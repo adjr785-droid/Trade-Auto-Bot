@@ -15,11 +15,11 @@ SYNC_FILE = "sync_state.json"
 STABLECOINS = ['USDC', 'USDT', 'DAI', 'FDUSD', 'TUSD', 'USDD', 'USDE', 'ONE', 'CT']
 MAX_AUTO_BUY = 20.0 
 
-# Initialize BITGET (FIXED: using 'password' not 'passphrase')
+# Initialize BITGET
 exchange = ccxt.bitget({
     'apiKey': os.environ.get('BITGET_API_KEY'),
     'secret': os.environ.get('BITGET_API_SECRET'),
-    'password': os.environ.get('BITGET_API_PASSPHRASE'), # MUST BE 'password'
+    'password': os.environ.get('BITGET_API_PASSPHRASE'),
     'enableRateLimit': True,
 })
 
@@ -34,6 +34,14 @@ def load_json(file):
 
 def save_json(file, data):
     with open(file, "w") as f: json.dump(data, f, indent=4)
+
+# --- NEW: CLEAR MEMORY FUNCTION ---
+def clear_memory():
+    """Wipes all tracking files clean."""
+    save_json(DB_FILE, {})
+    save_json(PENDING_FILE, {})
+    save_json(SYNC_FILE, {})
+    send_telegram("🧹 *MEMORY CLEARED!*\nAll active trades, pending alerts, and sync history have been wiped clean.")
 
 def get_market_data(symbol):
     try:
@@ -98,15 +106,17 @@ def sync_wallet():
             if symbol not in db and coin not in synced:
                 price, _, rsi, _, _, _ = get_market_data(symbol)
                 if price:
-                    db[symbol] = {
-                        "entry_price": price, "safe_zone": price, 
-                        "stop_loss": round(price * 0.85, 6),
-                        "took_profit_10": False, "took_profit_50": False
-                    }
-                    synced[coin] = True
-                    save_json(DB_FILE, db)
-                    save_json(SYNC_FILE, synced)
-                    send_telegram(f"🔄 *MANUAL BUY DETECTED*\n🪙 Found {amt} of {coin}.\n💰 Tracking Entry: ~{price}\n🛑 Stop Loss: 15%.")
+                    usdt_value = amt * price
+                    if usdt_value >= 1.02:
+                        db[symbol] = {
+                            "entry_price": price, "safe_zone": price, 
+                            "stop_loss": round(price * 0.85, 6),
+                            "took_profit_10": False, "took_profit_50": False
+                        }
+                        synced[coin] = True
+                        save_json(DB_FILE, db)
+                        save_json(SYNC_FILE, synced)
+                        send_telegram(f"🔄 *MANUAL BUY DETECTED*\n🪙 Found {amt} of {coin} (Worth ~${usdt_value:.2f}).\n💰 Tracking Entry: ~{price}\n🛑 Stop Loss: 15%.")
 
 def check_telegram_commands():
     state = load_json(STATE_FILE)
@@ -139,6 +149,10 @@ def check_telegram_commands():
                     elif text == "/sync":
                         sync_wallet()
                         send_telegram("🔄 *WALLET SYNC FORCED.*")
+
+                    # --- CLEAR COMMAND ---
+                    elif text == "/clear":
+                        clear_memory()
 
                     elif text.startswith("/buy"):
                         parts = text.split()
@@ -195,11 +209,8 @@ def check_telegram_commands():
                                     inc = ((price - data['entry_price']) / data['entry_price']) * 100
                                     send_telegram(f"🟢 *ACTIVE:* {sym}\n💰 Entry: {data['entry_price']}\n📊 Current: {price} ({inc:+.1f}%)\n🎯 RSI: {rsi}")
                                     
-                    elif "/clear" in text:
-                        save_json(DB_FILE, {})
-                        save_json(PENDING_FILE, {})
-                        save_json(SYNC_FILE, {})
-                        send_telegram("🧹 *MEMORY CLEARED!*")
+                    elif "/help" in text:
+                        send_telegram("🤖 *COMMANDS:*\n/balance - Check funds\n/sync - Force wallet sync\n/buy [coin] [usdt] - Buy\n/sell [coin] - Sell All\n/clear - Wipe memory\n/status - Check active trades")
             
             state["last_update_id"] = last_id
             save_json(STATE_FILE, state)
