@@ -12,12 +12,15 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+      
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
           python-version: '3.9'
+      
       - name: Install dependencies
         run: pip install requests ccxt
+      
       - name: Run Trade Bot
         env:
           BITGET_API_KEY: ${{ secrets.BITGET_API_KEY }}
@@ -26,11 +29,13 @@ jobs:
           TG_TOKEN: ${{ secrets.TG_TOKEN }}
           TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
         run: python bitget_bot.py
-      - name: Save Memory
+      
+      - name: Save Database and State
         run: |
           git config --global user.name "GitHub Bot"
           git config --global user.email "bot@github.com"
-          git add positions.json || echo "No positions"
-          git add tg_state.json || echo "No state"
-          git commit -m "Updated memory" || echo "No changes"
+          git add positions.json || true
+          git add tg_state.json || true
+          git add pending_trade.json || true
+          git commit -m "Updated database" || true
           git push
