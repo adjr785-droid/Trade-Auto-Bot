@@ -1,0 +1,6 @@
+{
+    "rsi_min": 42,
+    "rsi_max": 48,
+    "stop_loss_pct": 15,
+    "max_auto_buy": 20.0
+}
