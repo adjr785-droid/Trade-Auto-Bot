@@ -1,0 +1,275 @@
+import requests
+import json
+import os
+import time
+import ccxt
+
+# Load from GitHub Secrets
+TG_TOKEN = os.environ.get('TG_TOKEN')
+TG_CHAT_ID = os.environ.get('TG_CHAT_ID')
+DB_FILE = "positions.json"
+STATE_FILE = "tg_state.json"
+
+STABLECOINS = ['USDC', 'USDT', 'DAI', 'FDUSD', 'TUSD', 'USDD', 'USDE', 'ONE', 'CT']
+
+# Initialize BITGET
+exchange = ccxt.bitget({
+    'apiKey': os.environ.get('BITGET_API_KEY'),
+    'secret': os.environ.get('BITGET_API_SECRET'),
+    'password': os.environ.get('BITGET_API_PASSPHRASE'),
+    'enableRateLimit': True,
+})
+
+def send_telegram(message):
+    url = f"https://api.telegram.org/bot{TG_TOKEN}/sendMessage"
+    payload = {"chat_id": TG_CHAT_ID, "text": message, "parse_mode": "Markdown"}
+    requests.post(url, json=payload)
+
+def load_json(file):
+    if not os.path.exists(file): return {}
+    with open(file, "r") as f: return json.load(f)
+
+def save_json(file, data):
+    with open(file, "w") as f: json.dump(data, f, indent=4)
+
+def get_ath_atl(coin_symbol):
+    try:
+        search_url = f"https://api.coingecko.com/api/v3/search?query={coin_symbol}"
+        search_res = requests.get(search_url, timeout=10).json()
+        if not search_res.get('coins'): return None, None
+        coin_id = search_res['coins'][0]['id']
+        market_url = f"https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids={coin_id}"
+        market_res = requests.get(market_url, timeout=10).json()
+        if market_res: return market_res[0].get('ath'), market_res[0].get('atl')
+        return None, None
+    except Exception:
+        return None, None
+
+def get_market_data(symbol):
+    try:
+        ccxt_symbol = symbol.replace("-", "/")
+        ohlcv = exchange.fetch_ohlcv(ccxt_symbol, timeframe='1h', limit=50)
+        closes = [float(candle[4]) for candle in ohlcv[:-1]] 
+        
+        current_price = closes[-1]
+        prev_close = closes[-2]
+        
+        gains = [max(0, closes[i] - closes[i-1]) for i in range(1, len(closes))]
+        losses = [max(0, closes[i-1] - closes[i]) for i in range(1, len(closes))]
+        avg_gain = sum(gains[-14:])/14
+        avg_loss = sum(losses[-14:])/14
+        rsi = 100.0 if avg_loss == 0 else round(100 - (100 / (1 + (avg_gain / avg_loss))), 2)
+            
+        ma5 = round(sum(closes[-5:]) / 5, 6)
+        ma10 = round(sum(closes[-10:]) / 10, 6)
+        return current_price, prev_close, rsi, ma5, ma10, min(closes[-5:])
+    except Exception:
+        return None, None, None, None, None, None
+
+# --- AUTOMATED SELLING ENGINE ---
+def execute_sell(symbol, percentage, reason):
+    try:
+        ccxt_symbol = symbol.replace("-", "/")
+        base_coin = symbol.split("-")[0]
+        balance = exchange.fetch_balance()
+        free_balance = balance['free'].get(base_coin, 0)
+        
+        if free_balance > 0:
+            qty_to_sell = float(exchange.amount_to_precision(ccxt_symbol, free_balance * percentage))
+            exchange.create_market_sell_order(ccxt_symbol, qty_to_sell)
+            send_telegram(f"✅ *AUTO-SOLD ({reason})*\n🪙 Sold {percentage*100}% of {symbol}.\n💰 Amount: {qty_to_sell} {base_coin}")
+            return True
+        else:
+            send_telegram(f"⚠️ *WARNING:* Tried to sell {symbol}, but balance is 0.")
+            return False
+    except Exception as e:
+        send_telegram(f"❌ *AUTO-SELL FAILED for {symbol}:*\n`{e}`")
+        return False
+
+# --- TELEGRAM COMMAND CENTER ---
+def check_telegram_commands():
+    state = load_json(STATE_FILE)
+    last_id = state.get("last_update_id", 0)
+    
+    url = f"https://api.telegram.org/bot{TG_TOKEN}/getUpdates?offset={last_id + 1}"
+    try:
+        res = requests.get(url, timeout=10).json()
+        if res.get("ok") and len(res.get("result", [])) > 0:
+            for update in res["result"]:
+                last_id = update["update_id"]
+                if "message" in update and "text" in update["message"]:
+                    text = update["message"]["text"].lower()
+                    
+                    if text == "/balance":
+                        try:
+                            bal = exchange.fetch_balance()
+                            free = bal['free']
+                            msg = "💰 *BITGET SPOT BALANCE*\n\n"
+                            found = False
+                            for coin, amt in free.items():
+                                if amt > 0:
+                                    msg += f"🪙 {coin}: `{amt}`\n"
+                                    found = True
+                            if not found: msg += "No funds available."
+                            send_telegram(msg)
+                        except Exception as e:
+                            send_telegram(f"❌ *BALANCE FAILED:* {e}")
+
+                    elif text.startswith("/buy"):
+                        parts = text.split()
+                        if len(parts) == 3:
+                            coin = parts[1].upper()
+                            usdt_amount = float(parts[2])
+                            symbol = f"{coin}/USDT"
+                            try:
+                                ticker = exchange.fetch_ticker(symbol)
+                                current_price = ticker['last']
+                                raw_qty = usdt_amount / current_price
+                                qty = float(exchange.amount_to_precision(symbol, raw_qty))
+                                
+                                exchange.create_market_buy_order(symbol, qty)
+                                send_telegram(f"✅ *ORDER EXECUTED!*\n🪙 Bought {qty} of {coin}.\n💵 Spent: ~{usdt_amount} USDT\n💰 Price: {current_price}")
+                                
+                                db = load_json(DB_FILE)
+                                db[coin + "-USDT"] = {
+                                    "entry_price": current_price, "safe_zone": current_price, 
+                                    "stop_loss": round(current_price * 0.95, 6),
+                                    "took_profit_10": False, "took_profit_50": False
+                                }
+                                save_json(DB_FILE, db)
+                            except Exception as e:
+                                send_telegram(f"❌ *ORDER FAILED:* {e}")
+                        else:
+                            send_telegram("❌ Format: `/buy [COIN] [USDT_AMOUNT]`.")
+
+                    elif text.startswith("/sell"):
+                        parts = text.split()
+                        if len(parts) == 2:
+                            coin = parts[1].upper()
+                            symbol = f"{coin}-USDT"
+                            if execute_sell(symbol, 1.0, "Manual Override"):
+                                db = load_json(DB_FILE)
+                                if symbol in db:
+                                    del db[symbol]
+                                    save_json(DB_FILE, db)
+                        else:
+                            send_telegram("❌ Format: `/sell [COIN]`.")
+
+                    elif "/status" in text:
+                        db = load_json(DB_FILE)
+                        if not db: send_telegram("🛑 *STATUS:* No active trades.")
+                        else:
+                            for sym, data in db.items():
+                                price, _, rsi, _, _, _ = get_market_data(sym)
+                                if price:
+                                    inc = ((price - data['entry_price']) / data['entry_price']) * 100
+                                    send_telegram(f"🟢 *ACTIVE:* {sym}\n💰 Entry: {data['entry_price']}\n📊 Current: {price} ({inc:+.1f}%)\n🎯 RSI: {rsi}")
+                                    
+                    elif "/clear" in text:
+                        save_json(DB_FILE, {})
+                        send_telegram("🧹 *MEMORY CLEARED!*")
+                        
+                    elif "/help" in text:
+                        send_telegram("🤖 *COMMANDS:*\n/balance - Check funds\n/status - Check trades\n/buy [coin] [usdt] - Buy\n/sell [coin] - Sell All\n/clear - Wipe memory")
+            
+            state["last_update_id"] = last_id
+            save_json(STATE_FILE, state)
+    except Exception as e:
+        print(f"Telegram Error: {e}")
+
+# --- TRADE MANAGEMENT ---
+def manage_active_trades():
+    db = load_json(DB_FILE)
+    if not db: return
+    
+    for symbol, data in list(db.items()):
+        price, prev, rsi, ma5, ma10, _ = get_market_data(symbol)
+        if not price: continue
+        
+        inc = ((price - data["entry_price"]) / data["entry_price"]) * 100
+        
+        if price <= data["stop_loss"]:
+            if execute_sell(symbol, 1.0, "STOP LOSS"): del db[symbol]; save_json(DB_FILE, db)
+            continue
+        if rsi >= 75:
+            if execute_sell(symbol, 1.0, "RSI 75 HIT"): del db[symbol]; save_json(DB_FILE, db)
+            continue
+        elif rsi >= 70 and not data.get("took_profit_50"):
+            if execute_sell(symbol, 0.50, "RSI 70 HIT"): db[symbol]["took_profit_50"] = True; save_json(DB_FILE, db)
+        elif inc >= 10.0 and not data.get("took_profit_10"):
+            if execute_sell(symbol, 0.25, "+10% TARGET"): db[symbol]["took_profit_10"] = True; save_json(DB_FILE, db)
+
+# --- SCANNER ---
+def scan_for_new_trades():
+    db = load_json(DB_FILE)
+    if len(db) >= 1: return 
+
+    try: tickers = exchange.fetch_tickers()
+    except Exception: return
+        
+    valid = []
+    for sym, t in tickers.items():
+        if sym.endswith('/USDT'):
+            base = sym.split('/')[0]
+            if base in STABLECOINS or (base.startswith('X') and len(base) <= 6): continue
+            
+            vol = t['quoteVolume'] if t['quoteVolume'] else 0
+            if vol >= 1000000: 
+                change = t['percentage'] if t['percentage'] else 0
+                valid.append({'symbol': sym.replace("/", "-"), 'vol': vol, 'change': change})
+                
+    valid.sort(key=lambda x: x['vol'], reverse=True)
+    to_check = valid[15:50] 
+    
+    candidates = []
+    for t in to_check:
+        price, prev, rsi, ma5, ma10, low = get_market_data(t['symbol'])
+        if not price: continue
+        
+        if t['change'] > 1.0 and 42 <= rsi <= 48 and price > ma5 and ma5 > ma10:
+            safe_entry = ma5
+            sl = round(ma5 * 0.95, 6) 
+            tp1 = round(safe_entry * 1.10, 6) 
+            tp2 = round(safe_entry * 1.20, 6)
+            rr = (tp1 - safe_entry) / (safe_entry - sl) if (safe_entry - sl) > 0 else 0
+            if rr >= 1.8:
+                candidates.append({"symbol": t['symbol'], "type": "TREND PULLBACK", "entry": safe_entry, "sl": sl, "tp1": tp1, "tp2": tp2, "rsi": rsi, "vol": t['vol'], "rr": rr})
+
+        elif t['change'] < -8.0 and rsi < 30 and price > prev:
+            safe_entry = round(low * 1.005, 6)
+            sl = round(low * 0.98, 6)          
+            tp1 = round(safe_entry * 1.10, 6)          
+            tp2 = round(safe_entry * 1.20, 6)
+            rr = (tp1 - safe_entry) / (safe_entry - sl) if (safe_entry - sl) > 0 else 0
+            if rr >= 1.8:
+                candidates.append({"symbol": t['symbol'], "type": "OVERSOLD BOUNCE", "entry": safe_entry, "sl": sl, "tp1": tp1, "tp2": tp2, "rsi": rsi, "vol": t['vol'], "rr": rr})
+                
+    candidates.sort(key=lambda x: x['vol'], reverse=True)
+    
+    if candidates:
+        best = candidates[0] 
+        coin_symbol = best['symbol'].split('-')[0] 
+        
+        ath, atl = get_ath_atl(coin_symbol)
+        ath_str = f"${ath:.4f}" if ath else "N/A"
+        atl_str = f"${atl:.4f}" if atl else "N/A"
+        
+        icon = "🏆" if best['type'] == "TREND PULLBACK" else "🩸"
+        msg = (
+            f"{icon} *{best['type']}*\n"
+            f"🪙 *{best['symbol']}*\n\n"
+            f"🎯 *Entry:* {best['entry']}\n"
+            f"🛑 *Stop Loss:* {best['sl']} (5%)\n"
+            f"💰 *TP1:* {best['tp1']} (10%)\n"
+            f"💰 *TP2:* {best['tp2']} (20%)\n\n"
+            f"📊 *RSI:* {best['rsi']} | *R:R:* 1:{best['rr']:.1f}\n"
+            f"📈 *ATH:* {ath_str}\n"
+            f"📉 *ATL:* {atl_str}\n\n"
+            f"👉 Type `/buy {coin_symbol} 50` to execute!"
+        )
+        send_telegram(msg)
+
+if __name__ == "__main__":
+    check_telegram_commands() 
+    manage_active_trades()    
+    scan_for_new_trades()     
