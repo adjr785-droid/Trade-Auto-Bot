@@ -13,6 +13,7 @@ PENDING_FILE = "pending_trade.json"
 SYNC_FILE = "sync_state.json"
 
 STABLECOINS = ['USDC', 'USDT', 'DAI', 'FDUSD', 'TUSD', 'USDD', 'USDE', 'ONE', 'CT']
+MAX_AUTO_BUY = 20.0 # SAFETY LIMIT: Max $20 auto-buy
 
 # Initialize BITGET
 exchange = ccxt.bitget({
@@ -33,19 +34,6 @@ def load_json(file):
 
 def save_json(file, data):
     with open(file, "w") as f: json.dump(data, f, indent=4)
-
-def get_ath_atl(coin_symbol):
-    try:
-        search_url = f"https://api.coingecko.com/api/v3/search?query={coin_symbol}"
-        search_res = requests.get(search_url, timeout=10).json()
-        if not search_res.get('coins'): return None, None
-        coin_id = search_res['coins'][0]['id']
-        market_url = f"https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids={coin_id}"
-        market_res = requests.get(market_url, timeout=10).json()
-        if market_res: return market_res[0].get('ath'), market_res[0].get('atl')
-        return None, None
-    except Exception:
-        return None, None
 
 def get_market_data(symbol):
     try:
@@ -68,7 +56,6 @@ def get_market_data(symbol):
     except Exception:
         return None, None, None, None, None, None
 
-# --- AUTOMATED SELLING ENGINE (Now with 15% Stop Loss) ---
 def execute_sell(symbol, percentage, reason):
     try:
         ccxt_symbol = symbol.replace("-", "/")
@@ -88,8 +75,8 @@ def execute_sell(symbol, percentage, reason):
         send_telegram(f"❌ *AUTO-SELL FAILED for {symbol}:*\n`{e}`")
         return False
 
-# --- AUTO-SYNC MANUAL BUYS ---
-def sync_manual_buys():
+# --- NEW: GHOST TRADE SYNC ---
+def sync_wallet():
     db = load_json(DB_FILE)
     synced = load_json(SYNC_FILE)
     
@@ -99,11 +86,18 @@ def sync_manual_buys():
     except Exception:
         return
 
-    # Exclude stablecoins and empty balances
+    # 1. Remove Ghost Trades (Manually sold)
+    for symbol in list(db.keys()):
+        coin = symbol.split("-")[0]
+        if free.get(coin, 0) < 0.0001: # You no longer own it
+            del db[symbol]
+            send_telegram(f"👻 *GHOST TRADE REMOVED:* {symbol} was manually sold. Memory cleared.")
+            save_json(DB_FILE, db)
+
+    # 2. Add Manual Buys
     for coin, amt in free.items():
         if amt > 0 and coin not in STABLECOINS:
             symbol = f"{coin}-USDT"
-            # If we don't own it in memory, and haven't synced it yet
             if symbol not in db and coin not in synced:
                 price, _, rsi, _, _, _ = get_market_data(symbol)
                 if price:
@@ -115,7 +109,7 @@ def sync_manual_buys():
                     synced[coin] = True
                     save_json(DB_FILE, db)
                     save_json(SYNC_FILE, synced)
-                    send_telegram(f"🔄 *MANUAL BUY DETECTED*\n🪙 Found {amt} of {coin} in your wallet.\n💰 Tracking Entry: ~{price}\n🛑 Stop Loss set to 15%.")
+                    send_telegram(f"🔄 *MANUAL BUY DETECTED*\n🪙 Found {amt} of {coin}.\n💰 Tracking Entry: ~{price}\n🛑 Stop Loss: 15%.")
 
 # --- TELEGRAM COMMAND CENTER ---
 def check_telegram_commands():
@@ -146,6 +140,10 @@ def check_telegram_commands():
                         except Exception as e:
                             send_telegram(f"❌ *BALANCE FAILED:* {e}")
 
+                    elif text == "/sync":
+                        sync_wallet()
+                        send_telegram("🔄 *WALLET SYNC FORCED.* Checking for ghost trades and manual buys.")
+
                     elif text.startswith("/buy"):
                         parts = text.split()
                         if len(parts) == 3:
@@ -164,7 +162,7 @@ def check_telegram_commands():
                                 db = load_json(DB_FILE)
                                 db[coin + "-USDT"] = {
                                     "entry_price": current_price, "safe_zone": current_price, 
-                                    "stop_loss": round(current_price * 0.85, 6), # 15% STOP LOSS
+                                    "stop_loss": round(current_price * 0.85, 6),
                                     "took_profit_10": False, "took_profit_50": False
                                 }
                                 save_json(DB_FILE, db)
@@ -212,7 +210,6 @@ def check_telegram_commands():
     except Exception as e:
         print(f"Telegram Error: {e}")
 
-# --- TRADE MANAGEMENT ---
 def manage_active_trades():
     db = load_json(DB_FILE)
     if not db: return
@@ -223,7 +220,6 @@ def manage_active_trades():
         
         inc = ((price - data["entry_price"]) / data["entry_price"]) * 100
         
-        # Stop Loss is now 15%
         if price <= data["stop_loss"]:
             if execute_sell(symbol, 1.0, "STOP LOSS"): del db[symbol]; save_json(DB_FILE, db)
             continue
@@ -235,7 +231,6 @@ def manage_active_trades():
         elif inc >= 10.0 and not data.get("took_profit_10"):
             if execute_sell(symbol, 0.25, "+10% TARGET"): db[symbol]["took_profit_10"] = True; save_json(DB_FILE, db)
 
-# --- PENDING TRADE AUTO-EXECUTOR ---
 def check_pending_trades():
     pending = load_json(PENDING_FILE)
     if not pending: return
@@ -255,6 +250,10 @@ def check_pending_trades():
                 if target_spend < 1.02:
                     target_spend = usdt_balance 
                 
+                # NEW: ENFORCE MAX AUTO-BUY LIMIT
+                if target_spend > MAX_AUTO_BUY:
+                    target_spend = MAX_AUTO_BUY
+                
                 if target_spend >= 1.02:
                     ticker = exchange.fetch_ticker(symbol.replace("-", "/"))
                     current_price = ticker['last']
@@ -266,7 +265,7 @@ def check_pending_trades():
                     db = load_json(DB_FILE)
                     db[symbol] = {
                         "entry_price": current_price, "safe_zone": current_price, 
-                        "stop_loss": round(current_price * 0.85, 6), # 15% STOP LOSS
+                        "stop_loss": round(current_price * 0.85, 6),
                         "took_profit_10": False, "took_profit_50": False
                     }
                     save_json(DB_FILE, db)
@@ -283,7 +282,6 @@ def check_pending_trades():
                 del pending[symbol]
                 save_json(PENDING_FILE, pending)
 
-# --- SCANNER ---
 def scan_for_new_trades():
     db = load_json(DB_FILE)
     pending = load_json(PENDING_FILE)
@@ -338,10 +336,6 @@ def scan_for_new_trades():
         pending[best['symbol']] = {"timestamp": int(time.time())}
         save_json(PENDING_FILE, pending)
         
-        ath, atl = get_ath_atl(coin_symbol)
-        ath_str = f"${ath:.4f}" if ath else "N/A"
-        atl_str = f"${atl:.4f}" if atl else "N/A"
-        
         icon = "🏆" if best['type'] == "TREND PULLBACK" else "🩸"
         msg = (
             f"{icon} *{best['type']}*\n"
@@ -350,9 +344,7 @@ def scan_for_new_trades():
             f"🛑 *Stop Loss:* {best['sl']} (15%)\n"
             f"💰 *TP1:* {best['tp1']} (10%)\n"
             f"💰 *TP2:* {best['tp2']} (20%)\n\n"
-            f"📊 *RSI:* {best['rsi']} | *R:R:* 1:{best['rr']:.1f}\n"
-            f"📈 *ATH:* {ath_str}\n"
-            f"📉 *ATL:* {atl_str}\n\n"
+            f"📊 *RSI:* {best['rsi']} | *R:R:* 1:{best['rr']:.1f}\n\n"
             f"👉 *Approve now:* `/buy {coin_symbol} 50`\n"
             f"*(Auto-buys 50% of balance in 15m if no reply)*"
         )
@@ -360,7 +352,7 @@ def scan_for_new_trades():
 
 if __name__ == "__main__":
     check_telegram_commands() 
-    sync_manual_buys() # NEW: Checks your wallet for manual buys
+    sync_wallet() # NOW RUNS EVERY 10 MINUTES
     manage_active_trades()    
     check_pending_trades() 
     scan_for_new_trades()     
