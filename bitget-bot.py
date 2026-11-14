@@ -9,6 +9,7 @@ TG_TOKEN = os.environ.get('TG_TOKEN')
 TG_CHAT_ID = os.environ.get('TG_CHAT_ID')
 DB_FILE = "positions.json"
 STATE_FILE = "tg_state.json"
+PENDING_FILE = "pending_trade.json"
 
 STABLECOINS = ['USDC', 'USDT', 'DAI', 'FDUSD', 'TUSD', 'USDD', 'USDE', 'ONE', 'CT']
 
@@ -137,6 +138,12 @@ def check_telegram_commands():
                                     "took_profit_10": False, "took_profit_50": False
                                 }
                                 save_json(DB_FILE, db)
+                                
+                                pending = load_json(PENDING_FILE)
+                                if coin + "-USDT" in pending:
+                                    del pending[coin + "-USDT"]
+                                    save_json(PENDING_FILE, pending)
+                                    
                             except Exception as e:
                                 send_telegram(f"❌ *ORDER FAILED:* {e}")
                         else:
@@ -167,6 +174,7 @@ def check_telegram_commands():
                                     
                     elif "/clear" in text:
                         save_json(DB_FILE, {})
+                        save_json(PENDING_FILE, {})
                         send_telegram("🧹 *MEMORY CLEARED!*")
                         
                     elif "/help" in text:
@@ -199,10 +207,60 @@ def manage_active_trades():
         elif inc >= 10.0 and not data.get("took_profit_10"):
             if execute_sell(symbol, 0.25, "+10% TARGET"): db[symbol]["took_profit_10"] = True; save_json(DB_FILE, db)
 
+# --- PENDING TRADE AUTO-EXECUTOR ---
+def check_pending_trades():
+    pending = load_json(PENDING_FILE)
+    if not pending: return
+    
+    current_time = int(time.time())
+    
+    for symbol, data in list(pending.items()):
+        time_elapsed = current_time - data["timestamp"]
+        
+        # If 15 minutes (900 seconds) have passed
+        if time_elapsed >= 900:
+            try:
+                balance = exchange.fetch_balance()
+                usdt_balance = balance['free'].get('USDT', 0)
+                
+                target_spend = usdt_balance * 0.50 
+                
+                if target_spend < 1.02:
+                    target_spend = usdt_balance 
+                
+                if target_spend >= 1.02:
+                    ticker = exchange.fetch_ticker(symbol.replace("-", "/"))
+                    current_price = ticker['last']
+                    raw_qty = target_spend / current_price
+                    qty = float(exchange.amount_to_precision(symbol.replace("-", "/"), raw_qty))
+                    
+                    exchange.create_market_buy_order(symbol.replace("-", "/"), qty)
+                    
+                    db = load_json(DB_FILE)
+                    db[symbol] = {
+                        "entry_price": current_price, "safe_zone": current_price, 
+                        "stop_loss": round(current_price * 0.95, 6),
+                        "took_profit_10": False, "took_profit_50": False
+                    }
+                    save_json(DB_FILE, db)
+                    
+                    send_telegram(f"🤖 *AUTO-EXECUTED (15m Timeout)*\n🪙 Bought {qty} of {symbol}.\n💵 Spent: ~{target_spend:.2f} USDT\n💰 Price: {current_price}")
+                else:
+                    send_telegram(f"⚠️ *AUTO-BUY SKIPPED:* Not enough USDT.\nBalance: {usdt_balance:.2f} (Min required: 1.02)")
+                
+                del pending[symbol]
+                save_json(PENDING_FILE, pending)
+                
+            except Exception as e:
+                send_telegram(f"❌ *AUTO-BUY FAILED for {symbol}:*\n`{e}`")
+                del pending[symbol]
+                save_json(PENDING_FILE, pending)
+
 # --- SCANNER ---
 def scan_for_new_trades():
     db = load_json(DB_FILE)
-    if len(db) >= 1: return 
+    pending = load_json(PENDING_FILE)
+    if len(db) >= 1 or len(pending) >= 1: return 
 
     try: tickers = exchange.fetch_tickers()
     except Exception: return
@@ -250,6 +308,9 @@ def scan_for_new_trades():
         best = candidates[0] 
         coin_symbol = best['symbol'].split('-')[0] 
         
+        pending[best['symbol']] = {"timestamp": int(time.time())}
+        save_json(PENDING_FILE, pending)
+        
         ath, atl = get_ath_atl(coin_symbol)
         ath_str = f"${ath:.4f}" if ath else "N/A"
         atl_str = f"${atl:.4f}" if atl else "N/A"
@@ -265,11 +326,13 @@ def scan_for_new_trades():
             f"📊 *RSI:* {best['rsi']} | *R:R:* 1:{best['rr']:.1f}\n"
             f"📈 *ATH:* {ath_str}\n"
             f"📉 *ATL:* {atl_str}\n\n"
-            f"👉 Type `/buy {coin_symbol} 50` to execute!"
+            f"👉 *Approve now:* `/buy {coin_symbol} 50`\n"
+            f"*(If no reply in 15 mins, bot auto-buys with 50% of your USDT)*"
         )
         send_telegram(msg)
 
 if __name__ == "__main__":
     check_telegram_commands() 
     manage_active_trades()    
+    check_pending_trades() 
     scan_for_new_trades()     
