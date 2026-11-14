@@ -15,11 +15,11 @@ SYNC_FILE = "sync_state.json"
 STABLECOINS = ['USDC', 'USDT', 'DAI', 'FDUSD', 'TUSD', 'USDD', 'USDE', 'ONE', 'CT']
 MAX_AUTO_BUY = 20.0 # SAFETY LIMIT: Max $20 auto-buy
 
-# Initialize BITGET
+# Initialize BITGET (FIXED: 'passphrase' instead of 'password')
 exchange = ccxt.bitget({
     'apiKey': os.environ.get('BITGET_API_KEY'),
     'secret': os.environ.get('BITGET_API_SECRET'),
-    'password': os.environ.get('BITGET_API_PASSPHRASE'),
+    'passphrase': os.environ.get('BITGET_API_PASSPHRASE'),
     'enableRateLimit': True,
 })
 
@@ -75,7 +75,7 @@ def execute_sell(symbol, percentage, reason):
         send_telegram(f"❌ *AUTO-SELL FAILED for {symbol}:*\n`{e}`")
         return False
 
-# --- NEW: GHOST TRADE SYNC ---
+# --- GHOST TRADE SYNC ---
 def sync_wallet():
     db = load_json(DB_FILE)
     synced = load_json(SYNC_FILE)
@@ -86,15 +86,13 @@ def sync_wallet():
     except Exception:
         return
 
-    # 1. Remove Ghost Trades (Manually sold)
     for symbol in list(db.keys()):
         coin = symbol.split("-")[0]
-        if free.get(coin, 0) < 0.0001: # You no longer own it
+        if free.get(coin, 0) < 0.0001: 
             del db[symbol]
             send_telegram(f"👻 *GHOST TRADE REMOVED:* {symbol} was manually sold. Memory cleared.")
             save_json(DB_FILE, db)
 
-    # 2. Add Manual Buys
     for coin, amt in free.items():
         if amt > 0 and coin not in STABLECOINS:
             symbol = f"{coin}-USDT"
@@ -103,7 +101,7 @@ def sync_wallet():
                 if price:
                     db[symbol] = {
                         "entry_price": price, "safe_zone": price, 
-                        "stop_loss": round(price * 0.85, 6), # 15% STOP LOSS
+                        "stop_loss": round(price * 0.85, 6),
                         "took_profit_10": False, "took_profit_50": False
                     }
                     synced[coin] = True
@@ -142,7 +140,7 @@ def check_telegram_commands():
 
                     elif text == "/sync":
                         sync_wallet()
-                        send_telegram("🔄 *WALLET SYNC FORCED.* Checking for ghost trades and manual buys.")
+                        send_telegram("🔄 *WALLET SYNC FORCED.*")
 
                     elif text.startswith("/buy"):
                         parts = text.split()
@@ -250,7 +248,6 @@ def check_pending_trades():
                 if target_spend < 1.02:
                     target_spend = usdt_balance 
                 
-                # NEW: ENFORCE MAX AUTO-BUY LIMIT
                 if target_spend > MAX_AUTO_BUY:
                     target_spend = MAX_AUTO_BUY
                 
@@ -352,7 +349,7 @@ def scan_for_new_trades():
 
 if __name__ == "__main__":
     check_telegram_commands() 
-    sync_wallet() # NOW RUNS EVERY 10 MINUTES
+    sync_wallet() 
     manage_active_trades()    
     check_pending_trades() 
     scan_for_new_trades()     
