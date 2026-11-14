@@ -13,13 +13,13 @@ PENDING_FILE = "pending_trade.json"
 SYNC_FILE = "sync_state.json"
 
 STABLECOINS = ['USDC', 'USDT', 'DAI', 'FDUSD', 'TUSD', 'USDD', 'USDE', 'ONE', 'CT']
-MAX_AUTO_BUY = 20.0 # SAFETY LIMIT: Max $20 auto-buy
+MAX_AUTO_BUY = 20.0 
 
-# Initialize BITGET (FIXED: 'passphrase' instead of 'password')
+# Initialize BITGET (FIXED: using 'password' not 'passphrase')
 exchange = ccxt.bitget({
     'apiKey': os.environ.get('BITGET_API_KEY'),
     'secret': os.environ.get('BITGET_API_SECRET'),
-    'passphrase': os.environ.get('BITGET_API_PASSPHRASE'),
+    'password': os.environ.get('BITGET_API_PASSPHRASE'), # MUST BE 'password'
     'enableRateLimit': True,
 })
 
@@ -75,7 +75,6 @@ def execute_sell(symbol, percentage, reason):
         send_telegram(f"❌ *AUTO-SELL FAILED for {symbol}:*\n`{e}`")
         return False
 
-# --- GHOST TRADE SYNC ---
 def sync_wallet():
     db = load_json(DB_FILE)
     synced = load_json(SYNC_FILE)
@@ -109,7 +108,6 @@ def sync_wallet():
                     save_json(SYNC_FILE, synced)
                     send_telegram(f"🔄 *MANUAL BUY DETECTED*\n🪙 Found {amt} of {coin}.\n💰 Tracking Entry: ~{price}\n🛑 Stop Loss: 15%.")
 
-# --- TELEGRAM COMMAND CENTER ---
 def check_telegram_commands():
     state = load_json(STATE_FILE)
     last_id = state.get("last_update_id", 0)
