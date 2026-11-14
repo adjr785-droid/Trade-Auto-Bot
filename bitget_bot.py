@@ -104,7 +104,7 @@ def get_market_data(symbol):
             
         ma5 = round(sum(closes[-5:]) / 5, 6)
         ma10 = round(sum(closes[-10:]) / 10, 6)
-        return closes[-1], closes[-2], rsi, ma5, ma10, min(closes[-5:])
+        return closes[-1], closes[-2], rsi, ma5, ma10, min(closes[-5:]) # RETURNS 6 VALUES
     except Exception:
         return None, None, None, None, None, None
 
@@ -145,8 +145,8 @@ def sync_wallet():
         if amt > 0 and coin not in STABLECOINS:
             symbol = f"{coin}-USDT"
             if symbol not in db and coin not in synced:
-                price, _, _, _, _, _ = get_market_data(symbol)
-                if price and (amt * price) >= 1.02: # ONLY SYNC IF WORTH > $1.02
+                price, _, _, _, _, _ = get_market_data(symbol) # FIXED: 6 variables
+                if price and (amt * price) >= 1.02: 
                     db[symbol] = {
                         "entry_price": price, "safe_zone": price, 
                         "stop_loss": round(price * (1 - settings['stop_loss_pct']/100), 6),
@@ -192,11 +192,10 @@ def check_telegram_commands():
                                         price = exchange.fetch_ticker(f"{coin}/USDT")['last']
                                         val = amt * price
                                         
-                                        # --- DUST FILTER: Ignore anything under $0.10 ---
+                                        # --- DUST FILTER ---
                                         if val < 0.10:
                                             continue
                                             
-                                        # Format decimals cleanly
                                         amt_str = f"{amt:.6f}".rstrip('0').rstrip('.')
                                         val_ngn = f" / ₦{val * ngn_rate:,.2f}" if ngn_rate else ""
                                         pnl_str = ""
@@ -261,7 +260,7 @@ def check_telegram_commands():
                         if not db: send_telegram("🛑 No active trades.")
                         else:
                             for sym, data in db.items():
-                                price, _, rsi, _, _, _ = get_market_data(sym)
+                                price, _, rsi, _, _, _ = get_market_data(sym) # FIXED: 6 variables
                                 if price:
                                     inc = ((price - data['entry_price']) / data['entry_price']) * 100
                                     send_telegram(f"🟢 *ACTIVE:* {sym}\n💰 Entry: {data['entry_price']}\n📊 Current: {price} ({inc:+.1f}%)\n🎯 RSI: {rsi}")
@@ -312,7 +311,9 @@ def scan_for_new_trades():
     valid.sort(key=lambda x: x['vol'], reverse=True)
     
     for t in valid[15:50]:
-        price, prev, rsi, ma5, ma10 = get_market_data(t['symbol'])
+        # --- THE FIX IS ON THIS LINE ---
+        # Added the 6th underscore to catch the 'recent_low' value
+        price, prev, rsi, ma5, ma10, _ = get_market_data(t['symbol']) 
         if not price: continue
         
         if t['change'] > 1.0 and settings['rsi_min'] <= rsi <= settings['rsi_max'] and price > ma5 and ma5 > ma10:
