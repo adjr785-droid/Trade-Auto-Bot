@@ -32,7 +32,7 @@ def self_heal(file_name, default_data, error_msg):
     try:
         with open(file_name, "w") as f:
             json.dump(default_data, f, indent=4)
-        send_telegram(f"🚑 *SELF-HEALING ACTIVATED*\n\n❌ **Error:** {error_msg}\n🛠️ **Fix Applied:** Rebuilt `{file_name}` with default safe values.")
+        send_telegram(f"🚑 *SELF-HEALING ACTIVATED*\n\n❌ **Error:** {error_msg}\n🛠️ **Fix Applied:** Rebuilt `{file_name}`.")
     except Exception as e:
         send_telegram(f"🚨 *CRITICAL ERROR:* Could not heal `{file_name}`. {e}")
 
@@ -64,38 +64,30 @@ def get_ngn_rate():
     except Exception:
         return None
 
-# --- GIT SYNC ENGINE ---
 def git_save():
     try:
         subprocess.run(["git", "pull", "--rebase"], check=True, capture_output=True)
         subprocess.run(["git", "add", "."], check=True, capture_output=True)
-        subprocess.run(["git", "commit", "-m", "Auto-healed and saved memory"], capture_output=True)
+        subprocess.run(["git", "commit", "-m", "Auto-saved memory"], capture_output=True)
         subprocess.run(["git", "push"], check=True, capture_output=True)
-    except subprocess.CalledProcessError:
-        pass # No changes to commit
-    except Exception as e:
-        send_telegram(f"⚠️ *GIT PUSH FAILED:* `{e}`")
+    except Exception:
+        pass
 
-# --- SYSTEM AUDIT ---
 def perform_audit():
     msg = "🛠️ *SYSTEM AUDIT REPORT*\n\n"
     try:
-        balance = exchange.fetch_balance()
+        exchange.fetch_balance()
         msg += "✅ *Bitget API:* Connected\n"
     except Exception as e:
-        msg += f"❌ *Bitget API:* Failed (`{e}`)\n"
-        send_telegram(msg)
+        send_telegram(f"❌ *Bitget API:* Failed (`{e}`)")
         return
 
     db = load_json(DB_FILE)
     settings = load_settings()
     
     msg += f"✅ *Active Trades:* {len(db)}\n"
-    msg += f"⚙️ *Current Rules:*\n"
-    msg += f"📊 RSI: {settings['rsi_min']} - {settings['rsi_max']}\n"
-    msg += f"🛑 Stop Loss: {settings['stop_loss_pct']}%\n"
-    msg += f"💵 Auto-Buy: ${settings['auto_buy_amount_usdt']}\n"
-    msg += f"⚙️ *Status:* HEALTHY 🟢"
+    msg += f"⚙️ *Rules:* RSI {settings['rsi_min']}-{settings['rsi_max']} | SL {settings['stop_loss_pct']}% | Auto-Buy ${settings['auto_buy_amount_usdt']}\n"
+    msg += f"🟢 *Status:* HEALTHY"
     send_telegram(msg)
 
 def get_market_data(symbol):
@@ -103,9 +95,6 @@ def get_market_data(symbol):
         ccxt_symbol = symbol.replace("-", "/")
         ohlcv = exchange.fetch_ohlcv(ccxt_symbol, timeframe='1h', limit=50)
         closes = [float(candle[4]) for candle in ohlcv[:-1]] 
-        
-        current_price = closes[-1]
-        prev_close = closes[-2]
         
         gains = [max(0, closes[i] - closes[i-1]) for i in range(1, len(closes))]
         losses = [max(0, closes[i-1] - closes[i]) for i in range(1, len(closes))]
@@ -115,7 +104,7 @@ def get_market_data(symbol):
             
         ma5 = round(sum(closes[-5:]) / 5, 6)
         ma10 = round(sum(closes[-10:]) / 10, 6)
-        return current_price, prev_close, rsi, ma5, ma10, min(closes[-5:])
+        return closes[-1], closes[-2], rsi, ma5, ma10, min(closes[-5:])
     except Exception:
         return None, None, None, None, None, None
 
@@ -157,7 +146,7 @@ def sync_wallet():
             symbol = f"{coin}-USDT"
             if symbol not in db and coin not in synced:
                 price, _, _, _, _, _ = get_market_data(symbol)
-                if price and (amt * price) >= 1.02:
+                if price and (amt * price) >= 1.02: # ONLY SYNC IF WORTH > $1.02
                     db[symbol] = {
                         "entry_price": price, "safe_zone": price, 
                         "stop_loss": round(price * (1 - settings['stop_loss_pct']/100), 6),
@@ -166,6 +155,7 @@ def sync_wallet():
                     synced[coin] = True
                     save_json(DB_FILE, db)
                     save_json(SYNC_FILE, synced)
+                    send_telegram(f"🔄 *MANUAL BUY DETECTED*\n🪙 Found {amt} of {coin}.")
 
 def check_telegram_commands():
     state = load_json(STATE_FILE)
@@ -201,16 +191,23 @@ def check_telegram_commands():
                                     try:
                                         price = exchange.fetch_ticker(f"{coin}/USDT")['last']
                                         val = amt * price
+                                        
+                                        # --- DUST FILTER: Ignore anything under $0.10 ---
+                                        if val < 0.10:
+                                            continue
+                                            
+                                        # Format decimals cleanly
+                                        amt_str = f"{amt:.6f}".rstrip('0').rstrip('.')
                                         val_ngn = f" / ₦{val * ngn_rate:,.2f}" if ngn_rate else ""
                                         pnl_str = ""
                                         if f"{coin}-USDT" in db:
                                             entry = db[f"{coin}-USDT"]["entry_price"]
                                             pnl = ((price - entry) / entry) * 100
                                             pnl_str = f" | 🟢 +{pnl:.1f}%" if pnl >= 0 else f" | 🔴 {pnl:.1f}%"
-                                        msg += f"🪙 {coin}: `{amt}` (~${val:.2f}{val_ngn}){pnl_str}\n"
+                                        msg += f"🪙 {coin}: `{amt_str}` (~${val:.2f}{val_ngn}){pnl_str}\n"
                                     except: pass
                                     found = True
-                            if not found: msg += "No tokens held.\n"
+                            if not found: msg += "No significant tokens held.\n"
                             send_telegram(msg)
                         except Exception as e:
                             send_telegram(f"❌ Error: {e}")
@@ -315,7 +312,7 @@ def scan_for_new_trades():
     valid.sort(key=lambda x: x['vol'], reverse=True)
     
     for t in valid[15:50]:
-        price, prev, rsi, ma5, ma10, low = get_market_data(t['symbol'])
+        price, prev, rsi, ma5, ma10 = get_market_data(t['symbol'])
         if not price: continue
         
         if t['change'] > 1.0 and settings['rsi_min'] <= rsi <= settings['rsi_max'] and price > ma5 and ma5 > ma10:
@@ -357,6 +354,6 @@ if __name__ == "__main__":
         manage_active_trades()    
         scan_for_new_trades()     
         
-        git_save() # Self-saving mechanism
+        git_save() 
     except Exception as e:
         send_telegram(f"🚨 *CRITICAL SYSTEM FAILURE:* The bot crashed. Error: `{e}`")
