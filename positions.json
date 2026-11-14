@@ -1,1 +1,44 @@
-{}
+{
+    "BGB-USDT": {
+        "entry_price": 1.594,
+        "safe_zone": 1.594,
+        "stop_loss": 1.3549,
+        "took_profit_10": false,
+        "took_profit_50": false
+    },
+    "SHIB-USDT": {
+        "entry_price": 3.95e-06,
+        "safe_zone": 3.95e-06,
+        "stop_loss": 3e-06,
+        "took_profit_10": false,
+        "took_profit_50": false
+    },
+    "BABYDOGE-USDT": {
+        "entry_price": 2.553e-10,
+        "safe_zone": 2.553e-10,
+        "stop_loss": 0.0,
+        "took_profit_10": false,
+        "took_profit_50": false
+    },
+    "HTX-USDT": {
+        "entry_price": 1.488e-06,
+        "safe_zone": 1.488e-06,
+        "stop_loss": 1e-06,
+        "took_profit_10": false,
+        "took_profit_50": false
+    },
+    "CHEEMS-USDT": {
+        "entry_price": 3.233e-07,
+        "safe_zone": 3.233e-07,
+        "stop_loss": 0.0,
+        "took_profit_10": false,
+        "took_profit_50": false
+    },
+    "SWARM-USDT": {
+        "entry_price": 0.030139,
+        "safe_zone": 0.030139,
+        "stop_loss": 0.025618,
+        "took_profit_10": false,
+        "took_profit_50": false
+    }
+}
