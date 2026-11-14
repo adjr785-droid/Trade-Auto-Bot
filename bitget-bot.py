@@ -10,6 +10,7 @@ TG_CHAT_ID = os.environ.get('TG_CHAT_ID')
 DB_FILE = "positions.json"
 STATE_FILE = "tg_state.json"
 PENDING_FILE = "pending_trade.json"
+SYNC_FILE = "sync_state.json"
 
 STABLECOINS = ['USDC', 'USDT', 'DAI', 'FDUSD', 'TUSD', 'USDD', 'USDE', 'ONE', 'CT']
 
@@ -67,7 +68,7 @@ def get_market_data(symbol):
     except Exception:
         return None, None, None, None, None, None
 
-# --- AUTOMATED SELLING ENGINE ---
+# --- AUTOMATED SELLING ENGINE (Now with 15% Stop Loss) ---
 def execute_sell(symbol, percentage, reason):
     try:
         ccxt_symbol = symbol.replace("-", "/")
@@ -86,6 +87,35 @@ def execute_sell(symbol, percentage, reason):
     except Exception as e:
         send_telegram(f"❌ *AUTO-SELL FAILED for {symbol}:*\n`{e}`")
         return False
+
+# --- AUTO-SYNC MANUAL BUYS ---
+def sync_manual_buys():
+    db = load_json(DB_FILE)
+    synced = load_json(SYNC_FILE)
+    
+    try:
+        balance = exchange.fetch_balance()
+        free = balance['free']
+    except Exception:
+        return
+
+    # Exclude stablecoins and empty balances
+    for coin, amt in free.items():
+        if amt > 0 and coin not in STABLECOINS:
+            symbol = f"{coin}-USDT"
+            # If we don't own it in memory, and haven't synced it yet
+            if symbol not in db and coin not in synced:
+                price, _, rsi, _, _, _ = get_market_data(symbol)
+                if price:
+                    db[symbol] = {
+                        "entry_price": price, "safe_zone": price, 
+                        "stop_loss": round(price * 0.85, 6), # 15% STOP LOSS
+                        "took_profit_10": False, "took_profit_50": False
+                    }
+                    synced[coin] = True
+                    save_json(DB_FILE, db)
+                    save_json(SYNC_FILE, synced)
+                    send_telegram(f"🔄 *MANUAL BUY DETECTED*\n🪙 Found {amt} of {coin} in your wallet.\n💰 Tracking Entry: ~{price}\n🛑 Stop Loss set to 15%.")
 
 # --- TELEGRAM COMMAND CENTER ---
 def check_telegram_commands():
@@ -134,7 +164,7 @@ def check_telegram_commands():
                                 db = load_json(DB_FILE)
                                 db[coin + "-USDT"] = {
                                     "entry_price": current_price, "safe_zone": current_price, 
-                                    "stop_loss": round(current_price * 0.95, 6),
+                                    "stop_loss": round(current_price * 0.85, 6), # 15% STOP LOSS
                                     "took_profit_10": False, "took_profit_50": False
                                 }
                                 save_json(DB_FILE, db)
@@ -143,7 +173,6 @@ def check_telegram_commands():
                                 if coin + "-USDT" in pending:
                                     del pending[coin + "-USDT"]
                                     save_json(PENDING_FILE, pending)
-                                    
                             except Exception as e:
                                 send_telegram(f"❌ *ORDER FAILED:* {e}")
                         else:
@@ -175,10 +204,8 @@ def check_telegram_commands():
                     elif "/clear" in text:
                         save_json(DB_FILE, {})
                         save_json(PENDING_FILE, {})
+                        save_json(SYNC_FILE, {})
                         send_telegram("🧹 *MEMORY CLEARED!*")
-                        
-                    elif "/help" in text:
-                        send_telegram("🤖 *COMMANDS:*\n/balance - Check funds\n/status - Check trades\n/buy [coin] [usdt] - Buy\n/sell [coin] - Sell All\n/clear - Wipe memory")
             
             state["last_update_id"] = last_id
             save_json(STATE_FILE, state)
@@ -196,6 +223,7 @@ def manage_active_trades():
         
         inc = ((price - data["entry_price"]) / data["entry_price"]) * 100
         
+        # Stop Loss is now 15%
         if price <= data["stop_loss"]:
             if execute_sell(symbol, 1.0, "STOP LOSS"): del db[symbol]; save_json(DB_FILE, db)
             continue
@@ -217,7 +245,6 @@ def check_pending_trades():
     for symbol, data in list(pending.items()):
         time_elapsed = current_time - data["timestamp"]
         
-        # If 15 minutes (900 seconds) have passed
         if time_elapsed >= 900:
             try:
                 balance = exchange.fetch_balance()
@@ -239,7 +266,7 @@ def check_pending_trades():
                     db = load_json(DB_FILE)
                     db[symbol] = {
                         "entry_price": current_price, "safe_zone": current_price, 
-                        "stop_loss": round(current_price * 0.95, 6),
+                        "stop_loss": round(current_price * 0.85, 6), # 15% STOP LOSS
                         "took_profit_10": False, "took_profit_50": False
                     }
                     save_json(DB_FILE, db)
@@ -286,7 +313,7 @@ def scan_for_new_trades():
         
         if t['change'] > 1.0 and 42 <= rsi <= 48 and price > ma5 and ma5 > ma10:
             safe_entry = ma5
-            sl = round(ma5 * 0.95, 6) 
+            sl = round(ma5 * 0.85, 6) 
             tp1 = round(safe_entry * 1.10, 6) 
             tp2 = round(safe_entry * 1.20, 6)
             rr = (tp1 - safe_entry) / (safe_entry - sl) if (safe_entry - sl) > 0 else 0
@@ -295,7 +322,7 @@ def scan_for_new_trades():
 
         elif t['change'] < -8.0 and rsi < 30 and price > prev:
             safe_entry = round(low * 1.005, 6)
-            sl = round(low * 0.98, 6)          
+            sl = round(low * 0.85, 6)          
             tp1 = round(safe_entry * 1.10, 6)          
             tp2 = round(safe_entry * 1.20, 6)
             rr = (tp1 - safe_entry) / (safe_entry - sl) if (safe_entry - sl) > 0 else 0
@@ -320,19 +347,20 @@ def scan_for_new_trades():
             f"{icon} *{best['type']}*\n"
             f"🪙 *{best['symbol']}*\n\n"
             f"🎯 *Entry:* {best['entry']}\n"
-            f"🛑 *Stop Loss:* {best['sl']} (5%)\n"
+            f"🛑 *Stop Loss:* {best['sl']} (15%)\n"
             f"💰 *TP1:* {best['tp1']} (10%)\n"
             f"💰 *TP2:* {best['tp2']} (20%)\n\n"
             f"📊 *RSI:* {best['rsi']} | *R:R:* 1:{best['rr']:.1f}\n"
             f"📈 *ATH:* {ath_str}\n"
             f"📉 *ATL:* {atl_str}\n\n"
             f"👉 *Approve now:* `/buy {coin_symbol} 50`\n"
-            f"*(If no reply in 15 mins, bot auto-buys with 50% of your USDT)*"
+            f"*(Auto-buys 50% of balance in 15m if no reply)*"
         )
         send_telegram(msg)
 
 if __name__ == "__main__":
     check_telegram_commands() 
+    sync_manual_buys() # NEW: Checks your wallet for manual buys
     manage_active_trades()    
     check_pending_trades() 
     scan_for_new_trades()     
