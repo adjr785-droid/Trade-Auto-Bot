@@ -117,7 +117,8 @@ def exec_queue():
                     save(DB_FILE,db); del q[sym]; save(QUEUE_FILE,q); ub-=sp
                     tg(f"🛒 *EXECUTED!*\n{sym} | 💵 {sp:.2f} USDT\n🛑 SL: {sl}")
                     time.sleep(2)
-        except: pass
+        except Exception as e: 
+            tg(f"⚠️ *QUEUE BUY FAILED:* `{e}`")
 
 def scan():
     db=load(DB_FILE); q=load(QUEUE_FILE); s=settings()
