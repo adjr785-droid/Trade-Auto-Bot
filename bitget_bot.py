@@ -1,10 +1,10 @@
 import requests, json, os, time, ccxt, subprocess, traceback
-import google.generativeai as genai
+from google import genai
 TG_TOKEN=os.environ.get('TG_TOKEN'); TG_CHAT_ID=os.environ.get('TG_CHAT_ID')
 DB_FILE="positions.json"; STATE_FILE="tg_state.json"; SETTINGS_FILE="settings.json"; QUEUE_FILE="queue.json"; LEDGER_FILE="profit_ledger.json"
 STABLECOINS=['USDC','USDT','DAI','FDUSD','TUSD','USDD','USDE']; LEV=['3L','3S','5L','5S','10L','10S','2L','2S']; BL=['RPANW','CT','ONE']
 exchange=ccxt.bitget({'apiKey':os.environ.get('BITGET_API_KEY'),'secret':os.environ.get('BITGET_API_SECRET'),'password':os.environ.get('BITGET_API_PASSPHRASE'),'enableRateLimit':True})
-genai.configure(api_key=os.environ.get('GEMINI_API_KEY'))
+client = genai.Client(api_key=os.environ.get('GEMINI_API_KEY'))
 
 def tg(m):
     try: requests.post(f"https://api.telegram.org/bot{TG_TOKEN}/sendMessage", json={"chat_id":TG_CHAT_ID,"text":m,"parse_mode":"Markdown"}, timeout=10)
@@ -26,13 +26,6 @@ def settings():
     for k,v in d.items(): s.setdefault(k,v)
     return s
 
-def is_cool(sym):
-    st=load(STATE_FILE); c=st.get('cool', {})
-    return c.get(sym, 0) > time.time() - 86400
-
-def set_cool(sym):
-    st=load(STATE_FILE); c=st.get('cool', {}); c[sym]=time.time(); st['cool']=c; save(STATE_FILE, st)
-
 def data(sym):
     try:
         o=exchange.fetch_ohlcv(sym.replace("-","/"),'1h',limit=50); c=[float(k[4]) for k in o[:-1]]
@@ -47,8 +40,10 @@ def ask_ai(prompt):
         bal = exchange.fetch_balance()['free'].get('USDT', 0)
         btc_p, _, btc_rsi, _, _ = data("BTC-USDT")
         context = f"System Data:\n- USDT Balance: {bal}\n- Auto-Buy Size per Trade: {s['auto_buy_amount_usdt']}\n- BTC RSI: {btc_rsi}\n- Active Trades: {db}\n- Queue: {q}\n- Bot Rules: RSI {s['rsi_min']}-{s['rsi_max']}, SL {s['stop_loss_pct']}%\n\n"
-        model = genai.GenerativeModel('gemini-1.5-flash-latest') # FIXED AI MODEL
-        response = model.generate_content(f"You are an expert crypto trading analyst. Use this live data to answer the user.\n{context}\nUser Question: {prompt}")
+        response = client.models.generate_content(
+            model='gemini-3.8-flash',
+            contents=f"You are an expert crypto trading analyst. Use this live data to answer the user.\n{context}\nUser Question: {prompt}"
+        )
         tg_ai(f"🧠 AI ANALYST:\n\n{response.text}")
     except Exception as e: tg(f"❌ AI Error: {e}")
 
@@ -74,7 +69,6 @@ def sell(sym, pct, reason):
                 pnl=(p-db[sym]["entry_price"])*qty; L=load(LEDGER_FILE)
                 L['total_realized_usdt']=L.get('total_realized_usdt',0.0)+pnl; L['trade_count']=L.get('trade_count',0)+1
                 save(LEDGER_FILE,L); tg(f"✅ *SOLD ({reason})*\n🪙 {qty} {sym}\n{'🟢' if pnl>=0 else '🔴'} PnL: ${pnl:.2f}")
-                set_cool(sym) # 🚨 START 24H COOLDOWN
             return True
     except Exception as e: tg(f"❌ *SELL FAILED:* {e}")
     return False
@@ -109,24 +103,56 @@ def exec_queue():
     q=load(QUEUE_FILE); db=load(DB_FILE); s=settings()
     if not q: return
     sq=sorted(q.items(), key=lambda x:x[1].get('score',0), reverse=True)
-    if len(db)<s["max_tokens_before_consolidation"]:
-        try:
-            ub=exchange.fetch_balance()['free'].get('USDT',0)
-            for sym,d in sq:
-                if len(db)>=s["max_tokens_before_consolidation"]: break
-                if sym in db or is_cool(sym): del q[sym]; save(QUEUE_FILE,q); continue
-                p,_,_,_,_=data(sym)
-                if not p: continue
-                sp=min(ub, s['auto_buy_amount_usdt'])
-                if sp>=1.02:
-                    cs=sym.replace("-","/"); qty=float(exchange.amount_to_precision(cs, sp/p))
-                    exchange.create_limit_buy_order(cs, qty, p); sl=d['sl']; hard_sl(sym,qty,sl)
-                    db[sym]={"entry_price":p,"safe_zone":p,"stop_loss":sl,"took_profit_10":False,"took_profit_50":False}
-                    save(DB_FILE,db); del q[sym]; save(QUEUE_FILE,q); ub-=sp
-                    tg(f"🛒 *EXECUTED!*\n{sym} | 💵 {sp:.2f} USDT\n🛑 SL: {sl}")
-                    time.sleep(2)
-        except Exception as e: 
-            tg(f"⚠️ *QUEUE BUY FAILED:* `{e}`")
+    
+    try:
+        ub=exchange.fetch_balance()['free'].get('USDT',0)
+        for sym,d in sq:
+            p,_,_,_,_=data(sym)
+            if not p: continue
+            sp=min(ub, s['auto_buy_amount_usdt'])
+            if sp<1.02: continue
+            
+            cs=sym.replace("-","/")
+            
+            if sym in db:
+                # 🚨 AUTO-DCA LOGIC 🚨
+                if db[sym].get('dca_count', 0) >= 2:
+                    del q[sym]; save(QUEUE_FILE,q); continue # Max 2 DCAs per token
+                
+                qty=float(exchange.amount_to_precision(cs, sp/p))
+                exchange.create_limit_buy_order(cs, qty, p)
+                
+                bal = exchange.fetch_balance()['free'].get(sym.split('-')[0], 0)
+                old_qty = bal - qty
+                if old_qty <= 0: old_qty = 0
+                
+                old_entry = db[sym]['entry_price']
+                new_entry = ((old_qty * old_entry) + (qty * p)) / bal if bal > 0 else p
+                new_sl = round(new_entry * (1 - s['stop_loss_pct']/100), 6)
+                
+                db[sym]['entry_price'] = round(new_entry, 6)
+                db[sym]['stop_loss'] = new_sl
+                db[sym]['took_profit_10'] = False
+                db[sym]['took_profit_50'] = False
+                db[sym]['dca_count'] = db[sym].get('dca_count', 0) + 1
+                save(DB_FILE, db)
+                
+                hard_sl(sym, bal, new_sl)
+                tg(f"🛒 *AUTO-DCA EXECUTED!*\n{sym} | 💵 {sp:.2f} USDT\n📉 New Entry: {new_entry:.6f}\n🛑 New SL: {new_sl}")
+                
+            else:
+                # NEW BUY LOGIC
+                if len(db) >= s["max_tokens_before_consolidation"]: continue
+                qty=float(exchange.amount_to_precision(cs, sp/p))
+                exchange.create_limit_buy_order(cs, qty, p); sl=d['sl']; hard_sl(sym,qty,sl)
+                db[sym]={"entry_price":p,"safe_zone":p,"stop_loss":sl,"took_profit_10":False,"took_profit_50":False,"dca_count":0}
+                save(DB_FILE,db)
+                tg(f"🛒 *EXECUTED!*\n{sym} | 💵 {sp:.2f} USDT\n🛑 SL: {sl}")
+
+            del q[sym]; save(QUEUE_FILE,q); ub-=sp
+            time.sleep(2)
+    except Exception as e: 
+        tg(f"⚠️ *QUEUE BUY FAILED:* `{e}`")
 
 def scan():
     db=load(DB_FILE); q=load(QUEUE_FILE); s=settings()
@@ -146,8 +172,11 @@ def scan():
     v.sort(key=lambda x:x['vol'], reverse=True); ct=int(time.time()); qu=False
     for sym,d in list(q.items()):
         if ct-d.get('timestamp',0)>86400: del q[sym]; qu=True
+        
     for t in v[15:50]:
-        if t['sym'] in db or is_cool(t['sym']): continue # PREVENT BUYING IF HELD OR ON COOLDOWN
+        # Allow held tokens to be queued for DCA
+        # if t['sym'] in db: continue 
+        
         p,pr,r,ma5,ma10=data(t['sym'])
         if not p: continue
         setup=None; sl=0
@@ -166,13 +195,13 @@ def fmt_price(p):
     else: return f"{p:.6f}"
 
 def format_table(headers, rows, widths):
-    # REVERTED TO CLEAN TEXT FORMAT
-    header_str = " | ".join([h.ljust(w) for h, w in zip(headers, widths)])
-    line_str = "-+-".join(["-" * w for w in widths])
-    row_strs = []
-    for r in rows:
-        row_strs.append(" | ".join([str(val).ljust(w) for val, w in zip(r, widths)]))
-    return "\n".join([header_str, line_str] + row_strs)
+    # Clean ASCII table borders
+    top = "+" + "+".join(["-" * (w + 2) for w in widths]) + "+"
+    header_str = "| " + " | ".join([h.ljust(w) for h, w in zip(headers, widths)]) + " |"
+    mid = "+" + "+".join(["-" * (w + 2) for w in widths]) + "+"
+    row_strs = ["| " + " | ".join([str(val).ljust(w) for val, w in zip(r, widths)]) + " |" for r in rows]
+    bot = "+" + "+".join(["-" * (w + 2) for w in widths]) + "+"
+    return "\n".join([top, header_str, mid] + row_strs + [bot])
 
 def gl():
     try: tk=exchange.fetch_tickers()
@@ -188,7 +217,7 @@ def gl():
     
     def build(title, data):
         rows = [[x['sym'], fmt_price(x['price']), f"{x['chg']:+.1f}%"] for x in data]
-        table = format_table(["Coin", "Price", "Change"], rows, [8, 10, 8])
+        table = format_table(["Coin", "Price", "Change"], rows, [8, 12, 8])
         return f"*{title}*\n```\n{table}\n```"
 
     return build("🚀 GAINERS (24H)", v[:10]), build("🩸 LOSERS (24H)", v[-10:][::-1])
@@ -281,8 +310,22 @@ def tg_check():
                             if sym not in db:
                                 pr=exchange.fetch_ticker(f"{c}/USDT")['last']; qty=float(exchange.amount_to_precision(f"{c}/USDT", amt/pr))
                                 exchange.create_limit_buy_order(f"{c}/USDT", qty, pr); sl=round(pr*(1-settings()['stop_loss_pct']/100),6)
-                                db[sym]={"entry_price":pr,"safe_zone":pr,"stop_loss":sl,"took_profit_10":False,"took_profit_50":False}
+                                db[sym]={"entry_price":pr,"safe_zone":pr,"stop_loss":sl,"took_profit_10":False,"took_profit_50":False,"dca_count":0}
                                 save(DB_FILE,db); hard_sl(sym, qty, sl); tg(f"✅ *BOUGHT:* {c} | SL: {sl}")
+                    elif low.startswith("/dca"):
+                        p=txt.split()
+                        if len(p)==3:
+                            c=p[1].upper(); amt=float(p[2]); sym=f"{c}-USDT"; db=load(DB_FILE)
+                            if sym not in db: tg(f"❌ You don't have an active bot trade for {c}.")
+                            else:
+                                try:
+                                    pr=exchange.fetch_ticker(f"{c}/USDT")['last']; aq=float(exchange.amount_to_precision(f"{c}/USDT", amt/pr))
+                                    exchange.create_limit_buy_order(f"{c}/USDT", aq, pr); bal=exchange.fetch_balance()['free'].get(c,0); oq=bal-aq
+                                    ne=pr if oq<=0 else ((oq*db[sym]['entry_price'])+amt)/bal
+                                    sl=round(ne*(1-settings()['stop_loss_pct']/100),6)
+                                    db[sym].update({"entry_price":round(ne,6),"stop_loss":sl,"took_profit_10":False,"took_profit_50":False,"dca_count":db[sym].get('dca_count',0)+1})
+                                    save(DB_FILE,db); hard_sl(sym,bal,sl); tg(f"🛒 *DCA:* {c} | {amt} USDT\n📉 New Entry: {ne:.6f}\n🛑 SL: {sl}")
+                                except Exception as e: tg(f"❌ *DCA FAILED:* {e}")
                 st["last_update_id"]=lid; save(STATE_FILE,st)
     except Exception as e: print(f"TG Err: {e}")
 
