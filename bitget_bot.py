@@ -13,6 +13,7 @@ DB_FILE = "positions.json"
 STATE_FILE = "tg_state.json"
 SETTINGS_FILE = "settings.json"
 QUEUE_FILE = "queue.json"
+LEDGER_FILE = "profit_ledger.json" # NEW: Profit Tracker
 
 STABLECOINS = ['USDC', 'USDT', 'DAI', 'FDUSD', 'TUSD', 'USDD', 'USDE']
 LEVERAGE_SUFFIXES = ['3L', '3S', '5L', '5S', '10L', '10S', '2L', '2S', '4L', '4S']
@@ -75,38 +76,32 @@ def get_market_data(symbol):
     except Exception:
         return None, None, None, None, None
 
-# ==========================================
-# 🛡️ UPGRADE 1: EXCHANGE HARD STOP-LOSS
-# ==========================================
 def place_exchange_stop_loss(symbol, qty, trigger_price):
-    """Places a real stop-loss order directly on Bitget's servers."""
     try:
         ccxt_symbol = symbol.replace("-", "/")
+        try:
+            open_orders = exchange.fetch_open_orders(ccxt_symbol)
+            for o in open_orders:
+                if o['side'] == 'sell':
+                    exchange.cancel_order(o['id'], ccxt_symbol)
+        except: pass
+
         exchange.create_order(
-            symbol=ccxt_symbol,
-            type='market',
-            side='sell',
-            amount=qty,
+            symbol=ccxt_symbol, type='market', side='sell', amount=qty,
             params={'stopPrice': trigger_price, 'triggerPrice': trigger_price, 'stopLossPrice': trigger_price}
         )
         return True
     except Exception as e:
-        send_telegram(f"⚠️ *EXCHANGE STOP LOSS FAILED:* Could not place on Bitget. Error: `{e}`\nRelying on software stop loss.")
+        send_telegram(f"⚠️ *EXCHANGE SL FAILED:* `{e}`")
         return False
 
-# ==========================================
-# 🛡️ UPGRADE 3: GLOBAL CIRCUIT BREAKER
-# ==========================================
 def check_circuit_breaker():
-    """Checks total portfolio value. If it drops 10% from its peak, it pauses the bot."""
     settings = load_settings()
     if not settings.get("auto_buy_enabled"): return
-
     try:
         db = load_json(DB_FILE)
         bal = exchange.fetch_balance()
         free = bal['free']
-        
         total_val = free.get('USDT', 0.0) + free.get('USDC', 0.0)
         for symbol in db.keys():
             coin = symbol.split('-')[0]
@@ -117,28 +112,22 @@ def check_circuit_breaker():
                 
         state = load_json(STATE_FILE)
         peak = state.get('portfolio_peak', 0.0)
-        
         if total_val > peak:
             state['portfolio_peak'] = total_val
             save_json(STATE_FILE, state)
-            
         elif peak > 0 and total_val < (peak * 0.90):
             settings["auto_buy_enabled"] = False
             save_json(SETTINGS_FILE, settings)
-            send_telegram(f"🚨 *EMERGENCY CIRCUIT BREAKER!*\n\nYour portfolio dropped >10% from its peak (${peak:.2f} -> ${total_val:.2f}).\n\nThe bot has been paused to protect your funds. Type `/set auto_buy_enabled true` to resume.")
+            send_telegram(f"🚨 *EMERGENCY CIRCUIT BREAKER!*\n\nPortfolio dropped >10% from peak (${peak:.2f} -> ${total_val:.2f}).\nBot paused. Type `/set auto_buy_enabled true` to resume.")
     except Exception as e:
-        print(f"Circuit breaker error: {e}")
+        print(f"CB error: {e}")
 
-# ==========================================
-# CORE LOGIC
-# ==========================================
 def execute_sell(symbol, percentage, reason):
     try:
         ccxt_symbol = symbol.replace("-", "/")
         base_coin = symbol.split("-")[0]
         balance = exchange.fetch_balance()
         free_balance = balance['free'].get(base_coin, 0)
-        
         if free_balance > 0:
             ticker = exchange.fetch_ticker(ccxt_symbol)
             price = ticker['last']
@@ -151,7 +140,21 @@ def execute_sell(symbol, percentage, reason):
                 
             qty = float(exchange.amount_to_precision(ccxt_symbol, qty_to_sell))
             exchange.create_market_sell_order(ccxt_symbol, qty)
-            send_telegram(f"✅ *AUTO-SOLD ({reason})*\n🪙 Sold {qty} of {symbol}.")
+            
+            # 🆕 LOG PROFIT TO LEDGER
+            db = load_json(DB_FILE)
+            if symbol in db:
+                entry_price = db[symbol]["entry_price"]
+                realized_pnl = (price - entry_price) * qty
+                ledger = load_json(LEDGER_FILE)
+                ledger['total_realized_usdt'] = ledger.get('total_realized_usdt', 0.0) + realized_pnl
+                ledger['trade_count'] = ledger.get('trade_count', 0) + 1
+                save_json(LEDGER_FILE, ledger)
+                
+                pnl_emoji = "🟢" if realized_pnl >= 0 else "🔴"
+                send_telegram(f"✅ *AUTO-SOLD ({reason})*\n🪙 Sold {qty} of {symbol}.\n{pnl_emoji} Realized PnL: ${realized_pnl:.2f}")
+            else:
+                send_telegram(f"✅ *AUTO-SOLD ({reason})*\n🪙 Sold {qty} of {symbol}.")
             return True
     except Exception as e:
         send_telegram(f"❌ *SELL FAILED ({symbol}):*\n`{e}`")
@@ -162,9 +165,7 @@ def manage_active_trades():
     for symbol, data in list(db.items()):
         price, prev, rsi, ma5, ma10 = get_market_data(symbol)
         if not price: continue
-        
         inc = ((price - data["entry_price"]) / data["entry_price"]) * 100
-        
         if price <= data["stop_loss"]:
             if execute_sell(symbol, 1.0, "STOP LOSS"): del db[symbol]; save_json(DB_FILE, db)
             continue
@@ -179,7 +180,6 @@ def manage_active_trades():
 def consolidate_portfolio():
     db = load_json(DB_FILE)
     if len(db) <= 2: return
-
     send_telegram(f"⚖️ *STARTING CONSOLIDATION...*")
     ranked = []
     for sym, data in db.items():
@@ -187,60 +187,48 @@ def consolidate_portfolio():
         if price and "entry_price" in data:
             pnl = ((price - data['entry_price']) / data['entry_price']) * 100
             ranked.append({"symbol": sym, "pnl": pnl, "price": price})
-    
     ranked.sort(key=lambda x: x["pnl"], reverse=True)
     keep = ranked[:2]
     sell = ranked[2:]
-
     for t in sell:
         sym = t['symbol']
-        if execute_sell(sym, 1.0, "Consolidation"):
-            del db[sym]
-            save_json(DB_FILE, db)
+        if execute_sell(sym, 1.0, "Consolidation"): del db[sym]; save_json(DB_FILE, db)
 
 def execute_from_queue():
     queue = load_json(QUEUE_FILE)
     db = load_json(DB_FILE)
     settings = load_settings()
-    
     if not queue: return
-    
     sorted_queue = sorted(queue.items(), key=lambda x: x[1].get('score', 0), reverse=True)
     
     if len(db) < settings.get("max_tokens_before_consolidation", 3):
         try:
             balance = exchange.fetch_balance()
             usdt_bal = balance['free'].get('USDT', 0)
-            
             for sym, data in sorted_queue:
                 if len(db) >= settings.get("max_tokens_before_consolidation", 3): break
                 
+                if sym in db:
+                    del queue[sym]
+                    save_json(QUEUE_FILE, queue)
+                    continue
+                    
                 base = sym.split("-")[0]
                 if base in BLACKLIST: continue
-                
                 price, _, _, _, _ = get_market_data(sym)
                 if not price: continue
-                
                 spend = min(usdt_bal, settings['auto_buy_amount_usdt'])
                 if spend >= 1.02:
                     ccxt_symbol = sym.replace("-", "/")
                     qty = float(exchange.amount_to_precision(ccxt_symbol, spend / price))
-                    
                     exchange.create_market_buy_order(ccxt_symbol, qty)
-                    
                     sl_price = data['sl']
                     sl_placed = place_exchange_stop_loss(sym, qty, sl_price)
                     sl_msg = "🛡️ Exchange SL Placed" if sl_placed else "⚠️ Software SL Only"
-                    
-                    db[sym] = {
-                        "entry_price": price, "safe_zone": price, "stop_loss": sl_price,
-                        "took_profit_10": False, "took_profit_50": False
-                    }
+                    db[sym] = {"entry_price": price, "safe_zone": price, "stop_loss": sl_price, "took_profit_10": False, "took_profit_50": False}
                     save_json(DB_FILE, db)
-                    
                     del queue[sym]
                     save_json(QUEUE_FILE, queue)
-                    
                     usdt_bal -= spend
                     send_telegram(f"🛒 *QUEUE EXECUTED!*\n{sym} | 💵 {spend:.2f} USDT\n🛑 SL: {sl_price}\n{sl_msg}")
                     time.sleep(2)
@@ -251,51 +239,41 @@ def scan_and_queue():
     db = load_json(DB_FILE)
     queue = load_json(QUEUE_FILE)
     settings = load_settings()
-    
     check_circuit_breaker()
-    
     if not settings.get("auto_buy_enabled", False): return 
-
-    # ==========================================
-    # 🛡️ UPGRADE 2: BTC CRASH FILTER
-    # ==========================================
+    
     btc_price, _, btc_rsi, _, _ = get_market_data("BTC-USDT")
     if btc_rsi and btc_rsi < 35:
         state = load_json(STATE_FILE)
         last_btc_alert = state.get('last_btc_alert', 0)
         if time.time() - last_btc_alert > 3600:
-            send_telegram(f"🐋 *BTC CRASH FILTER:* BTC RSI is {btc_rsi}. The market is bleeding. Pausing new buys to protect capital.")
+            send_telegram(f"🐋 *BTC CRASH FILTER:* BTC RSI is {btc_rsi}. Pausing new buys.")
             state['last_btc_alert'] = time.time()
             save_json(STATE_FILE, state)
         return 
-
+        
     if len(db) > settings.get("max_tokens_before_consolidation", 3):
-        send_telegram(f"⚠️ *AUTO-CONSOLIDATING:* You have {len(db)} tokens.")
         consolidate_portfolio()
         db = load_json(DB_FILE) 
-
+        
     try: 
         tickers = exchange.fetch_tickers()
         markets = exchange.load_markets() 
     except Exception: return
-        
+    
     valid = []
     for sym, t in tickers.items():
         if sym.endswith('/USDT'):
             base = sym.split('/')[0]
-            
-            if base in STABLECOINS: continue
-            if base in BLACKLIST: continue 
+            if base in STABLECOINS or base in BLACKLIST: continue 
             if base.startswith('X') and len(base) <= 6: continue
             if any(base.upper().endswith(suffix) for suffix in LEVERAGE_SUFFIXES): continue
             if sym in markets and not markets[sym].get('spot', False): continue
-
             vol = t['quoteVolume'] if t['quoteVolume'] else 0
             if vol >= 1000000: 
                 valid.append({'symbol': sym.replace("/", "-"), 'vol': vol, 'change': t['percentage'] if t['percentage'] else 0})
                 
     valid.sort(key=lambda x: x['vol'], reverse=True)
-    
     current_time = int(time.time())
     queue_updated = False
     
@@ -303,61 +281,137 @@ def scan_and_queue():
         if current_time - data.get('timestamp', 0) > 86400:
             del queue[sym]
             queue_updated = True
-
+            
     for t in valid[15:50]:
         if t['symbol'] in db: continue 
-        
         price, prev_close, rsi, ma5, ma10 = get_market_data(t['symbol']) 
         if not price: continue
-        
         setup = None
         sl = 0
-
         if t['change'] > 1.0 and settings['rsi_min'] <= rsi <= settings['rsi_max'] and price > ma5 and ma5 > ma10:
             setup = "TREND PULLBACK"
             sl = round(ma5 * (1 - settings['stop_loss_pct']/100), 6)
         elif t['change'] < -8.0 and rsi < 30 and price > prev_close:
             setup = "OVERSOLD BOUNCE"
             sl = round(price * 0.95, 6)
-            
         if setup:
             rr_ratio = (price * 0.10) / (price - sl) if (price - sl) > 0 else 0
             score = (t['vol'] / 1000000) + (rr_ratio * 10)
-            
             if t['symbol'] not in queue or queue[t['symbol']].get('score', 0) < score:
                 is_new = t['symbol'] not in queue
-                queue[t['symbol']] = {
-                    "timestamp": current_time,
-                    "type": setup,
-                    "sl": sl,
-                    "score": score
-                }
+                queue[t['symbol']] = {"timestamp": current_time, "type": setup, "sl": sl, "score": score}
                 queue_updated = True
+                if is_new: send_telegram(f"📥 *QUEUED:* {t['symbol']}\nSetup: {setup}\nScore: {score:.1f}")
                 
-                if is_new:
-                    send_telegram(f"📥 *QUEUED:* {t['symbol']}\nSetup: {setup}\nScore: {score:.1f}")
-                    
-    if queue_updated:
-        save_json(QUEUE_FILE, queue)
+    if queue_updated: save_json(QUEUE_FILE, queue)
+
+def analyze_coin(coin):
+    symbol = f"{coin}-USDT"
+    price, prev_close, rsi, ma5, ma10 = get_market_data(symbol)
+    if not price: return f"❌ Could not fetch data for {coin}."
+    try:
+        ticker = exchange.fetch_ticker(symbol.replace("-", "/"))
+        change_24h = ticker['percentage']
+        volume = ticker['quoteVolume']
+    except:
+        change_24h = 0
+        volume = 0
+
+    msg = f"🧠 *TECHNICAL ANALYSIS: {coin}*\n\n"
+    msg += f"💰 *Price:* {price}\n📊 *24H Change:* {change_24h:+.2f}%\n💵 *Volume:* ${volume/1000000:.1f}M\n\n"
+    msg += f"📈 *RSI (1H):* {rsi}\n"
+    if rsi >= 70: msg += "   └ 🔴 Overbought (Danger)\n"
+    elif rsi >= 52: msg += "   └ 🟡 Danger Zone (Hold)\n"
+    elif rsi >= 42: msg += "   └ 🟢 Entry Zone (Healthy Pullback)\n"
+    elif rsi >= 30: msg += "   └ 🟠 Late Phase (Wait)\n"
+    else: msg += "   └ 🔪 Knife Phase (Oversold)\n"
+    
+    msg += f"\n📉 *MA5:* {ma5}\n📉 *MA10:* {ma10}\n"
+    if price > ma5 > ma10: msg += "   └ 🟢 Uptrend\n"
+    elif price < ma5 < ma10: msg += "   └ 🔴 Downtrend\n"
+    else: msg += "   └ 🟡 Choppy\n"
+
+    msg += f"\n🎯 *Bot Verdict:*\n"
+    if 42 <= rsi <= 48 and price > ma5 and ma5 > ma10:
+        msg += f"✅ *VALID SETUP!* Meets Trend Pullback criteria.\n👉 Type `/buy {coin} [USDT]` to execute."
+    elif rsi < 30 and price > prev_close:
+        msg += f"✅ *VALID SETUP!* Meets Oversold Bounce criteria.\n👉 Type `/buy {coin} [USDT]` to execute."
+    else:
+        msg += "🛑 *NO SETUP.* Does not meet the bot's strict rules right now."
+    return msg
+
+def get_gainers_losers():
+    try: tickers = exchange.fetch_tickers()
+    except Exception: return "❌ Could not fetch market data.", "❌ Could not fetch market data."
+    valid = []
+    for sym, t in tickers.items():
+        if sym.endswith('/USDT'):
+            base = sym.split('/')[0]
+            if base in STABLECOINS or base in BLACKLIST: continue
+            if base.startswith('X') and len(base) <= 6: continue
+            if any(base.upper().endswith(suffix) for suffix in LEVERAGE_SUFFIXES): continue
+            vol = t['quoteVolume'] if t['quoteVolume'] else 0
+            change = t['percentage'] if t['percentage'] else 0
+            if vol >= 1000000: valid.append({'symbol': base, 'change': change, 'vol': vol})
+    valid.sort(key=lambda x: x['change'], reverse=True)
+    gainers = valid[:10]
+    losers = valid[-10:][::-1]
+    g_msg = "🚀 *TOP 10 GAINERS (24H)*\n\n"
+    for i, g in enumerate(gainers, 1): g_msg += f"{i}. 🟢 *{g['symbol']}*: {g['change']:+.1f}% (${g['vol']/1e6:.1f}M)\n"
+    l_msg = "🩸 *TOP 10 LOSERS (24H)*\n\n"
+    for i, l in enumerate(losers, 1): l_msg += f"{i}. 🔴 *{l['symbol']}*: {l['change']:+.1f}% (${l['vol']/1e6:.1f}M)\n"
+    return g_msg, l_msg
 
 def check_telegram():
     state = load_json(STATE_FILE)
     last_id = state.get("last_update_id", 0)
-    
     url = f"https://api.telegram.org/bot{TG_TOKEN}/getUpdates?offset={last_id + 1}"
     try:
         res = requests.get(url, timeout=10).json()
         if res.get("ok") and len(res.get("result", [])) > 0:
             for update in res["result"]:
                 last_id = update["update_id"]
-                
                 if "message" in update and "date" in update["message"]:
                     if int(time.time()) - update["message"]["date"] > 900: continue
-                
                 if "message" in update and "text" in update["message"]:
                     text = update["message"]["text"].lower()
                     
-                    if text == "/audit":
+                    if text == "/help":
+                        help_msg = (
+                            "🤖 *BOT COMMAND CENTER*\n\n"
+                            "📊 *Data & Analysis:*\n"
+                            "`/analyze SOL` - Full technical breakdown\n"
+                            "`/gainers` - Top 10 24H gainers\n"
+                            "`/losers` - Top 10 24H losers\n"
+                            "`/queue` - View priority queue\n"
+                            "`/pnl` - View total profit/loss\n\n"
+                            "💼 *Account Management:*\n"
+                            "`/balance` - View USDT & NGN balance\n"
+                            "`/audit` - System health check\n"
+                            "`/status` - Check active trades\n\n"
+                            "🛠️ *Execution:*\n"
+                            "`/buy SOL 5.75` - Manual buy\n"
+                            "`/dca SOL 5.75` - Add to a trade\n"
+                            "`/consolidate` - Merge into top 2\n"
+                            "`/clear` - Wipe all memory\n"
+                            "`/set [key] [val]` - Change rules"
+                        )
+                        send_telegram(help_msg)
+
+                    elif text == "/pnl":
+                        ledger = load_json(LEDGER_FILE)
+                        total_pnl = ledger.get('total_realized_usdt', 0.0)
+                        count = ledger.get('trade_count', 0)
+                        rate = get_ngn_rate()
+                        ngn_str = f" (₦{total_pnl * rate:,.2f})" if rate else ""
+                        
+                        emoji = "🟢" if total_pnl >= 0 else "🔴"
+                        msg = f"📊 *PROFIT & LOSS LEDGER*\n\n"
+                        msg += f"{emoji} *Total Realized PnL:* ${total_pnl:.2f} USDT{ngn_str}\n"
+                        msg += f"✅ *Total Trades Closed:* {count}"
+                        send_telegram(msg)
+
+                    elif text == "/audit":
                         try:
                             bal = exchange.fetch_balance()
                             free = bal['free']
@@ -367,8 +421,7 @@ def check_telegram():
                             queue = load_json(QUEUE_FILE)
                             msg = f"🛠️ *SYSTEM AUDIT*\n\n✅ *API:* Connected\n💵 *Balance:* {usdt:.2f} USDT{ngn_str}\n✅ *Trades:* {len(load_json(DB_FILE))}\n📥 *Queue:* {len(queue)}\n⚙️ *Buy Size:* ${load_settings()['auto_buy_amount_usdt']}"
                             send_telegram(msg)
-                        except Exception as e:
-                            send_telegram(f"❌ Audit failed: {e}")
+                        except Exception as e: send_telegram(f"❌ Audit failed: {e}")
                             
                     elif text == "/balance":
                         bal = exchange.fetch_balance()
@@ -388,58 +441,4 @@ def check_telegram():
                         if not queue: send_telegram("📥 Queue is empty.")
                         else:
                             msg = "📥 *PRIORITY QUEUE*\n\n"
-                            sorted_queue = sorted(queue.items(), key=lambda x: x[1].get('score', 0), reverse=True)
-                            for sym, data in sorted_queue:
-                                msg += f"🪙 {sym} ({data['type']})\n🏆 Score: {data.get('score', 0):.1f}\n\n"
-                            send_telegram(msg)
-
-                    elif text == "/consolidate":
-                        consolidate_portfolio()
-
-                    elif text.startswith("/set "):
-                        parts = text.split()
-                        if len(parts) == 3:
-                            k, v = parts[1], parts[2]
-                            s = load_settings()
-                            if k in s:
-                                try:
-                                    if k in ["rsi_min", "rsi_max", "max_tokens_before_consolidation"]: s[k] = int(v)
-                                    elif k in ["stop_loss_pct", "auto_buy_amount_usdt"]: s[k] = float(v)
-                                    elif k == "auto_buy_enabled": s[k] = (v.lower() == 'true')
-                                    
-                                    save_json(SETTINGS_FILE, s)
-                                    send_telegram(f"✅ *SETTING SAVED!* `{k}` is now `{s[k]}`.")
-                                except ValueError:
-                                    send_telegram("❌ Invalid value format.")
-                        else:
-                            send_telegram("❌ Format: `/set [key] [value]`")
-
-                    elif "/status" in text:
-                        db = load_json(DB_FILE)
-                        if not db: send_telegram("🛑 No active trades.")
-                        else:
-                            for sym, data in db.items():
-                                price, _, rsi, _, _ = get_market_data(sym)
-                                if price:
-                                    inc = ((price - data['entry_price']) / data['entry_price']) * 100
-                                    send_telegram(f"🟢 *ACTIVE:* {sym}\n💰 Entry: {data['entry_price']}\n📊 Current: {price} ({inc:+.1f}%)\n🎯 RSI: {rsi}")
-            
-            state["last_update_id"] = last_id
-            save_json(STATE_FILE, state)
-    except Exception as e:
-        print(f"Telegram Error: {e}")
-
-if __name__ == "__main__":
-    try:
-        check_telegram()
-        manage_active_trades()    
-        scan_and_queue()
-        execute_from_queue()
-        
-        subprocess.run(["git", "pull", "--rebase"], capture_output=True)
-        subprocess.run(["git", "add", "."], capture_output=True)
-        subprocess.run(["git", "commit", "-m", "Auto-save"], capture_output=True)
-        subprocess.run(["git", "push"], capture_output=True)
-        
-    except Exception as e:
-        send_telegram(f"🚨 *CRITICAL FAILURE:* `{e}`\n\n```\n{traceback.format_exc()[-200:]}\n```")
+                            so
