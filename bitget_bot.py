@@ -15,6 +15,7 @@ SETTINGS_FILE = "settings.json"
 QUEUE_FILE = "queue.json"
 
 STABLECOINS = ['USDC', 'USDT', 'DAI', 'FDUSD', 'TUSD', 'USDD', 'USDE', 'ONE', 'CT']
+LEVERAGE_SUFFIXES = ['3L', '3S', '5L', '5S', '10L', '10S', '2L', '2S', '4L', '4S']
 
 exchange = ccxt.bitget({
     'apiKey': os.environ.get('BITGET_API_KEY'),
@@ -122,7 +123,6 @@ def consolidate_portfolio():
     if len(db) <= 2: return
 
     send_telegram(f"⚖️ *STARTING CONSOLIDATION...*")
-
     ranked = []
     for sym, data in db.items():
         price, _, _, _, _ = get_market_data(sym)
@@ -131,7 +131,6 @@ def consolidate_portfolio():
             ranked.append({"symbol": sym, "pnl": pnl, "price": price})
     
     ranked.sort(key=lambda x: x["pnl"], reverse=True)
-
     keep = ranked[:2]
     sell = ranked[2:]
 
@@ -161,25 +160,20 @@ def consolidate_portfolio():
                 save_json(DB_FILE, db)
             except: pass
 
-# --- NEW: QUEUE MANAGER ---
 def manage_queue():
     queue = load_json(QUEUE_FILE)
     db = load_json(DB_FILE)
     settings = load_settings()
     current_time = int(time.time())
+    valid_queue = {}
     
-    valid_queue = []
-    
-    # 1. Clean the queue (remove old or invalid setups)
+    # 1. Clean the queue
     for sym, data in list(queue.items()):
-        # Drop if older than 24 hours
-        if current_time - data['timestamp'] > 86400:
-            continue
+        if current_time - data['timestamp'] > 86400: continue # Older than 24h
             
         price, prev, rsi, ma5, ma10 = get_market_data(sym)
         if not price: continue
         
-        # Check if the setup is still valid
         is_valid = False
         if data['type'] == "TREND PULLBACK" and settings['rsi_min'] <= rsi <= settings['rsi_max'] and price > ma5:
             is_valid = True
@@ -187,20 +181,17 @@ def manage_queue():
             is_valid = True
             
         if is_valid:
-            valid_queue.append((sym, data))
+            valid_queue[sym] = data
             
-    # Update the queue file with only valid items
-    queue = {k: v for k, v in valid_queue}
-    save_json(QUEUE_FILE, queue)
+    save_json(QUEUE_FILE, valid_queue)
 
-    # 2. Try to execute from the queue if we have space
+    # 2. Execute from queue if space allows
     if len(db) < settings.get("max_tokens_before_consolidation", 3):
         try:
             balance = exchange.fetch_balance()
             usdt_bal = balance['free'].get('USDT', 0)
             
-            # Sort queue by timestamp (oldest first)
-            sorted_queue = sorted(valid_queue, key=lambda x: x[1]['timestamp'])
+            sorted_queue = sorted(valid_queue.items(), key=lambda x: x[1]['timestamp'])
             
             for sym, data in sorted_queue:
                 if len(db) >= settings.get("max_tokens_before_consolidation", 3): break
@@ -220,36 +211,42 @@ def manage_queue():
                     }
                     save_json(DB_FILE, db)
                     
-                    # Remove from queue
-                    del queue[sym]
-                    save_json(QUEUE_FILE, queue)
+                    del valid_queue[sym]
+                    save_json(QUEUE_FILE, valid_queue)
                     
                     usdt_bal -= spend
                     send_telegram(f"🛒 *QUEUED BUY EXECUTED!*\n{sym} | 💵 {spend:.2f} USDT\n🛑 SL: {data['sl']}")
         except Exception as e:
             print(f"Queue execution error: {e}")
 
-# --- SCANNER (Never Stops) ---
 def scan_for_new_trades():
     db = load_json(DB_FILE)
     queue = load_json(QUEUE_FILE)
     settings = load_settings()
     if not settings.get("auto_buy_enabled", False): return 
 
-    # Trigger Consolidation if over limit (instead of stopping)
     if len(db) > settings.get("max_tokens_before_consolidation", 3):
         send_telegram(f"⚠️ *AUTO-CONSOLIDATING:* You have {len(db)} tokens.")
         consolidate_portfolio()
         db = load_json(DB_FILE) 
 
-    try: tickers = exchange.fetch_tickers()
+    try: 
+        tickers = exchange.fetch_tickers()
+        markets = exchange.load_markets() # Load metadata for true spot check
     except Exception: return
         
     valid = []
     for sym, t in tickers.items():
         if sym.endswith('/USDT'):
             base = sym.split('/')[0]
-            if base in STABLECOINS or (base.startswith('X') and len(base) <= 6): continue
+            
+            # --- FILTERS ---
+            if base in STABLECOINS: continue
+            if base.startswith('X') and len(base) <= 6: continue
+            if any(base.upper().endswith(suffix) for suffix in LEVERAGE_SUFFIXES): continue
+            if sym in markets and not markets[sym].get('spot', False): continue
+            # ---------------
+
             vol = t['quoteVolume'] if t['quoteVolume'] else 0
             if vol >= 1000000: 
                 valid.append({'symbol': sym.replace("/", "-"), 'vol': vol, 'change': t['percentage'] if t['percentage'] else 0})
@@ -257,7 +254,6 @@ def scan_for_new_trades():
     valid.sort(key=lambda x: x['vol'], reverse=True)
     
     for t in valid[15:50]:
-        # Skip if already in DB or Queue
         if t['symbol'] in db or t['symbol'] in queue: continue 
         
         price, prev_close, rsi, ma5, ma10 = get_market_data(t['symbol']) 
@@ -274,14 +270,34 @@ def scan_for_new_trades():
             sl = round(price * 0.95, 6)
             
         if setup:
-            # ADD TO QUEUE INSTEAD OF BUYING DIRECTLY
-            queue[t['symbol']] = {
-                "timestamp": int(time.time()),
-                "type": setup,
-                "sl": sl
-            }
-            save_json(QUEUE_FILE, queue)
-            send_telegram(f"📥 *ADDED TO QUEUE:* {t['symbol']}\nSetup: {setup}\n*(Waiting for funds/space)*")
+            try:
+                balance = exchange.fetch_balance()
+                spend = min(balance['free'].get('USDT', 0), settings['auto_buy_amount_usdt'])
+                
+                # INSTANT BUY if we have space and funds
+                if len(db) < settings.get("max_tokens_before_consolidation", 3) and spend >= 1.02:
+                    coin = t['symbol'].split('-')[0]
+                    qty = float(exchange.amount_to_precision(t['symbol'].replace("-", "/"), spend / price))
+                    exchange.create_market_buy_order(t['symbol'].replace("-", "/"), qty)
+                    
+                    db[t['symbol']] = {
+                        "entry_price": price, "safe_zone": price, "stop_loss": sl,
+                        "took_profit_10": False, "took_profit_50": False
+                    }
+                    save_json(DB_FILE, db)
+                    send_telegram(f"🤖 *INSTANT BUY EXECUTED!*\n{setup}\n🪙 {coin} | 💵 {spend:.2f} USDT\n🛑 SL: {sl}")
+                    time.sleep(2) 
+                else:
+                    # Otherwise, add to queue
+                    queue[t['symbol']] = {
+                        "timestamp": int(time.time()),
+                        "type": setup,
+                        "sl": sl
+                    }
+                    save_json(QUEUE_FILE, queue)
+                    send_telegram(f"📥 *ADDED TO QUEUE:* {t['symbol']}\nSetup: {setup}")
+            except Exception as e:
+                send_telegram(f"❌ *BUY FAILED:* {e}")
 
 def check_telegram():
     state = load_json(STATE_FILE)
@@ -308,7 +324,7 @@ def check_telegram():
                             rate = get_ngn_rate()
                             ngn_str = f" (₦{usdt * rate:,.2f})" if rate else ""
                             queue = load_json(QUEUE_FILE)
-                            msg = f"🛠️ *SYSTEM AUDIT*\n\n✅ *API:* Connected\n💵 *Balance:* {usdt:.2f} USDT{ngn_str}\n✅ *Active Trades:* {len(load_json(DB_FILE))}\n📥 *Queue:* {len(queue)} tokens\n⚙️ *Rules:* RSI 42-48 | SL 15% | Buy ${load_settings()['auto_buy_amount_usdt']}"
+                            msg = f"🛠️ *SYSTEM AUDIT*\n\n✅ *API:* Connected\n💵 *Balance:* {usdt:.2f} USDT{ngn_str}\n✅ *Trades:* {len(load_json(DB_FILE))}\n📥 *Queue:* {len(queue)}\n⚙️ *Buy Size:* ${load_settings()['auto_buy_amount_usdt']}"
                             send_telegram(msg)
                         except Exception as e:
                             send_telegram(f"❌ Audit failed: {e}")
@@ -357,10 +373,10 @@ if __name__ == "__main__":
     try:
         check_telegram()
         manage_active_trades()    
-        manage_queue() # Process the queue first
-        scan_for_new_trades() # Then scan for new ones
+        manage_queue()
+        scan_for_new_trades() 
         
-        # Save everything (including queue.json) to GitHub
+        # Save everything to GitHub
         subprocess.run(["git", "pull", "--rebase"], capture_output=True)
         subprocess.run(["git", "add", "."], capture_output=True)
         subprocess.run(["git", "commit", "-m", "Auto-save"], capture_output=True)
