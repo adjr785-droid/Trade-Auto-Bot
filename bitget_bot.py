@@ -4,7 +4,6 @@ TG_TOKEN=os.environ.get('TG_TOKEN'); TG_CHAT_ID=os.environ.get('TG_CHAT_ID')
 DB_FILE="positions.json"; STATE_FILE="tg_state.json"; SETTINGS_FILE="settings.json"; QUEUE_FILE="queue.json"; LEDGER_FILE="profit_ledger.json"
 STABLECOINS=['USDC','USDT','DAI','FDUSD','TUSD','USDD','USDE']; LEV=['3L','3S','5L','5S','10L','10S','2L','2S']; BL=['RPANW','CT','ONE']
 exchange=ccxt.bitget({'apiKey':os.environ.get('BITGET_API_KEY'),'secret':os.environ.get('BITGET_API_SECRET'),'password':os.environ.get('BITGET_API_PASSPHRASE'),'enableRateLimit':True})
-exchange.options['createMarketBuyOrderRequiresPrice'] = False # <--- THE FIX
 genai.configure(api_key=os.environ.get('GEMINI_API_KEY'))
 
 def tg(m):
@@ -113,7 +112,9 @@ def exec_queue():
                 sp=min(ub, s['auto_buy_amount_usdt'])
                 if sp>=1.02:
                     cs=sym.replace("-","/"); qty=float(exchange.amount_to_precision(cs, sp/p))
-                    exchange.create_market_buy_order(cs, qty); sl=d['sl']; hard_sl(sym,qty,sl)
+                    # FIX: Use a Limit Order at the current price instead of Market Order
+                    exchange.create_limit_buy_order(cs, qty, p)
+                    sl=d['sl']; hard_sl(sym,qty,sl)
                     db[sym]={"entry_price":p,"safe_zone":p,"stop_loss":sl,"took_profit_10":False,"took_profit_50":False}
                     save(DB_FILE,db); del q[sym]; save(QUEUE_FILE,q); ub-=sp
                     tg(f"🛒 *EXECUTED!*\n{sym} | 💵 {sp:.2f} USDT\n🛑 SL: {sl}")
@@ -197,7 +198,7 @@ def tg_check():
                             c=p[1].upper(); amt=float(p[2]); sym=f"{c}-USDT"; db=load(DB_FILE)
                             if sym not in db:
                                 pr=exchange.fetch_ticker(f"{c}/USDT")['last']; qty=float(exchange.amount_to_precision(f"{c}/USDT", amt/pr))
-                                exchange.create_market_buy_order(f"{c}/USDT", qty); sl=round(pr*(1-settings()['stop_loss_pct']/100),6)
+                                exchange.create_limit_buy_order(f"{c}/USDT", qty, pr); sl=round(pr*(1-settings()['stop_loss_pct']/100),6)
                                 db[sym]={"entry_price":pr,"safe_zone":pr,"stop_loss":sl,"took_profit_10":False,"took_profit_50":False}
                                 save(DB_FILE,db); hard_sl(sym, qty, sl); tg(f"✅ *BOUGHT:* {c} | SL: {sl}")
                 st["last_update_id"]=lid; save(STATE_FILE,st)
