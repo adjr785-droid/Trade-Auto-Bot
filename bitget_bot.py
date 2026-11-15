@@ -4,6 +4,7 @@ import os
 import time
 import ccxt
 import subprocess
+import traceback
 
 # Load from GitHub Secrets
 TG_TOKEN = os.environ.get('TG_TOKEN')
@@ -73,10 +74,36 @@ def git_save():
     except Exception:
         pass
 
+# --- THE OVERSEER DIAGNOSTIC ENGINE ---
+def run_diagnostics():
+    """Clones the Overseer: Checks API, Files, and stuck trades."""
+    # 1. API Check
+    try:
+        exchange.fetch_balance()
+    except Exception as e:
+        return False, f"Bitget API Connection Failed: {e}"
+
+    # 2. Check for stuck pending trades (older than 24 hours)
+    pending = load_json(PENDING_FILE)
+    current_time = int(time.time())
+    stuck_cleared = 0
+    for sym, data in list(pending.items()):
+        if current_time - data["timestamp"] > 86400:
+            del pending[sym]
+            stuck_cleared += 1
+    
+    if stuck_cleared > 0:
+        save_json(PENDING_FILE, pending)
+        send_telegram(f"🔧 *AUTO-FIX:* Cleared {stuck_cleared} stuck pending trades older than 24h.")
+        
+    return True, "System Nominal"
+
+# --- AUDIT & REPORTING ---
 def perform_audit():
     msg = "🛠️ *SYSTEM AUDIT REPORT*\n\n"
     try:
-        exchange.fetch_balance()
+        bal = exchange.fetch_balance()
+        free = bal['free']
         msg += "✅ *Bitget API:* Connected\n"
     except Exception as e:
         send_telegram(f"❌ *Bitget API:* Failed (`{e}`)")
@@ -84,12 +111,30 @@ def perform_audit():
 
     db = load_json(DB_FILE)
     settings = load_settings()
+    ngn_rate = get_ngn_rate()
     
-    msg += f"✅ *Active Trades:* {len(db)}\n" # Removed the /3 limit
+    usdt_bal = free.get('USDT', 0.0)
+    usdt_ngn = f" (₦{usdt_bal * ngn_rate:,.2f})" if ngn_rate else ""
+    
+    msg += f"💵 *Balance:* `{usdt_bal:.2f}` USDT{usdt_ngn}\n"
+    msg += f"✅ *Active Trades:* {len(db)}\n"
     msg += f"⚙️ *Rules:* RSI {settings['rsi_min']}-{settings['rsi_max']} | SL {settings['stop_loss_pct']}% | Auto-Buy ${settings['auto_buy_amount_usdt']}\n"
     msg += f"🟢 *Status:* HEALTHY"
     send_telegram(msg)
 
+def check_6_hour_audit():
+    """Automatically triggers the audit every 6 hours."""
+    state = load_json(STATE_FILE)
+    last_audit = state.get("last_periodic_audit", 0)
+    current_time = int(time.time())
+    
+    # 6 hours = 21600 seconds
+    if current_time - last_audit >= 21600:
+        perform_audit()
+        state["last_periodic_audit"] = current_time
+        save_json(STATE_FILE, state)
+
+# --- CORE BOT LOGIC ---
 def get_market_data(symbol):
     try:
         ccxt_symbol = symbol.replace("-", "/")
@@ -168,10 +213,8 @@ def check_telegram_commands():
             for update in res["result"]:
                 last_id = update["update_id"]
                 
-                # IGNORE OLD MESSAGES
                 if "message" in update and "date" in update["message"]:
-                    if int(time.time()) - update["message"]["date"] > 300:
-                        continue
+                    if int(time.time()) - update["message"]["date"] > 300: continue
                 
                 if "message" in update and "text" in update["message"]:
                     text = update["message"]["text"].lower()
@@ -232,31 +275,6 @@ def check_telegram_commands():
                         save_json(DB_FILE, {})
                         save_json(SYNC_FILE, {})
                         send_telegram("🧹 *MEMORY CLEARED!*")
-                        
-                    elif text.startswith("/buy"):
-                        parts = text.split()
-                        if len(parts) == 3:
-                            coin = parts[1].upper()
-                            usdt_amount = float(parts[2])
-                            symbol = f"{coin}/USDT"
-                            try:
-                                ticker = exchange.fetch_ticker(symbol)
-                                current_price = ticker['last']
-                                qty = float(exchange.amount_to_precision(symbol, usdt_amount / current_price))
-                                exchange.create_market_buy_order(symbol, qty)
-                                send_telegram(f"✅ *ORDER EXECUTED!*\n🪙 Bought {qty} of {coin}.")
-                            except Exception as e:
-                                send_telegram(f"❌ *ORDER FAILED:* {e}")
-
-                    elif text.startswith("/sell"):
-                        parts = text.split()
-                        if len(parts) == 2:
-                            coin = parts[1].upper()
-                            if execute_sell(f"{coin}-USDT", 1.0, "Manual Override"):
-                                db = load_json(DB_FILE)
-                                if f"{coin}-USDT" in db:
-                                    del db[f"{coin}-USDT"]
-                                    save_json(DB_FILE, db)
 
                     elif "/status" in text:
                         db = load_json(DB_FILE)
@@ -294,7 +312,6 @@ def manage_active_trades():
 
 def scan_for_new_trades():
     db = load_json(DB_FILE)
-
     settings = load_settings()
     if not settings.get("auto_buy_enabled", False): return 
 
@@ -312,7 +329,6 @@ def scan_for_new_trades():
                 
     valid.sort(key=lambda x: x['vol'], reverse=True)
     
-    # UNLIMITED SCANNING: It will buy every valid setup it finds
     for t in valid[15:50]:
         if t['symbol'] in db: continue 
         
@@ -342,24 +358,35 @@ def scan_for_new_trades():
                         }
                         save_json(DB_FILE, db)
                         send_telegram(f"🤖 *AUTONOMOUS BUY EXECUTED!*\n🪙 {coin} | 💵 {spend:.2f} USDT\n🛑 SL: {sl}")
-                        
-                        # Small sleep to prevent Bitget API rate limits if it buys many at once
                         time.sleep(2) 
                 except Exception as e:
                     send_telegram(f"❌ *BUY FAILED:* {e}")
 
 if __name__ == "__main__":
     try:
+        # 1. The Overseer Clone runs first to check system health
+        is_healthy, status_msg = run_diagnostics()
+        if not is_healthy:
+            send_telegram(f"🚨 *DIAGNOSTIC FAILURE:* {status_msg}\nBot is pausing to protect your funds.")
+            exit(0) # Stops execution if API is broken
+
+        # 2. Load files
         load_json(DB_FILE)
         load_json(STATE_FILE)
         load_json(SYNC_FILE)
         load_settings()
         
+        # 3. Run core tasks
         check_telegram_commands() 
+        check_6_hour_audit() # New 6-hour timer
         sync_wallet() 
         manage_active_trades()    
         scan_for_new_trades()     
         
+        # 4. Save
         git_save() 
+        
     except Exception as e:
-        send_telegram(f"🚨 *CRITICAL SYSTEM FAILURE:* The bot crashed. Error: `{e}`")
+        # The ultimate global catch: If the bot crashes, report exactly why.
+        error_details = traceback.format_exc()
+        send_telegram(f"🚨 *CRITICAL SYSTEM FAILURE:*\nThe bot crashed.\n\n*Error:* `{e}`\n\n*Location:*\n```\n{error_details[-300:]}\n```")
