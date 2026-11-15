@@ -26,6 +26,13 @@ def settings():
     for k,v in d.items(): s.setdefault(k,v)
     return s
 
+def is_cool(sym):
+    st=load(STATE_FILE); c=st.get('cool', {})
+    return c.get(sym, 0) > time.time() - 86400
+
+def set_cool(sym):
+    st=load(STATE_FILE); c=st.get('cool', {}); c[sym]=time.time(); st['cool']=c; save(STATE_FILE, st)
+
 def data(sym):
     try:
         o=exchange.fetch_ohlcv(sym.replace("-","/"),'1h',limit=50); c=[float(k[4]) for k in o[:-1]]
@@ -40,7 +47,7 @@ def ask_ai(prompt):
         bal = exchange.fetch_balance()['free'].get('USDT', 0)
         btc_p, _, btc_rsi, _, _ = data("BTC-USDT")
         context = f"System Data:\n- USDT Balance: {bal}\n- Auto-Buy Size per Trade: {s['auto_buy_amount_usdt']}\n- BTC RSI: {btc_rsi}\n- Active Trades: {db}\n- Queue: {q}\n- Bot Rules: RSI {s['rsi_min']}-{s['rsi_max']}, SL {s['stop_loss_pct']}%\n\n"
-        model = genai.GenerativeModel('gemini-1.5-flash')
+        model = genai.GenerativeModel('gemini-1.5-flash-latest') # FIXED AI MODEL
         response = model.generate_content(f"You are an expert crypto trading analyst. Use this live data to answer the user.\n{context}\nUser Question: {prompt}")
         tg_ai(f"🧠 AI ANALYST:\n\n{response.text}")
     except Exception as e: tg(f"❌ AI Error: {e}")
@@ -67,6 +74,7 @@ def sell(sym, pct, reason):
                 pnl=(p-db[sym]["entry_price"])*qty; L=load(LEDGER_FILE)
                 L['total_realized_usdt']=L.get('total_realized_usdt',0.0)+pnl; L['trade_count']=L.get('trade_count',0)+1
                 save(LEDGER_FILE,L); tg(f"✅ *SOLD ({reason})*\n🪙 {qty} {sym}\n{'🟢' if pnl>=0 else '🔴'} PnL: ${pnl:.2f}")
+                set_cool(sym) # 🚨 START 24H COOLDOWN
             return True
     except Exception as e: tg(f"❌ *SELL FAILED:* {e}")
     return False
@@ -106,7 +114,7 @@ def exec_queue():
             ub=exchange.fetch_balance()['free'].get('USDT',0)
             for sym,d in sq:
                 if len(db)>=s["max_tokens_before_consolidation"]: break
-                if sym in db: del q[sym]; save(QUEUE_FILE,q); continue
+                if sym in db or is_cool(sym): del q[sym]; save(QUEUE_FILE,q); continue
                 p,_,_,_,_=data(sym)
                 if not p: continue
                 sp=min(ub, s['auto_buy_amount_usdt'])
@@ -139,7 +147,7 @@ def scan():
     for sym,d in list(q.items()):
         if ct-d.get('timestamp',0)>86400: del q[sym]; qu=True
     for t in v[15:50]:
-        if t['sym'] in db: continue 
+        if t['sym'] in db or is_cool(t['sym']): continue # PREVENT BUYING IF HELD OR ON COOLDOWN
         p,pr,r,ma5,ma10=data(t['sym'])
         if not p: continue
         setup=None; sl=0
@@ -158,15 +166,13 @@ def fmt_price(p):
     else: return f"{p:.6f}"
 
 def format_table(headers, rows, widths):
-    # Draw a solid box border
-    top = "┌" + "┬".join(["─" * (w + 2) for w in widths]) + "┐"
-    header_str = "│ " + " │ ".join([h.ljust(w) for h, w in zip(headers, widths)]) + " │"
-    mid = "├" + "┼".join(["─" * (w + 2) for w in widths]) + "┤"
+    # REVERTED TO CLEAN TEXT FORMAT
+    header_str = " | ".join([h.ljust(w) for h, w in zip(headers, widths)])
+    line_str = "-+-".join(["-" * w for w in widths])
     row_strs = []
     for r in rows:
-        row_strs.append("│ " + " │ ".join([str(val).ljust(w) for val, w in zip(r, widths)]) + " │")
-    bot = "└" + "┴".join(["─" * (w + 2) for w in widths]) + "┘"
-    return "\n".join([top, header_str, mid] + row_strs + [bot])
+        row_strs.append(" | ".join([str(val).ljust(w) for val, w in zip(r, widths)]))
+    return "\n".join([header_str, line_str] + row_strs)
 
 def gl():
     try: tk=exchange.fetch_tickers()
@@ -182,7 +188,7 @@ def gl():
     
     def build(title, data):
         rows = [[x['sym'], fmt_price(x['price']), f"{x['chg']:+.1f}%"] for x in data]
-        table = format_table(["Coin", "Price", "Change"], rows, [8, 12, 8]) # Widened columns
+        table = format_table(["Coin", "Price", "Change"], rows, [8, 10, 8])
         return f"*{title}*\n```\n{table}\n```"
 
     return build("🚀 GAINERS (24H)", v[:10]), build("🩸 LOSERS (24H)", v[-10:][::-1])
@@ -233,7 +239,7 @@ def tg_check():
                                 if p:
                                     pnl=((p-d['entry_price'])/d['entry_price'])*100
                                     rows.append([s.split('-')[0], fmt_price(d['entry_price']), fmt_price(p), f"{pnl:+.1f}%"])
-                            table = format_table(["Coin", "Entry", "Current", "PnL"], rows, [7, 9, 9, 7])
+                            table = format_table(["Coin", "Entry", "Current", "PnL"], rows, [7, 8, 8, 7])
                             tg(f"🟢 *ACTIVE TRADES*\n```\n{table}\n```")
                             
                     elif low=="/audit":
