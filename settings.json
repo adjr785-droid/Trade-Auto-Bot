@@ -3,5 +3,5 @@
     "rsi_max": 48,
     "stop_loss_pct": 15,
     "auto_buy_enabled": true,
-    "auto_buy_amount_usdt": 10.0
+    "auto_buy_amount_usdt": 5.0
 }
