@@ -55,7 +55,7 @@ def save_json(file, data):
         send_telegram(f"⚠️ *SAVE FAILED:* Could not save `{file}`: {e}")
 
 def load_settings():
-    defaults = {"rsi_min": 42, "rsi_max": 48, "stop_loss_pct": 15, "auto_buy_enabled": True, "auto_buy_amount_usdt": 5.0}
+    defaults = {"rsi_min": 42, "rsi_max": 48, "stop_loss_pct": 15, "auto_buy_enabled": True, "auto_buy_amount_usdt": 5.75, "max_tokens_before_consolidation": 3}
     return load_json(SETTINGS_FILE, defaults)
 
 def get_ngn_rate():
@@ -114,6 +114,7 @@ def perform_audit():
     msg += f"💵 *Balance:* `{usdt_bal:.2f}` USDT{usdt_ngn}\n"
     msg += f"✅ *Active Trades:* {len(db)}\n"
     msg += f"⚙️ *Rules:* RSI {settings['rsi_min']}-{settings['rsi_max']} | SL {settings['stop_loss_pct']}% | Auto-Buy ${settings['auto_buy_amount_usdt']}\n"
+    msg += f"⚖️ *Auto-Consolidate at:* {settings['max_tokens_before_consolidation']} tokens\n"
     msg += f"🟢 *Status:* HEALTHY"
     send_telegram(msg)
 
@@ -145,7 +146,6 @@ def get_market_data(symbol):
     except Exception:
         return None, None, None, None, None, None
 
-# --- SMART SELLING ENGINE (Handles Bitget Minimums) ---
 def execute_sell(symbol, percentage, reason):
     try:
         ccxt_symbol = symbol.replace("-", "/")
@@ -157,17 +157,13 @@ def execute_sell(symbol, percentage, reason):
             ticker = exchange.fetch_ticker(ccxt_symbol)
             current_price = ticker['last']
             
-            # Calculate how much we want to sell and its USDT value
             qty_to_sell = free_balance * percentage
             value_to_sell = qty_to_sell * current_price
             total_value = free_balance * current_price
             
-            # Check if the WHOLE bag is dust (less than $1.02)
             if total_value < 1.02:
-                send_telegram(f"⚠️ *SKIPPING SELL:* {symbol} is worth ${total_value:.2f} (Below Bitget minimum). Leaving it as dust.")
                 return False
                 
-            # If partial sell is less than $1.02, sell 100% instead
             if value_to_sell < 1.02:
                 qty_to_sell = free_balance
                 reason += " (Sold 100% - Partial < $1.02)"
@@ -224,7 +220,6 @@ def check_telegram_commands():
             for update in res["result"]:
                 last_id = update["update_id"]
                 
-                # Extended to 15 minutes (900s) so you have time to click run manually
                 if "message" in update and "date" in update["message"]:
                     if int(time.time()) - update["message"]["date"] > 900: continue
                 
@@ -271,7 +266,7 @@ def check_telegram_commands():
 
                     elif text == "/settings":
                         s = load_settings()
-                        send_telegram(f"⚙️ *SETTINGS*\nAuto-Buy: `{s['auto_buy_enabled']}`\nSize: `${s['auto_buy_amount_usdt']}`\nRSI: `{s['rsi_min']}-{s['rsi_max']}`\nSL: `{s['stop_loss_pct']}%`")
+                        send_telegram(f"⚙️ *SETTINGS*\nAuto-Buy: `{s['auto_buy_enabled']}`\nSize: `${s['auto_buy_amount_usdt']}`\nRSI: `{s['rsi_min']}-{s['rsi_max']}`\nSL: `{s['stop_loss_pct']}%`\nConsolidate At: `{s['max_tokens_before_consolidation']}` tokens")
                     
                     elif text.startswith("/set "):
                         parts = text.split()
@@ -280,7 +275,7 @@ def check_telegram_commands():
                             s = load_settings()
                             if k in s:
                                 try:
-                                    if k in ["rsi_min", "rsi_max"]: s[k] = int(v)
+                                    if k in ["rsi_min", "rsi_max", "max_tokens_before_consolidation"]: s[k] = int(v)
                                     elif k in ["stop_loss_pct", "auto_buy_amount_usdt"]: s[k] = float(v)
                                     elif k == "auto_buy_enabled": s[k] = (v.lower() == 'true')
                                     
@@ -297,6 +292,9 @@ def check_telegram_commands():
                         save_json(DB_FILE, {})
                         save_json(SYNC_FILE, {})
                         send_telegram("🧹 *MEMORY CLEARED!*")
+
+                    elif text == "/consolidate":
+                        consolidate_portfolio()
 
                     elif "/status" in text:
                         db = load_json(DB_FILE)
@@ -332,10 +330,83 @@ def manage_active_trades():
         elif inc >= 10.0 and not data.get("took_profit_10"):
             if execute_sell(symbol, 0.25, "+10% TARGET"): db[symbol]["took_profit_10"] = True; save_json(DB_FILE, db)
 
+# --- CONSOLIDATION ENGINE ---
+def consolidate_portfolio():
+    db = load_json(DB_FILE)
+    settings = load_settings()
+    
+    if len(db) <= 2:
+        send_telegram("🛑 *CONSOLIDATION SKIPPED:* You have 2 or fewer tokens. Nothing to consolidate.")
+        return
+
+    send_telegram(f"⚖️ *STARTING CONSOLIDATION...*\nYou have {len(db)} tokens. Reducing to the top 2 strongest performers.")
+
+    ranked_tokens = []
+    for sym, data in db.items():
+        price, _, rsi, _, _, _ = get_market_data(sym)
+        if price:
+            pnl = ((price - data['entry_price']) / data['entry_price']) * 100
+            ranked_tokens.append({"symbol": sym, "pnl": pnl, "price": price})
+    
+    ranked_tokens.sort(key=lambda x: x["pnl"], reverse=True)
+
+    keep_tokens = ranked_tokens[:2]
+    sell_tokens = ranked_tokens[2:]
+
+    keep_names = [t['symbol'] for t in keep_tokens]
+    send_telegram(f"🏆 *KEEPING (Top Performers):*\n" + "\n".join([f"🟢 {t['symbol']} ({t['pnl']:+.1f}%)" for t in keep_tokens]))
+    send_telegram(f"🩸 *LIQUIDATING (Weakest):*\n" + "\n".join([f"🔴 {t['symbol']} ({t['pnl']:+.1f}%)" for t in sell_tokens]))
+
+    for t in sell_tokens:
+        sym = t['symbol']
+        if execute_sell(sym, 1.0, "Consolidation"):
+            del db[sym]
+            save_json(DB_FILE, db)
+
+    time.sleep(5) 
+    bal = exchange.fetch_balance()
+    available_usdt = bal['free'].get('USDT', 0.0)
+
+    if available_usdt >= 1.02:
+        split_amount = available_usdt / 2
+        
+        if split_amount < 1.02:
+            split_amount = available_usdt
+            keep_tokens = keep_tokens[:1] 
+            
+        for t in keep_tokens:
+            try:
+                ccxt_symbol = t['symbol'].replace("-", "/")
+                ticker = exchange.fetch_ticker(ccxt_symbol)
+                price = ticker['last']
+                
+                qty = float(exchange.amount_to_precision(ccxt_symbol, split_amount / price))
+                exchange.create_market_buy_order(ccxt_symbol, qty)
+                
+                send_telegram(f"🛒 *REINVESTED:* Bought {qty} of {t['symbol']} with {split_amount:.2f} USDT.")
+                
+                db[t['symbol']]['entry_price'] = price
+                save_json(DB_FILE, db)
+                
+            except Exception as e:
+                send_telegram(f"❌ *REINVEST FAILED ({t['symbol']}):* {e}")
+                
+    send_telegram("✅ *CONSOLIDATION COMPLETE!*")
+
 def scan_for_new_trades():
     db = load_json(DB_FILE)
     settings = load_settings()
+    
     if not settings.get("auto_buy_enabled", False): return 
+
+    # ==========================================
+    # 🚨 AUTO-CONSOLIDATION TRIGGER 🚨
+    # ==========================================
+    max_tokens = settings.get("max_tokens_before_consolidation", 3)
+    if len(db) > max_tokens:
+        send_telegram(f"⚠️ *TRIGGERED:* You have {len(db)} tokens (Limit is {max_tokens}). Auto-consolidating now...")
+        consolidate_portfolio()
+        db = load_json(DB_FILE) # Reload memory after consolidation
 
     try: tickers = exchange.fetch_tickers()
     except Exception: return
@@ -354,35 +425,42 @@ def scan_for_new_trades():
     for t in valid[15:50]:
         if t['symbol'] in db: continue 
         
-        price, prev, rsi, ma5, ma10, _ = get_market_data(t['symbol']) 
+        price, prev_close, rsi, ma5, ma10, recent_low = get_market_data(t['symbol']) 
         if not price: continue
         
+        setup_type = None
+        sl = 0
+
         if t['change'] > 1.0 and settings['rsi_min'] <= rsi <= settings['rsi_max'] and price > ma5 and ma5 > ma10:
-            safe_entry = ma5
-            sl = round(ma5 * (1 - settings['stop_loss_pct']/100), 6) 
-            tp1 = round(safe_entry * 1.10, 6) 
-            rr = (tp1 - safe_entry) / (safe_entry - sl) if (safe_entry - sl) > 0 else 0
+            setup_type = "TREND PULLBACK"
+            sl = round(ma5 * (1 - settings['stop_loss_pct']/100), 6)
+        elif t['change'] < -8.0 and rsi < 30 and price > prev_close:
+            setup_type = "OVERSOLD BOUNCE"
+            sl = round(recent_low * 0.98, 6) 
             
-            if rr >= 1.8:
-                try:
-                    balance = exchange.fetch_balance()
-                    usdt_bal = balance['free'].get('USDT', 0)
-                    spend = min(usdt_bal, settings['auto_buy_amount_usdt'])
+        if setup_type:
+            try:
+                balance = exchange.fetch_balance()
+                usdt_bal = balance['free'].get('USDT', 0)
+                spend = min(usdt_bal, settings['auto_buy_amount_usdt'])
+                
+                if spend >= 1.02:
+                    coin = t['symbol'].split('-')[0]
+                    qty = float(exchange.amount_to_precision(t['symbol'].replace("-", "/"), spend / price))
+                    exchange.create_market_buy_order(t['symbol'].replace("-", "/"), qty)
                     
-                    if spend >= 1.02:
-                        coin = t['symbol'].split('-')[0]
-                        qty = float(exchange.amount_to_precision(t['symbol'].replace("-", "/"), spend / price))
-                        exchange.create_market_buy_order(t['symbol'].replace("-", "/"), qty)
-                        
-                        db[t['symbol']] = {
-                            "entry_price": price, "safe_zone": price, "stop_loss": sl,
-                            "took_profit_10": False, "took_profit_50": False
-                        }
-                        save_json(DB_FILE, db)
-                        send_telegram(f"🤖 *AUTONOMOUS BUY EXECUTED!*\n🪙 {coin} | 💵 {spend:.2f} USDT\n🛑 SL: {sl}")
-                        time.sleep(2) 
-                except Exception as e:
-                    send_telegram(f"❌ *BUY FAILED:* {e}")
+                    db[t['symbol']] = {
+                        "entry_price": price, "safe_zone": price, "stop_loss": sl,
+                        "took_profit_10": False, "took_profit_50": False
+                    }
+                    save_json(DB_FILE, db)
+                    
+                    icon = "🏆" if setup_type == "TREND PULLBACK" else "🩸"
+                    send_telegram(f"🤖 *AUTONOMOUS BUY EXECUTED!*\n{icon} *{setup_type}*\n🪙 {coin} | 💵 {spend:.2f} USDT\n🛑 SL: {sl}")
+                    
+                    time.sleep(2) 
+            except Exception as e:
+                send_telegram(f"❌ *BUY FAILED:* {e}")
 
 if __name__ == "__main__":
     try:
@@ -391,20 +469,4 @@ if __name__ == "__main__":
             send_telegram(f"🚨 *DIAGNOSTIC FAILURE:* {status_msg}\nBot is pausing to protect your funds.")
             exit(0)
 
-        load_json(DB_FILE)
-        load_json(STATE_FILE)
-        load_json(SYNC_FILE)
-        load_json(PENDING_FILE) 
-        load_settings()
-        
-        check_telegram_commands() 
-        check_6_hour_audit() 
-        sync_wallet() 
-        manage_active_trades()    
-        scan_for_new_trades()     
-        
-        git_save() 
-        
-    except Exception as e:
-        error_details = traceback.format_exc()
-        send_telegram(f"🚨 *CRITICAL SYSTEM FAILURE:*\nThe bot crashed.\n\n*Error:* `{e}`\n\n*Location:*\n```\n{error_details[-300:]}\n```")
+        lo
