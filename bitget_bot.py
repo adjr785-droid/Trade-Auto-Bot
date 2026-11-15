@@ -104,7 +104,7 @@ def get_market_data(symbol):
             
         ma5 = round(sum(closes[-5:]) / 5, 6)
         ma10 = round(sum(closes[-10:]) / 10, 6)
-        return closes[-1], closes[-2], rsi, ma5, ma10, min(closes[-5:]) # RETURNS 6 VALUES
+        return closes[-1], closes[-2], rsi, ma5, ma10, min(closes[-5:])
     except Exception:
         return None, None, None, None, None, None
 
@@ -145,7 +145,7 @@ def sync_wallet():
         if amt > 0 and coin not in STABLECOINS:
             symbol = f"{coin}-USDT"
             if symbol not in db and coin not in synced:
-                price, _, _, _, _, _ = get_market_data(symbol) # FIXED: 6 variables
+                price, _, _, _, _, _ = get_market_data(symbol)
                 if price and (amt * price) >= 1.02: 
                     db[symbol] = {
                         "entry_price": price, "safe_zone": price, 
@@ -167,6 +167,12 @@ def check_telegram_commands():
         if res.get("ok") and len(res.get("result", [])) > 0:
             for update in res["result"]:
                 last_id = update["update_id"]
+                
+                # --- FIX: IGNORE MESSAGES OLDER THAN 5 MINUTES ---
+                msg_time = update["message"]["date"]
+                if int(time.time()) - msg_time > 300:
+                    continue # Skip this old message silently
+                
                 if "message" in update and "text" in update["message"]:
                     text = update["message"]["text"].lower()
                     
@@ -191,11 +197,8 @@ def check_telegram_commands():
                                     try:
                                         price = exchange.fetch_ticker(f"{coin}/USDT")['last']
                                         val = amt * price
+                                        if val < 0.10: continue
                                         
-                                        # --- DUST FILTER ---
-                                        if val < 0.10:
-                                            continue
-                                            
                                         amt_str = f"{amt:.6f}".rstrip('0').rstrip('.')
                                         val_ngn = f" / ₦{val * ngn_rate:,.2f}" if ngn_rate else ""
                                         pnl_str = ""
@@ -260,7 +263,7 @@ def check_telegram_commands():
                         if not db: send_telegram("🛑 No active trades.")
                         else:
                             for sym, data in db.items():
-                                price, _, rsi, _, _, _ = get_market_data(sym) # FIXED: 6 variables
+                                price, _, rsi, _, _, _ = get_market_data(sym)
                                 if price:
                                     inc = ((price - data['entry_price']) / data['entry_price']) * 100
                                     send_telegram(f"🟢 *ACTIVE:* {sym}\n💰 Entry: {data['entry_price']}\n📊 Current: {price} ({inc:+.1f}%)\n🎯 RSI: {rsi}")
@@ -311,8 +314,6 @@ def scan_for_new_trades():
     valid.sort(key=lambda x: x['vol'], reverse=True)
     
     for t in valid[15:50]:
-        # --- THE FIX IS ON THIS LINE ---
-        # Added the 6th underscore to catch the 'recent_low' value
         price, prev, rsi, ma5, ma10, _ = get_market_data(t['symbol']) 
         if not price: continue
         
