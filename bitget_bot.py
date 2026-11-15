@@ -10,6 +10,10 @@ def tg(m):
     try: requests.post(f"https://api.telegram.org/bot{TG_TOKEN}/sendMessage", json={"chat_id":TG_CHAT_ID,"text":m,"parse_mode":"Markdown"}, timeout=10)
     except: pass
 
+def tg_ai(m):
+    try: requests.post(f"https://api.telegram.org/bot{TG_TOKEN}/sendMessage", json={"chat_id":TG_CHAT_ID,"text":m}, timeout=10)
+    except: pass
+
 def load(f, d={}):
     try: return json.load(open(f)) if os.path.exists(f) else d
     except: return d
@@ -35,10 +39,10 @@ def ask_ai(prompt):
         db = load(DB_FILE); q = load(QUEUE_FILE); s = settings()
         bal = exchange.fetch_balance()['free'].get('USDT', 0)
         btc_p, _, btc_rsi, _, _ = data("BTC-USDT")
-        context = f"System Data:\n- USDT Balance: {bal}\n- BTC RSI: {btc_rsi}\n- Active Trades: {db}\n- Queue: {q}\n- Bot Rules: RSI {s['rsi_min']}-{s['rsi_max']}, SL {s['stop_loss_pct']}%\n\n"
-        model = genai.GenerativeModel('gemini-3.8-flash')
+        context = f"System Data:\n- USDT Balance: {bal}\n- Auto-Buy Size per Trade: {s['auto_buy_amount_usdt']}\n- BTC RSI: {btc_rsi}\n- Active Trades: {db}\n- Queue: {q}\n- Bot Rules: RSI {s['rsi_min']}-{s['rsi_max']}, SL {s['stop_loss_pct']}%\n\n"
+        model = genai.GenerativeModel('gemini-1.5-flash')
         response = model.generate_content(f"You are an expert crypto trading analyst. Use this live data to answer the user.\n{context}\nUser Question: {prompt}")
-        tg(f"🧠 *AI ANALYST:*\n\n{response.text}")
+        tg_ai(f"🧠 AI ANALYST:\n\n{response.text}")
     except Exception as e: tg(f"❌ AI Error: {e}")
 
 def hard_sl(sym, qty, pr):
