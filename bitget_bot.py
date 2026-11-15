@@ -36,7 +36,7 @@ def ask_ai(prompt):
         bal = exchange.fetch_balance()['free'].get('USDT', 0)
         btc_p, _, btc_rsi, _, _ = data("BTC-USDT")
         context = f"System Data:\n- USDT Balance: {bal}\n- BTC RSI: {btc_rsi}\n- Active Trades: {db}\n- Queue: {q}\n- Bot Rules: RSI {s['rsi_min']}-{s['rsi_max']}, SL {s['stop_loss_pct']}%\n\n"
-        model = genai.GenerativeModel('gemini-1.5-flash')
+        model = genai.GenerativeModel('gemini-2.0-flash')
         response = model.generate_content(f"You are an expert crypto trading analyst. Use this live data to answer the user.\n{context}\nUser Question: {prompt}")
         tg(f"🧠 *AI ANALYST:*\n\n{response.text}")
     except Exception as e: tg(f"❌ AI Error: {e}")
@@ -152,11 +152,11 @@ def tg_check():
     try:
         res=requests.get(f"https://api.telegram.org/bot{TG_TOKEN}/getUpdates?offset={lid+1}", timeout=10).json()
         if res.get("ok") and res.get("result"):
-            for u in res["result"]:
-                lid=u["update_id"]
-                if "message" in u and "date" in u["message"] and int(time.time())-u["message"]["date"]>900: continue
-                if "message" in u and "text" in u["message"]:
-                    txt=u["message"]["text"].strip()
+            for upd in res["result"]:
+                lid=upd["update_id"]
+                if "message" in upd and "date" in upd["message"] and int(time.time())-upd["message"]["date"]>900: continue
+                if "message" in upd and "text" in upd["message"]:
+                    txt=upd["message"]["text"].strip()
                     low=txt.lower()
                     
                     if low.startswith("/ai"):
@@ -164,8 +164,8 @@ def tg_check():
                     elif low=="/help":
                         tg("🤖 *COMMANDS*\n`/ai [question]` - Ask AI\n`/analyze SOL`\n`/gainers` / `/losers`\n`/queue` / `/balance`\n`/audit` / `/status`\n`/buy SOL 5.75`\n`/dca SOL 5.75`")
                     elif low=="/balance":
-                        b=exchange.fetch_balance()['free']; u=b.get('USDT',0)
-                        tg(f"💰 *BALANCE:* {u:.2f} USDT")
+                        b=exchange.fetch_balance()['free']; bal_amt=b.get('USDT',0)
+                        tg(f"💰 *BALANCE:* {bal_amt:.2f} USDT")
                     elif low=="/clear":
                         save(DB_FILE,{}); save(QUEUE_FILE,{}); tg("🧹 *CLEARED!*")
                     elif low=="/queue":
@@ -194,7 +194,7 @@ def tg_check():
                                 exchange.create_market_buy_order(f"{c}/USDT", qty); sl=round(pr*(1-settings()['stop_loss_pct']/100),6)
                                 db[sym]={"entry_price":pr,"safe_zone":pr,"stop_loss":sl,"took_profit_10":False,"took_profit_50":False}
                                 save(DB_FILE,db); hard_sl(sym, qty, sl); tg(f"✅ *BOUGHT:* {c} | SL: {sl}")
-            st["last_update_id"]=lid; save(STATE_FILE,st)
+                st["last_update_id"]=lid; save(STATE_FILE,st)
     except Exception as e: print(f"TG Err: {e}")
 
 if __name__ == "__main__":
