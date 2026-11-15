@@ -20,7 +20,7 @@ jobs:
           python-version: '3.9'
 
       - name: Install dependencies
-        run: pip install requests ccxt google-generativeai
+        run: pip install requests ccxt google-genai
 
       - name: Run Trade Bot
         env:
