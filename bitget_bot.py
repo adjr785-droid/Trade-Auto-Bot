@@ -36,7 +36,7 @@ def ask_ai(prompt):
         bal = exchange.fetch_balance()['free'].get('USDT', 0)
         btc_p, _, btc_rsi, _, _ = data("BTC-USDT")
         context = f"System Data:\n- USDT Balance: {bal}\n- BTC RSI: {btc_rsi}\n- Active Trades: {db}\n- Queue: {q}\n- Bot Rules: RSI {s['rsi_min']}-{s['rsi_max']}, SL {s['stop_loss_pct']}%\n\n"
-        model = genai.GenerativeModel('gemini-2.0-flash')
+        model = genai.GenerativeModel('gemini-3.8-flash')
         response = model.generate_content(f"You are an expert crypto trading analyst. Use this live data to answer the user.\n{context}\nUser Question: {prompt}")
         tg(f"🧠 *AI ANALYST:*\n\n{response.text}")
     except Exception as e: tg(f"❌ AI Error: {e}")
