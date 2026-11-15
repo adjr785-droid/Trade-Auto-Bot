@@ -14,8 +14,12 @@ STATE_FILE = "tg_state.json"
 SETTINGS_FILE = "settings.json"
 QUEUE_FILE = "queue.json"
 
-STABLECOINS = ['USDC', 'USDT', 'DAI', 'FDUSD', 'TUSD', 'USDD', 'USDE', 'ONE', 'CT']
+STABLECOINS = ['USDC', 'USDT', 'DAI', 'FDUSD', 'TUSD', 'USDD', 'USDE']
 LEVERAGE_SUFFIXES = ['3L', '3S', '5L', '5S', '10L', '10S', '2L', '2S', '4L', '4S']
+
+# 🚨 PERMANENT BLACKLIST 🚨
+# Add any token symbol here (without -USDT) to ban it forever.
+BLACKLIST = ['RPANW', 'CT', 'ONE']
 
 exchange = ccxt.bitget({
     'apiKey': os.environ.get('BITGET_API_KEY'),
@@ -178,6 +182,10 @@ def execute_from_queue():
             for sym, data in sorted_queue:
                 if len(db) >= settings.get("max_tokens_before_consolidation", 3): break
                 
+                # Double check the blacklist before executing from queue
+                base = sym.split("-")[0]
+                if base in BLACKLIST: continue
+                
                 price, _, _, _, _ = get_market_data(sym)
                 if not price: continue
                 
@@ -214,7 +222,7 @@ def scan_and_queue():
 
     try: 
         tickers = exchange.fetch_tickers()
-        markets = exchange.load_markets() # Load metadata for true spot check
+        markets = exchange.load_markets() 
     except Exception: return
         
     valid = []
@@ -224,10 +232,10 @@ def scan_and_queue():
             
             # --- HARDENED FILTERS ---
             if base in STABLECOINS: continue
+            if base in BLACKLIST: continue # 🚨 Checks the manual blacklist
             if base.startswith('X') and len(base) <= 6: continue
             if any(base.upper().endswith(suffix) for suffix in LEVERAGE_SUFFIXES): continue
             if sym in markets and not markets[sym].get('spot', False): continue
-            # ------------------------
 
             vol = t['quoteVolume'] if t['quoteVolume'] else 0
             if vol >= 1000000: 
@@ -253,22 +261,17 @@ def scan_and_queue():
         setup = None
         sl = 0
 
-        # STATE 1: TREND PULLBACK (RSI 42-48)
         if t['change'] > 1.0 and settings['rsi_min'] <= rsi <= settings['rsi_max'] and price > ma5 and ma5 > ma10:
             setup = "TREND PULLBACK"
             sl = round(ma5 * (1 - settings['stop_loss_pct']/100), 6)
-            
-        # STATE 2: OVERSOLD BOUNCE (RSI < 30)
         elif t['change'] < -8.0 and rsi < 30 and price > prev_close:
             setup = "OVERSOLD BOUNCE"
             sl = round(price * 0.95, 6)
             
         if setup:
-            # --- CALCULATE SCORE (Volume in M + R:R Ratio) ---
             rr_ratio = (price * 0.10) / (price - sl) if (price - sl) > 0 else 0
             score = (t['vol'] / 1000000) + (rr_ratio * 10)
             
-            # If new token, or if existing token has a better score now, update it
             if t['symbol'] not in queue or queue[t['symbol']].get('score', 0) < score:
                 is_new = t['symbol'] not in queue
                 queue[t['symbol']] = {
@@ -360,14 +363,9 @@ if __name__ == "__main__":
     try:
         check_telegram()
         manage_active_trades()    
-        
-        # 1. Scan market, check RSI < 30 & RSI 42-48, score them, and update queue
         scan_and_queue()
-        
-        # 2. Execute the absolute highest-scoring token from the queue
         execute_from_queue()
         
-        # 3. Save everything to GitHub
         subprocess.run(["git", "pull", "--rebase"], capture_output=True)
         subprocess.run(["git", "add", "."], capture_output=True)
         subprocess.run(["git", "commit", "-m", "Auto-save"], capture_output=True)
