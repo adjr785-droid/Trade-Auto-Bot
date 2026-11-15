@@ -140,7 +140,8 @@ def scan():
     for sym,t in tk.items():
         if sym.endswith('/USDT'):
             b=sym.split('/')[0]
-            if b in STABLECOINS or b in BL or (b.startswith('X') and len(b)<=6) or any(b.upper().endswith(x) for x in LEV) or (sym in mk and not mk[sym].get('spot',False)): continue
+            # 🚨 NEW FILTER: Blocks X stocks, R stocks (tokenized stocks), stablecoins, blacklist, and leverage
+            if b in STABLECOINS or b in BL or ((b.startswith('X') or b.startswith('R')) and len(b)<=6) or any(b.upper().endswith(x) for x in LEV) or (sym in mk and not mk[sym].get('spot',False)): continue
             vol=t['quoteVolume'] or 0
             if vol>=1000000: v.append({'sym':sym.replace("/","-"),'vol':vol,'chg':t['percentage'] or 0})
     v.sort(key=lambda x:x['vol'], reverse=True); ct=int(time.time()); qu=False
@@ -188,7 +189,8 @@ def gl():
     for sym,t in tk.items():
         if sym.endswith('/USDT'):
             b=sym.split('/')[0]
-            if b in STABLECOINS or b in BL or any(b.upper().endswith(x) for x in LEV): continue
+            # 🚨 NEW FILTER here too, so R-Stocks don't show up in /gainers
+            if b in STABLECOINS or b in BL or ((b.startswith('X') or b.startswith('R')) and len(b)<=6) or any(b.upper().endswith(x) for x in LEV): continue
             vol=t['quoteVolume'] or 0
             if vol>=1000000: v.append({'sym':b,'chg':t['percentage'] or 0,'vol':vol})
     v.sort(key=lambda x:x['chg'], reverse=True)
