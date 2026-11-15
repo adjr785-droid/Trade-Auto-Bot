@@ -54,7 +54,7 @@ def save_json(file, data):
         send_telegram(f"⚠️ *SAVE FAILED:* Could not save `{file}`: {e}")
 
 def load_settings():
-    defaults = {"rsi_min": 42, "rsi_max": 48, "stop_loss_pct": 15, "auto_buy_enabled": True, "auto_buy_amount_usdt": 10.0}
+    defaults = {"rsi_min": 42, "rsi_max": 48, "stop_loss_pct": 15, "auto_buy_enabled": True, "auto_buy_amount_usdt": 5.0}
     return load_json(SETTINGS_FILE, defaults)
 
 def get_ngn_rate():
@@ -85,7 +85,7 @@ def perform_audit():
     db = load_json(DB_FILE)
     settings = load_settings()
     
-    msg += f"✅ *Active Trades:* {len(db)}\n"
+    msg += f"✅ *Active Trades:* {len(db)}\n" # Removed the /3 limit
     msg += f"⚙️ *Rules:* RSI {settings['rsi_min']}-{settings['rsi_max']} | SL {settings['stop_loss_pct']}% | Auto-Buy ${settings['auto_buy_amount_usdt']}\n"
     msg += f"🟢 *Status:* HEALTHY"
     send_telegram(msg)
@@ -168,10 +168,10 @@ def check_telegram_commands():
             for update in res["result"]:
                 last_id = update["update_id"]
                 
-                # --- FIX: IGNORE MESSAGES OLDER THAN 5 MINUTES ---
-                msg_time = update["message"]["date"]
-                if int(time.time()) - msg_time > 300:
-                    continue # Skip this old message silently
+                # IGNORE OLD MESSAGES
+                if "message" in update and "date" in update["message"]:
+                    if int(time.time()) - update["message"]["date"] > 300:
+                        continue
                 
                 if "message" in update and "text" in update["message"]:
                     text = update["message"]["text"].lower()
@@ -294,7 +294,6 @@ def manage_active_trades():
 
 def scan_for_new_trades():
     db = load_json(DB_FILE)
-    if len(db) >= 1: return 
 
     settings = load_settings()
     if not settings.get("auto_buy_enabled", False): return 
@@ -313,7 +312,10 @@ def scan_for_new_trades():
                 
     valid.sort(key=lambda x: x['vol'], reverse=True)
     
+    # UNLIMITED SCANNING: It will buy every valid setup it finds
     for t in valid[15:50]:
+        if t['symbol'] in db: continue 
+        
         price, prev, rsi, ma5, ma10, _ = get_market_data(t['symbol']) 
         if not price: continue
         
@@ -340,7 +342,9 @@ def scan_for_new_trades():
                         }
                         save_json(DB_FILE, db)
                         send_telegram(f"🤖 *AUTONOMOUS BUY EXECUTED!*\n🪙 {coin} | 💵 {spend:.2f} USDT\n🛑 SL: {sl}")
-                        break 
+                        
+                        # Small sleep to prevent Bitget API rate limits if it buys many at once
+                        time.sleep(2) 
                 except Exception as e:
                     send_telegram(f"❌ *BUY FAILED:* {e}")
 
