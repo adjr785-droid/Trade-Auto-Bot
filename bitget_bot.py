@@ -157,6 +157,17 @@ def fmt_price(p):
     elif p >= 1: return f"{p:.4f}"
     else: return f"{p:.6f}"
 
+def format_table(headers, rows, widths):
+    # Draw a solid box border
+    top = "┌" + "┬".join(["─" * (w + 2) for w in widths]) + "┐"
+    header_str = "│ " + " │ ".join([h.ljust(w) for h, w in zip(headers, widths)]) + " │"
+    mid = "├" + "┼".join(["─" * (w + 2) for w in widths]) + "┤"
+    row_strs = []
+    for r in rows:
+        row_strs.append("│ " + " │ ".join([str(val).ljust(w) for val, w in zip(r, widths)]) + " │")
+    bot = "└" + "┴".join(["─" * (w + 2) for w in widths]) + "┘"
+    return "\n".join([top, header_str, mid] + row_strs + [bot])
+
 def gl():
     try: tk=exchange.fetch_tickers()
     except: return "❌ Error", "❌ Error"
@@ -169,15 +180,12 @@ def gl():
             if vol>=1000000: v.append({'sym':b,'chg':t['percentage'] or 0,'price':t['last'] or 0})
     v.sort(key=lambda x:x['chg'], reverse=True)
     
-    def build_table(title, data):
-        t_str = f"*{title}*\n```\n{'Coin':<8} | {'Price':<10} | {'Change':<7}\n"
-        t_str += "-" * 30 + "\n"
-        for x in data:
-            t_str += f"{x['sym']:<8} | {fmt_price(x['price']):<10} | {x['chg']:+.1f}%\n"
-        t_str += "```"
-        return t_str
+    def build(title, data):
+        rows = [[x['sym'], fmt_price(x['price']), f"{x['chg']:+.1f}%"] for x in data]
+        table = format_table(["Coin", "Price", "Change"], rows, [8, 12, 8]) # Widened columns
+        return f"*{title}*\n```\n{table}\n```"
 
-    return build_table("🚀 GAINERS (24H)", v[:10]), build_table("🩸 LOSERS (24H)", v[-10:][::-1])
+    return build("🚀 GAINERS (24H)", v[:10]), build("🩸 LOSERS (24H)", v[-10:][::-1])
 
 def tg_check():
     st=load(STATE_FILE); lid=st.get("last_update_id",0)
@@ -197,51 +205,59 @@ def tg_check():
                         tg("🤖 *COMMANDS*\n`/ai [question]` - Ask AI\n`/analyze SOL`\n`/gainers` / `/losers`\n`/queue` / `/balance`\n`/audit` / `/status`\n`/buy SOL 5.75`\n`/dca SOL 5.75`")
                     
                     elif low=="/balance":
-                        b=exchange.fetch_balance()['free']; u=b.get('USDT',0); db=load(DB_FILE); msg="💰 *BALANCE*\n```\nAsset    | Amount     | Est. Value\n"
-                        msg+="-"*35+"\n"
-                        msg+=f"USDT     | {u:<10.2f} | ${u:.2f}\n"
+                        b=exchange.fetch_balance()['free']; u=b.get('USDT',0); db=load(DB_FILE)
+                        rows = [["USDT", f"{u:.2f}", f"${u:.2f}"]]
                         for c,a in b.items():
                             if a>0 and c not in ['USDT','USDC']:
                                 p,_,_,_,_=data(f"{c}-USDT")
-                                if p and a*p>=0.10: msg+=f"{c:<8} | {a:<10.4f} | ${a*p:.2f}\n"
-                        msg+="```"; tg(msg)
+                                if p and a*p>=0.10: rows.append([c, f"{a:.4f}", f"${a*p:.2f}"])
+                        table = format_table(["Asset", "Amount", "Est. Val"], rows, [7, 10, 9])
+                        tg(f"💰 *BALANCE*\n```\n{table}\n```")
                         
                     elif low=="/queue":
                         q=load(QUEUE_FILE)
                         if not q: tg("📥 Queue empty.")
                         else:
-                            msg="📥 *PRIORITY QUEUE*\n```\nCoin     | Score  | Setup\n"
-                            msg+="-"*30+"\n"
                             sq=sorted(q.items(), key=lambda x:x[1].get('score',0), reverse=True)
-                            for s,d in sq: msg+=f"{s:<8} | {d.get('score',0):<6.1f} | {d.get('type','N/A')}\n"
-                            msg+="```"; tg(msg)
+                            rows = [[s, f"{d.get('score',0):.1f}", d.get('type','N/A')] for s,d in sq]
+                            table = format_table(["Coin", "Score", "Setup"], rows, [7, 6, 8])
+                            tg(f"📥 *PRIORITY QUEUE*\n```\n{table}\n```")
                             
                     elif "/status" in low:
                         db=load(DB_FILE)
                         if not db: tg("🛑 No active trades.")
                         else:
-                            msg="🟢 *ACTIVE TRADES*\n```\nCoin     | Entry    | Current  | PnL\n"
-                            msg+="-"*40+"\n"
+                            rows = []
                             for s,d in db.items():
                                 p,_,r,_,_=data(s)
                                 if p:
                                     pnl=((p-d['entry_price'])/d['entry_price'])*100
-                                    msg+=f"{s.split('-')[0]:<8} | {fmt_price(d['entry_price']):<8} | {fmt_price(p):<8} | {pnl:+.1f}%\n"
-                            msg+="```"; tg(msg)
+                                    rows.append([s.split('-')[0], fmt_price(d['entry_price']), fmt_price(p), f"{pnl:+.1f}%"])
+                            table = format_table(["Coin", "Entry", "Current", "PnL"], rows, [7, 9, 9, 7])
+                            tg(f"🟢 *ACTIVE TRADES*\n```\n{table}\n```")
                             
                     elif low=="/audit":
                         b=exchange.fetch_balance()['free']; u=b.get('USDT',0); q=load(QUEUE_FILE); s=settings()
-                        msg="🛠️ *SYSTEM AUDIT*\n```\nMetric        | Value\n"
-                        msg+="-"*28+"\n"
-                        msg+=f"API Status    | OK 🟢\nUSDT Balance  | {u:.2f}\nActive Trades | {len(load(DB_FILE))}\nQueue Size    | {len(q)}\nRSI Range     | {s['rsi_min']}-{s['rsi_max']}\nStop Loss     | {s['stop_loss_pct']}%\nAuto-Buy      | ${s['auto_buy_amount_usdt']}\n"
-                        msg+="```"; tg(msg)
+                        rows = [
+                            ["API Status", "OK 🟢"],
+                            ["USDT Balance", f"{u:.2f}"],
+                            ["Active Trades", f"{len(load(DB_FILE))}"],
+                            ["Queue Size", f"{len(q)}"],
+                            ["RSI Range", f"{s['rsi_min']}-{s['rsi_max']}"],
+                            ["Stop Loss", f"{s['stop_loss_pct']}%"],
+                            ["Auto-Buy", f"${s['auto_buy_amount_usdt']}"]
+                        ]
+                        table = format_table(["Metric", "Value"], rows, [12, 10])
+                        tg(f"🛠️ *SYSTEM AUDIT*\n```\n{table}\n```")
                         
                     elif low=="/pnl":
                         L=load(LEDGER_FILE); p=L.get('total_realized_usdt',0.0); c=L.get('trade_count',0)
-                        msg="📊 *PROFIT & LOSS*\n```\nMetric        | Value\n"
-                        msg+="-"*28+"\n"
-                        msg+=f"Total PnL     | ${p:.2f}\nTrades Closed | {c}\n"
-                        msg+="```"; tg(msg)
+                        rows = [
+                            ["Total PnL", f"${p:.2f}"],
+                            ["Trades Closed", f"{c}"]
+                        ]
+                        table = format_table(["Metric", "Value"], rows, [12, 10])
+                        tg(f"📊 *PROFIT & LOSS*\n```\n{table}\n```")
                         
                     elif low.startswith("/analyze"):
                         p=txt.split()
