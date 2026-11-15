@@ -25,9 +25,12 @@ exchange = ccxt.bitget({
 })
 
 def send_telegram(message):
-    url = f"https://api.telegram.org/bot{TG_TOKEN}/sendMessage"
-    payload = {"chat_id": TG_CHAT_ID, "text": message, "parse_mode": "Markdown"}
-    requests.post(url, json=payload)
+    try:
+        url = f"https://api.telegram.org/bot{TG_TOKEN}/sendMessage"
+        payload = {"chat_id": TG_CHAT_ID, "text": message, "parse_mode": "Markdown"}
+        requests.post(url, json=payload, timeout=10)
+    except Exception as e:
+        print(f"Telegram send failed: {e}")
 
 def self_heal(file_name, default_data, error_msg):
     try:
@@ -55,8 +58,15 @@ def save_json(file, data):
         send_telegram(f"⚠️ *SAVE FAILED:* Could not save `{file}`: {e}")
 
 def load_settings():
+    # THIS FIX PREVENTS THE CRASH: It merges missing keys instead of crashing
     defaults = {"rsi_min": 42, "rsi_max": 48, "stop_loss_pct": 15, "auto_buy_enabled": True, "auto_buy_amount_usdt": 5.75, "max_tokens_before_consolidation": 3}
-    return load_json(SETTINGS_FILE, defaults)
+    current_settings = load_json(SETTINGS_FILE, {})
+    
+    for key, value in defaults.items():
+        if key not in current_settings:
+            current_settings[key] = value
+            
+    return current_settings
 
 def get_ngn_rate():
     try:
@@ -84,7 +94,8 @@ def run_diagnostics():
     current_time = int(time.time())
     stuck_cleared = 0
     for sym, data in list(pending.items()):
-        if current_time - data["timestamp"] > 86400:
+        # Extra safety check here
+        if "timestamp" in data and current_time - data["timestamp"] > 86400:
             del pending[sym]
             stuck_cleared += 1
     
@@ -124,7 +135,10 @@ def check_6_hour_audit():
     current_time = int(time.time())
     
     if current_time - last_audit >= 21600:
-        perform_audit()
+        try:
+            perform_audit()
+        except:
+            pass
         state["last_periodic_audit"] = current_time
         save_json(STATE_FILE, state)
 
@@ -332,66 +346,70 @@ def manage_active_trades():
 
 # --- CONSOLIDATION ENGINE ---
 def consolidate_portfolio():
-    db = load_json(DB_FILE)
-    settings = load_settings()
-    
-    if len(db) <= 2:
-        send_telegram("🛑 *CONSOLIDATION SKIPPED:* You have 2 or fewer tokens. Nothing to consolidate.")
-        return
-
-    send_telegram(f"⚖️ *STARTING CONSOLIDATION...*\nYou have {len(db)} tokens. Reducing to the top 2 strongest performers.")
-
-    ranked_tokens = []
-    for sym, data in db.items():
-        price, _, rsi, _, _, _ = get_market_data(sym)
-        if price:
-            pnl = ((price - data['entry_price']) / data['entry_price']) * 100
-            ranked_tokens.append({"symbol": sym, "pnl": pnl, "price": price})
-    
-    ranked_tokens.sort(key=lambda x: x["pnl"], reverse=True)
-
-    keep_tokens = ranked_tokens[:2]
-    sell_tokens = ranked_tokens[2:]
-
-    keep_names = [t['symbol'] for t in keep_tokens]
-    send_telegram(f"🏆 *KEEPING (Top Performers):*\n" + "\n".join([f"🟢 {t['symbol']} ({t['pnl']:+.1f}%)" for t in keep_tokens]))
-    send_telegram(f"🩸 *LIQUIDATING (Weakest):*\n" + "\n".join([f"🔴 {t['symbol']} ({t['pnl']:+.1f}%)" for t in sell_tokens]))
-
-    for t in sell_tokens:
-        sym = t['symbol']
-        if execute_sell(sym, 1.0, "Consolidation"):
-            del db[sym]
-            save_json(DB_FILE, db)
-
-    time.sleep(5) 
-    bal = exchange.fetch_balance()
-    available_usdt = bal['free'].get('USDT', 0.0)
-
-    if available_usdt >= 1.02:
-        split_amount = available_usdt / 2
+    try:
+        db = load_json(DB_FILE)
+        settings = load_settings()
         
-        if split_amount < 1.02:
-            split_amount = available_usdt
-            keep_tokens = keep_tokens[:1] 
-            
-        for t in keep_tokens:
-            try:
-                ccxt_symbol = t['symbol'].replace("-", "/")
-                ticker = exchange.fetch_ticker(ccxt_symbol)
-                price = ticker['last']
-                
-                qty = float(exchange.amount_to_precision(ccxt_symbol, split_amount / price))
-                exchange.create_market_buy_order(ccxt_symbol, qty)
-                
-                send_telegram(f"🛒 *REINVESTED:* Bought {qty} of {t['symbol']} with {split_amount:.2f} USDT.")
-                
-                db[t['symbol']]['entry_price'] = price
+        if len(db) <= 2:
+            send_telegram("🛑 *CONSOLIDATION SKIPPED:* You have 2 or fewer tokens. Nothing to consolidate.")
+            return
+
+        send_telegram(f"⚖️ *STARTING CONSOLIDATION...*\nYou have {len(db)} tokens. Reducing to the top 2 strongest performers.")
+
+        ranked_tokens = []
+        for sym, data in db.items():
+            price, _, rsi, _, _, _ = get_market_data(sym)
+            if price and "entry_price" in data:
+                pnl = ((price - data['entry_price']) / data['entry_price']) * 100
+                ranked_tokens.append({"symbol": sym, "pnl": pnl, "price": price})
+        
+        ranked_tokens.sort(key=lambda x: x["pnl"], reverse=True)
+
+        keep_tokens = ranked_tokens[:2]
+        sell_tokens = ranked_tokens[2:]
+
+        if keep_tokens:
+            send_telegram(f"🏆 *KEEPING (Top Performers):*\n" + "\n".join([f"🟢 {t['symbol']} ({t['pnl']:+.1f}%)" for t in keep_tokens]))
+        if sell_tokens:
+            send_telegram(f"🩸 *LIQUIDATING (Weakest):*\n" + "\n".join([f"🔴 {t['symbol']} ({t['pnl']:+.1f}%)" for t in sell_tokens]))
+
+        for t in sell_tokens:
+            sym = t['symbol']
+            if execute_sell(sym, 1.0, "Consolidation"):
+                del db[sym]
                 save_json(DB_FILE, db)
+
+        time.sleep(5) 
+        bal = exchange.fetch_balance()
+        available_usdt = bal['free'].get('USDT', 0.0)
+
+        if available_usdt >= 1.02 and keep_tokens:
+            split_amount = available_usdt / len(keep_tokens)
+            
+            if split_amount < 1.02 and len(keep_tokens) > 1:
+                split_amount = available_usdt
+                keep_tokens = keep_tokens[:1] 
                 
-            except Exception as e:
-                send_telegram(f"❌ *REINVEST FAILED ({t['symbol']}):* {e}")
-                
-    send_telegram("✅ *CONSOLIDATION COMPLETE!*")
+            for t in keep_tokens:
+                try:
+                    ccxt_symbol = t['symbol'].replace("-", "/")
+                    ticker = exchange.fetch_ticker(ccxt_symbol)
+                    price = ticker['last']
+                    
+                    qty = float(exchange.amount_to_precision(ccxt_symbol, split_amount / price))
+                    exchange.create_market_buy_order(ccxt_symbol, qty)
+                    
+                    send_telegram(f"🛒 *REINVESTED:* Bought {qty} of {t['symbol']} with {split_amount:.2f} USDT.")
+                    
+                    db[t['symbol']]['entry_price'] = price
+                    save_json(DB_FILE, db)
+                    
+                except Exception as e:
+                    send_telegram(f"❌ *REINVEST FAILED ({t['symbol']}):* {e}")
+                    
+        send_telegram("✅ *CONSOLIDATION COMPLETE!*")
+    except Exception as e:
+        send_telegram(f"❌ *CONSOLIDATION CRASHED:* {e}")
 
 def scan_for_new_trades():
     db = load_json(DB_FILE)
@@ -399,14 +417,11 @@ def scan_for_new_trades():
     
     if not settings.get("auto_buy_enabled", False): return 
 
-    # ==========================================
-    # 🚨 AUTO-CONSOLIDATION TRIGGER 🚨
-    # ==========================================
     max_tokens = settings.get("max_tokens_before_consolidation", 3)
     if len(db) > max_tokens:
         send_telegram(f"⚠️ *TRIGGERED:* You have {len(db)} tokens (Limit is {max_tokens}). Auto-consolidating now...")
         consolidate_portfolio()
-        db = load_json(DB_FILE) # Reload memory after consolidation
+        db = load_json(DB_FILE) 
 
     try: tickers = exchange.fetch_tickers()
     except Exception: return
@@ -452,21 +467,4 @@ def scan_for_new_trades():
                     db[t['symbol']] = {
                         "entry_price": price, "safe_zone": price, "stop_loss": sl,
                         "took_profit_10": False, "took_profit_50": False
-                    }
-                    save_json(DB_FILE, db)
-                    
-                    icon = "🏆" if setup_type == "TREND PULLBACK" else "🩸"
-                    send_telegram(f"🤖 *AUTONOMOUS BUY EXECUTED!*\n{icon} *{setup_type}*\n🪙 {coin} | 💵 {spend:.2f} USDT\n🛑 SL: {sl}")
-                    
-                    time.sleep(2) 
-            except Exception as e:
-                send_telegram(f"❌ *BUY FAILED:* {e}")
-
-if __name__ == "__main__":
-    try:
-        is_healthy, status_msg = run_diagnostics()
-        if not is_healthy:
-            send_telegram(f"🚨 *DIAGNOSTIC FAILURE:* {status_msg}\nBot is pausing to protect your funds.")
-            exit(0)
-
-        lo
+                  
