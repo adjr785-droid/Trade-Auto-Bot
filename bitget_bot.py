@@ -13,7 +13,7 @@ DB_FILE = "positions.json"
 STATE_FILE = "tg_state.json"
 SYNC_FILE = "sync_state.json"
 SETTINGS_FILE = "settings.json"
-PENDING_FILE = "pending_trade.json"  # <--- THE FIX (Added this line)
+PENDING_FILE = "pending_trade.json"
 
 STABLECOINS = ['USDC', 'USDT', 'DAI', 'FDUSD', 'TUSD', 'USDD', 'USDE', 'ONE', 'CT']
 
@@ -29,7 +29,6 @@ def send_telegram(message):
     payload = {"chat_id": TG_CHAT_ID, "text": message, "parse_mode": "Markdown"}
     requests.post(url, json=payload)
 
-# --- SELF-HEALING SYSTEM ---
 def self_heal(file_name, default_data, error_msg):
     try:
         with open(file_name, "w") as f:
@@ -75,9 +74,7 @@ def git_save():
     except Exception:
         pass
 
-# --- THE OVERSEER DIAGNOSTIC ENGINE ---
 def run_diagnostics():
-    """Clones the Overseer: Checks API, Files, and stuck trades."""
     try:
         exchange.fetch_balance()
     except Exception as e:
@@ -97,7 +94,6 @@ def run_diagnostics():
         
     return True, "System Nominal"
 
-# --- AUDIT & REPORTING ---
 def perform_audit():
     msg = "🛠️ *SYSTEM AUDIT REPORT*\n\n"
     try:
@@ -131,7 +127,6 @@ def check_6_hour_audit():
         state["last_periodic_audit"] = current_time
         save_json(STATE_FILE, state)
 
-# --- CORE BOT LOGIC ---
 def get_market_data(symbol):
     try:
         ccxt_symbol = symbol.replace("-", "/")
@@ -150,6 +145,7 @@ def get_market_data(symbol):
     except Exception:
         return None, None, None, None, None, None
 
+# --- SMART SELLING ENGINE (Handles Bitget Minimums) ---
 def execute_sell(symbol, percentage, reason):
     try:
         ccxt_symbol = symbol.replace("-", "/")
@@ -158,9 +154,27 @@ def execute_sell(symbol, percentage, reason):
         free_balance = balance['free'].get(base_coin, 0)
         
         if free_balance > 0:
-            qty = float(exchange.amount_to_precision(ccxt_symbol, free_balance * percentage))
+            ticker = exchange.fetch_ticker(ccxt_symbol)
+            current_price = ticker['last']
+            
+            # Calculate how much we want to sell and its USDT value
+            qty_to_sell = free_balance * percentage
+            value_to_sell = qty_to_sell * current_price
+            total_value = free_balance * current_price
+            
+            # Check if the WHOLE bag is dust (less than $1.02)
+            if total_value < 1.02:
+                send_telegram(f"⚠️ *SKIPPING SELL:* {symbol} is worth ${total_value:.2f} (Below Bitget minimum). Leaving it as dust.")
+                return False
+                
+            # If partial sell is less than $1.02, sell 100% instead
+            if value_to_sell < 1.02:
+                qty_to_sell = free_balance
+                reason += " (Sold 100% - Partial < $1.02)"
+                
+            qty = float(exchange.amount_to_precision(ccxt_symbol, qty_to_sell))
             exchange.create_market_sell_order(ccxt_symbol, qty)
-            send_telegram(f"✅ *AUTO-SOLD ({reason})*\n🪙 Sold {percentage*100}% of {symbol}.")
+            send_telegram(f"✅ *AUTO-SOLD ({reason})*\n🪙 Sold {qty} of {symbol}.\n💰 Value: ~${(qty * current_price):.2f} USDT")
             return True
     except Exception as e:
         send_telegram(f"❌ *AUTO-SELL FAILED ({symbol}):*\n`{e}`")
@@ -210,8 +224,9 @@ def check_telegram_commands():
             for update in res["result"]:
                 last_id = update["update_id"]
                 
+                # Extended to 15 minutes (900s) so you have time to click run manually
                 if "message" in update and "date" in update["message"]:
-                    if int(time.time()) - update["message"]["date"] > 300: continue
+                    if int(time.time()) - update["message"]["date"] > 900: continue
                 
                 if "message" in update and "text" in update["message"]:
                     text = update["message"]["text"].lower()
@@ -264,9 +279,19 @@ def check_telegram_commands():
                             k, v = parts[1], parts[2]
                             s = load_settings()
                             if k in s:
-                                s[k] = float(v) if v.replace('.','',1).isdigit() else v
-                                save_json(SETTINGS_FILE, s)
-                                send_telegram(f"✅ `{k}` updated to `{v}`.")
+                                try:
+                                    if k in ["rsi_min", "rsi_max"]: s[k] = int(v)
+                                    elif k in ["stop_loss_pct", "auto_buy_amount_usdt"]: s[k] = float(v)
+                                    elif k == "auto_buy_enabled": s[k] = (v.lower() == 'true')
+                                    
+                                    save_json(SETTINGS_FILE, s)
+                                    send_telegram(f"✅ *SETTING SAVED!*\n\n{s}")
+                                except ValueError:
+                                    send_telegram("❌ Invalid value format.")
+                            else:
+                                send_telegram("❌ Invalid key.")
+                        else:
+                            send_telegram("❌ Format: `/set [key] [value]`")
                                 
                     elif text == "/clear":
                         save_json(DB_FILE, {})
@@ -361,27 +386,23 @@ def scan_for_new_trades():
 
 if __name__ == "__main__":
     try:
-        # 1. The Overseer Clone runs first to check system health
         is_healthy, status_msg = run_diagnostics()
         if not is_healthy:
             send_telegram(f"🚨 *DIAGNOSTIC FAILURE:* {status_msg}\nBot is pausing to protect your funds.")
-            exit(0) # Stops execution if API is broken
+            exit(0)
 
-        # 2. Load files
         load_json(DB_FILE)
         load_json(STATE_FILE)
         load_json(SYNC_FILE)
-        load_json(PENDING_FILE) # Added this to ensure it self-heals on startup
+        load_json(PENDING_FILE) 
         load_settings()
         
-        # 3. Run core tasks
         check_telegram_commands() 
         check_6_hour_audit() 
         sync_wallet() 
         manage_active_trades()    
         scan_for_new_trades()     
         
-        # 4. Save
         git_save() 
         
     except Exception as e:
