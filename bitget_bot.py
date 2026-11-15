@@ -112,9 +112,7 @@ def exec_queue():
                 sp=min(ub, s['auto_buy_amount_usdt'])
                 if sp>=1.02:
                     cs=sym.replace("-","/"); qty=float(exchange.amount_to_precision(cs, sp/p))
-                    # FIX: Use a Limit Order at the current price instead of Market Order
-                    exchange.create_limit_buy_order(cs, qty, p)
-                    sl=d['sl']; hard_sl(sym,qty,sl)
+                    exchange.create_limit_buy_order(cs, qty, p); sl=d['sl']; hard_sl(sym,qty,sl)
                     db[sym]={"entry_price":p,"safe_zone":p,"stop_loss":sl,"took_profit_10":False,"took_profit_50":False}
                     save(DB_FILE,db); del q[sym]; save(QUEUE_FILE,q); ub-=sp
                     tg(f"🛒 *EXECUTED!*\n{sym} | 💵 {sp:.2f} USDT\n🛑 SL: {sl}")
@@ -154,6 +152,37 @@ def scan():
                 q[t['sym']]={"timestamp":ct,"type":setup,"sl":sl,"score":sc}; qu=True
     if qu: save(QUEUE_FILE,q)
 
+def fmt_price(p):
+    if p >= 100: return f"{p:.2f}"
+    elif p >= 1: return f"{p:.4f}"
+    else: return f"{p:.6f}"
+
+def gl():
+    try: tk=exchange.fetch_tickers()
+    except: return "❌ Error", "❌ Error"
+    v=[]
+    for sym,t in tk.items():
+        if sym.endswith('/USDT'):
+            b=sym.split('/')[0]
+            if b in STABLECOINS or b in BL or ((b.startswith('X') or b.startswith('R')) and len(b)<=6) or any(b.upper().endswith(x) for x in LEV): continue
+            vol=t['quoteVolume'] or 0
+            if vol>=1000000: v.append({'sym':b,'chg':t['percentage'] or 0,'price':t['last'] or 0})
+            
+    v.sort(key=lambda x:x['chg'], reverse=True)
+    
+    def build_table(title, data):
+        t_str = f"*{title}*\n```\n{'Coin':<7} | {'Price':<9} | {'Change':<7}\n"
+        t_str += "-" * 29 + "\n"
+        for x in data:
+            p_str = fmt_price(x['price'])
+            t_str += f"{x['sym']:<7} | {p_str:<9} | {x['chg']:+.1f}%\n"
+        t_str += "```"
+        return t_str
+
+    g = build_table("🚀 GAINERS (24H)", v[:10])
+    l = build_table("🩸 LOSERS (24H)", v[-10:][::-1])
+    return g, l
+
 def tg_check():
     st=load(STATE_FILE); lid=st.get("last_update_id",0)
     try:
@@ -184,11 +213,9 @@ def tg_check():
                             c=p[1].upper(); pr,_,r,ma5,ma10=data(f"{c}-USDT")
                             tg(f"🧠 *{c}*\nPrice: {pr}\nRSI: {r}\nMA5: {ma5}\nMA10: {ma10}")
                     elif low=="/gainers":
-                        tk=exchange.fetch_tickers(); v=[(s.split('/')[0],t['percentage']) for s,t in tk.items() if s.endswith('/USDT') and t['percentage']]
-                        v.sort(key=lambda x:x[1], reverse=True); tg("🚀 *GAINERS*\n"+"\n".join([f"{i}. {x[0]}: {x[1]:+.1f}%" for i,x in enumerate(v[:10],1)]))
+                        g,_=gl(); tg(g)
                     elif low=="/losers":
-                        tk=exchange.fetch_tickers(); v=[(s.split('/')[0],t['percentage']) for s,t in tk.items() if s.endswith('/USDT') and t['percentage']]
-                        v.sort(key=lambda x:x[1]); tg("🩸 *LOSERS*\n"+"\n".join([f"{i}. {x[0]}: {x[1]:+.1f}%" for i,x in enumerate(v[:10],1)]))
+                        _,l=gl(); tg(l)
                     elif "/status" in low:
                         db=load(DB_FILE)
                         tg("🟢 *ACTIVE*\n"+"\n".join([f"{s}: {d['entry_price']}" for s,d in db.items()]) if db else "None")
