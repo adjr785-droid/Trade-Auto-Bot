@@ -168,13 +168,15 @@ def gl():
             vol=t['quoteVolume'] or 0
             if vol>=1000000: v.append({'sym':b,'chg':t['percentage'] or 0,'price':t['last'] or 0})
     v.sort(key=lambda x:x['chg'], reverse=True)
+    
     def build_table(title, data):
-        t_str = f"*{title}*\n```\n{'Coin':<7} | {'Price':<9} | {'Change':<7}\n"
-        t_str += "-" * 29 + "\n"
+        t_str = f"*{title}*\n```\n{'Coin':<8} | {'Price':<10} | {'Change':<7}\n"
+        t_str += "-" * 30 + "\n"
         for x in data:
-            t_str += f"{x['sym']:<7} | {fmt_price(x['price']):<9} | {x['chg']:+.1f}%\n"
+            t_str += f"{x['sym']:<8} | {fmt_price(x['price']):<10} | {x['chg']:+.1f}%\n"
         t_str += "```"
         return t_str
+
     return build_table("🚀 GAINERS (24H)", v[:10]), build_table("🩸 LOSERS (24H)", v[-10:][::-1])
 
 def tg_check():
