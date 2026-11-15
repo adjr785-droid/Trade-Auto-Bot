@@ -13,6 +13,7 @@ DB_FILE = "positions.json"
 STATE_FILE = "tg_state.json"
 SYNC_FILE = "sync_state.json"
 SETTINGS_FILE = "settings.json"
+PENDING_FILE = "pending_trade.json"  # <--- THE FIX (Added this line)
 
 STABLECOINS = ['USDC', 'USDT', 'DAI', 'FDUSD', 'TUSD', 'USDD', 'USDE', 'ONE', 'CT']
 
@@ -77,13 +78,11 @@ def git_save():
 # --- THE OVERSEER DIAGNOSTIC ENGINE ---
 def run_diagnostics():
     """Clones the Overseer: Checks API, Files, and stuck trades."""
-    # 1. API Check
     try:
         exchange.fetch_balance()
     except Exception as e:
         return False, f"Bitget API Connection Failed: {e}"
 
-    # 2. Check for stuck pending trades (older than 24 hours)
     pending = load_json(PENDING_FILE)
     current_time = int(time.time())
     stuck_cleared = 0
@@ -123,12 +122,10 @@ def perform_audit():
     send_telegram(msg)
 
 def check_6_hour_audit():
-    """Automatically triggers the audit every 6 hours."""
     state = load_json(STATE_FILE)
     last_audit = state.get("last_periodic_audit", 0)
     current_time = int(time.time())
     
-    # 6 hours = 21600 seconds
     if current_time - last_audit >= 21600:
         perform_audit()
         state["last_periodic_audit"] = current_time
@@ -374,11 +371,12 @@ if __name__ == "__main__":
         load_json(DB_FILE)
         load_json(STATE_FILE)
         load_json(SYNC_FILE)
+        load_json(PENDING_FILE) # Added this to ensure it self-heals on startup
         load_settings()
         
         # 3. Run core tasks
         check_telegram_commands() 
-        check_6_hour_audit() # New 6-hour timer
+        check_6_hour_audit() 
         sync_wallet() 
         manage_active_trades()    
         scan_for_new_trades()     
@@ -387,6 +385,5 @@ if __name__ == "__main__":
         git_save() 
         
     except Exception as e:
-        # The ultimate global catch: If the bot crashes, report exactly why.
         error_details = traceback.format_exc()
         send_telegram(f"🚨 *CRITICAL SYSTEM FAILURE:*\nThe bot crashed.\n\n*Error:* `{e}`\n\n*Location:*\n```\n{error_details[-300:]}\n```")
