@@ -160,38 +160,20 @@ def consolidate_portfolio():
                 save_json(DB_FILE, db)
             except: pass
 
-def manage_queue():
+def execute_from_queue():
     queue = load_json(QUEUE_FILE)
     db = load_json(DB_FILE)
     settings = load_settings()
-    current_time = int(time.time())
-    valid_queue = {}
     
-    # 1. Clean the queue
-    for sym, data in list(queue.items()):
-        if current_time - data['timestamp'] > 86400: continue # Older than 24h
-            
-        price, prev, rsi, ma5, ma10 = get_market_data(sym)
-        if not price: continue
-        
-        is_valid = False
-        if data['type'] == "TREND PULLBACK" and settings['rsi_min'] <= rsi <= settings['rsi_max'] and price > ma5:
-            is_valid = True
-        elif data['type'] == "OVERSOLD BOUNCE" and rsi < 35:
-            is_valid = True
-            
-        if is_valid:
-            valid_queue[sym] = data
-            
-    save_json(QUEUE_FILE, valid_queue)
-
-    # 2. Execute from queue if space allows
+    if not queue: return
+    
+    # Sort queue by Score (Highest first)
+    sorted_queue = sorted(queue.items(), key=lambda x: x[1].get('score', 0), reverse=True)
+    
     if len(db) < settings.get("max_tokens_before_consolidation", 3):
         try:
             balance = exchange.fetch_balance()
             usdt_bal = balance['free'].get('USDT', 0)
-            
-            sorted_queue = sorted(valid_queue.items(), key=lambda x: x[1]['timestamp'])
             
             for sym, data in sorted_queue:
                 if len(db) >= settings.get("max_tokens_before_consolidation", 3): break
@@ -211,15 +193,15 @@ def manage_queue():
                     }
                     save_json(DB_FILE, db)
                     
-                    del valid_queue[sym]
-                    save_json(QUEUE_FILE, valid_queue)
+                    del queue[sym]
+                    save_json(QUEUE_FILE, queue)
                     
                     usdt_bal -= spend
-                    send_telegram(f"🛒 *QUEUED BUY EXECUTED!*\n{sym} | 💵 {spend:.2f} USDT\n🛑 SL: {data['sl']}")
+                    send_telegram(f"🛒 *QUEUE EXECUTED!*\n{sym} | 💵 {spend:.2f} USDT\n🛑 SL: {data['sl']}\n🏆 Score: {data.get('score', 0):.1f}")
         except Exception as e:
             print(f"Queue execution error: {e}")
 
-def scan_for_new_trades():
+def scan_and_queue():
     db = load_json(DB_FILE)
     queue = load_json(QUEUE_FILE)
     settings = load_settings()
@@ -240,12 +222,12 @@ def scan_for_new_trades():
         if sym.endswith('/USDT'):
             base = sym.split('/')[0]
             
-            # --- FILTERS ---
+            # --- HARDENED FILTERS ---
             if base in STABLECOINS: continue
             if base.startswith('X') and len(base) <= 6: continue
             if any(base.upper().endswith(suffix) for suffix in LEVERAGE_SUFFIXES): continue
             if sym in markets and not markets[sym].get('spot', False): continue
-            # ---------------
+            # ------------------------
 
             vol = t['quoteVolume'] if t['quoteVolume'] else 0
             if vol >= 1000000: 
@@ -253,8 +235,17 @@ def scan_for_new_trades():
                 
     valid.sort(key=lambda x: x['vol'], reverse=True)
     
+    current_time = int(time.time())
+    queue_updated = False
+    
+    # Clean up old queue items (older than 24h)
+    for sym, data in list(queue.items()):
+        if current_time - data.get('timestamp', 0) > 86400:
+            del queue[sym]
+            queue_updated = True
+
     for t in valid[15:50]:
-        if t['symbol'] in db or t['symbol'] in queue: continue 
+        if t['symbol'] in db: continue 
         
         price, prev_close, rsi, ma5, ma10 = get_market_data(t['symbol']) 
         if not price: continue
@@ -262,42 +253,37 @@ def scan_for_new_trades():
         setup = None
         sl = 0
 
+        # STATE 1: TREND PULLBACK (RSI 42-48)
         if t['change'] > 1.0 and settings['rsi_min'] <= rsi <= settings['rsi_max'] and price > ma5 and ma5 > ma10:
             setup = "TREND PULLBACK"
             sl = round(ma5 * (1 - settings['stop_loss_pct']/100), 6)
+            
+        # STATE 2: OVERSOLD BOUNCE (RSI < 30)
         elif t['change'] < -8.0 and rsi < 30 and price > prev_close:
             setup = "OVERSOLD BOUNCE"
             sl = round(price * 0.95, 6)
             
         if setup:
-            try:
-                balance = exchange.fetch_balance()
-                spend = min(balance['free'].get('USDT', 0), settings['auto_buy_amount_usdt'])
+            # --- CALCULATE SCORE (Volume in M + R:R Ratio) ---
+            rr_ratio = (price * 0.10) / (price - sl) if (price - sl) > 0 else 0
+            score = (t['vol'] / 1000000) + (rr_ratio * 10)
+            
+            # If new token, or if existing token has a better score now, update it
+            if t['symbol'] not in queue or queue[t['symbol']].get('score', 0) < score:
+                is_new = t['symbol'] not in queue
+                queue[t['symbol']] = {
+                    "timestamp": current_time,
+                    "type": setup,
+                    "sl": sl,
+                    "score": score
+                }
+                queue_updated = True
                 
-                # INSTANT BUY if we have space and funds
-                if len(db) < settings.get("max_tokens_before_consolidation", 3) and spend >= 1.02:
-                    coin = t['symbol'].split('-')[0]
-                    qty = float(exchange.amount_to_precision(t['symbol'].replace("-", "/"), spend / price))
-                    exchange.create_market_buy_order(t['symbol'].replace("-", "/"), qty)
+                if is_new:
+                    send_telegram(f"📥 *QUEUED:* {t['symbol']}\nSetup: {setup}\nScore: {score:.1f}")
                     
-                    db[t['symbol']] = {
-                        "entry_price": price, "safe_zone": price, "stop_loss": sl,
-                        "took_profit_10": False, "took_profit_50": False
-                    }
-                    save_json(DB_FILE, db)
-                    send_telegram(f"🤖 *INSTANT BUY EXECUTED!*\n{setup}\n🪙 {coin} | 💵 {spend:.2f} USDT\n🛑 SL: {sl}")
-                    time.sleep(2) 
-                else:
-                    # Otherwise, add to queue
-                    queue[t['symbol']] = {
-                        "timestamp": int(time.time()),
-                        "type": setup,
-                        "sl": sl
-                    }
-                    save_json(QUEUE_FILE, queue)
-                    send_telegram(f"📥 *ADDED TO QUEUE:* {t['symbol']}\nSetup: {setup}")
-            except Exception as e:
-                send_telegram(f"❌ *BUY FAILED:* {e}")
+    if queue_updated:
+        save_json(QUEUE_FILE, queue)
 
 def check_telegram():
     state = load_json(STATE_FILE)
@@ -346,9 +332,10 @@ def check_telegram():
                         queue = load_json(QUEUE_FILE)
                         if not queue: send_telegram("📥 Queue is empty.")
                         else:
-                            msg = "📥 *CURRENT QUEUE*\n\n"
-                            for sym, data in queue.items():
-                                msg += f"🪙 {sym} ({data['type']})\n"
+                            msg = "📥 *PRIORITY QUEUE*\n\n"
+                            sorted_queue = sorted(queue.items(), key=lambda x: x[1].get('score', 0), reverse=True)
+                            for sym, data in sorted_queue:
+                                msg += f"🪙 {sym} ({data['type']})\n🏆 Score: {data.get('score', 0):.1f}\n\n"
                             send_telegram(msg)
 
                     elif text == "/consolidate":
@@ -373,10 +360,14 @@ if __name__ == "__main__":
     try:
         check_telegram()
         manage_active_trades()    
-        manage_queue()
-        scan_for_new_trades() 
         
-        # Save everything to GitHub
+        # 1. Scan market, check RSI < 30 & RSI 42-48, score them, and update queue
+        scan_and_queue()
+        
+        # 2. Execute the absolute highest-scoring token from the queue
+        execute_from_queue()
+        
+        # 3. Save everything to GitHub
         subprocess.run(["git", "pull", "--rebase"], capture_output=True)
         subprocess.run(["git", "add", "."], capture_output=True)
         subprocess.run(["git", "commit", "-m", "Auto-save"], capture_output=True)
