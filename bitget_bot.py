@@ -11,7 +11,8 @@ def tg(m):
     except: pass
 
 def tg_ai(m):
-    try: requests.post(f"https://api.telegram.org/bot{TG_TOKEN}/sendMessage", json={"chat_id":TG_CHAT_ID,"text":m}, timeout=10)
+    # 🚨 CHANGED TO HTML SO IT NEVER CRASHES ON RAW AI TEXT 🚨
+    try: requests.post(f"https://api.telegram.org/bot{TG_TOKEN}/sendMessage", json={"chat_id":TG_CHAT_ID,"text":m,"parse_mode":"HTML"}, timeout=10)
     except: pass
 
 def load(f, d={}):
@@ -40,12 +41,15 @@ def ask_ai(prompt):
         bal = exchange.fetch_balance()['free'].get('USDT', 0)
         btc_p, _, btc_rsi, _, _ = data("BTC-USDT")
         context = f"System Data:\n- USDT Balance: {bal}\n- Auto-Buy Size per Trade: {s['auto_buy_amount_usdt']}\n- BTC RSI: {btc_rsi}\n- Active Trades: {db}\n- Queue: {q}\n- Bot Rules: RSI {s['rsi_min']}-{s['rsi_max']}, SL {s['stop_loss_pct']}%\n\n"
-        # 🚨 MODEL UPDATED TO GEMINI-3.8-FLASH 🚨
+        
+        # 🚨 TOLD THE AI TO USE HTML 🚨
+        ai_prompt = f"You are an expert crypto trading analyst. Use this live data to answer the user. Format your response using HTML tags (<b>, <i>, <br>) instead of markdown.\n{context}\nUser Question: {prompt}"
+        
         response = client.models.generate_content(
             model='gemini-3.8-flash',
-            contents=f"You are an expert crypto trading analyst. Use this live data to answer the user.\n{context}\nUser Question: {prompt}"
+            contents=ai_prompt
         )
-        tg_ai(f"🧠 AI ANALYST:\n\n{response.text}")
+        tg_ai(f"🧠 <b>AI ANALYST:</b>\n\n{response.text}")
     except Exception as e: tg(f"❌ AI Error: {e}")
 
 def hard_sl(sym, qty, pr):
@@ -116,9 +120,8 @@ def exec_queue():
             cs=sym.replace("-","/")
             
             if sym in db:
-                # 🚨 AUTO-DCA LOGIC 🚨
                 if db[sym].get('dca_count', 0) >= 2:
-                    del q[sym]; save(QUEUE_FILE,q); continue # Max 2 DCAs per token
+                    del q[sym]; save(QUEUE_FILE,q); continue
                 
                 qty=float(exchange.amount_to_precision(cs, sp/p))
                 exchange.create_limit_buy_order(cs, qty, p)
@@ -142,7 +145,6 @@ def exec_queue():
                 tg(f"🛒 *AUTO-DCA EXECUTED!*\n{sym} | 💵 {sp:.2f} USDT\n📉 New Entry: {new_entry:.6f}\n🛑 New SL: {new_sl}")
                 
             else:
-                # NEW BUY LOGIC
                 if len(db) >= s["max_tokens_before_consolidation"]: continue
                 qty=float(exchange.amount_to_precision(cs, sp/p))
                 exchange.create_limit_buy_order(cs, qty, p); sl=d['sl']; hard_sl(sym,qty,sl)
@@ -175,9 +177,6 @@ def scan():
         if ct-d.get('timestamp',0)>86400: del q[sym]; qu=True
         
     for t in v[15:50]:
-        # Allow held tokens to be queued for DCA
-        # if t['sym'] in db: continue 
-        
         p,pr,r,ma5,ma10=data(t['sym'])
         if not p: continue
         setup=None; sl=0
