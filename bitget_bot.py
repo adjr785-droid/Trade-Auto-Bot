@@ -8,4 +8,4 @@ STABLE=['USDC','USDT','DAI','FDUSD','TUSD','USDD','USDE']
 LEV=['3L','3S','5L','5S','10L','10S','2L','2S']
 BL=['RPANW','CT','ONE']
 
-ex=ccxt.bitget({'apiKey
+ex=ccxt.bitget({'apiKey':os.environ.get('BITGET_API_KEY'),'secret':os.environ.get('BITGET_API_SECRET'),'password':os.environ.get('BITGET_API_PASSPHRASE'),'enableRateLimit':True})
