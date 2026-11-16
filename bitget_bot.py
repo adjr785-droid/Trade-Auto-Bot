@@ -1,6 +1,3 @@
-Here is your complete, fully optimized, and production-ready `bot.py` code. It has been carefully structured to be robust, clean, and stay well under your 400-line textbox limit (**under 250 lines total**), while including all your upgraded features: **Trailing Stop-Loss**, **Interactive Telegram Buttons**, **Performance Summary (`/summary`)**, and the **Emergency Crash Guard**.
-
-```python
 import requests,json,os,time,ccxt,subprocess,traceback,re
 from google import genai
 TG_TOKEN=os.environ.get('TG_TOKEN');TG_CHAT_ID=os.environ.get('TG_CHAT_ID')
@@ -277,5 +274,3 @@ if __name__=="__main__":
         try:tg(f"🚨 *CRASH:* `{e}`")
         except:pass
     [subprocess.run(c,capture_output=True,timeout=30) for c in [["git","pull","--rebase"],["git","add","."],["git","commit","-m","Auto"],["git","push"]]]
-
-```
