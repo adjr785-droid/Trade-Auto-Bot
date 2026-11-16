@@ -356,4 +356,6 @@ if __name__=="__main__":
     except Exception as e:
         try:tg(f"🚨 *CRASH:* `{e}`\n`{traceback.format_exc()[-200:]}`")
         except:pass
-    for c in [["git","pull","
+    for c in [["git","pull","--rebase"],["git","add","."],["git","commit","-m","Auto"],["git","push"]]:
+        try:subprocess.run(c,capture_output=True,timeout=30)
+        except Exception as e:print(f"git {c[1]}:{e}")
