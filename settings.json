@@ -2,6 +2,10 @@
     "rsi_min": 42,
     "rsi_max": 48,
     "stop_loss_pct": 15,
-    "auto_buy_enabled": true,
-    "auto_buy_amount_usdt": 6.75
+    "sl_sell_percent": 0.5,
+    "dca_reserve": 2.0,
+    "auto_buy_enabled": false,
+    "auto_buy_amount_usdt": 5.75,
+    "max_tokens_before_consolidation": 3,
+    "max_hold_hours": 720
 }
