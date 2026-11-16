@@ -1,33 +1,24 @@
-name: Trade Auto Bot
-
+name: BitgetBot
 on:
   schedule:
-    - cron: '*/10 * * * *'
+    - cron: '*/5 * * * *'
   workflow_dispatch:
-
+permissions:
+  contents: write
 jobs:
-  run-trade-bot:
+  run:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Set up Python
-        uses: actions/setup-python@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
-          python-version: '3.9'
-
-      - name: Install dependencies
-        run: pip install requests ccxt google-genai
-
-      - name: Run Trade Bot
-        env:
+          python-version: '3.11'
+      - run: pip install requests ccxt google-genai
+      - env:
+          TG_TOKEN: ${{ secrets.TG_TOKEN }}
+          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
           BITGET_API_KEY: ${{ secrets.BITGET_API_KEY }}
           BITGET_API_SECRET: ${{ secrets.BITGET_API_SECRET }}
           BITGET_API_PASSPHRASE: ${{ secrets.BITGET_API_PASSPHRASE }}
-          TG_TOKEN: ${{ secrets.TG_TOKEN }}
-          TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python bitget_bot.py
