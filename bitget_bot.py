@@ -373,8 +373,11 @@ def tg_check():
                 txt=cb["data"]
                 requests.post(f"https://api.telegram.org/bot{TG_TOKEN}/answerCallbackQuery",json={"callback_query_id":cb["id"]})
             elif "message" in upd and "text" in upd["message"]:
-                if "date" in upd["message"] and int(time.time())-upd["message"]["date"]>900:
-                    tg("⏱ Message too old (>15min), ignored.");continue
+                # Increased timeout to 30 mins (1800s) and made it SILENT
+                if "date" in upd["message"] and int(time.time())-upd["message"]["date"]>1800:
+                    print(f"Skipped old message: {upd['message']['text']}")
+                    st["last_update_id"]=lid; save(ST,st)
+                    continue
                 txt=upd["message"]["text"].strip()
             
             if not txt: continue
