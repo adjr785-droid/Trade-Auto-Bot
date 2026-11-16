@@ -1,7 +1,7 @@
 import requests,json,os,time,ccxt,subprocess,traceback,re
 from google import genai
 TG_TOKEN=os.environ.get('TG_TOKEN');TG_CHAT_ID=os.environ.get('TG_CHAT_ID')
-DB="positions.json";ST="tg_state.json";CFG="settings.json";QF="queue.json";LF="profit_ledger.json";CD=".cmd_cooldown.json"
+DB="positions.json";ST="tg_state.json";CFG="settings.json";QF="queue.json";LF="profit_ledger.json";CD=".cmd_cooldown.json";SC="scan_state.json"
 STABLE=['USDC','USDT','DAI','FDUSD','TUSD','USDD','USDE'];LEV=['3L','3S','5L','5S','10L','10S','2L','2S'];BL=['RPANW','CT','ONE']
 ex=ccxt.bitget({'apiKey':os.environ.get('BITGET_API_KEY'),'secret':os.environ.get('BITGET_API_SECRET'),'password':os.environ.get('BITGET_API_PASSPHRASE'),'enableRateLimit':True})
 client=genai.Client(api_key=os.environ.get('GEMINI_API_KEY'))
@@ -27,7 +27,7 @@ def save(f,d):
         with open(f,"w") as fh:json.dump(d,fh,indent=4)
     except Exception as e:print(f"save {f}:{e}")
 def cfg():
-    d={"rsi_min":42,"rsi_max":48,"stop_loss_pct":15,"sl_sell_percent":0.5,"dca_reserve":2.0,"auto_buy_enabled":True,"auto_buy_amount_usdt":5.75,"max_tokens_before_consolidation":3}
+    d={"rsi_min":42,"rsi_max":48,"stop_loss_pct":15,"sl_sell_percent":0.5,"dca_reserve":2.0,"auto_buy_enabled":False,"auto_buy_amount_usdt":5.75,"max_tokens_before_consolidation":3,"max_hold_hours":720}
     s=load(CFG,d)
     for k,v in d.items():s.setdefault(k,v)
     return s
@@ -91,6 +91,19 @@ def sell(sym,pct,reason):
             tg(f"✅ *SOLD ({reason})*\n🪙 {q} {sym}\n{'🟢' if pnl>=0 else '🔴'} PnL: ${pnl:.2f}")
         return True
     except Exception as e:tg(f"❌ *SELL FAILED* {sym}:`{e}`");return False
+def reconcile():
+    db=load(DB)
+    if not db:return db
+    try:bal=ex.fetch_balance()['total']
+    except:return db
+    changed=False
+    for sym in list(db.keys()):
+        coin=sym.split('-')[0];held=bal.get(coin,0)
+        if held<=0:
+            tg(f"🧹 Reconciled: {sym} not on exchange, removing")
+            db.pop(sym,None);changed=True
+    if changed:save(DB,db)
+    return db
 def ask_ai(p):
     try:
         db=load(DB);q=load(QF);s=cfg();bal=ex.fetch_balance()['free'].get('USDT',0);_,_,br,_,_=data("BTC-USDT")
@@ -102,9 +115,15 @@ def ask_ai(p):
 def manage():
     db=load(DB);s=cfg()
     for sym,d in list(db.items()):
+        if 'opened_at' not in d:
+            d['opened_at']=time.time();db[sym]=d;save(DB,db)
         _,_,r,_,_=data(sym);lv=live(sym)
         if not lv:continue
         inc=((lv-d["entry_price"])/d["entry_price"])*100;coin=sym.split('-')[0]
+        hold_h=(time.time()-d.get('opened_at',time.time()))/3600
+        if hold_h>s.get('max_hold_hours',720):
+            if sell(sym,1.0,f"MAX HOLD {hold_h:.0f}h"):db.pop(sym,None);save(DB,db)
+            continue
         if lv<=d["stop_loss"]:
             if not d.get("sl_hit"):
                 pct=s.get('sl_sell_percent',0.5);tot=ex.fetch_balance()['total'].get(coin,0)
@@ -178,11 +197,13 @@ def exec_q():
                 except Exception as e:tg(f"❌ Buy fail {sym}:{e}");mk_cd(f"fail_{sym}");continue
                 maxsl=round(a*(1-s['stop_loss_pct']/100),6);sl=qd.get('sl') or maxsl
                 if sl>=a or sl>maxsl:sl=maxsl
-                db[sym]={"entry_price":round(a,6),"safe_zone":round(a,6),"stop_loss":sl,"took_profit_10":False,"took_profit_50":False,"dca_count":0,"sl_hit":False}
+                db[sym]={"entry_price":round(a,6),"safe_zone":round(a,6),"stop_loss":sl,"took_profit_10":False,"took_profit_50":False,"dca_count":0,"sl_hit":False,"opened_at":time.time()}
                 save(DB,db);hard_sl(sym,f*s.get('sl_sell_percent',0.5),sl);tg(f"🛒 *EXECUTED!*\n{sym}|💵{sp:.2f}@{a:.6f}\n🛑SL:{sl}")
             q.pop(sym,None);save(QF,q);ub=ex.fetch_balance()['free'].get('USDT',0);time.sleep(2)
     except Exception as e:tg(f"⚠️ *QUEUE FAILED:* `{e}`")
 def scan():
+    st=load(SC)
+    if time.time()-st.get('last',0)<3540:return
     db=load(DB);q=load(QF);s=cfg()
     if not s["auto_buy_enabled"]:return
     _,_,br,_,_=data("BTC-USDT")
@@ -212,6 +233,7 @@ def scan():
                 if t['sym'] not in q:tg(f"📥 *QUEUED:* {t['sym']}\nScore:{sc:.1f}")
                 q[t['sym']]={"timestamp":ct,"type":setup,"sl":sl,"score":sc};qu=True
     if qu:save(QF,q)
+    st['last']=time.time();save(SC,st)
 def fp(p):
     if p is None:return "N/A"
     if p>=100:return f"{p:.2f}"
@@ -258,10 +280,21 @@ def cmd_buy(txt,is_dca):
             db[sym].update({"entry_price":round(ne,6),"stop_loss":sl,"took_profit_10":False,"took_profit_50":False,"dca_count":db[sym].get('dca_count',0)+1,"sl_hit":False})
         else:
             ne=a;sl=round(a*(1-cfg()['stop_loss_pct']/100),6)
-            db[sym]={"entry_price":round(a,6),"safe_zone":round(a,6),"stop_loss":sl,"took_profit_10":False,"took_profit_50":False,"dca_count":0,"sl_hit":False}
+            db[sym]={"entry_price":round(a,6),"safe_zone":round(a,6),"stop_loss":sl,"took_profit_10":False,"took_profit_50":False,"dca_count":0,"sl_hit":False,"opened_at":time.time()}
         save(DB,db);hard_sl(sym,tot*cfg().get('sl_sell_percent',0.5),sl)
         tg(f"{'🛒 *DCA:*' if is_dca else '✅ *BOUGHT:*'} {c} @ {a:.6f}\n📉 Entry:{ne:.6f}\n🛑 SL:{sl}")
     except Exception as e:tg(f"❌ *{'DCA' if is_dca else 'BUY'} FAILED:* {e}")
+def cmd_set(txt):
+    parts=txt.split()
+    if len(parts)!=3:tg("❌ Usage: `/set <key> <value>`");return
+    key,val=parts[1],parts[2];s=cfg()
+    if key not in s:tg(f"❌ Unknown key. Valid: `{'`, `'.join(s.keys())}`");return
+    try:
+        if isinstance(s[key],bool):new=val.lower() in ('true','1','yes','on')
+        elif isinstance(s[key],float):new=float(val)
+        else:new=int(val)
+    except:tg(f"❌ Invalid value for {key}");return
+    s[key]=new;save(CFG,s);tg(f"✅ `{key}` = `{new}`")
 def tg_check():
     st=load(ST);lid=st.get("last_update_id",0)
     try:
@@ -270,10 +303,11 @@ def tg_check():
         for upd in res["result"]:
             lid=upd["update_id"]
             if "message" not in upd or "text" not in upd["message"]:continue
-            if "date" in upd["message"] and int(time.time())-upd["message"]["date"]>900:continue
+            if "date" in upd["message"] and int(time.time())-upd["message"]["date"]>900:
+                tg("⏱ Message too old (>15min), ignored. GitHub Actions delay.");continue
             txt=upd["message"]["text"].strip();low=txt.lower()
             if low.startswith("/ai"):ask_ai(txt[3:].strip())
-            elif low=="/help":tg("🤖 *CMDS*\n`/ai [q]` `/analyze SOL`\n`/gainers` `/losers`\n`/queue` `/balance`\n`/audit` `/status` `/pnl`\n`/buy SOL 5.75`\n`/dca SOL 5.75`\n`/set sl_sell_percent 0.5`\n`/set dca_reserve 2.0`")
+            elif low=="/help":tg("🤖 *CMDS*\n`/ai [q]` `/analyze SOL`\n`/gainers` `/losers`\n`/queue` `/balance`\n`/audit` `/status` `/pnl`\n`/buy SOL 5.75`\n`/dca SOL 5.75`\n`/set key value`\n`/pause` `/resume`")
             elif low=="/balance":
                 b=ex.fetch_balance()['free'];u=b.get('USDT',0);rows=[["USDT",f"{u:.2f}",f"${u:.2f}"]]
                 for c,a in b.items():
@@ -296,7 +330,7 @@ def tg_check():
                     tg(f"🟢 *ACTIVE*\n```\n{tbl(['Coin','Entry','Current','PnL'],rows,[7,8,8,7])}\n```")
             elif low=="/audit":
                 u=ex.fetch_balance()['free'].get('USDT',0);q=load(QF);s=cfg()
-                rows=[["API","OK 🟢"],["USDT",f"{u:.2f}"],["Active",f"{len(load(DB))}"],["Queue",f"{len(q)}"],["RSI",f"{s['rsi_min']}-{s['rsi_max']}"],["SL",f"{s['stop_loss_pct']}%"],["SL Sell",f"{s.get('sl_sell_percent',0.5)*100}%"],["Reserve",f"${s.get('dca_reserve',2.0)}"],["AutoBuy",f"${s['auto_buy_amount_usdt']}"]]
+                rows=[["API","OK 🟢"],["USDT",f"{u:.2f}"],["Active",f"{len(load(DB))}"],["Queue",f"{len(q)}"],["RSI",f"{s['rsi_min']}-{s['rsi_max']}"],["SL",f"{s['stop_loss_pct']}%"],["SL Sell",f"{s.get('sl_sell_percent',0.5)*100}%"],["Reserve",f"${s.get('dca_reserve',2.0)}"],["AutoBuy",f"${s['auto_buy_amount_usdt']}"],["MaxHold",f"{s.get('max_hold_hours',720)}h"],["Paused","Yes ⏸" if not s['auto_buy_enabled'] else "No ▶️"]]
                 tg(f"🛠️ *AUDIT*\n```\n{tbl(['Metric','Value'],rows,[12,10])}\n```")
             elif low=="/pnl":
                 L=load(LF);rows=[["Total PnL",f"${L.get('total_realized_usdt',0.0):.2f}"],["Trades",f"{L.get('trade_count',0)}"]]
@@ -310,13 +344,16 @@ def tg_check():
             elif low=="/losers":_,l=gl();tg(l)
             elif low.startswith("/buy"):cmd_buy(txt,False)
             elif low.startswith("/dca"):cmd_buy(txt,True)
+            elif low.startswith("/set"):cmd_set(txt)
+            elif low=="/pause":
+                s=cfg();s['auto_buy_enabled']=False;save(CFG,s);tg("⏸ Auto-buy paused.")
+            elif low=="/resume":
+                s=cfg();s['auto_buy_enabled']=True;save(CFG,s);tg("▶️ Auto-buy resumed.")
         st["last_update_id"]=lid;save(ST,st)
     except Exception as e:print(f"TG Err:{e}")
 if __name__=="__main__":
-    try:clr();tg_check();manage();scan();exec_q()
+    try:clr();reconcile();tg_check();manage();scan();exec_q()
     except Exception as e:
         try:tg(f"🚨 *CRASH:* `{e}`\n`{traceback.format_exc()[-200:]}`")
         except:pass
-    for c in [["git","pull","--rebase"],["git","add","."],["git","commit","-m","Auto"],["git","push"]]:
-        try:subprocess.run(c,capture_output=True,timeout=30)
-        except Exception as e:print(f"git {c[1]}:{e}")
+    for c in [["git","pull","
