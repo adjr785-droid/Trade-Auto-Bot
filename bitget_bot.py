@@ -40,8 +40,9 @@ def ask_ai(prompt):
         bal = exchange.fetch_balance()['free'].get('USDT', 0)
         btc_p, _, btc_rsi, _, _ = data("BTC-USDT")
         context = f"System Data:\n- USDT Balance: {bal}\n- Auto-Buy Size per Trade: {s['auto_buy_amount_usdt']}\n- BTC RSI: {btc_rsi}\n- Active Trades: {db}\n- Queue: {q}\n- Bot Rules: RSI {s['rsi_min']}-{s['rsi_max']}, SL {s['stop_loss_pct']}%\n\n"
+        # 🚨 CHANGED TO A HIGHER QUOTA MODEL 🚨
         response = client.models.generate_content(
-            model='gemini-3.8-flash',
+            model='gemini-1.5-flash-8b',
             contents=f"You are an expert crypto trading analyst. Use this live data to answer the user.\n{context}\nUser Question: {prompt}"
         )
         tg_ai(f"🧠 AI ANALYST:\n\n{response.text}")
@@ -195,7 +196,6 @@ def fmt_price(p):
     else: return f"{p:.6f}"
 
 def format_table(headers, rows, widths):
-    # Clean ASCII table borders
     top = "+" + "+".join(["-" * (w + 2) for w in widths]) + "+"
     header_str = "| " + " | ".join([h.ljust(w) for h, w in zip(headers, widths)]) + " |"
     mid = "+" + "+".join(["-" * (w + 2) for w in widths]) + "+"
