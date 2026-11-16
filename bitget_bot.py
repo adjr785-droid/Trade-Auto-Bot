@@ -21,7 +21,7 @@ def load(f, d={}):
 def save(f, d): json.dump(d, open(f, "w"), indent=4)
 
 def settings():
-    d={"rsi_min":42,"rsi_max":48,"stop_loss_pct":15,"auto_buy_enabled":True,"auto_buy_amount_usdt":5.75,"max_tokens_before_consolidation":3}
+    d={"rsi_min":42,"rsi_max":48,"stop_loss_pct":15,"sl_sell_percent":0.5,"dca_reserve":2.0,"auto_buy_enabled":True,"auto_buy_amount_usdt":5.75,"max_tokens_before_consolidation":3}
     s=load(SETTINGS_FILE, d)
     for k,v in d.items(): s.setdefault(k,v)
     return s
@@ -51,7 +51,8 @@ def hard_sl(sym, qty, pr):
             for o in exchange.fetch_open_orders(sym.replace("-","/")):
                 if o['side']=='sell': exchange.cancel_order(o['id'], sym.replace("-","/"))
         except: pass
-        exchange.create_order(sym.replace("-","/"), 'market', 'sell', qty, params={'stopPrice':pr,'triggerPrice':pr,'stopLossPrice':pr})
+        if qty > 0:
+            exchange.create_order(sym.replace("-","/"), 'market', 'sell', qty, params={'stopPrice':pr,'triggerPrice':pr,'stopLossPrice':pr})
         return True
     except: return False
 
@@ -72,13 +73,32 @@ def sell(sym, pct, reason):
     return False
 
 def manage():
-    db=load(DB_FILE)
+    db=load(DB_FILE); s=settings()
     for sym,d in list(db.items()):
         p,pr,r,ma5,ma10=data(sym)
         if not p: continue
         inc=((p-d["entry_price"])/d["entry_price"])*100
-        if p<=d["stop_loss"]: 
-            if sell(sym,1.0,"STOP LOSS"): del db[sym]; save(DB_FILE,db)
+        
+        if p <= d["stop_loss"]:
+            if not d.get("sl_hit"):
+                pct_to_sell = s.get('sl_sell_percent', 0.5)
+                coin_bal = exchange.fetch_balance()['free'].get(sym.split('-')[0], 0)
+                if (coin_bal * pct_to_sell * p) < 1.02: pct_to_sell = 1.0 
+                    
+                if sell(sym, pct_to_sell, "PARTIAL STOP LOSS"):
+                    db[sym]["sl_hit"] = True
+                    new_sl = round(p * (1 - s['stop_loss_pct']/100), 6)
+                    db[sym]["stop_loss"] = new_sl
+                    save(DB_FILE, db)
+                    
+                    rem_qty = exchange.fetch_balance()['free'].get(sym.split('-')[0], 0)
+                    if rem_qty > 0: hard_sl(sym, rem_qty, new_sl)
+                    tg(f"⚠️ *PARTIAL STOP LOSS!*\nSold {pct_to_sell*100}% of {sym} to protect capital.\nRemaining {100-(pct_to_sell*100)}% is protected at a new SL of {new_sl}.")
+            else:
+                if sell(sym, 1.0, "FINAL STOP LOSS"): 
+                    del db[sym]; save(DB_FILE, db)
+            continue
+            
         elif r>=75: 
             if sell(sym,1.0,"RSI 75"): del db[sym]; save(DB_FILE,db)
         elif r>=70 and not d.get("took_profit_50"): 
@@ -108,51 +128,22 @@ def exec_queue():
             p,_,_,_,_=data(sym)
             if not p: continue
             
-            # 🚨 RELATIVE STRENGTH SWAP LOGIC 🚨
-            if ub < 1.02 and len(db) > 0:
-                weakest_sym = None
-                lowest_pnl = 999
-                for h_sym, h_data in db.items():
-                    hp, _, _, _, _ = data(h_sym)
-                    if hp:
-                        pnl = ((hp - h_data['entry_price']) / h_data['entry_price']) * 100
-                        if pnl < lowest_pnl:
-                            lowest_pnl = pnl
-                            weakest_sym = h_sym
-                
-                if weakest_sym:
-                    base_coin = weakest_sym.split('-')[0]
-                    h_bal = exchange.fetch_balance()['free'].get(base_coin, 0)
-                    hp, _, _, _, _ = data(weakest_sym)
-                    
-                    # Ensure we don't sell ALL of it. Only sell what we need.
-                    if h_bal > 0 and hp:
-                        val_to_sell = min(s['auto_buy_amount_usdt'], h_bal * hp)
-                        qty_to_sell = float(exchange.amount_to_precision(weakest_sym.replace("-","/"), val_to_sell / hp))
-                        
-                        # Safety check: ensure we aren't selling 100% of the bag
-                        if qty_to_sell * hp < (h_bal * hp) * 0.95: 
-                            exchange.create_market_sell_order(weakest_sym.replace("-","/"), qty_to_sell)
-                            tg(f"🔄 *PARTIAL SWAP:* Sold {qty_to_sell} {base_coin} to fund {sym}.\n(Remaining {base_coin} kept)")
-                            
-                            time.sleep(3) # Wait for Bitget to update balance
-                            ub = exchange.fetch_balance()['free'].get('USDT', 0)
-                            
-                            # Update Stop Loss for remaining coins
-                            new_bal = exchange.fetch_balance()['free'].get(base_coin, 0)
-                            if new_bal > 0:
-                                hard_sl(weakest_sym, new_bal, db[weakest_sym]['stop_loss'])
-                            else:
-                                del db[weakest_sym] # If somehow all sold
-                                save(DB_FILE, db)
-
-            # CONTINUE WITH NORMAL BUY
-            sp=min(ub, s['auto_buy_amount_usdt'])
-            if sp<1.02: continue
+            is_dca = sym in db
             
+            # 🚨 RULE 2: DCA can use 100%, New Buys must leave $2 Reserve 🚨
+            if is_dca:
+                spendable_ub = ub 
+            else:
+                spendable_ub = ub - s.get('dca_reserve', 2.0)
+                
+            if spendable_ub < 1.02:
+                if not is_dca: tg(f"⚠️ *SKIPPING BUY:* Wallet has ${ub:.2f}. Need to keep ${s.get('dca_reserve', 2.0):.2f} for DCA.")
+                continue
+
+            sp=min(spendable_ub, s['auto_buy_amount_usdt'])
             cs=sym.replace("-","/")
             
-            if sym in db:
+            if is_dca:
                 if db[sym].get('dca_count', 0) >= 2:
                     del q[sym]; save(QUEUE_FILE,q); continue
                 
@@ -172,17 +163,23 @@ def exec_queue():
                 db[sym]['took_profit_10'] = False
                 db[sym]['took_profit_50'] = False
                 db[sym]['dca_count'] = db[sym].get('dca_count', 0) + 1
+                db[sym]['sl_hit'] = False 
                 save(DB_FILE, db)
                 
-                hard_sl(sym, bal, new_sl)
+                sl_qty = bal * s.get('sl_sell_percent', 0.5)
+                hard_sl(sym, sl_qty, new_sl)
                 tg(f"🛒 *AUTO-DCA EXECUTED!*\n{sym} | 💵 {sp:.2f} USDT\n📉 New Entry: {new_entry:.6f}\n🛑 New SL: {new_sl}")
                 
             else:
                 if len(db) >= s["max_tokens_before_consolidation"]: continue
                 qty=float(exchange.amount_to_precision(cs, sp/p))
-                exchange.create_limit_buy_order(cs, qty, p); sl=d['sl']; hard_sl(sym,qty,sl)
-                db[sym]={"entry_price":p,"safe_zone":p,"stop_loss":sl,"took_profit_10":False,"took_profit_50":False,"dca_count":0}
+                exchange.create_limit_buy_order(cs, qty, p); sl=d['sl']; 
+                
+                db[sym]={"entry_price":p,"safe_zone":p,"stop_loss":sl,"took_profit_10":False,"took_profit_50":False,"dca_count":0,"sl_hit":False}
                 save(DB_FILE,db)
+                
+                sl_qty = qty * s.get('sl_sell_percent', 0.5)
+                hard_sl(sym, sl_qty, sl)
                 tg(f"🛒 *EXECUTED!*\n{sym} | 💵 {sp:.2f} USDT\n🛑 SL: {sl}")
 
             del q[sym]; save(QUEUE_FILE,q); ub-=sp
@@ -269,7 +266,7 @@ def tg_check():
                     if low.startswith("/ai"):
                         ask_ai(txt[3:].strip())
                     elif low=="/help":
-                        tg("🤖 *COMMANDS*\n`/ai [question]` - Ask AI\n`/analyze SOL`\n`/gainers` / `/losers`\n`/queue` / `/balance`\n`/audit` / `/status`\n`/buy SOL 5.75`\n`/dca SOL 5.75`")
+                        tg("🤖 *COMMANDS*\n`/ai [question]` - Ask AI\n`/analyze SOL`\n`/gainers` / `/losers`\n`/queue` / `/balance`\n`/audit` / `/status`\n`/buy SOL 5.75`\n`/dca SOL 5.75`\n`/set sl_sell_percent 0.5`\n`/set dca_reserve 2.0`")
                     
                     elif low=="/balance":
                         b=exchange.fetch_balance()['free']; u=b.get('USDT',0); db=load(DB_FILE)
@@ -312,6 +309,8 @@ def tg_check():
                             ["Queue Size", f"{len(q)}"],
                             ["RSI Range", f"{s['rsi_min']}-{s['rsi_max']}"],
                             ["Stop Loss", f"{s['stop_loss_pct']}%"],
+                            ["SL Sell %", f"{s.get('sl_sell_percent', 0.5)*100}%"],
+                            ["DCA Reserve", f"${s.get('dca_reserve', 2.0)}"],
                             ["Auto-Buy", f"${s['auto_buy_amount_usdt']}"]
                         ]
                         table = format_table(["Metric", "Value"], rows, [12, 10])
@@ -342,8 +341,10 @@ def tg_check():
                             if sym not in db:
                                 pr=exchange.fetch_ticker(f"{c}/USDT")['last']; qty=float(exchange.amount_to_precision(f"{c}/USDT", amt/pr))
                                 exchange.create_limit_buy_order(f"{c}/USDT", qty, pr); sl=round(pr*(1-settings()['stop_loss_pct']/100),6)
-                                db[sym]={"entry_price":pr,"safe_zone":pr,"stop_loss":sl,"took_profit_10":False,"took_profit_50":False,"dca_count":0}
-                                save(DB_FILE,db); hard_sl(sym, qty, sl); tg(f"✅ *BOUGHT:* {c} | SL: {sl}")
+                                db[sym]={"entry_price":pr,"safe_zone":pr,"stop_loss":sl,"took_profit_10":False,"took_profit_50":False,"dca_count":0,"sl_hit":False}
+                                save(DB_FILE,db); 
+                                sl_qty = qty * settings().get('sl_sell_percent', 0.5)
+                                hard_sl(sym, sl_qty, sl); tg(f"✅ *BOUGHT:* {c} | SL: {sl}")
                     elif low.startswith("/dca"):
                         p=txt.split()
                         if len(p)==3:
@@ -355,8 +356,10 @@ def tg_check():
                                     exchange.create_limit_buy_order(f"{c}/USDT", aq, pr); bal=exchange.fetch_balance()['free'].get(c,0); oq=bal-aq
                                     ne=pr if oq<=0 else ((oq*db[sym]['entry_price'])+amt)/bal
                                     sl=round(ne*(1-settings()['stop_loss_pct']/100),6)
-                                    db[sym].update({"entry_price":round(ne,6),"stop_loss":sl,"took_profit_10":False,"took_profit_50":False,"dca_count":db[sym].get('dca_count',0)+1})
-                                    save(DB_FILE,db); hard_sl(sym,bal,sl); tg(f"🛒 *DCA:* {c} | {amt} USDT\n📉 New Entry: {ne:.6f}\n🛑 SL: {sl}")
+                                    db[sym].update({"entry_price":round(ne,6),"stop_loss":sl,"took_profit_10":False,"took_profit_50":False,"dca_count":db[sym].get('dca_count',0)+1,"sl_hit":False})
+                                    save(DB_FILE,db); 
+                                    sl_qty = bal * settings().get('sl_sell_percent', 0.5)
+                                    hard_sl(sym,sl_qty,sl); tg(f"🛒 *DCA:* {c} | {amt} USDT\n📉 New Entry: {ne:.6f}\n🛑 SL: {sl}")
                                 except Exception as e: tg(f"❌ *DCA FAILED:* {e}")
                 st["last_update_id"]=lid; save(STATE_FILE,st)
     except Exception as e: print(f"TG Err: {e}")
@@ -365,4 +368,7 @@ if __name__ == "__main__":
     try:
         tg_check(); manage(); scan(); exec_queue()
         subprocess.run(["git","pull","--rebase"],capture_output=True)
-        subprocess.run(["git","add","."],capture_outpu
+        subprocess.run(["git","add","."],capture_output=True)
+        subprocess.run(["git","commit","-m","Auto"],capture_output=True)
+        subprocess.run(["git","push"],capture_output=True)
+    except Exception as e: tg(f"🚨 *CRASH:* {e}\n`{traceback.format_exc()[-100:]}`")
