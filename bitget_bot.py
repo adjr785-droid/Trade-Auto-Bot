@@ -43,7 +43,8 @@ def save(f,d):
         with open(f,"w") as fh:json.dump(d,fh,indent=4)
     except Exception as e:print(f"save {f}:{e}")
 def cfg():
-    d={"rsi_min":42,"rsi_max":48,"stop_loss_pct":15,"sl_sell_percent":0.5,"dca_reserve":2.0,"auto_buy_enabled":True,"auto_buy_amount_usdt":5.75,"max_tokens_before_consolidation":3,"max_hold_hours":720,"trail_pct":5.0,"crash_guard_pct":18.0}
+    # 8% Stop-Loss, 48 Hour Max Hold
+    d={"rsi_min":42,"rsi_max":48,"stop_loss_pct":8,"auto_buy_enabled":True,"auto_buy_amount_usdt":5.75,"max_tokens_before_consolidation":3,"max_hold_hours":48,"trail_pct":5.0,"crash_guard_pct":18.0}
     s=load(CFG,d)
     for k,v in d.items():s.setdefault(k,v)
     return s
@@ -158,6 +159,19 @@ def manage():
         if not lv:continue
         inc=((lv-d["entry_price"])/d["entry_price"])*100;coin=sym.split('-')[0]
         
+        target_base_sl = round(d['entry_price'] * (1 - s['stop_loss_pct']/100), 6)
+        if d['stop_loss'] < target_base_sl:
+            if lv <= target_base_sl:
+                if sell(sym, 1.0, f"SL HIT ({s['stop_loss_pct']}%)"): 
+                    db.pop(sym, None); save(DB, db)
+                continue
+            else:
+                d['stop_loss'] = target_base_sl
+                tot = ex.fetch_balance()['total'].get(coin, 0)
+                if tot > 0:
+                    hard_sl(sym, tot, target_base_sl)
+                    tg(f"🛡️ *SL TIGHTENED:* {sym} moved to {target_base_sl} ({s['stop_loss_pct']}%)")
+
         last_p = d.get('last_price', 0)
         if last_p > 0:
             drop = (lv - last_p) / last_p * 100
@@ -166,6 +180,13 @@ def manage():
                     db.pop(sym, None); save(DB, db); continue
         d['last_price'] = lv
 
+        if inc >= 5.0 and d['stop_loss'] < d['entry_price']:
+            d['stop_loss'] = d['entry_price']
+            tot = ex.fetch_balance()['total'].get(coin, 0)
+            if tot > 0:
+                hard_sl(sym, tot, d['stop_loss'])
+                tg(f"🛡️ *BREAKEVEN LOCKED:* {sym} moved to {d['stop_loss']}")
+
         if s.get('trail_pct', 0) > 0:
             peak = d.get('peak_price', d['entry_price'])
             if lv > peak:
@@ -173,34 +194,23 @@ def manage():
                 d['peak_price'] = peak
                 trail_sl = round(peak * (1 - s.get('trail_pct', 5)/100), 6)
                 if trail_sl > d['stop_loss']:
+                    d['stop_loss'] = trail_sl
                     tot = ex.fetch_balance()['total'].get(coin, 0)
                     if tot > 0:
-                        d['stop_loss'] = trail_sl
-                        hard_sl(sym, tot * s.get('sl_sell_percent', 0.5), trail_sl)
+                        hard_sl(sym, tot, trail_sl)
                         tg(f"📈 *TRAILING SL UPDATED:* {sym} moved to {trail_sl}")
 
         hold_h=(time.time()-d.get('opened_at',time.time()))/3600
-        if hold_h>s.get('max_hold_hours',720):
-            if sell(sym,1.0,f"MAX HOLD {hold_h:.0f}h"):db.pop(sym,None);save(DB,db)
+        if hold_h>s.get('max_hold_hours',48):
+            if sell(sym,1.0,f"TIME STOP {hold_h:.0f}h"):db.pop(sym,None);save(DB,db)
             continue
+            
         if lv<=d["stop_loss"]:
-            if not d.get("sl_hit"):
-                pct=s.get('sl_sell_percent',0.5);tot=ex.fetch_balance()['total'].get(coin,0)
-                if (tot*pct*lv)<1.02:pct=1.0
-                if sell(sym,pct,"PARTIAL SL"):
-                    rem=ex.fetch_balance()['total'].get(coin,0)
-                    if rem<=0 or (rem*lv)<1.02:db.pop(sym,None);save(DB,db);continue
-                    db[sym]["sl_hit"]=True;ns=round(lv*(1-s['stop_loss_pct']/100),6);db[sym]["stop_loss"]=ns
-                    save(DB,db);hard_sl(sym,rem,ns);tg(f"⚠️ *PARTIAL SL!*\nSold {pct*100:.0f}% {sym}. Rem {rem:.6f}@{ns}.")
-            else:
-                if sell(sym,1.0,"FINAL SL"):db.pop(sym,None);save(DB,db)
+            if sell(sym,1.0,"STOP LOSS"):db.pop(sym,None);save(DB,db)
             continue
+            
         if r and r>=75:
             if sell(sym,1.0,"RSI 75"):db.pop(sym,None);save(DB,db)
-        elif r and r>=70 and not d.get("took_profit_50"):
-            if sell(sym,0.5,"RSI 70") and sym in db:db[sym]["took_profit_50"]=True;save(DB,db)
-        elif inc>=10.0 and not d.get("took_profit_10"):
-            if sell(sym,0.25,"+10%") and sym in db:db[sym]["took_profit_10"]=True;save(DB,db)
 def consolidate():
     db=load(DB)
     if len(db)<=2:return
@@ -218,10 +228,13 @@ def exec_q():
         ub=ex.fetch_balance()['free'].get('USDT',0)
         for sym,qd in sq:
             if in_cd(f"fail_{sym}",300):continue
+            if sym in db: 
+                q.pop(sym,None); save(QF,q); continue
             p=live(sym)
             if not p:continue
-            is_dca=sym in db;spend=ub if is_dca else (ub-s.get('dca_reserve',2.0))
-            if spend<1.02 and not is_dca and db:
+            spend=ub
+            
+            if spend<1.02 and db:
                 wk=None;low=999
                 for hs,hd in db.items():
                     hp=live(hs)
@@ -229,35 +242,38 @@ def exec_q():
                         pnl=((hp-hd['entry_price'])/hd['entry_price'])*100
                         if pnl<low:low=pnl;wk=hs
                 if wk:
-                    bc=wk.split('-')[0];cancel_sells(wk);time.sleep(0.5)
-                    hb=ex.fetch_balance()['free'].get(bc,0);hp=live(wk)
-                    if hb>0 and hp:
-                        v=min(s['auto_buy_amount_usdt'],hb*hp);qs=float(ex.amount_to_precision(wk.replace("-","/"),v/hp))
-                        if qs*hp<(hb*hp)*0.95:
-                            ex.create_market_sell_order(wk.replace("-","/"),qs);tg(f"🔄 *PARTIAL SWAP:* Sold {qs} {bc} for {sym}.")
-                            time.sleep(2);ub=ex.fetch_balance()['free'].get('USDT',0);spend=ub-s.get('dca_reserve',2.0)
-                            rem=ex.fetch_balance()['total'].get(bc,0)
-                            if rem>0 and (rem*hp)>1.02:hard_sl(wk,rem,db[wk]['stop_loss'])
-                            else:db.pop(wk,None);save(DB,db)
+                    bc=wk.split('-')[0]; new_sc = qd.get('score', 0)
+                    # SMART ROTATION: If new coin is highly ranked or weakest coin is losing money
+                    if new_sc > 25 or low < 0:
+                        tg(f"🔄 *ROTATION SELL:* Dropping {wk} (PnL {low:.1f}%) to buy better setup {sym} (Score {new_sc:.1f})")
+                        if sell(wk, 1.0, "ROTATION"):
+                            db.pop(wk, None); save(DB, db)
+                            time.sleep(2)
+                            ub = ex.fetch_balance()['free'].get('USDT', 0)
+                            spend = ub
+                    else:
+                        # PARTIAL SWAP: Fallback for average setups
+                        cancel_sells(wk);time.sleep(0.5)
+                        hb=ex.fetch_balance()['free'].get(bc,0);hp=live(wk)
+                        if hb>0 and hp:
+                            v=min(s['auto_buy_amount_usdt'],hb*hp);qs=float(ex.amount_to_precision(wk.replace("-","/"),v/hp))
+                            if qs*hp<(hb*hp)*0.95:
+                                ex.create_market_sell_order(wk.replace("-","/"),qs);tg(f"🔄 *PARTIAL SWAP:* Sold {qs} {bc} for {sym}.")
+                                time.sleep(2);ub=ex.fetch_balance()['free'].get('USDT',0);spend=ub
+                                rem=ex.fetch_balance()['total'].get(bc,0)
+                                if rem>0 and (rem*hp)>1.02:hard_sl(wk,rem,db[wk]['stop_loss'])
+                                else:db.pop(wk,None);save(DB,db)
             if spend<1.02:q.pop(sym,None);save(QF,q);continue
             sp=min(spend,s['auto_buy_amount_usdt']);cs=sym.replace("-","/");coin=sym.split('-')[0]
-            if is_dca:
-                if db[sym].get('dca_count',0)>=2:q.pop(sym,None);save(QF,q);continue
-                old=ex.fetch_balance()['total'].get(coin,0)
-                try:f,a=m_buy(cs,sp)
-                except Exception as e:tg(f"❌ DCA fail {sym}:{e}");mk_cd(f"fail_{sym}");continue
-                tot=old+f;oe=db[sym]['entry_price'];ne=((old*oe)+(f*a))/tot if tot>0 else a
-                sl=round(ne*(1-s['stop_loss_pct']/100),6)
-                db[sym].update({'entry_price':round(ne,6),'stop_loss':sl,'took_profit_10':False,'took_profit_50':False,'dca_count':db[sym].get('dca_count',0)+1,'sl_hit':False})
-                save(DB,db);hard_sl(sym,tot*s.get('sl_sell_percent',0.5),sl);tg(f"🛒 *DCA!*\n{sym}|💵{sp:.2f}@{a:.6f}\n📉Entry:{ne:.6f}\n🛑SL:{sl}")
-            else:
-                if len(db)>=s["max_tokens_before_consolidation"]:continue
-                try:f,a=m_buy(cs,sp)
-                except Exception as e:tg(f"❌ Buy fail {sym}:{e}");mk_cd(f"fail_{sym}");continue
-                maxsl=round(a*(1-s['stop_loss_pct']/100),6);sl=qd.get('sl') or maxsl
-                if sl>=a or sl>maxsl:sl=maxsl
-                db[sym]={"entry_price":round(a,6),"safe_zone":round(a,6),"stop_loss":sl,"took_profit_10":False,"took_profit_50":False,"dca_count":0,"sl_hit":False,"opened_at":time.time(),"peak_price":a,"last_price":a}
-                save(DB,db);hard_sl(sym,f*s.get('sl_sell_percent',0.5),sl);tg(f"🛒 *EXECUTED!*\n{sym}|💵{sp:.2f}@{a:.6f}\n🛑SL:{sl}")
+            
+            if len(db)>=s["max_tokens_before_consolidation"]:continue
+            try:f,a=m_buy(cs,sp)
+            except Exception as e:tg(f"❌ Buy fail {sym}:{e}");mk_cd(f"fail_{sym}");continue
+            maxsl=round(a*(1-s['stop_loss_pct']/100),6);sl=qd.get('sl') or maxsl
+            if sl>=a or sl>maxsl:sl=maxsl
+            db[sym]={"entry_price":round(a,6),"safe_zone":round(a,6),"stop_loss":sl,"took_profit_10":False,"took_profit_50":False,"sl_hit":False,"opened_at":time.time(),"peak_price":a,"last_price":a}
+            save(DB,db);hard_sl(sym,f,sl);tg(f"🛒 *EXECUTED!*\n{sym}|💵{sp:.2f}@{a:.6f}\n🛑SL:{sl}")
+            
             q.pop(sym,None);save(QF,q);ub=ex.fetch_balance()['free'].get('USDT',0);time.sleep(2)
     except Exception as e:tg(f"⚠️ *QUEUE FAILED:* `{e}`")
 def scan():
@@ -280,7 +296,7 @@ def scan():
     v.sort(key=lambda x:x['vol'],reverse=True);ct=int(time.time());qu=False
     for sym,d in list(q.items()):
         if ct-d.get('timestamp',0)>86400:q.pop(sym,None);qu=True
-    for t in v[15:50]:
+    for t in v[15:100]: 
         p,pr,r,ma5,ma10=data(t['sym'])
         if not p or r is None:continue
         setup=sl=None
@@ -326,31 +342,25 @@ def gl():
         rows=[[x['sym'],fp(x['price']),f"{x['chg']:+.1f}%"] for x in d]
         return f"*{title}*\n```\n{tbl(['Coin','Price','Change'],rows,[8,12,8])}\n```"
     return bd("🚀 GAINERS (24H)",v[:10]),bd("🩸 LOSERS (24H)",v[-10:][::-1])
-def cmd_buy(txt,is_dca):
+def cmd_buy(txt):
     parts=txt.split()
     if len(parts)!=3:return
     c=parts[1].upper()
     try:amt=float(parts[2])
     except:tg("❌ Invalid amount.");return
-    sym=f"{c}-USDT";tag="dca" if is_dca else "buy"
-    if cd(f"{tag}:{sym}",30):tg(f"⏳ Already processing /{tag} {c}.");return
+    sym=f"{c}-USDT"
+    if cd(f"buy:{sym}",30):tg(f"⏳ Already processing /buy {c}.");return
     db=load(DB)
-    if is_dca and sym not in db:tg(f"❌ No active trade for {c}.");return
-    if not is_dca and sym in db:tg(f"❌ Active position for {c}.");return
+    if sym in db:tg(f"❌ Active position for {c}.");return
     ub=ex.fetch_balance()['free'].get('USDT',0)
-    if ub<amt:tg(f"❌ *{'DCA' if is_dca else 'BUY'} FAILED:* Only ${ub:.2f} USDT.");return
+    if ub<amt:tg(f"❌ *BUY FAILED:* Only ${ub:.2f} USDT.");return
     try:
         old=ex.fetch_balance()['total'].get(c,0);f,a=m_buy(f"{c}/USDT",amt);tot=old+f
-        if is_dca:
-            oe=db[sym]['entry_price'];ne=((old*oe)+(f*a))/tot if tot>0 else a
-            sl=round(ne*(1-cfg()['stop_loss_pct']/100),6)
-            db[sym].update({"entry_price":round(ne,6),"stop_loss":sl,"took_profit_10":False,"took_profit_50":False,"dca_count":db[sym].get('dca_count',0)+1,"sl_hit":False})
-        else:
-            ne=a;sl=round(a*(1-cfg()['stop_loss_pct']/100),6)
-            db[sym]={"entry_price":round(a,6),"safe_zone":round(a,6),"stop_loss":sl,"took_profit_10":False,"took_profit_50":False,"dca_count":0,"sl_hit":False,"opened_at":time.time(),"peak_price":a,"last_price":a}
-        save(DB,db);hard_sl(sym,tot*cfg().get('sl_sell_percent',0.5),sl)
-        tg(f"{'🛒 *DCA:*' if is_dca else '✅ *BOUGHT:*'} {c} @ {a:.6f}\n📉 Entry:{ne:.6f}\n🛑 SL:{sl}")
-    except Exception as e:tg(f"❌ *{'DCA' if is_dca else 'BUY'} FAILED:* {e}")
+        sl=round(a*(1-cfg()['stop_loss_pct']/100),6)
+        db[sym]={"entry_price":round(a,6),"safe_zone":round(a,6),"stop_loss":sl,"took_profit_10":False,"took_profit_50":False,"sl_hit":False,"opened_at":time.time(),"peak_price":a,"last_price":a}
+        save(DB,db);hard_sl(sym,tot,sl)
+        tg(f"✅ *BOUGHT:* {c} @ {a:.6f}\n📉 Entry:{a:.6f}\n🛑 SL:{sl}")
+    except Exception as e:tg(f"❌ *BUY FAILED:* {e}")
 def cmd_set(txt):
     parts=txt.split()
     if len(parts)!=3:tg("❌ Usage: `/set <key> <value>`");return
@@ -388,7 +398,7 @@ def tg_check():
             elif low=="ai_info":tg("🧠 *AI ANALYST*\nTo ask the AI a question, type:\n`/ai <your question>`\n\nExample:\n`/ai what is the market sentiment right now?`")
             elif low=="/menu":tg_menu()
             elif low=="/panic":panic_sell()
-            elif low=="/help":tg("🤖 *CMDS*\n`/menu` `/ai [q]` `/analyze SOL`\n`/gainers` `/losers` `/summary`\n`/queue` `/balance` `/audit` `/status` `/pnl`\n`/buy SOL 5.75` `/dca SOL 5.75`\n`/set key value` `/pause` `/resume` `/panic`")
+            elif low=="/help":tg("🤖 *CMDS*\n`/menu` `/ai [q]` `/analyze SOL`\n`/gainers` `/losers` `/summary`\n`/queue` `/balance` `/audit` `/status` `/pnl`\n`/buy SOL 5.75`\n`/set key value` `/pause` `/resume` `/panic`")
             elif low=="trail_on":
                 s=cfg();s['trail_pct']=5.0;save(CFG,s);tg("📈 Trailing Stop-Loss turned ON (5%)");tg_menu()
             elif low=="trail_off":
@@ -428,8 +438,7 @@ def tg_check():
                     tg(f"🧠 *{c}*\nPrice:{pr}\nRSI:{r}\nMA5:{ma5}\nMA10:{ma10}")
             elif low=="/gainers":g,_=gl();tg(g)
             elif low=="/losers":_,l=gl();tg(l)
-            elif low.startswith("/buy"):cmd_buy(txt,False)
-            elif low.startswith("/dca"):cmd_buy(txt,True)
+            elif low.startswith("/buy"):cmd_buy(txt)
             elif low.startswith("/set"):cmd_set(txt)
             elif low=="/pause":
                 s=cfg();s['auto_buy_enabled']=False;save(CFG,s);tg("⏸ Auto-buy paused.")
