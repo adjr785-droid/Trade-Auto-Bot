@@ -40,9 +40,9 @@ def ask_ai(prompt):
         bal = exchange.fetch_balance()['free'].get('USDT', 0)
         btc_p, _, btc_rsi, _, _ = data("BTC-USDT")
         context = f"System Data:\n- USDT Balance: {bal}\n- Auto-Buy Size per Trade: {s['auto_buy_amount_usdt']}\n- BTC RSI: {btc_rsi}\n- Active Trades: {db}\n- Queue: {q}\n- Bot Rules: RSI {s['rsi_min']}-{s['rsi_max']}, SL {s['stop_loss_pct']}%\n\n"
-        # 🚨 CHANGED TO A HIGHER QUOTA MODEL 🚨
+        # 🚨 FIXED MODEL NAME 🚨
         response = client.models.generate_content(
-            model='gemini-1.5-flash-8b',
+            model='gemini-2.5-flash',
             contents=f"You are an expert crypto trading analyst. Use this live data to answer the user.\n{context}\nUser Question: {prompt}"
         )
         tg_ai(f"🧠 AI ANALYST:\n\n{response.text}")
