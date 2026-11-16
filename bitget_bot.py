@@ -130,16 +130,51 @@ def exec_queue():
             
             is_dca = sym in db
             
-            # 🚨 RULE 2: DCA can use 100%, New Buys must leave $2 Reserve 🚨
-            if is_dca:
-                spendable_ub = ub 
-            else:
-                spendable_ub = ub - s.get('dca_reserve', 2.0)
+            # 🚨 FIX 2: DCA uses 100%, New Buys leave $2 Reserve 🚨
+            spendable_ub = ub if is_dca else (ub - s.get('dca_reserve', 2.0))
+            
+            # 🚨 FIX 1: Priority Swap Logic if funds are low 🚨
+            if spendable_ub < 1.02 and not is_dca and len(db) > 0:
+                weakest_sym = None
+                lowest_pnl = 999
+                for h_sym, h_data in db.items():
+                    hp, _, _, _, _ = data(h_sym)
+                    if hp:
+                        pnl = ((hp - h_data['entry_price']) / h_data['entry_price']) * 100
+                        if pnl < lowest_pnl:
+                            lowest_pnl = pnl
+                            weakest_sym = h_sym
                 
-            if spendable_ub < 1.02:
-                if not is_dca: tg(f"⚠️ *SKIPPING BUY:* Wallet has ${ub:.2f}. Need to keep ${s.get('dca_reserve', 2.0):.2f} for DCA.")
-                continue
+                if weakest_sym:
+                    base_coin = weakest_sym.split('-')[0]
+                    h_bal = exchange.fetch_balance()['free'].get(base_coin, 0)
+                    hp, _, _, _, _ = data(weakest_sym)
+                    
+                    if h_bal > 0 and hp:
+                        val_to_sell = min(s['auto_buy_amount_usdt'], h_bal * hp)
+                        qty_to_sell = float(exchange.amount_to_precision(weakest_sym.replace("-","/"), val_to_sell / hp))
+                        
+                        if qty_to_sell * hp < (h_bal * hp) * 0.95: 
+                            exchange.create_market_sell_order(weakest_sym.replace("-","/"), qty_to_sell)
+                            tg(f"🔄 *PARTIAL SWAP:* Sold {qty_to_sell} {base_coin} to fund {sym}.\n(Remaining {base_coin} kept)")
+                            
+                            time.sleep(3)
+                            ub = exchange.fetch_balance()['free'].get('USDT', 0)
+                            spendable_ub = ub - s.get('dca_reserve', 2.0)
+                            
+                            new_bal = exchange.fetch_balance()['free'].get(base_coin, 0)
+                            if new_bal > 0:
+                                hard_sl(weakest_sym, new_bal, db[weakest_sym]['stop_loss'])
+                            else:
+                                del db[weakest_sym]
+                                save(DB_FILE, db)
 
+            if spendable_ub < 1.02:
+                # 🚨 FIX 1: Remove from queue to prevent infinite loop 🚨
+                del q[sym]
+                save(QUEUE_FILE, q)
+                continue
+            
             sp=min(spendable_ub, s['auto_buy_amount_usdt'])
             cs=sym.replace("-","/")
             
@@ -339,36 +374,9 @@ def tg_check():
                         if len(p)==3:
                             c=p[1].upper(); amt=float(p[2]); sym=f"{c}-USDT"; db=load(DB_FILE)
                             if sym not in db:
-                                pr=exchange.fetch_ticker(f"{c}/USDT")['last']; qty=float(exchange.amount_to_precision(f"{c}/USDT", amt/pr))
-                                exchange.create_limit_buy_order(f"{c}/USDT", qty, pr); sl=round(pr*(1-settings()['stop_loss_pct']/100),6)
-                                db[sym]={"entry_price":pr,"safe_zone":pr,"stop_loss":sl,"took_profit_10":False,"took_profit_50":False,"dca_count":0,"sl_hit":False}
-                                save(DB_FILE,db); 
-                                sl_qty = qty * settings().get('sl_sell_percent', 0.5)
-                                hard_sl(sym, sl_qty, sl); tg(f"✅ *BOUGHT:* {c} | SL: {sl}")
-                    elif low.startswith("/dca"):
-                        p=txt.split()
-                        if len(p)==3:
-                            c=p[1].upper(); amt=float(p[2]); sym=f"{c}-USDT"; db=load(DB_FILE)
-                            if sym not in db: tg(f"❌ You don't have an active bot trade for {c}.")
-                            else:
-                                try:
-                                    pr=exchange.fetch_ticker(f"{c}/USDT")['last']; aq=float(exchange.amount_to_precision(f"{c}/USDT", amt/pr))
-                                    exchange.create_limit_buy_order(f"{c}/USDT", aq, pr); bal=exchange.fetch_balance()['free'].get(c,0); oq=bal-aq
-                                    ne=pr if oq<=0 else ((oq*db[sym]['entry_price'])+amt)/bal
-                                    sl=round(ne*(1-settings()['stop_loss_pct']/100),6)
-                                    db[sym].update({"entry_price":round(ne,6),"stop_loss":sl,"took_profit_10":False,"took_profit_50":False,"dca_count":db[sym].get('dca_count',0)+1,"sl_hit":False})
-                                    save(DB_FILE,db); 
-                                    sl_qty = bal * settings().get('sl_sell_percent', 0.5)
-                                    hard_sl(sym,sl_qty,sl); tg(f"🛒 *DCA:* {c} | {amt} USDT\n📉 New Entry: {ne:.6f}\n🛑 SL: {sl}")
-                                except Exception as e: tg(f"❌ *DCA FAILED:* {e}")
-                st["last_update_id"]=lid; save(STATE_FILE,st)
-    except Exception as e: print(f"TG Err: {e}")
-
-if __name__ == "__main__":
-    try:
-        tg_check(); manage(); scan(); exec_queue()
-        subprocess.run(["git","pull","--rebase"],capture_output=True)
-        subprocess.run(["git","add","."],capture_output=True)
-        subprocess.run(["git","commit","-m","Auto"],capture_output=True)
-        subprocess.run(["git","push"],capture_output=True)
-    except Exception as e: tg(f"🚨 *CRASH:* {e}\n`{traceback.format_exc()[-100:]}`")
+                                ub=exchange.fetch_balance()['free'].get('USDT',0)
+                                if ub < amt:
+                                    tg(f"❌ *BUY FAILED:* You only have ${ub:.2f} USDT.")
+                                else:
+                                    pr=exchange.fetch_ticker(f"{c}/USDT")['last']; qty=float(exchange.amount_to_precision(f"{c}/USDT", amt/pr))
+                                   
