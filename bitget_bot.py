@@ -11,7 +11,6 @@ def tg(m):
     except: pass
 
 def tg_ai(m):
-    # 🚨 CHANGED TO HTML SO IT NEVER CRASHES ON RAW AI TEXT 🚨
     try: requests.post(f"https://api.telegram.org/bot{TG_TOKEN}/sendMessage", json={"chat_id":TG_CHAT_ID,"text":m,"parse_mode":"HTML"}, timeout=10)
     except: pass
 
@@ -41,14 +40,8 @@ def ask_ai(prompt):
         bal = exchange.fetch_balance()['free'].get('USDT', 0)
         btc_p, _, btc_rsi, _, _ = data("BTC-USDT")
         context = f"System Data:\n- USDT Balance: {bal}\n- Auto-Buy Size per Trade: {s['auto_buy_amount_usdt']}\n- BTC RSI: {btc_rsi}\n- Active Trades: {db}\n- Queue: {q}\n- Bot Rules: RSI {s['rsi_min']}-{s['rsi_max']}, SL {s['stop_loss_pct']}%\n\n"
-        
-        # 🚨 TOLD THE AI TO USE HTML 🚨
         ai_prompt = f"You are an expert crypto trading analyst. Use this live data to answer the user. Format your response using HTML tags (<b>, <i>, <br>) instead of markdown.\n{context}\nUser Question: {prompt}"
-        
-        response = client.models.generate_content(
-            model='gemini-3.8-flash',
-            contents=ai_prompt
-        )
+        response = client.models.generate_content(model='gemini-3.8-flash', contents=ai_prompt)
         tg_ai(f"🧠 <b>AI ANALYST:</b>\n\n{response.text}")
     except Exception as e: tg(f"❌ AI Error: {e}")
 
@@ -114,6 +107,46 @@ def exec_queue():
         for sym,d in sq:
             p,_,_,_,_=data(sym)
             if not p: continue
+            
+            # 🚨 RELATIVE STRENGTH SWAP LOGIC 🚨
+            if ub < 1.02 and len(db) > 0:
+                weakest_sym = None
+                lowest_pnl = 999
+                for h_sym, h_data in db.items():
+                    hp, _, _, _, _ = data(h_sym)
+                    if hp:
+                        pnl = ((hp - h_data['entry_price']) / h_data['entry_price']) * 100
+                        if pnl < lowest_pnl:
+                            lowest_pnl = pnl
+                            weakest_sym = h_sym
+                
+                if weakest_sym:
+                    base_coin = weakest_sym.split('-')[0]
+                    h_bal = exchange.fetch_balance()['free'].get(base_coin, 0)
+                    hp, _, _, _, _ = data(weakest_sym)
+                    
+                    # Ensure we don't sell ALL of it. Only sell what we need.
+                    if h_bal > 0 and hp:
+                        val_to_sell = min(s['auto_buy_amount_usdt'], h_bal * hp)
+                        qty_to_sell = float(exchange.amount_to_precision(weakest_sym.replace("-","/"), val_to_sell / hp))
+                        
+                        # Safety check: ensure we aren't selling 100% of the bag
+                        if qty_to_sell * hp < (h_bal * hp) * 0.95: 
+                            exchange.create_market_sell_order(weakest_sym.replace("-","/"), qty_to_sell)
+                            tg(f"🔄 *PARTIAL SWAP:* Sold {qty_to_sell} {base_coin} to fund {sym}.\n(Remaining {base_coin} kept)")
+                            
+                            time.sleep(3) # Wait for Bitget to update balance
+                            ub = exchange.fetch_balance()['free'].get('USDT', 0)
+                            
+                            # Update Stop Loss for remaining coins
+                            new_bal = exchange.fetch_balance()['free'].get(base_coin, 0)
+                            if new_bal > 0:
+                                hard_sl(weakest_sym, new_bal, db[weakest_sym]['stop_loss'])
+                            else:
+                                del db[weakest_sym] # If somehow all sold
+                                save(DB_FILE, db)
+
+            # CONTINUE WITH NORMAL BUY
             sp=min(ub, s['auto_buy_amount_usdt'])
             if sp<1.02: continue
             
@@ -332,7 +365,4 @@ if __name__ == "__main__":
     try:
         tg_check(); manage(); scan(); exec_queue()
         subprocess.run(["git","pull","--rebase"],capture_output=True)
-        subprocess.run(["git","add","."],capture_output=True)
-        subprocess.run(["git","commit","-m","Auto"],capture_output=True)
-        subprocess.run(["git","push"],capture_output=True)
-    except Exception as e: tg(f"🚨 *CRASH:* {e}\n`{traceback.format_exc()[-100:]}`")
+        subprocess.run(["git","add","."],capture_outpu
