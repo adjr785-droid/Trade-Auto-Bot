@@ -398,4 +398,59 @@ def tg_check():
             elif low=="ai_info":tg("🧠 *AI ANALYST*\nTo ask the AI a question, type:\n`/ai <your question>`\n\nExample:\n`/ai what is the market sentiment right now?`")
             elif low=="/menu":tg_menu()
             elif low=="/panic":panic_sell()
-            elif low=="/help":tg("🤖 *CMDS*\n`/menu` `/ai [q]` `/analyze SOL`\n`/gainers` `/losers` `/summary`\n`/queue` `/balance` `/audit` `/status` `/pnl`\n`/buy SOL 5.75`\n`/set key value` `/pause` `/res
+            elif low=="/help":tg("🤖 *CMDS*\n`/menu` `/ai [q]` `/analyze SOL`\n`/gainers` `/losers` `/summary`\n`/queue` `/balance` `/audit` `/status` `/pnl`\n`/buy SOL 5.75`\n`/set key value` `/pause` `/resume` `/panic`")
+            elif low=="trail_on":
+                s=cfg();s['trail_pct']=5.0;save(CFG,s);tg("📈 Trailing Stop-Loss turned ON (5%)");tg_menu()
+            elif low=="trail_off":
+                s=cfg();s['trail_pct']=0.0;save(CFG,s);tg("📉 Trailing Stop-Loss turned OFF");tg_menu()
+            elif low=="/balance":
+                b=ex.fetch_balance()['free'];u=b.get('USDT',0);rows=[["USDT",f"{u:.2f}",f"${u:.2f}"]]
+                for c,a in b.items():
+                    if a>0 and c not in ['USDT','USDC']:
+                        p=live(f"{c}-USDT")
+                        if p and a*p>=0.10:rows.append([c,f"{a:.4f}",f"${a*p:.2f}"])
+                tg(f"💰 *BALANCE*\n```\n{tbl(['Asset','Amount','Est.Val'],rows,[7,10,9])}\n```")
+            elif low=="/queue":
+                q=load(QF)
+                if not q:tg("📥 Queue empty.")
+                else:
+                    sq=sorted(q.items(),key=lambda x:x[1].get('score',0),reverse=True)
+                    rows=[[s,f"{d.get('score',0):.1f}",d.get('type','N/A')] for s,d in sq]
+                    tg(f"📥 *QUEUE*\n```\n{tbl(['Coin','Score','Setup'],rows,[7,6,8])}\n```")
+            elif low=="/summary":tg(get_summary_text())
+            elif "/status" in low:
+                db=load(DB)
+                if not db:tg("🛑 No active trades.")
+                else:
+                    rows=[[s.split('-')[0],fp(d['entry_price']),fp(p),f"{((p-d['entry_price'])/d['entry_price'])*100:+.1f}%"] for s,d in db.items() if (p:=live(s))]
+                    tg(f"🟢 *ACTIVE*\n```\n{tbl(['Coin','Entry','Current','PnL'],rows,[7,8,8,7])}\n```")
+            elif low=="/audit":
+                u=ex.fetch_balance()['free'].get('USDT',0);q=load(QF);s=cfg()
+                rows=[["API","OK 🟢"],["USDT",f"{u:.2f}"],["Active",f"{len(load(DB))}"],["Queue",f"{len(q)}"],["RSI",f"{s['rsi_min']}-{s['rsi_max']}"],["SL",f"{s['stop_loss_pct']}%"],["Trail",f"{s.get('trail_pct',5)}%"],["Guard",f"{s.get('crash_guard_pct',18)}%"],["AutoBuy",f"${s['auto_buy_amount_usdt']}"],["Paused","Yes ⏸" if not s['auto_buy_enabled'] else "No ▶️"]]
+                tg(f"🛠️ *AUDIT*\n```\n{tbl(['Metric','Value'],rows,[12,10])}\n```")
+            elif low=="/pnl":
+                L=load(LF);rows=[["Total PnL",f"${L.get('total_realized_usdt',0.0):.2f}"],["Trades",f"{L.get('trade_count',0)}"]]
+                tg(f"📊 *P&L*\n```\n{tbl(['Metric','Value'],rows,[12,10])}\n```")
+            elif low.startswith("/analyze"):
+                parts=txt.split()
+                if len(parts)>1:
+                    c=parts[1].upper();pr,_,r,ma5,ma10=data(f"{c}-USDT")
+                    tg(f"🧠 *{c}*\nPrice:{pr}\nRSI:{r}\nMA5:{ma5}\nMA10:{ma10}")
+            elif low=="/gainers":g,_=gl();tg(g)
+            elif low=="/losers":_,l=gl();tg(l)
+            elif low.startswith("/buy"):cmd_buy(txt)
+            elif low.startswith("/set"):cmd_set(txt)
+            elif low=="/pause":
+                s=cfg();s['auto_buy_enabled']=False;save(CFG,s);tg("⏸ Auto-buy paused.")
+            elif low=="/resume":
+                s=cfg();s['auto_buy_enabled']=True;save(CFG,s);tg("▶️ Auto-buy resumed.")
+        st["last_update_id"]=lid;save(ST,st)
+    except Exception as e:print(f"TG Err:{e}")
+if __name__=="__main__":
+    try:clr();reconcile();tg_check();manage();check_daily_summary();scan();exec_q()
+    except Exception as e:
+        try:tg(f"🚨 *CRASH:* `{e}`\n`{traceback.format_exc()[-200:]}`")
+        except:pass
+    for c in [["git","pull","--rebase"],["git","add","."],["git","commit","-m","Auto"],["git","push"]]:
+        try:subprocess.run(c,capture_output=True,timeout=30)
+        except Exception as e:print(f"git {c[1]}:{e}")
