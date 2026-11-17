@@ -1,5 +1,6 @@
 import requests,json,os,time,ccxt,subprocess,traceback,re,datetime
 from google import genai
+
 TG_TOKEN=os.environ.get('TG_TOKEN');TG_CHAT_ID=os.environ.get('TG_CHAT_ID')
 DB="positions.json";ST="tg_state.json";CFG="settings.json";QF="queue.json";LF="profit_ledger.json";CD=".cmd_cooldown.json";SC="scan_state.json";HIST="trade_history.json"
 STABLE=['USDC','USDT','DAI','FDUSD','TUSD','USDD','USDE'];LEV=['3L','3S','5L','5S','10L','10S','2L','2S'];BL=['RPANW','CT','ONE']
@@ -345,9 +346,8 @@ def get_market_row(sym, chg=None):
         try: chg = ex.fetch_ticker(sym.replace("-","/"))['percentage'] or 0
         except: chg = 0
     p = live(sym)
-    _,_,r,ma5,ma10 = data(sym)
-    sentiment = "🟢 Bullish" if r and r > 55 else ("🔴 Bearish" if r and r < 45 else "⚪ Neutral")
-    return [sym.split('-')[0], fp(p), f"{chg:+.1f}%", f"{r:.1f}", fp(ma5), fp(ma10), sentiment]
+    _,_,r,_,_ = data(sym)
+    return [sym.split('-')[0], fp(p), f"{chg:+.1f}%", f"{r:.1f}" if r is not None else "N/A"]
 
 def gl():
     try:tk=ex.fetch_tickers()
@@ -359,7 +359,7 @@ def gl():
         if (b in STABLE or b in BL or ((b.startswith('X') or b.startswith('R')) and len(b)<=6) or any(b.upper().endswith(x) for x in LEV)):continue
         if (t['quoteVolume'] or 0)>=1000000:v.append({'sym':sym.replace("/","-"),'chg':t['percentage'] or 0})
     v.sort(key=lambda x:x['chg'],reverse=True)
-    headers=["Asset","Price","24H Chg","RSI","MA5","MA10","Sentiment"];widths=[6,10,8,5,8,8,10]
+    headers=["Asset","Price","24H%","RSI"];widths=[8,10,8,6]
     def build(title, data):
         rows=[get_market_row(x['sym'], x['chg']) for x in data]
         return f"*{title}*\n```\n{tbl(headers, rows, widths)}\n```"
@@ -367,7 +367,7 @@ def gl():
 
 def cmd_buy(txt):
     parts=txt.split()
-    if len(parts)!=3:return
+    if len(parts)!=3: tg("❌ Usage: `/buy COIN USDT_AMOUNT`"); return
     c=parts[1].upper()
     try:amt=float(parts[2])
     except:tg("❌ Invalid amount.");return
@@ -405,71 +405,53 @@ def tg_check():
         for upd in res["result"]:
             lid=upd["update_id"];txt=""
             if "callback_query" in upd:
-                cb=upd["callback_query"];txt=cb["data"];requests.post(f"https://api.telegram.org/bot{TG_TOKEN}/answerCallbackQuery",json={"callback_query_id":cb["id"]})
+                cb=upd["callback_query"];txt=cb["data"]
+                requests.post(f"https://api.telegram.org/bot{TG_TOKEN}/answerCallbackQuery",json={"callback_query_id":cb["id"]})
             elif "message" in upd and "text" in upd["message"]:
                 if "date" in upd["message"] and int(time.time())-upd["message"]["date"]>1800:
-                    print("Skipped old message");st["last_update_id"]=lid;save(ST,st);continue
+                    st["last_update_id"]=lid; save(ST,st);continue
                 txt=upd["message"]["text"].strip()
-            if not txt:continue
+            if not txt: continue
             low=txt.lower()
-            if txt=="📊 Menu":low="/menu"
-            elif txt=="🛒 Buy":low="buy_info"
-            elif txt=="💸 Sell":low="sell_info"
-            elif txt=="🚨 Panic":low="/panic"
-            elif txt=="📈 Gainers":low="/gainers"
-            elif txt=="🩸 Losers":low="/losers"
-            elif txt=="🟢 Status":low="/status"
-            elif txt=="💰 Balance":low="/balance"
-            elif txt=="⏸ Pause":low="/pause"
-            if low.startswith("/ai"):ask_ai(txt[3:].strip())
-            elif low=="ai_info":tg("🧠 *AI ANALYST*\nTo ask the AI a question, type:\n`/ai <your question>`")
-            elif low=="buy_info":tg("🛒 *HOW TO BUY*\nTo buy a coin, type:\n`/buy COIN AMOUNT`\n\nExample:\n`/buy DOGE 5.75`")
-            elif low=="sell_info":tg("💸 *HOW TO SELL*\nTo sell a portion of a coin you hold, type:\n`/sell COIN AMOUNT_USDT`\n\nExample:\n`/sell DOGE 1.02`")
-            elif low=="/menu":tg_inline_menu()
+            
+            if low.startswith("/ai "):ask_ai(txt[4:].strip())
+            elif low=="/ai":ask_ai("Give me a market overview.")
+            elif low=="ai_info":tg("🧠 *AI ANALYST*\nTo ask the AI a question, type:\n`/ai <your question>`\n\nExample:\n`/ai what is the market sentiment right now?`")
+            elif low=="buy_info":tg("🛒 *BUY COMMAND*\nUsage: `/buy COIN AMOUNT`\nExample: `/buy SOL 5.75`\n\n_Minimum buy is usually $5 USDT._")
+            elif low=="sell_info":tg("💸 *SELL COMMAND*\nUsage: `/sell COIN AMOUNT`\nExample: `/sell SOL 5.75`\n\n_Type ALL to sell the entire position._")
+            elif low in ("/menu","📊 menu"):tg_inline_menu()
             elif low=="/panic":panic_sell()
-            elif low=="/help":tg("🤖 *CMDS*\n`/menu` `/ai [q]` `/analyze SOL`\n`/gainers` `/losers` `/summary`\n`/queue` `/balance` `/audit` `/status` `/pnl`\n`/buy SOL 5.75` `/sell SOL 1.02`\n`/set key value` `/pause` `/resume` `/panic`")
-            elif low=="trail_on":s=cfg();s['trail_pct']=5.0;save(CFG,s);tg("📈 Trailing Stop-Loss turned ON (5%)");tg_inline_menu()
-            elif low=="trail_off":s=cfg();s['trail_pct']=0.0;save(CFG,s);tg("📉 Trailing Stop-Loss turned OFF");tg_inline_menu()
-            elif low=="/balance":
-                b=ex.fetch_balance()['free'];u=b.get('USDT',0);rows=[["USDT", f"{u:.2f}", f"${u:.2f}"]]
+            elif low=="/help":tg("🤖 *CMDS*\n`/menu` `/ai [q]`\n`/gainers` `/losers` `/summary`\n`/balance` `/status` `/pnl`\n`/buy COIN AMT` `/sell COIN AMT`\n`/set key value` `/pause` `/resume` `/panic`")
+            elif low=="trail_on":
+                s=cfg();s['trail_pct']=5.0;save(CFG,s);tg("📈 Trailing Stop-Loss turned ON (5%)");tg_inline_menu()
+            elif low=="trail_off":
+                s=cfg();s['trail_pct']=0.0;save(CFG,s);tg("📉 Trailing Stop-Loss turned OFF");tg_inline_menu()
+            elif low in ("/balance","💰 balance"):
+                b=ex.fetch_balance()['free'];u=b.get('USDT',0);rows=[["USDT",f"{u:.2f}",f"${u:.2f}"]]
                 for c,a in b.items():
                     if a>0 and c not in ['USDT','USDC']:
                         p=live(f"{c}-USDT")
                         if p and a*p>=0.10:rows.append([c,f"{a:.4f}",f"${a*p:.2f}"])
                 tg(f"💰 *BALANCE*\n```\n{tbl(['Asset','Amount','Est.Val'],rows,[7,10,9])}\n```")
-            elif low=="/queue":
-                q=load(QF)
-                if not q:tg("📥 Queue empty.")
-                else:
-                    sq=sorted(q.items(),key=lambda x:x[1].get('score',0),reverse=True)[:5]
-                    rows=[get_market_row(s) for s,d in sq]
-                    tg(f"📥 *PRIORITY QUEUE*\n```\n{tbl(['Asset','Price','24H Chg','RSI','MA5','MA10','Sentiment'],rows,[6,10,8,5,8,8,10])}\n```")
             elif low=="/summary":tg(get_summary_text())
-            elif "/status" in low:
+            elif low in ("/status","🟢 status"):
                 db=load(DB)
                 if not db:tg("🛑 No active trades.")
                 else:
-                    rows=[get_market_row(s) for s in db.keys()]
-                    tg(f"🟢 *ACTIVE TRADES*\n```\n{tbl(['Asset','Price','24H Chg','RSI','MA5','MA10','Sentiment'],rows,[6,10,8,5,8,8,10])}\n```")
-            elif low=="/audit":
-                u=ex.fetch_balance()['free'].get('USDT',0);q=load(QF);s=cfg()
-                rows=[["API","OK 🟢"],["USDT",f"{u:.2f}"],["Active",f"{len(load(DB))}"],["Queue",f"{len(q)}"],["RSI",f"{s['rsi_min']}-{s['rsi_max']}"],["SL",f"{s['stop_loss_pct']}%"],["Trail",f"{s.get('trail_pct',5)}%"],["Guard",f"{s.get('crash_guard_pct',18)}%"],["AutoBuy",f"${s['auto_buy_amount_usdt']}"],["Paused","Yes ⏸" if not s['auto_buy_enabled'] else "No ▶️"]]
-                tg(f"🛠️ *AUDIT*\n```\n{tbl(['Metric','Value'],rows,[12,10])}\n```")
+                    rows=[[s.split('-')[0],fp(d['entry_price']),fp(p),f"{((p-d['entry_price'])/d['entry_price'])*100:+.1f}%"] for s,d in db.items() if (p:=live(s))]
+                    tg(f"🟢 *ACTIVE*\n```\n{tbl(['Coin','Entry','Current','PnL'],rows,[7,8,8,7])}\n```")
             elif low=="/pnl":
                 L=load(LF);rows=[["Total PnL",f"${L.get('total_realized_usdt',0.0):.2f}"],["Trades",f"{L.get('trade_count',0)}"]]
                 tg(f"📊 *P&L*\n```\n{tbl(['Metric','Value'],rows,[12,10])}\n```")
-            elif low.startswith("/analyze"):
-                parts=txt.split()
-                if len(parts)>1:
-                    c=parts[1].upper();row=[get_market_row(f"{c}-USDT")]
-                    tg(f"🧠 *{c} ANALYSIS*\n```\n{tbl(['Asset','Price','24H Chg','RSI','MA5','MA10','Sentiment'],row,[6,10,8,5,8,8,10])}\n```")
-            elif low=="/gainers":g,_=gl();tg(g)
-            elif low=="/losers":_,l=gl();tg(l)
-            elif low.startswith("/buy"):cmd_buy(txt)
-            elif low.startswith("/sell"):cmd_sell(txt)
+            elif low=="/gainers" or low=="📈 gainers":g,_=gl();tg(g)
+            elif low=="/losers" or low=="🩸 losers":_,l=gl();tg(l)
+            elif low.startswith("/buy") or low.startswith("🛒 buy"):cmd_buy(txt.replace("🛒","/").replace("🛒 ","/buy "))
+            elif low.startswith("/sell") or low.startswith("💸 sell"):cmd_sell(txt.replace("💸","/").replace("💸 ","/sell "))
             elif low.startswith("/set"):cmd_set(txt)
-            elif low=="/pause":s=cfg();s['auto_buy_enabled']=False;save(CFG,s);tg("⏸ Auto-buy paused.")
-            elif low=="/resume":s=cfg();s['auto_buy_enabled']=True;save(CFG,s);tg("▶️ Auto-buy resumed.")
+            elif low=="/pause" or low=="⏸ pause":
+                s=cfg();s['auto_buy_enabled']=False;save(CFG,s);tg("⏸ Auto-buy paused.")
+            elif low=="/resume":
+                s=cfg();s['auto_buy_enabled']=True;save(CFG,s);tg("▶️ Auto-buy resumed.")
         st["last_update_id"]=lid;save(ST,st)
     except Exception as e:print(f"TG Err:{e}")
 
