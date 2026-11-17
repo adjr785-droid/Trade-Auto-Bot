@@ -4,12 +4,15 @@ from google import genai
 TG_TOKEN=os.environ.get('TG_TOKEN');TG_CHAT_ID=os.environ.get('TG_CHAT_ID')
 DB="positions.json";ST="tg_state.json";CFG="settings.json";QF="queue.json";LF="profit_ledger.json";CD=".cmd_cooldown.json";SC="scan_state.json";HIST="trade_history.json"
 STABLE=['USDC','USDT','DAI','FDUSD','TUSD','USDD','USDE'];LEV=['3L','3S','5L','5S','10L','10S','2L','2S'];BL=['RPANW','CT','ONE']
+
 ex=ccxt.bitget({'apiKey':os.environ.get('BITGET_API_KEY'),'secret':os.environ.get('BITGET_API_SECRET'),'password':os.environ.get('BITGET_API_PASSPHRASE'),'enableRateLimit':True})
+ex.options['createMarketBuyOrderRequiresPrice'] = False
+
 client=genai.Client(api_key=os.environ.get('GEMINI_API_KEY'))
 _C={};_T=20
 
 def get_reply_kb():
-    kb=[["📊 Menu","🚨 PANIC"]]
+    kb=[["📊 Menu","▶️ Resume","🚨 PANIC"]]
     return {"keyboard": kb, "resize_keyboard": True, "is_persistent": True}
 
 def _send(m,mode,buttons=None):
@@ -84,13 +87,18 @@ def cancel_sells(sym):
 
 def m_buy(cs,usdt):
     p=live(cs.replace("/","-"))
-    if not p:raise Exception(f"No price {cs}")
-    q=float(ex.amount_to_precision(cs,usdt/p));o=ex.create_market_buy_order(cs,q)
+    if not p:raise Exception(f"No price for {cs}")
+    try:
+        o=ex.create_market_buy_order(cs,usdt)
+    except Exception:
+        ex.options['createMarketBuyOrderRequiresPrice'] = True
+        q=float(ex.amount_to_precision(cs,usdt/p))
+        o=ex.create_market_buy_order(cs,q,p)
     f,a=o.get('filled'),o.get('average')
     if not f or not a:
         time.sleep(1)
-        try:o2=ex.fetch_order(o['id'],cs);f=o2.get('filled',q);a=o2.get('average',p)
-        except:f,a=q,p
+        try:o2=ex.fetch_order(o['id'],cs);f=o2.get('filled',usdt/p);a=o2.get('average',p)
+        except:f,a=usdt/p,p
     return float(f),float(a)
 
 def hard_sl(sym,qty,pr):
@@ -123,7 +131,7 @@ def sell(sym,pct,reason):
 def cmd_sell(txt):
     parts=txt.split()
     if len(parts)!=3:tg("❌ Usage: `/sell COIN AMOUNT_USDT`");return
-    c=parts[1].upper()
+    c=parts[1].upper().replace("-USDT","").replace("/USDT","")
     try:amt=float(parts[2])
     except:tg("❌ Invalid amount.");return
     sym=f"{c}-USDT"
@@ -367,8 +375,8 @@ def gl():
 
 def cmd_buy(txt):
     parts=txt.split()
-    if len(parts)!=3: tg("❌ Usage: `/buy COIN USDT_AMOUNT`"); return
-    c=parts[1].upper()
+    if len(parts)!=3: tg("❌ Usage: `/buy COIN USDT_AMOUNT`\nExample: `/buy BTC 5.75`"); return
+    c=parts[1].upper().replace("-USDT","").replace("/USDT","")
     try:amt=float(parts[2])
     except:tg("❌ Invalid amount.");return
     sym=f"{c}-USDT"
@@ -450,7 +458,7 @@ def tg_check():
             elif low.startswith("/set"):cmd_set(txt)
             elif low=="/pause":
                 s=cfg();s['auto_buy_enabled']=False;save(CFG,s);tg("⏸ Auto-buy paused.")
-            elif low=="/resume":
+            elif low=="/resume" or low=="▶️ resume":
                 s=cfg();s['auto_buy_enabled']=True;save(CFG,s);tg("▶️ Auto-buy resumed.")
         st["last_update_id"]=lid;save(ST,st)
     except Exception as e:print(f"TG Err:{e}")
