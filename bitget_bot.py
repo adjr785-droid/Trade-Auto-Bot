@@ -105,8 +105,19 @@ def hard_sl(sym,qty,pr):
     try:
         cancel_sells(sym)
         if qty<=0:return True
-        ex.create_order(sym.replace("-","/"),'market','sell',qty,None,{'triggerPrice':pr,'triggerType':'market_price','stopLossPrice':pr});return True
+        ex.create_order(sym.replace("-","/"),'market','sell',qty,None,{'triggerPrice':pr,'triggerType':'market_price'})
+        return True
     except Exception as e:tg(f"⚠️ *SL FAILED* {sym}@{pr}:`{e}`");return False
+
+def place_trailing_sl(sym,qty,pct):
+    try:
+        cancel_sells(sym);time.sleep(0.5)
+        ex.create_order(sym.replace("-","/"),'market','sell',qty,None,{'trailingPercent':pct})
+        tg(f"📈 *NATIVE TRAILING SL PLACED:* {sym} @ {pct}%")
+        return True
+    except Exception as e:
+        tg(f"⚠️ *NATIVE TRAIL FAILED* {sym}: `{e}`. Falling back to local.")
+        return hard_sl(sym,qty,live(sym)*0.95)
 
 def sell(sym,pct,reason):
     try:
@@ -258,7 +269,7 @@ def manage():
                 peak=lv;d['peak_price']=peak;trail_sl=round(peak*(1-s.get('trail_pct',5)/100),6)
                 if trail_sl>d['stop_loss']:
                     d['stop_loss']=trail_sl;tot=ex.fetch_balance()['total'].get(coin,0)
-                    if tot>0:hard_sl(sym,tot,trail_sl);tg(f"📈 *TRAILING SL UPDATED:* {sym} moved to {trail_sl}")
+                    if tot>0:place_trailing_sl(sym,tot,s.get('trail_pct',5))
         hold_h=(time.time()-d.get('opened_at',time.time()))/3600
         if hold_h>s.get('max_hold_hours',48):
             if sell(sym,1.0,f"TIME STOP {hold_h:.0f}h"):db.pop(sym,None);save(DB,db)
