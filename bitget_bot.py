@@ -31,8 +31,8 @@ def tg(m):_send(m,"Markdown")
 def tg_ai(m):_send(m,"HTML")
 
 def tg_inline_menu():
-    s=cfg();tb={"text":"📈 Trail: ON","callback_data":"trail_off"} if s.get('trail_pct',5.0)>0 else {"text":"📉 Trail: OFF","callback_data":"trail_on"}
-    btns={"inline_keyboard":[[{"text":"▶️ Resume","callback_data":"/resume"},{"text":"⏸ Pause","callback_data":"/pause"}],[{"text":"🔄 Sync Wallet","callback_data":"/sync"},{"text":"🛒 Buy Info","callback_data":"buy_info"}],[{"text":"🟢 Status","callback_data":"/status"},{"text":"💰 Balance","callback_data":"/balance"}],[{"text":"📊 Summary","callback_data":"/summary"},tb],[{"text":"🚀 Gainers","callback_data":"/gainers"},{"text":"🩸 Losers","callback_data":"/losers"}],[{"text":"🧠 Ask AI","callback_data":"ai_info"}]]}
+    s=cfg();tb={"text":"📈 Trail: ON","callback_data":"trail_off"} if s.get('trail_pct',8.0)>0 else {"text":"📉 Trail: OFF","callback_data":"trail_on"}
+    btns={"inline_keyboard":[[{"text":"▶️ Resume","callback_data":"/resume"},{"text":"⏸ Pause","callback_data":"/pause"}],[{"text":"🔄 Sync Wallet","callback_data":"/sync"},{"text":"🛠️ Run Audit","callback_data":"/audit"}],[{"text":"🟢 Status","callback_data":"/status"},{"text":"💰 Balance","callback_data":"/balance"}],[{"text":"📊 Summary","callback_data":"/summary"},tb],[{"text":"🚀 Gainers","callback_data":"/gainers"},{"text":"🩸 Losers","callback_data":"/losers"}],[{"text":"🧠 Ask AI","callback_data":"ai_info"}]]}
     _send("🕹️ *MAIN MENU*\nSelect an option below:","Markdown",btns)
 
 def load(f,d=None):
@@ -49,7 +49,7 @@ def save(f,d):
     except Exception as e:print(f"SAVE ERR {f}: {e}")
 
 def cfg():
-    d={"rsi_min":42,"rsi_max":48,"stop_loss_pct":8,"auto_buy_enabled":True,"auto_buy_amount_usdt":5.75,"max_tokens_before_consolidation":3,"max_hold_hours":48,"trail_pct":5.0,"crash_guard_pct":18.0}
+    d={"rsi_min":42,"rsi_max":48,"stop_loss_pct":12,"auto_buy_enabled":True,"auto_buy_amount_usdt":5.75,"max_tokens_before_consolidation":3,"max_hold_hours":48,"trail_pct":8.0,"crash_guard_pct":18.0}
     s=load(CFG,d)
     for k,v in d.items():s.setdefault(k,v)
     return s
@@ -110,14 +110,13 @@ def hard_sl(sym,qty,pr):
     except Exception as e:tg(f"⚠️ *SL FAILED* {sym}@{pr}:`{e}`");return False
 
 def place_trailing_sl(sym,qty):
-    pct = cfg().get('trail_pct', 5.0)
+    pct = cfg().get('trail_pct', 8.0)
     if pct <= 0: return False
     try:
         cancel_sells(sym); time.sleep(0.5)
         ex.create_order(sym.replace("-","/"),'market','sell',qty,None,{'trailingPercent':pct})
         return True
     except Exception as e:
-        # Fallback to hard SL if native trailing is rejected by Bitget
         p = live(sym)
         return hard_sl(sym, qty, round(p*(1-cfg()['stop_loss_pct']/100),6))
 
@@ -140,37 +139,6 @@ def sell(sym,pct,reason):
             tg(f"✅ *SOLD ({reason})*\n🪙 {q} {sym}\n{'🟢' if pnl>=0 else '🔴'} PnL: ${pnl:.2f}")
         return True
     except Exception as e:tg(f"❌ *SELL FAILED* {sym}:`{e}`");return False
-
-def cmd_sell(txt):
-    parts=txt.split()
-    if len(parts)!=3:tg("❌ Usage: `/sell COIN AMOUNT_USDT`");return
-    c=parts[1].upper().replace("-USDT","").replace("/USDT","")
-    try:amt=float(parts[2])
-    except:tg("❌ Invalid amount.");return
-    sym=f"{c}-USDT"
-    if cd(f"sell:{sym}",5):tg(f"⏳ Processing /sell {c}...");return
-    db=load(DB)
-    if sym not in db:tg(f"❌ No active bot trade for {c}.\n💡 *Tip:* Type `/sync` to add manual buys.");return
-    p=live(sym)
-    if not p:tg(f"❌ No price for {c}.");return
-    fb=ex.fetch_balance()['free'].get(c,0)
-    if fb<=0:tg(f"❌ You have 0 {c} available to sell.");return
-    target_qty=amt/p
-    if target_qty >= fb:qty=fb;amt_str="ALL"
-    else:qty=float(ex.amount_to_precision(sym.replace("-","/"),target_qty));amt_str=f"${amt:.2f}"
-    if qty<=0:tg(f"❌ Amount too small after precision rounding.");return
-    try:
-        cancel_sells(sym);time.sleep(0.5)
-        ex.create_market_sell_order(sym.replace("-","/"),qty)
-        pnl=(p-db[sym]["entry_price"])*qty;L=load(LF)
-        L['total_realized_usdt']=L.get('total_realized_usdt',0.0)+pnl;L['trade_count']=L.get('trade_count',0)+1;save(LF,L)
-        H=load(HIST);H.append({"sym":sym,"pnl":pnl,"time":time.time(),"reason":f"MANUAL SELL {amt_str}"});save(HIST,H)
-        rem=ex.fetch_balance()['total'].get(c,0)
-        if rem<=0 or (rem*p)<1.02:db.pop(sym,None);save(DB,db);tg(f"✅ *MANUALLY SOLD:* {qty} {c} @ {p:.6f}\nPnL: ${pnl:.2f}\nPosition closed.")
-        else:
-            place_trailing_sl(sym,rem);save(DB,db)
-            tg(f"✅ *MANUALLY SOLD:* {qty} {c} @ {p:.6f}\nPnL: ${pnl:.2f}\nRemaining: {rem:.4f} {c} (Trailing SL Replaced)")
-    except Exception as e:tg(f"❌ *SELL FAILED:* {e}")
 
 def cmd_sync():
     tg("🔄 Syncing manual coins to bot database...")
@@ -207,25 +175,64 @@ def get_summary_text():
     dp,dc,dw=calc(day);wp,wc,ww=calc(week)
     return f"📊 *PERFORMANCE SUMMARY*\n\n*24 HOURS*\nPnL: ${dp:.2f}\nTrades: {dc}\nWin Rate: {dw:.1f}%\n\n*7 DAYS*\nPnL: ${wp:.2f}\nTrades: {wc}\nWin Rate: {ww:.1f}%"
 
-def reconcile():
-    try:bal=ex.fetch_balance()['total']
-    except:return load(DB)
-    db=load(DB);changed=False
+def get_balance_text():
+    b=ex.fetch_balance()['free'];u=b.get('USDT',0);rows=[["USDT",f"{u:.2f}",f"${u:.2f}"]]
+    for c,a in b.items():
+        if a>0 and c not in ['USDT','USDC']:
+            p=live(f"{c}-USDT")
+            if p and a*p>=0.10:rows.append([c,f"{a:.4f}",f"${a*p:.2f}"])
+    if not rows: return "💰 Empty balance."
+    return f"```\n{tbl(['Asset','Amount','Est.Val'],rows,[7,10,9])}\n```"
+
+def check_hourly_balance():
+    st=load(SC);now=time.time()
+    if now-st.get('last_bal_alert',0)>=3600:
+        tg(f"💰 *HOURLY BALANCE*\n{get_balance_text()}")
+        st['last_bal_alert']=now;save(SC,st)
+
+def audit_system():
+    issues = []
+    db = load(DB); q = load(QF)
+    try: 
+        bal = ex.fetch_balance()['total']
+        all_orders = ex.fetch_open_orders()
+    except Exception as e:
+        tg(f"⚠️ *AUDIT WARNING:* Failed to fetch exchange data: `{e}`"); return
+
     for sym in list(db.keys()):
-        if bal.get(sym.split('-')[0],0)<=0:
-            db.pop(sym,None);changed=True
-    for c,a in bal.items():
-        if c in STABLE or a<=0: continue
-        sym=f"{c}-USDT"
+        coin = sym.split('-')[0]; amt = bal.get(coin, 0)
+        if amt <= 0:
+            db.pop(sym, None); issues.append(f"🧹 Removed ghost position: {sym}")
+        else:
+            has_sl = any(o['symbol'] == sym.replace('-', '/') and o['side'] == 'sell' for o in all_orders)
+            if not has_sl:
+                issues.append(f"🚨 Missing Stop Loss for {sym}. Replacing...")
+                place_trailing_sl(sym, amt)
+
+    for c, a in bal.items():
+        if c in STABLE or a <= 0: continue
+        sym = f"{c}-USDT"
         if sym not in db:
-            p=live(sym)
-            if p and (a*p)>1.02:
-                sl=round(p*(1-cfg()['stop_loss_pct']/100),6)
-                db[sym]={"entry_price":p,"safe_zone":p,"stop_loss":sl,"peak_price":p,"last_price":p,"opened_at":time.time()}
-                tg(f"🔄 *AUTO-SYNC:* Detected manual buy! Added {sym}.\nEntry (current): {p:.6f}")
-                place_trailing_sl(sym,a);changed=True
-    if changed:save(DB,db)
-    return db
+            p = live(sym)
+            if p and (a * p) > 1.02:
+                sl = round(p * (1 - cfg()['stop_loss_pct'] / 100), 6)
+                db[sym] = {"entry_price": p, "safe_zone": p, "stop_loss": sl, "peak_price": p, "last_price": p, "opened_at": time.time()}
+                issues.append(f"🔄 Auto-synced orphaned balance: {sym} (Entry: {p:.6f})")
+                place_trailing_sl(sym, a)
+
+    q_changed = False
+    for sym in list(q.keys()):
+        if sym in db or time.time() - q[sym].get('timestamp', 0) > 86400:
+            q.pop(sym, None); q_changed = True
+
+    if issues or q_changed:
+        save(DB, db)
+        if q_changed: save(QF, q)
+        msg = "🛠️ *AUTO-AUDIT COMPLETE*\nFound and fixed issues:\n\n" + "\n".join(issues)
+        tg(msg)
+        return msg
+    else:
+        return "✅ *AUDIT COMPLETE:* No issues found. System healthy."
 
 def ask_ai(p):
     try:
@@ -254,12 +261,14 @@ def manage():
             if drop<=-s.get('crash_guard_pct',18):
                 if sell(sym,1.0,f"CRASH GUARD ({drop:.1f}%)"):db.pop(sym,None);save(DB,db);continue
         d['last_price']=lv
-        if inc>=5.0 and d['stop_loss']<d['entry_price']:
-            d['stop_loss']=d['entry_price']
+        if inc>=5.0 and d['stop_loss']<d['entry_price']:d['stop_loss']=d['entry_price']
+        
         hold_h=(time.time()-d.get('opened_at',time.time()))/3600
-        if hold_h>s.get('max_hold_hours',48):
-            if sell(sym,1.0,f"TIME STOP {hold_h:.0f}h"):db.pop(sym,None);save(DB,db)
+        # NEW LOGIC: Time Stop ONLY if it hasn't gained at least 1%
+        if hold_h>s.get('max_hold_hours',48) and inc <= 1.0:
+            if sell(sym,1.0,f"TIME STOP 48h ({inc:+.1f}%)"):db.pop(sym,None);save(DB,db)
             continue
+
         if lv<=d["stop_loss"]:
             if sell(sym,1.0,"STOP LOSS"):db.pop(sym,None);save(DB,db)
             continue
@@ -297,7 +306,7 @@ def exec_q():
                         if pnl<low:low=pnl;wk=hs
                 if wk:
                     bc=wk.split('-')[0]; new_sc=qd.get('score',0)
-                    if new_sc>25 or low<0:
+                    if new_sc>35 or low<0:
                         tg(f"🔄 *ROTATION SELL:* Dropping {wk} (PnL {low:.1f}%) to buy {sym}")
                         if sell(wk,1.0,"ROTATION"):
                             db.pop(wk,None);save(DB,db);time.sleep(2);ub=ex.fetch_balance()['free'].get('USDT',0);spend=ub
@@ -401,26 +410,6 @@ def gl():
         return f"*{title}*\n```\n{tbl(headers, rows, widths)}\n```"
     return build("🚀 GAINERS (24H)",v[:5]),build("🩸 LOSERS (24H)",v[-5:][::-1])
 
-def cmd_buy(txt):
-    parts=txt.split()
-    if len(parts)!=3: tg("❌ Usage: `/buy COIN USDT_AMOUNT`\nExample: `/buy BTC 5.75`"); return
-    c=parts[1].upper().replace("-USDT","").replace("/USDT","")
-    try:amt=float(parts[2])
-    except:tg("❌ Invalid amount.");return
-    sym=f"{c}-USDT"
-    if cd(f"buy:{sym}",5):tg(f"⏳ Already processing /buy {c}.");return
-    db=load(DB)
-    if sym in db:tg(f"❌ Active position for {c}.");return
-    ub=ex.fetch_balance()['free'].get('USDT',0)
-    if ub<amt:tg(f"❌ *BUY FAILED:* You typed ${amt:.2f}, but only have ${ub:.2f} USDT.");return
-    try:
-        old=ex.fetch_balance()['total'].get(c,0);f,a=m_buy(f"{c}/USDT",amt);tot=old+f
-        sl=round(a*(1-cfg()['stop_loss_pct']/100),6)
-        db[sym]={"entry_price":round(a,6),"safe_zone":round(a,6),"stop_loss":sl,"peak_price":a,"last_price":a,"opened_at":time.time()}
-        save(DB,db);place_trailing_sl(sym,tot)
-        tg(f"✅ *BOUGHT:* {c} @ {a:.6f}\n📉 Entry:{a:.6f}\n📈 Trailing SL: Active")
-    except Exception as e:tg(f"❌ *BUY FAILED:* {e}\n*(Note: Bitget minimum is usually $5 USDT)*")
-
 def cmd_set(txt):
     parts=txt.split()
     if len(parts)!=3:tg("❌ Usage: `/set <key> <value>`");return
@@ -453,22 +442,17 @@ def tg_check():
             if low.startswith("/ai "):ask_ai(txt[4:].strip())
             elif low=="/ai":ask_ai("Give me a market overview.")
             elif low=="ai_info":tg("🧠 *AI ANALYST*\nTo ask the AI a question, type:\n`/ai <your question>`\n\nExample:\n`/ai what is the market sentiment right now?`")
-            elif low=="buy_info":tg("🛒 *BUY COMMAND*\nUsage: `/buy COIN AMOUNT`\nExample: `/buy SOL 5.75`\n\n_Minimum buy is usually $5 USDT._")
             elif low in ("/menu","📊 menu"):tg_inline_menu()
             elif low=="/panic" or low=="🚨 panic":panic_sell()
             elif low=="/sync":cmd_sync()
-            elif low=="/help":tg("🤖 *CMDS*\n`/menu` `/ai [q]` `/sync`\n`/gainers` `/losers` `/summary`\n`/balance` `/status` `/pnl`\n`/buy COIN AMT` `/sell COIN AMT`\n`/set key value` `/pause` `/resume` `/panic`")
+            elif low=="/audit":audit_system()
+            elif low=="/help":tg("🤖 *CMDS*\n`/menu` `/ai [q]` `/sync` `/audit`\n`/gainers` `/losers` `/summary`\n`/balance` `/status` `/pnl`\n`/set key value` `/pause` `/resume` `/panic`")
             elif low=="trail_on":
-                s=cfg();s['trail_pct']=5.0;save(CFG,s);tg("📈 Trailing Stop-Loss turned ON (5%)");tg_inline_menu()
+                s=cfg();s['trail_pct']=8.0;save(CFG,s);tg("📈 Trailing Stop-Loss turned ON (8%)");tg_inline_menu()
             elif low=="trail_off":
                 s=cfg();s['trail_pct']=0.0;save(CFG,s);tg("📉 Trailing Stop-Loss turned OFF");tg_inline_menu()
             elif low=="/balance":
-                b=ex.fetch_balance()['free'];u=b.get('USDT',0);rows=[["USDT",f"{u:.2f}",f"${u:.2f}"]]
-                for c,a in b.items():
-                    if a>0 and c not in ['USDT','USDC']:
-                        p=live(f"{c}-USDT")
-                        if p and a*p>=0.10:rows.append([c,f"{a:.4f}",f"${a*p:.2f}"])
-                tg(f"💰 *BALANCE*\n```\n{tbl(['Asset','Amount','Est.Val'],rows,[7,10,9])}\n```")
+                tg(f"💰 *BALANCE*\n{get_balance_text()}")
             elif low=="/summary":tg(get_summary_text())
             elif low=="/status":
                 db=load(DB)
@@ -481,8 +465,6 @@ def tg_check():
                 tg(f"📊 *P&L*\n```\n{tbl(['Metric','Value'],rows,[12,10])}\n```")
             elif low=="/gainers":g,_=gl();tg(g)
             elif low=="/losers":_,l=gl();tg(l)
-            elif low.startswith("/buy"):cmd_buy(txt)
-            elif low.startswith("/sell"):cmd_sell(txt)
             elif low.startswith("/set"):cmd_set(txt)
             elif low=="/pause":
                 s=cfg();s['auto_buy_enabled']=False;save(CFG,s);tg("⏸ Auto-buy paused.")
@@ -492,7 +474,7 @@ def tg_check():
     except Exception as e:print(f"TG Err:{e}")
 
 if __name__=="__main__":
-    try:clr();reconcile();tg_check();manage();check_daily_summary();scan();exec_q()
+    try:clr();audit_system();tg_check();manage();check_daily_summary();check_hourly_balance();scan();exec_q()
     except Exception as e:
         try:tg(f"🚨 *CRASH:* `{e}`\n`{traceback.format_exc()[-200:]}`")
         except:pass
