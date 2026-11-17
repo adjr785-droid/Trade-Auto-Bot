@@ -264,7 +264,6 @@ def manage():
         if inc>=5.0 and d['stop_loss']<d['entry_price']:d['stop_loss']=d['entry_price']
         
         hold_h=(time.time()-d.get('opened_at',time.time()))/3600
-        # NEW LOGIC: Time Stop ONLY if it hasn't gained at least 1%
         if hold_h>s.get('max_hold_hours',48) and inc <= 1.0:
             if sell(sym,1.0,f"TIME STOP 48h ({inc:+.1f}%)"):db.pop(sym,None);save(DB,db)
             continue
@@ -363,9 +362,17 @@ def scan():
             rr=(p*0.10)/(p-sl) if (p-sl)>0 else 0;sc=(t['vol']/1e6)+(rr*10)
             if t['sym'] not in q or q[t['sym']].get('score',0)<sc:
                 if t['sym'] not in q:tg(f"📥 *QUEUED:* {t['sym']}\nScore:{sc:.1f}")
-                q[t['sym']]={"timestamp":ct,"type":setup,"sl":sl,"score":sc};qu=True
+                q[t['sym']]={"timestamp":ct,"type":setup,"sl":sl,"score":sc,"price":p,"chg":t['chg']};qu=True
     if qu:save(QF,q)
     st['last']=time.time();save(SC,st)
+
+    # REPORTING LOGIC
+    if q:
+        sq=sorted(q.items(),key=lambda x:x[1].get('score',0),reverse=True)
+        rows=[[sym.split('-')[0],fp(d.get('price')),f"{d.get('chg',0):+.1f}%",f"{d.get('score',0):.1f}"] for sym,d in sq]
+        tg(f"🔍 *SCAN COMPLETE*\nQueue has {len(q)} setup(s):\n```\n{tbl(['Asset','Price','24H%','Score'],rows,[8,10,8,6])}\n```")
+    else:
+        tg("🔍 *SCAN COMPLETE*\nNo setups found in this cycle.")
 
 def check_daily_summary():
     st=load(SC)
