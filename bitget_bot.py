@@ -19,8 +19,10 @@ def _send(m,mode,buttons=None):
         r=requests.post(f"https://api.telegram.org/bot{TG_TOKEN}/sendMessage",json=payload,timeout=10)
         if not r.ok:
             c=re.sub(r'<[^>]+>','',m) if mode=="HTML" else m;payload["text"]=c
-            requests.post(f"https://api.telegram.org/bot{TG_TOKEN}/sendMessage",json=payload,timeout=10)
-    except:pass
+            r2=requests.post(f"https://api.telegram.org/bot{TG_TOKEN}/sendMessage",json=payload,timeout=10)
+            if not r2.ok: print(f"TG SEND ERROR: {r2.text}")
+    except Exception as e: print(f"TG EXCEPTION: {e}")
+
 def tg(m):_send(m,"Markdown")
 def tg_ai(m):_send(m,"HTML")
 
@@ -34,12 +36,14 @@ def load(f,d=None):
     try:
         if os.path.exists(f):
             with open(f) as fh:return json.load(fh)
-    except:pass
+    except Exception as e:print(f"LOAD ERR {f}: {e}")
     return d
+
 def save(f,d):
     try:
         with open(f,"w") as fh:json.dump(d,fh,indent=4)
-    except Exception as e:print(f"save {f}:{e}")
+    except Exception as e:print(f"SAVE ERR {f}: {e}")
+
 def cfg():
     d={"rsi_min":42,"rsi_max":48,"stop_loss_pct":8,"auto_buy_enabled":True,"auto_buy_amount_usdt":5.75,"max_tokens_before_consolidation":3,"max_hold_hours":48,"trail_pct":5.0,"crash_guard_pct":18.0}
     s=load(CFG,d)
@@ -59,13 +63,16 @@ def _calc(sym):
         ag=sum(g[-14:])/14;al=sum(l[-14:])/14;r=100.0 if al==0 else round(100-(100/(1+(ag/al))),2)
         return c[-1],c[-2],r,round(sum(c[-5:])/5,6),round(sum(c[-10:])/10,6)
     except:return None,None,None,None,None
+
 def data(sym):
     h=_C.get(sym)
     if h and (time.time()-h[0])<_T:return h[1]
     r=_calc(sym);_C[sym]=(time.time(),r);return r
+
 def live(sym):
     try:return ex.fetch_ticker(sym.replace("-","/"))['last']
     except:return None
+
 def clr():_C.clear()
 
 def cancel_sells(sym):
@@ -73,6 +80,7 @@ def cancel_sells(sym):
         for o in ex.fetch_open_orders(sym.replace("-","/")):
             if o['side']=='sell':ex.cancel_order(o['id'],sym.replace("-","/"))
     except:pass
+
 def m_buy(cs,usdt):
     p=live(cs.replace("/","-"))
     if not p:raise Exception(f"No price {cs}")
@@ -83,6 +91,7 @@ def m_buy(cs,usdt):
         try:o2=ex.fetch_order(o['id'],cs);f=o2.get('filled',q);a=o2.get('average',p)
         except:f,a=q,p
     return float(f),float(a)
+
 def hard_sl(sym,qty,pr):
     try:
         cancel_sells(sym)
@@ -324,11 +333,13 @@ def fp(p):
     if p>=1:return f"{p:.4f}"
     if p>=0.001:return f"{p:.6f}"
     return f"{p:.8f}"
+
 def tbl(h,r,w):
     bar="+"+"+".join(["-"*(x+2) for x in w])+"+"
     hd="| "+" | ".join([a.ljust(b) for a,b in zip(h,w)])+" |"
     bd=["| "+" | ".join([str(v).ljust(x) for v,x in zip(rw,w)])+" |" for rw in r]
     return "\n".join([bar,hd,bar]+bd+[bar])
+
 def get_market_row(sym, chg=None):
     if chg is None:
         try: chg = ex.fetch_ticker(sym.replace("-","/"))['percentage'] or 0
@@ -337,6 +348,7 @@ def get_market_row(sym, chg=None):
     _,_,r,ma5,ma10 = data(sym)
     sentiment = "🟢 Bullish" if r and r > 55 else ("🔴 Bearish" if r and r < 45 else "⚪ Neutral")
     return [sym.split('-')[0], fp(p), f"{chg:+.1f}%", f"{r:.1f}", fp(ma5), fp(ma10), sentiment]
+
 def gl():
     try:tk=ex.fetch_tickers()
     except:return "❌","❌"
@@ -372,14 +384,11 @@ def cmd_buy(txt):
         save(DB,db);hard_sl(sym,tot,sl)
         tg(f"✅ *BOUGHT:* {c} @ {a:.6f}\n📉 Entry:{a:.6f}\n🛑 SL:{sl}\n📈 Trailing: Active")
     except Exception as e:tg(f"❌ *BUY FAILED:* {e}\n*(Note: Bitget minimum is usually $5 USDT for most coins)*")
+
 def cmd_set(txt):
     parts=txt.split()
     if len(parts)!=3:tg("❌ Usage: `/set <key> <value>`");return
     key,val=parts[1],parts[2];s=cfg()
     if key not in s:tg(f"❌ Unknown key. Valid: `{'`, `'.join(s.keys())}`");return
     try:
-        if isinstance(s[key],bool):new=val.lower() in ('true','1','yes','on')
-        elif isinstance(s[key],float):new=float(val)
-        else:new=int(val)
-    except:tg(f"❌ Invalid value for {key}");return
-    s[key]=new;save(CFG,s)
+        if isinstance(s[key],bool):new=val.lower() in ('true','1','yes','on'
