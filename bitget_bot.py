@@ -9,7 +9,7 @@ client=genai.Client(api_key=os.environ.get('GEMINI_API_KEY'))
 _C={};_T=20
 
 def get_reply_kb():
-    kb=[["📊 Menu","💰 Balance","🟢 Status"],["🛒 Buy","💸 Sell","🚨 Panic"],["📈 Gainers","🩸 Losers","⏸ Pause"]]
+    kb=[["📊 Menu","🚨 PANIC"]]
     return {"keyboard": kb, "resize_keyboard": True, "is_persistent": True}
 
 def _send(m,mode,buttons=None):
@@ -29,7 +29,7 @@ def tg_ai(m):_send(m,"HTML")
 
 def tg_inline_menu():
     s=cfg();tb={"text":"📈 Trail: ON","callback_data":"trail_off"} if s.get('trail_pct',5.0)>0 else {"text":"📉 Trail: OFF","callback_data":"trail_on"}
-    btns={"inline_keyboard":[[{"text":"▶️ Resume","callback_data":"/resume"},{"text":"⏸ Pause","callback_data":"/pause"}],[{"text":"🛒 Buy Info","callback_data":"buy_info"},{"text":"💸 Sell Info","callback_data":"sell_info"}],[{"text":"🟢 Status","callback_data":"/status"},{"text":"💰 Balance","callback_data":"/balance"}],[{"text":"📊 Summary","callback_data":"/summary"},tb],[{"text":"🚀 Gainers","callback_data":"/gainers"},{"text":"🩸 Losers","callback_data":"/losers"}],[{"text":"🧠 Ask AI","callback_data":"ai_info"}],[{"text":"🚨 PANIC SELL","callback_data":"/panic"}]]}
+    btns={"inline_keyboard":[[{"text":"▶️ Resume","callback_data":"/resume"},{"text":"⏸ Pause","callback_data":"/pause"}],[{"text":"🛒 Buy Info","callback_data":"buy_info"},{"text":"💸 Sell Info","callback_data":"sell_info"}],[{"text":"🟢 Status","callback_data":"/status"},{"text":"💰 Balance","callback_data":"/balance"}],[{"text":"📊 Summary","callback_data":"/summary"},tb],[{"text":"🚀 Gainers","callback_data":"/gainers"},{"text":"🩸 Losers","callback_data":"/losers"}],[{"text":"🧠 Ask AI","callback_data":"ai_info"}]]}
     _send("🕹️ *MAIN MENU*\nSelect an option below:","Markdown",btns)
 
 def load(f,d=None):
@@ -51,9 +51,9 @@ def cfg():
     for k,v in d.items():s.setdefault(k,v)
     return s
 
-def in_cd(k,s=30):return (time.time()-load(CD,{}).get(k,0))<s
+def in_cd(k,s=5):return (time.time()-load(CD,{}).get(k,0))<s
 def mk_cd(k):d=load(CD,{});d[k]=time.time();save(CD,d)
-def cd(k,s=30):
+def cd(k,s=5):
     if in_cd(k,s):return True
     mk_cd(k);return False
 
@@ -127,7 +127,7 @@ def cmd_sell(txt):
     try:amt=float(parts[2])
     except:tg("❌ Invalid amount.");return
     sym=f"{c}-USDT"
-    if cd(f"sell:{sym}",30):tg(f"⏳ Processing /sell {c}...");return
+    if cd(f"sell:{sym}",5):tg(f"⏳ Processing /sell {c}...");return
     db=load(DB)
     if sym not in db:tg(f"❌ No active bot trade for {c}.");return
     p=live(sym)
@@ -372,7 +372,7 @@ def cmd_buy(txt):
     try:amt=float(parts[2])
     except:tg("❌ Invalid amount.");return
     sym=f"{c}-USDT"
-    if cd(f"buy:{sym}",30):tg(f"⏳ Already processing /buy {c}.");return
+    if cd(f"buy:{sym}",5):tg(f"⏳ Already processing /buy {c}.");return
     db=load(DB)
     if sym in db:tg(f"❌ Active position for {c}.");return
     ub=ex.fetch_balance()['free'].get('USDT',0)
@@ -420,13 +420,13 @@ def tg_check():
             elif low=="buy_info":tg("🛒 *BUY COMMAND*\nUsage: `/buy COIN AMOUNT`\nExample: `/buy SOL 5.75`\n\n_Minimum buy is usually $5 USDT._")
             elif low=="sell_info":tg("💸 *SELL COMMAND*\nUsage: `/sell COIN AMOUNT`\nExample: `/sell SOL 5.75`\n\n_Type ALL to sell the entire position._")
             elif low in ("/menu","📊 menu"):tg_inline_menu()
-            elif low=="/panic":panic_sell()
+            elif low=="/panic" or low=="🚨 panic":panic_sell()
             elif low=="/help":tg("🤖 *CMDS*\n`/menu` `/ai [q]`\n`/gainers` `/losers` `/summary`\n`/balance` `/status` `/pnl`\n`/buy COIN AMT` `/sell COIN AMT`\n`/set key value` `/pause` `/resume` `/panic`")
             elif low=="trail_on":
                 s=cfg();s['trail_pct']=5.0;save(CFG,s);tg("📈 Trailing Stop-Loss turned ON (5%)");tg_inline_menu()
             elif low=="trail_off":
                 s=cfg();s['trail_pct']=0.0;save(CFG,s);tg("📉 Trailing Stop-Loss turned OFF");tg_inline_menu()
-            elif low in ("/balance","💰 balance"):
+            elif low=="/balance":
                 b=ex.fetch_balance()['free'];u=b.get('USDT',0);rows=[["USDT",f"{u:.2f}",f"${u:.2f}"]]
                 for c,a in b.items():
                     if a>0 and c not in ['USDT','USDC']:
@@ -434,7 +434,7 @@ def tg_check():
                         if p and a*p>=0.10:rows.append([c,f"{a:.4f}",f"${a*p:.2f}"])
                 tg(f"💰 *BALANCE*\n```\n{tbl(['Asset','Amount','Est.Val'],rows,[7,10,9])}\n```")
             elif low=="/summary":tg(get_summary_text())
-            elif low in ("/status","🟢 status"):
+            elif low=="/status":
                 db=load(DB)
                 if not db:tg("🛑 No active trades.")
                 else:
@@ -443,12 +443,12 @@ def tg_check():
             elif low=="/pnl":
                 L=load(LF);rows=[["Total PnL",f"${L.get('total_realized_usdt',0.0):.2f}"],["Trades",f"{L.get('trade_count',0)}"]]
                 tg(f"📊 *P&L*\n```\n{tbl(['Metric','Value'],rows,[12,10])}\n```")
-            elif low=="/gainers" or low=="📈 gainers":g,_=gl();tg(g)
-            elif low=="/losers" or low=="🩸 losers":_,l=gl();tg(l)
-            elif low.startswith("/buy") or low.startswith("🛒 buy"):cmd_buy(txt.replace("🛒","/").replace("🛒 ","/buy "))
-            elif low.startswith("/sell") or low.startswith("💸 sell"):cmd_sell(txt.replace("💸","/").replace("💸 ","/sell "))
+            elif low=="/gainers":g,_=gl();tg(g)
+            elif low=="/losers":_,l=gl();tg(l)
+            elif low.startswith("/buy"):cmd_buy(txt)
+            elif low.startswith("/sell"):cmd_sell(txt)
             elif low.startswith("/set"):cmd_set(txt)
-            elif low=="/pause" or low=="⏸ pause":
+            elif low=="/pause":
                 s=cfg();s['auto_buy_enabled']=False;save(CFG,s);tg("⏸ Auto-buy paused.")
             elif low=="/resume":
                 s=cfg();s['auto_buy_enabled']=True;save(CFG,s);tg("▶️ Auto-buy resumed.")
