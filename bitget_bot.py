@@ -32,7 +32,7 @@ def tg_ai(m):_send(m,"HTML")
 
 def tg_inline_menu():
     s=cfg();tb={"text":"📈 Trail: ON","callback_data":"trail_off"} if s.get('trail_pct',5.0)>0 else {"text":"📉 Trail: OFF","callback_data":"trail_on"}
-    btns={"inline_keyboard":[[{"text":"▶️ Resume","callback_data":"/resume"},{"text":"⏸ Pause","callback_data":"/pause"}],[{"text":"🛒 Buy Info","callback_data":"buy_info"},{"text":"💸 Sell Info","callback_data":"sell_info"}],[{"text":"🟢 Status","callback_data":"/status"},{"text":"💰 Balance","callback_data":"/balance"}],[{"text":"📊 Summary","callback_data":"/summary"},tb],[{"text":"🚀 Gainers","callback_data":"/gainers"},{"text":"🩸 Losers","callback_data":"/losers"}],[{"text":"🧠 Ask AI","callback_data":"ai_info"}]]}
+    btns={"inline_keyboard":[[{"text":"▶️ Resume","callback_data":"/resume"},{"text":"⏸ Pause","callback_data":"/pause"}],[{"text":"🔄 Sync Wallet","callback_data":"/sync"},{"text":"🛒 Buy Info","callback_data":"buy_info"}],[{"text":"🟢 Status","callback_data":"/status"},{"text":"💰 Balance","callback_data":"/balance"}],[{"text":"📊 Summary","callback_data":"/summary"},tb],[{"text":"🚀 Gainers","callback_data":"/gainers"},{"text":"🩸 Losers","callback_data":"/losers"}],[{"text":"🧠 Ask AI","callback_data":"ai_info"}]]}
     _send("🕹️ *MAIN MENU*\nSelect an option below:","Markdown",btns)
 
 def load(f,d=None):
@@ -137,7 +137,7 @@ def cmd_sell(txt):
     sym=f"{c}-USDT"
     if cd(f"sell:{sym}",5):tg(f"⏳ Processing /sell {c}...");return
     db=load(DB)
-    if sym not in db:tg(f"❌ No active bot trade for {c}.");return
+    if sym not in db:tg(f"❌ No active bot trade for {c}.\n💡 *Tip:* If you bought it manually, type `/sync` to add it to the bot first.");return
     p=live(sym)
     if not p:tg(f"❌ No price for {c}.");return
     fb=ex.fetch_balance()['free'].get(c,0)
@@ -159,6 +159,23 @@ def cmd_sell(txt):
             tg(f"✅ *MANUALLY SOLD:* {qty} {c} @ {p:.6f}\nPnL: ${pnl:.2f}\nRemaining: {rem:.4f} {c} (SL Replaced)")
     except Exception as e:tg(f"❌ *SELL FAILED:* {e}")
 
+def cmd_sync():
+    tg("🔄 Syncing manual coins to bot database...")
+    try: b=ex.fetch_balance()['total']
+    except: tg("❌ Failed to fetch balance."); return
+    db=load(DB); added=[]
+    for c,a in b.items():
+        if c in STABLE or a<=0: continue
+        sym=f"{c}-USDT"; p=live(sym)
+        if p and (a*p)>1.02:
+            if sym not in db:
+                sl=round(p*(1-cfg()['stop_loss_pct']/100),6)
+                db[sym]={"entry_price":p,"safe_zone":p,"stop_loss":sl,"peak_price":p,"last_price":p,"opened_at":time.time()}
+                added.append(sym); hard_sl(sym,a,sl)
+    if added:
+        save(DB,db); tg(f"✅ *SYNCED:* Added {len(added)} coins to DB:\n`{chr(10).join(added)}`\n_Entry price set to current market price. You can now sell them via the bot._")
+    else: tg("✅ No new manual coins found to sync.")
+
 def panic_sell():
     db=load(DB); q=load(QF)
     if not db:tg(f"🚨 *PANIC:* No open positions to sell. Your balance is ${ex.fetch_balance()['free'].get('USDT',0):.2f} USDT.");return
@@ -178,13 +195,27 @@ def get_summary_text():
     return f"📊 *PERFORMANCE SUMMARY*\n\n*24 HOURS*\nPnL: ${dp:.2f}\nTrades: {dc}\nWin Rate: {dw:.1f}%\n\n*7 DAYS*\nPnL: ${wp:.2f}\nTrades: {wc}\nWin Rate: {ww:.1f}%"
 
 def reconcile():
-    db=load(DB)
-    if not db:return db
     try:bal=ex.fetch_balance()['total']
-    except:return db
+    except:return load(DB)
+    db=load(DB)
     changed=False
     for sym in list(db.keys()):
-        if bal.get(sym.split('-')[0],0)<=0:tg(f"🧹 Reconciled: {sym} not on exchange, removing");db.pop(sym,None);changed=True
+        if bal.get(sym.split('-')[0],0)<=0:
+            tg(f"🧹 Reconciled: {sym} not on exchange, removing")
+            db.pop(sym,None);changed=True
+            
+    for c,a in bal.items():
+        if c in STABLE or a<=0: continue
+        sym=f"{c}-USDT"
+        if sym not in db:
+            p=live(sym)
+            if p and (a*p)>1.02:
+                sl=round(p*(1-cfg()['stop_loss_pct']/100),6)
+                db[sym]={"entry_price":p,"safe_zone":p,"stop_loss":sl,"peak_price":p,"last_price":p,"opened_at":time.time()}
+                tg(f"🔄 *AUTO-SYNC:* Detected manual buy! Added {sym}.\nEntry (current price): {p:.6f}\nSL set to: {sl}")
+                hard_sl(sym,a,sl)
+                changed=True
+                
     if changed:save(DB,db)
     return db
 
@@ -426,10 +457,10 @@ def tg_check():
             elif low=="/ai":ask_ai("Give me a market overview.")
             elif low=="ai_info":tg("🧠 *AI ANALYST*\nTo ask the AI a question, type:\n`/ai <your question>`\n\nExample:\n`/ai what is the market sentiment right now?`")
             elif low=="buy_info":tg("🛒 *BUY COMMAND*\nUsage: `/buy COIN AMOUNT`\nExample: `/buy SOL 5.75`\n\n_Minimum buy is usually $5 USDT._")
-            elif low=="sell_info":tg("💸 *SELL COMMAND*\nUsage: `/sell COIN AMOUNT`\nExample: `/sell SOL 5.75`\n\n_Type ALL to sell the entire position._")
             elif low in ("/menu","📊 menu"):tg_inline_menu()
             elif low=="/panic" or low=="🚨 panic":panic_sell()
-            elif low=="/help":tg("🤖 *CMDS*\n`/menu` `/ai [q]`\n`/gainers` `/losers` `/summary`\n`/balance` `/status` `/pnl`\n`/buy COIN AMT` `/sell COIN AMT`\n`/set key value` `/pause` `/resume` `/panic`")
+            elif low=="/sync":cmd_sync()
+            elif low=="/help":tg("🤖 *CMDS*\n`/menu` `/ai [q]` `/sync`\n`/gainers` `/losers` `/summary`\n`/balance` `/status` `/pnl`\n`/buy COIN AMT` `/sell COIN AMT`\n`/set key value` `/pause` `/resume` `/panic`")
             elif low=="trail_on":
                 s=cfg();s['trail_pct']=5.0;save(CFG,s);tg("📈 Trailing Stop-Loss turned ON (5%)");tg_inline_menu()
             elif low=="trail_off":
