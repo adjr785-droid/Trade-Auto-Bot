@@ -109,15 +109,17 @@ def hard_sl(sym,qty,pr):
         return True
     except Exception as e:tg(f"⚠️ *SL FAILED* {sym}@{pr}:`{e}`");return False
 
-def place_trailing_sl(sym,qty,pct):
+def place_trailing_sl(sym,qty):
+    pct = cfg().get('trail_pct', 5.0)
+    if pct <= 0: return False
     try:
-        cancel_sells(sym);time.sleep(0.5)
+        cancel_sells(sym); time.sleep(0.5)
         ex.create_order(sym.replace("-","/"),'market','sell',qty,None,{'trailingPercent':pct})
-        tg(f"📈 *NATIVE TRAILING SL PLACED:* {sym} @ {pct}%")
         return True
     except Exception as e:
-        tg(f"⚠️ *NATIVE TRAIL FAILED* {sym}: `{e}`. Falling back to local.")
-        return hard_sl(sym,qty,live(sym)*0.95)
+        # Fallback to hard SL if native trailing is rejected by Bitget
+        p = live(sym)
+        return hard_sl(sym, qty, round(p*(1-cfg()['stop_loss_pct']/100),6))
 
 def sell(sym,pct,reason):
     try:
@@ -148,7 +150,7 @@ def cmd_sell(txt):
     sym=f"{c}-USDT"
     if cd(f"sell:{sym}",5):tg(f"⏳ Processing /sell {c}...");return
     db=load(DB)
-    if sym not in db:tg(f"❌ No active bot trade for {c}.\n💡 *Tip:* If you bought it manually, type `/sync` to add it to the bot first.");return
+    if sym not in db:tg(f"❌ No active bot trade for {c}.\n💡 *Tip:* Type `/sync` to add manual buys.");return
     p=live(sym)
     if not p:tg(f"❌ No price for {c}.");return
     fb=ex.fetch_balance()['free'].get(c,0)
@@ -166,8 +168,8 @@ def cmd_sell(txt):
         rem=ex.fetch_balance()['total'].get(c,0)
         if rem<=0 or (rem*p)<1.02:db.pop(sym,None);save(DB,db);tg(f"✅ *MANUALLY SOLD:* {qty} {c} @ {p:.6f}\nPnL: ${pnl:.2f}\nPosition closed.")
         else:
-            tot=ex.fetch_balance()['total'].get(c,0);hard_sl(sym,tot,db[sym]['stop_loss']);save(DB,db)
-            tg(f"✅ *MANUALLY SOLD:* {qty} {c} @ {p:.6f}\nPnL: ${pnl:.2f}\nRemaining: {rem:.4f} {c} (SL Replaced)")
+            place_trailing_sl(sym,rem);save(DB,db)
+            tg(f"✅ *MANUALLY SOLD:* {qty} {c} @ {p:.6f}\nPnL: ${pnl:.2f}\nRemaining: {rem:.4f} {c} (Trailing SL Replaced)")
     except Exception as e:tg(f"❌ *SELL FAILED:* {e}")
 
 def cmd_sync():
@@ -182,9 +184,9 @@ def cmd_sync():
             if sym not in db:
                 sl=round(p*(1-cfg()['stop_loss_pct']/100),6)
                 db[sym]={"entry_price":p,"safe_zone":p,"stop_loss":sl,"peak_price":p,"last_price":p,"opened_at":time.time()}
-                added.append(sym); hard_sl(sym,a,sl)
+                added.append(sym); place_trailing_sl(sym,a)
     if added:
-        save(DB,db); tg(f"✅ *SYNCED:* Added {len(added)} coins to DB:\n`{chr(10).join(added)}`\n_Entry price set to current market price. You can now sell them via the bot._")
+        save(DB,db); tg(f"✅ *SYNCED:* Added {len(added)} coins to DB:\n`{chr(10).join(added)}`\n_Trailing SL Active._")
     else: tg("✅ No new manual coins found to sync.")
 
 def panic_sell():
@@ -208,13 +210,10 @@ def get_summary_text():
 def reconcile():
     try:bal=ex.fetch_balance()['total']
     except:return load(DB)
-    db=load(DB)
-    changed=False
+    db=load(DB);changed=False
     for sym in list(db.keys()):
         if bal.get(sym.split('-')[0],0)<=0:
-            tg(f"🧹 Reconciled: {sym} not on exchange, removing")
             db.pop(sym,None);changed=True
-            
     for c,a in bal.items():
         if c in STABLE or a<=0: continue
         sym=f"{c}-USDT"
@@ -223,10 +222,8 @@ def reconcile():
             if p and (a*p)>1.02:
                 sl=round(p*(1-cfg()['stop_loss_pct']/100),6)
                 db[sym]={"entry_price":p,"safe_zone":p,"stop_loss":sl,"peak_price":p,"last_price":p,"opened_at":time.time()}
-                tg(f"🔄 *AUTO-SYNC:* Detected manual buy! Added {sym}.\nEntry (current price): {p:.6f}\nSL set to: {sl}")
-                hard_sl(sym,a,sl)
-                changed=True
-                
+                tg(f"🔄 *AUTO-SYNC:* Detected manual buy! Added {sym}.\nEntry (current): {p:.6f}")
+                place_trailing_sl(sym,a);changed=True
     if changed:save(DB,db)
     return db
 
@@ -251,9 +248,6 @@ def manage():
             if lv<=target_base_sl:
                 if sell(sym,1.0,f"SL HIT ({s['stop_loss_pct']}%)"):db.pop(sym,None);save(DB,db)
                 continue
-            else:
-                d['stop_loss']=target_base_sl;tot=ex.fetch_balance()['total'].get(coin,0)
-                if tot>0:hard_sl(sym,tot,target_base_sl);tg(f"🛡️ *SL TIGHTENED:* {sym} moved to {target_base_sl} ({s['stop_loss_pct']}%)")
         last_p=d.get('last_price',0)
         if last_p>0:
             drop=(lv-last_p)/last_p*100
@@ -261,15 +255,7 @@ def manage():
                 if sell(sym,1.0,f"CRASH GUARD ({drop:.1f}%)"):db.pop(sym,None);save(DB,db);continue
         d['last_price']=lv
         if inc>=5.0 and d['stop_loss']<d['entry_price']:
-            d['stop_loss']=d['entry_price'];tot=ex.fetch_balance()['total'].get(coin,0)
-            if tot>0:hard_sl(sym,tot,d['stop_loss']);tg(f"🛡️ *BREAKEVEN LOCKED:* {sym} moved to {d['stop_loss']}")
-        if s.get('trail_pct',0)>0:
-            peak=d.get('peak_price',d['entry_price'])
-            if lv>peak:
-                peak=lv;d['peak_price']=peak;trail_sl=round(peak*(1-s.get('trail_pct',5)/100),6)
-                if trail_sl>d['stop_loss']:
-                    d['stop_loss']=trail_sl;tot=ex.fetch_balance()['total'].get(coin,0)
-                    if tot>0:place_trailing_sl(sym,tot,s.get('trail_pct',5))
+            d['stop_loss']=d['entry_price']
         hold_h=(time.time()-d.get('opened_at',time.time()))/3600
         if hold_h>s.get('max_hold_hours',48):
             if sell(sym,1.0,f"TIME STOP {hold_h:.0f}h"):db.pop(sym,None);save(DB,db)
@@ -312,7 +298,7 @@ def exec_q():
                 if wk:
                     bc=wk.split('-')[0]; new_sc=qd.get('score',0)
                     if new_sc>25 or low<0:
-                        tg(f"🔄 *ROTATION SELL:* Dropping {wk} (PnL {low:.1f}%) to buy {sym} (Score {new_sc:.1f})")
+                        tg(f"🔄 *ROTATION SELL:* Dropping {wk} (PnL {low:.1f}%) to buy {sym}")
                         if sell(wk,1.0,"ROTATION"):
                             db.pop(wk,None);save(DB,db);time.sleep(2);ub=ex.fetch_balance()['free'].get('USDT',0);spend=ub
                     else:
@@ -324,7 +310,7 @@ def exec_q():
                                 ex.create_market_sell_order(wk.replace("-","/"),qs);tg(f"🔄 *PARTIAL SWAP:* Sold {qs} {bc} for {sym}.")
                                 time.sleep(2);ub=ex.fetch_balance()['free'].get('USDT',0);spend=ub
                                 rem=ex.fetch_balance()['total'].get(bc,0)
-                                if rem>0 and (rem*hp)>1.02:hard_sl(wk,rem,db[wk]['stop_loss'])
+                                if rem>0 and (rem*hp)>1.02:place_trailing_sl(wk,rem)
                                 else:db.pop(wk,None);save(DB,db)
             if spend<1.00:q.pop(sym,None);save(QF,q);continue
             sp=min(spend,s['auto_buy_amount_usdt']);cs=sym.replace("-","/")
@@ -334,7 +320,7 @@ def exec_q():
             maxsl=round(a*(1-s['stop_loss_pct']/100),6);sl=qd.get('sl') or maxsl
             if sl>=a or sl>maxsl:sl=maxsl
             db[sym]={"entry_price":round(a,6),"safe_zone":round(a,6),"stop_loss":sl,"peak_price":a,"last_price":a,"opened_at":time.time()}
-            save(DB,db);hard_sl(sym,f,sl);tg(f"🛒 *EXECUTED!*\n{sym}|💵{sp:.2f}@{a:.6f}\n🛑SL:{sl}")
+            save(DB,db);place_trailing_sl(sym,f);tg(f"🛒 *EXECUTED!*\n{sym}|💵{sp:.2f}@{a:.6f}\n📈 Trailing SL Active")
             q.pop(sym,None);save(QF,q);ub=ex.fetch_balance()['free'].get('USDT',0);time.sleep(2)
     except Exception as e:tg(f"⚠️ *QUEUE FAILED:* `{e}`")
 
@@ -431,9 +417,9 @@ def cmd_buy(txt):
         old=ex.fetch_balance()['total'].get(c,0);f,a=m_buy(f"{c}/USDT",amt);tot=old+f
         sl=round(a*(1-cfg()['stop_loss_pct']/100),6)
         db[sym]={"entry_price":round(a,6),"safe_zone":round(a,6),"stop_loss":sl,"peak_price":a,"last_price":a,"opened_at":time.time()}
-        save(DB,db);hard_sl(sym,tot,sl)
-        tg(f"✅ *BOUGHT:* {c} @ {a:.6f}\n📉 Entry:{a:.6f}\n🛑 SL:{sl}\n📈 Trailing: Active")
-    except Exception as e:tg(f"❌ *BUY FAILED:* {e}\n*(Note: Bitget minimum is usually $5 USDT for most coins)*")
+        save(DB,db);place_trailing_sl(sym,tot)
+        tg(f"✅ *BOUGHT:* {c} @ {a:.6f}\n📉 Entry:{a:.6f}\n📈 Trailing SL: Active")
+    except Exception as e:tg(f"❌ *BUY FAILED:* {e}\n*(Note: Bitget minimum is usually $5 USDT)*")
 
 def cmd_set(txt):
     parts=txt.split()
