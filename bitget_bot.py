@@ -249,12 +249,14 @@ def get_summary_text():
     return f"📊 *PERFORMANCE SUMMARY*\n\n*24 HOURS*\nPnL: ${dp:.2f}\nTrades: {dc}\nWin Rate: {dw:.1f}%\n\n*7 DAYS*\nPnL: ${wp:.2f}\nTrades: {wc}\nWin Rate: {ww:.1f}%"
 
 def get_balance_text():
-    b=ex.fetch_balance()['free'];u=b.get('USDT',0);rows=[["USDT",f"{u:.2f}",f"${u:.2f}"]]
+    b=ex.fetch_balance()['free']
+    lines=[f"USDT: ${b.get('USDT',0):.2f}"]
     for c,a in b.items():
         if a>0 and c not in ['USDT','USDC']:
             p=live(f"{c}-USDT")
-            if p and a*p>=0.10:rows.append([c,f"{a:.4f}",f"${a*p:.2f}"])
-    return f"```\n{tbl(['Asset','Amount','Est.Val'],rows,[7,10,9])}\n```"
+            if p and a*p>=0.10:
+                lines.append(f"{c}: {a:.4f} (about ${a*p:.2f})")
+    return "\n".join(lines)
 
 def check_hourly_balance():
     st=load(SC);now=time.time()
@@ -419,8 +421,10 @@ def scan():
     if qu:save(QF,q)
     st['last']=time.time();save(SC,st)
     if q:
-        rows=[[k.split('-')[0],fp(d.get('price')),f"{d.get('chg',0):+.1f}%",f"{d.get('score',0):.1f}"] for k,d in sorted(q.items(),key=lambda x:x[1].get('score',0),reverse=True)]
-        tg(f"🔍 *SCAN COMPLETE*\nQueue has {len(q)} setup(s):\n```\n{tbl(['Asset','Price','24H%','Score'],rows,[8,10,8,6])}\n```")
+        lines=[]
+        for sym,d in sorted(q.items(),key=lambda x:x[1].get('score',0),reverse=True):
+            lines.append(f"{sym.split('-')[0]} | Price: {fp(d.get('price'))} | 24H: {d.get('chg',0):+.1f}% | Score: {d.get('score',0):.1f}")
+        tg(f"🔍 *SCAN COMPLETE*\nQueue has {len(q)} setup(s):\n" + "\n".join(lines))
     else:tg("🔍 *SCAN COMPLETE*\nNo setups found in this cycle.")
 
 def check_daily_summary():
@@ -431,21 +435,21 @@ def fp(p):
     if p is None:return "N/A"
     return f"{p:.2f}" if p>=100 else f"{p:.4f}" if p>=1 else f"{p:.6f}" if p>=0.001 else f"{p:.8f}"
 
-def tbl(h,r,w):
-    bar="+"+"+".join("-"*(x+2) for x in w)+"+";row=lambda c:"| "+" | ".join(str(v).ljust(x) for v,x in zip(c,w))+" |"
-    return "\n".join([bar,row(h),bar]+[row(x) for x in r]+[bar])
-
 def get_market_row(sym,chg=None):
     if chg is None:
         try:chg=ex.fetch_ticker(S(sym))['percentage'] or 0
         except:chg=0
-    r=data(sym)[2];return [sym.split('-')[0],fp(live(sym)),f"{chg:+.1f}%",f"{r:.1f}" if r is not None else "N/A"]
+    r=data(sym)[2]
+    rsi=f"{r:.1f}" if r is not None else "N/A"
+    return f"{sym.split('-')[0]} | Price: {fp(live(sym))} | 24H: {chg:+.1f}% | RSI: {rsi}"
 
 def gl():
     try:tk=ex.fetch_tickers()
     except:return "❌","❌"
     v=sorted([{'sym':k.replace("/","-"),'chg':t['percentage'] or 0} for k,t in tk.items() if k.endswith('/USDT') and not skip(k.split('/')[0]) and (t['quoteVolume'] or 0)>=1000000],key=lambda x:x['chg'],reverse=True)
-    build=lambda title,d:f"*{title}*\n```\n{tbl(['Asset','Price','24H%','RSI'],[get_market_row(x['sym'],x['chg']) for x in d],[8,10,8,6])}\n```"
+    def build(title,items):
+        lines=[get_market_row(x['sym'],x['chg']) for x in items]
+        return f"*{title}*\n" + ("\n".join(lines) if lines else "No results found.")
     return build("🚀 GAINERS (24H)",v[:5]),build("🩸 LOSERS (24H)",v[-5:][::-1])
 
 def cmd_set(txt):
@@ -481,11 +485,16 @@ def handle(t,age):
         db=load(DB)
         if not db:tg("🛑 No active trades.")
         else:
-            rows=[[s.split('-')[0],fp(d['entry_price']),fp(p),f"{(p-d['entry_price'])/d['entry_price']*100:+.1f}%"] for s,d in db.items() if (p:=live(s))]
-            tg(f"🟢 *ACTIVE*\n```\n{tbl(['Coin','Entry','Current','PnL'],rows,[7,8,8,7])}\n```")
+            lines=[]
+            for sym,d in db.items():
+                p=live(sym)
+                if p:
+                    change=(p-d['entry_price'])/d['entry_price']*100
+                    lines.append(f"{sym.split('-')[0]} | Entry: {fp(d['entry_price'])} | Now: {fp(p)} | PnL: {change:+.1f}%")
+            tg("🟢 *ACTIVE POSITIONS*\n" + ("\n".join(lines) if lines else "No live prices available."))
     elif l=="/pnl":
         L=load(LF);tp=L.get('total_realized_usdt',0.0);n=L.get('trade_count',0)
-        tg(f"📊 *P&L*\n```\n{tbl(['Metric','Value'],[['Total PnL',f'${tp:.2f}'],['Trades',str(n)]],[12,10])}\n```")
+        tg(f"📊 *P&L SUMMARY*\nTotal realized PnL: ${tp:.2f}\nCompleted trades: {n}")
     elif l=="/gainers":tg(gl()[0])
     elif l=="/losers":tg(gl()[1])
     elif l.startswith("/buy"):cmd_buy(t)
