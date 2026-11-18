@@ -701,7 +701,7 @@ def cmd_scan_history(txt="/scan_history"):
     for x in chunk:
         r=x.get("rsi");rsi=f"{r:.1f}" if isinstance(r,(int,float)) else "N/A"
         lines.append(f"#{x.get('rank','?')} {x.get('sym','?')} | ${fp(x.get('price'))} | 24H {x.get('chg',0):+.1f}% | Vol ${x.get('vol',0)/1e6:.2f}M | RSI {rsi} | MA5 {fp(x.get('ma5'))} | MA10 {fp(x.get('ma10'))} | {x.get('decision','SKIP')}: {x.get('reason','-')}")
-    msg=f"🔎 *SCAN HISTORY — 24H WINDOW*\nRecorded: {len(items)} coin checks | Page {page}/{total}\nWindow age: {age/3600:.1f} hours\n\n"+("\n".join(lines) if lines else "No scan records yet. The next scheduled market scan will record eligible coins whether auto-buy is ON or OFF.")
+    msg=f"🔎 *SCAN HISTORY — 24H WINDOW*\nRecorded: {len(items)} coin checks | Page {page}/{total}\nWindow age: {age/3600:.1f} hours\n\n"+("\n".join(lines) if lines else "No scan records yet. The next scheduled scan will record market checks even when auto-buy is OFF.")
     msg+="\n\nHistory resets automatically after 24 hours."
     nav=[]
     if page>1:nav.append({"text":"⬅️ Previous","callback_data":f"scan_history:{page-1}"})
@@ -722,8 +722,9 @@ def cmd_about():
          "*3. Scanning process*\n• Loads Bitget spot USDT tickers and filters stablecoins, leveraged tokens and excluded symbols.\n"
          "• Sorts eligible markets by 24H quote volume; the current scanner examines ranks 16–500.\n"
          "• Applies tiered minimum volume thresholds: $1M for ranks 16–100, $3M for 101–199, $4M for 200–399 and $5M for 400–500; qualifying coins get indicator checks.\n"
-         "• Matching setups are recorded in Scan History whether or not auto-buy is enabled. They enter the purchase queue only when auto-buy is ON and safety filters permit.\n"
-         "• BTC RSI filter can block new automatic buys when BTC RSI is below its configured minimum; it does not stop market scanning. Scanning is rate-limited to about once per hour.\n\n"
+         "• Scanning and history recording continue whether auto-buy is ON or OFF; auto-buy and safety filters control execution only.\n"
+         "• Matching setups enter a scored queue only when buying is permitted. The scan report/history records why a setup was not queued (for example auto-buy OFF or BTC filter).\n"
+         "• BTC RSI filter can block new automatic buys when BTC RSI is below its configured minimum. Scanning is rate-limited to about once per hour.\n\n"
          "*4. Risk & position management*\n"
          f"• Auto-buy: {'ON' if s.get('auto_buy_enabled') else 'OFF'}; default trade budget ${s.get('auto_buy_amount_usdt',10):g}.\n"
          f"• Risk target {s.get('risk_per_trade_pct',1):g}% per trade; daily loss limit {s.get('max_daily_loss_pct',3):g}%; max portfolio exposure {s.get('max_portfolio_exposure_pct',50):g}%; max position {s.get('max_position_pct',15):g}%.\n"
@@ -734,104 +735,78 @@ def cmd_about():
     tg(msg)
 
 def scan():
-    """Scan and record markets independently of whether automatic buying is allowed."""
     st=load(SC);now=time.time()
     if now-st.get('last',0)<3540:return
     db=load(DB);q=load(QF);s=cfg()
     auto_enabled=bool(s.get("auto_buy_enabled"))
-    # The BTC filter is a purchase safeguard, not a reason to stop observing markets.
     btc_is_blocked=btc_blocked(s) if auto_enabled else False
     buying_allowed=auto_enabled and not btc_is_blocked
-    if buying_allowed and len(db)>s["max_tokens_before_consolidation"]:
-        consolidate();db=load(DB)
-    try:
-        tk=ex.fetch_tickers();mk=ex.load_markets()
+    block_reason=("auto-buy is OFF" if not auto_enabled else
+                  "BTC safety filter blocked buying" if btc_is_blocked else "")
+    if buying_allowed and len(db)>s["max_tokens_before_consolidation"]:consolidate()
+    try:tk=ex.fetch_tickers();mk=ex.load_markets()
     except Exception as e:
-        print(f"SCAN FETCH ERROR: {e}")
+        print(f"SCAN MARKET DATA ERROR: {e}")
+        tg(f"⚠️ *SCAN FAILED:* Could not load Bitget market data: {e}")
         return
-
-    v=[{'sym':k.replace("/","-"),'vol':t.get('quoteVolume') or 0,'chg':t.get('percentage') or 0,'last':t.get('last')}
-       for k,t in tk.items()
-       if k.endswith('/USDT') and not skip(k.split('/')[0])
-       and not (k in mk and not mk[k].get('spot',False))]
-    v.sort(key=lambda x:x['vol'],reverse=True)
-    ct=int(time.time());qu=False
-
-    # Pending entries are only valid while buying is permitted. Never carry old
-    # signals through a pause or BTC safety block and execute them on a later run.
+    v=[{'sym':k.replace("/","-"),'vol':t['quoteVolume'] or 0,'chg':t['percentage'] or 0,'last':t.get('last')} for k,t in tk.items() if k.endswith('/USDT') and not skip(k.split('/')[0]) and not (k in mk and not mk[k].get('spot',False))]
+    v.sort(key=lambda x:x['vol'],reverse=True);ct=int(time.time());qu=False
+    for sym,d in list(q.items()):
+        if ct-d.get('timestamp',0)>86400:q.pop(sym,None);qu=True
+    # A paused buying mode must not leave old signals waiting to execute after a later resume.
     if not buying_allowed and q:
         q.clear();qu=True
-    else:
-        for sym,d in list(q.items()):
-            if ct-d.get('timestamp',0)>86400:
-                q.pop(sym,None);qu=True
-
-    sh=scan_history_state();records=[]
+    sh=scan_history_state();records=[];matched=0;queued=0
     for rank,t in enumerate(v[:500],start=1):
         sym=t['sym'];vol=float(t['vol'] or 0);chg=float(t['chg'] or 0)
-        recd={"time":ct,"rank":rank,"sym":sym,"vol":vol,"chg":chg,
-              "price":t.get("last"),"rsi":None,"ma5":None,"ma10":None,
-              "decision":"SKIP",
-              "reason":"Top 15 by volume are intentionally excluded" if rank<=15 else "Not evaluated"}
+        recd={"time":ct,"rank":rank,"sym":sym,"vol":vol,"chg":chg,"price":t.get("last"),"rsi":None,"ma5":None,"ma10":None,"decision":"SKIP","reason":"Top 15 by volume are intentionally excluded" if rank<=15 else "Not evaluated"}
         if rank>15:
-            i=rank-16
-            threshold=(1000000 if i<=84 else 3000000 if i<=183 else 4000000 if i<=383 else 5000000)
+            i=rank-16;threshold=(1000000 if i<=84 else 3000000 if i<=183 else 4000000 if i<=383 else 5000000)
             recd["min_volume"]=threshold
-            if vol<threshold:
-                recd["reason"]=f"24H volume below ${threshold/1e6:.0f}M minimum"
+            if vol<threshold:recd["reason"]=f"24H volume below ${threshold/1e6:.0f}M minimum"
             else:
-                try:
-                    price,prior,r,ma5,ma10=data(sym)
-                    recd.update(price=price,rsi=r,ma5=ma5,ma10=ma10)
-                    if not price or r is None or ma5 is None or ma10 is None:
-                        recd["reason"]="Hourly candle/indicator data unavailable"
-                    else:
-                        setup=sl=None
-                        if 1.0<chg<30.0 and s['rsi_min']<=r<=s['rsi_max'] and price>ma5>ma10:
-                            setup="TREND";sl=round(ma5*(1-s['stop_loss_pct']/100),6)
-                        elif -30.0<chg<-8.0 and r<30 and prior is not None and price>prior:
-                            setup="OVERSOLD";sl=round(price*(1-s['stop_loss_pct']/100),6)
-                        if setup:
-                            rr=(price*0.10)/(price-sl) if (price-sl)>0 else 0
-                            score=vol/1e6+rr*10
-                            recd["decision"]="SETUP — QUEUED" if buying_allowed else "SETUP — NOT QUEUED"
-                            if buying_allowed:
-                                recd["reason"]=setup+" setup matched; eligible for auto-buy"
-                                if sym not in q or q[sym].get('score',0)<score:
-                                    if sym not in q:tg(f"📥 *QUEUED:* {sym}\nScore:{score:.1f}")
-                                    q[sym]={"timestamp":ct,"type":setup,"sl":sl,"score":score,"price":price,"chg":chg}
-                                    qu=True
-                            else:
-                                block_reason=("auto-buy is OFF" if not auto_enabled else "BTC safety filter blocked auto-buy")
-                                recd["reason"]=f"{setup} setup matched; {block_reason}"
+                p,pr,r,ma5,ma10=data(sym)
+                recd.update(price=p,rsi=r,ma5=ma5,ma10=ma10)
+                if not p or r is None:recd["reason"]="Hourly candle/indicator data unavailable"
+                else:
+                    setup=sl=None
+                    if 1.0<chg<30.0 and s['rsi_min']<=r<=s['rsi_max'] and p>ma5>ma10:
+                        setup="TREND";sl=round(ma5*(1-s['stop_loss_pct']/100),6)
+                    elif -30.0<chg<-8.0 and r<30 and p>pr:
+                        setup="OVERSOLD";sl=round(p*(1-s['stop_loss_pct']/100),6)
+                    if setup:
+                        matched+=1
+                        rr=(p*0.10)/(p-sl) if (p-sl)>0 else 0;score=vol/1e6+rr*10
+                        if not buying_allowed:
+                            recd["decision"]="SETUP — NOT QUEUED"
+                            recd["reason"]=f"{setup} setup matched, but {block_reason}"
                         else:
-                            reasons=[]
-                            if not (1.0<chg<30.0):reasons.append("not in trend 24H-change range")
-                            if not (s['rsi_min']<=r<=s['rsi_max']):reasons.append(f"RSI outside {s['rsi_min']}-{s['rsi_max']}")
-                            if not (price>ma5>ma10):reasons.append("price/MA trend condition failed")
-                            if not (-30.0<chg<-8.0 and r<30 and prior is not None and price>prior):reasons.append("oversold recovery condition failed")
-                            recd["reason"]="; ".join(reasons) or "No strategy setup matched"
-                except Exception as e:
-                    recd["reason"]="Indicator check failed: "+str(e)[:100]
+                            recd["decision"]="SETUP — QUEUED"
+                            recd["reason"]=setup+" setup matched; eligible for automatic-buy queue"
+                            if sym not in q or q[sym].get('score',0)<score:
+                                if sym not in q:tg(f"📥 *QUEUED:* {sym}\nScore:{score:.1f}")
+                                q[sym]={"timestamp":ct,"type":setup,"sl":sl,"score":score,"price":p,"chg":chg};qu=True
+                            queued+=1
+                    else:
+                        reasons=[]
+                        if not (1.0<chg<30.0):reasons.append("not in trend 24H-change range")
+                        if not (s['rsi_min']<=r<=s['rsi_max']):reasons.append(f"RSI outside {s['rsi_min']}-{s['rsi_max']}")
+                        if not (p>ma5>ma10):reasons.append("price/MA trend condition failed")
+                        if not (-30.0<chg<-8.0 and r<30 and p>pr):reasons.append("oversold recovery condition failed")
+                        recd["reason"]="; ".join(reasons) or "No strategy setup matched"
         records.append(recd)
-
     sh["items"].extend(records)
-    # Bound the log while retaining the rolling 24-hour window.
-    sh["items"]=sh["items"][-15000:]
-    save(SH,sh)
-    if qu:save(QF,q)
+    # Keep the rolling-day file bounded if the exchange lists an unusually large number of markets.
+    sh["items"]=sh["items"][-15000:];save(SH,sh)
+    if qu or not buying_allowed:save(QF,q)
     st['last']=time.time();save(SC,st)
-
-    if not buying_allowed:
-        why="auto-buy is OFF" if not auto_enabled else "BTC safety filter is blocking new buys"
-        tg(f"🔍 *SCAN COMPLETE*\nRecorded {len(records)} market checks in 24-hour Scan History.\nAutomatic buying not permitted: {why}.")
-    elif q:
-        lines=[]
-        for sym,d in sorted(q.items(),key=lambda x:x[1].get('score',0),reverse=True):
-            lines.append(f"{sym.split('-')[0]} | Price: {fp(d.get('price'))} | 24H: {d.get('chg',0):+.1f}% | Score: {d.get('score',0):.1f}")
-        tg(f"🔍 *SCAN COMPLETE*\nRecorded {len(records)} market checks.\nQueue has {len(q)} setup(s):\n"+"\n".join(lines))
+    if matched:
+        if not buying_allowed:
+            tg(f"🔍 *SCAN COMPLETE*\nRecorded {len(records)} market checks.\nFound {matched} strategy setup(s), but none were queued because {block_reason}.\nSee /scan_history for each coin's RSI, MA5, MA10 and exact decision reason.")
+        else:
+            tg(f"🔍 *SCAN COMPLETE*\nRecorded {len(records)} market checks.\nStrategy setups matched: {matched} | queued/eligible: {queued}.\nSee /scan_history for each coin's technical readings and decision reason.")
     else:
-        tg(f"🔍 *SCAN COMPLETE*\nRecorded {len(records)} market checks.\nNo setups found in this cycle.")
+        tg(f"🔍 *SCAN COMPLETE*\nRecorded {len(records)} market checks.\nNo coin matched the configured TREND or OVERSOLD setup this cycle.\nSee /scan_history for each coin's rejection reason.")
 
 def check_daily_summary():
     st=load(SC);now=datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=TZ)));today=now.strftime('%Y-%m-%d')
