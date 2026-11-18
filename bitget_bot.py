@@ -1,5 +1,8 @@
 import requests,json,os,time,ccxt,subprocess,traceback,re,datetime,sys
-from google import genai
+try:
+    from google import genai
+except Exception:
+    genai=None
 try:import fcntl
 except ImportError:fcntl=None
 TK=os.environ.get('TG_TOKEN');CHAT=str(os.environ.get('TG_CHAT_ID',''));TZ=float(os.environ.get('TZ_OFFSET_HOURS','1'));API=f"https://api.telegram.org/bot{TK}"
@@ -7,7 +10,7 @@ DB,ST,CFG,QF,LF,CD,SC,HIST,LOCK="positions.json","tg_state.json","settings.json"
 FILES=[DB,ST,CFG,QF,LF,CD,SC,HIST]
 STABLE=['USDC','USDT','DAI','FDUSD','TUSD','USDD','USDE'];LEV=['3L','3S','5L','5S','10L','10S','2L','2S'];BL=['RPANW','CT','ONE']
 ex=ccxt.bitget({'apiKey':os.environ.get('BITGET_API_KEY'),'secret':os.environ.get('BITGET_API_SECRET'),'password':os.environ.get('BITGET_API_PASSPHRASE'),'enableRateLimit':True});ex.options['createMarketBuyOrderRequiresPrice']=False
-client=genai.Client(api_key=os.environ.get('GEMINI_API_KEY'))
+client=genai.Client(api_key=os.environ.get('GEMINI_API_KEY')) if genai and os.environ.get('GEMINI_API_KEY') else None
 GEMINI_MODELS=[m for m in [os.environ.get('GEMINI_MODEL'),'gemini-3.8-flash','gemini-3.6-flash','gemini-2.5-flash'] if m]
 _C={};KB={"keyboard":[["📊 Menu","▶️ Resume","🚨 PANIC"]],"resize_keyboard":True,"is_persistent":True}
 S=lambda s:s.replace("-","/")
@@ -15,8 +18,8 @@ TR=lambda t:{'trigger':True} if t else {}
 B=lambda k,c:ex.fetch_balance()[k].get(c,0)
 skip=lambda b:b in STABLE or b in BL or ((b.startswith('X') or b.startswith('R')) and len(b)<=6) or any(b.upper().endswith(x) for x in LEV)
 NP=lambda e,sl:{"entry_price":e,"safe_zone":e,"stop_loss":sl,"peak_price":e,"last_price":e,"opened_at":time.time()}
-STOP_OK="🛡️ Exchange stop-loss: Active\n📈 Bot-side trailing: Active"
-STOP_NO="⚠️ Exchange stop NOT placed.\n📈 Bot-side stop + trailing still protect it"
+STOP_OK="🛡️ Exchange protective sell: Verified\n📈 Bot-side trailing: Active"
+STOP_NO="⚠️ Exchange stop NOT verified.\nBot-side monitoring is active only while the bot is running; protection is not guaranteed."
 
 def _send(m,mode,btn=None):
     try:
@@ -50,9 +53,13 @@ def save(f,d):
     except Exception as e:print(f"SAVE ERR {f}: {e}")
 
 def cfg():
-    d={"rsi_min":42,"rsi_max":48,"stop_loss_pct":12,"auto_buy_enabled":True,"auto_buy_amount_usdt":10.0,"max_tokens_before_consolidation":3,"max_hold_hours":48,"trail_pct":8.0,"crash_guard_pct":18.0,"rsi_exit":75,"btc_rsi_min":45}
+    d={"rsi_min":42,"rsi_max":48,"stop_loss_pct":5.0,"auto_buy_enabled":False,"auto_buy_amount_usdt":10.0,"max_tokens_before_consolidation":3,"max_hold_hours":48,"trail_pct":8.0,"crash_guard_pct":10.0,"rsi_exit":75,"btc_rsi_min":50,"risk_per_trade_pct":1.0,"max_daily_loss_pct":3.0,"max_portfolio_exposure_pct":50.0,"max_position_pct":15.0,"max_daily_trades":5,"max_spread_pct":0.5}
     s=load(CFG,d)
+    upgraded='risk_per_trade_pct' not in s
     for k,v in d.items():s.setdefault(k,v)
+    # On an upgrade, require an explicit /resume after the new risk controls are installed.
+    if upgraded:s['auto_buy_enabled']=False
+    if upgraded:save(CFG,s)
     return s
 
 def in_cd(k,s=5):return time.time()-load(CD,{}).get(k,0)<s
@@ -65,7 +72,7 @@ def _rsi(c,n=14):
     if len(c)<n+1:return None
     d=[c[i]-c[i-1] for i in range(1,len(c))];ag=sum(max(0,x) for x in d[:n])/n;al=sum(max(0,-x) for x in d[:n])/n
     for x in d[n:]:ag=(ag*(n-1)+max(0,x))/n;al=(al*(n-1)+max(0,-x))/n
-    return 100.0 if al==0 else round(100-100/(1+ag/al),2)
+    return 50.0 if al==0 and ag==0 else 100.0 if al==0 else round(100-100/(1+ag/al),2)
 
 def _calc(sym):
     try:
@@ -92,41 +99,74 @@ def open_sells(sym):
     return res,ok
 
 def cancel_sells(sym):
-    f=0
-    for o,t in open_sells(sym)[0]:
+    orders,ok=open_sells(sym)
+    if not ok:return 1
+    failed=0
+    for o,t in orders:
         try:ex.cancel_order(o['id'],S(sym),TR(t))
-        except Exception as e:f+=1;print(f"CANCEL ERR {sym} {o.get('id')}: {e}")
-    return f
+        except Exception as e:
+            failed+=1;print(f"CANCEL ERR {sym} {o.get('id')}: {e}")
+    time.sleep(0.3)
+    remaining,verified=open_sells(sym)
+    if not verified or remaining:failed=max(1,failed)
+    return failed
 
 def free_qty(sym,d):
     try:b=B('free',sym.split('-')[0]);return min(d,b) if b>0 else d
     except Exception:return d
 
 def m_buy(cs,usdt):
-    p=live(cs.replace("/","-"))
+    """Submit a market buy and use only exchange-confirmed fills; never invent a fill."""
+    sym=cs.replace("/","-")
+    p=live(sym)
     if not p:raise Exception(f"No price for {cs}")
-    try:o=ex.create_order(cs,'market','buy',usdt,None,{'createMarketBuyOrderRequiresPrice':False})
+    try:
+        o=ex.create_order(cs,'market','buy',usdt,None,{'createMarketBuyOrderRequiresPrice':False})
     except Exception as e1:
         try:o=ex.create_order(cs,'market','buy',float(ex.amount_to_precision(cs,usdt/p)),p)
         except Exception as e2:raise Exception(f"{e1} | fallback: {e2}")
-    f,a=o.get('filled'),o.get('average')
-    if not f or not a:
-        time.sleep(1)
-        try:o2=ex.fetch_order(o['id'],cs);f=o2.get('filled') or usdt/p;a=o2.get('average') or p
-        except:f,a=usdt/p,p
-    return float(f),float(a)
+    oid=o.get('id')
+    if oid:
+        for _ in range(8):
+            f=o.get('filled') or 0
+            if f>0 and (o.get('average') or o.get('price')):break
+            time.sleep(1)
+            try:o=ex.fetch_order(oid,cs)
+            except Exception:continue
+            if o.get('status') in ('canceled','rejected','expired') and not (o.get('filled') or 0):
+                raise Exception(f"Buy order {o.get('status')}; no fill confirmed")
+    f=float(o.get('filled') or 0)
+    a=float(o.get('average') or o.get('price') or 0)
+    if f<=0 or a<=0:
+        raise Exception("Exchange did not confirm a filled quantity and execution price. Check Bitget order history before retrying.")
+    if o.get('status') not in (None,'closed') and o.get('remaining'):
+        print(f"PARTIAL BUY {cs}: filled={f}, remaining={o.get('remaining')}")
+    return f,a
 
 def hard_sl(sym,qty,pr):
+    """Place a spot trigger sell only if old sell orders are cleared and the new order is visible."""
     try:
         cs=S(sym)
-        if cancel_sells(sym):print(f"WARN: some old sell orders for {sym} could not be cancelled")
+        if cancel_sells(sym):
+            print(f"SL aborted {sym}: existing sell orders could not be safely cleared")
+            return False
         time.sleep(0.5)
-        try:qty=float(ex.amount_to_precision(cs,qty))
-        except Exception:print(f"SL skipped {sym}: amount below exchange minimum (dust)");return False
+        qty=float(ex.amount_to_precision(cs,qty))
         pr=float(ex.price_to_precision(cs,pr))
-        if qty<=0 or qty*pr<1.0:print(f"SL skipped {sym}: position too small");return False
-        ex.create_order(cs,'market','sell',qty,None,{'triggerPrice':pr});return True
-    except Exception as e:tg(f"⚠️ *SL FAILED* {sym}@{pr}:`{e}`");return False
+        if qty<=0 or qty*pr<1.0:
+            print(f"SL skipped {sym}: position too small")
+            return False
+        created=ex.create_order(cs,'market','sell',qty,None,{'triggerPrice':pr})
+        oid=(created or {}).get('id')
+        time.sleep(0.5)
+        orders,ok=open_sells(sym)
+        if ok and any((o.get('id')==oid if oid else False) for o,_ in orders):
+            return True
+        print(f"SL unverified {sym}: exchange response={created}; open sell orders={len(orders)}")
+        return False
+    except Exception as e:
+        tg(f"⚠️ *SL NOT VERIFIED* {sym}: `{e}`")
+        return False
 
 def place_trailing_sl(sym,qty):
     # Exchange side = ONE stop-loss trigger order (starts at entry-SL%; manage() raises it as the price climbs).
@@ -152,8 +192,12 @@ def rec(sym,pnl,why):
 
 def sell(sym,pct,reason):
     try:
-        cs=S(sym);coin=sym.split("-")[0];cancel_sells(sym);time.sleep(0.5);fb=B('free',coin)
-        if fb<=0:tg(f"ℹ️ {sym} has 0 balance ({reason}) - removed from tracking, no PnL logged.");return True
+        cs=S(sym);coin=sym.split("-")[0]
+        if cancel_sells(sym):
+            tg(f"⚠️ Sale of {sym} stopped: existing protective sell orders could not be safely cancelled. Trailing-stop protection was not deliberately bypassed.")
+            return False
+        time.sleep(0.5);fb=B('free',coin)
+        if fb<=0:tg(f"ℹ️ {sym} has 0 free balance ({reason}) - position was not sold; check locked funds and open orders.");return False
         p=live(sym)
         if not p:return False
         q=fb*pct
@@ -207,7 +251,9 @@ def cmd_sell(txt):
     p=live(sym)
     if not p:tg(f"❌ No price for {c}.");return
     try:
-        cancel_sells(sym);time.sleep(0.5);fb=B('free',c)
+        if cancel_sells(sym):
+            tg(f"⚠️ Sale of {sym} stopped: existing sell/stop orders could not be cancelled safely.");return
+        time.sleep(0.5);fb=B('free',c)
         if fb<=0:tg(f"❌ You have 0 {c} available.");return
         q,a_s=(fb,"ALL") if amt is None or amt/p>=fb else (amt/p,f"${amt:.2f}")
         q=float(ex.amount_to_precision(cs,q))
@@ -310,6 +356,10 @@ def get_holdings_text():
             f"MA5 (1h): {fp(ma5) if ma5 is not None else 'N/A'}",
             f"MA10 (1h): {fp(ma10) if ma10 is not None else 'N/A'}",
             f"Market sentiment: {sentiment}",
+            f"Bot trailing stop: {'ON ('+str(cfg().get('trail_pct',0))+'% below peak)' if cfg().get('trail_pct',0)>0 else 'OFF'}",
+            f"Peak price: {fp(entry_data.get('peak_price')) if entry_data.get('peak_price') else 'N/A'}",
+            f"Trailing stop level: {fp(entry_data.get('peak_price',0)*(1-cfg().get('trail_pct',0)/100)) if entry_data.get('peak_price') and cfg().get('trail_pct',0)>0 else 'N/A'}",
+            f"Exchange stop level: {fp(entry_data.get('xsl')) if entry_data.get('xsl') else 'Not verified / not recorded'}",
             f"Stop loss: {fp(entry_data.get('stop_loss')) if entry_data.get('stop_loss') else 'Not set'}",
             ""
         ])
@@ -365,6 +415,8 @@ def audit_system():
     return "✅ *AUDIT COMPLETE:* No issues found. System healthy."
 
 def ask_ai(p):
+    if not client:
+        tg("⚠️ AI analyst is unavailable. Add GEMINI_API_KEY to your GitHub repository secrets to enable it. Trading functions can still run without AI.");return
     try:
         db=load(DB);q=load(QF);s=cfg();bal=B('free','USDT');br=data("BTC-USDT")[2]
         pos=[f"  {sym}:entry={d['entry_price']},pnl={((live(sym) or d['entry_price'])-d['entry_price'])/d['entry_price']*100:+.1f}%" for sym,d in list(db.items())[:5]] or ["  (none)"]
@@ -378,6 +430,9 @@ def ask_ai(p):
     except Exception as e:tg(f"❌ AI Error: {e}")
 
 def manage():
+    # KEEP EXISTING TRAILING-STOP BEHAVIOUR:
+    # peak_price ratchets upward; trailing level is peak_price * (1 - trail_pct/100).
+    # The stop is never lowered when the market price falls.
     db=load(DB);s=cfg();tp=s.get('trail_pct',0) or 0
     for sym,d in list(db.items()):
         d.setdefault('opened_at',time.time());r=data(sym)[2];lv=live(sym)
@@ -424,9 +479,52 @@ def btc_blocked(s):
     cd("btcblock",21600) or tg(f"⏸ *BTC FILTER:* BTC RSI is {br} (needs ≥ {m}). Auto-buying paused until it recovers.")
     return True
 
+def risk_controls():
+    """Daily circuit breaker based on confirmed realized trades; returns (allowed, reason)."""
+    s=cfg();now=time.time();day=[t for t in load(HIST) if now-float(t.get('time',0))<86400]
+    realized=sum(float(t.get('pnl',0)) for t in day)
+    try:
+        bal=ex.fetch_balance();equity=float((bal.get('total') or {}).get('USDT',0))
+        for coin,qty in (bal.get('total') or {}).items():
+            if coin in STABLE or coin=='USDT' or float(qty or 0)<=0:continue
+            px=live(f"{coin}-USDT")
+            if px:equity+=float(qty)*px
+    except Exception as e:return False,f"Cannot verify account equity: {e}"
+    if equity<=0:return False,"Account equity is unavailable"
+    if len(day)>=int(s.get('max_daily_trades',5)):return False,f"Daily completed-trade limit reached ({len(day)})"
+    limit=equity*float(s.get('max_daily_loss_pct',3.0))/100
+    if realized<=-limit:return False,f"Daily loss limit reached (${realized:.2f} / -${limit:.2f})"
+    return True,""
+
+def risk_sized_budget(sym,price,stop,available_usdt):
+    """Size a new spot position to 1% account risk, with exposure caps."""
+    s=cfg()
+    try:
+        bal=ex.fetch_balance();tot=bal.get('total') or {};equity=float(tot.get('USDT',0))
+        exposure=0.0
+        for coin,qty in tot.items():
+            if coin in STABLE or coin=='USDT' or float(qty or 0)<=0:continue
+            px=live(f"{coin}-USDT")
+            if px:exposure+=float(qty)*px
+        equity+=exposure
+        if equity<=0:return 0.0
+        distance=max(0.005,(price-stop)/price)
+        risk_cash=equity*float(s.get('risk_per_trade_pct',1.0))/100
+        by_risk=risk_cash/distance
+        max_position=equity*float(s.get('max_position_pct',15.0))/100
+        max_exposure=equity*float(s.get('max_portfolio_exposure_pct',50.0))/100
+        remaining=max(0.0,max_exposure-exposure)
+        return max(0.0,min(float(available_usdt),by_risk,max_position,remaining,float(s.get('auto_buy_amount_usdt',10.0))))
+    except Exception as e:
+        print(f"RISK SIZE ERROR {sym}: {e}");return 0.0
+
 def exec_q():
     q=load(QF);db=load(DB);s=cfg();mx=s["max_tokens_before_consolidation"]
     if not q or not s["auto_buy_enabled"] or btc_blocked(s):return
+    allowed,reason=risk_controls()
+    if not allowed:
+        if not in_cd('risk_pause_notice',3600):tg(f"🛑 *RISK CIRCUIT BREAKER:* {reason}. Automatic buying is paused for safety.")
+        return
     try:
         ub=B('free','USDT')
         for sym,qd in sorted(q.items(),key=lambda x:x[1].get('score',0),reverse=True):
@@ -447,7 +545,10 @@ def exec_q():
                         tg(f"🔄 *ROTATION SELL:* Dropping {wk} (PnL {low:.1f}%) to buy {sym}")
                         if sell(wk,1.0,"ROTATION"):db.pop(wk,None);save(DB,db);time.sleep(2);ub=B('free','USDT');spend=ub
                     elif not full:
-                        cancel_sells(wk);time.sleep(0.5);hb=B('free',bc);hp=live(wk)
+                        if cancel_sells(wk):
+                            tg(f"⚠️ Rotation skipped for {wk}: existing protective sell orders could not be safely cancelled.")
+                            continue
+                        time.sleep(0.5);hb=B('free',bc);hp=live(wk)
                         if hb>0 and hp:
                             qs=float(ex.amount_to_precision(S(wk),min(s['auto_buy_amount_usdt'],hb*hp)/hp))
                             if qs*hp<hb*hp*0.95:
@@ -458,7 +559,9 @@ def exec_q():
                         elif hb>0:place_trailing_sl(wk,hb)
             if len(db)>=mx:continue
             if spend<1.00:q.pop(sym,None);save(QF,q);continue
-            sp=min(spend,s['auto_buy_amount_usdt'])
+            sp=risk_sized_budget(sym,live(sym),qd.get('sl') or live(sym)*(1-s['stop_loss_pct']/100),spend)
+            if sp<1.02:
+                continue
             try:f,a=m_buy(S(sym),sp)
             except Exception as e:tg(f"❌ Buy fail {sym}:{e}");mk_cd(f"fail_{sym}");continue
             mxs=round(a*(1-s['stop_loss_pct']/100),6);sl=qd.get('sl') or mxs
@@ -533,6 +636,21 @@ def cmd_set(txt):
     if k not in s:tg(f"❌ Unknown key. Valid: `{'`, `'.join(s.keys())}`");return
     try:new=val.lower() in ('true','1','yes','on') if isinstance(s[k],bool) else float(val) if isinstance(s[k],float) else int(val)
     except:tg(f"❌ Invalid value for {k}");return
+    limits={
+        "risk_per_trade_pct":(0.1,2.0),"max_daily_loss_pct":(0.5,10.0),
+        "max_portfolio_exposure_pct":(5.0,100.0),"max_position_pct":(1.0,50.0),
+        "max_daily_trades":(1,50),"max_spread_pct":(0.05,3.0),
+        "trail_pct":(0.0,30.0),"stop_loss_pct":(0.5,20.0),
+        "rsi_min":(1.0,99.0),"rsi_max":(1.0,99.0),"rsi_exit":(0.0,99.0),
+        "auto_buy_amount_usdt":(1.0,100000.0),"max_tokens_before_consolidation":(1,30),
+        "max_hold_hours":(1,720),"crash_guard_pct":(1.0,50.0),"btc_rsi_min":(0.0,99.0)
+    }
+    if k in limits and not (limits[k][0] <= new <= limits[k][1]):
+        tg(f"❌ `{k}` must be between {limits[k][0]} and {limits[k][1]}. No setting was changed.");return
+    if k=="rsi_min" and new>=s.get("rsi_max",99):
+        tg("❌ rsi_min must be lower than rsi_max.");return
+    if k=="rsi_max" and new<=s.get("rsi_min",1):
+        tg("❌ rsi_max must be higher than rsi_min.");return
     s[k]=new;save(CFG,s);tg(f"✅ `{k}` = `{new}`")
 
 def setc(k,v,m):s=cfg();s[k]=v;save(CFG,s);tg(m)
