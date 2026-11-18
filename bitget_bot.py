@@ -31,7 +31,7 @@ tg=lambda m:_send(m,"Markdown");tg_ai=lambda m:_send(m,"HTML")
 
 def menu():
     s=cfg();b=lambda t,c:{"text":t,"callback_data":c};tb=b("📈 Trail: ON","trail_off") if s.get('trail_pct',8.0)>0 else b("📉 Trail: OFF","trail_on")
-    _send("🕹️ *MAIN MENU*\nSelect an option below:","Markdown",{"inline_keyboard":[[b("▶️ Resume","/resume"),b("⏸ Pause","/pause")],[b("🔄 Sync","/sync"),b("🛠️ Audit","/audit")],[b("🟢 Status","/status"),b("💰 Balance","/balance")],[b("📊 Summary","/summary"),tb],[b("🚀 Gainers","/gainers"),b("🩸 Losers","/losers")],[b("🛒 Buy Info","buy_info"),b("💸 Sell Info","sell_info")],[b("🧠 Ask AI","ai_info")]]})
+    _send("🕹️ *MAIN MENU*\nSelect an option below:","Markdown",{"inline_keyboard":[[b("▶️ Resume","/resume"),b("⏸ Pause","/pause")],[b("🔄 Sync","/sync"),b("🛠️ Audit","/audit")],[b("🟢 Status","/status"),b("💰 Balance","/balance")],[b("💼 Holdings Details","/holdings")],[b("📊 Summary","/summary"),tb],[b("🚀 Gainers","/gainers"),b("🩸 Losers","/losers")],[b("🛒 Buy Info","buy_info"),b("💸 Sell Info","sell_info")],[b("🧠 Ask AI","ai_info")]]})
 
 def panic_prompt():_send("🚨 *CONFIRM PANIC*\nThis sells ALL positions at market and pauses auto-buy.\nConfirm within 15 minutes.","Markdown",{"inline_keyboard":[[{"text":"✅ YES, SELL EVERYTHING","callback_data":"panic_confirm"},{"text":"❌ Cancel","callback_data":"panic_cancel"}]]})
 
@@ -258,6 +258,80 @@ def get_balance_text():
                 lines.append(f"{c}: {a:.4f} (about ${a*p:.2f})")
     return "\n".join(lines)
 
+def get_holdings_text():
+    """Show wallet holdings with live price, indicators and technical sentiment."""
+    try:
+        balance=ex.fetch_balance()
+        totals=balance.get('total') or {}
+    except Exception as e:
+        return f"❌ Could not fetch exchange holdings: {e}"
+
+    db=load(DB)
+    lines=["💼 *YOUR ASSET HOLDINGS*", "Indicators use the 1-hour timeframe.", ""]
+    count=0
+    total_value=0.0
+
+    for coin,qty in sorted(totals.items()):
+        try: qty=float(qty or 0)
+        except (TypeError,ValueError): continue
+        if qty<=0 or coin in STABLE or coin in BL: continue
+
+        sym=f"{coin}-USDT"
+        price=live(sym)
+        if not price or qty*price<0.10: continue
+
+        total_value += qty*price
+        entry_data=db.get(sym,{})
+        entry=entry_data.get('entry_price')
+        _,_,rsi,ma5,ma10=data(sym)
+        if rsi is not None and ma5 is not None and ma10 is not None:
+            if price>ma5>ma10 and rsi>=50:
+                sentiment="🟢 Bullish"
+            elif price<ma5<ma10 and rsi<50:
+                sentiment="🔴 Bearish"
+            else:
+                sentiment="🟡 Neutral / Mixed"
+        else:
+            sentiment="⚪ Unavailable"
+
+        pnl_line="Entry / PnL: Not tracked by bot"
+        if entry:
+            pnl=(price-entry)/entry*100 if entry else 0
+            pnl_usdt=(price-entry)*qty
+            pnl_line=f"Entry: {fp(entry)} USDT | PnL: {pnl:+.2f}% (${pnl_usdt:+.2f})"
+
+        lines.extend([
+            f"🪙 *{coin}*",
+            f"Quantity: {qty:.8g}",
+            f"Current price: {fp(price)} USDT",
+            f"Market value: ${qty*price:.2f}",
+            pnl_line,
+            f"RSI (1h): {rsi if rsi is not None else 'N/A'}",
+            f"MA5 (1h): {fp(ma5) if ma5 is not None else 'N/A'}",
+            f"MA10 (1h): {fp(ma10) if ma10 is not None else 'N/A'}",
+            f"Market sentiment: {sentiment}",
+            f"Stop loss: {fp(entry_data.get('stop_loss')) if entry_data.get('stop_loss') else 'Not set'}",
+            ""
+        ])
+        count+=1
+
+    if count==0:
+        return "💼 *YOUR ASSET HOLDINGS*\nNo eligible USDT-priced holdings found in your exchange wallet."
+    lines.insert(2,f"Assets: {count} | Estimated value: ${total_value:.2f} USDT")
+    lines.append("Sentiment is a technical estimate from RSI and price vs MA5/MA10, not news-based advice.")
+    message="\n".join(lines)
+    # Telegram messages are limited to 4096 characters; split at asset boundaries.
+    if len(message)<=3900:
+        return message
+    chunks=[]
+    current="💼 *YOUR ASSET HOLDINGS*\n"
+    for block in message.split("\n\n"):
+        if len(current)+len(block)+2>3900:
+            chunks.append(current);current="💼 *YOUR ASSET HOLDINGS (continued)*\n"
+        current+=block+"\n\n"
+    if current.strip():chunks.append(current)
+    return chunks
+
 def check_hourly_balance():
     st=load(SC);now=time.time()
     if now-st.get('last_bal_alert',0)>=3600:tg(f"💰 *HOURLY BALANCE*\n{get_balance_text()}");st['last_bal_alert']=now;save(SC,st)
@@ -462,7 +536,7 @@ def cmd_set(txt):
     s[k]=new;save(CFG,s);tg(f"✅ `{k}` = `{new}`")
 
 def setc(k,v,m):s=cfg();s[k]=v;save(CFG,s);tg(m)
-MSG={"ai_info":"🧠 *AI ANALYST*\nTo ask the AI a question, type:\n`/ai <your question>`\n\nExample:\n`/ai what is the market sentiment right now?`","buy_info":"🛒 *BUY COMMAND*\nUsage: `/buy COIN AMOUNT`\nExample: `/buy SOL 5.75`","sell_info":"💸 *SELL COMMAND*\nUsage: `/sell COIN AMOUNT`\nExample: `/sell SOL 5.75`\n\nType `ALL` instead of an amount to sell the entire position.","/help":"🤖 *CMDS*\n`/menu` `/ai [q]` `/sync` `/audit`\n`/gainers` `/losers` `/summary`\n`/balance` `/status` `/pnl`\n`/buy COIN AMT` `/sell COIN AMT|ALL`\n`/set key value` `/pause` `/resume` `/panic`"}
+MSG={"ai_info":"🧠 *AI ANALYST*\nTo ask the AI a question, type:\n`/ai <your question>`\n\nExample:\n`/ai what is the market sentiment right now?`","buy_info":"🛒 *BUY COMMAND*\nUsage: `/buy COIN AMOUNT`\nExample: `/buy SOL 5.75`","sell_info":"💸 *SELL COMMAND*\nUsage: `/sell COIN AMOUNT`\nExample: `/sell SOL 5.75`\n\nType `ALL` instead of an amount to sell the entire position.","/help":"🤖 *CMDS*\n`/menu` `/ai [q]` `/sync` `/audit`\n`/gainers` `/losers` `/summary`\n`/balance` `/status` `/holdings` `/pnl`\n`/buy COIN AMT` `/sell COIN AMT|ALL`\n`/set key value` `/pause` `/resume` `/panic`"}
 
 def handle(t,age):
     l=t.lower()
@@ -480,6 +554,9 @@ def handle(t,age):
     elif l=="trail_on":setc('trail_pct',8.0,"📈 Trailing Stop-Loss turned ON (8%)");menu()
     elif l=="trail_off":setc('trail_pct',0.0,"📉 Trailing Stop-Loss turned OFF");menu()
     elif l=="/balance":tg(f"💰 *BALANCE*\n{get_balance_text()}")
+    elif l in ("/holdings","/portfolio"):
+        result=get_holdings_text()
+        for part in result if isinstance(result,list) else [result]:tg(part)
     elif l=="/summary":tg(get_summary_text())
     elif l=="/status":
         db=load(DB)
