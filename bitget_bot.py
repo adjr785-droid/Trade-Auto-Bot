@@ -626,19 +626,37 @@ def risk_sized_budget(sym,price,stop,available_usdt):
     except Exception as e:
         print(f"RISK SIZE ERROR {sym}: {e}");return 0.0
 
+def buy_rejection(sym,reason):
+    """Explain a blocked automatic entry without flooding Telegram."""
+    key=f"buy_reject_notice:{sym}:{reason[:60]}"
+    if not in_cd(key,900):
+        tg(f"⛔ *AUTOMATIC BUY REJECTED — {sym}*\nReason: {reason}\nNo order was submitted.")
+        mk_cd(key)
+
 def exec_q():
     q=load(QF);db=load(DB);s=cfg();mx=s["max_tokens_before_consolidation"]
-    if not q or not s["auto_buy_enabled"] or btc_blocked(s):return
+    if not q:return
+    if not s["auto_buy_enabled"]:
+        for sym in q:buy_rejection(sym,"Auto-buy is OFF. Use /resume to enable automatic buying.")
+        return
+    if btc_blocked(s):
+        for sym in q:buy_rejection(sym,"BTC market-safety filter is active; automatic entries are paused.")
+        return
     allowed,reason=risk_controls()
     if not allowed:
+        for sym in q:buy_rejection(sym,f"Risk controls blocked entry: {reason}")
         if not in_cd('risk_pause_notice',3600):tg(f"🛑 *RISK CIRCUIT BREAKER:* {reason}. Automatic buying is paused for safety.")
         return
     try:
         ub=B('free','USDT')
         for sym,qd in sorted(q.items(),key=lambda x:x[1].get('score',0),reverse=True):
-            if in_cd(f"fail_{sym}",300):continue
-            if sym in db:q.pop(sym,None);save(QF,q);continue
-            if not live(sym):continue
+            if in_cd(f"fail_{sym}",300):
+                buy_rejection(sym,"A previous order attempt failed; retry cooldown is still active.");continue
+            if sym in db:
+                buy_rejection(sym,"A bot-managed position already exists for this coin; duplicate entry blocked.")
+                q.pop(sym,None);save(QF,q);continue
+            if not live(sym):
+                buy_rejection(sym,"Live market price is unavailable; no order was submitted.");continue
             full=len(db)>=mx;spend=ub
             if spend<1.02 and db:
                 wk=None;low=999
@@ -665,13 +683,20 @@ def exec_q():
                                 else:db.pop(wk,None);save(DB,db)
                             else:place_trailing_sl(wk,hb)
                         elif hb>0:place_trailing_sl(wk,hb)
-            if len(db)>=mx:continue
-            if spend<1.00:q.pop(sym,None);save(QF,q);continue
+            if len(db)>=mx:
+                buy_rejection(sym,f"Maximum active positions reached ({mx}).")
+                continue
+            if spend<1.00:
+                buy_rejection(sym,f"Insufficient free USDT balance for an order; available balance is ${spend:.2f}.")
+                q.pop(sym,None);save(QF,q);continue
             sp=risk_sized_budget(sym,live(sym),qd.get('sl') or live(sym)*(1-s['stop_loss_pct']/100),spend)
             if sp<1.02:
+                buy_rejection(sym,f"Risk-based position size is below Bitget's practical minimum; calculated budget is ${sp:.2f}.")
                 continue
             try:f,a=m_buy(S(sym),sp)
-            except Exception as e:tg(f"❌ Buy fail {sym}:{e}");mk_cd(f"fail_{sym}");continue
+            except Exception as e:
+                buy_rejection(sym,f"Bitget order failed or could not be confirmed: {e}")
+                mk_cd(f"fail_{sym}");continue
             mxs=round(a*(1-s['stop_loss_pct']/100),6);sl=qd.get('sl') or mxs
             if sl>=a or sl>mxs:sl=mxs
             db[sym]=NP(round(a,6),sl);save(DB,db);ok=place_trailing_sl(sym,free_qty(sym,f));tg(f"🛒 *EXECUTED!*\n{sym}|💵{sp:.2f}@{a:.6f}\n"+(STOP_OK if ok else STOP_NO))
