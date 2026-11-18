@@ -1,3 +1,4 @@
+
 name: BitgetBot
 
 on:
@@ -16,17 +17,25 @@ jobs:
   run-bot:
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    steps:
-      - uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: pip install requests ccxt google-genai
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests ccxt google-genai
 
-      - name: Run bot
+      - name: Run Bitget trading bot
         env:
           TG_TOKEN: ${{ secrets.TG_TOKEN }}
           TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
@@ -34,4 +43,5 @@ jobs:
           BITGET_API_SECRET: ${{ secrets.BITGET_API_SECRET }}
           BITGET_API_PASSPHRASE: ${{ secrets.BITGET_API_PASSPHRASE }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          TZ_OFFSET_HOURS: '1'
         run: python bitget_bot.py
