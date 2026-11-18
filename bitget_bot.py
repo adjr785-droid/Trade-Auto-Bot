@@ -32,7 +32,7 @@ def tg_ai(m):_send(m,"HTML")
 
 def tg_inline_menu():
     s=cfg();tb={"text":"📈 Trail: ON","callback_data":"trail_off"} if s.get('trail_pct',8.0)>0 else {"text":"📉 Trail: OFF","callback_data":"trail_on"}
-    btns={"inline_keyboard":[[{"text":"▶️ Resume","callback_data":"/resume"},{"text":"⏸ Pause","callback_data":"/pause"}],[{"text":"🔄 Sync Wallet","callback_data":"/sync"},{"text":"🛠️ Run Audit","callback_data":"/audit"}],[{"text":"🟢 Status","callback_data":"/status"},{"text":"💰 Balance","callback_data":"/balance"}],[{"text":"📊 Summary","callback_data":"/summary"},tb],[{"text":"🚀 Gainers","callback_data":"/gainers"},{"text":"🩸 Losers","callback_data":"/losers"}],[{"text":"🧠 Ask AI","callback_data":"ai_info"}]]}
+    btns={"inline_keyboard":[[{"text":"▶️ Resume","callback_data":"/resume"},{"text":"⏸ Pause","callback_data":"/pause"}],[{"text":"🔄 Sync","callback_data":"/sync"},{"text":"🛠️ Audit","callback_data":"/audit"}],[{"text":"🟢 Status","callback_data":"/status"},{"text":"💰 Balance","callback_data":"/balance"}],[{"text":"📊 Summary","callback_data":"/summary"},tb],[{"text":"🚀 Gainers","callback_data":"/gainers"},{"text":"🩸 Losers","callback_data":"/losers"}],[{"text":"🛒 Buy Info","callback_data":"buy_info"},{"text":"💸 Sell Info","callback_data":"sell_info"}],[{"text":"🧠 Ask AI","callback_data":"ai_info"}]]}
     _send("🕹️ *MAIN MENU*\nSelect an option below:","Markdown",btns)
 
 def load(f,d=None):
@@ -49,7 +49,7 @@ def save(f,d):
     except Exception as e:print(f"SAVE ERR {f}: {e}")
 
 def cfg():
-    d={"rsi_min":42,"rsi_max":48,"stop_loss_pct":12,"auto_buy_enabled":True,"auto_buy_amount_usdt":5.75,"max_tokens_before_consolidation":3,"max_hold_hours":48,"trail_pct":8.0,"crash_guard_pct":18.0}
+    d={"rsi_min":42,"rsi_max":48,"stop_loss_pct":12,"auto_buy_enabled":True,"auto_buy_amount_usdt":10.0,"max_tokens_before_consolidation":3,"max_hold_hours":48,"trail_pct":8.0,"crash_guard_pct":18.0}
     s=load(CFG,d)
     for k,v in d.items():s.setdefault(k,v)
     return s
@@ -62,7 +62,9 @@ def cd(k,s=5):
 
 def _calc(sym):
     try:
-        o=ex.fetch_ohlcv(sym.replace("-","/"),'1h',limit=50);c=[float(k[4]) for k in o[:-1]]
+        o=ex.fetch_ohlcv(sym.replace("-","/"),'1h',limit=50)
+        if len(o) < 50: return None,None,None,None,None # ANTI-SCAM: Reject new coins with < 50h history
+        c=[float(k[4]) for k in o[:-1]]
         g=[max(0,c[i]-c[i-1]) for i in range(1,len(c))];l=[max(0,c[i-1]-c[i]) for i in range(1,len(c))]
         ag=sum(g[-14:])/14;al=sum(l[-14:])/14;r=100.0 if al==0 else round(100-(100/(1+(ag/al))),2)
         return c[-1],c[-2],r,round(sum(c[-5:])/5,6),round(sum(c[-10:])/10,6)
@@ -139,6 +141,57 @@ def sell(sym,pct,reason):
             tg(f"✅ *SOLD ({reason})*\n🪙 {q} {sym}\n{'🟢' if pnl>=0 else '🔴'} PnL: ${pnl:.2f}")
         return True
     except Exception as e:tg(f"❌ *SELL FAILED* {sym}:`{e}`");return False
+
+def cmd_buy(txt):
+    parts=txt.split()
+    if len(parts)!=3: tg("❌ Usage: `/buy COIN USDT_AMOUNT`\nExample: `/buy BTC 5`"); return
+    c=parts[1].upper().replace("-USDT","").replace("/USDT","")
+    try: amt=float(parts[2])
+    except: tg("❌ Invalid amount."); return
+    sym=f"{c}-USDT"
+    if cd(f"buy:{sym}",5): tg(f"⏳ Processing /buy {c}..."); return
+    db=load(DB)
+    if sym in db: tg(f"❌ Active position for {c}."); return
+    ub=ex.fetch_balance()['free'].get('USDT',0)
+    if ub<amt: tg(f"❌ *BUY FAILED:* You only have ${ub:.2f} USDT."); return
+    try:
+        f,a=m_buy(f"{c}/USDT",amt)
+        sl=round(a*(1-cfg()['stop_loss_pct']/100),6)
+        db[sym]={"entry_price":round(a,6),"safe_zone":round(a,6),"stop_loss":sl,"peak_price":a,"last_price":a,"opened_at":time.time()}
+        save(DB,db); place_trailing_sl(sym,f)
+        tg(f"✅ *BOUGHT:* {c} @ {a:.6f}\nSpent: ${amt:.2f}\n📈 Trailing SL: Active")
+    except Exception as e: tg(f"❌ *BUY FAILED:* {e}")
+
+def cmd_sell(txt):
+    parts=txt.split()
+    if len(parts)!=3: tg("❌ Usage: `/sell COIN USDT_AMOUNT`"); return
+    c=parts[1].upper().replace("-USDT","").replace("/USDT","")
+    try: amt=float(parts[2])
+    except: tg("❌ Invalid amount."); return
+    sym=f"{c}-USDT"
+    if cd(f"sell:{sym}",5): tg(f"⏳ Processing /sell {c}..."); return
+    db=load(DB)
+    if sym not in db: tg(f"❌ No active bot trade for {c}.\n💡 *Tip:* Type `/sync` if manual."); return
+    p=live(sym)
+    if not p: tg(f"❌ No price for {c}."); return
+    fb=ex.fetch_balance()['free'].get(c,0)
+    if fb<=0: tg(f"❌ You have 0 {c} available."); return
+    target_qty=amt/p
+    if target_qty >= fb: qty=fb; amt_str="ALL"
+    else: qty=float(ex.amount_to_precision(sym.replace("-","/"),target_qty)); amt_str=f"${amt:.2f}"
+    if qty<=0: tg(f"❌ Amount too small."); return
+    try:
+        cancel_sells(sym); time.sleep(0.5)
+        ex.create_market_sell_order(sym.replace("-","/"),qty)
+        pnl=(p-db[sym]["entry_price"])*qty; L=load(LF)
+        L['total_realized_usdt']=L.get('total_realized_usdt',0.0)+pnl; L['trade_count']=L.get('trade_count',0)+1; save(LF,L)
+        H=load(HIST); H.append({"sym":sym,"pnl":pnl,"time":time.time(),"reason":f"MANUAL SELL {amt_str}"}); save(HIST,H)
+        rem=ex.fetch_balance()['total'].get(c,0)
+        if rem<=0 or (rem*p)<1.02: db.pop(sym,None); save(DB,db); tg(f"✅ *SOLD:* {qty} {c} @ {p:.6f}\nPnL: ${pnl:.2f}\nPosition closed.")
+        else:
+            place_trailing_sl(sym,rem); save(DB,db)
+            tg(f"✅ *SOLD:* {qty} {c} @ {p:.6f}\nPnL: ${pnl:.2f}\nRemaining: {rem:.4f} {c} (Trailing Active)")
+    except Exception as e: tg(f"❌ *SELL FAILED:* {e}")
 
 def cmd_sync():
     tg("🔄 Syncing manual coins to bot database...")
@@ -348,16 +401,24 @@ def scan():
         b=sym.split('/')[0]
         if (b in STABLE or b in BL or ((b.startswith('X') or b.startswith('R')) and len(b)<=6) or any(b.upper().endswith(x) for x in LEV) or (sym in mk and not mk[sym].get('spot',False))):continue
         vol=t['quoteVolume'] or 0
-        if vol>=1000000:v.append({'sym':sym.replace("/","-"),'vol':vol,'chg':t['percentage'] or 0})
+        v.append({'sym':sym.replace("/","-"),'vol':vol,'chg':t['percentage'] or 0})
     v.sort(key=lambda x:x['vol'],reverse=True);ct=int(time.time());qu=False
     for sym,d in list(q.items()):
         if ct-d.get('timestamp',0)>86400:q.pop(sym,None);qu=True
-    for t in v[15:100]: 
+    
+    for i, t in enumerate(v[15:500]): 
+        # TIERED VOLUME FILTER (i=0 is Rank 16)
+        req_vol = 1000000 if i <= 84 else (3000000 if i <= 183 else (4000000 if i <= 383 else 5000000))
+        if t['vol'] < req_vol: continue
+        
         p,pr,r,ma5,ma10=data(t['sym'])
         if not p or r is None:continue
         setup=sl=None
-        if t['chg']>1.0 and s['rsi_min']<=r<=s['rsi_max'] and p>ma5>ma10:setup="TREND";sl=round(ma5*(1-s['stop_loss_pct']/100),6)
-        elif t['chg']<-8.0 and r<30 and p>pr:setup="OVERSOLD";sl=round(p*(1-s['stop_loss_pct']/100),6)
+        # ANTI-SCAM: Price movement limits applied
+        if 1.0 < t['chg'] < 30.0 and s['rsi_min']<=r<=s['rsi_max'] and p>ma5>ma10:
+            setup="TREND";sl=round(ma5*(1-s['stop_loss_pct']/100),6)
+        elif -30.0 < t['chg'] < -8.0 and r<30 and p>pr:
+            setup="OVERSOLD";sl=round(p*(1-s['stop_loss_pct']/100),6)
         if setup:
             rr=(p*0.10)/(p-sl) if (p-sl)>0 else 0;sc=(t['vol']/1e6)+(rr*10)
             if t['sym'] not in q or q[t['sym']].get('score',0)<sc:
@@ -366,7 +427,6 @@ def scan():
     if qu:save(QF,q)
     st['last']=time.time();save(SC,st)
 
-    # REPORTING LOGIC
     if q:
         sq=sorted(q.items(),key=lambda x:x[1].get('score',0),reverse=True)
         rows=[[sym.split('-')[0],fp(d.get('price')),f"{d.get('chg',0):+.1f}%",f"{d.get('score',0):.1f}"] for sym,d in sq]
@@ -449,11 +509,13 @@ def tg_check():
             if low.startswith("/ai "):ask_ai(txt[4:].strip())
             elif low=="/ai":ask_ai("Give me a market overview.")
             elif low=="ai_info":tg("🧠 *AI ANALYST*\nTo ask the AI a question, type:\n`/ai <your question>`\n\nExample:\n`/ai what is the market sentiment right now?`")
+            elif low=="buy_info":tg("🛒 *BUY COMMAND*\nUsage: `/buy COIN AMOUNT`\nExample: `/buy SOL 5.75`")
+            elif low=="sell_info":tg("💸 *SELL COMMAND*\nUsage: `/sell COIN AMOUNT`\nExample: `/sell SOL 5.75`\n\nType `ALL` to sell entire position.")
             elif low in ("/menu","📊 menu"):tg_inline_menu()
             elif low=="/panic" or low=="🚨 panic":panic_sell()
             elif low=="/sync":cmd_sync()
             elif low=="/audit":audit_system()
-            elif low=="/help":tg("🤖 *CMDS*\n`/menu` `/ai [q]` `/sync` `/audit`\n`/gainers` `/losers` `/summary`\n`/balance` `/status` `/pnl`\n`/set key value` `/pause` `/resume` `/panic`")
+            elif low=="/help":tg("🤖 *CMDS*\n`/menu` `/ai [q]` `/sync` `/audit`\n`/gainers` `/losers` `/summary`\n`/balance` `/status` `/pnl`\n`/buy COIN AMT` `/sell COIN AMT`\n`/set key value` `/pause` `/resume` `/panic`")
             elif low=="trail_on":
                 s=cfg();s['trail_pct']=8.0;save(CFG,s);tg("📈 Trailing Stop-Loss turned ON (8%)");tg_inline_menu()
             elif low=="trail_off":
@@ -472,6 +534,8 @@ def tg_check():
                 tg(f"📊 *P&L*\n```\n{tbl(['Metric','Value'],rows,[12,10])}\n```")
             elif low=="/gainers":g,_=gl();tg(g)
             elif low=="/losers":_,l=gl();tg(l)
+            elif low.startswith("/buy"):cmd_buy(txt)
+            elif low.startswith("/sell"):cmd_sell(txt)
             elif low.startswith("/set"):cmd_set(txt)
             elif low=="/pause":
                 s=cfg();s['auto_buy_enabled']=False;save(CFG,s);tg("⏸ Auto-buy paused.")
