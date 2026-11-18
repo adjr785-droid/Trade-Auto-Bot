@@ -111,6 +111,28 @@ def data(sym):
     if h and time.time()-h[0]<20:return h[1]
     r=_calc(sym);_C[sym]=(time.time(),r);return r
 
+def breakout_confirmation(sym):
+    """Confirm a 20-hour resistance breakout using the last completed 1h candle.
+
+    Returns (confirmed, volume_multiple, resistance). The currently forming
+    candle is excluded so a temporary intrahour spike cannot trigger a setup.
+    """
+    try:
+        candles=ex.fetch_ohlcv(S(sym),'1h',limit=25)
+        if len(candles)<23:return False,None,None
+        closed=candles[:-1]
+        latest=closed[-1]
+        prior=closed[-21:-1]
+        if len(prior)!=20:return False,None,None
+        resistance=max(float(c[2]) for c in prior)
+        close=float(latest[4]);last_volume=float(latest[5] or 0)
+        avg_volume=sum(float(c[5] or 0) for c in prior)/20
+        multiple=(last_volume/avg_volume) if avg_volume>0 else 0.0
+        return close>resistance and multiple>=1.5,multiple,resistance
+    except Exception as e:
+        print(f"BREAKOUT CHECK ERROR {sym}: {e}")
+        return False,None,None
+
 def live(sym):
     try:return ex.fetch_ticker(S(sym))['last']
     except:return None
@@ -633,6 +655,10 @@ def buy_rejection(sym,reason):
         tg(f"⛔ *AUTOMATIC BUY REJECTED — {sym}*\nReason: {reason}\nNo order was submitted.")
         mk_cd(key)
 
+def strategy_priority(name):
+    """Higher number means a stronger queue priority; unknown setups rank last."""
+    return {"BREAKOUT":3,"TREND":2,"OVERSOLD":1}.get(str(name or "").upper(),0)
+
 def exec_q():
     q=load(QF);db=load(DB);s=cfg();mx=s["max_tokens_before_consolidation"]
     if not q:return
@@ -649,7 +675,10 @@ def exec_q():
         return
     try:
         ub=B('free','USDT')
-        for sym,qd in sorted(q.items(),key=lambda x:x[1].get('score',0),reverse=True):
+        # Small balances should fund one best-ranked setup, never several tiny positions.
+        single_trade_mode = ub <= max(10.0, float(s.get('auto_buy_amount_usdt',10.0)))
+        ordered_queue=sorted(q.items(),key=lambda x:(strategy_priority(x[1].get('type')),float(x[1].get('score',0) or 0)),reverse=True)
+        for sym,qd in ordered_queue:
             if in_cd(f"fail_{sym}",300):
                 buy_rejection(sym,"A previous order attempt failed; retry cooldown is still active.");continue
             if sym in db:
@@ -701,6 +730,9 @@ def exec_q():
             if sl>=a or sl>mxs:sl=mxs
             db[sym]=NP(round(a,6),sl);save(DB,db);ok=place_trailing_sl(sym,free_qty(sym,f));tg(f"🛒 *EXECUTED!*\n{sym}|💵{sp:.2f}@{a:.6f}\n"+(STOP_OK if ok else STOP_NO))
             q.pop(sym,None);save(QF,q);ub=B('free','USDT');time.sleep(2)
+            if single_trade_mode:
+                # Leave the remaining queue for the next scan cycle; do not split a small balance.
+                break
     except Exception as e:tg(f"⚠️ *QUEUE FAILED:* `{e}`")
 
 def scan_history_state():
@@ -712,6 +744,24 @@ def scan_history_state():
         h={"window_start":now,"items":[]};save(SH,h)
     h.setdefault("items",[])
     return h
+
+def scan_history_rsi(sym):
+    """Fetch a display-only 1h RSI without changing scanner eligibility rules."""
+    try:
+        cached=data(sym)[2]
+        if isinstance(cached,(int,float)):
+            return cached
+    except Exception:
+        pass
+    try:
+        candles=ex.fetch_ohlcv(S(sym),"1h",limit=30)
+        if len(candles)<16:
+            return None
+        closes=[float(c[4]) for c in candles[:-1]]  # exclude the still-forming candle
+        return _rsi(closes)
+    except Exception as e:
+        print(f"SCAN HISTORY RSI ERROR {sym}: {e}")
+        return None
 
 def cmd_scan_history(txt="/scan_history"):
     """Query the rolling 24-hour scan log instead of paging through every coin."""
@@ -758,25 +808,22 @@ def cmd_scan_history(txt="/scan_history"):
     total=max(1,(len(found)+limit-1)//limit)
     if page>total:tg(f"Only {total} page(s) match. Use `/scan_history page={total}`.");return
     chunk=found[(page-1)*limit:page*limit]
+    # Fill missing historical RSI values only for the rows being displayed.
+    # This avoids hundreds of OHLCV requests during every scan while allowing
+    # older/top-15/low-volume records to show a real 1h RSI when requested.
+    changed=False
+    for x in chunk:
+        if not isinstance(x.get("rsi"),(int,float)):
+            _rsi_value=scan_history_rsi(str(x.get("sym","")))
+            if isinstance(_rsi_value,(int,float)):
+                x["rsi"]=_rsi_value
+                changed=True
+    if changed:
+        save(SH,h)
     age=max(0,time.time()-h.get("window_start",time.time()))
     rows=[]
-    # Older history rows (including low-volume markets) may not have RSI yet.
-    # Fetch the hourly indicator only for the rows on this page, then persist it.
-    history_changed=False
     for x in chunk:
-        r=x.get("rsi")
-        if not isinstance(r,(int,float)):
-            sym_for_data=str(x.get("sym", ""))
-            if sym_for_data:
-                try:
-                    _,_,fresh_rsi,_,_=data(sym_for_data)
-                    if isinstance(fresh_rsi,(int,float)):
-                        x["rsi"]=fresh_rsi
-                        r=fresh_rsi
-                        history_changed=True
-                except Exception as e:
-                    print(f"SCAN HISTORY RSI ERR {sym_for_data}: {e}")
-        rsi=f"{r:.1f}" if isinstance(r,(int,float)) else "N/A"
+        r=x.get("rsi");rsi=f"{r:.1f}" if isinstance(r,(int,float)) else "N/A"
         sym=str(x.get("sym","?")).replace("-USDT","")[:12]
         raw_decision=str(x.get("decision","SKIP")).upper()
         if "NOT QUEUED" in raw_decision or "REJECT" in raw_decision: decision="REJECTED"
@@ -785,9 +832,7 @@ def cmd_scan_history(txt="/scan_history"):
         elif "SELL" in raw_decision or "SOLD" in raw_decision: decision="SOLD"
         else: decision="SKIP"
         rr=x.get("rr");rr_text=f"1:{rr:.1f}" if isinstance(rr,(int,float)) and rr>0 else "-"
-        rows.append(f"{sym:<12} {rsi:>4} {rr_text:>6} {decision:<9}")
-    if history_changed:
-        save(SH,h)
+        rows.append(f"{sym:<12} {rsi:>5} {rr_text:>6} {decision}")
     table="COIN         RSI    R:R  DECISION\n"+"-"*39+"\n"+"\n".join(rows)
     query=" ".join(parts) if parts else "all coins"
     msg=f"🔎 *SCAN HISTORY — QUERY*\nMatched {len(found)} of {len(items)} records | {query}\nPage {page}/{total} | Window {age/3600:.1f}h\n\n```{table}```\n\n*Filter examples*\n`/scan_history BTC` — one coin\n`/scan_history decision=queued` — queued setups\n`/scan_history rsi<30` — RSI below 30\n`/scan_history` — shows COIN, RSI, R:R and DECISION, ranked by market rank\n`/scan_history chg>5 rank<=100` — combined filters\n`/scan_history oversold limit=20` — oversold reasons\n`/scan_history` — all recent records\nHistory resets automatically after 24 hours."
@@ -807,6 +852,10 @@ def cmd_about():
          "*1. Main aim*\nFind liquid USDT spot-market opportunities, apply rule-based technical filters, manage positions and protect capital with predefined risk controls. The bot does not guarantee profit.\n\n"
          "*2. Strategy*\n• TREND setup: 24H change above +1% and below +30%, RSI within the configured range, and price above MA5 above MA10.\n"
          "• OVERSOLD setup: 24H change between -30% and -8%, RSI below 30, and current price recovering above the prior hourly close.\n"
+         "• BREAKOUT setup: 24H change above 0% and below 25%, RSI 50–70, price above MA5 above MA10, and the last completed 1-hour candle closes above the previous 20-hour high with volume at least 1.5x the previous 20-hour average.\n"
+         "• Breakout is confirmation-based monitoring; it does not buy on a wick or an unclosed candle. It uses the existing configured stop-loss and position-risk sizing.\n"
+         "• Queue priority when several coins qualify: BREAKOUT first, TREND second, OVERSOLD third; technical score ranks coins within the same strategy.\n"
+         "• When free USDT is at or below the configured small-balance threshold (at least $10), the bot executes at most one successful buy per queue run. Existing risk sizing and exchange minimum checks can still reject the trade.\n"
          "• Uses 1-hour candles, RSI(14), MA5 and MA10. These are technical signals, not predictions.\n\n"
          "*3. Scanning process*\n• Loads Bitget spot USDT tickers and filters stablecoins, leveraged tokens and excluded symbols.\n"
          "• Sorts eligible markets by 24H quote volume; the current scanner examines ranks 16–500.\n"
@@ -859,19 +908,33 @@ def scan():
                 if not p or r is None:recd["reason"]="Hourly candle/indicator data unavailable"
                 else:
                     setup=sl=None
+                    breakout_volume=None;breakout_level=None
+                    # Evaluate every strategy independently, then keep the highest-priority
+                    # valid signal. This prevents an ordinary TREND match hiding a confirmed breakout.
+                    candidates=[]
                     if 1.0<chg<30.0 and s['rsi_min']<=r<=s['rsi_max'] and p>ma5>ma10:
-                        setup="TREND";sl=round(ma5*(1-s['stop_loss_pct']/100),6)
-                    elif -30.0<chg<-8.0 and r<30 and p>pr:
-                        setup="OVERSOLD";sl=round(p*(1-s['stop_loss_pct']/100),6)
+                        candidates.append(("TREND",round(ma5*(1-s['stop_loss_pct']/100),6)))
+                    if -30.0<chg<-8.0 and r<30 and p>pr:
+                        candidates.append(("OVERSOLD",round(p*(1-s['stop_loss_pct']/100),6)))
+                    if 0.0<chg<25.0 and 50.0<=r<=70.0 and p>ma5>ma10:
+                        confirmed,breakout_volume,breakout_level=breakout_confirmation(sym)
+                        if confirmed:
+                            candidates.append(("BREAKOUT",round(p*(1-s['stop_loss_pct']/100),6)))
+                    if candidates:
+                        setup,sl=max(candidates,key=lambda item:strategy_priority(item[0]))
                     if setup:
+                        recd["strategy"]=setup
+                        if setup=="BREAKOUT":
+                            recd["reason"]=f"BREAKOUT confirmed: 1h close above 20h resistance; volume {breakout_volume:.2f}x average"
                         matched+=1
                         rr=(p*0.10)/(p-sl) if (p-sl)>0 else 0;recd["rr"]=rr;score=vol/1e6+rr*10
                         if not buying_allowed:
                             recd["decision"]="SETUP — NOT QUEUED"
-                            recd["reason"]=f"{setup} setup matched, but {block_reason}"
+                            recd["reason"]=(f"BREAKOUT confirmed (volume {breakout_volume:.2f}x), but {block_reason}" if setup=="BREAKOUT" else f"{setup} setup matched, but {block_reason}")
                         else:
                             recd["decision"]="SETUP — QUEUED"
-                            recd["reason"]=setup+" setup matched; eligible for automatic-buy queue"
+                            if setup!="BREAKOUT":recd["reason"]=setup+" setup matched; eligible for automatic-buy queue"
+                            else:recd["reason"]=f"BREAKOUT confirmed: 20h resistance cleared; volume {breakout_volume:.2f}x average; queued"
                             if sym not in q or q[sym].get('score',0)<score:
                                 if sym not in q:tg(f"📥 *QUEUED:* {sym}\nScore:{score:.1f}")
                                 q[sym]={"timestamp":ct,"type":setup,"sl":sl,"score":score,"price":p,"chg":chg};qu=True
@@ -882,6 +945,8 @@ def scan():
                         if not (s['rsi_min']<=r<=s['rsi_max']):reasons.append(f"RSI outside {s['rsi_min']}-{s['rsi_max']}")
                         if not (p>ma5>ma10):reasons.append("price/MA trend condition failed")
                         if not (-30.0<chg<-8.0 and r<30 and p>pr):reasons.append("oversold recovery condition failed")
+                        if not (0.0<chg<25.0 and 50.0<=r<=70.0 and p>ma5>ma10):reasons.append("breakout trend/RSI conditions failed")
+                        else:reasons.append("no confirmed 20h breakout with 1.5x volume")
                         recd["reason"]="; ".join(reasons) or "No strategy setup matched"
         records.append(recd)
     sh["items"].extend(records)
@@ -895,7 +960,7 @@ def scan():
         else:
             tg(f"🔍 *SCAN COMPLETE*\nRecorded {len(records)} market checks.\nStrategy setups matched: {matched} | queued/eligible: {queued}.\nSee /scan_history for each coin's technical readings and decision reason.")
     else:
-        tg(f"🔍 *SCAN COMPLETE*\nRecorded {len(records)} market checks.\nNo coin matched the configured TREND or OVERSOLD setup this cycle.\nSee /scan_history for each coin's rejection reason.")
+        tg(f"🔍 *SCAN COMPLETE*\nRecorded {len(records)} market checks.\nNo coin matched the configured TREND, OVERSOLD or BREAKOUT setup this cycle.\nSee /scan_history for each coin's rejection reason.")
 
 def check_daily_summary():
     st=load(SC);now=datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=TZ)));today=now.strftime('%Y-%m-%d')
