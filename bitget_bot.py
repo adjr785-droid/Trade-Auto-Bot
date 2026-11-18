@@ -8,6 +8,7 @@ FILES=[DB,ST,CFG,QF,LF,CD,SC,HIST]
 STABLE=['USDC','USDT','DAI','FDUSD','TUSD','USDD','USDE'];LEV=['3L','3S','5L','5S','10L','10S','2L','2S'];BL=['RPANW','CT','ONE']
 ex=ccxt.bitget({'apiKey':os.environ.get('BITGET_API_KEY'),'secret':os.environ.get('BITGET_API_SECRET'),'password':os.environ.get('BITGET_API_PASSPHRASE'),'enableRateLimit':True});ex.options['createMarketBuyOrderRequiresPrice']=False
 client=genai.Client(api_key=os.environ.get('GEMINI_API_KEY'))
+GEMINI_MODELS=[m for m in [os.environ.get('GEMINI_MODEL'),'gemini-3.8-flash','gemini-3.6-flash','gemini-2.5-flash'] if m]
 _C={};KB={"keyboard":[["📊 Menu","▶️ Resume","🚨 PANIC"]],"resize_keyboard":True,"is_persistent":True}
 S=lambda s:s.replace("-","/")
 TR=lambda t:{'trigger':True} if t else {}
@@ -47,7 +48,7 @@ def save(f,d):
     except Exception as e:print(f"SAVE ERR {f}: {e}")
 
 def cfg():
-    d={"rsi_min":42,"rsi_max":48,"stop_loss_pct":12,"auto_buy_enabled":True,"auto_buy_amount_usdt":10.0,"max_tokens_before_consolidation":3,"max_hold_hours":48,"trail_pct":8.0,"crash_guard_pct":18.0}
+    d={"rsi_min":42,"rsi_max":48,"stop_loss_pct":12,"auto_buy_enabled":True,"auto_buy_amount_usdt":10.0,"max_tokens_before_consolidation":3,"max_hold_hours":48,"trail_pct":8.0,"crash_guard_pct":18.0,"rsi_exit":75}
     s=load(CFG,d)
     for k,v in d.items():s.setdefault(k,v)
     return s
@@ -102,11 +103,10 @@ def free_qty(sym,d):
 def m_buy(cs,usdt):
     p=live(cs.replace("/","-"))
     if not p:raise Exception(f"No price for {cs}")
-    try:ex.options['createMarketBuyOrderRequiresPrice']=False;o=ex.create_market_buy_order(cs,usdt)
-    except Exception:
-        ex.options['createMarketBuyOrderRequiresPrice']=True
-        try:o=ex.create_market_buy_order(cs,float(ex.amount_to_precision(cs,usdt/p)),p)
-        finally:ex.options['createMarketBuyOrderRequiresPrice']=False
+    try:o=ex.create_order(cs,'market','buy',usdt,None,{'createMarketBuyOrderRequiresPrice':False})
+    except Exception as e1:
+        try:o=ex.create_order(cs,'market','buy',float(ex.amount_to_precision(cs,usdt/p)),p)
+        except Exception as e2:raise Exception(f"{e1} | fallback: {e2}")
     f,a=o.get('filled'),o.get('average')
     if not f or not a:
         time.sleep(1)
@@ -274,9 +274,13 @@ def ask_ai(p):
         db=load(DB);q=load(QF);s=cfg();bal=B('free','USDT');br=data("BTC-USDT")[2]
         pos=[f"  {sym}:entry={d['entry_price']},pnl={((live(sym) or d['entry_price'])-d['entry_price'])/d['entry_price']*100:+.1f}%" for sym,d in list(db.items())[:5]] or ["  (none)"]
         ctx=f"USDT:{bal:.2f}|AutoBuy:${s['auto_buy_amount_usdt']}|BTC RSI:{br}|Pos({len(db)}):\n"+"\n".join(pos)+f"\nQueue:{len(q)}|RSI {s['rsi_min']}-{s['rsi_max']},SL {s['stop_loss_pct']}%\n\n"
-        r=client.models.generate_content(model='gemini-2.5-flash',contents=f"Expert crypto analyst. Use Telegram HTML (<b>,<i>), newlines NOT <br>.\n{ctx}Q:{p}")
-        tg_ai(f"🧠 <b>AI:</b>\n\n{r.text or '(empty)'}")
-    except Exception as e:tg(f"❌ AI Error:{e}")
+        txt=err=used=None
+        for m in GEMINI_MODELS:
+            try:txt=client.models.generate_content(model=m,contents=f"Expert crypto analyst. Plain text only, no markdown, under 3000 characters.\n{ctx}Q:{p}").text;used=m;break
+            except Exception as e:err=e
+        if not txt:raise err or Exception("empty reply")
+        _send(f"🧠 AI ({used}):\n\n{txt[:3800]}",None)
+    except Exception as e:tg(f"❌ AI Error: {e}")
 
 def manage():
     db=load(DB);s=cfg();tp=s.get('trail_pct',0) or 0
@@ -299,7 +303,7 @@ def manage():
         if (time.time()-d['opened_at'])/3600>mh and inc<=1.0:
             if sell(sym,1.0,f"TIME STOP {mh}h ({inc:+.1f}%)"):db.pop(sym,None);save(DB,db)
             continue
-        if r and r>=75 and sell(sym,1.0,"RSI 75"):db.pop(sym,None);save(DB,db);continue
+        if r and s['rsi_exit']>0 and r>=s['rsi_exit'] and sell(sym,1.0,f"RSI {s['rsi_exit']}"):db.pop(sym,None);save(DB,db);continue
         db[sym]=d
     save(DB,db)
 
