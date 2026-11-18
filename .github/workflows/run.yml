@@ -1,24 +1,33 @@
 name: BitgetBot
+
 on:
   schedule:
     - cron: '*/5 * * * *'
   workflow_dispatch:
+
 permissions:
   contents: write
+
 concurrency:
   group: trading-bot
   cancel-in-progress: false
+
 jobs:
-  run:
+  run-bot:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - run: pip install requests ccxt google-genai
-      - env:
+
+      - name: Install dependencies
+        run: pip install requests ccxt google-genai
+
+      - name: Run bot
+        env:
           TG_TOKEN: ${{ secrets.TG_TOKEN }}
           TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
           BITGET_API_KEY: ${{ secrets.BITGET_API_KEY }}
