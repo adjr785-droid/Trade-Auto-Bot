@@ -58,7 +58,7 @@ tg=lambda m:_send(m,"Markdown");tg_ai=lambda m:_send(m,"HTML")
 
 def menu():
     s=cfg();b=lambda t,c:{"text":t,"callback_data":c};tb=b("📈 Trail: ON","trail_off") if s.get('trail_pct',8.0)>0 else b("📉 Trail: OFF","trail_on")
-    _send("🕹️ *MAIN MENU*\nSelect an option below:","Markdown",{"inline_keyboard":[[b("▶️ Resume","/resume"),b("⏸ Pause","/pause")],[b("🔄 Sync","/sync"),b("🛠️ Audit","/audit")],[b("🟢 Status","/status"),b("💰 Balance","/balance")],[b("💼 Holdings Details","/holdings")],[b("📊 Summary","/summary"),tb],[b("🚀 Gainers","/gainers"),b("🩸 Losers","/losers")],[b("🛒 Buy Info","buy_info"),b("💸 Sell Info","sell_info")],[b("🧠 Ask AI","ai_info")]]})
+    _send("🕹️ *MAIN MENU*\nSelect an option below:","Markdown",{"inline_keyboard":[[b("⏸ Pause","/pause"),b("🔄 Sync","/sync")],[b("🛠️ Audit","/audit"),b("🧾 Scan History","scan_history:1")],[b("🟢 Status","/status"),b("💰 Balance","/balance")],[b("💼 Holdings Details","/holdings")],[b("📊 Summary","/summary"),tb],[b("🚀 Gainers","/gainers"),b("🩸 Losers","/losers")],[b("🛒 Buy Info","buy_info"),b("💸 Sell Info","sell_info")],[b("🧠 Ask AI","ai_info")]]})
 
 def panic_prompt():_send("🚨 *CONFIRM PANIC*\nThis sells ALL positions at market and pauses auto-buy.\nConfirm within 15 minutes.","Markdown",{"inline_keyboard":[[{"text":"✅ YES, SELL EVERYTHING","callback_data":"panic_confirm"},{"text":"❌ Cancel","callback_data":"panic_cancel"}]]})
 
@@ -702,8 +702,14 @@ def cmd_scan_history(txt="/scan_history"):
         r=x.get("rsi");rsi=f"{r:.1f}" if isinstance(r,(int,float)) else "N/A"
         lines.append(f"#{x.get('rank','?')} {x.get('sym','?')} | ${fp(x.get('price'))} | 24H {x.get('chg',0):+.1f}% | Vol ${x.get('vol',0)/1e6:.2f}M | RSI {rsi} | MA5 {fp(x.get('ma5'))} | MA10 {fp(x.get('ma10'))} | {x.get('decision','SKIP')}: {x.get('reason','-')}")
     msg=f"🔎 *SCAN HISTORY — 24H WINDOW*\nRecorded: {len(items)} coin checks | Page {page}/{total}\nWindow age: {age/3600:.1f} hours\n\n"+("\n".join(lines) if lines else "No scan records yet. Scanning runs only when auto-buy is enabled and market filters permit it.")
-    msg+="\n\nNext page: `/scan_history "+str(page+1)+"`" if page<total else "\n\nHistory resets automatically after 24 hours."
-    tg(msg)
+    msg+="\n\nHistory resets automatically after 24 hours."
+    nav=[]
+    if page>1:nav.append({"text":"⬅️ Previous","callback_data":f"scan_history:{page-1}"})
+    if page<total:nav.append({"text":"Next ➡️","callback_data":f"scan_history:{page+1}"})
+    keyboard=[]
+    if nav:keyboard.append(nav)
+    keyboard.append([{"text":"🕹️ Main Menu","callback_data":"/menu"}])
+    _send(msg,"Markdown",{"inline_keyboard":keyboard})
 
 def cmd_about():
     s=cfg()
@@ -845,6 +851,10 @@ def handle(t,age):
     elif l=="/ai":ask_ai("Give me a market overview.")
     elif l in MSG:tg(MSG[l])
     elif l in ("/menu","📊 menu"):menu()
+    elif l=="scan_history":cmd_scan_history("/scan_history")
+    elif l.startswith("scan_history:"):
+        try:cmd_scan_history("/scan_history "+str(max(1,int(l.split(":",1)[1]))))
+        except (ValueError,IndexError):cmd_scan_history("/scan_history")
     elif l in ("/panic","🚨 panic"):panic_prompt()
     elif l=="panic_cancel":tg("👍 Panic cancelled.")
     elif l=="panic_confirm":panic_sell() if age<=900 else tg("⌛ That confirmation expired. Send /panic again if you still want to sell everything.")
