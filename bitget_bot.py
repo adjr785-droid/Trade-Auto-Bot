@@ -50,7 +50,7 @@ def save(f,d):
     except Exception as e:print(f"SAVE ERR {f}: {e}")
 
 def cfg():
-    d={"rsi_min":42,"rsi_max":48,"stop_loss_pct":12,"auto_buy_enabled":True,"auto_buy_amount_usdt":10.0,"max_tokens_before_consolidation":3,"max_hold_hours":48,"trail_pct":8.0,"crash_guard_pct":18.0,"rsi_exit":75}
+    d={"rsi_min":42,"rsi_max":48,"stop_loss_pct":12,"auto_buy_enabled":True,"auto_buy_amount_usdt":10.0,"max_tokens_before_consolidation":3,"max_hold_hours":48,"trail_pct":8.0,"crash_guard_pct":18.0,"rsi_exit":75,"btc_rsi_min":45}
     s=load(CFG,d)
     for k,v in d.items():s.setdefault(k,v)
     return s
@@ -129,11 +129,22 @@ def hard_sl(sym,qty,pr):
     except Exception as e:tg(f"⚠️ *SL FAILED* {sym}@{pr}:`{e}`");return False
 
 def place_trailing_sl(sym,qty):
-    # Exchange side = ONE fixed stop-loss trigger order. Trailing is done bot-side in manage().
+    # Exchange side = ONE stop-loss trigger order (starts at entry-SL%; manage() raises it as the price climbs).
     # Never send 'trailingPercent' on spot: it can be executed as a plain MARKET SELL (instant liquidation).
     ent=load(DB).get(sym,{}).get('entry_price') or live(sym)
     if not ent:return False
-    return hard_sl(sym,qty,round(ent*(1-cfg()['stop_loss_pct']/100),6))
+    px=round(ent*(1-cfg()['stop_loss_pct']/100),6);ok=hard_sl(sym,qty,px)
+    if ok:
+        db=load(DB)
+        if sym in db:db[sym]['xsl']=px;save(DB,db)
+    return ok
+
+def ratchet(sym,d,lvl,lv):
+    # keep the exchange stop in step with the bot's own stop level: only ever moves UP, and only when it gains >1%
+    if lvl<=d.get('xsl',0)*1.01 or lvl>=lv*0.995:return
+    q=B('total',sym.split('-')[0])
+    if hard_sl(sym,q,lvl):d['xsl']=lvl
+    elif place_trailing_sl(sym,q):d['xsl']=round(d['entry_price']*(1-cfg()['stop_loss_pct']/100),6)  # new stop failed: restore the base stop we cancelled
 
 def rec(sym,pnl,why):
     L=load(LF);L['total_realized_usdt']=L.get('total_realized_usdt',0.0)+pnl;L['trade_count']=L.get('trade_count',0)+1;save(LF,L)
@@ -306,6 +317,7 @@ def manage():
             if sell(sym,1.0,f"TIME STOP {mh}h ({inc:+.1f}%)"):db.pop(sym,None);save(DB,db)
             continue
         if r and s['rsi_exit']>0 and r>=s['rsi_exit'] and sell(sym,1.0,f"RSI {s['rsi_exit']}"):db.pop(sym,None);save(DB,db);continue
+        ratchet(sym,d,lvl,lv)
         db[sym]=d
     save(DB,db)
 
@@ -322,9 +334,17 @@ def consolidate():
     for t in rk[:ex_n]:
         if sell(t['s'],1.0,"Consolidation"):db.pop(t['s'],None);save(DB,db)
 
+def btc_blocked(s):
+    m=s.get('btc_rsi_min',0)
+    if m<=0:return False
+    br=data("BTC-USDT")[2]
+    if br is not None and br>=m:return False
+    cd("btcblock",21600) or tg(f"⏸ *BTC FILTER:* BTC RSI is {br} (needs ≥ {m}). Auto-buying paused until it recovers.")
+    return True
+
 def exec_q():
     q=load(QF);db=load(DB);s=cfg();mx=s["max_tokens_before_consolidation"]
-    if not q:return
+    if not q or not s["auto_buy_enabled"] or btc_blocked(s):return
     try:
         ub=B('free','USDT')
         for sym,qd in sorted(q.items(),key=lambda x:x[1].get('score',0),reverse=True):
@@ -370,8 +390,7 @@ def scan():
     if time.time()-st.get('last',0)<3540:return
     db=load(DB);q=load(QF);s=cfg()
     if not s["auto_buy_enabled"]:return
-    br=data("BTC-USDT")[2]
-    if br and br<35:return
+    if btc_blocked(s):return
     if len(db)>s["max_tokens_before_consolidation"]:consolidate()
     try:tk=ex.fetch_tickers();mk=ex.load_markets()
     except:return
