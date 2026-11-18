@@ -15,6 +15,8 @@ TR=lambda t:{'trigger':True} if t else {}
 B=lambda k,c:ex.fetch_balance()[k].get(c,0)
 skip=lambda b:b in STABLE or b in BL or ((b.startswith('X') or b.startswith('R')) and len(b)<=6) or any(b.upper().endswith(x) for x in LEV)
 NP=lambda e,sl:{"entry_price":e,"safe_zone":e,"stop_loss":sl,"peak_price":e,"last_price":e,"opened_at":time.time()}
+STOP_OK="🛡️ Exchange stop-loss: Active\n📈 Bot-side trailing: Active"
+STOP_NO="⚠️ Exchange stop NOT placed.\n📈 Bot-side stop + trailing still protect it"
 
 def _send(m,mode,btn=None):
     try:
@@ -118,21 +120,20 @@ def hard_sl(sym,qty,pr):
     try:
         cs=S(sym)
         if cancel_sells(sym):print(f"WARN: some old sell orders for {sym} could not be cancelled")
-        qty=float(ex.amount_to_precision(cs,qty))
-        if qty<=0:return True
-        pr=float(ex.price_to_precision(cs,pr));ex.create_order(cs,'market','sell',qty,None,{'triggerPrice':pr,'triggerType':'market_price'});return True
+        time.sleep(0.5)
+        try:qty=float(ex.amount_to_precision(cs,qty))
+        except Exception:print(f"SL skipped {sym}: amount below exchange minimum (dust)");return False
+        pr=float(ex.price_to_precision(cs,pr))
+        if qty<=0 or qty*pr<1.0:print(f"SL skipped {sym}: position too small");return False
+        ex.create_order(cs,'market','sell',qty,None,{'triggerPrice':pr});return True
     except Exception as e:tg(f"⚠️ *SL FAILED* {sym}@{pr}:`{e}`");return False
 
 def place_trailing_sl(sym,qty):
-    s=cfg();pct=s.get('trail_pct',8.0);ent=load(DB).get(sym,{}).get('entry_price') or live(sym)
+    # Exchange side = ONE fixed stop-loss trigger order. Trailing is done bot-side in manage().
+    # Never send 'trailingPercent' on spot: it can be executed as a plain MARKET SELL (instant liquidation).
+    ent=load(DB).get(sym,{}).get('entry_price') or live(sym)
     if not ent:return False
-    base=round(ent*(1-s['stop_loss_pct']/100),6);cancel_sells(sym);time.sleep(0.5)
-    if pct>0 and not in_cd('no_trail',21600):
-        try:ex.create_order(S(sym),'market','sell',float(ex.amount_to_precision(S(sym),qty)),None,{'trailingPercent':pct});return True
-        except Exception as e:
-            mk_cd('no_trail');print(f"TRAIL UNSUPPORTED: {e}")
-            tg("ℹ️ Exchange trailing stop rejected (likely unsupported on spot). Using a fixed exchange SL + bot-side trailing.")
-    return hard_sl(sym,qty,base)
+    return hard_sl(sym,qty,round(ent*(1-cfg()['stop_loss_pct']/100),6))
 
 def rec(sym,pnl,why):
     L=load(LF);L['total_realized_usdt']=L.get('total_realized_usdt',0.0)+pnl;L['trade_count']=L.get('trade_count',0)+1;save(LF,L)
@@ -175,8 +176,8 @@ def cmd_buy(txt):
     ub=B('free','USDT')
     if ub<amt:tg(f"❌ *BUY FAILED:* You only have ${ub:.2f} USDT.");return
     try:
-        f,a=m_buy(f"{c}/USDT",amt);db[sym]=NP(round(a,6),round(a*(1-cfg()['stop_loss_pct']/100),6));save(DB,db);place_trailing_sl(sym,free_qty(sym,f))
-        tg(f"✅ *BOUGHT:* {c} @ {a:.6f}\nSpent: ${amt:.2f}\n📈 Stop-loss + trailing: Active")
+        f,a=m_buy(f"{c}/USDT",amt);db[sym]=NP(round(a,6),round(a*(1-cfg()['stop_loss_pct']/100),6));save(DB,db);ok=place_trailing_sl(sym,free_qty(sym,f))
+        tg(f"✅ *BOUGHT:* {c} @ {a:.6f}\nSpent: ${amt:.2f}\n"+(STOP_OK if ok else STOP_NO))
     except Exception as e:tg(f"❌ *BUY FAILED:* {e}")
 
 def cmd_sell(txt):
@@ -209,7 +210,7 @@ def cmd_sync():
         sym=f"{c}-USDT";p=live(sym)
         if p and a*p>1.02 and sym not in db:
             db[sym]=NP(p,round(p*(1-cfg()['stop_loss_pct']/100),6));save(DB,db);added.append(sym);place_trailing_sl(sym,a)
-    tg(f"✅ *SYNCED:* Added {len(added)} coins to DB:\n`{chr(10).join(added)}`\n_Stop-loss + trailing active._" if added else "✅ No new manual coins found to sync.")
+    tg(f"✅ *SYNCED:* Added {len(added)} coins to DB:\n`{chr(10).join(added)}`\n_Bot-side stop-loss + trailing active._" if added else "✅ No new manual coins found to sync.")
 
 def panic_sell():
     db=load(DB)
@@ -248,7 +249,8 @@ def audit_system():
     except Exception as e:tg(f"⚠️ *AUDIT WARNING:* Failed to fetch exchange data: `{e}`");return "⚠️ Audit failed."
     for sym in list(db):
         amt=bal.get(sym.split('-')[0],0)
-        if amt<=0:db.pop(sym,None);issues.append(f"🧹 Removed ghost position: {sym}");continue
+        px=live(sym)
+        if amt<=0 or (px and amt*px<1.02):db.pop(sym,None);issues.append(f"🧹 Removed ghost/dust position: {sym}");continue
         orders,ok=open_sells(sym)
         if not ok:continue
         if len(orders)!=1 and not in_cd(f"auditsl_{sym}",1800):
@@ -359,7 +361,7 @@ def exec_q():
             except Exception as e:tg(f"❌ Buy fail {sym}:{e}");mk_cd(f"fail_{sym}");continue
             mxs=round(a*(1-s['stop_loss_pct']/100),6);sl=qd.get('sl') or mxs
             if sl>=a or sl>mxs:sl=mxs
-            db[sym]=NP(round(a,6),sl);save(DB,db);place_trailing_sl(sym,free_qty(sym,f));tg(f"🛒 *EXECUTED!*\n{sym}|💵{sp:.2f}@{a:.6f}\n📈 Stop-loss + trailing active")
+            db[sym]=NP(round(a,6),sl);save(DB,db);ok=place_trailing_sl(sym,free_qty(sym,f));tg(f"🛒 *EXECUTED!*\n{sym}|💵{sp:.2f}@{a:.6f}\n"+(STOP_OK if ok else STOP_NO))
             q.pop(sym,None);save(QF,q);ub=B('free','USDT');time.sleep(2)
     except Exception as e:tg(f"⚠️ *QUEUE FAILED:* `{e}`")
 
@@ -470,10 +472,13 @@ def handle(t,age):
 def tg_check():
     st=load(ST);lid=st.get("last_update_id",0)
     try:
-        res=requests.get(f"{API}/getUpdates?offset={lid+1}",timeout=10).json()
+        res=requests.get(f"{API}/getUpdates?offset={lid+1}&timeout=0",timeout=10).json()
         if not (res.get("ok") and res.get("result")):return
+        top=max(u["update_id"] for u in res["result"]);st["last_update_id"]=top;save(ST,st)
+        try:requests.get(f"{API}/getUpdates?offset={top+1}&limit=1&timeout=0",timeout=10)  # ack on Telegram's side BEFORE acting: overlapping/stale runs can never replay these commands
+        except Exception:pass
         for u in res["result"]:
-            st["last_update_id"]=u["update_id"];save(ST,st);txt=cid="";age=0
+            txt=cid="";age=0
             if "callback_query" in u:
                 cb=u["callback_query"];txt=cb.get("data","");m=cb.get("message") or {}
                 try:requests.post(f"{API}/answerCallbackQuery",json={"callback_query_id":cb["id"]},timeout=10)
