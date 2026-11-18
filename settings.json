@@ -7,5 +7,15 @@
     "auto_buy_enabled": false,
     "auto_buy_amount_usdt": 5.75,
     "max_tokens_before_consolidation": 3,
-    "max_hold_hours": 720
+    "max_hold_hours": 720,
+    "trail_pct": 8.0,
+    "crash_guard_pct": 10.0,
+    "rsi_exit": 75,
+    "btc_rsi_min": 50,
+    "risk_per_trade_pct": 1.0,
+    "max_daily_loss_pct": 3.0,
+    "max_portfolio_exposure_pct": 50.0,
+    "max_position_pct": 15.0,
+    "max_daily_trades": 5,
+    "max_spread_pct": 0.5
 }
