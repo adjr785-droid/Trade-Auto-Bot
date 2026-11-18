@@ -438,6 +438,90 @@ def audit_system():
         if issues:m="🛠️ *AUTO-AUDIT COMPLETE*\nFound and fixed issues:\n\n"+"\n".join(issues);tg(m);return m
     return "✅ *AUDIT COMPLETE:* No issues found. System healthy."
 
+def analyse_coin(txt):
+    """Read-only technical analysis for a coin before a manual purchase."""
+    parts=txt.strip().split()
+    if len(parts)!=2:
+        tg("📊 Usage: `/analyse COIN`\nExample: `/analyse BTC` or `/analyse BTC-USDT`\nThis command analyses only; it never places an order.")
+        return
+    coin=parts[1].upper().replace('/USDT','').replace('-USDT','').replace('USDT','').strip('-/')
+    if not coin or not re.fullmatch(r'[A-Z0-9]+',coin):
+        tg("❌ Invalid coin symbol. Example: `/analyse BTC`")
+        return
+    sym=f"{coin}-USDT";cs=S(sym)
+    try:
+        markets=ex.load_markets()
+        if cs not in markets or not markets[cs].get('spot',False):
+            tg(f"❌ {sym} is not available as a Bitget spot market. Check the symbol or try another USDT pair.")
+            return
+        candles=ex.fetch_ohlcv(cs,'1h',limit=100)
+        if len(candles)<60:
+            tg(f"⚠️ Not enough hourly candle history to analyse {sym} reliably.")
+            return
+        # Exclude the still-forming candle from indicators.
+        closed=candles[:-1]
+        closes=[float(x[4]) for x in closed]
+        highs=[float(x[2]) for x in closed]
+        lows=[float(x[3]) for x in closed]
+        vols=[float(x[5] or 0) for x in closed]
+        price=float(ex.fetch_ticker(cs).get('last') or candles[-1][4])
+        ticker=ex.fetch_ticker(cs)
+        rsi=_rsi(closes)
+        def ema(values,period):
+            if len(values)<period:return None
+            alpha=2/(period+1);v=sum(values[:period])/period
+            for z in values[period:]:v=alpha*z+(1-alpha)*v
+            return v
+        ma5=sum(closes[-5:])/5;ma10=sum(closes[-10:])/10;ma20=sum(closes[-20:])/20
+        e12=ema(closes,12);e26=ema(closes,26)
+        macd_series=[]
+        for i in range(26,len(closes)+1):
+            a=ema(closes[:i],12);b=ema(closes[:i],26)
+            if a is not None and b is not None:macd_series.append(a-b)
+        macd=macd_series[-1] if macd_series else None
+        signal=ema(macd_series,9) if len(macd_series)>=9 else None
+        hist=(macd-signal) if macd is not None and signal is not None else None
+        trs=[]
+        for i in range(1,len(closed)):
+            trs.append(max(highs[i]-lows[i],abs(highs[i]-closes[i-1]),abs(lows[i]-closes[i-1])))
+        atr=sum(trs[-14:])/14 if len(trs)>=14 else None
+        avgvol=sum(vols[-21:-1])/20 if len(vols)>=21 else None
+        lastvol=vols[-1] if vols else 0
+        change=ticker.get('percentage')
+        bid=ticker.get('bid');ask=ticker.get('ask')
+        spread=((ask-bid)/((ask+bid)/2)*100) if bid and ask and ask>=bid else None
+        # Transparent rule-based score; this is not a prediction.
+        checks=[price>ma5>ma10>ma20, rsi is not None and 50<=rsi<=70,
+                macd is not None and signal is not None and macd>signal,
+                avgvol is not None and lastvol>=avgvol]
+        score=sum(bool(x) for x in checks)
+        if price<ma20 or (rsi is not None and rsi>=75) or (hist is not None and hist<0):
+            verdict='WAIT / WEAK SETUP'
+        elif score>=3 and spread is not None and spread<=cfg().get('max_spread_pct',0.5):
+            verdict='TECHNICAL SETUP LOOKS POSITIVE'
+        elif score>=3 and spread is None:
+            verdict='MIXED — SPREAD DATA UNAVAILABLE'
+        else:
+            verdict='WAIT FOR STRONGER CONFIRMATION'
+        def fmt(v):return fp(v) if isinstance(v,(int,float)) else 'N/A'
+        lines=[f"📊 *TECHNICAL ANALYSIS: {sym}*",
+               "Timeframe: 1-hour candles; indicators use completed candles.",
+               f"Live price: {fmt(price)} USDT",
+               f"24h change: {change:+.2f}%" if isinstance(change,(int,float)) else "24h change: N/A",
+               f"RSI(14): {fmt(rsi)} — "+("Overbought" if rsi is not None and rsi>=70 else "Oversold" if rsi is not None and rsi<=30 else "Neutral" if rsi is not None else "N/A"),
+               f"MA5: {fmt(ma5)} | MA10: {fmt(ma10)} | MA20: {fmt(ma20)}",
+               f"MACD: {fmt(macd)} | Signal: {fmt(signal)} | Histogram: {fmt(hist)}",
+               f"ATR(14): {fmt(atr)} ({(atr/price*100):.2f}% of price)" if atr is not None and price else "ATR(14): N/A",
+               f"Last hourly volume vs 20-candle average: {(lastvol/avgvol):.2f}x" if avgvol else "Volume comparison: N/A",
+               f"Bid/ask spread: {spread:.3f}%" if spread is not None else "Bid/ask spread: N/A",
+               f"Technical checks: {score}/4",
+               f"Assessment: *{verdict}*",
+               "\nChecks: price above MA5/MA10/MA20; RSI 50–70; MACD above signal; latest completed-hour volume above its 20-hour average.",
+               "⚠️ Analysis only — not a buy instruction or guarantee. Check liquidity, order-book depth, BTC trend and your risk before placing a manual order."]
+        tg("\n".join(lines))
+    except Exception as e:
+        tg(f"❌ Could not analyse {sym}: {e}")
+
 def ask_ai(p):
     if not client:
         tg("⚠️ AI analyst is unavailable. Add GEMINI_API_KEY to your GitHub repository secrets to enable it. Trading functions can still run without AI.");return
@@ -639,7 +723,7 @@ def cmd_about():
          f"• Risk target {s.get('risk_per_trade_pct',1):g}% per trade; daily loss limit {s.get('max_daily_loss_pct',3):g}%; max portfolio exposure {s.get('max_portfolio_exposure_pct',50):g}%; max position {s.get('max_position_pct',15):g}%.\n"
          f"• Base stop loss {s.get('stop_loss_pct',5):g}%; trailing stop {trail}. Peak price only moves upward; the trailing level follows that peak and is not lowered.\n"
          f"• Additional controls include crash guard, RSI exit, time stop, position limit, daily trade limit and protective-order checks.\n\n"
-         "*5. Monitoring commands*\n`/holdings` — balances, indicators and stop details.\n`/scan_history` — coins checked and their indicator/decision details, retained for 24 hours.\n`/status` — active positions. `/summary` — performance summary. `/pause` and `/resume` — pause/resume automatic buying.\n\n"
+         "*5. Monitoring commands*\n`/holdings` — balances, indicators and stop details.\n`/scan_history` — coins checked and their indicator/decision details, retained for 24 hours.\n`/analyse COIN` — read-only 1-hour technical analysis before a manual buy.\n`/status` — active positions. `/summary` — performance summary. `/pause` and `/resume` — pause/resume automatic buying.\n\n"
          "*Important:* This is a rule-based spot trading assistant, not financial advice. Bot-side trailing protection requires the bot process to keep running. Exchange protective orders must be verified on Bitget; never assume an unverified stop is active.")
     tg(msg)
 
@@ -751,11 +835,13 @@ def cmd_set(txt):
     s[k]=new;save(CFG,s);tg(f"✅ `{k}` = `{new}`")
 
 def setc(k,v,m):s=cfg();s[k]=v;save(CFG,s);tg(m)
-MSG={"ai_info":"🧠 *AI ANALYST*\nTo ask the AI a question, type:\n`/ai <your question>`\n\nExample:\n`/ai what is the market sentiment right now?`","buy_info":"🛒 *BUY COMMAND*\nUsage: `/buy COIN AMOUNT`\nExample: `/buy SOL 5.75`","sell_info":"💸 *SELL COMMAND*\nUsage: `/sell COIN AMOUNT`\nExample: `/sell SOL 5.75`\n\nType `ALL` instead of an amount to sell the entire position.","/help":"🤖 *CMDS*\n`/menu` `/ai [q]` `/sync` `/audit`\n`/gainers` `/losers` `/summary`\n`/balance` `/status` `/holdings` `/pnl`\n`/about` `/scan_history [page]`\n`/buy COIN AMT` `/sell COIN AMT|ALL`\n`/set key value` `/pause` `/resume` `/panic`"}
+MSG={"ai_info":"🧠 *AI ANALYST*\nTo ask the AI a question, type:\n`/ai <your question>`\n\nExample:\n`/ai what is the market sentiment right now?`","buy_info":"🛒 *BUY COMMAND*\nUsage: `/buy COIN AMOUNT`\nExample: `/buy SOL 5.75`","sell_info":"💸 *SELL COMMAND*\nUsage: `/sell COIN AMOUNT`\nExample: `/sell SOL 5.75`\n\nType `ALL` instead of an amount to sell the entire position.","/help":"🤖 *CMDS*\n`/menu` `/ai [q]` `/analyse COIN` `/sync` `/audit`\n`/gainers` `/losers` `/summary`\n`/balance` `/status` `/holdings` `/pnl`\n`/about` `/scan_history [page]`\n`/buy COIN AMT` `/sell COIN AMT|ALL`\n`/set key value` `/pause` `/resume` `/panic`"}
 
 def handle(t,age):
     l=t.lower()
-    if l.startswith("/ai "):ask_ai(t[4:].strip())
+    if l.startswith("/analyse "):analyse_coin(t)
+    elif l=="/analyse":analyse_coin(t)
+    elif l.startswith("/ai "):ask_ai(t[4:].strip())
     elif l=="/ai":ask_ai("Give me a market overview.")
     elif l in MSG:tg(MSG[l])
     elif l in ("/menu","📊 menu"):menu()
@@ -827,22 +913,77 @@ def acquire_lock():
     except OSError:return None
 
 def git_sync():
+    """
+    Safely persist bot state to GitHub.
+    First try a rebase. If concurrent bot runs changed the same JSON state
+    files, abort the rebase cleanly and use a merge that keeps this run's
+    state-file versions for conflicting files while still bringing in
+    non-conflicting remote changes.
+    """
     ident="trading-bot";mail="bot@users.noreply.github.com"
-    env={**os.environ,"GIT_AUTHOR_NAME":ident,"GIT_AUTHOR_EMAIL":mail,"GIT_COMMITTER_NAME":ident,"GIT_COMMITTER_EMAIL":mail}  # CI runners have no git identity: without this every commit/rebase fails
-    run=lambda c:subprocess.run(c,capture_output=True,text=True,timeout=60,env=env)
-    def fail(m):print(m);cd("gitfail",3600) or tg(f"⚠️ *STATE NOT SAVED:* `{m[:150]}`\nBot memory may reset on the next run.")
+    env={**os.environ,"GIT_AUTHOR_NAME":ident,"GIT_AUTHOR_EMAIL":mail,
+         "GIT_COMMITTER_NAME":ident,"GIT_COMMITTER_EMAIL":mail,
+         "GIT_TERMINAL_PROMPT":"0"}
+    def run(args):
+        return subprocess.run(args,capture_output=True,text=True,timeout=60,env=env)
+    def notify_fail(message):
+        print(message)
+        if not cd("gitfail",900):
+            tg("⚠️ *STATE NOT SAVED:* "+message[:220]+
+               "\\nBot state files remain on this runner, but GitHub persistence is not confirmed. Check the next run.")
+    def abort_rebase():
+        # A previous interrupted run may have left Git in rebase mode.
+        p=run(["git","rev-parse","--verify","-q","REBASE_HEAD"])
+        if p.returncode==0:
+            a=run(["git","rebase","--abort"])
+            if a.returncode!=0:
+                raise RuntimeError("Could not abort the previous rebase: "+a.stderr[-250:])
     try:
-        run(["git","add","--"]+[f for f in FILES if os.path.exists(f)])
-        if run(["git","diff","--cached","--quiet"]).returncode!=0:
-            r=run(["git","commit","-m","Auto"])
-            if r.returncode!=0:fail(f"git commit failed: {r.stderr[-150:]}");return
-        r=run(["git","pull","--rebase","--autostash"])
-        if r.returncode!=0:run(["git","rebase","--abort"]);fail(f"git pull failed: {r.stderr[-150:]}");return
-        r=run(["git","push"])
-        if r.returncode!=0:fail(f"git push failed: {r.stderr[-150:]}");return
-        bad=[t for t in run(["git","ls-files"]).stdout.split() if re.search(r'(^|/)(\.env|.*\.pem|.*\.key|.*secret.*)',t,re.I)]
-        if bad and not cd("gitwarn",86400):tg(f"🚨 *SECURITY:* secret-looking files are tracked in git: `{', '.join(bad[:5])}`. Remove them (git rm --cached) and rotate your keys.")
-    except Exception as e:print(f"git sync: {e}")
+        abort_rebase()
+        existing=[f for f in FILES if os.path.exists(f)]
+        if existing:
+            a=run(["git","add","--"]+existing)
+            if a.returncode!=0:
+                notify_fail("git add failed: "+a.stderr[-250:]);return
+            staged=run(["git","diff","--cached","--quiet"])
+            if staged.returncode==1:
+                c=run(["git","commit","-m","Persist bot state"])
+                if c.returncode!=0:
+                    notify_fail("git commit failed: "+c.stderr[-250:]);return
+            elif staged.returncode not in (0,):
+                notify_fail("could not inspect staged changes: "+staged.stderr[-250:]);return
+
+        p=run(["git","pull","--rebase","--autostash"])
+        if p.returncode!=0:
+            # Rebase conflicts commonly happen when overlapping Actions runs
+            # both update the same JSON state files. Abort before attempting
+            # a merge; never leave conflict markers or an active rebase behind.
+            abort=run(["git","rebase","--abort"])
+            if abort.returncode!=0:
+                notify_fail("rebase failed and could not be aborted: "+abort.stderr[-250:]);return
+
+            # In a merge, 'ours' is this runner's checked-out commit. This
+            # deliberately preserves its runtime state for conflicting files.
+            # Non-conflicting remote changes are still incorporated.
+            m=run(["git","pull","--no-rebase","--no-edit","-s","recursive","-X","ours"])
+            if m.returncode!=0:
+                # Do not leave a merge in progress either.
+                run(["git","merge","--abort"])
+                notify_fail("rebase conflicted; safe merge also failed: "+m.stderr[-250:])
+                return
+            tg("ℹ️ Git sync used conflict recovery. This run's conflicting bot-state files were preserved; non-conflicting GitHub changes were merged.")
+
+        push=run(["git","push"])
+        if push.returncode!=0:
+            notify_fail("git push failed: "+push.stderr[-250:]);return
+
+        bad=[t for t in run(["git","ls-files"]).stdout.split()
+             if re.search(r'(^|/)(\\.env|.*\\.pem|.*\\.key|.*secret.*)',t,re.I)]
+        if bad and not cd("gitwarn",86400):
+            tg("🚨 *SECURITY:* secret-looking files are tracked in git: `"+
+               ", ".join(bad[:5])+"`. Remove them (git rm --cached) and rotate your keys.")
+    except Exception as e:
+        notify_fail("git sync exception: "+str(e))
 
 if __name__=="__main__":
     lk=acquire_lock()
