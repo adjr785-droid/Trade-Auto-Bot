@@ -6,8 +6,8 @@ except Exception:
 try:import fcntl
 except ImportError:fcntl=None
 TK=os.environ.get('TG_TOKEN');CHAT=str(os.environ.get('TG_CHAT_ID',''));TZ=float(os.environ.get('TZ_OFFSET_HOURS','1'));API=f"https://api.telegram.org/bot{TK}"
-DB,ST,CFG,QF,LF,CD,SC,HIST,LOCK="positions.json","tg_state.json","settings.json","queue.json","profit_ledger.json",".cmd_cooldown.json","scan_state.json","trade_history.json",".bot.lock"
-FILES=[DB,ST,CFG,QF,LF,CD,SC,HIST]
+DB,ST,CFG,QF,LF,CD,SC,HIST,LOCK,SH,OUT="positions.json","tg_state.json","settings.json","queue.json","profit_ledger.json",".cmd_cooldown.json","scan_state.json","trade_history.json",".bot.lock","scan_history.json","telegram_output.json"
+FILES=[DB,ST,CFG,QF,LF,CD,SC,HIST,SH,OUT]
 STABLE=['USDC','USDT','DAI','FDUSD','TUSD','USDD','USDE'];LEV=['3L','3S','5L','5S','10L','10S','2L','2S'];BL=['RPANW','CT','ONE']
 ex=ccxt.bitget({'apiKey':os.environ.get('BITGET_API_KEY'),'secret':os.environ.get('BITGET_API_SECRET'),'password':os.environ.get('BITGET_API_PASSPHRASE'),'enableRateLimit':True});ex.options['createMarketBuyOrderRequiresPrice']=False
 client=genai.Client(api_key=os.environ.get('GEMINI_API_KEY')) if genai and os.environ.get('GEMINI_API_KEY') else None
@@ -25,11 +25,35 @@ def _send(m,mode,btn=None):
     try:
         rm=btn or KB;p={"chat_id":CHAT,"text":m,"reply_markup":rm}
         if mode:p["parse_mode"]=mode
-        if not requests.post(API+"/sendMessage",json=p,timeout=10).ok:
+        r=requests.post(API+"/sendMessage",json=p,timeout=10)
+        if not r.ok:
             p.pop("parse_mode",None);p["text"]=re.sub(r'<[^>]+>','',m) if mode=="HTML" else m
             r=requests.post(API+"/sendMessage",json=p,timeout=10)
-            if not r.ok:print("TG SEND ERROR:",r.text)
+        if r.ok:
+            body=r.json()
+            mid=(body.get("result") or {}).get("message_id")
+            if mid:
+                out=load(OUT,[]);out.append({"message_id":mid,"sent_at":time.time()});save(OUT,out)
+        else:print("TG SEND ERROR:",r.text)
     except Exception as e:print("TG EXCEPTION:",e)
+
+def cleanup_telegram_output():
+    """Delete this bot's own Telegram messages after 24 hours where Telegram permits it."""
+    now=time.time();out=load(OUT,[]);keep=[]
+    for item in out:
+        if now-float(item.get("sent_at",now))<86400:
+            keep.append(item);continue
+        try:
+            r=requests.post(API+"/deleteMessage",json={"chat_id":CHAT,"message_id":item.get("message_id")},timeout=10)
+            if not r.ok:
+                body=r.json() if r.headers.get("content-type","").startswith("application/json") else {}
+                desc=str(body.get("description", ""))
+                # Retry transient errors; discard messages Telegram says cannot be deleted.
+                if body.get("error_code",0)>=500 or "too many requests" in desc.lower():keep.append(item)
+        except Exception:
+            keep.append(item)
+    save(OUT,keep)
+
 tg=lambda m:_send(m,"Markdown");tg_ai=lambda m:_send(m,"HTML")
 
 def menu():
@@ -570,9 +594,58 @@ def exec_q():
             q.pop(sym,None);save(QF,q);ub=B('free','USDT');time.sleep(2)
     except Exception as e:tg(f"⚠️ *QUEUE FAILED:* `{e}`")
 
+def scan_history_state():
+    """Keep a rolling 24-hour scan log; start a fresh window after 24 hours."""
+    h=load(SH,{})
+    if not isinstance(h,dict):h={}
+    now=time.time();start=float(h.get("window_start",0) or 0)
+    if not start or now-start>=86400:
+        h={"window_start":now,"items":[]};save(SH,h)
+    h.setdefault("items",[])
+    return h
+
+def cmd_scan_history(txt="/scan_history"):
+    h=scan_history_state();items=h.get("items",[]);parts=txt.split();page=1
+    if len(parts)>1:
+        try:page=max(1,int(parts[1]))
+        except ValueError:tg("Usage: `/scan_history [page]`");return
+    per=20;total=max(1,(len(items)+per-1)//per)
+    if page>total:tg(f"Only {total} page(s) are available.");return
+    start=(page-1)*per;chunk=items[start:start+per]
+    age=max(0,time.time()-h.get("window_start",time.time()))
+    lines=[]
+    for x in chunk:
+        r=x.get("rsi");rsi=f"{r:.1f}" if isinstance(r,(int,float)) else "N/A"
+        lines.append(f"#{x.get('rank','?')} {x.get('sym','?')} | ${fp(x.get('price'))} | 24H {x.get('chg',0):+.1f}% | Vol ${x.get('vol',0)/1e6:.2f}M | RSI {rsi} | MA5 {fp(x.get('ma5'))} | MA10 {fp(x.get('ma10'))} | {x.get('decision','SKIP')}: {x.get('reason','-')}")
+    msg=f"🔎 *SCAN HISTORY — 24H WINDOW*\nRecorded: {len(items)} coin checks | Page {page}/{total}\nWindow age: {age/3600:.1f} hours\n\n"+("\n".join(lines) if lines else "No scan records yet. Scanning runs only when auto-buy is enabled and market filters permit it.")
+    msg+="\n\nNext page: `/scan_history "+str(page+1)+"`" if page<total else "\n\nHistory resets automatically after 24 hours."
+    tg(msg)
+
+def cmd_about():
+    s=cfg()
+    trail=f"ON ({s.get('trail_pct',8.0):g}% below the highest price since entry)" if s.get('trail_pct',8.0)>0 else "OFF"
+    msg=("🤖 *BOT AIMS, OBJECTIVES & OPERATING METHOD*\n\n"
+         "*1. Main aim*\nFind liquid USDT spot-market opportunities, apply rule-based technical filters, manage positions and protect capital with predefined risk controls. The bot does not guarantee profit.\n\n"
+         "*2. Strategy*\n• TREND setup: 24H change above +1% and below +30%, RSI within the configured range, and price above MA5 above MA10.\n"
+         "• OVERSOLD setup: 24H change between -30% and -8%, RSI below 30, and current price recovering above the prior hourly close.\n"
+         "• Uses 1-hour candles, RSI(14), MA5 and MA10. These are technical signals, not predictions.\n\n"
+         "*3. Scanning process*\n• Loads Bitget spot USDT tickers and filters stablecoins, leveraged tokens and excluded symbols.\n"
+         "• Sorts eligible markets by 24H quote volume; the current scanner examines ranks 16–500.\n"
+         "• Applies tiered minimum volume thresholds: $1M for ranks 16–100, $3M for 101–199, $4M for 200–399 and $5M for 400–500; qualifying coins get indicator checks.\n"
+         "• Matching setups enter a scored queue; queued opportunities are considered for execution only when auto-buy and safety filters allow.\n"
+         "• BTC RSI filter can block new automatic buys when BTC RSI is below its configured minimum. Scanning is rate-limited to about once per hour.\n\n"
+         "*4. Risk & position management*\n"
+         f"• Auto-buy: {'ON' if s.get('auto_buy_enabled') else 'OFF'}; default trade budget ${s.get('auto_buy_amount_usdt',10):g}.\n"
+         f"• Risk target {s.get('risk_per_trade_pct',1):g}% per trade; daily loss limit {s.get('max_daily_loss_pct',3):g}%; max portfolio exposure {s.get('max_portfolio_exposure_pct',50):g}%; max position {s.get('max_position_pct',15):g}%.\n"
+         f"• Base stop loss {s.get('stop_loss_pct',5):g}%; trailing stop {trail}. Peak price only moves upward; the trailing level follows that peak and is not lowered.\n"
+         f"• Additional controls include crash guard, RSI exit, time stop, position limit, daily trade limit and protective-order checks.\n\n"
+         "*5. Monitoring commands*\n`/holdings` — balances, indicators and stop details.\n`/scan_history` — coins checked and their indicator/decision details, retained for 24 hours.\n`/status` — active positions. `/summary` — performance summary. `/pause` and `/resume` — pause/resume automatic buying.\n\n"
+         "*Important:* This is a rule-based spot trading assistant, not financial advice. Bot-side trailing protection requires the bot process to keep running. Exchange protective orders must be verified on Bitget; never assume an unverified stop is active.")
+    tg(msg)
+
 def scan():
-    st=load(SC)
-    if time.time()-st.get('last',0)<3540:return
+    st=load(SC);now=time.time()
+    if now-st.get('last',0)<3540:return
     db=load(DB);q=load(QF);s=cfg()
     if not s["auto_buy_enabled"]:return
     if btc_blocked(s):return
@@ -583,18 +656,42 @@ def scan():
     v.sort(key=lambda x:x['vol'],reverse=True);ct=int(time.time());qu=False
     for sym,d in list(q.items()):
         if ct-d.get('timestamp',0)>86400:q.pop(sym,None);qu=True
-    for i,t in enumerate(v[15:500]):
-        if t['vol']<(1000000 if i<=84 else 3000000 if i<=183 else 4000000 if i<=383 else 5000000):continue
-        p,pr,r,ma5,ma10=data(t['sym'])
-        if not p or r is None:continue
-        setup=sl=None
-        if 1.0<t['chg']<30.0 and s['rsi_min']<=r<=s['rsi_max'] and p>ma5>ma10:setup="TREND";sl=round(ma5*(1-s['stop_loss_pct']/100),6)
-        elif -30.0<t['chg']<-8.0 and r<30 and p>pr:setup="OVERSOLD";sl=round(p*(1-s['stop_loss_pct']/100),6)
-        if setup:
-            rr=(p*0.10)/(p-sl) if (p-sl)>0 else 0;sc=t['vol']/1e6+rr*10
-            if t['sym'] not in q or q[t['sym']].get('score',0)<sc:
-                if t['sym'] not in q:tg(f"📥 *QUEUED:* {t['sym']}\nScore:{sc:.1f}")
-                q[t['sym']]={"timestamp":ct,"type":setup,"sl":sl,"score":sc,"price":p,"chg":t['chg']};qu=True
+    # Log the exact candidate universe, including volume rejections and indicator decisions.
+    sh=scan_history_state();records=[]
+    for rank,t in enumerate(v[:500],start=1):
+        sym=t['sym'];vol=float(t['vol'] or 0);chg=float(t['chg'] or 0)
+        recd={"time":ct,"rank":rank,"sym":sym,"vol":vol,"chg":chg,"price":t.get("last"),"rsi":None,"ma5":None,"ma10":None,"decision":"SKIP","reason":"Top 15 by volume are intentionally excluded" if rank<=15 else "Not evaluated"}
+        if rank>15:
+            i=rank-16;threshold=(1000000 if i<=84 else 3000000 if i<=183 else 4000000 if i<=383 else 5000000)
+            recd["min_volume"]=threshold
+            if vol<threshold:recd["reason"]=f"24H volume below ${threshold/1e6:.0f}M minimum"
+            else:
+                p,pr,r,ma5,ma10=data(sym)
+                recd.update(price=p,rsi=r,ma5=ma5,ma10=ma10)
+                if not p or r is None:recd["reason"]="Hourly candle/indicator data unavailable"
+                else:
+                    setup=sl=None
+                    if 1.0<chg<30.0 and s['rsi_min']<=r<=s['rsi_max'] and p>ma5>ma10:
+                        setup="TREND";sl=round(ma5*(1-s['stop_loss_pct']/100),6)
+                    elif -30.0<chg<-8.0 and r<30 and p>pr:
+                        setup="OVERSOLD";sl=round(p*(1-s['stop_loss_pct']/100),6)
+                    if setup:
+                        rr=(p*0.10)/(p-sl) if (p-sl)>0 else 0;score=vol/1e6+rr*10
+                        recd["decision"]="SETUP";recd["reason"]=setup+" setup matched"
+                        if sym not in q or q[sym].get('score',0)<score:
+                            if sym not in q:tg(f"📥 *QUEUED:* {sym}\nScore:{score:.1f}")
+                            q[sym]={"timestamp":ct,"type":setup,"sl":sl,"score":score,"price":p,"chg":chg};qu=True
+                    else:
+                        reasons=[]
+                        if not (1.0<chg<30.0):reasons.append("not in trend 24H-change range")
+                        if not (s['rsi_min']<=r<=s['rsi_max']):reasons.append(f"RSI outside {s['rsi_min']}-{s['rsi_max']}")
+                        if not (p>ma5>ma10):reasons.append("price/MA trend condition failed")
+                        if not (-30.0<chg<-8.0 and r<30 and p>pr):reasons.append("oversold recovery condition failed")
+                        recd["reason"]="; ".join(reasons) or "No strategy setup matched"
+        records.append(recd)
+    sh["items"].extend(records)
+    # Keep the rolling-day file bounded if the exchange lists an unusually large number of markets.
+    sh["items"]=sh["items"][-15000:];save(SH,sh)
     if qu:save(QF,q)
     st['last']=time.time();save(SC,st)
     if q:
@@ -654,7 +751,7 @@ def cmd_set(txt):
     s[k]=new;save(CFG,s);tg(f"✅ `{k}` = `{new}`")
 
 def setc(k,v,m):s=cfg();s[k]=v;save(CFG,s);tg(m)
-MSG={"ai_info":"🧠 *AI ANALYST*\nTo ask the AI a question, type:\n`/ai <your question>`\n\nExample:\n`/ai what is the market sentiment right now?`","buy_info":"🛒 *BUY COMMAND*\nUsage: `/buy COIN AMOUNT`\nExample: `/buy SOL 5.75`","sell_info":"💸 *SELL COMMAND*\nUsage: `/sell COIN AMOUNT`\nExample: `/sell SOL 5.75`\n\nType `ALL` instead of an amount to sell the entire position.","/help":"🤖 *CMDS*\n`/menu` `/ai [q]` `/sync` `/audit`\n`/gainers` `/losers` `/summary`\n`/balance` `/status` `/holdings` `/pnl`\n`/buy COIN AMT` `/sell COIN AMT|ALL`\n`/set key value` `/pause` `/resume` `/panic`"}
+MSG={"ai_info":"🧠 *AI ANALYST*\nTo ask the AI a question, type:\n`/ai <your question>`\n\nExample:\n`/ai what is the market sentiment right now?`","buy_info":"🛒 *BUY COMMAND*\nUsage: `/buy COIN AMOUNT`\nExample: `/buy SOL 5.75`","sell_info":"💸 *SELL COMMAND*\nUsage: `/sell COIN AMOUNT`\nExample: `/sell SOL 5.75`\n\nType `ALL` instead of an amount to sell the entire position.","/help":"🤖 *CMDS*\n`/menu` `/ai [q]` `/sync` `/audit`\n`/gainers` `/losers` `/summary`\n`/balance` `/status` `/holdings` `/pnl`\n`/about` `/scan_history [page]`\n`/buy COIN AMT` `/sell COIN AMT|ALL`\n`/set key value` `/pause` `/resume` `/panic`"}
 
 def handle(t,age):
     l=t.lower()
@@ -676,6 +773,8 @@ def handle(t,age):
         result=get_holdings_text()
         for part in result if isinstance(result,list) else [result]:tg(part)
     elif l=="/summary":tg(get_summary_text())
+    elif l=="/about":cmd_about()
+    elif l=="/scan_history" or l.startswith("/scan_history "):cmd_scan_history(t)
     elif l=="/status":
         db=load(DB)
         if not db:tg("🛑 No active trades.")
@@ -748,7 +847,7 @@ def git_sync():
 if __name__=="__main__":
     lk=acquire_lock()
     if lk is None:print("Another run is in progress; exiting.");sys.exit(0)
-    try:_C.clear();audit_system();tg_check();manage();git_sync();check_daily_summary();check_hourly_balance();scan();exec_q()
+    try:_C.clear();cleanup_telegram_output();scan_history_state();audit_system();tg_check();manage();git_sync();check_daily_summary();check_hourly_balance();scan();exec_q()
     except Exception as e:
         try:tg(f"🚨 *CRASH:* `{e}`\n`{traceback.format_exc()[-200:]}`")
         except:pass
