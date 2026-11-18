@@ -182,13 +182,19 @@ def cmd_buy(txt):
     if not r:return
     c,amt=r;sym=f"{c}-USDT"
     if cd(f"buy:{sym}",5):tg(f"⏳ Processing /buy {c}...");return
-    db=load(DB)
-    if sym in db:tg(f"❌ Active position for {c}.");return
+    db=load(DB);old=db.get(sym)
     ub=B('free','USDT')
     if ub<amt:tg(f"❌ *BUY FAILED:* You only have ${ub:.2f} USDT.");return
     try:
-        f,a=m_buy(f"{c}/USDT",amt);db[sym]=NP(round(a,6),round(a*(1-cfg()['stop_loss_pct']/100),6));save(DB,db);ok=place_trailing_sl(sym,free_qty(sym,f))
-        tg(f"✅ *BOUGHT:* {c} @ {a:.6f}\nSpent: ${amt:.2f}\n"+(STOP_OK if ok else STOP_NO))
+        ob=B('total',c) if old else 0.0
+        f,a=m_buy(f"{c}/USDT",amt);sl=cfg()['stop_loss_pct']
+        if old:
+            e0=old['entry_price'];avg=round((ob*e0+f*a)/(ob+f),6) if ob>0 else round(a,6)
+            old.update(entry_price=avg,safe_zone=avg,stop_loss=round(avg*(1-sl/100),6),last_price=a,peak_price=max(old.get('peak_price',avg),a));db[sym]=old;save(DB,db);ok=place_trailing_sl(sym,free_qty(sym,ob+f))
+            tg(f"➕ *DCA ADDED:* {c} @ {a:.6f}\nSpent: ${amt:.2f}\nNew avg entry: {avg:.6f} (was {e0:.6f})\n"+(STOP_OK if ok else STOP_NO))
+        else:
+            db[sym]=NP(round(a,6),round(a*(1-sl/100),6));save(DB,db);ok=place_trailing_sl(sym,free_qty(sym,f))
+            tg(f"✅ *BOUGHT:* {c} @ {a:.6f}\nSpent: ${amt:.2f}\n"+(STOP_OK if ok else STOP_NO))
     except Exception as e:tg(f"❌ *BUY FAILED:* {e}")
 
 def cmd_sell(txt):
