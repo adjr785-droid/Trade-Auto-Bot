@@ -760,8 +760,23 @@ def cmd_scan_history(txt="/scan_history"):
     chunk=found[(page-1)*limit:page*limit]
     age=max(0,time.time()-h.get("window_start",time.time()))
     rows=[]
+    # Older history rows (including low-volume markets) may not have RSI yet.
+    # Fetch the hourly indicator only for the rows on this page, then persist it.
+    history_changed=False
     for x in chunk:
-        r=x.get("rsi");rsi=f"{r:.0f}" if isinstance(r,(int,float)) else "-"
+        r=x.get("rsi")
+        if not isinstance(r,(int,float)):
+            sym_for_data=str(x.get("sym", ""))
+            if sym_for_data:
+                try:
+                    _,_,fresh_rsi,_,_=data(sym_for_data)
+                    if isinstance(fresh_rsi,(int,float)):
+                        x["rsi"]=fresh_rsi
+                        r=fresh_rsi
+                        history_changed=True
+                except Exception as e:
+                    print(f"SCAN HISTORY RSI ERR {sym_for_data}: {e}")
+        rsi=f"{r:.1f}" if isinstance(r,(int,float)) else "N/A"
         sym=str(x.get("sym","?")).replace("-USDT","")[:12]
         raw_decision=str(x.get("decision","SKIP")).upper()
         if "NOT QUEUED" in raw_decision or "REJECT" in raw_decision: decision="REJECTED"
@@ -771,6 +786,8 @@ def cmd_scan_history(txt="/scan_history"):
         else: decision="SKIP"
         rr=x.get("rr");rr_text=f"1:{rr:.1f}" if isinstance(rr,(int,float)) and rr>0 else "-"
         rows.append(f"{sym:<12} {rsi:>4} {rr_text:>6} {decision:<9}")
+    if history_changed:
+        save(SH,h)
     table="COIN         RSI    R:R  DECISION\n"+"-"*39+"\n"+"\n".join(rows)
     query=" ".join(parts) if parts else "all coins"
     msg=f"🔎 *SCAN HISTORY — QUERY*\nMatched {len(found)} of {len(items)} records | {query}\nPage {page}/{total} | Window {age/3600:.1f}h\n\n```{table}```\n\n*Filter examples*\n`/scan_history BTC` — one coin\n`/scan_history decision=queued` — queued setups\n`/scan_history rsi<30` — RSI below 30\n`/scan_history` — shows COIN, RSI, R:R and DECISION, ranked by market rank\n`/scan_history chg>5 rank<=100` — combined filters\n`/scan_history oversold limit=20` — oversold reasons\n`/scan_history` — all recent records\nHistory resets automatically after 24 hours."
