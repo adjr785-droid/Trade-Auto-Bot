@@ -714,17 +714,15 @@ def scan_history_state():
     return h
 
 def cmd_scan_history(txt="/scan_history"):
-    """Show actionable BUY/QUEUED records by default; allow explicit history filters."""
+    """Query the rolling 24-hour scan log instead of paging through every coin."""
     import re, shlex
     h=scan_history_state();items=h.get("items",[])
     try: parts=shlex.split(txt)[1:]
     except Exception: parts=txt.split()[1:]
-    filters=[];page=1;limit=20;bad=[];show_all=False;explicit_decision=False
+    filters=[];page=1;limit=20;bad=[]
     for token in parts:
         t=token.strip();low=t.lower()
-        if low == "all":
-            show_all=True
-        elif low.startswith("page="):
+        if low.startswith("page="):
             try: page=max(1,int(t.split("=",1)[1]))
             except ValueError: bad.append(t)
         elif low.startswith("limit="):
@@ -733,53 +731,30 @@ def cmd_scan_history(txt="/scan_history"):
         elif re.match(r"^(rsi|chg|change|rank|vol)(<=|>=|=|<|>)-?\d+(?:\.\d+)?$",low):
             m=re.match(r"^(rsi|chg|change|rank|vol)(<=|>=|=|<|>)(-?\d+(?:\.\d+)?)$",low)
             key={"change":"chg","vol":"vol"}.get(m.group(1),m.group(1));filters.append((key,m.group(2),float(m.group(3))))
-        elif low.startswith("coin="):
-            filters.append(("coin","contains",low.split("=",1)[1]))
-        elif low.startswith("decision="):
-            explicit_decision=True
-            filters.append(("decision","contains",low.split("=",1)[1].upper()))
-        elif low.startswith("reason="):
-            filters.append(("reason","contains",low.split("=",1)[1]))
-        elif low in ("buy","queued","skip","rejected","bought","sold","hold"):
-            explicit_decision=True
-            filters.append(("decision","contains",low.upper()))
+        elif low.startswith("coin="): filters.append(("coin","contains",low.split("=",1)[1]))
+        elif low.startswith("decision="): filters.append(("decision","contains",low.split("=",1)[1]))
+        elif low.startswith("reason="): filters.append(("reason","contains",low.split("=",1)[1]))
+        elif low in ("buy","queued","setup","not_queued","skip","rejected"):
+            val={"buy":"setup","queued":"queued","not_queued":"not queued","rejected":"not queued"}.get(low,low)
+            filters.append(("decision","contains",val))
         elif low in ("trend","oversold"):
             filters.append(("reason","contains",low))
-        elif low.startswith("/scan_history"):
-            continue
-        else:
-            filters.append(("coin","contains",low))
+        elif low.startswith("/scan_history"): continue
+        else: filters.append(("coin","contains",low))
     if bad:
         tg("❌ Invalid filter: "+", ".join(bad)+"\nExample: `/scan_history BTC decision=queued rsi<30 limit=20`");return
-
-    def clean_decision(value):
-        raw=str(value or "SKIP").strip().upper().replace("_"," ")
-        if "NOT QUEUED" in raw:return "BUY"
-        if "QUEUED" in raw:return "QUEUED"
-        if "SETUP" in raw:return "BUY"
-        for word in ("REJECTED","BOUGHT","SOLD","HOLD","BUY","SKIP"):
-            if word in raw:return word
-        return raw.split()[0] if raw else "SKIP"
-
-    # Unless the user explicitly asks for another decision or all records,
-    # keep the default focused on actionable signals only.
-    if not show_all and not explicit_decision:
-        filters.insert(0,("decision","actionable",("BUY","QUEUED")))
-
     def matches(x):
         for key,op,val in filters:
             if key in ("coin","decision","reason"):
-                actual=(str(x.get("sym", "")) if key=="coin" else clean_decision(x.get("decision")) if key=="decision" else str(x.get("reason",""))).lower()
-                if op=="actionable":
-                    if actual not in val:return False
-                elif val.lower() not in actual:return False
+                actual=(str(x.get("sym", "")) if key=="coin" else str(x.get(key,""))).lower()
+                if val not in actual:return False
             else:
                 actual=x.get(key)
                 if not isinstance(actual,(int,float)):return False
                 if not {"<":actual<val,">":actual>val,"<=":actual<=val,">=":actual>=val,"=":actual==val}[op]:return False
         return True
-
-    found=[x for x in reversed(items) if matches(x)]
+    # Rank by the scanner market rank: rank 16 appears before rank 17, etc.
+    found=sorted((x for x in items if matches(x)), key=lambda x: (int(x.get("rank", 10**9) or 10**9), -float(x.get("time", 0) or 0)))
     total=max(1,(len(found)+limit-1)//limit)
     if page>total:tg(f"Only {total} page(s) match. Use `/scan_history page={total}`.");return
     chunk=found[(page-1)*limit:page*limit]
@@ -787,15 +762,19 @@ def cmd_scan_history(txt="/scan_history"):
     rows=[]
     for x in chunk:
         r=x.get("rsi");rsi=f"{r:.0f}" if isinstance(r,(int,float)) else "-"
-        sym=str(x.get('sym','?')).replace('-USDT','')[:10]
-        chg=x.get('chg',0) or 0
-        decision=clean_decision(x.get('decision'))
-        rows.append(f"{sym:<10} {chg:>+6.1f}% {rsi:>3} {decision}")
-    table="COIN       24H      RSI DECISION\n"+"-"*34+"\n"+"\n".join(rows)
-    query=" ".join(parts) if parts else "BUY + QUEUED"
-    msg=f"🔎 *SCAN HISTORY*\nMatched {len(found)} of {len(items)} records | {query}\nPage {page}/{total} | Window {age/3600:.1f}h\n\n```{table}```\n\nUse `/scan_history all` for every decision, or filter with `/scan_history buy`, `/scan_history queued`, `/scan_history skip`, `/scan_history rejected`.\nHistory resets automatically after 24 hours."
-    if not chunk:
-        msg=f"🔎 *SCAN HISTORY*\nNo matching records: {query}\nDefault view shows BUY and QUEUED only. Use `/scan_history all` to view every decision.\nHistory resets automatically after 24 hours."
+        sym=str(x.get("sym","?")).replace("-USDT","")[:12]
+        raw_decision=str(x.get("decision","SKIP")).upper()
+        if "NOT QUEUED" in raw_decision or "REJECT" in raw_decision: decision="REJECTED"
+        elif "QUEUED" in raw_decision: decision="QUEUED"
+        elif "BUY" in raw_decision or "BOUGHT" in raw_decision: decision="BUY"
+        elif "SELL" in raw_decision or "SOLD" in raw_decision: decision="SOLD"
+        else: decision="SKIP"
+        rr=x.get("rr");rr_text=f"1:{rr:.1f}" if isinstance(rr,(int,float)) and rr>0 else "-"
+        rows.append(f"{sym:<12} {rsi:>4} {rr_text:>6} {decision:<9}")
+    table="COIN         RSI    R:R  DECISION\n"+"-"*39+"\n"+"\n".join(rows)
+    query=" ".join(parts) if parts else "all coins"
+    msg=f"🔎 *SCAN HISTORY — QUERY*\nMatched {len(found)} of {len(items)} records | {query}\nPage {page}/{total} | Window {age/3600:.1f}h\n\n```{table}```\n\n*Filter examples*\n`/scan_history BTC` — one coin\n`/scan_history decision=queued` — queued setups\n`/scan_history rsi<30` — RSI below 30\n`/scan_history` — shows COIN, RSI, R:R and DECISION, ranked by market rank\n`/scan_history chg>5 rank<=100` — combined filters\n`/scan_history oversold limit=20` — oversold reasons\n`/scan_history` — all recent records\nHistory resets automatically after 24 hours."
+    if not chunk:msg=f"🔎 *SCAN HISTORY — QUERY*\nNo records match: {query}\nTry `/scan_history` to view all records, or change your filters.\nHistory resets automatically after 24 hours."
     nav=[]
     if page>1:nav.append({"text":"⬅️ Previous","callback_data":f"scan_history:{page-1}:{' '.join(parts)}"})
     if page<total:nav.append({"text":"Next ➡️","callback_data":f"scan_history:{page+1}:{' '.join(parts)}"})
@@ -852,7 +831,7 @@ def scan():
     sh=scan_history_state();records=[];matched=0;queued=0
     for rank,t in enumerate(v[:500],start=1):
         sym=t['sym'];vol=float(t['vol'] or 0);chg=float(t['chg'] or 0)
-        recd={"time":ct,"rank":rank,"sym":sym,"vol":vol,"chg":chg,"price":t.get("last"),"rsi":None,"ma5":None,"ma10":None,"decision":"SKIP","reason":"Top 15 by volume are intentionally excluded" if rank<=15 else "Not evaluated"}
+        recd={"time":ct,"rank":rank,"sym":sym,"vol":vol,"chg":chg,"price":t.get("last"),"rsi":None,"rr":None,"ma5":None,"ma10":None,"decision":"SKIP","reason":"Top 15 by volume are intentionally excluded" if rank<=15 else "Not evaluated"}
         if rank>15:
             i=rank-16;threshold=(1000000 if i<=84 else 3000000 if i<=183 else 4000000 if i<=383 else 5000000)
             recd["min_volume"]=threshold
@@ -869,12 +848,12 @@ def scan():
                         setup="OVERSOLD";sl=round(p*(1-s['stop_loss_pct']/100),6)
                     if setup:
                         matched+=1
-                        rr=(p*0.10)/(p-sl) if (p-sl)>0 else 0;score=vol/1e6+rr*10
+                        rr=(p*0.10)/(p-sl) if (p-sl)>0 else 0;recd["rr"]=rr;score=vol/1e6+rr*10
                         if not buying_allowed:
-                            recd["decision"]="BUY"
+                            recd["decision"]="SETUP — NOT QUEUED"
                             recd["reason"]=f"{setup} setup matched, but {block_reason}"
                         else:
-                            recd["decision"]="QUEUED"
+                            recd["decision"]="SETUP — QUEUED"
                             recd["reason"]=setup+" setup matched; eligible for automatic-buy queue"
                             if sym not in q or q[sym].get('score',0)<score:
                                 if sym not in q:tg(f"📥 *QUEUED:* {sym}\nScore:{score:.1f}")
