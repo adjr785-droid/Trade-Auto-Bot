@@ -714,23 +714,65 @@ def scan_history_state():
     return h
 
 def cmd_scan_history(txt="/scan_history"):
-    h=scan_history_state();items=h.get("items",[]);parts=txt.split();page=1
-    if len(parts)>1:
-        try:page=max(1,int(parts[1]))
-        except ValueError:tg("Usage: `/scan_history [page]`");return
-    per=20;total=max(1,(len(items)+per-1)//per)
-    if page>total:tg(f"Only {total} page(s) are available.");return
-    start=(page-1)*per;chunk=items[start:start+per]
+    """Query the rolling 24-hour scan log instead of paging through every coin."""
+    import re, shlex
+    h=scan_history_state();items=h.get("items",[])
+    try: parts=shlex.split(txt)[1:]
+    except Exception: parts=txt.split()[1:]
+    filters=[];page=1;limit=20;bad=[]
+    for token in parts:
+        t=token.strip();low=t.lower()
+        if low.startswith("page="):
+            try: page=max(1,int(t.split("=",1)[1]))
+            except ValueError: bad.append(t)
+        elif low.startswith("limit="):
+            try: limit=max(1,min(50,int(t.split("=",1)[1])))
+            except ValueError: bad.append(t)
+        elif re.match(r"^(rsi|chg|change|rank|vol)(<=|>=|=|<|>)-?\d+(?:\.\d+)?$",low):
+            m=re.match(r"^(rsi|chg|change|rank|vol)(<=|>=|=|<|>)(-?\d+(?:\.\d+)?)$",low)
+            key={"change":"chg","vol":"vol"}.get(m.group(1),m.group(1));filters.append((key,m.group(2),float(m.group(3))))
+        elif low.startswith("coin="): filters.append(("coin","contains",low.split("=",1)[1]))
+        elif low.startswith("decision="): filters.append(("decision","contains",low.split("=",1)[1]))
+        elif low.startswith("reason="): filters.append(("reason","contains",low.split("=",1)[1]))
+        elif low in ("buy","queued","setup","not_queued","skip","rejected"):
+            val={"buy":"setup","queued":"queued","not_queued":"not queued","rejected":"not queued"}.get(low,low)
+            filters.append(("decision","contains",val))
+        elif low in ("trend","oversold"):
+            filters.append(("reason","contains",low))
+        elif low.startswith("/scan_history"): continue
+        else: filters.append(("coin","contains",low))
+    if bad:
+        tg("❌ Invalid filter: "+", ".join(bad)+"\nExample: `/scan_history BTC decision=queued rsi<30 limit=20`");return
+    def matches(x):
+        for key,op,val in filters:
+            if key in ("coin","decision","reason"):
+                actual=(str(x.get("sym", "")) if key=="coin" else str(x.get(key,""))).lower()
+                if val not in actual:return False
+            else:
+                actual=x.get(key)
+                if not isinstance(actual,(int,float)):return False
+                if not {"<":actual<val,">":actual>val,"<=":actual<=val,">=":actual>=val,"=":actual==val}[op]:return False
+        return True
+    found=[x for x in reversed(items) if matches(x)]
+    total=max(1,(len(found)+limit-1)//limit)
+    if page>total:tg(f"Only {total} page(s) match. Use `/scan_history page={total}`.");return
+    chunk=found[(page-1)*limit:page*limit]
     age=max(0,time.time()-h.get("window_start",time.time()))
-    lines=[]
+    rows=[]
     for x in chunk:
-        r=x.get("rsi");rsi=f"{r:.1f}" if isinstance(r,(int,float)) else "N/A"
-        lines.append(f"#{x.get('rank','?')} {x.get('sym','?')} | ${fp(x.get('price'))} | 24H {x.get('chg',0):+.1f}% | Vol ${x.get('vol',0)/1e6:.2f}M | RSI {rsi} | MA5 {fp(x.get('ma5'))} | MA10 {fp(x.get('ma10'))} | {x.get('decision','SKIP')}: {x.get('reason','-')}")
-    msg=f"🔎 *SCAN HISTORY — 24H WINDOW*\nRecorded: {len(items)} coin checks | Page {page}/{total}\nWindow age: {age/3600:.1f} hours\n\n"+("\n".join(lines) if lines else "No scan records yet. The next scheduled scan will record market checks even when auto-buy is OFF.")
-    msg+="\n\nHistory resets automatically after 24 hours."
+        r=x.get("rsi");rsi=f"{r:.0f}" if isinstance(r,(int,float)) else "-"
+        sym=str(x.get('sym','?')).replace('-USDT','')[:10]
+        chg=x.get('chg',0) or 0
+        decision=str(x.get('decision','SKIP')).replace('_',' ')[:12]
+        reason=' '.join(str(x.get('reason','-')).split())[:76]
+        rows.append(f"{int(x.get('rank',0) or 0):>3} {sym:<10} {chg:>+6.1f}% {rsi:>3} {decision:<12}\n    ↳ {reason}")
+    table="RANK COIN       24H      RSI DECISION\n"+"-"*42+"\n"+"\n".join(rows)
+    query=" ".join(parts) if parts else "all coins"
+    msg=f"🔎 *SCAN HISTORY — QUERY*\nMatched {len(found)} of {len(items)} records | {query}\nPage {page}/{total} | Window {age/3600:.1f}h\n\n```{table}```\n\n*Filter examples*\n`/scan_history BTC` — one coin\n`/scan_history decision=queued` — queued setups\n`/scan_history rsi<30` — RSI below 30\n`/scan_history chg>5 rank<=100` — combined filters\n`/scan_history oversold limit=20` — oversold reasons\n`/scan_history` — all recent records\nHistory resets automatically after 24 hours."
+    if not chunk:msg=f"🔎 *SCAN HISTORY — QUERY*\nNo records match: {query}\nTry `/scan_history` to view all records, or change your filters.\nHistory resets automatically after 24 hours."
     nav=[]
-    if page>1:nav.append({"text":"⬅️ Previous","callback_data":f"scan_history:{page-1}"})
-    if page<total:nav.append({"text":"Next ➡️","callback_data":f"scan_history:{page+1}"})
+    if page>1:nav.append({"text":"⬅️ Previous","callback_data":f"scan_history:{page-1}:{' '.join(parts)}"})
+    if page<total:nav.append({"text":"Next ➡️","callback_data":f"scan_history:{page+1}:{' '.join(parts)}"})
     keyboard=[]
     if nav:keyboard.append(nav)
     keyboard.append([{"text":"🕹️ Main Menu","callback_data":"/menu"}])
@@ -846,17 +888,23 @@ def get_market_row(sym,chg=None):
         try:chg=ex.fetch_ticker(S(sym))['percentage'] or 0
         except:chg=0
     r=data(sym)[2]
-    rsi=f"{r:.1f}" if r is not None else "N/A"
-    return f"{sym.split('-')[0]} | Price: {fp(live(sym))} | 24H: {chg:+.1f}% | RSI: {rsi}"
+    rsi=f"{r:.1f}" if r is not None else "-"
+    return {'coin':sym.split('-')[0],'price':fp(live(sym)),'chg':float(chg or 0),'rsi':rsi}
 
-def gl():
+def gl(limit=10):
     try:tk=ex.fetch_tickers()
-    except:return "❌","❌"
+    except:return "❌ Unable to fetch market data.","❌ Unable to fetch market data."
     v=sorted([{'sym':k.replace("/","-"),'chg':t['percentage'] or 0} for k,t in tk.items() if k.endswith('/USDT') and not skip(k.split('/')[0]) and (t['quoteVolume'] or 0)>=1000000],key=lambda x:x['chg'],reverse=True)
+    gainers=[x for x in v if x['chg']>0][:limit]
+    losers=[x for x in reversed(v) if x['chg']<0][:limit]
     def build(title,items):
-        lines=[get_market_row(x['sym'],x['chg']) for x in items]
-        return f"*{title}*\n" + ("\n".join(lines) if lines else "No results found.")
-    return build("🚀 GAINERS (24H)",v[:5]),build("🩸 LOSERS (24H)",v[-5:][::-1])
+        lines=[f"{'COIN':<11} {'PRICE':>12} {'24H %':>8} {'RSI':>5}","-"*40]
+        for x in items:
+            r=get_market_row(x['sym'],x['chg'])
+            lines.append(f"{r['coin'][:11]:<11} {r['price']:>12} {r['chg']:>+7.2f}% {r['rsi']:>5}")
+        body="\n".join(lines) if items else "No qualifying markets found."
+        return f"*{title} — TOP {limit} (24H)*\n```{body}```\n_Minimum 24H quote volume: $1M._"
+    return build("🚀 GAINERS",gainers),build("🩸 LOSERS",losers)
 
 def cmd_set(txt):
     p=txt.split()
@@ -883,7 +931,7 @@ def cmd_set(txt):
     s[k]=new;save(CFG,s);tg(f"✅ `{k}` = `{new}`")
 
 def setc(k,v,m):s=cfg();s[k]=v;save(CFG,s);tg(m)
-MSG={"ai_info":"🧠 *AI ANALYST*\nTo ask the AI a question, type:\n`/ai <your question>`\n\nExample:\n`/ai what is the market sentiment right now?`","buy_info":"🛒 *BUY COMMAND*\nUsage: `/buy COIN AMOUNT`\nExample: `/buy SOL 5.75`","sell_info":"💸 *SELL COMMAND*\nUsage: `/sell COIN AMOUNT`\nExample: `/sell SOL 5.75`\n\nType `ALL` instead of an amount to sell the entire position.","/help":"🤖 *CMDS*\n`/menu` `/ai [q]` `/analyse COIN` `/sync` `/audit`\n`/gainers` `/losers` `/summary`\n`/balance` `/status` `/holdings` `/pnl`\n`/about` `/scan_history [page]`\n`/buy COIN AMT` `/sell COIN AMT|ALL`\n`/set key value` `/pause` `/resume` `/panic`"}
+MSG={"ai_info":"🧠 *AI ANALYST*\nTo ask the AI a question, type:\n`/ai <your question>`\n\nExample:\n`/ai what is the market sentiment right now?`","buy_info":"🛒 *BUY COMMAND*\nUsage: `/buy COIN AMOUNT`\nExample: `/buy SOL 5.75`","sell_info":"💸 *SELL COMMAND*\nUsage: `/sell COIN AMOUNT`\nExample: `/sell SOL 5.75`\n\nType `ALL` instead of an amount to sell the entire position.","/help":"🤖 *CMDS*\n`/menu` `/ai [q]` `/analyse COIN` `/sync` `/audit`\n`/gainers` `/losers` `/summary`\n`/balance` `/status` `/holdings` `/pnl`\n`/about` `/scan_history [coin/filter]`\n`/buy COIN AMT` `/sell COIN AMT|ALL`\n`/set key value` `/pause` `/resume` `/panic`"}
 
 def handle(t,age):
     l=t.lower()
@@ -895,7 +943,9 @@ def handle(t,age):
     elif l in ("/menu","📊 menu"):menu()
     elif l=="scan_history":cmd_scan_history("/scan_history")
     elif l.startswith("scan_history:"):
-        try:cmd_scan_history("/scan_history "+str(max(1,int(l.split(":",1)[1]))))
+        try:
+            payload=t.split(":",1)[1];pg,sep,qry=payload.partition(":")
+            cmd_scan_history("/scan_history page="+str(max(1,int(pg)))+(" "+qry if sep and qry else ""))
         except (ValueError,IndexError):cmd_scan_history("/scan_history")
     elif l in ("/panic","🚨 panic"):panic_prompt()
     elif l=="panic_cancel":tg("👍 Panic cancelled.")
@@ -927,8 +977,12 @@ def handle(t,age):
     elif l=="/pnl":
         L=load(LF);tp=L.get('total_realized_usdt',0.0);n=L.get('trade_count',0)
         tg(f"📊 *P&L SUMMARY*\nTotal realized PnL: ${tp:.2f}\nCompleted trades: {n}")
-    elif l=="/gainers":tg(gl()[0])
-    elif l=="/losers":tg(gl()[1])
+    elif l.startswith("/gainers"):
+        p=l.split();n=20 if len(p)>1 and p[1]=="20" else 10
+        tg(gl(n)[0])
+    elif l.startswith("/losers"):
+        p=l.split();n=20 if len(p)>1 and p[1]=="20" else 10
+        tg(gl(n)[1])
     elif l.startswith("/buy"):cmd_buy(t)
     elif l.startswith("/sell"):cmd_sell(t)
     elif l.startswith("/set"):cmd_set(t)
