@@ -334,7 +334,7 @@ def spot_total():
     tot=ex.fetch_balance().get('total') or {}
     try:tk=ex.fetch_tickers()
     except Exception:tk={}
-    total=0.0;skipped=0
+    total=0.0;skipped=0;usdt=0.0
     for c,a in tot.items():
         try:a=float(a or 0)
         except (TypeError,ValueError):continue
@@ -343,13 +343,34 @@ def spot_total():
         if not p and not tk:p=live(f"{c}-USDT")
         if p:total+=a*p
         else:skipped+=1
-    return total,skipped
+        if c=='USDT':usdt=a
+    return total,skipped,usdt
 
 def total_line():
-    try:total,skipped=spot_total()
+    try:total,skipped,_=spot_total()
     except Exception as e:return f"Total spot balance: unavailable ({e})"
     now=datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=TZ))).strftime('%H:%M')
     return f"Total spot balance: ${total:.2f} USDT (live, {now})"+(f" | {skipped} coin(s) with no USDT price not counted" if skipped else "")
+
+def update_pinned_balance():
+    """ONE pinned message at the top of the chat shows the live total spot balance; it is edited in place on every run."""
+    try:
+        total,skipped,usdt=spot_total()
+        now=datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=TZ))).strftime('%H:%M')
+        txt=f"💰 ${total:.2f} total spot | USDT ${usdt:.2f} | {now}\nLive spot balance, updated every bot run."+(f"\n{skipped} coin(s) with no USDT price not counted." if skipped else "")
+        st=load(ST);mid=st.get("pin_id")
+        if mid:
+            r=requests.post(API+"/editMessageText",json={"chat_id":CHAT,"message_id":mid,"text":txt},timeout=10)
+            if r.ok:return
+            d=r.text.lower()
+            if "not modified" in d:return
+            if not any(k in d for k in ("not found","message_id_invalid","can't be edited")):print("PIN EDIT ERROR:",r.text);return
+        r=requests.post(API+"/sendMessage",json={"chat_id":CHAT,"text":txt,"disable_notification":True},timeout=10)
+        mid=((r.json() if r.ok else {}).get("result") or {}).get("message_id")
+        if not mid:print("PIN SEND ERROR:",r.text);return
+        requests.post(API+"/pinChatMessage",json={"chat_id":CHAT,"message_id":mid,"disable_notification":True},timeout=10)
+        st=load(ST);st["pin_id"]=mid;save(ST,st)
+    except Exception as e:print(f"PIN ERR: {e}")
 
 def get_holdings_text():
     try:balance=ex.fetch_balance();totals=balance.get('total') or {}
@@ -884,7 +905,7 @@ def git_sync():
 if __name__=="__main__":
     lk=acquire_lock()
     if lk is None:print("Another run is in progress; exiting.");sys.exit(0)
-    try:_C.clear();cleanup_telegram_output();scan_history_state();audit_system();tg_check();manage();git_sync();check_hourly_balance();scan();exec_q()
+    try:_C.clear();cleanup_telegram_output();scan_history_state();audit_system();tg_check();manage();update_pinned_balance();git_sync();check_hourly_balance();scan();exec_q()
     except Exception as e:
         try:tg(f"🚨 *CRASH:* `{e}`\n`{traceback.format_exc()[-200:]}`")
         except:pass
