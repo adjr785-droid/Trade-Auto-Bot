@@ -4,9 +4,9 @@
         "safe_zone": 0.265129,
         "stop_loss": 0.22536,
         "peak_price": 0.2677,
-        "last_price": 0.2549,
+        "last_price": 0.2554,
         "opened_at": 1795066169.8475425,
-        "seen": 1795117469.641595,
+        "seen": 1795117794.6242232,
         "xsl": 0.24462800000000004
     },
     "ADA-USDT": {
@@ -14,19 +14,19 @@
         "safe_zone": 0.154,
         "stop_loss": 0.1309,
         "peak_price": 0.1546,
-        "last_price": 0.1532,
+        "last_price": 0.1536,
         "opened_at": 1795102086.900256,
         "xsl": 0.14168,
-        "seen": 1795117469.9729128
+        "seen": 1795117794.9983022
     },
     "BTW-USDT": {
         "entry_price": 0.560309,
         "safe_zone": 0.560309,
         "stop_loss": 0.560309,
-        "peak_price": 0.594134,
-        "last_price": 0.594134,
+        "peak_price": 0.594231,
+        "last_price": 0.594231,
         "opened_at": 1795102668.8371024,
         "xsl": 0.560309,
-        "seen": 1795117470.3203864
+        "seen": 1795117795.5991673
     }
 }
