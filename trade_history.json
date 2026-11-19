@@ -4,5 +4,11 @@
         "pnl": -0.04015746000000026,
         "time": 1795066050.2611175,
         "reason": "MANUAL SELL ALL"
+    },
+    {
+        "sym": "SOON-USDT",
+        "pnl": -0.25194676000000027,
+        "time": 1795102006.029435,
+        "reason": "MANUAL SELL $6.76"
     }
 ]
