@@ -12,7 +12,7 @@ STABLE=['USDC','USDT','DAI','FDUSD','TUSD','USDD','USDE'];LEV=['3L','3S','5L','5
 ex=ccxt.bitget({'apiKey':os.environ.get('BITGET_API_KEY'),'secret':os.environ.get('BITGET_API_SECRET'),'password':os.environ.get('BITGET_API_PASSPHRASE'),'enableRateLimit':True});ex.options['createMarketBuyOrderRequiresPrice']=False
 client=genai.Client(api_key=os.environ.get('GEMINI_API_KEY')) if genai and os.environ.get('GEMINI_API_KEY') else None
 GEMINI_MODELS=[m for m in [os.environ.get('GEMINI_MODEL'),'gemini-2.5-flash','gemini-1.5-flash'] if m]
-_C={};KB={"keyboard":[["📊 Menu","❌ Cancel","🚨 PANIC"]],"resize_keyboard":True,"is_persistent":True}
+_C={};KB={"keyboard":[["📊 Menu","🧠 Ask AI","💼 Holdings"]],"resize_keyboard":True,"is_persistent":True}
 S=lambda s:s.replace("-","/")
 TR=lambda t:{'trigger':True} if t else {}
 B=lambda k,c:ex.fetch_balance()[k].get(c,0)
@@ -56,12 +56,12 @@ tg=lambda m:_send(m,"Markdown");tg_ai=lambda m:_send(m,"HTML")
 
 def menu():
     b=lambda t,c:{"text":t,"callback_data":c}
-    _send("🕹️ *MAIN MENU*\nAutomatic buying is enabled by default when a valid setup passes all safety checks. Use /pause only for an emergency stop.","Markdown",{"inline_keyboard":[
-        [b("🛠️ Audit","/audit"),b("🧾 Scan History","scan_history:1")],
-        [b("🟢 Status","/status"),b("💼 Holdings Details","/holdings")],
-        [b("🚀 Gainers","/gainers"),b("🩸 Losers","/losers")],
-        [b("❌ Cancel All Orders","/cancel")],
-        [b("🧠 Ask AI","ai_info")]
+    _send("🕹️ *MAIN MENU*\nSelect an option below:","Markdown",{"inline_keyboard":[
+        [b("▶️ Resume","/resume"),b("⏸ Pause","/pause")],
+        [b("🟢 Status","/status"),b("🛠️ Audit","/audit")],
+        [b("🧾 Scan History","scan_history:1"),b("🚀 Gainers","/gainers")],
+        [b("🩸 Losers","/losers"),b("❌ Cancel Orders","/cancel")],
+        [b("🚨 PANIC SELL","/panic")]
     ]})
 
 def panic_prompt():_send("🚨 *CONFIRM PANIC*\nThis sells ALL positions at market and pauses auto-buy.\nConfirm within 15 minutes.","Markdown",{"inline_keyboard":[[{"text":"✅ YES, SELL EVERYTHING","callback_data":"panic_confirm"},{"text":"❌ Cancel","callback_data":"panic_cancel"}]]})
@@ -329,15 +329,6 @@ def panic_sell():
     save(DB,db);save(QF,{});s=cfg();s['auto_buy_enabled']=False;save(CFG,s)
     tg(f"⚠️ *PANIC INCOMPLETE.* Still held: `{', '.join(failed)}`\nAuto-buy PAUSED." if failed else "🛑 *PANIC COMPLETE.* All positions sold. Auto-buy PAUSED.")
 
-def get_balance_text():
-    b=ex.fetch_balance()['free']
-    lines=[f"USDT: ${b.get('USDT',0):.2f}"]
-    for c,a in b.items():
-        if a>0 and c not in ['USDT','USDC']:
-            p=live(f"{c}-USDT")
-            if p and a*p>=0.10:lines.append(f"{c}: {a:.4f} (about ${a*p:.2f})")
-    return "\n".join(lines)
-
 def get_holdings_text():
     try:balance=ex.fetch_balance();totals=balance.get('total') or {}
     except Exception as e:return f"❌ Could not fetch exchange holdings: {e}"
@@ -362,15 +353,17 @@ def get_holdings_text():
             pnl_line=f"Entry: {fp(entry)} USDT | PnL: {pnl:+.2f}% (${pnl_usdt:+.2f})"
         lines.extend([f"🪙 *{coin}*",f"Quantity: {qty:.8g}",f"Current price: {fp(price)} USDT",f"Market value: ${qty*price:.2f}",pnl_line,f"RSI (1h): {rsi if rsi is not None else 'N/A'}",f"MA5 (1h): {fp(ma5) if ma5 is not None else 'N/A'}",f"MA10 (1h): {fp(ma10) if ma10 is not None else 'N/A'}",f"Market sentiment: {sentiment}",f"Bot trailing stop: {'ON ('+str(cfg().get('trail_pct',0))+'% below peak)' if cfg().get('trail_pct',0)>0 else 'OFF'}",f"Peak price: {fp(entry_data.get('peak_price')) if entry_data.get('peak_price') else 'N/A'}",f"Exchange stop level: {fp(entry_data.get('xsl')) if entry_data.get('xsl') else 'Not verified'}",""])
         count+=1
-    note=("\n⚠️ Held but with no Bitget USDT price: "+", ".join(unpriced)) if unpriced else ""
+    if unpriced:
+        note="\n⚠️ Held but with no Bitget USDT price (dust/delisted): "+", ".join(unpriced[:3])
+        if len(unpriced)>3: note+=f" and {len(unpriced)-3} more..."
+        lines.append(note)
     if count==0:return "💼 *HOLDINGS*\nNo eligible USDT-priced holdings found."+note
     lines.insert(2,f"Assets: {count} | Estimated value: ${total_value:.2f} USDT")
-    if note:lines.append(note.strip())
     return "\n".join(lines)
 
 def check_hourly_balance():
     st=load(SC);now=time.time()
-    if now-st.get('last_bal_alert',0)>=3600:tg(f"💰 *HOURLY BALANCE*\n{get_balance_text()}");st['last_bal_alert']=now;save(SC,st)
+    if now-st.get('last_bal_alert',0)>=3600:tg(f"💼 *HOURLY HOLDINGS*\n{get_holdings_text()}");st['last_bal_alert']=now;save(SC,st)
 
 def last_trade_line():
     H=load(HIST)
@@ -780,7 +773,7 @@ def handle(t,age):
         if r and r.startswith("✅"):tg(r)
     elif l=="trail_on":setc('trail_pct',8.0,"📈 Trailing Stop-Loss ON (8%)");menu()
     elif l=="trail_off":setc('trail_pct',0.0,"📉 Trailing Stop-Loss OFF");menu()
-    elif l in ("/holdings","/portfolio"):tg(get_holdings_text())
+    elif l in ("/holdings","/portfolio","💼 holdings"):tg(get_holdings_text())
     elif l=="/scan_history" or l.startswith("/scan_history "):cmd_scan_history(t)
     elif l=="/status":
         db=load(DB)
@@ -798,6 +791,7 @@ def handle(t,age):
     elif l.startswith("/set"):cmd_set(t)
     elif l=="/pause":setc('auto_buy_enabled',False,"⏸ Auto-buy paused.")
     elif l in ("/resume","▶️ resume"):setc('auto_buy_enabled',True,"▶️ Auto-buy resumed.")
+    elif l in ("🧠 ask ai", "ai_info"):tg(MSG["ai_info"])
 
 def tg_check():
     st=load(ST);lid=st.get("last_update_id",0)
