@@ -22,12 +22,12 @@ STOP_NO="⚠️ Exchange stop NOT verified.\nBot-side monitoring is active only 
 def compact_balance():
     if time.time()-_BAL["t"]<60:return _BAL["m"]
     try:
-        bal=ex.fetch_balance();tot=bal.get('total') or {};u=float(tot.get('USDT',0.0));cv=0.0
+        tot=ex.fetch_balance().get('total') or {};v=float(tot.get('USDT',0.0))
         for c,q in tot.items():
             if c in STABLE or c=='USDT' or float(q or 0)<=0:continue
             p=live(f"{c}-USDT")
-            if p:cv+=float(q)*p
-        txt=f"USDT ${u:.2f} | Assets ${cv:.2f}"
+            if p:v+=float(q)*p
+        txt=f"Total value: ${v:.2f} USDT"
         _BAL["t"],_BAL["m"]=time.time(),txt;return txt
     except:return _BAL["m"]
 
