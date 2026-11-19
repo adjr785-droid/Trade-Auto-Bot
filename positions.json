@@ -1,22 +1,12 @@
 {
-    "BLESS-USDT": {
-        "entry_price": 0.011945,
-        "safe_zone": 0.011945,
-        "stop_loss": 0.011945,
-        "peak_price": 0.0126791,
-        "last_price": 0.0122174,
-        "opened_at": 1795061194.800919,
-        "xsl": 0.011945,
-        "seen": 1795066176.817512
-    },
     "SOON-USDT": {
         "entry_price": 0.2635,
         "safe_zone": 0.2635,
         "stop_loss": 0.223975,
-        "peak_price": 0.2635,
-        "last_price": 0.2635,
+        "peak_price": 0.2652,
+        "last_price": 0.2652,
         "opened_at": 1795066169.8475425,
-        "seen": 1795066176.9799957,
+        "seen": 1795069546.5984855,
         "xsl": 0.24242000000000002
     }
 }
