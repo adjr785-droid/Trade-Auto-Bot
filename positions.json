@@ -4,9 +4,19 @@
         "safe_zone": 0.011945,
         "stop_loss": 0.011945,
         "peak_price": 0.0126791,
-        "last_price": 0.0122771,
+        "last_price": 0.0121196,
         "opened_at": 1795061194.800919,
         "xsl": 0.011945,
-        "seen": 1795066051.954471
+        "seen": 1795066139.6222537
+    },
+    "SOON-USDT": {
+        "entry_price": 0.2636,
+        "safe_zone": 0.2636,
+        "stop_loss": 0.22406,
+        "peak_price": 0.2636,
+        "last_price": 0.2636,
+        "opened_at": 1795066136.030271,
+        "xsl": 0.242512,
+        "seen": 1795066139.9859629
     }
 }
