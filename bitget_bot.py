@@ -340,16 +340,14 @@ def panic_sell():
     tg(f"⚠️ *PANIC INCOMPLETE.* Still held (sell failed): `{', '.join(failed)}`\nAuto-buy PAUSED. Retry with /panic or sell manually." if failed else "🛑 *PANIC COMPLETE.* All positions sold. Auto-buy PAUSED.")
 
 def get_balance_text():
+    # Spot balance only: no warnings, no analysis.
     b=ex.fetch_balance()['free']
-    lines=[f"USDT: ${b.get('USDT',0):.2f}"];unpriced=[]
+    lines=[f"USDT: ${b.get('USDT',0):.2f}"]
     for c,a in b.items():
         if a>0 and c not in ['USDT','USDC']:
             p=live(f"{c}-USDT")
             if p and a*p>=0.10:
                 lines.append(f"{c}: {a:.4f} (about ${a*p:.2f})")
-            elif not p and c not in STABLE:unpriced.append(f"{c}: {a:.8g}")
-    if unpriced:  # the hourly balance reuses this text, so keep it short; /holdings lists every coin
-        lines.append("⚠️ No Bitget spot USDT price, so the bot cannot track or protect: "+", ".join(unpriced) if len(unpriced)<=3 else f"⚠️ {len(unpriced)} other coins have no Bitget spot USDT price, so the bot cannot track them. Send /holdings to see them.")
     return "\n".join(lines)
 
 def get_holdings_text():
