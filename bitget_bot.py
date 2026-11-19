@@ -339,6 +339,24 @@ def panic_sell():
     save(DB,db);save(QF,{});s=cfg();s['auto_buy_enabled']=False;save(CFG,s)
     tg(f"⚠️ *PANIC INCOMPLETE.* Still held: `{', '.join(failed)}`\nAuto-buy PAUSED." if failed else "🛑 *PANIC COMPLETE.* All positions sold. Auto-buy PAUSED.")
 
+def get_spot_balance_text():
+    try:
+        bal=ex.fetch_balance();free=bal.get('free') or {};total=bal.get('total') or {}
+        usdt_free=float(free.get('USDT',0.0));usdt_total=float(total.get('USDT',0.0));total_equity=usdt_total
+        lines=["💰 *LIVE SPOT BALANCE*","━━━━━━━━━━━━━━━━━━━━",f"💵 *USDT Cash:* ${usdt_total:.2f}",f"🔓 *Free to Trade:* ${usdt_free:.2f}","━━━━━━━━━━━━━━━━━━━━"]
+        count=0
+        for coin,qty in total.items():
+            if qty<=0 or coin in STABLE or coin in BL: continue
+            p=live(f"{coin}-USDT")
+            if p and qty*p>=0.10:
+                val=qty*p;total_equity+=val
+                lines.append(f"🪙 *{coin}:* {qty:.4g} (≈${val:.2f})")
+                count+=1
+        lines.append("━━━━━━━━━━━━━━━━━━━━")
+        lines.append(f"📊 *Total Account Equity:* ${total_equity:.2f}")
+        return "\n".join(lines)
+    except Exception as e:return f"❌ Could not fetch balance: {e}"
+
 def get_holdings_text():
     try:balance=ex.fetch_balance();totals=balance.get('total') or {};free=balance.get('free') or {}
     except Exception as e:return f"❌ Could not fetch exchange holdings: {e}"
@@ -786,7 +804,7 @@ def handle(t,age):
         if r and r.startswith("✅"):tg(r)
     elif l=="trail_on":setc('trail_pct',8.0,"📈 Trailing Stop-Loss ON (8%)");menu()
     elif l=="trail_off":setc('trail_pct',0.0,"📉 Trailing Stop-Loss OFF");menu()
-    elif l.startswith("💰 spot") or l == "/balance":tg(f"💵 *USDT Spot Balance:* ${B('total','USDT'):.2f}")
+    elif l.startswith("💰 spot") or l == "/balance":tg(get_spot_balance_text())
     elif l in ("/holdings","/portfolio","💼 holdings"):tg(get_holdings_text())
     elif l=="/scan_history" or l.startswith("/scan_history "):cmd_scan_history(t)
     elif l=="/status":
