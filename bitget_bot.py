@@ -27,14 +27,17 @@ def compact_balance():
             if c in STABLE or c=='USDT' or float(q or 0)<=0:continue
             p=live(f"{c}-USDT")
             if p:cv+=float(q)*p
-        txt=f"\n\n━━━━━━━━━━━━━━━\n💵 *USDT:* ${u:.2f} | 🪙 *Assets:* ${cv:.2f}"
+        txt=f"USDT ${u:.2f} | Assets ${cv:.2f}"
         _BAL["t"],_BAL["m"]=time.time(),txt;return txt
-    except:return ""
+    except:return _BAL["m"]
 
 def _send(m,mode,btn=None):
     try:
-        if "Portfolio Value" not in m:m+=compact_balance()
-        rm=btn or KB;p={"chat_id":CHAT,"text":m,"reply_markup":rm}
+        rm=btn or dict(KB)
+        if not btn:
+            ph=compact_balance()
+            if ph:rm["input_field_placeholder"]=ph[:64]
+        p={"chat_id":CHAT,"text":m,"reply_markup":rm}
         if mode:p["parse_mode"]=mode
         r=requests.post(API+"/sendMessage",json=p,timeout=10)
         if not r.ok:
