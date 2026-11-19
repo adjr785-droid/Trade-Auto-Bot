@@ -11,8 +11,8 @@ FILES=[DB,ST,CFG,QF,LF,CD,SC,HIST,SH,OUT]
 STABLE=['USDC','USDT','DAI','FDUSD','TUSD','USDD','USDE'];LEV=['3L','3S','5L','5S','10L','10S','2L','2S'];BL=['RPANW','CT','ONE']
 ex=ccxt.bitget({'apiKey':os.environ.get('BITGET_API_KEY'),'secret':os.environ.get('BITGET_API_SECRET'),'password':os.environ.get('BITGET_API_PASSPHRASE'),'enableRateLimit':True});ex.options['createMarketBuyOrderRequiresPrice']=False
 client=genai.Client(api_key=os.environ.get('GEMINI_API_KEY')) if genai and os.environ.get('GEMINI_API_KEY') else None
-GEMINI_MODELS=[m for m in [os.environ.get('GEMINI_MODEL'),'gemini-3.8-flash','gemini-3.6-flash','gemini-2.5-flash'] if m]
-_C={};KB={"keyboard":[["📊 Menu","🚨 PANIC"]],"resize_keyboard":True,"is_persistent":True}
+GEMINI_MODELS=[m for m in [os.environ.get('GEMINI_MODEL'),'gemini-2.5-flash','gemini-1.5-flash'] if m]
+_C={};KB={"keyboard":[["📊 Menu","❌ Cancel","🚨 PANIC"]],"resize_keyboard":True,"is_persistent":True}
 S=lambda s:s.replace("-","/")
 TR=lambda t:{'trigger':True} if t else {}
 B=lambda k,c:ex.fetch_balance()[k].get(c,0)
@@ -38,7 +38,6 @@ def _send(m,mode,btn=None):
     except Exception as e:print("TG EXCEPTION:",e)
 
 def cleanup_telegram_output():
-    """Delete this bot's own Telegram messages after 24 hours where Telegram permits it."""
     now=time.time();out=load(OUT,[]);keep=[]
     for item in out:
         if now-float(item.get("sent_at",now))<86400:
@@ -48,7 +47,6 @@ def cleanup_telegram_output():
             if not r.ok:
                 body=r.json() if r.headers.get("content-type","").startswith("application/json") else {}
                 desc=str(body.get("description", ""))
-                # Retry transient errors; discard messages Telegram says cannot be deleted.
                 if body.get("error_code",0)>=500 or "too many requests" in desc.lower():keep.append(item)
         except Exception:
             keep.append(item)
@@ -58,7 +56,14 @@ tg=lambda m:_send(m,"Markdown");tg_ai=lambda m:_send(m,"HTML")
 
 def menu():
     b=lambda t,c:{"text":t,"callback_data":c}
-    _send("🕹️ *MAIN MENU*\nAutomatic buying is enabled by default when a valid setup passes all safety checks. Use /pause only for an emergency stop.","Markdown",{"inline_keyboard":[[b("🛠️ Audit","/audit"),b("🧾 Scan History","scan_history:1")],[b("🟢 Status","/status"),b("💰 Balance","/balance")],[b("💼 Holdings Details","/holdings")],[b("🚀 Gainers","/gainers"),b("🩸 Losers","/losers")],[b("🧠 Ask AI","ai_info")]]})
+    _send("🕹️ *MAIN MENU*\nAutomatic buying is enabled by default when a valid setup passes all safety checks. Use /pause only for an emergency stop.","Markdown",{"inline_keyboard":[
+        [b("🛠️ Audit","/audit"),b("🧾 Scan History","scan_history:1")],
+        [b("🟢 Status","/status"),b("💰 Balance","/balance")],
+        [b("💼 Holdings Details","/holdings")],
+        [b("🚀 Gainers","/gainers"),b("🩸 Losers","/losers")],
+        [b("❌ Cancel All Orders","/cancel")],
+        [b("🧠 Ask AI","ai_info")]
+    ]})
 
 def panic_prompt():_send("🚨 *CONFIRM PANIC*\nThis sells ALL positions at market and pauses auto-buy.\nConfirm within 15 minutes.","Markdown",{"inline_keyboard":[[{"text":"✅ YES, SELL EVERYTHING","callback_data":"panic_confirm"},{"text":"❌ Cancel","callback_data":"panic_cancel"}]]})
 
@@ -66,7 +71,10 @@ def load(f,d=None):
     d=[] if f==HIST else ({} if d is None else d)
     try:
         if os.path.exists(f):
-            with open(f) as h:return json.load(h)
+            with open(f) as h: 
+                data = json.load(h)
+                if f==HIST and not isinstance(data, list): return d
+                return data
     except Exception as e:print(f"LOAD ERR {f}: {e}")
     return d
 
@@ -80,8 +88,6 @@ def cfg():
     d={"rsi_min":42,"rsi_max":48,"stop_loss_pct":5.0,"auto_buy_enabled":True,"auto_buy_amount_usdt":10.0,"max_tokens_before_consolidation":3,"max_hold_hours":48,"trail_pct":8.0,"crash_guard_pct":10.0,"rsi_exit":75,"btc_rsi_min":50,"risk_per_trade_pct":1.0,"max_daily_loss_pct":3.0,"max_portfolio_exposure_pct":50.0,"max_position_pct":15.0,"max_daily_trades":5,"max_spread_pct":0.5,"auto_mode_v1":False}
     s=load(CFG,d)
     for k,v in d.items():s.setdefault(k,v)
-    # One-time migration: enable automatic execution by default. Thereafter /pause
-    # and /resume remain available as explicit emergency/operator safeguards.
     if not s.get('auto_mode_v1'):
         s['auto_buy_enabled']=True
         s['auto_mode_v1']=True
@@ -114,26 +120,17 @@ def data(sym):
     r=_calc(sym);_C[sym]=(time.time(),r);return r
 
 def breakout_confirmation(sym):
-    """Confirm a 20-hour resistance breakout using the last completed 1h candle.
-
-    Returns (confirmed, volume_multiple, resistance). The currently forming
-    candle is excluded so a temporary intrahour spike cannot trigger a setup.
-    """
     try:
         candles=ex.fetch_ohlcv(S(sym),'1h',limit=25)
         if len(candles)<23:return False,None,None
-        closed=candles[:-1]
-        latest=closed[-1]
-        prior=closed[-21:-1]
+        closed=candles[:-1];latest=closed[-1];prior=closed[-21:-1]
         if len(prior)!=20:return False,None,None
         resistance=max(float(c[2]) for c in prior)
-        close=float(latest[4]);last_volume=float(latest[5] or 0)
-        avg_volume=sum(float(c[5] or 0) for c in prior)/20
+        close=float(latest[4]);last_volume=float(latest[5] or 0);avg_volume=sum(float(c[5] or 0) for c in prior)/20
         multiple=(last_volume/avg_volume) if avg_volume>0 else 0.0
         return close>resistance and multiple>=1.5,multiple,resistance
     except Exception as e:
-        print(f"BREAKOUT CHECK ERROR {sym}: {e}")
-        return False,None,None
+        print(f"BREAKOUT CHECK ERROR {sym}: {e}");return False,None,None
 
 def live(sym):
     try:return ex.fetch_ticker(S(sym))['last']
@@ -164,12 +161,10 @@ def free_qty(sym,d):
     except Exception:return d
 
 def m_buy(cs,usdt):
-    """Submit a market buy and use only exchange-confirmed fills; never invent a fill."""
     sym=cs.replace("/","-")
     p=live(sym)
     if not p:raise Exception(f"No price for {cs}")
-    try:
-        o=ex.create_order(cs,'market','buy',usdt,None,{'createMarketBuyOrderRequiresPrice':False})
+    try:o=ex.create_order(cs,'market','buy',usdt,None,{'createMarketBuyOrderRequiresPrice':False})
     except Exception as e1:
         try:o=ex.create_order(cs,'market','buy',float(ex.amount_to_precision(cs,usdt/p)),p)
         except Exception as e2:raise Exception(f"{e1} | fallback: {e2}")
@@ -183,42 +178,23 @@ def m_buy(cs,usdt):
             except Exception:continue
             if o.get('status') in ('canceled','rejected','expired') and not (o.get('filled') or 0):
                 raise Exception(f"Buy order {o.get('status')}; no fill confirmed")
-    f=float(o.get('filled') or 0)
-    a=float(o.get('average') or o.get('price') or 0)
-    if f<=0 or a<=0:
-        raise Exception("Exchange did not confirm a filled quantity and execution price. Check Bitget order history before retrying.")
-    if o.get('status') not in (None,'closed') and o.get('remaining'):
-        print(f"PARTIAL BUY {cs}: filled={f}, remaining={o.get('remaining')}")
+    f=float(o.get('filled') or 0);a=float(o.get('average') or o.get('price') or 0)
+    if f<=0 or a<=0:raise Exception("Exchange did not confirm a filled quantity and execution price.")
     return f,a
 
 def hard_sl(sym,qty,pr):
-    """Place a spot trigger sell only if old sell orders are cleared and the new order is visible."""
     try:
         cs=S(sym)
-        if cancel_sells(sym):
-            print(f"SL aborted {sym}: existing sell orders could not be safely cleared")
-            return False
-        time.sleep(0.5)
-        qty=float(ex.amount_to_precision(cs,qty))
-        pr=float(ex.price_to_precision(cs,pr))
-        if qty<=0 or qty*pr<1.0:
-            print(f"SL skipped {sym}: position too small")
-            return False
+        if cancel_sells(sym):print(f"SL aborted {sym}: existing sell orders could not be safely cleared");return False
+        time.sleep(0.5);qty=float(ex.amount_to_precision(cs,qty));pr=float(ex.price_to_precision(cs,pr))
+        if qty<=0 or qty*pr<1.0:print(f"SL skipped {sym}: position too small");return False
         created=ex.create_order(cs,'market','sell',qty,None,{'triggerPrice':pr})
-        oid=(created or {}).get('id')
-        time.sleep(0.5)
-        orders,ok=open_sells(sym)
-        if ok and any((o.get('id')==oid if oid else False) for o,_ in orders):
-            return True
-        print(f"SL unverified {sym}: exchange response={created}; open sell orders={len(orders)}")
-        return False
-    except Exception as e:
-        tg(f"⚠️ *SL NOT VERIFIED* {sym}: `{e}`")
-        return False
+        oid=(created or {}).get('id');time.sleep(0.5);orders,ok=open_sells(sym)
+        if ok and any((o.get('id')==oid if oid else False) for o,_ in orders):return True
+        print(f"SL unverified {sym}");return False
+    except Exception as e:tg(f"⚠️ *SL NOT VERIFIED* {sym}: `{e}`");return False
 
 def place_trailing_sl(sym,qty):
-    # Exchange side = ONE stop-loss trigger order (starts at entry-SL%; manage() raises it as the price climbs).
-    # Never send 'trailingPercent' on spot: it can be executed as a plain MARKET SELL (instant liquidation).
     ent=load(DB).get(sym,{}).get('entry_price') or live(sym)
     if not ent:return False
     px=round(ent*(1-cfg()['stop_loss_pct']/100),6);ok=hard_sl(sym,qty,px)
@@ -228,24 +204,23 @@ def place_trailing_sl(sym,qty):
     return ok
 
 def ratchet(sym,d,lvl,lv):
-    # keep the exchange stop in step with the bot's own stop level: only ever moves UP, and only when it gains >1%
     if lvl<=d.get('xsl',0)*1.01 or lvl>=lv*0.995:return
     q=B('total',sym.split('-')[0])
     if hard_sl(sym,q,lvl):d['xsl']=lvl
-    elif place_trailing_sl(sym,q):d['xsl']=round(d['entry_price']*(1-cfg()['stop_loss_pct']/100),6)  # new stop failed: restore the base stop we cancelled
+    elif place_trailing_sl(sym,q):d['xsl']=round(d['entry_price']*(1-cfg()['stop_loss_pct']/100),6)
 
 def rec(sym,pnl,why):
     L=load(LF);L['total_realized_usdt']=L.get('total_realized_usdt',0.0)+pnl;L['trade_count']=L.get('trade_count',0)+1;save(LF,L)
-    H=load(HIST);H.append({"sym":sym,"pnl":pnl,"time":time.time(),"reason":why});save(HIST,H)
+    H=load(HIST)
+    if not isinstance(H, list): H=[]
+    H.append({"sym":sym,"pnl":pnl,"time":time.time(),"reason":why});save(HIST,H)
 
 def sell(sym,pct,reason):
     try:
         cs=S(sym);coin=sym.split("-")[0]
-        if cancel_sells(sym):
-            tg(f"⚠️ Sale of {sym} stopped: existing protective sell orders could not be safely cancelled. Trailing-stop protection was not deliberately bypassed.")
-            return False
+        if cancel_sells(sym):tg(f"⚠️ Sale of {sym} stopped: existing protective sell orders could not be safely cancelled.");return False
         time.sleep(0.5);fb=B('free',coin)
-        if fb<=0:tg(f"ℹ️ {sym} has 0 free balance ({reason}) - position was not sold; check locked funds and open orders.");return False
+        if fb<=0:tg(f"ℹ️ {sym} has 0 free balance ({reason}) - check locked funds and open orders.");return False
         p=live(sym)
         if not p:return False
         q=fb*pct
@@ -270,19 +245,17 @@ def parse(txt,usage,allow_all=False):
     return c,a
 
 def cmd_buy(txt):
-    r=parse(txt,"❌ Usage: `/buy COIN USDT_AMOUNT` or `/buy COIN ALL`\nExample: `/buy BTC 5` or `/buy BTC ALL` (uses all your free USDT)",True)
+    r=parse(txt,"❌ Usage: `/buy COIN USDT_AMOUNT` or `/buy COIN ALL`\nExample: `/buy BTC 5` or `/buy BTC ALL`",True)
     if not r:return
     c,amt=r;sym=f"{c}-USDT"
     if cd(f"buy:{sym}",5):tg(f"⏳ Processing /buy {c}...");return
-    db=load(DB);old=db.get(sym)
-    ub=B('free','USDT')
+    db=load(DB);old=db.get(sym);ub=B('free','USDT')
     if amt is None:
-        amt=int(ub*100)/100  # ALL = every available USDT, rounded down to the cent
-        if amt<1.0:tg(f"❌ *BUY FAILED:* Only ${ub:.2f} free USDT available (Bitget needs about $1 minimum).");return
+        amt=int(ub*100)/100
+        if amt<1.0:tg(f"❌ *BUY FAILED:* Only ${ub:.2f} free USDT available.");return
     if ub<amt:tg(f"❌ *BUY FAILED:* You only have ${ub:.2f} USDT.");return
     try:
-        ob=B('total',c) if old else 0.0
-        f,a=m_buy(f"{c}/USDT",amt);sl=cfg()['stop_loss_pct']
+        ob=B('total',c) if old else 0.0;f,a=m_buy(f"{c}/USDT",amt);sl=cfg()['stop_loss_pct']
         if old:
             e0=old['entry_price'];avg=round((ob*e0+f*a)/(ob+f),6) if ob>0 else round(a,6)
             old.update(entry_price=avg,safe_zone=avg,stop_loss=round(avg*(1-sl/100),6),last_price=a,peak_price=max(old.get('peak_price',avg),a));db[sym]=old;save(DB,db);ok=place_trailing_sl(sym,free_qty(sym,ob+f))
@@ -302,8 +275,7 @@ def cmd_sell(txt):
     p=live(sym)
     if not p:tg(f"❌ No price for {c}.");return
     try:
-        if cancel_sells(sym):
-            tg(f"⚠️ Sale of {sym} stopped: existing sell/stop orders could not be cancelled safely.");return
+        if cancel_sells(sym):tg(f"⚠️ Sale of {sym} stopped: existing sell/stop orders could not be cancelled safely.");return
         time.sleep(0.5);fb=B('free',c)
         if fb<=0:tg(f"❌ You have 0 {c} available.");return
         q,a_s=(fb,"ALL") if amt is None or amt/p>=fb else (amt/p,f"${amt:.2f}")
@@ -313,6 +285,29 @@ def cmd_sell(txt):
         if rem<=0 or rem*p<1.02:db.pop(sym,None);save(DB,db);tg(f"✅ *SOLD:* {q} {c} @ {px:.6f}\nPnL: ${pnl:.2f}\nPosition closed.")
         else:place_trailing_sl(sym,rem);save(DB,db);tg(f"✅ *SOLD:* {q} {c} @ {px:.6f}\nPnL: ${pnl:.2f}\nRemaining: {rem:.4f} {c} (stop re-armed)")
     except Exception as e:tg(f"❌ *SELL FAILED:* {e}")
+
+def cmd_cancel_all():
+    tg("🔄 Cancelling all open orders on Bitget...")
+    try:
+        count=0
+        # Fetch ALL open orders directly from the exchange
+        for t in (False, True):
+            try:
+                orders = ex.fetch_open_orders(params=TR(t))
+                for o in orders:
+                    try:
+                        ex.cancel_order(o['id'], o['symbol'], TR(t))
+                        count += 1
+                    except Exception as e:
+                        print(f"Failed to cancel {o['id']}: {e}")
+            except Exception as e:
+                print(f"Fetch orders err (trigger={t}): {e}")
+        
+        # Empty the scanner queue so it doesn't immediately buy
+        save(QF, {})
+        
+        tg(f"✅ *CANCELLED:* {count} open orders on Bitget.\nQueue emptied.\nRun `/audit` to re-arm stops on any active positions.")
+    except Exception as e:tg(f"❌ Failed to cancel: {e}")
 
 def cmd_sync():
     tg("🔄 Syncing manual coins to bot database...")
@@ -337,100 +332,46 @@ def panic_sell():
         if sell(sym,1.0,"PANIC"):db.pop(sym,None)
         else:failed.append(sym)
     save(DB,db);save(QF,{});s=cfg();s['auto_buy_enabled']=False;save(CFG,s)
-    tg(f"⚠️ *PANIC INCOMPLETE.* Still held (sell failed): `{', '.join(failed)}`\nAuto-buy PAUSED. Retry with /panic or sell manually." if failed else "🛑 *PANIC COMPLETE.* All positions sold. Auto-buy PAUSED.")
+    tg(f"⚠️ *PANIC INCOMPLETE.* Still held: `{', '.join(failed)}`\nAuto-buy PAUSED." if failed else "🛑 *PANIC COMPLETE.* All positions sold. Auto-buy PAUSED.")
 
 def get_balance_text():
-    # Spot balance only: no warnings, no analysis.
     b=ex.fetch_balance()['free']
     lines=[f"USDT: ${b.get('USDT',0):.2f}"]
     for c,a in b.items():
         if a>0 and c not in ['USDT','USDC']:
             p=live(f"{c}-USDT")
-            if p and a*p>=0.10:
-                lines.append(f"{c}: {a:.4f} (about ${a*p:.2f})")
+            if p and a*p>=0.10:lines.append(f"{c}: {a:.4f} (about ${a*p:.2f})")
     return "\n".join(lines)
 
 def get_holdings_text():
-    """Show wallet holdings with live price, indicators and technical sentiment."""
-    try:
-        balance=ex.fetch_balance()
-        totals=balance.get('total') or {}
-    except Exception as e:
-        return f"❌ Could not fetch exchange holdings: {e}"
-
-    db=load(DB)
-    lines=["💼 *YOUR ASSET HOLDINGS*", "Indicators use the 1-hour timeframe.", ""]
-    count=0
-    total_value=0.0
-    unpriced=[]
-
+    try:balance=ex.fetch_balance();totals=balance.get('total') or {}
+    except Exception as e:return f"❌ Could not fetch exchange holdings: {e}"
+    db=load(DB);lines=["💼 *YOUR ASSET HOLDINGS*","",""];count=0;total_value=0.0;unpriced=[]
     for coin,qty in sorted(totals.items()):
         try: qty=float(qty or 0)
         except (TypeError,ValueError): continue
         if qty<=0 or coin in STABLE or coin in BL: continue
-
-        sym=f"{coin}-USDT"
-        price=live(sym)
+        sym=f"{coin}-USDT";price=live(sym)
         if not price:unpriced.append(f"{coin}: {qty:.8g}")
         if not price or qty*price<0.10: continue
-
-        total_value += qty*price
-        entry_data=db.get(sym,{})
-        entry=entry_data.get('entry_price')
+        total_value += qty*price;entry_data=db.get(sym,{});entry=entry_data.get('entry_price')
         _,_,rsi,ma5,ma10=data(sym)
+        sentiment="⚪ Unavailable"
         if rsi is not None and ma5 is not None and ma10 is not None:
-            if price>ma5>ma10 and rsi>=50:
-                sentiment="🟢 Bullish"
-            elif price<ma5<ma10 and rsi<50:
-                sentiment="🔴 Bearish"
-            else:
-                sentiment="🟡 Neutral / Mixed"
-        else:
-            sentiment="⚪ Unavailable"
-
+            if price>ma5>ma10 and rsi>=50:sentiment="🟢 Bullish"
+            elif price<ma5<ma10 and rsi<50:sentiment="🔴 Bearish"
+            else:sentiment="🟡 Neutral / Mixed"
         pnl_line="Entry / PnL: Not tracked by bot"
         if entry:
-            pnl=(price-entry)/entry*100 if entry else 0
-            pnl_usdt=(price-entry)*qty
+            pnl=(price-entry)/entry*100 if entry else 0;pnl_usdt=(price-entry)*qty
             pnl_line=f"Entry: {fp(entry)} USDT | PnL: {pnl:+.2f}% (${pnl_usdt:+.2f})"
-
-        lines.extend([
-            f"🪙 *{coin}*",
-            f"Quantity: {qty:.8g}",
-            f"Current price: {fp(price)} USDT",
-            f"Market value: ${qty*price:.2f}",
-            pnl_line,
-            f"RSI (1h): {rsi if rsi is not None else 'N/A'}",
-            f"MA5 (1h): {fp(ma5) if ma5 is not None else 'N/A'}",
-            f"MA10 (1h): {fp(ma10) if ma10 is not None else 'N/A'}",
-            f"Market sentiment: {sentiment}",
-            f"Bot trailing stop: {'ON ('+str(cfg().get('trail_pct',0))+'% below peak)' if cfg().get('trail_pct',0)>0 else 'OFF'}",
-            f"Peak price: {fp(entry_data.get('peak_price')) if entry_data.get('peak_price') else 'N/A'}",
-            f"Trailing stop level: {fp(entry_data.get('peak_price',0)*(1-cfg().get('trail_pct',0)/100)) if entry_data.get('peak_price') and cfg().get('trail_pct',0)>0 else 'N/A'}",
-            f"Exchange stop level: {fp(entry_data.get('xsl')) if entry_data.get('xsl') else 'Not verified / not recorded'}",
-            f"Stop loss: {fp(entry_data.get('stop_loss')) if entry_data.get('stop_loss') else 'Not set'}",
-            ""
-        ])
+        lines.extend([f"🪙 *{coin}*",f"Quantity: {qty:.8g}",f"Current price: {fp(price)} USDT",f"Market value: ${qty*price:.2f}",pnl_line,f"RSI (1h): {rsi if rsi is not None else 'N/A'}",f"MA5 (1h): {fp(ma5) if ma5 is not None else 'N/A'}",f"MA10 (1h): {fp(ma10) if ma10 is not None else 'N/A'}",f"Market sentiment: {sentiment}",f"Bot trailing stop: {'ON ('+str(cfg().get('trail_pct',0))+'% below peak)' if cfg().get('trail_pct',0)>0 else 'OFF'}",f"Peak price: {fp(entry_data.get('peak_price')) if entry_data.get('peak_price') else 'N/A'}",f"Exchange stop level: {fp(entry_data.get('xsl')) if entry_data.get('xsl') else 'Not verified'}",""])
         count+=1
-
-    note=("\n⚠️ Held but with no Bitget spot USDT price (the bot cannot track, protect or sell these): "+", ".join(unpriced)) if unpriced else ""
-    if count==0:
-        return "💼 *YOUR ASSET HOLDINGS*\nNo eligible USDT-priced holdings found in your exchange wallet."+note+last_trade_line()
+    note=("\n⚠️ Held but with no Bitget USDT price: "+", ".join(unpriced)) if unpriced else ""
+    if count==0:return "💼 *HOLDINGS*\nNo eligible USDT-priced holdings found."+note
     lines.insert(2,f"Assets: {count} | Estimated value: ${total_value:.2f} USDT")
     if note:lines.append(note.strip())
-    lines.append("Sentiment is a technical estimate from RSI and price vs MA5/MA10, not news-based advice.")
-    message="\n".join(lines)
-    # Telegram messages are limited to 4096 characters; split at asset boundaries.
-    if len(message)<=3900:
-        return message
-    chunks=[]
-    current="💼 *YOUR ASSET HOLDINGS*\n"
-    for block in message.split("\n\n"):
-        if len(current)+len(block)+2>3900:
-            chunks.append(current);current="💼 *YOUR ASSET HOLDINGS (continued)*\n"
-        current+=block+"\n\n"
-    if current.strip():chunks.append(current)
-    return chunks
+    return "\n".join(lines)
 
 def check_hourly_balance():
     st=load(SC);now=time.time()
@@ -438,139 +379,85 @@ def check_hourly_balance():
 
 def last_trade_line():
     H=load(HIST)
-    if not H:return "\nNo closed trade is recorded in the bot history."
+    if not H:return "\nNo closed trade recorded."
     t=H[-1];ago=(time.time()-float(t.get('time',0)))/3600
-    return f"\nLast closed trade: {str(t.get('sym','?')).replace('-USDT','')} — {t.get('reason','?')} | PnL ${float(t.get('pnl',0)):+.2f} | {ago:.1f}h ago"
+    return f"\nLast trade: {str(t.get('sym','?')).replace('-USDT','')} — {t.get('reason','?')} | PnL ${float(t.get('pnl',0)):+.2f} | {ago:.1f}h ago"
 
 def exchange_sale_note(sym,d):
-    """The coin left the wallet without a bot sell (usually the exchange stop fired, or a manual sale). Find the fill and record it."""
     try:
         since=float(d.get('seen') or d.get('opened_at') or 0)*1000-120000
         tr=[t for t in ex.fetch_my_trades(S(sym),limit=30) if t.get('side')=='sell' and (t.get('timestamp') or 0)>=since]
-        if not tr:return "\n   ⚠️ No matching sell found on Bitget. Check your Bitget order history (manual sale or transfer?)."
+        if not tr:return "\n   ⚠️ No matching sell found on Bitget."
         q=sum(float(t['amount']) for t in tr);px=sum(float(t['amount'])*float(t['price']) for t in tr)/q
-        pnl=(px-d['entry_price'])*q;rec(sym,pnl,"EXCHANGE-SIDE SALE (stop-loss or manual)")
+        pnl=(px-d['entry_price'])*q;rec(sym,pnl,"EXCHANGE-SIDE SALE")
         return f"\n   💱 Sold on Bitget: {q:g} @ {px:.6f} | PnL ${pnl:+.2f} (recorded)"
-    except Exception as e:
-        print(f"EXCHANGE SALE LOOKUP ERROR {sym}: {e}");return "\n   ⚠️ Could not look up the sale on Bitget."
+    except Exception as e:print(f"EXCHANGE SALE LOOKUP ERROR {sym}: {e}");return "\n   ⚠️ Could not look up the sale."
 
 def audit_system():
     issues=[];db=load(DB);q=load(QF)
     try:bal=ex.fetch_balance()['total']
     except Exception as e:tg(f"⚠️ *AUDIT WARNING:* Failed to fetch exchange data: `{e}`");return "⚠️ Audit failed."
     for sym in list(db):
-        amt=bal.get(sym.split('-')[0],0)
-        px=live(sym)
+        amt=bal.get(sym.split('-')[0],0);px=live(sym)
         if amt<=0 or (px and amt*px<1.02):
             d=db.pop(sym,None) or {};note=exchange_sale_note(sym,d) if amt<=0 and d.get('entry_price') else ""
             issues.append(f"🧹 Removed ghost/dust position: {sym}"+note);continue
         orders,ok=open_sells(sym)
         if not ok:continue
         if len(orders)!=1 and not in_cd(f"auditsl_{sym}",1800):
-            mk_cd(f"auditsl_{sym}");issues.append(f"🚨 {sym}: found {len(orders)} sell/stop orders (expected 1). Re-arming...");save(DB,db);place_trailing_sl(sym,amt)
+            mk_cd(f"auditsl_{sym}");issues.append(f"🚨 {sym}: found {len(orders)} sell orders. Re-arming...");save(DB,db);place_trailing_sl(sym,amt)
     for c,a in bal.items():
         if c in STABLE or a<=0:continue
         sym=f"{c}-USDT"
         if sym not in db:
             p=live(sym)
             if p and a*p>1.02:
-                db[sym]=NP(p,round(p*(1-cfg()['stop_loss_pct']/100),6));save(DB,db);ok=place_trailing_sl(sym,a);issues.append(f"🔄 Auto-synced orphaned balance: {sym} (Entry: {p:.6f}) — stop {'VERIFIED' if ok else 'NOT VERIFIED'}")
+                db[sym]=NP(p,round(p*(1-cfg()['stop_loss_pct']/100),6));save(DB,db);ok=place_trailing_sl(sym,a);issues.append(f"🔄 Auto-synced: {sym} — stop {'VERIFIED' if ok else 'NOT VERIFIED'}")
     qc=False
     for sym in list(q):
         if sym in db or time.time()-q[sym].get('timestamp',0)>86400:q.pop(sym,None);qc=True
     if issues or qc:
         save(DB,db)
         if qc:save(QF,q)
-        if issues:m="🛠️ *AUTO-AUDIT COMPLETE*\nFound and fixed issues:\n\n"+"\n".join(issues);tg(m);return m
-    return "✅ *AUDIT COMPLETE:* No issues found. System healthy."
+        if issues:m="🛠️ *AUTO-AUDIT COMPLETE*\n"+"\n".join(issues);tg(m);return m
+    return "✅ *AUDIT COMPLETE:* No issues found."
 
 def analyse_coin(txt):
-    """Read-only technical analysis for a coin before a manual purchase."""
     parts=txt.strip().split()
-    if len(parts)!=2:
-        tg("📊 Usage: `/analyse COIN`\nExample: `/analyse BTC` or `/analyse BTC-USDT`\nThis command analyses only; it never places an order.")
-        return
+    if len(parts)!=2:tg("📊 Usage: `/analyse COIN`\nExample: `/analyse BTC`");return
     coin=parts[1].upper().replace('/USDT','').replace('-USDT','').replace('USDT','').strip('-/')
-    if not coin or not re.fullmatch(r'[A-Z0-9]+',coin):
-        tg("❌ Invalid coin symbol. Example: `/analyse BTC`")
-        return
+    if not coin or not re.fullmatch(r'[A-Z0-9]+',coin):tg("❌ Invalid coin symbol.");return
     sym=f"{coin}-USDT";cs=S(sym)
     try:
         markets=ex.load_markets()
-        if cs not in markets or not markets[cs].get('spot',False):
-            tg(f"❌ {sym} is not available as a Bitget spot market. Check the symbol or try another USDT pair.")
-            return
+        if cs not in markets or not markets[cs].get('spot',False):tg(f"❌ {sym} is not a Bitget spot market.");return
         candles=ex.fetch_ohlcv(cs,'1h',limit=100)
-        if len(candles)<60:
-            tg(f"⚠️ Not enough hourly candle history to analyse {sym} reliably.")
-            return
-        # Exclude the still-forming candle from indicators.
-        closed=candles[:-1]
-        closes=[float(x[4]) for x in closed]
-        highs=[float(x[2]) for x in closed]
-        lows=[float(x[3]) for x in closed]
-        vols=[float(x[5] or 0) for x in closed]
-        price=float(ex.fetch_ticker(cs).get('last') or candles[-1][4])
-        ticker=ex.fetch_ticker(cs)
-        rsi=_rsi(closes)
-        def ema(values,period):
-            if len(values)<period:return None
-            alpha=2/(period+1);v=sum(values[:period])/period
-            for z in values[period:]:v=alpha*z+(1-alpha)*v
-            return v
+        if len(candles)<60:tg(f"⚠️ Not enough history for {sym}.");return
+        closed=candles[:-1];closes=[float(x[4]) for x in closed];highs=[float(x[2]) for x in closed];lows=[float(x[3]) for x in closed];vols=[float(x[5] or 0) for x in closed]
+        price=float(ex.fetch_ticker(cs).get('last') or candles[-1][4]);ticker=ex.fetch_ticker(cs);rsi=_rsi(closes)
+        def ema(v,p):
+            if len(v)<p:return None
+            a=2/(p+1);e=sum(v[:p])/p
+            for z in v[p:]:e=a*z+(1-a)*e
+            return e
         ma5=sum(closes[-5:])/5;ma10=sum(closes[-10:])/10;ma20=sum(closes[-20:])/20
-        e12=ema(closes,12);e26=ema(closes,26)
         macd_series=[]
         for i in range(26,len(closes)+1):
             a=ema(closes[:i],12);b=ema(closes[:i],26)
             if a is not None and b is not None:macd_series.append(a-b)
-        macd=macd_series[-1] if macd_series else None
-        signal=ema(macd_series,9) if len(macd_series)>=9 else None
-        hist=(macd-signal) if macd is not None and signal is not None else None
-        trs=[]
-        for i in range(1,len(closed)):
-            trs.append(max(highs[i]-lows[i],abs(highs[i]-closes[i-1]),abs(lows[i]-closes[i-1])))
-        atr=sum(trs[-14:])/14 if len(trs)>=14 else None
-        avgvol=sum(vols[-21:-1])/20 if len(vols)>=21 else None
-        lastvol=vols[-1] if vols else 0
-        change=ticker.get('percentage')
-        bid=ticker.get('bid');ask=ticker.get('ask')
-        spread=((ask-bid)/((ask+bid)/2)*100) if bid and ask and ask>=bid else None
-        # Transparent rule-based score; this is not a prediction.
-        checks=[price>ma5>ma10>ma20, rsi is not None and 50<=rsi<=70,
-                macd is not None and signal is not None and macd>signal,
-                avgvol is not None and lastvol>=avgvol]
-        score=sum(bool(x) for x in checks)
-        if price<ma20 or (rsi is not None and rsi>=75) or (hist is not None and hist<0):
-            verdict='WAIT / WEAK SETUP'
-        elif score>=3 and spread is not None and spread<=cfg().get('max_spread_pct',0.5):
-            verdict='TECHNICAL SETUP LOOKS POSITIVE'
-        elif score>=3 and spread is None:
-            verdict='MIXED — SPREAD DATA UNAVAILABLE'
-        else:
-            verdict='WAIT FOR STRONGER CONFIRMATION'
+        macd=macd_series[-1] if macd_series else None;signal=ema(macd_series,9) if len(macd_series)>=9 else None;hist=(macd-signal) if macd is not None and signal is not None else None
+        trs=[max(highs[i]-lows[i],abs(highs[i]-closes[i-1]),abs(lows[i]-closes[i-1])) for i in range(1,len(closed))]
+        atr=sum(trs[-14:])/14 if len(trs)>=14 else None;avgvol=sum(vols[-21:-1])/20 if len(vols)>=21 else None;lastvol=vols[-1] if vols else 0
+        change=ticker.get('percentage');bid=ticker.get('bid');ask=ticker.get('ask');spread=((ask-bid)/((ask+bid)/2)*100) if bid and ask and ask>=bid else None
+        checks=[price>ma5>ma10>ma20,rsi is not None and 50<=rsi<=70,macd is not None and signal is not None and macd>signal,avgvol is not None and lastvol>=avgvol];score=sum(bool(x) for x in checks)
+        verdict='WAIT / WEAK SETUP' if price<ma20 or (rsi is not None and rsi>=75) or (hist is not None and hist<0) else 'TECHNICAL SETUP LOOKS POSITIVE' if score>=3 and spread is not None and spread<=cfg().get('max_spread_pct',0.5) else 'WAIT FOR STRONGER CONFIRMATION'
         def fmt(v):return fp(v) if isinstance(v,(int,float)) else 'N/A'
-        lines=[f"📊 *TECHNICAL ANALYSIS: {sym}*",
-               "Timeframe: 1-hour candles; indicators use completed candles.",
-               f"Live price: {fmt(price)} USDT",
-               f"24h change: {change:+.2f}%" if isinstance(change,(int,float)) else "24h change: N/A",
-               f"RSI(14): {fmt(rsi)} — "+("Overbought" if rsi is not None and rsi>=70 else "Oversold" if rsi is not None and rsi<=30 else "Neutral" if rsi is not None else "N/A"),
-               f"MA5: {fmt(ma5)} | MA10: {fmt(ma10)} | MA20: {fmt(ma20)}",
-               f"MACD: {fmt(macd)} | Signal: {fmt(signal)} | Histogram: {fmt(hist)}",
-               f"ATR(14): {fmt(atr)} ({(atr/price*100):.2f}% of price)" if atr is not None and price else "ATR(14): N/A",
-               f"Last hourly volume vs 20-candle average: {(lastvol/avgvol):.2f}x" if avgvol else "Volume comparison: N/A",
-               f"Bid/ask spread: {spread:.3f}%" if spread is not None else "Bid/ask spread: N/A",
-               f"Technical checks: {score}/4",
-               f"Assessment: *{verdict}*",
-               "\nChecks: price above MA5/MA10/MA20; RSI 50–70; MACD above signal; latest completed-hour volume above its 20-hour average.",
-               "⚠️ Analysis only — not a buy instruction or guarantee. Check liquidity, order-book depth, BTC trend and your risk before placing a manual order."]
+        lines=[f"📊 *ANALYSIS: {sym}*","1-hour candles; indicators use completed candles.",f"Live price: {fmt(price)} USDT",f"24h change: {change:+.2f}%" if isinstance(change,(int,float)) else "24h change: N/A",f"RSI(14): {fmt(rsi)} — "+("Overbought" if rsi is not None and rsi>=70 else "Oversold" if rsi is not None and rsi<=30 else "Neutral" if rsi is not None else "N/A"),f"MA5: {fmt(ma5)} | MA10: {fmt(ma10)} | MA20: {fmt(ma20)}",f"MACD: {fmt(macd)} | Signal: {fmt(signal)} | Histogram: {fmt(hist)}",f"ATR(14): {fmt(atr)} ({(atr/price*100):.2f}% of price)" if atr is not None and price else "ATR(14): N/A",f"Last hour vol vs 20h avg: {(lastvol/avgvol):.2f}x" if avgvol else "Volume: N/A",f"Bid/ask spread: {spread:.3f}%" if spread is not None else "Bid/ask spread: N/A",f"Technical checks: {score}/4",f"Assessment: *{verdict}*","\n⚠️ Analysis only — not a buy instruction."]
         tg("\n".join(lines))
-    except Exception as e:
-        tg(f"❌ Could not analyse {sym}: {e}")
+    except Exception as e:tg(f"❌ Could not analyse {sym}: {e}")
 
 def ask_ai(p):
-    if not client:
-        tg("⚠️ AI analyst is unavailable. Add GEMINI_API_KEY to your GitHub repository secrets to enable it. Trading functions can still run without AI.");return
+    if not client:tg("⚠️ AI analyst unavailable. Add GEMINI_API_KEY.");return
     try:
         db=load(DB);q=load(QF);s=cfg();bal=B('free','USDT');br=data("BTC-USDT")[2]
         pos=[f"  {sym}:entry={d['entry_price']},pnl={((live(sym) or d['entry_price'])-d['entry_price'])/d['entry_price']*100:+.1f}%" for sym,d in list(db.items())[:5]] or ["  (none)"]
@@ -584,9 +471,6 @@ def ask_ai(p):
     except Exception as e:tg(f"❌ AI Error: {e}")
 
 def manage():
-    # KEEP EXISTING TRAILING-STOP BEHAVIOUR:
-    # peak_price ratchets upward; trailing level is peak_price * (1 - trail_pct/100).
-    # The stop is never lowered when the market price falls.
     db=load(DB);s=cfg();tp=s.get('trail_pct',0) or 0
     for sym,d in list(db.items()):
         d.setdefault('opened_at',time.time());r=data(sym)[2];lv=live(sym)
@@ -608,24 +492,20 @@ def manage():
             if sell(sym,1.0,f"TIME STOP {mh}h ({inc:+.1f}%)"):db.pop(sym,None);save(DB,db)
             continue
         if r and s['rsi_exit']>0 and r>=s['rsi_exit'] and sell(sym,1.0,f"RSI {s['rsi_exit']}"):db.pop(sym,None);save(DB,db);continue
-        ratchet(sym,d,lvl,lv)
-        db[sym]=d
+        ratchet(sym,d,lvl,lv);db[sym]=d
     save(DB,db)
 
-def consolidate():
-    # Disabled: automatic consolidation must not sell existing positions.
-    return
+def consolidate():return
 
 def btc_blocked(s):
     m=s.get('btc_rsi_min',0)
     if m<=0:return False
     br=data("BTC-USDT")[2]
     if br is not None and br>=m:return False
-    cd("btcblock",21600) or tg(f"⏸ *BTC FILTER:* BTC RSI is {br} (needs ≥ {m}). Auto-buying paused until it recovers.")
+    cd("btcblock",21600) or tg(f"⏸ *BTC FILTER:* BTC RSI is {br} (needs ≥ {m}). Auto-buying paused.")
     return True
 
 def risk_controls():
-    """Daily circuit breaker based on confirmed realized trades; returns (allowed, reason)."""
     s=cfg();now=time.time();day=[t for t in load(HIST) if now-float(t.get('time',0))<86400]
     realized=sum(float(t.get('pnl',0)) for t in day)
     try:
@@ -642,42 +522,35 @@ def risk_controls():
     return True,""
 
 def risk_sized_budget(sym,price,stop,available_usdt):
-    """Size a new spot position to 1% account risk, with exposure caps."""
     s=cfg()
     try:
-        bal=ex.fetch_balance();tot=bal.get('total') or {};equity=float(tot.get('USDT',0))
-        exposure=0.0
+        bal=ex.fetch_balance();tot=bal.get('total') or {};equity=float(tot.get('USDT',0));exposure=0.0
         for coin,qty in tot.items():
             if coin in STABLE or coin=='USDT' or float(qty or 0)<=0:continue
             px=live(f"{coin}-USDT")
             if px:exposure+=float(qty)*px
         equity+=exposure
         if equity<=0:return 0.0
-        distance=max(0.005,(price-stop)/price)
-        risk_cash=equity*float(s.get('risk_per_trade_pct',1.0))/100
-        by_risk=risk_cash/distance
-        max_position=equity*float(s.get('max_position_pct',15.0))/100
-        max_exposure=equity*float(s.get('max_portfolio_exposure_pct',50.0))/100
+        distance=max(0.005,(price-stop)/price);risk_cash=equity*float(s.get('risk_per_trade_pct',1.0))/100
+        by_risk=risk_cash/distance;max_position=equity*float(s.get('max_position_pct',15.0))/100;max_exposure=equity*float(s.get('max_portfolio_exposure_pct',50.0))/100
         remaining=max(0.0,max_exposure-exposure)
         return max(0.0,min(float(available_usdt),by_risk,max_position,remaining,float(s.get('auto_buy_amount_usdt',10.0))))
-    except Exception as e:
-        print(f"RISK SIZE ERROR {sym}: {e}");return 0.0
+    except Exception as e:print(f"RISK SIZE ERROR {sym}: {e}");return 0.0
 
 def buy_rejection(sym,reason):
-    """Explain a blocked automatic entry without flooding Telegram."""
     key=f"buy_reject_notice:{sym}:{reason[:60]}"
     if not in_cd(key,900):
-        tg(f"⛔ *AUTOMATIC BUY REJECTED — {sym}*\nReason: {reason}\nNo order was submitted.")
+        tg(f"⛔ *AUTO-BUY REJECTED — {sym}*\nReason: {reason}\nNo order was submitted.")
         mk_cd(key)
 
 def exec_q():
     q=load(QF);db=load(DB);s=cfg();mx=s["max_tokens_before_consolidation"]
     if not q:return
     if not s["auto_buy_enabled"]:
-        for sym in q:buy_rejection(sym,"Automatic buying is paused. Use /resume to re-enable it after reviewing the reason for the pause.")
+        for sym in q:buy_rejection(sym,"Automatic buying is paused. Use /resume.")
         return
     if btc_blocked(s):
-        for sym in q:buy_rejection(sym,"BTC market-safety filter is active; automatic entries are paused.")
+        for sym in q:buy_rejection(sym,"BTC market-safety filter is active.")
         return
     allowed,reason=risk_controls()
     if not allowed:
@@ -687,67 +560,41 @@ def exec_q():
     try:
         ub=B('free','USDT')
         for sym,qd in sorted(q.items(),key=lambda x:x[1].get('score',0),reverse=True):
-            if in_cd(f"fail_{sym}",300):
-                buy_rejection(sym,"A previous order attempt failed; retry cooldown is still active.");continue
-            if sym in db:
-                buy_rejection(sym,"A bot-managed position already exists for this coin; duplicate entry blocked.")
-                q.pop(sym,None);save(QF,q);continue
-            if not live(sym):
-                buy_rejection(sym,"Live market price is unavailable; no order was submitted.");continue
+            if in_cd(f"fail_{sym}",300):buy_rejection(sym,"Previous order attempt failed; cooldown active.");continue
+            if sym in db:buy_rejection(sym,"Position already exists.");q.pop(sym,None);save(QF,q);continue
+            if not live(sym):buy_rejection(sym,"Live price unavailable.");continue
             spend=ub
-            # Never sell or swap an existing holding to fund a new entry.
-            if len(db)>=mx:
-                buy_rejection(sym,f"Maximum active positions reached ({mx}).")
-                continue
-            if spend<1.00:
-                buy_rejection(sym,f"Insufficient free USDT balance for an order; available balance is ${spend:.2f}.")
-                q.pop(sym,None);save(QF,q);continue
+            if len(db)>=mx:buy_rejection(sym,f"Max active positions reached ({mx}).");continue
+            if spend<1.00:buy_rejection(sym,f"Insufficient free USDT (${spend:.2f}).");q.pop(sym,None);save(QF,q);continue
             sp=risk_sized_budget(sym,live(sym),qd.get('sl') or live(sym)*(1-s['stop_loss_pct']/100),spend)
-            if sp<1.02:
-                buy_rejection(sym,f"Risk-based position size is below Bitget's practical minimum; calculated budget is ${sp:.2f}.")
-                continue
+            if sp<1.02:buy_rejection(sym,f"Risk-based size is below minimum (${sp:.2f}).");continue
             try:f,a=m_buy(S(sym),sp)
-            except Exception as e:
-                buy_rejection(sym,f"Bitget order failed or could not be confirmed: {e}")
-                mk_cd(f"fail_{sym}");continue
+            except Exception as e:buy_rejection(sym,f"Bitget order failed: {e}");mk_cd(f"fail_{sym}");continue
             mxs=round(a*(1-s['stop_loss_pct']/100),6);sl=qd.get('sl') or mxs
             if sl>=a or sl>mxs:sl=mxs
             db[sym]=NP(round(a,6),sl);save(DB,db);ok=place_trailing_sl(sym,free_qty(sym,f));tg(f"🛒 *EXECUTED!*\n{sym}|💵{sp:.2f}@{a:.6f}\n"+(STOP_OK if ok else STOP_NO))
-            q.pop(sym,None);save(QF,q);ub=B('free','USDT');time.sleep(2)
-            # One new position per cycle; leave other queued signals for later cycles.
-            break
+            q.pop(sym,None);save(QF,q);ub=B('free','USDT');time.sleep(2);break
     except Exception as e:tg(f"⚠️ *QUEUE FAILED:* `{e}`")
 
 def scan_history_state():
-    """Keep a rolling 24-hour scan log; start a fresh window after 24 hours."""
     h=load(SH,{})
     if not isinstance(h,dict):h={}
     now=time.time();start=float(h.get("window_start",0) or 0)
-    if not start or now-start>=86400:
-        h={"window_start":now,"items":[]};save(SH,h)
-    h.setdefault("items",[])
-    return h
+    if not start or now-start>=86400:h={"window_start":now,"items":[]};save(SH,h)
+    h.setdefault("items",[]);return h
 
 def scan_history_rsi(sym):
-    """Fetch a display-only 1h RSI without changing scanner eligibility rules."""
     try:
         cached=data(sym)[2]
-        if isinstance(cached,(int,float)):
-            return cached
-    except Exception:
-        pass
+        if isinstance(cached,(int,float)):return cached
+    except Exception:pass
     try:
         candles=ex.fetch_ohlcv(S(sym),"1h",limit=30)
-        if len(candles)<16:
-            return None
-        closes=[float(c[4]) for c in candles[:-1]]  # exclude the still-forming candle
-        return _rsi(closes)
-    except Exception as e:
-        print(f"SCAN HISTORY RSI ERROR {sym}: {e}")
-        return None
+        if len(candles)<16:return None
+        closes=[float(c[4]) for c in candles[:-1]];return _rsi(closes)
+    except Exception as e:print(f"SCAN HISTORY RSI ERROR {sym}: {e}");return None
 
 def cmd_scan_history(txt="/scan_history"):
-    """Query the rolling 24-hour scan log instead of paging through every coin."""
     import re, shlex
     h=scan_history_state();items=h.get("items",[])
     try: parts=shlex.split(txt)[1:]
@@ -768,14 +615,11 @@ def cmd_scan_history(txt="/scan_history"):
         elif low.startswith("decision="): filters.append(("decision","contains",low.split("=",1)[1]))
         elif low.startswith("reason="): filters.append(("reason","contains",low.split("=",1)[1]))
         elif low in ("buy","queued","setup","not_queued","skip","rejected"):
-            val={"buy":"setup","queued":"queued","not_queued":"not queued","rejected":"not queued"}.get(low,low)
-            filters.append(("decision","contains",val))
-        elif low in ("trend","oversold"):
-            filters.append(("reason","contains",low))
+            val={"buy":"setup","queued":"queued","not_queued":"not queued","rejected":"not queued"}.get(low,low);filters.append(("decision","contains",val))
+        elif low in ("trend","oversold"): filters.append(("reason","contains",low))
         elif low.startswith("/scan_history"): continue
         else: filters.append(("coin","contains",low))
-    if bad:
-        tg("❌ Invalid filter: "+", ".join(bad)+"\nExample: `/scan_history BTC decision=queued rsi<30 limit=20`");return
+    if bad:tg("❌ Invalid filter: "+", ".join(bad));return
     def matches(x):
         for key,op,val in filters:
             if key in ("coin","decision","reason"):
@@ -786,29 +630,19 @@ def cmd_scan_history(txt="/scan_history"):
                 if not isinstance(actual,(int,float)):return False
                 if not {"<":actual<val,">":actual>val,"<=":actual<=val,">=":actual>=val,"=":actual==val}[op]:return False
         return True
-    # Rank by the scanner market rank: rank 16 appears before rank 17, etc.
     found=sorted((x for x in items if matches(x)), key=lambda x: (int(x.get("rank", 10**9) or 10**9), -float(x.get("time", 0) or 0)))
     total=max(1,(len(found)+limit-1)//limit)
-    if page>total:tg(f"Only {total} page(s) match. Use `/scan_history page={total}`.");return
-    chunk=found[(page-1)*limit:page*limit]
-    # Fill missing historical RSI values only for the rows being displayed.
-    # This avoids hundreds of OHLCV requests during every scan while allowing
-    # older/top-15/low-volume records to show a real 1h RSI when requested.
-    changed=False
+    if page>total:tg(f"Only {total} page(s) match.");return
+    chunk=found[(page-1)*limit:page*limit];changed=False
     for x in chunk:
         if not isinstance(x.get("rsi"),(int,float)):
             _rsi_value=scan_history_rsi(str(x.get("sym","")))
-            if isinstance(_rsi_value,(int,float)):
-                x["rsi"]=_rsi_value
-                changed=True
-    if changed:
-        save(SH,h)
-    age=max(0,time.time()-h.get("window_start",time.time()))
-    rows=[]
+            if isinstance(_rsi_value,(int,float)):x["rsi"]=_rsi_value;changed=True
+    if changed:save(SH,h)
+    age=max(0,time.time()-h.get("window_start",time.time()));rows=[]
     for x in chunk:
         r=x.get("rsi");rsi=f"{r:.1f}" if isinstance(r,(int,float)) else "N/A"
-        sym=str(x.get("sym","?")).replace("-USDT","")[:12]
-        raw_decision=str(x.get("decision","SKIP")).upper()
+        sym=str(x.get("sym","?")).replace("-USDT","")[:12];raw_decision=str(x.get("decision","SKIP")).upper()
         if "NOT QUEUED" in raw_decision or "REJECT" in raw_decision: decision="REJECTED"
         elif "QUEUED" in raw_decision: decision="QUEUED"
         elif "BUY" in raw_decision or "BOUGHT" in raw_decision: decision="BUY"
@@ -818,8 +652,7 @@ def cmd_scan_history(txt="/scan_history"):
         rows.append(f"{sym:<12} {rsi:>5} {rr_text:>6} {decision}")
     table="COIN         RSI    R:R  DECISION\n"+"-"*39+"\n"+"\n".join(rows)
     query=" ".join(parts) if parts else "all coins"
-    msg=f"🔎 *SCAN HISTORY — QUERY*\nMatched {len(found)} of {len(items)} records | {query}\nPage {page}/{total} | Window {age/3600:.1f}h\n\n```{table}```\n\n*Filter examples*\n`/scan_history BTC` — one coin\n`/scan_history decision=queued` — queued setups\n`/scan_history rsi<30` — RSI below 30\n`/scan_history` — shows COIN, RSI, R:R and DECISION, ranked by market rank\n`/scan_history chg>5 rank<=100` — combined filters\n`/scan_history oversold limit=20` — oversold reasons\n`/scan_history` — all recent records\nHistory resets automatically after 24 hours."
-    if not chunk:msg=f"🔎 *SCAN HISTORY — QUERY*\nNo records match: {query}\nTry `/scan_history` to view all records, or change your filters.\nHistory resets automatically after 24 hours."
+    msg=f"🔎 *SCAN HISTORY — QUERY*\nMatched {len(found)} of {len(items)} records | {query}\nPage {page}/{total} | Window {age/3600:.1f}h\n\n```{table}```"
     nav=[]
     if page>1:nav.append({"text":"⬅️ Previous","callback_data":f"scan_history:{page-1}:{' '.join(parts)}"})
     if page<total:nav.append({"text":"Next ➡️","callback_data":f"scan_history:{page+1}:{' '.join(parts)}"})
@@ -828,111 +661,45 @@ def cmd_scan_history(txt="/scan_history"):
     keyboard.append([{"text":"🕹️ Main Menu","callback_data":"/menu"}])
     _send(msg,"Markdown",{"inline_keyboard":keyboard})
 
-def cmd_about():
-    s=cfg()
-    trail=f"ON ({s.get('trail_pct',8.0):g}% below the highest price since entry)" if s.get('trail_pct',8.0)>0 else "OFF"
-    msg=("🤖 *BOT AIMS, OBJECTIVES & OPERATING METHOD*\n\n"
-         "*1. Main aim*\nFind liquid USDT spot-market opportunities, apply rule-based technical filters, manage positions and protect capital with predefined risk controls. The bot does not guarantee profit.\n\n"
-         "*2. Strategy*\n• TREND setup: 24H change above +1% and below +30%, RSI within the configured range, and price above MA5 above MA10.\n"
-         "• OVERSOLD setup: 24H change between -30% and -8%, RSI below 30, and current price recovering above the prior hourly close.\n"
-         "• BREAKOUT setup: 24H change above 0% and below 25%, RSI 50–70, price above MA5 above MA10, and the last completed 1-hour candle closes above the previous 20-hour high with volume at least 1.5x the previous 20-hour average.\n"
-         "• Breakout is confirmation-based monitoring; it does not buy on a wick or an unclosed candle. It uses the existing configured stop-loss and position-risk sizing.\n"
-         "• Uses 1-hour candles, RSI(14), MA5 and MA10. These are technical signals, not predictions.\n\n"
-         "*3. Scanning process*\n• Loads Bitget spot USDT tickers and filters stablecoins, leveraged tokens and excluded symbols.\n"
-         "• Sorts eligible markets by 24H quote volume; the current scanner examines ranks 16–500.\n"
-         "• Applies tiered minimum volume thresholds: $1M for ranks 16–100, $3M for 101–199, $4M for 200–399 and $5M for 400–500; qualifying coins get indicator checks.\n"
-         "• Automatic buying is enabled by default. A matching setup is queued for execution only after the strategy and market-safety checks pass.\n"
-         "• Execution still requires sufficient free USDT, exchange minimum order size, portfolio room and all risk controls.\n"
-         "• BTC RSI filter can block new automatic buys when BTC RSI is below its configured minimum. Scanning is rate-limited to about once per hour.\n\n"
-         "*4. Risk & position management*\n"
-         f"• Automatic buying: {'ENABLED' if s.get('auto_buy_enabled') else 'PAUSED'}; default trade budget ${s.get('auto_buy_amount_usdt',10):g}.\n"
-         f"• Risk target {s.get('risk_per_trade_pct',1):g}% per trade; daily loss limit {s.get('max_daily_loss_pct',3):g}%; max portfolio exposure {s.get('max_portfolio_exposure_pct',50):g}%; max position {s.get('max_position_pct',15):g}%.\n"
-         f"• Base stop loss {s.get('stop_loss_pct',5):g}%; trailing stop {trail}. Peak price only moves upward; the trailing level follows that peak and is not lowered.\n"
-         f"• Additional controls include crash guard, RSI exit, time stop, position limit, daily trade limit and protective-order checks.\n\n"
-         "*5. Monitoring commands*\n`/holdings` — balances, indicators and stop details.\n`/scan_history` — coins checked and their indicator/decision details, retained for 24 hours.\n`/analyse COIN` — read-only 1-hour technical analysis before a manual buy.\n`/status` — active positions. `/pause` and `/resume` — pause/resume automatic buying.\n\n"
-         "*Important:* This is a rule-based spot trading assistant, not financial advice. Bot-side trailing protection requires the bot process to keep running. Exchange protective orders must be verified on Bitget; never assume an unverified stop is active.")
-    tg(msg)
-
-def scan_breakdown(records,s):
-    """Plain-language summary of WHY coins were not taken (counts per rule) + setups that were not bought."""
-    c={};held=[]
-    for x in records:
-        d=str(x.get("decision","SKIP")).upper();r=str(x.get("reason",""))
-        if "NOT QUEUED" in d:held.append(f"• {str(x.get('sym','?')).replace('-USDT','')} ({x.get('strategy','?')}) — {r}");continue
-        if d!="SKIP":continue
-        if r.startswith("Top 15"):c["Top-15 by volume (excluded by design)"]=c.get("Top-15 by volume (excluded by design)",0)+1
-        elif r.startswith("24H volume below"):c["24H volume below the minimum"]=c.get("24H volume below the minimum",0)+1
-        elif r.startswith("Hourly candle"):c["No hourly candle data"]=c.get("No hourly candle data",0)+1
-        else:
-            for part in r.split("; "):
-                if part:c[part]=c.get(part,0)+1
-    m=""
-    if held:m+="\n\n*✅ Setups found but NOT bought:*\n"+"\n".join(held[:8])+(f"\n…and {len(held)-8} more" if len(held)>8 else "")
-    if c:m+="\n\n*Why other coins were NOT taken* (a coin can fail several rules):\n"+"\n".join(f"• {k}: {n}" for k,n in sorted(c.items(),key=lambda x:-x[1])[:10])
-    return m
-
 def scan(force=False):
     st=load(SC);now=time.time()
     if not force and now-st.get('last',0)<3540:return
-    db=load(DB);q=load(QF);s=cfg()
-    auto_enabled=bool(s.get("auto_buy_enabled"))
-    btc_is_blocked=btc_blocked(s) if auto_enabled else False
-    buying_allowed=auto_enabled and not btc_is_blocked
-    block_reason=("automatic buying is emergency-paused" if not auto_enabled else
-                  "BTC safety filter blocked buying" if btc_is_blocked else "")
-    # Automatic consolidation/rotation selling is intentionally disabled for safety.
+    db=load(DB);q=load(QF);s=cfg();auto_enabled=bool(s.get("auto_buy_enabled"));btc_is_blocked=btc_blocked(s) if auto_enabled else False
+    buying_allowed=auto_enabled and not btc_is_blocked;block_reason=("automatic buying is paused" if not auto_enabled else "BTC safety filter blocked buying" if btc_is_blocked else "")
     try:tk=ex.fetch_tickers();mk=ex.load_markets()
-    except Exception as e:
-        print(f"SCAN MARKET DATA ERROR: {e}")
-        tg(f"⚠️ *SCAN FAILED:* Could not load Bitget market data: {e}")
-        return
+    except Exception as e:print(f"SCAN MARKET DATA ERROR: {e}");tg(f"⚠️ *SCAN FAILED:* Could not load Bitget data: {e}");return
     v=[{'sym':k.replace("/","-"),'vol':t['quoteVolume'] or 0,'chg':t['percentage'] or 0,'last':t.get('last')} for k,t in tk.items() if k.endswith('/USDT') and not skip(k.split('/')[0]) and not (k in mk and not mk[k].get('spot',False))]
     v.sort(key=lambda x:x['vol'],reverse=True);ct=int(time.time());qu=False
     for sym,d in list(q.items()):
         if ct-d.get('timestamp',0)>86400:q.pop(sym,None);qu=True
-    # A paused buying mode must not leave old signals waiting to execute after a later resume.
-    if not buying_allowed and q:
-        q.clear();qu=True
+    if not buying_allowed and q:q.clear();qu=True
     sh=scan_history_state();records=[];matched=0;queued=0
     for rank,t in enumerate(v[:500],start=1):
         sym=t['sym'];vol=float(t['vol'] or 0);chg=float(t['chg'] or 0)
         recd={"time":ct,"rank":rank,"sym":sym,"vol":vol,"chg":chg,"price":t.get("last"),"rsi":None,"rr":None,"ma5":None,"ma10":None,"decision":"SKIP","reason":"Top 15 by volume are intentionally excluded" if rank<=15 else "Not evaluated"}
         if rank>15:
-            i=rank-16;threshold=(1000000 if i<=84 else 3000000 if i<=183 else 4000000 if i<=383 else 5000000)
-            recd["min_volume"]=threshold
+            i=rank-16;threshold=(1000000 if i<=84 else 3000000 if i<=183 else 4000000 if i<=383 else 5000000);recd["min_volume"]=threshold
             if vol<threshold:recd["reason"]=f"24H volume below ${threshold/1e6:.0f}M minimum"
             else:
-                p,pr,r,ma5,ma10=data(sym)
-                recd.update(price=p,rsi=r,ma5=ma5,ma10=ma10)
-                if not p or r is None:recd["reason"]="Hourly candle/indicator data unavailable"
+                p,pr,r,ma5,ma10=data(sym);recd.update(price=p,rsi=r,ma5=ma5,ma10=ma10)
+                if not p or r is None:recd["reason"]="Hourly candle data unavailable"
                 else:
-                    setup=sl=None
-                    breakout_volume=None;breakout_level=None
-                    if 1.0<chg<30.0 and s['rsi_min']<=r<=s['rsi_max'] and p>ma5>ma10:
-                        setup="TREND";sl=round(ma5*(1-s['stop_loss_pct']/100),6)
-                    elif -30.0<chg<-8.0 and r<30 and p>pr:
-                        setup="OVERSOLD";sl=round(p*(1-s['stop_loss_pct']/100),6)
-                    # Third strategy: confirmed 20-hour breakout. This is an
-                    # additional setup, not a replacement for TREND/OVERSOLD.
-                    # It uses completed candles, stronger volume and the same
-                    # configured base stop-loss/risk sizing as existing trades.
+                    setup=sl=None;breakout_volume=None;breakout_level=None
+                    if 1.0<chg<30.0 and s['rsi_min']<=r<=s['rsi_max'] and p>ma5>ma10:setup="TREND";sl=round(ma5*(1-s['stop_loss_pct']/100),6)
+                    elif -30.0<chg<-8.0 and r<30 and p>pr:setup="OVERSOLD";sl=round(p*(1-s['stop_loss_pct']/100),6)
                     elif 0.0<chg<25.0 and 50.0<=r<=70.0 and p>ma5>ma10:
                         confirmed,breakout_volume,breakout_level=breakout_confirmation(sym)
-                        if confirmed:
-                            setup="BREAKOUT";sl=round(p*(1-s['stop_loss_pct']/100),6)
+                        if confirmed:setup="BREAKOUT";sl=round(p*(1-s['stop_loss_pct']/100),6)
                     if setup:
                         recd["strategy"]=setup
-                        if setup=="BREAKOUT":
-                            recd["reason"]=f"BREAKOUT confirmed: 1h close above 20h resistance; volume {breakout_volume:.2f}x average"
-                        matched+=1
-                        rr=None;recd["rr"]=None;priority={"BREAKOUT":3,"TREND":2,"OVERSOLD":1}.get(setup,0);score=vol/1e6+priority*100
+                        if setup=="BREAKOUT":recd["reason"]=f"BREAKOUT confirmed: volume {breakout_volume:.2f}x average"
+                        matched+=1;rr=None;recd["rr"]=None;priority={"BREAKOUT":3,"TREND":2,"OVERSOLD":1}.get(setup,0);score=vol/1e6+priority*100
                         if not buying_allowed:
-                            recd["decision"]="SETUP — NOT QUEUED"
-                            recd["reason"]=(f"BREAKOUT confirmed (volume {breakout_volume:.2f}x), but {block_reason}" if setup=="BREAKOUT" else f"{setup} setup matched, but {block_reason}")
+                            recd["decision"]="SETUP — NOT QUEUED";recd["reason"]=(f"BREAKOUT confirmed (volume {breakout_volume:.2f}x), but {block_reason}" if setup=="BREAKOUT" else f"{setup} matched, but {block_reason}")
                         else:
                             recd["decision"]="SETUP — QUEUED"
-                            if setup!="BREAKOUT":recd["reason"]=setup+" setup matched; eligible for automatic-buy queue"
-                            else:recd["reason"]=f"BREAKOUT confirmed: 20h resistance cleared; volume {breakout_volume:.2f}x average; queued"
+                            if setup!="BREAKOUT":recd["reason"]=setup+" setup matched; queued"
+                            else:recd["reason"]=f"BREAKOUT confirmed: volume {breakout_volume:.2f}x average; queued"
                             if sym not in q or q[sym].get('score',0)<score:
                                 if sym not in q:tg(f"📥 *QUEUED:* {sym}\nScore:{score:.1f}")
                                 q[sym]={"timestamp":ct,"type":setup,"sl":sl,"score":score,"price":p,"chg":chg};qu=True
@@ -941,25 +708,17 @@ def scan(force=False):
                         reasons=[]
                         if not (1.0<chg<30.0):reasons.append("not in trend 24H-change range")
                         if not (s['rsi_min']<=r<=s['rsi_max']):reasons.append(f"RSI outside {s['rsi_min']}-{s['rsi_max']}")
-                        if not (p>ma5>ma10):reasons.append("price/MA trend condition failed")
-                        if not (-30.0<chg<-8.0 and r<30 and p>pr):reasons.append("oversold recovery condition failed")
-                        if not (0.0<chg<25.0 and 50.0<=r<=70.0 and p>ma5>ma10):reasons.append("breakout trend/RSI conditions failed")
-                        else:reasons.append("no confirmed 20h breakout with 1.5x volume")
-                        recd["reason"]="; ".join(reasons) or "No strategy setup matched"
+                        if not (p>ma5>ma10):reasons.append("price/MA trend failed")
+                        if not (-30.0<chg<-8.0 and r<30 and p>pr):reasons.append("oversold recovery failed")
+                        if not (0.0<chg<25.0 and 50.0<=r<=70.0 and p>ma5>ma10):reasons.append("breakout trend/RSI failed")
+                        else:reasons.append("no confirmed 20h breakout")
+                        recd["reason"]="; ".join(reasons) or "No strategy matched"
         records.append(recd)
-    sh["items"].extend(records)
-    # Keep the rolling-day file bounded if the exchange lists an unusually large number of markets.
-    sh["items"]=sh["items"][-15000:];save(SH,sh)
+    sh["items"].extend(records);sh["items"]=sh["items"][-15000:];save(SH,sh)
     if qu or not buying_allowed:save(QF,q)
     st['last']=time.time();save(SC,st)
-    why=scan_breakdown(records,s)
-    if matched:
-        if not buying_allowed:
-            tg(f"🔍 *SCAN COMPLETE*\nRecorded {len(records)} market checks.\nFound {matched} strategy setup(s), but none were queued because {block_reason}.\nSee /scan\\_history for each coin's RSI, MA5, MA10 and exact decision reason."+why)
-        else:
-            tg(f"🔍 *SCAN COMPLETE*\nRecorded {len(records)} market checks.\nStrategy setups matched: {matched} | queued/eligible: {queued}.\nSee /scan\\_history for each coin's technical readings and decision reason."+why)
-    else:
-        tg(f"🔍 *SCAN COMPLETE*\nRecorded {len(records)} market checks.\nNo coin matched the configured TREND, OVERSOLD or BREAKOUT setup this cycle.\nSee /scan\\_history for each coin's rejection reason."+why)
+    if matched:tg(f"🔍 *SCAN COMPLETE*\nChecked {len(records)} markets.\nMatched: {matched} | Queued: {queued}." + ("\n" + block_reason if not buying_allowed else ""))
+    else:tg(f"🔍 *SCAN COMPLETE*\nChecked {len(records)} markets.\nNo coin matched any setup this cycle.")
 
 def fp(p):
     if p is None:return "N/A"
@@ -969,21 +728,18 @@ def get_market_row(sym,chg=None):
     if chg is None:
         try:chg=ex.fetch_ticker(S(sym))['percentage'] or 0
         except:chg=0
-    r=data(sym)[2]
-    rsi=f"{r:.1f}" if r is not None else "-"
+    r=data(sym)[2];rsi=f"{r:.1f}" if r is not None else "-"
     return {'coin':sym.split('-')[0],'price':fp(live(sym)),'chg':float(chg or 0),'rsi':rsi}
 
 def gl(limit=10):
     try:tk=ex.fetch_tickers()
     except:return "❌ Unable to fetch market data.","❌ Unable to fetch market data."
     v=sorted([{'sym':k.replace("/","-"),'chg':t['percentage'] or 0} for k,t in tk.items() if k.endswith('/USDT') and not skip(k.split('/')[0]) and (t['quoteVolume'] or 0)>=1000000],key=lambda x:x['chg'],reverse=True)
-    gainers=[x for x in v if x['chg']>0][:limit]
-    losers=[x for x in reversed(v) if x['chg']<0][:limit]
+    gainers=[x for x in v if x['chg']>0][:limit];losers=[x for x in reversed(v) if x['chg']<0][:limit]
     def build(title,items):
         lines=[f"{'COIN':<11} {'PRICE':>12} {'24H %':>8} {'RSI':>5}","-"*40]
         for x in items:
-            r=get_market_row(x['sym'],x['chg'])
-            lines.append(f"{r['coin'][:11]:<11} {r['price']:>12} {r['chg']:>+7.2f}% {r['rsi']:>5}")
+            r=get_market_row(x['sym'],x['chg']);lines.append(f"{r['coin'][:11]:<11} {r['price']:>12} {r['chg']:>+7.2f}% {r['rsi']:>5}")
         body="\n".join(lines) if items else "No qualifying markets found."
         return f"*{title} — TOP {limit} (24H)*\n```{body}```\n_Minimum 24H quote volume: $1M._"
     return build("🚀 GAINERS",gainers),build("🩸 LOSERS",losers)
@@ -995,25 +751,14 @@ def cmd_set(txt):
     if k not in s:tg(f"❌ Unknown key. Valid: `{'`, `'.join(s.keys())}`");return
     try:new=val.lower() in ('true','1','yes','on') if isinstance(s[k],bool) else float(val) if isinstance(s[k],float) else int(val)
     except:tg(f"❌ Invalid value for {k}");return
-    limits={
-        "risk_per_trade_pct":(0.1,2.0),"max_daily_loss_pct":(0.5,10.0),
-        "max_portfolio_exposure_pct":(5.0,100.0),"max_position_pct":(1.0,50.0),
-        "max_daily_trades":(1,50),"max_spread_pct":(0.05,3.0),
-        "trail_pct":(0.0,30.0),"stop_loss_pct":(0.5,20.0),
-        "rsi_min":(1.0,99.0),"rsi_max":(1.0,99.0),"rsi_exit":(0.0,99.0),
-        "auto_buy_amount_usdt":(1.0,100000.0),"max_tokens_before_consolidation":(1,30),
-        "max_hold_hours":(1,720),"crash_guard_pct":(1.0,50.0),"btc_rsi_min":(0.0,99.0)
-    }
-    if k in limits and not (limits[k][0] <= new <= limits[k][1]):
-        tg(f"❌ `{k}` must be between {limits[k][0]} and {limits[k][1]}. No setting was changed.");return
-    if k=="rsi_min" and new>=s.get("rsi_max",99):
-        tg("❌ rsi_min must be lower than rsi_max.");return
-    if k=="rsi_max" and new<=s.get("rsi_min",1):
-        tg("❌ rsi_max must be higher than rsi_min.");return
+    limits={"risk_per_trade_pct":(0.1,2.0),"max_daily_loss_pct":(0.5,10.0),"max_portfolio_exposure_pct":(5.0,100.0),"max_position_pct":(1.0,50.0),"max_daily_trades":(1,50),"max_spread_pct":(0.05,3.0),"trail_pct":(0.0,30.0),"stop_loss_pct":(0.5,20.0),"rsi_min":(1.0,99.0),"rsi_max":(1.0,99.0),"rsi_exit":(0.0,99.0),"auto_buy_amount_usdt":(1.0,100000.0),"max_tokens_before_consolidation":(1,30),"max_hold_hours":(1,720),"crash_guard_pct":(1.0,50.0),"btc_rsi_min":(0.0,99.0)}
+    if k in limits and not (limits[k][0] <= new <= limits[k][1]):tg(f"❌ `{k}` must be between {limits[k][0]} and {limits[k][1]}.");return
+    if k=="rsi_min" and new>=s.get("rsi_max",99):tg("❌ rsi_min must be lower than rsi_max.");return
+    if k=="rsi_max" and new<=s.get("rsi_min",1):tg("❌ rsi_max must be higher than rsi_min.");return
     s[k]=new;save(CFG,s);tg(f"✅ `{k}` = `{new}`")
 
 def setc(k,v,m):s=cfg();s[k]=v;save(CFG,s);tg(m)
-MSG={"ai_info":"🧠 *AI ANALYST*\nTo ask the AI a question, type:\n`/ai <your question>`\n\nExample:\n`/ai what is the market sentiment right now?`","/help":"🤖 *CMDS*\n`/menu` `/ai [q]` `/analyse COIN` `/audit`\n`/gainers` `/losers`\n`/balance` `/status` `/holdings`\n`/about` `/scan` `/scan_history [coin/filter]`\n`/set key value` `/pause` `/resume` `/panic`"}
+MSG={"ai_info":"🧠 *AI ANALYST*\nTo ask the AI a question, type:\n`/ai <your question>`","/help":"🤖 *CMDS*\n`/menu` `/ai [q]` `/analyse COIN` `/audit` `/cancel`\n`/gainers` `/losers`\n`/balance` `/status` `/holdings`\n`/scan_history [coin/filter]`\n`/set key value` `/pause` `/resume` `/panic`"}
 
 def handle(t,age):
     l=t.lower()
@@ -1023,7 +768,7 @@ def handle(t,age):
     elif l=="/ai":ask_ai("Give me a market overview.")
     elif l in MSG:tg(MSG[l])
     elif l in ("/menu","📊 menu"):menu()
-    elif l=="/scan":tg("🔍 Scanning the market now... this can take a minute.");scan(True)
+    elif l=="/scan":tg("🔍 Scanning the market now...");scan(True)
     elif l=="scan_history":cmd_scan_history("/scan_history")
     elif l.startswith("scan_history:"):
         try:
@@ -1032,18 +777,16 @@ def handle(t,age):
         except (ValueError,IndexError):cmd_scan_history("/scan_history")
     elif l in ("/panic","🚨 panic"):panic_prompt()
     elif l=="panic_cancel":tg("👍 Panic cancelled.")
-    elif l=="panic_confirm":panic_sell() if age<=900 else tg("⌛ That confirmation expired. Send /panic again if you still want to sell everything.")
+    elif l=="panic_confirm":panic_sell() if age<=900 else tg("⌛ That confirmation expired.")
     elif l=="/sync":cmd_sync()
+    elif l in ("/cancel","❌ cancel"):cmd_cancel_all()
     elif l=="/audit":
         r=audit_system()
         if r and r.startswith("✅"):tg(r)
-    elif l=="trail_on":setc('trail_pct',8.0,"📈 Trailing Stop-Loss turned ON (8%)");menu()
-    elif l=="trail_off":setc('trail_pct',0.0,"📉 Trailing Stop-Loss turned OFF");menu()
+    elif l=="trail_on":setc('trail_pct',8.0,"📈 Trailing Stop-Loss ON (8%)");menu()
+    elif l=="trail_off":setc('trail_pct',0.0,"📉 Trailing Stop-Loss OFF");menu()
     elif l=="/balance":tg(f"💰 *BALANCE*\n{get_balance_text()}")
-    elif l in ("/holdings","/portfolio"):
-        result=get_holdings_text()
-        for part in result if isinstance(result,list) else [result]:tg(part)
-    elif l=="/about":cmd_about()
+    elif l in ("/holdings","/portfolio"):tg(get_holdings_text())
     elif l=="/scan_history" or l.startswith("/scan_history "):cmd_scan_history(t)
     elif l=="/status":
         db=load(DB)
@@ -1052,16 +795,10 @@ def handle(t,age):
             lines=[]
             for sym,d in db.items():
                 p=live(sym)
-                if p:
-                    change=(p-d['entry_price'])/d['entry_price']*100
-                    lines.append(f"{sym.split('-')[0]} | Entry: {fp(d['entry_price'])} | Now: {fp(p)} | PnL: {change:+.1f}%")
-            tg("🟢 *ACTIVE POSITIONS*\n" + ("\n".join(lines) if lines else "No live prices available."))
-    elif l.startswith("/gainers"):
-        p=l.split();n=20 if len(p)>1 and p[1]=="20" else 10
-        tg(gl(n)[0])
-    elif l.startswith("/losers"):
-        p=l.split();n=20 if len(p)>1 and p[1]=="20" else 10
-        tg(gl(n)[1])
+                if p:change=(p-d['entry_price'])/d['entry_price']*100;lines.append(f"{sym.split('-')[0]} | Entry: {fp(d['entry_price'])} | Now: {fp(p)} | PnL: {change:+.1f}%")
+            tg("🟢 *ACTIVE POSITIONS*\n"+("\n".join(lines) if lines else "No live prices."))
+    elif l.startswith("/gainers"):p=l.split();n=20 if len(p)>1 and p[1]=="20" else 10;tg(gl(n)[0])
+    elif l.startswith("/losers"):p=l.split();n=20 if len(p)>1 and p[1]=="20" else 10;tg(gl(n)[1])
     elif l.startswith("/buy"):cmd_buy(t)
     elif l.startswith("/sell"):cmd_sell(t)
     elif l.startswith("/set"):cmd_set(t)
@@ -1074,7 +811,7 @@ def tg_check():
         res=requests.get(f"{API}/getUpdates?offset={lid+1}&timeout=0",timeout=10).json()
         if not (res.get("ok") and res.get("result")):return
         top=max(u["update_id"] for u in res["result"]);st["last_update_id"]=top;save(ST,st)
-        try:requests.get(f"{API}/getUpdates?offset={top+1}&limit=1&timeout=0",timeout=10)  # ack on Telegram's side BEFORE acting: overlapping/stale runs can never replay these commands
+        try:requests.get(f"{API}/getUpdates?offset={top+1}&limit=1&timeout=0",timeout=10)
         except Exception:pass
         for u in res["result"]:
             txt=cid="";age=0
@@ -1098,77 +835,37 @@ def acquire_lock():
     except OSError:return None
 
 def git_sync():
-    """
-    Safely persist bot state to GitHub.
-    First try a rebase. If concurrent bot runs changed the same JSON state
-    files, abort the rebase cleanly and use a merge that keeps this run's
-    state-file versions for conflicting files while still bringing in
-    non-conflicting remote changes.
-    """
     ident="trading-bot";mail="bot@users.noreply.github.com"
-    env={**os.environ,"GIT_AUTHOR_NAME":ident,"GIT_AUTHOR_EMAIL":mail,
-         "GIT_COMMITTER_NAME":ident,"GIT_COMMITTER_EMAIL":mail,
-         "GIT_TERMINAL_PROMPT":"0"}
-    def run(args):
-        return subprocess.run(args,capture_output=True,text=True,timeout=60,env=env)
+    env={**os.environ,"GIT_AUTHOR_NAME":ident,"GIT_AUTHOR_EMAIL":mail,"GIT_COMMITTER_NAME":ident,"GIT_COMMITTER_EMAIL":mail,"GIT_TERMINAL_PROMPT":"0"}
+    def run(args):return subprocess.run(args,capture_output=True,text=True,timeout=60,env=env)
     def notify_fail(message):
         print(message)
-        if not cd("gitfail",900):
-            tg("⚠️ *STATE NOT SAVED:* "+message[:220]+
-               "\nBot state files remain on this runner, but GitHub persistence is not confirmed. Check the next run.")
+        if not cd("gitfail",900):tg("⚠️ *STATE NOT SAVED:* "+message[:220]+"\nBot state files remain on this runner, but GitHub persistence is not confirmed.")
     def abort_rebase():
-        # A previous interrupted run may have left Git in rebase mode.
         p=run(["git","rev-parse","--verify","-q","REBASE_HEAD"])
         if p.returncode==0:
             a=run(["git","rebase","--abort"])
-            if a.returncode!=0:
-                raise RuntimeError("Could not abort the previous rebase: "+a.stderr[-250:])
+            if a.returncode!=0:raise RuntimeError("Could not abort previous rebase: "+a.stderr[-250:])
     try:
-        abort_rebase()
-        existing=[f for f in FILES if os.path.exists(f)]
+        abort_rebase();existing=[f for f in FILES if os.path.exists(f)]
         if existing:
             a=run(["git","add","--"]+existing)
-            if a.returncode!=0:
-                notify_fail("git add failed: "+a.stderr[-250:]);return
+            if a.returncode!=0:notify_fail("git add failed: "+a.stderr[-250:]);return
             staged=run(["git","diff","--cached","--quiet"])
             if staged.returncode==1:
                 c=run(["git","commit","-m","Persist bot state"])
-                if c.returncode!=0:
-                    notify_fail("git commit failed: "+c.stderr[-250:]);return
-            elif staged.returncode not in (0,):
-                notify_fail("could not inspect staged changes: "+staged.stderr[-250:]);return
-
+                if c.returncode!=0:notify_fail("git commit failed: "+c.stderr[-250:]);return
+            elif staged.returncode not in (0,):notify_fail("could not inspect staged changes: "+staged.stderr[-250:]);return
         p=run(["git","pull","--rebase","--autostash"])
         if p.returncode!=0:
-            # Rebase conflicts commonly happen when overlapping Actions runs
-            # both update the same JSON state files. Abort before attempting
-            # a merge; never leave conflict markers or an active rebase behind.
             abort=run(["git","rebase","--abort"])
-            if abort.returncode!=0:
-                notify_fail("rebase failed and could not be aborted: "+abort.stderr[-250:]);return
-
-            # In a merge, 'ours' is this runner's checked-out commit. This
-            # deliberately preserves its runtime state for conflicting files.
-            # Non-conflicting remote changes are still incorporated.
+            if abort.returncode!=0:notify_fail("rebase failed and could not be aborted: "+abort.stderr[-250:]);return
             m=run(["git","pull","--no-rebase","--no-edit","-s","recursive","-X","ours"])
-            if m.returncode!=0:
-                # Do not leave a merge in progress either.
-                run(["git","merge","--abort"])
-                notify_fail("rebase conflicted; safe merge also failed: "+m.stderr[-250:])
-                return
-            tg("ℹ️ Git sync used conflict recovery. This run's conflicting bot-state files were preserved; non-conflicting GitHub changes were merged.")
-
+            if m.returncode!=0:run(["git","merge","--abort"]);notify_fail("rebase conflicted; safe merge also failed: "+m.stderr[-250:]);return
+            tg("ℹ️ Git sync used conflict recovery. This run's conflicting bot-state files were preserved.")
         push=run(["git","push"])
-        if push.returncode!=0:
-            notify_fail("git push failed: "+push.stderr[-250:]);return
-
-        bad=[t for t in run(["git","ls-files"]).stdout.split()
-             if re.search(r'(^|/)(\.env|.*\.pem|.*\.key|.*secret.*)',t,re.I)]
-        if bad and not cd("gitwarn",86400):
-            tg("🚨 *SECURITY:* secret-looking files are tracked in git: `"+
-               ", ".join(bad[:5])+"`. Remove them (git rm --cached) and rotate your keys.")
-    except Exception as e:
-        notify_fail("git sync exception: "+str(e))
+        if push.returncode!=0:notify_fail("git push failed: "+push.stderr[-250:]);return
+    except Exception as e:notify_fail("git sync exception: "+str(e))
 
 if __name__=="__main__":
     lk=acquire_lock()
