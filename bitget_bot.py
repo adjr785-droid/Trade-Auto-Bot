@@ -57,8 +57,8 @@ def cleanup_telegram_output():
 tg=lambda m:_send(m,"Markdown");tg_ai=lambda m:_send(m,"HTML")
 
 def menu():
-    s=cfg();b=lambda t,c:{"text":t,"callback_data":c};tb=b("📈 Trail: ON","trail_off") if s.get('trail_pct',8.0)>0 else b("📉 Trail: OFF","trail_on")
-    _send("🕹️ *MAIN MENU*\nSelect an option below:","Markdown",{"inline_keyboard":[[b("⏸ Pause","/pause"),b("🔄 Sync","/sync")],[b("🛠️ Audit","/audit"),b("🧾 Scan History","scan_history:1")],[b("🟢 Status","/status"),b("💰 Balance","/balance")],[b("💼 Holdings Details","/holdings")],[b("📊 Summary","/summary"),tb],[b("🚀 Gainers","/gainers"),b("🩸 Losers","/losers")],[b("🛒 Buy Info","buy_info"),b("💸 Sell Info","sell_info")],[b("🧠 Ask AI","ai_info")]]})
+    b=lambda t,c:{"text":t,"callback_data":c}
+    _send("🕹️ *MAIN MENU*\nAutomatic buying is enabled by default when a valid setup passes all safety checks. Use /pause only for an emergency stop.","Markdown",{"inline_keyboard":[[b("🛠️ Audit","/audit"),b("🧾 Scan History","scan_history:1")],[b("🟢 Status","/status"),b("💰 Balance","/balance")],[b("💼 Holdings Details","/holdings")],[b("🚀 Gainers","/gainers"),b("🩸 Losers","/losers")],[b("🧠 Ask AI","ai_info")]]})
 
 def panic_prompt():_send("🚨 *CONFIRM PANIC*\nThis sells ALL positions at market and pauses auto-buy.\nConfirm within 15 minutes.","Markdown",{"inline_keyboard":[[{"text":"✅ YES, SELL EVERYTHING","callback_data":"panic_confirm"},{"text":"❌ Cancel","callback_data":"panic_cancel"}]]})
 
@@ -77,13 +77,15 @@ def save(f,d):
     except Exception as e:print(f"SAVE ERR {f}: {e}")
 
 def cfg():
-    d={"rsi_min":42,"rsi_max":48,"stop_loss_pct":5.0,"auto_buy_enabled":False,"auto_buy_amount_usdt":10.0,"max_tokens_before_consolidation":3,"max_hold_hours":48,"trail_pct":8.0,"crash_guard_pct":10.0,"rsi_exit":75,"btc_rsi_min":50,"risk_per_trade_pct":1.0,"max_daily_loss_pct":3.0,"max_portfolio_exposure_pct":50.0,"max_position_pct":15.0,"max_daily_trades":5,"max_spread_pct":0.5}
+    d={"rsi_min":42,"rsi_max":48,"stop_loss_pct":5.0,"auto_buy_enabled":True,"auto_buy_amount_usdt":10.0,"max_tokens_before_consolidation":3,"max_hold_hours":48,"trail_pct":8.0,"crash_guard_pct":10.0,"rsi_exit":75,"btc_rsi_min":50,"risk_per_trade_pct":1.0,"max_daily_loss_pct":3.0,"max_portfolio_exposure_pct":50.0,"max_position_pct":15.0,"max_daily_trades":5,"max_spread_pct":0.5,"auto_mode_v1":False}
     s=load(CFG,d)
-    upgraded='risk_per_trade_pct' not in s
     for k,v in d.items():s.setdefault(k,v)
-    # On an upgrade, require an explicit /resume after the new risk controls are installed.
-    if upgraded:s['auto_buy_enabled']=False
-    if upgraded:save(CFG,s)
+    # One-time migration: enable automatic execution by default. Thereafter /pause
+    # and /resume remain available as explicit emergency/operator safeguards.
+    if not s.get('auto_mode_v1'):
+        s['auto_buy_enabled']=True
+        s['auto_mode_v1']=True
+        save(CFG,s)
     return s
 
 def in_cd(k,s=5):return time.time()-load(CD,{}).get(k,0)<s
@@ -334,12 +336,6 @@ def panic_sell():
     save(DB,db);save(QF,{});s=cfg();s['auto_buy_enabled']=False;save(CFG,s)
     tg(f"⚠️ *PANIC INCOMPLETE.* Still held (sell failed): `{', '.join(failed)}`\nAuto-buy PAUSED. Retry with /panic or sell manually." if failed else "🛑 *PANIC COMPLETE.* All positions sold. Auto-buy PAUSED.")
 
-def get_summary_text():
-    H=load(HIST);now=time.time()
-    def calc(l):return (sum(t['pnl'] for t in l),len(l),len([t for t in l if t['pnl']>0])/len(l)*100) if l else (0.0,0,0.0)
-    dp,dc,dw=calc([t for t in H if now-t['time']<=86400]);wp,wc,ww=calc([t for t in H if now-t['time']<=604800])
-    return f"📊 *PERFORMANCE SUMMARY*\n\n*24 HOURS*\nPnL: ${dp:.2f}\nTrades: {dc}\nWin Rate: {dw:.1f}%\n\n*7 DAYS*\nPnL: ${wp:.2f}\nTrades: {wc}\nWin Rate: {ww:.1f}%"
-
 def get_balance_text():
     b=ex.fetch_balance()['free']
     lines=[f"USDT: ${b.get('USDT',0):.2f}"]
@@ -450,7 +446,7 @@ def audit_system():
         if sym not in db:
             p=live(sym)
             if p and a*p>1.02:
-                db[sym]=NP(p,round(p*(1-cfg()['stop_loss_pct']/100),6));save(DB,db);issues.append(f"🔄 Auto-synced orphaned balance: {sym} (Entry: {p:.6f})");place_trailing_sl(sym,a)
+                db[sym]=NP(p,round(p*(1-cfg()['stop_loss_pct']/100),6));save(DB,db);ok=place_trailing_sl(sym,a);issues.append(f"🔄 Auto-synced orphaned balance: {sym} (Entry: {p:.6f}) — stop {'VERIFIED' if ok else 'NOT VERIFIED'}")
     qc=False
     for sym in list(q):
         if sym in db or time.time()-q[sym].get('timestamp',0)>86400:q.pop(sym,None);qc=True
@@ -589,17 +585,8 @@ def manage():
     save(DB,db)
 
 def consolidate():
-    db=load(DB);mx=cfg()['max_tokens_before_consolidation']
-    if len(db)<=mx:return
-    now=time.time();rk=[]
-    for sym,d in db.items():
-        p=live(sym)
-        if p and d.get('entry_price') and now-d.get('opened_at',0)>=21600:rk.append({"s":sym,"pnl":(p-d['entry_price'])/d['entry_price']*100})
-    if not rk:return
-    rk.sort(key=lambda x:x["pnl"]);ex_n=len(db)-mx
-    tg(f"⚖️ *CONSOLIDATING:* {len(db)} positions, limit {mx}. Trimming worst {min(ex_n,len(rk))}.")
-    for t in rk[:ex_n]:
-        if sell(t['s'],1.0,"Consolidation"):db.pop(t['s'],None);save(DB,db)
+    # Disabled: automatic consolidation must not sell existing positions.
+    return
 
 def btc_blocked(s):
     m=s.get('btc_rsi_min',0)
@@ -655,15 +642,11 @@ def buy_rejection(sym,reason):
         tg(f"⛔ *AUTOMATIC BUY REJECTED — {sym}*\nReason: {reason}\nNo order was submitted.")
         mk_cd(key)
 
-def strategy_priority(name):
-    """Higher number means a stronger queue priority; unknown setups rank last."""
-    return {"BREAKOUT":3,"TREND":2,"OVERSOLD":1}.get(str(name or "").upper(),0)
-
 def exec_q():
     q=load(QF);db=load(DB);s=cfg();mx=s["max_tokens_before_consolidation"]
     if not q:return
     if not s["auto_buy_enabled"]:
-        for sym in q:buy_rejection(sym,"Auto-buy is OFF. Use /resume to enable automatic buying.")
+        for sym in q:buy_rejection(sym,"Automatic buying is paused. Use /resume to re-enable it after reviewing the reason for the pause.")
         return
     if btc_blocked(s):
         for sym in q:buy_rejection(sym,"BTC market-safety filter is active; automatic entries are paused.")
@@ -675,10 +658,7 @@ def exec_q():
         return
     try:
         ub=B('free','USDT')
-        # Small balances should fund one best-ranked setup, never several tiny positions.
-        single_trade_mode = ub <= max(10.0, float(s.get('auto_buy_amount_usdt',10.0)))
-        ordered_queue=sorted(q.items(),key=lambda x:(strategy_priority(x[1].get('type')),float(x[1].get('score',0) or 0)),reverse=True)
-        for sym,qd in ordered_queue:
+        for sym,qd in sorted(q.items(),key=lambda x:x[1].get('score',0),reverse=True):
             if in_cd(f"fail_{sym}",300):
                 buy_rejection(sym,"A previous order attempt failed; retry cooldown is still active.");continue
             if sym in db:
@@ -686,32 +666,8 @@ def exec_q():
                 q.pop(sym,None);save(QF,q);continue
             if not live(sym):
                 buy_rejection(sym,"Live market price is unavailable; no order was submitted.");continue
-            full=len(db)>=mx;spend=ub
-            if spend<1.02 and db:
-                wk=None;low=999
-                for hs,hd in db.items():
-                    hp=live(hs)
-                    if hp:
-                        pn=(hp-hd['entry_price'])/hd['entry_price']*100
-                        if pn<low:low=pn;wk=hs
-                if wk:
-                    bc=wk.split('-')[0]
-                    if qd.get('score',0)>35 or low<0:
-                        tg(f"🔄 *ROTATION SELL:* Dropping {wk} (PnL {low:.1f}%) to buy {sym}")
-                        if sell(wk,1.0,"ROTATION"):db.pop(wk,None);save(DB,db);time.sleep(2);ub=B('free','USDT');spend=ub
-                    elif not full:
-                        if cancel_sells(wk):
-                            tg(f"⚠️ Rotation skipped for {wk}: existing protective sell orders could not be safely cancelled.")
-                            continue
-                        time.sleep(0.5);hb=B('free',bc);hp=live(wk)
-                        if hb>0 and hp:
-                            qs=float(ex.amount_to_precision(S(wk),min(s['auto_buy_amount_usdt'],hb*hp)/hp))
-                            if qs*hp<hb*hp*0.95:
-                                ex.create_market_sell_order(S(wk),qs);tg(f"🔄 *PARTIAL SWAP:* Sold {qs} {bc} for {sym}.");time.sleep(2);ub=B('free','USDT');spend=ub;rem=B('total',bc)
-                                if rem>0 and rem*hp>1.02:place_trailing_sl(wk,rem)
-                                else:db.pop(wk,None);save(DB,db)
-                            else:place_trailing_sl(wk,hb)
-                        elif hb>0:place_trailing_sl(wk,hb)
+            spend=ub
+            # Never sell or swap an existing holding to fund a new entry.
             if len(db)>=mx:
                 buy_rejection(sym,f"Maximum active positions reached ({mx}).")
                 continue
@@ -730,9 +686,8 @@ def exec_q():
             if sl>=a or sl>mxs:sl=mxs
             db[sym]=NP(round(a,6),sl);save(DB,db);ok=place_trailing_sl(sym,free_qty(sym,f));tg(f"🛒 *EXECUTED!*\n{sym}|💵{sp:.2f}@{a:.6f}\n"+(STOP_OK if ok else STOP_NO))
             q.pop(sym,None);save(QF,q);ub=B('free','USDT');time.sleep(2)
-            if single_trade_mode:
-                # Leave the remaining queue for the next scan cycle; do not split a small balance.
-                break
+            # One new position per cycle; leave other queued signals for later cycles.
+            break
     except Exception as e:tg(f"⚠️ *QUEUE FAILED:* `{e}`")
 
 def scan_history_state():
@@ -854,21 +809,19 @@ def cmd_about():
          "• OVERSOLD setup: 24H change between -30% and -8%, RSI below 30, and current price recovering above the prior hourly close.\n"
          "• BREAKOUT setup: 24H change above 0% and below 25%, RSI 50–70, price above MA5 above MA10, and the last completed 1-hour candle closes above the previous 20-hour high with volume at least 1.5x the previous 20-hour average.\n"
          "• Breakout is confirmation-based monitoring; it does not buy on a wick or an unclosed candle. It uses the existing configured stop-loss and position-risk sizing.\n"
-         "• Queue priority when several coins qualify: BREAKOUT first, TREND second, OVERSOLD third; technical score ranks coins within the same strategy.\n"
-         "• When free USDT is at or below the configured small-balance threshold (at least $10), the bot executes at most one successful buy per queue run. Existing risk sizing and exchange minimum checks can still reject the trade.\n"
          "• Uses 1-hour candles, RSI(14), MA5 and MA10. These are technical signals, not predictions.\n\n"
          "*3. Scanning process*\n• Loads Bitget spot USDT tickers and filters stablecoins, leveraged tokens and excluded symbols.\n"
          "• Sorts eligible markets by 24H quote volume; the current scanner examines ranks 16–500.\n"
          "• Applies tiered minimum volume thresholds: $1M for ranks 16–100, $3M for 101–199, $4M for 200–399 and $5M for 400–500; qualifying coins get indicator checks.\n"
-         "• Scanning and history recording continue whether auto-buy is ON or OFF; auto-buy and safety filters control execution only.\n"
-         "• Matching setups enter a scored queue only when buying is permitted. The scan report/history records why a setup was not queued (for example auto-buy OFF or BTC filter).\n"
+         "• Automatic buying is enabled by default. A matching setup is queued for execution only after the strategy and market-safety checks pass.\n"
+         "• Execution still requires sufficient free USDT, exchange minimum order size, portfolio room and all risk controls.\n"
          "• BTC RSI filter can block new automatic buys when BTC RSI is below its configured minimum. Scanning is rate-limited to about once per hour.\n\n"
          "*4. Risk & position management*\n"
-         f"• Auto-buy: {'ON' if s.get('auto_buy_enabled') else 'OFF'}; default trade budget ${s.get('auto_buy_amount_usdt',10):g}.\n"
+         f"• Automatic buying: {'ENABLED' if s.get('auto_buy_enabled') else 'PAUSED'}; default trade budget ${s.get('auto_buy_amount_usdt',10):g}.\n"
          f"• Risk target {s.get('risk_per_trade_pct',1):g}% per trade; daily loss limit {s.get('max_daily_loss_pct',3):g}%; max portfolio exposure {s.get('max_portfolio_exposure_pct',50):g}%; max position {s.get('max_position_pct',15):g}%.\n"
          f"• Base stop loss {s.get('stop_loss_pct',5):g}%; trailing stop {trail}. Peak price only moves upward; the trailing level follows that peak and is not lowered.\n"
          f"• Additional controls include crash guard, RSI exit, time stop, position limit, daily trade limit and protective-order checks.\n\n"
-         "*5. Monitoring commands*\n`/holdings` — balances, indicators and stop details.\n`/scan_history` — coins checked and their indicator/decision details, retained for 24 hours.\n`/analyse COIN` — read-only 1-hour technical analysis before a manual buy.\n`/status` — active positions. `/summary` — performance summary. `/pause` and `/resume` — pause/resume automatic buying.\n\n"
+         "*5. Monitoring commands*\n`/holdings` — balances, indicators and stop details.\n`/scan_history` — coins checked and their indicator/decision details, retained for 24 hours.\n`/analyse COIN` — read-only 1-hour technical analysis before a manual buy.\n`/status` — active positions. `/pause` and `/resume` — pause/resume automatic buying.\n\n"
          "*Important:* This is a rule-based spot trading assistant, not financial advice. Bot-side trailing protection requires the bot process to keep running. Exchange protective orders must be verified on Bitget; never assume an unverified stop is active.")
     tg(msg)
 
@@ -879,9 +832,9 @@ def scan():
     auto_enabled=bool(s.get("auto_buy_enabled"))
     btc_is_blocked=btc_blocked(s) if auto_enabled else False
     buying_allowed=auto_enabled and not btc_is_blocked
-    block_reason=("auto-buy is OFF" if not auto_enabled else
+    block_reason=("automatic buying is emergency-paused" if not auto_enabled else
                   "BTC safety filter blocked buying" if btc_is_blocked else "")
-    if buying_allowed and len(db)>s["max_tokens_before_consolidation"]:consolidate()
+    # Automatic consolidation/rotation selling is intentionally disabled for safety.
     try:tk=ex.fetch_tickers();mk=ex.load_markets()
     except Exception as e:
         print(f"SCAN MARKET DATA ERROR: {e}")
@@ -909,25 +862,24 @@ def scan():
                 else:
                     setup=sl=None
                     breakout_volume=None;breakout_level=None
-                    # Evaluate every strategy independently, then keep the highest-priority
-                    # valid signal. This prevents an ordinary TREND match hiding a confirmed breakout.
-                    candidates=[]
                     if 1.0<chg<30.0 and s['rsi_min']<=r<=s['rsi_max'] and p>ma5>ma10:
-                        candidates.append(("TREND",round(ma5*(1-s['stop_loss_pct']/100),6)))
-                    if -30.0<chg<-8.0 and r<30 and p>pr:
-                        candidates.append(("OVERSOLD",round(p*(1-s['stop_loss_pct']/100),6)))
-                    if 0.0<chg<25.0 and 50.0<=r<=70.0 and p>ma5>ma10:
+                        setup="TREND";sl=round(ma5*(1-s['stop_loss_pct']/100),6)
+                    elif -30.0<chg<-8.0 and r<30 and p>pr:
+                        setup="OVERSOLD";sl=round(p*(1-s['stop_loss_pct']/100),6)
+                    # Third strategy: confirmed 20-hour breakout. This is an
+                    # additional setup, not a replacement for TREND/OVERSOLD.
+                    # It uses completed candles, stronger volume and the same
+                    # configured base stop-loss/risk sizing as existing trades.
+                    elif 0.0<chg<25.0 and 50.0<=r<=70.0 and p>ma5>ma10:
                         confirmed,breakout_volume,breakout_level=breakout_confirmation(sym)
                         if confirmed:
-                            candidates.append(("BREAKOUT",round(p*(1-s['stop_loss_pct']/100),6)))
-                    if candidates:
-                        setup,sl=max(candidates,key=lambda item:strategy_priority(item[0]))
+                            setup="BREAKOUT";sl=round(p*(1-s['stop_loss_pct']/100),6)
                     if setup:
                         recd["strategy"]=setup
                         if setup=="BREAKOUT":
                             recd["reason"]=f"BREAKOUT confirmed: 1h close above 20h resistance; volume {breakout_volume:.2f}x average"
                         matched+=1
-                        rr=(p*0.10)/(p-sl) if (p-sl)>0 else 0;recd["rr"]=rr;score=vol/1e6+rr*10
+                        rr=None;recd["rr"]=None;priority={"BREAKOUT":3,"TREND":2,"OVERSOLD":1}.get(setup,0);score=vol/1e6+priority*100
                         if not buying_allowed:
                             recd["decision"]="SETUP — NOT QUEUED"
                             recd["reason"]=(f"BREAKOUT confirmed (volume {breakout_volume:.2f}x), but {block_reason}" if setup=="BREAKOUT" else f"{setup} setup matched, but {block_reason}")
@@ -961,10 +913,6 @@ def scan():
             tg(f"🔍 *SCAN COMPLETE*\nRecorded {len(records)} market checks.\nStrategy setups matched: {matched} | queued/eligible: {queued}.\nSee /scan_history for each coin's technical readings and decision reason.")
     else:
         tg(f"🔍 *SCAN COMPLETE*\nRecorded {len(records)} market checks.\nNo coin matched the configured TREND, OVERSOLD or BREAKOUT setup this cycle.\nSee /scan_history for each coin's rejection reason.")
-
-def check_daily_summary():
-    st=load(SC);now=datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=TZ)));today=now.strftime('%Y-%m-%d')
-    if now.hour>=20 and st.get('last_summary_day')!=today:tg(get_summary_text());st['last_summary_day']=today;save(SC,st)
 
 def fp(p):
     if p is None:return "N/A"
@@ -1018,7 +966,7 @@ def cmd_set(txt):
     s[k]=new;save(CFG,s);tg(f"✅ `{k}` = `{new}`")
 
 def setc(k,v,m):s=cfg();s[k]=v;save(CFG,s);tg(m)
-MSG={"ai_info":"🧠 *AI ANALYST*\nTo ask the AI a question, type:\n`/ai <your question>`\n\nExample:\n`/ai what is the market sentiment right now?`","buy_info":"🛒 *BUY COMMAND*\nUsage: `/buy COIN AMOUNT`\nExample: `/buy SOL 5.75`","sell_info":"💸 *SELL COMMAND*\nUsage: `/sell COIN AMOUNT`\nExample: `/sell SOL 5.75`\n\nType `ALL` instead of an amount to sell the entire position.","/help":"🤖 *CMDS*\n`/menu` `/ai [q]` `/analyse COIN` `/sync` `/audit`\n`/gainers` `/losers` `/summary`\n`/balance` `/status` `/holdings` `/pnl`\n`/about` `/scan_history [coin/filter]`\n`/buy COIN AMT` `/sell COIN AMT|ALL`\n`/set key value` `/pause` `/resume` `/panic`"}
+MSG={"ai_info":"🧠 *AI ANALYST*\nTo ask the AI a question, type:\n`/ai <your question>`\n\nExample:\n`/ai what is the market sentiment right now?`","/help":"🤖 *CMDS*\n`/menu` `/ai [q]` `/analyse COIN` `/audit`\n`/gainers` `/losers`\n`/balance` `/status` `/holdings`\n`/about` `/scan_history [coin/filter]`\n`/set key value` `/pause` `/resume` `/panic`"}
 
 def handle(t,age):
     l=t.lower()
@@ -1047,7 +995,6 @@ def handle(t,age):
     elif l in ("/holdings","/portfolio"):
         result=get_holdings_text()
         for part in result if isinstance(result,list) else [result]:tg(part)
-    elif l=="/summary":tg(get_summary_text())
     elif l=="/about":cmd_about()
     elif l=="/scan_history" or l.startswith("/scan_history "):cmd_scan_history(t)
     elif l=="/status":
@@ -1061,9 +1008,6 @@ def handle(t,age):
                     change=(p-d['entry_price'])/d['entry_price']*100
                     lines.append(f"{sym.split('-')[0]} | Entry: {fp(d['entry_price'])} | Now: {fp(p)} | PnL: {change:+.1f}%")
             tg("🟢 *ACTIVE POSITIONS*\n" + ("\n".join(lines) if lines else "No live prices available."))
-    elif l=="/pnl":
-        L=load(LF);tp=L.get('total_realized_usdt',0.0);n=L.get('trade_count',0)
-        tg(f"📊 *P&L SUMMARY*\nTotal realized PnL: ${tp:.2f}\nCompleted trades: {n}")
     elif l.startswith("/gainers"):
         p=l.split();n=20 if len(p)>1 and p[1]=="20" else 10
         tg(gl(n)[0])
@@ -1181,7 +1125,7 @@ def git_sync():
 if __name__=="__main__":
     lk=acquire_lock()
     if lk is None:print("Another run is in progress; exiting.");sys.exit(0)
-    try:_C.clear();cleanup_telegram_output();scan_history_state();audit_system();tg_check();manage();git_sync();check_daily_summary();check_hourly_balance();scan();exec_q()
+    try:_C.clear();cleanup_telegram_output();scan_history_state();audit_system();tg_check();manage();git_sync();check_hourly_balance();scan();exec_q()
     except Exception as e:
         try:tg(f"🚨 *CRASH:* `{e}`\n`{traceback.format_exc()[-200:]}`")
         except:pass
