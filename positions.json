@@ -4,19 +4,9 @@
         "safe_zone": 0.011945,
         "stop_loss": 0.011945,
         "peak_price": 0.0126791,
-        "last_price": 0.0123403,
+        "last_price": 0.0122771,
         "opened_at": 1795061194.800919,
         "xsl": 0.011945,
-        "seen": 1795065903.7636786
-    },
-    "BTW-USDT": {
-        "entry_price": 0.56667,
-        "safe_zone": 0.56667,
-        "stop_loss": 0.481669,
-        "peak_price": 0.56667,
-        "last_price": 0.556753,
-        "opened_at": 1795064918.4431696,
-        "seen": 1795065903.941986,
-        "xsl": 0.5213364
+        "seen": 1795066051.954471
     }
 }
