@@ -12,7 +12,7 @@ STABLE=['USDC','USDT','DAI','FDUSD','TUSD','USDD','USDE'];LEV=['3L','3S','5L','5
 ex=ccxt.bitget({'apiKey':os.environ.get('BITGET_API_KEY'),'secret':os.environ.get('BITGET_API_SECRET'),'password':os.environ.get('BITGET_API_PASSPHRASE'),'enableRateLimit':True});ex.options['createMarketBuyOrderRequiresPrice']=False
 client=genai.Client(api_key=os.environ.get('GEMINI_API_KEY')) if genai and os.environ.get('GEMINI_API_KEY') else None
 GEMINI_MODELS=[m for m in [os.environ.get('GEMINI_MODEL'),'gemini-2.5-flash','gemini-1.5-flash'] if m]
-_C={}
+_C={};KB={"keyboard":[["📊 Menu","💰 Balance","🚨 PANIC"]],"resize_keyboard":True,"is_persistent":True}
 S=lambda s:s.replace("-","/")
 TR=lambda t:{'trigger':True} if t else {}
 B=lambda k,c:ex.fetch_balance()[k].get(c,0)
@@ -21,29 +21,9 @@ NP=lambda e,sl:{"entry_price":e,"safe_zone":e,"stop_loss":sl,"peak_price":e,"las
 STOP_OK="🛡️ Exchange protective sell: Verified\n📈 Bot-side trailing: Active"
 STOP_NO="⚠️ Exchange stop NOT verified.\nBot-side monitoring is active only while the bot is running; protection is not guaranteed."
 
-def get_reply_kb():
-    try:
-        bal = ex.fetch_balance()
-        usdt = bal['total'].get('USDT', 0.0)
-        btn_text = f"💰 Spot: ${usdt:.2f}"
-    except:
-        btn_text = "💰 Spot Balance"
-    
-    kb=[ [btn_text], ["📊 Menu","🧠 Ask AI","💼 Holdings"] ]
-    return {"keyboard": kb, "resize_keyboard": True, "is_persistent": True}
-
-def refresh_keyboard():
-    """Silently sends and deletes a message to update the persistent Reply Keyboard text."""
-    try:
-        r = requests.post(API+"/sendMessage", json={"chat_id":CHAT, "text": "🔄", "reply_markup": get_reply_kb(), "disable_notification": True}, timeout=10)
-        if r.ok:
-            mid = r.json()["result"]["message_id"]
-            requests.post(API+"/deleteMessage", json={"chat_id":CHAT, "message_id": mid}, timeout=10)
-    except: pass
-
 def _send(m,mode,btn=None):
     try:
-        rm=btn or get_reply_kb();p={"chat_id":CHAT,"text":m,"reply_markup":rm}
+        rm=btn or KB;p={"chat_id":CHAT,"text":m,"reply_markup":rm}
         if mode:p["parse_mode"]=mode
         r=requests.post(API+"/sendMessage",json=p,timeout=10)
         if not r.ok:
@@ -338,24 +318,6 @@ def panic_sell():
         else:failed.append(sym)
     save(DB,db);save(QF,{});s=cfg();s['auto_buy_enabled']=False;save(CFG,s)
     tg(f"⚠️ *PANIC INCOMPLETE.* Still held: `{', '.join(failed)}`\nAuto-buy PAUSED." if failed else "🛑 *PANIC COMPLETE.* All positions sold. Auto-buy PAUSED.")
-
-def get_spot_balance_text():
-    try:
-        bal=ex.fetch_balance();free=bal.get('free') or {};total=bal.get('total') or {}
-        usdt_free=float(free.get('USDT',0.0));usdt_total=float(total.get('USDT',0.0));total_equity=usdt_total
-        lines=["💰 *LIVE SPOT BALANCE*","━━━━━━━━━━━━━━━━━━━━",f"💵 *USDT Cash:* ${usdt_total:.2f}",f"🔓 *Free to Trade:* ${usdt_free:.2f}","━━━━━━━━━━━━━━━━━━━━"]
-        count=0
-        for coin,qty in total.items():
-            if qty<=0 or coin in STABLE or coin in BL: continue
-            p=live(f"{coin}-USDT")
-            if p and qty*p>=0.10:
-                val=qty*p;total_equity+=val
-                lines.append(f"🪙 *{coin}:* {qty:.4g} (≈${val:.2f})")
-                count+=1
-        lines.append("━━━━━━━━━━━━━━━━━━━━")
-        lines.append(f"📊 *Total Account Equity:* ${total_equity:.2f}")
-        return "\n".join(lines)
-    except Exception as e:return f"❌ Could not fetch balance: {e}"
 
 def get_holdings_text():
     try:balance=ex.fetch_balance();totals=balance.get('total') or {};free=balance.get('free') or {}
@@ -804,8 +766,7 @@ def handle(t,age):
         if r and r.startswith("✅"):tg(r)
     elif l=="trail_on":setc('trail_pct',8.0,"📈 Trailing Stop-Loss ON (8%)");menu()
     elif l=="trail_off":setc('trail_pct',0.0,"📉 Trailing Stop-Loss OFF");menu()
-    elif l.startswith("💰 spot") or l == "/balance":tg(get_spot_balance_text())
-    elif l in ("/holdings","/portfolio","💼 holdings"):tg(get_holdings_text())
+    elif l in ("/holdings","/portfolio","💼 holdings","💰 balance","/balance"):tg(get_holdings_text())
     elif l=="/scan_history" or l.startswith("/scan_history "):cmd_scan_history(t)
     elif l=="/status":
         db=load(DB)
@@ -890,18 +851,7 @@ def git_sync():
 if __name__=="__main__":
     lk=acquire_lock()
     if lk is None:print("Another run is in progress; exiting.");sys.exit(0)
-    try:
-        _C.clear()
-        cleanup_telegram_output()
-        scan_history_state()
-        audit_system()
-        tg_check()
-        manage()
-        git_sync()
-        check_hourly_balance()
-        scan()
-        exec_q()
-        refresh_keyboard()  # <--- Silently updates the bottom button with the latest balance
+    try:_C.clear();cleanup_telegram_output();scan_history_state();audit_system();tg_check();manage();git_sync();check_hourly_balance();scan();exec_q()
     except Exception as e:
         try:tg(f"🚨 *CRASH:* `{e}`\n`{traceback.format_exc()[-200:]}`")
         except:pass
