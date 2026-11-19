@@ -2,11 +2,11 @@
     "BLESS-USDT": {
         "entry_price": 0.011945,
         "safe_zone": 0.011945,
-        "stop_loss": 0.010153,
-        "peak_price": 0.0123072,
-        "last_price": 0.0123072,
+        "stop_loss": 0.011945,
+        "peak_price": 0.0126276,
+        "last_price": 0.0126276,
         "opened_at": 1795061194.800919,
-        "xsl": 0.011256844,
-        "seen": 1795063167.3947158
+        "xsl": 0.011945,
+        "seen": 1795064398.4345083
     }
 }
