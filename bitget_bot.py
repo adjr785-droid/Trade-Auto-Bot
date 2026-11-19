@@ -58,8 +58,7 @@ def menu():
     b=lambda t,c:{"text":t,"callback_data":c}
     _send("🕹️ *MAIN MENU*\nAutomatic buying is enabled by default when a valid setup passes all safety checks. Use /pause only for an emergency stop.","Markdown",{"inline_keyboard":[
         [b("🛠️ Audit","/audit"),b("🧾 Scan History","scan_history:1")],
-        [b("🟢 Status","/status"),b("💰 Balance","/balance")],
-        [b("💼 Holdings Details","/holdings")],
+        [b("🟢 Status","/status"),b("💼 Holdings Details","/holdings")],
         [b("🚀 Gainers","/gainers"),b("🩸 Losers","/losers")],
         [b("❌ Cancel All Orders","/cancel")],
         [b("🧠 Ask AI","ai_info")]
@@ -290,7 +289,6 @@ def cmd_cancel_all():
     tg("🔄 Cancelling all open orders on Bitget...")
     try:
         count=0
-        # Fetch ALL open orders directly from the exchange
         for t in (False, True):
             try:
                 orders = ex.fetch_open_orders(params=TR(t))
@@ -302,10 +300,7 @@ def cmd_cancel_all():
                         print(f"Failed to cancel {o['id']}: {e}")
             except Exception as e:
                 print(f"Fetch orders err (trigger={t}): {e}")
-        
-        # Empty the scanner queue so it doesn't immediately buy
         save(QF, {})
-        
         tg(f"✅ *CANCELLED:* {count} open orders on Bitget.\nQueue emptied.\nRun `/audit` to re-arm stops on any active positions.")
     except Exception as e:tg(f"❌ Failed to cancel: {e}")
 
@@ -758,7 +753,7 @@ def cmd_set(txt):
     s[k]=new;save(CFG,s);tg(f"✅ `{k}` = `{new}`")
 
 def setc(k,v,m):s=cfg();s[k]=v;save(CFG,s);tg(m)
-MSG={"ai_info":"🧠 *AI ANALYST*\nTo ask the AI a question, type:\n`/ai <your question>`","/help":"🤖 *CMDS*\n`/menu` `/ai [q]` `/analyse COIN` `/audit` `/cancel`\n`/gainers` `/losers`\n`/balance` `/status` `/holdings`\n`/scan_history [coin/filter]`\n`/set key value` `/pause` `/resume` `/panic`"}
+MSG={"ai_info":"🧠 *AI ANALYST*\nTo ask the AI a question, type:\n`/ai <your question>`","/help":"🤖 *CMDS*\n`/menu` `/ai [q]` `/analyse COIN` `/audit` `/cancel`\n`/gainers` `/losers`\n`/status` `/holdings`\n`/scan_history [coin/filter]`\n`/set key value` `/pause` `/resume` `/panic`"}
 
 def handle(t,age):
     l=t.lower()
@@ -785,7 +780,6 @@ def handle(t,age):
         if r and r.startswith("✅"):tg(r)
     elif l=="trail_on":setc('trail_pct',8.0,"📈 Trailing Stop-Loss ON (8%)");menu()
     elif l=="trail_off":setc('trail_pct',0.0,"📉 Trailing Stop-Loss OFF");menu()
-    elif l=="/balance":tg(f"💰 *BALANCE*\n{get_balance_text()}")
     elif l in ("/holdings","/portfolio"):tg(get_holdings_text())
     elif l=="/scan_history" or l.startswith("/scan_history "):cmd_scan_history(t)
     elif l=="/status":
