@@ -59,8 +59,8 @@ def menu():
     _send("🕹️ *MAIN MENU*\nSelect an option below:","Markdown",{"inline_keyboard":[
         [b("▶️ Resume","/resume"),b("⏸ Pause","/pause")],
         [b("🟢 Status","/status"),b("🛠️ Audit","/audit")],
-        [b("🚀 Gainers","/gainers"),b("🩸 Losers","/losers")],
-        [b("🧾 Scan History","scan_history:1"),b("❌ Cancel Orders","/cancel")],
+        [b("🧾 Scan History","scan_history:1"),b("🚀 Gainers","/gainers")],
+        [b("🩸 Losers","/losers"),b("❌ Cancel Orders","/cancel")],
         [b("🚨 PANIC SELL","/panic")]
     ]})
 
@@ -329,10 +329,36 @@ def panic_sell():
     save(DB,db);save(QF,{});s=cfg();s['auto_buy_enabled']=False;save(CFG,s)
     tg(f"⚠️ *PANIC INCOMPLETE.* Still held: `{', '.join(failed)}`\nAuto-buy PAUSED." if failed else "🛑 *PANIC COMPLETE.* All positions sold. Auto-buy PAUSED.")
 
+def spot_total():
+    """Live value of the WHOLE spot wallet in USDT: USDT and stablecoins at $1, every other coin at its live Bitget USDT price."""
+    tot=ex.fetch_balance().get('total') or {}
+    try:tk=ex.fetch_tickers()
+    except Exception:tk={}
+    total=0.0;skipped=0
+    for c,a in tot.items():
+        try:a=float(a or 0)
+        except (TypeError,ValueError):continue
+        if a<=0:continue
+        p=1.0 if c in STABLE else (tk.get(f"{c}/USDT") or {}).get('last')
+        if not p and not tk:p=live(f"{c}-USDT")
+        if p:total+=a*p
+        else:skipped+=1
+    return total,skipped
+
+def total_line():
+    try:total,skipped=spot_total()
+    except Exception as e:return f"Total spot balance: unavailable ({e})"
+    now=datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=TZ))).strftime('%H:%M')
+    return f"Total spot balance: ${total:.2f} USDT (live, {now})"+(f" | {skipped} coin(s) with no USDT price not counted" if skipped else "")
+
 def get_holdings_text():
     try:balance=ex.fetch_balance();totals=balance.get('total') or {}
     except Exception as e:return f"❌ Could not fetch exchange holdings: {e}"
-    db=load(DB);lines=["💼 *YOUR ASSET HOLDINGS*","",""];count=0;total_value=0.0;unpriced=[]
+    db=load(DB);lines=["💼 *YOUR ASSET HOLDINGS*","",""];count=0;total_value=0.0;unpriced=[];note=""
+    try:usdt=float(totals.get('USDT',0) or 0)
+    except (TypeError,ValueError):usdt=0.0
+    usdt_block=["🪙 *USDT*",f"Quantity: {usdt:.8g}",f"Market value: ${usdt:.2f}",""]
+    lines.extend(usdt_block)
     for coin,qty in sorted(totals.items()):
         try: qty=float(qty or 0)
         except (TypeError,ValueError): continue
@@ -357,8 +383,8 @@ def get_holdings_text():
         note="\n⚠️ Held but with no Bitget USDT price (dust/delisted): "+", ".join(unpriced[:3])
         if len(unpriced)>3: note+=f" and {len(unpriced)-3} more..."
         lines.append(note)
-    if count==0:return "💼 *HOLDINGS*\nNo eligible USDT-priced holdings found."+note
-    lines.insert(2,f"Assets: {count} | Estimated value: ${total_value:.2f} USDT")
+    if count==0:return "💼 *HOLDINGS*\n"+"\n".join(usdt_block)+"\nNo eligible USDT-priced holdings found.\n"+total_line()+note
+    lines.insert(2,f"Assets: {count+1}\n"+total_line())
     return "\n".join(lines)
 
 def check_hourly_balance():
@@ -721,32 +747,16 @@ def get_market_row(sym,chg=None):
 
 def gl(limit=10):
     try:tk=ex.fetch_tickers()
-    except:return "❌ Unable to fetch market data."
+    except:return "❌ Unable to fetch market data.","❌ Unable to fetch market data."
     v=sorted([{'sym':k.replace("/","-"),'chg':t['percentage'] or 0} for k,t in tk.items() if k.endswith('/USDT') and not skip(k.split('/')[0]) and (t['quoteVolume'] or 0)>=1000000],key=lambda x:x['chg'],reverse=True)
     gainers=[x for x in v if x['chg']>0][:limit];losers=[x for x in reversed(v) if x['chg']<0][:limit]
-    
-    lines = [
-        f"| {'GAINERS':<13} | {'LOSERS':<13} |",
-        "|---------------|---------------|"
-    ]
-    
-    for i in range(max(len(gainers), len(losers))):
-        g_str = " " * 13
-        if i < len(gainers):
-            g = gainers[i]
-            coin = g['sym'].split('-')[0][:5]
-            g_str = f"{coin:<5} {g['chg']:>+6.2f}%"
-            
-        l_str = " " * 13
-        if i < len(losers):
-            l = losers[i]
-            coin = l['sym'].split('-')[0][:5]
-            l_str = f"{coin:<5} {l['chg']:>+6.2f}%"
-            
-        lines.append(f"| {g_str} | {l_str} |")
-        
-    body = "\n".join(lines)
-    return f"📊 *TOP {limit} MOVERS (24H)*\n```{body}```\n_Minimum 24H volume: $1M._"
+    def build(title,items):
+        lines=[f"{'COIN':<11} {'PRICE':>12} {'24H %':>8} {'RSI':>5}","-"*40]
+        for x in items:
+            r=get_market_row(x['sym'],x['chg']);lines.append(f"{r['coin'][:11]:<11} {r['price']:>12} {r['chg']:>+7.2f}% {r['rsi']:>5}")
+        body="\n".join(lines) if items else "No qualifying markets found."
+        return f"*{title} — TOP {limit} (24H)*\n```{body}```\n_Minimum 24H quote volume: $1M._"
+    return build("🚀 GAINERS",gainers),build("🩸 LOSERS",losers)
 
 def cmd_set(txt):
     p=txt.split()
@@ -800,8 +810,8 @@ def handle(t,age):
                 p=live(sym)
                 if p:change=(p-d['entry_price'])/d['entry_price']*100;lines.append(f"{sym.split('-')[0]} | Entry: {fp(d['entry_price'])} | Now: {fp(p)} | PnL: {change:+.1f}%")
             tg("🟢 *ACTIVE POSITIONS*\n"+("\n".join(lines) if lines else "No live prices."))
-    elif l.startswith("/gainers"):p=l.split();n=20 if len(p)>1 and p[1]=="20" else 10;tg(gl(n))
-    elif l.startswith("/losers"):p=l.split();n=20 if len(p)>1 and p[1]=="20" else 10;tg(gl(n))
+    elif l.startswith("/gainers"):p=l.split();n=20 if len(p)>1 and p[1]=="20" else 10;tg(gl(n)[0])
+    elif l.startswith("/losers"):p=l.split();n=20 if len(p)>1 and p[1]=="20" else 10;tg(gl(n)[1])
     elif l.startswith("/buy"):cmd_buy(t)
     elif l.startswith("/sell"):cmd_sell(t)
     elif l.startswith("/set"):cmd_set(t)
