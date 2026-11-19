@@ -1,12 +1,12 @@
 {
     "SOON-USDT": {
-        "entry_price": 0.2635,
-        "safe_zone": 0.2635,
-        "stop_loss": 0.223975,
-        "peak_price": 0.2653,
-        "last_price": 0.2653,
+        "entry_price": 0.265129,
+        "safe_zone": 0.265129,
+        "stop_loss": 0.22536,
+        "peak_price": 0.2659,
+        "last_price": 0.2659,
         "opened_at": 1795066169.8475425,
-        "seen": 1795070181.9018133,
-        "xsl": 0.24242000000000002
+        "seen": 1795070352.0111241,
+        "xsl": 0.24462800000000004
     }
 }
