@@ -270,12 +270,15 @@ def parse(txt,usage,allow_all=False):
     return c,a
 
 def cmd_buy(txt):
-    r=parse(txt,"❌ Usage: `/buy COIN USDT_AMOUNT`\nExample: `/buy BTC 5`")
+    r=parse(txt,"❌ Usage: `/buy COIN USDT_AMOUNT` or `/buy COIN ALL`\nExample: `/buy BTC 5` or `/buy BTC ALL` (uses all your free USDT)",True)
     if not r:return
     c,amt=r;sym=f"{c}-USDT"
     if cd(f"buy:{sym}",5):tg(f"⏳ Processing /buy {c}...");return
     db=load(DB);old=db.get(sym)
     ub=B('free','USDT')
+    if amt is None:
+        amt=int(ub*100)/100  # ALL = every available USDT, rounded down to the cent
+        if amt<1.0:tg(f"❌ *BUY FAILED:* Only ${ub:.2f} free USDT available (Bitget needs about $1 minimum).");return
     if ub<amt:tg(f"❌ *BUY FAILED:* You only have ${ub:.2f} USDT.");return
     try:
         ob=B('total',c) if old else 0.0
