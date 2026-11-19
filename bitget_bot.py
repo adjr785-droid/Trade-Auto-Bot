@@ -12,7 +12,7 @@ STABLE=['USDC','USDT','DAI','FDUSD','TUSD','USDD','USDE'];LEV=['3L','3S','5L','5
 ex=ccxt.bitget({'apiKey':os.environ.get('BITGET_API_KEY'),'secret':os.environ.get('BITGET_API_SECRET'),'password':os.environ.get('BITGET_API_PASSPHRASE'),'enableRateLimit':True});ex.options['createMarketBuyOrderRequiresPrice']=False
 client=genai.Client(api_key=os.environ.get('GEMINI_API_KEY')) if genai and os.environ.get('GEMINI_API_KEY') else None
 GEMINI_MODELS=[m for m in [os.environ.get('GEMINI_MODEL'),'gemini-3.8-flash','gemini-3.6-flash','gemini-2.5-flash'] if m]
-_C={};KB={"keyboard":[["📊 Menu","▶️ Resume","🚨 PANIC"]],"resize_keyboard":True,"is_persistent":True}
+_C={};KB={"keyboard":[["📊 Menu","🚨 PANIC"]],"resize_keyboard":True,"is_persistent":True}
 S=lambda s:s.replace("-","/")
 TR=lambda t:{'trigger':True} if t else {}
 B=lambda k,c:ex.fetch_balance()[k].get(c,0)
@@ -338,12 +338,14 @@ def panic_sell():
 
 def get_balance_text():
     b=ex.fetch_balance()['free']
-    lines=[f"USDT: ${b.get('USDT',0):.2f}"]
+    lines=[f"USDT: ${b.get('USDT',0):.2f}"];unpriced=[]
     for c,a in b.items():
         if a>0 and c not in ['USDT','USDC']:
             p=live(f"{c}-USDT")
             if p and a*p>=0.10:
                 lines.append(f"{c}: {a:.4f} (about ${a*p:.2f})")
+            elif not p and c not in STABLE:unpriced.append(f"{c}: {a:.8g}")
+    if unpriced:lines.append("⚠️ No Bitget spot USDT price, so the bot cannot track or protect: "+", ".join(unpriced))
     return "\n".join(lines)
 
 def get_holdings_text():
@@ -358,6 +360,7 @@ def get_holdings_text():
     lines=["💼 *YOUR ASSET HOLDINGS*", "Indicators use the 1-hour timeframe.", ""]
     count=0
     total_value=0.0
+    unpriced=[]
 
     for coin,qty in sorted(totals.items()):
         try: qty=float(qty or 0)
@@ -366,6 +369,7 @@ def get_holdings_text():
 
         sym=f"{coin}-USDT"
         price=live(sym)
+        if not price:unpriced.append(f"{coin}: {qty:.8g}")
         if not price or qty*price<0.10: continue
 
         total_value += qty*price
@@ -407,9 +411,11 @@ def get_holdings_text():
         ])
         count+=1
 
+    note=("\n⚠️ Held but with no Bitget spot USDT price (the bot cannot track, protect or sell these): "+", ".join(unpriced)) if unpriced else ""
     if count==0:
-        return "💼 *YOUR ASSET HOLDINGS*\nNo eligible USDT-priced holdings found in your exchange wallet."
+        return "💼 *YOUR ASSET HOLDINGS*\nNo eligible USDT-priced holdings found in your exchange wallet."+note+last_trade_line()
     lines.insert(2,f"Assets: {count} | Estimated value: ${total_value:.2f} USDT")
+    if note:lines.append(note.strip())
     lines.append("Sentiment is a technical estimate from RSI and price vs MA5/MA10, not news-based advice.")
     message="\n".join(lines)
     # Telegram messages are limited to 4096 characters; split at asset boundaries.
@@ -428,6 +434,24 @@ def check_hourly_balance():
     st=load(SC);now=time.time()
     if now-st.get('last_bal_alert',0)>=3600:tg(f"💰 *HOURLY BALANCE*\n{get_balance_text()}");st['last_bal_alert']=now;save(SC,st)
 
+def last_trade_line():
+    H=load(HIST)
+    if not H:return "\nNo closed trade is recorded in the bot history."
+    t=H[-1];ago=(time.time()-float(t.get('time',0)))/3600
+    return f"\nLast closed trade: {str(t.get('sym','?')).replace('-USDT','')} — {t.get('reason','?')} | PnL ${float(t.get('pnl',0)):+.2f} | {ago:.1f}h ago"
+
+def exchange_sale_note(sym,d):
+    """The coin left the wallet without a bot sell (usually the exchange stop fired, or a manual sale). Find the fill and record it."""
+    try:
+        since=float(d.get('seen') or d.get('opened_at') or 0)*1000-120000
+        tr=[t for t in ex.fetch_my_trades(S(sym),limit=30) if t.get('side')=='sell' and (t.get('timestamp') or 0)>=since]
+        if not tr:return "\n   ⚠️ No matching sell found on Bitget. Check your Bitget order history (manual sale or transfer?)."
+        q=sum(float(t['amount']) for t in tr);px=sum(float(t['amount'])*float(t['price']) for t in tr)/q
+        pnl=(px-d['entry_price'])*q;rec(sym,pnl,"EXCHANGE-SIDE SALE (stop-loss or manual)")
+        return f"\n   💱 Sold on Bitget: {q:g} @ {px:.6f} | PnL ${pnl:+.2f} (recorded)"
+    except Exception as e:
+        print(f"EXCHANGE SALE LOOKUP ERROR {sym}: {e}");return "\n   ⚠️ Could not look up the sale on Bitget."
+
 def audit_system():
     issues=[];db=load(DB);q=load(QF)
     try:bal=ex.fetch_balance()['total']
@@ -435,7 +459,9 @@ def audit_system():
     for sym in list(db):
         amt=bal.get(sym.split('-')[0],0)
         px=live(sym)
-        if amt<=0 or (px and amt*px<1.02):db.pop(sym,None);issues.append(f"🧹 Removed ghost/dust position: {sym}");continue
+        if amt<=0 or (px and amt*px<1.02):
+            d=db.pop(sym,None) or {};note=exchange_sale_note(sym,d) if amt<=0 and d.get('entry_price') else ""
+            issues.append(f"🧹 Removed ghost/dust position: {sym}"+note);continue
         orders,ok=open_sells(sym)
         if not ok:continue
         if len(orders)!=1 and not in_cd(f"auditsl_{sym}",1800):
@@ -563,7 +589,7 @@ def manage():
     for sym,d in list(db.items()):
         d.setdefault('opened_at',time.time());r=data(sym)[2];lv=live(sym)
         if not lv:continue
-        e=d["entry_price"];inc=(lv-e)/e*100;d['peak_price']=max(d.get('peak_price',e),lv);lp=d.get('last_price',0)
+        e=d["entry_price"];inc=(lv-e)/e*100;d['peak_price']=max(d.get('peak_price',e),lv);lp=d.get('last_price',0);d['seen']=time.time()
         if lp>0:
             drop=(lv-lp)/lp*100
             if drop<=-s.get('crash_guard_pct',18) and sell(sym,1.0,f"CRASH GUARD ({drop:.1f}%)"):db.pop(sym,None);save(DB,db);continue
@@ -825,9 +851,27 @@ def cmd_about():
          "*Important:* This is a rule-based spot trading assistant, not financial advice. Bot-side trailing protection requires the bot process to keep running. Exchange protective orders must be verified on Bitget; never assume an unverified stop is active.")
     tg(msg)
 
-def scan():
+def scan_breakdown(records,s):
+    """Plain-language summary of WHY coins were not taken (counts per rule) + setups that were not bought."""
+    c={};held=[]
+    for x in records:
+        d=str(x.get("decision","SKIP")).upper();r=str(x.get("reason",""))
+        if "NOT QUEUED" in d:held.append(f"• {str(x.get('sym','?')).replace('-USDT','')} ({x.get('strategy','?')}) — {r}");continue
+        if d!="SKIP":continue
+        if r.startswith("Top 15"):c["Top-15 by volume (excluded by design)"]=c.get("Top-15 by volume (excluded by design)",0)+1
+        elif r.startswith("24H volume below"):c["24H volume below the minimum"]=c.get("24H volume below the minimum",0)+1
+        elif r.startswith("Hourly candle"):c["No hourly candle data"]=c.get("No hourly candle data",0)+1
+        else:
+            for part in r.split("; "):
+                if part:c[part]=c.get(part,0)+1
+    m=""
+    if held:m+="\n\n*✅ Setups found but NOT bought:*\n"+"\n".join(held[:8])+(f"\n…and {len(held)-8} more" if len(held)>8 else "")
+    if c:m+="\n\n*Why other coins were NOT taken* (a coin can fail several rules):\n"+"\n".join(f"• {k}: {n}" for k,n in sorted(c.items(),key=lambda x:-x[1])[:10])
+    return m
+
+def scan(force=False):
     st=load(SC);now=time.time()
-    if now-st.get('last',0)<3540:return
+    if not force and now-st.get('last',0)<3540:return
     db=load(DB);q=load(QF);s=cfg()
     auto_enabled=bool(s.get("auto_buy_enabled"))
     btc_is_blocked=btc_blocked(s) if auto_enabled else False
@@ -906,13 +950,14 @@ def scan():
     sh["items"]=sh["items"][-15000:];save(SH,sh)
     if qu or not buying_allowed:save(QF,q)
     st['last']=time.time();save(SC,st)
+    why=scan_breakdown(records,s)
     if matched:
         if not buying_allowed:
-            tg(f"🔍 *SCAN COMPLETE*\nRecorded {len(records)} market checks.\nFound {matched} strategy setup(s), but none were queued because {block_reason}.\nSee /scan_history for each coin's RSI, MA5, MA10 and exact decision reason.")
+            tg(f"🔍 *SCAN COMPLETE*\nRecorded {len(records)} market checks.\nFound {matched} strategy setup(s), but none were queued because {block_reason}.\nSee /scan\\_history for each coin's RSI, MA5, MA10 and exact decision reason."+why)
         else:
-            tg(f"🔍 *SCAN COMPLETE*\nRecorded {len(records)} market checks.\nStrategy setups matched: {matched} | queued/eligible: {queued}.\nSee /scan_history for each coin's technical readings and decision reason.")
+            tg(f"🔍 *SCAN COMPLETE*\nRecorded {len(records)} market checks.\nStrategy setups matched: {matched} | queued/eligible: {queued}.\nSee /scan\\_history for each coin's technical readings and decision reason."+why)
     else:
-        tg(f"🔍 *SCAN COMPLETE*\nRecorded {len(records)} market checks.\nNo coin matched the configured TREND, OVERSOLD or BREAKOUT setup this cycle.\nSee /scan_history for each coin's rejection reason.")
+        tg(f"🔍 *SCAN COMPLETE*\nRecorded {len(records)} market checks.\nNo coin matched the configured TREND, OVERSOLD or BREAKOUT setup this cycle.\nSee /scan\\_history for each coin's rejection reason."+why)
 
 def fp(p):
     if p is None:return "N/A"
@@ -966,7 +1011,7 @@ def cmd_set(txt):
     s[k]=new;save(CFG,s);tg(f"✅ `{k}` = `{new}`")
 
 def setc(k,v,m):s=cfg();s[k]=v;save(CFG,s);tg(m)
-MSG={"ai_info":"🧠 *AI ANALYST*\nTo ask the AI a question, type:\n`/ai <your question>`\n\nExample:\n`/ai what is the market sentiment right now?`","/help":"🤖 *CMDS*\n`/menu` `/ai [q]` `/analyse COIN` `/audit`\n`/gainers` `/losers`\n`/balance` `/status` `/holdings`\n`/about` `/scan_history [coin/filter]`\n`/set key value` `/pause` `/resume` `/panic`"}
+MSG={"ai_info":"🧠 *AI ANALYST*\nTo ask the AI a question, type:\n`/ai <your question>`\n\nExample:\n`/ai what is the market sentiment right now?`","/help":"🤖 *CMDS*\n`/menu` `/ai [q]` `/analyse COIN` `/audit`\n`/gainers` `/losers`\n`/balance` `/status` `/holdings`\n`/about` `/scan` `/scan_history [coin/filter]`\n`/set key value` `/pause` `/resume` `/panic`"}
 
 def handle(t,age):
     l=t.lower()
@@ -976,6 +1021,7 @@ def handle(t,age):
     elif l=="/ai":ask_ai("Give me a market overview.")
     elif l in MSG:tg(MSG[l])
     elif l in ("/menu","📊 menu"):menu()
+    elif l=="/scan":tg("🔍 Scanning the market now... this can take a minute.");scan(True)
     elif l=="scan_history":cmd_scan_history("/scan_history")
     elif l.startswith("scan_history:"):
         try:
@@ -999,7 +1045,7 @@ def handle(t,age):
     elif l=="/scan_history" or l.startswith("/scan_history "):cmd_scan_history(t)
     elif l=="/status":
         db=load(DB)
-        if not db:tg("🛑 No active trades.")
+        if not db:tg("🛑 No active trades."+last_trade_line())
         else:
             lines=[]
             for sym,d in db.items():
@@ -1067,7 +1113,7 @@ def git_sync():
         print(message)
         if not cd("gitfail",900):
             tg("⚠️ *STATE NOT SAVED:* "+message[:220]+
-               "\\nBot state files remain on this runner, but GitHub persistence is not confirmed. Check the next run.")
+               "\nBot state files remain on this runner, but GitHub persistence is not confirmed. Check the next run.")
     def abort_rebase():
         # A previous interrupted run may have left Git in rebase mode.
         p=run(["git","rev-parse","--verify","-q","REBASE_HEAD"])
@@ -1115,7 +1161,7 @@ def git_sync():
             notify_fail("git push failed: "+push.stderr[-250:]);return
 
         bad=[t for t in run(["git","ls-files"]).stdout.split()
-             if re.search(r'(^|/)(\\.env|.*\\.pem|.*\\.key|.*secret.*)',t,re.I)]
+             if re.search(r'(^|/)(\.env|.*\.pem|.*\.key|.*secret.*)',t,re.I)]
         if bad and not cd("gitwarn",86400):
             tg("🚨 *SECURITY:* secret-looking files are tracked in git: `"+
                ", ".join(bad[:5])+"`. Remove them (git rm --cached) and rotate your keys.")
