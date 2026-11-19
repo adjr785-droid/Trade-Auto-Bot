@@ -357,7 +357,7 @@ def update_pinned_balance():
     try:
         total,skipped,usdt=spot_total()
         now=datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=TZ))).strftime('%H:%M')
-        txt=f"💰 ${total:.2f} total spot | USDT ${usdt:.2f} | {now}\nLive spot balance, updated every bot run."+(f"\n{skipped} coin(s) with no USDT price not counted." if skipped else "")
+        txt=f"Total spot balance: ${total:.2f} USDT (live, {now})"+(f" | {skipped} coin(s) with no USDT price not counted" if skipped else "")  # same line as in /holdings
         st=load(ST);mid=st.get("pin_id")
         if mid:
             r=requests.post(API+"/editMessageText",json={"chat_id":CHAT,"message_id":mid,"text":txt},timeout=10)
