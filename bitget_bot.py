@@ -348,7 +348,8 @@ def get_balance_text():
             if p and a*p>=0.10:
                 lines.append(f"{c}: {a:.4f} (about ${a*p:.2f})")
             elif not p and c not in STABLE:unpriced.append(f"{c}: {a:.8g}")
-    if unpriced:lines.append("⚠️ No Bitget spot USDT price, so the bot cannot track or protect: "+", ".join(unpriced))
+    if unpriced:  # the hourly balance reuses this text, so keep it short; /holdings lists every coin
+        lines.append("⚠️ No Bitget spot USDT price, so the bot cannot track or protect: "+", ".join(unpriced) if len(unpriced)<=3 else f"⚠️ {len(unpriced)} other coins have no Bitget spot USDT price, so the bot cannot track them. Send /holdings to see them.")
     return "\n".join(lines)
 
 def get_holdings_text():
