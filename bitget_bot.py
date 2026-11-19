@@ -6,8 +6,8 @@ except Exception:
 try:import fcntl
 except ImportError:fcntl=None
 TK=os.environ.get('TG_TOKEN');CHAT=str(os.environ.get('TG_CHAT_ID',''));API=f"https://api.telegram.org/bot{TK}"
-DB,ST,CFG,QF,LF,CD,SC,HIST,LOCK,SH,OUT="positions.json","tg_state.json","settings.json","queue.json","profit_ledger.json",".cmd_cooldown.json","scan_state.json","trade_history.json",".bot.lock","scan_history.json","telegram_output.json"
-FILES=[DB,ST,CFG,QF,LF,CD,SC,HIST,SH,OUT]
+DB,ST,CFG,QF,LF,CD,SC,HIST,LOCK,SH,OUT,AL="positions.json","tg_state.json","settings.json","queue.json","profit_ledger.json",".cmd_cooldown.json","scan_state.json","trade_history.json",".bot.lock","scan_history.json","telegram_output.json","alerts.json"
+FILES=[DB,ST,CFG,QF,LF,CD,SC,HIST,SH,OUT,AL]
 STABLE=['USDC','USDT','DAI','FDUSD','TUSD','USDD','USDE'];LEV=['3L','3S','5L','5S','10L','10S','2L','2S'];BL=['RPANW','CT','ONE']
 ex=ccxt.bitget({'apiKey':os.environ.get('BITGET_API_KEY'),'secret':os.environ.get('BITGET_API_SECRET'),'password':os.environ.get('BITGET_API_PASSPHRASE'),'enableRateLimit':True});ex.options['createMarketBuyOrderRequiresPrice']=False
 client=genai.Client(api_key=os.environ.get('GEMINI_API_KEY')) if genai and os.environ.get('GEMINI_API_KEY') else None
@@ -15,7 +15,7 @@ GEMINI_MODELS=[m for m in [os.environ.get('GEMINI_MODEL'),'gemini-2.5-flash','ge
 _C={};_BAL={"t":0,"m":""};KB={"keyboard":[["📊 Menu","🧠 Ask AI","💼 Holdings"]],"resize_keyboard":True,"is_persistent":True}
 S=lambda s:s.replace("-","/");TR=lambda t:{'trigger':True} if t else {};B=lambda k,c:ex.fetch_balance()[k].get(c,0)
 skip=lambda b:b in STABLE or b in BL or ((b.startswith('X') or b.startswith('R')) and len(b)<=6) or any(b.upper().endswith(x) for x in LEV)
-NP=lambda e,sl:{"entry_price":e,"safe_zone":e,"stop_loss":sl,"peak_price":e,"last_price":e,"opened_at":time.time()}
+NP=lambda e,sl,pct=None:{"entry_price":e,"safe_zone":e,"stop_loss":sl,"peak_price":e,"last_price":e,"opened_at":time.time(),**({"sl_pct":pct} if pct else {})}
 STOP_OK="🛡️ Exchange protective sell: Verified\n📈 Bot-side trailing: Active"
 STOP_NO="⚠️ Exchange stop NOT verified.\nBot-side monitoring is active only while the bot is running; protection is not guaranteed."
 
@@ -27,7 +27,7 @@ def compact_balance():
             if c in STABLE or c=='USDT' or float(q or 0)<=0:continue
             p=live(f"{c}-USDT")
             if p:v+=float(q)*p
-        txt=f"Total value: ${v:.2f} USDT"
+        txt=f"Total: ${v:.2f}"
         _BAL["t"],_BAL["m"]=time.time(),txt;return txt
     except:return _BAL["m"]
 
@@ -63,7 +63,7 @@ tg=lambda m:_send(m,"Markdown");tg_ai=lambda m:_send(m,"HTML")
 
 def menu():
     b=lambda t,c:{"text":t,"callback_data":c}
-    _send("🕹️ *MAIN MENU*\nSelect an option below:","Markdown",{"inline_keyboard":[[b("▶️ Resume","/resume"),b("⏸ Pause","/pause")],[b("🟢 Status","/status"),b("🛠️ Audit","/audit")],[b("🚀 Gainers","/gainers"),b("🩸 Losers","/losers")],[b("🧾 Scan History","scan_history:1"),b("❌ Cancel Orders","/cancel")],[b("🚨 PANIC SELL","/panic")]]})
+    _send("🕹️ *MAIN MENU*\nSelect an option below:","Markdown",{"inline_keyboard":[[b("▶️ Resume","/resume"),b("⏸ Pause","/pause")],[b("🟢 Status","/status"),b("🛠️ Audit","/audit")],[b("🚀 Gainers","/gainers"),b("🩸 Losers","/losers")],[b("🧾 Scan History","scan_history:1"),b("❌ Cancel Orders","/cancel")],[b("📈 Stats","/stats"),b("🔔 Alerts","/alerts")],[b("🚨 PANIC SELL","/panic")]]})
 
 def panic_prompt():_send("🚨 *CONFIRM PANIC*\nThis sells ALL positions at market and pauses auto-buy.\nConfirm within 15 minutes.","Markdown",{"inline_keyboard":[[{"text":"✅ YES, SELL EVERYTHING","callback_data":"panic_confirm"},{"text":"❌ Cancel","callback_data":"panic_cancel"}]]})
 
@@ -85,7 +85,7 @@ def save(f,d):
     except Exception as e:print(f"SAVE ERR {f}: {e}")
 
 def cfg():
-    d={"rsi_min":42,"rsi_max":48,"stop_loss_pct":5.0,"auto_buy_enabled":True,"auto_buy_amount_usdt":10.0,"max_tokens_before_consolidation":3,"max_hold_hours":48,"trail_pct":8.0,"crash_guard_pct":10.0,"rsi_exit":75,"btc_rsi_min":50,"risk_per_trade_pct":1.0,"max_daily_loss_pct":3.0,"max_portfolio_exposure_pct":50.0,"max_position_pct":15.0,"max_daily_trades":5,"max_spread_pct":0.5,"auto_mode_v1":False}
+    d={"rsi_min":42,"rsi_max":48,"stop_loss_pct":5.0,"auto_buy_enabled":True,"auto_buy_amount_usdt":10.0,"max_tokens_before_consolidation":3,"max_hold_hours":48,"trail_pct":8.0,"crash_guard_pct":10.0,"rsi_exit":75,"btc_rsi_min":50,"risk_per_trade_pct":1.0,"max_daily_loss_pct":3.0,"max_portfolio_exposure_pct":50.0,"max_position_pct":15.0,"max_daily_trades":5,"max_spread_pct":0.5,"auto_mode_v1":False,"rebuy_cooldown_hours":6.0,"atr_stop_enabled":True,"atr_stop_mult":2.0,"atr_stop_min_pct":3.0,"atr_stop_max_pct":10.0,"market_filter_enabled":True,"btc_trend_hours":50,"min_breadth_pct":30.0,"offline_alert_hours":3.0,"daily_summary_hour_utc":20}
     s=load(CFG,d)
     for k,v in d.items():s.setdefault(k,v)
     if not s.get('auto_mode_v1'):s['auto_buy_enabled']=True;s['auto_mode_v1']=True;save(CFG,s)
@@ -96,6 +96,128 @@ def mk_cd(k):d=load(CD,{});d[k]=time.time();save(CD,d)
 def cd(k,s=5):
     if in_cd(k,s):return True
     mk_cd(k);return False
+
+def atr_pct(sym):
+    try:
+        o=ex.fetch_ohlcv(S(sym),'1h',limit=30)
+        if len(o)<16:return None
+        k=o[:-1];h=[float(x[2]) for x in k];lo=[float(x[3]) for x in k];c=[float(x[4]) for x in k]
+        trs=[max(h[i]-lo[i],abs(h[i]-c[i-1]),abs(lo[i]-c[i-1])) for i in range(1,len(c))]
+        a=sum(trs[-14:])/14
+        return a/c[-1]*100 if c[-1]>0 else None
+    except:return None
+
+def sl_pct(sym,d=None):
+    s=cfg();base=float(s['stop_loss_pct'])
+    if d is not None:return float(d.get('sl_pct') or base)
+    if not s.get('atr_stop_enabled',True):return base
+    a=atr_pct(sym)
+    if a is None:return base
+    lo=float(s.get('atr_stop_min_pct',3.0));hi=float(s.get('atr_stop_max_pct',10.0))
+    return round(min(max(a*float(s.get('atr_stop_mult',2.0)),lo),hi),2)
+
+def spread_pct(sym):
+    try:
+        t=ex.fetch_ticker(S(sym));b=t.get('bid');a=t.get('ask')
+        if b and a and a>=b:return (a-b)/((a+b)/2)*100
+    except:pass
+    return None
+
+_MKT={"t":0,"r":""}
+def market_filter(s):
+    if not s.get('market_filter_enabled',True):return ""
+    if time.time()-_MKT["t"]<300:return _MKT["r"]
+    reason=""
+    try:
+        n=max(10,int(s.get('btc_trend_hours',50)))
+        o=ex.fetch_ohlcv("BTC/USDT",'1h',limit=n+10)
+        c=[float(k[4]) for k in o[:-1]]
+        if len(c)>=n and c[-1]<sum(c[-n:])/n:reason=f"BTC is below its {n}h average"
+        if not reason:
+            ch=[t.get('percentage') for k,t in ex.fetch_tickers().items() if k.endswith('/USDT') and (t.get('quoteVolume') or 0)>=1000000 and t.get('percentage') is not None]
+            if len(ch)>=30:
+                up=sum(1 for x in ch if x>0)/len(ch)*100
+                if up<float(s.get('min_breadth_pct',30.0)):reason=f"only {up:.0f}% of coins are up today"
+    except Exception as e:print("MARKET FILTER ERR:",e);reason=""
+    _MKT["t"],_MKT["r"]=time.time(),reason;return reason
+
+def setup_score(setup,vol,r,ma5,ma10,bvol=None):
+    sc=({"BREAKOUT":3,"TREND":2,"OVERSOLD":1}.get(setup,0))*100+min(vol/1e6,100)*0.2
+    if ma10:sc+=max(0.0,min(20.0,(ma5-ma10)/ma10*1000))
+    sc+=max(0.0,min(10.0,(30-r)/3)) if setup=="OVERSOLD" else max(0.0,10-abs(r-55)/2)
+    if bvol:sc+=min(float(bvol),5.0)*4
+    return round(sc,2)
+
+def cmd_stats():
+    H=load(HIST)
+    if not isinstance(H,list) or not H:tg("📈 *TRADE STATS*\nNo closed trades yet.");return
+    pn=[float(t.get('pnl',0)) for t in H];w=sum(1 for x in pn if x>0);lo=sum(1 for x in pn if x<0);g={}
+    for t in H:g.setdefault(str(t.get('strategy','OLDER')).upper(),[]).append(float(t.get('pnl',0)))
+    rows=[f"{k}: {len(v)} trades | win {sum(1 for x in v if x>0)/len(v)*100:.0f}% | avg ${sum(v)/len(v):+.2f} | total ${sum(v):+.2f}" for k,v in sorted(g.items(),key=lambda x:-sum(x[1]))]
+    tg("\n".join(["📈 *TRADE STATS*",f"Closed trades: {len(pn)}",f"Win rate: {w/len(pn)*100:.0f}% ({w} wins, {lo} losses)",f"Average per trade: ${sum(pn)/len(pn):+.2f}",f"Net profit: ${sum(pn):+.2f}",f"Best: ${max(pn):+.2f} | Worst: ${min(pn):+.2f}","","*By strategy*"]+rows))
+
+def daily_summary_text():
+    now=time.time();H=load(HIST);day=[t for t in H if now-float(t.get('time',0))<86400] if isinstance(H,list) else []
+    nm=lambda t:str(t.get('sym','?')).replace('-USDT','');lines=["🗓 *DAILY SUMMARY*"]
+    if day:
+        pn=[float(t.get('pnl',0)) for t in day];w=sum(1 for x in pn if x>0);b=max(day,key=lambda t:float(t.get('pnl',0)));wo=min(day,key=lambda t:float(t.get('pnl',0)))
+        lines+=[f"Trades closed (24h): {len(pn)}",f"Win rate: {w/len(pn)*100:.0f}% ({w}/{len(pn)})",f"Net profit: ${sum(pn):+.2f}",f"Best: {nm(b)} ${float(b.get('pnl',0)):+.2f}",f"Worst: {nm(wo)} ${float(wo.get('pnl',0)):+.2f}"]
+    else:lines.append("No trades closed in the last 24 hours.")
+    L=load(LF);lines.append(f"Open positions: {len(load(DB))}");lines.append(f"All-time realized: ${float(L.get('total_realized_usdt',0.0)):+.2f} ({int(L.get('trade_count',0))} trades)")
+    bal=compact_balance()
+    if bal:lines.append("💼 "+bal)
+    return "\n".join(lines)
+
+def check_daily_summary():
+    st=load(SC);now=datetime.datetime.now(datetime.timezone.utc);today=now.strftime("%Y-%m-%d")
+    if now.hour<int(cfg().get('daily_summary_hour_utc',20)) or st.get('last_daily')==today:return
+    tg(daily_summary_text());st['last_daily']=today;save(SC,st)
+
+def heartbeat():
+    st=load(SC);now=time.time();last=float(st.get('last_run',0) or 0);st['last_run']=now;save(SC,st)
+    lim=float(cfg().get('offline_alert_hours',3.0))
+    if last and lim>0 and (now-last)/3600>=lim:tg(f"⚠️ *BOT WAS OFFLINE* for {(now-last)/3600:.1f}h.\nExchange stops stayed active; bot-side checks (trailing, crash guard, time stop) were paused.")
+
+def ping_watchdog():
+    u=os.environ.get('HEALTHCHECK_URL')
+    if u:
+        try:requests.get(u,timeout=10)
+        except Exception as e:print("WATCHDOG PING ERR:",e)
+
+def _alerts():
+    a=load(AL,[])
+    return a if isinstance(a,list) else []
+
+def cmd_alert(txt):
+    p=txt.split();cl=lambda x:x.upper().replace("-USDT","").replace("/USDT","")
+    if len(p)==3 and p[1].lower() in ("del","delete","remove"):
+        c=cl(p[2]);a=_alerts();n=[x for x in a if x.get('coin')!=c];save(AL,n);tg(f"🗑 Removed {len(a)-len(n)} alert(s) for {c}.");return
+    if len(p)!=3:tg("🔔 Usage: `/alert COIN PRICE`\n`/alert del COIN`\n`/alerts`");return
+    c=cl(p[1])
+    try:target=float(p[2])
+    except ValueError:tg("❌ Invalid price.");return
+    if target<=0:tg("❌ Price must be positive.");return
+    price=live(f"{c}-USDT")
+    if not price:tg(f"❌ No price for {c}.");return
+    if target==price:tg(f"ℹ️ {c} is already at {fp(price)}.");return
+    d="above" if target>price else "below";a=_alerts();a.append({"coin":c,"price":target,"dir":d,"created":time.time()});save(AL,a)
+    tg(f"🔔 *ALERT SET:* {c} {d} {fp(target)} (now {fp(price)}).")
+
+def cmd_alerts():
+    a=_alerts()
+    if not a:tg("🔔 No price alerts set.\nUse `/alert COIN PRICE`.");return
+    tg("🔔 *PRICE ALERTS*\n"+"\n".join(f"{x.get('coin')} {x.get('dir')} {fp(x.get('price'))}" for x in a))
+
+def check_alerts():
+    a=_alerts()
+    if not a:return
+    keep=[];hit=False
+    for x in a:
+        p=live(f"{x.get('coin')}-USDT")
+        if p and ((x.get('dir')=="above" and p>=x['price']) or (x.get('dir')=="below" and p<=x['price'])):
+            tg(f"🔔 *ALERT:* {x['coin']} is {fp(p)} ({x['dir']} your {fp(x['price'])} level).");hit=True
+        else:keep.append(x)
+    if hit:save(AL,keep)
 
 def _rsi(c,n=14):
     if len(c)<n+1:return None
@@ -187,9 +309,9 @@ def hard_sl(sym,qty,pr):
     except Exception as e:tg(f"⚠️ *SL NOT VERIFIED* {sym}: `{e}`");return False
 
 def place_trailing_sl(sym,qty):
-    ent=load(DB).get(sym,{}).get('entry_price') or live(sym)
+    pos=load(DB).get(sym,{});ent=pos.get('entry_price') or live(sym)
     if not ent:return False
-    px=round(ent*(1-cfg()['stop_loss_pct']/100),6);ok=hard_sl(sym,qty,px)
+    px=round(ent*(1-sl_pct(sym,pos)/100),6);ok=hard_sl(sym,qty,px)
     if ok:
         db=load(DB)
         if sym in db:db[sym]['xsl']=px;save(DB,db)
@@ -199,13 +321,15 @@ def ratchet(sym,d,lvl,lv):
     if lvl<=d.get('xsl',0)*1.01 or lvl>=lv*0.995:return
     q=B('total',sym.split('-')[0])
     if hard_sl(sym,q,lvl):d['xsl']=lvl
-    elif place_trailing_sl(sym,q):d['xsl']=round(d['entry_price']*(1-cfg()['stop_loss_pct']/100),6)
+    elif place_trailing_sl(sym,q):d['xsl']=round(d['entry_price']*(1-sl_pct(sym,d)/100),6)
 
 def rec(sym,pnl,why):
     L=load(LF);L['total_realized_usdt']=L.get('total_realized_usdt',0.0)+pnl;L['trade_count']=L.get('trade_count',0)+1;save(LF,L)
     H=load(HIST)
     if not isinstance(H,list):H=[]
-    H.append({"sym":sym,"pnl":pnl,"time":time.time(),"reason":why});save(HIST,H)
+    strat=load(DB).get(sym,{}).get('strategy','OTHER')
+    H.append({"sym":sym,"pnl":pnl,"time":time.time(),"reason":why,"strategy":strat});save(HIST,H)
+    if pnl<0 and not str(why).startswith(("MANUAL","PANIC")):mk_cd(f"stopout_{sym}")
 
 def sell(sym,pct,reason):
     try:
@@ -247,13 +371,13 @@ def cmd_buy(txt):
         if amt<1.0:tg(f"❌ *BUY FAILED:* Only ${ub:.2f} free USDT.");return
     if ub<amt:tg(f"❌ *BUY FAILED:* You only have ${ub:.2f} USDT.");return
     try:
-        ob=B('total',c) if old else 0.0;f,a=m_buy(f"{c}/USDT",amt);sl=cfg()['stop_loss_pct']
+        ob=B('total',c) if old else 0.0;f,a=m_buy(f"{c}/USDT",amt);sl=sl_pct(sym,old) if old else sl_pct(sym)
         if old:
             e0=old['entry_price'];avg=round((ob*e0+f*a)/(ob+f),6) if ob>0 else round(a,6)
             old.update(entry_price=avg,safe_zone=avg,stop_loss=round(avg*(1-sl/100),6),last_price=a,peak_price=max(old.get('peak_price',avg),a));db[sym]=old;save(DB,db);ok=place_trailing_sl(sym,free_qty(sym,ob+f))
             tg(f"➕ *DCA ADDED:* {c} @ {a:.6f}\nSpent: ${amt:.2f}\nNew avg entry: {avg:.6f}\n"+(STOP_OK if ok else STOP_NO))
         else:
-            db[sym]=NP(round(a,6),round(a*(1-sl/100),6));save(DB,db);ok=place_trailing_sl(sym,free_qty(sym,f))
+            db[sym]=NP(round(a,6),round(a*(1-sl/100),6),sl);db[sym]['strategy']="MANUAL";save(DB,db);ok=place_trailing_sl(sym,free_qty(sym,f))
             tg(f"✅ *BOUGHT:* {c} @ {a:.6f}\nSpent: ${amt:.2f}\n"+(STOP_OK if ok else STOP_NO))
     except Exception as e:tg(f"❌ *BUY FAILED:* {e}")
 
@@ -444,7 +568,7 @@ def manage():
             if drop<=-s.get('crash_guard_pct',18) and sell(sym,1.0,f"CRASH GUARD ({drop:.1f}%)"):db.pop(sym,None);save(DB,db);continue
         d['last_price']=lv
         if inc>=5.0 and d['stop_loss']<e:d['stop_loss']=e
-        c=[(round(e*(1-s['stop_loss_pct']/100),6),f"SL HIT ({s['stop_loss_pct']}%)"),(d['stop_loss'],"STOP LOSS")]
+        sp=sl_pct(sym,d);c=[(round(e*(1-sp/100),6),f"SL HIT ({sp}%)"),(d['stop_loss'],"STOP LOSS")]
         if tp>0:c.append((d['peak_price']*(1-tp/100),f"TRAILING STOP ({tp}%)"))
         lvl,why=max(c,key=lambda x:x[0])
         if lv<=lvl:
@@ -510,6 +634,11 @@ def exec_q():
     if btc_blocked(s):
         for sym in q:buy_rejection(sym,"BTC filter active.")
         return
+    mf=market_filter(s)
+    if mf:
+        for sym in q:buy_rejection(sym,"Market filter active.")
+        if not cd("mktblock",21600):tg(f"⏸ *MARKET FILTER:* {mf}.")
+        return
     allowed,reason=risk_controls()
     if not allowed:
         for sym in q:buy_rejection(sym,f"Risk: {reason}")
@@ -521,16 +650,20 @@ def exec_q():
             if in_cd(f"fail_{sym}",300):buy_rejection(sym,"Previous fail.");continue
             if sym in db:buy_rejection(sym,"Position exists.");q.pop(sym,None);save(QF,q);continue
             if not live(sym):buy_rejection(sym,"No price.");continue
+            hrs=float(s.get('rebuy_cooldown_hours',6.0))
+            if hrs>0 and in_cd(f"stopout_{sym}",hrs*3600):buy_rejection(sym,f"Re-buy cooldown ({hrs:g}h after a loss).");q.pop(sym,None);save(QF,q);continue
+            sprd=spread_pct(sym);lim=float(s.get('max_spread_pct',0.5))
+            if sprd is None or sprd>lim:buy_rejection(sym,f"Spread too wide or unavailable (limit {lim:g}%).");continue
             spend=ub
             if len(db)>=mx:buy_rejection(sym,f"Max positions ({mx}).");continue
             if spend<1.00:buy_rejection(sym,f"Insufficient USDT (${spend:.2f}).");q.pop(sym,None);save(QF,q);continue
-            sp=risk_sized_budget(sym,live(sym),qd.get('sl') or live(sym)*(1-s['stop_loss_pct']/100),spend)
+            pct=sl_pct(sym);sp=risk_sized_budget(sym,live(sym),qd.get('sl') or live(sym)*(1-pct/100),spend)
             if sp<1.02:buy_rejection(sym,f"Size too small (${sp:.2f}).");continue
             try:f,a=m_buy(S(sym),sp)
             except Exception as e:buy_rejection(sym,f"Order failed: {e}");mk_cd(f"fail_{sym}");continue
-            mxs=round(a*(1-s['stop_loss_pct']/100),6);sl=qd.get('sl') or mxs
+            mxs=round(a*(1-pct/100),6);sl=qd.get('sl') or mxs
             if sl>=a or sl>mxs:sl=mxs
-            db[sym]=NP(round(a,6),sl);save(DB,db);ok=place_trailing_sl(sym,free_qty(sym,f));tg(f"🛒 *EXECUTED!*\n{sym}|💵{sp:.2f}@{a:.6f}\n"+(STOP_OK if ok else STOP_NO))
+            db[sym]=NP(round(a,6),sl,pct);db[sym]['strategy']=qd.get('type','OTHER');save(DB,db);ok=place_trailing_sl(sym,free_qty(sym,f));tg(f"🛒 *EXECUTED!*\n{sym}|💵{sp:.2f}@{a:.6f}\n"+(STOP_OK if ok else STOP_NO))
             q.pop(sym,None);save(QF,q);ub=B('free','USDT');time.sleep(2);break
     except Exception as e:tg(f"⚠️ *QUEUE FAILED:* `{e}`")
 
@@ -623,7 +756,10 @@ def scan(force=False):
     st=load(SC);now=time.time()
     if not force and now-st.get('last',0)<3540:return
     db=load(DB);q=load(QF);s=cfg();auto_enabled=bool(s.get("auto_buy_enabled"));btc_is_blocked=btc_blocked(s) if auto_enabled else False
-    buying_allowed=auto_enabled and not btc_is_blocked;block_reason=("automatic buying is paused" if not auto_enabled else "BTC safety filter blocked buying" if btc_is_blocked else "")
+    mf=market_filter(s) if auto_enabled and not btc_is_blocked else ""
+    if mf and not cd("mktblock",21600):tg(f"⏸ *MARKET FILTER:* {mf}.")
+    rbh=float(s.get('rebuy_cooldown_hours',6.0))
+    buying_allowed=auto_enabled and not btc_is_blocked and not mf;block_reason=("automatic buying is paused" if not auto_enabled else "BTC safety filter blocked buying" if btc_is_blocked else f"market filter: {mf}" if mf else "")
     try:tk=ex.fetch_tickers();mk=ex.load_markets()
     except Exception as e:print(f"SCAN ERROR: {e}");tg(f"⚠️ *SCAN FAILED:* {e}");return
     v=[{'sym':k.replace("/","-"),'vol':t['quoteVolume'] or 0,'chg':t['percentage'] or 0,'last':t.get('last')} for k,t in tk.items() if k.endswith('/USDT') and not skip(k.split('/')[0]) and not (k in mk and not mk[k].get('spot',False))]
@@ -651,8 +787,9 @@ def scan(force=False):
                     if setup:
                         recd["strategy"]=setup
                         if setup=="BREAKOUT":recd["reason"]=f"BREAKOUT vol {breakout_volume:.2f}x"
-                        matched+=1;rr=None;recd["rr"]=None;priority={"BREAKOUT":3,"TREND":2,"OVERSOLD":1}.get(setup,0);score=vol/1e6+priority*100
+                        matched+=1;rr=None;recd["rr"]=None;score=setup_score(setup,vol,r,ma5,ma10,breakout_volume)
                         if not buying_allowed:recd["decision"]="SETUP — NOT QUEUED";recd["reason"]=f"{setup} matched, {block_reason}"
+                        elif rbh>0 and in_cd(f"stopout_{sym}",rbh*3600):recd["decision"]="SETUP — NOT QUEUED";recd["reason"]=f"{setup} matched, re-buy cooldown"
                         else:
                             recd["decision"]="SETUP — QUEUED";recd["reason"]=setup+" matched; queued"
                             if sym not in q or q[sym].get('score',0)<score:
@@ -708,14 +845,14 @@ def cmd_set(txt):
     if k not in s:tg(f"❌ Unknown key. Valid: `{'`, `'.join(s.keys())}`");return
     try:new=val.lower() in ('true','1','yes','on') if isinstance(s[k],bool) else float(val) if isinstance(s[k],float) else int(val)
     except:tg(f"❌ Invalid value for {k}");return
-    limits={"risk_per_trade_pct":(0.1,2.0),"max_daily_loss_pct":(0.5,10.0),"max_portfolio_exposure_pct":(5.0,100.0),"max_position_pct":(1.0,50.0),"max_daily_trades":(1,50),"max_spread_pct":(0.05,3.0),"trail_pct":(0.0,30.0),"stop_loss_pct":(0.5,20.0),"rsi_min":(1.0,99.0),"rsi_max":(1.0,99.0),"rsi_exit":(0.0,99.0),"auto_buy_amount_usdt":(1.0,100000.0),"max_tokens_before_consolidation":(1,30),"max_hold_hours":(1,720),"crash_guard_pct":(1.0,50.0),"btc_rsi_min":(0.0,99.0)}
+    limits={"risk_per_trade_pct":(0.1,2.0),"max_daily_loss_pct":(0.5,10.0),"max_portfolio_exposure_pct":(5.0,100.0),"max_position_pct":(1.0,50.0),"max_daily_trades":(1,50),"max_spread_pct":(0.05,3.0),"trail_pct":(0.0,30.0),"stop_loss_pct":(0.5,20.0),"rsi_min":(1.0,99.0),"rsi_max":(1.0,99.0),"rsi_exit":(0.0,99.0),"auto_buy_amount_usdt":(1.0,100000.0),"max_tokens_before_consolidation":(1,30),"max_hold_hours":(1,720),"crash_guard_pct":(1.0,50.0),"btc_rsi_min":(0.0,99.0),"rebuy_cooldown_hours":(0.0,168.0),"atr_stop_mult":(0.5,6.0),"atr_stop_min_pct":(1.0,10.0),"atr_stop_max_pct":(2.0,25.0),"btc_trend_hours":(10,200),"min_breadth_pct":(0.0,100.0),"offline_alert_hours":(0.0,72.0),"daily_summary_hour_utc":(0,23)}
     if k in limits and not (limits[k][0] <= new <= limits[k][1]):tg(f"❌ `{k}` must be between {limits[k][0]} and {limits[k][1]}.");return
     if k=="rsi_min" and new>=s.get("rsi_max",99):tg("❌ rsi_min must be lower than rsi_max.");return
     if k=="rsi_max" and new<=s.get("rsi_min",1):tg("❌ rsi_max must be higher than rsi_min.");return
     s[k]=new;save(CFG,s);tg(f"✅ `{k}` = `{new}`")
 
 def setc(k,v,m):s=cfg();s[k]=v;save(CFG,s);tg(m)
-MSG={"ai_info":"🧠 *AI ANALYST*\nTo ask the AI a question, type:\n`/ai <your question>`","/help":"🤖 *CMDS*\n`/menu` `/ai [q]` `/analyse COIN` `/audit` `/cancel`\n`/gainers` `/losers`\n`/status` `/holdings`\n`/scan_history [coin/filter]`\n`/set key value` `/pause` `/resume` `/panic`"}
+MSG={"ai_info":"🧠 *AI ANALYST*\nTo ask the AI a question, type:\n`/ai <your question>`","/help":"🤖 *CMDS*\n`/menu` `/ai [q]` `/analyse COIN` `/audit` `/cancel`\n`/gainers` `/losers`\n`/status` `/holdings` `/stats`\n`/alert COIN PRICE` `/alerts`\n`/scan_history [coin/filter]`\n`/set key value` `/pause` `/resume` `/panic`"}
 
 def handle(t,age):
     l=t.lower()
@@ -725,6 +862,9 @@ def handle(t,age):
     elif l=="/ai":ask_ai("Give me a market overview.")
     elif l in MSG:tg(MSG[l])
     elif l in ("/menu","📊 menu"):menu()
+    elif l=="/stats":cmd_stats()
+    elif l=="/alerts":cmd_alerts()
+    elif l.startswith("/alert"):cmd_alert(t)
     elif l=="/scan":tg("🔍 Scanning the market now...");scan(True)
     elif l=="scan_history":cmd_scan_history("/scan_history")
     elif l.startswith("scan_history:"):
@@ -827,8 +967,8 @@ def git_sync():
 if __name__=="__main__":
     lk=acquire_lock()
     if lk is None:print("Another run is in progress; exiting.");sys.exit(0)
-    try:_C.clear();cleanup_telegram_output();scan_history_state();audit_system();tg_check();manage();git_sync();check_hourly_balance();scan();exec_q()
+    try:heartbeat();_C.clear();cleanup_telegram_output();scan_history_state();audit_system();tg_check();manage();git_sync();check_hourly_balance();check_alerts();check_daily_summary();scan();exec_q()
     except Exception as e:
         try:tg(f"🚨 *CRASH:* `{e}`\n`{traceback.format_exc()[-200:]}`")
         except:pass
-    git_sync()
+    git_sync();ping_watchdog()
