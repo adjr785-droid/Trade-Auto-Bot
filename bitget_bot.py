@@ -59,8 +59,8 @@ def menu():
     _send("🕹️ *MAIN MENU*\nSelect an option below:","Markdown",{"inline_keyboard":[
         [b("▶️ Resume","/resume"),b("⏸ Pause","/pause")],
         [b("🟢 Status","/status"),b("🛠️ Audit","/audit")],
-        [b("🧾 Scan History","scan_history:1"),b("🚀 Gainers","/gainers")],
-        [b("🩸 Losers","/losers"),b("❌ Cancel Orders","/cancel")],
+        [b("🚀 Gainers","/gainers"),b("🩸 Losers","/losers")],
+        [b("🧾 Scan History","scan_history:1"),b("❌ Cancel Orders","/cancel")],
         [b("🚨 PANIC SELL","/panic")]
     ]})
 
@@ -721,16 +721,32 @@ def get_market_row(sym,chg=None):
 
 def gl(limit=10):
     try:tk=ex.fetch_tickers()
-    except:return "❌ Unable to fetch market data.","❌ Unable to fetch market data."
+    except:return "❌ Unable to fetch market data."
     v=sorted([{'sym':k.replace("/","-"),'chg':t['percentage'] or 0} for k,t in tk.items() if k.endswith('/USDT') and not skip(k.split('/')[0]) and (t['quoteVolume'] or 0)>=1000000],key=lambda x:x['chg'],reverse=True)
     gainers=[x for x in v if x['chg']>0][:limit];losers=[x for x in reversed(v) if x['chg']<0][:limit]
-    def build(title,items):
-        lines=[f"{'COIN':<11} {'PRICE':>12} {'24H %':>8} {'RSI':>5}","-"*40]
-        for x in items:
-            r=get_market_row(x['sym'],x['chg']);lines.append(f"{r['coin'][:11]:<11} {r['price']:>12} {r['chg']:>+7.2f}% {r['rsi']:>5}")
-        body="\n".join(lines) if items else "No qualifying markets found."
-        return f"*{title} — TOP {limit} (24H)*\n```{body}```\n_Minimum 24H quote volume: $1M._"
-    return build("🚀 GAINERS",gainers),build("🩸 LOSERS",losers)
+    
+    lines = [
+        f"| {'GAINERS':<13} | {'LOSERS':<13} |",
+        "|---------------|---------------|"
+    ]
+    
+    for i in range(max(len(gainers), len(losers))):
+        g_str = " " * 13
+        if i < len(gainers):
+            g = gainers[i]
+            coin = g['sym'].split('-')[0][:5]
+            g_str = f"{coin:<5} {g['chg']:>+6.2f}%"
+            
+        l_str = " " * 13
+        if i < len(losers):
+            l = losers[i]
+            coin = l['sym'].split('-')[0][:5]
+            l_str = f"{coin:<5} {l['chg']:>+6.2f}%"
+            
+        lines.append(f"| {g_str} | {l_str} |")
+        
+    body = "\n".join(lines)
+    return f"📊 *TOP {limit} MOVERS (24H)*\n```{body}```\n_Minimum 24H volume: $1M._"
 
 def cmd_set(txt):
     p=txt.split()
@@ -784,8 +800,8 @@ def handle(t,age):
                 p=live(sym)
                 if p:change=(p-d['entry_price'])/d['entry_price']*100;lines.append(f"{sym.split('-')[0]} | Entry: {fp(d['entry_price'])} | Now: {fp(p)} | PnL: {change:+.1f}%")
             tg("🟢 *ACTIVE POSITIONS*\n"+("\n".join(lines) if lines else "No live prices."))
-    elif l.startswith("/gainers"):p=l.split();n=20 if len(p)>1 and p[1]=="20" else 10;tg(gl(n)[0])
-    elif l.startswith("/losers"):p=l.split();n=20 if len(p)>1 and p[1]=="20" else 10;tg(gl(n)[1])
+    elif l.startswith("/gainers"):p=l.split();n=20 if len(p)>1 and p[1]=="20" else 10;tg(gl(n))
+    elif l.startswith("/losers"):p=l.split();n=20 if len(p)>1 and p[1]=="20" else 10;tg(gl(n))
     elif l.startswith("/buy"):cmd_buy(t)
     elif l.startswith("/sell"):cmd_sell(t)
     elif l.startswith("/set"):cmd_set(t)
