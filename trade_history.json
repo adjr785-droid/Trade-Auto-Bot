@@ -45,5 +45,12 @@
         "time": 1795196118.0781748,
         "reason": "MANUAL SELL $1.10",
         "strategy": "MANUAL"
+    },
+    {
+        "sym": "JCT-USDT",
+        "pnl": -0.2804004000000012,
+        "time": 1795202101.6599848,
+        "reason": "MANUAL SELL ALL",
+        "strategy": "MANUAL"
     }
 ]
