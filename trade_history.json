@@ -31,5 +31,12 @@
         "time": 1795186863.9178607,
         "reason": "MANUAL SELL ALL",
         "strategy": "OTHER"
+    },
+    {
+        "sym": "INJ-USDT",
+        "pnl": -0.5431999999999998,
+        "time": 1795195501.7576318,
+        "reason": "MANUAL SELL ALL",
+        "strategy": "MANUAL"
     }
 ]
