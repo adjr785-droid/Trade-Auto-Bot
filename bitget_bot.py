@@ -359,66 +359,99 @@ def rec(sym,pnl,why):
     if pnl<0 and not str(why).startswith(("MANUAL","PANIC")):mk_cd(f"stopout_{sym}")
 
 def cleanup_spot_dust_after_sale(sym):
-    """Sweep only residuals left by a fully completed sale, when Bitget spot rules allow a market sell.
+    """Convert only the just-sold coin's eligible residual spot dust into BGB.
 
-    This deliberately does not call undocumented conversion endpoints. Balances below the
-    exchange minimum remain untouched and are reported for manual/official Convert handling.
+    Uses Bitget's documented V2 BGB small-balance endpoints. It never market-sells
+    dust and never sweeps unrelated coins or intentional holdings.
     """
-    coin=sym.split("-")[0]
+    coin=sym.split("-")[0].upper()
+    conversion_attempted=False
     try:
-        time.sleep(0.8)  # allow the exchange balance ledger to settle
+        if coin in STABLE or coin=="BGB":
+            return f"🧹 BGB dust conversion skipped for {coin} (not a convertible source asset)."
+        time.sleep(0.8)  # allow Bitget's spot balance ledger to settle
         bal=ex.fetch_balance()
-        total=float((bal.get("total") or {}).get(coin) or 0.0)
-        free=float((bal.get("free") or {}).get(coin) or 0.0)
+        totals=bal.get("total") or {};free_bal=bal.get("free") or {}
+        total=float(totals.get(coin) or 0.0)
+        free=float(free_bal.get(coin) or 0.0)
         if total<=0:
             return f"🧹 Dust check: {coin} balance is zero."
         price=live(sym)
         if not price or price<=0:
-            return f"🧹 Dust retained: {total:.8g} {coin}; live price unavailable."
+            return f"🧹 Dust retained: {total:.8g} {coin}; live USDT price unavailable."
         value=total*price
-        if value>=5.0:
-            return f"ℹ️ Residual retained: {total:.8g} {coin} (≈${value:.4f}); not classified as dust."
+        if value>=10.0:
+            return f"ℹ️ Residual retained: {total:.8g} {coin} (≈${value:.4f}); Bitget BGB conversion is only for balances below 10 USDT."
         if free<=0:
-            return f"🧹 Dust retained: {total:.8g} {coin} (≈${value:.4f}); no free balance to sell."
-        cs=S(sym)
-        markets=ex.load_markets()
-        market=markets.get(cs) or ex.market(cs)
-        if not market or not market.get("spot",False) or market.get("active") is False:
-            return f"🧹 Dust retained: {total:.8g} {coin}; spot market unavailable/inactive."
-        limits=market.get("limits") or {}
-        min_amount=((limits.get("amount") or {}).get("min"))
-        min_cost=((limits.get("cost") or {}).get("min"))
-        amount=float(ex.amount_to_precision(cs,free))
-        if amount<=0:
-            return f"🧹 Dust retained: {total:.8g} {coin}; rounds to zero at exchange precision."
-        if min_amount and amount<float(min_amount):
-            return f"🧹 Dust retained: {total:.8g} {coin} (≈${value:.4f}); below minimum amount {min_amount}."
-        if min_cost and amount*price<float(min_cost):
-            return f"🧹 Dust retained: {total:.8g} {coin} (≈${value:.4f}); below minimum order value ${float(min_cost):.4f}."
-        if amount*price<1.02:
-            return f"🧹 Dust retained: {total:.8g} {coin} (≈${value:.4f}); below safe minimum order value $1.02."
-        order=ex.create_market_sell_order(cs,amount)
-        oid=(order or {}).get("id")
-        filled=float((order or {}).get("filled") or 0.0)
-        avg=float((order or {}).get("average") or (order or {}).get("price") or price)
-        if oid and (filled<=0 or not avg):
-            for _ in range(8):
-                time.sleep(0.8)
+            return f"🧹 Dust retained: {total:.8g} {coin} (≈${value:.4f}); no free spot balance."
+
+        get_list=getattr(ex,"privateConvertGetV2ConvertBgbConvertCoinList",None)
+        convert=getattr(ex,"privateConvertPostV2ConvertBgbConvert",None)
+        if not callable(get_list) or not callable(convert):
+            return (f"⚠️ {coin} dust retained (≈${value:.4f}). Your installed CCXT version does not expose "
+                    "Bitget's BGB-convert endpoints; update CCXT before enabling conversion.")
+
+        listed=get_list()
+        if str((listed or {}).get("code"))!="00000":
+            return f"⚠️ Bitget eligibility check failed for {coin}; dust left untouched: {(listed or {}).get('msg','unknown API response')}"
+        data=(listed or {}).get("data") or {}
+        items=data.get("coinList") or [] if isinstance(data,dict) else []
+        item=next((x for x in items if str(x.get("coin","")).upper()==coin),None)
+        if not item:
+            return f"🧹 {coin} dust retained (≈${value:.4f}); Bitget does not list it as eligible for BGB conversion."
+        eligible=float(item.get("available") or 0.0)
+        if eligible<=0:
+            return f"🧹 {coin} dust retained; Bitget reports no available amount to convert."
+        eligible_value=eligible*price
+        if eligible_value>=10.0:
+            return f"🧹 {coin} dust retained (≈${eligible_value:.4f}); Bitget's eligible amount is not below 10 USDT."
+        # The API converts the listed available balance for a coin, not an arbitrary amount.
+        # Do not proceed if the eligibility snapshot exceeds the currently free balance.
+        if eligible>free*1.000001:
+            return f"⚠️ {coin} dust retained; Bitget's eligible amount ({eligible:.8g}) does not match the current free balance ({free:.8g})."
+
+        conversion_attempted=True  # a timeout after this point may have an unknown exchange outcome
+        result=convert({"coinList":[coin]})
+        if str((result or {}).get("code"))!="00000":
+            return f"⚠️ Bitget rejected {coin}→BGB conversion; dust left untouched: {(result or {}).get('msg','unknown API response')}"
+        rdata=(result or {}).get("data") or {}
+        orders=rdata.get("orderList") or [] if isinstance(rdata,dict) else []
+        order=next((x for x in orders if str(x.get("coin","")).upper()==coin),None)
+        if not order:
+            return f"⚠️ Bitget accepted the conversion request but returned no order for {coin}; check Bitget conversion history."
+        oid=str(order.get("orderId") or "")
+
+        # Verify the conversion record where the installed CCXT build exposes it.
+        history=getattr(ex,"privateConvertGetV2ConvertBgbConvertRecords",None)
+        if callable(history) and oid:
+            for _ in range(4):
                 try:
-                    order=ex.fetch_order(oid,cs)
-                    filled=float(order.get("filled") or 0.0)
-                    avg=float(order.get("average") or order.get("price") or price)
-                except Exception:
-                    continue
-                if filled>0:
-                    break
-        if filled<=0:
-            return f"⚠️ Dust sale not verified for {coin} (order {oid}); balance left for reconciliation."
-        time.sleep(0.5)
-        remain=float((ex.fetch_balance().get("total") or {}).get(coin) or 0.0)
-        return f"✅ 🧹 Dust sold: {filled:.8g} {coin} → approximately ${filled*avg:.4f} USDT. Remaining: {remain:.8g} {coin}."
+                    hr=history({"orderId":oid})
+                    hd=(hr or {}).get("data") or []
+                    records=hd if isinstance(hd,list) else [hd]
+                    recd=next((x for x in records if str(x.get("orderId",oid))==oid),None)
+                    if recd:
+                        status=str(recd.get("status","")).lower()
+                        if status in ("success","successful","succeed"):
+                            from_amt=recd.get("fromAmount",eligible)
+                            to_amt=recd.get("toAmount")
+                            fee_detail=recd.get("feeDetail") or []
+                            fee_txt=""
+                            if fee_detail:
+                                fee_txt=f" | Fee: {fee_detail[0].get('fee','?')} {fee_detail[0].get('feeCoin','BGB')}"
+                            return f"✅ 🧹 BGB dust converted: {from_amt} {coin} → {to_amt or 'BGB amount in history'} BGB{fee_txt}. Order: {oid}."
+                        if status in ("failed","fail","rejected","cancelled","canceled"):
+                            return f"⚠️ Bitget conversion {status} for {coin}; check order {oid}."
+                except Exception as e:
+                    print(f"BGB CONVERT HISTORY CHECK {coin}: {e}")
+                time.sleep(0.8)
+        # The POST returned Bitget's successful acknowledgement, but do not claim final
+        # settlement unless the conversion history confirms it.
+        return f"🟡 Bitget accepted {coin}→BGB dust conversion. Order: {oid or 'not supplied'}. Final status can be checked in Bitget conversion history."
     except Exception as e:
-        return f"⚠️ Dust cleanup skipped for {coin}; balance left untouched. Reason: {str(e)[:220]}"
+        if conversion_attempted:
+            return f"⚠️ BGB conversion outcome is UNKNOWN for {coin}; do not retry until Bitget conversion history and balances are checked. Reason: {str(e)[:180]}"
+        return f"⚠️ BGB dust conversion skipped for {coin}; balance left untouched. Reason: {str(e)[:220]}"
 
 def sell(sym,pct,reason):
     try:
@@ -471,9 +504,14 @@ def cmd_buy(txt):
     if cd(f"buy:{sym}",5):tg(f"⏳ Processing /buy {c}...");return
     db=load(DB);old=db.get(sym);ub=B('free','USDT')
     if amt is None:
-        amt=int(ub*100)/100
-        if amt<1.0:tg(f"❌ *BUY FAILED:* Only ${ub:.2f} free USDT.");return
-    if ub<amt:tg(f"❌ *BUY FAILED:* You only have ${ub:.2f} USDT.");return
+        # Keep 0.02 USDT aside for Bitget quote-currency fees/safety; round spend down.
+        fee_reserve=0.02
+        spendable=max(0.0,ub-fee_reserve)
+        amt=int(spendable*100)/100
+        if amt<1.0:
+            tg(f"❌ *BUY FAILED:* Only ${ub:.2f} free USDT. `/buy COIN ALL` keeps ${fee_reserve:.2f} aside; at least $1.02 free USDT is needed for a $1.00 order.");return
+    if ub<amt+(0.02 if txt.strip().upper().endswith(' ALL') else 0.0):
+        tg(f"❌ *BUY FAILED:* You have ${ub:.2f} free USDT; the order plus the $0.02 fee reserve would exceed it.");return
     try:
         ob=B('total',c) if old else 0.0;f,a=m_buy(f"{c}/USDT",amt);sl=sl_pct(sym,old) if old else sl_pct(sym)
         if old:
@@ -495,15 +533,35 @@ def cmd_sell(txt):
     p=live(sym)
     if not p:tg(f"❌ No price for {c}.");return
     try:
-        if cancel_sells(sym):tg(f"⚠️ Sale of {sym} stopped: orders could not be cancelled safely.");return
+        if cancel_sells(sym):tg(f"⚠️ Sale of {sym} stopped: orders could not be safely cancelled.");return
         time.sleep(0.5);fb=B('free',c)
         if fb<=0:tg(f"❌ You have 0 {c} available.");return
         q,a_s=(fb,"ALL") if amt is None or amt/p>=fb else (amt/p,f"${amt:.2f}")
         q=float(ex.amount_to_precision(cs,q))
         if q<=0:tg("❌ Amount too small.");return
-        o=ex.create_market_sell_order(cs,q);px=(o or {}).get('average') or p;pnl=(px-db[sym]["entry_price"])*q;rec(sym,pnl,f"MANUAL SELL {a_s}");time.sleep(1);rem=B('total',c)
-        if rem<=0 or rem*p<1.02:db.pop(sym,None);save(DB,db);tg(f"✅ *SOLD:* {q} {c} @ {px:.6f}\nPnL: ${pnl:.2f}\nPosition closed.")
-        else:place_trailing_sl(sym,rem);save(DB,db);tg(f"✅ *SOLD:* {q} {c} @ {px:.6f}\nPnL: ${pnl:.2f}\nRemaining: {rem:.4f} {c} (stop re-armed)")
+        full_exit=q>=fb*0.999
+        o=ex.create_market_sell_order(cs,q);oid=(o or {}).get('id')
+        filled=float((o or {}).get('filled') or 0.0);px=float((o or {}).get('average') or (o or {}).get('price') or p)
+        if oid and (filled<=0 or not px):
+            for _ in range(8):
+                time.sleep(0.8)
+                try:
+                    o=ex.fetch_order(oid,cs);filled=float(o.get('filled') or 0.0);px=float(o.get('average') or o.get('price') or p)
+                except Exception:continue
+                if filled>0 and px>0:break
+        if filled<=0 or px<=0:
+            tg(f"⚠️ *SELL NOT VERIFIED* {sym}: order `{oid}` has no confirmed fill. Reconcile the Bitget balance before retrying.");return
+        pnl=(px-db[sym]["entry_price"])*filled;rec(sym,pnl,f"MANUAL SELL {a_s}")
+        time.sleep(1);rem=B('total',c)
+        fully_filled=full_exit and filled>=q*0.999
+        if rem<=0 or rem*p<1.02:
+            db.pop(sym,None);save(DB,db)
+            tg(f"✅ *SOLD:* {filled:.8g} {c} @ {px:.6f}\nPnL: ${pnl:.2f}\nPosition closed.")
+        else:
+            place_trailing_sl(sym,rem);save(DB,db)
+            tg(f"✅ *SOLD:* {filled:.8g} {c} @ {px:.6f}\nPnL: ${pnl:.2f}\nRemaining: {rem:.8g} {c} (stop re-armed)")
+        if fully_filled:
+            tg(cleanup_spot_dust_after_sale(sym))
     except Exception as e:tg(f"❌ *SELL FAILED:* {e}")
 
 def cmd_cancel_all():
