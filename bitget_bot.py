@@ -526,16 +526,15 @@ def audit_system():
         if issues:m="🛠️ *AUTO-AUDIT COMPLETE*\n"+"\n".join(issues);tg(m);return m
     return "✅ *AUDIT COMPLETE:* No issues found."
 
-def analyse_top3():
-    """/analyse with no coin: run the scanner rules (read-only, no buying) and report the 3 best setups with reasons."""
-    tg("🏆 Scanning the market for the 3 best setups... this can take a minute.")
+def rank_setups(exclude=()):
+    """Read-only scan using the scanner rules; returns candidates best first, or None if market data failed."""
     s=cfg()
     try:tk=ex.fetch_tickers();mk=ex.load_markets()
-    except Exception as e:tg(f"⚠️ Could not load Bitget data: {e}");return
+    except Exception as e:print(f"RANK ERR: {e}");return None
     v=[{'sym':k.replace("/","-"),'vol':t['quoteVolume'] or 0,'chg':t['percentage'] or 0} for k,t in tk.items() if k.endswith('/USDT') and not skip(k.split('/')[0]) and not (k in mk and not mk[k].get('spot',False))]
     v.sort(key=lambda x:x['vol'],reverse=True);cands=[]
     for rank,t in enumerate(v[:500],start=1):
-        if rank<=15:continue
+        if rank<=15 or t['sym'] in exclude:continue
         i=rank-16;thr=(1000000 if i<=84 else 3000000 if i<=183 else 4000000 if i<=383 else 5000000)
         if t['vol']<thr:continue
         sym=t['sym'];chg=float(t['chg'] or 0);p,pr,r,ma5,ma10=data(sym)
@@ -559,7 +558,14 @@ def analyse_top3():
         pts+=min(t['vol']/1e8,3);why.append(f"24h volume ${t['vol']/1e6:.1f}M (liquid enough: above the ${thr/1e6:.0f}M minimum)")
         tier=setup or ("WATCHLIST (no full scanner setup)" if p>ma5>ma10 and r<75 else "WEAK (best available, not a full setup)")
         cands.append({"sym":sym,"setup":tier,"full":bool(setup),"pts":pts+(0 if setup or p>ma5>ma10 else -10),"why":why,"p":p,"rsi":r,"chg":chg})
-    cands.sort(key=lambda x:x["pts"],reverse=True);top=cands[:3]
+    cands.sort(key=lambda x:x["pts"],reverse=True);return cands
+
+def analyse_top3():
+    """/analyse with no coin: run the scanner rules (read-only, no buying) and report the 3 best setups with reasons."""
+    tg("🏆 Scanning the market for the 3 best setups... this can take a minute.")
+    s=cfg();cands=rank_setups()
+    if cands is None:tg("⚠️ Could not load Bitget data.");return
+    top=cands[:3]
     if not top:tg("🏆 *TOP 3 SETUPS*\nCould not read market data for any coin right now. Try again shortly.");return
     sl=s['stop_loss_pct'];out=["🏆 *TOP 3 SETUPS RIGHT NOW*","_Read-only scan. Nothing was bought._",""]
     for n,c in enumerate(top,1):
@@ -568,6 +574,68 @@ def analyse_top3():
     if not any(c["full"] for c in top):out.append("No coin passes all scanner rules right now, so these are the strongest available. Be cautious.\n")
     out.append("Buy manually with `/buy COIN amount` if you agree.")
     tg("\n".join(out))
+
+def hold_advice(sym,price,entry,rsi,ma5,ma10,s):
+    """Returns (verdict, reason) for one holding: HOLD, SELL or TAKE PROFIT."""
+    pnl=(price-entry)/entry*100 if entry else None;sl=float(s.get('stop_loss_pct',5));rx=float(s.get('rsi_exit',75) or 0)
+    down=rsi is not None and ma5 is not None and ma10 is not None and price<ma5<ma10 and rsi<50
+    up=ma5 is not None and ma10 is not None and price>ma5>ma10
+    if rsi is not None and rx and rsi>=rx:return ("💰 TAKE PROFIT" if pnl is None or pnl>0 else "🟠 OVERBOUGHT - consider selling"),"RSI "+f"{rsi:.0f}"+" is overbought; a pullback is likely"
+    if pnl is not None and pnl<=-sl:return "🔴 SELL (cut loss)",f"Down {pnl:.1f}%, past your {sl}% stop-loss level"
+    if down and pnl is not None and pnl<0:return "🔴 SELL (cut loss)",f"Losing {pnl:.1f}% and the trend is down (price < MA5 < MA10, RSI {rsi:.0f}); loss is likely to grow"
+    if down:return "🟠 WEAK - consider selling","Trend is down (price < MA5 < MA10)"+(f", RSI {rsi:.0f}" if rsi is not None else "")
+    if up:return "🟢 HOLD","Trend is up (price > MA5 > MA10)"+(f", RSI {rsi:.0f}" if rsi is not None else "")
+    return "🟡 HOLD / WATCH","Trend is mixed; keep the stop-loss active"
+
+def long_term_view(sym):
+    """Rough long-term suitability from 100 daily candles and 24h volume (technical view only)."""
+    try:
+        c=ex.fetch_ohlcv(S(sym),'1d',limit=100);cl=[float(x[4]) for x in c]
+        if len(cl)<50:return "⚪ Long-term: not enough history (new coin, high risk)"
+        ma50=sum(cl[-50:])/50;ch=(cl[-1]/cl[0]-1)*100;vol=float(ex.fetch_ticker(S(sym)).get('quoteVolume') or 0)
+        if vol>=20e6 and cl[-1]>=ma50 and ch>-20:return f"✅ Long-term: reasonable to hold (above 50-day average, {len(cl)}-day change {ch:+.0f}%, liquid)"
+        if cl[-1]<ma50 and (ch<-30 or vol<2e6):return f"❌ Long-term: not suited (below 50-day average, {len(cl)}-day change {ch:+.0f}%"+(", thin volume)" if vol<2e6 else ")")
+        return f"⚠️ Long-term: speculative ({len(cl)}-day change {ch:+.0f}%, {'above' if cl[-1]>=ma50 else 'below'} 50-day average)"
+    except Exception as e:
+        print(f"LONG TERM ERR {sym}: {e}");return "⚪ Long-term: unavailable"
+
+def cmd_status():
+    s=cfg();now=time.time();db=load(DB)
+    try:bal=ex.fetch_balance();totals=bal.get('total') or {};free=bal.get('free') or {}
+    except Exception as e:tg(f"❌ Could not reach Bitget: {e}");return
+    usdt=float(totals.get('USDT',0) or 0);usdt_free=float(free.get('USDT',0) or 0)
+    held=[];coin_val=0.0
+    for coin,qty in sorted(totals.items()):
+        try:qty=float(qty or 0)
+        except (TypeError,ValueError):continue
+        if qty<=0 or coin in STABLE or coin in BL:continue
+        sym=f"{coin}-USDT";px=live(sym)
+        if px and qty*px>=0.10:held.append((coin,sym,qty,px));coin_val+=qty*px
+    total=usdt+coin_val;r=ngn_rate()
+    ok,why=risk_controls();br=data("BTC-USDT")[2];bm=s.get('btc_rsi_min',0)
+    btc="OK" if bm<=0 or (br is not None and br>=bm) else f"BLOCKING buys (BTC RSI {br} < {bm})"
+    ls=load(SC).get('last',0);ago=f"{(now-ls)/60:.0f} min ago" if ls else "never"
+    q=load(QF)
+    sysmsg=["📟 *SYSTEM STATUS*","Exchange connection: ✅ OK",f"Portfolio: ${total:.2f} USDT"+(f" | ₦{total*r:,.0f}" if r else ""),f"USDT cash: ${usdt:.2f} (free ${usdt_free:.2f})",f"Auto-buy: {'ON' if s.get('auto_buy_enabled') else 'PAUSED'} (${s.get('auto_buy_amount_usdt')} per trade)",f"BTC safety filter: {btc}",f"Risk controls: {'✅ trading allowed' if ok else '⛔ '+why}",f"Last market scan: {ago} | Queued coins: {len(q)}",f"Bot-tracked positions: {len(db)} | Holdings priced: {len(held)}",last_trade_line().strip(),"",
+      "🧭 *STRATEGY*",f"Entries: TREND (RSI {s.get('rsi_min')}-{s.get('rsi_max')}, price > MA5 > MA10), OVERSOLD bounce (RSI < 30), BREAKOUT (RSI 50-70 + volume breakout)",f"Protection: stop-loss {s.get('stop_loss_pct')}% | trailing stop {s.get('trail_pct')}% below peak | crash guard {s.get('crash_guard_pct')}%",f"Exit: RSI >= {s.get('rsi_exit')} or max hold {s.get('max_hold_hours')}h",f"Limits: {s.get('max_daily_trades')} trades/day, {s.get('max_daily_loss_pct')}% daily loss, {s.get('max_position_pct')}% max per coin"]
+    tg("\n".join(sysmsg))
+    if not held:tg("🛑 *HOLDINGS ADVICE*\nNo priced coin holdings right now.");return
+    out=["💼 *HOLDINGS ADVICE*","_Technical view only, not financial advice._",""];sells=0
+    for coin,sym,qty,px in held:
+        d=db.get(sym,{});entry=d.get('entry_price');_,_,rsi,ma5,ma10=data(sym)
+        v,why2=hold_advice(sym,px,entry,rsi,ma5,ma10,s)
+        if any(k in v for k in ("SELL","TAKE","WEAK","OVERBOUGHT")):sells+=1
+        pnl=f" | PnL {(px-entry)/entry*100:+.1f}% (${(px-entry)*qty:+.2f})" if entry else " | PnL not tracked"
+        out+=[f"🪙 *{coin}* — ${qty*px:.2f}{pnl}",f"Advice: {v}",f"Why: {why2}",long_term_view(sym),""]
+    tg("\n".join(out))
+    if sells:
+        cands=rank_setups(exclude={sym for _,sym,_,_ in held})
+        if cands:
+            alt=["🔁 *IF YOU SELL - TOP 3 ALTERNATIVES*",""]
+            for n,c in enumerate(cands[:3],1):alt+=[f"*{n}. {c['sym']}* - {c['setup']}",f"Price {fp(c['p'])} | 24h {c['chg']:+.2f}% | RSI {c['rsi']:.1f}","Why: "+c['why'][0],""]
+            alt.append("Full reasons: /analyse")
+            tg("\n".join(alt))
+    else:tg("✅ No sell advised right now. For possible new buys use /analyse.")
 
 def analyse_coin(txt):
     parts=txt.strip().split()
@@ -945,15 +1013,7 @@ def handle(t,age):
     elif l=="trail_off":setc('trail_pct',0.0,"📉 Trailing Stop-Loss OFF");menu()
     elif l in ("/holdings","/portfolio","💼 holdings","💰 balance","/balance"):tg(get_holdings_text())
     elif l=="/scan_history" or l.startswith("/scan_history "):cmd_scan_history(t)
-    elif l=="/status":
-        db=load(DB)
-        if not db:tg("🛑 No active trades."+last_trade_line())
-        else:
-            lines=[]
-            for sym,d in db.items():
-                p=live(sym)
-                if p:change=(p-d['entry_price'])/d['entry_price']*100;lines.append(f"{sym.split('-')[0]} | Entry: {fp(d['entry_price'])} | Now: {fp(p)} | PnL: {change:+.1f}%")
-            tg("🟢 *ACTIVE POSITIONS*\n"+("\n".join(lines) if lines else "No live prices."))
+    elif l=="/status":cmd_status()
     elif l.startswith("/buy"):cmd_buy(t)
     elif l.startswith("/sell"):cmd_sell(t)
     elif l.startswith("/set"):cmd_set(t)
