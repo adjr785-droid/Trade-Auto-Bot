@@ -19,6 +19,15 @@ NP=lambda e,sl,pct=None:{"entry_price":e,"safe_zone":e,"stop_loss":sl,"peak_pric
 STOP_OK="🛡️ Exchange protective sell: Verified\n📈 Bot-side trailing: Active"
 STOP_NO="⚠️ Exchange stop NOT verified.\nBot-side monitoring is active only while the bot is running; protection is not guaranteed."
 
+_NGN={"t":0,"r":0}
+def ngn_rate():
+    if time.time()-_NGN["t"]<600 and _NGN["r"]:return _NGN["r"]
+    try:
+        r=float((requests.get("https://open.er-api.com/v6/latest/USD",timeout=8).json().get("rates") or {}).get("NGN") or 0)
+        if r>0:_NGN["t"],_NGN["r"]=time.time(),r
+    except Exception as e:print(f"NGN RATE ERR: {e}")
+    return _NGN["r"]
+
 def compact_balance():
     if time.time()-_BAL["t"]<60:return _BAL["m"]
     try:
@@ -27,7 +36,7 @@ def compact_balance():
             if c in STABLE or c=='USDT' or float(q or 0)<=0:continue
             p=live(f"{c}-USDT")
             if p:v+=float(q)*p
-        txt=f"Total: ${v:.2f}"
+        rate=ngn_rate();txt=f"Portfolio: ${v:.2f}"+(f" | ₦{v*rate:,.0f}" if rate else "")
         _BAL["t"],_BAL["m"]=time.time(),txt;return txt
     except:return _BAL["m"]
 
@@ -63,7 +72,7 @@ tg=lambda m:_send(m,"Markdown");tg_ai=lambda m:_send(m,"HTML")
 
 def menu():
     b=lambda t,c:{"text":t,"callback_data":c}
-    _send("🕹️ *MAIN MENU*\nSelect an option below:","Markdown",{"inline_keyboard":[[b("🟢 Status","/status"),b("🛠️ Audit","/audit")],[b("🚀 Gainers","/gainers"),b("🩸 Losers","/losers")],[b("🧾 Scan History","scan_history:1"),b("❌ Cancel Orders","/cancel")],[b("📈 Stats","/stats"),b("🔔 Alerts","/alerts")],[b("🚨 PANIC SELL","/panic")]]})
+    _send("🕹️ *MAIN MENU*\nSelect an option below:","Markdown",{"inline_keyboard":[[b("🟢 Status","/status"),b("🛠️ Audit","/audit")],[b("🧾 Scan History","scan_history:1"),b("❌ Cancel Orders","/cancel")],[b("📈 Stats","/stats"),b("🔔 Alerts","/alerts")],[b("🏆 Analyse (Top 3)","/analyse")],[b("🚨 PANIC SELL","/panic")]]})
 
 def panic_prompt():_send("🚨 *CONFIRM PANIC*\nThis sells ALL positions at market and pauses auto-buy.\nConfirm within 15 minutes.","Markdown",{"inline_keyboard":[[{"text":"✅ YES, SELL EVERYTHING","callback_data":"panic_confirm"},{"text":"❌ Cancel","callback_data":"panic_cancel"}]]})
 
@@ -203,10 +212,13 @@ def cmd_alert(txt):
     d="above" if target>price else "below";a=_alerts();a.append({"coin":c,"price":target,"dir":d,"created":time.time()});save(AL,a)
     tg(f"🔔 *ALERT SET:* {c} {d} {fp(target)} (now {fp(price)}).")
 
+def cmd_cancel_alerts():
+    a=_alerts();save(AL,[]);tg(f"🗑 Cancelled all price alerts ({len(a)})." if a else "🔔 No price alerts to cancel.")
+
 def cmd_alerts():
     a=_alerts()
     if not a:tg("🔔 No price alerts set.\nUse `/alert COIN PRICE`.");return
-    tg("🔔 *PRICE ALERTS*\n"+"\n".join(f"{x.get('coin')} {x.get('dir')} {fp(x.get('price'))}" for x in a))
+    _send("🔔 *PRICE ALERTS*\n"+"\n".join(f"{x.get('coin')} {x.get('dir')} {fp(x.get('price'))}" for x in a)+"\n\nCancel all: /cancel\\_alerts","Markdown",{"inline_keyboard":[[{"text":"🗑 Cancel all alerts","callback_data":"/cancel_alerts"}]]})
 
 def check_alerts():
     a=_alerts()
@@ -455,12 +467,17 @@ def get_holdings_text():
         total_coins_value += qty*price
         db=load(DB);entry_data=db.get(sym,{});entry=entry_data.get('entry_price')
         _,_,rsi,ma5,ma10=data(sym)
-        coin_lines.extend([f"🪙 *{coin}*",f"Quantity: {qty:.8g}",f"Value: ${qty*price:.2f}",f"Price: {fp(price)} USDT"])
+        sentiment="⚪ Unavailable"
+        if rsi is not None and ma5 is not None and ma10 is not None:
+            if price>ma5>ma10 and rsi>=50:sentiment="🟢 Bullish"
+            elif price<ma5<ma10 and rsi<50:sentiment="🔴 Bearish"
+            else:sentiment="🟡 Neutral / Mixed"
+        pnl_line="Entry / PnL: Not tracked by bot"
         if entry:
-            pnl=(price-entry)/entry*100; pnl_usdt=(price-entry)*qty
-            coin_lines.append(f"PnL: {pnl:+.2f}% (${pnl_usdt:+.2f})")
-        else:coin_lines.append("PnL: Not tracked")
-        if rsi is not None:coin_lines.append(f"RSI: {rsi} | MA5: {fp(ma5)} | MA10: {fp(ma10)}")
+            pnl=(price-entry)/entry*100;pnl_usdt=(price-entry)*qty
+            pnl_line=f"Entry: {fp(entry)} USDT | PnL: {pnl:+.2f}% (${pnl_usdt:+.2f})"
+        tp=cfg().get('trail_pct',0) or 0
+        coin_lines.extend([f"🪙 *{coin}*",f"Quantity: {qty:.8g}",f"Current price: {fp(price)} USDT",f"Market value: ${qty*price:.2f}",pnl_line,f"RSI (1h): {rsi if rsi is not None else 'N/A'}",f"MA5 (1h): {fp(ma5) if ma5 is not None else 'N/A'}",f"MA10 (1h): {fp(ma10) if ma10 is not None else 'N/A'}",f"Market sentiment: {sentiment}",f"Bot trailing stop: {'ON ('+str(tp)+'% below peak)' if tp>0 else 'OFF'}",f"Peak price: {fp(entry_data.get('peak_price')) if entry_data.get('peak_price') else 'N/A'}",f"Exchange stop level: {fp(entry_data.get('xsl')) if entry_data.get('xsl') else 'Not verified'}"])
         coin_lines.append("");count+=1
     total_portfolio_value=usdt_total+total_coins_value
     lines=[f"💼 *Total Portfolio Value:* ${total_portfolio_value:.2f} USDT","",f"💵 *Available USDT Cash*",f"Total: ${usdt_total:.2f} | Free to Trade: ${usdt_free:.2f}","━━━━━━━━━━━━━━━━━━━━"]
@@ -508,6 +525,46 @@ def audit_system():
         if qc:save(QF,q)
         if issues:m="🛠️ *AUTO-AUDIT COMPLETE*\n"+"\n".join(issues);tg(m);return m
     return "✅ *AUDIT COMPLETE:* No issues found."
+
+def analyse_top3():
+    """/analyse with no coin: run the scanner rules (read-only, no buying) and report the 3 best setups with reasons."""
+    tg("🏆 Scanning the market for the 3 best setups... this can take a minute.")
+    s=cfg()
+    try:tk=ex.fetch_tickers();mk=ex.load_markets()
+    except Exception as e:tg(f"⚠️ Could not load Bitget data: {e}");return
+    v=[{'sym':k.replace("/","-"),'vol':t['quoteVolume'] or 0,'chg':t['percentage'] or 0} for k,t in tk.items() if k.endswith('/USDT') and not skip(k.split('/')[0]) and not (k in mk and not mk[k].get('spot',False))]
+    v.sort(key=lambda x:x['vol'],reverse=True);cands=[]
+    for rank,t in enumerate(v[:500],start=1):
+        if rank<=15:continue
+        i=rank-16;thr=(1000000 if i<=84 else 3000000 if i<=183 else 4000000 if i<=383 else 5000000)
+        if t['vol']<thr:continue
+        sym=t['sym'];chg=float(t['chg'] or 0);p,pr,r,ma5,ma10=data(sym)
+        if not p or r is None or ma5 is None or ma10 is None:continue
+        setup=None;bv=None
+        if 1.0<chg<30.0 and s['rsi_min']<=r<=s['rsi_max'] and p>ma5>ma10:setup="TREND"
+        elif -30.0<chg<-8.0 and r<30 and p>pr:setup="OVERSOLD"
+        elif 0.0<chg<25.0 and 50.0<=r<=70.0 and p>ma5>ma10:
+            ok,bv,bl=breakout_confirmation(sym)
+            if ok:setup="BREAKOUT"
+        why=[];pts=0
+        if setup:
+            pts+={"BREAKOUT":30,"TREND":20,"OVERSOLD":10}[setup]
+            why.append({"BREAKOUT":f"Confirmed breakout: price cleared the recent 20h high on {bv or 0:.2f}x average volume","TREND":f"Trend setup: price {fp(p)} is above MA5 {fp(ma5)} which is above MA10 {fp(ma10)}, with RSI {r:.1f} inside your {s['rsi_min']}-{s['rsi_max']} entry zone","OVERSOLD":f"Oversold bounce: RSI {r:.1f} is below 30 and price is back above the previous close"}[setup])
+        elif p>ma5>ma10:why.append("Short-term trend is up (price > MA5 > MA10)")
+        if p>ma5>ma10:pts+=5
+        if 45<=r<=65:pts+=3;why.append(f"RSI {r:.1f} is healthy (room to run before overbought)")
+        elif r>=75:pts-=5;why.append(f"RSI {r:.1f} is overbought (risk of pullback)")
+        if 1<chg<15:pts+=2;why.append(f"24h change {chg:+.2f}% shows steady, not extreme, momentum")
+        pts+=min(t['vol']/1e8,3);why.append(f"24h volume ${t['vol']/1e6:.1f}M (liquid enough: above the ${thr/1e6:.0f}M minimum)")
+        if pts>0 and (setup or (p>ma5>ma10 and r<75)):cands.append({"sym":sym,"setup":setup,"pts":pts,"why":why,"p":p,"rsi":r,"chg":chg})
+    cands.sort(key=lambda x:x["pts"],reverse=True);top=cands[:3]
+    if not top:tg("🏆 *TOP 3 SETUPS*\nNo coin shows a usable setup right now. The market is weak or sideways, so waiting is the safer choice.");return
+    sl=s['stop_loss_pct'];out=["🏆 *TOP 3 SETUPS RIGHT NOW*","_Read-only scan. Nothing was bought._",""]
+    for n,c in enumerate(top,1):
+        lab=c["setup"] or "WATCHLIST (no full scanner setup)"
+        out+=[f"*{n}. {c['sym']}* — {lab}",f"Price: {fp(c['p'])} USDT | 24h: {c['chg']:+.2f}% | RSI: {c['rsi']:.1f}",f"Suggested stop: {fp(c['p']*(1-sl/100))} ({sl}% below price)","Why:"]+["• "+w for w in c["why"]]+[""]
+    out.append("Buy manually with `/buy COIN amount` if you agree.")
+    tg("\n".join(out))
 
 def analyse_coin(txt):
     parts=txt.strip().split()
@@ -852,18 +909,19 @@ def cmd_set(txt):
     s[k]=new;save(CFG,s);tg(f"✅ `{k}` = `{new}`")
 
 def setc(k,v,m):s=cfg();s[k]=v;save(CFG,s);tg(m)
-MSG={"ai_info":"🧠 *AI ANALYST*\nTo ask the AI a question, type:\n`/ai <your question>`","/help":"🤖 *CMDS*\n`/menu` `/ai [q]` `/analyse COIN` `/audit` `/cancel`\n`/gainers` `/losers`\n`/status` `/holdings` `/stats`\n`/alert COIN PRICE` `/alerts`\n`/scan_history [coin/filter]`\n`/set key value` `/pause` `/resume` `/panic`"}
+MSG={"ai_info":"🧠 *AI ANALYST*\nTo ask the AI a question, type:\n`/ai <your question>`","/help":"🤖 *CMDS*\n`/menu` `/ai [q]` `/analyse` (top 3) `/analyse COIN` `/audit` `/cancel`\n`/status` `/holdings` `/stats`\n`/alert COIN PRICE` `/alerts` `/cancel\\_alerts`\n`/scan_history [coin/filter]`\n`/set key value` `/pause` `/resume` `/panic`"}
 
 def handle(t,age):
     l=t.lower()
     if l.startswith("/analyse "):analyse_coin(t)
-    elif l=="/analyse":analyse_coin(t)
+    elif l=="/analyse":analyse_top3()
     elif l.startswith("/ai "):ask_ai(t[4:].strip())
     elif l=="/ai":ask_ai("Give me a market overview.")
     elif l in MSG:tg(MSG[l])
     elif l in ("/menu","📊 menu"):menu()
     elif l=="/stats":cmd_stats()
     elif l=="/alerts":cmd_alerts()
+    elif l in ("/cancel_alerts","/cancelalerts","/alerts_cancel"):cmd_cancel_alerts()
     elif l.startswith("/alert"):cmd_alert(t)
     elif l=="/scan":tg("🔍 Scanning the market now...");scan(True)
     elif l=="scan_history":cmd_scan_history("/scan_history")
@@ -893,8 +951,6 @@ def handle(t,age):
                 p=live(sym)
                 if p:change=(p-d['entry_price'])/d['entry_price']*100;lines.append(f"{sym.split('-')[0]} | Entry: {fp(d['entry_price'])} | Now: {fp(p)} | PnL: {change:+.1f}%")
             tg("🟢 *ACTIVE POSITIONS*\n"+("\n".join(lines) if lines else "No live prices."))
-    elif l.startswith("/gainers"):p=l.split();n=20 if len(p)>1 and p[1]=="20" else 10;tg(gl(n))
-    elif l.startswith("/losers"):p=l.split();n=20 if len(p)>1 and p[1]=="20" else 10;tg(gl(n))
     elif l.startswith("/buy"):cmd_buy(t)
     elif l.startswith("/sell"):cmd_sell(t)
     elif l.startswith("/set"):cmd_set(t)
