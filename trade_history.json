@@ -24,5 +24,12 @@
         "time": 1795143552.3297338,
         "reason": "MANUAL SELL ALL",
         "strategy": "OTHER"
+    },
+    {
+        "sym": "SOON-USDT",
+        "pnl": -0.6575319999999972,
+        "time": 1795186863.9178607,
+        "reason": "MANUAL SELL ALL",
+        "strategy": "OTHER"
     }
 ]
