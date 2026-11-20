@@ -358,6 +358,68 @@ def rec(sym,pnl,why):
     H.append({"sym":sym,"pnl":pnl,"time":time.time(),"reason":why,"strategy":strat});save(HIST,H)
     if pnl<0 and not str(why).startswith(("MANUAL","PANIC")):mk_cd(f"stopout_{sym}")
 
+def cleanup_spot_dust_after_sale(sym):
+    """Sweep only residuals left by a fully completed sale, when Bitget spot rules allow a market sell.
+
+    This deliberately does not call undocumented conversion endpoints. Balances below the
+    exchange minimum remain untouched and are reported for manual/official Convert handling.
+    """
+    coin=sym.split("-")[0]
+    try:
+        time.sleep(0.8)  # allow the exchange balance ledger to settle
+        bal=ex.fetch_balance()
+        total=float((bal.get("total") or {}).get(coin) or 0.0)
+        free=float((bal.get("free") or {}).get(coin) or 0.0)
+        if total<=0:
+            return f"🧹 Dust check: {coin} balance is zero."
+        price=live(sym)
+        if not price or price<=0:
+            return f"🧹 Dust retained: {total:.8g} {coin}; live price unavailable."
+        value=total*price
+        if value>=5.0:
+            return f"ℹ️ Residual retained: {total:.8g} {coin} (≈${value:.4f}); not classified as dust."
+        if free<=0:
+            return f"🧹 Dust retained: {total:.8g} {coin} (≈${value:.4f}); no free balance to sell."
+        cs=S(sym)
+        markets=ex.load_markets()
+        market=markets.get(cs) or ex.market(cs)
+        if not market or not market.get("spot",False) or market.get("active") is False:
+            return f"🧹 Dust retained: {total:.8g} {coin}; spot market unavailable/inactive."
+        limits=market.get("limits") or {}
+        min_amount=((limits.get("amount") or {}).get("min"))
+        min_cost=((limits.get("cost") or {}).get("min"))
+        amount=float(ex.amount_to_precision(cs,free))
+        if amount<=0:
+            return f"🧹 Dust retained: {total:.8g} {coin}; rounds to zero at exchange precision."
+        if min_amount and amount<float(min_amount):
+            return f"🧹 Dust retained: {total:.8g} {coin} (≈${value:.4f}); below minimum amount {min_amount}."
+        if min_cost and amount*price<float(min_cost):
+            return f"🧹 Dust retained: {total:.8g} {coin} (≈${value:.4f}); below minimum order value ${float(min_cost):.4f}."
+        if amount*price<1.02:
+            return f"🧹 Dust retained: {total:.8g} {coin} (≈${value:.4f}); below safe minimum order value $1.02."
+        order=ex.create_market_sell_order(cs,amount)
+        oid=(order or {}).get("id")
+        filled=float((order or {}).get("filled") or 0.0)
+        avg=float((order or {}).get("average") or (order or {}).get("price") or price)
+        if oid and (filled<=0 or not avg):
+            for _ in range(8):
+                time.sleep(0.8)
+                try:
+                    order=ex.fetch_order(oid,cs)
+                    filled=float(order.get("filled") or 0.0)
+                    avg=float(order.get("average") or order.get("price") or price)
+                except Exception:
+                    continue
+                if filled>0:
+                    break
+        if filled<=0:
+            return f"⚠️ Dust sale not verified for {coin} (order {oid}); balance left for reconciliation."
+        time.sleep(0.5)
+        remain=float((ex.fetch_balance().get("total") or {}).get(coin) or 0.0)
+        return f"✅ 🧹 Dust sold: {filled:.8g} {coin} → approximately ${filled*avg:.4f} USDT. Remaining: {remain:.8g} {coin}."
+    except Exception as e:
+        return f"⚠️ Dust cleanup skipped for {coin}; balance left untouched. Reason: {str(e)[:220]}"
+
 def sell(sym,pct,reason):
     try:
         cs=S(sym);coin=sym.split("-")[0]
@@ -384,13 +446,11 @@ def sell(sym,pct,reason):
             pnl=(px-db[sym]["entry_price"])*filled;rec(sym,pnl,reason)
             tg(f"✅ *SOLD ({reason})*\n🪙 {filled:.8g} {sym}\n{'🟢' if pnl>=0 else '🔴'} PnL: ${pnl:.2f}")
         else:tg(f"✅ *SOLD ({reason})*\n🪙 {filled:.8g} {sym}\nCost basis not tracked; realized PnL not calculated.")
-        # Post-sale dust reconciliation: do not invoke an undocumented conversion endpoint.
-        time.sleep(0.5)
-        try:
-            residual=float(B('total',coin) or 0);rp=live(sym);value=residual*rp if rp else 0
-            if residual>0 and value<5.0:
-                tg(f"🧹 *DUST CHECK* {coin}: residual {residual:.8g} (≈${value:.4f}).\nBitget conversion availability is checked conservatively; this bot leaves residual dust untouched rather than invoking an unverified conversion API.")
-        except Exception as de:print(f"DUST CHECK ERR {sym}: {de}")
+        # Dust sweep runs only after a full sale. Partial-profit sales intentionally retain
+        # the remaining position and must never trigger a residual sweep.
+        if pct>=0.999:
+            dust_result=cleanup_spot_dust_after_sale(sym)
+            tg(dust_result)
         return True
     except Exception as e:tg(f"❌ *SELL FAILED* {sym}:`{e}`");return False
 
