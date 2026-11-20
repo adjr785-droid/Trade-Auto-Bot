@@ -370,10 +370,27 @@ def sell(sym,pct,reason):
         if q*p<1.02 and pct<1.0:q=fb;reason+=" (dust→full)"
         q=float(ex.amount_to_precision(cs,q))
         if q<=0:return True
-        o=ex.create_market_sell_order(cs,q);db=load(DB);px=(o or {}).get('average') or p
+        o=ex.create_market_sell_order(cs,q);oid=(o or {}).get('id');filled=float((o or {}).get('filled') or 0);px=float((o or {}).get('average') or (o or {}).get('price') or p)
+        # Confirm ambiguous/partial market-order state before updating local accounting.
+        if oid and (filled<=0 or not px):
+            for _ in range(8):
+                time.sleep(0.8)
+                try:o=ex.fetch_order(oid,cs);filled=float(o.get('filled') or 0);px=float(o.get('average') or o.get('price') or p)
+                except Exception:continue
+                if filled>0:break
+        if filled<=0:tg(f"⚠️ *SELL NOT VERIFIED* {sym}: order `{oid}` returned no confirmed fill. Reconcile exchange balance before retrying.");return False
+        db=load(DB)
         if sym in db:
-            pnl=(px-db[sym]["entry_price"])*q;rec(sym,pnl,reason)
-            tg(f"✅ *SOLD ({reason})*\n🪙 {q} {sym}\n{'🟢' if pnl>=0 else '🔴'} PnL: ${pnl:.2f}")
+            pnl=(px-db[sym]["entry_price"])*filled;rec(sym,pnl,reason)
+            tg(f"✅ *SOLD ({reason})*\n🪙 {filled:.8g} {sym}\n{'🟢' if pnl>=0 else '🔴'} PnL: ${pnl:.2f}")
+        else:tg(f"✅ *SOLD ({reason})*\n🪙 {filled:.8g} {sym}\nCost basis not tracked; realized PnL not calculated.")
+        # Post-sale dust reconciliation: do not invoke an undocumented conversion endpoint.
+        time.sleep(0.5)
+        try:
+            residual=float(B('total',coin) or 0);rp=live(sym);value=residual*rp if rp else 0
+            if residual>0 and value<5.0:
+                tg(f"🧹 *DUST CHECK* {coin}: residual {residual:.8g} (≈${value:.4f}).\nBitget conversion availability is checked conservatively; this bot leaves residual dust untouched rather than invoking an unverified conversion API.")
+        except Exception as de:print(f"DUST CHECK ERR {sym}: {de}")
         return True
     except Exception as e:tg(f"❌ *SELL FAILED* {sym}:`{e}`");return False
 
@@ -500,9 +517,10 @@ def get_holdings_text():
         note="\n⚠️ Held but with no USDT price: "+", ".join(unpriced[:3])
         if len(unpriced)>3: note+=f" and {len(unpriced)-3} more..."
         coin_lines.append(note)
-    if count==0:return "\n".join(lines) + "\n\n💼 *Coin Holdings*\nNo eligible USDT-priced assets."
+    footer=f"\n\n📊 *LIVE SPOT WALLET BALANCE:* {compact_balance()}"
+    if count==0:return "\n".join(lines) + "\n\n💼 *Coin Holdings*\nNo eligible USDT-priced assets."+footer
     lines.append(f"\n💼 *Coin Holdings (Value: ${total_coins_value:.2f})*\n")
-    return "\n".join(lines) + "\n".join(coin_lines)
+    return "\n".join(lines) + "\n".join(coin_lines)+footer
 
 def check_hourly_balance():
     st=load(SC);now=time.time()
