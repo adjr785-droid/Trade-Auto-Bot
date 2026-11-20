@@ -480,7 +480,7 @@ def get_holdings_text():
         coin_lines.extend([f"🪙 *{coin}*",f"Quantity: {qty:.8g}",f"Current price: {fp(price)} USDT",f"Market value: ${qty*price:.2f}",pnl_line,f"RSI (1h): {rsi if rsi is not None else 'N/A'}",f"MA5 (1h): {fp(ma5) if ma5 is not None else 'N/A'}",f"MA10 (1h): {fp(ma10) if ma10 is not None else 'N/A'}",f"Market sentiment: {sentiment}",f"Bot trailing stop: {'ON ('+str(tp)+'% below peak)' if tp>0 else 'OFF'}",f"Peak price: {fp(entry_data.get('peak_price')) if entry_data.get('peak_price') else 'N/A'}",f"Exchange stop level: {fp(entry_data.get('xsl')) if entry_data.get('xsl') else 'Not verified'}"])
         coin_lines.append("");count+=1
     total_portfolio_value=usdt_total+total_coins_value
-    lines=[f"💼 *Total Portfolio Value:* ${total_portfolio_value:.2f} USDT","",f"💵 *Available USDT Cash*",f"Total: ${usdt_total:.2f} | Free to Trade: ${usdt_free:.2f}","━━━━━━━━━━━━━━━━━━━━"]
+    _r=ngn_rate();lines=[f"💼 *Total Portfolio Value:* ${total_portfolio_value:.2f} USDT"+(f" | ₦{total_portfolio_value*_r:,.0f}" if _r else ""),"",f"💵 *Available USDT Cash*",f"Total: ${usdt_total:.2f} | Free to Trade: ${usdt_free:.2f}","━━━━━━━━━━━━━━━━━━━━"]
     if unpriced:
         note="\n⚠️ Held but with no USDT price: "+", ".join(unpriced[:3])
         if len(unpriced)>3: note+=f" and {len(unpriced)-3} more..."
@@ -551,18 +551,21 @@ def analyse_top3():
             pts+={"BREAKOUT":30,"TREND":20,"OVERSOLD":10}[setup]
             why.append({"BREAKOUT":f"Confirmed breakout: price cleared the recent 20h high on {bv or 0:.2f}x average volume","TREND":f"Trend setup: price {fp(p)} is above MA5 {fp(ma5)} which is above MA10 {fp(ma10)}, with RSI {r:.1f} inside your {s['rsi_min']}-{s['rsi_max']} entry zone","OVERSOLD":f"Oversold bounce: RSI {r:.1f} is below 30 and price is back above the previous close"}[setup])
         elif p>ma5>ma10:why.append("Short-term trend is up (price > MA5 > MA10)")
+        else:why.append(f"Trend not confirmed yet (price {fp(p)}, MA5 {fp(ma5)}, MA10 {fp(ma10)})")
         if p>ma5>ma10:pts+=5
         if 45<=r<=65:pts+=3;why.append(f"RSI {r:.1f} is healthy (room to run before overbought)")
         elif r>=75:pts-=5;why.append(f"RSI {r:.1f} is overbought (risk of pullback)")
         if 1<chg<15:pts+=2;why.append(f"24h change {chg:+.2f}% shows steady, not extreme, momentum")
         pts+=min(t['vol']/1e8,3);why.append(f"24h volume ${t['vol']/1e6:.1f}M (liquid enough: above the ${thr/1e6:.0f}M minimum)")
-        if pts>0 and (setup or (p>ma5>ma10 and r<75)):cands.append({"sym":sym,"setup":setup,"pts":pts,"why":why,"p":p,"rsi":r,"chg":chg})
+        tier=setup or ("WATCHLIST (no full scanner setup)" if p>ma5>ma10 and r<75 else "WEAK (best available, not a full setup)")
+        cands.append({"sym":sym,"setup":tier,"full":bool(setup),"pts":pts+(0 if setup or p>ma5>ma10 else -10),"why":why,"p":p,"rsi":r,"chg":chg})
     cands.sort(key=lambda x:x["pts"],reverse=True);top=cands[:3]
-    if not top:tg("🏆 *TOP 3 SETUPS*\nNo coin shows a usable setup right now. The market is weak or sideways, so waiting is the safer choice.");return
+    if not top:tg("🏆 *TOP 3 SETUPS*\nCould not read market data for any coin right now. Try again shortly.");return
     sl=s['stop_loss_pct'];out=["🏆 *TOP 3 SETUPS RIGHT NOW*","_Read-only scan. Nothing was bought._",""]
     for n,c in enumerate(top,1):
-        lab=c["setup"] or "WATCHLIST (no full scanner setup)"
+        lab=c["setup"]
         out+=[f"*{n}. {c['sym']}* — {lab}",f"Price: {fp(c['p'])} USDT | 24h: {c['chg']:+.2f}% | RSI: {c['rsi']:.1f}",f"Suggested stop: {fp(c['p']*(1-sl/100))} ({sl}% below price)","Why:"]+["• "+w for w in c["why"]]+[""]
+    if not any(c["full"] for c in top):out.append("No coin passes all scanner rules right now, so these are the strongest available. Be cautious.\n")
     out.append("Buy manually with `/buy COIN amount` if you agree.")
     tg("\n".join(out))
 
