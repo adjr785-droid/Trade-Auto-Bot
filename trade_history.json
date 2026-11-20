@@ -52,5 +52,12 @@
         "time": 1795202101.6599848,
         "reason": "MANUAL SELL ALL",
         "strategy": "MANUAL"
+    },
+    {
+        "sym": "BGB-USDT",
+        "pnl": -0.0011345799999998752,
+        "time": 1795208001.5939193,
+        "reason": "MANUAL SELL ALL",
+        "strategy": "OTHER"
     }
 ]
