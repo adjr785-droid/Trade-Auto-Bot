@@ -6948,6 +6948,38 @@
             "reason": "OVERSOLD matched, BTC safety filter blocked buying",
             "min_volume": 1000000,
             "strategy": "OVERSOLD"
+        },
+        {
+            "time": 1795197223,
+            "rank": 23,
+            "sym": "JCT-USDT",
+            "vol": 3010608.0,
+            "chg": -13.388,
+            "price": 0.001572,
+            "rsi": 21.65,
+            "rr": null,
+            "ma5": 0.001583,
+            "ma10": 0.001625,
+            "decision": "SETUP \u2014 NOT QUEUED",
+            "reason": "OVERSOLD matched, BTC safety filter blocked buying",
+            "min_volume": 1000000,
+            "strategy": "OVERSOLD"
+        },
+        {
+            "time": 1795197223,
+            "rank": 35,
+            "sym": "UNI-USDT",
+            "vol": 1352428.3176,
+            "chg": -9.901,
+            "price": 4.461,
+            "rsi": 18.95,
+            "rr": null,
+            "ma5": 4.6266,
+            "ma10": 4.7261,
+            "decision": "SETUP \u2014 NOT QUEUED",
+            "reason": "OVERSOLD matched, BTC safety filter blocked buying",
+            "min_volume": 1000000,
+            "strategy": "OVERSOLD"
         }
     ]
 }
