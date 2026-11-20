@@ -6,8 +6,8 @@ except Exception:
 try:import fcntl
 except ImportError:fcntl=None
 TK=os.environ.get('TG_TOKEN');CHAT=str(os.environ.get('TG_CHAT_ID',''));API=f"https://api.telegram.org/bot{TK}"
-DB,ST,CFG,QF,LF,CD,SC,HIST,LOCK,SH,OUT,AL="positions.json","tg_state.json","settings.json","queue.json","profit_ledger.json",".cmd_cooldown.json","scan_state.json","trade_history.json",".bot.lock","scan_history.json","telegram_output.json","alerts.json"
-FILES=[DB,ST,CFG,QF,LF,CD,SC,HIST,SH,OUT,AL]
+DB,ST,CFG,QF,LF,CD,SC,HIST,LOCK,SH,OUT,AL,ATHATL_CACHE="positions.json","tg_state.json","settings.json","queue.json","profit_ledger.json",".cmd_cooldown.json","scan_state.json","trade_history.json",".bot.lock","scan_history.json","telegram_output.json","alerts.json","ath_atl_cache.json"
+FILES=[DB,ST,CFG,QF,LF,CD,SC,HIST,SH,OUT,AL,ATHATL_CACHE]
 STABLE=['USDC','USDT','DAI','FDUSD','TUSD','USDD','USDE'];LEV=['3L','3S','5L','5S','10L','10S','2L','2S'];BL=['RPANW','CT','ONE']
 ex=ccxt.bitget({'apiKey':os.environ.get('BITGET_API_KEY'),'secret':os.environ.get('BITGET_API_SECRET'),'password':os.environ.get('BITGET_API_PASSPHRASE'),'enableRateLimit':True});ex.options['createMarketBuyOrderRequiresPrice']=False
 client=genai.Client(api_key=os.environ.get('GEMINI_API_KEY')) if genai and os.environ.get('GEMINI_API_KEY') else None
@@ -603,6 +603,71 @@ def panic_sell():
     save(DB,db);save(QF,{});s=cfg();s['auto_buy_enabled']=False;save(CFG,s)
     tg(f"⚠️ *PANIC INCOMPLETE.* Still held: `{', '.join(failed)}`\nAuto-buy PAUSED." if failed else "🛑 *PANIC COMPLETE.* All positions sold. Auto-buy PAUSED.")
 
+def get_bitget_ath_atl(sym):
+    """Return exchange-wide spot ATH/ATL from Bitget weekly candles, cached for 24h.
+
+    Weekly OHLC highs/lows preserve intraw week extremes. Historical requests are
+    split into <=89-day windows to respect Bitget history-candle query limits.
+    """
+    cache=load(ATHATL_CACHE,{})
+    now=time.time()
+    item=cache.get(sym,{}) if isinstance(cache,dict) else {}
+    if item and now-float(item.get("checked_at",0) or 0)<86400:
+        return item.get("ath"),item.get("atl"),item.get("status","cached")
+    try:
+        markets=ex.load_markets()
+        market=markets.get(S(sym)) or markets.get(sym)
+        if not market or not market.get("spot",False):
+            return None,None,"not a Bitget spot market"
+        info=market.get("info") or {}
+        start_ms=0
+        for key in ("listTime","listingTime","onlineTime","openTime","ctime"):
+            value=info.get(key)
+            try:
+                n=int(float(value))
+                if n>0:
+                    start_ms=n if n>100000000000 else n*1000
+                    break
+            except (TypeError,ValueError):
+                continue
+        # If Bitget metadata omits listing time, scan from the exchange's historical-data era.
+        if not start_ms:start_ms=1514764800000  # 2018-01-01 UTC
+        end_ms=int(now*1000)
+        window_ms=89*24*60*60*1000
+        ath=None;atl=None;cursor=start_ms;calls=0
+        api_symbol=str(market.get("id") or sym.replace("/",""))
+        while cursor<end_ms and calls<100:
+            window_end=min(cursor+window_ms,end_ms)
+            response=requests.get("https://api.bitget.com/api/v2/spot/market/history-candles",params={
+                "symbol":api_symbol,"granularity":"1week","startTime":str(cursor),
+                "endTime":str(window_end),"limit":"200"
+            },timeout=12)
+            response.raise_for_status();payload=response.json()
+            if payload.get("code")!="00000":
+                raise RuntimeError(str(payload.get("msg") or payload.get("code") or "Bitget candle API error"))
+            rows=payload.get("data") or []
+            for row in rows:
+                try:
+                    high=float(row[2]);low=float(row[3])
+                    if high>0:ath=high if ath is None else max(ath,high)
+                    if low>0:atl=low if atl is None else min(atl,low)
+                except (TypeError,ValueError,IndexError):continue
+            cursor=window_end+1;calls+=1
+            if calls%4==0:time.sleep(0.12)
+        if calls>=100 and cursor<end_ms:
+            raise RuntimeError("historical scan limit reached; ATH/ATL not certified")
+        if ath is None or atl is None:
+            return None,None,"no historical candles returned"
+        cache[sym]={"ath":ath,"atl":atl,"checked_at":now,"status":"complete"}
+        save(ATHATL_CACHE,cache)
+        return ath,atl,"complete"
+    except Exception as e:
+        print(f"ATH/ATL ERR {sym}: {e}")
+        # Retain prior successful values rather than replacing them with guesses.
+        if item and item.get("ath") and item.get("atl"):
+            return item.get("ath"),item.get("atl"),"cached; refresh failed"
+        return None,None,"unavailable"
+
 def get_holdings_text():
     try:balance=ex.fetch_balance();totals=balance.get('total') or {};free=balance.get('free') or {}
     except Exception as e:return f"❌ Could not fetch exchange holdings: {e}"
@@ -627,7 +692,10 @@ def get_holdings_text():
             pnl=(price-entry)/entry*100;pnl_usdt=(price-entry)*qty
             pnl_line=f"Entry: {fp(entry)} USDT | PnL: {pnl:+.2f}% (${pnl_usdt:+.2f})"
         tp=cfg().get('trail_pct',0) or 0
-        coin_lines.extend([f"🪙 *{coin}*",f"Quantity: {qty:.8g}",f"Current price: {fp(price)} USDT",f"Market value: ${qty*price:.2f}",pnl_line,f"RSI (1h): {rsi if rsi is not None else 'N/A'}",f"MA5 (1h): {fp(ma5) if ma5 is not None else 'N/A'}",f"MA10 (1h): {fp(ma10) if ma10 is not None else 'N/A'}",f"Market sentiment: {sentiment}",f"Bot trailing stop: {'ON ('+str(tp)+'% below peak)' if tp>0 else 'OFF'}",f"Peak price: {fp(entry_data.get('peak_price')) if entry_data.get('peak_price') else 'N/A'}",f"Exchange stop level: {fp(entry_data.get('xsl')) if entry_data.get('xsl') else 'Not verified'}"])
+        ath,atl,ath_status=get_bitget_ath_atl(sym)
+        ath_line=f"ATH (Bitget lifetime): {fp(ath)} USDT" if ath else "ATH (Bitget lifetime): Unavailable"
+        atl_line=f"ATL (Bitget lifetime): {fp(atl)} USDT" if atl else "ATL (Bitget lifetime): Unavailable"
+        coin_lines.extend([f"🪙 *{coin}*",f"Quantity: {qty:.8g}",f"Current price: {fp(price)} USDT",f"Market value: ${qty*price:.2f}",ath_line,atl_line,pnl_line,f"RSI (1h): {rsi if rsi is not None else 'N/A'}",f"MA5 (1h): {fp(ma5) if ma5 is not None else 'N/A'}",f"MA10 (1h): {fp(ma10) if ma10 is not None else 'N/A'}",f"Market sentiment: {sentiment}",f"Bot trailing stop: {'ON ('+str(tp)+'% below peak)' if tp>0 else 'OFF'}",f"Peak price: {fp(entry_data.get('peak_price')) if entry_data.get('peak_price') else 'N/A'}",f"Exchange stop level: {fp(entry_data.get('xsl')) if entry_data.get('xsl') else 'Not verified'}"])
         coin_lines.append("");count+=1
     total_portfolio_value=usdt_total+total_coins_value
     _r=ngn_rate();lines=[f"💼 *Total Portfolio Value:* ${total_portfolio_value:.2f} USDT"+(f" | ₦{total_portfolio_value*_r:,.0f}" if _r else ""),"",f"💵 *Available USDT Cash*",f"Total: ${usdt_total:.2f} | Free to Trade: ${usdt_free:.2f}","━━━━━━━━━━━━━━━━━━━━"]
