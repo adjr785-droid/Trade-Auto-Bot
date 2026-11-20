@@ -10,5 +10,19 @@
         "pnl": -0.25194676000000027,
         "time": 1795102006.029435,
         "reason": "MANUAL SELL $6.76"
+    },
+    {
+        "sym": "BTW-USDT",
+        "pnl": 0.10936800000000058,
+        "time": 1795143545.6652615,
+        "reason": "MANUAL SELL ALL",
+        "strategy": "OTHER"
+    },
+    {
+        "sym": "ADA-USDT",
+        "pnl": -0.17926019999999968,
+        "time": 1795143552.3297338,
+        "reason": "MANUAL SELL ALL",
+        "strategy": "OTHER"
     }
 ]
