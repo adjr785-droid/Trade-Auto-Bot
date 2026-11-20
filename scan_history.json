@@ -6916,6 +6916,38 @@
             "decision": "SKIP",
             "reason": "Vol below $5M",
             "min_volume": 5000000
+        },
+        {
+            "time": 1795196131,
+            "rank": 23,
+            "sym": "JCT-USDT",
+            "vol": 3017654.8,
+            "chg": -13.987,
+            "price": 0.001562,
+            "rsi": 21.65,
+            "rr": null,
+            "ma5": 0.001583,
+            "ma10": 0.001625,
+            "decision": "SETUP \u2014 NOT QUEUED",
+            "reason": "OVERSOLD matched, BTC safety filter blocked buying",
+            "min_volume": 1000000,
+            "strategy": "OVERSOLD"
+        },
+        {
+            "time": 1795196131,
+            "rank": 36,
+            "sym": "UNI-USDT",
+            "vol": 1346306.0018,
+            "chg": -10.573,
+            "price": 4.449,
+            "rsi": 18.95,
+            "rr": null,
+            "ma5": 4.6266,
+            "ma10": 4.7261,
+            "decision": "SETUP \u2014 NOT QUEUED",
+            "reason": "OVERSOLD matched, BTC safety filter blocked buying",
+            "min_volume": 1000000,
+            "strategy": "OVERSOLD"
         }
     ]
 }
