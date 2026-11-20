@@ -698,7 +698,15 @@ def get_holdings_text():
         coin_lines.extend([f"🪙 *{coin}*",f"Quantity: {qty:.8g}",f"Current price: {fp(price)} USDT",f"Market value: ${qty*price:.2f}",ath_line,atl_line,pnl_line,f"RSI (1h): {rsi if rsi is not None else 'N/A'}",f"MA5 (1h): {fp(ma5) if ma5 is not None else 'N/A'}",f"MA10 (1h): {fp(ma10) if ma10 is not None else 'N/A'}",f"Market sentiment: {sentiment}",f"Bot trailing stop: {'ON ('+str(tp)+'% below peak)' if tp>0 else 'OFF'}",f"Peak price: {fp(entry_data.get('peak_price')) if entry_data.get('peak_price') else 'N/A'}",f"Exchange stop level: {fp(entry_data.get('xsl')) if entry_data.get('xsl') else 'Not verified'}"])
         coin_lines.append("");count+=1
     total_portfolio_value=usdt_total+total_coins_value
-    _r=ngn_rate();lines=[f"💼 *Total Portfolio Value:* ${total_portfolio_value:.2f} USDT"+(f" | ₦{total_portfolio_value*_r:,.0f}" if _r else ""),"",f"💵 *Available USDT Cash*",f"Total: ${usdt_total:.2f} | Free to Trade: ${usdt_free:.2f}","━━━━━━━━━━━━━━━━━━━━"]
+    # Report BGB separately as a wallet balance; it is not a convertible source
+    # for Bitget's BGB dust conversion and must never be auto-sold as dust.
+    bgb_total=float(totals.get('BGB',0.0) or 0.0)
+    bgb_free=float(free.get('BGB',0.0) or 0.0)
+    bgb_price=live('BGB-USDT') if bgb_total>0 else None
+    bgb_value=bgb_total*bgb_price if bgb_price else None
+    bgb_report=(f"🟡 *BGB Wallet Balance (not auto-converted)*\nTotal: {bgb_total:.8g} BGB | Free: {bgb_free:.8g} BGB"
+                +(f" | Value: ${bgb_value:.4f} USDT" if bgb_value is not None else " | USDT value: unavailable"))
+    _r=ngn_rate();lines=[f"💼 *Total Portfolio Value:* ${total_portfolio_value:.2f} USDT"+(f" | ₦{total_portfolio_value*_r:,.0f}" if _r else ""),"",f"💵 *Available USDT Cash*",f"Total: ${usdt_total:.2f} | Free to Trade: ${usdt_free:.2f}",bgb_report,"━━━━━━━━━━━━━━━━━━━━"]
     if unpriced:
         note="\n⚠️ Held but with no USDT price: "+", ".join(unpriced[:3])
         if len(unpriced)>3: note+=f" and {len(unpriced)-3} more..."
