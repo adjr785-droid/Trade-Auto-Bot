@@ -443,17 +443,26 @@ def cmd_cancel_all():
         tg(f"✅ *CANCELLED:* {count} open orders on Bitget.\nRun `/audit` to re-arm stops.")
     except Exception as e:tg(f"❌ Failed to cancel: {e}")
 
-def cmd_sync():
-    tg("🔄 Syncing manual coins to bot database...")
-    try:b=ex.fetch_balance()['total']
-    except:tg("❌ Failed to fetch balance.");return
-    db=load(DB);added=[]
-    for c,a in b.items():
-        if c in STABLE or a<=0:continue
-        sym=f"{c}-USDT";p=live(sym)
-        if p and a*p>1.02 and sym not in db:
-            db[sym]=NP(p,round(p*(1-cfg()['stop_loss_pct']/100),6));save(DB,db);added.append(sym);place_trailing_sl(sym,a)
-    tg(f"✅ *SYNCED:* Added {len(added)} coins:\n`{chr(10).join(added)}`" if added else "✅ No new manual coins found to sync.")
+def cleanup_dust():
+    try:
+        bal=ex.fetch_balance();tot=bal.get('total') or {};fr=bal.get('free') or {};sold=[]
+        for c,q in tot.items():
+            try:q=float(q or 0)
+            except:continue
+            if q<=0 or c in STABLE or c in BL:continue
+            sym=f"{c}-USDT";p=live(sym)
+            if not p:continue
+            if q*p<1.0:
+                fq=float(fr.get(c,0) or 0)
+                if fq>0:
+                    try:
+                        aq=float(ex.amount_to_precision(S(sym),fq))
+                        if aq>0:
+                            ex.create_market_sell_order(S(sym),aq)
+                            sold.append(f"{c}: {fq:.6g} (${q*p:.2f})")
+                    except Exception as e:print(f"DUST SELL ERR {sym}: {e}")
+        if sold:tg("🧹 *DUST CLEANUP:* Sold the following dust to USDT:\n"+"\n".join(sold))
+    except Exception as e:print(f"DUST CLEANUP ERR: {e}")
 
 def panic_sell():
     db=load(DB)
@@ -1109,7 +1118,6 @@ def handle(t,age):
     elif l in ("/panic","🚨 panic"):panic_prompt()
     elif l=="panic_cancel":tg("👍 Panic cancelled.")
     elif l=="panic_confirm":panic_sell() if age<=900 else tg("⌛ That confirmation expired.")
-    elif l=="/sync":cmd_sync()
     elif l in ("/cancel","❌ cancel"):cmd_cancel_all()
     elif l=="/audit":
         r=audit_system()
@@ -1193,7 +1201,7 @@ if __name__=="__main__":
     if lk is None:print("Another run is in progress; exiting.");sys.exit(0)
     try:
         # Each step is isolated: a failure in one step is reported (at most every 30 min per step) and never stops the scan or the others.
-        for fn in (heartbeat,_C.clear,cleanup_telegram_output,scan_history_state,audit_system,tg_check,manage,track_day_equity,git_sync,check_hourly_balance,check_alerts,check_daily_summary,scan,exec_q):
+        for fn in (heartbeat,_C.clear,cleanup_telegram_output,scan_history_state,audit_system,cleanup_dust,tg_check,manage,track_day_equity,git_sync,check_hourly_balance,check_alerts,check_daily_summary,scan,exec_q):
             try:fn()
             except Exception as e:
                 nm=getattr(fn,"__name__","step");print(f"STEP {nm} FAILED: {e}\n{traceback.format_exc()[-400:]}")
