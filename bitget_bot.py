@@ -55,6 +55,13 @@ def _display_mid():
     except Exception:
         return None
 
+def new_display():
+    """Forget the saved display message so the next screen is sent as a brand-new message (recovers from a cleared chat)."""
+    try:
+        st=load(ST,{});st.pop("display_message_id",None);save(ST,st)
+    except Exception as e:print(f"NEW DISPLAY ERR: {e}")
+    _UI["mid"]=None
+
 def _remember_display_mid(mid):
     if not mid:return
     _UI["mid"]=mid
@@ -1567,7 +1574,9 @@ def handle(t,age):
     elif l.startswith("/ai "):ask_ai(t[4:].strip())
     elif l=="/ai":ask_ai("Give me a market overview.")
     elif l in MSG:tg(MSG[l])
-    elif l in ("/menu","📊 menu"):menu()
+    elif l in ("/menu","📊 menu","/start"):
+        if not _UI.get("mid"):new_display()  # a typed or keyboard Menu tap always creates a fresh, visible menu
+        menu()
     elif l in ("/clear","/wipe","🧹 clear chat"):cmd_clear()
     elif l=="/dust cancel":tg("❌ Dust conversion cancelled.")
     elif l in ("/dust","/dust confirm"):cmd_dust(l)
@@ -1718,6 +1727,11 @@ if __name__=="__main__":
     lk=acquire_lock()
     if lk is None:print("Another run is in progress; exiting.");sys.exit(0)
     T0=time.time()
+    try:
+        _st=load(ST,{})
+        if not _st.get("display_reset_v1"):  # one-time: forget a display message that may no longer be visible
+            _st.pop("display_message_id",None);_st["display_reset_v1"]=True;save(ST,_st)
+    except Exception as e:print(f"DISPLAY RESET ERR: {e}")
     try:
         # Each step is isolated: a failure in one step is reported (at most every 30 min per step) and never stops the scan or the others.
         for fn in (heartbeat,_C.clear,cleanup_telegram_output,auto_clear_daily,scan_history_state,audit_system,tg_check,manage,track_day_equity,git_sync,check_hourly_balance,check_alerts,check_daily_summary,scan,exec_q):run_step(fn)
