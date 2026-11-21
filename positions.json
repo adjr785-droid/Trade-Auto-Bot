@@ -3,13 +3,13 @@
         "entry_price": 0.01411,
         "safe_zone": 0.01411,
         "stop_loss": 0.01411,
-        "peak_price": 0.0150928,
-        "last_price": 0.0150928,
+        "peak_price": 0.0151033,
+        "last_price": 0.0148576,
         "opened_at": 1795233526.4441814,
         "sl_pct": 8.8,
         "strategy": "MANUAL",
         "xsl": 0.01411,
-        "seen": 1795240635.7596571,
+        "seen": 1795240884.8658025,
         "partial_done": true
     },
     "PUMP-USDT": {
@@ -17,11 +17,11 @@
         "safe_zone": 0.002254,
         "stop_loss": 0.002123,
         "peak_price": 0.002261,
-        "last_price": 0.002209,
+        "last_price": 0.002212,
         "opened_at": 1795235212.0214336,
         "sl_pct": 5.8,
         "strategy": "MANUAL",
         "xsl": 0.002123,
-        "seen": 1795240636.1162624
+        "seen": 1795240885.4652357
     }
 }
