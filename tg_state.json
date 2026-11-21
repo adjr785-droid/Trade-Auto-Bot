@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT23.61/\u20a631,941",
+    "kb_ph": "USDT23.58/\u20a631,899",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -37,7 +37,7 @@
     "out_text": "\ud83d\udcbc *HOURLY HOLDINGS*\n\ud83d\udcbc *Total Portfolio Value:* $23.60 USDT | \u20a631,933\n\n\ud83d\udcb5 *Available USDT Cash*\nTotal: $13.29 | Free to Trade: $13.29\n\ud83d\udfe1 *BGB Wallet Balance (not auto-converted)*\nTotal: 0.00095019464 BGB | Free: 0.00095019464 BGB | Value: $0.0015 USDT\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\n\ud83d\udcbc *Coin Holdings (Value: $10.29)*\n\ud83e\ude99 *COLLECT*\nQuantity: 402.77682\nCurrent price: 0.025553 USDT\nMarket value: $10.29",
     "out_mode": "Markdown",
     "out_mid": 3073,
-    "kb_mid": 3133,
+    "kb_mid": 3134,
     "pages": {
         "p": [
             "\ud83d\udcbc *HOURLY HOLDINGS*\n\ud83d\udcbc *Total Portfolio Value:* $23.60 USDT | \u20a631,933\n\n\ud83d\udcb5 *Available USDT Cash*\nTotal: $13.29 | Free to Trade: $13.29\n\ud83d\udfe1 *BGB Wallet Balance (not auto-converted)*\nTotal: 0.00095019464 BGB | Free: 0.00095019464 BGB | Value: $0.0015 USDT\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\n\ud83d\udcbc *Coin Holdings (Value: $10.29)*\n\ud83e\ude99 *COLLECT*\nQuantity: 402.77682\nCurrent price: 0.025553 USDT\nMarket value: $10.29",
