@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935688486,
+    "last_update_id": 935688490,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -18,7 +18,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "2/8",
+                "text": "6/8",
                 "callback_data": "pg:x"
             },
             {
@@ -35,7 +35,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 2/8*",
+    "panel_text": "\ud83d\udcc4 *Page 6/8*",
     "out_text": "\ud83e\udd16 *BOT*\n\ud83d\udd58 Since last check (27 min\nago): \ud83d\udfe2 balance +0.04 USDT\nExchange connection: \u2705 OK\nPortfolio: $23.61 USDT |\n\u20a631,937\nUSDT cash: $13.29 (free $13.29)\nAuto-buy: ON ($3.7348 per trade)\nBTC safety filter: OK\nMarket filter: only 20% of coins\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "kb_mid": 3150,
@@ -51,8 +51,8 @@
     "last_cmd": "/bot",
     "page_mem": {
         "/bot": [
-            1,
-            1795303761.9423356
+            5,
+            1795303780.530867
         ]
     },
     "out_mid": 3148,
@@ -67,7 +67,7 @@
             "Advice: \ud83d\udfe1 HOLD / WATCH\nWhy: Trend is mixed; keep the\nstop-loss active\n\u26a0\ufe0f Long-term: speculative\n(100-day change -58%, above\n50-day average)\n\n\n\u2705 No sell advised right now.\nFor possible new buys use\n\u2800\n\u2800",
             "/analyse.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 1,
+        "i": 5,
         "mode": "Markdown",
         "x": [
             {
