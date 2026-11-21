@@ -7,7 +7,7 @@
     "auto_buy_enabled": true,
     "auto_buy_amount_usdt": 3.7348,
     "max_tokens_before_consolidation": 3,
-    "max_hold_hours": 713,
+    "max_hold_hours": 704,
     "trail_pct": 8.0,
     "crash_guard_pct": 10.0,
     "rsi_exit": 75,
