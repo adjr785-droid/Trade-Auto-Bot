@@ -46,16 +46,33 @@ def compact_balance():
         _BAL["t"],_BAL["m"]=time.time(),txt;return txt
     except:return _BAL["m"]
 
+def _display_mid():
+    """Return the one persistent Telegram display message ID, shared across workflow runs."""
+    if _UI.get("mid"):
+        return _UI["mid"]
+    try:
+        return load(ST,{}).get("display_message_id")
+    except Exception:
+        return None
+
+def _remember_display_mid(mid):
+    if not mid:return
+    _UI["mid"]=mid
+    st=load(ST,{})
+    st["display_message_id"]=mid
+    save(ST,st)
+
 def _send(m,mode,btn=None):
     try:
-        if _UI.get("edit_mode") and _UI.get("mid"):
-            payload={"chat_id":CHAT,"message_id":_UI["mid"],"text":m,"parse_mode":mode or "Markdown"}
-            if btn:payload["reply_markup"]=btn
+        mid=_display_mid()
+        if mid:
+            payload={"chat_id":CHAT,"message_id":mid,"text":m,"parse_mode":mode or "Markdown",
+                     "reply_markup":btn if btn else {"inline_keyboard":[]}}
             r=requests.post(API+"/editMessageText",json=payload,timeout=10)
             if r.ok:return
             body=r.json() if r.headers.get("content-type","").startswith("application/json") else {}
             if "message is not modified" in str(body.get("description","")).lower():return
-        
+        # No saved display yet, or Telegram says it can no longer be edited: create its replacement.
         rm=btn or dict(KB)
         if not btn:
             ph=compact_balance()
@@ -67,13 +84,18 @@ def _send(m,mode,btn=None):
             p.pop("parse_mode",None);p["text"]=re.sub(r'<[^>]+>','',m) if mode=="HTML" else m
             r=requests.post(API+"/sendMessage",json=p,timeout=10)
         if r.ok:
-            body=r.json();mid=(body.get("result") or {}).get("message_id")
-            if mid:out=load(OUT,[]);out.append({"message_id":mid,"sent_at":time.time()});save(OUT,out)
+            body=r.json();new_mid=(body.get("result") or {}).get("message_id")
+            if new_mid:
+                _remember_display_mid(new_mid)
+                out=load(OUT,[]);out.append({"message_id":new_mid,"sent_at":time.time()});save(OUT,out)
     except Exception as e:print("TG EXCEPTION:",e)
 
 def cleanup_telegram_output():
     now=time.time();out=load(OUT,[]);keep=[]
+    persistent_mid=load(ST,{}).get("display_message_id")
     for item in out:
+        if item.get("message_id")==persistent_mid:
+            keep.append(item);continue
         if now-float(item.get("sent_at",now))<float(cfg().get('cleanup_hours',24.0) or 24.0)*3600:keep.append(item);continue
         try:
             r=requests.post(API+"/deleteMessage",json={"chat_id":CHAT,"message_id":item.get("message_id")},timeout=10)
@@ -161,13 +183,11 @@ def auto_clear_daily():
 
 def menu():
     b=lambda t,c:{"text":t,"callback_data":c}
-    ui_send("🖥️ *TRADE AUTO BOT — DASHBOARD*\nSelect a screen below.",[
-      [b("💼 Holdings","m:r:holdings"),b("📊 Market","m:r:market")],
-      [b("📈 Performance","m:r:stats"),b("🧠 Ask AI","m:ai:1")],
-      [b("🧾 Trade History","m:r:history"),b("🛡️ Risk & Bot","m:r:bot")],
+    ui_send("🕹️ *MAIN MENU*\nSelect an option below.",[
       [b("🤖 Bot","/bot"),b("📈 Stats","/stats")],
-      [b("🏆 Analyse (Top 3)","/analyse"),b("🔎 Analyse Coin","m:an")],
-      [b("🧹 Clear Chat","/clear"),b("⚙️ Settings","m:set")],
+      [b("🏆 Analyse (Top 3)","/analyse"),b("🧹 Clear Chat","/clear")],
+      [b("🔎 Analyse Coin","m:an"),b("⚙️ Settings","m:set")],
+      [b("💼 Holdings","m:r:holdings"),b("🧠 Ask AI","m:ai:1")],
       [b("🧰 Tools","m:tools"),b("🚨 PANIC SELL","/panic")]
     ])
 
@@ -1400,7 +1420,7 @@ RUN={"scan":"/scan","sync":"/sync","holdings":"/holdings","analyse":"/analyse","
 AI_Q={"1":"Give me a market overview.","2":"Review my current holdings and say which to hold or sell.","3":"Which single coin looks best to buy right now and why?","4":"What is the biggest risk in my portfolio right now?"}
 
 def ui_send(text,rows):
-    rm={"inline_keyboard":rows};mid=_UI.get("mid")
+    rm={"inline_keyboard":rows};mid=_display_mid()
     if mid:
         try:
             r=requests.post(API+"/editMessageText",json={"chat_id":CHAT,"message_id":mid,"text":text,"parse_mode":"Markdown","reply_markup":rm},timeout=10)
@@ -1517,7 +1537,14 @@ def ui_cb(t):
               [_B("❌ Cancel Orders","m:r:cancel"),_B("🔔 Alerts","m:r:alerts")],
               [_B("🧹 Dust → BGB","m:r:dust"),_B("🛒 Buy","m:buy")],
               [_B("💸 Sell","m:sell"),_B("🔔 Price Alert","m:al")],
-              [_B("⬅️ Dashboard","m:menu")]
+              [_B("📊 Dashboard","m:dash")],
+              [_B("⬅️ Main Menu","m:menu")]
+            ])
+        elif a=="dash":
+            ui_send("📊 *DASHBOARD*\nChoose a dashboard screen.",[
+              [_B("📊 Market","m:r:market"),_B("📈 Performance","m:r:stats")],
+              [_B("🧾 Trade History","m:r:history"),_B("🛡️ Risk & Bot","m:r:bot")],
+              [_B("⬅️ Tools","m:tools"),_B("🏠 Main Menu","m:menu")]
             ])
         elif a=="scan_hist":
             cmd_scan_history("/scan_history")
@@ -1599,6 +1626,8 @@ def tg_check(poll=0):
                 except Exception:pass
             if age>1800:continue
             _UI["mid"]=m.get("message_id") if "callback_query" in u else None
+            if "callback_query" in u and (txt.startswith("m:") or txt.startswith("scan_history:")):
+                _remember_display_mid(m.get("message_id"))
             _TG_N["n"]+=1
             if "callback_query" in u and (txt.startswith("m:") or txt.startswith("scan_history:")):_UI["edit_mode"]=True
             try:handle(txt,age)
