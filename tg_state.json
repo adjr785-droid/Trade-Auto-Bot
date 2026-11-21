@@ -1,15 +1,15 @@
 {
-    "last_update_id": 935688329,
+    "last_update_id": 935688331,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT24.29/\u20a632,862|[['\ud83d\udccb Menu', '\ud83e\uddf0 Tools', '\ud83c\udfc6 Analyse']]",
+    "kb_ph": "USDT24.28/\u20a632,850|[['\ud83d\udccb Menu', '\ud83e\uddf0 Tools', '\ud83c\udfc6 Analyse']]",
     "layout_bottom": [
         "tools",
         "analyse"
     ],
-    "out_mid": 2895,
-    "panel_mid": 2898
+    "out_mid": 2901,
+    "panel_hidden": true
 }
