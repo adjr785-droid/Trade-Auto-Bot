@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935688444,
+    "last_update_id": 935688447,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT24.23/\u20a632,778",
+    "kb_ph": "USDT24.19/\u20a632,723",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -34,8 +34,12 @@
         ],
         [
             {
+                "text": "\u2b05\ufe0f Previous",
+                "callback_data": "scan_history:1:page=2"
+            },
+            {
                 "text": "Next \u27a1\ufe0f",
-                "callback_data": "scan_history:2:"
+                "callback_data": "scan_history:3:page=2"
             }
         ],
         [
@@ -46,14 +50,14 @@
         ]
     ],
     "panel_text": "\ud83d\udcc4 *Page 1/2*",
-    "out_text": "\ud83d\udd0e *SCAN HISTORY \u2014 QUERY*\nMatched 462 of 462 records | all coins\nPage 1/24 | Window 0.7h\n\n```COIN         RSI    R:R  DECISION\n---------------------------------------\nBTC           56.3      - SKIP\nETH           56.0      - SKIP\nSOL           57.5      - SKIP\nUSDGO         54.8      - SKIP\nZEC           54.9      - SKIP\nMTX           50.9      - SKIP\nUMXM          41.8      - SKIP\nDOGE          55.3      - SKIP\n```",
+    "out_text": "\ud83d\udd0e *SCAN HISTORY \u2014 QUERY*\nMatched 462 of 462 records | page=2\nPage 2/24 | Window 0.8h\n\n```COIN         RSI    R:R  DECISION\n---------------------------------------\nPUMP          50.7      - SKIP\nCOLLECT       54.6      - SKIP\nWLD           50.4      - SKIP\nTRX           57.8      - SKIP\nBTW           50.6      - SKIP\nSKYAI         60.7      - SKIP\nJCT           67.8      - SKIP\nUNI           61.1      - SKIP\n```",
     "out_mode": "Markdown",
     "out_mid": 3073,
-    "kb_mid": 3094,
+    "kb_mid": 3096,
     "pages": {
         "p": [
-            "\ud83d\udd0e *SCAN HISTORY \u2014 QUERY*\nMatched 462 of 462 records | all coins\nPage 1/24 | Window 0.7h\n\n```COIN         RSI    R:R  DECISION\n---------------------------------------\nBTC           56.3      - SKIP\nETH           56.0      - SKIP\nSOL           57.5      - SKIP\nUSDGO         54.8      - SKIP\nZEC           54.9      - SKIP\nMTX           50.9      - SKIP\nUMXM          41.8      - SKIP\nDOGE          55.3      - SKIP\n```",
-            "```\nHYPE          50.6      - SKIP\nSUI           51.7      - SKIP\nBGB           50.6      - SKIP\nNEAR          50.3      - SKIP\nTAO           57.4      - SKIP\nEVAA          57.6      - SKIP\nADA           57.4      - SKIP\nBNB           55.5      - SKIP\nENA           50.5      - SKIP\nBLESS         45.6      - SKIP\nPEPE          48.2      - SKIP\nDGAI          71.7      - SKIP```"
+            "\ud83d\udd0e *SCAN HISTORY \u2014 QUERY*\nMatched 462 of 462 records | page=2\nPage 2/24 | Window 0.8h\n\n```COIN         RSI    R:R  DECISION\n---------------------------------------\nPUMP          50.7      - SKIP\nCOLLECT       54.6      - SKIP\nWLD           50.4      - SKIP\nTRX           57.8      - SKIP\nBTW           50.6      - SKIP\nSKYAI         60.7      - SKIP\nJCT           67.8      - SKIP\nUNI           61.1      - SKIP\n```",
+            "```\nLTC           50.7      - SKIP\nONDO          53.2      - SKIP\nIDOL          80.1      - SKIP\nGRAM          50.4      - SKIP\nDOS           37.3      - SKIP\nICNT          45.4      - SKIP\nLINK          53.1      - SKIP\nARX           46.2      - SKIP\nARB           51.9      - SKIP\nAVAX          54.9      - SKIP\nINJ           43.9      - SKIP\nSOON          57.3      - SKIP```"
         ],
         "i": 0,
         "mode": "Markdown"
