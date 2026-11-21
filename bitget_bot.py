@@ -82,10 +82,12 @@ def _edit(mid,text,mode,rm=None):
     except Exception:pass
     return False
 
-def _create(text,mode,rm):
+def _create(text,mode,rm,silent=False):
     text=(text or "")[:4000]
     try:
-        p={"chat_id":CHAT,"text":text,"reply_markup":rm}
+        p={"chat_id":CHAT,"text":text}
+        if rm:p["reply_markup"]=rm
+        if silent:p["disable_notification"]=True
         if mode:p["parse_mode"]=mode
         r=requests.post(API+"/sendMessage",json=p,timeout=10)
         if not r.ok:
@@ -102,11 +104,8 @@ def _create(text,mode,rm):
 def _make_out(m,mode):
     """Create the upper OUTPUT message (carries the bottom keyboard + balance box). The panel is re-created after it so it always sits below."""
     _del_msg(_mid("out_mid"));_del_msg(_mid("panel_mid"))
-    _set_mid("panel_mid",None);_set_mid("out_mid",None)
-    rm=dict(KB)
-    ph=compact_balance()
-    if ph:rm["input_field_placeholder"]=ph[:64]
-    mid=_create(m,mode,rm)
+    _set_mid("panel_mid",None);_set_mid("out_mid",None);_set_mid("panel_kb",None)
+    mid=_create(m,mode,None)
     if mid:_set_mid("out_mid",mid)
     return mid
 
@@ -116,16 +115,48 @@ def new_display():
         _del_msg(_mid(k));_set_mid(k,None)
     _UI["mid"]=None
 
-def _panel(text,rows):
-    """Lower part: the buttons message."""
-    _UI["panel_used"]=True
-    rm={"inline_keyboard":rows}
+def _kb_rows(rows):
+    """Turn button rows into bottom-keyboard keys; remember which command each key's text stands for."""
+    mp={};out=[]
+    for r in rows:
+        row=[]
+        for b in r:
+            d=b.get("callback_data")
+            if d is None:continue
+            t=str(b.get("text","?"))
+            while t in mp and mp[t]!=d:t+="\u200b"
+            mp[t]=d;row.append({"text":t})
+        if row:out.append(row)
+    return out,mp
+
+def _push_kb(text,kb,mp,ph):
+    """Send the buttons as the bottom keyboard (below the text box) and drop the previous buttons message."""
+    st=load(ST,{});old=st.get("panel_mid")
+    rm={"keyboard":kb,"resize_keyboard":True,"is_persistent":True}
+    if ph:rm["input_field_placeholder"]=ph
+    nm=_create(text,"Markdown",rm,silent=True)
+    if nm:
+        st=load(ST,{});st["panel_mid"]=nm;st["panel_kb"]=kb;st["kb_map"]=mp;st["panel_ph"]=ph;st["panel_text"]=text;save(ST,st)
+        if old and old!=nm:_del_msg(old)
+
+def _panel(text,rows,touch=True):
+    """Lower part: the buttons, shown as the bottom keyboard under the text box."""
+    if touch:_UI["panel_used"]=True
     if not _mid("out_mid"):_make_out("📟 *OUTPUT*\nResults appear here.","Markdown")
-    pm=_mid("panel_mid")
-    if pm and _edit(pm,text,"Markdown",rm):return
-    if pm:_del_msg(pm);_set_mid("panel_mid",None)
-    nm=_create(text,"Markdown",rm)
-    if nm:_set_mid("panel_mid",nm)
+    kb,mp=_kb_rows(rows);ph=(compact_balance() or "")[:64]
+    st=load(ST,{})
+    if st.get("panel_mid") and st.get("panel_kb")==kb and st.get("panel_ph")==ph:
+        if st.get("kb_map")!=mp:st["kb_map"]=mp;save(ST,st)
+        return
+    _push_kb(text,kb,mp,ph)
+
+def _kb_refresh():
+    """Keep the USDT/₦ box in the text box current: re-send the same keyboard only when the balance text changed."""
+    st=load(ST,{});kb=st.get("panel_kb")
+    if not (st.get("panel_mid") and kb):return False
+    ph=(compact_balance() or "")[:64]
+    if st.get("panel_ph")!=ph:_push_kb(st.get("panel_text") or "🕹️ *MENU*",kb,st.get("kb_map") or {},ph)
+    return True
 
 def _send(m,mode,btn=None):
     """Upper part: output. Buttons (if any) go to the lower panel."""
@@ -133,7 +164,7 @@ def _send(m,mode,btn=None):
         out=_mid("out_mid")
         if not (out and _edit(out,m,mode or "Markdown",None)):_make_out(m,mode)
         if btn:_panel("👇 *Actions*",btn.get("inline_keyboard") if isinstance(btn,dict) else btn)
-        elif not _mid("panel_mid"):menu()
+        elif not _mid("panel_mid") or not _kb_refresh():menu()
     except Exception as e:print("TG EXCEPTION:",e)
 
 def cleanup_telegram_output():
@@ -258,7 +289,7 @@ def save(f,d):
     except Exception as e:print(f"SAVE ERR {f}: {e}")
 
 def cfg():
-    d={"rsi_min":42,"rsi_max":48,"stop_loss_pct":5.0,"auto_buy_enabled":True,"auto_buy_amount_usdt":10.0,"max_tokens_before_consolidation":3,"max_hold_hours":48,"trail_pct":8.0,"crash_guard_pct":10.0,"rsi_exit":75,"btc_rsi_min":50,"risk_per_trade_pct":1.0,"max_daily_loss_pct":3.0,"max_portfolio_exposure_pct":50.0,"max_position_pct":15.0,"max_daily_trades":5,"max_spread_pct":0.5,"auto_mode_v1":False,"rebuy_cooldown_hours":6.0,"atr_stop_enabled":True,"atr_stop_mult":2.0,"atr_stop_min_pct":3.0,"atr_stop_max_pct":10.0,"market_filter_enabled":True,"btc_trend_hours":50,"min_breadth_pct":30.0,"offline_alert_hours":3.0,"daily_summary_hour_utc":20,"max_daily_drawdown_pct":5.0,"partial_tp_pct":5.0,"partial_tp_fraction":0.5,"dynamic_trail":True,"sell_if_stop_fails":True,"scan_prefilter":True,"cleanup_hours":24.0,"scan_interval_minutes":15.0,"auto_clear_hours":24.0,"live_mode_seconds":270}
+    d={"rsi_min":42,"rsi_max":48,"stop_loss_pct":5.0,"auto_buy_enabled":True,"auto_buy_amount_usdt":10.0,"max_tokens_before_consolidation":3,"max_hold_hours":48,"trail_pct":8.0,"crash_guard_pct":10.0,"rsi_exit":75,"btc_rsi_min":50,"risk_per_trade_pct":1.0,"max_daily_loss_pct":3.0,"max_portfolio_exposure_pct":50.0,"max_position_pct":15.0,"max_daily_trades":5,"max_spread_pct":0.5,"auto_mode_v1":False,"rebuy_cooldown_hours":6.0,"atr_stop_enabled":True,"atr_stop_mult":2.0,"atr_stop_min_pct":3.0,"atr_stop_max_pct":10.0,"market_filter_enabled":True,"btc_trend_hours":50,"min_breadth_pct":30.0,"offline_alert_hours":3.0,"daily_summary_hour_utc":20,"max_daily_drawdown_pct":5.0,"partial_tp_pct":5.0,"partial_tp_fraction":0.5,"dynamic_trail":True,"sell_if_stop_fails":True,"scan_prefilter":True,"cleanup_hours":24.0,"scan_interval_minutes":15.0,"auto_clear_hours":24.0,"live_mode_seconds":270,"mtf_confirm":True,"btc_shock_pct":3.0,"max_open_risk_pct":3.0,"loss_streak_trigger":2,"loss_streak_size_factor":0.5,"scan_parallel":True}
     s=load(CFG,d)
     for k,v in d.items():s.setdefault(k,v)
     if not s.get('auto_mode_v1'):s['auto_buy_enabled']=True;s['auto_mode_v1']=True;save(CFG,s)
@@ -409,6 +440,7 @@ def _calc(sym):
         return float(o[-1][4]),c[-1],_rsi(c),round(sum(c[-5:])/5,6),round(sum(c[-10:])/10,6)
     except:return (None,)*5
 
+_PF={}
 def data(sym):
     h=_C.get(sym)
     if h and time.time()-h[0]<20:return h[1]
@@ -1010,7 +1042,7 @@ def cmd_status():
     expo=coin_val/total*100 if total>0 else 0.0
     cdl=[k[8:].replace("-USDT","") for k,v in load(CD,{}).items() if k.startswith("stopout_") and now-v<float(s.get('rebuy_cooldown_hours',6.0))*3600]
     sysmsg=["🤖 *BOT*","Exchange connection: ✅ OK",f"Portfolio: ${total:.2f} USDT"+(f" | ₦{total*r:,.0f}" if r else ""),f"USDT cash: ${usdt:.2f} (free ${usdt_free:.2f})",f"Auto-buy: {'ON' if s.get('auto_buy_enabled') else 'PAUSED'} (${s.get('auto_buy_amount_usdt')} per trade)",f"BTC safety filter: {btc}",f"Market filter: {mf}",f"Risk controls: {'✅ trading allowed' if ok else '⛔ '+why}",f"Today vs start of day: {ddp:+.2f}% (auto-buy pauses at -{s.get('max_daily_drawdown_pct')}%)",f"Money in coins: {expo:.0f}% of portfolio (cap {s.get('max_portfolio_exposure_pct')}%)",f"Re-buy cooldown active: {', '.join(cdl) if cdl else 'none'}",f"Last market scan: {ago} (runs every {float(s.get('scan_interval_minutes',15)):g} min) | Queued coins: {len(q)}",f"Bot-tracked positions: {len(db)} | Holdings priced: {len(held)}",last_trade_line().strip(),"",
-      "🧭 *STRATEGY*",f"Entries: TREND (RSI {s.get('rsi_min')}-{s.get('rsi_max')}, price > MA5 > MA10), OVERSOLD bounce (RSI < 30), BREAKOUT (RSI 50-70 + volume breakout)",f"Protection: stop-loss {s.get('stop_loss_pct')}% | trailing stop {s.get('trail_pct')}% below peak | crash guard {s.get('crash_guard_pct')}%",f"Exit: RSI >= {s.get('rsi_exit')} or max hold {s.get('max_hold_hours')}h",f"Profit taking: sell {float(s.get('partial_tp_fraction',0.5))*100:.0f}% at +{s.get('partial_tp_pct')}% then stop moves to break-even" if float(s.get('partial_tp_pct',0) or 0)>0 else "Profit taking: partial sell OFF",f"Dynamic trailing: {'ON (wider in strong trends, tighter when momentum fades)' if s.get('dynamic_trail',True) else 'OFF'}",f"Entry safety: spread limit {s.get('max_spread_pct')}% | stop fails -> {'sell at market' if s.get('sell_if_stop_fails',True) else 'alert only'} | scan pre-filter {'ON' if s.get('scan_prefilter',True) else 'OFF'}",(f"Near-instant mode: ON (stays awake {float(s.get('live_mode_seconds',270)):g}s per run)" if float(s.get('live_mode_seconds',270) or 0)>0 else "Near-instant mode: OFF"),f"Auto-clear chat: every {float(s.get('auto_clear_hours',24)):g}h" if float(s.get('auto_clear_hours',24) or 0)>0 else "Auto-clear chat: OFF",f"Limits: {s.get('max_daily_trades')} trades/day, {s.get('max_daily_loss_pct')}% daily loss, {s.get('max_position_pct')}% max per coin"]
+      "🧭 *STRATEGY*",f"Entries: TREND (RSI {s.get('rsi_min')}-{s.get('rsi_max')}, price > MA5 > MA10), OVERSOLD bounce (RSI < 30), BREAKOUT (RSI 50-70 + volume breakout)",f"Protection: stop-loss {s.get('stop_loss_pct')}% | trailing stop {s.get('trail_pct')}% below peak | crash guard {s.get('crash_guard_pct')}%",f"Exit: RSI >= {s.get('rsi_exit')} or max hold {s.get('max_hold_hours')}h",f"Profit taking: sell {float(s.get('partial_tp_fraction',0.5))*100:.0f}% at +{s.get('partial_tp_pct')}% then stop moves to break-even" if float(s.get('partial_tp_pct',0) or 0)>0 else "Profit taking: partial sell OFF",f"Dynamic trailing: {'ON (wider in strong trends, tighter when momentum fades)' if s.get('dynamic_trail',True) else 'OFF'}",f"Entry safety: spread limit {s.get('max_spread_pct')}% | stop fails -> {'sell at market' if s.get('sell_if_stop_fails',True) else 'alert only'} | scan pre-filter {'ON' if s.get('scan_prefilter',True) else 'OFF'}",(f"Near-instant mode: ON (stays awake {float(s.get('live_mode_seconds',270)):g}s per run)" if float(s.get('live_mode_seconds',270) or 0)>0 else "Near-instant mode: OFF"),f"Auto-clear chat: every {float(s.get('auto_clear_hours',24)):g}h" if float(s.get('auto_clear_hours',24) or 0)>0 else "Auto-clear chat: OFF",f"Limits: {s.get('max_daily_trades')} trades/day, {s.get('max_daily_loss_pct')}% daily loss, {s.get('max_position_pct')}% max per coin",f"Extra safeguards: 4h trend check {'ON' if s.get('mtf_confirm',True) else 'OFF'} | BTC shock pause {float(s.get('btc_shock_pct',3.0) or 0):g}%/h | combined open risk cap {float(s.get('max_open_risk_pct',3.0) or 0):g}% | smaller buys after {int(s.get('loss_streak_trigger',2) or 0)} losses in a row | parallel scan {'ON' if s.get('scan_parallel',True) else 'OFF'}"]
     tg("\n".join(sysmsg))
     if not held:tg("🛑 *HOLDINGS ADVICE*\nNo priced coin holdings right now.");return
     out=["💼 *HOLDINGS ADVICE*","_Technical view only, not financial advice._",""];sells=0
@@ -1211,6 +1243,50 @@ def unprotected_exit(sym,db):
     tg(f"🚨 *{sym} has NO exchange stop after a retry.* Selling at market to protect your funds.")
     if sell(sym,1.0,"UNPROTECTED (stop failed)"):db.pop(sym,None);save(DB,db)
 
+def trend_4h_ok(sym,s):
+    """Extra entry check: price must be above its 4h 10-period average. Unknown data never blocks."""
+    if not s.get('mtf_confirm',True):return True
+    try:
+        o=ex.fetch_ohlcv(S(sym),'4h',limit=30)
+        c=[float(k[4]) for k in o[:-1]]
+        if len(c)<12:return True
+        return float(o[-1][4])>=sum(c[-10:])/10
+    except Exception:return True
+
+_SHOCK={"t":0,"r":""}
+def btc_shock(s):
+    """Pause new buys while BTC is dropping fast (default: down 3% or more within the last hour)."""
+    lim=float(s.get('btc_shock_pct',3.0) or 0)
+    if lim<=0:return ""
+    if time.time()-_SHOCK["t"]<300:return _SHOCK["r"]
+    r=""
+    try:
+        o=ex.fetch_ohlcv("BTC/USDT",'1h',limit=3);a=float(o[-2][4]);b=float(o[-1][4]);ch=(b-a)/a*100 if a>0 else 0
+        if ch<=-lim:r=f"BTC fell {ch:.1f}% within the hour"
+    except Exception:r=""
+    _SHOCK["t"],_SHOCK["r"]=time.time(),r;return r
+
+def open_risk_pct():
+    """Combined money at risk across open positions (price down to each stop), as % of equity."""
+    try:
+        db=load(DB);eq=equity_now()
+        if not eq or eq<=0:return 0.0
+        tot=0.0
+        for sym,d in db.items():
+            px=live(sym);q=B('total',sym.split('-')[0])
+            if not px or q<=0:continue
+            e=float(d.get('entry_price') or px);stop=max(float(d.get('stop_loss') or 0),e*(1-sl_pct(sym,d)/100))
+            tot+=max(0.0,px-stop)*q
+        return tot/eq*100
+    except Exception:return 0.0
+
+def loss_streak_adjust(sp,s):
+    """After a run of losing trades, buy smaller until a trade wins."""
+    f=float(s.get('loss_streak_size_factor',0.5) or 0);n=int(s.get('loss_streak_trigger',2) or 0)
+    if n<=0 or not (0<f<1):return sp
+    h=[t for t in load(HIST) if isinstance(t,dict) and not str(t.get('reason','')).startswith(('PARTIAL','MANUAL','PANIC'))][-n:]
+    return sp*f if len(h)>=n and all(float(t.get('pnl',0))<0 for t in h) else sp
+
 def exec_q():
     q=load(QF);db=load(DB);s=cfg();mx=s["max_tokens_before_consolidation"]
     if not q:return
@@ -1224,6 +1300,11 @@ def exec_q():
     if mf:
         for sym in q:buy_rejection(sym,"Market filter active.")
         if not cd("mktblock",21600):tg(f"⏸ *MARKET FILTER:* {mf}.")
+        return
+    shk=btc_shock(s)
+    if shk:
+        for sym in q:buy_rejection(sym,"BTC shock.")
+        if not cd("btcshock",3600):tg(f"⏸ *BTC SHOCK:* {shk}. New buys wait until it settles.")
         return
     allowed,reason=risk_controls()
     if not allowed:
@@ -1243,7 +1324,11 @@ def exec_q():
             spend=ub
             if len(db)>=mx:buy_rejection(sym,f"Max positions ({mx}).");continue
             if spend<1.00:buy_rejection(sym,f"Insufficient USDT (${spend:.2f}).");q.pop(sym,None);save(QF,q);continue
-            pct=sl_pct(sym);sp=risk_sized_budget(sym,live(sym),qd.get('sl') or live(sym)*(1-pct/100),spend)
+            cap=float(s.get('max_open_risk_pct',3.0) or 0)
+            if cap>0 and db:
+                orp=open_risk_pct()
+                if orp+float(s.get('risk_per_trade_pct',1.0))>cap:buy_rejection(sym,f"Combined open risk {orp:.1f}% (limit {cap:g}%).");continue
+            pct=sl_pct(sym);sp=risk_sized_budget(sym,live(sym),qd.get('sl') or live(sym)*(1-pct/100),spend);sp=loss_streak_adjust(sp,s)
             if sp<1.02:buy_rejection(sym,f"Size too small (${sp:.2f}).");continue
             try:f,a=m_buy(S(sym),sp)
             except Exception as e:buy_rejection(sym,f"Order failed: {e}");mk_cd(f"fail_{sym}");continue
@@ -1356,6 +1441,20 @@ def scan(force=False):
         if ct-d.get('timestamp',0)>86400:q.pop(sym,None);qu=True
     if not buying_allowed and q:q.clear();qu=True
     sh=scan_history_state();records=[];matched=0;queued=0
+    _PF.clear()
+    if s.get('scan_parallel',True):
+        try:
+            cand=[]
+            for rank,t in enumerate(v[:500],start=1):
+                if rank<=15:continue
+                i=rank-16;th=(1000000 if i<=84 else 3000000 if i<=183 else 4000000 if i<=383 else 5000000);chg=float(t['chg'] or 0)
+                if float(t['vol'] or 0)<th:continue
+                if s.get('scan_prefilter',True) and not (-30.0<chg<-8.0 or 0.0<chg<30.0):continue
+                cand.append(t['sym'])
+            from concurrent.futures import ThreadPoolExecutor
+            with ThreadPoolExecutor(max_workers=4) as pool:
+                for sy,res in zip(cand,pool.map(_calc,cand)):_PF[sy]=res
+        except Exception as e:print(f"PREFETCH ERR: {e}");_PF.clear()
     for rank,t in enumerate(v[:500],start=1):
         sym=t['sym'];vol=float(t['vol'] or 0);chg=float(t['chg'] or 0)
         recd={"time":ct,"rank":rank,"sym":sym,"vol":vol,"chg":chg,"price":t.get("last"),"rsi":None,"rr":None,"ma5":None,"ma10":None,"decision":"SKIP","reason":"Top 15 excluded" if rank<=15 else "Not evaluated"}
@@ -1364,7 +1463,7 @@ def scan(force=False):
             if vol<threshold:recd["reason"]=f"Vol below ${threshold/1e6:.0f}M"
             elif s.get('scan_prefilter',True) and not (-30.0<chg<-8.0 or 0.0<chg<30.0):recd["reason"]="24H change outside every setup range (skipped before candle fetch)"
             else:
-                p,pr,r,ma5,ma10=data(sym);recd.update(price=p,rsi=r,ma5=ma5,ma10=ma10)
+                p,pr,r,ma5,ma10=_PF.get(sym) or data(sym);recd.update(price=p,rsi=r,ma5=ma5,ma10=ma10)
                 if not p or r is None:recd["reason"]="No candle data"
                 else:
                     setup=sl=None;breakout_volume=None
@@ -1373,6 +1472,8 @@ def scan(force=False):
                     elif 0.0<chg<25.0 and 50.0<=r<=70.0 and p>ma5>ma10:
                         confirmed,breakout_volume,_=breakout_confirmation(sym)
                         if confirmed:setup="BREAKOUT";sl=round(p*(1-s['stop_loss_pct']/100),6)
+                    if setup in ("TREND","BREAKOUT") and not trend_4h_ok(sym,s):
+                        recd["reason"]=f"{setup} matched but 4h trend is down";setup=None
                     if setup:
                         recd["strategy"]=setup
                         if setup=="BREAKOUT":recd["reason"]=f"BREAKOUT vol {breakout_volume:.2f}x"
@@ -1385,7 +1486,7 @@ def scan(force=False):
                                 if sym not in q:tg(f"📥 *QUEUED:* {sym}\nScore:{score:.1f}")
                                 q[sym]={"timestamp":ct,"type":setup,"sl":sl,"score":score,"price":p,"chg":chg};qu=True
                             queued+=1
-                    else:
+                    elif "4h trend is down" not in str(recd.get("reason","")):
                         reasons=[]
                         if not (1.0<chg<30.0):reasons.append("Trend range")
                         if not (s['rsi_min']<=r<=s['rsi_max']):reasons.append(f"RSI {s['rsi_min']}-{s['rsi_max']}")
@@ -1661,7 +1762,13 @@ def tg_check(poll=0):
             if not txt:continue
             cid=str(m.get("chat",{}).get("id",""));age=time.time()-m.get("date",time.time())
             if cid!=CHAT:continue
-            if "callback_query" not in u and m.get("message_id"):  # remember your own messages too so the daily wipe can remove them
+            tapped=False
+            if "callback_query" not in u:
+                try:
+                    mp=load(ST,{}).get("kb_map") or {}
+                    if txt in mp:txt=mp[txt];tapped=True;_del_msg(m.get("message_id"))  # a bottom-keyboard tap: run its command and remove the tap message
+                except Exception:pass
+            if "callback_query" not in u and not tapped and m.get("message_id"):  # remember your own messages too so the daily wipe can remove them
                 try:o=load(OUT,[]);o.append({"message_id":m["message_id"],"sent_at":time.time()});save(OUT,o)
                 except Exception:pass
             if age>1800:continue
@@ -1669,12 +1776,12 @@ def tg_check(poll=0):
             if "callback_query" in u and (txt.startswith("m:") or txt.startswith("scan_history:")) and not _mid("panel_mid"):
                 _set_mid("panel_mid",m.get("message_id"))  # adopt the button message the user tapped
             _TG_N["n"]+=1
-            if "callback_query" in u and (txt.startswith("m:") or txt.startswith("scan_history:")):_UI["edit_mode"]=True
+            if ("callback_query" in u or tapped) and (txt.startswith("m:") or txt.startswith("scan_history:")):_UI["edit_mode"]=True
             _UI["panel_used"]=False
             try:handle(txt,age)
             except Exception as e:print(f"HANDLER ERR: {e}");tg(f"⚠️ Command failed: `{e}`")
             finally:_UI["edit_mode"]=False
-            if "callback_query" in u and txt.startswith("m:") and not _UI.get("panel_used"):
+            if ("callback_query" in u or tapped) and txt.startswith("m:") and not _UI.get("panel_used"):
                 try:menu()  # results went to the upper part; put the main menu back in the lower part
                 except Exception as e:print(f"PANEL RESTORE ERR: {e}")
     except Exception as e:print(f"TG Err:{e}")
@@ -1764,8 +1871,10 @@ if __name__=="__main__":
     T0=time.time()
     try:
         _st=load(ST,{})
-        if not _st.get("display_reset_v2"):  # one-time: forget old display messages so the new two-part display is created
-            _st.pop("display_message_id",None);_st.pop("out_mid",None);_st.pop("panel_mid",None);_st["display_reset_v2"]=True;save(ST,_st)
+        if not _st.get("display_reset_v3"):  # one-time: replace old display messages with the output + bottom-keyboard display
+            for _k in ("display_message_id","out_mid","panel_mid"):
+                _del_msg(_st.get(_k));_st.pop(_k,None)
+            _st["display_reset_v3"]=True;save(ST,_st)
     except Exception as e:print(f"DISPLAY RESET ERR: {e}")
     try:
         # Each step is isolated: a failure in one step is reported (at most every 30 min per step) and never stops the scan or the others.
