@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT23.99/\u20a632,456",
+    "kb_ph": "USDT23.95/\u20a632,403",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -47,6 +47,6 @@
     "out_text": "\ud83d\udcc8 *TRADE STATS*\nClosed trades: 16\nWin rate: 56% (9 wins, 7 losses)\nAverage per trade: $+0.32\nNet profit: $+5.19\nBest: $+2.97 | Worst: $-0.66\n\n*By strategy*\nMANUAL: 10 trades | win 80% | avg $+0.62 | total $+6.21\nOLDER: 2 trades | win 0% | avg $-0.15 | total $-0.29\nOTHER: 4 trades | win 25% | avg $-0.18 | total $-0.73",
     "out_mode": "Markdown",
     "out_mid": 3073,
-    "kb_mid": 3109,
+    "kb_mid": 3110,
     "panel_hidden": true
 }
