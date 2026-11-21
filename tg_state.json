@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935688499,
+    "last_update_id": 935688502,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT23.60/\u20a631,930",
+    "kb_ph": "USDT23.60/\u20a631,933",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -18,7 +18,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "4/5",
+                "text": "1/8",
                 "callback_data": "pg:x"
             },
             {
@@ -28,18 +28,14 @@
             {
                 "text": "\ud83c\udfe0",
                 "callback_data": "m:menu"
-            },
-            {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 4/5*",
-    "out_text": "\ud83d\udcbc *Total Portfolio Value:*\n$23.60 USDT | \u20a631,930\n\n\ud83d\udcb5 *Available USDT Cash*\nTotal: $13.29 | Free to Trade:\n$13.29\n\ud83d\udfe1 *BGB Wallet Balance (not\nauto-converted)*\nTotal: 0.00095019464 BGB | Free:\n0.00095019464 BGB | Value:\n\u2800\n\u2800",
+    "panel_text": "\ud83d\udcc4 *Page 1/8*",
+    "out_text": "\ud83c\udfc6 *TOP 3 SETUPS RIGHT NOW*\n_Read-only scan. Nothing was\nbought._\n\n\u26a0\ufe0f Market filter active: only\n20% of coins are up today.\nAuto-buy is blocked; a manual\nbuy is your own call.\n\n*1. BNB-USDT* \u2014 WATCHLIST (no\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "kb_mid": 3153,
-    "out_time": 1795303834.4968004,
+    "kb_mid": 3156,
+    "out_time": 1795303887.3845885,
     "bot_seen": {
         "t": 1795303709.9367409,
         "eq": 23.605739652835926,
@@ -55,28 +51,26 @@
             1795303808.8093398
         ],
         "m:r:holdings": [
-            3,
-            1795303854.5899754
+            4,
+            1795303860.5320578
         ]
     },
+    "out_mid": 3155,
     "pages": {
         "p": [
-            "\ud83d\udcbc *Total Portfolio Value:*\n$23.60 USDT | \u20a631,930\n\n\ud83d\udcb5 *Available USDT Cash*\nTotal: $13.29 | Free to Trade:\n$13.29\n\ud83d\udfe1 *BGB Wallet Balance (not\nauto-converted)*\nTotal: 0.00095019464 BGB | Free:\n0.00095019464 BGB | Value:\n\u2800\n\u2800",
-            "$0.0015 USDT\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\u2501\u2501\u2501\u2501\n\n\ud83d\udcbc *Coin Holdings (Value:\n$10.29)*\n\ud83e\ude99 *COLLECT*\nQuantity: 402.77682\nCurrent price: 0.025548 USDT\nMarket value: $10.29\n\u2800\n\u2800",
-            "ATH (Bitget lifetime): 0.116638\nUSDT\nATL (Bitget lifetime): 0.002500\nUSDT\n\ud83d\udfe2 Entry: 0.025522 USDT | PnL:\n+0.10% ($+0.01)\nRSI (1h): 51.16\nMA5 (1h): 0.025597\nMA10 (1h): 0.025692\nMarket sentiment: \ud83d\udfe1 Neutral /\n\u2800\n\u2800",
-            "Mixed\nBot trailing stop: ON (8.0%\nbelow peak)\nPeak price: 0.026357\nExchange stop level: 0.024718\n\n\n\u26a0\ufe0f Held but with no USDT\nprice: AIDOGE: 0.602, COQ:\n0.00711, DGRAM: 0.00447 and 8\n\u2800\n\u2800",
-            "more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:*\nUSDT23.60/\u20a631,930\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+            "\ud83c\udfc6 *TOP 3 SETUPS RIGHT NOW*\n_Read-only scan. Nothing was\nbought._\n\n\u26a0\ufe0f Market filter active: only\n20% of coins are up today.\nAuto-buy is blocked; a manual\nbuy is your own call.\n\n*1. BNB-USDT* \u2014 WATCHLIST (no\n\u2800\n\u2800",
+            "full scanner setup)\nPrice: 549.25 USDT | 24h: +1.71%\n| RSI: 55.6\nSuggested stop: 466.86 (15%\nbelow price)\nWhy:\n\u2022 Short-term trend is up (price\n> MA5 > MA10)\n\u2022 RSI 55.6 is healthy (room to\nrun before overbought)\n\u2800\n\u2800",
+            "\u2022 24h change +1.71% shows\nsteady, not extreme, momentum\n\u2022 24h volume $4.8M (liquid\nenough: above the $1M minimum)\n\u2022 Spread: 0.00% (OK for\nauto-buy)\n\n*2. DGAI-USDT* \u2014 WEAK (best\navailable, not a full setup)\nPrice: 0.807375 USDT | 24h:\n\u2800\n\u2800",
+            "+14.99% | RSI: 86.7\nSuggested stop: 0.686269 (15%\nbelow price)\nWhy:\n\u2022 Short-term trend is up (price\n> MA5 > MA10)\n\u2022 RSI 86.7 is overbought (risk\nof pullback)\n\u2022 24h change +14.99% shows\nsteady, not extreme, momentum\n\u2800\n\u2800",
+            "\u2022 24h volume $4.7M (liquid\nenough: above the $1M minimum)\n\u2022 Spread: 0.08% (OK for\nauto-buy)\n\n*3. COLLECT-USDT* \u2014 WEAK (best\navailable, not a full setup)\nPrice: 0.025554 USDT | 24h:\n+2.74% | RSI: 51.2\nSuggested stop: 0.021721 (15%\n\u2800\n\u2800",
+            "below price)\nWhy:\n\u2022 Trend not confirmed yet\n(price 0.025554, MA5 0.025597,\nMA10 0.025692)\n\u2022 RSI 51.2 is healthy (room to\nrun before overbought)\n\u2022 24h change +2.74% shows\nsteady, not extreme, momentum\n\u2022 24h volume $4.3M (liquid\n\u2800\n\u2800",
+            "enough: above the $1M minimum)\n\u2022 Spread: 0.08% (OK for\nauto-buy)\n\nNo coin passes all scanner rules\nright now, so these are the\nstrongest available. Be\ncautious.\n\nBuy manually with `/buy COIN\n\u2800\n\u2800",
+            "amount` if you agree.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 3,
+        "i": 0,
         "mode": "Markdown",
-        "x": [
-            {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
-            }
-        ],
-        "cmd": "m:r:holdings"
+        "x": [],
+        "cmd": "/analyse"
     },
-    "out_mid": 3151,
-    "panel_mid": 3152
+    "panel_mid": 3157
 }
