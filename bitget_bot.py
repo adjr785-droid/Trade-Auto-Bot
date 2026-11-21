@@ -28,15 +28,25 @@ def ngn_rate():
     except Exception as e:print(f"NGN RATE ERR: {e}")
     return _NGN["r"]
 
+def wallet_value(totals):
+    """ONE definition of the wallet total used everywhere: stablecoins at $1, every other coin at its live Bitget USDT price."""
+    v=0.0
+    for c,q in (totals or {}).items():
+        try:q=float(q or 0)
+        except (TypeError,ValueError):continue
+        if q<=0:continue
+        if c in STABLE:v+=q;continue
+        p=live(f"{c}-USDT")
+        if p:v+=q*p
+    return v
+
+def balance_text(v):
+    rate=ngn_rate();return f"USDT{v:.2f}"+(f"/₦{v*rate:,.0f}" if rate else "")
+
 def compact_balance():
-    if time.time()-_BAL["t"]<60:return _BAL["m"]
+    if time.time()-_BAL["t"]<15:return _BAL["m"]
     try:
-        tot=ex.fetch_balance().get('total') or {};v=float(tot.get('USDT',0.0))
-        for c,q in tot.items():
-            if c in STABLE or c=='USDT' or float(q or 0)<=0:continue
-            p=live(f"{c}-USDT")
-            if p:v+=float(q)*p
-        rate=ngn_rate();txt=f"USDT{v:.2f}"+(f"/₦{v*rate:,.0f}" if rate else "")
+        txt=balance_text(wallet_value(ex.fetch_balance().get('total') or {}))
         _BAL["t"],_BAL["m"]=time.time(),txt;return txt
     except:return _BAL["m"]
 
@@ -697,7 +707,8 @@ def get_holdings_text():
         atl_line=f"ATL (Bitget lifetime): {fp(atl)} USDT" if atl else "ATL (Bitget lifetime): Unavailable"
         coin_lines.extend([f"🪙 *{coin}*",f"Quantity: {qty:.8g}",f"Current price: {fp(price)} USDT",f"Market value: ${qty*price:.2f}",ath_line,atl_line,pnl_line,f"RSI (1h): {rsi if rsi is not None else 'N/A'}",f"MA5 (1h): {fp(ma5) if ma5 is not None else 'N/A'}",f"MA10 (1h): {fp(ma10) if ma10 is not None else 'N/A'}",f"Market sentiment: {sentiment}",f"Bot trailing stop: {'ON ('+str(tp)+'% below peak)' if tp>0 else 'OFF'}",f"Peak price: {fp(entry_data.get('peak_price')) if entry_data.get('peak_price') else 'N/A'}",f"Exchange stop level: {fp(entry_data.get('xsl')) if entry_data.get('xsl') else 'Not verified'}"])
         coin_lines.append("");count+=1
-    total_portfolio_value=usdt_total+total_coins_value
+    total_portfolio_value=wallet_value(totals)
+    _BAL["t"],_BAL["m"]=time.time(),balance_text(total_portfolio_value)  # textbox and the footer below show this same number
     # Report BGB separately as a wallet balance; it is not a convertible source
     # for Bitget's BGB dust conversion and must never be auto-sold as dust.
     bgb_total=float(totals.get('BGB',0.0) or 0.0)
@@ -848,12 +859,12 @@ def cmd_status():
         if qty<=0 or coin in STABLE or coin in BL:continue
         sym=f"{coin}-USDT";px=live(sym)
         if px and qty*px>=0.10:held.append((coin,sym,qty,px));coin_val+=qty*px
-    total=usdt+coin_val;r=ngn_rate()
+    total=wallet_value(totals);r=ngn_rate()
     ok,why=risk_controls();br=data("BTC-USDT")[2];bm=s.get('btc_rsi_min',0)
     btc="OK" if bm<=0 or (br is not None and br>=bm) else f"BLOCKING buys (BTC RSI {br} < {bm})"
     ls=load(SC).get('last',0);ago=f"{(now-ls)/60:.0f} min ago" if ls else "never"
     q=load(QF)
-    try:_,ddp=day_drawdown(total)
+    try:_,ddp=day_drawdown()
     except Exception:ddp=0.0
     try:mf=market_filter(s) or "OK (no market-wide block)"
     except Exception:mf="unavailable"
