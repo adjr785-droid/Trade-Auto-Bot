@@ -10,5 +10,16 @@
         "strategy": "MANUAL",
         "xsl": 0.012868,
         "seen": 1795235157.290731
+    },
+    "PUMP-USDT": {
+        "entry_price": 0.002254,
+        "safe_zone": 0.002254,
+        "stop_loss": 0.002123,
+        "peak_price": 0.002254,
+        "last_price": 0.002254,
+        "opened_at": 1795235212.0214336,
+        "sl_pct": 5.8,
+        "strategy": "MANUAL",
+        "xsl": 0.002123
     }
 }
