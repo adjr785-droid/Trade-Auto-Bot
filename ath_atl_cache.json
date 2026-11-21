@@ -16,5 +16,11 @@
         "atl": 0.0949,
         "checked_at": 1795223846.6442568,
         "status": "complete"
+    },
+    "PUMP-USDT": {
+        "ath": 0.008975,
+        "atl": 0.001152,
+        "checked_at": 1795235278.7158916,
+        "status": "complete"
     }
 }
