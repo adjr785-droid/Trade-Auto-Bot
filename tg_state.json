@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935688441,
+    "last_update_id": 935688444,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT24.23/\u20a632,782",
+    "kb_ph": "USDT24.22/\u20a632,769",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -18,7 +18,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "4/5",
+                "text": "1/2",
                 "callback_data": "pg:x"
             },
             {
@@ -31,22 +31,31 @@
                 "text": "\ud83c\udfe0 Menu",
                 "callback_data": "m:menu"
             }
+        ],
+        [
+            {
+                "text": "Next \u27a1\ufe0f",
+                "callback_data": "scan_history:2:"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udd79\ufe0f Main Menu",
+                "callback_data": "/menu"
+            }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 4/5*",
-    "out_text": "\ud83d\udcbc *HOURLY HOLDINGS*\n\ud83d\udcbc *Total Portfolio Value:* $24.23 USDT | \u20a632,782\n\n\ud83d\udcb5 *Available USDT Cash*\nTotal: $0.02 | Free to Trade: $0.02\n\ud83d\udfe1 *BGB Wallet Balance (not auto-converted)*\nTotal: 0.00095019464 BGB | Free: 0.00095019464 BGB | Value: $0.0015 USDT\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\n\ud83d\udcbc *Coin Holdings (Value: $24.19)*\n\ud83e\ude99 *COLLECT*\nQuantity: 402.77682\nCurrent price: 0.025582 USDT\nMarket value: $10.30",
+    "panel_text": "\ud83d\udcc4 *Page 1/2*",
+    "out_text": "\ud83d\udd0e *SCAN HISTORY \u2014 QUERY*\nMatched 462 of 462 records | all coins\nPage 1/24 | Window 0.7h\n\n```COIN         RSI    R:R  DECISION\n---------------------------------------\nBTC           56.3      - SKIP\nETH           56.0      - SKIP\nSOL           57.5      - SKIP\nUSDGO         54.8      - SKIP\nZEC           54.9      - SKIP\nMTX           50.9      - SKIP\nUMXM          41.8      - SKIP\nDOGE          55.3      - SKIP\n```",
     "out_mode": "Markdown",
     "out_mid": 3073,
-    "kb_mid": 3091,
+    "kb_mid": 3093,
     "pages": {
         "p": [
-            "\ud83d\udcbc *HOURLY HOLDINGS*\n\ud83d\udcbc *Total Portfolio Value:* $24.23 USDT | \u20a632,782\n\n\ud83d\udcb5 *Available USDT Cash*\nTotal: $0.02 | Free to Trade: $0.02\n\ud83d\udfe1 *BGB Wallet Balance (not auto-converted)*\nTotal: 0.00095019464 BGB | Free: 0.00095019464 BGB | Value: $0.0015 USDT\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\n\ud83d\udcbc *Coin Holdings (Value: $24.19)*\n\ud83e\ude99 *COLLECT*\nQuantity: 402.77682\nCurrent price: 0.025582 USDT\nMarket value: $10.30",
-            "ATH (Bitget lifetime): 0.116638 USDT\nATL (Bitget lifetime): 0.002500 USDT\nEntry: 0.025522 USDT | PnL: +0.24% ($+0.02)\nRSI (1h): 53.6\nMA5 (1h): 0.025787\nMA10 (1h): 0.025676\nMarket sentiment: \ud83d\udfe1 Neutral / Mixed\nBot trailing stop: ON (8.0% below peak)\nPeak price: 0.026357\nExchange stop level: 0.024718\n\n\ud83e\ude99 *ICNT*\nQuantity: 19.73025\nCurrent price: 0.367400 USDT",
-            "Market value: $7.25\nATH (Bitget lifetime): 0.607568 USDT\nATL (Bitget lifetime): 0.010000 USDT\nEntry: 0.345800 USDT | PnL: +6.25% ($+0.43)\nRSI (1h): 45.96\nMA5 (1h): 0.359080\nMA10 (1h): 0.358790\nMarket sentiment: \ud83d\udfe1 Neutral / Mixed\nBot trailing stop: ON (8.0% below peak)\nPeak price: 0.369800\nExchange stop level: 0.345800\n\n\ud83e\ude99 *JCT*\nQuantity: 3961.5345",
-            "Current price: 0.001675 USDT\nMarket value: $6.64\nATH (Bitget lifetime): 0.019589 USDT\nATL (Bitget lifetime): 0.00015000 USDT\nEntry: 0.001682 USDT | PnL: -0.42% ($-0.03)\nRSI (1h): 55.26\nMA5 (1h): 0.001707\nMA10 (1h): 0.001679\nMarket sentiment: \ud83d\udfe1 Neutral / Mixed\nBot trailing stop: ON (8.0% below peak)\nPeak price: 0.001736\nExchange stop level: 0.001632\n\n",
-            "\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447 and 8 more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT24.23/\u20a632,782"
+            "\ud83d\udd0e *SCAN HISTORY \u2014 QUERY*\nMatched 462 of 462 records | all coins\nPage 1/24 | Window 0.7h\n\n```COIN         RSI    R:R  DECISION\n---------------------------------------\nBTC           56.3      - SKIP\nETH           56.0      - SKIP\nSOL           57.5      - SKIP\nUSDGO         54.8      - SKIP\nZEC           54.9      - SKIP\nMTX           50.9      - SKIP\nUMXM          41.8      - SKIP\nDOGE          55.3      - SKIP\n```",
+            "```\nHYPE          50.6      - SKIP\nSUI           51.7      - SKIP\nBGB           50.6      - SKIP\nNEAR          50.3      - SKIP\nTAO           57.4      - SKIP\nEVAA          57.6      - SKIP\nADA           57.4      - SKIP\nBNB           55.5      - SKIP\nENA           50.5      - SKIP\nBLESS         45.6      - SKIP\nPEPE          48.2      - SKIP\nDGAI          71.7      - SKIP```"
         ],
-        "i": 3,
+        "i": 0,
         "mode": "Markdown"
     },
     "panel_mid": 3090
