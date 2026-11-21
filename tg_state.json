@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935688496,
+    "last_update_id": 935688499,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -18,7 +18,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "1/5",
+                "text": "4/5",
                 "callback_data": "pg:x"
             },
             {
@@ -35,7 +35,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/5*",
+    "panel_text": "\ud83d\udcc4 *Page 4/5*",
     "out_text": "\ud83d\udcbc *Total Portfolio Value:*\n$23.60 USDT | \u20a631,930\n\n\ud83d\udcb5 *Available USDT Cash*\nTotal: $13.29 | Free to Trade:\n$13.29\n\ud83d\udfe1 *BGB Wallet Balance (not\nauto-converted)*\nTotal: 0.00095019464 BGB | Free:\n0.00095019464 BGB | Value:\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "kb_mid": 3153,
@@ -53,6 +53,10 @@
         "/bot": [
             7,
             1795303808.8093398
+        ],
+        "m:r:holdings": [
+            3,
+            1795303854.5899754
         ]
     },
     "pages": {
@@ -63,7 +67,7 @@
             "Mixed\nBot trailing stop: ON (8.0%\nbelow peak)\nPeak price: 0.026357\nExchange stop level: 0.024718\n\n\n\u26a0\ufe0f Held but with no USDT\nprice: AIDOGE: 0.602, COQ:\n0.00711, DGRAM: 0.00447 and 8\n\u2800\n\u2800",
             "more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:*\nUSDT23.60/\u20a631,930\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 0,
+        "i": 3,
         "mode": "Markdown",
         "x": [
             {
