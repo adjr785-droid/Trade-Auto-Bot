@@ -1,86 +1,87 @@
 {
-    "last_update_id": 935688373,
+    "last_update_id": 935688375,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT24.33/\u20a632,913",
+    "kb_ph": "USDT24.33/\u20a632,911",
     "layout_bottom": [
         "tools",
-        "analyse"
+        "analyse",
+        "stats"
     ],
-    "kb_mid": 2998,
-    "kb_keys": "[['\ud83d\udccb Menu', '\ud83e\uddf0 Tools', '\ud83c\udfc6 Analyse']]",
+    "kb_mid": 3002,
+    "kb_keys": "[['\ud83d\udccb Menu', '\ud83e\uddf0 Tools', '\ud83c\udfc6 Analyse'], ['\ud83d\udcc8 Stats']]",
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udee0\ufe0f Audit",
-                "callback_data": "m:r:audit"
+                "text": "\u2328\ufe0f \ud83e\uddf0 Tools",
+                "callback_data": "m:lay:t:tools"
             },
             {
-                "text": "\ud83e\uddfe Scan History",
-                "callback_data": "m:scan_hist"
+                "text": "\u2328\ufe0f \ud83c\udfc6 Analyse",
+                "callback_data": "m:lay:t:analyse"
             }
         ],
         [
             {
-                "text": "\u274c Cancel Orders",
-                "callback_data": "m:r:cancel"
+                "text": "\ud83d\udccb \ud83e\udd16 Bot",
+                "callback_data": "m:lay:t:bot"
             },
             {
-                "text": "\ud83d\udd14 Alerts",
-                "callback_data": "m:r:alerts"
+                "text": "\u2328\ufe0f \ud83d\udcc8 Stats",
+                "callback_data": "m:lay:t:stats"
             }
         ],
         [
             {
-                "text": "\ud83e\uddf9 Dust \u2192 BGB",
-                "callback_data": "m:r:dust"
+                "text": "\ud83d\udccb \ud83d\udd0e Analyse Coin",
+                "callback_data": "m:lay:t:an"
             },
             {
-                "text": "\ud83d\uded2 Buy",
-                "callback_data": "m:buy"
+                "text": "\ud83d\udccb \u2699\ufe0f Settings",
+                "callback_data": "m:lay:t:set"
             }
         ],
         [
             {
-                "text": "\ud83d\udcb8 Sell",
-                "callback_data": "m:sell"
+                "text": "\ud83d\udccb \ud83d\udcbc Holdings",
+                "callback_data": "m:lay:t:hold"
             },
             {
-                "text": "\ud83d\udd14 Price Alert",
-                "callback_data": "m:al"
+                "text": "\ud83d\udccb \ud83e\udde0 Ask AI",
+                "callback_data": "m:lay:t:ai"
             }
         ],
         [
             {
-                "text": "\ud83d\udcc8 Gainers",
-                "callback_data": "m:r:gain"
+                "text": "\ud83d\udccb \ud83e\uddf9 Clear Chat",
+                "callback_data": "m:lay:t:clear"
             },
             {
-                "text": "\ud83d\udcc9 Losers",
-                "callback_data": "m:r:lose"
+                "text": "\ud83d\udccb \ud83d\udea8 PANIC SELL",
+                "callback_data": "m:lay:t:panic"
             }
         ],
         [
             {
-                "text": "\ud83d\udcca Dashboard",
-                "callback_data": "m:dash"
+                "text": "\u270f\ufe0f Rename buttons",
+                "callback_data": "m:lay:rn"
             },
             {
-                "text": "\ud83e\udde9 Layout",
-                "callback_data": "m:lay"
+                "text": "\u21a9\ufe0f Reset layout",
+                "callback_data": "m:lay:reset"
             }
         ],
         [
             {
-                "text": "\u2b05\ufe0f Main Menu",
-                "callback_data": "m:menu"
+                "text": "\u2b05\ufe0f Tools",
+                "callback_data": "m:tools"
             }
         ]
     ],
-    "panel_text": "\ud83e\uddf0 *TOOLS*\nChoose a tool. Existing commands and functions remain available.",
+    "panel_text": "\ud83e\udde9 *LAYOUT*\nTap a button to move it.\n\u2328\ufe0f = bottom key (below the text box)\n\ud83d\udccb = Menu list\nBottom keys: 4/6 (Menu always stays)",
     "out_mid": 2985,
     "out_text": "\u2139\ufe0f Git sync used conflict recovery.",
     "out_mode": "Markdown",
