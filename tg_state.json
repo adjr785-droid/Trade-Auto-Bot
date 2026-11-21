@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935688464,
+    "last_update_id": 935688465,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT24.03/\u20a632,517",
+    "kb_ph": "USDT24.03/\u20a632,508",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -18,7 +18,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "1/3",
+                "text": "2/5",
                 "callback_data": "pg:x"
             },
             {
@@ -33,18 +33,20 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/3*",
-    "out_text": "\ud83c\udfc6 *TOP 3 SETUPS RIGHT NOW*\n_Read-only scan. Nothing was bought._\n\n\u26a0\ufe0f Market filter active: BTC is below its 50h average. Auto-buy is blocked; a manual buy is your own call.\n\n*1. TRUMP-USDT* \u2014 BREAKOUT\nPrice: 0.884000 USDT | 24h: +4.00% | RSI: 59.2\nSuggested stop: 0.751400 (15% below price)\nWhy:\n\u2022 Confirmed breakout: price cleared the recent 20h high on 2.55x average volume\n\u2022 RSI 59.2 is healthy (room to run before overbought)\n\u2022 24h change +4.00% shows steady, not extreme, momentum\n\u2022 24h volume $1.0M (liquid enough: above the $1M minimum)\n\u2022 Spread: 0.11% (OK for auto-buy)",
+    "panel_text": "\ud83d\udcc4 *Page 2/5*",
+    "out_text": "\ud83d\udcbc *HOURLY HOLDINGS*\n\ud83d\udcbc *Total Portfolio Value:* $24.03 USDT | \u20a632,508\n\n\ud83d\udcb5 *Available USDT Cash*\nTotal: $0.02 | Free to Trade: $0.02\n\ud83d\udfe1 *BGB Wallet Balance (not auto-converted)*\nTotal: 0.00095019464 BGB | Free: 0.00095019464 BGB | Value: $0.0015 USDT\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\n\ud83d\udcbc *Coin Holdings (Value: $23.99)*\n\ud83e\ude99 *COLLECT*\nQuantity: 402.77682\nCurrent price: 0.025652 USDT\nMarket value: $10.33",
     "out_mode": "Markdown",
     "out_mid": 3073,
-    "kb_mid": 3114,
+    "kb_mid": 3116,
     "pages": {
         "p": [
-            "\ud83c\udfc6 *TOP 3 SETUPS RIGHT NOW*\n_Read-only scan. Nothing was bought._\n\n\u26a0\ufe0f Market filter active: BTC is below its 50h average. Auto-buy is blocked; a manual buy is your own call.\n\n*1. TRUMP-USDT* \u2014 BREAKOUT\nPrice: 0.884000 USDT | 24h: +4.00% | RSI: 59.2\nSuggested stop: 0.751400 (15% below price)\nWhy:\n\u2022 Confirmed breakout: price cleared the recent 20h high on 2.55x average volume\n\u2022 RSI 59.2 is healthy (room to run before overbought)\n\u2022 24h change +4.00% shows steady, not extreme, momentum\n\u2022 24h volume $1.0M (liquid enough: above the $1M minimum)\n\u2022 Spread: 0.11% (OK for auto-buy)",
-            "\n*2. BNB-USDT* \u2014 WATCHLIST (no full scanner setup)\nPrice: 549.47 USDT | 24h: +2.33% | RSI: 56.8\nSuggested stop: 467.05 (15% below price)\nWhy:\n\u2022 Short-term trend is up (price > MA5 > MA10)\n\u2022 RSI 56.8 is healthy (room to run before overbought)\n\u2022 24h change +2.33% shows steady, not extreme, momentum\n\u2022 24h volume $5.6M (liquid enough: above the $1M minimum)\n\u2022 Spread: 0.00% (OK for auto-buy)\n\n*3. LINK-USDT* \u2014 WATCHLIST (no full scanner setup)\nPrice: 8.6340 USDT | 24h: +2.90% | RSI: 54.5\nSuggested stop: 7.3389 (15% below price)",
-            "Why:\n\u2022 Short-term trend is up (price > MA5 > MA10)\n\u2022 RSI 54.5 is healthy (room to run before overbought)\n\u2022 24h change +2.90% shows steady, not extreme, momentum\n\u2022 24h volume $2.0M (liquid enough: above the $1M minimum)\n\u2022 Spread: 0.01% (OK for auto-buy)\n\nBuy manually with `/buy COIN amount` if you agree."
+            "\ud83d\udcbc *HOURLY HOLDINGS*\n\ud83d\udcbc *Total Portfolio Value:* $24.03 USDT | \u20a632,508\n\n\ud83d\udcb5 *Available USDT Cash*\nTotal: $0.02 | Free to Trade: $0.02\n\ud83d\udfe1 *BGB Wallet Balance (not auto-converted)*\nTotal: 0.00095019464 BGB | Free: 0.00095019464 BGB | Value: $0.0015 USDT\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\n\ud83d\udcbc *Coin Holdings (Value: $23.99)*\n\ud83e\ude99 *COLLECT*\nQuantity: 402.77682\nCurrent price: 0.025652 USDT\nMarket value: $10.33",
+            "ATH (Bitget lifetime): 0.116638 USDT\nATL (Bitget lifetime): 0.002500 USDT\nEntry: 0.025522 USDT | PnL: +0.51% ($+0.05)\nRSI (1h): 54.81\nMA5 (1h): 0.025640\nMA10 (1h): 0.025690\nMarket sentiment: \ud83d\udfe1 Neutral / Mixed\nBot trailing stop: ON (8.0% below peak)\nPeak price: 0.026357\nExchange stop level: 0.024718\n\n\ud83e\ude99 *ICNT*\nQuantity: 19.73025\nCurrent price: 0.357000 USDT",
+            "Market value: $7.04\nATH (Bitget lifetime): 0.607568 USDT\nATL (Bitget lifetime): 0.010000 USDT\nEntry: 0.345800 USDT | PnL: +3.24% ($+0.22)\nRSI (1h): 39.25\nMA5 (1h): 0.361980\nMA10 (1h): 0.357990\nMarket sentiment: \ud83d\udfe1 Neutral / Mixed\nBot trailing stop: ON (8.0% below peak)\nPeak price: 0.369800\nExchange stop level: 0.345800\n\n\ud83e\ude99 *JCT*\nQuantity: 3961.5345",
+            "Current price: 0.001670 USDT\nMarket value: $6.62\nATH (Bitget lifetime): 0.019589 USDT\nATL (Bitget lifetime): 0.00015000 USDT\nEntry: 0.001682 USDT | PnL: -0.71% ($-0.05)\nRSI (1h): 54.67\nMA5 (1h): 0.001705\nMA10 (1h): 0.001681\nMarket sentiment: \ud83d\udfe1 Neutral / Mixed\nBot trailing stop: ON (8.0% below peak)\nPeak price: 0.001736\nExchange stop level: 0.001632\n\n",
+            "\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447 and 8 more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT24.03/\u20a632,508"
         ],
-        "i": 0,
+        "i": 1,
         "mode": "Markdown"
     },
     "panel_mid": 3115
