@@ -1,8 +1,11 @@
 {
-    "last_update_id": 935688226,
+    "last_update_id": 935688229,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
-    "display_reset_v4": true
+    "display_reset_v4": true,
+    "kb_ph": "USDT22.91/\u20a630,994",
+    "out_mid": 2703,
+    "panel_mid": 2704
 }
