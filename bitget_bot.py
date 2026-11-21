@@ -1438,6 +1438,7 @@ def ui_cb(t):
     p=t.split(":");a=p[1] if len(p)>1 else "menu"
     try:
         if a=="menu":menu()
+        elif a=="clear":cmd_clear()
         elif a=="r" and len(p)>2 and p[2] in RUN:
             _UI["edit_mode"]=True
             try:handle(RUN[p[2]],0)
@@ -1495,7 +1496,7 @@ def ui_cb(t):
                 step=max(abs(v)*0.1,0.1);new=round(v+(step if d=="+" else -step),4)
             handle(f"/set {k} {new}",0);ui_setting(k)
         elif a=="tools":
-            ui_send("🧰 *TOOLS*\nChoose a tool. Existing commands and functions remain available.",[[_B("🛠️ Audit","m:r:audit"),_B("🧾 Scan history","m:scan_hist")],[ _B("❌ Cancel orders","m:r:cancel"),_B("🔔 Alerts","m:r:alerts")],[_B("🧹 Dust → BGB","m:r:dust"),_B("🛒 Buy","m:buy")],[_B("💸 Sell","m:sell"),_B("🔔 Price alert","m:al")],[_B("⬅️ Dashboard","m:menu")]])
+            ui_send("🧰 *TOOLS*\nChoose a tool. Existing commands and functions remain available.",[[_B("🛠️ Audit","m:r:audit"),_B("🧾 Scan history","m:scan_hist")],[ _B("❌ Cancel orders","m:r:cancel"),_B("🔔 Alerts","m:r:alerts")],[_B("🧹 Dust → BGB","m:r:dust"),_B("🛒 Buy","m:buy")],[_B("💸 Sell","m:sell"),_B("🔔 Price alert","m:al")],[_B("🧹 clear chat","m:clear")],[_B("⬅️ Dashboard","m:menu")]])
         elif a=="scan_hist":
             cmd_scan_history("/scan_history")
         elif a=="r" and len(p)>2 and p[2]=="market":
