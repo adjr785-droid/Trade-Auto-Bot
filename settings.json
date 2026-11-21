@@ -36,5 +36,7 @@
     "sell_if_stop_fails": true,
     "scan_prefilter": true,
     "cleanup_hours": 24.0,
-    "scan_interval_minutes": 15.0
+    "scan_interval_minutes": 60.0,
+    "auto_clear_hours": 24.0,
+    "live_mode_seconds": 270
 }
