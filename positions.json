@@ -1,1 +1,13 @@
-{}
+{
+    "SKYAI-USDT": {
+        "entry_price": 0.02719,
+        "safe_zone": 0.02719,
+        "stop_loss": 0.025896,
+        "peak_price": 0.02719,
+        "last_price": 0.02719,
+        "opened_at": 1795245669.2282627,
+        "sl_pct": 4.76,
+        "strategy": "MANUAL",
+        "xsl": 0.025896
+    }
+}
