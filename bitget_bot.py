@@ -129,7 +129,7 @@ def _create(text,mode,rm,silent=False):
 def _make_out(m,mode):
  _del_msg(_mid("out_mid"));_del_msg(_mid("panel_mid"))
  _set_mid("panel_mid",None);_set_mid("out_mid",None)
- mid=_create(m,mode,None)
+ mid=_create(m,mode,None,silent=True)
  if mid:
   st=load(ST,{});st["out_mid"]=mid;st["out_text"]=(m or "")[:3800];st["out_mode"]=mode or "Markdown";save(ST,st)
  return mid
@@ -168,7 +168,29 @@ def _carrier(ph):
 def _kb_refresh():
  st=load(ST,{});keys=str(kb_markup()["keyboard"]);ph=(compact_balance() or "")[:64]
  if not st.get("kb_mid") or st.get("kb_keys")!=keys or (ph and ph!=st.get("kb_ph")):_carrier(ph)
-def _paginate(text,n):
+IMPORTANT=("*SOLD","*BOUGHT","*BUY FAILED","*SELL FAILED","*SELL NOT VERIFIED","*SL NOT VERIFIED","*PANIC","*CRASH","*STATE NOT SAVED","*PARTIAL PROFIT","*DCA ADDED","*EXECUTED","*ALERT:*","*RISK BREAKER","*QUEUE FAILED","*STOP")
+REFRESH=("/bot","/stats","m:r:holdings","m:r:gain","m:r:lose")
+def _mark_pnl(t):
+ out=[]
+ for ln in t.split("\n"):
+  if "PnL" in ln and "🟢" not in ln and "🔴" not in ln:
+   m=re.search(r'PnL:?\s*\$?\s*([+-]?\d+(?:\.\d+)?)',ln)
+   if m:ln=("🟢 " if float(m.group(1))>=0 else "🔴 ")+ln
+  out.append(ln)
+ return "\n".join(out)
+def _ring(m,mode):
+ mid=_create(m,mode,None,silent=False)
+ if not mid:_create(m,None,None,silent=False)
+def stale_output():
+ mins=float(cfg().get('output_stale_minutes',30) or 0)
+ st=load(ST,{})
+ if mins<=0 or not st.get("out_mid") or st.get("out_stale") or not st.get("out_time"):return
+ if time.time()-float(st["out_time"])<mins*60:return
+ note=f"⏳ *Output cleared* (older than {mins:g} min).\nTap Menu, Tools or Analyse for fresh results."
+ if _edit(st["out_mid"],note,"Markdown",None):
+  st=load(ST,{});st.pop("pages",None);st["out_stale"]=True;st["out_text"]=note;save(ST,st)
+  if st.get("panel_mid"):_hide_panel()
+def _paginate(text,n,maxl=14):
  if n<=0 or len(text)<=n:return [text]
  pages=[];cur=[];size=0;fence=[False]
  def flush():
@@ -180,44 +202,66 @@ def _paginate(text,n):
   if odd:t+="\n```"
   pages.append(t);cur.clear()
  for ln in text.split("\n"):
-  if cur and (size+len(ln)+1>n or len(cur)>=14):flush();size=0
+  if cur and (size+len(ln)+1>n or len(cur)>=maxl):flush();size=0
   cur.append(ln);size+=len(ln)+1
  flush()
  return pages
 def _nav_rows(i,k):
  b=lambda t,c:{"text":t,"callback_data":c}
- return [[b("◀ Prev","pg:p"),b(f"{i+1}/{k}","pg:x"),b("Next ▶","pg:n")],[b("🏠 Menu","m:menu")]]
+ return [[b("◀","pg:p"),b(f"{i+1}/{k}","pg:x"),b("▶","pg:n"),b("🏠","m:menu")]]
 def page_nav(t):
  st=load(ST,{});pg=st.get("pages") or {};ps=pg.get("p") or []
  if len(ps)<2:_hide_panel();return
  i=int(pg.get("i",0));d=t.split(":")[1] if ":" in t else "x"
- i=max(0,i-1) if d=="p" else min(len(ps)-1,i+1) if d=="n" else i
- st["pages"]["i"]=i;save(ST,st)
+ i=max(0,i-1) if d=="p" else min(len(ps)-1,i+1) if d=="n" else 0
+ st["pages"]["i"]=i
+ if pg.get("cmd"):st.setdefault("page_mem",{})[pg["cmd"]]=[i,time.time()]
+ save(ST,st)
  out=_mid("out_mid")
  if not (out and _edit(out,ps[i],pg.get("mode") or "Markdown",None)):_make_out(ps[i],pg.get("mode") or "Markdown")
- _panel(f"📄 *Page {i+1}/{len(ps)}*",_nav_rows(i,len(ps)))
+ nav=_nav_rows(i,len(ps));nav[0]+=pg.get("x") or []
+ _panel(f"📄 *Page {i+1}/{len(ps)}*",nav)
 def _send(m,mode,btn=None):
  try:
   n=int(cfg().get('page_chars',600) or 0)
   acc=_UI.get("acc")
+  if acc is None and mode in (None,"Markdown") and any(k in (m or "") for k in IMPORTANT):_ring(m,mode);return
   if acc is not None:
    pm,pt=acc if acc else (None,"")
    if pt and len(pt)>=120 and pm==mode and len(pt)+len(m)+2<=(12000 if n>0 else 4000):m=pt+"\n\n"+m
    _UI["acc"]=(mode,m)
-  ps=_paginate(m,n) if mode in (None,"Markdown") else [m]
+  if mode in (None,"Markdown"):m=_mark_pnl(m)
+  cmd=_UI.get("cmd") if acc is not None else None
+  tables="```" in (m or "")
+  ps=_paginate(m,n if tables else (int(cfg().get('page_chars_text',900) or 0) if n>0 else 0),12 if tables else 18) if mode in (None,"Markdown") else [m]
   had=bool((load(ST,{}).get("pages") or {}).get("p"))
-  show=ps[0]
-  out=_mid("out_mid")
-  if not (out and _edit(out,show,mode or "Markdown",None)):_make_out(show,mode)
+  rf=cmd in REFRESH
+  i0=0
+  if len(ps)>1 and cmd:
+   mem=(load(ST,{}).get("page_mem") or {}).get(cmd)
+   if mem and time.time()-float(mem[1])<600 and int(mem[0])<len(ps):i0=int(mem[0])
+  show=ps[i0]
+  out=_mid("out_mid");had_panel=bool(_mid("panel_mid"))
+  fresh=bool(_UI.get("fresh")) and acc is not None;_UI["fresh"]=False
+  recreated=False
+  if fresh or not (out and _edit(out,show,mode or "Markdown",None)):_make_out(show,mode);recreated=True
+  rows=(btn.get("inline_keyboard") if isinstance(btn,dict) else btn) if btn else []
+  rb={"text":"🔄","callback_data":"rf:go"}
+  extra=([[rb]] if rf else [])+rows
+  flat=[x for r in extra for x in r if x.get("callback_data")!="m:menu"]
   try:
-   st=load(ST,{});st["out_text"]=(show or "")[:3800];st["out_mode"]=mode or "Markdown"
-   if len(ps)>1:st["pages"]={"p":ps,"i":0,"mode":mode or "Markdown"}
+   st=load(ST,{});st["out_text"]=(show or "")[:3800];st["out_mode"]=mode or "Markdown";st["out_time"]=time.time();st.pop("out_stale",None)
+   if rf:st["last_cmd"]=cmd
+   if len(ps)>1:st["pages"]={"p":ps,"i":i0,"mode":mode or "Markdown","x":flat,"cmd":cmd}
    else:st.pop("pages",None)
    save(ST,st)
   except Exception:pass
-  rows=(btn.get("inline_keyboard") if isinstance(btn,dict) else btn) if btn else []
-  if len(ps)>1:_panel("📄 *Page 1/%d*"%len(ps),_nav_rows(0,len(ps))+rows)
+  if len(ps)>1:
+   nav=_nav_rows(i0,len(ps));nav[0]+=flat
+   _panel("📄 *Page %d/%d*"%(i0+1,len(ps)),nav)
+  elif rf:_panel("🔄 *Refresh*",[[rb,{"text":"🏠","callback_data":"m:menu"}]+[x for r in rows for x in r if x.get("callback_data")!="m:menu"]])
   elif btn:_panel("👇 *Actions*",rows)
+  elif recreated and had_panel:_set_mid("panel_hidden",True)
   elif had and _mid("panel_mid"):_hide_panel()
   elif not _mid("panel_mid") and not _mid("panel_hidden"):
    pu=_UI.get("panel_used");menu();_UI["panel_used"]=pu
@@ -328,7 +372,7 @@ def save(f,d):
   os.replace(f+".tmp",f)
  except Exception as e:print(f"SAVE ERR {f}: {e}")
 def cfg():
- d={"rsi_min":42,"rsi_max":48,"stop_loss_pct":5.0,"auto_buy_enabled":True,"auto_buy_amount_usdt":10.0,"max_tokens_before_consolidation":3,"max_hold_hours":48,"trail_pct":8.0,"crash_guard_pct":10.0,"rsi_exit":75,"btc_rsi_min":50,"risk_per_trade_pct":1.0,"max_daily_loss_pct":3.0,"max_portfolio_exposure_pct":50.0,"max_position_pct":15.0,"max_daily_trades":5,"max_spread_pct":0.5,"auto_mode_v1":False,"rebuy_cooldown_hours":6.0,"atr_stop_enabled":True,"atr_stop_mult":2.0,"atr_stop_min_pct":3.0,"atr_stop_max_pct":10.0,"market_filter_enabled":True,"btc_trend_hours":50,"min_breadth_pct":30.0,"offline_alert_hours":3.0,"daily_summary_hour_utc":20,"max_daily_drawdown_pct":5.0,"partial_tp_pct":5.0,"partial_tp_fraction":0.5,"dynamic_trail":True,"sell_if_stop_fails":True,"scan_prefilter":True,"cleanup_hours":24.0,"scan_interval_minutes":15.0,"auto_clear_hours":24.0,"live_mode_seconds":270,"mtf_confirm":True,"btc_shock_pct":3.0,"max_open_risk_pct":3.0,"loss_streak_trigger":2,"loss_streak_size_factor":0.5,"scan_parallel":True,"page_chars":600}
+ d={"rsi_min":42,"rsi_max":48,"stop_loss_pct":5.0,"auto_buy_enabled":True,"auto_buy_amount_usdt":10.0,"max_tokens_before_consolidation":3,"max_hold_hours":48,"trail_pct":8.0,"crash_guard_pct":10.0,"rsi_exit":75,"btc_rsi_min":50,"risk_per_trade_pct":1.0,"max_daily_loss_pct":3.0,"max_portfolio_exposure_pct":50.0,"max_position_pct":15.0,"max_daily_trades":5,"max_spread_pct":0.5,"auto_mode_v1":False,"rebuy_cooldown_hours":6.0,"atr_stop_enabled":True,"atr_stop_mult":2.0,"atr_stop_min_pct":3.0,"atr_stop_max_pct":10.0,"market_filter_enabled":True,"btc_trend_hours":50,"min_breadth_pct":30.0,"offline_alert_hours":3.0,"daily_summary_hour_utc":20,"max_daily_drawdown_pct":5.0,"partial_tp_pct":5.0,"partial_tp_fraction":0.5,"dynamic_trail":True,"sell_if_stop_fails":True,"scan_prefilter":True,"cleanup_hours":24.0,"scan_interval_minutes":15.0,"auto_clear_hours":24.0,"live_mode_seconds":270,"mtf_confirm":True,"btc_shock_pct":3.0,"max_open_risk_pct":3.0,"loss_streak_trigger":2,"loss_streak_size_factor":0.5,"scan_parallel":True,"page_chars":600,"page_chars_text":900,"output_stale_minutes":30}
  s=load(CFG,d)
  for k,v in d.items():s.setdefault(k,v)
  if not s.get('auto_mode_v1'):s['auto_buy_enabled']=True;s['auto_mode_v1']=True;save(CFG,s)
@@ -979,6 +1023,21 @@ def long_term_view(sym):
   return f"⚠️ Long-term: speculative ({len(cl)}-day change {ch:+.0f}%, {'above' if cl[-1]>=ma50 else 'below'} 50-day average)"
  except Exception as e:
   print(f"LONG TERM ERR {sym}: {e}");return "⚪ Long-term: unavailable"
+def since_last(total,db):
+ try:
+  st=load(ST,{});prev=st.get("bot_seen");now=time.time()
+  pos=sorted(k.replace("-USDT","") for k in db);hn=len(load(HIST))
+  st["bot_seen"]={"t":now,"eq":total,"pos":pos,"hn":hn};save(ST,st)
+  if not prev:return ""
+  mins=(now-prev["t"])/60;ago=f"{mins:.0f} min" if mins<120 else f"{mins/60:.1f} h"
+  d=total-float(prev.get("eq",total));new=[x for x in pos if x not in prev.get("pos",[])];gone=[x for x in prev.get("pos",[]) if x not in pos]
+  parts=[f"{'🟢' if d>=0 else '🔴'} balance {d:+.2f} USDT"]
+  if new:parts.append("new: "+", ".join(new))
+  if gone:parts.append("closed: "+", ".join(gone))
+  n=hn-int(prev.get("hn",hn))
+  if n>0:parts.append(f"{n} trade(s) closed")
+  return f"🕘 Since last check ({ago} ago): "+" | ".join(parts)
+ except Exception:return ""
 def cmd_status():
  s=cfg();now=time.time();db=load(DB)
  try:bal=ex.fetch_balance();totals=bal.get('total') or {};free=bal.get('free') or {}
@@ -1002,7 +1061,7 @@ def cmd_status():
  except Exception:mf="unavailable"
  expo=coin_val/total*100 if total>0 else 0.0
  cdl=[k[8:].replace("-USDT","") for k,v in load(CD,{}).items() if k.startswith("stopout_") and now-v<float(s.get('rebuy_cooldown_hours',6.0))*3600]
- sysmsg=["🤖 *BOT*","Exchange connection: ✅ OK",f"Portfolio: ${total:.2f} USDT"+(f" | ₦{total*r:,.0f}" if r else ""),f"USDT cash: ${usdt:.2f} (free ${usdt_free:.2f})",f"Auto-buy: {'ON' if s.get('auto_buy_enabled') else 'PAUSED'} (${s.get('auto_buy_amount_usdt')} per trade)",f"BTC safety filter: {btc}",f"Market filter: {mf}",f"Risk controls: {'✅ trading allowed' if ok else '⛔ '+why}",f"Today vs start of day: {ddp:+.2f}% (auto-buy pauses at -{s.get('max_daily_drawdown_pct')}%)",f"Money in coins: {expo:.0f}% of portfolio (cap {s.get('max_portfolio_exposure_pct')}%)",f"Re-buy cooldown active: {', '.join(cdl) if cdl else 'none'}",f"Last market scan: {ago} (runs every {float(s.get('scan_interval_minutes',15)):g} min) | Queued coins: {len(q)}",f"Bot-tracked positions: {len(db)} | Holdings priced: {len(held)}",last_trade_line().strip(),"",
+ sysmsg=["🤖 *BOT*"]+([_sl] if (_sl:=since_last(total,db)) else [])+["Exchange connection: ✅ OK",f"Portfolio: ${total:.2f} USDT"+(f" | ₦{total*r:,.0f}" if r else ""),f"USDT cash: ${usdt:.2f} (free ${usdt_free:.2f})",f"Auto-buy: {'ON' if s.get('auto_buy_enabled') else 'PAUSED'} (${s.get('auto_buy_amount_usdt')} per trade)",f"BTC safety filter: {btc}",f"Market filter: {mf}",f"Risk controls: {'✅ trading allowed' if ok else '⛔ '+why}",f"Today vs start of day: {ddp:+.2f}% (auto-buy pauses at -{s.get('max_daily_drawdown_pct')}%)",f"Money in coins: {expo:.0f}% of portfolio (cap {s.get('max_portfolio_exposure_pct')}%)",f"Re-buy cooldown active: {', '.join(cdl) if cdl else 'none'}",f"Last market scan: {ago} (runs every {float(s.get('scan_interval_minutes',15)):g} min) | Queued coins: {len(q)}",f"Bot-tracked positions: {len(db)} | Holdings priced: {len(held)}",last_trade_line().strip(),"",
       "🧭 *STRATEGY*",f"Entries: TREND (RSI {s.get('rsi_min')}-{s.get('rsi_max')}, price > MA5 > MA10), OVERSOLD bounce (RSI < 30), BREAKOUT (RSI 50-70 + volume breakout)",f"Protection: stop-loss {s.get('stop_loss_pct')}% | trailing stop {s.get('trail_pct')}% below peak | crash guard {s.get('crash_guard_pct')}%",f"Exit: RSI >= {s.get('rsi_exit')} or max hold {s.get('max_hold_hours')}h",f"Profit taking: sell {float(s.get('partial_tp_fraction',0.5))*100:.0f}% at +{s.get('partial_tp_pct')}% then stop moves to break-even" if float(s.get('partial_tp_pct',0) or 0)>0 else "Profit taking: partial sell OFF",f"Dynamic trailing: {'ON (wider in strong trends, tighter when momentum fades)' if s.get('dynamic_trail',True) else 'OFF'}",f"Entry safety: spread limit {s.get('max_spread_pct')}% | stop fails -> {'sell at market' if s.get('sell_if_stop_fails',True) else 'alert only'} | scan pre-filter {'ON' if s.get('scan_prefilter',True) else 'OFF'}",(f"Near-instant mode: ON (stays awake {float(s.get('live_mode_seconds',270)):g}s per run)" if float(s.get('live_mode_seconds',270) or 0)>0 else "Near-instant mode: OFF"),f"Auto-clear chat: every {float(s.get('auto_clear_hours',24)):g}h" if float(s.get('auto_clear_hours',24) or 0)>0 else "Auto-clear chat: OFF",f"Limits: {s.get('max_daily_trades')} trades/day, {s.get('max_daily_loss_pct')}% daily loss, {s.get('max_position_pct')}% max per coin",f"Extra safeguards: 4h trend check {'ON' if s.get('mtf_confirm',True) else 'OFF'} | BTC shock pause {float(s.get('btc_shock_pct',3.0) or 0):g}%/h | combined open risk cap {float(s.get('max_open_risk_pct',3.0) or 0):g}% | smaller buys after {int(s.get('loss_streak_trigger',2) or 0)} losses in a row | parallel scan {'ON' if s.get('scan_parallel',True) else 'OFF'}"]
  tg("\n".join(sysmsg))
  if not held:tg("🛑 *HOLDINGS ADVICE*\nNo priced coin holdings right now.");return
@@ -1643,6 +1702,10 @@ def ui_cb(t):
 def handle(t,age):
  if t.startswith("m:"):ui_cb(t);return
  if t.startswith("pg:"):page_nav(t);return
+ if t=="rf:go":
+  c=load(ST,{}).get("last_cmd")
+  if c in REFRESH:_UI["cmd"]=c;_UI["fresh"]=False;handle(c,age)
+  return
  if not t.startswith(("/","scan_history")):
   try:
    _pd=load(ST,{}).get("rename_pending")
@@ -1721,7 +1784,7 @@ def tg_check(poll=0):
     _set_mid("panel_mid",m.get("message_id"))
    _TG_N["n"]+=1
    if ("callback_query" in u or tapped) and (txt.startswith("m:") or txt.startswith("scan_history:")):_UI["edit_mode"]=True
-   _UI["panel_used"]=False;label="";_UI["acc"]=() if (("callback_query" in u) or tapped) else None
+   _UI["panel_used"]=False;_UI["fresh"]=True;_UI["cmd"]=txt if (("callback_query" in u) or tapped) else None;label="";_UI["acc"]=() if (("callback_query" in u) or tapped) else None
    if "callback_query" in u:
     try:
      for _r in ((m.get("reply_markup") or {}).get("inline_keyboard") or []):
@@ -1803,7 +1866,7 @@ def live_loop(t0):
     run_step(fn)
    last_light=time.time()
   if now-last_heavy>=300:
-   for fn in (auto_clear_daily,check_hourly_balance,check_daily_summary):run_step(fn)
+   for fn in (auto_clear_daily,check_hourly_balance,check_daily_summary,stale_output):run_step(fn)
    last_heavy=time.time()
   if _TG_N["n"]>n0:pending=True
   if pending and time.time()-last_sync>=15:run_step(git_sync);last_sync=time.time();pending=False
@@ -1821,7 +1884,7 @@ if __name__=="__main__":
    _st["display_reset_v4"]=True;save(ST,_st)
  except Exception as e:print(f"DISPLAY RESET ERR: {e}")
  try:
-  for fn in (heartbeat,_C.clear,cleanup_telegram_output,_kb_refresh,auto_clear_daily,scan_history_state,audit_system,tg_check,manage,track_day_equity,git_sync,check_hourly_balance,check_alerts,check_daily_summary,scan,exec_q):run_step(fn)
+  for fn in (heartbeat,_C.clear,cleanup_telegram_output,stale_output,_kb_refresh,auto_clear_daily,scan_history_state,audit_system,tg_check,manage,track_day_equity,git_sync,check_hourly_balance,check_alerts,check_daily_summary,scan,exec_q):run_step(fn)
   live_loop(T0)
   run_step(_kb_refresh)
  except Exception as e:
