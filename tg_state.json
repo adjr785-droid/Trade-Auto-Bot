@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935688483,
+    "last_update_id": 935688485,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT23.60/\u20a631,933",
+    "kb_ph": "USDT23.61/\u20a631,940",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -18,7 +18,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "2/3",
+                "text": "1/8",
                 "callback_data": "pg:x"
             },
             {
@@ -35,28 +35,39 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 2/3*",
-    "out_text": "\ud83e\udd16 *BOT*\nExchange connection: \u2705 OK\nPortfolio: $23.56 USDT | \u20a631,879\nUSDT cash: $13.29 (free $13.29)\nAuto-buy: ON ($3.7348 per trade)\nBTC safety filter: OK\nMarket filter: only 20% of coins are up today\nRisk controls: \u2705 trading allowed\nToday vs start of day: +27.74% (auto-buy pauses at -5.0%)\nMoney in coins: 44% of portfolio (cap 50.0%)\nRe-buy cooldown active: none\nLast market scan: 0 min ago (runs every 30 min) | Queued coins: 0\nBot-tracked positions: 1 | Holdings priced: 1\n\ud83d\udfe2 Last: DGAI \u2014 RSI 75 | PnL $+0.49 | 8.8h ago\n\n\ud83e\udded *STRATEGY*\nEntries: TREND (RSI 42-48, price > MA5 > MA10), OVERSOLD bounce (RSI < 30), BREAKOUT (RSI 50-70 + volume breakout)\nProtection: stop-loss 15% | trailing stop 8.0% below peak | crash guard 10.0%",
+    "panel_text": "\ud83d\udcc4 *Page 1/8*",
+    "out_text": "\ud83e\udd16 *BOT*\n\ud83d\udd58 Since last check (27 min\nago): \ud83d\udfe2 balance +0.04 USDT\nExchange connection: \u2705 OK\nPortfolio: $23.61 USDT |\n\u20a631,937\nUSDT cash: $13.29 (free $13.29)\nAuto-buy: ON ($3.7348 per trade)\nBTC safety filter: OK\nMarket filter: only 20% of coins\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "kb_mid": 3145,
-    "out_time": 1795302116.259088,
+    "kb_mid": 3150,
+    "out_time": 1795303716.1234796,
     "bot_seen": {
-        "t": 1795302110.915402,
-        "eq": 23.563106460226596,
+        "t": 1795303709.9367409,
+        "eq": 23.605739652835926,
         "pos": [
             "COLLECT"
         ],
         "hn": 16
     },
-    "out_mid": 3139,
     "last_cmd": "/bot",
+    "page_mem": {
+        "/bot": [
+            1,
+            1795302168.2947803
+        ]
+    },
+    "out_mid": 3148,
     "pages": {
         "p": [
-            "\ud83e\udd16 *BOT*\nExchange connection: \u2705 OK\nPortfolio: $23.56 USDT | \u20a631,879\nUSDT cash: $13.29 (free $13.29)\nAuto-buy: ON ($3.7348 per trade)\nBTC safety filter: OK\nMarket filter: only 20% of coins are up today\nRisk controls: \u2705 trading allowed\nToday vs start of day: +27.74% (auto-buy pauses at -5.0%)\nMoney in coins: 44% of portfolio (cap 50.0%)\nRe-buy cooldown active: none\nLast market scan: 0 min ago (runs every 30 min) | Queued coins: 0\nBot-tracked positions: 1 | Holdings priced: 1\n\ud83d\udfe2 Last: DGAI \u2014 RSI 75 | PnL $+0.49 | 8.8h ago\n\n\ud83e\udded *STRATEGY*\nEntries: TREND (RSI 42-48, price > MA5 > MA10), OVERSOLD bounce (RSI < 30), BREAKOUT (RSI 50-70 + volume breakout)\nProtection: stop-loss 15% | trailing stop 8.0% below peak | crash guard 10.0%",
-            "Exit: RSI >= 75 or max hold 703h\nProfit taking: sell 50% at +5.0% then stop moves to break-even\nDynamic trailing: ON (wider in strong trends, tighter when momentum fades)\nEntry safety: spread limit 0.5% | stop fails -> sell at market | scan pre-filter ON\nNear-instant mode: ON (stays awake 270s per run)\nAuto-clear chat: every 24h\nLimits: 5 trades/day, 3.0% daily loss, 15.0% max per coin\nExtra safeguards: 4h trend check ON | BTC shock pause 3%/h | combined open risk cap 3% | smaller buys after 2 losses in a row | parallel scan ON\n\n\ud83d\udcbc *HOLDINGS ADVICE*\n_Technical view only, not financial advice._\n\n\ud83d\udd34 \ud83e\ude99 *COLLECT* \u2014 $10.25 | PnL -0.3% ($-0.03)\nAdvice: \ud83d\udfe1 HOLD / WATCH\nWhy: Trend is mixed; keep the stop-loss active\n\u26a0\ufe0f Long-term: speculative (100-day change -58%, above 50-day average)\n\n",
-            "\u2705 No sell advised right now. For possible new buys use /analyse."
+            "\ud83e\udd16 *BOT*\n\ud83d\udd58 Since last check (27 min\nago): \ud83d\udfe2 balance +0.04 USDT\nExchange connection: \u2705 OK\nPortfolio: $23.61 USDT |\n\u20a631,937\nUSDT cash: $13.29 (free $13.29)\nAuto-buy: ON ($3.7348 per trade)\nBTC safety filter: OK\nMarket filter: only 20% of coins\n\u2800\n\u2800",
+            "are up today\nRisk controls: \u2705 trading\nallowed\nToday vs start of day: +27.99%\n(auto-buy pauses at -5.0%)\nMoney in coins: 44% of portfolio\n(cap 50.0%)\nRe-buy cooldown active: none\nLast market scan: 0 min ago\n(runs every 30 min) | Queued\n\u2800\n\u2800",
+            "coins: 0\nBot-tracked positions: 1 |\nHoldings priced: 1\n\ud83d\udfe2 Last: DGAI \u2014 RSI 75 | PnL\n$+0.49 | 9.3h ago\n\n\ud83e\udded *STRATEGY*\nEntries: TREND (RSI 42-48, price\n> MA5 > MA10), OVERSOLD bounce\n(RSI < 30), BREAKOUT (RSI 50-70\n\u2800\n\u2800",
+            "+ volume breakout)\nProtection: stop-loss 15% |\ntrailing stop 8.0% below peak |\ncrash guard 10.0%\nExit: RSI >= 75 or max hold 703h\nProfit taking: sell 50% at +5.0%\nthen stop moves to break-even\nDynamic trailing: ON (wider in\nstrong trends, tighter when\nmomentum fades)\n\u2800\n\u2800",
+            "Entry safety: spread limit 0.5%\n| stop fails -> sell at market |\nscan pre-filter ON\nNear-instant mode: ON (stays\nawake 270s per run)\nAuto-clear chat: every 24h\nLimits: 5 trades/day, 3.0% daily\nloss, 15.0% max per coin\nExtra safeguards: 4h trend check\nON | BTC shock pause 3%/h |\n\u2800\n\u2800",
+            "combined open risk cap 3% |\nsmaller buys after 2 losses in a\nrow | parallel scan ON\n\n\ud83d\udcbc *HOLDINGS ADVICE*\n_Technical view only, not\nfinancial advice._\n\n\ud83d\udfe2 \ud83e\ude99 *COLLECT* \u2014 $10.29 | PnL\n+0.1% ($+0.01)\n\u2800\n\u2800",
+            "Advice: \ud83d\udfe1 HOLD / WATCH\nWhy: Trend is mixed; keep the\nstop-loss active\n\u26a0\ufe0f Long-term: speculative\n(100-day change -58%, above\n50-day average)\n\n\n\u2705 No sell advised right now.\nFor possible new buys use\n\u2800\n\u2800",
+            "/analyse.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 1,
+        "i": 0,
         "mode": "Markdown",
         "x": [
             {
@@ -66,11 +77,5 @@
         ],
         "cmd": "/bot"
     },
-    "panel_mid": 3140,
-    "page_mem": {
-        "/bot": [
-            1,
-            1795302168.2947803
-        ]
-    }
+    "panel_mid": 3149
 }
