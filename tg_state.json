@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935688502,
+    "last_update_id": 935688506,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -18,7 +18,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "1/8",
+                "text": "3/8",
                 "callback_data": "pg:x"
             },
             {
@@ -31,7 +31,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/8*",
+    "panel_text": "\ud83d\udcc4 *Page 3/8*",
     "out_text": "\ud83c\udfc6 *TOP 3 SETUPS RIGHT NOW*\n_Read-only scan. Nothing was\nbought._\n\n\u26a0\ufe0f Market filter active: only\n20% of coins are up today.\nAuto-buy is blocked; a manual\nbuy is your own call.\n\n*1. BNB-USDT* \u2014 WATCHLIST (no\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "kb_mid": 3156,
@@ -53,6 +53,10 @@
         "m:r:holdings": [
             4,
             1795303860.5320578
+        ],
+        "/analyse": [
+            2,
+            1795303904.7741313
         ]
     },
     "out_mid": 3155,
@@ -67,7 +71,7 @@
             "enough: above the $1M minimum)\n\u2022 Spread: 0.08% (OK for\nauto-buy)\n\nNo coin passes all scanner rules\nright now, so these are the\nstrongest available. Be\ncautious.\n\nBuy manually with `/buy COIN\n\u2800\n\u2800",
             "amount` if you agree.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 0,
+        "i": 2,
         "mode": "Markdown",
         "x": [],
         "cmd": "/analyse"
