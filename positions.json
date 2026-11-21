@@ -4,12 +4,12 @@
         "safe_zone": 0.025522,
         "stop_loss": 0.024718,
         "peak_price": 0.026357,
-        "last_price": 0.026062,
+        "last_price": 0.026155,
         "opened_at": 1795252298.2993214,
         "sl_pct": 3.15,
         "strategy": "MANUAL",
         "xsl": 0.024718,
-        "seen": 1795271996.6768596
+        "seen": 1795272124.2734807
     },
     "JCT-USDT": {
         "entry_price": 0.001682,
@@ -21,19 +21,19 @@
         "sl_pct": 7.99,
         "strategy": "MANUAL",
         "xsl": 0.001548,
-        "seen": 1795271996.9146972
+        "seen": 1795272124.5290544
     },
     "ICNT-USDT": {
         "entry_price": 0.3458,
         "safe_zone": 0.3458,
         "stop_loss": 0.3458,
-        "peak_price": 0.364,
-        "last_price": 0.364,
+        "peak_price": 0.3668,
+        "last_price": 0.366,
         "opened_at": 1795270464.3778148,
         "sl_pct": 7.0,
         "strategy": "MANUAL",
         "xsl": 0.3458,
-        "seen": 1795271997.1616724,
+        "seen": 1795272124.7949252,
         "partial_done": true
     }
 }
