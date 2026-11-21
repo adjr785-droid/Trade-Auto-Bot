@@ -161,7 +161,15 @@ def auto_clear_daily():
 
 def menu():
     b=lambda t,c:{"text":t,"callback_data":c}
-    ui_send("🖥️ *TRADE AUTO BOT — DASHBOARD*\nSelect a screen below.",[[b("💼 Holdings","m:r:holdings"),b("📊 Market","m:r:market")],[b("📈 Performance","m:r:stats"),b("🧠 Ask AI","m:ai:1")],[b("🧾 Trade History","m:r:history"),b("🛡️ Risk & Bot","m:r:bot")],[b("🧰 Tools","m:tools"),b("⚙️ Settings","m:set")],[b("🚨 PANIC SELL","/panic")]])
+    ui_send("🖥️ *TRADE AUTO BOT — DASHBOARD*\nSelect a screen below.",[
+      [b("💼 Holdings","m:r:holdings"),b("📊 Market","m:r:market")],
+      [b("📈 Performance","m:r:stats"),b("🧠 Ask AI","m:ai:1")],
+      [b("🧾 Trade History","m:r:history"),b("🛡️ Risk & Bot","m:r:bot")],
+      [b("🤖 Bot","/bot"),b("📈 Stats","/stats")],
+      [b("🏆 Analyse (Top 3)","/analyse"),b("🔎 Analyse Coin","m:an")],
+      [b("🧹 Clear Chat","/clear"),b("⚙️ Settings","m:set")],
+      [b("🧰 Tools","m:tools"),b("🚨 PANIC SELL","/panic")]
+    ])
 
 def panic_prompt():_send("🚨 *CONFIRM PANIC*\nThis sells ALL positions at market and pauses auto-buy.\nConfirm within 15 minutes.","Markdown",{"inline_keyboard":[[{"text":"✅ YES, SELL EVERYTHING","callback_data":"panic_confirm"},{"text":"❌ Cancel","callback_data":"panic_cancel"}]]})
 
@@ -1504,7 +1512,13 @@ def ui_cb(t):
                 step=max(abs(v)*0.1,0.1);new=round(v+(step if d=="+" else -step),4)
             handle(f"/set {k} {new}",0);ui_setting(k)
         elif a=="tools":
-            ui_send("🧰 *TOOLS*\nChoose a tool. Existing commands and functions remain available.",[[_B("🛠️ Audit","m:r:audit"),_B("🧾 Scan history","m:scan_hist")],[ _B("❌ Cancel orders","m:r:cancel"),_B("🔔 Alerts","m:r:alerts")],[_B("🧹 Dust → BGB","m:r:dust"),_B("🛒 Buy","m:buy")],[_B("💸 Sell","m:sell"),_B("🔔 Price alert","m:al")],[_B("🧹 clear chat","m:clear")],[_B("⬅️ Dashboard","m:menu")]])
+            ui_send("🧰 *TOOLS*\nChoose a tool. Existing commands and functions remain available.",[
+              [_B("🛠️ Audit","m:r:audit"),_B("🧾 Scan History","m:scan_hist")],
+              [_B("❌ Cancel Orders","m:r:cancel"),_B("🔔 Alerts","m:r:alerts")],
+              [_B("🧹 Dust → BGB","m:r:dust"),_B("🛒 Buy","m:buy")],
+              [_B("💸 Sell","m:sell"),_B("🔔 Price Alert","m:al")],
+              [_B("⬅️ Dashboard","m:menu")]
+            ])
         elif a=="scan_hist":
             cmd_scan_history("/scan_history")
         elif a=="r" and len(p)>2 and p[2]=="market":
