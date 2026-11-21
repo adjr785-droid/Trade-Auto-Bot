@@ -28,5 +28,11 @@
         "atl": 0.02,
         "checked_at": 1795245707.1798394,
         "status": "complete"
+    },
+    "COLLECT-USDT": {
+        "ath": 0.116638,
+        "atl": 0.0025,
+        "checked_at": 1795252450.2450213,
+        "status": "complete"
     }
 }
