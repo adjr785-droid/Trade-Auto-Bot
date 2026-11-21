@@ -187,25 +187,51 @@ def stale_output():
  if mins<=0 or not st.get("out_mid") or st.get("out_stale") or not st.get("out_time"):return
  if time.time()-float(st["out_time"])<mins*60:return
  note=f"⏳ *Output cleared* (older than {mins:g} min).\nTap Menu, Tools or Analyse for fresh results."
+ try:L=int(cfg().get('page_lines',14) or 0);note=_pad(note,max(10,int(cfg().get('page_width',32) or 32)),L) if L>0 else note
+ except Exception:pass
  if _edit(st["out_mid"],note,"Markdown",None):
   st=load(ST,{});st.pop("pages",None);st["out_stale"]=True;st["out_text"]=note;save(ST,st)
   if st.get("panel_mid"):_hide_panel()
-def _paginate(text,n,maxl=14):
- if n<=0 or len(text)<=n:return [text]
- pages=[];cur=[];size=0;fence=[False]
+def _dw(t):
+ return sum(2 if ord(c)>0x2000 else 1 for c in t)
+def _vis(ln,W):
+ return max(1,-(-_dw(ln)//W))
+def _wrap(text,W):
+ out=[]
+ for ln in text.split("\n"):
+  if _dw(ln)<=W:out.append(ln);continue
+  cur="";
+  for w in ln.split(" "):
+   while _dw(w)>W:
+    if cur:out.append(cur);cur=""
+    k=0;acc=0
+    while k<len(w) and acc+(2 if ord(w[k])>0x2000 else 1)<=W:acc+=2 if ord(w[k])>0x2000 else 1;k+=1
+    out.append(w[:k]);w=w[k:]
+   if not cur:cur=w
+   elif _dw(cur)+1+_dw(w)<=W:cur+=" "+w
+   else:out.append(cur);cur=w
+  out.append(cur)
+ return "\n".join(out)
+def _pad(t,W,L):
+ v=sum(_vis(x,W) for x in t.split("\n"))
+ return t+"\n"+"\n".join(["⠀"]*(L-v)) if v<L else t
+def _paginate(text,W,L):
+ cap=max(2,L-2);pages=[];cur=[];used=[0];fence=[False]
  def flush():
   if not cur:return
   t="\n".join(cur)
   if fence[0]:t="```\n"+t
-  odd=t.count("```")%2==1
-  fence[0]=odd
-  if odd:t+="\n```"
-  pages.append(t);cur.clear()
+  fence[0]=t.count("```")%2==1
+  if fence[0]:t+="\n```"
+  pages.append(t);cur.clear();used[0]=0
  for ln in text.split("\n"):
-  if cur and (size+len(ln)+1>n or len(cur)>=maxl):flush();size=0
-  cur.append(ln);size+=len(ln)+1
+  parts=[ln[i:i+W*cap] for i in range(0,len(ln),W*cap)] if _vis(ln,W)>cap else [ln]
+  for pt in parts:
+   v=_vis(pt,W)
+   if cur and used[0]+v>cap:flush()
+   cur.append(pt);used[0]+=v
  flush()
- return pages
+ return pages or [""]
 def _nav_rows(i,k):
  b=lambda t,c:{"text":t,"callback_data":c}
  return [[b("◀","pg:p"),b(f"{i+1}/{k}","pg:x"),b("▶","pg:n"),b("🏠","m:menu")]]
@@ -232,8 +258,8 @@ def _send(m,mode,btn=None):
    _UI["acc"]=(mode,m)
   if mode in (None,"Markdown"):m=_mark_pnl(m)
   cmd=_UI.get("cmd") if acc is not None else None
-  tables="```" in (m or "")
-  ps=_paginate(m,n if tables else (int(cfg().get('page_chars_text',900) or 0) if n>0 else 0),12 if tables else 18) if mode in (None,"Markdown") else [m]
+  L=int(cfg().get('page_lines',14) or 0);W=max(10,int(cfg().get('page_width',32) or 32))
+  ps=[_pad(x,W,L) for x in _paginate(_wrap(m,W),W,L)] if (mode in (None,"Markdown") and n>0 and L>0) else [m]
   had=bool((load(ST,{}).get("pages") or {}).get("p"))
   rf=cmd in REFRESH
   i0=0
@@ -372,7 +398,7 @@ def save(f,d):
   os.replace(f+".tmp",f)
  except Exception as e:print(f"SAVE ERR {f}: {e}")
 def cfg():
- d={"rsi_min":42,"rsi_max":48,"stop_loss_pct":5.0,"auto_buy_enabled":True,"auto_buy_amount_usdt":10.0,"max_tokens_before_consolidation":3,"max_hold_hours":48,"trail_pct":8.0,"crash_guard_pct":10.0,"rsi_exit":75,"btc_rsi_min":50,"risk_per_trade_pct":1.0,"max_daily_loss_pct":3.0,"max_portfolio_exposure_pct":50.0,"max_position_pct":15.0,"max_daily_trades":5,"max_spread_pct":0.5,"auto_mode_v1":False,"rebuy_cooldown_hours":6.0,"atr_stop_enabled":True,"atr_stop_mult":2.0,"atr_stop_min_pct":3.0,"atr_stop_max_pct":10.0,"market_filter_enabled":True,"btc_trend_hours":50,"min_breadth_pct":30.0,"offline_alert_hours":3.0,"daily_summary_hour_utc":20,"max_daily_drawdown_pct":5.0,"partial_tp_pct":5.0,"partial_tp_fraction":0.5,"dynamic_trail":True,"sell_if_stop_fails":True,"scan_prefilter":True,"cleanup_hours":24.0,"scan_interval_minutes":15.0,"auto_clear_hours":24.0,"live_mode_seconds":270,"mtf_confirm":True,"btc_shock_pct":3.0,"max_open_risk_pct":3.0,"loss_streak_trigger":2,"loss_streak_size_factor":0.5,"scan_parallel":True,"page_chars":600,"page_chars_text":900,"output_stale_minutes":30}
+ d={"rsi_min":42,"rsi_max":48,"stop_loss_pct":5.0,"auto_buy_enabled":True,"auto_buy_amount_usdt":10.0,"max_tokens_before_consolidation":3,"max_hold_hours":48,"trail_pct":8.0,"crash_guard_pct":10.0,"rsi_exit":75,"btc_rsi_min":50,"risk_per_trade_pct":1.0,"max_daily_loss_pct":3.0,"max_portfolio_exposure_pct":50.0,"max_position_pct":15.0,"max_daily_trades":5,"max_spread_pct":0.5,"auto_mode_v1":False,"rebuy_cooldown_hours":6.0,"atr_stop_enabled":True,"atr_stop_mult":2.0,"atr_stop_min_pct":3.0,"atr_stop_max_pct":10.0,"market_filter_enabled":True,"btc_trend_hours":50,"min_breadth_pct":30.0,"offline_alert_hours":3.0,"daily_summary_hour_utc":20,"max_daily_drawdown_pct":5.0,"partial_tp_pct":5.0,"partial_tp_fraction":0.5,"dynamic_trail":True,"sell_if_stop_fails":True,"scan_prefilter":True,"cleanup_hours":24.0,"scan_interval_minutes":15.0,"auto_clear_hours":24.0,"live_mode_seconds":270,"mtf_confirm":True,"btc_shock_pct":3.0,"max_open_risk_pct":3.0,"loss_streak_trigger":2,"loss_streak_size_factor":0.5,"scan_parallel":True,"page_chars":600,"page_lines":12,"page_width":32,"output_stale_minutes":30}
  s=load(CFG,d)
  for k,v in d.items():s.setdefault(k,v)
  if not s.get('auto_mode_v1'):s['auto_buy_enabled']=True;s['auto_mode_v1']=True;save(CFG,s)
@@ -1666,9 +1692,11 @@ def ui_cb(t):
     st=load(ST,{});st["layout_bottom"]=b;save(ST,st)
    except Exception as e:print(f"LAYOUT SAVE ERR: {e}")
    _kb_refresh()
+   if len(p)>3 and p[2]=="pl":
+    c=cfg();c["page_lines"]=max(6,min(24,int(c.get("page_lines",12) or 12)+(1 if p[3]=="+" else -1)));save(CFG,c);note="\n✅ Page size: %d lines."%c["page_lines"]
    note+=_UI.pop("lay_note","")
    rows=[[_B(("⌨️ " if k in b else "📋 ")+lbl(k),f"m:lay:t:{k}") for k,l,_ in LAYOUT_ITEMS[i:i+2]] for i in range(0,len(LAYOUT_ITEMS),2)]
-   ui_send(f"🧩 *LAYOUT*\nTap a button to move it.\n⌨️ = bottom key (below the text box)\n📋 = Menu list\nBottom keys: {len(b)+1}/{LAYOUT_MAX+1} (Menu always stays){note}",rows+[[_B("✏️ Rename buttons","m:lay:rn"),_B("↩️ Reset layout","m:lay:reset")],[_B("⬅️ Tools","m:tools")]])
+   ui_send(f"🧩 *LAYOUT*\nTap a button to move it.\n⌨️ = bottom key (below the text box)\n📋 = Menu list\nBottom keys: {len(b)+1}/{LAYOUT_MAX+1} (Menu always stays){note}",rows+[[_B("➖","m:lay:pl:-"),_B("📏 Page: %d lines"%int(cfg().get("page_lines",12) or 12),"m:lay"),_B("➕","m:lay:pl:+")],[_B("✏️ Rename buttons","m:lay:rn"),_B("↩️ Reset layout","m:lay:reset")],[_B("⬅️ Tools","m:tools")]])
   elif a=="tools":
    ui_send("🧰 *TOOLS*\nChoose a tool. Existing commands and functions remain available.",[
               [_B("🛠️ Audit","m:r:audit"),_B("🧾 Scan History","m:scan_hist")],
