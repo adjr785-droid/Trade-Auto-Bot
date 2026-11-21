@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935688435,
+    "last_update_id": 935688437,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT24.26/\u20a632,821",
+    "kb_ph": "USDT24.24/\u20a632,797",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -14,81 +14,49 @@
     "panel_rows": [
         [
             {
-                "text": "rsi_min = 42",
-                "callback_data": "m:k:rsi_min"
+                "text": "\ud83e\udd16 Bot",
+                "callback_data": "/bot"
             },
             {
-                "text": "rsi_max = 48",
-                "callback_data": "m:k:rsi_max"
+                "text": "\ud83d\udcc8 Stats",
+                "callback_data": "/stats"
             }
         ],
         [
             {
-                "text": "stop_loss_pct = 15",
-                "callback_data": "m:k:stop_loss_pct"
+                "text": "\ud83d\udd0e Analyse Coin",
+                "callback_data": "m:an"
             },
             {
-                "text": "sl_sell_percent = 0.5",
-                "callback_data": "m:k:sl_sell_percent"
+                "text": "\u2699\ufe0f Settings",
+                "callback_data": "m:set"
             }
         ],
         [
             {
-                "text": "dca_reserve = 2.0",
-                "callback_data": "m:k:dca_reserve"
+                "text": "\ud83d\udcbc Holdings",
+                "callback_data": "m:r:holdings"
             },
             {
-                "text": "auto_buy_enabled = True",
-                "callback_data": "m:k:auto_buy_enabled"
+                "text": "\ud83e\udde0 Ask AI",
+                "callback_data": "m:ai:1"
             }
         ],
         [
             {
-                "text": "auto_buy_amount_usdt = 3.7348",
-                "callback_data": "m:k:auto_buy_amount_usdt"
+                "text": "\ud83e\uddf9 Clear Chat",
+                "callback_data": "/clear"
             },
             {
-                "text": "max_tokens_before_consolidatio",
-                "callback_data": "m:k:max_tokens_before_consolidation"
-            }
-        ],
-        [
-            {
-                "text": "max_hold_hours = 703",
-                "callback_data": "m:k:max_hold_hours"
-            },
-            {
-                "text": "trail_pct = 8.0",
-                "callback_data": "m:k:trail_pct"
-            }
-        ],
-        [
-            {
-                "text": "crash_guard_pct = 10.0",
-                "callback_data": "m:k:crash_guard_pct"
-            },
-            {
-                "text": "rsi_exit = 75",
-                "callback_data": "m:k:rsi_exit"
-            }
-        ],
-        [
-            {
-                "text": "Next \u25b6\ufe0f",
-                "callback_data": "m:sp:1"
-            }
-        ],
-        [
-            {
-                "text": "\u2b05\ufe0f Menu",
-                "callback_data": "m:menu"
+                "text": "\ud83d\udea8 PANIC SELL",
+                "callback_data": "/panic"
             }
         ]
     ],
-    "panel_text": "\u2699\ufe0f *SETTINGS* (page 1/4)\nTap a setting to change it.",
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
     "out_text": "\ud83d\udcc8 *TRADE STATS*\nClosed trades: 16\nWin rate: 56% (9 wins, 7 losses)\nAverage per trade: $+0.32\nNet profit: $+5.19\nBest: $+2.97 | Worst: $-0.66\n\n*By strategy*\nMANUAL: 10 trades | win 80% | avg $+0.62 | total $+6.21\nOLDER: 2 trades | win 0% | avg $-0.15 | total $-0.29\nOTHER: 4 trades | win 25% | avg $-0.18 | total $-0.73",
     "out_mode": "Markdown",
     "out_mid": 3073,
-    "kb_mid": 3084,
+    "kb_mid": 3086,
     "panel_mid": 3083
 }
