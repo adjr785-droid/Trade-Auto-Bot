@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT24.32/\u20a632,898",
+    "kb_ph": "USDT24.29/\u20a632,865",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -57,6 +57,6 @@
     "out_text": "\ud83e\uddf9 Cleared 7 bot message(s).",
     "out_mode": "Markdown",
     "out_mid": 3053,
-    "kb_mid": 3055,
+    "kb_mid": 3057,
     "panel_hidden": true
 }
