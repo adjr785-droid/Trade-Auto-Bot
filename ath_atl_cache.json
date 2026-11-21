@@ -10,5 +10,11 @@
         "atl": 1.221,
         "checked_at": 1795206414.5297556,
         "status": "complete"
+    },
+    "MMT-USDT": {
+        "ath": 4.2296,
+        "atl": 0.0949,
+        "checked_at": 1795223846.6442568,
+        "status": "complete"
     }
 }
