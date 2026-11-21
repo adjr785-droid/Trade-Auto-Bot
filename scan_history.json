@@ -110936,6 +110936,22 @@
             "decision": "SKIP",
             "reason": "Vol below $5M",
             "min_volume": 5000000
+        },
+        {
+            "time": 1795260054,
+            "rank": 30,
+            "sym": "DOS-USDT",
+            "vol": 2906489.32,
+            "chg": -25.43,
+            "price": 0.1475,
+            "rsi": 26.77,
+            "rr": null,
+            "ma5": 0.14918,
+            "ma10": 0.15542,
+            "decision": "SETUP \u2014 NOT QUEUED",
+            "reason": "OVERSOLD matched, BTC safety filter blocked buying",
+            "min_volume": 1000000,
+            "strategy": "OVERSOLD"
         }
     ]
 }
