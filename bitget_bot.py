@@ -80,6 +80,57 @@ def cleanup_telegram_output():
     save(OUT,keep)
 tg=lambda m:_send(m,"Markdown");tg_ai=lambda m:_send(m,"HTML")
 
+def dust_candidates():
+    """Coins Bitget lists as eligible for small-balance -> BGB conversion, minus anything the bot tracks, stablecoins, BGB and blacklisted coins."""
+    get_list=getattr(ex,"privateConvertGetV2ConvertBgbConvertCoinList",None)
+    if not callable(get_list):return None,"Your installed CCXT version does not expose Bitget's BGB-convert endpoints. Update CCXT (pip install -U ccxt) and try again."
+    listed=get_list()
+    if str((listed or {}).get("code"))!="00000":return None,f"Bitget eligibility check failed: {(listed or {}).get('msg','unknown API response')}"
+    data=(listed or {}).get("data") or {}
+    items=(data.get("coinList") or []) if isinstance(data,dict) else []
+    tracked={k.split("-")[0].upper() for k in load(DB)}
+    out=[]
+    for x in items:
+        c=str(x.get("coin","")).upper()
+        try:a=float(x.get("available") or 0)
+        except (TypeError,ValueError):a=0.0
+        if not c or a<=0 or c in STABLE or c=="BGB" or c in BL or c in tracked:continue
+        px=live(f"{c}-USDT");out.append({"coin":c,"amount":a,"value":(a*px) if px else None})
+    return out,""
+
+def cmd_dust(txt=""):
+    """/dust shows what could be converted; /dust confirm converts it (nothing is sold at market)."""
+    confirm=txt.strip().lower().endswith("confirm")
+    try:cands,err=dust_candidates()
+    except Exception as e:tg(f"⚠️ Dust check failed, nothing changed: {str(e)[:200]}");return
+    if cands is None:tg(f"⚠️ {err}");return
+    if not cands:tg("🧹 *DUST*\nNo eligible small balances to convert right now.");return
+    lines=[f"{x['coin']}: {x['amount']:.8g}"+(f" (≈${x['value']:.4f})" if x['value'] is not None else " (no USDT price)") for x in cands]
+    if not confirm:
+        tot=sum(x['value'] or 0 for x in cands)
+        _send(f"🧹 *DUST → BGB*\n{len(cands)} eligible coin(s)"+(f", about ${tot:.2f} priced" if tot>0 else "")+":\n"+"\n".join(lines[:40])+("\n…" if len(lines)>40 else "")+"\n\nNothing is sold at market. Bitget converts these small balances to BGB. Coins in your active trades are never included.","Markdown",{"inline_keyboard":[[{"text":"✅ Convert all to BGB","callback_data":"/dust confirm"},{"text":"❌ Cancel","callback_data":"/dust cancel"}]]});return
+    if cd("dust:confirm",30):tg("⏳ Dust conversion already processing...");return
+    done=[];failed=[];unknown=False
+    try:
+        convert=getattr(ex,"privateConvertPostV2ConvertBgbConvert",None)
+        if not callable(convert):tg("⚠️ CCXT does not expose the BGB conversion call. Nothing changed.");return
+        coins=[x["coin"] for x in cands]
+        for i in range(0,len(coins),20):
+            batch=coins[i:i+20]
+            try:
+                res=convert({"coinList":batch})
+                if str((res or {}).get("code"))!="00000":failed.append(f"{', '.join(batch)}: {(res or {}).get('msg','rejected')}");continue
+                rd=(res or {}).get("data") or {}
+                orders=(rd.get("orderList") or []) if isinstance(rd,dict) else []
+                got={str(o.get("coin","")).upper() for o in orders}
+                done+= [c for c in batch if c in got];failed+=[f"{c}: no order returned" for c in batch if c not in got]
+            except Exception as e:
+                unknown=True;failed.append(f"{', '.join(batch)}: outcome UNKNOWN ({str(e)[:120]})")
+    except Exception as e:failed.append(str(e)[:200])
+    msg="🧹 *DUST → BGB*\n"+(f"✅ Conversion accepted for {len(done)} coin(s): {', '.join(done)}\n" if done else "")+("⚠️ "+"\n⚠️ ".join(failed)+"\n" if failed else "")
+    if unknown:msg+="Do not retry until you check Bitget's conversion history and balances.\n"
+    tg(msg+"Final status is in Bitget conversion history.")
+
 def cmd_clear():
     """Wipe the bot's own messages from the chat (Telegram only lets bots delete messages younger than 48h)."""
     out=load(OUT,[]);n=0;keep=[];t0=time.time()
@@ -97,7 +148,7 @@ def cmd_clear():
 
 def menu():
     b=lambda t,c:{"text":t,"callback_data":c}
-    _send("🕹️ *MAIN MENU*\nSelect an option below:","Markdown",{"inline_keyboard":[[b("🤖 Bot","/bot"),b("🛠️ Audit","/audit")],[b("🧾 Scan History","scan_history:1"),b("❌ Cancel Orders","/cancel")],[b("📈 Stats","/stats"),b("🔔 Alerts","/alerts")],[b("🏆 Analyse (Top 3)","/analyse"),b("🧹 Clear Chat","/clear")],[b("🚨 PANIC SELL","/panic")]]})
+    _send("🕹️ *MAIN MENU*\nSelect an option below:","Markdown",{"inline_keyboard":[[b("🤖 Bot","/bot"),b("🛠️ Audit","/audit")],[b("🧾 Scan History","scan_history:1"),b("❌ Cancel Orders","/cancel")],[b("📈 Stats","/stats"),b("🔔 Alerts","/alerts")],[b("🏆 Analyse (Top 3)","/analyse"),b("🧹 Clear Chat","/clear")],[b("🧹 Dust → BGB","/dust")],[b("🚨 PANIC SELL","/panic")]]})
 
 def panic_prompt():_send("🚨 *CONFIRM PANIC*\nThis sells ALL positions at market and pauses auto-buy.\nConfirm within 15 minutes.","Markdown",{"inline_keyboard":[[{"text":"✅ YES, SELL EVERYTHING","callback_data":"panic_confirm"},{"text":"❌ Cancel","callback_data":"panic_cancel"}]]})
 
@@ -1307,7 +1358,7 @@ def cmd_set(txt):
     s[k]=new;save(CFG,s);tg(f"✅ `{k}` = `{new}`")
 
 def setc(k,v,m):s=cfg();s[k]=v;save(CFG,s);tg(m)
-MSG={"ai_info":"🧠 *AI ANALYST*\nTo ask the AI a question, type:\n`/ai <your question>`","/help":"🤖 *CMDS*\n`/menu` `/ai [q]` `/analyse` (top 3) `/analyse COIN` `/audit` `/cancel`\n`/bot` `/holdings` `/stats`\n`/clear` `/alert COIN PRICE` `/alerts` `/cancel\\_alerts`\n`/scan_history [coin/filter]`\n`/set key value` `/pause` `/resume` `/panic`"}
+MSG={"ai_info":"🧠 *AI ANALYST*\nTo ask the AI a question, type:\n`/ai <your question>`","/help":"🤖 *CMDS*\n`/menu` `/ai [q]` `/analyse` (top 3) `/analyse COIN` `/audit` `/cancel`\n`/bot` `/holdings` `/stats`\n`/clear` `/dust` `/alert COIN PRICE` `/alerts` `/cancel\\_alerts`\n`/scan_history [coin/filter]`\n`/set key value` `/pause` `/resume` `/panic`"}
 
 def handle(t,age):
     l=t.lower()
@@ -1318,6 +1369,8 @@ def handle(t,age):
     elif l in MSG:tg(MSG[l])
     elif l in ("/menu","📊 menu"):menu()
     elif l in ("/clear","/wipe","🧹 clear chat"):cmd_clear()
+    elif l=="/dust cancel":tg("❌ Dust conversion cancelled.")
+    elif l in ("/dust","/dust confirm"):cmd_dust(l)
     elif l=="/stats":cmd_stats()
     elif l=="/alerts":cmd_alerts()
     elif l in ("/cancel_alerts","/cancelalerts","/alerts_cancel"):cmd_cancel_alerts()
