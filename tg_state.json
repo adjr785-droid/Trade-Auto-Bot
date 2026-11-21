@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935688508,
+    "last_update_id": 935688519,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT23.60/\u20a631,934",
+    "kb_ph": "USDT23.60/\u20a631,932",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -14,27 +14,49 @@
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
+                "text": "\ud83e\udd16 Bot",
+                "callback_data": "/bot"
             },
             {
-                "text": "5/8",
-                "callback_data": "pg:x"
+                "text": "\ud83d\udcc8 Stats",
+                "callback_data": "/stats"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udd0e Analyse Coin",
+                "callback_data": "m:an"
             },
             {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
+                "text": "\u2699\ufe0f Settings",
+                "callback_data": "m:set"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udcbc Holdings",
+                "callback_data": "m:r:holdings"
             },
             {
-                "text": "\ud83c\udfe0",
-                "callback_data": "m:menu"
+                "text": "\ud83e\udde0 Ask AI",
+                "callback_data": "m:ai:1"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\uddf9 Clear Chat",
+                "callback_data": "/clear"
+            },
+            {
+                "text": "\ud83d\udea8 PANIC SELL",
+                "callback_data": "/panic"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 5/8*",
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
     "out_text": "\ud83c\udfc6 *TOP 3 SETUPS RIGHT NOW*\n_Read-only scan. Nothing was\nbought._\n\n\u26a0\ufe0f Market filter active: only\n20% of coins are up today.\nAuto-buy is blocked; a manual\nbuy is your own call.\n\n*1. BNB-USDT* \u2014 WATCHLIST (no\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "kb_mid": 3158,
+    "kb_mid": 3160,
     "out_time": 1795303887.3845885,
     "bot_seen": {
         "t": 1795303709.9367409,
@@ -55,8 +77,8 @@
             1795303860.5320578
         ],
         "/analyse": [
-            4,
-            1795303925.123031
+            2,
+            1795304050.1089635
         ]
     },
     "out_mid": 3155,
@@ -71,7 +93,7 @@
             "enough: above the $1M minimum)\n\u2022 Spread: 0.08% (OK for\nauto-buy)\n\nNo coin passes all scanner rules\nright now, so these are the\nstrongest available. Be\ncautious.\n\nBuy manually with `/buy COIN\n\u2800\n\u2800",
             "amount` if you agree.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 4,
+        "i": 2,
         "mode": "Markdown",
         "x": [],
         "cmd": "/analyse"
