@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935688254,
+    "last_update_id": 935688255,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -7,5 +7,5 @@
     "display_reset_v4": true,
     "kb_ph": "USDT23.83/\u20a632,239|[['\ud83d\udccb Menu', '\ud83e\uddf0 Tools', '\ud83c\udfc6 Analyse']]",
     "out_mid": 2782,
-    "panel_hidden": true
+    "panel_mid": 2785
 }
