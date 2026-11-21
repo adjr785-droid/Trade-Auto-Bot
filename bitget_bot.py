@@ -8,7 +8,7 @@ STABLE=['USDC','USDT','DAI','FDUSD','TUSD','USDD','USDE'];LEV=['3L','3S','5L','5
 ex=ccxt.bitget({'apiKey':os.environ.get('BITGET_API_KEY'),'secret':os.environ.get('BITGET_API_SECRET'),'password':os.environ.get('BITGET_API_PASSPHRASE'),'enableRateLimit':True});ex.options['createMarketBuyOrderRequiresPrice']=False
 GROQ_API_KEY=os.environ.get('GROQ_API_KEY','').strip()
 GROQ_MODEL=os.environ.get('GROQ_MODEL','openai/gpt-oss-120b').strip() or 'openai/gpt-oss-120b'
-_C={};_BAL={"t":0,"m":""};KB={"keyboard":[["📋 Menu","🧰 Tools","🏆 Analyse (Top 3)"]],"resize_keyboard":True,"is_persistent":True};BOTTOM=("📋 menu","🧰 tools","🏆 analyse (top 3)","📊 menu")
+_C={};_BAL={"t":0,"m":""};KB={"keyboard":[["📋 Menu","🧰 Tools","🏆 Analyse"]],"resize_keyboard":True,"is_persistent":True};BOTTOM=("📋 menu","🧰 tools","🏆 analyse","🏆 analyse (top 3)","📊 menu")
 S=lambda s:s.replace("-","/");TR=lambda t:{'trigger':True} if t else {};B=lambda k,c:ex.fetch_balance()[k].get(c,0)
 skip=lambda b:b in STABLE or b in BL or ((b.startswith('X') or b.startswith('R')) and len(b)<=6) or any(b.upper().endswith(x) for x in LEV)
 NP=lambda e,sl,pct=None:{"entry_price":e,"safe_zone":e,"stop_loss":sl,"peak_price":e,"last_price":e,"opened_at":time.time(),**({"sl_pct":pct} if pct else {})}
@@ -108,7 +108,7 @@ def _make_out(m,mode):
     rm=dict(KB);ph=(compact_balance() or "")[:64]
     if ph:rm["input_field_placeholder"]=ph
     mid=_create(m,mode,rm)
-    if mid:_set_mid("out_mid",mid);_set_mid("kb_ph",ph)
+    if mid:_set_mid("out_mid",mid);_set_mid("kb_ph",ph+"|"+str(KB["keyboard"]))
     return mid
 
 def new_display():
@@ -131,18 +131,24 @@ def _panel(text,rows,touch=True):
 def _kb_refresh():
     """Keep the USDT/₦ box in the text box current: re-send the bottom keyboard only when the balance text changed."""
     ph=(compact_balance() or "")[:64]
-    if ph==_mid("kb_ph"):return
+    sig=ph+"|"+str(KB["keyboard"])
+    if sig==_mid("kb_ph"):return
     rm=dict(KB)
     if ph:rm["input_field_placeholder"]=ph
     try:
         r=requests.post(API+"/sendMessage",json={"chat_id":CHAT,"text":"🔄","reply_markup":rm,"disable_notification":True},timeout=10)
         if r.ok:
-            _del_msg(((r.json() or {}).get("result") or {}).get("message_id"));_set_mid("kb_ph",ph)
+            _del_msg(((r.json() or {}).get("result") or {}).get("message_id"));_set_mid("kb_ph",sig)
     except Exception:pass
 
 def _send(m,mode,btn=None):
     """Upper part: output. Buttons (if any) go to the lower panel."""
     try:
+        acc=_UI.get("acc")
+        if acc is not None:  # one tapped command: keep its earlier report parts visible (short progress notes are replaced)
+            pm,pt=acc if acc else (None,"")
+            if pt and len(pt)>=120 and pm==mode and len(pt)+len(m)+2<=4000:m=pt+"\n\n"+m
+            _UI["acc"]=(mode,m)
         out=_mid("out_mid")
         if not (out and _edit(out,m,mode or "Markdown",None)):_make_out(m,mode)
         if btn:_panel("👇 *Actions*",btn.get("inline_keyboard") if isinstance(btn,dict) else btn)
@@ -1684,7 +1690,7 @@ def handle(t,age):
     if t.startswith("m:"):ui_cb(t);return
     l=t.lower()
     if l.startswith("/analyse "):analyse_coin(t)
-    elif l in ("/analyse","🏆 analyse (top 3)"):analyse_top3()
+    elif l in ("/analyse","🏆 analyse","🏆 analyse (top 3)"):analyse_top3()
     elif l.startswith("/ai "):ask_ai(t[4:].strip())
     elif l=="/ai":ask_ai("Give me a market overview.")
     elif l in MSG:tg(MSG[l])
@@ -1756,13 +1762,21 @@ def tg_check(poll=0):
                 _set_mid("panel_mid",m.get("message_id"))  # adopt the button message the user tapped
             _TG_N["n"]+=1
             if ("callback_query" in u or tapped) and (txt.startswith("m:") or txt.startswith("scan_history:")):_UI["edit_mode"]=True
-            _UI["panel_used"]=False
+            _UI["panel_used"]=False;label="";_UI["acc"]=() if (("callback_query" in u) or txt.lower() in BOTTOM) else None
+            if "callback_query" in u:
+                try:
+                    for _r in ((m.get("reply_markup") or {}).get("inline_keyboard") or []):
+                        for _b in _r:
+                            if _b.get("callback_data")==txt:label=str(_b.get("text","")).replace("✅ ","",1)
+                except Exception:label=""
             try:handle(txt,age)
             except Exception as e:print(f"HANDLER ERR: {e}");tg(f"⚠️ Command failed: `{e}`")
-            finally:_UI["edit_mode"]=False
-            if ("callback_query" in u or tapped) and txt.startswith("m:") and not _UI.get("panel_used"):
-                try:menu()  # results went to the upper part; put the main menu back in the lower part
-                except Exception as e:print(f"PANEL RESTORE ERR: {e}")
+            finally:_UI["edit_mode"]=False;_UI["acc"]=None
+            if "callback_query" in u and not _UI.get("panel_used"):
+                try:
+                    if label:_panel("🟢 *Active*",[[{"text":"✅ "+label,"callback_data":txt}]],touch=False)  # results went to the upper part; only the active button stays in the lower part
+                    elif txt.startswith("m:"):menu()
+                except Exception as e:print(f"PANEL ERR: {e}")
     except Exception as e:print(f"TG Err:{e}")
 
 def acquire_lock():
