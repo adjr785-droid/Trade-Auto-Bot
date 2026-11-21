@@ -5,11 +5,11 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT24.50/\u20a633,144|[['\ud83d\udccb Menu', '\ud83e\uddf0 Tools', '\ud83c\udfc6 Analyse']]",
+    "kb_ph": "USDT24.30/\u20a632,872|[['\ud83d\udccb Menu', '\ud83e\uddf0 Tools', '\ud83c\udfc6 Analyse']]",
     "layout_bottom": [
         "tools",
         "analyse"
     ],
     "panel_hidden": true,
-    "out_mid": 2941
+    "out_mid": 2943
 }
