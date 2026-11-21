@@ -22,5 +22,11 @@
         "atl": 0.001152,
         "checked_at": 1795235278.7158916,
         "status": "complete"
+    },
+    "SKYAI-USDT": {
+        "ath": 0.86423,
+        "atl": 0.02,
+        "checked_at": 1795245707.1798394,
+        "status": "complete"
     }
 }
