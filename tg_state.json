@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935688370,
+    "last_update_id": 935688371,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -84,5 +84,5 @@
     "out_mid": 2985,
     "out_text": "\ud83d\udcc8 *TOP 10 GAINERS (24H)*\n\n```\n\ud83d\udcc8 GAINERS\n 1. IDOL      +36.91%\n 2. MTX       +36.59%\n 3. SKYAI     +27.86%\n 4. JCT       +10.11%\n 5. EVAA       +7.86%\n 6. COLLECT    +7.76%\n 7. DGAI       +7.25%\n 8. UNI        +7.12%\n 9. TAO        +5.79%\n10. BTW        +5.16%```\n_Minimum 24H volume: $1M._",
     "out_mode": "Markdown",
-    "panel_hidden": true
+    "panel_mid": 2995
 }
