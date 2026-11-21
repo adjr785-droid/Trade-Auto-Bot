@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935688461,
+    "last_update_id": 935688463,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT23.95/\u20a632,399",
+    "kb_ph": "USDT23.99/\u20a632,456",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -14,86 +14,39 @@
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udee0\ufe0f Audit",
-                "callback_data": "m:r:audit"
+                "text": "\ud83d\udcca Market",
+                "callback_data": "m:r:market"
             },
             {
-                "text": "\ud83e\uddfe Scan History",
-                "callback_data": "m:scan_hist"
+                "text": "\ud83d\udcc8 Performance",
+                "callback_data": "m:r:stats"
             }
         ],
         [
             {
-                "text": "\u274c Cancel Orders",
-                "callback_data": "m:r:cancel"
+                "text": "\ud83e\uddfe Trade History",
+                "callback_data": "m:r:history"
             },
             {
-                "text": "\ud83d\udd14 Alerts",
-                "callback_data": "m:r:alerts"
+                "text": "\ud83d\udee1\ufe0f Risk & Bot",
+                "callback_data": "m:r:bot"
             }
         ],
         [
             {
-                "text": "\ud83e\uddf9 Dust \u2192 BGB",
-                "callback_data": "m:r:dust"
+                "text": "\u2b05\ufe0f Tools",
+                "callback_data": "m:tools"
             },
             {
-                "text": "\ud83d\uded2 Buy",
-                "callback_data": "m:buy"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udcb8 Sell",
-                "callback_data": "m:sell"
-            },
-            {
-                "text": "\ud83d\udd14 Price Alert",
-                "callback_data": "m:al"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udcc8 Gainers",
-                "callback_data": "m:r:gain"
-            },
-            {
-                "text": "\ud83d\udcc9 Losers",
-                "callback_data": "m:r:lose"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udcca Dashboard",
-                "callback_data": "m:dash"
-            },
-            {
-                "text": "\ud83e\udde9 Layout",
-                "callback_data": "m:lay"
-            }
-        ],
-        [
-            {
-                "text": "\u2b05\ufe0f Main Menu",
+                "text": "\ud83c\udfe0 Main Menu",
                 "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83e\uddf0 *TOOLS*\nChoose a tool. Existing commands and functions remain available.",
-    "out_text": "\ud83d\udcbc *Total Portfolio Value:* $23.95 USDT | \u20a632,399\n\n\ud83d\udcb5 *Available USDT Cash*\nTotal: $0.02 | Free to Trade: $0.02\n\ud83d\udfe1 *BGB Wallet Balance (not auto-converted)*\nTotal: 0.00095019464 BGB | Free: 0.00095019464 BGB | Value: $0.0015 USDT\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\n\ud83d\udcbc *Coin Holdings (Value: $23.90)*\n\ud83e\ude99 *COLLECT*\nQuantity: 402.77682\nCurrent price: 0.025594 USDT\nMarket value: $10.31\nATH (Bitget lifetime): 0.116638 USDT",
+    "panel_text": "\ud83d\udcca *DASHBOARD*\nChoose a dashboard screen.",
+    "out_text": "\ud83d\udcc8 *TRADE STATS*\nClosed trades: 16\nWin rate: 56% (9 wins, 7 losses)\nAverage per trade: $+0.32\nNet profit: $+5.19\nBest: $+2.97 | Worst: $-0.66\n\n*By strategy*\nMANUAL: 10 trades | win 80% | avg $+0.62 | total $+6.21\nOLDER: 2 trades | win 0% | avg $-0.15 | total $-0.29\nOTHER: 4 trades | win 25% | avg $-0.18 | total $-0.73",
     "out_mode": "Markdown",
     "out_mid": 3073,
-    "kb_mid": 3107,
-    "panel_mid": 3106,
-    "pages": {
-        "p": [
-            "\ud83d\udcbc *Total Portfolio Value:* $23.95 USDT | \u20a632,399\n\n\ud83d\udcb5 *Available USDT Cash*\nTotal: $0.02 | Free to Trade: $0.02\n\ud83d\udfe1 *BGB Wallet Balance (not auto-converted)*\nTotal: 0.00095019464 BGB | Free: 0.00095019464 BGB | Value: $0.0015 USDT\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\n\ud83d\udcbc *Coin Holdings (Value: $23.90)*\n\ud83e\ude99 *COLLECT*\nQuantity: 402.77682\nCurrent price: 0.025594 USDT\nMarket value: $10.31\nATH (Bitget lifetime): 0.116638 USDT",
-            "ATL (Bitget lifetime): 0.002500 USDT\nEntry: 0.025522 USDT | PnL: +0.28% ($+0.03)\nRSI (1h): 53.6\nMA5 (1h): 0.025787\nMA10 (1h): 0.025676\nMarket sentiment: \ud83d\udfe1 Neutral / Mixed\nBot trailing stop: ON (8.0% below peak)\nPeak price: 0.026357\nExchange stop level: 0.024718\n\n\ud83e\ude99 *ICNT*\nQuantity: 19.73025\nCurrent price: 0.354800 USDT\nMarket value: $7.00",
-            "ATH (Bitget lifetime): 0.607568 USDT\nATL (Bitget lifetime): 0.010000 USDT\nEntry: 0.345800 USDT | PnL: +2.60% ($+0.18)\nRSI (1h): 45.96\nMA5 (1h): 0.359080\nMA10 (1h): 0.358790\nMarket sentiment: \ud83d\udfe1 Neutral / Mixed\nBot trailing stop: ON (8.0% below peak)\nPeak price: 0.369800\nExchange stop level: 0.345800\n\n\ud83e\ude99 *JCT*\nQuantity: 3961.5345\nCurrent price: 0.001665 USDT",
-            "Market value: $6.60\nATH (Bitget lifetime): 0.019589 USDT\nATL (Bitget lifetime): 0.00015000 USDT\nEntry: 0.001682 USDT | PnL: -1.01% ($-0.07)\nRSI (1h): 55.26\nMA5 (1h): 0.001707\nMA10 (1h): 0.001679\nMarket sentiment: \ud83d\udfe1 Neutral / Mixed\nBot trailing stop: ON (8.0% below peak)\nPeak price: 0.001736\nExchange stop level: 0.001632\n\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447 and 8 more...",
-            "\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT23.95/\u20a632,399"
-        ],
-        "i": 3,
-        "mode": "Markdown"
-    }
+    "kb_mid": 3109,
+    "panel_hidden": true
 }
