@@ -1,18 +1,16 @@
 {
-    "last_update_id": 935688389,
+    "last_update_id": 935688409,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT24.25/\u20a632,814",
+    "kb_ph": "USDT24.24/\u20a632,801",
     "layout_bottom": [
         "tools",
-        "analyse",
-        "bot",
-        "hold"
+        "analyse"
     ],
-    "kb_keys": "[['\ud83d\udccb Menu', '\ud83e\uddf0 Tools', '\ud83c\udfc6 Analyse'], ['\ud83e\udd16 Bot', '\ud83d\udcbc Holdings']]",
+    "kb_keys": "[['\ud83d\udccb Menu', '\ud83e\uddf0 Tools', '\ud83c\udfc6 Analyse']]",
     "panel_rows": [
         [
             {
@@ -26,7 +24,7 @@
         ],
         [
             {
-                "text": "\u2328\ufe0f \ud83e\udd16 Bot",
+                "text": "\ud83d\udccb \ud83e\udd16 Bot",
                 "callback_data": "m:lay:t:bot"
             },
             {
@@ -46,7 +44,7 @@
         ],
         [
             {
-                "text": "\u2328\ufe0f \ud83d\udcbc Holdings",
+                "text": "\ud83d\udccb \ud83d\udcbc Holdings",
                 "callback_data": "m:lay:t:hold"
             },
             {
@@ -81,10 +79,10 @@
             }
         ]
     ],
-    "panel_text": "\ud83e\udde9 *LAYOUT*\nTap a button to move it.\n\u2328\ufe0f = bottom key (below the text box)\n\ud83d\udccb = Menu list\nBottom keys: 5/6 (Menu always stays)",
-    "out_text": "\ud83e\uddf9 Cleared 6 bot message(s).",
+    "panel_text": "\ud83e\udde9 *LAYOUT*\nTap a button to move it.\n\u2328\ufe0f = bottom key (below the text box)\n\ud83d\udccb = Menu list\nBottom keys: 3/6 (Menu always stays)\n\u2705 Layout reset.",
+    "out_text": "\ud83d\udcbc *Total Portfolio Value:* $24.24 USDT | \u20a632,801\n\n\ud83d\udcb5 *Available USDT Cash*\nTotal: $0.02 | Free to Trade: $0.02\n\ud83d\udfe1 *BGB Wallet Balance (not auto-converted)*\nTotal: 0.00095019464 BGB | Free: 0.00095019464 BGB | Value: $0.0015 USDT\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\n\ud83d\udcbc *Coin Holdings (Value: $24.20)*\n\ud83e\ude99 *COLLECT*\nQuantity: 402.77682\nCurrent price: 0.025527 USDT\nMarket value: $10.28\nATH (Bitget lifetime): 0.116638 USDT\nATL (Bitget lifetime): 0.002500 USDT\nEntry: 0.025522 USDT | PnL: +0.02% ($+0.00)\nRSI (1h): 54.63\nMA5 (1h): 0.025857\nMA10 (1h): 0.025682\nMarket sentiment: \ud83d\udfe1 Neutral / Mixed\nBot trailing stop: ON (8.0% below peak)\nPeak price: 0.026357\nExchange stop level: 0.024718\n\n\ud83e\ude99 *ICNT*\nQuantity: 19.73025\nCurrent price: 0.368000 USDT\nMarket value: $7.26\nATH (Bitget lifetime): 0.607568 USDT\nATL (Bitget lifetime): 0.010000 USDT\nEntry: 0.345800 USDT | PnL: +6.42% ($+0.44)\nRSI (1h): 45.39\nMA5 (1h): 0.355640\nMA10 (1h): 0.357540\nMarket sentiment: \ud83d\udfe1 Neutral / Mixed\nBot trailing stop: ON (8.0% below peak)\nPeak price: 0.368800\nExchange stop level: 0.345800\n\n\ud83e\ude99 *JCT*\nQuantity: 3961.5345\nCurrent price: 0.001681 USDT\nMarket value: $6.66\nATH (Bitget lifetime): 0.019589 USDT\nATL (Bitget lifetime): 0.00015000 USDT\nEntry: 0.001682 USDT | PnL: -0.06% ($-0.00)\nRSI (1h): 67.75\nMA5 (1h): 0.001698\nMA10 (1h): 0.001674\nMarket sentiment: \ud83d\udfe1 Neutral / Mixed\nBot trailing stop: ON (8.0% below peak)\nPeak price: 0.001736\nExchange stop level: 0.001632\n\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447 and 8 more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT24.24/\u20a632,801",
     "out_mode": "Markdown",
     "out_mid": 3019,
-    "kb_mid": 3024,
-    "panel_mid": 3022
+    "kb_mid": 3046,
+    "panel_mid": 3047
 }
