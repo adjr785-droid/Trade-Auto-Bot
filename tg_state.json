@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935688481,
+    "last_update_id": 935688482,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT23.56/\u20a631,879",
+    "kb_ph": "USDT23.56/\u20a631,878",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -14,49 +14,57 @@
     "panel_rows": [
         [
             {
-                "text": "\ud83e\udd16 Bot",
-                "callback_data": "/bot"
+                "text": "\u25c0",
+                "callback_data": "pg:p"
             },
             {
-                "text": "\ud83d\udcc8 Stats",
-                "callback_data": "/stats"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udd0e Analyse Coin",
-                "callback_data": "m:an"
+                "text": "1/3",
+                "callback_data": "pg:x"
             },
             {
-                "text": "\u2699\ufe0f Settings",
-                "callback_data": "m:set"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udcbc Holdings",
-                "callback_data": "m:r:holdings"
+                "text": "\u25b6",
+                "callback_data": "pg:n"
             },
             {
-                "text": "\ud83e\udde0 Ask AI",
-                "callback_data": "m:ai:1"
-            }
-        ],
-        [
-            {
-                "text": "\ud83e\uddf9 Clear Chat",
-                "callback_data": "/clear"
+                "text": "\ud83c\udfe0",
+                "callback_data": "m:menu"
             },
             {
-                "text": "\ud83d\udea8 PANIC SELL",
-                "callback_data": "/panic"
+                "text": "\ud83d\udd04",
+                "callback_data": "rf:go"
             }
         ]
     ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
-    "out_text": "\ud83d\udd0d *SCAN COMPLETE*\nChecked 462 markets.\nNo coin matched any setup.",
+    "panel_text": "\ud83d\udcc4 *Page 1/3*",
+    "out_text": "\ud83e\udd16 *BOT*\nExchange connection: \u2705 OK\nPortfolio: $23.56 USDT | \u20a631,879\nUSDT cash: $13.29 (free $13.29)\nAuto-buy: ON ($3.7348 per trade)\nBTC safety filter: OK\nMarket filter: only 20% of coins are up today\nRisk controls: \u2705 trading allowed\nToday vs start of day: +27.74% (auto-buy pauses at -5.0%)\nMoney in coins: 44% of portfolio (cap 50.0%)\nRe-buy cooldown active: none\nLast market scan: 0 min ago (runs every 30 min) | Queued coins: 0\nBot-tracked positions: 1 | Holdings priced: 1\n\ud83d\udfe2 Last: DGAI \u2014 RSI 75 | PnL $+0.49 | 8.8h ago\n\n\ud83e\udded *STRATEGY*\nEntries: TREND (RSI 42-48, price > MA5 > MA10), OVERSOLD bounce (RSI < 30), BREAKOUT (RSI 50-70 + volume breakout)\nProtection: stop-loss 15% | trailing stop 8.0% below peak | crash guard 10.0%",
     "out_mode": "Markdown",
-    "out_mid": 3073,
-    "kb_mid": 3137,
-    "panel_mid": 3138
+    "kb_mid": 3141,
+    "out_time": 1795302116.259088,
+    "bot_seen": {
+        "t": 1795302110.915402,
+        "eq": 23.563106460226596,
+        "pos": [
+            "COLLECT"
+        ],
+        "hn": 16
+    },
+    "out_mid": 3139,
+    "last_cmd": "/bot",
+    "pages": {
+        "p": [
+            "\ud83e\udd16 *BOT*\nExchange connection: \u2705 OK\nPortfolio: $23.56 USDT | \u20a631,879\nUSDT cash: $13.29 (free $13.29)\nAuto-buy: ON ($3.7348 per trade)\nBTC safety filter: OK\nMarket filter: only 20% of coins are up today\nRisk controls: \u2705 trading allowed\nToday vs start of day: +27.74% (auto-buy pauses at -5.0%)\nMoney in coins: 44% of portfolio (cap 50.0%)\nRe-buy cooldown active: none\nLast market scan: 0 min ago (runs every 30 min) | Queued coins: 0\nBot-tracked positions: 1 | Holdings priced: 1\n\ud83d\udfe2 Last: DGAI \u2014 RSI 75 | PnL $+0.49 | 8.8h ago\n\n\ud83e\udded *STRATEGY*\nEntries: TREND (RSI 42-48, price > MA5 > MA10), OVERSOLD bounce (RSI < 30), BREAKOUT (RSI 50-70 + volume breakout)\nProtection: stop-loss 15% | trailing stop 8.0% below peak | crash guard 10.0%",
+            "Exit: RSI >= 75 or max hold 703h\nProfit taking: sell 50% at +5.0% then stop moves to break-even\nDynamic trailing: ON (wider in strong trends, tighter when momentum fades)\nEntry safety: spread limit 0.5% | stop fails -> sell at market | scan pre-filter ON\nNear-instant mode: ON (stays awake 270s per run)\nAuto-clear chat: every 24h\nLimits: 5 trades/day, 3.0% daily loss, 15.0% max per coin\nExtra safeguards: 4h trend check ON | BTC shock pause 3%/h | combined open risk cap 3% | smaller buys after 2 losses in a row | parallel scan ON\n\n\ud83d\udcbc *HOLDINGS ADVICE*\n_Technical view only, not financial advice._\n\n\ud83d\udd34 \ud83e\ude99 *COLLECT* \u2014 $10.25 | PnL -0.3% ($-0.03)\nAdvice: \ud83d\udfe1 HOLD / WATCH\nWhy: Trend is mixed; keep the stop-loss active\n\u26a0\ufe0f Long-term: speculative (100-day change -58%, above 50-day average)\n\n",
+            "\u2705 No sell advised right now. For possible new buys use /analyse."
+        ],
+        "i": 0,
+        "mode": "Markdown",
+        "x": [
+            {
+                "text": "\ud83d\udd04",
+                "callback_data": "rf:go"
+            }
+        ],
+        "cmd": "/bot"
+    },
+    "panel_mid": 3140
 }
