@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935688372,
+    "last_update_id": 935688373,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -82,7 +82,7 @@
     ],
     "panel_text": "\ud83e\uddf0 *TOOLS*\nChoose a tool. Existing commands and functions remain available.",
     "out_mid": 2985,
-    "out_text": "\ud83d\udcc9 *TOP 10 LOSERS (24H)*\n\n```\n\ud83d\udcc9 LOSERS\n 1. DOS       -15.35%\n 2. ICNT      -10.89%\n 3. BLESS      -7.38%\n 4. ARX        -4.60%\n 5. GRAM       -2.71%\n 6. HYPE       -0.53%\n 7. WLD        -0.48%\n 8. SUI        -0.14%\n 9. ARB        -0.08%```\n_Minimum 24H volume: $1M._",
+    "out_text": "\u2139\ufe0f Git sync used conflict recovery.",
     "out_mode": "Markdown",
-    "panel_hidden": true
+    "panel_mid": 3000
 }
