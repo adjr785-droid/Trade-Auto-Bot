@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935688475,
+    "last_update_id": 935688477,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT24.01/\u20a632,485",
+    "kb_ph": "USDT24.00/\u20a632,468",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -18,7 +18,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "4/5",
+                "text": "1/4",
                 "callback_data": "pg:x"
             },
             {
@@ -33,20 +33,19 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 4/5*",
-    "out_text": "\ud83d\udcbc *Total Portfolio Value:* $24.01 USDT | \u20a632,485\n\n\ud83d\udcb5 *Available USDT Cash*\nTotal: $0.02 | Free to Trade: $0.02\n\ud83d\udfe1 *BGB Wallet Balance (not auto-converted)*\nTotal: 0.00095019464 BGB | Free: 0.00095019464 BGB | Value: $0.0015 USDT\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\n\ud83d\udcbc *Coin Holdings (Value: $23.97)*\n\ud83e\ude99 *COLLECT*\nQuantity: 402.77682\nCurrent price: 0.025639 USDT\nMarket value: $10.33\nATH (Bitget lifetime): 0.116638 USDT",
+    "panel_text": "\ud83d\udcc4 *Page 1/4*",
+    "out_text": "\ud83e\udd16 *BOT*\nExchange connection: \u2705 OK\nPortfolio: $24.01 USDT | \u20a632,486\nUSDT cash: $0.02 (free $0.02)\nAuto-buy: ON ($3.7348 per trade)\nBTC safety filter: OK\nMarket filter: BTC is below its 50h average\nRisk controls: \u26d4 Daily limit (6)\nToday vs start of day: +30.16% (auto-buy pauses at -5.0%)\nMoney in coins: 100% of portfolio (cap 50.0%)\nRe-buy cooldown active: none\nLast market scan: 20 min ago (runs every 30 min) | Queued coins: 0\nBot-tracked positions: 3 | Holdings priced: 3\nLast: DGAI \u2014 RSI 75 | PnL $+0.49 | 5.0h ago",
     "out_mode": "Markdown",
     "out_mid": 3073,
-    "kb_mid": 3118,
+    "kb_mid": 3120,
     "pages": {
         "p": [
-            "\ud83d\udcbc *Total Portfolio Value:* $24.01 USDT | \u20a632,485\n\n\ud83d\udcb5 *Available USDT Cash*\nTotal: $0.02 | Free to Trade: $0.02\n\ud83d\udfe1 *BGB Wallet Balance (not auto-converted)*\nTotal: 0.00095019464 BGB | Free: 0.00095019464 BGB | Value: $0.0015 USDT\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\n\ud83d\udcbc *Coin Holdings (Value: $23.97)*\n\ud83e\ude99 *COLLECT*\nQuantity: 402.77682\nCurrent price: 0.025639 USDT\nMarket value: $10.33\nATH (Bitget lifetime): 0.116638 USDT",
-            "ATL (Bitget lifetime): 0.002500 USDT\nEntry: 0.025522 USDT | PnL: +0.46% ($+0.05)\nRSI (1h): 54.81\nMA5 (1h): 0.025640\nMA10 (1h): 0.025690\nMarket sentiment: \ud83d\udfe1 Neutral / Mixed\nBot trailing stop: ON (8.0% below peak)\nPeak price: 0.026357\nExchange stop level: 0.024718\n\n\ud83e\ude99 *ICNT*\nQuantity: 19.73025\nCurrent price: 0.355900 USDT\nMarket value: $7.02",
-            "ATH (Bitget lifetime): 0.607568 USDT\nATL (Bitget lifetime): 0.010000 USDT\nEntry: 0.345800 USDT | PnL: +2.92% ($+0.20)\nRSI (1h): 39.25\nMA5 (1h): 0.361980\nMA10 (1h): 0.357990\nMarket sentiment: \ud83d\udfe1 Neutral / Mixed\nBot trailing stop: ON (8.0% below peak)\nPeak price: 0.369800\nExchange stop level: 0.345800\n\n\ud83e\ude99 *JCT*\nQuantity: 3961.5345\nCurrent price: 0.001671 USDT",
-            "Market value: $6.62\nATH (Bitget lifetime): 0.019589 USDT\nATL (Bitget lifetime): 0.00015000 USDT\nEntry: 0.001682 USDT | PnL: -0.65% ($-0.04)\nRSI (1h): 54.67\nMA5 (1h): 0.001705\nMA10 (1h): 0.001681\nMarket sentiment: \ud83d\udfe1 Neutral / Mixed\nBot trailing stop: ON (8.0% below peak)\nPeak price: 0.001736\nExchange stop level: 0.001632\n\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447 and 8 more...",
-            "\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT24.01/\u20a632,485"
+            "\ud83e\udd16 *BOT*\nExchange connection: \u2705 OK\nPortfolio: $24.01 USDT | \u20a632,486\nUSDT cash: $0.02 (free $0.02)\nAuto-buy: ON ($3.7348 per trade)\nBTC safety filter: OK\nMarket filter: BTC is below its 50h average\nRisk controls: \u26d4 Daily limit (6)\nToday vs start of day: +30.16% (auto-buy pauses at -5.0%)\nMoney in coins: 100% of portfolio (cap 50.0%)\nRe-buy cooldown active: none\nLast market scan: 20 min ago (runs every 30 min) | Queued coins: 0\nBot-tracked positions: 3 | Holdings priced: 3\nLast: DGAI \u2014 RSI 75 | PnL $+0.49 | 5.0h ago",
+            "\n\ud83e\udded *STRATEGY*\nEntries: TREND (RSI 42-48, price > MA5 > MA10), OVERSOLD bounce (RSI < 30), BREAKOUT (RSI 50-70 + volume breakout)\nProtection: stop-loss 15% | trailing stop 8.0% below peak | crash guard 10.0%\nExit: RSI >= 75 or max hold 703h\nProfit taking: sell 50% at +5.0% then stop moves to break-even\nDynamic trailing: ON (wider in strong trends, tighter when momentum fades)\nEntry safety: spread limit 0.5% | stop fails -> sell at market | scan pre-filter ON\nNear-instant mode: ON (stays awake 270s per run)\nAuto-clear chat: every 24h\nLimits: 5 trades/day, 3.0% daily loss, 15.0% max per coin",
+            "Extra safeguards: 4h trend check ON | BTC shock pause 3%/h | combined open risk cap 3% | smaller buys after 2 losses in a row | parallel scan ON\n\n\ud83d\udcbc *HOLDINGS ADVICE*\n_Technical view only, not financial advice._\n\n\ud83e\ude99 *COLLECT* \u2014 $10.32 | PnL +0.4% ($+0.04)\nAdvice: \ud83d\udfe1 HOLD / WATCH\nWhy: Trend is mixed; keep the stop-loss active\n\u26a0\ufe0f Long-term: speculative (100-day change -58%, above 50-day average)\n\n\ud83e\ude99 *ICNT* \u2014 $7.03 | PnL +3.0% ($+0.21)\nAdvice: \ud83d\udfe1 HOLD / WATCH\nWhy: Trend is mixed; keep the stop-loss active\n\u26a0\ufe0f Long-term: speculative (100-day change +163%, above 50-day average)",
+            "\n\ud83e\ude99 *JCT* \u2014 $6.63 | PnL -0.5% ($-0.04)\nAdvice: \ud83d\udfe1 HOLD / WATCH\nWhy: Trend is mixed; keep the stop-loss active\n\u274c Long-term: not suited (below 50-day average, 100-day change -49%)\n\n\n\u2705 No sell advised right now. For possible new buys use /analyse."
         ],
-        "i": 3,
+        "i": 0,
         "mode": "Markdown"
     },
     "panel_mid": 3115
