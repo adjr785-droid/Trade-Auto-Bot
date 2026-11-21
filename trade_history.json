@@ -73,5 +73,12 @@
         "time": 1795244795.426478,
         "reason": "RSI 75",
         "strategy": "MANUAL"
+    },
+    {
+        "sym": "PUMP-USDT",
+        "pnl": 0.10195632000000043,
+        "time": 1795245636.3065073,
+        "reason": "MANUAL SELL ALL",
+        "strategy": "MANUAL"
     }
 ]
