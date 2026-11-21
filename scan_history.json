@@ -69401,6 +69401,22 @@
             "decision": "SKIP",
             "reason": "Vol below $5M",
             "min_volume": 5000000
+        },
+        {
+            "time": 1795234867,
+            "rank": 25,
+            "sym": "PUMP-USDT",
+            "vol": 3555164.63,
+            "chg": -11.002,
+            "price": 0.002257,
+            "rsi": 21.24,
+            "rr": null,
+            "ma5": 0.002389,
+            "ma10": 0.002401,
+            "decision": "SETUP \u2014 NOT QUEUED",
+            "reason": "OVERSOLD matched, BTC safety filter blocked buying",
+            "min_volume": 1000000,
+            "strategy": "OVERSOLD"
         }
     ]
 }
