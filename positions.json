@@ -4,11 +4,11 @@
         "safe_zone": 0.013287,
         "stop_loss": 0.013287,
         "peak_price": 0.0142361,
-        "last_price": 0.0140215,
+        "last_price": 0.0140093,
         "opened_at": 1795209494.4167035,
         "sl_pct": 10.0,
         "strategy": "MANUAL",
-        "seen": 1795222919.1240478,
+        "seen": 1795222981.8226502,
         "partial_done": true,
         "xsl": 0.013287
     }
