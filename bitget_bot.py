@@ -168,20 +168,57 @@ def _carrier(ph):
 def _kb_refresh():
  st=load(ST,{});keys=str(kb_markup()["keyboard"]);ph=(compact_balance() or "")[:64]
  if not st.get("kb_mid") or st.get("kb_keys")!=keys or (ph and ph!=st.get("kb_ph")):_carrier(ph)
+def _paginate(text,n):
+ if n<=0 or len(text)<=n:return [text]
+ pages=[];cur=[];size=0;fence=[False]
+ def flush():
+  if not cur:return
+  t="\n".join(cur)
+  if fence[0]:t="```\n"+t
+  odd=t.count("```")%2==1
+  fence[0]=odd
+  if odd:t+="\n```"
+  pages.append(t);cur.clear()
+ for ln in text.split("\n"):
+  if cur and (size+len(ln)+1>n or len(cur)>=14):flush();size=0
+  cur.append(ln);size+=len(ln)+1
+ flush()
+ return pages
+def _nav_rows(i,k):
+ b=lambda t,c:{"text":t,"callback_data":c}
+ return [[b("◀ Prev","pg:p"),b(f"{i+1}/{k}","pg:x"),b("Next ▶","pg:n")],[b("🏠 Menu","m:menu")]]
+def page_nav(t):
+ st=load(ST,{});pg=st.get("pages") or {};ps=pg.get("p") or []
+ if len(ps)<2:_hide_panel();return
+ i=int(pg.get("i",0));d=t.split(":")[1] if ":" in t else "x"
+ i=max(0,i-1) if d=="p" else min(len(ps)-1,i+1) if d=="n" else i
+ st["pages"]["i"]=i;save(ST,st)
+ out=_mid("out_mid")
+ if not (out and _edit(out,ps[i],pg.get("mode") or "Markdown",None)):_make_out(ps[i],pg.get("mode") or "Markdown")
+ _panel(f"📄 *Page {i+1}/{len(ps)}*",_nav_rows(i,len(ps)))
 def _send(m,mode,btn=None):
  try:
+  n=int(cfg().get('page_chars',600) or 0)
   acc=_UI.get("acc")
   if acc is not None:
    pm,pt=acc if acc else (None,"")
-   if pt and len(pt)>=120 and pm==mode and len(pt)+len(m)+2<=4000:m=pt+"\n\n"+m
+   if pt and len(pt)>=120 and pm==mode and len(pt)+len(m)+2<=(12000 if n>0 else 4000):m=pt+"\n\n"+m
    _UI["acc"]=(mode,m)
+  ps=_paginate(m,n) if mode in (None,"Markdown") else [m]
+  had=bool((load(ST,{}).get("pages") or {}).get("p"))
+  show=ps[0]
   out=_mid("out_mid")
-  if not (out and _edit(out,m,mode or "Markdown",None)):_make_out(m,mode)
-  else:
-   try:
-    st=load(ST,{});st["out_text"]=(m or "")[:3800];st["out_mode"]=mode or "Markdown";save(ST,st)
-   except Exception:pass
-  if btn:_panel("👇 *Actions*",btn.get("inline_keyboard") if isinstance(btn,dict) else btn)
+  if not (out and _edit(out,show,mode or "Markdown",None)):_make_out(show,mode)
+  try:
+   st=load(ST,{});st["out_text"]=(show or "")[:3800];st["out_mode"]=mode or "Markdown"
+   if len(ps)>1:st["pages"]={"p":ps,"i":0,"mode":mode or "Markdown"}
+   else:st.pop("pages",None)
+   save(ST,st)
+  except Exception:pass
+  rows=(btn.get("inline_keyboard") if isinstance(btn,dict) else btn) if btn else []
+  if len(ps)>1:_panel("📄 *Page 1/%d*"%len(ps),_nav_rows(0,len(ps))+rows)
+  elif btn:_panel("👇 *Actions*",rows)
+  elif had and _mid("panel_mid"):_hide_panel()
   elif not _mid("panel_mid") and not _mid("panel_hidden"):
    pu=_UI.get("panel_used");menu();_UI["panel_used"]=pu
   _kb_refresh()
@@ -291,7 +328,7 @@ def save(f,d):
   os.replace(f+".tmp",f)
  except Exception as e:print(f"SAVE ERR {f}: {e}")
 def cfg():
- d={"rsi_min":42,"rsi_max":48,"stop_loss_pct":5.0,"auto_buy_enabled":True,"auto_buy_amount_usdt":10.0,"max_tokens_before_consolidation":3,"max_hold_hours":48,"trail_pct":8.0,"crash_guard_pct":10.0,"rsi_exit":75,"btc_rsi_min":50,"risk_per_trade_pct":1.0,"max_daily_loss_pct":3.0,"max_portfolio_exposure_pct":50.0,"max_position_pct":15.0,"max_daily_trades":5,"max_spread_pct":0.5,"auto_mode_v1":False,"rebuy_cooldown_hours":6.0,"atr_stop_enabled":True,"atr_stop_mult":2.0,"atr_stop_min_pct":3.0,"atr_stop_max_pct":10.0,"market_filter_enabled":True,"btc_trend_hours":50,"min_breadth_pct":30.0,"offline_alert_hours":3.0,"daily_summary_hour_utc":20,"max_daily_drawdown_pct":5.0,"partial_tp_pct":5.0,"partial_tp_fraction":0.5,"dynamic_trail":True,"sell_if_stop_fails":True,"scan_prefilter":True,"cleanup_hours":24.0,"scan_interval_minutes":15.0,"auto_clear_hours":24.0,"live_mode_seconds":270,"mtf_confirm":True,"btc_shock_pct":3.0,"max_open_risk_pct":3.0,"loss_streak_trigger":2,"loss_streak_size_factor":0.5,"scan_parallel":True}
+ d={"rsi_min":42,"rsi_max":48,"stop_loss_pct":5.0,"auto_buy_enabled":True,"auto_buy_amount_usdt":10.0,"max_tokens_before_consolidation":3,"max_hold_hours":48,"trail_pct":8.0,"crash_guard_pct":10.0,"rsi_exit":75,"btc_rsi_min":50,"risk_per_trade_pct":1.0,"max_daily_loss_pct":3.0,"max_portfolio_exposure_pct":50.0,"max_position_pct":15.0,"max_daily_trades":5,"max_spread_pct":0.5,"auto_mode_v1":False,"rebuy_cooldown_hours":6.0,"atr_stop_enabled":True,"atr_stop_mult":2.0,"atr_stop_min_pct":3.0,"atr_stop_max_pct":10.0,"market_filter_enabled":True,"btc_trend_hours":50,"min_breadth_pct":30.0,"offline_alert_hours":3.0,"daily_summary_hour_utc":20,"max_daily_drawdown_pct":5.0,"partial_tp_pct":5.0,"partial_tp_fraction":0.5,"dynamic_trail":True,"sell_if_stop_fails":True,"scan_prefilter":True,"cleanup_hours":24.0,"scan_interval_minutes":15.0,"auto_clear_hours":24.0,"live_mode_seconds":270,"mtf_confirm":True,"btc_shock_pct":3.0,"max_open_risk_pct":3.0,"loss_streak_trigger":2,"loss_streak_size_factor":0.5,"scan_parallel":True,"page_chars":600}
  s=load(CFG,d)
  for k,v in d.items():s.setdefault(k,v)
  if not s.get('auto_mode_v1'):s['auto_buy_enabled']=True;s['auto_mode_v1']=True;save(CFG,s)
@@ -1605,6 +1642,7 @@ def ui_cb(t):
  except Exception as e:print(f"UI ERR {t}: {e}");tg(f"⚠️ Button failed, nothing changed: `{str(e)[:150]}`")
 def handle(t,age):
  if t.startswith("m:"):ui_cb(t);return
+ if t.startswith("pg:"):page_nav(t);return
  if not t.startswith(("/","scan_history")):
   try:
    _pd=load(ST,{}).get("rename_pending")
