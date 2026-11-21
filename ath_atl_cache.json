@@ -34,5 +34,11 @@
         "atl": 0.0025,
         "checked_at": 1795252450.2450213,
         "status": "complete"
+    },
+    "DGAI-USDT": {
+        "ath": 2.999899,
+        "atl": 0.005,
+        "checked_at": 1795255496.430489,
+        "status": "complete"
     }
 }
