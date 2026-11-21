@@ -1,8 +1,4 @@
 import requests,json,os,time,ccxt,subprocess,traceback,re,datetime,sys
-try:
-    from google import genai
-except Exception:
-    genai=None
 try:import fcntl
 except ImportError:fcntl=None
 TK=os.environ.get('TG_TOKEN');CHAT=str(os.environ.get('TG_CHAT_ID',''));API=f"https://api.telegram.org/bot{TK}"
@@ -10,8 +6,8 @@ DB,ST,CFG,QF,LF,CD,SC,HIST,LOCK,SH,OUT,AL,ATHATL_CACHE="positions.json","tg_stat
 FILES=[DB,ST,CFG,QF,LF,CD,SC,HIST,SH,OUT,AL,ATHATL_CACHE]
 STABLE=['USDC','USDT','DAI','FDUSD','TUSD','USDD','USDE'];LEV=['3L','3S','5L','5S','10L','10S','2L','2S'];BL=['RPANW','CT','ONE']
 ex=ccxt.bitget({'apiKey':os.environ.get('BITGET_API_KEY'),'secret':os.environ.get('BITGET_API_SECRET'),'password':os.environ.get('BITGET_API_PASSPHRASE'),'enableRateLimit':True});ex.options['createMarketBuyOrderRequiresPrice']=False
-client=genai.Client(api_key=os.environ.get('GEMINI_API_KEY')) if genai and os.environ.get('GEMINI_API_KEY') else None
-GEMINI_MODELS=[m for m in [os.environ.get('GEMINI_MODEL'),'gemini-2.5-flash','gemini-1.5-flash'] if m]
+OPENAI_API_KEY=os.environ.get('OPENAI_API_KEY')
+OPENAI_MODEL=os.environ.get('OPENAI_MODEL','gpt-4.1-mini')
 _C={};_BAL={"t":0,"m":""};KB={"keyboard":[["📊 Menu","🧠 Ask AI","💼 Holdings"]],"resize_keyboard":True,"is_persistent":True}
 S=lambda s:s.replace("-","/");TR=lambda t:{'trigger':True} if t else {};B=lambda k,c:ex.fetch_balance()[k].get(c,0)
 skip=lambda b:b in STABLE or b in BL or ((b.startswith('X') or b.startswith('R')) and len(b)<=6) or any(b.upper().endswith(x) for x in LEV)
@@ -52,6 +48,14 @@ def compact_balance():
 
 def _send(m,mode,btn=None):
     try:
+        if _UI.get("edit_mode") and _UI.get("mid"):
+            payload={"chat_id":CHAT,"message_id":_UI["mid"],"text":m,"parse_mode":mode or "Markdown"}
+            if btn:payload["reply_markup"]=btn
+            r=requests.post(API+"/editMessageText",json=payload,timeout=10)
+            if r.ok:return
+            body=r.json() if r.headers.get("content-type","").startswith("application/json") else {}
+            if "message is not modified" in str(body.get("description","")).lower():return
+        
         rm=btn or dict(KB)
         if not btn:
             ph=compact_balance()
@@ -157,7 +161,7 @@ def auto_clear_daily():
 
 def menu():
     b=lambda t,c:{"text":t,"callback_data":c}
-    _send("🕹️ *MAIN MENU*\nSelect an option below:","Markdown",{"inline_keyboard":[[b("🤖 Bot","/bot"),b("🛠️ Audit","/audit")],[b("🧾 Scan History","scan_history:1"),b("❌ Cancel Orders","/cancel")],[b("📈 Stats","/stats"),b("🔔 Alerts","/alerts")],[b("🏆 Analyse (Top 3)","/analyse"),b("🧹 Clear Chat","/clear")],[b("🧹 Dust → BGB","/dust")],[b("🛒 Buy","m:buy"),b("💸 Sell","m:sell")],[b("🔎 Analyse Coin","m:an"),b("🔔 Price Alert","m:al")],[b("⚙️ Settings","m:set"),b("🧰 Tools","m:tools")],[b("🚨 PANIC SELL","/panic")]]})
+    ui_send("🖥️ *TRADE AUTO BOT — DASHBOARD*\nSelect a screen below.",[[b("💼 Holdings","m:r:holdings"),b("📊 Market","m:r:market")],[b("📈 Performance","m:r:stats"),b("🧠 Ask AI","m:ai:1")],[b("🧾 Trade History","m:r:history"),b("🛡️ Risk & Bot","m:r:bot")],[b("🧰 Tools","m:tools"),b("⚙️ Settings","m:set")],[b("🚨 PANIC SELL","/panic")]])
 
 def panic_prompt():_send("🚨 *CONFIRM PANIC*\nThis sells ALL positions at market and pauses auto-buy.\nConfirm within 15 minutes.","Markdown",{"inline_keyboard":[[{"text":"✅ YES, SELL EVERYTHING","callback_data":"panic_confirm"},{"text":"❌ Cancel","callback_data":"panic_cancel"}]]})
 
@@ -986,18 +990,21 @@ def analyse_coin(txt):
     except Exception as e:tg(f"❌ Could not analyse {sym}: {e}")
 
 def ask_ai(p):
-    if not client:tg("⚠️ AI unavailable. Add GEMINI_API_KEY.");return
+    if not OPENAI_API_KEY:
+        tg("⚠️ AI unavailable. Set OPENAI_API_KEY (and optionally OPENAI_MODEL) in your environment.");return
     try:
         db=load(DB);q=load(QF);s=cfg();bal=B('free','USDT');br=data("BTC-USDT")[2]
-        pos=[f"  {sym}:entry={d['entry_price']},pnl={((live(sym) or d['entry_price'])-d['entry_price'])/d['entry_price']*100:+.1f}%" for sym,d in list(db.items())[:5]] or ["  (none)"]
-        ctx=f"USDT:{bal:.2f}|AutoBuy:${s['auto_buy_amount_usdt']}|BTC RSI:{br}|Pos({len(db)}):\n"+"\n".join(pos)+f"\nQueue:{len(q)}|RSI {s['rsi_min']}-{s['rsi_max']},SL {s['stop_loss_pct']}%\n\n"
-        txt=err=used=None
-        for m in GEMINI_MODELS:
-            try:txt=client.models.generate_content(model=m,contents=f"Expert crypto analyst. Plain text only.\n{ctx}Q:{p}").text;used=m;break
-            except Exception as e:err=e
-        if not txt:raise err or Exception("empty reply")
-        _send(f"🧠 AI ({used}):\n\n{txt[:3800]}",None)
-    except Exception as e:tg(f"❌ AI Error: {e}")
+        pos=[f"  {sym}: entry={d.get('entry_price')}, pnl={((live(sym) or d.get('entry_price',0))-d.get('entry_price',1))/d.get('entry_price',1)*100:+.1f}%" for sym,d in list(db.items())[:8] if d.get('entry_price')] or ["  (none)"]
+        ctx=f"Free USDT: {bal:.2f}|AutoBuy: ${s['auto_buy_amount_usdt']}|BTC RSI: {br}|Positions({len(db)}):\n"+"\n".join(pos)+f"\nQueue: {len(q)}|RSI {s['rsi_min']}-{s['rsi_max']}, SL {s['stop_loss_pct']}%\n\n"
+        prompt="You are an expert crypto market analyst advising a spot trading bot user. Use plain text, concise, acknowledge uncertainty. You are advisory only: never claim to execute trades or override deterministic bot risk controls. Context:\n"+ctx+"User question: "+str(p)
+        r=requests.post("https://api.openai.com/v1/chat/completions",headers={"Authorization":"Bearer "+OPENAI_API_KEY,"Content-Type":"application/json"},json={"model":OPENAI_MODEL,"messages":[{"role":"user","content":prompt}],"temperature":0.4},timeout=45)
+        if not r.ok:
+            detail=(r.text or "")[:400]
+            raise RuntimeError(f"OpenAI HTTP {r.status}: {detail}")
+        data_json=r.json();txt=data_json.get("choices", [{}])[0].get("message",{}).get("content")
+        if not txt:raise RuntimeError("OpenAI returned an empty response")
+        _send(f"🧠 AI ({OPENAI_MODEL}):\n\n{txt[:3800]}",None)
+    except Exception as e:tg(f"❌ AI Error: {str(e)[:500]}")
 
 def manage():
     db=load(DB);s=cfg();tp=s.get('trail_pct',0) or 0
@@ -1370,10 +1377,10 @@ def setc(k,v,m):s=cfg();s[k]=v;save(CFG,s);tg(m)
 MSG={"ai_info":"🧠 *AI ANALYST*\nTo ask the AI a question, type:\n`/ai <your question>`","/help":"🤖 *CMDS*\n`/menu` `/ai [q]` `/analyse` (top 3) `/analyse COIN` `/audit` `/cancel`\n`/bot` `/holdings` `/stats`\n`/clear` `/dust` `/alert COIN PRICE` `/alerts` `/cancel\\_alerts`\n`/scan_history [coin/filter]`\n`/set key value` `/pause` `/resume` `/panic`"}
 
 # ---------- Button-only control panel (no typing). Every button runs an existing command; nothing else was changed. ----------
-_UI={"mid":None}
+_UI={"mid":None,"edit_mode":False}
 _B=lambda t,c:{"text":t,"callback_data":c}
 _MENU_BTN=[_B("⬅️ Menu","m:menu")]
-RUN={"scan":"/scan","sync":"/sync","holdings":"/holdings","analyse":"/analyse","alerts":"/alerts","cancelalerts":"/cancel_alerts","dust":"/dust","bot":"/bot","audit":"/audit","stats":"/stats","clear":"/clear","pause":"/pause","resume":"/resume"}
+RUN={"scan":"/scan","sync":"/sync","holdings":"/holdings","analyse":"/analyse","alerts":"/alerts","cancelalerts":"/cancel_alerts","dust":"/dust","bot":"/bot","audit":"/audit","stats":"/stats","clear":"/clear","pause":"/pause","resume":"/resume","cancel":"/cancel","pricealert":"/alerts"}
 AI_Q={"1":"Give me a market overview.","2":"Review my current holdings and say which to hold or sell.","3":"Which single coin looks best to buy right now and why?","4":"What is the biggest risk in my portfolio right now?"}
 
 def ui_send(text,rows):
@@ -1382,6 +1389,8 @@ def ui_send(text,rows):
         try:
             r=requests.post(API+"/editMessageText",json={"chat_id":CHAT,"message_id":mid,"text":text,"parse_mode":"Markdown","reply_markup":rm},timeout=10)
             if r.ok:return
+            body=r.json() if r.headers.get("content-type","").startswith("application/json") else {}
+            if "message is not modified" in str(body.get("description","")).lower():return
         except Exception:pass
     _send(text,"Markdown",rm)
 
@@ -1429,7 +1438,10 @@ def ui_cb(t):
     p=t.split(":");a=p[1] if len(p)>1 else "menu"
     try:
         if a=="menu":menu()
-        elif a=="r" and len(p)>2 and p[2] in RUN:handle(RUN[p[2]],0)
+        elif a=="r" and len(p)>2 and p[2] in RUN:
+            _UI["edit_mode"]=True
+            try:handle(RUN[p[2]],0)
+            finally:_UI["edit_mode"]=False
         elif a=="buy":
             cs=ui_coins("buy")
             ui_send("🛒 *BUY* — choose a coin:",_grid([_B(c,f"m:b:{c}") for c in cs],3)+[[_B("🏆 Top 3 ideas","m:r:analyse")],_MENU_BTN])
@@ -1483,8 +1495,17 @@ def ui_cb(t):
                 step=max(abs(v)*0.1,0.1);new=round(v+(step if d=="+" else -step),4)
             handle(f"/set {k} {new}",0);ui_setting(k)
         elif a=="tools":
-            on=cfg().get("auto_buy_enabled")
-            ui_send("🧰 *TOOLS*",[[_B("🔍 Scan now","m:r:scan"),_B("🔄 Sync coins","m:r:sync")],[_B("💼 Holdings","m:r:holdings"),_B("🧹 Dust → BGB","m:r:dust")],[_B("⏸ Pause auto-buy" if on else "▶️ Resume auto-buy","m:r:pause" if on else "m:r:resume")],_MENU_BTN])
+            ui_send("🧰 *TOOLS*\nChoose a tool. Existing commands and functions remain available.",[[_B("🛠️ Audit","m:r:audit"),_B("🧾 Scan history","m:scan_hist")],[ _B("❌ Cancel orders","m:r:cancel"),_B("🔔 Alerts","m:r:alerts")],[_B("🧹 Dust → BGB","m:r:dust"),_B("🛒 Buy","m:buy")],[_B("💸 Sell","m:sell"),_B("🔔 Price alert","m:al")],[_B("⬅️ Dashboard","m:menu")]])
+        elif a=="scan_hist":
+            cmd_scan_history("/scan_history")
+        elif a=="r" and len(p)>2 and p[2]=="market":
+            ui_send(gl(10),[[_B("⬅️ Dashboard","m:menu"),_B("🔄 Refresh","m:r:market")]])
+        elif a=="r" and len(p)>2 and p[2]=="history":
+            H=load(HIST);lines=["🧾 *TRADE HISTORY*"]
+            for x in H[-12:]:lines.append(f"{str(x.get('sym','?')).replace('-USDT','')} | {x.get('reason','?')} | PnL ${float(x.get('pnl',0)):+.2f}")
+            ui_send("\n".join(lines),[[_B("⬅️ Dashboard","m:menu")]])
+        elif a=="r" and len(p)>2 and p[2]=="cancel":
+            cmd_cancel_all()
         elif a=="ai" and len(p)>2 and p[2] in AI_Q:ask_ai(AI_Q[p[2]])
     except Exception as e:print(f"UI ERR {t}: {e}");tg(f"⚠️ Button failed, nothing changed: `{str(e)[:150]}`")
 
@@ -1556,8 +1577,10 @@ def tg_check(poll=0):
             if age>1800:continue
             _UI["mid"]=m.get("message_id") if "callback_query" in u else None
             _TG_N["n"]+=1
+            if "callback_query" in u and (txt.startswith("m:") or txt.startswith("scan_history:")):_UI["edit_mode"]=True
             try:handle(txt,age)
             except Exception as e:print(f"HANDLER ERR: {e}");tg(f"⚠️ Command failed: `{e}`")
+            finally:_UI["edit_mode"]=False
     except Exception as e:print(f"TG Err:{e}")
 
 def acquire_lock():
