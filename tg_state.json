@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935688447,
+    "last_update_id": 935688454,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT24.17/\u20a632,695",
+    "kb_ph": "USDT23.93/\u20a632,381",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -14,46 +14,50 @@
     "panel_rows": [
         [
             {
-                "text": "\u25c0 Prev",
-                "callback_data": "pg:p"
+                "text": "\ud83e\udd16 Bot",
+                "callback_data": "/bot"
             },
             {
-                "text": "1/2",
-                "callback_data": "pg:x"
-            },
-            {
-                "text": "Next \u25b6",
-                "callback_data": "pg:n"
+                "text": "\ud83d\udcc8 Stats",
+                "callback_data": "/stats"
             }
         ],
         [
             {
-                "text": "\ud83c\udfe0 Menu",
-                "callback_data": "m:menu"
-            }
-        ],
-        [
-            {
-                "text": "\u2b05\ufe0f Previous",
-                "callback_data": "scan_history:1:page=2"
+                "text": "\ud83d\udd0e Analyse Coin",
+                "callback_data": "m:an"
             },
             {
-                "text": "Next \u27a1\ufe0f",
-                "callback_data": "scan_history:3:page=2"
+                "text": "\u2699\ufe0f Settings",
+                "callback_data": "m:set"
             }
         ],
         [
             {
-                "text": "\ud83d\udd79\ufe0f Main Menu",
-                "callback_data": "/menu"
+                "text": "\ud83d\udcbc Holdings",
+                "callback_data": "m:r:holdings"
+            },
+            {
+                "text": "\ud83e\udde0 Ask AI",
+                "callback_data": "m:ai:1"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\uddf9 Clear Chat",
+                "callback_data": "/clear"
+            },
+            {
+                "text": "\ud83d\udea8 PANIC SELL",
+                "callback_data": "/panic"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/2*",
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
     "out_text": "\ud83d\udd0e *SCAN HISTORY \u2014 QUERY*\nMatched 462 of 462 records | page=2\nPage 2/24 | Window 0.8h\n\n```COIN         RSI    R:R  DECISION\n---------------------------------------\nPUMP          50.7      - SKIP\nCOLLECT       54.6      - SKIP\nWLD           50.4      - SKIP\nTRX           57.8      - SKIP\nBTW           50.6      - SKIP\nSKYAI         60.7      - SKIP\nJCT           67.8      - SKIP\nUNI           61.1      - SKIP\n```",
     "out_mode": "Markdown",
     "out_mid": 3073,
-    "kb_mid": 3097,
+    "kb_mid": 3103,
     "pages": {
         "p": [
             "\ud83d\udd0e *SCAN HISTORY \u2014 QUERY*\nMatched 462 of 462 records | page=2\nPage 2/24 | Window 0.8h\n\n```COIN         RSI    R:R  DECISION\n---------------------------------------\nPUMP          50.7      - SKIP\nCOLLECT       54.6      - SKIP\nWLD           50.4      - SKIP\nTRX           57.8      - SKIP\nBTW           50.6      - SKIP\nSKYAI         60.7      - SKIP\nJCT           67.8      - SKIP\nUNI           61.1      - SKIP\n```",
