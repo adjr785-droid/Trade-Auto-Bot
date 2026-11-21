@@ -124801,6 +124801,22 @@
             "decision": "SKIP",
             "reason": "Vol below $5M",
             "min_volume": 5000000
+        },
+        {
+            "time": 1795270313,
+            "rank": 39,
+            "sym": "ICNT-USDT",
+            "vol": 1565066.86,
+            "chg": -19.015,
+            "price": 0.3471,
+            "rsi": 26.08,
+            "rr": null,
+            "ma5": 0.354,
+            "ma10": 0.35773,
+            "decision": "SETUP \u2014 NOT QUEUED",
+            "reason": "OVERSOLD matched, market filter: only 20% of coins are up today",
+            "min_volume": 1000000,
+            "strategy": "OVERSOLD"
         }
     ]
 }
