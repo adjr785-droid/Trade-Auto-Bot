@@ -1,26 +1,14 @@
 {
-    "MMT-USDT": {
-        "entry_price": 0.2718,
-        "safe_zone": 0.2718,
-        "stop_loss": 0.247474,
-        "peak_price": 0.2746,
-        "last_price": 0.257,
-        "opened_at": 1795223819.6142437,
-        "sl_pct": 8.95,
-        "strategy": "MANUAL",
-        "xsl": 0.252632,
-        "seen": 1795233624.7196991
-    },
     "BLESS-USDT": {
         "entry_price": 0.01411,
         "safe_zone": 0.01411,
         "stop_loss": 0.012868,
         "peak_price": 0.0142712,
-        "last_price": 0.0142712,
+        "last_price": 0.0141736,
         "opened_at": 1795233526.4441814,
         "sl_pct": 8.8,
         "strategy": "MANUAL",
         "xsl": 0.012868,
-        "seen": 1795233625.1099353
+        "seen": 1795234864.2610922
     }
 }
