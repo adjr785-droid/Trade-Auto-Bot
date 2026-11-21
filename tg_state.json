@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935688562,
+    "last_update_id": 935688564,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -18,7 +18,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "6/8",
+                "text": "8/8",
                 "callback_data": "pg:x"
             },
             {
@@ -35,7 +35,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 6/8*",
+    "panel_text": "\ud83d\udcc4 *Page 8/8*",
     "out_text": "+ volume breakout)\nProtection: stop-loss 15% |\ntrailing stop 8.0% below peak |\ncrash guard 10.0%\nExit: RSI >= 75 or max hold 703h\nProfit taking: sell 50% at +5.0%\nthen stop moves to break-even\nDynamic trailing: ON (wider in\nstrong trends, tighter when\nmomentum fades)\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "out_time": 1795304793.0385468,
@@ -50,8 +50,8 @@
     "last_cmd": "/bot",
     "page_mem": {
         "/bot": [
-            5,
-            1795304809.683344
+            7,
+            1795304840.7210934
         ],
         "m:r:holdings": [
             4,
@@ -82,7 +82,7 @@
             "Advice: \ud83d\udfe1 HOLD / WATCH\nWhy: Trend is mixed; keep the\nstop-loss active\n\u26a0\ufe0f Long-term: speculative\n(100-day change -58%, above\n50-day average)\n\n\n\u2705 No sell advised right now.\nFor possible new buys use\n\u2800\n\u2800",
             "/analyse.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 5,
+        "i": 7,
         "mode": "Markdown",
         "x": [
             {
