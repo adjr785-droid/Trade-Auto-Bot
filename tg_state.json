@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935688519,
+    "last_update_id": 935688521,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT23.60/\u20a631,932",
+    "kb_ph": "USDT23.60/\u20a631,931",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -14,50 +14,28 @@
     "panel_rows": [
         [
             {
-                "text": "\ud83e\udd16 Bot",
-                "callback_data": "/bot"
+                "text": "\u25c0",
+                "callback_data": "pg:p"
             },
             {
-                "text": "\ud83d\udcc8 Stats",
-                "callback_data": "/stats"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udd0e Analyse Coin",
-                "callback_data": "m:an"
+                "text": "1/7",
+                "callback_data": "pg:x"
             },
             {
-                "text": "\u2699\ufe0f Settings",
-                "callback_data": "m:set"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udcbc Holdings",
-                "callback_data": "m:r:holdings"
+                "text": "\u25b6",
+                "callback_data": "pg:n"
             },
             {
-                "text": "\ud83e\udde0 Ask AI",
-                "callback_data": "m:ai:1"
-            }
-        ],
-        [
-            {
-                "text": "\ud83e\uddf9 Clear Chat",
-                "callback_data": "/clear"
-            },
-            {
-                "text": "\ud83d\udea8 PANIC SELL",
-                "callback_data": "/panic"
+                "text": "\ud83c\udfe0",
+                "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
-    "out_text": "\ud83c\udfc6 *TOP 3 SETUPS RIGHT NOW*\n_Read-only scan. Nothing was\nbought._\n\n\u26a0\ufe0f Market filter active: only\n20% of coins are up today.\nAuto-buy is blocked; a manual\nbuy is your own call.\n\n*1. BNB-USDT* \u2014 WATCHLIST (no\n\u2800\n\u2800",
+    "panel_text": "\ud83d\udcc4 *Page 1/7*",
+    "out_text": "\ud83c\udfc6 *TOP 3 SETUPS RIGHT NOW*\n_Read-only scan. Nothing was\nbought._\n\n\u26a0\ufe0f Market filter active: only\n20% of coins are up today.\nAuto-buy is blocked; a manual\nbuy is your own call.\n\n*1. DGAI-USDT* \u2014 WEAK (best\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "kb_mid": 3160,
-    "out_time": 1795303887.3845885,
+    "kb_mid": 3162,
+    "out_time": 1795304084.5105968,
     "bot_seen": {
         "t": 1795303709.9367409,
         "eq": 23.605739652835926,
@@ -81,22 +59,21 @@
             1795304050.1089635
         ]
     },
-    "out_mid": 3155,
+    "out_mid": 3161,
     "pages": {
         "p": [
-            "\ud83c\udfc6 *TOP 3 SETUPS RIGHT NOW*\n_Read-only scan. Nothing was\nbought._\n\n\u26a0\ufe0f Market filter active: only\n20% of coins are up today.\nAuto-buy is blocked; a manual\nbuy is your own call.\n\n*1. BNB-USDT* \u2014 WATCHLIST (no\n\u2800\n\u2800",
-            "full scanner setup)\nPrice: 549.25 USDT | 24h: +1.71%\n| RSI: 55.6\nSuggested stop: 466.86 (15%\nbelow price)\nWhy:\n\u2022 Short-term trend is up (price\n> MA5 > MA10)\n\u2022 RSI 55.6 is healthy (room to\nrun before overbought)\n\u2800\n\u2800",
-            "\u2022 24h change +1.71% shows\nsteady, not extreme, momentum\n\u2022 24h volume $4.8M (liquid\nenough: above the $1M minimum)\n\u2022 Spread: 0.00% (OK for\nauto-buy)\n\n*2. DGAI-USDT* \u2014 WEAK (best\navailable, not a full setup)\nPrice: 0.807375 USDT | 24h:\n\u2800\n\u2800",
-            "+14.99% | RSI: 86.7\nSuggested stop: 0.686269 (15%\nbelow price)\nWhy:\n\u2022 Short-term trend is up (price\n> MA5 > MA10)\n\u2022 RSI 86.7 is overbought (risk\nof pullback)\n\u2022 24h change +14.99% shows\nsteady, not extreme, momentum\n\u2800\n\u2800",
-            "\u2022 24h volume $4.7M (liquid\nenough: above the $1M minimum)\n\u2022 Spread: 0.08% (OK for\nauto-buy)\n\n*3. COLLECT-USDT* \u2014 WEAK (best\navailable, not a full setup)\nPrice: 0.025554 USDT | 24h:\n+2.74% | RSI: 51.2\nSuggested stop: 0.021721 (15%\n\u2800\n\u2800",
-            "below price)\nWhy:\n\u2022 Trend not confirmed yet\n(price 0.025554, MA5 0.025597,\nMA10 0.025692)\n\u2022 RSI 51.2 is healthy (room to\nrun before overbought)\n\u2022 24h change +2.74% shows\nsteady, not extreme, momentum\n\u2022 24h volume $4.3M (liquid\n\u2800\n\u2800",
-            "enough: above the $1M minimum)\n\u2022 Spread: 0.08% (OK for\nauto-buy)\n\nNo coin passes all scanner rules\nright now, so these are the\nstrongest available. Be\ncautious.\n\nBuy manually with `/buy COIN\n\u2800\n\u2800",
-            "amount` if you agree.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+            "\ud83c\udfc6 *TOP 3 SETUPS RIGHT NOW*\n_Read-only scan. Nothing was\nbought._\n\n\u26a0\ufe0f Market filter active: only\n20% of coins are up today.\nAuto-buy is blocked; a manual\nbuy is your own call.\n\n*1. DGAI-USDT* \u2014 WEAK (best\n\u2800\n\u2800",
+            "available, not a full setup)\nPrice: 0.807855 USDT | 24h:\n+15.10% | RSI: 86.7\nSuggested stop: 0.686677 (15%\nbelow price)\nWhy:\n\u2022 Short-term trend is up (price\n> MA5 > MA10)\n\u2022 RSI 86.7 is overbought (risk\nof pullback)\n\u2800\n\u2800",
+            "\u2022 24h volume $4.7M (liquid\nenough: above the $1M minimum)\n\u2022 Spread: 0.06% (OK for\nauto-buy)\n\n*2. BNB-USDT* \u2014 WEAK (best\navailable, not a full setup)\nPrice: 548.68 USDT | 24h: +1.55%\n| RSI: 55.6\nSuggested stop: 466.38 (15%\n\u2800\n\u2800",
+            "below price)\nWhy:\n\u2022 Trend not confirmed yet\n(price 548.68, MA5 549.23, MA10\n548.34)\n\u2022 RSI 55.6 is healthy (room to\nrun before overbought)\n\u2022 24h change +1.55% shows\nsteady, not extreme, momentum\n\u2022 24h volume $4.8M (liquid\n\u2800\n\u2800",
+            "enough: above the $1M minimum)\n\u2022 Spread: 0.00% (OK for\nauto-buy)\n\n*3. COLLECT-USDT* \u2014 WEAK (best\navailable, not a full setup)\nPrice: 0.025550 USDT | 24h:\n+2.82% | RSI: 51.2\nSuggested stop: 0.021718 (15%\nbelow price)\n\u2800\n\u2800",
+            "Why:\n\u2022 Trend not confirmed yet\n(price 0.025550, MA5 0.025597,\nMA10 0.025692)\n\u2022 RSI 51.2 is healthy (room to\nrun before overbought)\n\u2022 24h change +2.82% shows\nsteady, not extreme, momentum\n\u2022 24h volume $4.3M (liquid\nenough: above the $1M minimum)\n\u2800\n\u2800",
+            "\u2022 Spread: 0.05% (OK for\nauto-buy)\n\nNo coin passes all scanner rules\nright now, so these are the\nstrongest available. Be\ncautious.\n\nBuy manually with `/buy COIN\namount` if you agree.\n\u2800\n\u2800"
         ],
-        "i": 2,
+        "i": 0,
         "mode": "Markdown",
         "x": [],
-        "cmd": "/analyse"
+        "cmd": "m:r:analyse"
     },
-    "panel_mid": 3157
+    "panel_mid": 3163
 }
