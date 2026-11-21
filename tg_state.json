@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935688533,
+    "last_update_id": 935688536,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -14,24 +14,46 @@
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
+                "text": "\ud83e\udd16 Bot",
+                "callback_data": "/bot"
             },
             {
-                "text": "4/7",
-                "callback_data": "pg:x"
+                "text": "\ud83d\udcc8 Stats",
+                "callback_data": "/stats"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udd0e Analyse Coin",
+                "callback_data": "m:an"
             },
             {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
+                "text": "\u2699\ufe0f Settings",
+                "callback_data": "m:set"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udcbc Holdings",
+                "callback_data": "m:r:holdings"
             },
             {
-                "text": "\ud83c\udfe0",
-                "callback_data": "m:menu"
+                "text": "\ud83e\udde0 Ask AI",
+                "callback_data": "m:ai:1"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\uddf9 Clear Chat",
+                "callback_data": "/clear"
+            },
+            {
+                "text": "\ud83d\udea8 PANIC SELL",
+                "callback_data": "/panic"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 4/7*",
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
     "out_text": "\ud83c\udfc6 *TOP 3 SETUPS RIGHT NOW*\n_Read-only scan. Nothing was\nbought._\n\n\u26a0\ufe0f Market filter active: only\n20% of coins are up today.\nAuto-buy is blocked; a manual\nbuy is your own call.\n\n*1. DGAI-USDT* \u2014 WEAK (best\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "kb_mid": 3162,
@@ -59,8 +81,8 @@
             1795304050.1089635
         ],
         "m:r:analyse": [
-            3,
-            1795304209.5886023
+            4,
+            1795304212.30103
         ]
     },
     "out_mid": 3161,
@@ -74,7 +96,7 @@
             "Why:\n\u2022 Trend not confirmed yet\n(price 0.025550, MA5 0.025597,\nMA10 0.025692)\n\u2022 RSI 51.2 is healthy (room to\nrun before overbought)\n\u2022 24h change +2.82% shows\nsteady, not extreme, momentum\n\u2022 24h volume $4.3M (liquid\nenough: above the $1M minimum)\n\u2800\n\u2800",
             "\u2022 Spread: 0.05% (OK for\nauto-buy)\n\nNo coin passes all scanner rules\nright now, so these are the\nstrongest available. Be\ncautious.\n\nBuy manually with `/buy COIN\namount` if you agree.\n\u2800\n\u2800"
         ],
-        "i": 3,
+        "i": 4,
         "mode": "Markdown",
         "x": [],
         "cmd": "m:r:analyse"
