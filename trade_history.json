@@ -101,5 +101,12 @@
         "time": 1795269109.851761,
         "reason": "PARTIAL PROFIT +5.0%",
         "strategy": "MANUAL"
+    },
+    {
+        "sym": "DGAI-USDT",
+        "pnl": 0.49114802000000024,
+        "time": 1795270290.9392958,
+        "reason": "RSI 75",
+        "strategy": "MANUAL"
     }
 ]
