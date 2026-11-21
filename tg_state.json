@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935688539,
+    "last_update_id": 935688540,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -14,74 +14,12 @@
     "panel_rows": [
         [
             {
-                "text": "\u270f\ufe0f \ud83d\udccb Menu",
-                "callback_data": "m:lay:rk:menu"
-            },
-            {
-                "text": "\u270f\ufe0f \ud83e\uddf0 Tools",
-                "callback_data": "m:lay:rk:tools"
-            }
-        ],
-        [
-            {
-                "text": "\u270f\ufe0f \ud83c\udfc6 Analyse",
-                "callback_data": "m:lay:rk:analyse"
-            },
-            {
-                "text": "\u270f\ufe0f \ud83e\udd16 Bot",
-                "callback_data": "m:lay:rk:bot"
-            }
-        ],
-        [
-            {
-                "text": "\u270f\ufe0f \ud83d\udcc8 Stats",
-                "callback_data": "m:lay:rk:stats"
-            },
-            {
-                "text": "\u270f\ufe0f \ud83d\udd0e Analyse Coin",
-                "callback_data": "m:lay:rk:an"
-            }
-        ],
-        [
-            {
-                "text": "\u270f\ufe0f \u2699\ufe0f Settings",
-                "callback_data": "m:lay:rk:set"
-            },
-            {
-                "text": "\u270f\ufe0f \ud83d\udcbc Holdings",
-                "callback_data": "m:lay:rk:hold"
-            }
-        ],
-        [
-            {
-                "text": "\u270f\ufe0f \ud83e\udde0 Ask AI",
-                "callback_data": "m:lay:rk:ai"
-            },
-            {
-                "text": "\u270f\ufe0f \ud83e\uddf9 Clear Chat",
-                "callback_data": "m:lay:rk:clear"
-            }
-        ],
-        [
-            {
-                "text": "\u270f\ufe0f \ud83d\udea8 PANIC SELL",
-                "callback_data": "m:lay:rk:panic"
-            }
-        ],
-        [
-            {
-                "text": "\u21a9\ufe0f Restore all names",
-                "callback_data": "m:lay:rnreset"
-            }
-        ],
-        [
-            {
-                "text": "\u2b05\ufe0f Layout",
+                "text": "\u2b05\ufe0f Cancel",
                 "callback_data": "m:lay"
             }
         ]
     ],
-    "panel_text": "\u270f\ufe0f *RENAME*\nChoose the button to rename.",
+    "panel_text": "\u270f\ufe0f *RENAME*\nSend the new name as a message (1-20 characters, emoji allowed).\nSend `reset` to restore the original name or `cancel` to stop.",
     "out_text": "\ud83c\udfc6 *TOP 3 SETUPS RIGHT NOW*\n_Read-only scan. Nothing was\nbought._\n\n\u26a0\ufe0f Market filter active: only\n20% of coins are up today.\nAuto-buy is blocked; a manual\nbuy is your own call.\n\n*1. DGAI-USDT* \u2014 WEAK (best\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "kb_mid": 3168,
@@ -129,5 +67,9 @@
         "x": [],
         "cmd": "m:r:analyse"
     },
-    "panel_mid": 3163
+    "panel_mid": 3163,
+    "rename_pending": {
+        "key": "hold",
+        "t": 1795304276.3200836
+    }
 }
