@@ -87,5 +87,12 @@
         "time": 1795251869.0228684,
         "reason": "PARTIAL PROFIT +6.2%",
         "strategy": "MANUAL"
+    },
+    {
+        "sym": "SKYAI-USDT",
+        "pnl": 2.972794,
+        "time": 1795255249.4810705,
+        "reason": "RSI 75",
+        "strategy": "MANUAL"
     }
 ]
