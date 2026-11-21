@@ -8,7 +8,51 @@ STABLE=['USDC','USDT','DAI','FDUSD','TUSD','USDD','USDE'];LEV=['3L','3S','5L','5
 ex=ccxt.bitget({'apiKey':os.environ.get('BITGET_API_KEY'),'secret':os.environ.get('BITGET_API_SECRET'),'password':os.environ.get('BITGET_API_PASSPHRASE'),'enableRateLimit':True});ex.options['createMarketBuyOrderRequiresPrice']=False
 GROQ_API_KEY=os.environ.get('GROQ_API_KEY','').strip()
 GROQ_MODEL=os.environ.get('GROQ_MODEL','openai/gpt-oss-120b').strip() or 'openai/gpt-oss-120b'
-_C={};_BAL={"t":0,"m":""};KB={"keyboard":[["📋 Menu","🧰 Tools","🏆 Analyse"]],"resize_keyboard":True,"is_persistent":True};BOTTOM=("📋 menu","🧰 tools","🏆 analyse","🏆 analyse (top 3)","📊 menu")
+_C={};_BAL={"t":0,"m":""};LAYOUT_ITEMS=[("tools","🧰 Tools","m:tools"),("analyse","🏆 Analyse","/analyse"),("bot","🤖 Bot","/bot"),("stats","📈 Stats","/stats"),("an","🔎 Analyse Coin","m:an"),("set","⚙️ Settings","m:set"),("hold","💼 Holdings","m:r:holdings"),("ai","🧠 Ask AI","m:ai:1"),("clear","🧹 Clear Chat","/clear"),("panic","🚨 PANIC SELL","/panic")]
+LAYOUT_DEFAULT=["tools","analyse"];LAYOUT_MAX=5  # bottom keys: the fixed Menu key + up to 5 more
+
+def layout_bottom():
+    try:b=load(ST,{}).get("layout_bottom")
+    except Exception:b=None
+    if not isinstance(b,list):b=list(LAYOUT_DEFAULT)
+    ok={i[0] for i in LAYOUT_ITEMS}
+    return [k for k in b if k in ok][:LAYOUT_MAX]
+
+def lbl(k):
+    """Button name: your own rename if you set one, else the default."""
+    try:n=(load(ST,{}).get("layout_names") or {}).get(k)
+    except Exception:n=None
+    return n or ({"menu":"📋 Menu"}.get(k) or next((l for i,l,_ in LAYOUT_ITEMS if i==k),k))
+
+def kb_markup():
+    keys=[lbl("menu")]+[lbl(k) for k in layout_bottom()]
+    return {"keyboard":[keys[i:i+3] for i in range(0,len(keys),3)],"resize_keyboard":True,"is_persistent":True}
+
+def bottom_map():
+    m={"📋 menu":"m:menu","📊 menu":"m:menu","🏆 analyse (top 3)":"/analyse"}
+    for k,l,d in LAYOUT_ITEMS:m[l.lower()]=d
+    m["📋 menu"]="m:menu"
+    for k,l,d in LAYOUT_ITEMS:m[lbl(k).lower()]=d
+    m[lbl("menu").lower()]="m:menu"
+    return m
+
+def rename_apply(t):
+    """The next typed message becomes the new name of the button chosen in Layout > Rename."""
+    st=load(ST,{});pd=st.get("rename_pending") or {};k=pd.get("key")
+    st.pop("rename_pending",None);save(ST,st)
+    if not k or time.time()-float(pd.get("t",0))>600:return
+    name=re.sub(r'[*_`\[\]]','',t).strip();low=name.lower()
+    if low=="cancel":_UI["lay_note"]="\nRename cancelled.";ui_cb("m:lay");return
+    names=st.get("layout_names") or {}
+    if low=="reset":
+        names.pop(k,None);_UI["lay_note"]="\n✅ Name restored."
+    else:
+        taken={lbl(i).lower() for i in [x[0] for x in LAYOUT_ITEMS]+["menu"] if i!=k}
+        if not (1<=len(name)<=20):_UI["lay_note"]="\n⚠️ Name must be 1-20 characters. Nothing changed.";ui_cb("m:lay");return
+        if low in taken:_UI["lay_note"]="\n⚠️ That name is already used by another button. Nothing changed.";ui_cb("m:lay");return
+        names[k]=name;_UI["lay_note"]="\n✅ Renamed."
+    st=load(ST,{});st["layout_names"]=names;save(ST,st)
+    ui_cb("m:lay")
 S=lambda s:s.replace("-","/");TR=lambda t:{'trigger':True} if t else {};B=lambda k,c:ex.fetch_balance()[k].get(c,0)
 skip=lambda b:b in STABLE or b in BL or ((b.startswith('X') or b.startswith('R')) and len(b)<=6) or any(b.upper().endswith(x) for x in LEV)
 NP=lambda e,sl,pct=None:{"entry_price":e,"safe_zone":e,"stop_loss":sl,"peak_price":e,"last_price":e,"opened_at":time.time(),**({"sl_pct":pct} if pct else {})}
@@ -105,10 +149,10 @@ def _make_out(m,mode):
     """Create the upper OUTPUT message (carries the bottom keyboard + balance box). The panel is re-created after it so it always sits below."""
     _del_msg(_mid("out_mid"));_del_msg(_mid("panel_mid"))
     _set_mid("panel_mid",None);_set_mid("out_mid",None)
-    rm=dict(KB);ph=(compact_balance() or "")[:64]
+    rm=kb_markup();ph=(compact_balance() or "")[:64]
     if ph:rm["input_field_placeholder"]=ph
     mid=_create(m,mode,rm)
-    if mid:_set_mid("out_mid",mid);_set_mid("kb_ph",ph+"|"+str(KB["keyboard"]))
+    if mid:_set_mid("out_mid",mid);_set_mid("kb_ph",ph+"|"+str(rm["keyboard"]))
     return mid
 
 def new_display():
@@ -138,9 +182,8 @@ def _hide_panel(extra=None):
 def _kb_refresh():
     """Keep the USDT/₦ box in the text box current: re-send the bottom keyboard only when the balance text changed."""
     ph=(compact_balance() or "")[:64]
-    sig=ph+"|"+str(KB["keyboard"])
+    rm=kb_markup();sig=ph+"|"+str(rm["keyboard"])
     if sig==_mid("kb_ph"):return
-    rm=dict(KB)
     if ph:rm["input_field_placeholder"]=ph
     try:
         r=requests.post(API+"/sendMessage",json={"chat_id":CHAT,"text":"🔄","reply_markup":rm,"disable_notification":True},timeout=10)
@@ -258,12 +301,9 @@ def auto_clear_daily():
 
 def menu():
     b=lambda t,c:{"text":t,"callback_data":c}
-    ui_send("🕹️ *MENU*\nSelect an option below.",[
-      [b("🤖 Bot","/bot"),b("📈 Stats","/stats")],
-      [b("🔎 Analyse Coin","m:an"),b("⚙️ Settings","m:set")],
-      [b("💼 Holdings","m:r:holdings"),b("🧠 Ask AI","m:ai:1")],
-      [b("🧹 Clear Chat","/clear"),b("🚨 PANIC SELL","/panic")]
-    ])
+    bot_keys=layout_bottom()
+    btns=[b(lbl(k),d) for k,l,d in LAYOUT_ITEMS if k not in bot_keys]
+    ui_send("🕹️ *MENU*\nSelect an option below.",[btns[i:i+2] for i in range(0,len(btns),2)])
 
 def panic_prompt():_send("🚨 *CONFIRM PANIC*\nThis sells ALL positions at market and pauses auto-buy.\nConfirm within 15 minutes.","Markdown",{"inline_keyboard":[[{"text":"✅ YES, SELL EVERYTHING","callback_data":"panic_confirm"},{"text":"❌ Cancel","callback_data":"panic_cancel"}]]})
 
@@ -1666,13 +1706,36 @@ def ui_cb(t):
             else:
                 step=max(abs(v)*0.1,0.1);new=round(v+(step if d=="+" else -step),4)
             handle(f"/set {k} {new}",0);ui_setting(k)
+        elif a=="lay" and len(p)>2 and p[2]=="rn":
+            ks=["menu"]+[x[0] for x in LAYOUT_ITEMS]
+            ui_send("✏️ *RENAME*\nChoose the button to rename.",[[_B("✏️ "+lbl(k),f"m:lay:rk:{k}") for k in ks[i:i+2]] for i in range(0,len(ks),2)]+[[_B("↩️ Restore all names","m:lay:rnreset")],[_B("⬅️ Layout","m:lay")]])
+        elif a=="lay" and len(p)>3 and p[2]=="rk":
+            st=load(ST,{});st["rename_pending"]={"key":p[3],"t":time.time()};save(ST,st)
+            ui_send("✏️ *RENAME*\nSend the new name as a message (1-20 characters, emoji allowed).\nSend `reset` to restore the original name or `cancel` to stop.",[[_B("⬅️ Cancel","m:lay")]])
+        elif a=="lay" and len(p)>2 and p[2]=="rnreset":
+            st=load(ST,{});st.pop("layout_names",None);st.pop("rename_pending",None);save(ST,st);_UI["lay_note"]="\n✅ All names restored.";ui_cb("m:lay")
+        elif a=="lay":
+            b=layout_bottom();note=""
+            if len(p)>2 and p[2]=="reset":b=list(LAYOUT_DEFAULT);note="\n✅ Layout reset."
+            elif len(p)>3 and p[2]=="t":
+                k=p[3]
+                if k in b:b.remove(k)
+                elif len(b)>=LAYOUT_MAX:note=f"\n⚠️ Bottom is full ({LAYOUT_MAX+1} keys with Menu). Move one back to the list first."
+                else:b.append(k)
+            try:
+                st=load(ST,{});st["layout_bottom"]=b;save(ST,st)
+            except Exception as e:print(f"LAYOUT SAVE ERR: {e}")
+            note+=_UI.pop("lay_note","")
+            rows=[[_B(("⌨️ " if k in b else "📋 ")+lbl(k),f"m:lay:t:{k}") for k,l,_ in LAYOUT_ITEMS[i:i+2]] for i in range(0,len(LAYOUT_ITEMS),2)]
+            ui_send(f"🧩 *LAYOUT*\nTap a button to move it.\n⌨️ = bottom key (below the text box)\n📋 = Menu list\nBottom keys: {len(b)+1}/{LAYOUT_MAX+1} (Menu always stays){note}",rows+[[_B("✏️ Rename buttons","m:lay:rn"),_B("↩️ Reset layout","m:lay:reset")],[_B("⬅️ Tools","m:tools")]])
+            _kb_refresh()
         elif a=="tools":
             ui_send("🧰 *TOOLS*\nChoose a tool. Existing commands and functions remain available.",[
               [_B("🛠️ Audit","m:r:audit"),_B("🧾 Scan History","m:scan_hist")],
               [_B("❌ Cancel Orders","m:r:cancel"),_B("🔔 Alerts","m:r:alerts")],
               [_B("🧹 Dust → BGB","m:r:dust"),_B("🛒 Buy","m:buy")],
               [_B("💸 Sell","m:sell"),_B("🔔 Price Alert","m:al")],
-              [_B("📊 Dashboard","m:dash")],
+              [_B("📊 Dashboard","m:dash"),_B("🧩 Layout","m:lay")],
               [_B("⬅️ Main Menu","m:menu")]
             ])
         elif a=="dash":
@@ -1696,6 +1759,11 @@ def ui_cb(t):
 
 def handle(t,age):
     if t.startswith("m:"):ui_cb(t);return
+    if not t.startswith(("/","scan_history")):
+        try:
+            _pd=load(ST,{}).get("rename_pending")
+            if _pd:rename_apply(t);return
+        except Exception as e:print(f"RENAME ERR: {e}")
     l=t.lower()
     if l.startswith("/analyse "):analyse_coin(t)
     elif l in ("/analyse","🏆 analyse","🏆 analyse (top 3)"):analyse_top3()
@@ -1760,7 +1828,7 @@ def tg_check(poll=0):
             cid=str(m.get("chat",{}).get("id",""));age=time.time()-m.get("date",time.time())
             if cid!=CHAT:continue
             tapped=False
-            if "callback_query" not in u and txt.lower() in BOTTOM:_del_msg(m.get("message_id"));tapped=True  # bottom-key tap: remove the tap message
+            if "callback_query" not in u and txt.lower() in bottom_map():_del_msg(m.get("message_id"));tapped=True;txt=bottom_map()[txt.lower()]  # bottom-key tap: remove the tap message and run its command
             elif "callback_query" not in u and m.get("message_id"):
                 try:o=load(OUT,[]);o.append({"message_id":m["message_id"],"sent_at":time.time()});save(OUT,o)
                 except Exception:pass
@@ -1770,7 +1838,7 @@ def tg_check(poll=0):
                 _set_mid("panel_mid",m.get("message_id"))  # adopt the button message the user tapped
             _TG_N["n"]+=1
             if ("callback_query" in u or tapped) and (txt.startswith("m:") or txt.startswith("scan_history:")):_UI["edit_mode"]=True
-            _UI["panel_used"]=False;label="";_UI["acc"]=() if (("callback_query" in u) or txt.lower() in BOTTOM) else None
+            _UI["panel_used"]=False;label="";_UI["acc"]=() if (("callback_query" in u) or tapped) else None
             if "callback_query" in u:
                 try:
                     for _r in ((m.get("reply_markup") or {}).get("inline_keyboard") or []):
@@ -1780,7 +1848,7 @@ def tg_check(poll=0):
             try:handle(txt,age)
             except Exception as e:print(f"HANDLER ERR: {e}");tg(f"⚠️ Command failed: `{e}`")
             finally:_UI["edit_mode"]=False;_UI["acc"]=None
-            if "callback_query" in u and not _UI.get("panel_used"):
+            if ("callback_query" in u or tapped) and not _UI.get("panel_used"):
                 try:
                     _hide_panel(m.get("message_id"))  # a sub command was picked: the buttons go away and only the output stays
                 except Exception as e:print(f"PANEL ERR: {e}")
