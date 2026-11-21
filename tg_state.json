@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935688538,
+    "last_update_id": 935688539,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -14,86 +14,74 @@
     "panel_rows": [
         [
             {
-                "text": "\u2328\ufe0f \ud83e\uddf0 Tools",
-                "callback_data": "m:lay:t:tools"
+                "text": "\u270f\ufe0f \ud83d\udccb Menu",
+                "callback_data": "m:lay:rk:menu"
             },
             {
-                "text": "\u2328\ufe0f \ud83c\udfc6 Analyse",
-                "callback_data": "m:lay:t:analyse"
+                "text": "\u270f\ufe0f \ud83e\uddf0 Tools",
+                "callback_data": "m:lay:rk:tools"
             }
         ],
         [
             {
-                "text": "\ud83d\udccb \ud83e\udd16 Bot",
-                "callback_data": "m:lay:t:bot"
+                "text": "\u270f\ufe0f \ud83c\udfc6 Analyse",
+                "callback_data": "m:lay:rk:analyse"
             },
             {
-                "text": "\ud83d\udccb \ud83d\udcc8 Stats",
-                "callback_data": "m:lay:t:stats"
+                "text": "\u270f\ufe0f \ud83e\udd16 Bot",
+                "callback_data": "m:lay:rk:bot"
             }
         ],
         [
             {
-                "text": "\ud83d\udccb \ud83d\udd0e Analyse Coin",
-                "callback_data": "m:lay:t:an"
+                "text": "\u270f\ufe0f \ud83d\udcc8 Stats",
+                "callback_data": "m:lay:rk:stats"
             },
             {
-                "text": "\ud83d\udccb \u2699\ufe0f Settings",
-                "callback_data": "m:lay:t:set"
+                "text": "\u270f\ufe0f \ud83d\udd0e Analyse Coin",
+                "callback_data": "m:lay:rk:an"
             }
         ],
         [
             {
-                "text": "\ud83d\udccb \ud83d\udcbc Holdings",
-                "callback_data": "m:lay:t:hold"
+                "text": "\u270f\ufe0f \u2699\ufe0f Settings",
+                "callback_data": "m:lay:rk:set"
             },
             {
-                "text": "\ud83d\udccb \ud83e\udde0 Ask AI",
-                "callback_data": "m:lay:t:ai"
+                "text": "\u270f\ufe0f \ud83d\udcbc Holdings",
+                "callback_data": "m:lay:rk:hold"
             }
         ],
         [
             {
-                "text": "\ud83d\udccb \ud83e\uddf9 Clear Chat",
-                "callback_data": "m:lay:t:clear"
+                "text": "\u270f\ufe0f \ud83e\udde0 Ask AI",
+                "callback_data": "m:lay:rk:ai"
             },
             {
-                "text": "\ud83d\udccb \ud83d\udea8 PANIC SELL",
-                "callback_data": "m:lay:t:panic"
+                "text": "\u270f\ufe0f \ud83e\uddf9 Clear Chat",
+                "callback_data": "m:lay:rk:clear"
             }
         ],
         [
             {
-                "text": "\u2796",
-                "callback_data": "m:lay:pl:-"
-            },
+                "text": "\u270f\ufe0f \ud83d\udea8 PANIC SELL",
+                "callback_data": "m:lay:rk:panic"
+            }
+        ],
+        [
             {
-                "text": "\ud83d\udccf Page: 12 lines",
+                "text": "\u21a9\ufe0f Restore all names",
+                "callback_data": "m:lay:rnreset"
+            }
+        ],
+        [
+            {
+                "text": "\u2b05\ufe0f Layout",
                 "callback_data": "m:lay"
-            },
-            {
-                "text": "\u2795",
-                "callback_data": "m:lay:pl:+"
-            }
-        ],
-        [
-            {
-                "text": "\u270f\ufe0f Rename buttons",
-                "callback_data": "m:lay:rn"
-            },
-            {
-                "text": "\u21a9\ufe0f Reset layout",
-                "callback_data": "m:lay:reset"
-            }
-        ],
-        [
-            {
-                "text": "\u2b05\ufe0f Tools",
-                "callback_data": "m:tools"
             }
         ]
     ],
-    "panel_text": "\ud83e\udde9 *LAYOUT*\nTap a button to move it.\n\u2328\ufe0f = bottom key (below the text box)\n\ud83d\udccb = Menu list\nBottom keys: 3/6 (Menu always stays)",
+    "panel_text": "\u270f\ufe0f *RENAME*\nChoose the button to rename.",
     "out_text": "\ud83c\udfc6 *TOP 3 SETUPS RIGHT NOW*\n_Read-only scan. Nothing was\nbought._\n\n\u26a0\ufe0f Market filter active: only\n20% of coins are up today.\nAuto-buy is blocked; a manual\nbuy is your own call.\n\n*1. DGAI-USDT* \u2014 WEAK (best\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "kb_mid": 3168,
