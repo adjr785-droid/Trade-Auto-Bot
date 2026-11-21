@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935688478,
+    "last_update_id": 935688480,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -18,7 +18,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "2/4",
+                "text": "4/4",
                 "callback_data": "pg:x"
             },
             {
@@ -33,7 +33,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 2/4*",
+    "panel_text": "\ud83d\udcc4 *Page 4/4*",
     "out_text": "\ud83e\udd16 *BOT*\nExchange connection: \u2705 OK\nPortfolio: $24.01 USDT | \u20a632,486\nUSDT cash: $0.02 (free $0.02)\nAuto-buy: ON ($3.7348 per trade)\nBTC safety filter: OK\nMarket filter: BTC is below its 50h average\nRisk controls: \u26d4 Daily limit (6)\nToday vs start of day: +30.16% (auto-buy pauses at -5.0%)\nMoney in coins: 100% of portfolio (cap 50.0%)\nRe-buy cooldown active: none\nLast market scan: 20 min ago (runs every 30 min) | Queued coins: 0\nBot-tracked positions: 3 | Holdings priced: 3\nLast: DGAI \u2014 RSI 75 | PnL $+0.49 | 5.0h ago",
     "out_mode": "Markdown",
     "out_mid": 3073,
@@ -45,7 +45,7 @@
             "Extra safeguards: 4h trend check ON | BTC shock pause 3%/h | combined open risk cap 3% | smaller buys after 2 losses in a row | parallel scan ON\n\n\ud83d\udcbc *HOLDINGS ADVICE*\n_Technical view only, not financial advice._\n\n\ud83e\ude99 *COLLECT* \u2014 $10.32 | PnL +0.4% ($+0.04)\nAdvice: \ud83d\udfe1 HOLD / WATCH\nWhy: Trend is mixed; keep the stop-loss active\n\u26a0\ufe0f Long-term: speculative (100-day change -58%, above 50-day average)\n\n\ud83e\ude99 *ICNT* \u2014 $7.03 | PnL +3.0% ($+0.21)\nAdvice: \ud83d\udfe1 HOLD / WATCH\nWhy: Trend is mixed; keep the stop-loss active\n\u26a0\ufe0f Long-term: speculative (100-day change +163%, above 50-day average)",
             "\n\ud83e\ude99 *JCT* \u2014 $6.63 | PnL -0.5% ($-0.04)\nAdvice: \ud83d\udfe1 HOLD / WATCH\nWhy: Trend is mixed; keep the stop-loss active\n\u274c Long-term: not suited (below 50-day average, 100-day change -49%)\n\n\n\u2705 No sell advised right now. For possible new buys use /analyse."
         ],
-        "i": 1,
+        "i": 3,
         "mode": "Markdown"
     },
     "panel_mid": 3115
