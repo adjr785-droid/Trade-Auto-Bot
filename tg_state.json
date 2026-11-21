@@ -1,14 +1,14 @@
 {
-    "last_update_id": 935688307,
+    "last_update_id": 935688308,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT24.29/\u20a632,861|[['\ud83d\udccb Menu', '\ud83c\udfc6 Analyse']]",
-    "out_mid": 2868,
-    "panel_mid": 2871,
+    "kb_ph": "USDT24.28/\u20a632,849|[['\ud83d\udccb Menu', '\ud83c\udfc6 Analyse']]",
     "layout_bottom": [
         "analyse"
-    ]
+    ],
+    "out_mid": 2875,
+    "panel_mid": 2876
 }
