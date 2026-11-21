@@ -131,7 +131,7 @@ def cmd_dust(txt=""):
     if unknown:msg+="Do not retry until you check Bitget's conversion history and balances.\n"
     tg(msg+"Final status is in Bitget conversion history.")
 
-def cmd_clear():
+def cmd_clear(auto=False):
     """Wipe the bot's own messages from the chat (Telegram only lets bots delete messages younger than 48h)."""
     out=load(OUT,[]);n=0;keep=[];t0=time.time()
     for i,item in enumerate(out):
@@ -144,11 +144,20 @@ def cmd_clear():
                 if body.get("error_code",0)>=500 or "too many requests" in str(body.get("description","")).lower():keep.append(item)
         except Exception:keep.append(item)
     save(OUT,keep)
-    tg(f"🧹 Cleared {n} bot message(s)."+(f" {len(keep)} left; send /clear again." if keep else ""))
+    tg((f"🧹 Daily auto-clear: removed {n} message(s)." if auto else f"🧹 Cleared {n} bot message(s).")+(f" {len(keep)} left; send /clear again." if keep else ""))
+
+def auto_clear_daily():
+    """Wipes the chat every auto_clear_hours (default 24h), counted from the first run after deployment. 0 turns it off."""
+    h=float(cfg().get('auto_clear_hours',24.0) or 0)
+    if h<=0:return
+    st=load(SC);now=time.time();a=st.get('clear_anchor')
+    if not a:st['clear_anchor']=now;save(SC,st);return
+    if now-a>=h*3600:
+        st['clear_anchor']=a+int((now-a)//(h*3600))*h*3600;save(SC,st);cmd_clear(auto=True)
 
 def menu():
     b=lambda t,c:{"text":t,"callback_data":c}
-    _send("🕹️ *MAIN MENU*\nSelect an option below:","Markdown",{"inline_keyboard":[[b("🤖 Bot","/bot"),b("🛠️ Audit","/audit")],[b("🧾 Scan History","scan_history:1"),b("❌ Cancel Orders","/cancel")],[b("📈 Stats","/stats"),b("🔔 Alerts","/alerts")],[b("🏆 Analyse (Top 3)","/analyse"),b("🧹 Clear Chat","/clear")],[b("🧹 Dust → BGB","/dust")],[b("🚨 PANIC SELL","/panic")]]})
+    _send("🕹️ *MAIN MENU*\nSelect an option below:","Markdown",{"inline_keyboard":[[b("🤖 Bot","/bot"),b("🛠️ Audit","/audit")],[b("🧾 Scan History","scan_history:1"),b("❌ Cancel Orders","/cancel")],[b("📈 Stats","/stats"),b("🔔 Alerts","/alerts")],[b("🏆 Analyse (Top 3)","/analyse"),b("🧹 Clear Chat","/clear")],[b("🧹 Dust → BGB","/dust")],[b("🛒 Buy","m:buy"),b("💸 Sell","m:sell")],[b("🔎 Analyse Coin","m:an"),b("🔔 Price Alert","m:al")],[b("⚙️ Settings","m:set"),b("🧰 Tools","m:tools")],[b("🚨 PANIC SELL","/panic")]]})
 
 def panic_prompt():_send("🚨 *CONFIRM PANIC*\nThis sells ALL positions at market and pauses auto-buy.\nConfirm within 15 minutes.","Markdown",{"inline_keyboard":[[{"text":"✅ YES, SELL EVERYTHING","callback_data":"panic_confirm"},{"text":"❌ Cancel","callback_data":"panic_cancel"}]]})
 
@@ -170,7 +179,7 @@ def save(f,d):
     except Exception as e:print(f"SAVE ERR {f}: {e}")
 
 def cfg():
-    d={"rsi_min":42,"rsi_max":48,"stop_loss_pct":5.0,"auto_buy_enabled":True,"auto_buy_amount_usdt":10.0,"max_tokens_before_consolidation":3,"max_hold_hours":48,"trail_pct":8.0,"crash_guard_pct":10.0,"rsi_exit":75,"btc_rsi_min":50,"risk_per_trade_pct":1.0,"max_daily_loss_pct":3.0,"max_portfolio_exposure_pct":50.0,"max_position_pct":15.0,"max_daily_trades":5,"max_spread_pct":0.5,"auto_mode_v1":False,"rebuy_cooldown_hours":6.0,"atr_stop_enabled":True,"atr_stop_mult":2.0,"atr_stop_min_pct":3.0,"atr_stop_max_pct":10.0,"market_filter_enabled":True,"btc_trend_hours":50,"min_breadth_pct":30.0,"offline_alert_hours":3.0,"daily_summary_hour_utc":20,"max_daily_drawdown_pct":5.0,"partial_tp_pct":5.0,"partial_tp_fraction":0.5,"dynamic_trail":True,"sell_if_stop_fails":True,"scan_prefilter":True,"cleanup_hours":24.0,"scan_interval_minutes":15.0}
+    d={"rsi_min":42,"rsi_max":48,"stop_loss_pct":5.0,"auto_buy_enabled":True,"auto_buy_amount_usdt":10.0,"max_tokens_before_consolidation":3,"max_hold_hours":48,"trail_pct":8.0,"crash_guard_pct":10.0,"rsi_exit":75,"btc_rsi_min":50,"risk_per_trade_pct":1.0,"max_daily_loss_pct":3.0,"max_portfolio_exposure_pct":50.0,"max_position_pct":15.0,"max_daily_trades":5,"max_spread_pct":0.5,"auto_mode_v1":False,"rebuy_cooldown_hours":6.0,"atr_stop_enabled":True,"atr_stop_mult":2.0,"atr_stop_min_pct":3.0,"atr_stop_max_pct":10.0,"market_filter_enabled":True,"btc_trend_hours":50,"min_breadth_pct":30.0,"offline_alert_hours":3.0,"daily_summary_hour_utc":20,"max_daily_drawdown_pct":5.0,"partial_tp_pct":5.0,"partial_tp_fraction":0.5,"dynamic_trail":True,"sell_if_stop_fails":True,"scan_prefilter":True,"cleanup_hours":24.0,"scan_interval_minutes":15.0,"auto_clear_hours":24.0}
     s=load(CFG,d)
     for k,v in d.items():s.setdefault(k,v)
     if not s.get('auto_mode_v1'):s['auto_buy_enabled']=True;s['auto_mode_v1']=True;save(CFG,s)
@@ -922,7 +931,7 @@ def cmd_status():
     expo=coin_val/total*100 if total>0 else 0.0
     cdl=[k[8:].replace("-USDT","") for k,v in load(CD,{}).items() if k.startswith("stopout_") and now-v<float(s.get('rebuy_cooldown_hours',6.0))*3600]
     sysmsg=["🤖 *BOT*","Exchange connection: ✅ OK",f"Portfolio: ${total:.2f} USDT"+(f" | ₦{total*r:,.0f}" if r else ""),f"USDT cash: ${usdt:.2f} (free ${usdt_free:.2f})",f"Auto-buy: {'ON' if s.get('auto_buy_enabled') else 'PAUSED'} (${s.get('auto_buy_amount_usdt')} per trade)",f"BTC safety filter: {btc}",f"Market filter: {mf}",f"Risk controls: {'✅ trading allowed' if ok else '⛔ '+why}",f"Today vs start of day: {ddp:+.2f}% (auto-buy pauses at -{s.get('max_daily_drawdown_pct')}%)",f"Money in coins: {expo:.0f}% of portfolio (cap {s.get('max_portfolio_exposure_pct')}%)",f"Re-buy cooldown active: {', '.join(cdl) if cdl else 'none'}",f"Last market scan: {ago} (runs every {float(s.get('scan_interval_minutes',15)):g} min) | Queued coins: {len(q)}",f"Bot-tracked positions: {len(db)} | Holdings priced: {len(held)}",last_trade_line().strip(),"",
-      "🧭 *STRATEGY*",f"Entries: TREND (RSI {s.get('rsi_min')}-{s.get('rsi_max')}, price > MA5 > MA10), OVERSOLD bounce (RSI < 30), BREAKOUT (RSI 50-70 + volume breakout)",f"Protection: stop-loss {s.get('stop_loss_pct')}% | trailing stop {s.get('trail_pct')}% below peak | crash guard {s.get('crash_guard_pct')}%",f"Exit: RSI >= {s.get('rsi_exit')} or max hold {s.get('max_hold_hours')}h",f"Profit taking: sell {float(s.get('partial_tp_fraction',0.5))*100:.0f}% at +{s.get('partial_tp_pct')}% then stop moves to break-even" if float(s.get('partial_tp_pct',0) or 0)>0 else "Profit taking: partial sell OFF",f"Dynamic trailing: {'ON (wider in strong trends, tighter when momentum fades)' if s.get('dynamic_trail',True) else 'OFF'}",f"Entry safety: spread limit {s.get('max_spread_pct')}% | stop fails -> {'sell at market' if s.get('sell_if_stop_fails',True) else 'alert only'} | scan pre-filter {'ON' if s.get('scan_prefilter',True) else 'OFF'}",f"Limits: {s.get('max_daily_trades')} trades/day, {s.get('max_daily_loss_pct')}% daily loss, {s.get('max_position_pct')}% max per coin"]
+      "🧭 *STRATEGY*",f"Entries: TREND (RSI {s.get('rsi_min')}-{s.get('rsi_max')}, price > MA5 > MA10), OVERSOLD bounce (RSI < 30), BREAKOUT (RSI 50-70 + volume breakout)",f"Protection: stop-loss {s.get('stop_loss_pct')}% | trailing stop {s.get('trail_pct')}% below peak | crash guard {s.get('crash_guard_pct')}%",f"Exit: RSI >= {s.get('rsi_exit')} or max hold {s.get('max_hold_hours')}h",f"Profit taking: sell {float(s.get('partial_tp_fraction',0.5))*100:.0f}% at +{s.get('partial_tp_pct')}% then stop moves to break-even" if float(s.get('partial_tp_pct',0) or 0)>0 else "Profit taking: partial sell OFF",f"Dynamic trailing: {'ON (wider in strong trends, tighter when momentum fades)' if s.get('dynamic_trail',True) else 'OFF'}",f"Entry safety: spread limit {s.get('max_spread_pct')}% | stop fails -> {'sell at market' if s.get('sell_if_stop_fails',True) else 'alert only'} | scan pre-filter {'ON' if s.get('scan_prefilter',True) else 'OFF'}",f"Auto-clear chat: every {float(s.get('auto_clear_hours',24)):g}h" if float(s.get('auto_clear_hours',24) or 0)>0 else "Auto-clear chat: OFF",f"Limits: {s.get('max_daily_trades')} trades/day, {s.get('max_daily_loss_pct')}% daily loss, {s.get('max_position_pct')}% max per coin"]
     tg("\n".join(sysmsg))
     if not held:tg("🛑 *HOLDINGS ADVICE*\nNo priced coin holdings right now.");return
     out=["💼 *HOLDINGS ADVICE*","_Technical view only, not financial advice._",""];sells=0
@@ -1351,7 +1360,7 @@ def cmd_set(txt):
     if k not in s:tg(f"❌ Unknown key. Valid: `{'`, `'.join(s.keys())}`");return
     try:new=val.lower() in ('true','1','yes','on') if isinstance(s[k],bool) else float(val) if isinstance(s[k],float) else int(val)
     except:tg(f"❌ Invalid value for {k}");return
-    limits={"risk_per_trade_pct":(0.1,2.0),"max_daily_loss_pct":(0.5,10.0),"max_portfolio_exposure_pct":(5.0,100.0),"max_position_pct":(1.0,50.0),"max_daily_trades":(1,50),"max_spread_pct":(0.05,3.0),"trail_pct":(0.0,30.0),"scan_interval_minutes":(5.0,240.0),"stop_loss_pct":(0.5,20.0),"rsi_min":(1.0,99.0),"rsi_max":(1.0,99.0),"rsi_exit":(0.0,99.0),"auto_buy_amount_usdt":(1.0,100000.0),"max_tokens_before_consolidation":(1,30),"max_hold_hours":(1,720),"crash_guard_pct":(1.0,50.0),"btc_rsi_min":(0.0,99.0),"rebuy_cooldown_hours":(0.0,168.0),"atr_stop_mult":(0.5,6.0),"atr_stop_min_pct":(1.0,10.0),"atr_stop_max_pct":(2.0,25.0),"btc_trend_hours":(10,200),"min_breadth_pct":(0.0,100.0),"offline_alert_hours":(0.0,72.0),"daily_summary_hour_utc":(0,23)}
+    limits={"risk_per_trade_pct":(0.1,2.0),"max_daily_loss_pct":(0.5,10.0),"max_portfolio_exposure_pct":(5.0,100.0),"max_position_pct":(1.0,50.0),"max_daily_trades":(1,50),"max_spread_pct":(0.05,3.0),"trail_pct":(0.0,30.0),"scan_interval_minutes":(5.0,240.0),"auto_clear_hours":(0.0,168.0),"stop_loss_pct":(0.5,20.0),"rsi_min":(1.0,99.0),"rsi_max":(1.0,99.0),"rsi_exit":(0.0,99.0),"auto_buy_amount_usdt":(1.0,100000.0),"max_tokens_before_consolidation":(1,30),"max_hold_hours":(1,720),"crash_guard_pct":(1.0,50.0),"btc_rsi_min":(0.0,99.0),"rebuy_cooldown_hours":(0.0,168.0),"atr_stop_mult":(0.5,6.0),"atr_stop_min_pct":(1.0,10.0),"atr_stop_max_pct":(2.0,25.0),"btc_trend_hours":(10,200),"min_breadth_pct":(0.0,100.0),"offline_alert_hours":(0.0,72.0),"daily_summary_hour_utc":(0,23)}
     if k in limits and not (limits[k][0] <= new <= limits[k][1]):tg(f"❌ `{k}` must be between {limits[k][0]} and {limits[k][1]}.");return
     if k=="rsi_min" and new>=s.get("rsi_max",99):tg("❌ rsi_min must be lower than rsi_max.");return
     if k=="rsi_max" and new<=s.get("rsi_min",1):tg("❌ rsi_max must be higher than rsi_min.");return
@@ -1360,7 +1369,127 @@ def cmd_set(txt):
 def setc(k,v,m):s=cfg();s[k]=v;save(CFG,s);tg(m)
 MSG={"ai_info":"🧠 *AI ANALYST*\nTo ask the AI a question, type:\n`/ai <your question>`","/help":"🤖 *CMDS*\n`/menu` `/ai [q]` `/analyse` (top 3) `/analyse COIN` `/audit` `/cancel`\n`/bot` `/holdings` `/stats`\n`/clear` `/dust` `/alert COIN PRICE` `/alerts` `/cancel\\_alerts`\n`/scan_history [coin/filter]`\n`/set key value` `/pause` `/resume` `/panic`"}
 
+# ---------- Button-only control panel (no typing). Every button runs an existing command; nothing else was changed. ----------
+_UI={"mid":None}
+_B=lambda t,c:{"text":t,"callback_data":c}
+_MENU_BTN=[_B("⬅️ Menu","m:menu")]
+RUN={"scan":"/scan","sync":"/sync","holdings":"/holdings","analyse":"/analyse","alerts":"/alerts","cancelalerts":"/cancel_alerts","dust":"/dust","bot":"/bot","audit":"/audit","stats":"/stats","clear":"/clear","pause":"/pause","resume":"/resume"}
+AI_Q={"1":"Give me a market overview.","2":"Review my current holdings and say which to hold or sell.","3":"Which single coin looks best to buy right now and why?","4":"What is the biggest risk in my portfolio right now?"}
+
+def ui_send(text,rows):
+    rm={"inline_keyboard":rows};mid=_UI.get("mid")
+    if mid:
+        try:
+            r=requests.post(API+"/editMessageText",json={"chat_id":CHAT,"message_id":mid,"text":text,"parse_mode":"Markdown","reply_markup":rm},timeout=10)
+            if r.ok:return
+        except Exception:pass
+    _send(text,"Markdown",rm)
+
+def _grid(btns,n=3):return [btns[i:i+n] for i in range(0,len(btns),n)]
+
+def ui_coins(kind):
+    """Coins to pick from: bot positions, queued coins, recent scan matches, wallet coins (sell: bot positions only)."""
+    out=[];seen=set()
+    def add(c):
+        c=str(c).split("-")[0].upper()
+        if c and c not in seen and c not in STABLE and c not in BL:seen.add(c);out.append(c)
+    for k in load(DB):add(k)
+    if kind=="sell":return out[:18]
+    for k in load(QF):add(k)
+    try:
+        for x in reversed(((load(SH,{}) or {}).get("items") or [])[-3000:]):
+            if str(x.get("decision","")).startswith("SETUP"):add(x.get("sym",""))
+            if len(out)>=18:break
+    except Exception:pass
+    try:
+        for c,q in (ex.fetch_balance().get('total') or {}).items():
+            if float(q or 0)>0 and c not in STABLE:
+                p=live(f"{c}-USDT")
+                if p and float(q)*p>=0.10:add(c)
+    except Exception:pass
+    return out[:18]
+
+def ui_settings_page(pg=0):
+    keys=[k for k in cfg() if k!="auto_mode_v1"];per=12;n=(len(keys)+per-1)//per;pg=max(0,min(pg,n-1));cur=cfg()
+    btns=[_B(f"{k} = {cur[k]}"[:30],f"m:k:{k}") for k in keys[pg*per:(pg+1)*per]]
+    nav=[]
+    if pg>0:nav.append(_B("◀️ Prev",f"m:sp:{pg-1}"))
+    if pg<n-1:nav.append(_B("Next ▶️",f"m:sp:{pg+1}"))
+    ui_send(f"⚙️ *SETTINGS* (page {pg+1}/{n})\nTap a setting to change it.",_grid(btns,2)+([nav] if nav else [])+[_MENU_BTN])
+
+def ui_setting(k):
+    cur=cfg()
+    if k not in cur:ui_send("❌ Unknown setting.",[_MENU_BTN]);return
+    v=cur[k]
+    if isinstance(v,bool):row=[_B("🔄 Switch ON/OFF",f"m:kv:{k}:t")]
+    else:row=[_B("➖ Decrease",f"m:kv:{k}:-"),_B("➕ Increase",f"m:kv:{k}:+")]
+    ui_send(f"⚙️ *{str(k).replace('_',' ')}*\nCurrent value: `{v}`",[row,[_B("⬅️ Settings","m:sp:0")]])
+
+def ui_cb(t):
+    p=t.split(":");a=p[1] if len(p)>1 else "menu"
+    try:
+        if a=="menu":menu()
+        elif a=="r" and len(p)>2 and p[2] in RUN:handle(RUN[p[2]],0)
+        elif a=="buy":
+            cs=ui_coins("buy")
+            ui_send("🛒 *BUY* — choose a coin:",_grid([_B(c,f"m:b:{c}") for c in cs],3)+[[_B("🏆 Top 3 ideas","m:r:analyse")],_MENU_BTN])
+        elif a=="b":
+            c=p[2];free=B('free','USDT');amts=[x for x in (2,5,10,15) if x<=free]
+            ui_send(f"🛒 *BUY {c}*\nFree USDT: ${free:.2f}\nChoose how much:",[[_B(f"${x}",f"m:bc:{c}:{x}") for x in amts]+[_B("ALL",f"m:bc:{c}:ALL")],[_B("⬅️ Back","m:buy")]])
+        elif a=="bc":
+            c,x=p[2],p[3];px=live(f"{c}-USDT")
+            ui_send(f"⚠️ *CONFIRM BUY*\n{c} for {'ALL free USDT' if x=='ALL' else '$'+x} at about {fp(px)} USDT.",[[_B("✅ Confirm",f"m:bx:{c}:{x}"),_B("❌ Cancel","m:menu")]])
+        elif a=="bx":handle(f"/buy {p[2]} {p[3]}",0)
+        elif a=="sell":
+            cs=ui_coins("sell")
+            if not cs:ui_send("💸 *SELL*\nNo bot-tracked positions. If you bought manually, tap Sync first.",[[_B("🔄 Sync manual coins","m:r:sync")],_MENU_BTN])
+            else:ui_send("💸 *SELL* — choose a position:",_grid([_B(c,f"m:s:{c}") for c in cs],3)+[_MENU_BTN])
+        elif a=="s":
+            c=p[2];fb=B('free',c);px=live(f"{c}-USDT") or 0
+            ui_send(f"💸 *SELL {c}*\nYou hold {fb:.8g} (about ${fb*px:.2f}).\nHow much?",[[_B(f"{x}%",f"m:sc:{c}:{x}") for x in (25,50,75,100)],[_B("⬅️ Back","m:sell")]])
+        elif a=="sc":
+            c,x=p[2],int(p[3]);fb=B('free',c);px=live(f"{c}-USDT") or 0
+            ui_send(f"⚠️ *CONFIRM SELL*\n{x}% of {c} (about ${fb*px*x/100:.2f}) at market.",[[_B("✅ Confirm",f"m:sx:{c}:{x}"),_B("❌ Cancel","m:menu")]])
+        elif a=="sx":
+            c,x=p[2],int(p[3])
+            if x>=100:handle(f"/sell {c} ALL",0)
+            else:
+                fb=B('free',c);px=live(f"{c}-USDT") or 0;handle(f"/sell {c} {fb*px*x/100:.2f}",0)
+        elif a=="an":
+            cs=ui_coins("analyse")
+            ui_send("🔎 *ANALYSE A COIN* — choose:",[[_B("🏆 Top 3 now","m:r:analyse")]]+_grid([_B(c,f"m:a:{c}") for c in cs],3)+[_MENU_BTN])
+        elif a=="a":handle(f"/analyse {p[2]}",0)
+        elif a=="al":
+            cs=ui_coins("alert");al=[x.get("coin") for x in _alerts()]
+            rows=[[_B("📋 My alerts","m:r:alerts"),_B("🗑 Cancel all","m:r:cancelalerts")]]
+            rows+=_grid([_B(f"🗑 {c}",f"m:ad:{c}") for c in dict.fromkeys(al)],3)
+            ui_send("🔔 *PRICE ALERT* — choose a coin to set an alert on:",rows+_grid([_B(c,f"m:a2:{c}") for c in cs],3)+[_MENU_BTN])
+        elif a=="a2":
+            c=p[2];px=live(f"{c}-USDT")
+            ui_send(f"🔔 *ALERT {c}*\nNow {fp(px)} USDT. Alert me when price is:",[[_B(f"▲ +{x}%",f"m:ax:{c}:{x}") for x in (2,5,10)],[_B(f"▼ -{x}%",f"m:ax:{c}:-{x}") for x in (2,5,10)],[_B("⬅️ Back","m:al")]])
+        elif a=="ax":
+            c,x=p[2],float(p[3]);px=live(f"{c}-USDT")
+            if not px:tg(f"❌ No price for {c}.")
+            else:handle(f"/alert {c} {px*(1+x/100):.8g}",0)
+        elif a=="ad":handle(f"/alert del {p[2]}",0)
+        elif a=="set":ui_settings_page(0)
+        elif a=="sp":ui_settings_page(int(p[2]))
+        elif a=="k":ui_setting(p[2])
+        elif a=="kv":
+            k,d=p[2],p[3];v=cfg().get(k)
+            if isinstance(v,bool):new=not v
+            elif isinstance(v,int):new=v+(1 if d=="+" else -1)
+            else:
+                step=max(abs(v)*0.1,0.1);new=round(v+(step if d=="+" else -step),4)
+            handle(f"/set {k} {new}",0);ui_setting(k)
+        elif a=="tools":
+            on=cfg().get("auto_buy_enabled")
+            ui_send("🧰 *TOOLS*",[[_B("🔍 Scan now","m:r:scan"),_B("🔄 Sync coins","m:r:sync")],[_B("💼 Holdings","m:r:holdings"),_B("🧹 Dust → BGB","m:r:dust")],[_B("⏸ Pause auto-buy" if on else "▶️ Resume auto-buy","m:r:pause" if on else "m:r:resume")],_MENU_BTN])
+        elif a=="ai" and len(p)>2 and p[2] in AI_Q:ask_ai(AI_Q[p[2]])
+    except Exception as e:print(f"UI ERR {t}: {e}");tg(f"⚠️ Button failed, nothing changed: `{str(e)[:150]}`")
+
 def handle(t,age):
+    if t.startswith("m:"):ui_cb(t);return
     l=t.lower()
     if l.startswith("/analyse "):analyse_coin(t)
     elif l=="/analyse":analyse_top3()
@@ -1400,7 +1529,7 @@ def handle(t,age):
     elif l.startswith("/set"):cmd_set(t)
     elif l=="/pause":setc('auto_buy_enabled',False,"⏸ Auto-buy paused.")
     elif l in ("/resume","▶️ resume"):setc('auto_buy_enabled',True,"▶️ Auto-buy resumed.")
-    elif l in ("🧠 ask ai", "ai_info"):tg(MSG["ai_info"])
+    elif l in ("🧠 ask ai", "ai_info"):_send(MSG["ai_info"]+"\n\nOr tap a question:","Markdown",{"inline_keyboard":[[_B("📈 Market overview","m:ai:1"),_B("💼 Review my holdings","m:ai:2")],[_B("🏆 Best coin to buy","m:ai:3"),_B("⚠️ Biggest risk","m:ai:4")]]})
 
 def tg_check():
     st=load(ST);lid=st.get("last_update_id",0)
@@ -1420,7 +1549,11 @@ def tg_check():
             if not txt:continue
             cid=str(m.get("chat",{}).get("id",""));age=time.time()-m.get("date",time.time())
             if cid!=CHAT:continue
+            if "callback_query" not in u and m.get("message_id"):  # remember your own messages too so the daily wipe can remove them
+                try:o=load(OUT,[]);o.append({"message_id":m["message_id"],"sent_at":time.time()});save(OUT,o)
+                except Exception:pass
             if age>1800:continue
+            _UI["mid"]=m.get("message_id") if "callback_query" in u else None
             try:handle(txt,age)
             except Exception as e:print(f"HANDLER ERR: {e}");tg(f"⚠️ Command failed: `{e}`")
     except Exception as e:print(f"TG Err:{e}")
@@ -1469,7 +1602,7 @@ if __name__=="__main__":
     if lk is None:print("Another run is in progress; exiting.");sys.exit(0)
     try:
         # Each step is isolated: a failure in one step is reported (at most every 30 min per step) and never stops the scan or the others.
-        for fn in (heartbeat,_C.clear,cleanup_telegram_output,scan_history_state,audit_system,tg_check,manage,track_day_equity,git_sync,check_hourly_balance,check_alerts,check_daily_summary,scan,exec_q):
+        for fn in (heartbeat,_C.clear,cleanup_telegram_output,auto_clear_daily,scan_history_state,audit_system,tg_check,manage,track_day_equity,git_sync,check_hourly_balance,check_alerts,check_daily_summary,scan,exec_q):
             try:fn()
             except Exception as e:
                 nm=getattr(fn,"__name__","step");print(f"STEP {nm} FAILED: {e}\n{traceback.format_exc()[-400:]}")
