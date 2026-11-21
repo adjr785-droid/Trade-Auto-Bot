@@ -40,5 +40,17 @@
         "atl": 0.005,
         "checked_at": 1795255496.430489,
         "status": "complete"
+    },
+    "ICNT-USDT": {
+        "ath": 0.607568,
+        "atl": 0.01,
+        "checked_at": 1795270496.1831696,
+        "status": "complete"
+    },
+    "JCT-USDT": {
+        "ath": 0.019589,
+        "atl": 0.00015,
+        "checked_at": 1795270497.6101997,
+        "status": "complete"
     }
 }
