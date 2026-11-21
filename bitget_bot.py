@@ -8,7 +8,7 @@ STABLE=['USDC','USDT','DAI','FDUSD','TUSD','USDD','USDE'];LEV=['3L','3S','5L','5
 ex=ccxt.bitget({'apiKey':os.environ.get('BITGET_API_KEY'),'secret':os.environ.get('BITGET_API_SECRET'),'password':os.environ.get('BITGET_API_PASSPHRASE'),'enableRateLimit':True});ex.options['createMarketBuyOrderRequiresPrice']=False
 GROQ_API_KEY=os.environ.get('GROQ_API_KEY','').strip()
 GROQ_MODEL=os.environ.get('GROQ_MODEL','openai/gpt-oss-120b').strip() or 'openai/gpt-oss-120b'
-_C={};_BAL={"t":0,"m":""};KB={"keyboard":[["📊 Menu"]],"resize_keyboard":True,"is_persistent":True}
+_C={};_BAL={"t":0,"m":""};KB={"keyboard":[["📋 Menu","🧰 Tools","🏆 Analyse (Top 3)"]],"resize_keyboard":True,"is_persistent":True};BOTTOM=("📋 menu","🧰 tools","🏆 analyse (top 3)","📊 menu")
 S=lambda s:s.replace("-","/");TR=lambda t:{'trigger':True} if t else {};B=lambda k,c:ex.fetch_balance()[k].get(c,0)
 skip=lambda b:b in STABLE or b in BL or ((b.startswith('X') or b.startswith('R')) and len(b)<=6) or any(b.upper().endswith(x) for x in LEV)
 NP=lambda e,sl,pct=None:{"entry_price":e,"safe_zone":e,"stop_loss":sl,"peak_price":e,"last_price":e,"opened_at":time.time(),**({"sl_pct":pct} if pct else {})}
@@ -104,9 +104,11 @@ def _create(text,mode,rm,silent=False):
 def _make_out(m,mode):
     """Create the upper OUTPUT message (carries the bottom keyboard + balance box). The panel is re-created after it so it always sits below."""
     _del_msg(_mid("out_mid"));_del_msg(_mid("panel_mid"))
-    _set_mid("panel_mid",None);_set_mid("out_mid",None);_set_mid("panel_kb",None)
-    mid=_create(m,mode,None)
-    if mid:_set_mid("out_mid",mid)
+    _set_mid("panel_mid",None);_set_mid("out_mid",None)
+    rm=dict(KB);ph=(compact_balance() or "")[:64]
+    if ph:rm["input_field_placeholder"]=ph
+    mid=_create(m,mode,rm)
+    if mid:_set_mid("out_mid",mid);_set_mid("kb_ph",ph)
     return mid
 
 def new_display():
@@ -115,48 +117,28 @@ def new_display():
         _del_msg(_mid(k));_set_mid(k,None)
     _UI["mid"]=None
 
-def _kb_rows(rows):
-    """Turn button rows into bottom-keyboard keys; remember which command each key's text stands for."""
-    mp={};out=[]
-    for r in rows:
-        row=[]
-        for b in r:
-            d=b.get("callback_data")
-            if d is None:continue
-            t=str(b.get("text","?"))
-            while t in mp and mp[t]!=d:t+="\u200b"
-            mp[t]=d;row.append({"text":t})
-        if row:out.append(row)
-    return out,mp
-
-def _push_kb(text,kb,mp,ph):
-    """Send the buttons as the bottom keyboard (below the text box) and drop the previous buttons message."""
-    st=load(ST,{});old=st.get("panel_mid")
-    rm={"keyboard":kb,"resize_keyboard":True,"is_persistent":True}
-    if ph:rm["input_field_placeholder"]=ph
-    nm=_create(text,"Markdown",rm,silent=True)
-    if nm:
-        st=load(ST,{});st["panel_mid"]=nm;st["panel_kb"]=kb;st["kb_map"]=mp;st["panel_ph"]=ph;st["panel_text"]=text;save(ST,st)
-        if old and old!=nm:_del_msg(old)
-
 def _panel(text,rows,touch=True):
-    """Lower part: the buttons, shown as the bottom keyboard under the text box."""
+    """Lower part: the sub-command buttons, in the chat just under the output."""
     if touch:_UI["panel_used"]=True
+    rm={"inline_keyboard":rows}
     if not _mid("out_mid"):_make_out("📟 *OUTPUT*\nResults appear here.","Markdown")
-    kb,mp=_kb_rows(rows);ph=(compact_balance() or "")[:64]
-    st=load(ST,{})
-    if st.get("panel_mid") and st.get("panel_kb")==kb and st.get("panel_ph")==ph:
-        if st.get("kb_map")!=mp:st["kb_map"]=mp;save(ST,st)
-        return
-    _push_kb(text,kb,mp,ph)
+    pm=_mid("panel_mid")
+    if pm and _edit(pm,text,"Markdown",rm):return
+    if pm:_del_msg(pm);_set_mid("panel_mid",None)
+    nm=_create(text,"Markdown",rm,silent=True)
+    if nm:_set_mid("panel_mid",nm)
 
 def _kb_refresh():
-    """Keep the USDT/₦ box in the text box current: re-send the same keyboard only when the balance text changed."""
-    st=load(ST,{});kb=st.get("panel_kb")
-    if not (st.get("panel_mid") and kb):return False
+    """Keep the USDT/₦ box in the text box current: re-send the bottom keyboard only when the balance text changed."""
     ph=(compact_balance() or "")[:64]
-    if st.get("panel_ph")!=ph:_push_kb(st.get("panel_text") or "🕹️ *MENU*",kb,st.get("kb_map") or {},ph)
-    return True
+    if ph==_mid("kb_ph"):return
+    rm=dict(KB)
+    if ph:rm["input_field_placeholder"]=ph
+    try:
+        r=requests.post(API+"/sendMessage",json={"chat_id":CHAT,"text":"🔄","reply_markup":rm,"disable_notification":True},timeout=10)
+        if r.ok:
+            _del_msg(((r.json() or {}).get("result") or {}).get("message_id"));_set_mid("kb_ph",ph)
+    except Exception:pass
 
 def _send(m,mode,btn=None):
     """Upper part: output. Buttons (if any) go to the lower panel."""
@@ -164,7 +146,8 @@ def _send(m,mode,btn=None):
         out=_mid("out_mid")
         if not (out and _edit(out,m,mode or "Markdown",None)):_make_out(m,mode)
         if btn:_panel("👇 *Actions*",btn.get("inline_keyboard") if isinstance(btn,dict) else btn)
-        elif not _mid("panel_mid") or not _kb_refresh():menu()
+        elif not _mid("panel_mid"):menu()
+        _kb_refresh()
     except Exception as e:print("TG EXCEPTION:",e)
 
 def cleanup_telegram_output():
@@ -261,12 +244,11 @@ def auto_clear_daily():
 
 def menu():
     b=lambda t,c:{"text":t,"callback_data":c}
-    ui_send("🕹️ *MAIN MENU*\nSelect an option below.",[
+    ui_send("🕹️ *MENU*\nSelect an option below.",[
       [b("🤖 Bot","/bot"),b("📈 Stats","/stats")],
-      [b("🏆 Analyse (Top 3)","/analyse"),b("🧹 Clear Chat","/clear")],
       [b("🔎 Analyse Coin","m:an"),b("⚙️ Settings","m:set")],
       [b("💼 Holdings","m:r:holdings"),b("🧠 Ask AI","m:ai:1")],
-      [b("🧰 Tools","m:tools"),b("🚨 PANIC SELL","/panic")]
+      [b("🧹 Clear Chat","/clear"),b("🚨 PANIC SELL","/panic")]
     ])
 
 def panic_prompt():_send("🚨 *CONFIRM PANIC*\nThis sells ALL positions at market and pauses auto-buy.\nConfirm within 15 minutes.","Markdown",{"inline_keyboard":[[{"text":"✅ YES, SELL EVERYTHING","callback_data":"panic_confirm"},{"text":"❌ Cancel","callback_data":"panic_cancel"}]]})
@@ -1702,12 +1684,13 @@ def handle(t,age):
     if t.startswith("m:"):ui_cb(t);return
     l=t.lower()
     if l.startswith("/analyse "):analyse_coin(t)
-    elif l=="/analyse":analyse_top3()
+    elif l in ("/analyse","🏆 analyse (top 3)"):analyse_top3()
     elif l.startswith("/ai "):ask_ai(t[4:].strip())
     elif l=="/ai":ask_ai("Give me a market overview.")
     elif l in MSG:tg(MSG[l])
-    elif l in ("/menu","📊 menu","/start"):
-        if not _UI.get("mid"):new_display()  # a typed or keyboard Menu tap always creates a fresh, visible menu
+    elif l in ("/tools","🧰 tools"):
+        ui_cb("m:tools")  # a bottom-key tap pops its sub commands in the lower part (the last output stays above)
+    elif l in ("/menu","📊 menu","📋 menu","/start"):
         menu()
     elif l in ("/clear","/wipe","🧹 clear chat"):cmd_clear()
     elif l=="/dust cancel":tg("❌ Dust conversion cancelled.")
@@ -1763,12 +1746,8 @@ def tg_check(poll=0):
             cid=str(m.get("chat",{}).get("id",""));age=time.time()-m.get("date",time.time())
             if cid!=CHAT:continue
             tapped=False
-            if "callback_query" not in u:
-                try:
-                    mp=load(ST,{}).get("kb_map") or {}
-                    if txt in mp:txt=mp[txt];tapped=True;_del_msg(m.get("message_id"))  # a bottom-keyboard tap: run its command and remove the tap message
-                except Exception:pass
-            if "callback_query" not in u and not tapped and m.get("message_id"):  # remember your own messages too so the daily wipe can remove them
+            if "callback_query" not in u and txt.lower() in BOTTOM:_del_msg(m.get("message_id"));tapped=True  # bottom-key tap: remove the tap message
+            elif "callback_query" not in u and m.get("message_id"):
                 try:o=load(OUT,[]);o.append({"message_id":m["message_id"],"sent_at":time.time()});save(OUT,o)
                 except Exception:pass
             if age>1800:continue
@@ -1871,10 +1850,11 @@ if __name__=="__main__":
     T0=time.time()
     try:
         _st=load(ST,{})
-        if not _st.get("display_reset_v3"):  # one-time: replace old display messages with the output + bottom-keyboard display
+        if not _st.get("display_reset_v4"):  # one-time: replace old display messages with the 3-part display
             for _k in ("display_message_id","out_mid","panel_mid"):
                 _del_msg(_st.get(_k));_st.pop(_k,None)
-            _st["display_reset_v3"]=True;save(ST,_st)
+            for _k in ("panel_kb","kb_map","panel_ph","panel_text","kb_ph"):_st.pop(_k,None)
+            _st["display_reset_v4"]=True;save(ST,_st)
     except Exception as e:print(f"DISPLAY RESET ERR: {e}")
     try:
         # Each step is isolated: a failure in one step is reported (at most every 30 min per step) and never stops the scan or the others.
