@@ -5,8 +5,9 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT24.15/\u20a632,679|[['\ud83d\udccb Menu', '\ud83c\udfc6 Analyse']]",
+    "kb_ph": "USDT24.28/\u20a632,850|[['\ud83d\udccb Menu', '\ud83e\uddf0 Tools', '\ud83c\udfc6 Analyse']]",
     "layout_bottom": [
+        "tools",
         "analyse"
     ],
     "out_mid": 2887,
