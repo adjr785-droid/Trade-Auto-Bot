@@ -1,67 +1,65 @@
 {
-    "last_update_id": 935688225,
+    "last_update_id": 935688226,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "out_mid": 2688,
-    "panel_mid": 2693,
+    "panel_mid": 2695,
     "panel_kb": [
         [
             {
-                "text": "\ud83d\udee0\ufe0f Audit"
+                "text": "\ud83e\udd16 Bot"
             },
             {
-                "text": "\ud83e\uddfe Scan History"
+                "text": "\ud83d\udcc8 Stats"
             }
         ],
         [
             {
-                "text": "\u274c Cancel Orders"
+                "text": "\ud83c\udfc6 Analyse (Top 3)"
             },
             {
-                "text": "\ud83d\udd14 Alerts"
+                "text": "\ud83e\uddf9 Clear Chat"
             }
         ],
         [
             {
-                "text": "\ud83e\uddf9 Dust \u2192 BGB"
+                "text": "\ud83d\udd0e Analyse Coin"
             },
             {
-                "text": "\ud83d\uded2 Buy"
+                "text": "\u2699\ufe0f Settings"
             }
         ],
         [
             {
-                "text": "\ud83d\udcb8 Sell"
+                "text": "\ud83d\udcbc Holdings"
             },
             {
-                "text": "\ud83d\udd14 Price Alert"
+                "text": "\ud83e\udde0 Ask AI"
             }
         ],
         [
             {
-                "text": "\ud83d\udcca Dashboard"
-            }
-        ],
-        [
+                "text": "\ud83e\uddf0 Tools"
+            },
             {
-                "text": "\u2b05\ufe0f Main Menu"
+                "text": "\ud83d\udea8 PANIC SELL"
             }
         ]
     ],
     "kb_map": {
-        "\ud83d\udee0\ufe0f Audit": "m:r:audit",
-        "\ud83e\uddfe Scan History": "m:scan_hist",
-        "\u274c Cancel Orders": "m:r:cancel",
-        "\ud83d\udd14 Alerts": "m:r:alerts",
-        "\ud83e\uddf9 Dust \u2192 BGB": "m:r:dust",
-        "\ud83d\uded2 Buy": "m:buy",
-        "\ud83d\udcb8 Sell": "m:sell",
-        "\ud83d\udd14 Price Alert": "m:al",
-        "\ud83d\udcca Dashboard": "m:dash",
-        "\u2b05\ufe0f Main Menu": "m:menu"
+        "\ud83e\udd16 Bot": "/bot",
+        "\ud83d\udcc8 Stats": "/stats",
+        "\ud83c\udfc6 Analyse (Top 3)": "/analyse",
+        "\ud83e\uddf9 Clear Chat": "/clear",
+        "\ud83d\udd0e Analyse Coin": "m:an",
+        "\u2699\ufe0f Settings": "m:set",
+        "\ud83d\udcbc Holdings": "m:r:holdings",
+        "\ud83e\udde0 Ask AI": "m:ai:1",
+        "\ud83e\uddf0 Tools": "m:tools",
+        "\ud83d\udea8 PANIC SELL": "/panic"
     },
     "panel_ph": "USDT22.86/\u20a630,932",
-    "panel_text": "\ud83e\uddf0 *TOOLS*\nChoose a tool. Existing commands and functions remain available."
+    "panel_text": "\ud83d\udd79\ufe0f *MAIN MENU*\nSelect an option below."
 }
