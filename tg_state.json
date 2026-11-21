@@ -3,6 +3,5 @@
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
-    "out_mid": 2686,
-    "panel_mid": 2687
+    "display_reset_v3": true
 }
