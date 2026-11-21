@@ -126,7 +126,14 @@ def _panel(text,rows,touch=True):
     if pm and _edit(pm,text,"Markdown",rm):return
     if pm:_del_msg(pm);_set_mid("panel_mid",None)
     nm=_create(text,"Markdown",rm,silent=True)
-    if nm:_set_mid("panel_mid",nm)
+    if nm:_set_mid("panel_mid",nm);_set_mid("panel_hidden",None)
+
+def _hide_panel(extra=None):
+    """Remove the lower buttons message; Menu / Tools at the bottom bring the sub commands back."""
+    pm=_mid("panel_mid")
+    for x in {pm,extra}:
+        if x:_del_msg(x)
+    _set_mid("panel_mid",None);_set_mid("panel_hidden",True)
 
 def _kb_refresh():
     """Keep the USDT/₦ box in the text box current: re-send the bottom keyboard only when the balance text changed."""
@@ -152,7 +159,8 @@ def _send(m,mode,btn=None):
         out=_mid("out_mid")
         if not (out and _edit(out,m,mode or "Markdown",None)):_make_out(m,mode)
         if btn:_panel("👇 *Actions*",btn.get("inline_keyboard") if isinstance(btn,dict) else btn)
-        elif not _mid("panel_mid"):menu()
+        elif not _mid("panel_mid") and not _mid("panel_hidden"):
+            pu=_UI.get("panel_used");menu();_UI["panel_used"]=pu
         _kb_refresh()
     except Exception as e:print("TG EXCEPTION:",e)
 
@@ -1774,8 +1782,7 @@ def tg_check(poll=0):
             finally:_UI["edit_mode"]=False;_UI["acc"]=None
             if "callback_query" in u and not _UI.get("panel_used"):
                 try:
-                    if label:_panel("🟢 *Active*",[[{"text":"✅ "+label,"callback_data":txt}]],touch=False)  # results went to the upper part; only the active button stays in the lower part
-                    elif txt.startswith("m:"):menu()
+                    _hide_panel(m.get("message_id"))  # a sub command was picked: the buttons go away and only the output stays
                 except Exception as e:print(f"PANEL ERR: {e}")
     except Exception as e:print(f"TG Err:{e}")
 
