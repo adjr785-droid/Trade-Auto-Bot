@@ -1703,7 +1703,9 @@ def live_loop(t0):
         except Exception as e:print(f"LIVE POLL ERR: {e}")
         now=time.time()
         if now-last_light>=60:
-            for fn in (manage,check_alerts,scan,exec_q):run_step(fn)
+            for fn in (manage,check_alerts,scan,exec_q):
+                if fn is scan and deadline-time.time()<180:continue  # a scan can't be interrupted; the next run does it
+                run_step(fn)
             last_light=time.time()
         if now-last_heavy>=300:
             for fn in (auto_clear_daily,check_hourly_balance,check_daily_summary):run_step(fn)
