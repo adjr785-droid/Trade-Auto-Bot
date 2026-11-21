@@ -6,9 +6,9 @@ DB,ST,CFG,QF,LF,CD,SC,HIST,LOCK,SH,OUT,AL,ATHATL_CACHE="positions.json","tg_stat
 FILES=[DB,ST,CFG,QF,LF,CD,SC,HIST,SH,OUT,AL,ATHATL_CACHE]
 STABLE=['USDC','USDT','DAI','FDUSD','TUSD','USDD','USDE'];LEV=['3L','3S','5L','5S','10L','10S','2L','2S'];BL=['RPANW','CT','ONE']
 ex=ccxt.bitget({'apiKey':os.environ.get('BITGET_API_KEY'),'secret':os.environ.get('BITGET_API_SECRET'),'password':os.environ.get('BITGET_API_PASSPHRASE'),'enableRateLimit':True});ex.options['createMarketBuyOrderRequiresPrice']=False
-OPENAI_API_KEY=os.environ.get('OPENAI_API_KEY')
-OPENAI_MODEL=os.environ.get('OPENAI_MODEL','gpt-4.1-mini')
-_C={};_BAL={"t":0,"m":""};KB={"keyboard":[["📊 Menu","🧠 Ask AI","💼 Holdings"]],"resize_keyboard":True,"is_persistent":True}
+GROQ_API_KEY=os.environ.get('GROQ_API_KEY','').strip()
+GROQ_MODEL=os.environ.get('GROQ_MODEL','openai/gpt-oss-120b').strip() or 'openai/gpt-oss-120b'
+_C={};_BAL={"t":0,"m":""};KB={"keyboard":[["📊 Menu"]],"resize_keyboard":True,"is_persistent":True}
 S=lambda s:s.replace("-","/");TR=lambda t:{'trigger':True} if t else {};B=lambda k,c:ex.fetch_balance()[k].get(c,0)
 skip=lambda b:b in STABLE or b in BL or ((b.startswith('X') or b.startswith('R')) and len(b)<=6) or any(b.upper().endswith(x) for x in LEV)
 NP=lambda e,sl,pct=None:{"entry_price":e,"safe_zone":e,"stop_loss":sl,"peak_price":e,"last_price":e,"opened_at":time.time(),**({"sl_pct":pct} if pct else {})}
@@ -990,20 +990,28 @@ def analyse_coin(txt):
     except Exception as e:tg(f"❌ Could not analyse {sym}: {e}")
 
 def ask_ai(p):
-    if not OPENAI_API_KEY:
-        tg("⚠️ AI unavailable. Set OPENAI_API_KEY (and optionally OPENAI_MODEL) in your environment.");return
+    # Groq offers a free, rate-limited API tier. Read credentials at request
+    # time so host-side environment updates are picked up after restart.
+    api_key=os.environ.get('GROQ_API_KEY','').strip() or GROQ_API_KEY
+    model=os.environ.get('GROQ_MODEL','').strip() or GROQ_MODEL or 'openai/gpt-oss-120b'
+    if not api_key:
+        tg("⚠️ Groq AI is not configured. Create a free API key at https://console.groq.com/keys, add it as GROQ_API_KEY in your bot host's Secrets/Environment Variables, then restart the bot. GROQ_MODEL is optional (default: openai/gpt-oss-120b). The free tier has usage limits.");return
     try:
         db=load(DB);q=load(QF);s=cfg();bal=B('free','USDT');br=data("BTC-USDT")[2]
         pos=[f"  {sym}: entry={d.get('entry_price')}, pnl={((live(sym) or d.get('entry_price',0))-d.get('entry_price',1))/d.get('entry_price',1)*100:+.1f}%" for sym,d in list(db.items())[:8] if d.get('entry_price')] or ["  (none)"]
         ctx=f"Free USDT: {bal:.2f}|AutoBuy: ${s['auto_buy_amount_usdt']}|BTC RSI: {br}|Positions({len(db)}):\n"+"\n".join(pos)+f"\nQueue: {len(q)}|RSI {s['rsi_min']}-{s['rsi_max']}, SL {s['stop_loss_pct']}%\n\n"
         prompt="You are an expert crypto market analyst advising a spot trading bot user. Use plain text, concise, acknowledge uncertainty. You are advisory only: never claim to execute trades or override deterministic bot risk controls. Context:\n"+ctx+"User question: "+str(p)
-        r=requests.post("https://api.openai.com/v1/chat/completions",headers={"Authorization":"Bearer "+OPENAI_API_KEY,"Content-Type":"application/json"},json={"model":OPENAI_MODEL,"messages":[{"role":"user","content":prompt}],"temperature":0.4},timeout=45)
+        r=requests.post("https://api.groq.com/openai/v1/chat/completions",headers={"Authorization":"Bearer "+api_key,"Content-Type":"application/json"},json={"model":model,"messages":[{"role":"user","content":prompt}],"temperature":0.4,"max_tokens":1200},timeout=45)
         if not r.ok:
-            detail=(r.text or "")[:400]
-            raise RuntimeError(f"OpenAI HTTP {r.status}: {detail}")
+            try: detail=(r.json().get("error",{}).get("message") or r.text or "")[:350]
+            except Exception: detail=(r.text or "")[:350]
+            if r.status_code==401: raise RuntimeError("Groq rejected the API key. Check GROQ_API_KEY in your host secrets.")
+            if r.status_code==429: raise RuntimeError("Groq free-tier rate limit reached. Wait for the limit to reset and try again: "+detail)
+            if r.status_code==404: raise RuntimeError(f"Groq model '{model}' is unavailable. Check GROQ_MODEL against Groq's current model list.")
+            raise RuntimeError(f"Groq HTTP {r.status_code}: {detail}")
         data_json=r.json();txt=data_json.get("choices", [{}])[0].get("message",{}).get("content")
-        if not txt:raise RuntimeError("OpenAI returned an empty response")
-        _send(f"🧠 AI ({OPENAI_MODEL}):\n\n{txt[:3800]}",None)
+        if not txt:raise RuntimeError("Groq returned an empty response")
+        _send(f"🧠 AI ({model} via Groq):\n\n{txt[:3800]}",None)
     except Exception as e:tg(f"❌ AI Error: {str(e)[:500]}")
 
 def manage():
