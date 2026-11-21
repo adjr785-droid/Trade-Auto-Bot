@@ -46,62 +46,101 @@ def compact_balance():
         _BAL["t"],_BAL["m"]=time.time(),txt;return txt
     except:return _BAL["m"]
 
-def _display_mid():
-    """Return the one persistent Telegram display message ID, shared across workflow runs."""
-    if _UI.get("mid"):
-        return _UI["mid"]
-    try:
-        return load(ST,{}).get("display_message_id")
-    except Exception:
-        return None
+def _mid(k):
+    try:return load(ST,{}).get(k)
+    except Exception:return None
 
-def new_display():
-    """Forget the saved display message so the next screen is sent as a brand-new message (recovers from a cleared chat)."""
+def _set_mid(k,v):
     try:
-        st=load(ST,{});st.pop("display_message_id",None);save(ST,st)
-    except Exception as e:print(f"NEW DISPLAY ERR: {e}")
-    _UI["mid"]=None
+        st=load(ST,{})
+        if v:st[k]=v
+        else:st.pop(k,None)
+        save(ST,st)
+    except Exception as e:print(f"DISPLAY STATE ERR: {e}")
 
-def _remember_display_mid(mid):
+def _del_msg(mid):
     if not mid:return
-    _UI["mid"]=mid
-    st=load(ST,{})
-    st["display_message_id"]=mid
-    save(ST,st)
+    try:requests.post(API+"/deleteMessage",json={"chat_id":CHAT,"message_id":mid},timeout=10)
+    except Exception:pass
 
-def _send(m,mode,btn=None):
+def _edit(mid,text,mode,rm=None):
+    """Edit a display message in place. True when it is now showing this text (a 'not modified' reply counts as success)."""
+    text=(text or "")[:4000]
     try:
-        mid=_display_mid()
-        if mid:
-            payload={"chat_id":CHAT,"message_id":mid,"text":m,"parse_mode":mode or "Markdown",
-                     "reply_markup":btn if btn else {"inline_keyboard":[]}}
-            r=requests.post(API+"/editMessageText",json=payload,timeout=10)
-            if r.ok:return
-            body=r.json() if r.headers.get("content-type","").startswith("application/json") else {}
-            if "message is not modified" in str(body.get("description","")).lower():return
-        # No saved display yet, or Telegram says it can no longer be edited: create its replacement.
-        rm=btn or dict(KB)
-        if not btn:
-            ph=compact_balance()
-            if ph:rm["input_field_placeholder"]=ph[:64]
-        p={"chat_id":CHAT,"text":m,"reply_markup":rm}
+        p={"chat_id":CHAT,"message_id":mid,"text":text}
+        if mode:p["parse_mode"]=mode
+        if rm:p["reply_markup"]=rm
+        r=requests.post(API+"/editMessageText",json=p,timeout=10)
+        if r.ok:return True
+        body=r.json() if r.headers.get("content-type","").startswith("application/json") else {}
+        d=str(body.get("description","")).lower()
+        if "not modified" in d:return True
+        if "parse" in d or "entities" in d:
+            p.pop("parse_mode",None);p["text"]=re.sub(r'<[^>]+>','',text) if mode=="HTML" else text
+            r=requests.post(API+"/editMessageText",json=p,timeout=10)
+            return bool(r.ok)
+    except Exception:pass
+    return False
+
+def _create(text,mode,rm):
+    text=(text or "")[:4000]
+    try:
+        p={"chat_id":CHAT,"text":text,"reply_markup":rm}
         if mode:p["parse_mode"]=mode
         r=requests.post(API+"/sendMessage",json=p,timeout=10)
         if not r.ok:
-            p.pop("parse_mode",None);p["text"]=re.sub(r'<[^>]+>','',m) if mode=="HTML" else m
+            p.pop("parse_mode",None);p["text"]=re.sub(r'<[^>]+>','',text) if mode=="HTML" else text
             r=requests.post(API+"/sendMessage",json=p,timeout=10)
         if r.ok:
-            body=r.json();new_mid=(body.get("result") or {}).get("message_id")
-            if new_mid:
-                _remember_display_mid(new_mid)
-                out=load(OUT,[]);out.append({"message_id":new_mid,"sent_at":time.time()});save(OUT,out)
+            mid=((r.json() or {}).get("result") or {}).get("message_id")
+            if mid:
+                out=load(OUT,[]);out.append({"message_id":mid,"sent_at":time.time()});save(OUT,out)
+                return mid
+    except Exception as e:print("TG EXCEPTION:",e)
+    return None
+
+def _make_out(m,mode):
+    """Create the upper OUTPUT message (carries the bottom keyboard + balance box). The panel is re-created after it so it always sits below."""
+    _del_msg(_mid("out_mid"));_del_msg(_mid("panel_mid"))
+    _set_mid("panel_mid",None);_set_mid("out_mid",None)
+    rm=dict(KB)
+    ph=compact_balance()
+    if ph:rm["input_field_placeholder"]=ph[:64]
+    mid=_create(m,mode,rm)
+    if mid:_set_mid("out_mid",mid)
+    return mid
+
+def new_display():
+    """Remove both display messages so the next screen is sent as a brand-new pair (recovers from a cleared chat)."""
+    for k in ("out_mid","panel_mid"):
+        _del_msg(_mid(k));_set_mid(k,None)
+    _UI["mid"]=None
+
+def _panel(text,rows):
+    """Lower part: the buttons message."""
+    _UI["panel_used"]=True
+    rm={"inline_keyboard":rows}
+    if not _mid("out_mid"):_make_out("📟 *OUTPUT*\nResults appear here.","Markdown")
+    pm=_mid("panel_mid")
+    if pm and _edit(pm,text,"Markdown",rm):return
+    if pm:_del_msg(pm);_set_mid("panel_mid",None)
+    nm=_create(text,"Markdown",rm)
+    if nm:_set_mid("panel_mid",nm)
+
+def _send(m,mode,btn=None):
+    """Upper part: output. Buttons (if any) go to the lower panel."""
+    try:
+        out=_mid("out_mid")
+        if not (out and _edit(out,m,mode or "Markdown",None)):_make_out(m,mode)
+        if btn:_panel("👇 *Actions*",btn.get("inline_keyboard") if isinstance(btn,dict) else btn)
+        elif not _mid("panel_mid"):menu()
     except Exception as e:print("TG EXCEPTION:",e)
 
 def cleanup_telegram_output():
     now=time.time();out=load(OUT,[]);keep=[]
-    persistent_mid=load(ST,{}).get("display_message_id")
+    _st0=load(ST,{});persistent_mid=[_st0.get("out_mid"),_st0.get("panel_mid")]
     for item in out:
-        if item.get("message_id")==persistent_mid:
+        if item.get("message_id") in persistent_mid:
             keep.append(item);continue
         if now-float(item.get("sent_at",now))<float(cfg().get('cleanup_hours',24.0) or 24.0)*3600:keep.append(item);continue
         try:
@@ -177,6 +216,7 @@ def cmd_clear(auto=False):
                 if body.get("error_code",0)>=500 or "too many requests" in str(body.get("description","")).lower():keep.append(item)
         except Exception:keep.append(item)
     save(OUT,keep)
+    if not keep:_set_mid("out_mid",None);_set_mid("panel_mid",None)
     tg((f"🧹 Daily auto-clear: removed {n} message(s)." if auto else f"🧹 Cleared {n} bot message(s).")+(f" {len(keep)} left; send /clear again." if keep else ""))
 
 def auto_clear_daily():
@@ -1420,22 +1460,13 @@ def setc(k,v,m):s=cfg();s[k]=v;save(CFG,s);tg(m)
 MSG={"ai_info":"🧠 *AI ANALYST*\nTo ask the AI a question, type:\n`/ai <your question>`","/help":"🤖 *CMDS*\n`/menu` `/ai [q]` `/analyse` (top 3) `/analyse COIN` `/audit` `/cancel`\n`/bot` `/holdings` `/stats`\n`/clear` `/dust` `/alert COIN PRICE` `/alerts` `/cancel\\_alerts`\n`/scan_history [coin/filter]`\n`/set key value` `/pause` `/resume` `/panic`"}
 
 # ---------- Button-only control panel (no typing). Every button runs an existing command; nothing else was changed. ----------
-_UI={"mid":None,"edit_mode":False}
+_UI={"mid":None,"edit_mode":False,"panel_used":False}
 _B=lambda t,c:{"text":t,"callback_data":c}
 _MENU_BTN=[_B("⬅️ Menu","m:menu")]
 RUN={"scan":"/scan","sync":"/sync","holdings":"/holdings","analyse":"/analyse","alerts":"/alerts","cancelalerts":"/cancel_alerts","dust":"/dust","bot":"/bot","audit":"/audit","stats":"/stats","clear":"/clear","pause":"/pause","resume":"/resume","cancel":"/cancel","pricealert":"/alerts"}
 AI_Q={"1":"Give me a market overview.","2":"Review my current holdings and say which to hold or sell.","3":"Which single coin looks best to buy right now and why?","4":"What is the biggest risk in my portfolio right now?"}
 
-def ui_send(text,rows):
-    rm={"inline_keyboard":rows};mid=_display_mid()
-    if mid:
-        try:
-            r=requests.post(API+"/editMessageText",json={"chat_id":CHAT,"message_id":mid,"text":text,"parse_mode":"Markdown","reply_markup":rm},timeout=10)
-            if r.ok:return
-            body=r.json() if r.headers.get("content-type","").startswith("application/json") else {}
-            if "message is not modified" in str(body.get("description","")).lower():return
-        except Exception:pass
-    _send(text,"Markdown",rm)
+def ui_send(text,rows):_panel(text,rows)
 
 def _grid(btns,n=3):return [btns[i:i+n] for i in range(0,len(btns),n)]
 
@@ -1635,13 +1666,17 @@ def tg_check(poll=0):
                 except Exception:pass
             if age>1800:continue
             _UI["mid"]=m.get("message_id") if "callback_query" in u else None
-            if "callback_query" in u and (txt.startswith("m:") or txt.startswith("scan_history:")):
-                _remember_display_mid(m.get("message_id"))
+            if "callback_query" in u and (txt.startswith("m:") or txt.startswith("scan_history:")) and not _mid("panel_mid"):
+                _set_mid("panel_mid",m.get("message_id"))  # adopt the button message the user tapped
             _TG_N["n"]+=1
             if "callback_query" in u and (txt.startswith("m:") or txt.startswith("scan_history:")):_UI["edit_mode"]=True
+            _UI["panel_used"]=False
             try:handle(txt,age)
             except Exception as e:print(f"HANDLER ERR: {e}");tg(f"⚠️ Command failed: `{e}`")
             finally:_UI["edit_mode"]=False
+            if "callback_query" in u and txt.startswith("m:") and not _UI.get("panel_used"):
+                try:menu()  # results went to the upper part; put the main menu back in the lower part
+                except Exception as e:print(f"PANEL RESTORE ERR: {e}")
     except Exception as e:print(f"TG Err:{e}")
 
 def acquire_lock():
@@ -1729,8 +1764,8 @@ if __name__=="__main__":
     T0=time.time()
     try:
         _st=load(ST,{})
-        if not _st.get("display_reset_v1"):  # one-time: forget a display message that may no longer be visible
-            _st.pop("display_message_id",None);_st["display_reset_v1"]=True;save(ST,_st)
+        if not _st.get("display_reset_v2"):  # one-time: forget old display messages so the new two-part display is created
+            _st.pop("display_message_id",None);_st.pop("out_mid",None);_st.pop("panel_mid",None);_st["display_reset_v2"]=True;save(ST,_st)
     except Exception as e:print(f"DISPLAY RESET ERR: {e}")
     try:
         # Each step is isolated: a failure in one step is reported (at most every 30 min per step) and never stops the scan or the others.
