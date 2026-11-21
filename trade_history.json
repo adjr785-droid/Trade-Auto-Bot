@@ -80,5 +80,12 @@
         "time": 1795245636.3065073,
         "reason": "MANUAL SELL ALL",
         "strategy": "MANUAL"
+    },
+    {
+        "sym": "SKYAI-USDT",
+        "pnl": 0.555814500000001,
+        "time": 1795251869.0228684,
+        "reason": "PARTIAL PROFIT +6.2%",
+        "strategy": "MANUAL"
     }
 ]
