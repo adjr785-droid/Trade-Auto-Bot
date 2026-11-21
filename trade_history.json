@@ -66,5 +66,12 @@
         "time": 1795220607.6626432,
         "reason": "PARTIAL PROFIT +5.5%",
         "strategy": "MANUAL"
+    },
+    {
+        "sym": "BLESS-USDT",
+        "pnl": 2.124997259,
+        "time": 1795244795.426478,
+        "reason": "RSI 75",
+        "strategy": "MANUAL"
     }
 ]

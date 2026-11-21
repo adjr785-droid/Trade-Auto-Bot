@@ -1,27 +1,14 @@
 {
-    "BLESS-USDT": {
-        "entry_price": 0.01411,
-        "safe_zone": 0.01411,
-        "stop_loss": 0.01411,
-        "peak_price": 0.015596,
-        "last_price": 0.015596,
-        "opened_at": 1795233526.4441814,
-        "sl_pct": 8.8,
-        "strategy": "MANUAL",
-        "xsl": 0.01411,
-        "seen": 1795243492.7411191,
-        "partial_done": true
-    },
     "PUMP-USDT": {
         "entry_price": 0.002254,
         "safe_zone": 0.002254,
         "stop_loss": 0.002123,
-        "peak_price": 0.002267,
-        "last_price": 0.002267,
+        "peak_price": 0.002292,
+        "last_price": 0.002292,
         "opened_at": 1795235212.0214336,
         "sl_pct": 5.8,
         "strategy": "MANUAL",
         "xsl": 0.002123,
-        "seen": 1795243493.0699935
+        "seen": 1795244803.9243147
     }
 }
