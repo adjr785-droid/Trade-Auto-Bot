@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935688276,
+    "last_update_id": 935688278,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
     "kb_ph": "USDT24.40/\u20a633,011|[['\ud83d\udccb Menu', '\ud83e\uddf0 Tools', '\ud83c\udfc6 Analyse']]",
-    "out_mid": 2840,
-    "panel_hidden": true
+    "out_mid": 2842,
+    "panel_mid": 2844
 }
