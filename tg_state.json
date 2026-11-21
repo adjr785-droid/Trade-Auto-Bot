@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT23.56/\u20a631,876",
+    "kb_ph": "USDT23.60/\u20a631,926",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -38,7 +38,7 @@
     "panel_text": "\ud83d\udcc4 *Page 2/3*",
     "out_text": "\ud83e\udd16 *BOT*\nExchange connection: \u2705 OK\nPortfolio: $23.56 USDT | \u20a631,879\nUSDT cash: $13.29 (free $13.29)\nAuto-buy: ON ($3.7348 per trade)\nBTC safety filter: OK\nMarket filter: only 20% of coins are up today\nRisk controls: \u2705 trading allowed\nToday vs start of day: +27.74% (auto-buy pauses at -5.0%)\nMoney in coins: 44% of portfolio (cap 50.0%)\nRe-buy cooldown active: none\nLast market scan: 0 min ago (runs every 30 min) | Queued coins: 0\nBot-tracked positions: 1 | Holdings priced: 1\n\ud83d\udfe2 Last: DGAI \u2014 RSI 75 | PnL $+0.49 | 8.8h ago\n\n\ud83e\udded *STRATEGY*\nEntries: TREND (RSI 42-48, price > MA5 > MA10), OVERSOLD bounce (RSI < 30), BREAKOUT (RSI 50-70 + volume breakout)\nProtection: stop-loss 15% | trailing stop 8.0% below peak | crash guard 10.0%",
     "out_mode": "Markdown",
-    "kb_mid": 3142,
+    "kb_mid": 3143,
     "out_time": 1795302116.259088,
     "bot_seen": {
         "t": 1795302110.915402,
