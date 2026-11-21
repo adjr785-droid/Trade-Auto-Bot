@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935688463,
+    "last_update_id": 935688464,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT24.01/\u20a632,480",
+    "kb_ph": "USDT24.03/\u20a632,517",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -14,39 +14,38 @@
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udcca Market",
-                "callback_data": "m:r:market"
+                "text": "\u25c0 Prev",
+                "callback_data": "pg:p"
             },
             {
-                "text": "\ud83d\udcc8 Performance",
-                "callback_data": "m:r:stats"
+                "text": "1/3",
+                "callback_data": "pg:x"
+            },
+            {
+                "text": "Next \u25b6",
+                "callback_data": "pg:n"
             }
         ],
         [
             {
-                "text": "\ud83e\uddfe Trade History",
-                "callback_data": "m:r:history"
-            },
-            {
-                "text": "\ud83d\udee1\ufe0f Risk & Bot",
-                "callback_data": "m:r:bot"
-            }
-        ],
-        [
-            {
-                "text": "\u2b05\ufe0f Tools",
-                "callback_data": "m:tools"
-            },
-            {
-                "text": "\ud83c\udfe0 Main Menu",
+                "text": "\ud83c\udfe0 Menu",
                 "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcca *DASHBOARD*\nChoose a dashboard screen.",
-    "out_text": "\ud83d\udcc8 *TRADE STATS*\nClosed trades: 16\nWin rate: 56% (9 wins, 7 losses)\nAverage per trade: $+0.32\nNet profit: $+5.19\nBest: $+2.97 | Worst: $-0.66\n\n*By strategy*\nMANUAL: 10 trades | win 80% | avg $+0.62 | total $+6.21\nOLDER: 2 trades | win 0% | avg $-0.15 | total $-0.29\nOTHER: 4 trades | win 25% | avg $-0.18 | total $-0.73",
+    "panel_text": "\ud83d\udcc4 *Page 1/3*",
+    "out_text": "\ud83c\udfc6 *TOP 3 SETUPS RIGHT NOW*\n_Read-only scan. Nothing was bought._\n\n\u26a0\ufe0f Market filter active: BTC is below its 50h average. Auto-buy is blocked; a manual buy is your own call.\n\n*1. TRUMP-USDT* \u2014 BREAKOUT\nPrice: 0.884000 USDT | 24h: +4.00% | RSI: 59.2\nSuggested stop: 0.751400 (15% below price)\nWhy:\n\u2022 Confirmed breakout: price cleared the recent 20h high on 2.55x average volume\n\u2022 RSI 59.2 is healthy (room to run before overbought)\n\u2022 24h change +4.00% shows steady, not extreme, momentum\n\u2022 24h volume $1.0M (liquid enough: above the $1M minimum)\n\u2022 Spread: 0.11% (OK for auto-buy)",
     "out_mode": "Markdown",
     "out_mid": 3073,
-    "kb_mid": 3112,
-    "panel_hidden": true
+    "kb_mid": 3114,
+    "pages": {
+        "p": [
+            "\ud83c\udfc6 *TOP 3 SETUPS RIGHT NOW*\n_Read-only scan. Nothing was bought._\n\n\u26a0\ufe0f Market filter active: BTC is below its 50h average. Auto-buy is blocked; a manual buy is your own call.\n\n*1. TRUMP-USDT* \u2014 BREAKOUT\nPrice: 0.884000 USDT | 24h: +4.00% | RSI: 59.2\nSuggested stop: 0.751400 (15% below price)\nWhy:\n\u2022 Confirmed breakout: price cleared the recent 20h high on 2.55x average volume\n\u2022 RSI 59.2 is healthy (room to run before overbought)\n\u2022 24h change +4.00% shows steady, not extreme, momentum\n\u2022 24h volume $1.0M (liquid enough: above the $1M minimum)\n\u2022 Spread: 0.11% (OK for auto-buy)",
+            "\n*2. BNB-USDT* \u2014 WATCHLIST (no full scanner setup)\nPrice: 549.47 USDT | 24h: +2.33% | RSI: 56.8\nSuggested stop: 467.05 (15% below price)\nWhy:\n\u2022 Short-term trend is up (price > MA5 > MA10)\n\u2022 RSI 56.8 is healthy (room to run before overbought)\n\u2022 24h change +2.33% shows steady, not extreme, momentum\n\u2022 24h volume $5.6M (liquid enough: above the $1M minimum)\n\u2022 Spread: 0.00% (OK for auto-buy)\n\n*3. LINK-USDT* \u2014 WATCHLIST (no full scanner setup)\nPrice: 8.6340 USDT | 24h: +2.90% | RSI: 54.5\nSuggested stop: 7.3389 (15% below price)",
+            "Why:\n\u2022 Short-term trend is up (price > MA5 > MA10)\n\u2022 RSI 54.5 is healthy (room to run before overbought)\n\u2022 24h change +2.90% shows steady, not extreme, momentum\n\u2022 24h volume $2.0M (liquid enough: above the $1M minimum)\n\u2022 Spread: 0.01% (OK for auto-buy)\n\nBuy manually with `/buy COIN amount` if you agree."
+        ],
+        "i": 0,
+        "mode": "Markdown"
+    },
+    "panel_mid": 3115
 }
