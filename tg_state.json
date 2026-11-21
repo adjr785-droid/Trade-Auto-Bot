@@ -1,6 +1,8 @@
 {
-    "last_update_id": 935688216,
+    "last_update_id": 935688218,
     "pin_id": 2055,
     "display_reset_v1": true,
-    "display_message_id": 2673
+    "display_reset_v2": true,
+    "out_mid": 2678,
+    "panel_mid": 2679
 }
