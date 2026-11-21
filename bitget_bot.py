@@ -179,7 +179,7 @@ def save(f,d):
     except Exception as e:print(f"SAVE ERR {f}: {e}")
 
 def cfg():
-    d={"rsi_min":42,"rsi_max":48,"stop_loss_pct":5.0,"auto_buy_enabled":True,"auto_buy_amount_usdt":10.0,"max_tokens_before_consolidation":3,"max_hold_hours":48,"trail_pct":8.0,"crash_guard_pct":10.0,"rsi_exit":75,"btc_rsi_min":50,"risk_per_trade_pct":1.0,"max_daily_loss_pct":3.0,"max_portfolio_exposure_pct":50.0,"max_position_pct":15.0,"max_daily_trades":5,"max_spread_pct":0.5,"auto_mode_v1":False,"rebuy_cooldown_hours":6.0,"atr_stop_enabled":True,"atr_stop_mult":2.0,"atr_stop_min_pct":3.0,"atr_stop_max_pct":10.0,"market_filter_enabled":True,"btc_trend_hours":50,"min_breadth_pct":30.0,"offline_alert_hours":3.0,"daily_summary_hour_utc":20,"max_daily_drawdown_pct":5.0,"partial_tp_pct":5.0,"partial_tp_fraction":0.5,"dynamic_trail":True,"sell_if_stop_fails":True,"scan_prefilter":True,"cleanup_hours":24.0,"scan_interval_minutes":15.0,"auto_clear_hours":24.0}
+    d={"rsi_min":42,"rsi_max":48,"stop_loss_pct":5.0,"auto_buy_enabled":True,"auto_buy_amount_usdt":10.0,"max_tokens_before_consolidation":3,"max_hold_hours":48,"trail_pct":8.0,"crash_guard_pct":10.0,"rsi_exit":75,"btc_rsi_min":50,"risk_per_trade_pct":1.0,"max_daily_loss_pct":3.0,"max_portfolio_exposure_pct":50.0,"max_position_pct":15.0,"max_daily_trades":5,"max_spread_pct":0.5,"auto_mode_v1":False,"rebuy_cooldown_hours":6.0,"atr_stop_enabled":True,"atr_stop_mult":2.0,"atr_stop_min_pct":3.0,"atr_stop_max_pct":10.0,"market_filter_enabled":True,"btc_trend_hours":50,"min_breadth_pct":30.0,"offline_alert_hours":3.0,"daily_summary_hour_utc":20,"max_daily_drawdown_pct":5.0,"partial_tp_pct":5.0,"partial_tp_fraction":0.5,"dynamic_trail":True,"sell_if_stop_fails":True,"scan_prefilter":True,"cleanup_hours":24.0,"scan_interval_minutes":15.0,"auto_clear_hours":24.0,"live_mode_seconds":270}
     s=load(CFG,d)
     for k,v in d.items():s.setdefault(k,v)
     if not s.get('auto_mode_v1'):s['auto_buy_enabled']=True;s['auto_mode_v1']=True;save(CFG,s)
@@ -931,7 +931,7 @@ def cmd_status():
     expo=coin_val/total*100 if total>0 else 0.0
     cdl=[k[8:].replace("-USDT","") for k,v in load(CD,{}).items() if k.startswith("stopout_") and now-v<float(s.get('rebuy_cooldown_hours',6.0))*3600]
     sysmsg=["🤖 *BOT*","Exchange connection: ✅ OK",f"Portfolio: ${total:.2f} USDT"+(f" | ₦{total*r:,.0f}" if r else ""),f"USDT cash: ${usdt:.2f} (free ${usdt_free:.2f})",f"Auto-buy: {'ON' if s.get('auto_buy_enabled') else 'PAUSED'} (${s.get('auto_buy_amount_usdt')} per trade)",f"BTC safety filter: {btc}",f"Market filter: {mf}",f"Risk controls: {'✅ trading allowed' if ok else '⛔ '+why}",f"Today vs start of day: {ddp:+.2f}% (auto-buy pauses at -{s.get('max_daily_drawdown_pct')}%)",f"Money in coins: {expo:.0f}% of portfolio (cap {s.get('max_portfolio_exposure_pct')}%)",f"Re-buy cooldown active: {', '.join(cdl) if cdl else 'none'}",f"Last market scan: {ago} (runs every {float(s.get('scan_interval_minutes',15)):g} min) | Queued coins: {len(q)}",f"Bot-tracked positions: {len(db)} | Holdings priced: {len(held)}",last_trade_line().strip(),"",
-      "🧭 *STRATEGY*",f"Entries: TREND (RSI {s.get('rsi_min')}-{s.get('rsi_max')}, price > MA5 > MA10), OVERSOLD bounce (RSI < 30), BREAKOUT (RSI 50-70 + volume breakout)",f"Protection: stop-loss {s.get('stop_loss_pct')}% | trailing stop {s.get('trail_pct')}% below peak | crash guard {s.get('crash_guard_pct')}%",f"Exit: RSI >= {s.get('rsi_exit')} or max hold {s.get('max_hold_hours')}h",f"Profit taking: sell {float(s.get('partial_tp_fraction',0.5))*100:.0f}% at +{s.get('partial_tp_pct')}% then stop moves to break-even" if float(s.get('partial_tp_pct',0) or 0)>0 else "Profit taking: partial sell OFF",f"Dynamic trailing: {'ON (wider in strong trends, tighter when momentum fades)' if s.get('dynamic_trail',True) else 'OFF'}",f"Entry safety: spread limit {s.get('max_spread_pct')}% | stop fails -> {'sell at market' if s.get('sell_if_stop_fails',True) else 'alert only'} | scan pre-filter {'ON' if s.get('scan_prefilter',True) else 'OFF'}",f"Auto-clear chat: every {float(s.get('auto_clear_hours',24)):g}h" if float(s.get('auto_clear_hours',24) or 0)>0 else "Auto-clear chat: OFF",f"Limits: {s.get('max_daily_trades')} trades/day, {s.get('max_daily_loss_pct')}% daily loss, {s.get('max_position_pct')}% max per coin"]
+      "🧭 *STRATEGY*",f"Entries: TREND (RSI {s.get('rsi_min')}-{s.get('rsi_max')}, price > MA5 > MA10), OVERSOLD bounce (RSI < 30), BREAKOUT (RSI 50-70 + volume breakout)",f"Protection: stop-loss {s.get('stop_loss_pct')}% | trailing stop {s.get('trail_pct')}% below peak | crash guard {s.get('crash_guard_pct')}%",f"Exit: RSI >= {s.get('rsi_exit')} or max hold {s.get('max_hold_hours')}h",f"Profit taking: sell {float(s.get('partial_tp_fraction',0.5))*100:.0f}% at +{s.get('partial_tp_pct')}% then stop moves to break-even" if float(s.get('partial_tp_pct',0) or 0)>0 else "Profit taking: partial sell OFF",f"Dynamic trailing: {'ON (wider in strong trends, tighter when momentum fades)' if s.get('dynamic_trail',True) else 'OFF'}",f"Entry safety: spread limit {s.get('max_spread_pct')}% | stop fails -> {'sell at market' if s.get('sell_if_stop_fails',True) else 'alert only'} | scan pre-filter {'ON' if s.get('scan_prefilter',True) else 'OFF'}",(f"Near-instant mode: ON (stays awake {float(s.get('live_mode_seconds',270)):g}s per run)" if float(s.get('live_mode_seconds',270) or 0)>0 else "Near-instant mode: OFF"),f"Auto-clear chat: every {float(s.get('auto_clear_hours',24)):g}h" if float(s.get('auto_clear_hours',24) or 0)>0 else "Auto-clear chat: OFF",f"Limits: {s.get('max_daily_trades')} trades/day, {s.get('max_daily_loss_pct')}% daily loss, {s.get('max_position_pct')}% max per coin"]
     tg("\n".join(sysmsg))
     if not held:tg("🛑 *HOLDINGS ADVICE*\nNo priced coin holdings right now.");return
     out=["💼 *HOLDINGS ADVICE*","_Technical view only, not financial advice._",""];sells=0
@@ -1360,7 +1360,7 @@ def cmd_set(txt):
     if k not in s:tg(f"❌ Unknown key. Valid: `{'`, `'.join(s.keys())}`");return
     try:new=val.lower() in ('true','1','yes','on') if isinstance(s[k],bool) else float(val) if isinstance(s[k],float) else int(val)
     except:tg(f"❌ Invalid value for {k}");return
-    limits={"risk_per_trade_pct":(0.1,2.0),"max_daily_loss_pct":(0.5,10.0),"max_portfolio_exposure_pct":(5.0,100.0),"max_position_pct":(1.0,50.0),"max_daily_trades":(1,50),"max_spread_pct":(0.05,3.0),"trail_pct":(0.0,30.0),"scan_interval_minutes":(5.0,240.0),"auto_clear_hours":(0.0,168.0),"stop_loss_pct":(0.5,20.0),"rsi_min":(1.0,99.0),"rsi_max":(1.0,99.0),"rsi_exit":(0.0,99.0),"auto_buy_amount_usdt":(1.0,100000.0),"max_tokens_before_consolidation":(1,30),"max_hold_hours":(1,720),"crash_guard_pct":(1.0,50.0),"btc_rsi_min":(0.0,99.0),"rebuy_cooldown_hours":(0.0,168.0),"atr_stop_mult":(0.5,6.0),"atr_stop_min_pct":(1.0,10.0),"atr_stop_max_pct":(2.0,25.0),"btc_trend_hours":(10,200),"min_breadth_pct":(0.0,100.0),"offline_alert_hours":(0.0,72.0),"daily_summary_hour_utc":(0,23)}
+    limits={"risk_per_trade_pct":(0.1,2.0),"max_daily_loss_pct":(0.5,10.0),"max_portfolio_exposure_pct":(5.0,100.0),"max_position_pct":(1.0,50.0),"max_daily_trades":(1,50),"max_spread_pct":(0.05,3.0),"trail_pct":(0.0,30.0),"scan_interval_minutes":(5.0,240.0),"auto_clear_hours":(0.0,168.0),"live_mode_seconds":(0,330),"stop_loss_pct":(0.5,20.0),"rsi_min":(1.0,99.0),"rsi_max":(1.0,99.0),"rsi_exit":(0.0,99.0),"auto_buy_amount_usdt":(1.0,100000.0),"max_tokens_before_consolidation":(1,30),"max_hold_hours":(1,720),"crash_guard_pct":(1.0,50.0),"btc_rsi_min":(0.0,99.0),"rebuy_cooldown_hours":(0.0,168.0),"atr_stop_mult":(0.5,6.0),"atr_stop_min_pct":(1.0,10.0),"atr_stop_max_pct":(2.0,25.0),"btc_trend_hours":(10,200),"min_breadth_pct":(0.0,100.0),"offline_alert_hours":(0.0,72.0),"daily_summary_hour_utc":(0,23)}
     if k in limits and not (limits[k][0] <= new <= limits[k][1]):tg(f"❌ `{k}` must be between {limits[k][0]} and {limits[k][1]}.");return
     if k=="rsi_min" and new>=s.get("rsi_max",99):tg("❌ rsi_min must be lower than rsi_max.");return
     if k=="rsi_max" and new<=s.get("rsi_min",1):tg("❌ rsi_max must be higher than rsi_min.");return
@@ -1531,10 +1531,11 @@ def handle(t,age):
     elif l in ("/resume","▶️ resume"):setc('auto_buy_enabled',True,"▶️ Auto-buy resumed.")
     elif l in ("🧠 ask ai", "ai_info"):_send(MSG["ai_info"]+"\n\nOr tap a question:","Markdown",{"inline_keyboard":[[_B("📈 Market overview","m:ai:1"),_B("💼 Review my holdings","m:ai:2")],[_B("🏆 Best coin to buy","m:ai:3"),_B("⚠️ Biggest risk","m:ai:4")]]})
 
-def tg_check():
+_TG_N={"n":0}
+def tg_check(poll=0):
     st=load(ST);lid=st.get("last_update_id",0)
     try:
-        res=requests.get(f"{API}/getUpdates?offset={lid+1}&timeout=0",timeout=10).json()
+        res=requests.get(f"{API}/getUpdates?offset={lid+1}&timeout={int(poll)}",timeout=10+int(poll)).json()
         if not (res.get("ok") and res.get("result")):return
         top=max(u["update_id"] for u in res["result"]);st["last_update_id"]=top;save(ST,st)
         try:requests.get(f"{API}/getUpdates?offset={top+1}&limit=1&timeout=0",timeout=10)
@@ -1554,6 +1555,7 @@ def tg_check():
                 except Exception:pass
             if age>1800:continue
             _UI["mid"]=m.get("message_id") if "callback_query" in u else None
+            _TG_N["n"]+=1
             try:handle(txt,age)
             except Exception as e:print(f"HANDLER ERR: {e}");tg(f"⚠️ Command failed: `{e}`")
     except Exception as e:print(f"TG Err:{e}")
@@ -1597,18 +1599,52 @@ def git_sync():
         if push.returncode!=0:notify_fail("git push failed: "+push.stderr[-250:]);return
     except Exception as e:notify_fail("git sync exception: "+str(e))
 
+def run_step(fn):
+    """Runs one step; a failure is reported (at most every 30 min per step) and never stops the others."""
+    try:fn()
+    except Exception as e:
+        nm=getattr(fn,"__name__","step");print(f"STEP {nm} FAILED: {e}\n{traceback.format_exc()[-400:]}")
+        try:
+            if not in_cd(f"stepfail_{nm}",1800):mk_cd(f"stepfail_{nm}");tg(f"⚠️ *{nm} failed; the other steps (including the scan) continue:* `{e}`")
+        except Exception:pass
+
+def live_loop(t0):
+    """Near-instant mode: stay alive for live_mode_seconds, long-polling Telegram so button taps and commands are answered within seconds.
+    Stops, trailing, alerts, the scan (on its own interval) and the buy queue keep running every minute. 0 = off (one pass per run)."""
+    window=float(cfg().get('live_mode_seconds',270) or 0)
+    if window<=0:return
+    import signal
+    def _stop(sig,frm):
+        try:git_sync()
+        except Exception:pass
+        os._exit(0)
+    for sg in (signal.SIGTERM,signal.SIGINT):
+        try:signal.signal(sg,_stop)
+        except Exception:pass
+    deadline=t0+window;last_light=last_heavy=last_sync=time.time();pending=False
+    while deadline-time.time()>8:
+        it=time.time();_C.clear();n0=_TG_N["n"]
+        try:tg_check(poll=int(min(20,max(1,deadline-time.time()-6))))
+        except Exception as e:print(f"LIVE POLL ERR: {e}")
+        now=time.time()
+        if now-last_light>=60:
+            for fn in (manage,check_alerts,scan,exec_q):run_step(fn)
+            last_light=time.time()
+        if now-last_heavy>=300:
+            for fn in (auto_clear_daily,check_hourly_balance,check_daily_summary):run_step(fn)
+            last_heavy=time.time()
+        if _TG_N["n"]>n0:pending=True
+        if pending and time.time()-last_sync>=15:run_step(git_sync);last_sync=time.time();pending=False
+        if time.time()-it<1:time.sleep(1)
+
 if __name__=="__main__":
     lk=acquire_lock()
     if lk is None:print("Another run is in progress; exiting.");sys.exit(0)
+    T0=time.time()
     try:
         # Each step is isolated: a failure in one step is reported (at most every 30 min per step) and never stops the scan or the others.
-        for fn in (heartbeat,_C.clear,cleanup_telegram_output,auto_clear_daily,scan_history_state,audit_system,tg_check,manage,track_day_equity,git_sync,check_hourly_balance,check_alerts,check_daily_summary,scan,exec_q):
-            try:fn()
-            except Exception as e:
-                nm=getattr(fn,"__name__","step");print(f"STEP {nm} FAILED: {e}\n{traceback.format_exc()[-400:]}")
-                try:
-                    if not in_cd(f"stepfail_{nm}",1800):mk_cd(f"stepfail_{nm}");tg(f"⚠️ *{nm} failed; the other steps (including the scan) continue:* `{e}`")
-                except Exception:pass
+        for fn in (heartbeat,_C.clear,cleanup_telegram_output,auto_clear_daily,scan_history_state,audit_system,tg_check,manage,track_day_equity,git_sync,check_hourly_balance,check_alerts,check_daily_summary,scan,exec_q):run_step(fn)
+        live_loop(T0)
     except Exception as e:
         try:tg(f"🚨 *CRASH:* `{e}`\n`{traceback.format_exc()[-200:]}`")
         except:pass
