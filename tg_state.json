@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT23.13/\u20a631,849",
+    "kb_ph": "USDT23.16/\u20a631,889",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -62,56 +62,8 @@
             1795362988.7943418
         ]
     },
-    "kb_mid": 4113,
+    "kb_mid": 4116,
     "radar": [
         "TRX-USDT"
-    ],
-    "out_text": "\ud83e\udd16 *BOT*\n\ud83d\udd58 Since last check (4.0 h ago): \ud83d\udfe2 balance +0.01 USDT | new: WLD | 2 trade(s)\nclosed\nExchange connection: \u2705 OK\nPortfolio: $23.13 USDT | \u20a631,849\nUSDT cash: $0.03 (free $0.03)\nAuto-buy: PAUSED (dynamic allocation; legacy target $6.4994)\nBTC safety filter: OK\nMarket filter: only 20% of coins are up today\nRisk controls: \u26d4 Daily limit (13)\n\u2800\n\u2800",
-    "out_mode": "Markdown",
-    "panel_rows": [
-        [
-            {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
-            },
-            {
-                "text": "1/5",
-                "callback_data": "pg:x"
-            },
-            {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
-            },
-            {
-                "text": "\ud83c\udfe0",
-                "callback_data": "m:menu"
-            },
-            {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
-            }
-        ]
-    ],
-    "panel_text": "\ud83d\udcc4 *Page 1/5*",
-    "out_time": 1795380764.8833992,
-    "pages": {
-        "p": [
-            "\ud83e\udd16 *BOT*\n\ud83d\udd58 Since last check (4.0 h ago): \ud83d\udfe2 balance +0.01 USDT | new: WLD | 2 trade(s)\nclosed\nExchange connection: \u2705 OK\nPortfolio: $23.13 USDT | \u20a631,849\nUSDT cash: $0.03 (free $0.03)\nAuto-buy: PAUSED (dynamic allocation; legacy target $6.4994)\nBTC safety filter: OK\nMarket filter: only 20% of coins are up today\nRisk controls: \u26d4 Daily limit (13)\n\u2800\n\u2800",
-            "Today vs start of day: -1.80% (auto-buy pauses at -5.0%)\nMoney in coins: 100% of portfolio (cap 50.0%)\nRe-buy cooldown active: JCT\nLast market scan: 9 min ago (runs every 30 min) | Queued coins: 0\nBot-tracked positions: 1 | Holdings priced: 1\n\ud83d\udd34 Last: SKYAI \u2014 PANIC | PnL $-0.01 | 0.6h ago\n\n\ud83e\udded *STRATEGY*\nEntries: TREND (RSI 42-48, price > MA5 > MA10), OVERSOLD bounce (RSI < 30),\nBREAKOUT (RSI 50-70 + volume breakout)\n\u2800\n\u2800",
-            "Protection: stop-loss 15% | trailing stop 8.0% below peak | crash guard 10.0%\nExit: RSI >= 75\nProfit taking: sell 50% at +10.7423% then stop moves to break-even\nDynamic trailing: ON (wider in strong trends, tighter when momentum fades)\nEntry safety: spread limit 0.5% | stop fails -> sell at market | scan pre-filter\nON\nNear-instant mode: ON (stays awake 270s per run)\nAuto-clear chat: every 24h\nLimits: 5 trades/day, 3.0% daily loss, 15.0% max per coin\nExtra safeguards: 4h trend check ON | BTC shock pause 3%/h | combined open risk\n\u2800\n\u2800",
-            "cap 3% | smaller buys after 2 losses in a row | parallel scan ON\n\n\ud83d\udcbc *HOLDINGS ADVICE*\n_Technical view only, not financial advice._\n\n\ud83d\udfe2 \ud83e\ude99 *WLD* \u2014 $23.07 | PnL +0.4% ($+0.09)\nAdvice: \ud83d\udfe2 HOLD\nWhy: Trend is up (price > MA5 > MA10), RSI 67\n\u274c Long-term: not suited (below 50-day average, 100-day change -31%, thin\nvolume)\n\u2800\n\u2800",
-            "\n\n\u2705 No sell advised right now. For possible new buys use /analyse.\n\n\ud83e\udde0 *AI:* Bot shows a modest portfolio ($23.13) with WLD up 0.4%, but auto\u2011buy\nis paused and daily loss is -1.80%, approaching the -5% auto\u2011buy pause\nthreshold; monitor risk limits and BTC filter status.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
-        ],
-        "i": 0,
-        "mode": "Markdown",
-        "x": [
-            {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
-            }
-        ],
-        "cmd": "/bot"
-    },
-    "out_mid": 4114,
-    "panel_mid": 4115
+    ]
 }
