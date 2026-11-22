@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935688782,
+    "last_update_id": 935688785,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -31,8 +31,8 @@
             1795332234.6212428
         ],
         "/analyse": [
-            1,
-            1795347407.014115
+            4,
+            1795347428.5805902
         ],
         "m:r:analyse": [
             4,
@@ -62,7 +62,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "2/8",
+                "text": "5/8",
                 "callback_data": "pg:x"
             },
             {
@@ -75,7 +75,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 2/8*",
+    "panel_text": "\ud83d\udcc4 *Page 5/8*",
     "out_mid": 3467,
     "pages": {
         "p": [
@@ -88,7 +88,7 @@
             "Why:\n\u2022 Short-term trend is up (price\n> MA5 > MA10)\n\u2022 RSI 59.9 is healthy (room to\nrun before overbought)\n\u2022 24h change +3.77% shows\nsteady, not extreme, momentum\n\u2022 24h volume $3.6M (liquid\nenough: above the $1M minimum)\n\u2022 Spread: 0.07% (OK for\n\u2800\n\u2800",
             "auto-buy)\n\u2022 Status: \ud83d\udd36 Potential, manual\nonly (misses scanner rules)\n\u2022 \ud83e\udde0 AI: WEAK \u2014 Fails scanner\nrules, insufficient data\n\nBuy manually with `/buy COIN\namount` if you agree.\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 1,
+        "i": 4,
         "mode": "Markdown",
         "x": [],
         "cmd": "/analyse"
