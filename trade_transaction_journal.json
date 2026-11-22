@@ -348,5 +348,15 @@
         "time": 1795351830.6277213,
         "event": "ai_portfolio_review",
         "summary": "{'portfolio_risk': 'Daily limit (8)', 'attention': [{'symbol': 'BLESS-USDT', 'action': 'hold', 'reason': 'Position is very small, recent entry with minimal profit (0.29% PnL) and stop loss not yet triggered. No clear signal to adjust.'}], 'summary': 'Overall portfolio risk is within the daily limit. The only open position (BLESS-USDT) is marginally profitable and far from its stop loss. Recommend holding until a stronger signal emerges or the stop is approached.'}"
+    },
+    {
+        "time": 1795352215.066066,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (8)', 'attention': [{'symbol': 'BLESS-USDT', 'action': 'hold', 'reason': 'Position is very small, recent entry with modest positive PnL (0.88%). Stop is far enough below entry to allow upside, but overall exposure is minimal. No immediate action required.'}], 'summary': 'Portfolio risk is within the daily limit. The only open position (BLESS-USDT) is tiny and showing a small gain. Maintain the position and monitor price relative to the stop. No new trades are recommended at this time.'}"
+    },
+    {
+        "time": 1795352215.8372328,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 52.17, 'net_pnl_usdt': 5.2917, 'recurring_patterns': {'manual_sell_all': 5, 'rsi_75_signals': 3, 'partial_profit': 3, 'panic_exits': 2, 'no_upward_trend_rotations': 2}, 'recommendations': ['Limit reliance on manual \"SELL ALL\" exits; consider predefined stop\u2011loss or take\u2011profit levels', 'Validate RSI\u201175 entries with additional confirmation signals before scaling in', 'Review panic\u2011driven exits to identify underlying volatility triggers and tighten position sizing', 'Incorporate systematic trend\u2011rotation filters to avoid low\u2011confidence 15\u2011minute signals', 'Overall, maintain a conservative stance given modest net PnL and mixed pattern performance']}"
     }
 ]
