@@ -35,7 +35,7 @@ def ai_sell_reason_allowed(reason):
   "PARTIAL PROFIT", "UNPROTECTED", "15-MINUTE NO-UPWARD-TREND ROTATION")
  return any(r.startswith(x) for x in prefixes)
 
-def ai_emergency_resume():
+def ai_emergency_resume(auto=False):
  hs=ai_emergency_state()
  if not hs.get("emergency_mode"):
   tg("ℹ️ AI emergency mode is not active.");return
@@ -43,7 +43,7 @@ def ai_emergency_resume():
   tg("⛔ Resume denied. AI must pass 3 consecutive live health checks first. Current successful checks: "+str(hs.get("consecutive_successes",0))+".");return
  hs.update({"emergency_mode":False,"trading_mode":"NORMAL","emergency_ended":time.time(),"resume_requires_user_confirmation":False})
  save(AI_HEALTH,hs)
- tg("✅ *AI RECOVERY VERIFIED — NORMAL MODE RESTORED*\nThree consecutive AI health checks passed and you confirmed /ai_resume. Existing buy settings are unchanged; normal deterministic risk checks still apply.")
+ tg("✅ *AI RECOVERY VERIFIED — NORMAL MODE RESTORED*\nThree consecutive AI health checks passed and "+("resumed automatically." if auto else "you confirmed /ai_resume.")+" Existing buy settings are unchanged; normal deterministic risk checks still apply.")
 _C={};_BAL={"t":0,"m":""};LAYOUT_ITEMS=[("tools","🧰 Tools","m:tools"),("analyse","🏆 Analyse","/analyse"),("bot","🤖 Bot","/bot"),("stats","📈 Stats","/stats"),("an","🔎 Analyse Coin","m:an"),("set","⚙️ Settings","m:set"),("hold","💼 Holdings","m:r:holdings"),("ai","🧠 Ask AI","m:ai:1"),("clear","🧹 Clear Chat","/clear"),("panic","🚨 PANIC SELL","/panic")]
 LAYOUT_DEFAULT=["tools","analyse"];LAYOUT_MAX=5
 def layout_bottom():
@@ -1231,6 +1231,9 @@ def analyse_coin(txt):
   lines=[f"📊 *ANALYSIS: {sym}*",f"Live price: {fmt(price)} USDT",f"24h change: {change:+.2f}%" if isinstance(change,(int,float)) else "24h change: N/A",f"RSI(14): {fmt(rsi)} — "+("Overbought" if rsi is not None and rsi>=70 else "Oversold" if rsi is not None and rsi<=30 else "Neutral" if rsi is not None else "N/A"),f"MA5: {fmt(ma5)} | MA10: {fmt(ma10)} | MA20: {fmt(ma20)}",f"MACD: {fmt(macd)} | Signal: {fmt(signal)} | Histogram: {fmt(hist)}",f"ATR(14): {fmt(atr)} ({(atr/price*100):.2f}% of price)" if atr is not None and price else "ATR(14): N/A",f"Last hour vol vs 20h avg: {(lastvol/avgvol):.2f}x" if avgvol else "Volume: N/A",f"Bid/ask spread: {spread:.3f}%" if spread is not None else "Bid/ask spread: N/A",f"Technical checks: {score}/4",f"Assessment: *{verdict}*"]
   tg("\n".join(lines))
  except Exception as e:tg(f"❌ Could not analyse {sym}: {e}")
+def _ai_reason(model):
+ # gpt-oss models spend max_tokens on hidden reasoning; keep it low so the JSON answer is not cut off
+ return {'reasoning_effort':'low'} if 'gpt-oss' in str(model) else {}
 def ai_stage(stage, payload, ttl=90, max_tokens=500):
  """Structured Groq AI analysis. Advisory only; deterministic guards remain authoritative."""
  api_key=os.environ.get('GROQ_API_KEY','').strip() or GROQ_API_KEY
@@ -1255,7 +1258,7 @@ def ai_stage(stage, payload, ttl=90, max_tokens=500):
    "Be conservative and explicitly represent uncertainty. Schema: "+schemas.get(stage,'Return a concise JSON object with summary and reason.')+
    " Stage="+stage+". Input JSON="+body[:12000])
   r=requests.post('https://api.groq.com/openai/v1/chat/completions',headers={'Authorization':'Bearer '+api_key,'Content-Type':'application/json'},
-   json={'model':model,'messages':[{'role':'system','content':'Return valid compact JSON only.'},{'role':'user','content':prompt}], 'temperature':0.1,'max_tokens':max_tokens},timeout=18)
+   json={'model':model,'messages':[{'role':'system','content':'Return valid compact JSON only.'},{'role':'user','content':prompt}], 'temperature':0.1,'max_tokens':max(max_tokens,1024),**_ai_reason(model)},timeout=18)
   if not r.ok:raise RuntimeError('Groq HTTP '+str(r.status_code))
   content=r.json().get('choices',[{}])[0].get('message',{}).get('content','')
   content=str(content).strip();start=content.find('{');end=content.rfind('}')
@@ -1294,7 +1297,7 @@ def ai_health_check(force=False):
  model=os.environ.get('GROQ_MODEL','').strip() or GROQ_MODEL or 'openai/gpt-oss-120b';started=time.time()
  try:
   r=requests.post('https://api.groq.com/openai/v1/chat/completions',headers={'Authorization':'Bearer '+key,'Content-Type':'application/json'},
-   json={'model':model,'messages':[{'role':'system','content':'Return valid JSON only.'},{'role':'user','content':'AI health self-test. Return exactly this JSON object: {"status":"ok","test":"passed"}'}], 'temperature':0,'max_tokens':40},timeout=12)
+   json={'model':model,'messages':[{'role':'system','content':'Return valid JSON only.'},{'role':'user','content':'AI health self-test. Return exactly this JSON object: {"status":"ok","test":"passed"}'}], 'temperature':0,'max_tokens':512,**_ai_reason(model)},timeout=12)
   if not r.ok:raise RuntimeError('Groq HTTP '+str(r.status_code))
   content=str(r.json().get('choices',[{}])[0].get('message',{}).get('content','')).strip();a=content.find('{');b=content.rfind('}')
   if a<0 or b<=a:raise ValueError('AI health response was not JSON')
@@ -1303,8 +1306,9 @@ def ai_health_check(force=False):
   previous=hs.get('status');hs.update({'last_check':time.time(),'last_success':time.time(),'status':'healthy','model':model,'latency_ms':round((time.time()-started)*1000),'last_error':'','consecutive_failures':0,'consecutive_successes':int(hs.get('consecutive_successes',0))+1,'last_response_valid':True})
   save(AI_HEALTH,hs)
   if previous not in ('healthy',None) or hs.get('alerted_status') not in ('healthy',None):
-   tg('✅ *AI HEALTH RESTORED*\nGroq connection and structured-response self-test passed. Emergency SELL-ONLY mode remains latched; after 3 consecutive successful checks, send /ai_resume to restore normal trading.')
+   tg('✅ *AI HEALTH RESTORED*\nGroq connection and structured-response self-test passed. Emergency SELL-ONLY mode remains latched; after 3 consecutive successful checks, normal trading resumes automatically.')
   hs['alerted_status']='healthy';save(AI_HEALTH,hs)
+  if hs.get('emergency_mode') and int(hs.get('consecutive_successes',0))>=3:ai_emergency_resume(True)
  except Exception as e:
   count=int(hs.get('consecutive_failures',0))+1;previous=hs.get('status')
   hs.update({'last_check':time.time(),'status':'unhealthy','model':model,'latency_ms':round((time.time()-started)*1000),'last_error':str(e)[:220],'consecutive_failures':count,'consecutive_successes':0,'last_response_valid':False})
@@ -2101,7 +2105,7 @@ MSG={"ai_info":"🧠 *AI ANALYST*\nTo ask the AI a question, type:\n`/ai <your q
 _UI={"mid":None,"edit_mode":False,"panel_used":False}
 _B=lambda t,c:{"text":t,"callback_data":c}
 _MENU_BTN=[_B("⬅️ Menu","m:menu")]
-RUN={"scan":"/scan","sync":"/sync","holdings":"/holdings","analyse":"/analyse","alerts":"/alerts","cancelalerts":"/cancel_alerts","dust":"/dust","bot":"/bot","audit":"/audit","stats":"/stats","clear":"/clear","pause":"/pause","resume":"/resume","cancel":"/cancel","pricealert":"/alerts"}
+RUN={"scan":"/scan","sync":"/sync","holdings":"/holdings","analyse":"/analyse","alerts":"/alerts","cancelalerts":"/cancel_alerts","dust":"/dust","bot":"/bot","audit":"/audit","stats":"/stats","clear":"/clear","pause":"/pause","resume":"/resume","cancel":"/cancel","pricealert":"/alerts","airesume":"/ai_resume"}
 AI_Q={"1":"Give me a market overview.","2":"Review my current holdings and say which to hold or sell.","3":"Which single coin looks best to buy right now and why?","4":"What is the biggest risk in my portfolio right now?"}
 def ui_send(text,rows):_panel(text,rows)
 def _grid(btns,n=3):return [btns[i:i+n] for i in range(0,len(btns),n)]
@@ -2233,6 +2237,7 @@ def ui_cb(t):
               [_B("💸 Sell","m:sell"),_B("🔔 Price Alert","m:al")],
               [_B("📈 Gainers","m:r:gain"),_B("📉 Losers","m:r:lose")],
               [_B("📊 Dashboard","m:dash"),_B("🧩 Layout","m:lay")],
+              [_B("🧠 Resume AI","m:r:airesume")],
               [_B("⬅️ Main Menu","m:menu")]
             ])
   elif a=="dash":
