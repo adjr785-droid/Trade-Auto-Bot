@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935688729,
+    "last_update_id": 935688730,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -63,7 +63,7 @@
             "profit, crash guard, time stop,\nRSI exit, unprotected-position\nexit and the existing 15-minute\nno-upward-trend rule). No\nreplacement buys. Proceeds\nremain in USDT.\nReason: Groq health self-test\nfailed: AI health response was\nnot JSON\nAI recovery does NOT\n\u2800\n\u2800",
             "automatically resume trading.\nYou will be notified.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 0,
+        "i": 1,
         "mode": "Markdown",
         "x": [],
         "cmd": null
@@ -76,7 +76,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "1/3",
+                "text": "2/3",
                 "callback_data": "pg:x"
             },
             {
@@ -89,5 +89,5 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/3*"
+    "panel_text": "\ud83d\udcc4 *Page 2/3*"
 }
