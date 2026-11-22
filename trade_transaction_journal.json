@@ -803,5 +803,15 @@
             "lesson": "Implement stricter emotional controls and adhere to predefined exit criteria (e.g., stop\u2011loss thresholds) to avoid panic\u2011driven sells. Ensure full position closure when exit signals are met, or use automated order execution to remove manual bias. Review risk parameters to align with volatility of the asset.",
             "confidence": "medium"
         }
+    },
+    {
+        "time": 1795378449.9429955,
+        "event": "ai_manual_buy_review",
+        "symbol": "WLD-USDT",
+        "review": {
+            "risk_level": "high",
+            "warning": "RSI is elevated (67) and market filter indicates only 20% of coins are up today, suggesting bearish sentiment. No existing position and BTC filter is inactive, increasing exposure risk.",
+            "summary": "Given the high RSI and unfavorable market filter, proceeding with a manual buy of WLD-USDT at $0.2379 for $23.01 carries high risk. Consider waiting for more favorable conditions."
+        }
     }
 ]
