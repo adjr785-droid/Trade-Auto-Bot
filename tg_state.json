@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935688952,
+    "last_update_id": 935688954,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -64,71 +64,47 @@
     "panel_rows": [
         [
             {
-                "text": "scan_interval_minutes = 30.0",
-                "callback_data": "m:k:scan_interval_minutes"
+                "text": "dynamic_auto_buy_enabled = Tru",
+                "callback_data": "m:k:dynamic_auto_buy_enabled"
             },
             {
-                "text": "auto_clear_hours = 24.0",
-                "callback_data": "m:k:auto_clear_hours"
+                "text": "auto_buy_reserve_pct = 5.0",
+                "callback_data": "m:k:auto_buy_reserve_pct"
             }
         ],
         [
             {
-                "text": "live_mode_seconds = 270",
-                "callback_data": "m:k:live_mode_seconds"
+                "text": "dynamic_auto_buy_max_pct = 20.",
+                "callback_data": "m:k:dynamic_auto_buy_max_pct"
             },
             {
-                "text": "mtf_confirm = True",
-                "callback_data": "m:k:mtf_confirm"
+                "text": "dynamic_auto_buy_min_usdt = 1.",
+                "callback_data": "m:k:dynamic_auto_buy_min_usdt"
             }
         ],
         [
             {
-                "text": "btc_shock_pct = 3.0",
-                "callback_data": "m:k:btc_shock_pct"
+                "text": "dynamic_auto_buy_max_usdt = 0.",
+                "callback_data": "m:k:dynamic_auto_buy_max_usdt"
             },
             {
-                "text": "max_open_risk_pct = 3.0",
-                "callback_data": "m:k:max_open_risk_pct"
+                "text": "guardian_enabled = True",
+                "callback_data": "m:k:guardian_enabled"
             }
         ],
         [
             {
-                "text": "loss_streak_trigger = 2",
-                "callback_data": "m:k:loss_streak_trigger"
+                "text": "guardian_audit_interval_minute",
+                "callback_data": "m:k:guardian_audit_interval_minutes"
             },
             {
-                "text": "loss_streak_size_factor = 0.5",
-                "callback_data": "m:k:loss_streak_size_factor"
-            }
-        ],
-        [
-            {
-                "text": "scan_parallel = True",
-                "callback_data": "m:k:scan_parallel"
-            },
-            {
-                "text": "page_chars = 600",
-                "callback_data": "m:k:page_chars"
-            }
-        ],
-        [
-            {
-                "text": "page_lines = 12",
-                "callback_data": "m:k:page_lines"
-            },
-            {
-                "text": "page_width = 32",
-                "callback_data": "m:k:page_width"
+                "text": "max_portfolio_correlation = 0.",
+                "callback_data": "m:k:max_portfolio_correlation"
             }
         ],
         [
             {
                 "text": "\u25c0\ufe0f Prev",
-                "callback_data": "m:sp:2"
-            },
-            {
-                "text": "Next \u25b6\ufe0f",
                 "callback_data": "m:sp:4"
             }
         ],
@@ -139,7 +115,7 @@
             }
         ]
     ],
-    "panel_text": "\u2699\ufe0f *SETTINGS* (page 4/6)\nTap a setting to change it.",
+    "panel_text": "\u2699\ufe0f *SETTINGS* (page 6/6)\nTap a setting to change it.",
     "out_mid": 3634,
     "kb_mid": 3636,
     "panel_mid": 3638
