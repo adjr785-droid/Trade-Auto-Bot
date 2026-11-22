@@ -33,8 +33,8 @@ def activate_ai_emergency(reason):
 def ai_sell_reason_allowed(reason):
  """Allow only the bot's predefined, deterministic exit conditions in emergency mode."""
  r=str(reason or "").strip().upper()
- prefixes=("SL HIT", "STOP LOSS", "TRAILING STOP", "TIME STOP", "RSI ", "CRASH GUARD",
-  "PARTIAL PROFIT", "UNPROTECTED", "MOMENTUM NO-UPWARD-TREND ROTATION")
+ prefixes=("SL HIT", "STOP LOSS", "TRAILING STOP", "RSI ", "CRASH GUARD",
+  "PARTIAL PROFIT", "UNPROTECTED")
  return any(r.startswith(x) for x in prefixes)
 
 def ai_emergency_resume(auto=False):
@@ -437,9 +437,11 @@ def save(f,d):
   os.replace(f+".tmp",f)
  except Exception as e:print(f"SAVE ERR {f}: {e}")
 def cfg():
- d={"rsi_min":42,"rsi_max":48,"stop_loss_pct":5.0,"auto_buy_enabled":True,"auto_buy_amount_usdt":10.0,"max_tokens_before_consolidation":3,"max_hold_hours":48,"trail_pct":8.0,"crash_guard_pct":10.0,"rsi_exit":75,"btc_rsi_min":50,"risk_per_trade_pct":1.0,"max_daily_loss_pct":3.0,"max_portfolio_exposure_pct":50.0,"max_position_pct":15.0,"max_daily_trades":5,"max_spread_pct":0.5,"auto_mode_v1":False,"rebuy_cooldown_hours":6.0,"atr_stop_enabled":True,"atr_stop_mult":2.0,"atr_stop_min_pct":3.0,"atr_stop_max_pct":10.0,"market_filter_enabled":True,"btc_trend_hours":50,"min_breadth_pct":30.0,"offline_alert_hours":3.0,"daily_summary_hour_utc":20,"max_daily_drawdown_pct":5.0,"partial_tp_pct":5.0,"partial_tp_fraction":0.5,"dynamic_trail":True,"sell_if_stop_fails":True,"scan_prefilter":True,"cleanup_hours":24.0,"scan_interval_minutes":15.0,"auto_clear_hours":24.0,"live_mode_seconds":270,"mtf_confirm":True,"btc_shock_pct":3.0,"max_open_risk_pct":3.0,"loss_streak_trigger":2,"loss_streak_size_factor":0.5,"scan_parallel":True,"page_chars":600,"page_lines":12,"page_width":32,"output_stale_minutes":5,"smart_risk_enabled":True,"max_coin_exposure_pct":20.0,"max_sector_exposure_pct":35.0,"liquidity_depth_usdt":5000.0,"max_book_imbalance_pct":85.0,"regime_risk_factor":0.65,"execution_slippage_pct":0.35,"stop_watchdog_enabled":True,"portfolio_stress_pct":12.0,"signal_expiry_minutes":30,"adaptive_risk_enabled":True,"dynamic_auto_buy_enabled":True,"auto_buy_reserve_pct":5.0,"dynamic_auto_buy_max_pct":20.0,"dynamic_auto_buy_min_usdt":1.02,"dynamic_auto_buy_max_usdt":0.0,"guardian_enabled":True,"guardian_audit_interval_minutes":15,"max_portfolio_correlation":0.85,"momentum_1h_enabled":True,"mom_1h_min_pct":0.5,"mom_1h_max_pct":6.0,"max_24h_pct":100.0,"near_miss_alerts":True,"near_miss_rsi_margin":3.0,"near_miss_1h_margin":0.5,"near_miss_cooldown_minutes":60,"near_miss_max_per_scan":3,"radar_max":30,"radar_rsi_margin":10.0,"momentum_watch_minutes":60,"rotation_retry_hours":6.0}
+ d={"rsi_min":42,"rsi_max":48,"stop_loss_pct":5.0,"auto_buy_enabled":True,"auto_buy_amount_usdt":10.0,"max_tokens_before_consolidation":3,"trail_pct":8.0,"crash_guard_pct":10.0,"rsi_exit":75,"btc_rsi_min":50,"risk_per_trade_pct":1.0,"max_daily_loss_pct":3.0,"max_portfolio_exposure_pct":50.0,"max_position_pct":15.0,"max_daily_trades":5,"max_spread_pct":0.5,"auto_mode_v1":False,"rebuy_cooldown_hours":6.0,"atr_stop_enabled":True,"atr_stop_mult":2.0,"atr_stop_min_pct":3.0,"atr_stop_max_pct":10.0,"market_filter_enabled":True,"btc_trend_hours":50,"min_breadth_pct":30.0,"offline_alert_hours":3.0,"daily_summary_hour_utc":20,"max_daily_drawdown_pct":5.0,"partial_tp_pct":5.0,"partial_tp_fraction":0.5,"dynamic_trail":True,"sell_if_stop_fails":True,"scan_prefilter":True,"cleanup_hours":24.0,"scan_interval_minutes":15.0,"auto_clear_hours":24.0,"live_mode_seconds":270,"mtf_confirm":True,"btc_shock_pct":3.0,"max_open_risk_pct":3.0,"loss_streak_trigger":2,"loss_streak_size_factor":0.5,"scan_parallel":True,"page_chars":600,"page_lines":12,"page_width":32,"output_stale_minutes":5,"smart_risk_enabled":True,"max_coin_exposure_pct":20.0,"max_sector_exposure_pct":35.0,"liquidity_depth_usdt":5000.0,"max_book_imbalance_pct":85.0,"regime_risk_factor":0.65,"execution_slippage_pct":0.35,"stop_watchdog_enabled":True,"portfolio_stress_pct":12.0,"signal_expiry_minutes":30,"adaptive_risk_enabled":True,"dynamic_auto_buy_enabled":True,"auto_buy_reserve_pct":5.0,"dynamic_auto_buy_max_pct":20.0,"dynamic_auto_buy_min_usdt":1.02,"dynamic_auto_buy_max_usdt":0.0,"guardian_enabled":True,"guardian_audit_interval_minutes":15,"max_portfolio_correlation":0.85,"momentum_1h_enabled":True,"mom_1h_min_pct":0.5,"mom_1h_max_pct":6.0,"max_24h_pct":100.0,"near_miss_alerts":True,"near_miss_rsi_margin":3.0,"near_miss_1h_margin":0.5,"near_miss_cooldown_minutes":60,"near_miss_max_per_scan":3,"radar_max":30,"radar_rsi_margin":10.0}
  s=load(CFG,d)
  for k,v in d.items():s.setdefault(k,v)
+ for _k in ('max_hold_hours','momentum_watch_minutes','rotation_retry_hours'):
+  if _k in s:s.pop(_k,None);save(CFG,s)
  if not s.get('auto_mode_v1'):s['auto_buy_enabled']=True;s['auto_mode_v1']=True;save(CFG,s)
  return s
 def in_cd(k,s=5):return time.time()-load(CD,{}).get(k,0)<s
@@ -867,10 +869,10 @@ def cmd_buy(txt):
   ob=B('total',c) if old else 0.0;f,a=m_buy(f"{c}/USDT",amt);sl=sl_pct(sym,old) if old else sl_pct(sym)
   if old:
    e0=old['entry_price'];avg=round((ob*e0+f*a)/(ob+f),6) if ob>0 else round(a,6)
-   old.update(entry_price=avg,safe_zone=avg,stop_loss=round(avg*(1-sl/100),6),last_price=a,peak_price=max(old.get('peak_price',avg),a),opened_at=time.time(),purchase_source='MANUAL',momentum_watch_started=time.time());db[sym]=old;save(DB,db);ok=place_trailing_sl(sym,free_qty(sym,ob+f))
+   old.update(entry_price=avg,safe_zone=avg,stop_loss=round(avg*(1-sl/100),6),last_price=a,peak_price=max(old.get('peak_price',avg),a),opened_at=time.time(),purchase_source='MANUAL');db[sym]=old;save(DB,db);ok=place_trailing_sl(sym,free_qty(sym,ob+f))
    tg(f"➕ *DCA ADDED:* {c} @ {a:.6f}\nSpent: ${amt:.2f}\nNew avg entry: {avg:.6f}\n"+(STOP_OK if ok else STOP_NO))
   else:
-   db[sym]=NP(round(a,6),round(a*(1-sl/100),6),sl);db[sym]['strategy']="MANUAL";db[sym]['purchase_source']='MANUAL';db[sym]['opened_at']=time.time();db[sym]['momentum_watch_started']=time.time();save(DB,db);ok=place_trailing_sl(sym,free_qty(sym,f))
+   db[sym]=NP(round(a,6),round(a*(1-sl/100),6),sl);db[sym]['strategy']="MANUAL";db[sym]['purchase_source']='MANUAL';db[sym]['opened_at']=time.time();save(DB,db);ok=place_trailing_sl(sym,free_qty(sym,f))
    tg(f"✅ *BOUGHT:* {c} @ {a:.6f}\nSpent: ${amt:.2f}\n"+(STOP_OK if ok else STOP_NO))
   if ai_manual:
    journal_event('ai_manual_buy_review',symbol=sym,review=ai_manual)
@@ -1232,7 +1234,7 @@ def cmd_status():
  expo=coin_val/total*100 if total>0 else 0.0
  cdl=[k[8:].replace("-USDT","") for k,v in load(CD,{}).items() if k.startswith("stopout_") and now-v<float(s.get('rebuy_cooldown_hours',6.0))*3600]
  sysmsg=["🤖 *BOT*"]+([_sl] if (_sl:=since_last(total,db)) else [])+["Exchange connection: ✅ OK",f"Portfolio: ${total:.2f} USDT"+(f" | ₦{total*r:,.0f}" if r else ""),f"USDT cash: ${usdt:.2f} (free ${usdt_free:.2f})",f"Auto-buy: {'ON' if s.get('auto_buy_enabled') else 'PAUSED'} (dynamic allocation; legacy target ${s.get('auto_buy_amount_usdt')})",f"BTC safety filter: {btc}",f"Market filter: {mf}",f"Risk controls: {'✅ trading allowed' if ok else '⛔ '+why}",f"Today vs start of day: {ddp:+.2f}% (auto-buy pauses at -{s.get('max_daily_drawdown_pct')}%)",f"Money in coins: {expo:.0f}% of portfolio (cap {s.get('max_portfolio_exposure_pct')}%)",f"Re-buy cooldown active: {', '.join(cdl) if cdl else 'none'}",f"Last market scan: {ago} (runs every {float(s.get('scan_interval_minutes',15)):g} min) | Queued coins: {len(q)}",f"Bot-tracked positions: {len(db)} | Holdings priced: {len(held)}",last_trade_line().strip(),"",
-      "🧭 *STRATEGY*",f"Entries: TREND (RSI {s.get('rsi_min')}-{s.get('rsi_max')}, price > MA5 > MA10), OVERSOLD bounce (RSI < 30), BREAKOUT (RSI 50-70 + volume breakout)",f"Protection: stop-loss {s.get('stop_loss_pct')}% | trailing stop {s.get('trail_pct')}% below peak | crash guard {s.get('crash_guard_pct')}%",f"Exit: RSI >= {s.get('rsi_exit')} or max hold {s.get('max_hold_hours')}h",f"Profit taking: sell {float(s.get('partial_tp_fraction',0.5))*100:.0f}% at +{s.get('partial_tp_pct')}% then stop moves to break-even" if float(s.get('partial_tp_pct',0) or 0)>0 else "Profit taking: partial sell OFF",f"Dynamic trailing: {'ON (wider in strong trends, tighter when momentum fades)' if s.get('dynamic_trail',True) else 'OFF'}",f"Entry safety: spread limit {s.get('max_spread_pct')}% | stop fails -> {'sell at market' if s.get('sell_if_stop_fails',True) else 'alert only'} | scan pre-filter {'ON' if s.get('scan_prefilter',True) else 'OFF'}",(f"Near-instant mode: ON (stays awake {float(s.get('live_mode_seconds',270)):g}s per run)" if float(s.get('live_mode_seconds',270) or 0)>0 else "Near-instant mode: OFF"),f"Auto-clear chat: every {float(s.get('auto_clear_hours',24)):g}h" if float(s.get('auto_clear_hours',24) or 0)>0 else "Auto-clear chat: OFF",f"Limits: {s.get('max_daily_trades')} trades/day, {s.get('max_daily_loss_pct')}% daily loss, {s.get('max_position_pct')}% max per coin",f"Extra safeguards: 4h trend check {'ON' if s.get('mtf_confirm',True) else 'OFF'} | BTC shock pause {float(s.get('btc_shock_pct',3.0) or 0):g}%/h | combined open risk cap {float(s.get('max_open_risk_pct',3.0) or 0):g}% | smaller buys after {int(s.get('loss_streak_trigger',2) or 0)} losses in a row | parallel scan {'ON' if s.get('scan_parallel',True) else 'OFF'}"]
+      "🧭 *STRATEGY*",f"Entries: TREND (RSI {s.get('rsi_min')}-{s.get('rsi_max')}, price > MA5 > MA10), OVERSOLD bounce (RSI < 30), BREAKOUT (RSI 50-70 + volume breakout)",f"Protection: stop-loss {s.get('stop_loss_pct')}% | trailing stop {s.get('trail_pct')}% below peak | crash guard {s.get('crash_guard_pct')}%",f"Exit: RSI >= {s.get('rsi_exit')}",f"Profit taking: sell {float(s.get('partial_tp_fraction',0.5))*100:.0f}% at +{s.get('partial_tp_pct')}% then stop moves to break-even" if float(s.get('partial_tp_pct',0) or 0)>0 else "Profit taking: partial sell OFF",f"Dynamic trailing: {'ON (wider in strong trends, tighter when momentum fades)' if s.get('dynamic_trail',True) else 'OFF'}",f"Entry safety: spread limit {s.get('max_spread_pct')}% | stop fails -> {'sell at market' if s.get('sell_if_stop_fails',True) else 'alert only'} | scan pre-filter {'ON' if s.get('scan_prefilter',True) else 'OFF'}",(f"Near-instant mode: ON (stays awake {float(s.get('live_mode_seconds',270)):g}s per run)" if float(s.get('live_mode_seconds',270) or 0)>0 else "Near-instant mode: OFF"),f"Auto-clear chat: every {float(s.get('auto_clear_hours',24)):g}h" if float(s.get('auto_clear_hours',24) or 0)>0 else "Auto-clear chat: OFF",f"Limits: {s.get('max_daily_trades')} trades/day, {s.get('max_daily_loss_pct')}% daily loss, {s.get('max_position_pct')}% max per coin",f"Extra safeguards: 4h trend check {'ON' if s.get('mtf_confirm',True) else 'OFF'} | BTC shock pause {float(s.get('btc_shock_pct',3.0) or 0):g}%/h | combined open risk cap {float(s.get('max_open_risk_pct',3.0) or 0):g}% | smaller buys after {int(s.get('loss_streak_trigger',2) or 0)} losses in a row | parallel scan {'ON' if s.get('scan_parallel',True) else 'OFF'}"]
  tg("\n".join(sysmsg))
  if not held:tg("🛑 *HOLDINGS ADVICE*\nNo priced coin holdings right now.");return
  out=["💼 *HOLDINGS ADVICE*","_Technical view only, not financial advice._",""];sells=0
@@ -1303,7 +1305,6 @@ def ai_stage(stage, payload, ttl=90, max_tokens=500, soft=False):
    'portfolio_review':'Return keys portfolio_risk, attention as an array of {symbol, action, reason}, summary. Advice only.',
    'buy_gate':'Return keys decision (BUY or VETO), reason. VETO only for a clear material risk in supplied data.',
    'manual_buy_review':'Return keys risk_level, warning, summary. Advisory only; the user explicitly requested this manual order.',
-   'rotation_candidate':'Return keys decision (BUY or VETO), reason. VETO only for a clear material risk in supplied data.',
    'sell_review':'Return keys review, lesson, confidence. This is post-exit analysis only.',
    'analyse_review':'Return reviews as an array of {symbol, verdict (OK, CAUTION or WEAK), reason (max 14 words)}, one per candidate. Advisory only; the user decides manually and may buy coins that miss some filters.',
    'command_review':'Return key insight: one plain-language sentence (max 35 words) that interprets the command output using its specific numbers and flags anything needing attention. Advisory only.',
@@ -1444,10 +1445,6 @@ def manage():
   lvl,why=max(c,key=lambda x:x[0])
   if lv<=lvl:
    if sell(sym,1.0,why):db.pop(sym,None);save(DB,db)
-   continue
-  mh=s.get('max_hold_hours',48)
-  if (time.time()-d['opened_at'])/3600>mh and inc<=1.0:
-   if sell(sym,1.0,f"TIME STOP {mh}h ({inc:+.1f}%)"):db.pop(sym,None);save(DB,db)
    continue
   if r and s['rsi_exit']>0 and r>=s['rsi_exit'] and sell(sym,1.0,f"RSI {s['rsi_exit']}"):db.pop(sym,None);save(DB,db);continue
   ptp=float(s.get('partial_tp_pct',0) or 0);pf=float(s.get('partial_tp_fraction',0.5) or 0)
@@ -1840,120 +1837,10 @@ def exec_q():
    journal_event("buy_fill_verified",symbol=sym,filled=f,average=a,spend_estimate=f*a)
    mxs=round(a*(1-pct/100),6);sl=qd.get('sl') or mxs
    if sl>=a or sl>mxs:sl=mxs
-   db[sym]=NP(round(a,6),sl,pct);db[sym]['strategy']=qd.get('type','OTHER');db[sym]['purchase_source']='AUTO';db[sym]['opened_at']=time.time();db[sym]['momentum_watch_started']=time.time();save(DB,db);ok=place_trailing_sl(sym,free_qty(sym,f)) or protect_retry(sym,f);tg(f"🛒 *EXECUTED — DYNAMIC AUTO-BUY!*\n{sym}|💵{sp:.2f}@{a:.6f}\nAllocation: score {alloc_meta.get('score_factor',0):.2f}x, setup {alloc_meta.get('setup_factor',0):.2f}x, volatility {alloc_meta.get('vol_factor',0):.2f}x, regime {alloc_meta.get('regime_factor',0):.2f}x\n"+(STOP_OK if ok else STOP_NO))
+   db[sym]=NP(round(a,6),sl,pct);db[sym]['strategy']=qd.get('type','OTHER');db[sym]['purchase_source']='AUTO';db[sym]['opened_at']=time.time();save(DB,db);ok=place_trailing_sl(sym,free_qty(sym,f)) or protect_retry(sym,f);tg(f"🛒 *EXECUTED — DYNAMIC AUTO-BUY!*\n{sym}|💵{sp:.2f}@{a:.6f}\nAllocation: score {alloc_meta.get('score_factor',0):.2f}x, setup {alloc_meta.get('setup_factor',0):.2f}x, volatility {alloc_meta.get('vol_factor',0):.2f}x, regime {alloc_meta.get('regime_factor',0):.2f}x\n"+(STOP_OK if ok else STOP_NO))
    if not ok and s.get('sell_if_stop_fails',True):unprotected_exit(sym,db)
    q.pop(sym,None);save(QF,q);ub=B('free','USDT');time.sleep(2);break
  except Exception as e:tg(f"⚠️ *QUEUE FAILED:* `{e}`")
-def asset_has_upward_momentum(sym, entry):
- """Use closed 1m candles; require both positive 15m direction and price above entry."""
- try:
-  candles=ex.fetch_ohlcv(S(sym),"1m",limit=17)
-  closed=candles[:-1] if len(candles)>=3 else candles
-  if len(closed)<12:return None,"Insufficient 1m candles to judge momentum safely."
-  closes=[float(x[4]) for x in closed[-15:] if float(x[4])>0]
-  if len(closes)<10:return None,"Insufficient valid 1m closes."
-  px=live(sym)
-  if not px or entry<=0:return None,"Live price unavailable."
-  rising=closes[-1]>closes[0] and closes[-1]>sum(closes[-5:])/5 and px>entry
-  return rising,f"15m move {((closes[-1]/closes[0])-1)*100:+.2f}%; live vs entry {((px/entry)-1)*100:+.2f}%"
- except Exception as e:return None,f"Momentum data unavailable: {str(e)[:120]}"
-def replace_with_best_setup(origin_source, sold_symbol, quiet=False):
- """Replacement purchases always require the complete Auto-Buy rules, regardless of entry origin."""
- s=cfg();_t=(lambda *a,**k:None) if quiet else tg
- if btc_blocked(s) or btc_shock(s):
-  _t("⏸ Replacement buy skipped: BTC safety filter is active. Proceeds remain in USDT until a qualifying Auto-Buy opportunity appears.");return
- if not s.get("auto_buy_enabled",True):
-  _t("⏸ Replacement buy skipped: Auto-buy is paused; existing risk settings remain in force.");return
- guardian_ok,guardian_reason=guardian_audit()
- if not guardian_ok:_t(f"⛔ Replacement buy blocked by Guardian: {guardian_reason}");return
- allowed,reason=risk_controls()
- if not allowed:_t(f"⛔ Replacement buy blocked by risk controls: {reason}");return
- mf=market_filter(s)
- if mf:_t(f"⏸ Replacement buy skipped: market filter: {mf}");return
- db=load(DB);cands=rank_setups(exclude=set(db)|{sold_symbol})
- if not cands:_t("🔎 No replacement bought: market setup scan returned no candidates.");return
- cand=next((x for x in cands if x.get("full") and x.get("sym") not in db),None)
- if not cand:_t("🔎 No replacement bought: no coin currently passes a complete TREND, OVERSOLD or BREAKOUT setup.");return
- sym=cand["sym"];sp=spread_pct(sym);lim=float(s.get("max_spread_pct",0.5))
- if sp is None or sp>lim:_t(f"⏸ Replacement buy skipped: {sym} spread unavailable or above {lim:g}%.");return
- if s.get("smart_risk_enabled",True):
-  ok,why=execution_quality(sym,s)
-  if not ok:_t(f"⏸ Replacement buy skipped: {why}");return
-  ok,why=portfolio_correlation_guard(sym,float(s.get("max_portfolio_correlation",0.85)))
-  if not ok:_t(f"⏸ Replacement buy skipped: {why}");return
- ub=B("free","USDT")*(1-max(0,min(50,float(s.get("auto_buy_reserve_pct",5))))/100)
- if ub<1.02:_t("⏸ Replacement buy skipped: insufficient free USDT after reserve.");return
- qd={"type":cand.get("setup","ROTATION"),"score":float(cand.get("pts",0)),"timestamp":time.time(),"sl":None}
- pct=sl_pct(sym);price=live(sym)
- if not price:_t("⏸ Replacement buy skipped: no live price.");return
- spend,meta=dynamic_auto_buy_budget(sym,qd,price,price*(1-pct/100),ub,s)
- if spend<1.02:_t("⏸ Replacement buy skipped: dynamic risk allocation is below the minimum order.");return
- impact_ok,impact,impact_reason=estimate_market_impact(sym,spend)
- if not impact_ok or impact is None or impact>float(s.get("execution_slippage_pct",0.35)):
-  _t(f"⏸ Replacement buy skipped: {impact_reason if not impact_ok else f'estimated impact {impact:.3f}% too high'}");return
- ai=ai_stage('rotation_candidate',{'symbol':sym,'setup':cand.get('setup'),'score':cand.get('pts'),'price':price,
-  'spread_pct':sp,'estimated_impact_pct':impact,'spend_usdt':spend,'btc_filter':'PASS','market_filter':'PASS',
-  'risk_controls':'PASS','origin_of_sold_position':origin_source},ttl=120,max_tokens=250)
- if ai and ai.get('decision') not in ('BUY','ALLOW','PROCEED'):
-  _t(f"⏸ Replacement buy skipped by AI review: {str(ai.get('reason','candidate not approved'))[:180]}. Proceeds remain in USDT.");journal_event('ai_rotation_veto',symbol=sym,ai=ai);return
- if ai:journal_event('ai_rotation_approved',symbol=sym,ai=ai)
- try:
-  journal_event("momentum_rotation_buy_submitted",symbol=sym,origin_source=origin_source,spend_usdt=spend,btc_filter_bypassed=False)
-  filled,avg=m_buy(S(sym),spend)
-  if filled<=0 or avg<=0:raise RuntimeError("replacement fill not verified")
-  newdb=load(DB);newdb[sym]=NP(round(avg,6),round(avg*(1-pct/100),6),pct);newdb[sym].update(strategy=cand.get("setup","ROTATION"),purchase_source="AUTO",opened_at=time.time(),momentum_watch_started=time.time(),rotation_from=sold_symbol);save(DB,newdb)
-  protected=place_trailing_sl(sym,free_qty(sym,filled)) or protect_retry(sym,filled)
-  journal_event("momentum_rotation_buy_verified",symbol=sym,filled=filled,average=avg,origin_source=origin_source,btc_filter_bypassed=False)
-  tg(f"🔁 *ROTATION BUY VERIFIED*\n{sym} @ {avg:.8g} | Spend ${spend:.2f}\nSetup: {cand.get('setup')} | Origin: {origin_source} | BTC bypass: NO (full Auto-Buy filters required)\n"+(STOP_OK if protected else STOP_NO))
-  if not protected and s.get("sell_if_stop_fails",True):unprotected_exit(sym,newdb)
-  return True
- except Exception as e:
-  breaker_failure(f"ROTATION BUY {sym}: {e}");journal_event("momentum_rotation_buy_failed",symbol=sym,error=str(e)[:220]);tg(f"❌ Replacement buy failed for {sym}: {str(e)[:180]}")
-def rotation_retry():
- # After a momentum sale with no qualifying replacement yet: keep looking so the USDT does not sit idle.
- st=load(ST,{});pend=st.get("rot_pending")
- if not pend:return
- hrs=float(cfg().get("rotation_retry_hours",6.0) or 0)
- if hrs<=0 or time.time()-float(pend.get("since",0))>hrs*3600:
-  st.pop("rot_pending",None);save(ST,st)
-  tg(f"⌛ *ROTATION RETRY ENDED*\nNo coin passed every auto-buy check within {hrs:g} hours, so the proceeds from {pend.get('sold')} stay in USDT. Tap Analyse to look manually.");return
- if time.time()-float(pend.get("last_try",0))<55:return
- pend["last_try"]=time.time();st["rot_pending"]=pend;save(ST,st)
- if replace_with_best_setup(str(pend.get("origin","AUTO")),str(pend.get("sold","")),True):
-  st=load(ST,{});st.pop("rot_pending",None);save(ST,st)
-def momentum_watchdog():
- """After momentum_watch_minutes (default 60), rotate bot /buy and auto-bought positions lacking upward momentum, then Analyse for the best setup."""
- db=load(DB);now=time.time();changed=False
- mw=max(1.0,float(cfg().get("momentum_watch_minutes",60) or 60));mwl=(f"{mw/60:g} hour" if mw>=60 and mw%60==0 else f"{mw:g} minutes")
- for sym,d in list(db.items()):
-  source=str(d.get("purchase_source","")).upper()
-  if source not in ("MANUAL","AUTO"):continue
-  started=float(d.get("momentum_watch_started",d.get("opened_at",0)) or 0)
-  if not started:
-   d["momentum_watch_started"]=now;db[sym]=d;changed=True;continue
-  if now-started<mw*60:continue
-  if d.get("momentum_watch_done"):continue
-  entry=float(d.get("entry_price",0) or 0)
-  rising,detail=asset_has_upward_momentum(sym,entry)
-  if rising is None:
-   # Never liquidate on missing/stale market data; retry on the next management cycle.
-   if not in_cd(f"momentum_data_{sym}",300):tg(f"⚠️ Momentum watchdog for {sym} deferred: {detail}")
-   continue
-  if rising:
-   d["momentum_watch_done"]=True;d["momentum_watch_result"]="UPWARD";db[sym]=d;changed=True
-   journal_event("momentum_watch_passed",symbol=sym,source=source,detail=detail)
-   tg(f"📈 *MOMENTUM WATCH PASSED* {sym}: upward trend confirmed after {mwl}. {detail}")
-   continue
-  tg(f"🔄 *MOMENTUM ROTATION TRIGGERED* {sym}: no upward trend after {mwl}. Analysing the market for the best replacement setup. {detail}")
-  if sell(sym,1.0,"MOMENTUM NO-UPWARD-TREND ROTATION"):
-   db=load(DB);db.pop(sym,None);save(DB,db)
-   journal_event("momentum_watch_sold",symbol=sym,source=source,detail=detail)
-   if not replace_with_best_setup(source,sym) and float(cfg().get("rotation_retry_hours",6.0) or 0)>0:
-    _st=load(ST,{});_st["rot_pending"]={"since":time.time(),"sold":sym,"origin":source};save(ST,_st)
-    tg(f"⏳ *ROTATION PENDING*\n{sym} was sold and the proceeds are in USDT. The bot keeps Analysing every minute and buys the first coin that passes every auto-buy check, for up to {float(cfg().get('rotation_retry_hours',6.0)):g} hours.")
-  else:
-   tg(f"⚠️ {sym} was not rotated because the sale could not be verified. It remains under existing protection.")
- if changed:save(DB,db)
 def scan_history_state():
  h=load(SH,{})
  if not isinstance(h,dict):h={}
@@ -2241,7 +2128,7 @@ def cmd_set(txt):
  if k not in s:tg(f"❌ Unknown key. Valid: `{'`, `'.join(s.keys())}`");return
  try:new=val.lower() in ('true','1','yes','on') if isinstance(s[k],bool) else float(val) if isinstance(s[k],float) else int(val)
  except:tg(f"❌ Invalid value for {k}");return
- limits={"risk_per_trade_pct":(0.1,2.0),"max_daily_loss_pct":(0.5,10.0),"max_portfolio_exposure_pct":(5.0,100.0),"max_position_pct":(1.0,50.0),"max_daily_trades":(1,50),"max_spread_pct":(0.05,3.0),"trail_pct":(0.0,30.0),"scan_interval_minutes":(5.0,240.0),"auto_clear_hours":(0.0,168.0),"live_mode_seconds":(0,330),"stop_loss_pct":(0.5,20.0),"rsi_min":(1.0,99.0),"rsi_max":(1.0,99.0),"rsi_exit":(0.0,99.0),"auto_buy_amount_usdt":(1.0,100000.0),"max_tokens_before_consolidation":(1,30),"max_hold_hours":(1,720),"crash_guard_pct":(1.0,50.0),"btc_rsi_min":(0.0,99.0),"rebuy_cooldown_hours":(0.0,168.0),"atr_stop_mult":(0.5,6.0),"atr_stop_min_pct":(1.0,10.0),"atr_stop_max_pct":(2.0,25.0),"btc_trend_hours":(10,200),"min_breadth_pct":(0.0,100.0),"offline_alert_hours":(0.0,72.0),"daily_summary_hour_utc":(0,23),"max_coin_exposure_pct":(1.0,100.0),"liquidity_depth_usdt":(0.0,1000000.0),"max_book_imbalance_pct":(50.0,99.0),"regime_risk_factor":(0.1,1.0),"execution_slippage_pct":(0.05,5.0),"portfolio_stress_pct":(1.0,50.0),"signal_expiry_minutes":(1,240),"mom_1h_min_pct":(0.0,20.0),"mom_1h_max_pct":(0.5,30.0),"max_24h_pct":(30.0,500.0),"near_miss_rsi_margin":(0.5,10.0),"near_miss_1h_margin":(0.1,3.0),"near_miss_cooldown_minutes":(5,1440),"near_miss_max_per_scan":(1,10),"radar_max":(5,60),"momentum_watch_minutes":(5,1440),"rotation_retry_hours":(0.0,48.0),"radar_rsi_margin":(3.0,25.0)}
+ limits={"risk_per_trade_pct":(0.1,2.0),"max_daily_loss_pct":(0.5,10.0),"max_portfolio_exposure_pct":(5.0,100.0),"max_position_pct":(1.0,50.0),"max_daily_trades":(1,50),"max_spread_pct":(0.05,3.0),"trail_pct":(0.0,30.0),"scan_interval_minutes":(5.0,240.0),"auto_clear_hours":(0.0,168.0),"live_mode_seconds":(0,330),"stop_loss_pct":(0.5,20.0),"rsi_min":(1.0,99.0),"rsi_max":(1.0,99.0),"rsi_exit":(0.0,99.0),"auto_buy_amount_usdt":(1.0,100000.0),"max_tokens_before_consolidation":(1,30),"crash_guard_pct":(1.0,50.0),"btc_rsi_min":(0.0,99.0),"rebuy_cooldown_hours":(0.0,168.0),"atr_stop_mult":(0.5,6.0),"atr_stop_min_pct":(1.0,10.0),"atr_stop_max_pct":(2.0,25.0),"btc_trend_hours":(10,200),"min_breadth_pct":(0.0,100.0),"offline_alert_hours":(0.0,72.0),"daily_summary_hour_utc":(0,23),"max_coin_exposure_pct":(1.0,100.0),"liquidity_depth_usdt":(0.0,1000000.0),"max_book_imbalance_pct":(50.0,99.0),"regime_risk_factor":(0.1,1.0),"execution_slippage_pct":(0.05,5.0),"portfolio_stress_pct":(1.0,50.0),"signal_expiry_minutes":(1,240),"mom_1h_min_pct":(0.0,20.0),"mom_1h_max_pct":(0.5,30.0),"max_24h_pct":(30.0,500.0),"near_miss_rsi_margin":(0.5,10.0),"near_miss_1h_margin":(0.1,3.0),"near_miss_cooldown_minutes":(5,1440),"near_miss_max_per_scan":(1,10),"radar_max":(5,60),"radar_rsi_margin":(3.0,25.0)}
  if k in limits and not (limits[k][0] <= new <= limits[k][1]):tg(f"❌ `{k}` must be between {limits[k][0]} and {limits[k][1]}.");return
  if k=="rsi_min" and new>=s.get("rsi_max",99):tg("❌ rsi_min must be lower than rsi_max.");return
  if k=="rsi_max" and new<=s.get("rsi_min",1):tg("❌ rsi_max must be higher than rsi_min.");return
@@ -2620,7 +2507,7 @@ def live_loop(t0):
   except Exception as e:print(f"LIVE POLL ERR: {e}")
   now=time.time()
   if now-last_light>=60:
-   for fn in (ai_health_check,manage,momentum_watchdog,rotation_retry,check_alerts,scan,fast_watch,exec_q):
+   for fn in (ai_health_check,manage,check_alerts,scan,fast_watch,exec_q):
     if fn is scan and deadline-time.time()<180:continue
     run_step(fn)
    last_light=time.time()
@@ -2643,7 +2530,7 @@ if __name__=="__main__":
    _st["display_reset_v4"]=True;save(ST,_st)
  except Exception as e:print(f"DISPLAY RESET ERR: {e}")
  try:
-  for fn in (heartbeat,_C.clear,cleanup_telegram_output,stale_output,_kb_refresh,auto_clear_daily,scan_history_state,audit_system,ai_health_check,tg_check,manage,momentum_watchdog,rotation_retry,track_day_equity,git_sync,check_hourly_balance,check_alerts,check_daily_summary,scan,exec_q):run_step(fn)
+  for fn in (heartbeat,_C.clear,cleanup_telegram_output,stale_output,_kb_refresh,auto_clear_daily,scan_history_state,audit_system,ai_health_check,tg_check,manage,track_day_equity,git_sync,check_hourly_balance,check_alerts,check_daily_summary,scan,exec_q):run_step(fn)
   live_loop(T0)
   run_step(_kb_refresh)
  except Exception as e:
