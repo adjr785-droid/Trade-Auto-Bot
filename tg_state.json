@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689129,
+    "last_update_id": 935689130,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -61,7 +61,7 @@
         ]
     },
     "kb_mid": 3788,
-    "out_text": "\u2705 `page_width` = `40`\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "\u2705 `stop_watchdog_enabled` = `False`\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
@@ -77,8 +77,8 @@
             }
         ]
     ],
-    "panel_text": "\u2699\ufe0f *stop watchdog enabled*\nCurrent value: `True`",
-    "out_time": 1795364732.2274587,
-    "out_mid": 3787,
-    "panel_mid": 3789
+    "panel_text": "\u2699\ufe0f *stop watchdog enabled*\nCurrent value: `False`",
+    "out_time": 1795364850.3231785,
+    "out_mid": 3790,
+    "panel_mid": 3791
 }
