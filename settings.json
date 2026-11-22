@@ -44,7 +44,7 @@
     "loss_streak_trigger": 2,
     "loss_streak_size_factor": 0.5,
     "scan_parallel": true,
-    "page_chars": 938,
+    "page_chars": 1175,
     "page_lines": 10,
     "page_width": 51,
     "output_stale_minutes": 5,

@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689469,
+    "last_update_id": 935689472,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -66,7 +66,7 @@
         "ICNT-USDT",
         "TRX-USDT"
     ],
-    "out_text": "\u2705 `page_chars` = `938`\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "\u2705 `page_chars` = `1175`\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
@@ -94,8 +94,8 @@
             }
         ]
     ],
-    "panel_text": "\u2699\ufe0f *page chars*\nCurrent value: `938`",
-    "out_time": 1795380039.4075935,
-    "out_mid": 4068,
-    "panel_mid": 4070
+    "panel_text": "\u2699\ufe0f *page chars*\nCurrent value: `1175`",
+    "out_time": 1795380060.4517925,
+    "out_mid": 4075,
+    "panel_mid": 4076
 }
