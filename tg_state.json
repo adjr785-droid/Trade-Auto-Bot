@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935688580,
+    "last_update_id": 935688584,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT23.56/\u20a631,881",
+    "kb_ph": "USDT23.58/\u20a632,463",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -14,33 +14,47 @@
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
+                "text": "\ud83e\udd16 Bot",
+                "callback_data": "/bot"
             },
             {
-                "text": "2/3",
-                "callback_data": "pg:x"
+                "text": "\ud83d\udcc8 Stats",
+                "callback_data": "/stats"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udd0e Analyse Coin",
+                "callback_data": "m:an"
             },
             {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
+                "text": "\u2699\ufe0f Settings",
+                "callback_data": "m:set"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udcbc Holdings",
+                "callback_data": "m:r:holdings"
             },
             {
-                "text": "\ud83c\udfe0",
-                "callback_data": "m:menu"
+                "text": "\ud83e\udde0 Ask AI",
+                "callback_data": "m:ai:1"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\uddf9 Clear Chat",
+                "callback_data": "/clear"
             },
             {
-                "text": "Next \u27a1\ufe0f",
-                "callback_data": "scan_history:2:"
-            },
-            {
-                "text": "\ud83d\udd79\ufe0f Main Menu",
-                "callback_data": "/menu"
+                "text": "\ud83d\udea8 PANIC SELL",
+                "callback_data": "/panic"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 2/3*",
-    "out_text": "\ud83d\udd0e *SCAN HISTORY \u2014 QUERY*\nMatched 2772 of 2772 records |\nall coins\nPage 1/139 | Window 6.4h\n\n```COIN         RSI    R:R \nDECISION\n--------------------------------\n-------\nBTC           55.5      - SKIP\n```\n\u2800",
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
+    "out_text": "\u23f3 *Output cleared* (older than 30 min).\nTap Menu, Tools or Analyse for fresh results.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "out_time": 1795304969.341926,
     "bot_seen": {
@@ -78,27 +92,8 @@
             1795304987.3062937
         ]
     },
-    "kb_mid": 3204,
-    "pages": {
-        "p": [
-            "\ud83d\udd0e *SCAN HISTORY \u2014 QUERY*\nMatched 2772 of 2772 records |\nall coins\nPage 1/139 | Window 6.4h\n\n```COIN         RSI    R:R \nDECISION\n--------------------------------\n-------\nBTC           55.5      - SKIP\n```\n\u2800",
-            "```\nBTC           55.5      - SKIP\nBTC           55.5      - SKIP\nBTC           55.5      - SKIP\nBTC           55.5      - SKIP\nBTC           56.3      - SKIP\nETH           54.3      - SKIP\nETH           54.3      - SKIP\nETH           54.3      - SKIP\nETH           54.3      - SKIP\nETH           54.3      - SKIP\n```",
-            "```\nETH           56.0      - SKIP\nSOL           53.6      - SKIP\nSOL           53.6      - SKIP\nSOL           53.6      - SKIP\nSOL           53.6      - SKIP\nSOL           53.6      - SKIP\nSOL           57.5      - SKIP\nUSDGO         60.0      - SKIP\nUSDGO         60.0      -\nSKIP```\n\u2800"
-        ],
-        "i": 1,
-        "mode": "Markdown",
-        "x": [
-            {
-                "text": "Next \u27a1\ufe0f",
-                "callback_data": "scan_history:2:"
-            },
-            {
-                "text": "\ud83d\udd79\ufe0f Main Menu",
-                "callback_data": "/menu"
-            }
-        ],
-        "cmd": "m:scan_hist"
-    },
+    "kb_mid": 3206,
     "out_mid": 3199,
-    "panel_mid": 3200
+    "out_stale": true,
+    "panel_mid": 3207
 }
