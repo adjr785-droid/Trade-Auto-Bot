@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689275,
+    "last_update_id": 935689278,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -66,72 +66,72 @@
     "panel_rows": [
         [
             {
-                "text": "partial_tp_pct = 8.5938",
-                "callback_data": "m:k:partial_tp_pct"
+                "text": "dynamic_auto_buy_enabled = True",
+                "callback_data": "m:k:dynamic_auto_buy_enabled"
             }
         ],
         [
             {
-                "text": "partial_tp_fraction = 0.5",
-                "callback_data": "m:k:partial_tp_fraction"
+                "text": "auto_buy_reserve_pct = 5.0",
+                "callback_data": "m:k:auto_buy_reserve_pct"
             }
         ],
         [
             {
-                "text": "dynamic_trail = True",
-                "callback_data": "m:k:dynamic_trail"
+                "text": "dynamic_auto_buy_max_pct = 20.0",
+                "callback_data": "m:k:dynamic_auto_buy_max_pct"
             }
         ],
         [
             {
-                "text": "sell_if_stop_fails = True",
-                "callback_data": "m:k:sell_if_stop_fails"
+                "text": "dynamic_auto_buy_min_usdt = 1.02",
+                "callback_data": "m:k:dynamic_auto_buy_min_usdt"
             }
         ],
         [
             {
-                "text": "scan_prefilter = True",
-                "callback_data": "m:k:scan_prefilter"
+                "text": "dynamic_auto_buy_max_usdt = 0.0",
+                "callback_data": "m:k:dynamic_auto_buy_max_usdt"
             }
         ],
         [
             {
-                "text": "cleanup_hours = 24.0",
-                "callback_data": "m:k:cleanup_hours"
+                "text": "guardian_enabled = True",
+                "callback_data": "m:k:guardian_enabled"
             }
         ],
         [
             {
-                "text": "scan_interval_minutes = 30.0",
-                "callback_data": "m:k:scan_interval_minutes"
+                "text": "guardian_audit_interval_minutes = 15",
+                "callback_data": "m:k:guardian_audit_interval_minutes"
             }
         ],
         [
             {
-                "text": "auto_clear_hours = 24.0",
-                "callback_data": "m:k:auto_clear_hours"
+                "text": "max_portfolio_correlation = 0.85",
+                "callback_data": "m:k:max_portfolio_correlation"
             }
         ],
         [
             {
-                "text": "live_mode_seconds = 270",
-                "callback_data": "m:k:live_mode_seconds"
+                "text": "momentum_1h_enabled = True",
+                "callback_data": "m:k:momentum_1h_enabled"
             }
         ],
         [
             {
-                "text": "mtf_confirm = True",
-                "callback_data": "m:k:mtf_confirm"
+                "text": "mom_1h_min_pct = 0.5",
+                "callback_data": "m:k:mom_1h_min_pct"
             }
         ],
         [
             {
                 "text": "\u25c0\ufe0f Prev",
-                "callback_data": "m:sp:2"
+                "callback_data": "m:sp:5"
             },
             {
                 "text": "Next \u25b6\ufe0f",
-                "callback_data": "m:sp:4"
+                "callback_data": "m:sp:7"
             }
         ],
         [
@@ -141,7 +141,7 @@
             }
         ]
     ],
-    "panel_text": "\u2699\ufe0f *SETTINGS* (page 4/8)\nTap a setting to change it.",
+    "panel_text": "\u2699\ufe0f *SETTINGS* (page 7/8)\nTap a setting to change it.",
     "out_mid": 3933,
     "out_time": 1795375308.4527352,
     "panel_mid": 3936
