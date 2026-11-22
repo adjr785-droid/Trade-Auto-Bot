@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935688849,
+    "last_update_id": 935688851,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT23.30/\u20a632,075",
+    "kb_ph": "USDT23.27/\u20a632,044",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -52,44 +52,53 @@
             1795311215.95037
         ]
     },
-    "kb_mid": 3519,
-    "out_text": "\u26a0\ufe0f BGB conversion outcome is\nUNKNOWN for TRX; do not retry\nuntil Bitget conversion history\nand balances are checked.\nReason: bitget\n{\"code\":\"13011\",\"msg\":\"Can be\nconvert 1 times every 6\nhours\",\"requestTime\":17953515853\n50,\"data\":null}\n\n\u2800\n\u2800",
+    "kb_mid": 3522,
+    "out_text": "\ud83e\udde0 AI manual-buy advisory:\nBuying 23.25 USDT of BLESS-USDT\nat 0.0137873 is not recommended\ndue to unfavorable market\nconditions and lack of\nsupporting technical signals.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795351609.8390522,
+    "out_time": 1795351641.2795544,
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
+                "text": "\ud83e\udd16 Bot",
+                "callback_data": "/bot"
             },
             {
-                "text": "1/5",
-                "callback_data": "pg:x"
+                "text": "\ud83d\udcc8 Stats",
+                "callback_data": "/stats"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udd0e Analyse Coin",
+                "callback_data": "m:an"
             },
             {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
+                "text": "\u2699\ufe0f Settings",
+                "callback_data": "m:set"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udcbc Holdings",
+                "callback_data": "m:r:holdings"
             },
             {
-                "text": "\ud83c\udfe0",
-                "callback_data": "m:menu"
+                "text": "\ud83e\udde0 Ask AI",
+                "callback_data": "m:ai:1"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\uddf9 Clear Chat",
+                "callback_data": "/clear"
+            },
+            {
+                "text": "\ud83d\udea8 PANIC SELL",
+                "callback_data": "/panic"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/5*",
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
     "out_mid": 3516,
-    "pages": {
-        "p": [
-            "\u26a0\ufe0f BGB conversion outcome is\nUNKNOWN for TRX; do not retry\nuntil Bitget conversion history\nand balances are checked.\nReason: bitget\n{\"code\":\"13011\",\"msg\":\"Can be\nconvert 1 times every 6\nhours\",\"requestTime\":17953515853\n50,\"data\":null}\n\n\u2800\n\u2800",
-            "\u2705 *SOLD (PANIC)*\n\ud83e\ude99 82.24 ENA-USDT\n\ud83d\udfe2 PnL: $0.33\n\n\ud83d\udfe1 ENA-USDT: remaining balance\nis below the $1.02\ntradable-order threshold and is\ntreated as exchange dust.\n\n\u26a0\ufe0f BGB conversion outcome is\n\u2800\n\u2800",
-            "UNKNOWN for ENA; do not retry\nuntil Bitget conversion history\nand balances are checked.\nReason: bitget\n{\"code\":\"13011\",\"msg\":\"Can be\nconvert 1 times every 6\nhours\",\"requestTime\":17953515983\n87,\"data\":null}\n\n\u2705 *SOLD (PANIC)*\n\u2800\n\u2800",
-            "\ud83e\ude99 29.59 WLD-USDT\n\ud83d\udd34 PnL: $-0.02\n\n\ud83d\udfe1 WLD-USDT: remaining balance\nis below the $1.02\ntradable-order threshold and is\ntreated as exchange dust.\n\n\u26a0\ufe0f BGB conversion outcome is\nUNKNOWN for WLD; do not retry\n\u2800\n\u2800",
-            "until Bitget conversion history\nand balances are checked.\nReason: bitget\n{\"code\":\"13011\",\"msg\":\"Can be\nconvert 1 times every 6\nhours\",\"requestTime\":17953516080\n99,\"data\":null}\n\n\ud83d\uded1 *PANIC COMPLETE.* All\npositions sold. Auto-buy PAUSED.\n\u2800\n\u2800"
-        ],
-        "i": 0,
-        "mode": "Markdown",
-        "x": [],
-        "cmd": "panic_confirm"
-    },
-    "panel_mid": 3517
+    "panel_hidden": true
 }

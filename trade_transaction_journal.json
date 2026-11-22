@@ -333,5 +333,15 @@
             "lesson": "Implement stricter emotional\u2011risk safeguards, such as automated stop\u2011losses or cooldown periods, to prevent panic\u2011driven exits. Ensure that exit decisions are based on predefined technical or risk criteria rather than sentiment. Review position sizing and ensure that remaining base is either fully liquidated or managed with clear stop parameters.",
             "confidence": "medium"
         }
+    },
+    {
+        "time": 1795351640.9377522,
+        "event": "ai_manual_buy_review",
+        "symbol": "BLESS-USDT",
+        "review": {
+            "risk_level": "high",
+            "warning": "Market filter indicates only 21% of coins are up today, suggesting overall bearish sentiment. Combined with a modest RSI and no existing position, this trade carries elevated risk.",
+            "summary": "Buying 23.25 USDT of BLESS-USDT at 0.0137873 is not recommended due to unfavorable market conditions and lack of supporting technical signals."
+        }
     }
 ]
