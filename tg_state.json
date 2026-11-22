@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935688749,
+    "last_update_id": 935688751,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -58,28 +58,46 @@
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
+                "text": "\ud83e\udd16 Bot",
+                "callback_data": "/bot"
             },
             {
-                "text": "3/9",
-                "callback_data": "pg:x"
+                "text": "\ud83d\udcc8 Stats",
+                "callback_data": "/stats"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udd0e Analyse Coin",
+                "callback_data": "m:an"
             },
             {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
+                "text": "\u2699\ufe0f Settings",
+                "callback_data": "m:set"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udcbc Holdings",
+                "callback_data": "m:r:holdings"
             },
             {
-                "text": "\ud83c\udfe0",
-                "callback_data": "m:menu"
+                "text": "\ud83e\udde0 Ask AI",
+                "callback_data": "m:ai:1"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\uddf9 Clear Chat",
+                "callback_data": "/clear"
             },
             {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
+                "text": "\ud83d\udea8 PANIC SELL",
+                "callback_data": "/panic"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 3/9*",
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
     "out_mid": 3415,
     "pages": {
         "p": [
