@@ -49,12 +49,12 @@
             "last_error": ""
         },
         "command_review": {
-            "last_success": 1795363231.9564817,
-            "successes": 6,
+            "last_success": 1795363304.05971,
+            "successes": 7,
             "last_error": ""
         }
     },
-    "last_stage_success": 1795363233.3904119,
+    "last_stage_success": 1795363304.05971,
     "last_success": 1795363223.4701943,
     "emergency_ended": 1795352684.071692,
     "recovery_start_alerted": false
