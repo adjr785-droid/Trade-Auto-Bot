@@ -80,5 +80,5 @@
     "radar_max": 30,
     "radar_rsi_margin": 10.0,
     "momentum_watch_minutes": 230,
-    "rotation_retry_hours": 4.5
+    "rotation_retry_hours": 1.4238
 }

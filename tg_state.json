@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689302,
+    "last_update_id": 935689306,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -65,9 +65,9 @@
         "DOS-USDT",
         "SKYAI-USDT"
     ],
-    "out_text": "\u2705 `rotation_retry_hours` = `4.5`\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "\u2705 `rotation_retry_hours` = `1.4238`\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795376654.8031037,
+    "out_time": 1795376675.099241,
     "panel_rows": [
         [
             {
@@ -94,7 +94,7 @@
             }
         ]
     ],
-    "panel_text": "\u2699\ufe0f *rotation retry hours*\nCurrent value: `4.5`",
-    "out_mid": 3960,
-    "panel_mid": 3961
+    "panel_text": "\u2699\ufe0f *rotation retry hours*\nCurrent value: `1.4238`",
+    "out_mid": 3968,
+    "panel_mid": 3969
 }
