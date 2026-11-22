@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935688718,
+    "last_update_id": 935688720,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT22.95/\u20a631,590",
+    "kb_ph": "USDT22.95/\u20a631,595",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -52,10 +52,10 @@
             1795311215.95037
         ]
     },
-    "kb_mid": 3384,
-    "out_text": "\u2705 \ud83e\uddf9 BGB dust converted:\n0.00487000 ONDO \u2192 0.00087453\nBGB | Fee: 0.00001750 BGB.\nOrder: 1508299581871038465.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "kb_mid": 3387,
+    "out_text": "\ud83c\udfc6 *TOP 3 SETUPS RIGHT NOW*\n_Read-only scan. Nothing was\nbought._\n\n\u26a0\ufe0f Market filter active: BTC\nis below its 50h average.\nAuto-buy is blocked; a manual\nbuy is your own call.\n\n*1. TAO-USDT* \u2014 WEAK (best\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795332565.5226073,
+    "out_time": 1795332589.8923075,
     "panel_rows": [
         [
             {
@@ -63,7 +63,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "8/12",
+                "text": "1/8",
                 "callback_data": "pg:x"
             },
             {
@@ -73,14 +73,26 @@
             {
                 "text": "\ud83c\udfe0",
                 "callback_data": "m:menu"
-            },
-            {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 8/12*",
-    "out_mid": 3376,
-    "panel_hidden": true
+    "panel_text": "\ud83d\udcc4 *Page 1/8*",
+    "out_mid": 3386,
+    "pages": {
+        "p": [
+            "\ud83c\udfc6 *TOP 3 SETUPS RIGHT NOW*\n_Read-only scan. Nothing was\nbought._\n\n\u26a0\ufe0f Market filter active: BTC\nis below its 50h average.\nAuto-buy is blocked; a manual\nbuy is your own call.\n\n*1. TAO-USDT* \u2014 WEAK (best\n\u2800\n\u2800",
+            "available, not a full setup)\nPrice: 185.80 USDT | 24h: +6.11%\n| RSI: 56.1\nSuggested stop: 157.93 (15%\nbelow price)\nWhy:\n\u2022 Trend not confirmed yet\n(price 185.80, MA5 184.60, MA10\n185.40)\n\u2022 RSI 56.1 is healthy (room to\n\u2800\n\u2800",
+            "run before overbought)\n\u2022 24h change +6.11% shows\nsteady, not extreme, momentum\n\u2022 24h volume $3.6M (liquid\nenough: above the $1M minimum)\n\u2022 Spread: 0.05% (OK for\nauto-buy)\n\n*2. ENA-USDT* \u2014 WEAK (best\navailable, not a full setup)\n\u2800\n\u2800",
+            "Price: 0.097450 USDT | 24h:\n+3.18% | RSI: 50.5\nSuggested stop: 0.082832 (15%\nbelow price)\nWhy:\n\u2022 Trend not confirmed yet\n(price 0.097450, MA5 0.097734,\nMA10 0.098150)\n\u2022 RSI 50.5 is healthy (room to\nrun before overbought)\n\u2800\n\u2800",
+            "\u2022 24h change +3.18% shows\nsteady, not extreme, momentum\n\u2022 24h volume $2.9M (liquid\nenough: above the $1M minimum)\n\u2022 Spread: 0.03% (OK for\nauto-buy)\n\n*3. UNI-USDT* \u2014 WEAK (best\navailable, not a full setup)\nPrice: 4.5930 USDT | 24h: +3.80%\n\u2800\n\u2800",
+            "| RSI: 48.1\nSuggested stop: 3.9040 (15%\nbelow price)\nWhy:\n\u2022 Trend not confirmed yet\n(price 4.5930, MA5 4.6320, MA10\n4.6793)\n\u2022 RSI 48.1 is healthy (room to\nrun before overbought)\n\u2022 24h change +3.80% shows\n\u2800\n\u2800",
+            "steady, not extreme, momentum\n\u2022 24h volume $2.4M (liquid\nenough: above the $1M minimum)\n\u2022 Spread: 0.02% (OK for\nauto-buy)\n\nNo coin passes all scanner rules\nright now, so these are the\nstrongest available. Be\ncautious.\n\u2800\n\u2800",
+            "\nBuy manually with `/buy COIN\namount` if you agree.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+        ],
+        "i": 0,
+        "mode": "Markdown",
+        "x": [],
+        "cmd": "/analyse"
+    },
+    "panel_mid": 3388
 }
