@@ -7,7 +7,6 @@
     "auto_buy_enabled": false,
     "auto_buy_amount_usdt": 6.4994,
     "max_tokens_before_consolidation": 3,
-    "max_hold_hours": 296,
     "trail_pct": 8.0,
     "crash_guard_pct": 10.0,
     "rsi_exit": 75,
@@ -78,7 +77,5 @@
     "near_miss_cooldown_minutes": 60,
     "near_miss_max_per_scan": 3,
     "radar_max": 30,
-    "radar_rsi_margin": 10.0,
-    "momentum_watch_minutes": 230,
-    "rotation_retry_hours": 1.3366
+    "radar_rsi_margin": 10.0
 }

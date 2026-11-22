@@ -747,5 +747,15 @@
         "time": 1795377212.5573225,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 57.14, 'net_pnl_usdt': 5.354, 'recurring_patterns': {'RSI 75': 3, 'PARTIAL PROFIT': 3, 'MANUAL SELL ALL': 3, '15-MINUTE NO-UPWARD-TREND ROTATION': 6, 'PANIC': 3}, 'recommendations': ['Limit exposure to trades triggered solely by RSI 75 without additional confirmation.', 'Review manual sell decisions; high frequency may indicate premature exits.', 'Investigate the consistency of the 15\u2011minute no\u2011upward\u2011trend rotation signal before scaling.', 'Maintain current risk parameters; win rate is modest and net PnL is positive but small.', 'Consider adding stop\u2011loss safeguards on panic\u2011driven exits to reduce downside volatility.']}"
+    },
+    {
+        "time": 1795377885.2187116,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (12)', 'attention': [{'symbol': 'SKYAI-USDT', 'action': 'hold', 'reason': 'Position is very small, recent entry price is close to current price, and PnL is modestly positive (+0.65%). No clear signal to add or exit; maintain until further market movement.'}], 'summary': 'Overall portfolio risk remains within the daily limit. The only open position (SKYAI-USDT) shows a slight gain and is well within its stop loss margin. Recommend holding and monitoring price action; avoid new exposure until additional risk capacity is available.'}"
+    },
+    {
+        "time": 1795377885.9679742,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 57.14, 'net_pnl_usdt': 5.354, 'recurring_patterns': ['RSI 75', 'PARTIAL PROFIT', 'MANUAL SELL', '15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC'], 'recommendations': 'Maintain current risk limits; reduce exposure to trades triggered by PANIC signals; prioritize RSI\u201175 entries with tighter stop\u2011losses; monitor partial\u2011profit exits for consistency; consider pausing manual sell all actions until market stabilises.'}"
     }
 ]
