@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689158,
+    "last_update_id": 935689160,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -68,72 +68,72 @@
     "panel_rows": [
         [
             {
-                "text": "atr_stop_enabled = True",
-                "callback_data": "m:k:atr_stop_enabled"
+                "text": "btc_shock_pct = 3.0",
+                "callback_data": "m:k:btc_shock_pct"
             }
         ],
         [
             {
-                "text": "atr_stop_mult = 2.0",
-                "callback_data": "m:k:atr_stop_mult"
+                "text": "max_open_risk_pct = 3.0",
+                "callback_data": "m:k:max_open_risk_pct"
             }
         ],
         [
             {
-                "text": "atr_stop_min_pct = 3.0",
-                "callback_data": "m:k:atr_stop_min_pct"
+                "text": "loss_streak_trigger = 2",
+                "callback_data": "m:k:loss_streak_trigger"
             }
         ],
         [
             {
-                "text": "atr_stop_max_pct = 10.0",
-                "callback_data": "m:k:atr_stop_max_pct"
+                "text": "loss_streak_size_factor = 0.5",
+                "callback_data": "m:k:loss_streak_size_factor"
             }
         ],
         [
             {
-                "text": "market_filter_enabled = True",
-                "callback_data": "m:k:market_filter_enabled"
+                "text": "scan_parallel = True",
+                "callback_data": "m:k:scan_parallel"
             }
         ],
         [
             {
-                "text": "btc_trend_hours = 50",
-                "callback_data": "m:k:btc_trend_hours"
+                "text": "page_chars = 600",
+                "callback_data": "m:k:page_chars"
             }
         ],
         [
             {
-                "text": "min_breadth_pct = 30.0",
-                "callback_data": "m:k:min_breadth_pct"
+                "text": "page_lines = 19",
+                "callback_data": "m:k:page_lines"
             }
         ],
         [
             {
-                "text": "offline_alert_hours = 3.0",
-                "callback_data": "m:k:offline_alert_hours"
+                "text": "page_width = 40",
+                "callback_data": "m:k:page_width"
             }
         ],
         [
             {
-                "text": "daily_summary_hour_utc = 20",
-                "callback_data": "m:k:daily_summary_hour_utc"
+                "text": "output_stale_minutes = 5",
+                "callback_data": "m:k:output_stale_minutes"
             }
         ],
         [
             {
-                "text": "max_daily_drawdown_pct = 5.0",
-                "callback_data": "m:k:max_daily_drawdown_pct"
+                "text": "smart_risk_enabled = True",
+                "callback_data": "m:k:smart_risk_enabled"
             }
         ],
         [
             {
                 "text": "\u25c0\ufe0f Prev",
-                "callback_data": "m:sp:1"
+                "callback_data": "m:sp:3"
             },
             {
                 "text": "Next \u25b6\ufe0f",
-                "callback_data": "m:sp:3"
+                "callback_data": "m:sp:5"
             }
         ],
         [
@@ -143,7 +143,7 @@
             }
         ]
     ],
-    "panel_text": "\u2699\ufe0f *SETTINGS* (page 3/8)\nTap a setting to change it.",
+    "panel_text": "\u2699\ufe0f *SETTINGS* (page 5/8)\nTap a setting to change it.",
     "out_time": 1795365168.0170023,
     "pages": {
         "p": [
