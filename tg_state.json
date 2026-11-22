@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935688720,
+    "last_update_id": 935688723,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -32,8 +32,8 @@
             1795332234.6212428
         ],
         "/analyse": [
-            4,
-            1795322526.2434235
+            3,
+            1795332611.698859
         ],
         "m:r:analyse": [
             4,
@@ -63,7 +63,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "1/8",
+                "text": "4/8",
                 "callback_data": "pg:x"
             },
             {
@@ -76,7 +76,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/8*",
+    "panel_text": "\ud83d\udcc4 *Page 4/8*",
     "out_mid": 3386,
     "pages": {
         "p": [
@@ -89,7 +89,7 @@
             "steady, not extreme, momentum\n\u2022 24h volume $2.4M (liquid\nenough: above the $1M minimum)\n\u2022 Spread: 0.02% (OK for\nauto-buy)\n\nNo coin passes all scanner rules\nright now, so these are the\nstrongest available. Be\ncautious.\n\u2800\n\u2800",
             "\nBuy manually with `/buy COIN\namount` if you agree.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 0,
+        "i": 3,
         "mode": "Markdown",
         "x": [],
         "cmd": "/analyse"
