@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689100,
+    "last_update_id": 935689103,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -66,72 +66,72 @@
     "panel_rows": [
         [
             {
-                "text": "partial_tp_pct = 8.5938",
-                "callback_data": "m:k:partial_tp_pct"
+                "text": "crash_guard_pct = 10.0",
+                "callback_data": "m:k:crash_guard_pct"
             }
         ],
         [
             {
-                "text": "partial_tp_fraction = 0.5",
-                "callback_data": "m:k:partial_tp_fraction"
+                "text": "rsi_exit = 75",
+                "callback_data": "m:k:rsi_exit"
             }
         ],
         [
             {
-                "text": "dynamic_trail = True",
-                "callback_data": "m:k:dynamic_trail"
+                "text": "btc_rsi_min = 50",
+                "callback_data": "m:k:btc_rsi_min"
             }
         ],
         [
             {
-                "text": "sell_if_stop_fails = True",
-                "callback_data": "m:k:sell_if_stop_fails"
+                "text": "risk_per_trade_pct = 1.0",
+                "callback_data": "m:k:risk_per_trade_pct"
             }
         ],
         [
             {
-                "text": "scan_prefilter = True",
-                "callback_data": "m:k:scan_prefilter"
+                "text": "max_daily_loss_pct = 3.0",
+                "callback_data": "m:k:max_daily_loss_pct"
             }
         ],
         [
             {
-                "text": "cleanup_hours = 24.0",
-                "callback_data": "m:k:cleanup_hours"
+                "text": "max_portfolio_exposure_pct = 50.0",
+                "callback_data": "m:k:max_portfolio_exposure_pct"
             }
         ],
         [
             {
-                "text": "scan_interval_minutes = 30.0",
-                "callback_data": "m:k:scan_interval_minutes"
+                "text": "max_position_pct = 15.0",
+                "callback_data": "m:k:max_position_pct"
             }
         ],
         [
             {
-                "text": "auto_clear_hours = 24.0",
-                "callback_data": "m:k:auto_clear_hours"
+                "text": "max_daily_trades = 5",
+                "callback_data": "m:k:max_daily_trades"
             }
         ],
         [
             {
-                "text": "live_mode_seconds = 270",
-                "callback_data": "m:k:live_mode_seconds"
+                "text": "max_spread_pct = 0.5",
+                "callback_data": "m:k:max_spread_pct"
             }
         ],
         [
             {
-                "text": "mtf_confirm = True",
-                "callback_data": "m:k:mtf_confirm"
+                "text": "rebuy_cooldown_hours = 6.0",
+                "callback_data": "m:k:rebuy_cooldown_hours"
             }
         ],
         [
             {
                 "text": "\u25c0\ufe0f Prev",
-                "callback_data": "m:sp:2"
+                "callback_data": "m:sp:0"
             },
             {
                 "text": "Next \u25b6\ufe0f",
-                "callback_data": "m:sp:4"
+                "callback_data": "m:sp:2"
             }
         ],
         [
@@ -141,7 +141,7 @@
             }
         ]
     ],
-    "panel_text": "\u2699\ufe0f *SETTINGS* (page 4/8)\nTap a setting to change it.",
+    "panel_text": "\u2699\ufe0f *SETTINGS* (page 2/8)\nTap a setting to change it.",
     "out_time": 1795364492.1111324,
     "out_mid": 3780,
     "panel_mid": 3781
