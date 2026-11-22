@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689420,
+    "last_update_id": 935689424,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -28,8 +28,8 @@
             1795353088.5562997
         ],
         "/analyse": [
-            5,
-            1795379609.3999734
+            6,
+            1795379614.9807777
         ],
         "m:r:analyse": [
             4,
@@ -73,28 +73,82 @@
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
+                "text": "rsi_exit = 75",
+                "callback_data": "m:k:rsi_exit"
+            }
+        ],
+        [
+            {
+                "text": "btc_rsi_min = 50",
+                "callback_data": "m:k:btc_rsi_min"
+            }
+        ],
+        [
+            {
+                "text": "risk_per_trade_pct = 1.0",
+                "callback_data": "m:k:risk_per_trade_pct"
+            }
+        ],
+        [
+            {
+                "text": "max_daily_loss_pct = 3.0",
+                "callback_data": "m:k:max_daily_loss_pct"
+            }
+        ],
+        [
+            {
+                "text": "max_portfolio_exposure_pct = 50.0",
+                "callback_data": "m:k:max_portfolio_exposure_pct"
+            }
+        ],
+        [
+            {
+                "text": "max_position_pct = 15.0",
+                "callback_data": "m:k:max_position_pct"
+            }
+        ],
+        [
+            {
+                "text": "max_daily_trades = 5",
+                "callback_data": "m:k:max_daily_trades"
+            }
+        ],
+        [
+            {
+                "text": "max_spread_pct = 0.5",
+                "callback_data": "m:k:max_spread_pct"
+            }
+        ],
+        [
+            {
+                "text": "rebuy_cooldown_hours = 6.0",
+                "callback_data": "m:k:rebuy_cooldown_hours"
+            }
+        ],
+        [
+            {
+                "text": "atr_stop_enabled = True",
+                "callback_data": "m:k:atr_stop_enabled"
+            }
+        ],
+        [
+            {
+                "text": "\u25c0\ufe0f Prev",
+                "callback_data": "m:sp:0"
             },
             {
-                "text": "6/9",
-                "callback_data": "pg:x"
-            },
+                "text": "Next \u25b6\ufe0f",
+                "callback_data": "m:sp:2"
+            }
+        ],
+        [
             {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
-            },
-            {
-                "text": "\ud83c\udfe0",
+                "text": "\u2b05\ufe0f Menu",
                 "callback_data": "m:menu"
-            },
-            {
-                "text": "\ud83d\udd0e Analyse a coin",
-                "callback_data": "m:an"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 6/9*",
+    "panel_text": "\u2699\ufe0f *SETTINGS* (page 2/8)\nTap a setting to change it.",
     "pages": {
         "p": [
             "\ud83c\udfc6 *TOP 3 SETUPS RIGHT NOW*\n_Read-only scan. Nothing was bought._\n\n\u26a0\ufe0f Market filter active: only 20% of\ncoins are up today. Auto-buy is blocked;\na manual buy is your own call.\n\n*1. WLD-USDT* \u2014 BREAKOUT\n\u2800\n\u2800",
@@ -107,7 +161,7 @@
             "\u2022 24h volume $3.8M (liquid enough: above\nthe $1M minimum)\n\u2022 Spread: 0.00% (OK for auto-buy)\n\u2022 Status: \ud83d\udd36 Potential, manual only\n(misses scanner rules)\n\u2022 \ud83e\udde0 AI: WEAK \u2014 Fails scanner,\nnegligible change, low momentum\n\n\u2800\n\u2800",
             "Buy manually with `/buy COIN amount` if\nyou agree.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 5,
+        "i": 6,
         "mode": "Markdown",
         "x": [
             {
