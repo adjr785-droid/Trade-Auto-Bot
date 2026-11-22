@@ -614,5 +614,15 @@
         "time": 1795370501.0219953,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 55.56, 'net_pnl_usdt': 5.3057, 'recurring_patterns': ['RSI 75 triggers positive pnl in multiple symbols (BLESS-USDT, SKYAI-USDT, DGAI-USDT)', 'Partial profit entries (+5% to +6.2%) appear in several trades and yield modest gains', 'Manual sell all actions show mixed outcomes, including losses', '15\u2011minute no\u2011upward\u2011trend rotation entries produce small gains or near\u2011zero results'], 'recommendations': ['Limit exposure to manual sell\u2011all signals until their success rate improves', 'Prioritize RSI\u201175 based entries but validate with additional filters to reduce occasional losses', 'Consider tightening profit\u2011target thresholds for partial profit strategies to capture gains earlier', 'Maintain current risk limits; overall performance is modestly positive but variability suggests a cautious approach']}"
+    },
+    {
+        "time": 1795370608.736977,
+        "event": "ai_manual_buy_review",
+        "symbol": "DOS-USDT",
+        "review": {
+            "risk_level": "high",
+            "warning": "Market filter indicates only 20% of coins are up today, suggesting overall bearish sentiment. RSI is below 50, indicating potential further downside. Proceed with caution and consider waiting for clearer bullish signals.",
+            "summary": "Manual buy of 23.07 USDT worth of DOS-USDT at 0.1429 is high risk given current market conditions and technical indicator. Recommend reviewing additional signals before execution."
+        }
     }
 ]
