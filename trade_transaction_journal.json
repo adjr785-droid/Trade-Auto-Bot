@@ -168,5 +168,15 @@
         "time": 1795347702.6770582,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 55.0, 'net_pnl_usdt': 4.9856, 'recurring_patterns': ['Frequent manual sell-all actions often result in losses', 'RSI 75 signals tend to produce positive PnL', 'Partial profit exits show mixed outcomes but can capture gains'], 'recommendations': ['Limit reliance on manual sell-all without additional technical confirmation', 'Consider using RSI 75 as a stronger entry signal, but validate with volume or trend filters', 'Implement stricter risk controls for high\u2011volatility symbols (e.g., SOON-USDT, INJ-USDT)', 'Monitor partial profit strategies to ensure they lock in gains without premature exits']}"
+    },
+    {
+        "time": 1795348117.1629655,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (5)', 'attention': [{'symbol': 'TRX-USDT', 'action': 'hold', 'reason': 'Small profit (0.08%) and stop loss still above entry; position age is high, indicating stability. No immediate risk signals.'}, {'symbol': 'ENA-USDT', 'action': 'monitor', 'reason': '5.06% profit but stop loss equals entry; price is slightly above stop. Consider tightening stop if price moves lower to protect gains.'}, {'symbol': 'WLD-USDT', 'action': 'hold', 'reason': 'Minimal profit (0.04%) with stop loss 3% below entry; position is very recent (9 minutes). Await clearer price direction before adjusting.'}], 'summary': 'Overall portfolio is within daily risk limits. Positions show modest gains with stops positioned to protect upside. Maintain current holdings, tighten ENA-USDT stop if price retreats, and reassess WLD-USDT after more market movement.'}"
+    },
+    {
+        "time": 1795348117.814152,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 55.0, 'net_pnl_usdt': 4.9856, 'recurring_patterns': ['MANUAL SELL ALL', 'RSI 75', 'PARTIAL PROFIT'], 'recommendations': 'Maintain current risk limits; focus on trades with RSI 75 signals that showed positive pnl; reduce reliance on manual sell all entries which often yielded losses; monitor partial profit exits for consistency; consider tightening stop\u2011losses on symbols with repeated negative outcomes (e.g., SOON-USDT, INJ-USDT).'}"
     }
 ]
