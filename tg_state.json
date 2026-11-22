@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935688617,
+    "last_update_id": 935688619,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -18,7 +18,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "1/7",
+                "text": "3/7",
                 "callback_data": "pg:x"
             },
             {
@@ -31,7 +31,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/7*",
+    "panel_text": "\ud83d\udcc4 *Page 3/7*",
     "out_text": "\ud83c\udfc6 *TOP 3 SETUPS RIGHT NOW*\n_Read-only scan. Nothing was\nbought._\n\n\u26a0\ufe0f Market filter active: only\n20% of coins are up today.\nAuto-buy is blocked; a manual\nbuy is your own call.\n\n*1. TRX-USDT* \u2014 WATCHLIST (no\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "out_time": 1795311238.0347497,
@@ -54,8 +54,8 @@
             1795304943.5284274
         ],
         "/analyse": [
-            4,
-            1795309886.7597346
+            2,
+            1795311256.4973087
         ],
         "m:r:analyse": [
             4,
@@ -86,7 +86,7 @@
             "below price)\nWhy:\n\u2022 Short-term trend is up (price\n> MA5 > MA10)\n\u2022 RSI 57.4 is healthy (room to\nrun before overbought)\n\u2022 24h change +1.15% shows\nsteady, not extreme, momentum\n\u2022 24h volume $2.4M (liquid\nenough: above the $1M minimum)\n\u2800\n\u2800",
             "\u2022 Spread: 0.04% (OK for\nauto-buy)\n\nNo coin passes all scanner rules\nright now, so these are the\nstrongest available. Be\ncautious.\n\nBuy manually with `/buy COIN\namount` if you agree.\n\u2800\n\u2800"
         ],
-        "i": 0,
+        "i": 2,
         "mode": "Markdown",
         "x": [],
         "cmd": "/analyse"
