@@ -4,35 +4,35 @@
         "safe_zone": 0.025551,
         "stop_loss": 0.024746,
         "peak_price": 0.026357,
-        "last_price": 0.025336,
+        "last_price": 0.025123,
         "opened_at": 1795252298.2993214,
         "sl_pct": 3.15,
         "strategy": "MANUAL",
         "xsl": 0.024746,
-        "seen": 1795312627.7151666
+        "seen": 1795313159.3302882
     },
     "TRX-USDT": {
         "entry_price": 0.30556,
         "safe_zone": 0.30556,
         "stop_loss": 0.296393,
         "peak_price": 0.30558,
-        "last_price": 0.3055,
+        "last_price": 0.30537,
         "opened_at": 1795311378.0803318,
         "sl_pct": 3.0,
         "strategy": "MANUAL",
         "xsl": 0.296393,
-        "seen": 1795312628.0621815
+        "seen": 1795313159.6416435
     },
     "ONDO-USDT": {
         "entry_price": 0.2817,
         "safe_zone": 0.2817,
         "stop_loss": 0.273249,
         "peak_price": 0.2828,
-        "last_price": 0.2822,
+        "last_price": 0.2823,
         "opened_at": 1795311430.5873933,
         "sl_pct": 3.0,
         "strategy": "MANUAL",
         "xsl": 0.273249,
-        "seen": 1795312628.4213822
+        "seen": 1795313159.952098
     }
 }
