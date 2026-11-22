@@ -717,5 +717,15 @@
         "time": 1795375327.047447,
         "event": "ai_portfolio_review",
         "summary": "{'portfolio_risk': 'Daily limit (12)', 'attention': [{'symbol': 'SKYAI-USDT', 'action': 'hold', 'reason': 'Position is small, recent entry with modest 5% profit and stop loss still provides downside protection. No immediate signal to add or exit.'}], 'summary': 'Overall portfolio risk remains within the daily limit. The only open position (SKYAI-USDT) shows a small gain and is protected by its stop loss. Maintain the position and monitor for any adverse price movement or new signals before considering adjustments.'}"
+    },
+    {
+        "time": 1795376552.9489133,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (12)', 'attention': [{'symbol': 'SKYAI-USDT', 'action': 'hold', 'reason': 'Position is very recent (21 days) with a small positive PnL (0.3%). Current price is slightly above entry and stop loss is comfortably below entry, indicating limited downside. No strong signal to adjust.'}], 'summary': 'Overall portfolio risk remains within the daily limit. The only open position, SKYAI-USDT, shows modest profit and is well\u2011protected by its stop loss. Maintain the position and monitor for any significant price movement or new market signals before considering any changes.'}"
+    },
+    {
+        "time": 1795376553.8215795,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 57.14, 'net_pnl_usdt': 5.354, 'recurring_patterns': ['RSI 75', 'PARTIAL PROFIT', 'MANUAL SELL', '15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC'], 'recommendations': ['Limit exposure to trades triggered solely by RSI 75 until further back\u2011testing confirms robustness', 'Review manual sell decisions that resulted in losses and consider stricter criteria before exiting positions', 'Investigate the high frequency of 15\u2011minute no\u2011upward\u2011trend rotation signals; assess whether they add value or increase noise', 'Implement tighter risk controls for panic\u2011driven exits to avoid small negative PnL events', 'Overall, maintain current position sizing but adopt a more conservative stance on high\u2011frequency short\u2011term signals until performance improves']}"
     }
 ]
