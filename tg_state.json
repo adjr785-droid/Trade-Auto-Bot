@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689218,
+    "last_update_id": 935689219,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -62,12 +62,9 @@
             1795362988.7943418
         ]
     },
-    "kb_mid": 3878,
-    "out_mid": 3879,
-    "out_text": "\ud83d\udd04 *AI RECOVERY \u2014 STAGE 2/3*\nGroq health check passed. Buying stays\nblocked until 3 consecutive checks pass;\n1 more to go. Normal mode returns\nautomatically.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "\ud83e\uddf9 Cleared 3 bot message(s).\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795366412.714346,
-    "panel_mid": 3880,
+    "out_time": 1795366465.8565838,
     "panel_rows": [
         [
             {
@@ -110,5 +107,8 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below."
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
+    "out_mid": 3881,
+    "kb_mid": 3883,
+    "panel_hidden": true
 }
