@@ -1172,9 +1172,7 @@ def analyse_top3():
    sw=_wrap("\n".join(["🏆 *TOP 3* · ▶ details"]+summ),W).split("\n") if isinstance(_wrap("x",W),str) else _wrap("\n".join(["🏆 *TOP 3* · ▶ details"]+summ),W)
    if len(sw)<=cap:out=sw+["⠀"]*(cap-len(sw))+out
  except Exception as e:print("ANALYSE SUMMARY ERR",str(e)[:100])
- tg("\n".join(out))
- try:ui_send("🔎 Want a specific coin?",[[_B("🔎 Analyse a coin","m:an")],_MENU_BTN])
- except Exception:pass
+ _send("\n".join(out),"Markdown",{"inline_keyboard":[[_B("🔎 Analyse a coin","m:an")]]})
 def hold_advice(sym,price,entry,rsi,ma5,ma10,s):
  pnl=(price-entry)/entry*100 if entry else None;sl=float(s.get('stop_loss_pct',5));rx=float(s.get('rsi_exit',75) or 0)
  down=rsi is not None and ma5 is not None and ma10 is not None and price<ma5<ma10 and rsi<50
