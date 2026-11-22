@@ -4,21 +4,21 @@
         "safe_zone": 0.30556,
         "stop_loss": 0.296393,
         "peak_price": 0.30656,
-        "last_price": 0.30572,
+        "last_price": 0.30578,
         "opened_at": 1795311378.0803318,
         "sl_pct": 3.0,
         "strategy": "MANUAL",
         "xsl": 0.296393,
-        "seen": 1795347355.2769585
+        "seen": 1795347449.2465804
     },
     "ENA-USDT": {
         "entry_price": 0.09785,
         "safe_zone": 0.09785,
         "stop_loss": 0.09785,
         "peak_price": 0.10284,
-        "last_price": 0.10284,
+        "last_price": 0.1026,
         "opened_at": 1795322596.1160789,
-        "seen": 1795347355.9644628,
+        "seen": 1795347449.7001913,
         "xsl": 0.09785,
         "partial_done": true
     }
