@@ -4,33 +4,33 @@
         "safe_zone": 0.30556,
         "stop_loss": 0.296393,
         "peak_price": 0.30558,
-        "last_price": 0.30432,
+        "last_price": 0.30418,
         "opened_at": 1795311378.0803318,
         "sl_pct": 3.0,
         "strategy": "MANUAL",
         "xsl": 0.296393,
-        "seen": 1795325988.942268
+        "seen": 1795326185.513993
     },
     "ONDO-USDT": {
         "entry_price": 0.2817,
         "safe_zone": 0.2817,
         "stop_loss": 0.273249,
         "peak_price": 0.2832,
-        "last_price": 0.2753,
+        "last_price": 0.2754,
         "opened_at": 1795311430.5873933,
         "sl_pct": 3.0,
         "strategy": "MANUAL",
         "xsl": 0.273249,
-        "seen": 1795325989.1922119
+        "seen": 1795326185.7696726
     },
     "ENA-USDT": {
         "entry_price": 0.09785,
         "safe_zone": 0.09785,
         "stop_loss": 0.083172,
         "peak_price": 0.09806,
-        "last_price": 0.0972,
+        "last_price": 0.09724,
         "opened_at": 1795322596.1160789,
-        "seen": 1795325989.4464958,
+        "seen": 1795326186.0479212,
         "xsl": 0.092026
     }
 }
