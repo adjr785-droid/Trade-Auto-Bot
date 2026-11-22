@@ -702,5 +702,20 @@
         "time": 1795375252.0925908,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 57.14, 'net_pnl_usdt': 5.354, 'recurring_patterns': ['RSI 75', 'PARTIAL PROFIT', 'MANUAL SELL', '15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC'], 'recommendations': 'Maintain current risk limits; reduce exposure to trades triggered by PANIC signals; prioritize RSI\u2011based entries with tighter stop\u2011losses; monitor partial\u2011profit exits for consistency; consider pausing manual sell all actions until market direction stabilises.'}"
+    },
+    {
+        "time": 1795375307.9756985,
+        "event": "ai_manual_buy_review",
+        "symbol": "SKYAI-USDT",
+        "review": {
+            "risk_level": "moderate",
+            "warning": "Only about 20% of coins are up today, indicating a generally weak market. Proceed with caution and consider limiting exposure.",
+            "summary": "The trade size is small (23.07\u202fUSDT) and RSI is neutral (50.39). However, the overall market filter suggests limited upside. Recommend a cautious approach."
+        }
+    },
+    {
+        "time": 1795375327.047447,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (12)', 'attention': [{'symbol': 'SKYAI-USDT', 'action': 'hold', 'reason': 'Position is small, recent entry with modest 5% profit and stop loss still provides downside protection. No immediate signal to add or exit.'}], 'summary': 'Overall portfolio risk remains within the daily limit. The only open position (SKYAI-USDT) shows a small gain and is protected by its stop loss. Maintain the position and monitor for any adverse price movement or new signals before considering adjustments.'}"
     }
 ]
