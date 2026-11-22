@@ -6,5 +6,29 @@
         "pnl_usdt": -0.12800999999999985,
         "reason": "MANUAL SELL ALL",
         "strategy": "MANUAL"
+    },
+    {
+        "time": 1795333876.5859365,
+        "event": "sell_fill_verified",
+        "symbol": "UNI-USDT",
+        "filled": 1.508,
+        "average": 4.599,
+        "order_id": "1508305083350851584",
+        "reason": "15-MINUTE NO-UPWARD-TREND ROTATION"
+    },
+    {
+        "time": 1795333876.5870898,
+        "event": "trade_closed",
+        "symbol": "UNI-USDT",
+        "pnl_usdt": 0.003015999999999668,
+        "reason": "15-MINUTE NO-UPWARD-TREND ROTATION",
+        "strategy": "MANUAL"
+    },
+    {
+        "time": 1795333884.2184703,
+        "event": "momentum_watch_sold",
+        "symbol": "UNI-USDT",
+        "source": "MANUAL",
+        "detail": "15m move -0.24%; live vs entry -0.04%"
     }
 ]

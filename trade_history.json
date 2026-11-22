@@ -122,5 +122,12 @@
         "time": 1795332560.0274377,
         "reason": "MANUAL SELL ALL",
         "strategy": "MANUAL"
+    },
+    {
+        "sym": "UNI-USDT",
+        "pnl": 0.003015999999999668,
+        "time": 1795333876.586712,
+        "reason": "15-MINUTE NO-UPWARD-TREND ROTATION",
+        "strategy": "MANUAL"
     }
 ]

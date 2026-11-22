@@ -52,47 +52,53 @@
             1795311215.95037
         ]
     },
-    "kb_mid": 3391,
-    "out_text": "\ud83c\udfc6 *TOP 3 SETUPS RIGHT NOW*\n_Read-only scan. Nothing was\nbought._\n\n\u26a0\ufe0f Market filter active: BTC\nis below its 50h average.\nAuto-buy is blocked; a manual\nbuy is your own call.\n\n*1. TAO-USDT* \u2014 WEAK (best\n\u2800\n\u2800",
+    "kb_mid": 3396,
+    "out_mid": 3393,
+    "out_text": "\u26d4 Replacement buy blocked by\nrisk controls: Daily limit (5)\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795332589.8923075,
+    "out_time": 1795333887.497487,
+    "panel_mid": 3394,
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
+                "text": "\ud83e\udd16 Bot",
+                "callback_data": "/bot"
             },
             {
-                "text": "5/8",
-                "callback_data": "pg:x"
+                "text": "\ud83d\udcc8 Stats",
+                "callback_data": "/stats"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udd0e Analyse Coin",
+                "callback_data": "m:an"
             },
             {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
+                "text": "\u2699\ufe0f Settings",
+                "callback_data": "m:set"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udcbc Holdings",
+                "callback_data": "m:r:holdings"
             },
             {
-                "text": "\ud83c\udfe0",
-                "callback_data": "m:menu"
+                "text": "\ud83e\udde0 Ask AI",
+                "callback_data": "m:ai:1"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\uddf9 Clear Chat",
+                "callback_data": "/clear"
+            },
+            {
+                "text": "\ud83d\udea8 PANIC SELL",
+                "callback_data": "/panic"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 5/8*",
-    "out_mid": 3386,
-    "pages": {
-        "p": [
-            "\ud83c\udfc6 *TOP 3 SETUPS RIGHT NOW*\n_Read-only scan. Nothing was\nbought._\n\n\u26a0\ufe0f Market filter active: BTC\nis below its 50h average.\nAuto-buy is blocked; a manual\nbuy is your own call.\n\n*1. TAO-USDT* \u2014 WEAK (best\n\u2800\n\u2800",
-            "available, not a full setup)\nPrice: 185.80 USDT | 24h: +6.11%\n| RSI: 56.1\nSuggested stop: 157.93 (15%\nbelow price)\nWhy:\n\u2022 Trend not confirmed yet\n(price 185.80, MA5 184.60, MA10\n185.40)\n\u2022 RSI 56.1 is healthy (room to\n\u2800\n\u2800",
-            "run before overbought)\n\u2022 24h change +6.11% shows\nsteady, not extreme, momentum\n\u2022 24h volume $3.6M (liquid\nenough: above the $1M minimum)\n\u2022 Spread: 0.05% (OK for\nauto-buy)\n\n*2. ENA-USDT* \u2014 WEAK (best\navailable, not a full setup)\n\u2800\n\u2800",
-            "Price: 0.097450 USDT | 24h:\n+3.18% | RSI: 50.5\nSuggested stop: 0.082832 (15%\nbelow price)\nWhy:\n\u2022 Trend not confirmed yet\n(price 0.097450, MA5 0.097734,\nMA10 0.098150)\n\u2022 RSI 50.5 is healthy (room to\nrun before overbought)\n\u2800\n\u2800",
-            "\u2022 24h change +3.18% shows\nsteady, not extreme, momentum\n\u2022 24h volume $2.9M (liquid\nenough: above the $1M minimum)\n\u2022 Spread: 0.03% (OK for\nauto-buy)\n\n*3. UNI-USDT* \u2014 WEAK (best\navailable, not a full setup)\nPrice: 4.5930 USDT | 24h: +3.80%\n\u2800\n\u2800",
-            "| RSI: 48.1\nSuggested stop: 3.9040 (15%\nbelow price)\nWhy:\n\u2022 Trend not confirmed yet\n(price 4.5930, MA5 4.6320, MA10\n4.6793)\n\u2022 RSI 48.1 is healthy (room to\nrun before overbought)\n\u2022 24h change +3.80% shows\n\u2800\n\u2800",
-            "steady, not extreme, momentum\n\u2022 24h volume $2.4M (liquid\nenough: above the $1M minimum)\n\u2022 Spread: 0.02% (OK for\nauto-buy)\n\nNo coin passes all scanner rules\nright now, so these are the\nstrongest available. Be\ncautious.\n\u2800\n\u2800",
-            "\nBuy manually with `/buy COIN\namount` if you agree.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
-        ],
-        "i": 4,
-        "mode": "Markdown",
-        "x": [],
-        "cmd": "/analyse"
-    },
-    "panel_mid": 3388
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below."
 }
