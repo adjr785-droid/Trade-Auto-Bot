@@ -1,18 +1,16 @@
 {
-    "last_update_id": 935689003,
+    "last_update_id": 935689006,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT23.13/\u20a631,842",
+    "kb_ph": "USDT23.06/\u20a631,743",
     "layout_bottom": [
         "tools",
-        "analyse",
-        "bot",
-        "hold"
+        "analyse"
     ],
-    "kb_keys": "[['\ud83d\udccb Menu', '\ud83e\uddf0 Tools', '\ud83c\udfc6 Analyse'], ['\ud83e\udd16 Bot', '\ud83d\udcbc Holdings']]",
+    "kb_keys": "[['\ud83d\udccb Menu', '\ud83e\uddf0 Tools', '\ud83c\udfc6 Analyse']]",
     "bot_seen": {
         "t": 1795353296.4384053,
         "eq": 23.238217869235225,
@@ -60,39 +58,99 @@
             1795352377.989315
         ]
     },
-    "kb_mid": 3688,
+    "kb_mid": 3692,
     "out_text": "\ud83e\udde0 AI manual-buy advisory: A\nmanual buy of 23.18\u202fUSDT worth\nof JCT at $0.001609 is\nsuggested. Given the limited\nupside in the broader market and\na neutral RSI, proceed\ncautiously and monitor price\naction closely.\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "out_time": 1795361460.2936618,
     "panel_rows": [
         [
             {
-                "text": "\ud83d\uded2 Trade",
-                "callback_data": "m:tl:trade"
+                "text": "\u2328\ufe0f \ud83e\uddf0 Tools",
+                "callback_data": "m:lay:t:tools"
             },
             {
-                "text": "\ud83d\udd14 Alerts",
-                "callback_data": "m:tl:alerts"
+                "text": "\u2328\ufe0f \ud83c\udfc6 Analyse",
+                "callback_data": "m:lay:t:analyse"
             }
         ],
         [
             {
-                "text": "\ud83d\udd0d Scan",
-                "callback_data": "m:tl:scan"
+                "text": "\ud83d\udccb \ud83e\udd16 Bot",
+                "callback_data": "m:lay:t:bot"
             },
             {
-                "text": "\ud83d\udee0\ufe0f System",
-                "callback_data": "m:tl:sys"
+                "text": "\ud83d\udccb \ud83d\udcc8 Stats",
+                "callback_data": "m:lay:t:stats"
             }
         ],
         [
             {
-                "text": "\u2b05\ufe0f Main Menu",
-                "callback_data": "m:menu"
+                "text": "\ud83d\udccb \ud83d\udd0e Analyse Coin",
+                "callback_data": "m:lay:t:an"
+            },
+            {
+                "text": "\ud83d\udccb \u2699\ufe0f Settings",
+                "callback_data": "m:lay:t:set"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udccb \ud83d\udcbc Holdings",
+                "callback_data": "m:lay:t:hold"
+            },
+            {
+                "text": "\ud83d\udccb \ud83d\udcdc Trade History",
+                "callback_data": "m:lay:t:hist"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udccb \ud83e\udde0 Ask AI",
+                "callback_data": "m:lay:t:ai"
+            },
+            {
+                "text": "\ud83d\udccb \ud83e\uddf9 Clear Chat",
+                "callback_data": "m:lay:t:clear"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udccb \ud83d\udea8 PANIC SELL",
+                "callback_data": "m:lay:t:panic"
+            }
+        ],
+        [
+            {
+                "text": "\u2796",
+                "callback_data": "m:lay:pl:-"
+            },
+            {
+                "text": "\ud83d\udccf Page: 12 lines",
+                "callback_data": "m:lay"
+            },
+            {
+                "text": "\u2795",
+                "callback_data": "m:lay:pl:+"
+            }
+        ],
+        [
+            {
+                "text": "\u270f\ufe0f Rename buttons",
+                "callback_data": "m:lay:rn"
+            },
+            {
+                "text": "\u21a9\ufe0f Reset layout",
+                "callback_data": "m:lay:reset"
+            }
+        ],
+        [
+            {
+                "text": "\u2b05\ufe0f Tools",
+                "callback_data": "m:tools"
             }
         ]
     ],
-    "panel_text": "\ud83e\uddf0 *TOOLS*\nChoose a group.",
+    "panel_text": "\ud83e\udde9 *LAYOUT*\nTap a button to move it.\n\u2328\ufe0f = bottom key (below the text box)\n\ud83d\udccb = Menu list\nBottom keys: 3/6 (Menu always stays)\n\u2705 Layout reset.",
     "out_mid": 3669,
     "panel_mid": 3682
 }
