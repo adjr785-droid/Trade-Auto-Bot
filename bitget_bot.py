@@ -4,6 +4,7 @@ except ImportError:fcntl=None
 TK=os.environ.get('TG_TOKEN');CHAT=str(os.environ.get('TG_CHAT_ID',''));API=f"https://api.telegram.org/bot{TK}"
 DB,ST,CFG,QF,LF,CD,SC,HIST,LOCK,SH,OUT,AL,ATHATL_CACHE="positions.json","tg_state.json","settings.json","queue.json","profit_ledger.json",".cmd_cooldown.json","scan_state.json","trade_history.json",".bot.lock","scan_history.json","telegram_output.json","alerts.json","ath_atl_cache.json"
 FILES=[DB,ST,CFG,QF,LF,CD,SC,HIST,SH,OUT,AL,ATHATL_CACHE]
+GUARDIAN="bot_guardian.json";GCHARTER="core_charter.json";GAUDIT="guardian_audit.json"
 STABLE=['USDC','USDT','DAI','FDUSD','TUSD','USDD','USDE'];LEV=['3L','3S','5L','5S','10L','10S','2L','2S'];BL=['RPANW','CT','ONE']
 ex=ccxt.bitget({'apiKey':os.environ.get('BITGET_API_KEY'),'secret':os.environ.get('BITGET_API_SECRET'),'password':os.environ.get('BITGET_API_PASSPHRASE'),'enableRateLimit':True});ex.options['createMarketBuyOrderRequiresPrice']=False
 GROQ_API_KEY=os.environ.get('GROQ_API_KEY','').strip()
@@ -398,7 +399,7 @@ def save(f,d):
   os.replace(f+".tmp",f)
  except Exception as e:print(f"SAVE ERR {f}: {e}")
 def cfg():
- d={"rsi_min":42,"rsi_max":48,"stop_loss_pct":5.0,"auto_buy_enabled":True,"auto_buy_amount_usdt":10.0,"max_tokens_before_consolidation":3,"max_hold_hours":48,"trail_pct":8.0,"crash_guard_pct":10.0,"rsi_exit":75,"btc_rsi_min":50,"risk_per_trade_pct":1.0,"max_daily_loss_pct":3.0,"max_portfolio_exposure_pct":50.0,"max_position_pct":15.0,"max_daily_trades":5,"max_spread_pct":0.5,"auto_mode_v1":False,"rebuy_cooldown_hours":6.0,"atr_stop_enabled":True,"atr_stop_mult":2.0,"atr_stop_min_pct":3.0,"atr_stop_max_pct":10.0,"market_filter_enabled":True,"btc_trend_hours":50,"min_breadth_pct":30.0,"offline_alert_hours":3.0,"daily_summary_hour_utc":20,"max_daily_drawdown_pct":5.0,"partial_tp_pct":5.0,"partial_tp_fraction":0.5,"dynamic_trail":True,"sell_if_stop_fails":True,"scan_prefilter":True,"cleanup_hours":24.0,"scan_interval_minutes":15.0,"auto_clear_hours":24.0,"live_mode_seconds":270,"mtf_confirm":True,"btc_shock_pct":3.0,"max_open_risk_pct":3.0,"loss_streak_trigger":2,"loss_streak_size_factor":0.5,"scan_parallel":True,"page_chars":600,"page_lines":12,"page_width":32,"output_stale_minutes":30,"smart_risk_enabled":True,"max_coin_exposure_pct":20.0,"max_sector_exposure_pct":35.0,"liquidity_depth_usdt":5000.0,"max_book_imbalance_pct":85.0,"regime_risk_factor":0.65,"execution_slippage_pct":0.35,"stop_watchdog_enabled":True,"portfolio_stress_pct":12.0,"signal_expiry_minutes":30,"adaptive_risk_enabled":True}
+ d={"rsi_min":42,"rsi_max":48,"stop_loss_pct":5.0,"auto_buy_enabled":True,"auto_buy_amount_usdt":10.0,"max_tokens_before_consolidation":3,"max_hold_hours":48,"trail_pct":8.0,"crash_guard_pct":10.0,"rsi_exit":75,"btc_rsi_min":50,"risk_per_trade_pct":1.0,"max_daily_loss_pct":3.0,"max_portfolio_exposure_pct":50.0,"max_position_pct":15.0,"max_daily_trades":5,"max_spread_pct":0.5,"auto_mode_v1":False,"rebuy_cooldown_hours":6.0,"atr_stop_enabled":True,"atr_stop_mult":2.0,"atr_stop_min_pct":3.0,"atr_stop_max_pct":10.0,"market_filter_enabled":True,"btc_trend_hours":50,"min_breadth_pct":30.0,"offline_alert_hours":3.0,"daily_summary_hour_utc":20,"max_daily_drawdown_pct":5.0,"partial_tp_pct":5.0,"partial_tp_fraction":0.5,"dynamic_trail":True,"sell_if_stop_fails":True,"scan_prefilter":True,"cleanup_hours":24.0,"scan_interval_minutes":15.0,"auto_clear_hours":24.0,"live_mode_seconds":270,"mtf_confirm":True,"btc_shock_pct":3.0,"max_open_risk_pct":3.0,"loss_streak_trigger":2,"loss_streak_size_factor":0.5,"scan_parallel":True,"page_chars":600,"page_lines":12,"page_width":32,"output_stale_minutes":30,"smart_risk_enabled":True,"max_coin_exposure_pct":20.0,"max_sector_exposure_pct":35.0,"liquidity_depth_usdt":5000.0,"max_book_imbalance_pct":85.0,"regime_risk_factor":0.65,"execution_slippage_pct":0.35,"stop_watchdog_enabled":True,"portfolio_stress_pct":12.0,"signal_expiry_minutes":30,"adaptive_risk_enabled":True,"dynamic_auto_buy_enabled":True,"auto_buy_reserve_pct":5.0,"dynamic_auto_buy_max_pct":20.0,"dynamic_auto_buy_min_usdt":1.02,"dynamic_auto_buy_max_usdt":0.0,"guardian_enabled":True,"guardian_audit_interval_minutes":15}
  s=load(CFG,d)
  for k,v in d.items():s.setdefault(k,v)
  if not s.get('auto_mode_v1'):s['auto_buy_enabled']=True;s['auto_mode_v1']=True;save(CFG,s)
@@ -1087,7 +1088,7 @@ def cmd_status():
  except Exception:mf="unavailable"
  expo=coin_val/total*100 if total>0 else 0.0
  cdl=[k[8:].replace("-USDT","") for k,v in load(CD,{}).items() if k.startswith("stopout_") and now-v<float(s.get('rebuy_cooldown_hours',6.0))*3600]
- sysmsg=["🤖 *BOT*"]+([_sl] if (_sl:=since_last(total,db)) else [])+["Exchange connection: ✅ OK",f"Portfolio: ${total:.2f} USDT"+(f" | ₦{total*r:,.0f}" if r else ""),f"USDT cash: ${usdt:.2f} (free ${usdt_free:.2f})",f"Auto-buy: {'ON' if s.get('auto_buy_enabled') else 'PAUSED'} (${s.get('auto_buy_amount_usdt')} per trade)",f"BTC safety filter: {btc}",f"Market filter: {mf}",f"Risk controls: {'✅ trading allowed' if ok else '⛔ '+why}",f"Today vs start of day: {ddp:+.2f}% (auto-buy pauses at -{s.get('max_daily_drawdown_pct')}%)",f"Money in coins: {expo:.0f}% of portfolio (cap {s.get('max_portfolio_exposure_pct')}%)",f"Re-buy cooldown active: {', '.join(cdl) if cdl else 'none'}",f"Last market scan: {ago} (runs every {float(s.get('scan_interval_minutes',15)):g} min) | Queued coins: {len(q)}",f"Bot-tracked positions: {len(db)} | Holdings priced: {len(held)}",last_trade_line().strip(),"",
+ sysmsg=["🤖 *BOT*"]+([_sl] if (_sl:=since_last(total,db)) else [])+["Exchange connection: ✅ OK",f"Portfolio: ${total:.2f} USDT"+(f" | ₦{total*r:,.0f}" if r else ""),f"USDT cash: ${usdt:.2f} (free ${usdt_free:.2f})",f"Auto-buy: {'ON' if s.get('auto_buy_enabled') else 'PAUSED'} (dynamic allocation; legacy target ${s.get('auto_buy_amount_usdt')})",f"BTC safety filter: {btc}",f"Market filter: {mf}",f"Risk controls: {'✅ trading allowed' if ok else '⛔ '+why}",f"Today vs start of day: {ddp:+.2f}% (auto-buy pauses at -{s.get('max_daily_drawdown_pct')}%)",f"Money in coins: {expo:.0f}% of portfolio (cap {s.get('max_portfolio_exposure_pct')}%)",f"Re-buy cooldown active: {', '.join(cdl) if cdl else 'none'}",f"Last market scan: {ago} (runs every {float(s.get('scan_interval_minutes',15)):g} min) | Queued coins: {len(q)}",f"Bot-tracked positions: {len(db)} | Holdings priced: {len(held)}",last_trade_line().strip(),"",
       "🧭 *STRATEGY*",f"Entries: TREND (RSI {s.get('rsi_min')}-{s.get('rsi_max')}, price > MA5 > MA10), OVERSOLD bounce (RSI < 30), BREAKOUT (RSI 50-70 + volume breakout)",f"Protection: stop-loss {s.get('stop_loss_pct')}% | trailing stop {s.get('trail_pct')}% below peak | crash guard {s.get('crash_guard_pct')}%",f"Exit: RSI >= {s.get('rsi_exit')} or max hold {s.get('max_hold_hours')}h",f"Profit taking: sell {float(s.get('partial_tp_fraction',0.5))*100:.0f}% at +{s.get('partial_tp_pct')}% then stop moves to break-even" if float(s.get('partial_tp_pct',0) or 0)>0 else "Profit taking: partial sell OFF",f"Dynamic trailing: {'ON (wider in strong trends, tighter when momentum fades)' if s.get('dynamic_trail',True) else 'OFF'}",f"Entry safety: spread limit {s.get('max_spread_pct')}% | stop fails -> {'sell at market' if s.get('sell_if_stop_fails',True) else 'alert only'} | scan pre-filter {'ON' if s.get('scan_prefilter',True) else 'OFF'}",(f"Near-instant mode: ON (stays awake {float(s.get('live_mode_seconds',270)):g}s per run)" if float(s.get('live_mode_seconds',270) or 0)>0 else "Near-instant mode: OFF"),f"Auto-clear chat: every {float(s.get('auto_clear_hours',24)):g}h" if float(s.get('auto_clear_hours',24) or 0)>0 else "Auto-clear chat: OFF",f"Limits: {s.get('max_daily_trades')} trades/day, {s.get('max_daily_loss_pct')}% daily loss, {s.get('max_position_pct')}% max per coin",f"Extra safeguards: 4h trend check {'ON' if s.get('mtf_confirm',True) else 'OFF'} | BTC shock pause {float(s.get('btc_shock_pct',3.0) or 0):g}%/h | combined open risk cap {float(s.get('max_open_risk_pct',3.0) or 0):g}% | smaller buys after {int(s.get('loss_streak_trigger',2) or 0)} losses in a row | parallel scan {'ON' if s.get('scan_parallel',True) else 'OFF'}"]
  tg("\n".join(sysmsg))
  if not held:tg("🛑 *HOLDINGS ADVICE*\nNo priced coin holdings right now.");return
@@ -1269,12 +1270,75 @@ def risk_sized_budget(sym,price,stop,available_usdt):
   distance=max(0.005,(price-stop)/price);risk_cash=equity*float(s.get('risk_per_trade_pct',1.0))/100
   by_risk=risk_cash/distance;max_position=equity*float(s.get('max_position_pct',15.0))/100;max_exposure=equity*float(s.get('max_portfolio_exposure_pct',50.0))/100
   remaining=max(0.0,max_exposure-exposure)
-  factor=market_regime(s).get("factor",1.0) if s.get("adaptive_risk_enabled",True) else 1.0
-  factor=min(1.0,max(0.25,float(factor)))
-  corr_factor,_corr_holds=correlation_exposure(sym)
-  factor*=max(0.65,min(1.0,float(corr_factor)))
-  return max(0.0,min(float(available_usdt),by_risk*factor,max_position*factor,remaining,float(s.get('auto_buy_amount_usdt',10.0))))
+  factor=1.0  # Applied once in dynamic_auto_buy_budget, not double-counted here.
+  return max(0.0,min(float(available_usdt),by_risk*factor,max_position*factor,remaining))
  except:return 0.0
+
+def dynamic_auto_buy_budget(sym, qd, price, stop, available_usdt, s):
+ """Adaptive order sizing bounded by risk, portfolio, signal quality, and wallet reserve."""
+ try:
+  score=float(qd.get("score",0) or 0); setup=str(qd.get("type","OTHER")).upper()
+  # Score multiplier is gradual and bounded, not a fixed amount per trade.
+  score_factor=max(0.35,min(1.25,0.45+score/220.0))
+  setup_factor={"BREAKOUT":1.0,"TREND":0.9,"OVERSOLD":0.75}.get(setup,0.65)
+  vol=atr_pct(sym);vol_factor=1.0 if not vol else max(0.45,min(1.0,4.0/max(float(vol),1.0)))
+  regime=market_regime(s);regime_factor=float(regime.get("factor",0.65 if regime.get("name")=="UNKNOWN" else 1.0))
+  # risk_sized_budget already constrains stop-distance, exposure and configured risk.
+  base=risk_sized_budget(sym,price,stop,available_usdt)
+  base=loss_streak_adjust(base,s)
+  size=base*score_factor*setup_factor*vol_factor*regime_factor
+  maxpct=float(s.get("dynamic_auto_buy_max_pct",20.0))/100.0
+  try:eq=equity_now(); size=min(size,eq*maxpct) if eq>0 else 0
+  except Exception:size=0
+  hardcap=float(s.get("dynamic_auto_buy_max_usdt",0) or 0)
+  if hardcap>0:size=min(size,hardcap)
+  minsize=float(s.get("dynamic_auto_buy_min_usdt",1.02) or 1.02)
+  if size<minsize:return 0.0,{"score_factor":score_factor,"setup_factor":setup_factor,"vol_factor":vol_factor,"regime_factor":regime_factor,"reason":"calculated size below exchange minimum"}
+  return round(min(size,available_usdt),2),{"score_factor":score_factor,"setup_factor":setup_factor,"vol_factor":vol_factor,"regime_factor":regime_factor,"score":score,"regime":regime.get("name"),"reason":"adaptive sizing"}
+ except Exception as e:return 0.0,{"reason":f"sizing error: {str(e)[:120]}"}
+
+def guardian_audit(force=False):
+ """Non-destructive Guardian checks; never edits strategy code or config limits."""
+ s=cfg()
+ if not s.get("guardian_enabled",True):return True,"Guardian disabled"
+ st=load(GUARDIAN,{}) if isinstance(load(GUARDIAN,{}),dict) else {}
+ now=time.time();interval=max(5,int(s.get("guardian_audit_interval_minutes",15))*60)
+ if not force and now-float(st.get("last_audit",0))<interval:return bool(st.get("healthy",True)),st.get("summary","Audit recent")
+ findings=[]
+ for f in (CFG,DB,QF,SC,HIST):
+  try:
+   if os.path.exists(f):
+    with open(f) as fh:json.load(fh)
+  except Exception as e:findings.append(f"{f} unreadable/corrupt: {str(e)[:90]}")
+ try:
+  db=load(DB,{})
+  if not isinstance(db,dict):findings.append("positions state is not a dictionary")
+  else:
+   for sym,d in db.items():
+    if not isinstance(d,dict) or float(d.get("entry_price",0) or 0)<=0:findings.append(f"position record invalid: {sym}")
+ except Exception as e:findings.append(f"position audit error: {e}")
+ try:
+  q=load(QF,{})
+  if not isinstance(q,dict):findings.append("buy queue is not a dictionary")
+  else:
+   for sym,d in q.items():
+    if not isinstance(d,dict) or not d.get("timestamp"):findings.append(f"queued signal invalid: {sym}")
+ except Exception as e:findings.append(f"queue audit error: {e}")
+ # Store the immutable charter once, then validate its persisted structure on each audit.
+ charter={"version":1,"mission":"Bitget spot trading; preserve capital, follow approved strategy logic, audit decisions and operational faults.","strategies":["TREND","OVERSOLD","BREAKOUT"],"constraints":["No leverage","Never silently alter strategy rules","No automatic liquidation solely from audit findings","Critical data-integrity uncertainty blocks new entries"]}
+ if not os.path.exists(GCHARTER):save(GCHARTER,charter)
+ else:
+  saved=load(GCHARTER,{})
+  if not isinstance(saved,dict) or saved.get("version")!=1 or saved.get("strategies")!=charter["strategies"]:findings.append("Core charter integrity mismatch")
+ healthy=not findings;summary="Healthy" if healthy else "; ".join(findings)
+ st.update(last_audit=now,healthy=healthy,summary=summary)
+ save(GUARDIAN,st)
+ ledger=load(GAUDIT,[]);ledger=ledger if isinstance(ledger,list) else []
+ ledger.append({"time":now,"healthy":healthy,"findings":findings})
+ save(GAUDIT,ledger[-500:])
+ if findings and not in_cd("guardian_notice",1800):tg("🛡️ *BOT GUARDIAN ALERT*\n"+summary[:3000]);mk_cd("guardian_notice")
+ return healthy,summary
+
 def buy_rejection(sym,reason):
  key=f"buy_reject_notice:{sym}:{reason[:60]}"
  if not in_cd(key,900):tg(f"⛔ *AUTO-BUY REJECTED — {sym}*\nReason: {reason}");mk_cd(key)
@@ -1387,6 +1451,8 @@ def exec_q():
   return
  try:
   ub=B('free','USDT')
+  reserve_pct=max(0.0,min(50.0,float(s.get('auto_buy_reserve_pct',5.0))))
+  ub=max(0.0,ub*(1-reserve_pct/100.0))
   for sym,qd in sorted(q.items(),key=lambda x:x[1].get('score',0),reverse=True):
    if in_cd(f"fail_{sym}",300):buy_rejection(sym,"Previous fail.");continue
    if sym in db:buy_rejection(sym,"Position exists.");q.pop(sym,None);save(QF,q);continue
@@ -1408,13 +1474,13 @@ def exec_q():
    if cap>0 and db:
     orp=open_risk_pct()
     if orp+float(s.get('risk_per_trade_pct',1.0))>cap:buy_rejection(sym,f"Combined open risk {orp:.1f}% (limit {cap:g}%).");continue
-   pct=sl_pct(sym);sp=risk_sized_budget(sym,live(sym),qd.get('sl') or live(sym)*(1-pct/100),spend);sp=loss_streak_adjust(sp,s)
+   pct=sl_pct(sym);sp,alloc_meta=dynamic_auto_buy_budget(sym,qd,live(sym),qd.get('sl') or live(sym)*(1-pct/100),spend,s)
    if sp<1.02:buy_rejection(sym,f"Size too small (${sp:.2f}).");continue
    try:f,a=m_buy(S(sym),sp)
    except Exception as e:buy_rejection(sym,f"Order failed: {e}");mk_cd(f"fail_{sym}");continue
    mxs=round(a*(1-pct/100),6);sl=qd.get('sl') or mxs
    if sl>=a or sl>mxs:sl=mxs
-   db[sym]=NP(round(a,6),sl,pct);db[sym]['strategy']=qd.get('type','OTHER');save(DB,db);ok=place_trailing_sl(sym,free_qty(sym,f)) or protect_retry(sym,f);tg(f"🛒 *EXECUTED!*\n{sym}|💵{sp:.2f}@{a:.6f}\n"+(STOP_OK if ok else STOP_NO))
+   db[sym]=NP(round(a,6),sl,pct);db[sym]['strategy']=qd.get('type','OTHER');save(DB,db);ok=place_trailing_sl(sym,free_qty(sym,f)) or protect_retry(sym,f);tg(f"🛒 *EXECUTED — DYNAMIC AUTO-BUY!*\n{sym}|💵{sp:.2f}@{a:.6f}\nAllocation: score {alloc_meta.get('score_factor',0):.2f}x, setup {alloc_meta.get('setup_factor',0):.2f}x, volatility {alloc_meta.get('vol_factor',0):.2f}x, regime {alloc_meta.get('regime_factor',0):.2f}x\n"+(STOP_OK if ok else STOP_NO))
    if not ok and s.get('sell_if_stop_fails',True):unprotected_exit(sym,db)
    q.pop(sym,None);save(QF,q);ub=B('free','USDT');time.sleep(2);break
  except Exception as e:tg(f"⚠️ *QUEUE FAILED:* `{e}`")
@@ -1504,11 +1570,11 @@ def scan(force=False):
  st=load(SC);now=time.time()
  iv=max(1.0,float(cfg().get('scan_interval_minutes',15) or 15))
  if not force and now-st.get('last',0)<max(60,iv*60-240):return
- db=load(DB);q=load(QF);s=cfg();auto_enabled=bool(s.get("auto_buy_enabled"));btc_is_blocked=btc_blocked(s) if auto_enabled else False
+ db=load(DB);q=load(QF);s=cfg();guardian_ok,guardian_reason=guardian_audit();auto_enabled=bool(s.get("auto_buy_enabled")) and guardian_ok;btc_is_blocked=btc_blocked(s) if auto_enabled else False
  mf=market_filter(s) if auto_enabled and not btc_is_blocked else ""
  if mf and not cd("mktblock",21600):tg(f"⏸ *MARKET FILTER:* {mf}.")
  rbh=float(s.get('rebuy_cooldown_hours',6.0))
- buying_allowed=auto_enabled and not btc_is_blocked and not mf;block_reason=("automatic buying is paused" if not auto_enabled else "BTC safety filter blocked buying" if btc_is_blocked else f"market filter: {mf}" if mf else "")
+ buying_allowed=auto_enabled and not btc_is_blocked and not mf;block_reason=(f"Guardian integrity check: {guardian_reason}" if not guardian_ok else "automatic buying is paused" if not auto_enabled else "BTC safety filter blocked buying" if btc_is_blocked else f"market filter: {mf}" if mf else "")
  try:tk=ex.fetch_tickers();mk=ex.load_markets()
  except Exception as e:print(f"SCAN ERROR: {e}");tg(f"⚠️ *SCAN FAILED:* {e}");return
  v=[{'sym':k.replace("/","-"),'vol':t['quoteVolume'] or 0,'chg':t['percentage'] or 0,'last':t.get('last')} for k,t in tk.items() if k.endswith('/USDT') and not skip(k.split('/')[0]) and not (k in mk and not mk[k].get('spot',False))]
@@ -1554,13 +1620,6 @@ def scan(force=False):
       recd["strategy"]=setup
       if setup=="BREAKOUT":recd["reason"]=f"BREAKOUT vol {breakout_volume:.2f}x"
       matched+=1;rr=None;recd["rr"]=None;score=setup_score(setup,vol,r,ma5,ma10,breakout_volume)
-      try:
-       cf,correlated=correlation_exposure(sym);score*=cf
-       if correlated:recd["reason"] += f"; correlation exposure caution ({len(correlated)} correlated holding(s))"
-      except Exception:pass
-      try:
-       rg=market_regime(s);score*=max(0.65,min(1.15,float(rg.get("factor",1.0))))
-      except Exception:pass
       if not buying_allowed:recd["decision"]="SETUP — NOT QUEUED";recd["reason"]=f"{setup} matched, {block_reason}"
       elif rbh>0 and in_cd(f"stopout_{sym}",rbh*3600):recd["decision"]="SETUP — NOT QUEUED";recd["reason"]=f"{setup} matched, re-buy cooldown"
       else:
@@ -1600,57 +1659,6 @@ def scan(force=False):
   except Exception as e:print(f"MATCH LIST ERR: {e}")
   tg(msg)
  elif full:tg(f"🔍 *SCAN COMPLETE*\nChecked {len(records)} markets.\nNo coin matched any setup.")
-
-# Supplemental portfolio intelligence: correlation, stress estimate and performance diagnostics.
-def _returns_series(sym, timeframe='1h', limit=72):
- try:
-  o=ex.fetch_ohlcv(S(sym),timeframe,limit=limit)
-  c=[float(x[4]) for x in o[:-1] if x[4]]
-  return [(c[i]/c[i-1]-1) for i in range(1,len(c)) if c[i-1]>0]
- except Exception:return []
-def _corr(a,b):
- try:
-  n=min(len(a),len(b));a=a[-n:];b=b[-n:]
-  if n<12:return None
-  ma=sum(a)/n;mb=sum(b)/n
-  va=sum((x-ma)**2 for x in a);vb=sum((x-mb)**2 for x in b)
-  if va<=0 or vb<=0:return None
-  return sum((a[i]-ma)*(b[i]-mb) for i in range(n))/(va*vb)**0.5
- except Exception:return None
-def correlation_exposure(sym):
- """Return a caution factor (0.65..1.0) for highly correlated holdings."""
- try:
-  db=load(DB);base=_returns_series(sym);high=[]
-  for held in db:
-   if held==sym:continue
-   c=_corr(base,_returns_series(held))
-   if c is not None and c>=0.80:high.append((held,c))
-  return (0.72 if len(high)>=2 else 0.85 if len(high)==1 else 1.0),high
- except Exception:return 1.0,[]
-def portfolio_stress_estimate(shock_pct=None):
- """Simple conservative mark-to-market shock estimate; not VaR or a prediction."""
- try:
-  s=cfg();shock=float(shock_pct if shock_pct is not None else s.get('portfolio_stress_pct',12))/100
-  db=load(DB);bal=ex.fetch_balance();tot=bal.get('total') or {};eq=equity_now();risk=0.0
-  for sym,d in db.items():
-   q=float(tot.get(sym.split('-')[0],0) or 0);px=live(sym)
-   if q>0 and px:risk+=q*px*shock
-  return {'equity':eq,'positions_shocked_usdt':risk,'shock_pct':shock*100,'equity_loss_pct':risk/eq*100 if eq else 0}
- except Exception:return {'equity':0,'positions_shocked_usdt':0,'shock_pct':0,'equity_loss_pct':0}
-def performance_intelligence():
- """Strategy and recent-trade metrics for diagnosis; never changes strategy rules."""
- try:
-  h=[x for x in load(HIST) if isinstance(x,dict) and isinstance(x.get('pnl'),(int,float))]
-  if not h:return {'count':0}
-  p=[float(x['pnl']) for x in h];w=[x for x in p if x>0];l=[x for x in p if x<0]
-  return {'count':len(p),'win_rate':100*len(w)/len(p),'profit_factor':sum(w)/abs(sum(l)) if l and sum(l) else (float('inf') if w else 0),'net':sum(p),'avg_win':sum(w)/len(w) if w else 0,'avg_loss':sum(l)/len(l) if l else 0,'max_drawdown':_historical_drawdown(p)}
- except Exception:return {'count':0}
-def _historical_drawdown(p):
- peak=cur=dd=0.0
- for x in p:
-  cur+=x;peak=max(peak,cur);dd=max(dd,peak-cur)
- return dd
-
 def fp(p):
  if p is None:return "N/A"
  return f"{p:.2f}" if p>=100 else f"{p:.4f}" if p>=1 else f"{p:.6f}" if p>=0.001 else f"{p:.8f}"
