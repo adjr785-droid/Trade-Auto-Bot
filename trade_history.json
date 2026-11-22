@@ -136,5 +136,26 @@
         "time": 1795342813.0647519,
         "reason": "15-MINUTE NO-UPWARD-TREND ROTATION",
         "strategy": "MANUAL"
+    },
+    {
+        "sym": "TRX-USDT",
+        "pnl": -0.009154320000000445,
+        "time": 1795351582.0519357,
+        "reason": "PANIC",
+        "strategy": "MANUAL"
+    },
+    {
+        "sym": "ENA-USDT",
+        "pnl": 0.3330719999999987,
+        "time": 1795351590.561882,
+        "reason": "PANIC",
+        "strategy": "OTHER"
+    },
+    {
+        "sym": "WLD-USDT",
+        "pnl": -0.01775400000000051,
+        "time": 1795351603.9687593,
+        "reason": "PANIC",
+        "strategy": "MANUAL"
     }
 ]

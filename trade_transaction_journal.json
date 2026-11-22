@@ -225,5 +225,113 @@
         "time": 1795351523.0543964,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 55.0, 'net_pnl_usdt': 4.9856, 'recurring_patterns': ['Frequent manual sell-all actions often result in losses', 'RSI 75 signals correlate with larger positive PnL', 'Partial profit exits (+5% to +6.2%) yield modest gains', '15\u2011minute no\u2011upward\u2011trend rotation entries produce very small positive PnL'], 'recommendations': ['Limit manual sell\u2011all orders unless clear exit criteria are met', 'Prioritize trades triggered by RSI 75 signals, as they have shown strong upside', 'Consider tightening profit\u2011target thresholds for partial exits to capture gains earlier', 'Review the effectiveness of short\u2011term rotation strategy, as returns are minimal and may not justify execution costs']}"
+    },
+    {
+        "time": 1795351580.8903043,
+        "event": "sell_fill_verified",
+        "symbol": "TRX-USDT",
+        "filled": 26.1552,
+        "average": 0.30521,
+        "order_id": "1508379340768485377",
+        "reason": "PANIC",
+        "attempt": 1
+    },
+    {
+        "time": 1795351582.0524619,
+        "event": "trade_closed",
+        "symbol": "TRX-USDT",
+        "pnl_usdt": -0.009154320000000445,
+        "reason": "PANIC",
+        "strategy": "MANUAL"
+    },
+    {
+        "time": 1795351582.3968036,
+        "event": "full_sale_verified_or_dust",
+        "symbol": "TRX-USDT",
+        "remaining_base": 1.86e-05,
+        "remaining_value_usdt": 5.676906e-06,
+        "filled": 26.1552
+    },
+    {
+        "time": 1795351586.2355638,
+        "event": "ai_sell_review",
+        "symbol": "TRX-USDT",
+        "review": {
+            "review": "The position was exited at an average price of 0.30521 USDT, resulting in a realized loss of 0.00915 USDT on a sold quantity of 26.1552 TRX. The exit was triggered by panic, indicating emotional decision\u2011making rather than a systematic risk rule. The remaining base balance is negligible (1.86e-05 TRX).",
+            "lesson": "Implement stricter emotional controls and adhere to predefined stop\u2011loss or risk\u2011management thresholds to avoid panic\u2011driven exits. Consider setting automated alerts or hard stop orders to enforce discipline, and review position sizing to ensure losses remain within acceptable limits.",
+            "confidence": "medium"
+        }
+    },
+    {
+        "time": 1795351589.4119525,
+        "event": "sell_fill_verified",
+        "symbol": "ENA-USDT",
+        "filled": 82.24,
+        "average": 0.1019,
+        "order_id": "1508379376441040897",
+        "reason": "PANIC",
+        "attempt": 1
+    },
+    {
+        "time": 1795351590.5624428,
+        "event": "trade_closed",
+        "symbol": "ENA-USDT",
+        "pnl_usdt": 0.3330719999999987,
+        "reason": "PANIC",
+        "strategy": "OTHER"
+    },
+    {
+        "time": 1795351594.944291,
+        "event": "full_sale_verified_or_dust",
+        "symbol": "ENA-USDT",
+        "remaining_base": 0.00767,
+        "remaining_value_usdt": 0.000781573,
+        "filled": 82.24
+    },
+    {
+        "time": 1795351599.7275546,
+        "event": "ai_sell_review",
+        "symbol": "ENA-USDT",
+        "review": {
+            "review": "The position was exited at an average price of 0.1019\u202fUSDT, realizing a modest profit of 0.333\u202fUSDT on the trade. The exit was triggered by panic rather than a systematic signal, which suggests emotional decision\u2011making. The remaining base asset (0.00767\u202fENA) indicates a small residual exposure that was not fully liquidated, potentially leaving open unintended risk.",
+            "lesson": "Implement stricter exit criteria that rely on predefined technical or risk thresholds rather than emotional cues. Ensure full liquidation of the position unless a strategic partial exit is planned, and document the rationale for any deviation from the standard protocol.",
+            "confidence": "medium"
+        }
+    },
+    {
+        "time": 1795351602.839861,
+        "event": "sell_fill_verified",
+        "symbol": "WLD-USDT",
+        "filled": 29.59,
+        "average": 0.2337,
+        "order_id": "1508379432766349328",
+        "reason": "PANIC",
+        "attempt": 1
+    },
+    {
+        "time": 1795351603.9693394,
+        "event": "trade_closed",
+        "symbol": "WLD-USDT",
+        "pnl_usdt": -0.01775400000000051,
+        "reason": "PANIC",
+        "strategy": "MANUAL"
+    },
+    {
+        "time": 1795351604.6429346,
+        "event": "full_sale_verified_or_dust",
+        "symbol": "WLD-USDT",
+        "remaining_base": 0.00038,
+        "remaining_value_usdt": 8.8806e-05,
+        "filled": 29.59
+    },
+    {
+        "time": 1795351609.514627,
+        "event": "ai_sell_review",
+        "symbol": "WLD-USDT",
+        "review": {
+            "review": "The position was closed at an average price of 0.2337\u202fUSDT, resulting in a realized loss of 0.01775\u202fUSDT on the trade. The exit was triggered by panic rather than a systematic signal, and only a small fraction of the original base (0.00038\u202fWLD) remains unsold. The trade size (\u224829.59\u202fWLD) was modest, but the loss indicates that the risk controls around emotional exits were insufficient.",
+            "lesson": "Implement stricter emotional\u2011risk safeguards, such as automated stop\u2011losses or cooldown periods, to prevent panic\u2011driven exits. Ensure that exit decisions are based on predefined technical or risk criteria rather than sentiment. Review position sizing and ensure that remaining base is either fully liquidated or managed with clear stop parameters.",
+            "confidence": "medium"
+        }
     }
 ]
