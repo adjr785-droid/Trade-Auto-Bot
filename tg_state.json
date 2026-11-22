@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689271,
+    "last_update_id": 935689275,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -66,46 +66,82 @@
     "panel_rows": [
         [
             {
-                "text": "\ud83e\udd16 Bot",
-                "callback_data": "/bot"
-            },
-            {
-                "text": "\ud83d\udcc8 Stats",
-                "callback_data": "/stats"
+                "text": "partial_tp_pct = 8.5938",
+                "callback_data": "m:k:partial_tp_pct"
             }
         ],
         [
             {
-                "text": "\u2699\ufe0f Settings",
-                "callback_data": "m:set"
-            },
-            {
-                "text": "\ud83d\udcbc Holdings",
-                "callback_data": "m:r:holdings"
+                "text": "partial_tp_fraction = 0.5",
+                "callback_data": "m:k:partial_tp_fraction"
             }
         ],
         [
             {
-                "text": "\ud83d\udcdc Trade History",
-                "callback_data": "m:r:history"
-            },
-            {
-                "text": "\ud83e\udde0 Ask AI",
-                "callback_data": "m:ai:1"
+                "text": "dynamic_trail = True",
+                "callback_data": "m:k:dynamic_trail"
             }
         ],
         [
             {
-                "text": "\ud83e\uddf9 Clear Chat",
-                "callback_data": "/clear"
+                "text": "sell_if_stop_fails = True",
+                "callback_data": "m:k:sell_if_stop_fails"
+            }
+        ],
+        [
+            {
+                "text": "scan_prefilter = True",
+                "callback_data": "m:k:scan_prefilter"
+            }
+        ],
+        [
+            {
+                "text": "cleanup_hours = 24.0",
+                "callback_data": "m:k:cleanup_hours"
+            }
+        ],
+        [
+            {
+                "text": "scan_interval_minutes = 30.0",
+                "callback_data": "m:k:scan_interval_minutes"
+            }
+        ],
+        [
+            {
+                "text": "auto_clear_hours = 24.0",
+                "callback_data": "m:k:auto_clear_hours"
+            }
+        ],
+        [
+            {
+                "text": "live_mode_seconds = 270",
+                "callback_data": "m:k:live_mode_seconds"
+            }
+        ],
+        [
+            {
+                "text": "mtf_confirm = True",
+                "callback_data": "m:k:mtf_confirm"
+            }
+        ],
+        [
+            {
+                "text": "\u25c0\ufe0f Prev",
+                "callback_data": "m:sp:2"
             },
             {
-                "text": "\ud83d\udea8 PANIC SELL",
-                "callback_data": "/panic"
+                "text": "Next \u25b6\ufe0f",
+                "callback_data": "m:sp:4"
+            }
+        ],
+        [
+            {
+                "text": "\u2b05\ufe0f Menu",
+                "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
+    "panel_text": "\u2699\ufe0f *SETTINGS* (page 4/8)\nTap a setting to change it.",
     "out_mid": 3933,
     "out_time": 1795375308.4527352,
     "panel_mid": 3936
