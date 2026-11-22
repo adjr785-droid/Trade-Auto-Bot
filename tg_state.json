@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935688944,
+    "last_update_id": 935688945,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -67,76 +67,44 @@
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udee0\ufe0f Audit",
-                "callback_data": "m:r:audit"
+                "text": "\ud83e\udd16 Bot",
+                "callback_data": "/bot"
             },
             {
-                "text": "\ud83e\uddfe Scan History",
-                "callback_data": "m:scan_hist"
+                "text": "\ud83d\udcc8 Stats",
+                "callback_data": "/stats"
             }
         ],
         [
             {
-                "text": "\u274c Cancel Orders",
-                "callback_data": "m:r:cancel"
+                "text": "\ud83d\udd0e Analyse Coin",
+                "callback_data": "m:an"
             },
             {
-                "text": "\ud83d\udd14 Alerts",
-                "callback_data": "m:r:alerts"
+                "text": "\u2699\ufe0f Settings",
+                "callback_data": "m:set"
             }
         ],
         [
             {
-                "text": "\ud83e\uddf9 Dust \u2192 BGB",
-                "callback_data": "m:r:dust"
+                "text": "\ud83d\udcbc Holdings",
+                "callback_data": "m:r:holdings"
             },
             {
-                "text": "\ud83d\uded2 Buy",
-                "callback_data": "m:buy"
+                "text": "\ud83e\udde0 Ask AI",
+                "callback_data": "m:ai:1"
             }
         ],
         [
             {
-                "text": "\ud83d\udcb8 Sell",
-                "callback_data": "m:sell"
+                "text": "\ud83e\uddf9 Clear Chat",
+                "callback_data": "/clear"
             },
             {
-                "text": "\ud83d\udd14 Price Alert",
-                "callback_data": "m:al"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udcc8 Gainers",
-                "callback_data": "m:r:gain"
-            },
-            {
-                "text": "\ud83d\udcc9 Losers",
-                "callback_data": "m:r:lose"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udcca Dashboard",
-                "callback_data": "m:dash"
-            },
-            {
-                "text": "\ud83e\udde9 Layout",
-                "callback_data": "m:lay"
-            }
-        ],
-        [
-            {
-                "text": "\ud83e\udde0 Resume AI",
-                "callback_data": "m:r:airesume"
-            }
-        ],
-        [
-            {
-                "text": "\u2b05\ufe0f Main Menu",
-                "callback_data": "m:menu"
+                "text": "\ud83d\udea8 PANIC SELL",
+                "callback_data": "/panic"
             }
         ]
     ],
-    "panel_text": "\ud83e\uddf0 *TOOLS*\nChoose a tool. Existing commands and functions remain available."
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below."
 }
