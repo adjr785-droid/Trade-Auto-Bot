@@ -178,5 +178,22 @@
         "time": 1795348117.814152,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 55.0, 'net_pnl_usdt': 4.9856, 'recurring_patterns': ['MANUAL SELL ALL', 'RSI 75', 'PARTIAL PROFIT'], 'recommendations': 'Maintain current risk limits; focus on trades with RSI 75 signals that showed positive pnl; reduce reliance on manual sell all entries which often yielded losses; monitor partial profit exits for consistency; consider tightening stop\u2011losses on symbols with repeated negative outcomes (e.g., SOON-USDT, INJ-USDT).'}"
+    },
+    {
+        "time": 1795349991.9336193,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (5)', 'attention': [{'symbol': 'TRX-USDT', 'action': 'hold', 'reason': 'Small profit (0.08%) and stop loss still above entry; position age is high, indicating stability. No immediate risk.'}, {'symbol': 'ENA-USDT', 'action': 'monitor', 'reason': 'Strong unrealized gain (5.57%) but stop loss equals entry; consider tightening stop to protect profit while confirming trend.'}, {'symbol': 'WLD-USDT', 'action': 'hold', 'reason': 'Modest profit (0.81%) with stop loss 3% below entry; position is relatively new, maintain until clearer price direction.'}], 'summary': 'Overall portfolio is within the daily risk limit. All positions show positive P&L; maintain current holdings, tighten ENA stop to lock gains, and continue monitoring for any adverse moves.'}"
+    },
+    {
+        "time": 1795349992.5924578,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 55.0, 'net_pnl_usdt': 4.9856, 'recurring_patterns': ['MANUAL SELL ALL', 'RSI 75', 'PARTIAL PROFIT'], 'recommendations': 'Maintain current risk limits; focus on trades with RSI 75 signals that showed positive pnl; reduce reliance on manual sell all entries which often yielded losses; monitor partial profit exits for consistency; consider tightening stop\u2011losses on symbols with repeated negative outcomes (e.g., SOON-USDT, INJ-USDT).'}"
+    },
+    {
+        "time": 1795349992.82236,
+        "event": "momentum_watch_passed",
+        "symbol": "WLD-USDT",
+        "source": "MANUAL",
+        "detail": "15m move +1.07%; live vs entry +0.77%"
     }
 ]
