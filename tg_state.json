@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689229,
+    "last_update_id": 935689230,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -17,7 +17,7 @@
         "pos": [],
         "hn": 27
     },
-    "last_cmd": "/bot",
+    "last_cmd": "/stats",
     "page_mem": {
         "/bot": [
             7,
@@ -60,66 +60,42 @@
             1795362988.7943418
         ]
     },
-    "out_text": "\ud83e\udd16 *BOT*\n\ud83d\udd58 Since last check (15 min ago): \ud83d\udd34\nbalance -0.02 USDT | closed: COLLECT | 1\ntrade(s) closed\nExchange connection: \u2705 OK\nPortfolio: $23.13 USDT | \u20a631,839\nUSDT cash: $23.10 (free $23.10)\nAuto-buy: PAUSED (dynamic allocation;\n\u2800\n\u2800",
+    "out_text": "\ud83d\udcc8 *TRADE STATS*\nClosed trades: 27\nWin rate: 56% (15 wins, 12 losses)\nAverage per trade: $+0.20\nNet profit: $+5.31\nBest: $+2.97 | Worst: $-0.66\n\n*By strategy*\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795366518.9978201,
+    "out_time": 1795366615.6419702,
     "panel_rows": [
         [
             {
-                "text": "\ud83e\udd16 Bot",
-                "callback_data": "/bot"
+                "text": "\u25c0",
+                "callback_data": "pg:p"
             },
             {
-                "text": "\ud83d\udcc8 Stats",
-                "callback_data": "/stats"
-            }
-        ],
-        [
-            {
-                "text": "\u2699\ufe0f Settings",
-                "callback_data": "m:set"
+                "text": "1/3",
+                "callback_data": "pg:x"
             },
             {
-                "text": "\ud83d\udcbc Holdings",
-                "callback_data": "m:r:holdings"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udcdc Trade History",
-                "callback_data": "m:r:history"
+                "text": "\u25b6",
+                "callback_data": "pg:n"
             },
             {
-                "text": "\ud83e\udde0 Ask AI",
-                "callback_data": "m:ai:1"
-            }
-        ],
-        [
-            {
-                "text": "\ud83e\uddf9 Clear Chat",
-                "callback_data": "/clear"
+                "text": "\ud83c\udfe0",
+                "callback_data": "m:menu"
             },
             {
-                "text": "\ud83d\udea8 PANIC SELL",
-                "callback_data": "/panic"
+                "text": "\ud83d\udd04",
+                "callback_data": "rf:go"
             }
         ]
     ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
+    "panel_text": "\ud83d\udcc4 *Page 1/3*",
     "kb_mid": 3883,
-    "out_mid": 3886,
     "pages": {
         "p": [
-            "\ud83e\udd16 *BOT*\n\ud83d\udd58 Since last check (15 min ago): \ud83d\udd34\nbalance -0.02 USDT | closed: COLLECT | 1\ntrade(s) closed\nExchange connection: \u2705 OK\nPortfolio: $23.13 USDT | \u20a631,839\nUSDT cash: $23.10 (free $23.10)\nAuto-buy: PAUSED (dynamic allocation;\n\u2800\n\u2800",
-            "legacy target $6.4994)\nBTC safety filter: OK\nMarket filter: only 20% of coins are up\ntoday\nRisk controls: \u26d4 Daily limit (11)\nToday vs start of day: -1.84% (auto-buy\npauses at -5.0%)\nMoney in coins: 0% of portfolio (cap\n\u2800\n\u2800",
-            "50.0%)\nRe-buy cooldown active: JCT\nLast market scan: 6 min ago (runs every\n30 min) | Queued coins: 0\nBot-tracked positions: 0 | Holdings\npriced: 0\n\ud83d\udfe2 Last: COLLECT \u2014 15-MINUTE\nNO-UPWARD-TREND ROTATION | PnL $+0.00 |\n\u2800\n\u2800",
-            "0.1h ago\n\n\ud83e\udded *STRATEGY*\nEntries: TREND (RSI 42-48, price > MA5 >\nMA10), OVERSOLD bounce (RSI < 30),\nBREAKOUT (RSI 50-70 + volume breakout)\nProtection: stop-loss 15% | trailing stop\n8.0% below peak | crash guard 10.0%\n\u2800\n\u2800",
-            "Exit: RSI >= 75 or max hold 296h\nProfit taking: sell 50% at +8.5938% then\nstop moves to break-even\nDynamic trailing: ON (wider in strong\ntrends, tighter when momentum fades)\nEntry safety: spread limit 0.5% | stop\nfails -> sell at market | scan pre-filter\nON\n\u2800\n\u2800",
-            "Near-instant mode: ON (stays awake 270s\nper run)\nAuto-clear chat: every 24h\nLimits: 5 trades/day, 3.0% daily loss,\n15.0% max per coin\nExtra safeguards: 4h trend check ON | BTC\nshock pause 3%/h | combined open risk cap\n3% | smaller buys after 2 losses in a row\n\u2800\n\u2800",
-            "| parallel scan ON\n\n\ud83d\uded1 *HOLDINGS ADVICE*\nNo priced coin holdings right now.\n\n\ud83e\udde0 *AI:* Bot shows a -0.02\u202fUSDT balance,\nauto\u2011buy paused, daily loss at -1.84%\n(near the -5% auto\u2011pause trigger), and\n\u2800\n\u2800",
-            "no active holdings; monitor for further\nlosses before resuming trades.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+            "\ud83d\udcc8 *TRADE STATS*\nClosed trades: 27\nWin rate: 56% (15 wins, 12 losses)\nAverage per trade: $+0.20\nNet profit: $+5.31\nBest: $+2.97 | Worst: $-0.66\n\n*By strategy*\n\u2800\n\u2800",
+            "MANUAL: 20 trades | win 65% | avg $+0.30\n| total $+5.99\nOLDER: 2 trades | win 0% | avg $-0.15 |\ntotal $-0.29\nOTHER: 5 trades | win 40% | avg $-0.08 |\ntotal $-0.40\n\n\ud83e\udde0 *AI:* Overall net profit is modest\n\u2800\n\u2800",
+            "(+$5.31) with a 56% win rate; manual\nstrategy is profitable, but the older\nstrategy shows consistent losses,\nwarranting review.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 7,
+        "i": 0,
         "mode": "Markdown",
         "x": [
             {
@@ -127,7 +103,8 @@
                 "callback_data": "rf:go"
             }
         ],
-        "cmd": "/bot"
+        "cmd": "/stats"
     },
-    "panel_mid": 3887
+    "out_mid": 3888,
+    "panel_mid": 3889
 }
