@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935688658,
+    "last_update_id": 935688659,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT23.07/\u20a631,755",
+    "kb_ph": "USDT23.05/\u20a631,739",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -75,7 +75,7 @@
             1795311215.95037
         ]
     },
-    "kb_mid": 3283,
+    "kb_mid": 3287,
     "out_mid": 3282,
     "pages": {
         "p": [
