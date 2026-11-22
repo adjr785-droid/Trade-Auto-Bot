@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935688924,
+    "last_update_id": 935688925,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -22,8 +22,8 @@
     "last_cmd": "/bot",
     "page_mem": {
         "/bot": [
-            5,
-            1795353367.654101
+            6,
+            1795353372.396385
         ],
         "m:r:holdings": [
             3,
@@ -67,7 +67,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "6/8",
+                "text": "7/8",
                 "callback_data": "pg:x"
             },
             {
@@ -84,7 +84,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 6/8*",
+    "panel_text": "\ud83d\udcc4 *Page 7/8*",
     "out_time": 1795353305.3687155,
     "kb_mid": 3609,
     "out_mid": 3607,
@@ -99,7 +99,7 @@
             "_Technical view only, not\nfinancial advice._\n\n\ud83d\udfe2 \ud83e\ude99 *GRAM* \u2014 $23.18 | PnL\n+0.0% ($+0.00)\nAdvice: \ud83d\udfe2 HOLD\nWhy: Trend is up (price > MA5 >\nMA10), RSI 67\n\u274c Long-term: not suited (below\n50-day average, 100-day change\n\u2800\n\u2800",
             "-27%, thin volume)\n\n\n\u2705 No sell advised right now.\nFor possible new buys use\n/analyse.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 5,
+        "i": 6,
         "mode": "Markdown",
         "x": [
             {
