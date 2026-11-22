@@ -624,5 +624,10 @@
             "warning": "Market filter indicates only 20% of coins are up today, suggesting overall bearish sentiment. RSI is below 50, indicating potential further downside. Proceed with caution and consider waiting for clearer bullish signals.",
             "summary": "Manual buy of 23.07 USDT worth of DOS-USDT at 0.1429 is high risk given current market conditions and technical indicator. Recommend reviewing additional signals before execution."
         }
+    },
+    {
+        "time": 1795370660.525908,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (11)', 'attention': [{'symbol': 'DOS-USDT', 'action': 'hold', 'reason': 'Position is at entry price with 0% PnL and stop loss only ~5% below entry; no clear signal to adjust.'}], 'summary': 'Current portfolio risk is within the daily limit. The only open position (DOS-USDT) shows no profit or loss and remains within its stop-loss threshold. Maintain the position and monitor for any price movement beyond the stop level before considering any action.'}"
     }
 ]

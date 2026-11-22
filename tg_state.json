@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT23.10/\u20a631,807",
+    "kb_ph": "USDT23.09/\u20a631,785",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -60,7 +60,7 @@
             1795362988.7943418
         ]
     },
-    "kb_mid": 3903,
+    "kb_mid": 3904,
     "out_text": "\ud83e\udde0 AI manual-buy advisory: Manual buy of\n23.07 USDT worth of DOS-USDT at 0.1429 is\nhigh risk given current market conditions\nand technical indicator. Recommend\nreviewing additional signals before\nexecution.\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "out_time": 1795370609.1415324,
