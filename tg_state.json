@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935688941,
+    "last_update_id": 935688942,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -59,9 +59,9 @@
         ]
     },
     "kb_mid": 3626,
-    "out_text": "\ud83d\udcc8 *TOP 10 GAINERS (24H)*\n\n```\n\ud83d\udcc8 GAINERS\n 1. PWT      +189.21%\n 2. DGAI      +28.54%\n 3. MAGMA     +23.32%\n 4. BLESS     +22.13%\n 5. NEAR       +5.42%\n 6. PUMP       +5.29%\n```\n\u2800",
+    "out_text": "\ud83d\udcca *ANALYSIS: DGAI-USDT*\nLive price: 0.928208 USDT\n24h change: +28.57%\nRSI(14): 82.0100 \u2014 Overbought\nMA5: 0.861129 | MA10: 0.842126 |\nMA20: 0.814054\nMACD: 0.036334 | Signal:\n0.031085 | Histogram: 0.005249\nATR(14): 0.029205 (3.15% of\nprice)\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795354108.5200133,
+    "out_time": 1795354197.8982003,
     "panel_rows": [
         [
             {
@@ -79,28 +79,19 @@
             {
                 "text": "\ud83c\udfe0",
                 "callback_data": "m:menu"
-            },
-            {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
             }
         ]
     ],
     "panel_text": "\ud83d\udcc4 *Page 1/2*",
     "pages": {
         "p": [
-            "\ud83d\udcc8 *TOP 10 GAINERS (24H)*\n\n```\n\ud83d\udcc8 GAINERS\n 1. PWT      +189.21%\n 2. DGAI      +28.54%\n 3. MAGMA     +23.32%\n 4. BLESS     +22.13%\n 5. NEAR       +5.42%\n 6. PUMP       +5.29%\n```\n\u2800",
-            "```\n 7. ENA        +5.04%\n 8. HYPE       +4.39%\n 9. WLD        +3.90%\n10. ONDO       +3.72%```\n_Minimum 24H volume: $1M._\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+            "\ud83d\udcca *ANALYSIS: DGAI-USDT*\nLive price: 0.928208 USDT\n24h change: +28.57%\nRSI(14): 82.0100 \u2014 Overbought\nMA5: 0.861129 | MA10: 0.842126 |\nMA20: 0.814054\nMACD: 0.036334 | Signal:\n0.031085 | Histogram: 0.005249\nATR(14): 0.029205 (3.15% of\nprice)\n\u2800\n\u2800",
+            "Last hour vol vs 20h avg: 1.28x\nBid/ask spread: 0.168%\nTechnical checks: 3/4\nAssessment: *WAIT / WEAK SETUP*\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
         "i": 0,
         "mode": "Markdown",
-        "x": [
-            {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
-            }
-        ],
-        "cmd": "m:r:gain"
+        "x": [],
+        "cmd": null
     },
     "out_mid": 3624,
     "panel_mid": 3625
