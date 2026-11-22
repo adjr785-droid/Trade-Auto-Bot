@@ -5,28 +5,28 @@
     "latency_ms": 225,
     "last_error": "",
     "consecutive_failures": 0,
-    "consecutive_successes": 20,
+    "consecutive_successes": 0,
     "last_response_valid": true,
     "alerted_status": "healthy",
-    "emergency_mode": false,
-    "trading_mode": "NORMAL",
+    "emergency_mode": true,
+    "trading_mode": "SELL_ONLY",
     "emergency_started": 1795337672.3776765,
-    "emergency_reason": "AI stage performance_review failed: Expecting ',' delimiter: line 1 column 646 (char 645)",
-    "resume_requires_user_confirmation": false,
+    "emergency_reason": "AI stage performance_review failed: Expecting ',' delimiter: line 1 column 627 (char 626)",
+    "resume_requires_user_confirmation": true,
     "stages": {
         "portfolio_review": {
             "last_failure": 1795339738.9050465,
             "failures": 2,
             "last_error": "",
-            "last_success": 1795365356.5017715,
-            "successes": 22
+            "last_success": 1795365697.29305,
+            "successes": 23
         },
         "performance_review": {
             "last_success": 1795365357.120241,
             "successes": 30,
-            "last_error": "",
-            "last_failure": 1795351831.5728984,
-            "failures": 2
+            "last_error": "Expecting ',' delimiter: line 1 column 627 (char 626)",
+            "last_failure": 1795365698.7489345,
+            "failures": 3
         },
         "market_regime": {
             "last_success": 1795364473.073366,
@@ -59,7 +59,7 @@
             "last_error": ""
         }
     },
-    "last_stage_success": 1795365608.8364763,
+    "last_stage_success": 1795365697.29305,
     "last_success": 1795365610.640647,
     "emergency_ended": 1795352684.071692,
     "recovery_start_alerted": false
