@@ -34,7 +34,7 @@ def ai_sell_reason_allowed(reason):
  """Allow only the bot's predefined, deterministic exit conditions in emergency mode."""
  r=str(reason or "").strip().upper()
  prefixes=("SL HIT", "STOP LOSS", "TRAILING STOP", "TIME STOP", "RSI ", "CRASH GUARD",
-  "PARTIAL PROFIT", "UNPROTECTED", "15-MINUTE NO-UPWARD-TREND ROTATION")
+  "PARTIAL PROFIT", "UNPROTECTED", "MOMENTUM NO-UPWARD-TREND ROTATION")
  return any(r.startswith(x) for x in prefixes)
 
 def ai_emergency_resume(auto=False):
@@ -437,7 +437,7 @@ def save(f,d):
   os.replace(f+".tmp",f)
  except Exception as e:print(f"SAVE ERR {f}: {e}")
 def cfg():
- d={"rsi_min":42,"rsi_max":48,"stop_loss_pct":5.0,"auto_buy_enabled":True,"auto_buy_amount_usdt":10.0,"max_tokens_before_consolidation":3,"max_hold_hours":48,"trail_pct":8.0,"crash_guard_pct":10.0,"rsi_exit":75,"btc_rsi_min":50,"risk_per_trade_pct":1.0,"max_daily_loss_pct":3.0,"max_portfolio_exposure_pct":50.0,"max_position_pct":15.0,"max_daily_trades":5,"max_spread_pct":0.5,"auto_mode_v1":False,"rebuy_cooldown_hours":6.0,"atr_stop_enabled":True,"atr_stop_mult":2.0,"atr_stop_min_pct":3.0,"atr_stop_max_pct":10.0,"market_filter_enabled":True,"btc_trend_hours":50,"min_breadth_pct":30.0,"offline_alert_hours":3.0,"daily_summary_hour_utc":20,"max_daily_drawdown_pct":5.0,"partial_tp_pct":5.0,"partial_tp_fraction":0.5,"dynamic_trail":True,"sell_if_stop_fails":True,"scan_prefilter":True,"cleanup_hours":24.0,"scan_interval_minutes":15.0,"auto_clear_hours":24.0,"live_mode_seconds":270,"mtf_confirm":True,"btc_shock_pct":3.0,"max_open_risk_pct":3.0,"loss_streak_trigger":2,"loss_streak_size_factor":0.5,"scan_parallel":True,"page_chars":600,"page_lines":12,"page_width":32,"output_stale_minutes":5,"smart_risk_enabled":True,"max_coin_exposure_pct":20.0,"max_sector_exposure_pct":35.0,"liquidity_depth_usdt":5000.0,"max_book_imbalance_pct":85.0,"regime_risk_factor":0.65,"execution_slippage_pct":0.35,"stop_watchdog_enabled":True,"portfolio_stress_pct":12.0,"signal_expiry_minutes":30,"adaptive_risk_enabled":True,"dynamic_auto_buy_enabled":True,"auto_buy_reserve_pct":5.0,"dynamic_auto_buy_max_pct":20.0,"dynamic_auto_buy_min_usdt":1.02,"dynamic_auto_buy_max_usdt":0.0,"guardian_enabled":True,"guardian_audit_interval_minutes":15,"max_portfolio_correlation":0.85,"momentum_1h_enabled":True,"mom_1h_min_pct":0.5,"mom_1h_max_pct":6.0,"max_24h_pct":100.0,"near_miss_alerts":True,"near_miss_rsi_margin":3.0,"near_miss_1h_margin":0.5,"near_miss_cooldown_minutes":60,"near_miss_max_per_scan":3}
+ d={"rsi_min":42,"rsi_max":48,"stop_loss_pct":5.0,"auto_buy_enabled":True,"auto_buy_amount_usdt":10.0,"max_tokens_before_consolidation":3,"max_hold_hours":48,"trail_pct":8.0,"crash_guard_pct":10.0,"rsi_exit":75,"btc_rsi_min":50,"risk_per_trade_pct":1.0,"max_daily_loss_pct":3.0,"max_portfolio_exposure_pct":50.0,"max_position_pct":15.0,"max_daily_trades":5,"max_spread_pct":0.5,"auto_mode_v1":False,"rebuy_cooldown_hours":6.0,"atr_stop_enabled":True,"atr_stop_mult":2.0,"atr_stop_min_pct":3.0,"atr_stop_max_pct":10.0,"market_filter_enabled":True,"btc_trend_hours":50,"min_breadth_pct":30.0,"offline_alert_hours":3.0,"daily_summary_hour_utc":20,"max_daily_drawdown_pct":5.0,"partial_tp_pct":5.0,"partial_tp_fraction":0.5,"dynamic_trail":True,"sell_if_stop_fails":True,"scan_prefilter":True,"cleanup_hours":24.0,"scan_interval_minutes":15.0,"auto_clear_hours":24.0,"live_mode_seconds":270,"mtf_confirm":True,"btc_shock_pct":3.0,"max_open_risk_pct":3.0,"loss_streak_trigger":2,"loss_streak_size_factor":0.5,"scan_parallel":True,"page_chars":600,"page_lines":12,"page_width":32,"output_stale_minutes":5,"smart_risk_enabled":True,"max_coin_exposure_pct":20.0,"max_sector_exposure_pct":35.0,"liquidity_depth_usdt":5000.0,"max_book_imbalance_pct":85.0,"regime_risk_factor":0.65,"execution_slippage_pct":0.35,"stop_watchdog_enabled":True,"portfolio_stress_pct":12.0,"signal_expiry_minutes":30,"adaptive_risk_enabled":True,"dynamic_auto_buy_enabled":True,"auto_buy_reserve_pct":5.0,"dynamic_auto_buy_max_pct":20.0,"dynamic_auto_buy_min_usdt":1.02,"dynamic_auto_buy_max_usdt":0.0,"guardian_enabled":True,"guardian_audit_interval_minutes":15,"max_portfolio_correlation":0.85,"momentum_1h_enabled":True,"mom_1h_min_pct":0.5,"mom_1h_max_pct":6.0,"max_24h_pct":100.0,"near_miss_alerts":True,"near_miss_rsi_margin":3.0,"near_miss_1h_margin":0.5,"near_miss_cooldown_minutes":60,"near_miss_max_per_scan":3,"radar_max":30,"radar_rsi_margin":10.0,"momentum_watch_minutes":60}
  s=load(CFG,d)
  for k,v in d.items():s.setdefault(k,v)
  if not s.get('auto_mode_v1'):s['auto_buy_enabled']=True;s['auto_mode_v1']=True;save(CFG,s)
@@ -573,7 +573,7 @@ def _calc(sym):
   except Exception:_H1[sym]=None
   return float(o[-1][4]),c[-1],_rsi(c),round(sum(c[-5:])/5,6),round(sum(c[-10:])/10,6)
  except:return (None,)*5
-_PF={};_H1={};_NM=[]
+_PF={};_H1={};_NM=[];_RADAR=[]
 def mom_on(s):return bool(s.get('momentum_1h_enabled',True))
 def pre_ok(chg,s):
  # candle-fetch prefilter: with the 1H momentum window the 24h change only needs to stay under a loose ceiling
@@ -1141,7 +1141,7 @@ def analyse_top3():
  lim=float(s.get('max_spread_pct',0.5));rbh=float(s.get('rebuy_cooldown_hours',6.0))
  try:btcb=bool(btc_blocked(s))
  except Exception:btcb=False
- amap={}
+ amap={};summ=[]
  try:
   ar=ai_stage('analyse_review',{'btc_filter_active':btcb,'market_filter':str(market_filter(s) or ''),'candidates':[{'symbol':c['sym'],'setup':c['setup'],'passes_scanner_rules':c['full'],'rsi':round(c['rsi'],1),'chg_24h_pct':round(c['chg'],2),'spread_pct':spread_pct(c['sym'])} for c in top]},ttl=120,max_tokens=500,soft=True)
   if ar and isinstance(ar.get('reviews'),list):amap={str(x.get('symbol','')).upper().replace('/','-'):x for x in ar['reviews'] if isinstance(x,dict)}
@@ -1159,8 +1159,17 @@ def analyse_top3():
   out.append("• Status: "+stt+(" | BTC filter active" if btcb else ""))
   out.append("• 🧠 AI: "+(vd+" — "+str(av.get('reason',''))[:120] if av else "unavailable right now"))
   out.append("")
+  _sn=str(c['setup']).split(" ")[0].replace("WATCHLIST","WATCH");_ic=stt.split(" ")[0]
+  summ+=[f"*{n}. {c['sym'].split('-')[0]}* {_ic} {_sn}",f"{fp(c['p'])} | {c['chg']:+.1f}% | RSI {c['rsi']:.0f}","🧠 "+((vd+" · "+str(av.get('reason',''))[:20]) if av else "AI n/a")]
  if not any(c["full"] for c in top):out.append("No coin passes all scanner rules right now, so these are the strongest available. Be cautious.\n")
  out.append("Buy manually with `/buy COIN amount` if you agree.")
+ # Page 1 = one-screen summary of all 3 coins (padded to a full page); full details follow on the next pages.
+ try:
+  if int(s.get('page_chars',0) or 0)>0:
+   W=int(s.get('page_width',32) or 32);L=int(s.get('page_lines',12) or 12);cap=max(2,L-2)
+   sw=_wrap("\n".join(["🏆 *TOP 3* · ▶ details"]+summ),W).split("\n") if isinstance(_wrap("x",W),str) else _wrap("\n".join(["🏆 *TOP 3* · ▶ details"]+summ),W)
+   if len(sw)<=cap:out=sw+["⠀"]*(cap-len(sw))+out
+ except Exception as e:print("ANALYSE SUMMARY ERR",str(e)[:100])
  tg("\n".join(out))
  try:ui_send("🔎 Want a specific coin?",[[_B("🔎 Analyse a coin","m:an")],_MENU_BTN])
  except Exception:pass
@@ -1900,15 +1909,16 @@ def replace_with_best_setup(origin_source, sold_symbol):
  except Exception as e:
   breaker_failure(f"ROTATION BUY {sym}: {e}");journal_event("momentum_rotation_buy_failed",symbol=sym,error=str(e)[:220]);tg(f"❌ Replacement buy failed for {sym}: {str(e)[:180]}")
 def momentum_watchdog():
- """After 15 minutes, rotate bot /buy and auto-bought positions lacking upward momentum."""
+ """After momentum_watch_minutes (default 60), rotate bot /buy and auto-bought positions lacking upward momentum, then Analyse for the best setup."""
  db=load(DB);now=time.time();changed=False
+ mw=max(1.0,float(cfg().get("momentum_watch_minutes",60) or 60));mwl=(f"{mw/60:g} hour" if mw>=60 and mw%60==0 else f"{mw:g} minutes")
  for sym,d in list(db.items()):
   source=str(d.get("purchase_source","")).upper()
   if source not in ("MANUAL","AUTO"):continue
   started=float(d.get("momentum_watch_started",d.get("opened_at",0)) or 0)
   if not started:
    d["momentum_watch_started"]=now;db[sym]=d;changed=True;continue
-  if now-started<900:continue
+  if now-started<mw*60:continue
   if d.get("momentum_watch_done"):continue
   entry=float(d.get("entry_price",0) or 0)
   rising,detail=asset_has_upward_momentum(sym,entry)
@@ -1919,10 +1929,10 @@ def momentum_watchdog():
   if rising:
    d["momentum_watch_done"]=True;d["momentum_watch_result"]="UPWARD";db[sym]=d;changed=True
    journal_event("momentum_watch_passed",symbol=sym,source=source,detail=detail)
-   tg(f"📈 *MOMENTUM WATCH PASSED* {sym}: upward trend confirmed after 15 minutes. {detail}")
+   tg(f"📈 *MOMENTUM WATCH PASSED* {sym}: upward trend confirmed after {mwl}. {detail}")
    continue
-  tg(f"🔄 *MOMENTUM ROTATION TRIGGERED* {sym}: no upward trend after 15 minutes. {detail}")
-  if sell(sym,1.0,"15-MINUTE NO-UPWARD-TREND ROTATION"):
+  tg(f"🔄 *MOMENTUM ROTATION TRIGGERED* {sym}: no upward trend after {mwl}. Analysing the market for the best replacement setup. {detail}")
+  if sell(sym,1.0,"MOMENTUM NO-UPWARD-TREND ROTATION"):
    db=load(DB);db.pop(sym,None);save(DB,db)
    journal_event("momentum_watch_sold",symbol=sym,source=source,detail=detail)
    replace_with_best_setup(source,sym)
@@ -2031,6 +2041,39 @@ def send_near_miss(s,ai_market=None):
   rows.append([_B(f"🛒 Buy {coin}",f"m:b:{coin}"),_B(f"🔎 Analyse {coin}",f"m:a:{coin}")])
   mk_cd("nm_"+c["sym"])
  _create("\n".join(lines)[:3900],"Markdown",{"inline_keyboard":rows},silent=False)
+def fast_watch():
+ # Once a minute in live mode: re-check the radar (coins near the entry rules) so alerts fire without waiting for the next full scan.
+ s=cfg()
+ if not (s.get('near_miss_alerts',True) and mom_on(s)):return
+ if time.time()-float(load(SC,{}).get('last',0) or 0)<45:return
+ radar=(load(ST,{}).get('radar') or [])[:int(s.get('radar_max',30))]
+ if not radar:return
+ try:tk=ex.fetch_tickers()
+ except Exception as e:print("FASTWATCH TICKERS",str(e)[:100]);return
+ from concurrent.futures import ThreadPoolExecutor
+ with ThreadPoolExecutor(max_workers=4) as pool:res=list(pool.map(_calc,radar))
+ _NM.clear();hits=[]
+ for sym,(p,pr,r,ma5,ma10) in zip(radar,res):
+  if not p or r is None or ma5 is None or ma10 is None:continue
+  chg=float(((tk.get(sym.replace('-','/')) or {}).get('percentage')) or 0)
+  if trend_range(sym,chg,s) and float(s['rsi_min'])<=r<=float(s['rsi_max']) and p>ma5>ma10 and trend_4h_ok(sym,s):
+   if not in_cd("sm_"+sym,3600) and sym not in load(DB):hits.append((sym,p,chg,r,_H1.get(sym) or 0.0))
+   continue
+  nmr=near_miss(sym,chg,r,p,ma5,ma10,s)
+  if nmr:_NM.append({"sym":sym,"score":nmr[0],"why":nmr[1],"rsi":round(r,1),"h1":round(nmr[2],2),"chg":round(chg,2),"price":p})
+ if hits:
+  lines=["🎯 *ALERT:* SETUP MATCHED NOW","_TREND entry rules just passed. The bot is checking it for auto-buy now._",""];rows=[]
+  for sym,p,chg,r,h in hits[:3]:
+   coin=sym.split("-")[0];mk_cd("sm_"+sym)
+   lines.append(f"*{coin}* — {fp(p)} USDT | 24h {chg:+.2f}% | 1H {h:+.2f}% | RSI {r:.1f}")
+   rows.append([_B(f"🛒 Buy {coin}",f"m:b:{coin}"),_B(f"🔎 Analyse {coin}",f"m:a:{coin}")])
+  _create("\n".join(lines),"Markdown",{"inline_keyboard":rows},silent=False)
+  if not in_cd("fast_scan",300):
+   mk_cd("fast_scan")
+   try:scan(True)
+   except Exception as e:print("FASTWATCH SCAN ERR",str(e)[:120])
+  return
+ send_near_miss(s,None)
 def scan(force=False):
  st=load(SC);now=time.time()
  iv=max(1.0,float(cfg().get('scan_interval_minutes',15) or 15))
@@ -2048,7 +2091,7 @@ def scan(force=False):
   if ct-d.get('timestamp',0)>86400:q.pop(sym,None);qu=True
  if not buying_allowed and q:q.clear();qu=True
  sh=scan_history_state();records=[];matched=0;queued=0
- _PF.clear();_NM.clear()
+ _PF.clear();_NM.clear();_RADAR.clear()
  if s.get('scan_parallel',True):
   try:
    cand=[]
@@ -2103,6 +2146,9 @@ def scan(force=False):
       else:reasons.append("No breakout")
       recd["reason"]="; ".join(reasons) or "No match"
       try:
+       if mom_on(s) and pre_ok(chg,s) and p>ma5>ma10:
+        _d=max(float(s['rsi_min'])-r,r-float(s['rsi_max']),0.0)
+        if _d<=float(s.get('radar_rsi_margin',10.0)):_RADAR.append((_d,sym))
        nmr=near_miss(sym,chg,r,p,ma5,ma10,s)
        if nmr:recd["near_miss"]=nmr[1];_NM.append({"sym":sym,"score":nmr[0],"why":nmr[1],"rsi":round(r,1),"h1":round(nmr[2],2),"chg":round(chg,2),"price":p})
       except Exception as e:print("NEAR-MISS ERR",str(e)[:100])
@@ -2122,6 +2168,9 @@ def scan(force=False):
       q[sy]=qd
     if q:save(QF,q)
  except Exception as e:print('AI opportunity ranking error:',e)
+ try:
+  _rs=load(ST,{});_rs["radar"]=[y for _,y in sorted(_RADAR)[:int(s.get('radar_max',30))]];save(ST,_rs)
+ except Exception as e:print("RADAR SAVE ERR",str(e)[:100])
  try:send_near_miss(s,ai_market)
  except Exception as e:print("NEAR-MISS SEND ERR",str(e)[:120])
  full=force or now-st.get('last_full',0)>=3300
@@ -2177,7 +2226,7 @@ def cmd_set(txt):
  if k not in s:tg(f"❌ Unknown key. Valid: `{'`, `'.join(s.keys())}`");return
  try:new=val.lower() in ('true','1','yes','on') if isinstance(s[k],bool) else float(val) if isinstance(s[k],float) else int(val)
  except:tg(f"❌ Invalid value for {k}");return
- limits={"risk_per_trade_pct":(0.1,2.0),"max_daily_loss_pct":(0.5,10.0),"max_portfolio_exposure_pct":(5.0,100.0),"max_position_pct":(1.0,50.0),"max_daily_trades":(1,50),"max_spread_pct":(0.05,3.0),"trail_pct":(0.0,30.0),"scan_interval_minutes":(5.0,240.0),"auto_clear_hours":(0.0,168.0),"live_mode_seconds":(0,330),"stop_loss_pct":(0.5,20.0),"rsi_min":(1.0,99.0),"rsi_max":(1.0,99.0),"rsi_exit":(0.0,99.0),"auto_buy_amount_usdt":(1.0,100000.0),"max_tokens_before_consolidation":(1,30),"max_hold_hours":(1,720),"crash_guard_pct":(1.0,50.0),"btc_rsi_min":(0.0,99.0),"rebuy_cooldown_hours":(0.0,168.0),"atr_stop_mult":(0.5,6.0),"atr_stop_min_pct":(1.0,10.0),"atr_stop_max_pct":(2.0,25.0),"btc_trend_hours":(10,200),"min_breadth_pct":(0.0,100.0),"offline_alert_hours":(0.0,72.0),"daily_summary_hour_utc":(0,23),"max_coin_exposure_pct":(1.0,100.0),"liquidity_depth_usdt":(0.0,1000000.0),"max_book_imbalance_pct":(50.0,99.0),"regime_risk_factor":(0.1,1.0),"execution_slippage_pct":(0.05,5.0),"portfolio_stress_pct":(1.0,50.0),"signal_expiry_minutes":(1,240),"mom_1h_min_pct":(0.0,20.0),"mom_1h_max_pct":(0.5,30.0),"max_24h_pct":(30.0,500.0),"near_miss_rsi_margin":(0.5,10.0),"near_miss_1h_margin":(0.1,3.0),"near_miss_cooldown_minutes":(5,1440),"near_miss_max_per_scan":(1,10)}
+ limits={"risk_per_trade_pct":(0.1,2.0),"max_daily_loss_pct":(0.5,10.0),"max_portfolio_exposure_pct":(5.0,100.0),"max_position_pct":(1.0,50.0),"max_daily_trades":(1,50),"max_spread_pct":(0.05,3.0),"trail_pct":(0.0,30.0),"scan_interval_minutes":(5.0,240.0),"auto_clear_hours":(0.0,168.0),"live_mode_seconds":(0,330),"stop_loss_pct":(0.5,20.0),"rsi_min":(1.0,99.0),"rsi_max":(1.0,99.0),"rsi_exit":(0.0,99.0),"auto_buy_amount_usdt":(1.0,100000.0),"max_tokens_before_consolidation":(1,30),"max_hold_hours":(1,720),"crash_guard_pct":(1.0,50.0),"btc_rsi_min":(0.0,99.0),"rebuy_cooldown_hours":(0.0,168.0),"atr_stop_mult":(0.5,6.0),"atr_stop_min_pct":(1.0,10.0),"atr_stop_max_pct":(2.0,25.0),"btc_trend_hours":(10,200),"min_breadth_pct":(0.0,100.0),"offline_alert_hours":(0.0,72.0),"daily_summary_hour_utc":(0,23),"max_coin_exposure_pct":(1.0,100.0),"liquidity_depth_usdt":(0.0,1000000.0),"max_book_imbalance_pct":(50.0,99.0),"regime_risk_factor":(0.1,1.0),"execution_slippage_pct":(0.05,5.0),"portfolio_stress_pct":(1.0,50.0),"signal_expiry_minutes":(1,240),"mom_1h_min_pct":(0.0,20.0),"mom_1h_max_pct":(0.5,30.0),"max_24h_pct":(30.0,500.0),"near_miss_rsi_margin":(0.5,10.0),"near_miss_1h_margin":(0.1,3.0),"near_miss_cooldown_minutes":(5,1440),"near_miss_max_per_scan":(1,10),"radar_max":(5,60),"momentum_watch_minutes":(5,1440),"radar_rsi_margin":(3.0,25.0)}
  if k in limits and not (limits[k][0] <= new <= limits[k][1]):tg(f"❌ `{k}` must be between {limits[k][0]} and {limits[k][1]}.");return
  if k=="rsi_min" and new>=s.get("rsi_max",99):tg("❌ rsi_min must be lower than rsi_max.");return
  if k=="rsi_max" and new<=s.get("rsi_min",1):tg("❌ rsi_max must be higher than rsi_min.");return
@@ -2556,7 +2605,7 @@ def live_loop(t0):
   except Exception as e:print(f"LIVE POLL ERR: {e}")
   now=time.time()
   if now-last_light>=60:
-   for fn in (ai_health_check,manage,momentum_watchdog,check_alerts,scan,exec_q):
+   for fn in (ai_health_check,manage,momentum_watchdog,check_alerts,scan,fast_watch,exec_q):
     if fn is scan and deadline-time.time()<180:continue
     run_step(fn)
    last_light=time.time()
