@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689231,
+    "last_update_id": 935689232,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -36,8 +36,8 @@
             1795304212.30103
         ],
         "/stats": [
-            1,
-            1795366636.1829772
+            2,
+            1795366649.6570988
         ],
         "m:scan_hist": [
             1,
@@ -70,7 +70,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "2/3",
+                "text": "3/3",
                 "callback_data": "pg:x"
             },
             {
@@ -87,7 +87,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 2/3*",
+    "panel_text": "\ud83d\udcc4 *Page 3/3*",
     "kb_mid": 3883,
     "pages": {
         "p": [
@@ -95,7 +95,7 @@
             "MANUAL: 20 trades | win 65% | avg $+0.30\n| total $+5.99\nOLDER: 2 trades | win 0% | avg $-0.15 |\ntotal $-0.29\nOTHER: 5 trades | win 40% | avg $-0.08 |\ntotal $-0.40\n\n\ud83e\udde0 *AI:* Overall net profit is modest\n\u2800\n\u2800",
             "(+$5.31) with a 56% win rate; manual\nstrategy is profitable, but the older\nstrategy shows consistent losses,\nwarranting review.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 1,
+        "i": 2,
         "mode": "Markdown",
         "x": [
             {
