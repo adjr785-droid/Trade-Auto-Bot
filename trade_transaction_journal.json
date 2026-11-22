@@ -484,5 +484,10 @@
         "symbol": "GRAM-USDT",
         "source": "MANUAL",
         "detail": "15m move +0.10%; live vs entry +0.10%"
+    },
+    {
+        "time": 1795354557.8904097,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.0, 'net_pnl_usdt': 5.3247, 'recurring_patterns': ['MANUAL SELL ALL appears in multiple trades across different symbols', 'RSI 75 trigger used for both BLESS-USDT and SKYAI-USDT with positive pnl', 'PARTIAL PROFIT percentages recurring (5.0%\u20116.2%)', 'PANIC reason associated with mixed outcomes', '15-MINUTE NO-UPWARD-TREND ROTATION appears on several small pnl trades'], 'recommendations': ['Review the effectiveness of manual sell-all actions as they include both losses and small gains', 'Consider tightening RSI 75 entry criteria or adding confirmation to maintain positive edge', 'Limit panic-driven exits; implement stricter stop\u2011loss rules to avoid ad\u2011hoc decisions', 'Evaluate partial profit targets to ensure they capture sufficient upside without premature exits', 'Monitor low\u2011pnl rotation strategy for potential removal or adjustment, as it yields minimal returns']}"
     }
 ]
