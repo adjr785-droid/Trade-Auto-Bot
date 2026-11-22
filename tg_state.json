@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT23.10/\u20a631,805",
+    "kb_ph": "USDT23.11/\u20a631,816",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -52,41 +52,53 @@
             1795311215.95037
         ]
     },
-    "kb_mid": 3410,
-    "out_mid": 3407,
-    "out_text": "\ud83d\udd0d *SCAN COMPLETE*\nChecked 462 markets.\nMatched: 1 | Queued: 0.\nmarket filter: only 21% of coins\nare up today\n\ud83e\udde0 AI market view: SIDEWAYS |\nmoderate\n\n\u2705 *MATCHED COINS*\n1. *TAO-USDT* \u2014 BREAKOUT\n\u2800\n\u2800",
+    "kb_mid": 3411,
+    "out_mid": 3412,
+    "out_text": "\u2705 *AI HEALTH RESTORED*\nGroq connection and\nstructured-response self-test\npassed. Emergency SELL-ONLY mode\nremains latched; after 3\nconsecutive successful checks,\nnormal trading resumes\nautomatically.\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795339758.8174534,
-    "panel_mid": 3408,
+    "out_time": 1795340092.4394746,
+    "panel_mid": 3413,
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
+                "text": "\ud83e\udd16 Bot",
+                "callback_data": "/bot"
             },
             {
-                "text": "1/2",
-                "callback_data": "pg:x"
+                "text": "\ud83d\udcc8 Stats",
+                "callback_data": "/stats"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udd0e Analyse Coin",
+                "callback_data": "m:an"
             },
             {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
+                "text": "\u2699\ufe0f Settings",
+                "callback_data": "m:set"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udcbc Holdings",
+                "callback_data": "m:r:holdings"
             },
             {
-                "text": "\ud83c\udfe0",
-                "callback_data": "m:menu"
+                "text": "\ud83e\udde0 Ask AI",
+                "callback_data": "m:ai:1"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\uddf9 Clear Chat",
+                "callback_data": "/clear"
+            },
+            {
+                "text": "\ud83d\udea8 PANIC SELL",
+                "callback_data": "/panic"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/2*",
-    "pages": {
-        "p": [
-            "\ud83d\udd0d *SCAN COMPLETE*\nChecked 462 markets.\nMatched: 1 | Queued: 0.\nmarket filter: only 21% of coins\nare up today\n\ud83e\udde0 AI market view: SIDEWAYS |\nmoderate\n\n\u2705 *MATCHED COINS*\n1. *TAO-USDT* \u2014 BREAKOUT\n\u2800\n\u2800",
-            "matched, market filter: only 21%\nof coins are up today\nPrice 191.30 | 24h +7.90% | RSI\n64.6 | \u23f8 not queued\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
-        ],
-        "i": 0,
-        "mode": "Markdown",
-        "x": [],
-        "cmd": null
-    }
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below."
 }

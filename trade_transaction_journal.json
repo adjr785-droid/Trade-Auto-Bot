@@ -35,5 +35,15 @@
         "time": 1795337683.6544585,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 52.63, 'net_pnl_usdt': 4.9657, 'recurring_patterns': ['Frequent manual sell\u2011all actions', 'RSI 75 signal used for profitable exits', 'Partial profit exits at ~5\u20116% gain', '15\u2011minute no\u2011upward\u2011trend rotation trigger'], 'recommendations': ['Limit reliance on manual sell\u2011all to reduce unnecessary losses', 'Validate RSI 75 threshold with broader back\u2011test before continued use', 'Implement systematic partial\u2011profit rules rather than ad\u2011hoc percentages', 'Introduce stop\u2011loss or trailing\u2011stop mechanisms for high\u2011volatility symbols', 'Monitor and adjust strategy for symbols with repeated negative PnL (e.g., SOON\u2011USDT, INJ\u2011USDT)']}"
+    },
+    {
+        "time": 1795340099.0075145,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (5)', 'attention': [{'symbol': 'TRX-USDT', 'action': 'monitor', 'reason': 'Position is slightly negative (-0.31%) and close to stop (0.296393). No immediate action; watch price movement and consider tightening stop if downside persists.'}, {'symbol': 'ENA-USDT', 'action': 'hold', 'reason': 'Position is modestly positive (+1.46%) but stop is relatively far (0.083172). Maintain current stop; re-evaluate if price approaches stop or profit target.'}], 'summary': 'Overall portfolio risk remains within the daily limit. Both positions are small and within acceptable risk parameters. Continue monitoring TRX-USDT closely due to proximity to its stop level, while ENA-USDT can be held with its current stop in place. No new orders are recommended at this time.'}"
+    },
+    {
+        "time": 1795340099.824357,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 52.63, 'net_pnl_usdt': 4.9657, 'recurring_patterns': {'loss_causes': ['MANUAL SELL ALL', 'MANUAL SELL $6.76', 'MANUAL SELL $15.10'], 'profit_causes': ['RSI 75', 'PARTIAL PROFIT +5.0%', 'PARTIAL PROFIT +5.5%', 'PARTIAL PROFIT +6.2%'], 'symbols_with_multiple_trades': {'BTW-USDT': 2, 'SOON-USDT': 2, 'BLESS-USDT': 2, 'SKYAI-USDT': 2, 'DGAI-USDT': 2}}, 'recommendations': {'focus_on_signals': ['RSI 75'], 'caution_on_manual_sell_all': True, 'consider_limiting_partial_profit_entries_to_5-6%_range': True, 'monitor_symbols_with_repeated_losses': ['SOON-USDT', 'INJ-USDT'], 'overall_strategy': 'maintain conservative position sizing and prioritize statistically supported signals; avoid frequent manual exits without clear technical justification.'}}"
     }
 ]
