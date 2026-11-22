@@ -1,18 +1,18 @@
 {
-    "last_check": 1795352347.8844335,
+    "last_check": 1795352684.0707283,
     "status": "healthy",
     "model": "openai/gpt-oss-120b",
-    "latency_ms": 262,
+    "latency_ms": 229,
     "last_error": "",
     "consecutive_failures": 0,
-    "consecutive_successes": 2,
+    "consecutive_successes": 3,
     "last_response_valid": true,
     "alerted_status": "healthy",
-    "emergency_mode": true,
-    "trading_mode": "SELL_ONLY",
+    "emergency_mode": false,
+    "trading_mode": "NORMAL",
     "emergency_started": 1795337672.3776765,
     "emergency_reason": "AI stage performance_review failed: Expecting ',' delimiter: line 1 column 646 (char 645)",
-    "resume_requires_user_confirmation": true,
+    "resume_requires_user_confirmation": false,
     "stages": {
         "portfolio_review": {
             "last_failure": 1795339738.9050465,
@@ -50,6 +50,6 @@
         }
     },
     "last_stage_success": 1795352601.2200103,
-    "last_success": 1795352347.8844337,
-    "emergency_ended": 1795341663.0714092
+    "last_success": 1795352684.0707285,
+    "emergency_ended": 1795352684.071692
 }
