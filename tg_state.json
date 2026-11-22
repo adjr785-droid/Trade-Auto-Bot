@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935688643,
+    "last_update_id": 935688644,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -18,7 +18,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "1/9",
+                "text": "2/9",
                 "callback_data": "pg:x"
             },
             {
@@ -35,7 +35,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/9*",
+    "panel_text": "\ud83d\udcc4 *Page 2/9*",
     "out_text": "\ud83e\udd16 *BOT*\n\ud83d\udd58 Since last check (3.3 h ago):\n\ud83d\udd34 balance -0.37 USDT | new:\nONDO, TRX | closed: COLLECT | 1\ntrade(s) closed\nExchange connection: \u2705 OK\nPortfolio: $23.07 USDT |\n\u20a631,768\nUSDT cash: $8.09 (free $8.09)\nAuto-buy: ON (dynamic\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "out_time": 1795322348.8357868,
@@ -51,8 +51,8 @@
     "last_cmd": "/bot",
     "page_mem": {
         "/bot": [
-            7,
-            1795309973.1573293
+            1,
+            1795322367.957518
         ],
         "m:r:holdings": [
             1,
@@ -92,7 +92,7 @@
             "-14%, thin volume)\n\n\ud83d\udd34 \ud83e\ude99 *TRX* \u2014 $7.97 | PnL -0.2%\n($-0.02)\nAdvice: \ud83d\udfe1 HOLD / WATCH\nWhy: Trend is mixed; keep the\nstop-loss active\n\u26a0\ufe0f Long-term: speculative\n(100-day change -8%, below\n50-day average)\n\u2800\n\u2800",
             "\n\n\u2705 No sell advised right now.\nFor possible new buys use\n/analyse.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 0,
+        "i": 1,
         "mode": "Markdown",
         "x": [
             {
