@@ -629,5 +629,15 @@
         "time": 1795370660.525908,
         "event": "ai_portfolio_review",
         "summary": "{'portfolio_risk': 'Daily limit (11)', 'attention': [{'symbol': 'DOS-USDT', 'action': 'hold', 'reason': 'Position is at entry price with 0% PnL and stop loss only ~5% below entry; no clear signal to adjust.'}], 'summary': 'Current portfolio risk is within the daily limit. The only open position (DOS-USDT) shows no profit or loss and remains within its stop-loss threshold. Maintain the position and monitor for any price movement beyond the stop level before considering any action.'}"
+    },
+    {
+        "time": 1795371207.8898365,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (11)', 'attention': [{'symbol': 'DOS-USDT', 'action': 'hold', 'reason': 'Position is modestly profitable (+14%) and above stop level; no immediate risk signals. Monitor price approaching stop.'}], 'summary': 'Current portfolio risk is within the daily limit. The only open position, DOS-USDT, shows a small gain and remains above its stop price. Recommend holding and watching for price movement toward the stop. No new trades are suggested.'}"
+    },
+    {
+        "time": 1795371208.532351,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 55.56, 'net_pnl_usdt': 5.3057, 'recurring_patterns': ['RSI 75', 'PARTIAL PROFIT', 'MANUAL SELL ALL', '15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC'], 'recommendations': 'Maintain current risk limits; focus on trades triggered by RSI 75 as they show positive pnl; reduce reliance on manual sell all signals which include losses; consider tightening entry criteria for PANIC and 15\u2011minute rotation signals due to mixed outcomes; monitor win\u2011rate trend for any degradation before scaling position size.'}"
     }
 ]
