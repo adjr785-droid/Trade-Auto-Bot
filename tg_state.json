@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT23.27/\u20a632,042",
+    "kb_ph": "USDT23.33/\u20a632,124",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -52,100 +52,5 @@
             1795311215.95037
         ]
     },
-    "kb_mid": 3504,
-    "out_text": "\ud83d\udcc8 *TRADE STATS*\nClosed trades: 20\nWin rate: 55% (11 wins, 9\nlosses)\nAverage per trade: $+0.25\nNet profit: $+4.99\nBest: $+2.97 | Worst: $-0.66\n\n*By strategy*\nMANUAL: 14 trades | win 71% |\n\u2800\n\u2800",
-    "out_mode": "Markdown",
-    "out_time": 1795350326.9310243,
-    "panel_rows": [
-        [
-            {
-                "text": "rsi_min = 42",
-                "callback_data": "m:k:rsi_min"
-            },
-            {
-                "text": "rsi_max = 48",
-                "callback_data": "m:k:rsi_max"
-            }
-        ],
-        [
-            {
-                "text": "stop_loss_pct = 15",
-                "callback_data": "m:k:stop_loss_pct"
-            },
-            {
-                "text": "sl_sell_percent = 0.5",
-                "callback_data": "m:k:sl_sell_percent"
-            }
-        ],
-        [
-            {
-                "text": "dca_reserve = 2.0",
-                "callback_data": "m:k:dca_reserve"
-            },
-            {
-                "text": "auto_buy_enabled = True",
-                "callback_data": "m:k:auto_buy_enabled"
-            }
-        ],
-        [
-            {
-                "text": "auto_buy_amount_usdt = 3.7348",
-                "callback_data": "m:k:auto_buy_amount_usdt"
-            },
-            {
-                "text": "max_tokens_before_consolidatio",
-                "callback_data": "m:k:max_tokens_before_consolidation"
-            }
-        ],
-        [
-            {
-                "text": "max_hold_hours = 703",
-                "callback_data": "m:k:max_hold_hours"
-            },
-            {
-                "text": "trail_pct = 8.0",
-                "callback_data": "m:k:trail_pct"
-            }
-        ],
-        [
-            {
-                "text": "crash_guard_pct = 10.0",
-                "callback_data": "m:k:crash_guard_pct"
-            },
-            {
-                "text": "rsi_exit = 75",
-                "callback_data": "m:k:rsi_exit"
-            }
-        ],
-        [
-            {
-                "text": "Next \u25b6\ufe0f",
-                "callback_data": "m:sp:1"
-            }
-        ],
-        [
-            {
-                "text": "\u2b05\ufe0f Menu",
-                "callback_data": "m:menu"
-            }
-        ]
-    ],
-    "panel_text": "\u2699\ufe0f *SETTINGS* (page 1/6)\nTap a setting to change it.",
-    "pages": {
-        "p": [
-            "\ud83d\udcc8 *TRADE STATS*\nClosed trades: 20\nWin rate: 55% (11 wins, 9\nlosses)\nAverage per trade: $+0.25\nNet profit: $+4.99\nBest: $+2.97 | Worst: $-0.66\n\n*By strategy*\nMANUAL: 14 trades | win 71% |\n\u2800\n\u2800",
-            "avg $+0.43 | total $+6.01\nOLDER: 2 trades | win 0% | avg\n$-0.15 | total $-0.29\nOTHER: 4 trades | win 25% | avg\n$-0.18 | total $-0.73\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
-        ],
-        "i": 0,
-        "mode": "Markdown",
-        "x": [
-            {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
-            }
-        ],
-        "cmd": "/stats"
-    },
-    "out_mid": 3502,
-    "panel_mid": 3503
+    "kb_mid": 3505
 }

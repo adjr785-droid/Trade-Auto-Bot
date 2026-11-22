@@ -205,5 +205,15 @@
         "time": 1795350336.2947342,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 55.0, 'net_pnl_usdt': 4.9856, 'recurring_patterns': ['Frequent manual sell-all actions often result in losses', 'RSI 75 signals tend to produce positive pnl', 'Partial profit exits show mixed outcomes but can capture gains'], 'recommendations': ['Limit reliance on manual sell-all without additional technical confirmation', 'Consider using RSI 75 as a stronger entry signal, but validate with volume or trend filters', 'Implement stricter risk controls for high\u2011volatility symbols (e.g., SOON-USDT, INJ-USDT)', 'Review partial profit strategy to ensure consistent exit thresholds']}"
+    },
+    {
+        "time": 1795350717.547033,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (5)', 'attention': [{'symbol': 'TRX-USDT', 'action': 'monitor', 'reason': 'Position is slightly below entry and near stop (0.296393). PnL is -0.11%, age > 600 minutes, no clear upside signal.'}, {'symbol': 'ENA-USDT', 'action': 'hold', 'reason': 'Positive PnL (+4.14%) and price above entry. Stop equals entry, providing a breakeven floor.'}, {'symbol': 'WLD-USDT', 'action': 'monitor', 'reason': 'Small negative PnL (-0.26%) with stop 0.227271 close to entry. Position is young (53 minutes); consider tightening stop if price declines further.'}], 'summary': 'Overall portfolio risk remains within the daily limit. Two positions (TRX-USDT, WLD-USDT) are near their stop levels and should be watched closely; ENA-USDT is performing well and can be retained. No new orders are recommended at this time.'}"
+    },
+    {
+        "time": 1795350718.6435692,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 55.0, 'net_pnl_usdt': 4.9856, 'recurring_patterns': ['MANUAL SELL ALL appears in 9 trades, often resulting in negative PnL', 'RSI 75 triggers two of the largest positive PnL trades', 'PARTIAL PROFIT entries show modest gains but are less frequent'], 'recommendations': ['Limit exposure to manual sell signals that historically produce losses; consider adding confirmation before executing such sells', 'Prioritize RSI\u2011based entries like the successful RSI 75 cases, but validate with additional momentum filters to reduce false positives', 'Monitor symbols with repeated losses (e.g., SOON\u2011USDT, INJ\u2011USDT) and consider reducing position size or pausing trading on them', 'Maintain current win\u2011rate target but aim to improve average win size while cutting average loss magnitude']}"
     }
 ]
