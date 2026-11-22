@@ -52,5 +52,17 @@
         "atl": 0.00015,
         "checked_at": 1795270497.6101997,
         "status": "complete"
+    },
+    "ONDO-USDT": {
+        "ath": 2.15,
+        "atl": 0.18,
+        "checked_at": 1795312421.840222,
+        "status": "complete"
+    },
+    "TRX-USDT": {
+        "ath": 1.0,
+        "atl": 3e-05,
+        "checked_at": 1795312425.7602139,
+        "status": "complete"
     }
 }
