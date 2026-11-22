@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935688696,
+    "last_update_id": 935688699,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT22.99/\u20a631,655",
+    "kb_ph": "USDT23.00/\u20a631,667",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -51,50 +51,53 @@
             1795311215.95037
         ]
     },
-    "kb_mid": 3358,
-    "out_text": "\ud83d\udcc8 *TRADE STATS*\nClosed trades: 17\nWin rate: 53% (9 wins, 8 losses)\nAverage per trade: $+0.30\nNet profit: $+5.09\nBest: $+2.97 | Worst: $-0.66\n\n*By strategy*\nMANUAL: 11 trades | win 73% |\navg $+0.56 | total $+6.11\n\u2800\n\u2800",
+    "out_text": "\ud83e\uddf9 Cleared 3 bot message(s).\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
+                "text": "\ud83e\udd16 Bot",
+                "callback_data": "/bot"
             },
             {
-                "text": "1/2",
-                "callback_data": "pg:x"
+                "text": "\ud83d\udcc8 Stats",
+                "callback_data": "/stats"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udd0e Analyse Coin",
+                "callback_data": "m:an"
             },
             {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
+                "text": "\u2699\ufe0f Settings",
+                "callback_data": "m:set"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udcbc Holdings",
+                "callback_data": "m:r:holdings"
             },
             {
-                "text": "\ud83c\udfe0",
-                "callback_data": "m:menu"
+                "text": "\ud83e\udde0 Ask AI",
+                "callback_data": "m:ai:1"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\uddf9 Clear Chat",
+                "callback_data": "/clear"
             },
             {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
+                "text": "\ud83d\udea8 PANIC SELL",
+                "callback_data": "/panic"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/2*",
-    "out_time": 1795327177.8524637,
-    "pages": {
-        "p": [
-            "\ud83d\udcc8 *TRADE STATS*\nClosed trades: 17\nWin rate: 53% (9 wins, 8 losses)\nAverage per trade: $+0.30\nNet profit: $+5.09\nBest: $+2.97 | Worst: $-0.66\n\n*By strategy*\nMANUAL: 11 trades | win 73% |\navg $+0.56 | total $+6.11\n\u2800\n\u2800",
-            "OLDER: 2 trades | win 0% | avg\n$-0.15 | total $-0.29\nOTHER: 4 trades | win 25% | avg\n$-0.18 | total $-0.73\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
-        ],
-        "i": 0,
-        "mode": "Markdown",
-        "x": [
-            {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
-            }
-        ],
-        "cmd": "/stats"
-    },
-    "out_mid": 3356,
-    "panel_mid": 3357
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
+    "out_time": 1795327225.0982318,
+    "out_mid": 3361,
+    "kb_mid": 3363,
+    "panel_hidden": true
 }
