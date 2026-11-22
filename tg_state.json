@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689489,
+    "last_update_id": 935689493,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -69,72 +69,72 @@
     "panel_rows": [
         [
             {
-                "text": "atr_stop_mult = 2.0",
-                "callback_data": "m:k:atr_stop_mult"
+                "text": "auto_buy_reserve_pct = 5.0",
+                "callback_data": "m:k:auto_buy_reserve_pct"
             }
         ],
         [
             {
-                "text": "atr_stop_min_pct = 3.0",
-                "callback_data": "m:k:atr_stop_min_pct"
+                "text": "dynamic_auto_buy_max_pct = 20.0",
+                "callback_data": "m:k:dynamic_auto_buy_max_pct"
             }
         ],
         [
             {
-                "text": "atr_stop_max_pct = 10.0",
-                "callback_data": "m:k:atr_stop_max_pct"
+                "text": "dynamic_auto_buy_min_usdt = 1.02",
+                "callback_data": "m:k:dynamic_auto_buy_min_usdt"
             }
         ],
         [
             {
-                "text": "market_filter_enabled = True",
-                "callback_data": "m:k:market_filter_enabled"
+                "text": "dynamic_auto_buy_max_usdt = 0.0",
+                "callback_data": "m:k:dynamic_auto_buy_max_usdt"
             }
         ],
         [
             {
-                "text": "btc_trend_hours = 50",
-                "callback_data": "m:k:btc_trend_hours"
+                "text": "guardian_enabled = True",
+                "callback_data": "m:k:guardian_enabled"
             }
         ],
         [
             {
-                "text": "min_breadth_pct = 30.0",
-                "callback_data": "m:k:min_breadth_pct"
+                "text": "guardian_audit_interval_minutes = 15",
+                "callback_data": "m:k:guardian_audit_interval_minutes"
             }
         ],
         [
             {
-                "text": "offline_alert_hours = 3.0",
-                "callback_data": "m:k:offline_alert_hours"
+                "text": "max_portfolio_correlation = 0.85",
+                "callback_data": "m:k:max_portfolio_correlation"
             }
         ],
         [
             {
-                "text": "daily_summary_hour_utc = 20",
-                "callback_data": "m:k:daily_summary_hour_utc"
+                "text": "momentum_1h_enabled = True",
+                "callback_data": "m:k:momentum_1h_enabled"
             }
         ],
         [
             {
-                "text": "max_daily_drawdown_pct = 5.0",
-                "callback_data": "m:k:max_daily_drawdown_pct"
+                "text": "mom_1h_min_pct = 0.5",
+                "callback_data": "m:k:mom_1h_min_pct"
             }
         ],
         [
             {
-                "text": "partial_tp_pct = 10.7423",
-                "callback_data": "m:k:partial_tp_pct"
+                "text": "mom_1h_max_pct = 6.0",
+                "callback_data": "m:k:mom_1h_max_pct"
             }
         ],
         [
             {
                 "text": "\u25c0\ufe0f Prev",
-                "callback_data": "m:sp:1"
+                "callback_data": "m:sp:5"
             },
             {
                 "text": "Next \u25b6\ufe0f",
-                "callback_data": "m:sp:3"
+                "callback_data": "m:sp:7"
             }
         ],
         [
@@ -144,7 +144,7 @@
             }
         ]
     ],
-    "panel_text": "\u2699\ufe0f *SETTINGS* (page 3/8)\nTap a setting to change it.",
+    "panel_text": "\u2699\ufe0f *SETTINGS* (page 7/8)\nTap a setting to change it.",
     "out_time": 1795380278.9834466,
     "out_mid": 4084,
     "panel_mid": 4085
