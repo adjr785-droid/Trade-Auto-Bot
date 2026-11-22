@@ -1,0 +1,10 @@
+[
+    {
+        "time": 1795332560.027628,
+        "event": "trade_closed",
+        "symbol": "ONDO-USDT",
+        "pnl_usdt": -0.12800999999999985,
+        "reason": "MANUAL SELL ALL",
+        "strategy": "MANUAL"
+    }
+]

@@ -115,5 +115,12 @@
         "time": 1795311339.9016566,
         "reason": "MANUAL SELL $15.10",
         "strategy": "MANUAL"
+    },
+    {
+        "sym": "ONDO-USDT",
+        "pnl": -0.12800999999999985,
+        "time": 1795332560.0274377,
+        "reason": "MANUAL SELL ALL",
+        "strategy": "MANUAL"
     }
 ]
