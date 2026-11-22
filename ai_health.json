@@ -44,12 +44,12 @@
             "last_error": ""
         },
         "analyse_review": {
-            "last_success": 1795351507.8328474,
-            "successes": 2,
+            "last_success": 1795351686.074969,
+            "successes": 3,
             "last_error": ""
         }
     },
-    "last_stage_success": 1795351635.7662559,
+    "last_stage_success": 1795351686.074969,
     "last_success": 1795351498.5586524,
     "emergency_ended": 1795341663.0714092
 }
