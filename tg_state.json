@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT23.24/\u20a631,993",
+    "kb_ph": "USDT23.24/\u20a631,994",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -58,65 +58,5 @@
             1795352377.989315
         ]
     },
-    "out_text": "\ud83e\uddf9 Cleared 3 bot message(s).\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
-    "out_mode": "Markdown",
-    "out_time": 1795354352.0375068,
-    "panel_rows": [
-        [
-            {
-                "text": "dynamic_auto_buy_enabled = Tru",
-                "callback_data": "m:k:dynamic_auto_buy_enabled"
-            },
-            {
-                "text": "auto_buy_reserve_pct = 5.0",
-                "callback_data": "m:k:auto_buy_reserve_pct"
-            }
-        ],
-        [
-            {
-                "text": "dynamic_auto_buy_max_pct = 20.",
-                "callback_data": "m:k:dynamic_auto_buy_max_pct"
-            },
-            {
-                "text": "dynamic_auto_buy_min_usdt = 1.",
-                "callback_data": "m:k:dynamic_auto_buy_min_usdt"
-            }
-        ],
-        [
-            {
-                "text": "dynamic_auto_buy_max_usdt = 0.",
-                "callback_data": "m:k:dynamic_auto_buy_max_usdt"
-            },
-            {
-                "text": "guardian_enabled = True",
-                "callback_data": "m:k:guardian_enabled"
-            }
-        ],
-        [
-            {
-                "text": "guardian_audit_interval_minute",
-                "callback_data": "m:k:guardian_audit_interval_minutes"
-            },
-            {
-                "text": "max_portfolio_correlation = 0.",
-                "callback_data": "m:k:max_portfolio_correlation"
-            }
-        ],
-        [
-            {
-                "text": "\u25c0\ufe0f Prev",
-                "callback_data": "m:sp:4"
-            }
-        ],
-        [
-            {
-                "text": "\u2b05\ufe0f Menu",
-                "callback_data": "m:menu"
-            }
-        ]
-    ],
-    "panel_text": "\u2699\ufe0f *SETTINGS* (page 6/6)\nTap a setting to change it.",
-    "out_mid": 3634,
-    "kb_mid": 3636,
-    "panel_mid": 3638
+    "kb_mid": 3646
 }
