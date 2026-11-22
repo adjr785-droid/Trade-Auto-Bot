@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935689282,
+    "last_update_id": 935689283,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT23.12/\u20a631,828",
+    "kb_ph": "USDT23.11/\u20a631,819",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -60,8 +60,8 @@
             1795362988.7943418
         ]
     },
-    "kb_mid": 3934,
-    "out_text": "\ud83e\udde0 AI manual-buy advisory: The trade size\nis small (23.07\u202fUSDT) and RSI is neutral\n(50.39). However, the overall market\nfilter suggests limited upside. Recommend\na cautious approach.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "kb_mid": 3938,
+    "out_text": "\u2705 `momentum_watch_minutes` = `75`\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
@@ -89,8 +89,8 @@
             }
         ]
     ],
-    "panel_text": "\u2699\ufe0f *momentum watch minutes*\nCurrent value: `60`",
-    "out_mid": 3933,
-    "out_time": 1795375308.4527352,
-    "panel_mid": 3936
+    "panel_text": "\u2699\ufe0f *momentum watch minutes*\nCurrent value: `75`",
+    "out_time": 1795375392.847121,
+    "out_mid": 3937,
+    "panel_mid": 3939
 }

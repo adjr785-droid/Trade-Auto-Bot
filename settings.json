@@ -76,5 +76,8 @@
     "near_miss_rsi_margin": 3.0,
     "near_miss_1h_margin": 0.5,
     "near_miss_cooldown_minutes": 60,
-    "near_miss_max_per_scan": 3
+    "near_miss_max_per_scan": 3,
+    "radar_max": 30,
+    "radar_rsi_margin": 10.0,
+    "momentum_watch_minutes": 75
 }
