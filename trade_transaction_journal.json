@@ -411,5 +411,15 @@
         "symbol": "BLESS-USDT",
         "source": "MANUAL",
         "detail": "15m move +0.44%; live vs entry +1.00%"
+    },
+    {
+        "time": 1795352781.6521823,
+        "event": "ai_manual_buy_review",
+        "symbol": "GRAM-USDT",
+        "review": {
+            "risk_level": "moderate-high",
+            "warning": "RSI is above 60 indicating potential overbought conditions, and the market filter shows only 21% of coins are up today, suggesting a weak overall market. Proceed with caution.",
+            "summary": "Given the elevated RSI and bearish market sentiment, a manual buy of GRAM-USDT carries moderate to high risk. Consider waiting for clearer bullish signals or a lower entry price before committing."
+        }
     }
 ]
