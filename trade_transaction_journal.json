@@ -823,5 +823,15 @@
         "time": 1795379234.1578202,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 55.17, 'net_pnl_usdt': 5.3414, 'recurring_patterns': ['RSI 75', 'PARTIAL PROFIT', '15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC'], 'recommendations': 'Maintain current strategy but tighten risk controls on panic exits. Prioritize trades with RSI 75 signals that have shown positive PnL, but verify overbought conditions. Reduce reliance on manual sell-all actions without clear trend confirmation. Continue monitoring partial profit targets around 5\u20116% for consistency. Consider adding stop\u2011losses for volatile assets that exhibit frequent panic\u2011driven losses.'}"
+    },
+    {
+        "time": 1795379546.4135716,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (13)', 'attention': [{'symbol': 'WLD-USDT', 'action': 'hold', 'reason': 'Position is very close to stop loss (0.230957) and shows a small negative PnL (-0.25%). Given the modest downside and lack of strong bullish signal, it is prudent to hold and monitor rather than add or exit immediately.'}], 'summary': 'Overall portfolio risk is within the daily limit. The only open position (WLD-USDT) is marginally underwater and near its stop level. Recommend holding the position, tightening the stop if price moves unfavorably, and awaiting clearer market direction before taking further action.'}"
+    },
+    {
+        "time": 1795379547.2034755,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 55.17, 'net_pnl_usdt': 5.3414, 'recurring_patterns': ['RSI 75', 'PARTIAL PROFIT', '15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC'], 'recommendations': 'Maintain current strategy but tighten risk controls on panic exits. Prioritize trades with RSI 75 signals that have shown positive PnL, but verify overbought conditions. Reduce reliance on manual sell-all actions without clear trend confirmation. Continue monitoring partial profit targets around 5\u20116% as they have contributed positively. Consider adding stop\u2011losses for high\u2011volatility assets to protect against sudden negative swings.'}"
     }
 ]
