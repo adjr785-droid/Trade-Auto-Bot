@@ -65,5 +65,15 @@
         "time": 1795341671.2845106,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 52.63, 'net_pnl_usdt': 4.9657, 'recurring_patterns': {'manual_sell_frequency': 14, 'rsi_75_triggers': 3, 'partial_profit_triggers': 3, 'symbols_with_multiple_trades': ['BTW-USDT', 'SOON-USDT', 'BLESS-USDT', 'SKYAI-USDT', 'DGAI-USDT']}, 'recommendations': {'caution': 'High reliance on manual sell decisions and RSI\u201175 entries observed; consider adding stricter risk limits and automated exit criteria.', 'suggested_actions': ['Implement stop\u2011loss thresholds for manual sell positions', 'Back\u2011test RSI\u201175 strategy to confirm edge', 'Diversify symbols to reduce concentration risk', 'Monitor partial profit patterns for consistency'], 'uncertainty': 'Data set is limited (19 trades); patterns may not hold in larger samples.'}}"
+    },
+    {
+        "time": 1795341741.535307,
+        "event": "ai_manual_buy_review",
+        "symbol": "PUMP-USDT",
+        "review": {
+            "risk_level": "high",
+            "warning": "The market filter indicates only 21% of coins are up today, and the RSI is elevated (62.92), suggesting overbought conditions. Proceed with caution; the trade may be speculative and could incur loss.",
+            "summary": "Manual buy of 6.93\u202fUSDT of PUMP-USDT at 0.002439\u202fUSDT per token is flagged as high risk due to unfavorable market sentiment and overbought RSI. No existing position and BTC filter is inactive, but the overall environment is not supportive."
+        }
     }
 ]
