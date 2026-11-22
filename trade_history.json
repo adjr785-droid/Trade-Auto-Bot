@@ -185,5 +185,12 @@
         "time": 1795366142.168787,
         "reason": "15-MINUTE NO-UPWARD-TREND ROTATION",
         "strategy": "MANUAL"
+    },
+    {
+        "sym": "DOS-USDT",
+        "pnl": 0.04834500000000362,
+        "time": 1795372054.9453168,
+        "reason": "15-MINUTE NO-UPWARD-TREND ROTATION",
+        "strategy": "MANUAL"
     }
 ]

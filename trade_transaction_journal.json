@@ -639,5 +639,58 @@
         "time": 1795371208.532351,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 55.56, 'net_pnl_usdt': 5.3057, 'recurring_patterns': ['RSI 75', 'PARTIAL PROFIT', 'MANUAL SELL ALL', '15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC'], 'recommendations': 'Maintain current risk limits; focus on trades triggered by RSI 75 as they show positive pnl; reduce reliance on manual sell all signals which include losses; consider tightening entry criteria for PANIC and 15\u2011minute rotation signals due to mixed outcomes; monitor win\u2011rate trend for any degradation before scaling position size.'}"
+    },
+    {
+        "time": 1795372049.753686,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (11)', 'attention': [{'symbol': 'DOS-USDT', 'action': 'hold', 'reason': 'Position is very recent (24h), small profit (0.35%), and stop is close to entry. No clear signal to add or exit.'}], 'summary': 'Overall portfolio risk is within the daily limit. The only position, DOS-USDT, shows a modest unrealized gain and is near its stop level. Recommend holding and monitoring; consider tightening stop if price moves against the position.'}"
+    },
+    {
+        "time": 1795372050.5109642,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 55.56, 'net_pnl_usdt': 5.3057, 'recurring_patterns': ['RSI 75 triggers positive pnl in multiple symbols (BLESS-USDT, SKYAI-USDT, DGAI-USDT)', 'Partial profit entries (+5% to +6.2%) appear in several trades', 'Manual sell actions show mixed outcomes, including losses', '15-MINUTE NO-UPWARD-TREND ROTATION yields small gains or near\u2011zero results'], 'recommendations': ['Maintain current risk limits; avoid increasing position size despite positive net pnl', 'Prioritize signals that have shown consistent profitability (e.g., RSI 75) and monitor for false positives', 'Limit reliance on manual sell triggers that have produced losses', 'Consider tightening stop\u2011losses on volatile assets (e.g., TRX-USDT, WLD-USDT)', 'Continue tracking win rate; aim to improve above 60% before scaling up']}"
+    },
+    {
+        "time": 1795372053.9095414,
+        "event": "sell_fill_verified",
+        "symbol": "DOS-USDT",
+        "filled": 161.15,
+        "average": 0.1433,
+        "order_id": "1508465211106598912",
+        "reason": "15-MINUTE NO-UPWARD-TREND ROTATION",
+        "attempt": 1
+    },
+    {
+        "time": 1795372054.9461207,
+        "event": "trade_closed",
+        "symbol": "DOS-USDT",
+        "pnl_usdt": 0.04834500000000362,
+        "reason": "15-MINUTE NO-UPWARD-TREND ROTATION",
+        "strategy": "MANUAL"
+    },
+    {
+        "time": 1795372055.4887195,
+        "event": "full_sale_verified_or_dust",
+        "symbol": "DOS-USDT",
+        "remaining_base": 0.00868,
+        "remaining_value_usdt": 0.00124558,
+        "filled": 161.15
+    },
+    {
+        "time": 1795372062.6492634,
+        "event": "ai_sell_review",
+        "symbol": "DOS-USDT",
+        "review": {
+            "review": "The position in DOS-USDT was exited at an average price of 0.1433, realizing a modest profit of 0.0483\u202fUSDT on the sold quantity of 161.15 units. The exit was triggered by a 15\u2011minute no\u2011upward\u2011trend rotation, which aligns with the bot's short\u2011term trend\u2011following safeguards. Remaining base of 0.00868\u202fDOS was left untouched, indicating the bot correctly limited exposure after the signal faded.",
+            "lesson": "Maintain the current conservative approach of exiting on short\u2011term stagnation signals to protect gains, especially for low\u2011liquidity or volatile pairs. Consider reviewing the threshold for rotation detection to avoid premature exits in marginally trending markets, but prioritize risk controls over marginal upside.",
+            "confidence": "high"
+        }
+    },
+    {
+        "time": 1795372062.6508944,
+        "event": "momentum_watch_sold",
+        "symbol": "DOS-USDT",
+        "source": "MANUAL",
+        "detail": "15m move +0.00%; live vs entry +0.35%"
     }
 ]
