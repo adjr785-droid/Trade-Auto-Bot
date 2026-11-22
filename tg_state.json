@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935688963,
+    "last_update_id": 935688964,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -59,62 +59,41 @@
         ]
     },
     "kb_mid": 3651,
-    "out_text": "\ud83d\udcca *ANALYSIS: SKYAI-USDT*\nLive price: 0.037430 USDT\n24h change: +5.47%\nRSI(14): 50.0300 \u2014 Neutral\nMA5: 0.036386 | MA10: 0.037758 |\nMA20: 0.038151\nMACD: 0.00057409 | Signal:\n0.001126 | Histogram:\n-0.00055219\nATR(14): 0.002999 (8.01% of\n\u2800\n\u2800",
+    "out_text": "\ud83c\udfc6 *TOP 3 SETUPS RIGHT NOW*\n_Read-only scan. Nothing was\nbought._\n\n\u26a0\ufe0f Market filter active: only\n21% of coins are up today.\nAuto-buy is blocked; a manual\nbuy is your own call.\n\n*1. BTW-USDT* \u2014 WATCHLIST (no\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795361123.995031,
+    "out_time": 1795361175.875195,
+    "panel_rows": [
+        [
+            {
+                "text": "\ud83d\udd0e Analyse a coin",
+                "callback_data": "m:an"
+            }
+        ],
+        [
+            {
+                "text": "\u2b05\ufe0f Menu",
+                "callback_data": "m:menu"
+            }
+        ]
+    ],
+    "panel_text": "\ud83d\udd0e Want a specific coin?",
+    "out_mid": 3658,
     "pages": {
         "p": [
-            "\ud83d\udcca *ANALYSIS: SKYAI-USDT*\nLive price: 0.037430 USDT\n24h change: +5.47%\nRSI(14): 50.0300 \u2014 Neutral\nMA5: 0.036386 | MA10: 0.037758 |\nMA20: 0.038151\nMACD: 0.00057409 | Signal:\n0.001126 | Histogram:\n-0.00055219\nATR(14): 0.002999 (8.01% of\n\u2800\n\u2800",
-            "price)\nLast hour vol vs 20h avg: 0.26x\nBid/ask spread: 0.160%\nTechnical checks: 1/4\nAssessment: *WAIT / WEAK SETUP*\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+            "\ud83c\udfc6 *TOP 3 SETUPS RIGHT NOW*\n_Read-only scan. Nothing was\nbought._\n\n\u26a0\ufe0f Market filter active: only\n21% of coins are up today.\nAuto-buy is blocked; a manual\nbuy is your own call.\n\n*1. BTW-USDT* \u2014 WATCHLIST (no\n\u2800\n\u2800",
+            "full scanner setup)\nPrice: 0.720491 USDT | 24h:\n+14.38% | RSI: 52.2\nSuggested stop: 0.612417 (15%\nbelow price)\nWhy:\n\u2022 Short-term trend is up (price\n> MA5 > MA10)\n\u2022 RSI 52.2 is healthy (room to\nrun before overbought)\n\u2800\n\u2800",
+            "\u2022 24h change +14.38% shows\nsteady, not extreme, momentum\n\u2022 24h volume $1.9M (liquid\nenough: above the $1M minimum)\n\u2022 Spread: 0.20% (OK for\nauto-buy)\n\u2022 Status: \ud83d\udd36 Potential, manual\nonly (misses scanner rules)\n\u2022 \ud83e\udde0 AI: CAUTION \u2014 High 24h\ngain but fails scanner, spread\n\u2800\n\u2800",
+            "moderate\n\n*2. WLD-USDT* \u2014 WATCHLIST (no\nfull scanner setup)\nPrice: 0.234300 USDT | 24h:\n+2.00% | RSI: 58.5\nSuggested stop: 0.199155 (15%\nbelow price)\nWhy:\n\u2022 Short-term trend is up (price\n\u2800\n\u2800",
+            "> MA5 > MA10)\n\u2022 RSI 58.5 is healthy (room to\nrun before overbought)\n\u2022 24h change +2.00% shows\nsteady, not extreme, momentum\n\u2022 24h volume $1.6M (liquid\nenough: above the $1M minimum)\n\u2022 Spread: 0.04% (OK for\nauto-buy)\n\u2022 Status: \ud83d\udd36 Potential, manual\n\u2800\n\u2800",
+            "only (misses scanner rules)\n\u2022 \ud83e\udde0 AI: CAUTION \u2014 Modest\ngain, fails scanner, spread\nacceptable\n\n*3. TRX-USDT* \u2014 WATCHLIST (no\nfull scanner setup)\nPrice: 0.305540 USDT | 24h:\n+0.17% | RSI: 52.3\nSuggested stop: 0.259709 (15%\n\u2800\n\u2800",
+            "below price)\nWhy:\n\u2022 Short-term trend is up (price\n> MA5 > MA10)\n\u2022 RSI 52.3 is healthy (room to\nrun before overbought)\n\u2022 24h volume $3.6M (liquid\nenough: above the $1M minimum)\n\u2022 Spread: 0.00% (OK for\nauto-buy)\n\u2800\n\u2800",
+            "\u2022 Status: \ud83d\udd36 Potential, manual\nonly (misses scanner rules)\n\u2022 \ud83e\udde0 AI: CAUTION \u2014 Low change,\nfails scanner, but spread very\ntight\n\nNo coin passes all scanner rules\nright now, so these are the\nstrongest available. Be\ncautious.\n\u2800\n\u2800",
+            "\nBuy manually with `/buy COIN\namount` if you agree.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
         "i": 0,
         "mode": "Markdown",
         "x": [],
-        "cmd": "m:a:SKYAI"
+        "cmd": "/analyse"
     },
-    "panel_rows": [
-        [
-            {
-                "text": "\ud83e\udd16 Bot",
-                "callback_data": "/bot"
-            },
-            {
-                "text": "\ud83d\udcc8 Stats",
-                "callback_data": "/stats"
-            }
-        ],
-        [
-            {
-                "text": "\u2699\ufe0f Settings",
-                "callback_data": "m:set"
-            },
-            {
-                "text": "\ud83d\udcbc Holdings",
-                "callback_data": "m:r:holdings"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udcdc Trade History",
-                "callback_data": "m:r:history"
-            },
-            {
-                "text": "\ud83e\udde0 Ask AI",
-                "callback_data": "m:ai:1"
-            }
-        ],
-        [
-            {
-                "text": "\ud83e\uddf9 Clear Chat",
-                "callback_data": "/clear"
-            },
-            {
-                "text": "\ud83d\udea8 PANIC SELL",
-                "callback_data": "/panic"
-            }
-        ]
-    ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
-    "out_mid": 3655,
-    "panel_mid": 3656
+    "panel_mid": 3659
 }
