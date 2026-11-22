@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935688681,
+    "last_update_id": 935688683,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT23.03/\u20a631,712",
+    "kb_ph": "USDT23.01/\u20a631,683",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -20,7 +20,7 @@
         ],
         "hn": 17
     },
-    "last_cmd": "m:r:holdings",
+    "last_cmd": "/stats",
     "page_mem": {
         "/bot": [
             8,
@@ -51,7 +51,7 @@
             1795311215.95037
         ]
     },
-    "out_text": "\ud83d\udcbc *Total Portfolio Value:*\n$23.03 USDT | \u20a631,712\n\n\ud83d\udcb5 *Available USDT Cash*\nTotal: $0.03 | Free to Trade:\n$0.03\n\ud83d\udfe1 *BGB Wallet Balance (not\nauto-converted)*\nTotal: 0.00095019464 BGB | Free:\n0.00095019464 BGB | Value:\n\u2800\n\u2800",
+    "out_text": "\ud83d\udcc8 *TRADE STATS*\nClosed trades: 17\nWin rate: 53% (9 wins, 8 losses)\nAverage per trade: $+0.30\nNet profit: $+5.09\nBest: $+2.97 | Worst: $-0.66\n\n*By strategy*\nMANUAL: 11 trades | win 73% |\navg $+0.56 | total $+6.11\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
@@ -60,7 +60,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "1/9",
+                "text": "1/2",
                 "callback_data": "pg:x"
             },
             {
@@ -77,21 +77,13 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/9*",
-    "out_time": 1795326649.2740176,
-    "kb_mid": 3335,
-    "out_mid": 3333,
+    "panel_text": "\ud83d\udcc4 *Page 1/2*",
+    "out_time": 1795326670.7201428,
+    "kb_mid": 3339,
     "pages": {
         "p": [
-            "\ud83d\udcbc *Total Portfolio Value:*\n$23.03 USDT | \u20a631,712\n\n\ud83d\udcb5 *Available USDT Cash*\nTotal: $0.03 | Free to Trade:\n$0.03\n\ud83d\udfe1 *BGB Wallet Balance (not\nauto-converted)*\nTotal: 0.00095019464 BGB | Free:\n0.00095019464 BGB | Value:\n\u2800\n\u2800",
-            "$0.0015 USDT\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\u2501\u2501\u2501\u2501\n\n\ud83d\udcbc *Coin Holdings (Value:\n$23.00)*\n\ud83e\ude99 *ENA*\nQuantity: 82.24767\nCurrent price: 0.098160 USDT\nMarket value: $8.07\n\u2800\n\u2800",
-            "ATH (Bitget lifetime): 1.5203\nUSDT\nATL (Bitget lifetime): 0.069700\nUSDT\n\ud83d\udfe2 Entry: 0.097850 USDT | PnL:\n+0.32% ($+0.03)\nRSI (1h): 49.48\nMA5 (1h): 0.098016\nMA10 (1h): 0.098225\nMarket sentiment: \ud83d\udfe1 Neutral /\n\u2800\n\u2800",
-            "Mixed\nBot trailing stop: ON (8.0%\nbelow peak)\nPeak price: 0.098060\nExchange stop level: 0.092026\n\n\ud83e\ude99 *ONDO*\nQuantity: 25.10487\nCurrent price: 0.277400 USDT\nMarket value: $6.96\n\u2800\n\u2800",
-            "ATH (Bitget lifetime): 2.1500\nUSDT\nATL (Bitget lifetime): 0.180000\nUSDT\n\ud83d\udd34 Entry: 0.281700 USDT | PnL:\n-1.53% ($-0.11)\nRSI (1h): 48.33\nMA5 (1h): 0.279980\nMA10 (1h): 0.280410\nMarket sentiment: \ud83d\udd34 Bearish\n\u2800\n\u2800",
-            "Bot trailing stop: ON (8.0%\nbelow peak)\nPeak price: 0.283200\nExchange stop level: 0.273249\n\n\ud83e\ude99 *TRX*\nQuantity: 26.155219\nCurrent price: 0.304340 USDT\nMarket value: $7.96\nATH (Bitget lifetime): 1.0000\n\u2800\n\u2800",
-            "USDT\nATL (Bitget lifetime):\n0.00003000 USDT\n\ud83d\udd34 Entry: 0.305560 USDT | PnL:\n-0.40% ($-0.03)\nRSI (1h): 54.48\nMA5 (1h): 0.305230\nMA10 (1h): 0.305286\nMarket sentiment: \ud83d\udfe1 Neutral /\nMixed\n\u2800\n\u2800",
-            "Bot trailing stop: ON (8.0%\nbelow peak)\nPeak price: 0.305580\nExchange stop level: 0.296393\n\n\n\u26a0\ufe0f Held but with no USDT\nprice: AIDOGE: 0.602, COQ:\n0.00711, DGRAM: 0.00447 and 8\nmore...\n\u2800\n\u2800",
-            "\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:*\nUSDT23.03/\u20a631,712\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+            "\ud83d\udcc8 *TRADE STATS*\nClosed trades: 17\nWin rate: 53% (9 wins, 8 losses)\nAverage per trade: $+0.30\nNet profit: $+5.09\nBest: $+2.97 | Worst: $-0.66\n\n*By strategy*\nMANUAL: 11 trades | win 73% |\navg $+0.56 | total $+6.11\n\u2800\n\u2800",
+            "OLDER: 2 trades | win 0% | avg\n$-0.15 | total $-0.29\nOTHER: 4 trades | win 25% | avg\n$-0.18 | total $-0.73\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
         "i": 0,
         "mode": "Markdown",
@@ -101,7 +93,8 @@
                 "callback_data": "rf:go"
             }
         ],
-        "cmd": "m:r:holdings"
+        "cmd": "/stats"
     },
-    "panel_mid": 3334
+    "out_mid": 3337,
+    "panel_mid": 3338
 }
