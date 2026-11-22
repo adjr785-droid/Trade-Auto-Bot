@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689237,
+    "last_update_id": 935689238,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -61,9 +61,5 @@
         ]
     },
     "kb_mid": 3893,
-    "panel_hidden": true,
-    "out_mid": 3895,
-    "out_text": "\ud83d\udd0d *SCAN COMPLETE*\nChecked 462 markets.\nNo coin matched any setup.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
-    "out_mode": "Markdown",
-    "out_time": 1795368560.3063848
+    "panel_hidden": true
 }
