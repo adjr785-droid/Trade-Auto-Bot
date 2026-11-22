@@ -757,5 +757,15 @@
         "time": 1795377885.9679742,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 57.14, 'net_pnl_usdt': 5.354, 'recurring_patterns': ['RSI 75', 'PARTIAL PROFIT', 'MANUAL SELL', '15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC'], 'recommendations': 'Maintain current risk limits; reduce exposure to trades triggered by PANIC signals; prioritize RSI\u201175 entries with tighter stop\u2011losses; monitor partial\u2011profit exits for consistency; consider pausing manual sell all actions until market stabilises.'}"
+    },
+    {
+        "time": 1795378342.231325,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (12)', 'attention': [{'symbol': 'SKYAI-USDT', 'action': 'hold', 'reason': 'Position is very recent (51 minutes) with a small positive PnL (+0.49%). Stop loss is relatively close (0.03303) and price is near entry. No clear signal to add or exit; monitor price action.'}], 'summary': 'Overall portfolio risk is within the daily limit. The only open position, SKYAI-USDT, shows modest profit and limited time in trade. Maintain the position and watch for price movement toward the stop or a stronger trend before considering any adjustment.'}"
+    },
+    {
+        "time": 1795378343.7359776,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 57.14, 'net_pnl_usdt': 5.354, 'recurring_patterns': [{'reason': 'RSI 75', 'occurrences': 3, 'symbols': ['BLESS-USDT', 'SKYAI-USDT', 'DGAI-USDT']}, {'reason': 'PARTIAL PROFIT', 'occurrences': 3, 'symbols': ['BLESS-USDT', 'SKYAI-USDT', 'DGAI-USDT']}, {'reason': '15-MINUTE NO-UPWARD-TREND ROTATION', 'occurrences': 6, 'symbols': ['UNI-USDT', 'PUMP-USDT', 'BLESS-USDT', 'GRAM-USDT', 'JCT-USDT', 'COLLECT-USDT', 'DOS-USDT']}, {'reason': 'MANUAL SELL ALL', 'occurrences': 2, 'symbols': ['BGB-USDT', 'ONDO-USDT']}, {'reason': 'PANIC', 'occurrences': 3, 'symbols': ['TRX-USDT', 'ENA-USDT', 'WLD-USDT']}], 'recommendations': ['Review the effectiveness of RSI 75 entries; they show mixed outcomes and may need tighter confirmation.', \"Limit exposure to trades triggered by '15-MINUTE NO-UPWARD-TREND ROTATION' as they produce small, inconsistent profits.\", 'Avoid panic-driven exits; consider"
     }
 ]

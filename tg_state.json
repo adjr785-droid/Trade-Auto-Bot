@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935689378,
+    "last_update_id": 935689379,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT23.24/\u20a631,992",
+    "kb_ph": "USDT23.22/\u20a631,966",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -60,67 +60,9 @@
             1795362988.7943418
         ]
     },
-    "kb_mid": 4033,
+    "kb_mid": 4034,
     "radar": [
         "DOS-USDT",
         "SKYAI-USDT"
-    ],
-    "out_mid": 4031,
-    "out_text": "\ud83d\uddd3 *DAILY SUMMARY*\nTrades closed (24h): 12\nWin rate: 58% (7/12)\nNet profit: $+0.16\nBest: ENA $+0.33\nWorst: ONDO $-0.13\nOpen positions: 1\nAll-time realized: $+5.50 (29 trades)\n\u2800\n\u2800",
-    "out_mode": "Markdown",
-    "out_time": 1795377896.757066,
-    "pages": {
-        "p": [
-            "\ud83d\uddd3 *DAILY SUMMARY*\nTrades closed (24h): 12\nWin rate: 58% (7/12)\nNet profit: $+0.16\nBest: ENA $+0.33\nWorst: ONDO $-0.13\nOpen positions: 1\nAll-time realized: $+5.50 (29 trades)\n\u2800\n\u2800",
-            "\ud83d\udcbc USDT23.26/\u20a632,018\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
-        ],
-        "i": 0,
-        "mode": "Markdown",
-        "x": [],
-        "cmd": null
-    },
-    "panel_mid": 4032,
-    "panel_rows": [
-        [
-            {
-                "text": "\ud83e\udd16 Bot",
-                "callback_data": "/bot"
-            },
-            {
-                "text": "\ud83d\udcc8 Stats",
-                "callback_data": "/stats"
-            }
-        ],
-        [
-            {
-                "text": "\u2699\ufe0f Settings",
-                "callback_data": "m:set"
-            },
-            {
-                "text": "\ud83d\udcbc Holdings",
-                "callback_data": "m:r:holdings"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udcdc Trade History",
-                "callback_data": "m:r:history"
-            },
-            {
-                "text": "\ud83e\udde0 Ask AI",
-                "callback_data": "m:ai:1"
-            }
-        ],
-        [
-            {
-                "text": "\ud83e\uddf9 Clear Chat",
-                "callback_data": "/clear"
-            },
-            {
-                "text": "\ud83d\udea8 PANIC SELL",
-                "callback_data": "/panic"
-            }
-        ]
-    ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below."
+    ]
 }
