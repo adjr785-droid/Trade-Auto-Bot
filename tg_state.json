@@ -1,19 +1,19 @@
 {
-    "last_update_id": 935688821,
+    "last_update_id": 935688824,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT23.52/\u20a632,384",
+    "kb_ph": "USDT23.55/\u20a632,425",
     "layout_bottom": [
         "tools",
         "analyse"
     ],
     "kb_keys": "[['\ud83d\udccb Menu', '\ud83e\uddf0 Tools', '\ud83c\udfc6 Analyse']]",
     "bot_seen": {
-        "t": 1795347896.1036518,
-        "eq": 23.388804800386932,
+        "t": 1795350040.7384691,
+        "eq": 23.55636543898724,
         "pos": [
             "ENA",
             "TRX",
@@ -52,53 +52,58 @@
             1795311215.95037
         ]
     },
-    "kb_mid": 3489,
-    "out_mid": 3487,
-    "out_text": "\ud83d\udcc8 *MOMENTUM WATCH PASSED*\nWLD-USDT: upward trend confirmed\nafter 15 minutes. 15m move\n+1.07%; live vs entry +0.77%\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "kb_mid": 3495,
+    "out_text": "\ud83e\udd16 *BOT*\n\ud83d\udd58 Since last check (36 min\nago): \ud83d\udfe2 balance +0.17 USDT\nExchange connection: \u2705 OK\nPortfolio: $23.56 USDT |\n\u20a632,431\nUSDT cash: $0.02 (free $0.02)\nAuto-buy: ON (dynamic\nallocation; legacy target\n$3.7348)\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795349993.3324864,
-    "panel_mid": 3488,
+    "out_time": 1795350049.556979,
     "panel_rows": [
         [
             {
-                "text": "\ud83e\udd16 Bot",
-                "callback_data": "/bot"
+                "text": "\u25c0",
+                "callback_data": "pg:p"
             },
             {
-                "text": "\ud83d\udcc8 Stats",
-                "callback_data": "/stats"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udd0e Analyse Coin",
-                "callback_data": "m:an"
+                "text": "1/10",
+                "callback_data": "pg:x"
             },
             {
-                "text": "\u2699\ufe0f Settings",
-                "callback_data": "m:set"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udcbc Holdings",
-                "callback_data": "m:r:holdings"
+                "text": "\u25b6",
+                "callback_data": "pg:n"
             },
             {
-                "text": "\ud83e\udde0 Ask AI",
-                "callback_data": "m:ai:1"
-            }
-        ],
-        [
-            {
-                "text": "\ud83e\uddf9 Clear Chat",
-                "callback_data": "/clear"
+                "text": "\ud83c\udfe0",
+                "callback_data": "m:menu"
             },
             {
-                "text": "\ud83d\udea8 PANIC SELL",
-                "callback_data": "/panic"
+                "text": "\ud83d\udd04",
+                "callback_data": "rf:go"
             }
         ]
     ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below."
+    "panel_text": "\ud83d\udcc4 *Page 1/10*",
+    "out_mid": 3493,
+    "pages": {
+        "p": [
+            "\ud83e\udd16 *BOT*\n\ud83d\udd58 Since last check (36 min\nago): \ud83d\udfe2 balance +0.17 USDT\nExchange connection: \u2705 OK\nPortfolio: $23.56 USDT |\n\u20a632,431\nUSDT cash: $0.02 (free $0.02)\nAuto-buy: ON (dynamic\nallocation; legacy target\n$3.7348)\n\u2800\n\u2800",
+            "BTC safety filter: OK\nMarket filter: only 21% of coins\nare up today\nRisk controls: \u26d4 Daily limit\n(5)\nToday vs start of day: -0.03%\n(auto-buy pauses at -5.0%)\nMoney in coins: 100% of\nportfolio (cap 50.0%)\nRe-buy cooldown active: none\n\u2800\n\u2800",
+            "Last market scan: 0 min ago\n(runs every 30 min) | Queued\ncoins: 0\nBot-tracked positions: 3 |\nHoldings priced: 3\n\ud83d\udfe2 Last: PUMP \u2014 15-MINUTE\nNO-UPWARD-TREND ROTATION | PnL\n$+0.02 | 2.0h ago\n\n\ud83e\udded *STRATEGY*\n\u2800\n\u2800",
+            "Entries: TREND (RSI 42-48, price\n> MA5 > MA10), OVERSOLD bounce\n(RSI < 30), BREAKOUT (RSI 50-70\n+ volume breakout)\nProtection: stop-loss 15% |\ntrailing stop 8.0% below peak |\ncrash guard 10.0%\nExit: RSI >= 75 or max hold 703h\nProfit taking: sell 50% at +5.0%\nthen stop moves to break-even\n\u2800\n\u2800",
+            "Dynamic trailing: ON (wider in\nstrong trends, tighter when\nmomentum fades)\nEntry safety: spread limit 0.5%\n| stop fails -> sell at market |\nscan pre-filter ON\nNear-instant mode: ON (stays\nawake 270s per run)\nAuto-clear chat: every 24h\nLimits: 5 trades/day, 3.0% daily\n\u2800\n\u2800",
+            "loss, 15.0% max per coin\nExtra safeguards: 4h trend check\nON | BTC shock pause 3%/h |\ncombined open risk cap 3% |\nsmaller buys after 2 losses in a\nrow | parallel scan ON\n\n\ud83d\udcbc *HOLDINGS ADVICE*\n_Technical view only, not\nfinancial advice._\n\u2800\n\u2800",
+            "\n\ud83d\udfe2 \ud83e\ude99 *ENA* \u2014 $8.52 | PnL +5.8%\n($+0.47)\nAdvice: \ud83d\udfe2 HOLD\nWhy: Trend is up (price > MA5 >\nMA10), RSI 70\n\u26a0\ufe0f Long-term: speculative\n(100-day change +23%, below\n50-day average)\n\n\u2800\n\u2800",
+            "\ud83d\udfe2 \ud83e\ude99 *TRX* \u2014 $8.00 | PnL +0.1%\n($+0.01)\nAdvice: \ud83d\udfe2 HOLD\nWhy: Trend is up (price > MA5 >\nMA10), RSI 55\n\u26a0\ufe0f Long-term: speculative\n(100-day change -8%, below\n50-day average)\n\n\ud83d\udfe2 \ud83e\ude99 *WLD* \u2014 $7.00 | PnL +0.9%\n\u2800\n\u2800",
+            "($+0.07)\nAdvice: \ud83d\udfe2 HOLD\nWhy: Trend is up (price > MA5 >\nMA10), RSI 61\n\u274c Long-term: not suited (below\n50-day average, 100-day change\n-32%)\n\n\n\u2705 No sell advised right now.\n\u2800\n\u2800",
+            "For possible new buys use\n/analyse.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+        ],
+        "i": 0,
+        "mode": "Markdown",
+        "x": [
+            {
+                "text": "\ud83d\udd04",
+                "callback_data": "rf:go"
+            }
+        ],
+        "cmd": "/bot"
+    },
+    "panel_mid": 3494
 }
