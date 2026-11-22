@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689084,
+    "last_update_id": 935689086,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -61,7 +61,7 @@
         ]
     },
     "kb_mid": 3730,
-    "out_text": "\u2705 `max_hold_hours` = `296`\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "\u2705 `btc_trend_hours` = `50`\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
@@ -90,7 +90,7 @@
         ]
     ],
     "panel_text": "\u2699\ufe0f *btc trend hours*\nCurrent value: `50`",
-    "out_time": 1795364166.7779016,
-    "out_mid": 3768,
-    "panel_mid": 3769
+    "out_time": 1795364263.881263,
+    "out_mid": 3772,
+    "panel_mid": 3773
 }
