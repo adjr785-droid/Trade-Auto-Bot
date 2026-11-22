@@ -737,5 +737,15 @@
         "time": 1795376918.7028162,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 57.14, 'net_pnl_usdt': 5.354, 'recurring_patterns': ['RSI 75', 'PARTIAL PROFIT', 'MANUAL SELL', '15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC'], 'recommendations': 'Maintain current risk limits; reduce exposure to trades triggered by panic signals; prioritize RSI\u2011based entries with tighter stop\u2011losses; monitor partial\u2011profit exits for consistency; consider pausing manual sell all actions until trend confirmation improves.'}"
+    },
+    {
+        "time": 1795377211.6231055,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (12)', 'attention': [{'symbol': 'SKYAI-USDT', 'action': 'hold', 'reason': 'Small unrealized profit (0.57%) and stop loss still comfortably below entry; position age is low (32 minutes). No immediate risk signals.'}], 'summary': 'Current portfolio risk is within the daily limit. The only open position, SKYAI-USDT, shows a modest gain and remains well above its stop level. Maintain the position and monitor for any adverse price movement or changes in market sentiment.'}"
+    },
+    {
+        "time": 1795377212.5573225,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 57.14, 'net_pnl_usdt': 5.354, 'recurring_patterns': {'RSI 75': 3, 'PARTIAL PROFIT': 3, 'MANUAL SELL ALL': 3, '15-MINUTE NO-UPWARD-TREND ROTATION': 6, 'PANIC': 3}, 'recommendations': ['Limit exposure to trades triggered solely by RSI 75 without additional confirmation.', 'Review manual sell decisions; high frequency may indicate premature exits.', 'Investigate the consistency of the 15\u2011minute no\u2011upward\u2011trend rotation signal before scaling.', 'Maintain current risk parameters; win rate is modest and net PnL is positive but small.', 'Consider adding stop\u2011loss safeguards on panic\u2011driven exits to reduce downside volatility.']}"
     }
 ]
