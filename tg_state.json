@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT23.33/\u20a632,124",
+    "kb_ph": "USDT23.26/\u20a632,018",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -52,5 +52,5 @@
             1795311215.95037
         ]
     },
-    "kb_mid": 3505
+    "kb_mid": 3506
 }
