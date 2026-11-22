@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT23.16/\u20a631,889",
+    "kb_ph": "USDT23.22/\u20a631,969",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -62,8 +62,35 @@
             1795362988.7943418
         ]
     },
-    "kb_mid": 4116,
+    "kb_mid": 4119,
     "radar": [
+        "LTC-USDT",
         "TRX-USDT"
-    ]
+    ],
+    "out_mid": 4117,
+    "out_text": "\ud83d\udd0d *SCAN COMPLETE*\nChecked 462 markets.\nMatched: 1 | Queued: 0.\nautomatic buying is paused\n\ud83e\udde0 AI market view: BULLISH | medium\n\n\u2705 *MATCHED COINS*\n1. *ARX-USDT* \u2014 BREAKOUT matched, automatic buying is paused\n   Price 0.170680 | 24h +0.31% | RSI 61.6 | \u23f8 not queued\n\u2800\n\u2800\n\u2800",
+    "out_mode": "Markdown",
+    "out_time": 1795382658.3325832,
+    "panel_rows": [
+        [
+            {
+                "text": "\u25c0",
+                "callback_data": "pg:p"
+            },
+            {
+                "text": "1/3",
+                "callback_data": "pg:x"
+            },
+            {
+                "text": "\u25b6",
+                "callback_data": "pg:n"
+            },
+            {
+                "text": "\ud83c\udfe0",
+                "callback_data": "m:menu"
+            }
+        ]
+    ],
+    "panel_text": "\ud83d\udcc4 *Page 1/3*",
+    "panel_hidden": true
 }

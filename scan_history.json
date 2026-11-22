@@ -27680,6 +27680,22 @@
             "decision": "SKIP",
             "reason": "Vol below $5M",
             "min_volume": 5000000
+        },
+        {
+            "time": 1795382656,
+            "rank": 37,
+            "sym": "ARX-USDT",
+            "vol": 1002304.42,
+            "chg": 0.311,
+            "price": 0.17068,
+            "rsi": 61.59,
+            "rr": null,
+            "ma5": 0.168544,
+            "ma10": 0.167473,
+            "decision": "SETUP \u2014 NOT QUEUED",
+            "reason": "BREAKOUT matched, automatic buying is paused",
+            "min_volume": 1000000,
+            "strategy": "BREAKOUT"
         }
     ]
 }
