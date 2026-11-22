@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689118,
+    "last_update_id": 935689124,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -66,30 +66,82 @@
     "panel_rows": [
         [
             {
-                "text": "\u2796\u2796 -25%",
-                "callback_data": "m:kv:page_width:--"
-            },
-            {
-                "text": "\u2796 -10%",
-                "callback_data": "m:kv:page_width:-"
-            },
-            {
-                "text": "\u2795 +10%",
-                "callback_data": "m:kv:page_width:+"
-            },
-            {
-                "text": "\u2795\u2795 +25%",
-                "callback_data": "m:kv:page_width:++"
+                "text": "max_coin_exposure_pct = 20.0",
+                "callback_data": "m:k:max_coin_exposure_pct"
             }
         ],
         [
             {
-                "text": "\u2b05\ufe0f Settings",
-                "callback_data": "m:sp:0"
+                "text": "max_sector_exposure_pct = 35.0",
+                "callback_data": "m:k:max_sector_exposure_pct"
+            }
+        ],
+        [
+            {
+                "text": "liquidity_depth_usdt = 5000.0",
+                "callback_data": "m:k:liquidity_depth_usdt"
+            }
+        ],
+        [
+            {
+                "text": "max_book_imbalance_pct = 85.0",
+                "callback_data": "m:k:max_book_imbalance_pct"
+            }
+        ],
+        [
+            {
+                "text": "regime_risk_factor = 0.65",
+                "callback_data": "m:k:regime_risk_factor"
+            }
+        ],
+        [
+            {
+                "text": "execution_slippage_pct = 0.35",
+                "callback_data": "m:k:execution_slippage_pct"
+            }
+        ],
+        [
+            {
+                "text": "stop_watchdog_enabled = True",
+                "callback_data": "m:k:stop_watchdog_enabled"
+            }
+        ],
+        [
+            {
+                "text": "portfolio_stress_pct = 12.0",
+                "callback_data": "m:k:portfolio_stress_pct"
+            }
+        ],
+        [
+            {
+                "text": "signal_expiry_minutes = 30",
+                "callback_data": "m:k:signal_expiry_minutes"
+            }
+        ],
+        [
+            {
+                "text": "adaptive_risk_enabled = True",
+                "callback_data": "m:k:adaptive_risk_enabled"
+            }
+        ],
+        [
+            {
+                "text": "\u25c0\ufe0f Prev",
+                "callback_data": "m:sp:4"
+            },
+            {
+                "text": "Next \u25b6\ufe0f",
+                "callback_data": "m:sp:6"
+            }
+        ],
+        [
+            {
+                "text": "\u2b05\ufe0f Menu",
+                "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\u2699\ufe0f *page width*\nCurrent value: `40`",
+    "panel_text": "\u2699\ufe0f *SETTINGS* (page 6/8)\nTap a setting to change it.",
     "out_time": 1795364732.2274587,
     "out_mid": 3787,
     "panel_mid": 3789
