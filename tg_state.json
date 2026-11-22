@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689493,
+    "last_update_id": 935689496,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -69,72 +69,72 @@
     "panel_rows": [
         [
             {
-                "text": "auto_buy_reserve_pct = 5.0",
-                "callback_data": "m:k:auto_buy_reserve_pct"
+                "text": "max_sector_exposure_pct = 35.0",
+                "callback_data": "m:k:max_sector_exposure_pct"
             }
         ],
         [
             {
-                "text": "dynamic_auto_buy_max_pct = 20.0",
-                "callback_data": "m:k:dynamic_auto_buy_max_pct"
+                "text": "liquidity_depth_usdt = 5000.0",
+                "callback_data": "m:k:liquidity_depth_usdt"
             }
         ],
         [
             {
-                "text": "dynamic_auto_buy_min_usdt = 1.02",
-                "callback_data": "m:k:dynamic_auto_buy_min_usdt"
+                "text": "max_book_imbalance_pct = 85.0",
+                "callback_data": "m:k:max_book_imbalance_pct"
             }
         ],
         [
             {
-                "text": "dynamic_auto_buy_max_usdt = 0.0",
-                "callback_data": "m:k:dynamic_auto_buy_max_usdt"
+                "text": "regime_risk_factor = 0.65",
+                "callback_data": "m:k:regime_risk_factor"
             }
         ],
         [
             {
-                "text": "guardian_enabled = True",
-                "callback_data": "m:k:guardian_enabled"
+                "text": "execution_slippage_pct = 0.35",
+                "callback_data": "m:k:execution_slippage_pct"
             }
         ],
         [
             {
-                "text": "guardian_audit_interval_minutes = 15",
-                "callback_data": "m:k:guardian_audit_interval_minutes"
+                "text": "stop_watchdog_enabled = True",
+                "callback_data": "m:k:stop_watchdog_enabled"
             }
         ],
         [
             {
-                "text": "max_portfolio_correlation = 0.85",
-                "callback_data": "m:k:max_portfolio_correlation"
+                "text": "portfolio_stress_pct = 12.0",
+                "callback_data": "m:k:portfolio_stress_pct"
             }
         ],
         [
             {
-                "text": "momentum_1h_enabled = True",
-                "callback_data": "m:k:momentum_1h_enabled"
+                "text": "signal_expiry_minutes = 30",
+                "callback_data": "m:k:signal_expiry_minutes"
             }
         ],
         [
             {
-                "text": "mom_1h_min_pct = 0.5",
-                "callback_data": "m:k:mom_1h_min_pct"
+                "text": "adaptive_risk_enabled = True",
+                "callback_data": "m:k:adaptive_risk_enabled"
             }
         ],
         [
             {
-                "text": "mom_1h_max_pct = 6.0",
-                "callback_data": "m:k:mom_1h_max_pct"
+                "text": "dynamic_auto_buy_enabled = True",
+                "callback_data": "m:k:dynamic_auto_buy_enabled"
             }
         ],
         [
             {
                 "text": "\u25c0\ufe0f Prev",
-                "callback_data": "m:sp:5"
+                "callback_data": "m:sp:4"
             },
             {
                 "text": "Next \u25b6\ufe0f",
-                "callback_data": "m:sp:7"
+                "callback_data": "m:sp:6"
             }
         ],
         [
@@ -144,7 +144,7 @@
             }
         ]
     ],
-    "panel_text": "\u2699\ufe0f *SETTINGS* (page 7/8)\nTap a setting to change it.",
+    "panel_text": "\u2699\ufe0f *SETTINGS* (page 6/8)\nTap a setting to change it.",
     "out_time": 1795380278.9834466,
     "out_mid": 4084,
     "panel_mid": 4085
