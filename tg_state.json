@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935689467,
+    "last_update_id": 935689469,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT23.13/\u20a631,849",
+    "kb_ph": "USDT23.14/\u20a631,862",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -60,94 +60,42 @@
             1795362988.7943418
         ]
     },
-    "kb_mid": 4065,
+    "kb_mid": 4069,
     "radar": [
         "SKYAI-USDT",
         "ICNT-USDT",
         "TRX-USDT"
     ],
-    "out_mid": 4066,
-    "out_text": "\u2139\ufe0f Git sync used conflict recovery.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "\u2705 `page_chars` = `938`\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "panel_mid": 4067,
     "panel_rows": [
         [
             {
-                "text": "max_open_risk_pct = 3.0",
-                "callback_data": "m:k:max_open_risk_pct"
-            }
-        ],
-        [
-            {
-                "text": "loss_streak_trigger = 2",
-                "callback_data": "m:k:loss_streak_trigger"
-            }
-        ],
-        [
-            {
-                "text": "loss_streak_size_factor = 0.5",
-                "callback_data": "m:k:loss_streak_size_factor"
-            }
-        ],
-        [
-            {
-                "text": "scan_parallel = True",
-                "callback_data": "m:k:scan_parallel"
-            }
-        ],
-        [
-            {
-                "text": "page_chars = 750",
-                "callback_data": "m:k:page_chars"
-            }
-        ],
-        [
-            {
-                "text": "page_lines = 10",
-                "callback_data": "m:k:page_lines"
-            }
-        ],
-        [
-            {
-                "text": "page_width = 51",
-                "callback_data": "m:k:page_width"
-            }
-        ],
-        [
-            {
-                "text": "output_stale_minutes = 5",
-                "callback_data": "m:k:output_stale_minutes"
-            }
-        ],
-        [
-            {
-                "text": "smart_risk_enabled = True",
-                "callback_data": "m:k:smart_risk_enabled"
-            }
-        ],
-        [
-            {
-                "text": "max_coin_exposure_pct = 20.0",
-                "callback_data": "m:k:max_coin_exposure_pct"
-            }
-        ],
-        [
-            {
-                "text": "\u25c0\ufe0f Prev",
-                "callback_data": "m:sp:3"
+                "text": "\u2796\u2796 -25%",
+                "callback_data": "m:kv:page_chars:--"
             },
             {
-                "text": "Next \u25b6\ufe0f",
-                "callback_data": "m:sp:5"
+                "text": "\u2796 -10%",
+                "callback_data": "m:kv:page_chars:-"
+            },
+            {
+                "text": "\u2795 +10%",
+                "callback_data": "m:kv:page_chars:+"
+            },
+            {
+                "text": "\u2795\u2795 +25%",
+                "callback_data": "m:kv:page_chars:++"
             }
         ],
         [
             {
-                "text": "\u2b05\ufe0f Menu",
-                "callback_data": "m:menu"
+                "text": "\u2b05\ufe0f Settings",
+                "callback_data": "m:sp:0"
             }
         ]
     ],
-    "panel_text": "\u2699\ufe0f *SETTINGS* (page 5/8)\nTap a setting to change it.",
-    "out_time": 1795379850.1923323
+    "panel_text": "\u2699\ufe0f *page chars*\nCurrent value: `938`",
+    "out_time": 1795380039.4075935,
+    "out_mid": 4068,
+    "panel_mid": 4070
 }
