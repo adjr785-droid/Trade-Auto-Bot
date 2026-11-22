@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689221,
+    "last_update_id": 935689223,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -20,8 +20,8 @@
     "last_cmd": "/bot",
     "page_mem": {
         "/bot": [
-            5,
-            1795365585.5937076
+            2,
+            1795366541.5353553
         ],
         "m:r:holdings": [
             3,
@@ -70,7 +70,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "1/8",
+                "text": "3/8",
                 "callback_data": "pg:x"
             },
             {
@@ -87,7 +87,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/8*",
+    "panel_text": "\ud83d\udcc4 *Page 3/8*",
     "kb_mid": 3883,
     "out_mid": 3886,
     "pages": {
@@ -101,7 +101,7 @@
             "| parallel scan ON\n\n\ud83d\uded1 *HOLDINGS ADVICE*\nNo priced coin holdings right now.\n\n\ud83e\udde0 *AI:* Bot shows a -0.02\u202fUSDT balance,\nauto\u2011buy paused, daily loss at -1.84%\n(near the -5% auto\u2011pause trigger), and\n\u2800\n\u2800",
             "no active holdings; monitor for further\nlosses before resuming trades.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 0,
+        "i": 2,
         "mode": "Markdown",
         "x": [
             {
