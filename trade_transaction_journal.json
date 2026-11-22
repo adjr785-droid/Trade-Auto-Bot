@@ -471,5 +471,10 @@
             "warning": "Market conditions indicate only a small fraction of coins are gaining today (21%). Combined with a neutral RSI (~47) and no existing position, the trade carries moderate risk. Ensure position sizing aligns with your risk tolerance and consider broader market trends before proceeding.",
             "summary": "A manual buy of 23.18\u202fUSDT worth of JCT at $0.001609 is suggested. Given the limited upside in the broader market and a neutral RSI, proceed cautiously and monitor price action closely."
         }
+    },
+    {
+        "time": 1795361513.4109738,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (9)', 'attention': [{'symbol': 'JCT-USDT', 'action': 'hold', 'reason': 'Position is at entry with 0% PnL and stop loss only 8.7% below entry; no clear signal to exit or add. Monitor price relative to stop.'}], 'summary': 'Current portfolio contains a single manual JCT-USDT position at entry price. Risk is within daily limit. No immediate action required; maintain the position and watch for price movement toward the stop level.'}"
     }
 ]
