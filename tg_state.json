@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935689443,
+    "last_update_id": 935689446,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT23.10/\u20a631,809",
+    "kb_ph": "USDT23.13/\u20a631,849",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -60,7 +60,7 @@
             1795362988.7943418
         ]
     },
-    "kb_mid": 4061,
+    "kb_mid": 4064,
     "radar": [
         "SKYAI-USDT",
         "ICNT-USDT",
@@ -72,72 +72,72 @@
     "panel_rows": [
         [
             {
-                "text": "atr_stop_mult = 2.0",
-                "callback_data": "m:k:atr_stop_mult"
+                "text": "max_sector_exposure_pct = 35.0",
+                "callback_data": "m:k:max_sector_exposure_pct"
             }
         ],
         [
             {
-                "text": "atr_stop_min_pct = 3.0",
-                "callback_data": "m:k:atr_stop_min_pct"
+                "text": "liquidity_depth_usdt = 5000.0",
+                "callback_data": "m:k:liquidity_depth_usdt"
             }
         ],
         [
             {
-                "text": "atr_stop_max_pct = 10.0",
-                "callback_data": "m:k:atr_stop_max_pct"
+                "text": "max_book_imbalance_pct = 85.0",
+                "callback_data": "m:k:max_book_imbalance_pct"
             }
         ],
         [
             {
-                "text": "market_filter_enabled = True",
-                "callback_data": "m:k:market_filter_enabled"
+                "text": "regime_risk_factor = 0.65",
+                "callback_data": "m:k:regime_risk_factor"
             }
         ],
         [
             {
-                "text": "btc_trend_hours = 50",
-                "callback_data": "m:k:btc_trend_hours"
+                "text": "execution_slippage_pct = 0.35",
+                "callback_data": "m:k:execution_slippage_pct"
             }
         ],
         [
             {
-                "text": "min_breadth_pct = 30.0",
-                "callback_data": "m:k:min_breadth_pct"
+                "text": "stop_watchdog_enabled = True",
+                "callback_data": "m:k:stop_watchdog_enabled"
             }
         ],
         [
             {
-                "text": "offline_alert_hours = 3.0",
-                "callback_data": "m:k:offline_alert_hours"
+                "text": "portfolio_stress_pct = 12.0",
+                "callback_data": "m:k:portfolio_stress_pct"
             }
         ],
         [
             {
-                "text": "daily_summary_hour_utc = 20",
-                "callback_data": "m:k:daily_summary_hour_utc"
+                "text": "signal_expiry_minutes = 30",
+                "callback_data": "m:k:signal_expiry_minutes"
             }
         ],
         [
             {
-                "text": "max_daily_drawdown_pct = 5.0",
-                "callback_data": "m:k:max_daily_drawdown_pct"
+                "text": "adaptive_risk_enabled = True",
+                "callback_data": "m:k:adaptive_risk_enabled"
             }
         ],
         [
             {
-                "text": "partial_tp_pct = 10.7423",
-                "callback_data": "m:k:partial_tp_pct"
+                "text": "dynamic_auto_buy_enabled = True",
+                "callback_data": "m:k:dynamic_auto_buy_enabled"
             }
         ],
         [
             {
                 "text": "\u25c0\ufe0f Prev",
-                "callback_data": "m:sp:1"
+                "callback_data": "m:sp:4"
             },
             {
                 "text": "Next \u25b6\ufe0f",
-                "callback_data": "m:sp:3"
+                "callback_data": "m:sp:6"
             }
         ],
         [
@@ -147,7 +147,7 @@
             }
         ]
     ],
-    "panel_text": "\u2699\ufe0f *SETTINGS* (page 3/8)\nTap a setting to change it.",
+    "panel_text": "\u2699\ufe0f *SETTINGS* (page 6/8)\nTap a setting to change it.",
     "out_mid": 4060,
     "panel_mid": 4062
 }
