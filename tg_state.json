@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689516,
+    "last_update_id": 935689519,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -64,36 +64,51 @@
     "radar": [
         "TRX-USDT"
     ],
-    "out_text": "\u2705 `page_lines` = `13`\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "\ud83d\udcbc *Total Portfolio Value:* $23.09 USDT | \u20a631,783\n\n\ud83d\udcb5 *Available USDT Cash*\nTotal: $0.03 | Free to Trade: $0.03\n\ud83d\udfe1 *BGB Wallet Balance (not auto-converted)*\nTotal: 0.0018448246 BGB | Free: 0.0018448246 BGB | Value: $0.0029 USDT\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\n\ud83d\udcbc *Coin Holdings (Value: $23.03)*\n\ud83e\ude99 *WLD*\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
             {
-                "text": "\u2796\u2796 -25%",
-                "callback_data": "m:kv:page_lines:--"
+                "text": "\u25c0",
+                "callback_data": "pg:p"
             },
             {
-                "text": "\u2796 -10%",
-                "callback_data": "m:kv:page_lines:-"
+                "text": "1/4",
+                "callback_data": "pg:x"
             },
             {
-                "text": "\u2795 +10%",
-                "callback_data": "m:kv:page_lines:+"
+                "text": "\u25b6",
+                "callback_data": "pg:n"
             },
             {
-                "text": "\u2795\u2795 +25%",
-                "callback_data": "m:kv:page_lines:++"
-            }
-        ],
-        [
+                "text": "\ud83c\udfe0",
+                "callback_data": "m:menu"
+            },
             {
-                "text": "\u2b05\ufe0f Settings",
-                "callback_data": "m:sp:0"
+                "text": "\ud83d\udd04",
+                "callback_data": "rf:go"
             }
         ]
     ],
-    "panel_text": "\u2699\ufe0f *page lines*\nCurrent value: `13`",
-    "out_time": 1795380570.1960704,
-    "out_mid": 4104,
-    "panel_mid": 4105
+    "panel_text": "\ud83d\udcc4 *Page 1/4*",
+    "out_time": 1795380594.0519695,
+    "out_mid": 4109,
+    "pages": {
+        "p": [
+            "\ud83d\udcbc *Total Portfolio Value:* $23.09 USDT | \u20a631,783\n\n\ud83d\udcb5 *Available USDT Cash*\nTotal: $0.03 | Free to Trade: $0.03\n\ud83d\udfe1 *BGB Wallet Balance (not auto-converted)*\nTotal: 0.0018448246 BGB | Free: 0.0018448246 BGB | Value: $0.0029 USDT\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\n\ud83d\udcbc *Coin Holdings (Value: $23.03)*\n\ud83e\ude99 *WLD*\n\u2800\n\u2800",
+            "Quantity: 96.54374\nCurrent price: 0.238500 USDT\nMarket value: $23.03\nATH (Bitget lifetime): 11.9570 USDT\nATL (Bitget lifetime): 0.226900 USDT\n\ud83d\udfe2 Entry: 0.238100 USDT | PnL: +0.17% ($+0.04)\nRSI (1h): 67.0\nMA5 (1h): 0.236000\nMA10 (1h): 0.235070\nMarket sentiment: \ud83d\udfe2 Bullish\n\u2800\n\u2800",
+            "Bot trailing stop: ON (8.0% below peak)\nPeak price: 0.239100\nExchange stop level: 0.230957\n\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\nand 8 more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT23.09/\u20a631,783\n\n\u2800\n\u2800",
+            "\ud83e\udde0 *AI:* Portfolio is $23.09 total, with only $0.03 USDT cash; main holding WLD\nis at $0.2385 (near entry, +0.17% PnL) and protected by an 8% trailing stop,\nwhile several coins lack price data, indicating valuation uncertainty.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+        ],
+        "i": 0,
+        "mode": "Markdown",
+        "x": [
+            {
+                "text": "\ud83d\udd04",
+                "callback_data": "rf:go"
+            }
+        ],
+        "cmd": "m:r:holdings"
+    },
+    "panel_mid": 4110
 }

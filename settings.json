@@ -45,7 +45,7 @@
     "loss_streak_size_factor": 0.5,
     "scan_parallel": true,
     "page_chars": 1175,
-    "page_lines": 13,
+    "page_lines": 12,
     "page_width": 80,
     "output_stale_minutes": 5,
     "smart_risk_enabled": true,
