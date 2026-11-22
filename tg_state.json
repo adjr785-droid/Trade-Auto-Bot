@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935688843,
+    "last_update_id": 935688846,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -32,8 +32,8 @@
             1795347869.6744292
         ],
         "/analyse": [
-            0,
-            1795347528.1279955
+            3,
+            1795351541.8881419
         ],
         "m:r:analyse": [
             4,
@@ -65,7 +65,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "1/9",
+                "text": "4/9",
                 "callback_data": "pg:x"
             },
             {
@@ -78,7 +78,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/9*",
+    "panel_text": "\ud83d\udcc4 *Page 4/9*",
     "pages": {
         "p": [
             "\ud83c\udfc6 *TOP 3 SETUPS RIGHT NOW*\n_Read-only scan. Nothing was\nbought._\n\n\u26a0\ufe0f Market filter active: only\n21% of coins are up today.\nAuto-buy is blocked; a manual\nbuy is your own call.\n\n*1. ADA-USDT* \u2014 WATCHLIST (no\n\u2800\n\u2800",
@@ -91,7 +91,7 @@
             "\u2022 Status: \ud83d\udd36 Potential, manual\nonly (misses scanner rules)\n\u2022 \ud83e\udde0 AI: CAUTION \u2014 Fails\nscanner rules; monitor risk\n\nNo coin passes all scanner rules\nright now, so these are the\nstrongest available. Be\ncautious.\n\n\u2800\n\u2800",
             "Buy manually with `/buy COIN\namount` if you agree.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 0,
+        "i": 3,
         "mode": "Markdown",
         "x": [],
         "cmd": "/analyse"
