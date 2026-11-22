@@ -53,5 +53,10 @@
         "time": 1795350012.781503,
         "healthy": true,
         "findings": []
+    },
+    {
+        "time": 1795351848.3404698,
+        "healthy": true,
+        "findings": []
     }
 ]
