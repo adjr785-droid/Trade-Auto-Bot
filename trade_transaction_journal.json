@@ -30,5 +30,10 @@
         "symbol": "UNI-USDT",
         "source": "MANUAL",
         "detail": "15m move -0.24%; live vs entry -0.04%"
+    },
+    {
+        "time": 1795337683.6544585,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 52.63, 'net_pnl_usdt': 4.9657, 'recurring_patterns': ['Frequent manual sell\u2011all actions', 'RSI 75 signal used for profitable exits', 'Partial profit exits at ~5\u20116% gain', '15\u2011minute no\u2011upward\u2011trend rotation trigger'], 'recommendations': ['Limit reliance on manual sell\u2011all to reduce unnecessary losses', 'Validate RSI 75 threshold with broader back\u2011test before continued use', 'Implement systematic partial\u2011profit rules rather than ad\u2011hoc percentages', 'Introduce stop\u2011loss or trailing\u2011stop mechanisms for high\u2011volatility symbols', 'Monitor and adjust strategy for symbols with repeated negative PnL (e.g., SOON\u2011USDT, INJ\u2011USDT)']}"
     }
 ]
