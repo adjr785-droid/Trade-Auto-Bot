@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689067,
+    "last_update_id": 935689069,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -68,44 +68,28 @@
     "panel_rows": [
         [
             {
-                "text": "\ud83e\udd16 Bot",
-                "callback_data": "/bot"
+                "text": "\u2796\u2796 -25%",
+                "callback_data": "m:kv:auto_buy_amount_usdt:--"
             },
             {
-                "text": "\ud83d\udcc8 Stats",
-                "callback_data": "/stats"
+                "text": "\u2796 -10%",
+                "callback_data": "m:kv:auto_buy_amount_usdt:-"
+            },
+            {
+                "text": "\u2795 +10%",
+                "callback_data": "m:kv:auto_buy_amount_usdt:+"
+            },
+            {
+                "text": "\u2795\u2795 +25%",
+                "callback_data": "m:kv:auto_buy_amount_usdt:++"
             }
         ],
         [
             {
-                "text": "\u2699\ufe0f Settings",
-                "callback_data": "m:set"
-            },
-            {
-                "text": "\ud83d\udcbc Holdings",
-                "callback_data": "m:r:holdings"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udcdc Trade History",
-                "callback_data": "m:r:history"
-            },
-            {
-                "text": "\ud83e\udde0 Ask AI",
-                "callback_data": "m:ai:1"
-            }
-        ],
-        [
-            {
-                "text": "\ud83e\uddf9 Clear Chat",
-                "callback_data": "/clear"
-            },
-            {
-                "text": "\ud83d\udea8 PANIC SELL",
-                "callback_data": "/panic"
+                "text": "\u2b05\ufe0f Settings",
+                "callback_data": "m:sp:0"
             }
         ]
     ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below."
+    "panel_text": "\u2699\ufe0f *auto buy amount usdt*\nCurrent value: `3.7348`"
 }
