@@ -20748,6 +20748,22 @@
             "decision": "SKIP",
             "reason": "Vol below $5M",
             "min_volume": 5000000
+        },
+        {
+            "time": 1795378356,
+            "rank": 28,
+            "sym": "WLD-USDT",
+            "vol": 1729866.49,
+            "chg": 4.156,
+            "price": 0.2381,
+            "rsi": 67.0,
+            "rr": null,
+            "ma5": 0.236,
+            "ma10": 0.23507,
+            "decision": "SETUP \u2014 NOT QUEUED",
+            "reason": "BREAKOUT matched, automatic buying is paused",
+            "min_volume": 1000000,
+            "strategy": "BREAKOUT"
         }
     ]
 }
