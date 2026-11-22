@@ -1,19 +1,19 @@
 {
-    "last_update_id": 935689176,
+    "last_update_id": 935689178,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT23.16/\u20a631,882",
+    "kb_ph": "USDT23.14/\u20a631,858",
     "layout_bottom": [
         "tools",
         "analyse"
     ],
     "kb_keys": "[['\ud83d\udccb Menu', '\ud83e\uddf0 Tools', '\ud83c\udfc6 Analyse']]",
     "bot_seen": {
-        "t": 1795365561.2259688,
-        "eq": 23.160499574654715,
+        "t": 1795365602.1792724,
+        "eq": 23.141890980643428,
         "pos": [
             "COLLECT"
         ],
@@ -22,8 +22,8 @@
     "last_cmd": "/bot",
     "page_mem": {
         "/bot": [
-            4,
-            1795365349.653904
+            5,
+            1795365585.5937076
         ],
         "m:r:holdings": [
             3,
@@ -62,8 +62,8 @@
             1795362988.7943418
         ]
     },
-    "kb_mid": 3841,
-    "out_text": "\ud83d\udfe2 \ud83e\ude99 *COLLECT* \u2014 $23.11 | PnL +0.0%\n($+0.01)\nAdvice: \ud83d\udfe2 HOLD\nWhy: Trend is up (price > MA5 > MA10),\nRSI 60\n\u26a0\ufe0f Long-term: speculative (100-day\nchange -56%, above 50-day average)\n\n\n\u2705 No sell advised right now. For\npossible new buys use /analyse.\n\n\ud83e\udde0 *AI:* Bot shows a small USDT gain but\n\u2800\n\u2800",
+    "kb_mid": 3842,
+    "out_text": "balance and a -1.75% daily loss, but\nauto\u2011buy is paused and holdings are\nadvised to HOLD as trend remains up.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
@@ -72,7 +72,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "5/6",
+                "text": "6/6",
                 "callback_data": "pg:x"
             },
             {
@@ -89,18 +89,18 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 5/6*",
-    "out_time": 1795365569.929996,
+    "panel_text": "\ud83d\udcc4 *Page 6/6*",
+    "out_time": 1795365609.8361044,
     "pages": {
         "p": [
-            "\ud83e\udd16 *BOT*\n\ud83d\udd58 Since last check (7 min ago): \ud83d\udfe2\nbalance +0.01 USDT\nExchange connection: \u2705 OK\nPortfolio: $23.16 USDT | \u20a631,886\nUSDT cash: $0.02 (free $0.02)\nAuto-buy: PAUSED (dynamic allocation;\nlegacy target $6.4994)\nBTC safety filter: OK\nMarket filter: only 20% of coins are up\ntoday\nRisk controls: \u26d4 Daily limit (10)\nToday vs start of day: -1.70% (auto-buy\n\u2800\n\u2800",
-            "pauses at -5.0%)\nMoney in coins: 100% of portfolio (cap\n50.0%)\nRe-buy cooldown active: JCT\nLast market scan: 18 min ago (runs every\n30 min) | Queued coins: 0\nBot-tracked positions: 1 | Holdings\npriced: 1\n\ud83d\udd34 Last: JCT \u2014 15-MINUTE NO-UPWARD-TREND\nROTATION | PnL $-0.02 | 0.7h ago\n\n\ud83e\udded *STRATEGY*\nEntries: TREND (RSI 42-48, price > MA5 >\n\u2800\n\u2800",
+            "\ud83e\udd16 *BOT*\n\ud83d\udd58 Since last check (1 min ago): \ud83d\udd34\nbalance -0.02 USDT\nExchange connection: \u2705 OK\nPortfolio: $23.14 USDT | \u20a631,860\nUSDT cash: $0.02 (free $0.02)\nAuto-buy: PAUSED (dynamic allocation;\nlegacy target $6.4994)\nBTC safety filter: OK\nMarket filter: only 20% of coins are up\ntoday\nRisk controls: \u26d4 Daily limit (10)\nToday vs start of day: -1.75% (auto-buy\n\u2800\n\u2800",
+            "pauses at -5.0%)\nMoney in coins: 100% of portfolio (cap\n50.0%)\nRe-buy cooldown active: JCT\nLast market scan: 19 min ago (runs every\n30 min) | Queued coins: 0\nBot-tracked positions: 1 | Holdings\npriced: 1\n\ud83d\udd34 Last: JCT \u2014 15-MINUTE NO-UPWARD-TREND\nROTATION | PnL $-0.02 | 0.8h ago\n\n\ud83e\udded *STRATEGY*\nEntries: TREND (RSI 42-48, price > MA5 >\n\u2800\n\u2800",
             "MA10), OVERSOLD bounce (RSI < 30),\nBREAKOUT (RSI 50-70 + volume breakout)\nProtection: stop-loss 15% | trailing stop\n8.0% below peak | crash guard 10.0%\nExit: RSI >= 75 or max hold 296h\nProfit taking: sell 50% at +8.5938% then\nstop moves to break-even\nDynamic trailing: ON (wider in strong\ntrends, tighter when momentum fades)\nEntry safety: spread limit 0.5% | stop\nfails -> sell at market | scan pre-filter\nON\nNear-instant mode: ON (stays awake 270s\n\u2800\n\u2800",
             "per run)\nAuto-clear chat: every 24h\nLimits: 5 trades/day, 3.0% daily loss,\n15.0% max per coin\nExtra safeguards: 4h trend check ON | BTC\nshock pause 3%/h | combined open risk cap\n3% | smaller buys after 2 losses in a row\n| parallel scan ON\n\n\ud83d\udcbc *HOLDINGS ADVICE*\n_Technical view only, not financial\nadvice._\n\n\u2800\n\u2800",
-            "\ud83d\udfe2 \ud83e\ude99 *COLLECT* \u2014 $23.11 | PnL +0.0%\n($+0.01)\nAdvice: \ud83d\udfe2 HOLD\nWhy: Trend is up (price > MA5 > MA10),\nRSI 60\n\u26a0\ufe0f Long-term: speculative (100-day\nchange -56%, above 50-day average)\n\n\n\u2705 No sell advised right now. For\npossible new buys use /analyse.\n\n\ud83e\udde0 *AI:* Bot shows a small USDT gain but\n\u2800\n\u2800",
-            "auto\u2011buy is paused, BTC safety filter is\noff, and daily loss is -1.70%\n(approaching the -5% auto\u2011buy pause\nthreshold), so monitor risk limits\nclosely.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+            "\ud83d\udfe2 \ud83e\ude99 *COLLECT* \u2014 $23.09 | PnL -0.0%\n($-0.01)\nAdvice: \ud83d\udfe2 HOLD\nWhy: Trend is up (price > MA5 > MA10),\nRSI 60\n\u26a0\ufe0f Long-term: speculative (100-day\nchange -56%, above 50-day average)\n\n\n\u2705 No sell advised right now. For\npossible new buys use /analyse.\n\n\ud83e\udde0 *AI:* Bot shows a tiny -0.02\u202fUSDT\n\u2800\n\u2800",
+            "balance and a -1.75% daily loss, but\nauto\u2011buy is paused and holdings are\nadvised to HOLD as trend remains up.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 4,
+        "i": 5,
         "mode": "Markdown",
         "x": [
             {
