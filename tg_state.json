@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935688861,
+    "last_update_id": 935688862,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT23.29/\u20a632,060",
+    "kb_ph": "USDT23.33/\u20a632,126",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -56,10 +56,10 @@
             1795351821.6260564
         ]
     },
-    "kb_mid": 3533,
-    "out_text": "\ud83d\udea8 *AI FAILURE \u2014 EMERGENCY\nSELL-ONLY MODE ACTIVATED*\nAll buying and\ndiscretionary/manual selling are\nnow blocked. The bot will\nindependently monitor existing\npositions and execute ONLY\nconfigured protective/exit\nconditions (stop-loss, trailing\nstop, take-profit/partial\n\u2800\n\u2800",
+    "kb_mid": 3536,
+    "out_text": "\u26d4 Resume denied. AI must pass 3\nconsecutive live health checks\nfirst. Current successful\nchecks: 0.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795351831.8797655,
+    "out_time": 1795351912.2056975,
     "panel_rows": [
         [
             {
@@ -135,17 +135,6 @@
         ]
     ],
     "panel_text": "\ud83e\uddf0 *TOOLS*\nChoose a tool. Existing commands and functions remain available.",
-    "pages": {
-        "p": [
-            "\ud83d\udea8 *AI FAILURE \u2014 EMERGENCY\nSELL-ONLY MODE ACTIVATED*\nAll buying and\ndiscretionary/manual selling are\nnow blocked. The bot will\nindependently monitor existing\npositions and execute ONLY\nconfigured protective/exit\nconditions (stop-loss, trailing\nstop, take-profit/partial\n\u2800\n\u2800",
-            "profit, crash guard, time stop,\nRSI exit, unprotected-position\nexit and the existing 15-minute\nno-upward-trend rule). No\nreplacement buys. Proceeds\nremain in USDT.\nReason: AI stage\nperformance_review failed:\nExpecting ',' delimiter: line 1\ncolumn 646 (char 645)\n\u2800\n\u2800",
-            "AI recovery does NOT\nautomatically resume trading.\nYou will be notified.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
-        ],
-        "i": 0,
-        "mode": "Markdown",
-        "x": [],
-        "cmd": null
-    },
-    "out_mid": 3528,
-    "panel_mid": 3532
+    "out_mid": 3535,
+    "panel_hidden": true
 }
