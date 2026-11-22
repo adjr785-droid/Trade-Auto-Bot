@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935688780,
+    "last_update_id": 935688782,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT23.44/\u20a632,264",
+    "kb_ph": "USDT23.43/\u20a632,251",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -31,8 +31,8 @@
             1795332234.6212428
         ],
         "/analyse": [
-            4,
-            1795341717.823824
+            1,
+            1795347407.014115
         ],
         "m:r:analyse": [
             4,
@@ -51,5 +51,47 @@
             1795311215.95037
         ]
     },
-    "kb_mid": 3462
+    "kb_mid": 3466,
+    "out_text": "\ud83c\udfc6 *TOP 3 SETUPS RIGHT NOW*\n_Read-only scan. Nothing was\nbought._\n\n\u26a0\ufe0f Market filter active: only\n21% of coins are up today.\nAuto-buy is blocked; a manual\nbuy is your own call.\n\n*1. WLD-USDT* \u2014 BREAKOUT\n\u2800\n\u2800",
+    "out_mode": "Markdown",
+    "out_time": 1795347398.3901546,
+    "panel_rows": [
+        [
+            {
+                "text": "\u25c0",
+                "callback_data": "pg:p"
+            },
+            {
+                "text": "2/8",
+                "callback_data": "pg:x"
+            },
+            {
+                "text": "\u25b6",
+                "callback_data": "pg:n"
+            },
+            {
+                "text": "\ud83c\udfe0",
+                "callback_data": "m:menu"
+            }
+        ]
+    ],
+    "panel_text": "\ud83d\udcc4 *Page 2/8*",
+    "out_mid": 3467,
+    "pages": {
+        "p": [
+            "\ud83c\udfc6 *TOP 3 SETUPS RIGHT NOW*\n_Read-only scan. Nothing was\nbought._\n\n\u26a0\ufe0f Market filter active: only\n21% of coins are up today.\nAuto-buy is blocked; a manual\nbuy is your own call.\n\n*1. WLD-USDT* \u2014 BREAKOUT\n\u2800\n\u2800",
+            "Price: 0.234100 USDT | 24h:\n+5.12% | RSI: 62.6\nSuggested stop: 0.198985 (15%\nbelow price)\nWhy:\n\u2022 Confirmed breakout: price\ncleared the recent 20h high on\n1.56x average volume\n\u2022 RSI 62.6 is healthy (room to\nrun before overbought)\n\u2800\n\u2800",
+            "\u2022 24h change +5.12% shows\nsteady, not extreme, momentum\n\u2022 24h volume $2.4M (liquid\nenough: above the $1M minimum)\n\u2022 Spread: 0.04% (OK for\nauto-buy)\n\u2022 Status: \u26a0\ufe0f Passes with a\nnote\n\u2022 \ud83e\udde0 AI: CAUTION \u2014 Scanner\npassed but spread high, moderate\n\u2800\n\u2800",
+            "risk\n\n*2. COLLECT-USDT* \u2014 WATCHLIST\n(no full scanner setup)\nPrice: 0.025791 USDT | 24h:\n+1.10% | RSI: 56.3\nSuggested stop: 0.021922 (15%\nbelow price)\nWhy:\n\u2022 Short-term trend is up (price\n\u2800\n\u2800",
+            "> MA5 > MA10)\n\u2022 RSI 56.3 is healthy (room to\nrun before overbought)\n\u2022 24h change +1.10% shows\nsteady, not extreme, momentum\n\u2022 24h volume $3.8M (liquid\nenough: above the $1M minimum)\n\u2022 Spread: 0.03% (OK for\nauto-buy)\n\u2022 Status: \ud83d\udd36 Potential, manual\n\u2800\n\u2800",
+            "only (misses scanner rules)\n\u2022 \ud83e\udde0 AI: WEAK \u2014 Fails scanner\nrules, insufficient data\n\n*3. ADA-USDT* \u2014 WATCHLIST (no\nfull scanner setup)\nPrice: 0.145900 USDT | 24h:\n+3.77% | RSI: 59.9\nSuggested stop: 0.124015 (15%\nbelow price)\n\u2800\n\u2800",
+            "Why:\n\u2022 Short-term trend is up (price\n> MA5 > MA10)\n\u2022 RSI 59.9 is healthy (room to\nrun before overbought)\n\u2022 24h change +3.77% shows\nsteady, not extreme, momentum\n\u2022 24h volume $3.6M (liquid\nenough: above the $1M minimum)\n\u2022 Spread: 0.07% (OK for\n\u2800\n\u2800",
+            "auto-buy)\n\u2022 Status: \ud83d\udd36 Potential, manual\nonly (misses scanner rules)\n\u2022 \ud83e\udde0 AI: WEAK \u2014 Fails scanner\nrules, insufficient data\n\nBuy manually with `/buy COIN\namount` if you agree.\n\u2800\n\u2800\n\u2800\n\u2800"
+        ],
+        "i": 1,
+        "mode": "Markdown",
+        "x": [],
+        "cmd": "/analyse"
+    },
+    "panel_mid": 3468
 }
