@@ -3,8 +3,8 @@ try:import fcntl
 except ImportError:fcntl=None
 TK=os.environ.get('TG_TOKEN');CHAT=str(os.environ.get('TG_CHAT_ID',''));API=f"https://api.telegram.org/bot{TK}"
 DB,ST,CFG,QF,LF,CD,SC,HIST,LOCK,SH,OUT,AL,ATHATL_CACHE="positions.json","tg_state.json","settings.json","queue.json","profit_ledger.json",".cmd_cooldown.json","scan_state.json","trade_history.json",".bot.lock","scan_history.json","telegram_output.json","alerts.json","ath_atl_cache.json"
-FILES=[DB,ST,CFG,QF,LF,CD,SC,HIST,SH,OUT,AL,ATHATL_CACHE]
-GUARDIAN="bot_guardian.json";GCHARTER="core_charter.json";GAUDIT="guardian_audit.json"
+FILES=[DB,ST,CFG,QF,LF,CD,SC,HIST,SH,OUT,AL,ATHATL_CACHE,JOURNAL,BREAKER]
+GUARDIAN="bot_guardian.json";GCHARTER="core_charter.json";GAUDIT="guardian_audit.json";JOURNAL="trade_transaction_journal.json";BREAKER="trade_circuit_breaker.json"
 STABLE=['USDC','USDT','DAI','FDUSD','TUSD','USDD','USDE'];LEV=['3L','3S','5L','5S','10L','10S','2L','2S'];BL=['RPANW','CT','ONE']
 ex=ccxt.bitget({'apiKey':os.environ.get('BITGET_API_KEY'),'secret':os.environ.get('BITGET_API_SECRET'),'password':os.environ.get('BITGET_API_PASSPHRASE'),'enableRateLimit':True});ex.options['createMarketBuyOrderRequiresPrice']=False
 GROQ_API_KEY=os.environ.get('GROQ_API_KEY','').strip()
@@ -183,16 +183,17 @@ def _ring(m,mode):
  mid=_create(m,mode,None,silent=False)
  if not mid:_create(m,None,None,silent=False)
 def stale_output():
- mins=float(cfg().get('output_stale_minutes',30) or 0)
+ mins=float(cfg().get('output_stale_minutes',5) or 0)
  st=load(ST,{})
- if mins<=0 or not st.get("out_mid") or st.get("out_stale") or not st.get("out_time"):return
+ if mins<=0 or not st.get("out_mid") or not st.get("out_time"):return
  if time.time()-float(st["out_time"])<mins*60:return
- note=f"⏳ *Output cleared* (older than {mins:g} min).\nTap Menu, Tools or Analyse for fresh results."
- try:L=int(cfg().get('page_lines',14) or 0);note=_pad(note,max(10,int(cfg().get('page_width',32) or 32)),L) if L>0 else note
- except Exception:pass
- if _edit(st["out_mid"],note,"Markdown",None):
-  st=load(ST,{});st.pop("pages",None);st["out_stale"]=True;st["out_text"]=note;save(ST,st)
-  if st.get("panel_mid"):_hide_panel()
+ # Expired command output is removed, not left as an obsolete actionable result.
+ _del_msg(st.get("out_mid"));_del_msg(st.get("panel_mid"))
+ st=load(ST,{})
+ for k in ("out_mid","out_text","out_mode","out_time","out_stale","panel_mid","panel_rows","panel_text","pages"):
+  st.pop(k,None)
+ save(ST,st)
+
 def _dw(t):
  return sum(2 if ord(c)>0x2000 else 1 for c in t)
 def _vis(ln,W):
@@ -300,7 +301,7 @@ def cleanup_telegram_output():
  for item in out:
   if item.get("message_id") in persistent_mid:
    keep.append(item);continue
-  if now-float(item.get("sent_at",now))<float(cfg().get('cleanup_hours',24.0) or 24.0)*3600:keep.append(item);continue
+  if now-float(item.get("sent_at",now))<300:keep.append(item);continue
   try:
    r=requests.post(API+"/deleteMessage",json={"chat_id":CHAT,"message_id":item.get("message_id")},timeout=10)
    if not r.ok:
@@ -399,7 +400,7 @@ def save(f,d):
   os.replace(f+".tmp",f)
  except Exception as e:print(f"SAVE ERR {f}: {e}")
 def cfg():
- d={"rsi_min":42,"rsi_max":48,"stop_loss_pct":5.0,"auto_buy_enabled":True,"auto_buy_amount_usdt":10.0,"max_tokens_before_consolidation":3,"max_hold_hours":48,"trail_pct":8.0,"crash_guard_pct":10.0,"rsi_exit":75,"btc_rsi_min":50,"risk_per_trade_pct":1.0,"max_daily_loss_pct":3.0,"max_portfolio_exposure_pct":50.0,"max_position_pct":15.0,"max_daily_trades":5,"max_spread_pct":0.5,"auto_mode_v1":False,"rebuy_cooldown_hours":6.0,"atr_stop_enabled":True,"atr_stop_mult":2.0,"atr_stop_min_pct":3.0,"atr_stop_max_pct":10.0,"market_filter_enabled":True,"btc_trend_hours":50,"min_breadth_pct":30.0,"offline_alert_hours":3.0,"daily_summary_hour_utc":20,"max_daily_drawdown_pct":5.0,"partial_tp_pct":5.0,"partial_tp_fraction":0.5,"dynamic_trail":True,"sell_if_stop_fails":True,"scan_prefilter":True,"cleanup_hours":24.0,"scan_interval_minutes":15.0,"auto_clear_hours":24.0,"live_mode_seconds":270,"mtf_confirm":True,"btc_shock_pct":3.0,"max_open_risk_pct":3.0,"loss_streak_trigger":2,"loss_streak_size_factor":0.5,"scan_parallel":True,"page_chars":600,"page_lines":12,"page_width":32,"output_stale_minutes":30,"smart_risk_enabled":True,"max_coin_exposure_pct":20.0,"max_sector_exposure_pct":35.0,"liquidity_depth_usdt":5000.0,"max_book_imbalance_pct":85.0,"regime_risk_factor":0.65,"execution_slippage_pct":0.35,"stop_watchdog_enabled":True,"portfolio_stress_pct":12.0,"signal_expiry_minutes":30,"adaptive_risk_enabled":True,"dynamic_auto_buy_enabled":True,"auto_buy_reserve_pct":5.0,"dynamic_auto_buy_max_pct":20.0,"dynamic_auto_buy_min_usdt":1.02,"dynamic_auto_buy_max_usdt":0.0,"guardian_enabled":True,"guardian_audit_interval_minutes":15}
+ d={"rsi_min":42,"rsi_max":48,"stop_loss_pct":5.0,"auto_buy_enabled":True,"auto_buy_amount_usdt":10.0,"max_tokens_before_consolidation":3,"max_hold_hours":48,"trail_pct":8.0,"crash_guard_pct":10.0,"rsi_exit":75,"btc_rsi_min":50,"risk_per_trade_pct":1.0,"max_daily_loss_pct":3.0,"max_portfolio_exposure_pct":50.0,"max_position_pct":15.0,"max_daily_trades":5,"max_spread_pct":0.5,"auto_mode_v1":False,"rebuy_cooldown_hours":6.0,"atr_stop_enabled":True,"atr_stop_mult":2.0,"atr_stop_min_pct":3.0,"atr_stop_max_pct":10.0,"market_filter_enabled":True,"btc_trend_hours":50,"min_breadth_pct":30.0,"offline_alert_hours":3.0,"daily_summary_hour_utc":20,"max_daily_drawdown_pct":5.0,"partial_tp_pct":5.0,"partial_tp_fraction":0.5,"dynamic_trail":True,"sell_if_stop_fails":True,"scan_prefilter":True,"cleanup_hours":24.0,"scan_interval_minutes":15.0,"auto_clear_hours":24.0,"live_mode_seconds":270,"mtf_confirm":True,"btc_shock_pct":3.0,"max_open_risk_pct":3.0,"loss_streak_trigger":2,"loss_streak_size_factor":0.5,"scan_parallel":True,"page_chars":600,"page_lines":12,"page_width":32,"output_stale_minutes":5,"smart_risk_enabled":True,"max_coin_exposure_pct":20.0,"max_sector_exposure_pct":35.0,"liquidity_depth_usdt":5000.0,"max_book_imbalance_pct":85.0,"regime_risk_factor":0.65,"execution_slippage_pct":0.35,"stop_watchdog_enabled":True,"portfolio_stress_pct":12.0,"signal_expiry_minutes":30,"adaptive_risk_enabled":True,"dynamic_auto_buy_enabled":True,"auto_buy_reserve_pct":5.0,"dynamic_auto_buy_max_pct":20.0,"dynamic_auto_buy_min_usdt":1.02,"dynamic_auto_buy_max_usdt":0.0,"guardian_enabled":True,"guardian_audit_interval_minutes":15,"max_portfolio_correlation":0.85}
  s=load(CFG,d)
  for k,v in d.items():s.setdefault(k,v)
  if not s.get('auto_mode_v1'):s['auto_buy_enabled']=True;s['auto_mode_v1']=True;save(CFG,s)
@@ -618,6 +619,7 @@ def rec(sym,pnl,why):
  if not isinstance(H,list):H=[]
  strat=load(DB).get(sym,{}).get('strategy','OTHER')
  H.append({"sym":sym,"pnl":pnl,"time":time.time(),"reason":why,"strategy":strat});save(HIST,H)
+ journal_event("trade_closed",symbol=sym,pnl_usdt=pnl,reason=why,strategy=strat)
  if pnl<0 and not str(why).startswith(("MANUAL","PANIC")):mk_cd(f"stopout_{sym}")
 def cleanup_spot_dust_after_sale(sym):
  coin=sym.split("-")[0].upper()
@@ -718,7 +720,9 @@ def sell(sym,pct,reason):
     try:o=ex.fetch_order(oid,cs);filled=float(o.get('filled') or 0);px=float(o.get('average') or o.get('price') or p)
     except Exception:continue
     if filled>0:break
-  if filled<=0:tg(f"⚠️ *SELL NOT VERIFIED* {sym}: order `{oid}` returned no confirmed fill. Reconcile exchange balance before retrying.");return False
+  if filled<=0:
+   breaker_failure(f"SELL {sym}: fill not verified");journal_event("sell_fill_unverified",symbol=sym,order_id=oid);tg(f"⚠️ *SELL NOT VERIFIED* {sym}: order `{oid}` returned no confirmed fill. Reconcile exchange balance before retrying.");return False
+  journal_event("sell_fill_verified",symbol=sym,filled=filled,average=px,order_id=oid,reason=reason)
   db=load(DB)
   if sym in db:
    pnl=(px-db[sym]["entry_price"])*filled;rec(sym,pnl,reason)
@@ -1236,8 +1240,66 @@ def day_drawdown(equity=None):
 def track_day_equity():
  try:day_drawdown()
  except Exception as e:print(f"DAY EQUITY ERR: {e}")
+def journal_event(event, **fields):
+ try:
+  rows=load(JOURNAL,[]);rows=rows if isinstance(rows,list) else []
+  rows.append({"time":time.time(),"event":str(event),**fields});save(JOURNAL,rows[-3000:])
+ except Exception as e:print("JOURNAL WRITE ERR:",e)
+def breaker_failure(reason):
+ try:
+  b=load(BREAKER,{});b=b if isinstance(b,dict) else {}
+  recent=[float(x) for x in b.get("failures",[]) if time.time()-float(x)<900];recent.append(time.time())
+  b.update(failures=recent,last_reason=str(reason)[:180])
+  if len(recent)>=3:b.update(paused_until=time.time()+900,trigger="3 execution/API failures in 15 minutes")
+  save(BREAKER,b);journal_event("circuit_breaker_failure",reason=str(reason)[:180],count=len(recent))
+ except Exception as e:print("BREAKER WRITE ERR:",e)
+def breaker_status():
+ b=load(BREAKER,{})
+ if not isinstance(b,dict):return ""
+ until=float(b.get("paused_until",0) or 0)
+ return f"Circuit breaker active for {(until-time.time())/60:.1f} more minutes: {b.get('trigger','operational failures')}" if until>time.time() else ""
+def clear_recovered_breaker():
+ b=load(BREAKER,{})
+ if isinstance(b,dict) and b.get("paused_until") and float(b.get("paused_until",0))<=time.time():b.update(paused_until=0,failures=[]);save(BREAKER,b)
+def portfolio_correlation_guard(sym, threshold=0.85):
+ try:
+  held=list(load(DB,{}).keys())
+  if not held:return True,"No existing positions."
+  import math
+  def rets(pair):
+   c=ex.fetch_ohlcv(S(pair),"1h",limit=73);v=[float(z[4]) for z in c[:-1] if float(z[4])>0]
+   return [v[i]/v[i-1]-1 for i in range(1,len(v))]
+  x=rets(sym)
+  if len(x)<24:return True,"Correlation sample insufficient; neutral."
+  for other in held:
+   if other==sym:continue
+   y=rets(other);n=min(len(x),len(y))
+   if n<24:continue
+   a=x[-n:];b=y[-n:];ma=sum(a)/n;mb=sum(b)/n;va=sum((z-ma)**2 for z in a);vb=sum((z-mb)**2 for z in b)
+   if va<=0 or vb<=0:continue
+   corr=sum((a[i]-ma)*(b[i]-mb) for i in range(n))/math.sqrt(va*vb)
+   if corr>=threshold:return False,f"Correlation with held {other} is {corr:.2f} (limit {threshold:.2f})."
+  return True,"Portfolio correlation acceptable."
+ except Exception as e:return False,f"Correlation check unavailable: {str(e)[:100]}"
+def estimate_market_impact(sym, spend):
+ try:
+  ob=ex.fetch_order_book(S(sym),limit=50);asks=ob.get("asks") or [];bids=ob.get("bids") or []
+  if not asks or not bids:return False,None,"Order book unavailable for impact estimate."
+  mid=(float(asks[0][0])+float(bids[0][0]))/2;left=float(spend);cost=qty=0.0
+  for price,amount in asks:
+   price=float(price);take=min(float(amount),left/price)
+   if take>0:cost+=take*price;qty+=take;left-=take*price
+   if left<=0:break
+  if qty<=0 or left>max(.01,spend*.001):return False,None,"Visible asks cannot cover planned order."
+  impact=(cost/qty-mid)/mid*100
+  return True,impact,f"Estimated market impact {impact:.3f}%"
+ except Exception as e:return False,None,f"Impact estimate failed: {str(e)[:100]}"
+
 def risk_controls():
- s=cfg();now=time.time();day=[t for t in load(HIST) if now-float(t.get('time',0))<86400];realized=sum(float(t.get('pnl',0)) for t in day)
+ s=cfg();now=time.time();breaker=breaker_status()
+ if breaker:return False,breaker
+ clear_recovered_breaker()
+ day=[t for t in load(HIST) if now-float(t.get('time',0))<86400];realized=sum(float(t.get('pnl',0)) for t in day)
  try:
   bal=ex.fetch_balance();equity=float((bal.get('total') or {}).get('USDT',0))
   for coin,qty in (bal.get('total') or {}).items():
@@ -1463,6 +1525,8 @@ def exec_q():
     if not eqok:buy_rejection(sym,eqwhy);continue
     coinlim=float(s.get("max_coin_exposure_pct",20.0))
     if coin_exposure_pct(sym)>coinlim:buy_rejection(sym,f"Coin exposure exceeds {coinlim:g}% of equity.");continue
+    corr_ok,corr_reason=portfolio_correlation_guard(sym,float(s.get("max_portfolio_correlation",0.85)))
+    if not corr_ok:buy_rejection(sym,corr_reason);continue
    hrs=float(s.get('rebuy_cooldown_hours',6.0))
    if hrs>0 and in_cd(f"stopout_{sym}",hrs*3600):buy_rejection(sym,f"Re-buy cooldown ({hrs:g}h after a loss).");q.pop(sym,None);save(QF,q);continue
    sprd=spread_pct(sym);lim=float(s.get('max_spread_pct',0.5))
@@ -1476,8 +1540,16 @@ def exec_q():
     if orp+float(s.get('risk_per_trade_pct',1.0))>cap:buy_rejection(sym,f"Combined open risk {orp:.1f}% (limit {cap:g}%).");continue
    pct=sl_pct(sym);sp,alloc_meta=dynamic_auto_buy_budget(sym,qd,live(sym),qd.get('sl') or live(sym)*(1-pct/100),spend,s)
    if sp<1.02:buy_rejection(sym,f"Size too small (${sp:.2f}).");continue
+   impact_ok,impact,impact_reason=estimate_market_impact(sym,sp);impact_limit=float(s.get("execution_slippage_pct",0.35))
+   if not impact_ok or impact is None or impact>impact_limit:
+    buy_rejection(sym,impact_reason if not impact_ok else f"Estimated impact {impact:.3f}% exceeds {impact_limit:.3f}%.");continue
+   journal_event("buy_order_submitted",symbol=sym,spend_usdt=sp,estimated_impact_pct=impact,setup=qd.get("type","OTHER"))
    try:f,a=m_buy(S(sym),sp)
-   except Exception as e:buy_rejection(sym,f"Order failed: {e}");mk_cd(f"fail_{sym}");continue
+   except Exception as e:
+    breaker_failure(f"BUY {sym}: {e}");journal_event("buy_order_failed",symbol=sym,error=str(e)[:250]);buy_rejection(sym,f"Order failed: {e}");mk_cd(f"fail_{sym}");continue
+   if f<=0 or a<=0:
+    breaker_failure(f"BUY {sym}: fill not verified");journal_event("buy_fill_unverified",symbol=sym,filled=f,average=a);buy_rejection(sym,"Exchange fill could not be verified.");continue
+   journal_event("buy_fill_verified",symbol=sym,filled=f,average=a,spend_estimate=f*a)
    mxs=round(a*(1-pct/100),6);sl=qd.get('sl') or mxs
    if sl>=a or sl>mxs:sl=mxs
    db[sym]=NP(round(a,6),sl,pct);db[sym]['strategy']=qd.get('type','OTHER');save(DB,db);ok=place_trailing_sl(sym,free_qty(sym,f)) or protect_retry(sym,f);tg(f"🛒 *EXECUTED — DYNAMIC AUTO-BUY!*\n{sym}|💵{sp:.2f}@{a:.6f}\nAllocation: score {alloc_meta.get('score_factor',0):.2f}x, setup {alloc_meta.get('setup_factor',0):.2f}x, volatility {alloc_meta.get('vol_factor',0):.2f}x, regime {alloc_meta.get('regime_factor',0):.2f}x\n"+(STOP_OK if ok else STOP_NO))
@@ -1890,7 +1962,7 @@ def handle(t,age):
   except (ValueError,IndexError):cmd_scan_history("/scan_history")
  elif l in ("/panic","🚨 panic"):panic_prompt()
  elif l=="panic_cancel":tg("👍 Panic cancelled.")
- elif l=="panic_confirm":panic_sell() if age<=900 else tg("⌛ That confirmation expired.")
+ elif l=="panic_confirm":panic_sell() if age<=300 else tg("⌛ That confirmation expired.")
  elif l=="/sync":cmd_sync()
  elif l in ("/cancel","❌ cancel"):cmd_cancel_all()
  elif l=="/audit":
@@ -1916,7 +1988,16 @@ def tg_check(poll=0):
   top=max(u["update_id"] for u in res["result"]);st["last_update_id"]=top;save(ST,st)
   try:requests.get(f"{API}/getUpdates?offset={top+1}&limit=1&timeout=0",timeout=10)
   except:pass
-  for u in res["result"]:
+  # Last-in/last-out command policy: consume the entire Telegram update batch,
+  # execute only the newest update addressed to this bot, and discard older pending commands.
+  _eligible=[]
+  for _u in res["result"]:
+   _m=(_u.get("callback_query") or {}).get("message") if "callback_query" in _u else _u.get("message",{})
+   if str((_m or {}).get("chat",{}).get("id",""))==CHAT:_eligible.append(_u)
+  for _old in _eligible[:-1]:
+   _om=(_old.get("callback_query") or {}).get("message") if "callback_query" in _old else _old.get("message",{})
+   if _om and _om.get("message_id"):_del_msg(_om.get("message_id"))
+  for u in _eligible[-1:]:
    txt=cid="";age=0
    if "callback_query" in u:
     cb=u["callback_query"];txt=cb.get("data","");m=cb.get("message") or {}
@@ -1931,7 +2012,8 @@ def tg_check(poll=0):
    elif "callback_query" not in u and m.get("message_id"):
     try:o=load(OUT,[]);o.append({"message_id":m["message_id"],"sent_at":time.time()});save(OUT,o)
     except Exception:pass
-   if age>1800:continue
+   if age>300:
+    _del_msg(m.get("message_id"));continue
    _UI["mid"]=m.get("message_id") if "callback_query" in u else None
    if "callback_query" in u and (txt.startswith("m:") or txt.startswith("scan_history:")) and not _mid("panel_mid"):
     _set_mid("panel_mid",m.get("message_id"))
