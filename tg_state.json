@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689300,
+    "last_update_id": 935689302,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -65,30 +65,36 @@
         "DOS-USDT",
         "SKYAI-USDT"
     ],
-    "out_mid": 3957,
-    "out_text": "\ud83d\udd0d *SCAN COMPLETE*\nChecked 462 markets.\nNo coin matched any setup.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "\u2705 `rotation_retry_hours` = `4.5`\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795376568.5813034,
-    "panel_mid": 3958,
+    "out_time": 1795376654.8031037,
     "panel_rows": [
         [
             {
-                "text": "rotation_retry_hours = 6.0",
-                "callback_data": "m:k:rotation_retry_hours"
+                "text": "\u2796\u2796 -25%",
+                "callback_data": "m:kv:rotation_retry_hours:--"
+            },
+            {
+                "text": "\u2796 -10%",
+                "callback_data": "m:kv:rotation_retry_hours:-"
+            },
+            {
+                "text": "\u2795 +10%",
+                "callback_data": "m:kv:rotation_retry_hours:+"
+            },
+            {
+                "text": "\u2795\u2795 +25%",
+                "callback_data": "m:kv:rotation_retry_hours:++"
             }
         ],
         [
             {
-                "text": "\u25c0\ufe0f Prev",
-                "callback_data": "m:sp:7"
-            }
-        ],
-        [
-            {
-                "text": "\u2b05\ufe0f Menu",
-                "callback_data": "m:menu"
+                "text": "\u2b05\ufe0f Settings",
+                "callback_data": "m:sp:0"
             }
         ]
     ],
-    "panel_text": "\u2699\ufe0f *SETTINGS* (page 9/9)\nTap a setting to change it."
+    "panel_text": "\u2699\ufe0f *rotation retry hours*\nCurrent value: `4.5`",
+    "out_mid": 3960,
+    "panel_mid": 3961
 }
