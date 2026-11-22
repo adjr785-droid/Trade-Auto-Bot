@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689029,
+    "last_update_id": 935689030,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -39,7 +39,7 @@
         ],
         "/stats": [
             1,
-            1795304766.0341334
+            1795363050.6591382
         ],
         "m:scan_hist": [
             1,
@@ -72,7 +72,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "1/3",
+                "text": "2/3",
                 "callback_data": "pg:x"
             },
             {
@@ -89,7 +89,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/3*",
+    "panel_text": "\ud83d\udcc4 *Page 2/3*",
     "out_time": 1795363047.4899364,
     "pages": {
         "p": [
@@ -97,7 +97,7 @@
             "avg $+0.32 | total $+5.99\nOLDER: 2 trades | win 0% | avg\n$-0.15 | total $-0.29\nOTHER: 5 trades | win 40% | avg\n$-0.08 | total $-0.40\n\n\ud83e\udde0 *AI:* Overall net profit is\nmodest (+$5.30) with a 54% win\nrate; manual strategy performs\nwell (63% win, +$5.99), but the\n\u2800\n\u2800",
             "older strategy shows 0% win and\na loss, suggesting review of\nnon\u2011manual trades.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 0,
+        "i": 1,
         "mode": "Markdown",
         "x": [
             {
