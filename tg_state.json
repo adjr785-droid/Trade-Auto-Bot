@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT23.15/\u20a631,874",
+    "kb_ph": "USDT23.16/\u20a631,880",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -62,7 +62,7 @@
             1795362988.7943418
         ]
     },
-    "kb_mid": 3815,
+    "kb_mid": 3816,
     "out_text": "\ud83e\udd16 *BOT*\n\ud83d\udd58 Since last check (31 min ago): \ud83d\udd34\nbalance -0.03 USDT | new: COLLECT\nExchange connection: \u2705 OK\nPortfolio: $23.15 USDT | \u20a631,867\nUSDT cash: $0.02 (free $0.02)\nAuto-buy: PAUSED (dynamic allocation;\nlegacy target $6.4994)\nBTC safety filter: OK\nMarket filter: only 21% of coins are up\ntoday\nRisk controls: \u26d4 Daily limit (10)\nToday vs start of day: -1.73% (auto-buy\npauses at -5.0%)\nMoney in coins: 100% of portfolio (cap\n50.0%)\nRe-buy cooldown active: JCT\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
