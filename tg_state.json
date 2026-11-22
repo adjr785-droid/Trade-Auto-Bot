@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689341,
+    "last_update_id": 935689344,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -71,72 +71,72 @@
     "panel_rows": [
         [
             {
-                "text": "btc_shock_pct = 3.0",
-                "callback_data": "m:k:btc_shock_pct"
+                "text": "mom_1h_max_pct = 6.0",
+                "callback_data": "m:k:mom_1h_max_pct"
             }
         ],
         [
             {
-                "text": "max_open_risk_pct = 3.0",
-                "callback_data": "m:k:max_open_risk_pct"
+                "text": "max_24h_pct = 100.0",
+                "callback_data": "m:k:max_24h_pct"
             }
         ],
         [
             {
-                "text": "loss_streak_trigger = 2",
-                "callback_data": "m:k:loss_streak_trigger"
+                "text": "near_miss_alerts = True",
+                "callback_data": "m:k:near_miss_alerts"
             }
         ],
         [
             {
-                "text": "loss_streak_size_factor = 0.5",
-                "callback_data": "m:k:loss_streak_size_factor"
+                "text": "near_miss_rsi_margin = 3.0",
+                "callback_data": "m:k:near_miss_rsi_margin"
             }
         ],
         [
             {
-                "text": "scan_parallel = True",
-                "callback_data": "m:k:scan_parallel"
+                "text": "near_miss_1h_margin = 0.5",
+                "callback_data": "m:k:near_miss_1h_margin"
             }
         ],
         [
             {
-                "text": "page_chars = 750",
-                "callback_data": "m:k:page_chars"
+                "text": "near_miss_cooldown_minutes = 60",
+                "callback_data": "m:k:near_miss_cooldown_minutes"
             }
         ],
         [
             {
-                "text": "page_lines = 10",
-                "callback_data": "m:k:page_lines"
+                "text": "near_miss_max_per_scan = 3",
+                "callback_data": "m:k:near_miss_max_per_scan"
             }
         ],
         [
             {
-                "text": "page_width = 41",
-                "callback_data": "m:k:page_width"
+                "text": "radar_max = 30",
+                "callback_data": "m:k:radar_max"
             }
         ],
         [
             {
-                "text": "output_stale_minutes = 5",
-                "callback_data": "m:k:output_stale_minutes"
+                "text": "radar_rsi_margin = 10.0",
+                "callback_data": "m:k:radar_rsi_margin"
             }
         ],
         [
             {
-                "text": "smart_risk_enabled = True",
-                "callback_data": "m:k:smart_risk_enabled"
+                "text": "momentum_watch_minutes = 230",
+                "callback_data": "m:k:momentum_watch_minutes"
             }
         ],
         [
             {
                 "text": "\u25c0\ufe0f Prev",
-                "callback_data": "m:sp:3"
+                "callback_data": "m:sp:6"
             },
             {
                 "text": "Next \u25b6\ufe0f",
-                "callback_data": "m:sp:5"
+                "callback_data": "m:sp:8"
             }
         ],
         [
@@ -146,7 +146,7 @@
             }
         ]
     ],
-    "panel_text": "\u2699\ufe0f *SETTINGS* (page 5/9)\nTap a setting to change it.",
+    "panel_text": "\u2699\ufe0f *SETTINGS* (page 8/9)\nTap a setting to change it.",
     "out_mid": 3995,
     "panel_mid": 3997
 }
