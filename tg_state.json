@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935689015,
+    "last_update_id": 935689016,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT23.20/\u20a631,942",
+    "kb_ph": "USDT23.17/\u20a631,902",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -58,53 +58,19 @@
             1795352377.989315
         ]
     },
-    "kb_mid": 3706,
-    "out_mid": 3704,
-    "out_text": "\u23f8 Replacement buy skipped:\nAuto-buy is paused; existing\nrisk settings remain in force.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "kb_mid": 3708,
+    "out_text": "\ud83e\udde0 *AI:* Trade history shows\nmodest overall gains but several\nassets flagged as PANIC or\nno-upward-trend, indicating\npotential downside risk and the\nneed for caution.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "panel_mid": 3705,
     "panel_rows": [
         [
             {
-                "text": "\ud83e\udd16 Bot",
-                "callback_data": "/bot"
-            },
-            {
-                "text": "\ud83d\udcc8 Stats",
-                "callback_data": "/stats"
-            }
-        ],
-        [
-            {
-                "text": "\u2699\ufe0f Settings",
-                "callback_data": "m:set"
-            },
-            {
-                "text": "\ud83d\udcbc Holdings",
-                "callback_data": "m:r:holdings"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udcdc Trade History",
-                "callback_data": "m:r:history"
-            },
-            {
-                "text": "\ud83e\udde0 Ask AI",
-                "callback_data": "m:ai:1"
-            }
-        ],
-        [
-            {
-                "text": "\ud83e\uddf9 Clear Chat",
-                "callback_data": "/clear"
-            },
-            {
-                "text": "\ud83d\udea8 PANIC SELL",
-                "callback_data": "/panic"
+                "text": "\u2b05\ufe0f Menu",
+                "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
-    "out_time": 1795362884.7943804
+    "panel_text": "\ud83e\uddfe *TRADE HISTORY*\nDGAI | PARTIAL PROFIT +5.0% | PnL $+0.32\nDGAI | RSI 75 | PnL $+0.49\nCOLLECT | MANUAL SELL $15.10 | PnL $-0.10\nONDO | MANUAL SELL ALL | PnL $-0.13\nUNI | 15-MINUTE NO-UPWARD-TREND ROTATION | PnL $+0.00\nPUMP | 15-MINUTE NO-UPWARD-TREND ROTATION | PnL $+0.02\nTRX | PANIC | PnL $-0.01\nENA | PANIC | PnL $+0.33\nWLD | PANIC | PnL $-0.02\nBLESS | 15-MINUTE NO-UPWARD-TREND ROTATION | PnL $+0.01\nGRAM | 15-MINUTE NO-UPWARD-TREND ROTATION | PnL $+0.02\nJCT | 15-MINUTE NO-UPWARD-TREND ROTATION | PnL $-0.02",
+    "out_time": 1795362906.143528,
+    "out_mid": 3709,
+    "panel_hidden": true
 }
