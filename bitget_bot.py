@@ -3,12 +3,47 @@ try:import fcntl
 except ImportError:fcntl=None
 TK=os.environ.get('TG_TOKEN');CHAT=str(os.environ.get('TG_CHAT_ID',''));API=f"https://api.telegram.org/bot{TK}"
 DB,ST,CFG,QF,LF,CD,SC,HIST,LOCK,SH,OUT,AL,ATHATL_CACHE="positions.json","tg_state.json","settings.json","queue.json","profit_ledger.json",".cmd_cooldown.json","scan_state.json","trade_history.json",".bot.lock","scan_history.json","telegram_output.json","alerts.json","ath_atl_cache.json"
-GUARDIAN="bot_guardian.json";GCHARTER="core_charter.json";GAUDIT="guardian_audit.json";JOURNAL="trade_transaction_journal.json";BREAKER="trade_circuit_breaker.json"
-FILES=[DB,ST,CFG,QF,LF,CD,SC,HIST,SH,OUT,AL,ATHATL_CACHE,JOURNAL,BREAKER,GUARDIAN,GCHARTER,GAUDIT]
+GUARDIAN="bot_guardian.json";GCHARTER="core_charter.json";GAUDIT="guardian_audit.json";JOURNAL="trade_transaction_journal.json";BREAKER="trade_circuit_breaker.json";AI_HEALTH="ai_health.json"
+FILES=[DB,ST,CFG,QF,LF,CD,SC,HIST,SH,OUT,AL,ATHATL_CACHE,JOURNAL,BREAKER,GUARDIAN,GCHARTER,GAUDIT,AI_HEALTH]
 STABLE=['USDC','USDT','DAI','FDUSD','TUSD','USDD','USDE'];LEV=['3L','3S','5L','5S','10L','10S','2L','2S'];BL=['RPANW','CT','ONE']
 ex=ccxt.bitget({'apiKey':os.environ.get('BITGET_API_KEY'),'secret':os.environ.get('BITGET_API_SECRET'),'password':os.environ.get('BITGET_API_PASSPHRASE'),'enableRateLimit':True});ex.options['createMarketBuyOrderRequiresPrice']=False
 GROQ_API_KEY=os.environ.get('GROQ_API_KEY','').strip()
 GROQ_MODEL=os.environ.get('GROQ_MODEL','openai/gpt-oss-120b').strip() or 'openai/gpt-oss-120b'
+_AI_CACHE={}
+_AI_LAST={}
+
+def ai_emergency_state():
+ hs=load(AI_HEALTH,{})
+ return hs if isinstance(hs,dict) else {}
+
+def ai_emergency_active():
+ return bool(ai_emergency_state().get("emergency_mode"))
+
+def activate_ai_emergency(reason):
+ """Latch sell-only mode on any confirmed AI health/stage failure."""
+ hs=ai_emergency_state();already=bool(hs.get("emergency_mode"))
+ hs.update({"emergency_mode":True,"trading_mode":"SELL_ONLY","emergency_started":hs.get("emergency_started") or time.time(),
+  "emergency_reason":str(reason)[:240],"consecutive_successes":0,"resume_requires_user_confirmation":True})
+ save(AI_HEALTH,hs)
+ if not already:
+  tg("🚨 *AI FAILURE — EMERGENCY SELL-ONLY MODE ACTIVATED*\nAll buying and discretionary/manual selling are now blocked. The bot will independently monitor existing positions and execute ONLY configured protective/exit conditions (stop-loss, trailing stop, take-profit/partial profit, crash guard, time stop, RSI exit, unprotected-position exit and the existing 15-minute no-upward-trend rule). No replacement buys. Proceeds remain in USDT.\nReason: "+str(reason)[:220]+"\nAI recovery does NOT automatically resume trading. You will be notified.")
+
+def ai_sell_reason_allowed(reason):
+ """Allow only the bot's predefined, deterministic exit conditions in emergency mode."""
+ r=str(reason or "").strip().upper()
+ prefixes=("SL HIT", "STOP LOSS", "TRAILING STOP", "TIME STOP", "RSI ", "CRASH GUARD",
+  "PARTIAL PROFIT", "UNPROTECTED", "15-MINUTE NO-UPWARD-TREND ROTATION")
+ return any(r.startswith(x) for x in prefixes)
+
+def ai_emergency_resume():
+ hs=ai_emergency_state()
+ if not hs.get("emergency_mode"):
+  tg("ℹ️ AI emergency mode is not active.");return
+ if hs.get("status")!="healthy" or int(hs.get("consecutive_successes",0))<3:
+  tg("⛔ Resume denied. AI must pass 3 consecutive live health checks first. Current successful checks: "+str(hs.get("consecutive_successes",0))+".");return
+ hs.update({"emergency_mode":False,"trading_mode":"NORMAL","emergency_ended":time.time(),"resume_requires_user_confirmation":False})
+ save(AI_HEALTH,hs)
+ tg("✅ *AI RECOVERY VERIFIED — NORMAL MODE RESTORED*\nThree consecutive AI health checks passed and you confirmed /ai_resume. Existing buy settings are unchanged; normal deterministic risk checks still apply.")
 _C={};_BAL={"t":0,"m":""};LAYOUT_ITEMS=[("tools","🧰 Tools","m:tools"),("analyse","🏆 Analyse","/analyse"),("bot","🤖 Bot","/bot"),("stats","📈 Stats","/stats"),("an","🔎 Analyse Coin","m:an"),("set","⚙️ Settings","m:set"),("hold","💼 Holdings","m:r:holdings"),("ai","🧠 Ask AI","m:ai:1"),("clear","🧹 Clear Chat","/clear"),("panic","🚨 PANIC SELL","/panic")]
 LAYOUT_DEFAULT=["tools","analyse"];LAYOUT_MAX=5
 def layout_bottom():
@@ -571,6 +606,7 @@ def free_qty(sym,d):
  try:b=B('free',sym.split('-')[0]);return min(d,b) if b>0 else d
  except:return d
 def m_buy(cs,usdt):
+ if ai_emergency_active():raise RuntimeError("AI emergency SELL-ONLY mode is active; all buys are locked")
  sym=cs.replace("/","-");p=live(sym)
  if not p:raise Exception(f"No price for {cs}")
  try:o=ex.create_order(cs,'market','buy',usdt,None,{'createMarketBuyOrderRequiresPrice':False})
@@ -702,37 +738,75 @@ def cleanup_spot_dust_after_sale(sym):
    return f"⚠️ BGB conversion outcome is UNKNOWN for {coin}; do not retry until Bitget conversion history and balances are checked. Reason: {str(e)[:180]}"
   return f"⚠️ BGB dust conversion skipped for {coin}; balance left untouched. Reason: {str(e)[:220]}"
 def sell(sym,pct,reason):
+ """Sell requested amount; full exits are not successful until no tradable balance remains."""
+ if ai_emergency_active() and not ai_sell_reason_allowed(reason):
+  tg(f"⛔ Emergency SELL-ONLY mode: discretionary sale blocked for {sym}. Only configured exit conditions are permitted.");return False
  try:
   cs=S(sym);coin=sym.split("-")[0]
   if cancel_sells(sym):tg(f"⚠️ Sale of {sym} stopped: orders could not be safely cancelled.");return False
-  time.sleep(0.5);fb=B('free',coin)
-  if fb<=0:tg(f"ℹ️ {sym} has 0 free balance ({reason}).");return False
-  p=live(sym)
+  time.sleep(0.5);p=live(sym)
   if not p:return False
-  q=fb*pct
-  if q*p<1.02 and pct<1.0:q=fb;reason+=" (dust→full)"
-  q=float(ex.amount_to_precision(cs,q))
-  if q<=0:return True
-  o=ex.create_market_sell_order(cs,q);oid=(o or {}).get('id');filled=float((o or {}).get('filled') or 0);px=float((o or {}).get('average') or (o or {}).get('price') or p)
-  if oid and (filled<=0 or not px):
-   for _ in range(8):
-    time.sleep(0.8)
-    try:o=ex.fetch_order(oid,cs);filled=float(o.get('filled') or 0);px=float(o.get('average') or o.get('price') or p)
-    except Exception:continue
-    if filled>0:break
-  if filled<=0:
-   breaker_failure(f"SELL {sym}: fill not verified");journal_event("sell_fill_unverified",symbol=sym,order_id=oid);tg(f"⚠️ *SELL NOT VERIFIED* {sym}: order `{oid}` returned no confirmed fill. Reconcile exchange balance before retrying.");return False
-  journal_event("sell_fill_verified",symbol=sym,filled=filled,average=px,order_id=oid,reason=reason)
+  full_exit=pct>=0.999
+  total_filled=0.0;weighted_value=0.0;attempts=0;remaining=0.0
+  max_attempts=4 if full_exit else 1
+  while attempts<max_attempts:
+   fb=B('free',coin)
+   if fb<=0:
+    remaining=0.0;break
+   q=fb if full_exit else fb*pct
+   if q*p<1.02 and not full_exit:
+    q=fb;reason+=" (dust→full)"
+   q=float(ex.amount_to_precision(cs,q))
+   if q<=0:
+    remaining=fb;break
+   try:
+    o=ex.create_market_sell_order(cs,q);oid=(o or {}).get('id')
+    filled=float((o or {}).get('filled') or 0);px=float((o or {}).get('average') or (o or {}).get('price') or p)
+    if oid and (filled<=0 or not px):
+     for _ in range(10):
+      time.sleep(0.8)
+      try:
+       o=ex.fetch_order(oid,cs);filled=float(o.get('filled') or 0);px=float(o.get('average') or o.get('price') or p)
+      except Exception:continue
+      if filled>0:break
+    if filled<=0:
+     breaker_failure(f"SELL {sym}: fill not verified");journal_event("sell_fill_unverified",symbol=sym,order_id=oid)
+     tg(f"⚠️ *SELL NOT VERIFIED* {sym}: order `{oid}` returned no confirmed fill. Reconcile exchange balance before retrying.");return False
+    total_filled+=filled;weighted_value+=filled*px
+    journal_event("sell_fill_verified",symbol=sym,filled=filled,average=px,order_id=oid,reason=reason,attempt=attempts+1)
+   except Exception as order_error:
+    # A failed attempt is not treated as a completed liquidation.
+    journal_event("sell_attempt_failed",symbol=sym,attempt=attempts+1,error=str(order_error)[:180])
+    if attempts+1>=max_attempts:raise
+   attempts+=1
+   time.sleep(0.8)
+   remaining=B('free',coin)
+   p=live(sym) or p
+   if not full_exit:break
+   if remaining<=0 or remaining*p<1.02:break
+  if total_filled<=0:
+   tg(f"ℹ️ {sym} has no confirmed sale fill ({reason}).");return False
+  avg_px=weighted_value/total_filled
   db=load(DB)
   if sym in db:
-   pnl=(px-db[sym]["entry_price"])*filled;rec(sym,pnl,reason)
-   tg(f"✅ *SOLD ({reason})*\n🪙 {filled:.8g} {sym}\n{'🟢' if pnl>=0 else '🔴'} PnL: ${pnl:.2f}")
-  else:tg(f"✅ *SOLD ({reason})*\n🪙 {filled:.8g} {sym}\nCost basis not tracked; realized PnL not calculated.")
-  if pct>=0.999:
-   dust_result=cleanup_spot_dust_after_sale(sym)
-   tg(dust_result)
+   pnl=(avg_px-db[sym]["entry_price"])*total_filled;rec(sym,pnl,reason)
+   tg(f"✅ *SOLD ({reason})*\n🪙 {total_filled:.8g} {sym}\n{'🟢' if pnl>=0 else '🔴'} PnL: ${pnl:.2f}")
+  else:tg(f"✅ *SOLD ({reason})*\n🪙 {total_filled:.8g} {sym}\nCost basis not tracked; realized PnL not calculated.")
+  if full_exit and remaining*p>=1.02:
+   journal_event("full_sale_incomplete",symbol=sym,remaining_base=remaining,remaining_value_usdt=remaining*p,filled=total_filled)
+   tg(f"⚠️ *PARTIAL SALE — POSITION RETAINED:* {sym}; approximately {remaining:.8g} remains (${remaining*p:.2f}). It will stay tracked; no replacement buy will be made.")
+   return False
+  if full_exit:
+   journal_event("full_sale_verified_or_dust",symbol=sym,remaining_base=remaining,remaining_value_usdt=remaining*p if remaining else 0.0,filled=total_filled)
+   if remaining>0:tg(f"🟡 {sym}: remaining balance is below the $1.02 tradable-order threshold and is treated as exchange dust.")
+   dust_result=cleanup_spot_dust_after_sale(sym);tg(dust_result)
+   # Post-exit AI review informs future analysis; it never delays or reverses a protective sale.
+   ai=ai_stage('sell_review',{'symbol':sym,'reason':reason,'sold_quantity':total_filled,'average_exit':avg_px,
+    'remaining_base':remaining,'realized_pnl_usdt':(avg_px-db[sym]['entry_price'])*total_filled if sym in db else None},ttl=60,max_tokens=220)
+   if ai:journal_event('ai_sell_review',symbol=sym,review=ai)
   return True
  except Exception as e:tg(f"❌ *SELL FAILED* {sym}:`{e}`");return False
+
 def parse(txt,usage,allow_all=False):
  p=txt.split()
  if len(p)!=3:tg(usage);return None
@@ -743,6 +817,7 @@ def parse(txt,usage,allow_all=False):
  if a<=0:tg("❌ Amount must be positive.");return None
  return c,a
 def cmd_buy(txt):
+ if ai_emergency_active():tg("⛔ *BUY LOCKED:* AI emergency SELL-ONLY mode is active. No buying is permitted until AI recovery is verified and /ai_resume is confirmed.");return
  r=parse(txt,"❌ Usage: `/buy COIN USDT_AMOUNT` or `/buy COIN ALL`",True)
  if not r:return
  c,amt=r;sym=f"{c}-USDT"
@@ -756,6 +831,9 @@ def cmd_buy(txt):
    tg(f"❌ *BUY FAILED:* Only ${ub:.2f} free USDT. `/buy COIN ALL` keeps ${fee_reserve:.2f} aside; at least $1.02 free USDT is needed for a $1.00 order.");return
  if ub<amt+(0.02 if txt.strip().upper().endswith(' ALL') else 0.0):
   tg(f"❌ *BUY FAILED:* You have ${ub:.2f} free USDT; the order plus the $0.02 fee reserve would exceed it.");return
+ # User-initiated /buy remains under the user's authority; AI provides a warning, never blocks it.
+ ai_manual=ai_stage('manual_buy_review',{'symbol':sym,'amount_usdt':amt,'price':live(sym),'rsi':data(sym)[2],
+  'btc_filter_active':btc_blocked(cfg()),'market_filter':market_filter(cfg()),'existing_position':bool(old)},ttl=60,max_tokens=220)
  try:
   ob=B('total',c) if old else 0.0;f,a=m_buy(f"{c}/USDT",amt);sl=sl_pct(sym,old) if old else sl_pct(sym)
   if old:
@@ -765,8 +843,12 @@ def cmd_buy(txt):
   else:
    db[sym]=NP(round(a,6),round(a*(1-sl/100),6),sl);db[sym]['strategy']="MANUAL";db[sym]['purchase_source']='MANUAL';db[sym]['opened_at']=time.time();db[sym]['momentum_watch_started']=time.time();save(DB,db);ok=place_trailing_sl(sym,free_qty(sym,f))
    tg(f"✅ *BOUGHT:* {c} @ {a:.6f}\nSpent: ${amt:.2f}\n"+(STOP_OK if ok else STOP_NO))
+  if ai_manual:
+   journal_event('ai_manual_buy_review',symbol=sym,review=ai_manual)
+   tg('🧠 AI manual-buy advisory: '+str(ai_manual.get('summary',ai_manual.get('warning','Review available')))[:500])
  except Exception as e:tg(f"❌ *BUY FAILED:* {e}")
 def cmd_sell(txt):
+ if ai_emergency_active():tg("⛔ *MANUAL SELL LOCKED:* Emergency mode reserves selling for the bot's configured exit conditions only.");return
  r=parse(txt,"❌ Usage: `/sell COIN USDT_AMOUNT` (or `ALL`)",True)
  if not r:return
  c,amt=r;sym=f"{c}-USDT";cs=f"{c}/USDT"
@@ -805,6 +887,9 @@ def cmd_sell(txt):
    tg(f"✅ *SOLD:* {filled:.8g} {c} @ {px:.6f}\nPnL: ${pnl:.2f}\nRemaining: {rem:.8g} {c} (stop re-armed)")
   if fully_filled:
    tg(cleanup_spot_dust_after_sale(sym))
+  ai_review=ai_stage('sell_review',{'symbol':sym,'reason':'MANUAL SELL','sold_quantity':filled,'average_exit':px,
+   'remaining_base':rem,'realized_pnl_usdt':pnl},ttl=60,max_tokens=220)
+  if ai_review:journal_event('ai_manual_sell_review',symbol=sym,review=ai_review)
  except Exception as e:tg(f"❌ *SELL FAILED:* {e}")
 def cmd_cancel_all():
  tg("🔄 Cancelling all open orders on Bitget...")
@@ -831,6 +916,7 @@ def cmd_sync():
    db[sym]=NP(p,round(p*(1-cfg()['stop_loss_pct']/100),6));save(DB,db);added.append(sym);place_trailing_sl(sym,a)
  tg(f"✅ *SYNCED:* Added {len(added)} coins:\n`{chr(10).join(added)}`" if added else "✅ No new manual coins found to sync.")
 def panic_sell():
+ if ai_emergency_active():tg("⛔ Emergency SELL-ONLY mode is active. The bot is managing configured exits; manual bulk liquidation is disabled in this mode.");return
  db=load(DB)
  if not db:
   try:u=B('free','USDT')
@@ -1145,6 +1231,98 @@ def analyse_coin(txt):
   lines=[f"📊 *ANALYSIS: {sym}*",f"Live price: {fmt(price)} USDT",f"24h change: {change:+.2f}%" if isinstance(change,(int,float)) else "24h change: N/A",f"RSI(14): {fmt(rsi)} — "+("Overbought" if rsi is not None and rsi>=70 else "Oversold" if rsi is not None and rsi<=30 else "Neutral" if rsi is not None else "N/A"),f"MA5: {fmt(ma5)} | MA10: {fmt(ma10)} | MA20: {fmt(ma20)}",f"MACD: {fmt(macd)} | Signal: {fmt(signal)} | Histogram: {fmt(hist)}",f"ATR(14): {fmt(atr)} ({(atr/price*100):.2f}% of price)" if atr is not None and price else "ATR(14): N/A",f"Last hour vol vs 20h avg: {(lastvol/avgvol):.2f}x" if avgvol else "Volume: N/A",f"Bid/ask spread: {spread:.3f}%" if spread is not None else "Bid/ask spread: N/A",f"Technical checks: {score}/4",f"Assessment: *{verdict}*"]
   tg("\n".join(lines))
  except Exception as e:tg(f"❌ Could not analyse {sym}: {e}")
+def ai_stage(stage, payload, ttl=90, max_tokens=500):
+ """Structured Groq AI analysis. Advisory only; deterministic guards remain authoritative."""
+ api_key=os.environ.get('GROQ_API_KEY','').strip() or GROQ_API_KEY
+ model=os.environ.get('GROQ_MODEL','').strip() or GROQ_MODEL or 'openai/gpt-oss-120b'
+ if not api_key:return None
+ try:
+  body=json.dumps(payload,sort_keys=True,default=str,separators=(',',':'))
+  cache_key=(stage,body[:12000]);now=time.time();cached=_AI_CACHE.get(cache_key)
+  if cached and now-cached[0]<ttl:return cached[1]
+  _AI_LAST[stage]=now  # throttle failed calls too, preventing repeated API hammering
+  schemas={
+   'market_regime':'Return keys regime, risk_level, summary.',
+   'opportunity_ranking':'Return rankings as an array of {symbol, adjustment, reason}; adjustment must be between -5 and +5.',
+   'portfolio_review':'Return keys portfolio_risk, attention as an array of {symbol, action, reason}, summary. Advice only.',
+   'buy_gate':'Return keys decision (BUY or VETO), reason. VETO only for a clear material risk in supplied data.',
+   'manual_buy_review':'Return keys risk_level, warning, summary. Advisory only; the user explicitly requested this manual order.',
+   'rotation_candidate':'Return keys decision (BUY or VETO), reason. VETO only for a clear material risk in supplied data.',
+   'sell_review':'Return keys review, lesson, confidence. This is post-exit analysis only.',
+   'performance_review':'Return keys win_rate_pct, net_pnl_usdt, recurring_patterns, recommendations.'}
+  prompt=("You are an advisory AI module inside a live crypto SPOT bot. Return ONLY one valid JSON object, no markdown. "
+   "Never claim to place orders. Never override deterministic exchange/risk safeguards. Do not invent missing data. "
+   "Be conservative and explicitly represent uncertainty. Schema: "+schemas.get(stage,'Return a concise JSON object with summary and reason.')+
+   " Stage="+stage+". Input JSON="+body[:12000])
+  r=requests.post('https://api.groq.com/openai/v1/chat/completions',headers={'Authorization':'Bearer '+api_key,'Content-Type':'application/json'},
+   json={'model':model,'messages':[{'role':'system','content':'Return valid compact JSON only.'},{'role':'user','content':prompt}], 'temperature':0.1,'max_tokens':max_tokens},timeout=18)
+  if not r.ok:raise RuntimeError('Groq HTTP '+str(r.status_code))
+  content=r.json().get('choices',[{}])[0].get('message',{}).get('content','')
+  content=str(content).strip();start=content.find('{');end=content.rfind('}')
+  if start<0 or end<=start:raise ValueError('AI response was not JSON')
+  result=json.loads(content[start:end+1])
+  if not isinstance(result,dict):raise ValueError('AI response must be an object')
+  _AI_CACHE[cache_key]=(now,result);_AI_LAST[stage]=now
+  try:
+   hs=load(AI_HEALTH,{});stages=hs.setdefault('stages',{});ss=stages.setdefault(stage,{})
+   ss['last_success']=now;ss['successes']=int(ss.get('successes',0))+1;ss['last_error']='';hs['last_stage_success']=now;save(AI_HEALTH,hs)
+  except Exception:pass
+  return result
+ except Exception as e:
+  print('AI STAGE '+str(stage)+' unavailable: '+str(e)[:180])
+  try:
+   hs=load(AI_HEALTH,{});stages=hs.setdefault('stages',{});ss=stages.setdefault(stage,{})
+   ss['last_failure']=time.time();ss['failures']=int(ss.get('failures',0))+1;ss['last_error']=str(e)[:180];save(AI_HEALTH,hs)
+  except Exception:pass
+  activate_ai_emergency(f"AI stage {stage} failed: {str(e)[:180]}")
+  return None
+
+def ai_health_check(force=False):
+ # Five-minute live connectivity and structured-response self-test. Never controls orders.
+ now=time.time();hs=load(AI_HEALTH,{})
+ if not isinstance(hs,dict):hs={}
+ if not force and now-float(hs.get('last_check',0) or 0)<300:return
+ key=os.environ.get('GROQ_API_KEY','').strip() or GROQ_API_KEY
+ if not key:
+  hs.update({'last_check':now,'status':'unconfigured','last_error':'GROQ_API_KEY is missing','consecutive_failures':int(hs.get('consecutive_failures',0))+1})
+  save(AI_HEALTH,hs)
+  hs['consecutive_successes']=0;save(AI_HEALTH,hs)
+  if hs.get('alerted_status')!='unconfigured':
+   hs['alerted_status']='unconfigured';save(AI_HEALTH,hs)
+  activate_ai_emergency('GROQ_API_KEY is missing or not configured')
+  return
+ model=os.environ.get('GROQ_MODEL','').strip() or GROQ_MODEL or 'openai/gpt-oss-120b';started=time.time()
+ try:
+  r=requests.post('https://api.groq.com/openai/v1/chat/completions',headers={'Authorization':'Bearer '+key,'Content-Type':'application/json'},
+   json={'model':model,'messages':[{'role':'system','content':'Return valid JSON only.'},{'role':'user','content':'AI health self-test. Return exactly this JSON object: {"status":"ok","test":"passed"}'}], 'temperature':0,'max_tokens':40},timeout=12)
+  if not r.ok:raise RuntimeError('Groq HTTP '+str(r.status_code))
+  content=str(r.json().get('choices',[{}])[0].get('message',{}).get('content','')).strip();a=content.find('{');b=content.rfind('}')
+  if a<0 or b<=a:raise ValueError('AI health response was not JSON')
+  result=json.loads(content[a:b+1])
+  if result.get('status')!='ok' or result.get('test')!='passed':raise ValueError('AI health self-test returned unexpected content')
+  previous=hs.get('status');hs.update({'last_check':time.time(),'last_success':time.time(),'status':'healthy','model':model,'latency_ms':round((time.time()-started)*1000),'last_error':'','consecutive_failures':0,'consecutive_successes':int(hs.get('consecutive_successes',0))+1,'last_response_valid':True})
+  save(AI_HEALTH,hs)
+  if previous not in ('healthy',None) or hs.get('alerted_status') not in ('healthy',None):
+   tg('✅ *AI HEALTH RESTORED*\nGroq connection and structured-response self-test passed. Emergency SELL-ONLY mode remains latched; after 3 consecutive successful checks, send /ai_resume to restore normal trading.')
+  hs['alerted_status']='healthy';save(AI_HEALTH,hs)
+ except Exception as e:
+  count=int(hs.get('consecutive_failures',0))+1;previous=hs.get('status')
+  hs.update({'last_check':time.time(),'status':'unhealthy','model':model,'latency_ms':round((time.time()-started)*1000),'last_error':str(e)[:220],'consecutive_failures':count,'consecutive_successes':0,'last_response_valid':False})
+  save(AI_HEALTH,hs)
+  hs['alerted_status']='unhealthy';save(AI_HEALTH,hs)
+  activate_ai_emergency('Groq health self-test failed: '+str(e)[:200])
+
+def ai_market_context(s):
+ """Market-regime interpretation; informational only."""
+ if not (os.environ.get('GROQ_API_KEY','').strip() or GROQ_API_KEY):return None
+ try:
+  btc=data('BTC-USDT');reg=market_regime(s)
+  payload={'btc_price':live('BTC-USDT'),'btc_rsi':btc[2] if btc else None,'btc_market_filter':btc_blocked(s),
+   'btc_shock':btc_shock(s),'market_regime_rule_engine':str(reg)[:500], 'auto_buy_enabled':bool(s.get('auto_buy_enabled')),
+   'risk_controls':risk_controls()[1] if not risk_controls()[0] else 'PASS'}
+  return ai_stage('market_regime',payload,ttl=300,max_tokens=300)
+ except Exception as e:print('AI market context error:',e);return None
+
 def ask_ai(p):
  api_key=os.environ.get('GROQ_API_KEY','').strip() or GROQ_API_KEY
  model=os.environ.get('GROQ_MODEL','').strip() or GROQ_MODEL or 'openai/gpt-oss-120b'
@@ -1152,9 +1330,19 @@ def ask_ai(p):
   tg("⚠️ Groq AI is not configured. Create a free API key at https://console.groq.com/keys, add it as GROQ_API_KEY in your bot host's Secrets/Environment Variables, then restart the bot. GROQ_MODEL is optional (default: openai/gpt-oss-120b). The free tier has usage limits.");return
  try:
   db=load(DB);q=load(QF);s=cfg();bal=B('free','USDT');br=data("BTC-USDT")[2]
-  pos=[f"  {sym}: entry={d.get('entry_price')}, pnl={((live(sym) or d.get('entry_price',0))-d.get('entry_price',1))/d.get('entry_price',1)*100:+.1f}%" for sym,d in list(db.items())[:8] if d.get('entry_price')] or ["  (none)"]
-  ctx=f"Free USDT: {bal:.2f}|AutoBuy: ${s['auto_buy_amount_usdt']}|BTC RSI: {br}|Positions({len(db)}):\n"+"\n".join(pos)+f"\nQueue: {len(q)}|RSI {s['rsi_min']}-{s['rsi_max']}, SL {s['stop_loss_pct']}%\n\n"
-  prompt="You are an expert crypto market analyst advising a spot trading bot user. Use plain text, concise, acknowledge uncertainty. You are advisory only: never claim to execute trades or override deterministic bot risk controls. Context:\n"+ctx+"User question: "+str(p)
+  pos=[]
+  for sym,d in list(db.items())[:12]:
+   entry=float(d.get('entry_price',0) or 0);px=live(sym) or entry
+   pnl=((px/entry)-1)*100 if entry>0 and px>0 else 0.0
+   pos.append(f"  {sym}: source={d.get('purchase_source','UNKNOWN')}, setup={d.get('strategy','UNKNOWN')}, entry={entry}, live={px}, unrealized_pct={pnl:+.2f}%, stop={d.get('stop_loss')}, age_min={max(0,(time.time()-float(d.get('opened_at',time.time()) or time.time()))/60):.0f}")
+  if not pos:pos=["  (none)"]
+  queue=[]
+  for sym,qd in list(q.items())[:10] if isinstance(q,dict) else []:
+   queue.append(f"  {sym}: setup={qd.get('type','?')}, score={qd.get('score','?')}, full_setup={qd.get('full','?')}")
+  if not queue:queue=["  (no queued candidates)"]
+  btc_state="BLOCKED" if btc_blocked(s) or btc_shock(s) else "not blocked"
+  ctx=f"Free USDT: {bal:.2f}|AutoBuy: ${s['auto_buy_amount_usdt']}|BTC RSI: {br}|BTC filter: {btc_state}|AutoBuy enabled: {s.get('auto_buy_enabled',True)}\nOpen positions ({len(db)}):\n"+"\n".join(pos)+"\nScanner queue:\n"+"\n".join(queue)+f"\nRSI settings {s['rsi_min']}-{s['rsi_max']}, stop-loss {s['stop_loss_pct']}%, max spread {s.get('max_spread_pct')}%\n\n"
+  prompt="You are the inbuilt crypto spot-trading analyst. Assess market regime, candidate quality, portfolio exposure, and each position's hold/reduce/exit risk. When BTC filter is blocking an otherwise attractive setup, clearly explain that the user may choose the existing manual /buy command; do not recommend bypassing other risk checks. Distinguish confirmed data from uncertainty, mention fees/slippage and avoid promising profit. You are advisory only: never claim to execute trades, never invent indicators, and never override deterministic bot risk controls. Give concise actionable analysis with BUY WATCH / HOLD / REDUCE / EXIT-style labels where supported. Context:\n"+ctx+"User question: "+str(p)
   r=requests.post("https://api.groq.com/openai/v1/chat/completions",headers={"Authorization":"Bearer "+api_key,"Content-Type":"application/json"},json={"model":model,"messages":[{"role":"user","content":prompt}],"temperature":0.4,"max_tokens":1200},timeout=45)
   if not r.ok:
    try: detail=(r.json().get("error",{}).get("message") or r.text or "")[:350]
@@ -1207,6 +1395,30 @@ def manage():
     if not ok and s.get("sell_if_stop_fails",True):unprotected_exit(sym,db)
   db[sym]=d
  save(DB,db)
+ # AI reviews run only after deterministic protective exits and stop maintenance have completed.
+ if db and time.time()-_AI_LAST.get('portfolio_review',0)>=900:
+  try:
+   positions=[]
+   for sy,dd in list(db.items())[:20]:
+    en=float(dd.get('entry_price',0) or 0);px=live(sy) or en
+    positions.append({'symbol':sy,'source':dd.get('purchase_source','UNKNOWN'),'setup':dd.get('strategy','UNKNOWN'),
+     'entry':en,'price':px,'pnl_pct':round((px/en-1)*100,2) if en>0 and px>0 else None,
+     'stop':dd.get('stop_loss'),'age_min':round((time.time()-float(dd.get('opened_at',time.time()) or time.time()))/60)})
+   ai=ai_stage('portfolio_review',{'positions':positions,'btc_price':live('BTC-USDT'),'btc_filter':btc_blocked(s),
+    'portfolio_risk':risk_controls()[1] if not risk_controls()[0] else 'PASS'},ttl=900,max_tokens=450)
+   if ai:journal_event('ai_portfolio_review',summary=str(ai)[:900])
+  except Exception as e:print('AI portfolio review error:',e)
+ # Performance intelligence uses closed trade history; it cannot alter sizing or strategy rules.
+ if time.time()-_AI_LAST.get('performance_review',0)>=1800:
+  try:
+   hist=load(HIST,[]);closed=[x for x in hist if isinstance(x,dict) and isinstance(x.get('pnl'),(int,float))][-30:]
+   if closed:
+    wins=sum(1 for x in closed if float(x.get('pnl',0))>0);net=sum(float(x.get('pnl',0)) for x in closed)
+    ai=ai_stage('performance_review',{'sample_trades':len(closed),'wins':wins,'losses':len(closed)-wins,
+     'win_rate_pct':round(wins/len(closed)*100,2),'net_pnl_usdt':round(net,4),
+     'trades':[{'pnl':x.get('pnl'),'reason':x.get('reason'),'symbol':x.get('sym')} for x in closed[-20:]]},ttl=1800,max_tokens=350)
+    if ai:journal_event('ai_performance_review',review=str(ai)[:900])
+  except Exception as e:print('AI performance review error:',e)
 def partial_profit(sym,d,db,s,lv,inc,ptp,pf):
  if not (ptp>0 and 0<pf<1 and not d.get('partial_done') and inc>=ptp):return
  coin=sym.split('-')[0];qh=B('total',coin)
@@ -1515,7 +1727,7 @@ def exec_q():
   ub=B('free','USDT')
   reserve_pct=max(0.0,min(50.0,float(s.get('auto_buy_reserve_pct',5.0))))
   ub=max(0.0,ub*(1-reserve_pct/100.0))
-  for sym,qd in sorted(q.items(),key=lambda x:x[1].get('score',0),reverse=True):
+  for sym,qd in sorted(q.items(),key=lambda x:float(x[1].get('score',0))+float(x[1].get('ai_priority_adjustment',0)),reverse=True):
    if in_cd(f"fail_{sym}",300):buy_rejection(sym,"Previous fail.");continue
    if sym in db:buy_rejection(sym,"Position exists.");q.pop(sym,None);save(QF,q);continue
    if not live(sym):buy_rejection(sym,"No price.");continue
@@ -1543,6 +1755,13 @@ def exec_q():
    impact_ok,impact,impact_reason=estimate_market_impact(sym,sp);impact_limit=float(s.get("execution_slippage_pct",0.35))
    if not impact_ok or impact is None or impact>impact_limit:
     buy_rejection(sym,impact_reason if not impact_ok else f"Estimated impact {impact:.3f}% exceeds {impact_limit:.3f}%.");continue
+   # AI is a final advisory quality gate only after every deterministic buy check passed.
+   ai=ai_stage('buy_gate',{'symbol':sym,'setup':qd.get('type'),'score':qd.get('score'),'price':live(sym),
+    'rsi':data(sym)[2],'spread_pct':sprd,'estimated_impact_pct':impact,'spend_usdt':sp,
+    'btc_filter':btc_blocked(s),'market_filter':market_filter(s),'risk_controls':'PASS'},ttl=120,max_tokens=250)
+   if ai and ai.get('decision') not in ('BUY','ALLOW','PROCEED'):
+    buy_rejection(sym,'AI advisory veto: '+str(ai.get('reason','AI did not approve this entry'))[:180]);journal_event('ai_buy_veto',symbol=sym,ai=ai);continue
+   if ai:journal_event('ai_buy_approved',symbol=sym,ai=ai)
    journal_event("buy_order_submitted",symbol=sym,spend_usdt=sp,estimated_impact_pct=impact,setup=qd.get("type","OTHER"))
    try:f,a=m_buy(S(sym),sp)
    except Exception as e:
@@ -1570,10 +1789,10 @@ def asset_has_upward_momentum(sym, entry):
   return rising,f"15m move {((closes[-1]/closes[0])-1)*100:+.2f}%; live vs entry {((px/entry)-1)*100:+.2f}%"
  except Exception as e:return None,f"Momentum data unavailable: {str(e)[:120]}"
 def replace_with_best_setup(origin_source, sold_symbol):
- """Buy the highest-ranked full setup; manual /buy-origin rotations alone bypass BTC filters."""
- s=cfg();manual_origin=str(origin_source).upper()=="MANUAL"
- if not manual_origin and (btc_blocked(s) or btc_shock(s)):
-  tg("⏸ Replacement buy skipped: BTC safety filter is active for an automatically purchased asset.");return
+ """Replacement purchases always require the complete Auto-Buy rules, regardless of entry origin."""
+ s=cfg()
+ if btc_blocked(s) or btc_shock(s):
+  tg("⏸ Replacement buy skipped: BTC safety filter is active. Proceeds remain in USDT until a qualifying Auto-Buy opportunity appears.");return
  if not s.get("auto_buy_enabled",True):
   tg("⏸ Replacement buy skipped: Auto-buy is paused; existing risk settings remain in force.");return
  guardian_ok,guardian_reason=guardian_audit()
@@ -1603,14 +1822,20 @@ def replace_with_best_setup(origin_source, sold_symbol):
  impact_ok,impact,impact_reason=estimate_market_impact(sym,spend)
  if not impact_ok or impact is None or impact>float(s.get("execution_slippage_pct",0.35)):
   tg(f"⏸ Replacement buy skipped: {impact_reason if not impact_ok else f'estimated impact {impact:.3f}% too high'}");return
+ ai=ai_stage('rotation_candidate',{'symbol':sym,'setup':cand.get('setup'),'score':cand.get('pts'),'price':price,
+  'spread_pct':sp,'estimated_impact_pct':impact,'spend_usdt':spend,'btc_filter':'PASS','market_filter':'PASS',
+  'risk_controls':'PASS','origin_of_sold_position':origin_source},ttl=120,max_tokens=250)
+ if ai and ai.get('decision') not in ('BUY','ALLOW','PROCEED'):
+  tg(f"⏸ Replacement buy skipped by AI review: {str(ai.get('reason','candidate not approved'))[:180]}. Proceeds remain in USDT.");journal_event('ai_rotation_veto',symbol=sym,ai=ai);return
+ if ai:journal_event('ai_rotation_approved',symbol=sym,ai=ai)
  try:
-  journal_event("momentum_rotation_buy_submitted",symbol=sym,origin_source=origin_source,spend_usdt=spend,btc_filter_bypassed=manual_origin)
+  journal_event("momentum_rotation_buy_submitted",symbol=sym,origin_source=origin_source,spend_usdt=spend,btc_filter_bypassed=False)
   filled,avg=m_buy(S(sym),spend)
   if filled<=0 or avg<=0:raise RuntimeError("replacement fill not verified")
   newdb=load(DB);newdb[sym]=NP(round(avg,6),round(avg*(1-pct/100),6),pct);newdb[sym].update(strategy=cand.get("setup","ROTATION"),purchase_source="AUTO",opened_at=time.time(),momentum_watch_started=time.time(),rotation_from=sold_symbol);save(DB,newdb)
   protected=place_trailing_sl(sym,free_qty(sym,filled)) or protect_retry(sym,filled)
-  journal_event("momentum_rotation_buy_verified",symbol=sym,filled=filled,average=avg,origin_source=origin_source,btc_filter_bypassed=manual_origin)
-  tg(f"🔁 *ROTATION BUY VERIFIED*\n{sym} @ {avg:.8g} | Spend ${spend:.2f}\nSetup: {cand.get('setup')} | Origin: {origin_source} | BTC bypass: {'YES (bot /buy origin)' if manual_origin else 'NO'}\n"+(STOP_OK if protected else STOP_NO))
+  journal_event("momentum_rotation_buy_verified",symbol=sym,filled=filled,average=avg,origin_source=origin_source,btc_filter_bypassed=False)
+  tg(f"🔁 *ROTATION BUY VERIFIED*\n{sym} @ {avg:.8g} | Spend ${spend:.2f}\nSetup: {cand.get('setup')} | Origin: {origin_source} | BTC bypass: NO (full Auto-Buy filters required)\n"+(STOP_OK if protected else STOP_NO))
   if not protected and s.get("sell_if_stop_fails",True):unprotected_exit(sym,newdb)
  except Exception as e:
   breaker_failure(f"ROTATION BUY {sym}: {e}");journal_event("momentum_rotation_buy_failed",symbol=sym,error=str(e)[:220]);tg(f"❌ Replacement buy failed for {sym}: {str(e)[:180]}")
@@ -1730,7 +1955,7 @@ def scan(force=False):
  st=load(SC);now=time.time()
  iv=max(1.0,float(cfg().get('scan_interval_minutes',15) or 15))
  if not force and now-st.get('last',0)<max(60,iv*60-240):return
- db=load(DB);q=load(QF);s=cfg();guardian_ok,guardian_reason=guardian_audit();auto_enabled=bool(s.get("auto_buy_enabled")) and guardian_ok;btc_is_blocked=btc_blocked(s) if auto_enabled else False
+ db=load(DB);q=load(QF);s=cfg();ai_market=ai_market_context(s);guardian_ok,guardian_reason=guardian_audit();auto_enabled=bool(s.get("auto_buy_enabled")) and guardian_ok;btc_is_blocked=btc_blocked(s) if auto_enabled else False
  mf=market_filter(s) if auto_enabled and not btc_is_blocked else ""
  if mf and not cd("mktblock",21600):tg(f"⏸ *MARKET FILTER:* {mf}.")
  rbh=float(s.get('rebuy_cooldown_hours',6.0))
@@ -1798,6 +2023,21 @@ def scan(force=False):
       else:reasons.append("No breakout")
       recd["reason"]="; ".join(reasons) or "No match"
   records.append(recd)
+ # AI opportunity ranking is batched (not one API call per coin); it can adjust priority, never create a setup.
+ try:
+  batch=[{'symbol':sy,'setup':qd.get('type'),'score':qd.get('score'),'price':qd.get('price')} for sy,qd in list(q.items())[:12]]
+  if batch:
+   ranked=ai_stage('opportunity_ranking',{'market_regime':ai_market or {},'candidates':batch},ttl=240,max_tokens=450)
+   if ranked and isinstance(ranked.get('rankings'),list):
+    amap={str(x.get('symbol','')).upper():x for x in ranked['rankings'] if isinstance(x,dict)}
+    for sy,qd in q.items():
+     item=amap.get(sy.upper())
+     if item:
+      try:qd['ai_priority_adjustment']=max(-5.0,min(5.0,float(item.get('adjustment',0))))
+      except Exception:qd['ai_priority_adjustment']=0.0
+      q[sy]=qd
+    if q:save(QF,q)
+ except Exception as e:print('AI opportunity ranking error:',e)
  full=force or now-st.get('last_full',0)>=3300
  sh["items"].extend(records if full else [x for x in records if str(x.get('decision','')).startswith('SETUP')]);sh["items"]=sh["items"][-15000:];save(SH,sh)
  if qu or not buying_allowed:save(QF,q)
@@ -1806,6 +2046,9 @@ def scan(force=False):
  save(SC,st)
  if matched:
   msg=f"🔍 *SCAN COMPLETE*\nChecked {len(records)} markets.\nMatched: {matched} | Queued: {queued}." + ("\n" + block_reason if not buying_allowed else "")
+  if ai_market:
+   regime=str(ai_market.get('regime',''))[:60];risk=str(ai_market.get('risk_level',''))[:30]
+   if regime or risk:msg+="\n🧠 AI market view: "+" | ".join(x for x in (regime,risk) if x)
   try:
    rows=[x for x in records if str(x.get('decision','')).startswith('SETUP')]
    lines=["","✅ *MATCHED COINS*"]
@@ -2052,6 +2295,7 @@ def handle(t,age):
  elif l=="panic_cancel":tg("👍 Panic cancelled.")
  elif l=="panic_confirm":panic_sell() if age<=300 else tg("⌛ That confirmation expired.")
  elif l=="/sync":cmd_sync()
+ elif l=="/ai_resume":ai_emergency_resume()
  elif l in ("/cancel","❌ cancel"):cmd_cancel_all()
  elif l=="/audit":
   r=audit_system()
@@ -2184,7 +2428,7 @@ def live_loop(t0):
   except Exception as e:print(f"LIVE POLL ERR: {e}")
   now=time.time()
   if now-last_light>=60:
-   for fn in (manage,momentum_watchdog,check_alerts,scan,exec_q):
+   for fn in (ai_health_check,manage,momentum_watchdog,check_alerts,scan,exec_q):
     if fn is scan and deadline-time.time()<180:continue
     run_step(fn)
    last_light=time.time()
@@ -2207,7 +2451,7 @@ if __name__=="__main__":
    _st["display_reset_v4"]=True;save(ST,_st)
  except Exception as e:print(f"DISPLAY RESET ERR: {e}")
  try:
-  for fn in (heartbeat,_C.clear,cleanup_telegram_output,stale_output,_kb_refresh,auto_clear_daily,scan_history_state,audit_system,tg_check,manage,momentum_watchdog,track_day_equity,git_sync,check_hourly_balance,check_alerts,check_daily_summary,scan,exec_q):run_step(fn)
+  for fn in (heartbeat,_C.clear,cleanup_telegram_output,stale_output,_kb_refresh,auto_clear_daily,scan_history_state,audit_system,ai_health_check,tg_check,manage,momentum_watchdog,track_day_equity,git_sync,check_hourly_balance,check_alerts,check_daily_summary,scan,exec_q):run_step(fn)
   live_loop(T0)
   run_step(_kb_refresh)
  except Exception as e:
