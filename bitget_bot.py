@@ -1271,6 +1271,8 @@ def risk_sized_budget(sym,price,stop,available_usdt):
   remaining=max(0.0,max_exposure-exposure)
   factor=market_regime(s).get("factor",1.0) if s.get("adaptive_risk_enabled",True) else 1.0
   factor=min(1.0,max(0.25,float(factor)))
+  corr_factor,_corr_holds=correlation_exposure(sym)
+  factor*=max(0.65,min(1.0,float(corr_factor)))
   return max(0.0,min(float(available_usdt),by_risk*factor,max_position*factor,remaining,float(s.get('auto_buy_amount_usdt',10.0))))
  except:return 0.0
 def buy_rejection(sym,reason):
@@ -1552,6 +1554,13 @@ def scan(force=False):
       recd["strategy"]=setup
       if setup=="BREAKOUT":recd["reason"]=f"BREAKOUT vol {breakout_volume:.2f}x"
       matched+=1;rr=None;recd["rr"]=None;score=setup_score(setup,vol,r,ma5,ma10,breakout_volume)
+      try:
+       cf,correlated=correlation_exposure(sym);score*=cf
+       if correlated:recd["reason"] += f"; correlation exposure caution ({len(correlated)} correlated holding(s))"
+      except Exception:pass
+      try:
+       rg=market_regime(s);score*=max(0.65,min(1.15,float(rg.get("factor",1.0))))
+      except Exception:pass
       if not buying_allowed:recd["decision"]="SETUP — NOT QUEUED";recd["reason"]=f"{setup} matched, {block_reason}"
       elif rbh>0 and in_cd(f"stopout_{sym}",rbh*3600):recd["decision"]="SETUP — NOT QUEUED";recd["reason"]=f"{setup} matched, re-buy cooldown"
       else:
@@ -1591,6 +1600,57 @@ def scan(force=False):
   except Exception as e:print(f"MATCH LIST ERR: {e}")
   tg(msg)
  elif full:tg(f"🔍 *SCAN COMPLETE*\nChecked {len(records)} markets.\nNo coin matched any setup.")
+
+# Supplemental portfolio intelligence: correlation, stress estimate and performance diagnostics.
+def _returns_series(sym, timeframe='1h', limit=72):
+ try:
+  o=ex.fetch_ohlcv(S(sym),timeframe,limit=limit)
+  c=[float(x[4]) for x in o[:-1] if x[4]]
+  return [(c[i]/c[i-1]-1) for i in range(1,len(c)) if c[i-1]>0]
+ except Exception:return []
+def _corr(a,b):
+ try:
+  n=min(len(a),len(b));a=a[-n:];b=b[-n:]
+  if n<12:return None
+  ma=sum(a)/n;mb=sum(b)/n
+  va=sum((x-ma)**2 for x in a);vb=sum((x-mb)**2 for x in b)
+  if va<=0 or vb<=0:return None
+  return sum((a[i]-ma)*(b[i]-mb) for i in range(n))/(va*vb)**0.5
+ except Exception:return None
+def correlation_exposure(sym):
+ """Return a caution factor (0.65..1.0) for highly correlated holdings."""
+ try:
+  db=load(DB);base=_returns_series(sym);high=[]
+  for held in db:
+   if held==sym:continue
+   c=_corr(base,_returns_series(held))
+   if c is not None and c>=0.80:high.append((held,c))
+  return (0.72 if len(high)>=2 else 0.85 if len(high)==1 else 1.0),high
+ except Exception:return 1.0,[]
+def portfolio_stress_estimate(shock_pct=None):
+ """Simple conservative mark-to-market shock estimate; not VaR or a prediction."""
+ try:
+  s=cfg();shock=float(shock_pct if shock_pct is not None else s.get('portfolio_stress_pct',12))/100
+  db=load(DB);bal=ex.fetch_balance();tot=bal.get('total') or {};eq=equity_now();risk=0.0
+  for sym,d in db.items():
+   q=float(tot.get(sym.split('-')[0],0) or 0);px=live(sym)
+   if q>0 and px:risk+=q*px*shock
+  return {'equity':eq,'positions_shocked_usdt':risk,'shock_pct':shock*100,'equity_loss_pct':risk/eq*100 if eq else 0}
+ except Exception:return {'equity':0,'positions_shocked_usdt':0,'shock_pct':0,'equity_loss_pct':0}
+def performance_intelligence():
+ """Strategy and recent-trade metrics for diagnosis; never changes strategy rules."""
+ try:
+  h=[x for x in load(HIST) if isinstance(x,dict) and isinstance(x.get('pnl'),(int,float))]
+  if not h:return {'count':0}
+  p=[float(x['pnl']) for x in h];w=[x for x in p if x>0];l=[x for x in p if x<0]
+  return {'count':len(p),'win_rate':100*len(w)/len(p),'profit_factor':sum(w)/abs(sum(l)) if l and sum(l) else (float('inf') if w else 0),'net':sum(p),'avg_win':sum(w)/len(w) if w else 0,'avg_loss':sum(l)/len(l) if l else 0,'max_drawdown':_historical_drawdown(p)}
+ except Exception:return {'count':0}
+def _historical_drawdown(p):
+ peak=cur=dd=0.0
+ for x in p:
+  cur+=x;peak=max(peak,cur);dd=max(dd,peak-cur)
+ return dd
+
 def fp(p):
  if p is None:return "N/A"
  return f"{p:.2f}" if p>=100 else f"{p:.4f}" if p>=1 else f"{p:.6f}" if p>=0.001 else f"{p:.8f}"
