@@ -343,5 +343,10 @@
             "warning": "Market filter indicates only 21% of coins are up today, suggesting overall bearish sentiment. Combined with a modest RSI and no existing position, this trade carries elevated risk.",
             "summary": "Buying 23.25 USDT of BLESS-USDT at 0.0137873 is not recommended due to unfavorable market conditions and lack of supporting technical signals."
         }
+    },
+    {
+        "time": 1795351830.6277213,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (8)', 'attention': [{'symbol': 'BLESS-USDT', 'action': 'hold', 'reason': 'Position is very small, recent entry with minimal profit (0.29% PnL) and stop loss not yet triggered. No clear signal to adjust.'}], 'summary': 'Overall portfolio risk is within the daily limit. The only open position (BLESS-USDT) is marginally profitable and far from its stop loss. Recommend holding until a stronger signal emerges or the stop is approached.'}"
     }
 ]

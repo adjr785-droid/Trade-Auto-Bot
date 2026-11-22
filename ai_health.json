@@ -1,32 +1,32 @@
 {
-    "last_check": 1795351498.5586522,
+    "last_check": 1795351820.4980683,
     "status": "healthy",
     "model": "openai/gpt-oss-120b",
-    "latency_ms": 297,
+    "latency_ms": 421,
     "last_error": "",
     "consecutive_failures": 0,
-    "consecutive_successes": 13,
+    "consecutive_successes": 0,
     "last_response_valid": true,
     "alerted_status": "healthy",
-    "emergency_mode": false,
-    "trading_mode": "NORMAL",
+    "emergency_mode": true,
+    "trading_mode": "SELL_ONLY",
     "emergency_started": 1795337672.3776765,
-    "emergency_reason": "AI stage performance_review failed: AI response was not JSON",
-    "resume_requires_user_confirmation": false,
+    "emergency_reason": "AI stage performance_review failed: Expecting ',' delimiter: line 1 column 646 (char 645)",
+    "resume_requires_user_confirmation": true,
     "stages": {
         "portfolio_review": {
             "last_failure": 1795339738.9050465,
             "failures": 2,
             "last_error": "",
-            "last_success": 1795351521.3820941,
-            "successes": 12
+            "last_success": 1795351830.1355586,
+            "successes": 13
         },
         "performance_review": {
             "last_success": 1795351522.2507865,
             "successes": 13,
-            "last_error": "",
-            "last_failure": 1795339740.0353496,
-            "failures": 1
+            "last_error": "Expecting ',' delimiter: line 1 column 646 (char 645)",
+            "last_failure": 1795351831.5728984,
+            "failures": 2
         },
         "market_regime": {
             "last_success": 1795350012.3202593,
@@ -49,7 +49,7 @@
             "last_error": ""
         }
     },
-    "last_stage_success": 1795351686.074969,
-    "last_success": 1795351498.5586524,
+    "last_stage_success": 1795351830.1355586,
+    "last_success": 1795351820.4980683,
     "emergency_ended": 1795341663.0714092
 }

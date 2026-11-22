@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935688858,
+    "last_update_id": 935688860,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT23.40/\u20a632,222",
+    "kb_ph": "USDT23.29/\u20a632,060",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -50,12 +50,16 @@
         "m:ai:1": [
             8,
             1795311215.95037
+        ],
+        "m:r:dust": [
+            1,
+            1795351821.6260564
         ]
     },
-    "kb_mid": 3530,
-    "out_text": "\ud83e\uddf9 *DUST \u2192 BGB*\n10 eligible coin(s), about $0.02\npriced:\nTRX: 1.86e-05 (\u2248$0.0000)\nUNI: 9.04e-05 (\u2248$0.0004)\nWLD: 0.00038 (\u2248$0.0001)\nENA: 0.00767 (\u2248$0.0008)\nSKYAI: 0.00209 (\u2248$0.0001)\nICNT: 0.00025 (\u2248$0.0001)\nPUMP: 0.0099 (\u2248$0.0000)\n\u2800\n\u2800",
+    "kb_mid": 3533,
+    "out_text": "\ud83d\udea8 *AI FAILURE \u2014 EMERGENCY\nSELL-ONLY MODE ACTIVATED*\nAll buying and\ndiscretionary/manual selling are\nnow blocked. The bot will\nindependently monitor existing\npositions and execute ONLY\nconfigured protective/exit\nconditions (stop-loss, trailing\nstop, take-profit/partial\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795351742.1012938,
+    "out_time": 1795351831.8797655,
     "panel_rows": [
         [
             {
@@ -63,7 +67,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "1/2",
+                "text": "1/3",
                 "callback_data": "pg:x"
             },
             {
@@ -73,37 +77,21 @@
             {
                 "text": "\ud83c\udfe0",
                 "callback_data": "m:menu"
-            },
-            {
-                "text": "\u2705 Convert all to BGB",
-                "callback_data": "/dust confirm"
-            },
-            {
-                "text": "\u274c Cancel",
-                "callback_data": "/dust cancel"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/2*",
+    "panel_text": "\ud83d\udcc4 *Page 1/3*",
     "pages": {
         "p": [
-            "\ud83e\uddf9 *DUST \u2192 BGB*\n10 eligible coin(s), about $0.02\npriced:\nTRX: 1.86e-05 (\u2248$0.0000)\nUNI: 9.04e-05 (\u2248$0.0004)\nWLD: 0.00038 (\u2248$0.0001)\nENA: 0.00767 (\u2248$0.0008)\nSKYAI: 0.00209 (\u2248$0.0001)\nICNT: 0.00025 (\u2248$0.0001)\nPUMP: 0.0099 (\u2248$0.0000)\n\u2800\n\u2800",
-            "MMT: 0.0661 (\u2248$0.0145)\nJCT: 0.0345 (\u2248$0.0001)\nCOLLECT: 0.00794 (\u2248$0.0002)\n\nNothing is sold at market.\nBitget converts these small\nbalances to BGB. Coins in your\nactive trades are never\nincluded.\n\u2800\n\u2800\n\u2800"
+            "\ud83d\udea8 *AI FAILURE \u2014 EMERGENCY\nSELL-ONLY MODE ACTIVATED*\nAll buying and\ndiscretionary/manual selling are\nnow blocked. The bot will\nindependently monitor existing\npositions and execute ONLY\nconfigured protective/exit\nconditions (stop-loss, trailing\nstop, take-profit/partial\n\u2800\n\u2800",
+            "profit, crash guard, time stop,\nRSI exit, unprotected-position\nexit and the existing 15-minute\nno-upward-trend rule). No\nreplacement buys. Proceeds\nremain in USDT.\nReason: AI stage\nperformance_review failed:\nExpecting ',' delimiter: line 1\ncolumn 646 (char 645)\n\u2800\n\u2800",
+            "AI recovery does NOT\nautomatically resume trading.\nYou will be notified.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
         "i": 0,
         "mode": "Markdown",
-        "x": [
-            {
-                "text": "\u2705 Convert all to BGB",
-                "callback_data": "/dust confirm"
-            },
-            {
-                "text": "\u274c Cancel",
-                "callback_data": "/dust cancel"
-            }
-        ],
-        "cmd": "m:r:dust"
+        "x": [],
+        "cmd": null
     },
     "out_mid": 3528,
-    "panel_mid": 3529
+    "panel_mid": 3532
 }
