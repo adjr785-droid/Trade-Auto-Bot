@@ -9,29 +9,30 @@
         "sl_pct": 3.0,
         "strategy": "MANUAL",
         "xsl": 0.296393,
-        "seen": 1795332672.378972
+        "seen": 1795332741.4239378
     },
     "ENA-USDT": {
         "entry_price": 0.09785,
         "safe_zone": 0.09785,
         "stop_loss": 0.083172,
         "peak_price": 0.0984,
-        "last_price": 0.09751,
+        "last_price": 0.09762,
         "opened_at": 1795322596.1160789,
-        "seen": 1795332672.5951183,
+        "seen": 1795332741.6417477,
         "xsl": 0.092026
     },
     "UNI-USDT": {
         "entry_price": 4.597,
         "safe_zone": 4.597,
         "stop_loss": 4.45909,
-        "peak_price": 4.597,
-        "last_price": 4.597,
+        "peak_price": 4.601,
+        "last_price": 4.601,
         "opened_at": 1795332675.2081215,
         "sl_pct": 3.0,
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
         "momentum_watch_started": 1795332675.2081215,
-        "xsl": 4.45909
+        "xsl": 4.45909,
+        "seen": 1795332741.8749514
     }
 }
