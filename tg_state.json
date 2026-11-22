@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689424,
+    "last_update_id": 935689427,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -73,72 +73,72 @@
     "panel_rows": [
         [
             {
-                "text": "rsi_exit = 75",
-                "callback_data": "m:k:rsi_exit"
+                "text": "max_open_risk_pct = 3.0",
+                "callback_data": "m:k:max_open_risk_pct"
             }
         ],
         [
             {
-                "text": "btc_rsi_min = 50",
-                "callback_data": "m:k:btc_rsi_min"
+                "text": "loss_streak_trigger = 2",
+                "callback_data": "m:k:loss_streak_trigger"
             }
         ],
         [
             {
-                "text": "risk_per_trade_pct = 1.0",
-                "callback_data": "m:k:risk_per_trade_pct"
+                "text": "loss_streak_size_factor = 0.5",
+                "callback_data": "m:k:loss_streak_size_factor"
             }
         ],
         [
             {
-                "text": "max_daily_loss_pct = 3.0",
-                "callback_data": "m:k:max_daily_loss_pct"
+                "text": "scan_parallel = True",
+                "callback_data": "m:k:scan_parallel"
             }
         ],
         [
             {
-                "text": "max_portfolio_exposure_pct = 50.0",
-                "callback_data": "m:k:max_portfolio_exposure_pct"
+                "text": "page_chars = 750",
+                "callback_data": "m:k:page_chars"
             }
         ],
         [
             {
-                "text": "max_position_pct = 15.0",
-                "callback_data": "m:k:max_position_pct"
+                "text": "page_lines = 10",
+                "callback_data": "m:k:page_lines"
             }
         ],
         [
             {
-                "text": "max_daily_trades = 5",
-                "callback_data": "m:k:max_daily_trades"
+                "text": "page_width = 41",
+                "callback_data": "m:k:page_width"
             }
         ],
         [
             {
-                "text": "max_spread_pct = 0.5",
-                "callback_data": "m:k:max_spread_pct"
+                "text": "output_stale_minutes = 5",
+                "callback_data": "m:k:output_stale_minutes"
             }
         ],
         [
             {
-                "text": "rebuy_cooldown_hours = 6.0",
-                "callback_data": "m:k:rebuy_cooldown_hours"
+                "text": "smart_risk_enabled = True",
+                "callback_data": "m:k:smart_risk_enabled"
             }
         ],
         [
             {
-                "text": "atr_stop_enabled = True",
-                "callback_data": "m:k:atr_stop_enabled"
+                "text": "max_coin_exposure_pct = 20.0",
+                "callback_data": "m:k:max_coin_exposure_pct"
             }
         ],
         [
             {
                 "text": "\u25c0\ufe0f Prev",
-                "callback_data": "m:sp:0"
+                "callback_data": "m:sp:3"
             },
             {
                 "text": "Next \u25b6\ufe0f",
-                "callback_data": "m:sp:2"
+                "callback_data": "m:sp:5"
             }
         ],
         [
@@ -148,7 +148,7 @@
             }
         ]
     ],
-    "panel_text": "\u2699\ufe0f *SETTINGS* (page 2/8)\nTap a setting to change it.",
+    "panel_text": "\u2699\ufe0f *SETTINGS* (page 5/8)\nTap a setting to change it.",
     "pages": {
         "p": [
             "\ud83c\udfc6 *TOP 3 SETUPS RIGHT NOW*\n_Read-only scan. Nothing was bought._\n\n\u26a0\ufe0f Market filter active: only 20% of\ncoins are up today. Auto-buy is blocked;\na manual buy is your own call.\n\n*1. WLD-USDT* \u2014 BREAKOUT\n\u2800\n\u2800",
