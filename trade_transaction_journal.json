@@ -599,5 +599,10 @@
         "time": 1795366413.919092,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 53.85, 'net_pnl_usdt': 5.3048, 'recurring_patterns': ['RSI 75', 'PARTIAL PROFIT', 'MANUAL SELL ALL', '15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC'], 'recommendations': ['Limit exposure to trades triggered solely by RSI 75 until further back\u2011testing confirms edge', 'Review manual sell decisions that resulted in losses, especially large manual sell all actions', 'Consider tightening criteria for partial profit exits to capture gains earlier', 'Monitor and possibly avoid 15\u2011minute no\u2011upward\u2011trend rotation signals that show mixed outcomes', 'Implement stricter risk controls for panic\u2011driven exits to reduce negative PnL']}"
+    },
+    {
+        "time": 1795366796.0647066,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 55.56, 'net_pnl_usdt': 5.3057, 'recurring_patterns': {'RSI_75_trades': 4, 'partial_profit_trades': 3, 'manual_sell_all_trades': 4, 'panic_trades': 3, 'no_upward_trend_rotation_trades': 5}, 'recommendations': 'Maintain current risk parameters; focus on confirming RSI 75 signals with additional filters before entry. Reduce exposure to manual sell triggers lacking clear criteria. Consider tightening stop\u2011losses on panic\u2011driven exits. Monitor pattern consistency before scaling up position sizes.'}"
     }
 ]
