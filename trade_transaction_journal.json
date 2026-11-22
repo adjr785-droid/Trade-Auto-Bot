@@ -451,5 +451,10 @@
         "time": 1795360645.5333142,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.0, 'net_pnl_usdt': 5.3247, 'recurring_patterns': ['MANUAL SELL ALL', 'RSI 75', 'PARTIAL PROFIT', 'PANIC', '15-MINUTE NO-UPWARD-TREND ROTATION'], 'recommendations': ['Consider limiting manual sell triggers to avoid frequent small losses', 'Review RSI 75 entries for consistency; they yielded positive PnL but may need tighter confirmation', 'Evaluate the effectiveness of partial profit targets; they appear profitable but could be optimized', 'Monitor panic-driven trades as they show mixed outcomes; implement stricter risk controls', 'Assess the 15\u2011minute no\u2011upward\u2011trend rotation strategy for consistency before scaling']}"
+    },
+    {
+        "time": 1795361039.4507449,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.0, 'net_pnl_usdt': 5.3247, 'recurring_patterns': {'RSI_75': 3, 'PARTIAL_PROFIT': 3, 'MANUAL_SELL_ALL': 5, 'MANUAL_SELL_SPECIFIC': 2, 'PANIC': 3, 'NO_UPWARD_TREND_ROTATION': 4}, 'recommendations': ['Consider tightening RSI entry criteria; current RSI\u201175 signals produced mixed results.', \"Review manual sell triggers, especially frequent 'MANUAL SELL ALL' actions that contributed to losses.\", 'Limit panic\u2011driven exits; implement stricter stop\u2011loss or cooling\u2011off period.', 'Prioritize trades with consistent partial\u2011profit patterns and avoid single\u2011point manual exits unless clear profit target is met.']}"
     }
 ]
