@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935688807,
+    "last_update_id": 935688809,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -27,8 +27,8 @@
             1795340277.2044952
         ],
         "m:r:holdings": [
-            4,
-            1795347824.2444303
+            6,
+            1795347858.0465162
         ],
         "/analyse": [
             0,
@@ -62,7 +62,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "5/9",
+                "text": "7/9",
                 "callback_data": "pg:x"
             },
             {
@@ -79,7 +79,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 5/9*",
+    "panel_text": "\ud83d\udcc4 *Page 7/9*",
     "out_mid": 3476,
     "pages": {
         "p": [
@@ -93,7 +93,7 @@
             "below peak)\nPeak price: 0.234300\nExchange stop level: 0.227271\n\n\n\u26a0\ufe0f Held but with no USDT\nprice: AIDOGE: 0.602, COQ:\n0.00711, DGRAM: 0.00447 and 8\nmore...\n\n\u2800\n\u2800",
             "\ud83d\udcca *LIVE SPOT WALLET BALANCE:*\nUSDT23.39/\u20a632,199\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 4,
+        "i": 6,
         "mode": "Markdown",
         "x": [
             {

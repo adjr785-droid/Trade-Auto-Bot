@@ -9,16 +9,16 @@
         "sl_pct": 3.0,
         "strategy": "MANUAL",
         "xsl": 0.296393,
-        "seen": 1795347773.7310581
+        "seen": 1795347839.792129
     },
     "ENA-USDT": {
         "entry_price": 0.09785,
         "safe_zone": 0.09785,
         "stop_loss": 0.09785,
         "peak_price": 0.10284,
-        "last_price": 0.1025,
+        "last_price": 0.10248,
         "opened_at": 1795322596.1160789,
-        "seen": 1795347774.292608,
+        "seen": 1795347840.0970962,
         "xsl": 0.09785,
         "partial_done": true
     },
@@ -34,6 +34,6 @@
         "purchase_source": "MANUAL",
         "momentum_watch_started": 1795347554.452587,
         "xsl": 0.227271,
-        "seen": 1795347774.6014266
+        "seen": 1795347840.4214313
     }
 }
