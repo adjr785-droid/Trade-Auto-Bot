@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689204,
+    "last_update_id": 935689209,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -68,46 +68,82 @@
     "panel_rows": [
         [
             {
-                "text": "\ud83e\udd16 Bot",
-                "callback_data": "/bot"
-            },
-            {
-                "text": "\ud83d\udcc8 Stats",
-                "callback_data": "/stats"
+                "text": "btc_shock_pct = 3.0",
+                "callback_data": "m:k:btc_shock_pct"
             }
         ],
         [
             {
-                "text": "\u2699\ufe0f Settings",
-                "callback_data": "m:set"
-            },
-            {
-                "text": "\ud83d\udcbc Holdings",
-                "callback_data": "m:r:holdings"
+                "text": "max_open_risk_pct = 3.0",
+                "callback_data": "m:k:max_open_risk_pct"
             }
         ],
         [
             {
-                "text": "\ud83d\udcdc Trade History",
-                "callback_data": "m:r:history"
-            },
-            {
-                "text": "\ud83e\udde0 Ask AI",
-                "callback_data": "m:ai:1"
+                "text": "loss_streak_trigger = 2",
+                "callback_data": "m:k:loss_streak_trigger"
             }
         ],
         [
             {
-                "text": "\ud83e\uddf9 Clear Chat",
-                "callback_data": "/clear"
+                "text": "loss_streak_size_factor = 0.5",
+                "callback_data": "m:k:loss_streak_size_factor"
+            }
+        ],
+        [
+            {
+                "text": "scan_parallel = True",
+                "callback_data": "m:k:scan_parallel"
+            }
+        ],
+        [
+            {
+                "text": "page_chars = 600",
+                "callback_data": "m:k:page_chars"
+            }
+        ],
+        [
+            {
+                "text": "page_lines = 10",
+                "callback_data": "m:k:page_lines"
+            }
+        ],
+        [
+            {
+                "text": "page_width = 41",
+                "callback_data": "m:k:page_width"
+            }
+        ],
+        [
+            {
+                "text": "output_stale_minutes = 5",
+                "callback_data": "m:k:output_stale_minutes"
+            }
+        ],
+        [
+            {
+                "text": "smart_risk_enabled = True",
+                "callback_data": "m:k:smart_risk_enabled"
+            }
+        ],
+        [
+            {
+                "text": "\u25c0\ufe0f Prev",
+                "callback_data": "m:sp:3"
             },
             {
-                "text": "\ud83d\udea8 PANIC SELL",
-                "callback_data": "/panic"
+                "text": "Next \u25b6\ufe0f",
+                "callback_data": "m:sp:5"
+            }
+        ],
+        [
+            {
+                "text": "\u2b05\ufe0f Menu",
+                "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
+    "panel_text": "\u2699\ufe0f *SETTINGS* (page 5/8)\nTap a setting to change it.",
     "out_time": 1795366151.1599002,
     "out_mid": 3860,
     "panel_mid": 3871
