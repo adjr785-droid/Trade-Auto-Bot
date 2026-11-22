@@ -1,17 +1,19 @@
 {
-    "last_update_id": 935688993,
+    "last_update_id": 935688996,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT23.19/\u20a631,921",
+    "kb_ph": "USDT23.16/\u20a631,882",
     "layout_bottom": [
         "tools",
         "analyse",
-        "bot"
+        "bot",
+        "hold",
+        "stats"
     ],
-    "kb_keys": "[['\ud83d\udccb Menu', '\ud83e\uddf0 Tools', '\ud83c\udfc6 Analyse'], ['\ud83e\udd16 Bot']]",
+    "kb_keys": "[['\ud83d\udccb Menu', '\ud83e\uddf0 Tools', '\ud83c\udfc6 Analyse'], ['\ud83e\udd16 Bot', '\ud83d\udcbc Holdings', '\ud83d\udcc8 Stats']]",
     "bot_seen": {
         "t": 1795353296.4384053,
         "eq": 23.238217869235225,
@@ -59,7 +61,7 @@
             1795352377.989315
         ]
     },
-    "kb_mid": 3679,
+    "kb_mid": 3683,
     "out_text": "\ud83e\udde0 AI manual-buy advisory: A\nmanual buy of 23.18\u202fUSDT worth\nof JCT at $0.001609 is\nsuggested. Given the limited\nupside in the broader market and\na neutral RSI, proceed\ncautiously and monitor price\naction closely.\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "out_time": 1795361460.2936618,
@@ -80,7 +82,7 @@
                 "callback_data": "m:lay:t:bot"
             },
             {
-                "text": "\ud83d\udccb \ud83d\udcc8 Stats",
+                "text": "\u2328\ufe0f \ud83d\udcc8 Stats",
                 "callback_data": "m:lay:t:stats"
             }
         ],
@@ -96,7 +98,7 @@
         ],
         [
             {
-                "text": "\ud83d\udccb \ud83d\udcbc Holdings",
+                "text": "\u2328\ufe0f \ud83d\udcbc Holdings",
                 "callback_data": "m:lay:t:hold"
             },
             {
@@ -151,7 +153,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83e\udde9 *LAYOUT*\nTap a button to move it.\n\u2328\ufe0f = bottom key (below the text box)\n\ud83d\udccb = Menu list\nBottom keys: 4/6 (Menu always stays)",
+    "panel_text": "\ud83e\udde9 *LAYOUT*\nTap a button to move it.\n\u2328\ufe0f = bottom key (below the text box)\n\ud83d\udccb = Menu list\nBottom keys: 6/6 (Menu always stays)",
     "out_mid": 3669,
-    "panel_mid": 3680
+    "panel_mid": 3682
 }
