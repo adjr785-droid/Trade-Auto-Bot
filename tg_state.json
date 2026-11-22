@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689226,
+    "last_update_id": 935689229,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -20,8 +20,8 @@
     "last_cmd": "/bot",
     "page_mem": {
         "/bot": [
-            5,
-            1795366561.7431734
+            7,
+            1795366572.7668848
         ],
         "m:r:holdings": [
             3,
@@ -66,28 +66,46 @@
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
+                "text": "\ud83e\udd16 Bot",
+                "callback_data": "/bot"
             },
             {
-                "text": "6/8",
-                "callback_data": "pg:x"
+                "text": "\ud83d\udcc8 Stats",
+                "callback_data": "/stats"
+            }
+        ],
+        [
+            {
+                "text": "\u2699\ufe0f Settings",
+                "callback_data": "m:set"
             },
             {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
+                "text": "\ud83d\udcbc Holdings",
+                "callback_data": "m:r:holdings"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udcdc Trade History",
+                "callback_data": "m:r:history"
             },
             {
-                "text": "\ud83c\udfe0",
-                "callback_data": "m:menu"
+                "text": "\ud83e\udde0 Ask AI",
+                "callback_data": "m:ai:1"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\uddf9 Clear Chat",
+                "callback_data": "/clear"
             },
             {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
+                "text": "\ud83d\udea8 PANIC SELL",
+                "callback_data": "/panic"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 6/8*",
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
     "kb_mid": 3883,
     "out_mid": 3886,
     "pages": {
@@ -101,7 +119,7 @@
             "| parallel scan ON\n\n\ud83d\uded1 *HOLDINGS ADVICE*\nNo priced coin holdings right now.\n\n\ud83e\udde0 *AI:* Bot shows a -0.02\u202fUSDT balance,\nauto\u2011buy paused, daily loss at -1.84%\n(near the -5% auto\u2011pause trigger), and\n\u2800\n\u2800",
             "no active holdings; monitor for further\nlosses before resuming trades.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 5,
+        "i": 7,
         "mode": "Markdown",
         "x": [
             {
