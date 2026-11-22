@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935688745,
+    "last_update_id": 935688747,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -23,8 +23,8 @@
     "last_cmd": "/bot",
     "page_mem": {
         "/bot": [
-            4,
-            1795340238.7182667
+            2,
+            1795340264.6722367
         ],
         "m:r:holdings": [
             4,
@@ -62,7 +62,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "5/9",
+                "text": "3/9",
                 "callback_data": "pg:x"
             },
             {
@@ -79,7 +79,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 5/9*",
+    "panel_text": "\ud83d\udcc4 *Page 3/9*",
     "out_mid": 3415,
     "pages": {
         "p": [
@@ -93,7 +93,7 @@
             "\n\ud83d\udd34 \ud83e\ude99 *TRX* \u2014 $7.97 | PnL -0.3%\n($-0.02)\nAdvice: \ud83d\udfe1 HOLD / WATCH\nWhy: Trend is mixed; keep the\nstop-loss active\n\u26a0\ufe0f Long-term: speculative\n(100-day change -8%, below\n50-day average)\n\n\u2800\n\u2800",
             "\n\u2705 No sell advised right now.\nFor possible new buys use\n/analyse.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 4,
+        "i": 2,
         "mode": "Markdown",
         "x": [
             {
