@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689519,
+    "last_update_id": 935689520,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -24,8 +24,8 @@
             1795366572.7668848
         ],
         "m:r:holdings": [
-            3,
-            1795353088.5562997
+            1,
+            1795380634.2675838
         ],
         "/analyse": [
             6,
@@ -73,7 +73,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "1/4",
+                "text": "2/4",
                 "callback_data": "pg:x"
             },
             {
@@ -90,7 +90,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/4*",
+    "panel_text": "\ud83d\udcc4 *Page 2/4*",
     "out_time": 1795380594.0519695,
     "out_mid": 4109,
     "pages": {
@@ -100,7 +100,7 @@
             "Bot trailing stop: ON (8.0% below peak)\nPeak price: 0.239100\nExchange stop level: 0.230957\n\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\nand 8 more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT23.09/\u20a631,783\n\n\u2800\n\u2800",
             "\ud83e\udde0 *AI:* Portfolio is $23.09 total, with only $0.03 USDT cash; main holding WLD\nis at $0.2385 (near entry, +0.17% PnL) and protected by an 8% trailing stop,\nwhile several coins lack price data, indicating valuation uncertainty.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 0,
+        "i": 1,
         "mode": "Markdown",
         "x": [
             {
