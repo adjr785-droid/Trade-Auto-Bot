@@ -853,5 +853,15 @@
         "time": 1795380198.2431364,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 55.17, 'net_pnl_usdt': 5.3414, 'recurring_patterns': ['RSI 75', 'PARTIAL PROFIT', '15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC'], 'recommendations': 'Maintain current strategy but tighten risk controls on panic exits. Prioritize trades with RSI 75 signals that have shown positive PnL, but verify overbought conditions. Reduce reliance on manual sell-all actions without clear trend confirmation. Continue monitoring partial profit targets around 5\u20116% as they have contributed positively. Consider adding stop\u2011losses for high\u2011volatility assets to protect against sudden negative swings.'}"
+    },
+    {
+        "time": 1795380530.8264635,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (13)', 'attention': [{'symbol': 'WLD-USDT', 'action': 'hold', 'reason': 'Position is very recent (35 min), small profit (0.17%), and stop is close to entry. No clear signal to adjust.'}], 'summary': 'Overall portfolio risk is within the daily limit. The only open position (WLD-USDT) shows a modest unrealized gain and is within its stop range. Recommend holding until a stronger signal emerges or the stop is breached.'}"
+    },
+    {
+        "time": 1795380531.5124853,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 55.17, 'net_pnl_usdt': 5.3414, 'recurring_patterns': ['RSI 75', 'PARTIAL PROFIT', '15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC'], 'recommendations': 'Maintain current strategy but tighten risk controls on panic exits. Prioritize trades with RSI 75 signals that have shown positive PnL, but verify overbought conditions. Reduce reliance on manual sell-all actions without clear trend confirmation. Continue using partial profit targets, but consider tighter stop\u2011losses to protect against small negative swings.'}"
     }
 ]
