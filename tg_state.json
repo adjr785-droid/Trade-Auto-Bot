@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935688799,
+    "last_update_id": 935688801,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT23.39/\u20a632,203",
+    "kb_ph": "USDT23.39/\u20a632,199",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -51,85 +51,57 @@
             1795311215.95037
         ]
     },
-    "kb_mid": 3474,
-    "out_text": "\ud83e\udde0 AI manual-buy advisory:\nBuying WLD-USDT with $6.94 at\n$0.2343 carries moderate risk\ndue to overall market weakness\nand a relatively high RSI.\nVerify alignment with your risk\ntolerance before executing.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "kb_mid": 3478,
+    "out_text": "\ud83d\udcbc *Total Portfolio Value:*\n$23.39 USDT | \u20a632,199\n\n\ud83d\udcb5 *Available USDT Cash*\nTotal: $0.02 | Free to Trade:\n$0.02\n\ud83d\udfe1 *BGB Wallet Balance (not\nauto-converted)*\nTotal: 0.0018072246 BGB | Free:\n0.0018072246 BGB | Value:\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795347558.21172,
+    "out_time": 1795347723.5691695,
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udee0\ufe0f Audit",
-                "callback_data": "m:r:audit"
+                "text": "\u25c0",
+                "callback_data": "pg:p"
             },
             {
-                "text": "\ud83e\uddfe Scan History",
-                "callback_data": "m:scan_hist"
-            }
-        ],
-        [
-            {
-                "text": "\u274c Cancel Orders",
-                "callback_data": "m:r:cancel"
+                "text": "1/9",
+                "callback_data": "pg:x"
             },
             {
-                "text": "\ud83d\udd14 Alerts",
-                "callback_data": "m:r:alerts"
-            }
-        ],
-        [
-            {
-                "text": "\ud83e\uddf9 Dust \u2192 BGB",
-                "callback_data": "m:r:dust"
+                "text": "\u25b6",
+                "callback_data": "pg:n"
             },
             {
-                "text": "\ud83d\uded2 Buy",
-                "callback_data": "m:buy"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udcb8 Sell",
-                "callback_data": "m:sell"
-            },
-            {
-                "text": "\ud83d\udd14 Price Alert",
-                "callback_data": "m:al"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udcc8 Gainers",
-                "callback_data": "m:r:gain"
-            },
-            {
-                "text": "\ud83d\udcc9 Losers",
-                "callback_data": "m:r:lose"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udcca Dashboard",
-                "callback_data": "m:dash"
-            },
-            {
-                "text": "\ud83e\udde9 Layout",
-                "callback_data": "m:lay"
-            }
-        ],
-        [
-            {
-                "text": "\ud83e\udde0 Resume AI",
-                "callback_data": "m:r:airesume"
-            }
-        ],
-        [
-            {
-                "text": "\u2b05\ufe0f Main Menu",
+                "text": "\ud83c\udfe0",
                 "callback_data": "m:menu"
+            },
+            {
+                "text": "\ud83d\udd04",
+                "callback_data": "rf:go"
             }
         ]
     ],
-    "panel_text": "\ud83e\uddf0 *TOOLS*\nChoose a tool. Existing commands and functions remain available.",
-    "out_mid": 3467,
-    "panel_mid": 3475
+    "panel_text": "\ud83d\udcc4 *Page 1/9*",
+    "out_mid": 3476,
+    "pages": {
+        "p": [
+            "\ud83d\udcbc *Total Portfolio Value:*\n$23.39 USDT | \u20a632,199\n\n\ud83d\udcb5 *Available USDT Cash*\nTotal: $0.02 | Free to Trade:\n$0.02\n\ud83d\udfe1 *BGB Wallet Balance (not\nauto-converted)*\nTotal: 0.0018072246 BGB | Free:\n0.0018072246 BGB | Value:\n\u2800\n\u2800",
+            "$0.0028 USDT\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\u2501\u2501\u2501\u2501\n\n\ud83d\udcbc *Coin Holdings (Value:\n$23.35)*\n\ud83e\ude99 *ENA*\nQuantity: 82.24767\nCurrent price: 0.102510 USDT\nMarket value: $8.43\n\u2800\n\u2800",
+            "ATH (Bitget lifetime): 1.5203\nUSDT\nATL (Bitget lifetime): 0.069700\nUSDT\n\ud83d\udfe2 Entry: 0.097850 USDT | PnL:\n+4.76% ($+0.38)\nRSI (1h): 70.73\nMA5 (1h): 0.099810\nMA10 (1h): 0.098827\nMarket sentiment: \ud83d\udfe2 Bullish\n\u2800\n\u2800",
+            "Bot trailing stop: ON (8.0%\nbelow peak)\nPeak price: 0.102840\nExchange stop level: 0.097850\n\n\ud83e\ude99 *TRX*\nQuantity: 26.155219\nCurrent price: 0.305760 USDT\nMarket value: $8.00\nATH (Bitget lifetime): 1.0000\n\u2800\n\u2800",
+            "USDT\nATL (Bitget lifetime):\n0.00003000 USDT\n\ud83d\udfe2 Entry: 0.305560 USDT | PnL:\n+0.07% ($+0.01)\nRSI (1h): 53.63\nMA5 (1h): 0.304794\nMA10 (1h): 0.304895\nMarket sentiment: \ud83d\udfe1 Neutral /\nMixed\n\u2800\n\u2800",
+            "Bot trailing stop: ON (8.0%\nbelow peak)\nPeak price: 0.306560\nExchange stop level: 0.296393\n\n\ud83e\ude99 *WLD*\nQuantity: 29.59038\nCurrent price: 0.233800 USDT\nMarket value: $6.92\nATH (Bitget lifetime): 11.9570\n\u2800\n\u2800",
+            "USDT\nATL (Bitget lifetime): 0.226900\nUSDT\n\ud83d\udd34 Entry: 0.234300 USDT | PnL:\n-0.21% ($-0.01)\nRSI (1h): 62.63\nMA5 (1h): 0.229100\nMA10 (1h): 0.227960\nMarket sentiment: \ud83d\udfe2 Bullish\nBot trailing stop: ON (8.0%\n\u2800\n\u2800",
+            "below peak)\nPeak price: 0.234300\nExchange stop level: 0.227271\n\n\n\u26a0\ufe0f Held but with no USDT\nprice: AIDOGE: 0.602, COQ:\n0.00711, DGRAM: 0.00447 and 8\nmore...\n\n\u2800\n\u2800",
+            "\ud83d\udcca *LIVE SPOT WALLET BALANCE:*\nUSDT23.39/\u20a632,199\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+        ],
+        "i": 0,
+        "mode": "Markdown",
+        "x": [
+            {
+                "text": "\ud83d\udd04",
+                "callback_data": "rf:go"
+            }
+        ],
+        "cmd": "m:r:holdings"
+    },
+    "panel_mid": 3477
 }

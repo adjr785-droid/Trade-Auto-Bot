@@ -70,5 +70,11 @@
         "atl": 0.0697,
         "checked_at": 1795322742.6534681,
         "status": "complete"
+    },
+    "WLD-USDT": {
+        "ath": 11.957,
+        "atl": 0.2269,
+        "checked_at": 1795347716.3434386,
+        "status": "complete"
     }
 }
