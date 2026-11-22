@@ -441,5 +441,10 @@
         "time": 1795354840.9688356,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.0, 'net_pnl_usdt': 5.3247, 'recurring_patterns': ['MANUAL SELL ALL appears in multiple trades across different symbols', 'RSI 75 trigger used for profitable exits on BLESS-USDT, SKYAI-USDT, DGAI-USDT', 'PARTIAL PROFIT percentages (\u22485-6%) used on BLESS-USDT, SKYAI-USDT, DGAI-USDT', 'PANIC exits observed on TRX-USDT, ENA-USDT, WLD-USDT', '15-MINUTE NO-UPWARD-TREND ROTATION pattern used on UNI-USDT, PUMP-USDT, BLESS-USDT, GRAM-USDT'], 'recommendations': ['Review the reliance on manual sell-all commands; consider automating exit criteria to reduce ad\u2011hoc decisions.', 'RSI 75 has yielded positive PnL in several cases; monitor RSI thresholds but validate with additional indicators before execution.', 'Partial profit targets around 5\u20116% appear effective; maintain but ensure stop\u2011losses are in place to protect against reversals.', \"The 'PANIC' exits resulted in mixed outcomes"
+    },
+    {
+        "time": 1795357684.6308014,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.0, 'net_pnl_usdt': 5.3247, 'recurring_patterns': ['MANUAL SELL ALL appears in multiple trades across different symbols', 'RSI 75 trigger used for several profitable trades', 'PARTIAL PROFIT percentages (\u22485\u20116%) recurring', 'PANIC exits resulting in small losses or gains', '15-MINUTE NO-UPWARD-TREND ROTATION used for small gains'], 'recommendations': 'Maintain current risk limits but consider reducing reliance on manual sell\u2011all commands, as they contribute to losses. Review RSI\u201175 entry criteria to ensure consistency and avoid over\u2011exposure. Limit panic\u2011driven exits; implement tighter stop\u2011losses. Continue using partial\u2011profit targets, but evaluate if the 5\u20116% threshold aligns with overall strategy profitability.'}"
     }
 ]
