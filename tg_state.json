@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689059,
+    "last_update_id": 935689063,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -65,96 +65,96 @@
     "panel_rows": [
         [
             {
-                "text": "PUMP",
-                "callback_data": "m:a:PUMP"
+                "text": "CC",
+                "callback_data": "m:a:CC"
             },
             {
-                "text": "SKYAI",
-                "callback_data": "m:a:SKYAI"
+                "text": "PENDLE",
+                "callback_data": "m:a:PENDLE"
             },
             {
-                "text": "BLESS",
-                "callback_data": "m:a:BLESS"
+                "text": "Q",
+                "callback_data": "m:a:Q"
             }
         ],
         [
             {
-                "text": "ENA",
-                "callback_data": "m:a:ENA"
+                "text": "PRL",
+                "callback_data": "m:a:PRL"
             },
             {
-                "text": "JCT",
-                "callback_data": "m:a:JCT"
+                "text": "PYUSD",
+                "callback_data": "m:a:PYUSD"
             },
             {
-                "text": "BNB",
-                "callback_data": "m:a:BNB"
+                "text": "IRYS",
+                "callback_data": "m:a:IRYS"
             }
         ],
         [
             {
-                "text": "BTW",
-                "callback_data": "m:a:BTW"
+                "text": "HBAR",
+                "callback_data": "m:a:HBAR"
             },
             {
-                "text": "PEPE",
-                "callback_data": "m:a:PEPE"
+                "text": "VIRTUAL",
+                "callback_data": "m:a:VIRTUAL"
             },
             {
-                "text": "WLD",
-                "callback_data": "m:a:WLD"
+                "text": "WLFI",
+                "callback_data": "m:a:WLFI"
             }
         ],
         [
             {
-                "text": "ICNT",
-                "callback_data": "m:a:ICNT"
+                "text": "BSV",
+                "callback_data": "m:a:BSV"
             },
             {
-                "text": "PWT",
-                "callback_data": "m:a:PWT"
+                "text": "BMT",
+                "callback_data": "m:a:BMT"
             },
             {
-                "text": "TAO",
-                "callback_data": "m:a:TAO"
+                "text": "APR",
+                "callback_data": "m:a:APR"
             }
         ],
         [
             {
-                "text": "DOS",
-                "callback_data": "m:a:DOS"
+                "text": "PYTH",
+                "callback_data": "m:a:PYTH"
             },
             {
-                "text": "LTC",
-                "callback_data": "m:a:LTC"
+                "text": "PAXG",
+                "callback_data": "m:a:PAXG"
             },
             {
-                "text": "ONDO",
-                "callback_data": "m:a:ONDO"
+                "text": "FIL",
+                "callback_data": "m:a:FIL"
             }
         ],
         [
             {
-                "text": "UNI",
-                "callback_data": "m:a:UNI"
+                "text": "SKY",
+                "callback_data": "m:a:SKY"
             },
             {
-                "text": "GRAM",
-                "callback_data": "m:a:GRAM"
+                "text": "NES",
+                "callback_data": "m:a:NES"
             },
             {
-                "text": "INJ",
-                "callback_data": "m:a:INJ"
+                "text": "PCI",
+                "callback_data": "m:a:PCI"
             }
         ],
         [
             {
                 "text": "\u25c0\ufe0f Prev",
-                "callback_data": "m:more:analyse:0"
+                "callback_data": "m:more:analyse:4"
             },
             {
                 "text": "Next \u25b6\ufe0f",
-                "callback_data": "m:more:analyse:2"
+                "callback_data": "m:more:analyse:6"
             }
         ],
         [
@@ -164,7 +164,7 @@
             }
         ]
     ],
-    "panel_text": "\u2795 *MORE COINS* (page 2/26)\nBiggest 24h volume first. Tap a coin.",
+    "panel_text": "\u2795 *MORE COINS* (page 6/26)\nBiggest 24h volume first. Tap a coin.",
     "out_time": 1795363514.8723621,
     "kb_mid": 3730,
     "out_mid": 3744,
