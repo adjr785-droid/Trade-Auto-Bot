@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689427,
+    "last_update_id": 935689430,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -66,79 +66,74 @@
         "ICNT-USDT",
         "TRX-USDT"
     ],
-    "out_mid": 4053,
-    "out_text": "\ud83c\udfc6 *TOP 3 SETUPS RIGHT NOW*\n_Read-only scan. Nothing was bought._\n\n\u26a0\ufe0f Market filter active: only 20% of\ncoins are up today. Auto-buy is blocked;\na manual buy is your own call.\n\n*1. WLD-USDT* \u2014 BREAKOUT\n\u2800\n\u2800",
+    "out_text": "\u2705 `page_width` = `51`\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795379282.4615512,
+    "out_time": 1795379668.2417555,
     "panel_rows": [
         [
             {
-                "text": "max_open_risk_pct = 3.0",
-                "callback_data": "m:k:max_open_risk_pct"
+                "text": "rsi_min = 42",
+                "callback_data": "m:k:rsi_min"
             }
         ],
         [
             {
-                "text": "loss_streak_trigger = 2",
-                "callback_data": "m:k:loss_streak_trigger"
+                "text": "rsi_max = 48",
+                "callback_data": "m:k:rsi_max"
             }
         ],
         [
             {
-                "text": "loss_streak_size_factor = 0.5",
-                "callback_data": "m:k:loss_streak_size_factor"
+                "text": "stop_loss_pct = 15",
+                "callback_data": "m:k:stop_loss_pct"
             }
         ],
         [
             {
-                "text": "scan_parallel = True",
-                "callback_data": "m:k:scan_parallel"
+                "text": "sl_sell_percent = 0.5",
+                "callback_data": "m:k:sl_sell_percent"
             }
         ],
         [
             {
-                "text": "page_chars = 750",
-                "callback_data": "m:k:page_chars"
+                "text": "dca_reserve = 2.0",
+                "callback_data": "m:k:dca_reserve"
             }
         ],
         [
             {
-                "text": "page_lines = 10",
-                "callback_data": "m:k:page_lines"
+                "text": "auto_buy_enabled = False",
+                "callback_data": "m:k:auto_buy_enabled"
             }
         ],
         [
             {
-                "text": "page_width = 41",
-                "callback_data": "m:k:page_width"
+                "text": "auto_buy_amount_usdt = 6.4994",
+                "callback_data": "m:k:auto_buy_amount_usdt"
             }
         ],
         [
             {
-                "text": "output_stale_minutes = 5",
-                "callback_data": "m:k:output_stale_minutes"
+                "text": "max_tokens_before_consolidation = 3",
+                "callback_data": "m:k:max_tokens_before_consolidation"
             }
         ],
         [
             {
-                "text": "smart_risk_enabled = True",
-                "callback_data": "m:k:smart_risk_enabled"
+                "text": "trail_pct = 8.0",
+                "callback_data": "m:k:trail_pct"
             }
         ],
         [
             {
-                "text": "max_coin_exposure_pct = 20.0",
-                "callback_data": "m:k:max_coin_exposure_pct"
+                "text": "crash_guard_pct = 10.0",
+                "callback_data": "m:k:crash_guard_pct"
             }
         ],
         [
-            {
-                "text": "\u25c0\ufe0f Prev",
-                "callback_data": "m:sp:3"
-            },
             {
                 "text": "Next \u25b6\ufe0f",
-                "callback_data": "m:sp:5"
+                "callback_data": "m:sp:1"
             }
         ],
         [
@@ -148,28 +143,7 @@
             }
         ]
     ],
-    "panel_text": "\u2699\ufe0f *SETTINGS* (page 5/8)\nTap a setting to change it.",
-    "pages": {
-        "p": [
-            "\ud83c\udfc6 *TOP 3 SETUPS RIGHT NOW*\n_Read-only scan. Nothing was bought._\n\n\u26a0\ufe0f Market filter active: only 20% of\ncoins are up today. Auto-buy is blocked;\na manual buy is your own call.\n\n*1. WLD-USDT* \u2014 BREAKOUT\n\u2800\n\u2800",
-            "Price: 0.237500 USDT | 24h: +3.62% | RSI:\n67.0\nSuggested stop: 0.201875 (15% below\nprice)\nWhy:\n\u2022 Confirmed breakout: price cleared the\nrecent 20h high on 2.80x average volume\n\u2022 24h change +3.62% shows steady, not\n\u2800\n\u2800",
-            "extreme, momentum\n\u2022 24h volume $1.7M (liquid enough: above\nthe $1M minimum)\n\u2022 Spread: 0.08% (OK for auto-buy)\n\u2022 Status: \u2705 Passes all filters\n\u2022 \ud83e\udde0 AI: OK \u2014 Passes scanner, low\nspread, RSI acceptable\n\n\u2800\n\u2800",
-            "*2. ICNT-USDT* \u2014 WATCHLIST (no full\nscanner setup)\nPrice: 0.357800 USDT | 24h: +2.58% | RSI:\n55.2\nSuggested stop: 0.304130 (15% below\nprice)\nWhy:\n\u2022 Short-term trend is up (price > MA5 >\n\u2800\n\u2800",
-            "MA10)\n\u2022 RSI 55.2 is healthy (room to run\nbefore overbought)\n\u2022 24h change +2.58% shows steady, not\nextreme, momentum\n\u2022 24h volume $1.5M (liquid enough: above\nthe $1M minimum)\n\u2022 Spread: 0.06% (OK for auto-buy)\n\u2800\n\u2800",
-            "\u2022 Status: \ud83d\udd36 Potential, manual only\n(misses scanner rules)\n\u2022 \ud83e\udde0 AI: CAUTION \u2014 Fails scanner,\nmarket filter exceeds 20% up limit\n\n*3. TRX-USDT* \u2014 WATCHLIST (no full\nscanner setup)\nPrice: 0.305620 USDT | 24h: +0.04% | RSI:\n\u2800\n\u2800",
-            "56.2\nSuggested stop: 0.259777 (15% below\nprice)\nWhy:\n\u2022 Short-term trend is up (price > MA5 >\nMA10)\n\u2022 RSI 56.2 is healthy (room to run\nbefore overbought)\n\u2800\n\u2800",
-            "\u2022 24h volume $3.8M (liquid enough: above\nthe $1M minimum)\n\u2022 Spread: 0.00% (OK for auto-buy)\n\u2022 Status: \ud83d\udd36 Potential, manual only\n(misses scanner rules)\n\u2022 \ud83e\udde0 AI: WEAK \u2014 Fails scanner,\nnegligible change, low momentum\n\n\u2800\n\u2800",
-            "Buy manually with `/buy COIN amount` if\nyou agree.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
-        ],
-        "i": 6,
-        "mode": "Markdown",
-        "x": [
-            {
-                "text": "\ud83d\udd0e Analyse a coin",
-                "callback_data": "m:an"
-            }
-        ],
-        "cmd": "/analyse"
-    },
-    "panel_mid": 4057
+    "panel_text": "\u2699\ufe0f *SETTINGS* (page 1/8)\nTap a setting to change it.",
+    "out_mid": 4058,
+    "panel_mid": 4059
 }
