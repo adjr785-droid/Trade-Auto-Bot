@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT23.44/\u20a632,276",
+    "kb_ph": "USDT23.39/\u20a632,199",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -52,7 +52,7 @@
             1795311215.95037
         ]
     },
-    "kb_mid": 3498,
+    "kb_mid": 3500,
     "out_text": "($+0.03)\nAdvice: \ud83d\udfe2 HOLD\nWhy: Trend is up (price > MA5 >\nMA10), RSI 61\n\u274c Long-term: not suited (below\n50-day average, 100-day change\n-33%)\n\n\n\u2705 No sell advised right now.\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "out_time": 1795350160.582932,
