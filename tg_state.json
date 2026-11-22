@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935688854,
+    "last_update_id": 935688857,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -32,8 +32,8 @@
             1795347869.6744292
         ],
         "/analyse": [
-            3,
-            1795351709.1428962
+            1,
+            1795351720.714506
         ],
         "m:r:analyse": [
             4,
@@ -59,24 +59,78 @@
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
+                "text": "\ud83d\udee0\ufe0f Audit",
+                "callback_data": "m:r:audit"
             },
             {
-                "text": "4/9",
-                "callback_data": "pg:x"
+                "text": "\ud83e\uddfe Scan History",
+                "callback_data": "m:scan_hist"
+            }
+        ],
+        [
+            {
+                "text": "\u274c Cancel Orders",
+                "callback_data": "m:r:cancel"
             },
             {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
+                "text": "\ud83d\udd14 Alerts",
+                "callback_data": "m:r:alerts"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\uddf9 Dust \u2192 BGB",
+                "callback_data": "m:r:dust"
             },
             {
-                "text": "\ud83c\udfe0",
+                "text": "\ud83d\uded2 Buy",
+                "callback_data": "m:buy"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udcb8 Sell",
+                "callback_data": "m:sell"
+            },
+            {
+                "text": "\ud83d\udd14 Price Alert",
+                "callback_data": "m:al"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udcc8 Gainers",
+                "callback_data": "m:r:gain"
+            },
+            {
+                "text": "\ud83d\udcc9 Losers",
+                "callback_data": "m:r:lose"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udcca Dashboard",
+                "callback_data": "m:dash"
+            },
+            {
+                "text": "\ud83e\udde9 Layout",
+                "callback_data": "m:lay"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\udde0 Resume AI",
+                "callback_data": "m:r:airesume"
+            }
+        ],
+        [
+            {
+                "text": "\u2b05\ufe0f Main Menu",
                 "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 4/9*",
+    "panel_text": "\ud83e\uddf0 *TOOLS*\nChoose a tool. Existing commands and functions remain available.",
     "out_mid": 3524,
     "pages": {
         "p": [
@@ -90,7 +144,7 @@
             "\u2022 Spread: 0.00% (OK for\nauto-buy)\n\u2022 Status: \ud83d\udd36 Potential, manual\nonly (misses scanner rules)\n\u2022 \ud83e\udde0 AI: CAUTION \u2014 Scanner\nrules not met; low spread, RSI\nnear neutral\n\nNo coin passes all scanner rules\nright now, so these are the\n\u2800\n\u2800",
             "strongest available. Be\ncautious.\n\nBuy manually with `/buy COIN\namount` if you agree.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 3,
+        "i": 1,
         "mode": "Markdown",
         "x": [],
         "cmd": "/analyse"
