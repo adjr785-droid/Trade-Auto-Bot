@@ -431,5 +431,58 @@
         "time": 1795353234.868024,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 54.17, 'net_pnl_usdt': 5.3011, 'recurring_patterns': {'manual_sell': 9, 'rsi_75': 3, 'partial_profit': 3, 'panic': 3, 'no_upward_trend_rotation': 3}, 'recommendations': 'Reduce reliance on manual sell triggers; focus on higher confidence signals such as RSI 75 that produced positive PnL; limit exposure during panic\u2011driven exits; consider tighter risk limits for low\u2011profit trades; monitor symbols with repeated manual sells for underlying volatility.'}"
+    },
+    {
+        "time": 1795353990.903475,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (9)', 'attention': [{'symbol': 'GRAM-USDT', 'action': 'hold', 'reason': 'Position is very recent (age 20), small positive PnL (0.1%), and stop is close to entry. No clear exit signal; maintain until further movement.'}], 'summary': 'Overall portfolio risk is within the daily limit. The only position, GRAM-USDT, shows minimal profit and is near its stop level, so a conservative hold is recommended while monitoring for price movement.'}"
+    },
+    {
+        "time": 1795353991.6543024,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 54.17, 'net_pnl_usdt': 5.3011, 'recurring_patterns': {'manual_sell': 9, 'rsi_75': 3, 'partial_profit': 3, 'panic': 3, 'no_upward_trend_rotation': 3}, 'recommendations': 'Reduce reliance on manual sell signals; focus on higher confidence RSI\u201175 entries that showed positive PnL; limit exposure during panic\u2011driven exits; consider tighter risk limits for low\u2011profit rotations; monitor symbols with repeated manual sells for underlying volatility.'}"
+    },
+    {
+        "time": 1795353999.7688532,
+        "event": "sell_fill_verified",
+        "symbol": "GRAM-USDT",
+        "filled": 23.6,
+        "average": 0.983,
+        "order_id": "1508389486005526528",
+        "reason": "15-MINUTE NO-UPWARD-TREND ROTATION",
+        "attempt": 1
+    },
+    {
+        "time": 1795354000.94029,
+        "event": "trade_closed",
+        "symbol": "GRAM-USDT",
+        "pnl_usdt": 0.023600000000000024,
+        "reason": "15-MINUTE NO-UPWARD-TREND ROTATION",
+        "strategy": "MANUAL"
+    },
+    {
+        "time": 1795354001.3667367,
+        "event": "full_sale_verified_or_dust",
+        "symbol": "GRAM-USDT",
+        "remaining_base": 0.00637,
+        "remaining_value_usdt": 0.006261709999999999,
+        "filled": 23.6
+    },
+    {
+        "time": 1795354005.2168949,
+        "event": "ai_sell_review",
+        "symbol": "GRAM-USDT",
+        "review": {
+            "review": "The position in GRAM-USDT was exited at an average price of 0.983 USDT, yielding a realized profit of 0.0236 USDT on the sold quantity of 23.6 units. The exit was triggered by a 15\u2011minute no\u2011upward\u2011trend rotation, indicating short\u2011term momentum weakness. A small residual base of 0.00637 GRAM remains, which may be re\u2011evaluated for future re\u2011entry or cleanup.",
+            "lesson": "Use short\u2011term trend filters (e.g., 15\u2011minute upward momentum) as an early warning for potential stagnation. When the upward trend stalls, consider exiting to lock in modest gains, especially on low\u2011volatility assets. Retaining a minimal residual position can provide flexibility for re\u2011entry if the trend resumes, but ensure it aligns with overall risk limits.",
+            "confidence": "medium"
+        }
+    },
+    {
+        "time": 1795354005.2182035,
+        "event": "momentum_watch_sold",
+        "symbol": "GRAM-USDT",
+        "source": "MANUAL",
+        "detail": "15m move +0.10%; live vs entry +0.10%"
     }
 ]
