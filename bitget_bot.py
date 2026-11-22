@@ -1110,12 +1110,25 @@ def analyse_top3():
   if mf:out+=[f"⚠️ Market filter active: {mf}. Auto-buy is blocked; a manual buy is your own call.",""]
  except Exception:pass
  lim=float(s.get('max_spread_pct',0.5));rbh=float(s.get('rebuy_cooldown_hours',6.0))
+ try:btcb=bool(btc_blocked(s))
+ except Exception:btcb=False
+ amap={}
+ try:
+  ar=ai_stage('analyse_review',{'btc_filter_active':btcb,'market_filter':str(market_filter(s) or ''),'candidates':[{'symbol':c['sym'],'setup':c['setup'],'passes_scanner_rules':c['full'],'rsi':round(c['rsi'],1),'chg_24h_pct':round(c['chg'],2),'spread_pct':spread_pct(c['sym'])} for c in top]},ttl=120,max_tokens=500,soft=True)
+  if ar and isinstance(ar.get('reviews'),list):amap={str(x.get('symbol','')).upper().replace('/','-'):x for x in ar['reviews'] if isinstance(x,dict)}
+ except Exception as e:print('ANALYSE AI ERR',str(e)[:120])
  for n,c in enumerate(top,1):
   lab=c["setup"]
   out+=[f"*{n}. {c['sym']}* — {lab}",f"Price: {fp(c['p'])} USDT | 24h: {c['chg']:+.2f}% | RSI: {c['rsi']:.1f}",f"Suggested stop: {fp(c['p']*(1-sl/100))} ({sl}% below price)","Why:"]+["• "+w for w in c["why"]]
   sp=spread_pct(c['sym'])
   out.append("• Spread: "+(f"{sp:.2f}% ("+("OK for auto-buy" if sp<=lim else f"wider than your {lim:g}% limit, auto-buy would skip it")+")" if sp is not None else "unavailable"))
   if rbh>0 and in_cd(f"stopout_{c['sym']}",rbh*3600):out.append(f"• Re-buy cooldown active after a recent loss on this coin ({rbh:g}h)")
+  av=amap.get(c['sym'].upper());vd=str(av.get('verdict','')).upper() if av else ''
+  if not c['full']:stt="🔶 Potential, manual only (misses scanner rules)"
+  elif btcb or vd in ('CAUTION','WEAK') or (sp is not None and sp>lim):stt="⚠️ Passes with a note"
+  else:stt="✅ Passes all filters"
+  out.append("• Status: "+stt+(" | BTC filter active" if btcb else ""))
+  out.append("• 🧠 AI: "+(vd+" — "+str(av.get('reason',''))[:120] if av else "unavailable right now"))
   out.append("")
  if not any(c["full"] for c in top):out.append("No coin passes all scanner rules right now, so these are the strongest available. Be cautious.\n")
  out.append("Buy manually with `/buy COIN amount` if you agree.")
@@ -1234,7 +1247,7 @@ def analyse_coin(txt):
 def _ai_reason(model):
  # gpt-oss models spend max_tokens on hidden reasoning; keep it low so the JSON answer is not cut off
  return {'reasoning_effort':'low'} if 'gpt-oss' in str(model) else {}
-def ai_stage(stage, payload, ttl=90, max_tokens=500):
+def ai_stage(stage, payload, ttl=90, max_tokens=500, soft=False):
  """Structured Groq AI analysis. Advisory only; deterministic guards remain authoritative."""
  api_key=os.environ.get('GROQ_API_KEY','').strip() or GROQ_API_KEY
  model=os.environ.get('GROQ_MODEL','').strip() or GROQ_MODEL or 'openai/gpt-oss-120b'
@@ -1252,6 +1265,7 @@ def ai_stage(stage, payload, ttl=90, max_tokens=500):
    'manual_buy_review':'Return keys risk_level, warning, summary. Advisory only; the user explicitly requested this manual order.',
    'rotation_candidate':'Return keys decision (BUY or VETO), reason. VETO only for a clear material risk in supplied data.',
    'sell_review':'Return keys review, lesson, confidence. This is post-exit analysis only.',
+   'analyse_review':'Return reviews as an array of {symbol, verdict (OK, CAUTION or WEAK), reason (max 14 words)}, one per candidate. Advisory only; the user decides manually and may buy coins that miss some filters.',
    'performance_review':'Return keys win_rate_pct, net_pnl_usdt, recurring_patterns, recommendations.'}
   prompt=("You are an advisory AI module inside a live crypto SPOT bot. Return ONLY one valid JSON object, no markdown. "
    "Never claim to place orders. Never override deterministic exchange/risk safeguards. Do not invent missing data. "
@@ -1277,7 +1291,7 @@ def ai_stage(stage, payload, ttl=90, max_tokens=500):
    hs=load(AI_HEALTH,{});stages=hs.setdefault('stages',{});ss=stages.setdefault(stage,{})
    ss['last_failure']=time.time();ss['failures']=int(ss.get('failures',0))+1;ss['last_error']=str(e)[:180];save(AI_HEALTH,hs)
   except Exception:pass
-  activate_ai_emergency(f"AI stage {stage} failed: {str(e)[:180]}")
+  if not soft:activate_ai_emergency(f"AI stage {stage} failed: {str(e)[:180]}")
   return None
 
 def ai_health_check(force=False):
