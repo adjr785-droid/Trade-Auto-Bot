@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689148,
+    "last_update_id": 935689150,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -22,8 +22,8 @@
     "last_cmd": "/bot",
     "page_mem": {
         "/bot": [
-            1,
-            1795365211.6066191
+            3,
+            1795365231.1698854
         ],
         "m:r:holdings": [
             3,
@@ -72,7 +72,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "2/5",
+                "text": "4/5",
                 "callback_data": "pg:x"
             },
             {
@@ -89,7 +89,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 2/5*",
+    "panel_text": "\ud83d\udcc4 *Page 4/5*",
     "out_time": 1795365168.0170023,
     "pages": {
         "p": [
@@ -99,7 +99,7 @@
             "advice._\n\n\ud83d\udfe2 \ud83e\ude99 *COLLECT* \u2014 $23.09 | PnL -0.0%\n($-0.00)\nAdvice: \ud83d\udfe2 HOLD\nWhy: Trend is up (price > MA5 > MA10),\nRSI 60\n\u26a0\ufe0f Long-term: speculative (100-day\nchange -56%, above 50-day average)\n\n\n\u2705 No sell advised right now. For\npossible new buys use /analyse.\n\n\ud83e\udde0 *AI:* Bot shows a -0.03\u202fUSDT balance\nand auto\u2011buy is paused; daily loss is\n-1.73% (well above the -5% auto\u2011buy\n\u2800\n\u2800",
             "pause threshold) but monitor the trend\nand risk caps closely.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 1,
+        "i": 3,
         "mode": "Markdown",
         "x": [
             {
