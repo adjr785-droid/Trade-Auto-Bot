@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT23.58/\u20a632,463",
+    "kb_ph": "USDT23.54/\u20a632,413",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -14,49 +14,27 @@
     "panel_rows": [
         [
             {
-                "text": "\ud83e\udd16 Bot",
-                "callback_data": "/bot"
+                "text": "\u25c0",
+                "callback_data": "pg:p"
             },
             {
-                "text": "\ud83d\udcc8 Stats",
-                "callback_data": "/stats"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udd0e Analyse Coin",
-                "callback_data": "m:an"
+                "text": "1/5",
+                "callback_data": "pg:x"
             },
             {
-                "text": "\u2699\ufe0f Settings",
-                "callback_data": "m:set"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udcbc Holdings",
-                "callback_data": "m:r:holdings"
+                "text": "\u25b6",
+                "callback_data": "pg:n"
             },
             {
-                "text": "\ud83e\udde0 Ask AI",
-                "callback_data": "m:ai:1"
-            }
-        ],
-        [
-            {
-                "text": "\ud83e\uddf9 Clear Chat",
-                "callback_data": "/clear"
-            },
-            {
-                "text": "\ud83d\udea8 PANIC SELL",
-                "callback_data": "/panic"
+                "text": "\ud83c\udfe0",
+                "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
-    "out_text": "\u23f3 *Output cleared* (older than 30 min).\nTap Menu, Tools or Analyse for fresh results.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "panel_text": "\ud83d\udcc4 *Page 1/5*",
+    "out_text": "\ud83d\udd0d *SCAN COMPLETE*\nChecked 462 markets.\nNo coin matched any setup.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795304969.341926,
+    "out_time": 1795308028.5460126,
     "bot_seen": {
         "t": 1795304787.3453424,
         "eq": 23.57570473281554,
@@ -92,8 +70,7 @@
             1795304987.3062937
         ]
     },
-    "kb_mid": 3206,
+    "kb_mid": 3209,
     "out_mid": 3199,
-    "out_stale": true,
-    "panel_mid": 3207
+    "panel_hidden": true
 }
