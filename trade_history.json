@@ -171,5 +171,12 @@
         "time": 1795354000.9396176,
         "reason": "15-MINUTE NO-UPWARD-TREND ROTATION",
         "strategy": "MANUAL"
+    },
+    {
+        "sym": "JCT-USDT",
+        "pnl": -0.019961800001331978,
+        "time": 1795362878.5146089,
+        "reason": "15-MINUTE NO-UPWARD-TREND ROTATION",
+        "strategy": "MANUAL"
     }
 ]

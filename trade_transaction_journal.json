@@ -486,5 +486,58 @@
         "time": 1795361726.570929,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.0, 'net_pnl_usdt': 5.3247, 'recurring_patterns': ['MANUAL SELL ALL appears in multiple trades across different symbols', 'RSI 75 trigger yields positive pnl in several assets', 'PARTIAL PROFIT entries with ~5-6% gains', 'PANIC exits result in small losses or gains', '15-MINUTE NO-UPWARD-TREND ROTATION triggers low\u2011pnl trades'], 'recommendations': ['Consider tightening manual sell criteria to avoid frequent small losses', 'Review RSI 75 threshold; it has produced consistent gains but monitor for over\u2011extension', 'Limit panic\u2011driven exits; implement stricter trend confirmation before closing positions', 'Evaluate the profitability of 15\u2011minute rotation strategy; current pnl is marginal', 'Maintain current win\u2011rate focus but aim to improve net pnl by scaling successful patterns and pruning underperforming triggers']}"
+    },
+    {
+        "time": 1795362868.78148,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (9)', 'attention': [{'symbol': 'JCT-USDT', 'action': 'monitor', 'reason': 'Position is slightly negative (-0.12% PnL) and close to stop level (0.001497). No immediate exit recommended, but watch price action closely.'}], 'summary': 'Overall portfolio risk remains within the daily limit. The only open position (JCT-USDT) is marginally down and approaching its stop. Maintain the position for now, but be prepared to exit if price breaches the stop or if further downside develops.'}"
+    },
+    {
+        "time": 1795362869.6909432,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.0, 'net_pnl_usdt': 5.3247, 'recurring_patterns': ['MANUAL SELL ALL', 'RSI 75', 'PARTIAL PROFIT', 'PANIC', '15-MINUTE NO-UPWARD-TREND ROTATION'], 'recommendations': ['Consider limiting manual sell triggers to avoid frequent small losses', 'Review RSI 75 entries for consistency; they yielded positive PnL but may need tighter confirmation', 'Evaluate the effectiveness of partial profit targets; they contributed to wins', 'Monitor panic-driven exits as they produced mixed results', 'Assess the 15\u2011minute no\u2011upward\u2011trend rotation strategy for risk\u2011adjusted returns before scaling']}"
+    },
+    {
+        "time": 1795362877.346524,
+        "event": "sell_fill_verified",
+        "symbol": "JCT-USDT",
+        "filled": 14383.1,
+        "average": 0.0016086121350751,
+        "order_id": "1508426721350328321",
+        "reason": "15-MINUTE NO-UPWARD-TREND ROTATION",
+        "attempt": 1
+    },
+    {
+        "time": 1795362878.516497,
+        "event": "trade_closed",
+        "symbol": "JCT-USDT",
+        "pnl_usdt": -0.019961800001331978,
+        "reason": "15-MINUTE NO-UPWARD-TREND ROTATION",
+        "strategy": "MANUAL"
+    },
+    {
+        "time": 1795362878.870924,
+        "event": "full_sale_verified_or_dust",
+        "symbol": "JCT-USDT",
+        "remaining_base": 0.037,
+        "remaining_value_usdt": 5.9496e-05,
+        "filled": 14383.1
+    },
+    {
+        "time": 1795362884.1246958,
+        "event": "ai_sell_review",
+        "symbol": "JCT-USDT",
+        "review": {
+            "review": "The trade exited at an average price of 0.00160861 USDT, resulting in a realized loss of approximately 0.01996 USDT on the sold quantity of 14,383.1 units. The exit was triggered by a 15\u2011minute lack of upward trend, indicating the market did not sustain momentum. The remaining base position of 0.037 units suggests a very small residual exposure.",
+            "lesson": "Short\u2011term trend detection is critical for spot exits. A 15\u2011minute window without upward movement may be too brief to confirm a genuine reversal, leading to premature exits and realized losses. Incorporating additional filters\u2014such as volume confirmation, multi\u2011timeframe trend alignment, or a minimum price movement threshold\u2014could reduce unnecessary exits. Maintaining tighter risk controls on small\u2011cap assets like JCT, which can exhibit high volatility, is advisable.",
+            "confidence": "medium"
+        }
+    },
+    {
+        "time": 1795362884.1265936,
+        "event": "momentum_watch_sold",
+        "symbol": "JCT-USDT",
+        "source": "MANUAL",
+        "detail": "15m move +0.50%; live vs entry -0.06%"
     }
 ]
