@@ -9,30 +9,30 @@
         "sl_pct": 3.0,
         "strategy": "MANUAL",
         "xsl": 0.296393,
-        "seen": 1795341746.3496377
+        "seen": 1795341875.1463463
     },
     "ENA-USDT": {
         "entry_price": 0.09785,
         "safe_zone": 0.09785,
         "stop_loss": 0.083172,
-        "peak_price": 0.10093,
-        "last_price": 0.10093,
+        "peak_price": 0.10117,
+        "last_price": 0.10117,
         "opened_at": 1795322596.1160789,
-        "seen": 1795341746.7374663,
+        "seen": 1795341875.4857829,
         "xsl": 0.092026
     },
     "PUMP-USDT": {
         "entry_price": 0.00244,
         "safe_zone": 0.00244,
         "stop_loss": 0.002367,
-        "peak_price": 0.00244,
-        "last_price": 0.00244,
+        "peak_price": 0.002444,
+        "last_price": 0.002444,
         "opened_at": 1795341738.228279,
         "sl_pct": 3.0,
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
         "momentum_watch_started": 1795341738.2282794,
         "xsl": 0.002367,
-        "seen": 1795341746.9597323
+        "seen": 1795341875.9035614
     }
 }
