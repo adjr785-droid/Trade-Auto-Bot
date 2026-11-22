@@ -692,5 +692,10 @@
         "symbol": "DOS-USDT",
         "source": "MANUAL",
         "detail": "15m move +0.00%; live vs entry +0.35%"
+    },
+    {
+        "time": 1795374277.7581728,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 57.14, 'net_pnl_usdt': 5.354, 'recurring_patterns': ['RSI 75', 'PARTIAL PROFIT', 'MANUAL SELL', '15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC'], 'recommendations': 'Maintain current risk parameters but tighten entry criteria for RSI\u2011based trades; review manual sell triggers to avoid premature exits; monitor panic\u2011driven exits and consider adding stop\u2011loss safeguards; continue leveraging partial\u2011profit strategies that show positive contribution.'}"
     }
 ]

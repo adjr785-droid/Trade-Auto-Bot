@@ -61,42 +61,5 @@
         ]
     },
     "kb_mid": 3915,
-    "out_text": "\ud83d\udd0d *SCAN COMPLETE*\nChecked 462 markets.\nNo coin matched any setup.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
-    "out_mode": "Markdown",
-    "panel_rows": [
-        [
-            {
-                "text": "\ud83d\udd0d Scan now",
-                "callback_data": "m:r:scan"
-            },
-            {
-                "text": "\ud83e\uddfe Scan History",
-                "callback_data": "m:scan_hist"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udcc8 Gainers",
-                "callback_data": "m:r:gain"
-            },
-            {
-                "text": "\ud83d\udcc9 Losers",
-                "callback_data": "m:r:lose"
-            }
-        ],
-        [
-            {
-                "text": "\u2b05\ufe0f Tools",
-                "callback_data": "m:tools"
-            },
-            {
-                "text": "\ud83c\udfe0 Main Menu",
-                "callback_data": "m:menu"
-            }
-        ]
-    ],
-    "panel_text": "\ud83d\udd0d *SCAN*",
-    "out_time": 1795372179.9865594,
-    "out_mid": 3926,
     "panel_hidden": true
 }
