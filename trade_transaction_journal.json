@@ -358,5 +358,58 @@
         "time": 1795352215.8372328,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 52.17, 'net_pnl_usdt': 5.2917, 'recurring_patterns': {'manual_sell_all': 5, 'rsi_75_signals': 3, 'partial_profit': 3, 'panic_exits': 2, 'no_upward_trend_rotations': 2}, 'recommendations': ['Limit reliance on manual \"SELL ALL\" exits; consider predefined stop\u2011loss or take\u2011profit levels', 'Validate RSI\u201175 entries with additional confirmation signals before scaling in', 'Review panic\u2011driven exits to identify underlying volatility triggers and tighten position sizing', 'Incorporate systematic trend\u2011rotation filters to avoid low\u2011confidence 15\u2011minute signals', 'Overall, maintain a conservative stance given modest net PnL and mixed pattern performance']}"
+    },
+    {
+        "time": 1795352588.4429388,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (8)', 'attention': [{'symbol': 'BLESS-USDT', 'action': 'hold', 'reason': 'Position is small, recent entry price close to current price, modest 1% profit, stop loss still comfortably below entry. No clear signal to add or exit.'}], 'summary': 'Overall portfolio risk is within the daily limit. The only open position (BLESS-USDT) shows a small gain and remains within its stop loss buffer. Maintain the position and monitor for any adverse price movement or new setup signals before considering adjustments.'}"
+    },
+    {
+        "time": 1795352589.2367954,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 52.17, 'net_pnl_usdt': 5.2917, 'recurring_patterns': ['MANUAL SELL ALL', 'RSI 75', 'PARTIAL PROFIT', 'PANIC', '15-MINUTE NO-UPWARD-TREND ROTATION'], 'recommendations': ['Limit manual sell-all actions to avoid unnecessary losses', 'Review RSI 75 entries for consistency and consider tighter stop\u2011losses', 'Investigate panic\u2011driven exits and implement stricter risk controls', 'Evaluate partial profit strategy to ensure it captures more upside', 'Monitor low\u2011profit rotations for potential timing improvements']}"
+    },
+    {
+        "time": 1795352592.8351758,
+        "event": "sell_fill_verified",
+        "symbol": "BLESS-USDT",
+        "filled": 1677.25,
+        "average": 0.0138536,
+        "order_id": "1508383585320247299",
+        "reason": "15-MINUTE NO-UPWARD-TREND ROTATION",
+        "attempt": 1
+    },
+    {
+        "time": 1795352593.9009235,
+        "event": "trade_closed",
+        "symbol": "BLESS-USDT",
+        "pnl_usdt": 0.00939260000000241,
+        "reason": "15-MINUTE NO-UPWARD-TREND ROTATION",
+        "strategy": "MANUAL"
+    },
+    {
+        "time": 1795352594.4508262,
+        "event": "full_sale_verified_or_dust",
+        "symbol": "BLESS-USDT",
+        "remaining_base": 0.00107,
+        "remaining_value_usdt": 1.4823352e-05,
+        "filled": 1677.25
+    },
+    {
+        "time": 1795352601.934841,
+        "event": "ai_sell_review",
+        "symbol": "BLESS-USDT",
+        "review": {
+            "review": "The position in BLESS-USDT was exited at an average price of 0.0138536, realizing a modest profit of 0.00939\u202fUSDT on the sold quantity of 1,677.25 units. The exit was triggered by a 15\u2011minute no\u2011upward\u2011trend rotation, which aligns with the predefined risk rule to close positions when short\u2011term momentum stalls. Remaining base of 0.00107\u202fBLESS was left untouched, indicating a partial exit strategy was applied.",
+            "lesson": "The early exit prevented further exposure during a stagnant market phase, preserving capital. However, the small profit margin suggests that the entry price may have been close to the exit threshold, highlighting the need for tighter entry criteria or larger position sizing to achieve more meaningful returns. Monitoring shorter\u2011term trend indicators can be valuable for timely exits, but balancing this with the trade\u2011off between capture of upside and transaction costs is essential.",
+            "confidence": "high"
+        }
+    },
+    {
+        "time": 1795352601.9365036,
+        "event": "momentum_watch_sold",
+        "symbol": "BLESS-USDT",
+        "source": "MANUAL",
+        "detail": "15m move +0.44%; live vs entry +1.00%"
     }
 ]

@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935688887,
+    "last_update_id": 935688889,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT23.59/\u20a632,480",
+    "kb_ph": "USDT23.26/\u20a632,024",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -60,10 +60,10 @@
             1795352377.989315
         ]
     },
-    "kb_mid": 3564,
-    "out_text": "\ud83d\udcca *ANALYSIS: BLESS-USDT*\nLive price: 0.014188 USDT\n24h change: +27.38%\nRSI(14): 54.0900 \u2014 Neutral\nMA5: 0.013426 | MA10: 0.013330 |\nMA20: 0.012822\nMACD: 0.00009140 | Signal:\n-0.00001561 | Histogram:\n0.00010701\nATR(14): 0.001015 (7.15% of\n\u2800\n\u2800",
+    "kb_mid": 3569,
+    "out_text": "\u23f8 Replacement buy skipped:\nAuto-buy is paused; existing\nrisk settings remain in force.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795352354.292761,
+    "out_time": 1795352602.555739,
     "panel_rows": [
         [
             {
@@ -93,16 +93,6 @@
         ]
     ],
     "panel_text": "\ud83d\udd0e *ANALYSE A COIN* \u2014 choose:",
-    "pages": {
-        "p": [
-            "\ud83d\udcca *ANALYSIS: BLESS-USDT*\nLive price: 0.014188 USDT\n24h change: +27.38%\nRSI(14): 54.0900 \u2014 Neutral\nMA5: 0.013426 | MA10: 0.013330 |\nMA20: 0.012822\nMACD: 0.00009140 | Signal:\n-0.00001561 | Histogram:\n0.00010701\nATR(14): 0.001015 (7.15% of\n\u2800\n\u2800",
-            "price)\nLast hour vol vs 20h avg: 1.07x\nBid/ask spread: 0.169%\nTechnical checks: 4/4\nAssessment: *TECHNICAL SETUP\nLOOKS POSITIVE*\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
-        ],
-        "i": 1,
-        "mode": "Markdown",
-        "x": [],
-        "cmd": "m:a:BLESS"
-    },
     "out_mid": 3561,
-    "panel_mid": 3562
+    "panel_hidden": true
 }

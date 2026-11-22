@@ -157,5 +157,12 @@
         "time": 1795351603.9687593,
         "reason": "PANIC",
         "strategy": "MANUAL"
+    },
+    {
+        "sym": "BLESS-USDT",
+        "pnl": 0.00939260000000241,
+        "time": 1795352593.8998926,
+        "reason": "15-MINUTE NO-UPWARD-TREND ROTATION",
+        "strategy": "MANUAL"
     }
 ]
