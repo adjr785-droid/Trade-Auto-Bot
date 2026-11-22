@@ -158,5 +158,15 @@
             "warning": "The market filter indicates only 21% of coins are up today, suggesting broader bearish sentiment. RSI is above 60, which may signal overbought conditions. Proceed with caution and consider tighter stop\u2011losses.",
             "summary": "Buying WLD-USDT with $6.94 at $0.2343 carries moderate risk due to overall market weakness and a relatively high RSI. Verify alignment with your risk tolerance before executing."
         }
+    },
+    {
+        "time": 1795347702.0049317,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (5)', 'attention': [{'symbol': 'TRX-USDT', 'action': 'hold', 'reason': 'Small profit (0.06%) and stop loss still comfortably below current price; position age >10 days, no urgent action.'}, {'symbol': 'ENA-USDT', 'action': 'monitor', 'reason': 'Significant unrealized gain (4.8%) but stop loss equals entry; consider tightening stop if price retraces, while respecting risk limits.'}, {'symbol': 'WLD-USDT', 'action': 'tighten_stop', 'reason': 'Slight loss (-0.21%) and stop loss only ~3% below entry; position is very new (2 minutes). Adjust stop to protect downside if volatility increases.'}], 'summary': 'Overall portfolio remains within daily risk limits. Maintain TRX-USDT, watch ENA-USDT for possible stop adjustment, and tighten WLD-USDT stop to limit further loss. No new orders recommended.'}"
+    },
+    {
+        "time": 1795347702.6770582,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 55.0, 'net_pnl_usdt': 4.9856, 'recurring_patterns': ['Frequent manual sell-all actions often result in losses', 'RSI 75 signals tend to produce positive PnL', 'Partial profit exits show mixed outcomes but can capture gains'], 'recommendations': ['Limit reliance on manual sell-all without additional technical confirmation', 'Consider using RSI 75 as a stronger entry signal, but validate with volume or trend filters', 'Implement stricter risk controls for high\u2011volatility symbols (e.g., SOON-USDT, INJ-USDT)', 'Monitor partial profit strategies to ensure they lock in gains without premature exits']}"
     }
 ]
