@@ -195,5 +195,15 @@
         "symbol": "WLD-USDT",
         "source": "MANUAL",
         "detail": "15m move +1.07%; live vs entry +0.77%"
+    },
+    {
+        "time": 1795350335.5408409,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (5)', 'attention': [{'symbol': 'TRX-USDT', 'action': 'monitor', 'reason': 'Position is slightly negative (-0.1%) and close to stop (0.296393). No immediate action; consider tightening stop if price continues downward.'}, {'symbol': 'ENA-USDT', 'action': 'hold', 'reason': 'Positive PnL (+3.83%) and price above entry; stop equals entry, providing a breakeven floor. No change needed.'}, {'symbol': 'WLD-USDT', 'action': 'monitor', 'reason': 'Small loss (-0.77%) and price approaching stop (0.227271). Maintain current stop; re\u2011evaluate if price falls further.'}], 'summary': 'Overall portfolio is within risk limits. Two positions are near their stop levels and should be watched closely, while the ENA-USDT trade is performing well and can remain unchanged. No new orders are recommended at this time.'}"
+    },
+    {
+        "time": 1795350336.2947342,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 55.0, 'net_pnl_usdt': 4.9856, 'recurring_patterns': ['Frequent manual sell-all actions often result in losses', 'RSI 75 signals tend to produce positive pnl', 'Partial profit exits show mixed outcomes but can capture gains'], 'recommendations': ['Limit reliance on manual sell-all without additional technical confirmation', 'Consider using RSI 75 as a stronger entry signal, but validate with volume or trend filters', 'Implement stricter risk controls for high\u2011volatility symbols (e.g., SOON-USDT, INJ-USDT)', 'Review partial profit strategy to ensure consistent exit thresholds']}"
     }
 ]
