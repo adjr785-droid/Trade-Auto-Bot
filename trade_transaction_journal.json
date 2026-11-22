@@ -549,5 +549,10 @@
         "time": 1795363509.9585602,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 53.85, 'net_pnl_usdt': 5.3048, 'recurring_patterns': ['RSI 75', 'MANUAL SELL', 'PARTIAL PROFIT', '15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC'], 'recommendations': ['Limit exposure to trades triggered solely by RSI 75 until further back\u2011testing confirms edge', 'Review manual sell decisions that resulted in losses; consider stricter profit targets before manual exit', 'Monitor and possibly tighten criteria for 15\u2011minute no\u2011upward\u2011trend rotation signals, as they show mixed outcomes', 'Avoid panic\u2011driven exits; implement stop\u2011loss rules to replace ad\u2011hoc panic sells', 'Overall maintain current risk limits and continue collecting more data before scaling position size']}"
+    },
+    {
+        "time": 1795364033.3082132,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 53.85, 'net_pnl_usdt': 5.3048, 'recurring_patterns': ['RSI 75', 'MANUAL SELL ALL', '15-MINUTE NO-UPWARD-TREND ROTATION', 'PARTIAL PROFIT', 'PANIC'], 'recommendations': 'Maintain current risk limits; focus on trades flagged with RSI 75 as they show higher positive pnl; limit exposure to manual sell-all actions which often produce losses; monitor and possibly avoid panic\u2011driven exits; continue using 15\u2011minute rotation signals but verify trend strength before entry.'}"
     }
 ]
