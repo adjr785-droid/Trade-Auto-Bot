@@ -3,8 +3,8 @@ try:import fcntl
 except ImportError:fcntl=None
 TK=os.environ.get('TG_TOKEN');CHAT=str(os.environ.get('TG_CHAT_ID',''));API=f"https://api.telegram.org/bot{TK}"
 DB,ST,CFG,QF,LF,CD,SC,HIST,LOCK,SH,OUT,AL,ATHATL_CACHE="positions.json","tg_state.json","settings.json","queue.json","profit_ledger.json",".cmd_cooldown.json","scan_state.json","trade_history.json",".bot.lock","scan_history.json","telegram_output.json","alerts.json","ath_atl_cache.json"
-FILES=[DB,ST,CFG,QF,LF,CD,SC,HIST,SH,OUT,AL,ATHATL_CACHE,JOURNAL,BREAKER]
 GUARDIAN="bot_guardian.json";GCHARTER="core_charter.json";GAUDIT="guardian_audit.json";JOURNAL="trade_transaction_journal.json";BREAKER="trade_circuit_breaker.json"
+FILES=[DB,ST,CFG,QF,LF,CD,SC,HIST,SH,OUT,AL,ATHATL_CACHE,JOURNAL,BREAKER,GUARDIAN,GCHARTER,GAUDIT]
 STABLE=['USDC','USDT','DAI','FDUSD','TUSD','USDD','USDE'];LEV=['3L','3S','5L','5S','10L','10S','2L','2S'];BL=['RPANW','CT','ONE']
 ex=ccxt.bitget({'apiKey':os.environ.get('BITGET_API_KEY'),'secret':os.environ.get('BITGET_API_SECRET'),'password':os.environ.get('BITGET_API_PASSPHRASE'),'enableRateLimit':True});ex.options['createMarketBuyOrderRequiresPrice']=False
 GROQ_API_KEY=os.environ.get('GROQ_API_KEY','').strip()
@@ -760,10 +760,10 @@ def cmd_buy(txt):
   ob=B('total',c) if old else 0.0;f,a=m_buy(f"{c}/USDT",amt);sl=sl_pct(sym,old) if old else sl_pct(sym)
   if old:
    e0=old['entry_price'];avg=round((ob*e0+f*a)/(ob+f),6) if ob>0 else round(a,6)
-   old.update(entry_price=avg,safe_zone=avg,stop_loss=round(avg*(1-sl/100),6),last_price=a,peak_price=max(old.get('peak_price',avg),a));db[sym]=old;save(DB,db);ok=place_trailing_sl(sym,free_qty(sym,ob+f))
+   old.update(entry_price=avg,safe_zone=avg,stop_loss=round(avg*(1-sl/100),6),last_price=a,peak_price=max(old.get('peak_price',avg),a),opened_at=time.time(),purchase_source='MANUAL',momentum_watch_started=time.time());db[sym]=old;save(DB,db);ok=place_trailing_sl(sym,free_qty(sym,ob+f))
    tg(f"➕ *DCA ADDED:* {c} @ {a:.6f}\nSpent: ${amt:.2f}\nNew avg entry: {avg:.6f}\n"+(STOP_OK if ok else STOP_NO))
   else:
-   db[sym]=NP(round(a,6),round(a*(1-sl/100),6),sl);db[sym]['strategy']="MANUAL";save(DB,db);ok=place_trailing_sl(sym,free_qty(sym,f))
+   db[sym]=NP(round(a,6),round(a*(1-sl/100),6),sl);db[sym]['strategy']="MANUAL";db[sym]['purchase_source']='MANUAL';db[sym]['opened_at']=time.time();db[sym]['momentum_watch_started']=time.time();save(DB,db);ok=place_trailing_sl(sym,free_qty(sym,f))
    tg(f"✅ *BOUGHT:* {c} @ {a:.6f}\nSpent: ${amt:.2f}\n"+(STOP_OK if ok else STOP_NO))
  except Exception as e:tg(f"❌ *BUY FAILED:* {e}")
 def cmd_sell(txt):
@@ -1552,10 +1552,98 @@ def exec_q():
    journal_event("buy_fill_verified",symbol=sym,filled=f,average=a,spend_estimate=f*a)
    mxs=round(a*(1-pct/100),6);sl=qd.get('sl') or mxs
    if sl>=a or sl>mxs:sl=mxs
-   db[sym]=NP(round(a,6),sl,pct);db[sym]['strategy']=qd.get('type','OTHER');save(DB,db);ok=place_trailing_sl(sym,free_qty(sym,f)) or protect_retry(sym,f);tg(f"🛒 *EXECUTED — DYNAMIC AUTO-BUY!*\n{sym}|💵{sp:.2f}@{a:.6f}\nAllocation: score {alloc_meta.get('score_factor',0):.2f}x, setup {alloc_meta.get('setup_factor',0):.2f}x, volatility {alloc_meta.get('vol_factor',0):.2f}x, regime {alloc_meta.get('regime_factor',0):.2f}x\n"+(STOP_OK if ok else STOP_NO))
+   db[sym]=NP(round(a,6),sl,pct);db[sym]['strategy']=qd.get('type','OTHER');db[sym]['purchase_source']='AUTO';db[sym]['opened_at']=time.time();db[sym]['momentum_watch_started']=time.time();save(DB,db);ok=place_trailing_sl(sym,free_qty(sym,f)) or protect_retry(sym,f);tg(f"🛒 *EXECUTED — DYNAMIC AUTO-BUY!*\n{sym}|💵{sp:.2f}@{a:.6f}\nAllocation: score {alloc_meta.get('score_factor',0):.2f}x, setup {alloc_meta.get('setup_factor',0):.2f}x, volatility {alloc_meta.get('vol_factor',0):.2f}x, regime {alloc_meta.get('regime_factor',0):.2f}x\n"+(STOP_OK if ok else STOP_NO))
    if not ok and s.get('sell_if_stop_fails',True):unprotected_exit(sym,db)
    q.pop(sym,None);save(QF,q);ub=B('free','USDT');time.sleep(2);break
  except Exception as e:tg(f"⚠️ *QUEUE FAILED:* `{e}`")
+def asset_has_upward_momentum(sym, entry):
+ """Use closed 1m candles; require both positive 15m direction and price above entry."""
+ try:
+  candles=ex.fetch_ohlcv(S(sym),"1m",limit=17)
+  closed=candles[:-1] if len(candles)>=3 else candles
+  if len(closed)<12:return None,"Insufficient 1m candles to judge momentum safely."
+  closes=[float(x[4]) for x in closed[-15:] if float(x[4])>0]
+  if len(closes)<10:return None,"Insufficient valid 1m closes."
+  px=live(sym)
+  if not px or entry<=0:return None,"Live price unavailable."
+  rising=closes[-1]>closes[0] and closes[-1]>sum(closes[-5:])/5 and px>entry
+  return rising,f"15m move {((closes[-1]/closes[0])-1)*100:+.2f}%; live vs entry {((px/entry)-1)*100:+.2f}%"
+ except Exception as e:return None,f"Momentum data unavailable: {str(e)[:120]}"
+def replace_with_best_setup(origin_source, sold_symbol):
+ """Buy the highest-ranked full setup; manual /buy-origin rotations alone bypass BTC filters."""
+ s=cfg();manual_origin=str(origin_source).upper()=="MANUAL"
+ if not manual_origin and (btc_blocked(s) or btc_shock(s)):
+  tg("⏸ Replacement buy skipped: BTC safety filter is active for an automatically purchased asset.");return
+ if not s.get("auto_buy_enabled",True):
+  tg("⏸ Replacement buy skipped: Auto-buy is paused; existing risk settings remain in force.");return
+ guardian_ok,guardian_reason=guardian_audit()
+ if not guardian_ok:tg(f"⛔ Replacement buy blocked by Guardian: {guardian_reason}");return
+ allowed,reason=risk_controls()
+ if not allowed:tg(f"⛔ Replacement buy blocked by risk controls: {reason}");return
+ mf=market_filter(s)
+ if mf:tg(f"⏸ Replacement buy skipped: market filter: {mf}");return
+ db=load(DB);cands=rank_setups(exclude=set(db)|{sold_symbol})
+ if not cands:tg("🔎 No replacement bought: market setup scan returned no candidates.");return
+ cand=next((x for x in cands if x.get("full") and x.get("sym") not in db),None)
+ if not cand:tg("🔎 No replacement bought: no coin currently passes a complete TREND, OVERSOLD or BREAKOUT setup.");return
+ sym=cand["sym"];sp=spread_pct(sym);lim=float(s.get("max_spread_pct",0.5))
+ if sp is None or sp>lim:tg(f"⏸ Replacement buy skipped: {sym} spread unavailable or above {lim:g}%.");return
+ if s.get("smart_risk_enabled",True):
+  ok,why=execution_quality(sym,s)
+  if not ok:tg(f"⏸ Replacement buy skipped: {why}");return
+  ok,why=portfolio_correlation_guard(sym,float(s.get("max_portfolio_correlation",0.85)))
+  if not ok:tg(f"⏸ Replacement buy skipped: {why}");return
+ ub=B("free","USDT")*(1-max(0,min(50,float(s.get("auto_buy_reserve_pct",5))))/100)
+ if ub<1.02:tg("⏸ Replacement buy skipped: insufficient free USDT after reserve.");return
+ qd={"type":cand.get("setup","ROTATION"),"score":float(cand.get("pts",0)),"timestamp":time.time(),"sl":None}
+ pct=sl_pct(sym);price=live(sym)
+ if not price:tg("⏸ Replacement buy skipped: no live price.");return
+ spend,meta=dynamic_auto_buy_budget(sym,qd,price,price*(1-pct/100),ub,s)
+ if spend<1.02:tg("⏸ Replacement buy skipped: dynamic risk allocation is below the minimum order.");return
+ impact_ok,impact,impact_reason=estimate_market_impact(sym,spend)
+ if not impact_ok or impact is None or impact>float(s.get("execution_slippage_pct",0.35)):
+  tg(f"⏸ Replacement buy skipped: {impact_reason if not impact_ok else f'estimated impact {impact:.3f}% too high'}");return
+ try:
+  journal_event("momentum_rotation_buy_submitted",symbol=sym,origin_source=origin_source,spend_usdt=spend,btc_filter_bypassed=manual_origin)
+  filled,avg=m_buy(S(sym),spend)
+  if filled<=0 or avg<=0:raise RuntimeError("replacement fill not verified")
+  newdb=load(DB);newdb[sym]=NP(round(avg,6),round(avg*(1-pct/100),6),pct);newdb[sym].update(strategy=cand.get("setup","ROTATION"),purchase_source="AUTO",opened_at=time.time(),momentum_watch_started=time.time(),rotation_from=sold_symbol);save(DB,newdb)
+  protected=place_trailing_sl(sym,free_qty(sym,filled)) or protect_retry(sym,filled)
+  journal_event("momentum_rotation_buy_verified",symbol=sym,filled=filled,average=avg,origin_source=origin_source,btc_filter_bypassed=manual_origin)
+  tg(f"🔁 *ROTATION BUY VERIFIED*\n{sym} @ {avg:.8g} | Spend ${spend:.2f}\nSetup: {cand.get('setup')} | Origin: {origin_source} | BTC bypass: {'YES (bot /buy origin)' if manual_origin else 'NO'}\n"+(STOP_OK if protected else STOP_NO))
+  if not protected and s.get("sell_if_stop_fails",True):unprotected_exit(sym,newdb)
+ except Exception as e:
+  breaker_failure(f"ROTATION BUY {sym}: {e}");journal_event("momentum_rotation_buy_failed",symbol=sym,error=str(e)[:220]);tg(f"❌ Replacement buy failed for {sym}: {str(e)[:180]}")
+def momentum_watchdog():
+ """After 15 minutes, rotate bot /buy and auto-bought positions lacking upward momentum."""
+ db=load(DB);now=time.time();changed=False
+ for sym,d in list(db.items()):
+  source=str(d.get("purchase_source","")).upper()
+  if source not in ("MANUAL","AUTO"):continue
+  started=float(d.get("momentum_watch_started",d.get("opened_at",0)) or 0)
+  if not started:
+   d["momentum_watch_started"]=now;db[sym]=d;changed=True;continue
+  if now-started<900:continue
+  if d.get("momentum_watch_done"):continue
+  entry=float(d.get("entry_price",0) or 0)
+  rising,detail=asset_has_upward_momentum(sym,entry)
+  if rising is None:
+   # Never liquidate on missing/stale market data; retry on the next management cycle.
+   if not in_cd(f"momentum_data_{sym}",300):tg(f"⚠️ Momentum watchdog for {sym} deferred: {detail}")
+   continue
+  if rising:
+   d["momentum_watch_done"]=True;d["momentum_watch_result"]="UPWARD";db[sym]=d;changed=True
+   journal_event("momentum_watch_passed",symbol=sym,source=source,detail=detail)
+   tg(f"📈 *MOMENTUM WATCH PASSED* {sym}: upward trend confirmed after 15 minutes. {detail}")
+   continue
+  tg(f"🔄 *MOMENTUM ROTATION TRIGGERED* {sym}: no upward trend after 15 minutes. {detail}")
+  if sell(sym,1.0,"15-MINUTE NO-UPWARD-TREND ROTATION"):
+   db=load(DB);db.pop(sym,None);save(DB,db)
+   journal_event("momentum_watch_sold",symbol=sym,source=source,detail=detail)
+   replace_with_best_setup(source,sym)
+  else:
+   tg(f"⚠️ {sym} was not rotated because the sale could not be verified. It remains under existing protection.")
+ if changed:save(DB,db)
 def scan_history_state():
  h=load(SH,{})
  if not isinstance(h,dict):h={}
@@ -2096,7 +2184,7 @@ def live_loop(t0):
   except Exception as e:print(f"LIVE POLL ERR: {e}")
   now=time.time()
   if now-last_light>=60:
-   for fn in (manage,check_alerts,scan,exec_q):
+   for fn in (manage,momentum_watchdog,check_alerts,scan,exec_q):
     if fn is scan and deadline-time.time()<180:continue
     run_step(fn)
    last_light=time.time()
@@ -2119,7 +2207,7 @@ if __name__=="__main__":
    _st["display_reset_v4"]=True;save(ST,_st)
  except Exception as e:print(f"DISPLAY RESET ERR: {e}")
  try:
-  for fn in (heartbeat,_C.clear,cleanup_telegram_output,stale_output,_kb_refresh,auto_clear_daily,scan_history_state,audit_system,tg_check,manage,track_day_equity,git_sync,check_hourly_balance,check_alerts,check_daily_summary,scan,exec_q):run_step(fn)
+  for fn in (heartbeat,_C.clear,cleanup_telegram_output,stale_output,_kb_refresh,auto_clear_daily,scan_history_state,audit_system,tg_check,manage,momentum_watchdog,track_day_equity,git_sync,check_hourly_balance,check_alerts,check_daily_summary,scan,exec_q):run_step(fn)
   live_loop(T0)
   run_step(_kb_refresh)
  except Exception as e:
