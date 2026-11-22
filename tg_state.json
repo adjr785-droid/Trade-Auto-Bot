@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689026,
+    "last_update_id": 935689029,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -19,7 +19,7 @@
         ],
         "hn": 24
     },
-    "last_cmd": "m:r:lose",
+    "last_cmd": "/stats",
     "page_mem": {
         "/bot": [
             6,
@@ -63,7 +63,7 @@
         ]
     },
     "kb_mid": 3708,
-    "out_text": "\ud83d\udcc9 *TOP 10 LOSERS (24H)*\n\n```\n\ud83d\udcc9 LOSERS\n 1. EVAA      -58.57%\n 2. IDOL      -45.48%\n 3. MTX       -28.20%\n 4. UMXM      -22.12%\n 5. ICNT       -6.13%\n 6. JCT        -5.45%\n```\n\u2800",
+    "out_text": "\ud83d\udcc8 *TRADE STATS*\nClosed trades: 26\nWin rate: 54% (14 wins, 12\nlosses)\nAverage per trade: $+0.20\nNet profit: $+5.30\nBest: $+2.97 | Worst: $-0.66\n\n*By strategy*\nMANUAL: 19 trades | win 63% |\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
@@ -90,12 +90,12 @@
         ]
     ],
     "panel_text": "\ud83d\udcc4 *Page 1/3*",
-    "out_time": 1795363015.7854657,
+    "out_time": 1795363047.4899364,
     "pages": {
         "p": [
-            "\ud83d\udcc9 *TOP 10 LOSERS (24H)*\n\n```\n\ud83d\udcc9 LOSERS\n 1. EVAA      -58.57%\n 2. IDOL      -45.48%\n 3. MTX       -28.20%\n 4. UMXM      -22.12%\n 5. ICNT       -6.13%\n 6. JCT        -5.45%\n```\n\u2800",
-            "```\n 7. DOS        -4.79%\n 8. UNI        -0.13%\n 9. USDGO      -0.05%\n10. LTC        -0.05%```\n_Minimum 24H volume: $1M._\n\n\ud83e\udde0 *AI:* EVAA leads 24h losers\nwith -58.57% drop, followed by\nIDOL -45.48%; all listed assets\nmeet the minimum $1M volume\n\u2800",
-            "threshold, but low\u2011volume coins\nmay be under\u2011represented.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+            "\ud83d\udcc8 *TRADE STATS*\nClosed trades: 26\nWin rate: 54% (14 wins, 12\nlosses)\nAverage per trade: $+0.20\nNet profit: $+5.30\nBest: $+2.97 | Worst: $-0.66\n\n*By strategy*\nMANUAL: 19 trades | win 63% |\n\u2800\n\u2800",
+            "avg $+0.32 | total $+5.99\nOLDER: 2 trades | win 0% | avg\n$-0.15 | total $-0.29\nOTHER: 5 trades | win 40% | avg\n$-0.08 | total $-0.40\n\n\ud83e\udde0 *AI:* Overall net profit is\nmodest (+$5.30) with a 54% win\nrate; manual strategy performs\nwell (63% win, +$5.99), but the\n\u2800\n\u2800",
+            "older strategy shows 0% win and\na loss, suggesting review of\nnon\u2011manual trades.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
         "i": 0,
         "mode": "Markdown",
@@ -105,8 +105,8 @@
                 "callback_data": "rf:go"
             }
         ],
-        "cmd": "m:r:lose"
+        "cmd": "/stats"
     },
-    "out_mid": 3715,
-    "panel_mid": 3716
+    "out_mid": 3719,
+    "panel_mid": 3720
 }
