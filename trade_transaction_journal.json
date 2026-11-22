@@ -128,5 +128,15 @@
         "symbol": "PUMP-USDT",
         "source": "MANUAL",
         "detail": "15m move +0.00%; live vs entry +0.33%"
+    },
+    {
+        "time": 1795345565.9810948,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (5)', 'attention': [{'symbol': 'TRX-USDT', 'action': 'monitor', 'reason': 'Position is slightly down (-0.11%) and close to stop loss (0.296393). No immediate action; consider tightening stop if price continues downward.'}, {'symbol': 'ENA-USDT', 'action': 'hold', 'reason': 'Position is up 4.97% with price above entry; stop loss is comfortably below current price. No change needed.'}], 'summary': 'Overall portfolio risk remains within daily limit. One position (TRX-USDT) is near its stop level and should be watched closely; the other (ENA-USDT) is performing well. No new orders are recommended at this time.'}"
+    },
+    {
+        "time": 1795345566.6506858,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 55.0, 'net_pnl_usdt': 4.9856, 'recurring_patterns': ['MANUAL SELL ALL appears in 9 trades, often resulting in negative PnL', 'RSI 75 triggers two of the largest positive PnL trades', 'PARTIAL PROFIT entries show modest gains but are less frequent'], 'recommendations': ['Limit exposure to manual sell signals unless confirmed by additional indicators', 'Prioritize RSI\u2011based entries that have historically yielded higher returns, but validate with volume and trend analysis', 'Implement tighter stop\u2011losses on symbols with repeated negative outcomes (e.g., SOON-USDT, INJ-USDT)', 'Consider reducing trade frequency to focus on higher\u2011confidence setups and improve win\u2011rate consistency']}"
     }
 ]
