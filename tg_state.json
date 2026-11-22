@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935689190,
+    "last_update_id": 935689192,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT23.18/\u20a631,908",
+    "kb_ph": "USDT23.18/\u20a631,909",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -62,8 +62,8 @@
             1795362988.7943418
         ]
     },
-    "kb_mid": 3851,
-    "out_text": "\u2705 `page_lines` = `11`\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "kb_mid": 3856,
+    "out_text": "\u2705 `page_lines` = `7`\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
@@ -91,8 +91,8 @@
             }
         ]
     ],
-    "panel_text": "\u2699\ufe0f *page lines*\nCurrent value: `11`",
-    "out_time": 1795365783.3487089,
-    "out_mid": 3850,
-    "panel_mid": 3852
+    "panel_text": "\u2699\ufe0f *page lines*\nCurrent value: `7`",
+    "out_time": 1795365800.7356136,
+    "out_mid": 3855,
+    "panel_mid": 3857
 }
