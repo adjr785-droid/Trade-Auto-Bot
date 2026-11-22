@@ -433,12 +433,7 @@
         "review": "{'win_rate_pct': 54.17, 'net_pnl_usdt': 5.3011, 'recurring_patterns': {'manual_sell': 9, 'rsi_75': 3, 'partial_profit': 3, 'panic': 3, 'no_upward_trend_rotation': 3}, 'recommendations': 'Reduce reliance on manual sell triggers; focus on higher confidence signals such as RSI 75 that produced positive PnL; limit exposure during panic\u2011driven exits; consider tighter risk limits for low\u2011profit trades; monitor symbols with repeated manual sells for underlying volatility.'}"
     },
     {
-        "time": 1795353990.903475,
-        "event": "ai_portfolio_review",
-        "summary": "{'portfolio_risk': 'Daily limit (9)', 'attention': [{'symbol': 'GRAM-USDT', 'action': 'hold', 'reason': 'Position is very recent (age 20), small positive PnL (0.1%), and stop is close to entry. No clear exit signal; maintain until further movement.'}], 'summary': 'Overall portfolio risk is within the daily limit. The only position, GRAM-USDT, shows minimal profit and is near its stop level, so a conservative hold is recommended while monitoring for price movement.'}"
-    },
-    {
-        "time": 1795353991.6543024,
+        "time": 1795354268.9849648,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 54.17, 'net_pnl_usdt': 5.3011, 'recurring_patterns': {'manual_sell': 9, 'rsi_75': 3, 'partial_profit': 3, 'panic': 3, 'no_upward_trend_rotation': 3}, 'recommendations': 'Reduce reliance on manual sell signals; focus on higher confidence RSI\u201175 entries that showed positive PnL; limit exposure during panic\u2011driven exits; consider tighter risk limits for low\u2011profit rotations; monitor symbols with repeated manual sells for underlying volatility.'}"
     },
