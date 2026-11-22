@@ -47,7 +47,7 @@
     "scan_parallel": true,
     "page_chars": 600,
     "page_lines": 19,
-    "page_width": 40,
+    "page_width": 41,
     "output_stale_minutes": 5,
     "smart_risk_enabled": true,
     "max_coin_exposure_pct": 20.0,
