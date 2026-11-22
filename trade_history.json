@@ -108,5 +108,12 @@
         "time": 1795270290.9392958,
         "reason": "RSI 75",
         "strategy": "MANUAL"
+    },
+    {
+        "sym": "COLLECT-USDT",
+        "pnl": -0.09932158000000028,
+        "time": 1795311339.9016566,
+        "reason": "MANUAL SELL $15.10",
+        "strategy": "MANUAL"
     }
 ]
