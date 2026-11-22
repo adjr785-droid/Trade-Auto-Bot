@@ -817,7 +817,7 @@ def parse(txt,usage,allow_all=False):
  if a<=0:tg("❌ Amount must be positive.");return None
  return c,a
 def cmd_buy(txt):
- if ai_emergency_active():tg("⛔ *BUY LOCKED:* AI emergency SELL-ONLY mode is active. No buying is permitted until AI recovery is verified and /ai_resume is confirmed.");return
+ if ai_emergency_active():tg("⛔ *BUY LOCKED:* AI emergency SELL-ONLY mode is active. No buying is permitted until AI recovery is verified; normal mode then resumes automatically.");return
  r=parse(txt,"❌ Usage: `/buy COIN USDT_AMOUNT` or `/buy COIN ALL`",True)
  if not r:return
  c,amt=r;sym=f"{c}-USDT"
@@ -1284,7 +1284,7 @@ def ai_health_check(force=False):
  # Five-minute live connectivity and structured-response self-test. Never controls orders.
  now=time.time();hs=load(AI_HEALTH,{})
  if not isinstance(hs,dict):hs={}
- if not force and now-float(hs.get('last_check',0) or 0)<300:return
+ if not force and now-float(hs.get('last_check',0) or 0)<240:return
  key=os.environ.get('GROQ_API_KEY','').strip() or GROQ_API_KEY
  if not key:
   hs.update({'last_check':now,'status':'unconfigured','last_error':'GROQ_API_KEY is missing','consecutive_failures':int(hs.get('consecutive_failures',0))+1})
