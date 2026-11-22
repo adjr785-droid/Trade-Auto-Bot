@@ -55,5 +55,15 @@
         "time": 1795340486.4828813,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 52.63, 'net_pnl_usdt': 4.9657, 'recurring_patterns': {'manual_sell': 9, 'rsi_triggers': 3, 'partial_profit': 3}, 'recommendations': {'risk_management': 'Consider tightening stop\u2011losses and reducing reliance on manual sell signals, especially for symbols with repeated losses (e.g., SOON-USDT, INJ-USDT).', 'strategy_adjustment': 'Monitor RSI\u2011based entries; while they yielded positive PnL, the sample size is small, so treat RSI signals with caution.', 'position_sizing': 'Maintain conservative position sizes given the modest net PnL and observed volatility across trades.', 'uncertainty': 'Data set is limited (19 trades); patterns may not generalize. Proceed with heightened vigilance.'}}"
+    },
+    {
+        "time": 1795341670.4179432,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'TRX-USDT', 'action': 'monitor', 'reason': 'Small positive PnL (0.29%) and stop loss only ~3% below entry; consider tightening stop if price approaches 0.3000 to protect against downside.'}, {'symbol': 'ENA-USDT', 'action': 'monitor', 'reason': 'Moderate positive PnL (3.09%) but stop loss is ~15% below entry; price is approaching stop level; consider adjusting stop upward to lock in gains.'}], 'summary': 'Overall portfolio risk remains PASS. Both positions are modestly profitable but exhibit proximity to their stop levels. Recommend close monitoring and possible stop adjustments to preserve gains while maintaining upside potential.'}"
+    },
+    {
+        "time": 1795341671.2845106,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 52.63, 'net_pnl_usdt': 4.9657, 'recurring_patterns': {'manual_sell_frequency': 14, 'rsi_75_triggers': 3, 'partial_profit_triggers': 3, 'symbols_with_multiple_trades': ['BTW-USDT', 'SOON-USDT', 'BLESS-USDT', 'SKYAI-USDT', 'DGAI-USDT']}, 'recommendations': {'caution': 'High reliance on manual sell decisions and RSI\u201175 entries observed; consider adding stricter risk limits and automated exit criteria.', 'suggested_actions': ['Implement stop\u2011loss thresholds for manual sell positions', 'Back\u2011test RSI\u201175 strategy to confirm edge', 'Diversify symbols to reduce concentration risk', 'Monitor partial profit patterns for consistency'], 'uncertainty': 'Data set is limited (19 trades); patterns may not hold in larger samples.'}}"
     }
 ]
