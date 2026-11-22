@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689069,
+    "last_update_id": 935689071,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -61,10 +61,8 @@
         ]
     },
     "kb_mid": 3730,
-    "out_mid": 3750,
-    "out_text": "\ud83d\udcdf *OUTPUT*\nResults appear here.",
+    "out_text": "\u2705 `auto_buy_amount_usdt` =\n`5.1354`\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "panel_mid": 3751,
     "panel_rows": [
         [
             {
@@ -91,5 +89,8 @@
             }
         ]
     ],
-    "panel_text": "\u2699\ufe0f *auto buy amount usdt*\nCurrent value: `3.7348`"
+    "panel_text": "\u2699\ufe0f *auto buy amount usdt*\nCurrent value: `5.1354`",
+    "out_time": 1795364077.8982017,
+    "out_mid": 3754,
+    "panel_mid": 3755
 }
