@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935688904,
+    "last_update_id": 935688907,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -32,8 +32,8 @@
             1795352296.0258873
         ],
         "/analyse": [
-            5,
-            1795352995.4819639
+            7,
+            1795353009.3314252
         ],
         "m:r:analyse": [
             4,
@@ -67,24 +67,46 @@
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
+                "text": "\ud83e\udd16 Bot",
+                "callback_data": "/bot"
             },
             {
-                "text": "6/8",
-                "callback_data": "pg:x"
+                "text": "\ud83d\udcc8 Stats",
+                "callback_data": "/stats"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udd0e Analyse Coin",
+                "callback_data": "m:an"
             },
             {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
+                "text": "\u2699\ufe0f Settings",
+                "callback_data": "m:set"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udcbc Holdings",
+                "callback_data": "m:r:holdings"
             },
             {
-                "text": "\ud83c\udfe0",
-                "callback_data": "m:menu"
+                "text": "\ud83e\udde0 Ask AI",
+                "callback_data": "m:ai:1"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\uddf9 Clear Chat",
+                "callback_data": "/clear"
+            },
+            {
+                "text": "\ud83d\udea8 PANIC SELL",
+                "callback_data": "/panic"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 6/8*",
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
     "out_mid": 3584,
     "pages": {
         "p": [
@@ -97,7 +119,7 @@
             "> MA5 > MA10)\n\u2022 RSI 61.9 is healthy (room to\nrun before overbought)\n\u2022 24h change +3.14% shows\nsteady, not extreme, momentum\n\u2022 24h volume $2.4M (liquid\nenough: above the $1M minimum)\n\u2022 Spread: 0.00% (OK for\nauto-buy)\n\u2022 Status: \ud83d\udd36 Potential, manual\n\u2800\n\u2800",
             "only (misses scanner rules)\n\u2022 \ud83e\udde0 AI: CAUTION \u2014 Fails\nscanner rules, watchlist only,\nmoderate RSI\n\nBuy manually with `/buy COIN\namount` if you agree.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 5,
+        "i": 7,
         "mode": "Markdown",
         "x": [],
         "cmd": "/analyse"
