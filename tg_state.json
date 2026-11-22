@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935688809,
+    "last_update_id": 935688811,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -27,8 +27,8 @@
             1795340277.2044952
         ],
         "m:r:holdings": [
-            6,
-            1795347858.0465162
+            7,
+            1795347869.6744292
         ],
         "/analyse": [
             0,
@@ -58,28 +58,46 @@
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
+                "text": "\ud83e\udd16 Bot",
+                "callback_data": "/bot"
             },
             {
-                "text": "7/9",
-                "callback_data": "pg:x"
+                "text": "\ud83d\udcc8 Stats",
+                "callback_data": "/stats"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udd0e Analyse Coin",
+                "callback_data": "m:an"
             },
             {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
+                "text": "\u2699\ufe0f Settings",
+                "callback_data": "m:set"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udcbc Holdings",
+                "callback_data": "m:r:holdings"
             },
             {
-                "text": "\ud83c\udfe0",
-                "callback_data": "m:menu"
+                "text": "\ud83e\udde0 Ask AI",
+                "callback_data": "m:ai:1"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\uddf9 Clear Chat",
+                "callback_data": "/clear"
             },
             {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
+                "text": "\ud83d\udea8 PANIC SELL",
+                "callback_data": "/panic"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 7/9*",
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
     "out_mid": 3476,
     "pages": {
         "p": [
@@ -93,7 +111,7 @@
             "below peak)\nPeak price: 0.234300\nExchange stop level: 0.227271\n\n\n\u26a0\ufe0f Held but with no USDT\nprice: AIDOGE: 0.602, COQ:\n0.00711, DGRAM: 0.00447 and 8\nmore...\n\n\u2800\n\u2800",
             "\ud83d\udcca *LIVE SPOT WALLET BALANCE:*\nUSDT23.39/\u20a632,199\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 6,
+        "i": 7,
         "mode": "Markdown",
         "x": [
             {
