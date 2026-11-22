@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935688652,
+    "last_update_id": 935688654,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT23.07/\u20a631,768",
+    "kb_ph": "USDT23.07/\u20a631,755",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -18,7 +18,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "8/9",
+                "text": "1/7",
                 "callback_data": "pg:x"
             },
             {
@@ -28,17 +28,13 @@
             {
                 "text": "\ud83c\udfe0",
                 "callback_data": "m:menu"
-            },
-            {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 8/9*",
-    "out_text": "\ud83e\udd16 *BOT*\n\ud83d\udd58 Since last check (3.3 h ago):\n\ud83d\udd34 balance -0.37 USDT | new:\nONDO, TRX | closed: COLLECT | 1\ntrade(s) closed\nExchange connection: \u2705 OK\nPortfolio: $23.07 USDT |\n\u20a631,768\nUSDT cash: $8.09 (free $8.09)\nAuto-buy: ON (dynamic\n\u2800\n\u2800",
+    "panel_text": "\ud83d\udcc4 *Page 1/7*",
+    "out_text": "\ud83c\udfc6 *TOP 3 SETUPS RIGHT NOW*\n_Read-only scan. Nothing was\nbought._\n\n\u26a0\ufe0f Market filter active: BTC\nis below its 50h average.\nAuto-buy is blocked; a manual\nbuy is your own call.\n\n*1. DGAI-USDT* \u2014 WEAK (best\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795322348.8357868,
+    "out_time": 1795322498.3495486,
     "bot_seen": {
         "t": 1795322343.1784606,
         "eq": 23.074895898742415,
@@ -51,8 +47,8 @@
     "last_cmd": "/bot",
     "page_mem": {
         "/bot": [
-            7,
-            1795322463.0641859
+            8,
+            1795322474.5359097
         ],
         "m:r:holdings": [
             1,
@@ -79,29 +75,22 @@
             1795311215.95037
         ]
     },
-    "kb_mid": 3276,
+    "kb_mid": 3283,
+    "out_mid": 3282,
     "pages": {
         "p": [
-            "\ud83e\udd16 *BOT*\n\ud83d\udd58 Since last check (3.3 h ago):\n\ud83d\udd34 balance -0.37 USDT | new:\nONDO, TRX | closed: COLLECT | 1\ntrade(s) closed\nExchange connection: \u2705 OK\nPortfolio: $23.07 USDT |\n\u20a631,768\nUSDT cash: $8.09 (free $8.09)\nAuto-buy: ON (dynamic\n\u2800\n\u2800",
-            "allocation; legacy target\n$3.7348)\nBTC safety filter: BLOCKING buys\n(BTC RSI 45.86 < 50)\nMarket filter: BTC is below its\n50h average\nRisk controls: \u26d4 Daily limit\n(5)\nToday vs start of day: -2.06%\n(auto-buy pauses at -5.0%)\n\u2800\n\u2800",
-            "Money in coins: 65% of portfolio\n(cap 50.0%)\nRe-buy cooldown active: none\nLast market scan: 0 min ago\n(runs every 30 min) | Queued\ncoins: 0\nBot-tracked positions: 2 |\nHoldings priced: 2\n\ud83d\udd34 Last: COLLECT \u2014 MANUAL SELL\n$15.10 | PnL $-0.10 | 3.1h ago\n\u2800\n\u2800",
-            "\n\ud83e\udded *STRATEGY*\nEntries: TREND (RSI 42-48, price\n> MA5 > MA10), OVERSOLD bounce\n(RSI < 30), BREAKOUT (RSI 50-70\n+ volume breakout)\nProtection: stop-loss 15% |\ntrailing stop 8.0% below peak |\ncrash guard 10.0%\nExit: RSI >= 75 or max hold 703h\n\u2800\n\u2800",
-            "Profit taking: sell 50% at +5.0%\nthen stop moves to break-even\nDynamic trailing: ON (wider in\nstrong trends, tighter when\nmomentum fades)\nEntry safety: spread limit 0.5%\n| stop fails -> sell at market |\nscan pre-filter ON\nNear-instant mode: ON (stays\nawake 270s per run)\n\u2800\n\u2800",
-            "Auto-clear chat: every 24h\nLimits: 5 trades/day, 3.0% daily\nloss, 15.0% max per coin\nExtra safeguards: 4h trend check\nON | BTC shock pause 3%/h |\ncombined open risk cap 3% |\nsmaller buys after 2 losses in a\nrow | parallel scan ON\n\n\ud83d\udcbc *HOLDINGS ADVICE*\n\u2800\n\u2800",
-            "_Technical view only, not\nfinancial advice._\n\n\ud83d\udd34 \ud83e\ude99 *ONDO* \u2014 $6.99 | PnL\n-1.1% ($-0.08)\nAdvice: \ud83d\udfe1 HOLD / WATCH\nWhy: Trend is mixed; keep the\nstop-loss active\n\u274c Long-term: not suited (below\n50-day average, 100-day change\n\u2800\n\u2800",
-            "-14%, thin volume)\n\n\ud83d\udd34 \ud83e\ude99 *TRX* \u2014 $7.97 | PnL -0.2%\n($-0.02)\nAdvice: \ud83d\udfe1 HOLD / WATCH\nWhy: Trend is mixed; keep the\nstop-loss active\n\u26a0\ufe0f Long-term: speculative\n(100-day change -8%, below\n50-day average)\n\u2800\n\u2800",
-            "\n\n\u2705 No sell advised right now.\nFor possible new buys use\n/analyse.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+            "\ud83c\udfc6 *TOP 3 SETUPS RIGHT NOW*\n_Read-only scan. Nothing was\nbought._\n\n\u26a0\ufe0f Market filter active: BTC\nis below its 50h average.\nAuto-buy is blocked; a manual\nbuy is your own call.\n\n*1. DGAI-USDT* \u2014 WEAK (best\n\u2800\n\u2800",
+            "available, not a full setup)\nPrice: 0.833325 USDT | 24h:\n+21.06% | RSI: 77.1\nSuggested stop: 0.708326 (15%\nbelow price)\nWhy:\n\u2022 Short-term trend is up (price\n> MA5 > MA10)\n\u2022 RSI 77.1 is overbought (risk\nof pullback)\n\u2800\n\u2800",
+            "\u2022 24h volume $4.7M (liquid\nenough: above the $1M minimum)\n\u2022 Spread: 0.06% (OK for\nauto-buy)\n\n*2. TRX-USDT* \u2014 WEAK (best\navailable, not a full setup)\nPrice: 0.305150 USDT | 24h:\n+1.99% | RSI: 50.5\nSuggested stop: 0.259377 (15%\n\u2800\n\u2800",
+            "below price)\nWhy:\n\u2022 Trend not confirmed yet\n(price 0.305150, MA5 0.305210,\nMA10 0.305279)\n\u2022 RSI 50.5 is healthy (room to\nrun before overbought)\n\u2022 24h change +1.99% shows\nsteady, not extreme, momentum\n\u2022 24h volume $4.0M (liquid\n\u2800\n\u2800",
+            "enough: above the $1M minimum)\n\u2022 Spread: 0.00% (OK for\nauto-buy)\n\n*3. ENA-USDT* \u2014 WEAK (best\navailable, not a full setup)\nPrice: 0.097920 USDT | 24h:\n+6.49% | RSI: 46.9\nSuggested stop: 0.083232 (15%\nbelow price)\n\u2800\n\u2800",
+            "Why:\n\u2022 Trend not confirmed yet\n(price 0.097920, MA5 0.098166,\nMA10 0.098244)\n\u2022 RSI 46.9 is healthy (room to\nrun before overbought)\n\u2022 24h change +6.49% shows\nsteady, not extreme, momentum\n\u2022 24h volume $3.6M (liquid\nenough: above the $1M minimum)\n\u2800\n\u2800",
+            "\u2022 Spread: 0.02% (OK for\nauto-buy)\n\nNo coin passes all scanner rules\nright now, so these are the\nstrongest available. Be\ncautious.\n\nBuy manually with `/buy COIN\namount` if you agree.\n\u2800\n\u2800"
         ],
-        "i": 7,
+        "i": 0,
         "mode": "Markdown",
-        "x": [
-            {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
-            }
-        ],
-        "cmd": "/bot"
+        "x": [],
+        "cmd": "/analyse"
     },
-    "out_mid": 3279,
-    "panel_mid": 3280
+    "panel_mid": 3284
 }
