@@ -421,5 +421,15 @@
             "warning": "RSI is above 60 indicating potential overbought conditions, and the market filter shows only 21% of coins are up today, suggesting a weak overall market. Proceed with caution.",
             "summary": "Given the elevated RSI and bearish market sentiment, a manual buy of GRAM-USDT carries moderate to high risk. Consider waiting for clearer bullish signals or a lower entry price before committing."
         }
+    },
+    {
+        "time": 1795353234.1705346,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (9)', 'attention': [{'symbol': 'GRAM-USDT', 'action': 'monitor', 'reason': 'Position opened 7+ days ago with entry near 0.982 and stop at 0.9525; no profit yet and price is stable. Maintain stop loss discipline and watch for any adverse price movement.'}], 'summary': 'Current portfolio risk is within the daily limit. The only open position (GRAM-USDT) is at break-even with a modest stop loss. Recommend holding the position, adhering to the stop loss, and avoiding new exposure until market conditions clarify.'}"
+    },
+    {
+        "time": 1795353234.868024,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 54.17, 'net_pnl_usdt': 5.3011, 'recurring_patterns': {'manual_sell': 9, 'rsi_75': 3, 'partial_profit': 3, 'panic': 3, 'no_upward_trend_rotation': 3}, 'recommendations': 'Reduce reliance on manual sell triggers; focus on higher confidence signals such as RSI 75 that produced positive PnL; limit exposure during panic\u2011driven exits; consider tighter risk limits for low\u2011profit trades; monitor symbols with repeated manual sells for underlying volatility.'}"
     }
 ]
