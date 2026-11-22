@@ -5,7 +5,7 @@
     "sl_sell_percent": 0.5,
     "dca_reserve": 2.0,
     "auto_buy_enabled": false,
-    "auto_buy_amount_usdt": 5.1354,
+    "auto_buy_amount_usdt": 8.024,
     "max_tokens_before_consolidation": 3,
     "max_hold_hours": 703,
     "trail_pct": 8.0,
