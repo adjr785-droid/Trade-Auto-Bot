@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935688660,
+    "last_update_id": 935688661,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT23.05/\u20a631,731",
+    "kb_ph": "USDT23.07/\u20a631,766",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -54,9 +54,9 @@
         ]
     ],
     "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
-    "out_text": "\ud83d\udee0\ufe0f *AUTO-AUDIT COMPLETE*\n\ud83d\udd04 Auto-synced: ENA-USDT\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "\ud83e\uddf9 Cleared 4 bot message(s).\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795322601.2158475,
+    "out_time": 1795322630.259949,
     "bot_seen": {
         "t": 1795322343.1784606,
         "eq": 23.074895898742415,
@@ -97,7 +97,7 @@
             1795311215.95037
         ]
     },
-    "kb_mid": 3289,
-    "out_mid": 3290,
-    "panel_mid": 3291
+    "out_mid": 3293,
+    "kb_mid": 3295,
+    "panel_hidden": true
 }
