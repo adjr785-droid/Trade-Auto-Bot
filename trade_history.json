@@ -164,5 +164,12 @@
         "time": 1795352593.8998926,
         "reason": "15-MINUTE NO-UPWARD-TREND ROTATION",
         "strategy": "MANUAL"
+    },
+    {
+        "sym": "GRAM-USDT",
+        "pnl": 0.023600000000000024,
+        "time": 1795354000.9396176,
+        "reason": "15-MINUTE NO-UPWARD-TREND ROTATION",
+        "strategy": "MANUAL"
     }
 ]
