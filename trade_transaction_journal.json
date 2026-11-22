@@ -215,5 +215,15 @@
         "time": 1795350718.6435692,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 55.0, 'net_pnl_usdt': 4.9856, 'recurring_patterns': ['MANUAL SELL ALL appears in 9 trades, often resulting in negative PnL', 'RSI 75 triggers two of the largest positive PnL trades', 'PARTIAL PROFIT entries show modest gains but are less frequent'], 'recommendations': ['Limit exposure to manual sell signals that historically produce losses; consider adding confirmation before executing such sells', 'Prioritize RSI\u2011based entries like the successful RSI 75 cases, but validate with additional momentum filters to reduce false positives', 'Monitor symbols with repeated losses (e.g., SOON\u2011USDT, INJ\u2011USDT) and consider reducing position size or pausing trading on them', 'Maintain current win\u2011rate target but aim to improve average win size while cutting average loss magnitude']}"
+    },
+    {
+        "time": 1795351522.250032,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (5)', 'attention': [{'symbol': 'TRX-USDT', 'action': 'hold', 'reason': 'Small negative PnL (-0.09%) and price near stop; no clear exit signal, but risk management suggests monitoring closely.'}, {'symbol': 'ENA-USDT', 'action': 'consider partial take-profit', 'reason': 'Positive PnL (+4.39%) and price above entry; stop equals entry, indicating breakeven protection is in place. Taking partial profit could lock gains while preserving upside.'}, {'symbol': 'WLD-USDT', 'action': 'hold', 'reason': 'Slight negative PnL (-0.34%) but price still above stop; no immediate trigger to exit, continue monitoring for trend reversal.'}], 'summary': 'Overall portfolio remains within daily risk limits. Maintain current positions, but evaluate ENA-USDT for partial profit taking to reduce exposure. Keep close watch on TRX-USDT as it approaches its stop level.'}"
+    },
+    {
+        "time": 1795351523.0543964,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 55.0, 'net_pnl_usdt': 4.9856, 'recurring_patterns': ['Frequent manual sell-all actions often result in losses', 'RSI 75 signals correlate with larger positive PnL', 'Partial profit exits (+5% to +6.2%) yield modest gains', '15\u2011minute no\u2011upward\u2011trend rotation entries produce very small positive PnL'], 'recommendations': ['Limit manual sell\u2011all orders unless clear exit criteria are met', 'Prioritize trades triggered by RSI 75 signals, as they have shown strong upside', 'Consider tightening profit\u2011target thresholds for partial exits to capture gains earlier', 'Review the effectiveness of short\u2011term rotation strategy, as returns are minimal and may not justify execution costs']}"
     }
 ]

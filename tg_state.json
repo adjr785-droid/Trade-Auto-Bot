@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935688842,
+    "last_update_id": 935688843,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT23.26/\u20a632,018",
+    "kb_ph": "USDT23.33/\u20a632,125",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -52,5 +52,48 @@
             1795311215.95037
         ]
     },
-    "kb_mid": 3506
+    "kb_mid": 3511,
+    "out_mid": 3509,
+    "out_text": "\ud83c\udfc6 *TOP 3 SETUPS RIGHT NOW*\n_Read-only scan. Nothing was\nbought._\n\n\u26a0\ufe0f Market filter active: only\n21% of coins are up today.\nAuto-buy is blocked; a manual\nbuy is your own call.\n\n*1. ADA-USDT* \u2014 WATCHLIST (no\n\u2800\n\u2800",
+    "out_mode": "Markdown",
+    "out_time": 1795351509.3987665,
+    "panel_mid": 3510,
+    "panel_rows": [
+        [
+            {
+                "text": "\u25c0",
+                "callback_data": "pg:p"
+            },
+            {
+                "text": "1/9",
+                "callback_data": "pg:x"
+            },
+            {
+                "text": "\u25b6",
+                "callback_data": "pg:n"
+            },
+            {
+                "text": "\ud83c\udfe0",
+                "callback_data": "m:menu"
+            }
+        ]
+    ],
+    "panel_text": "\ud83d\udcc4 *Page 1/9*",
+    "pages": {
+        "p": [
+            "\ud83c\udfc6 *TOP 3 SETUPS RIGHT NOW*\n_Read-only scan. Nothing was\nbought._\n\n\u26a0\ufe0f Market filter active: only\n21% of coins are up today.\nAuto-buy is blocked; a manual\nbuy is your own call.\n\n*1. ADA-USDT* \u2014 WATCHLIST (no\n\u2800\n\u2800",
+            "full scanner setup)\nPrice: 0.145600 USDT | 24h:\n+2.97% | RSI: 59.9\nSuggested stop: 0.123760 (15%\nbelow price)\nWhy:\n\u2022 Short-term trend is up (price\n> MA5 > MA10)\n\u2022 RSI 59.9 is healthy (room to\nrun before overbought)\n\u2800\n\u2800",
+            "\u2022 24h change +2.97% shows\nsteady, not extreme, momentum\n\u2022 24h volume $3.5M (liquid\nenough: above the $1M minimum)\n\u2022 Spread: 0.07% (OK for\nauto-buy)\n\u2022 Status: \ud83d\udd36 Potential, manual\nonly (misses scanner rules)\n\u2022 \ud83e\udde0 AI: CAUTION \u2014 Fails\nscanner rules; monitor risk\n\u2800\n\u2800",
+            "\n*2. BLESS-USDT* \u2014 WATCHLIST (no\nfull scanner setup)\nPrice: 0.014076 USDT | 24h:\n+8.42% | RSI: 54.1\nSuggested stop: 0.011965 (15%\nbelow price)\nWhy:\n\u2022 Short-term trend is up (price\n> MA5 > MA10)\n\u2800\n\u2800",
+            "\u2022 RSI 54.1 is healthy (room to\nrun before overbought)\n\u2022 24h change +8.42% shows\nsteady, not extreme, momentum\n\u2022 24h volume $2.7M (liquid\nenough: above the $1M minimum)\n\u2022 Spread: 0.14% (OK for\nauto-buy)\n\u2022 Status: \ud83d\udd36 Potential, manual\nonly (misses scanner rules)\n\u2800\n\u2800",
+            "\u2022 \ud83e\udde0 AI: CAUTION \u2014 Fails\nscanner rules; monitor risk\n\n*3. BNB-USDT* \u2014 WATCHLIST (no\nfull scanner setup)\nPrice: 554.65 USDT | 24h: +3.43%\n| RSI: 60.4\nSuggested stop: 471.45 (15%\nbelow price)\nWhy:\n\u2800\n\u2800",
+            "\u2022 Short-term trend is up (price\n> MA5 > MA10)\n\u2022 RSI 60.4 is healthy (room to\nrun before overbought)\n\u2022 24h change +3.43% shows\nsteady, not extreme, momentum\n\u2022 24h volume $2.3M (liquid\nenough: above the $1M minimum)\n\u2022 Spread: 0.01% (OK for\nauto-buy)\n\u2800\n\u2800",
+            "\u2022 Status: \ud83d\udd36 Potential, manual\nonly (misses scanner rules)\n\u2022 \ud83e\udde0 AI: CAUTION \u2014 Fails\nscanner rules; monitor risk\n\nNo coin passes all scanner rules\nright now, so these are the\nstrongest available. Be\ncautious.\n\n\u2800\n\u2800",
+            "Buy manually with `/buy COIN\namount` if you agree.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+        ],
+        "i": 0,
+        "mode": "Markdown",
+        "x": [],
+        "cmd": "/analyse"
+    }
 }
