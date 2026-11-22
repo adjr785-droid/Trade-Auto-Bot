@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689214,
+    "last_update_id": 935689217,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -63,88 +63,52 @@
         ]
     },
     "kb_mid": 3869,
-    "out_text": "\u23f8 Replacement buy skipped: Auto-buy is\npaused; existing risk settings remain in\nforce.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "\u2705 `stop_watchdog_enabled` = `True`\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
             {
-                "text": "max_coin_exposure_pct = 20.0",
-                "callback_data": "m:k:max_coin_exposure_pct"
-            }
-        ],
-        [
-            {
-                "text": "max_sector_exposure_pct = 35.0",
-                "callback_data": "m:k:max_sector_exposure_pct"
-            }
-        ],
-        [
-            {
-                "text": "liquidity_depth_usdt = 5000.0",
-                "callback_data": "m:k:liquidity_depth_usdt"
-            }
-        ],
-        [
-            {
-                "text": "max_book_imbalance_pct = 85.0",
-                "callback_data": "m:k:max_book_imbalance_pct"
-            }
-        ],
-        [
-            {
-                "text": "regime_risk_factor = 0.65",
-                "callback_data": "m:k:regime_risk_factor"
-            }
-        ],
-        [
-            {
-                "text": "execution_slippage_pct = 0.35",
-                "callback_data": "m:k:execution_slippage_pct"
-            }
-        ],
-        [
-            {
-                "text": "stop_watchdog_enabled = False",
-                "callback_data": "m:k:stop_watchdog_enabled"
-            }
-        ],
-        [
-            {
-                "text": "portfolio_stress_pct = 12.0",
-                "callback_data": "m:k:portfolio_stress_pct"
-            }
-        ],
-        [
-            {
-                "text": "signal_expiry_minutes = 30",
-                "callback_data": "m:k:signal_expiry_minutes"
-            }
-        ],
-        [
-            {
-                "text": "adaptive_risk_enabled = True",
-                "callback_data": "m:k:adaptive_risk_enabled"
-            }
-        ],
-        [
-            {
-                "text": "\u25c0\ufe0f Prev",
-                "callback_data": "m:sp:4"
+                "text": "\ud83e\udd16 Bot",
+                "callback_data": "/bot"
             },
             {
-                "text": "Next \u25b6\ufe0f",
-                "callback_data": "m:sp:6"
+                "text": "\ud83d\udcc8 Stats",
+                "callback_data": "/stats"
             }
         ],
         [
             {
-                "text": "\u2b05\ufe0f Menu",
-                "callback_data": "m:menu"
+                "text": "\u2699\ufe0f Settings",
+                "callback_data": "m:set"
+            },
+            {
+                "text": "\ud83d\udcbc Holdings",
+                "callback_data": "m:r:holdings"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udcdc Trade History",
+                "callback_data": "m:r:history"
+            },
+            {
+                "text": "\ud83e\udde0 Ask AI",
+                "callback_data": "m:ai:1"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\uddf9 Clear Chat",
+                "callback_data": "/clear"
+            },
+            {
+                "text": "\ud83d\udea8 PANIC SELL",
+                "callback_data": "/panic"
             }
         ]
     ],
-    "panel_text": "\u2699\ufe0f *SETTINGS* (page 6/8)\nTap a setting to change it.",
-    "out_time": 1795366151.1599002,
-    "out_mid": 3860,
-    "panel_mid": 3871
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
+    "out_time": 1795366251.0533123,
+    "out_mid": 3872,
+    "panel_mid": 3873
 }

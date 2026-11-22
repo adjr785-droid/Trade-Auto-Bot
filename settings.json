@@ -56,7 +56,7 @@
     "max_book_imbalance_pct": 85.0,
     "regime_risk_factor": 0.65,
     "execution_slippage_pct": 0.35,
-    "stop_watchdog_enabled": false,
+    "stop_watchdog_enabled": true,
     "portfolio_stress_pct": 12.0,
     "signal_expiry_minutes": 30,
     "adaptive_risk_enabled": true,
