@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935689007,
+    "last_update_id": 935689008,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT23.06/\u20a631,743",
+    "kb_ph": "USDT23.09/\u20a631,783",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -58,53 +58,19 @@
             1795352377.989315
         ]
     },
-    "kb_mid": 3692,
-    "out_text": "\ud83e\udde0 AI manual-buy advisory: A\nmanual buy of 23.18\u202fUSDT worth\nof JCT at $0.001609 is\nsuggested. Given the limited\nupside in the broader market and\na neutral RSI, proceed\ncautiously and monitor price\naction closely.\n\u2800\n\u2800\n\u2800\n\u2800",
+    "kb_mid": 3695,
+    "out_text": "\ud83e\udde0 *AI:* Overall trade history\nshows a modest net profit\n(~$4.3) but multiple panic\npositions and high RSI (75) on\nSKYAI and DGAI suggest\noverbought conditions and\npotential risk.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795361460.2936618,
+    "out_time": 1795361912.478177,
     "panel_rows": [
         [
             {
-                "text": "\ud83e\udd16 Bot",
-                "callback_data": "/bot"
-            },
-            {
-                "text": "\ud83d\udcc8 Stats",
-                "callback_data": "/stats"
-            }
-        ],
-        [
-            {
-                "text": "\u2699\ufe0f Settings",
-                "callback_data": "m:set"
-            },
-            {
-                "text": "\ud83d\udcbc Holdings",
-                "callback_data": "m:r:holdings"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udcdc Trade History",
-                "callback_data": "m:r:history"
-            },
-            {
-                "text": "\ud83e\udde0 Ask AI",
-                "callback_data": "m:ai:1"
-            }
-        ],
-        [
-            {
-                "text": "\ud83e\uddf9 Clear Chat",
-                "callback_data": "/clear"
-            },
-            {
-                "text": "\ud83d\udea8 PANIC SELL",
-                "callback_data": "/panic"
+                "text": "\u2b05\ufe0f Menu",
+                "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
-    "out_mid": 3669,
-    "panel_mid": 3682
+    "panel_text": "\ud83e\uddfe *TRADE HISTORY*\nSKYAI | RSI 75 | PnL $+2.97\nDGAI | PARTIAL PROFIT +5.0% | PnL $+0.32\nDGAI | RSI 75 | PnL $+0.49\nCOLLECT | MANUAL SELL $15.10 | PnL $-0.10\nONDO | MANUAL SELL ALL | PnL $-0.13\nUNI | 15-MINUTE NO-UPWARD-TREND ROTATION | PnL $+0.00\nPUMP | 15-MINUTE NO-UPWARD-TREND ROTATION | PnL $+0.02\nTRX | PANIC | PnL $-0.01\nENA | PANIC | PnL $+0.33\nWLD | PANIC | PnL $-0.02\nBLESS | 15-MINUTE NO-UPWARD-TREND ROTATION | PnL $+0.01\nGRAM | 15-MINUTE NO-UPWARD-TREND ROTATION | PnL $+0.02",
+    "out_mid": 3694,
+    "panel_hidden": true
 }
