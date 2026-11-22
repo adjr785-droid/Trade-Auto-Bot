@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935688947,
+    "last_update_id": 935688950,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -64,78 +64,82 @@
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udee0\ufe0f Audit",
-                "callback_data": "m:r:audit"
+                "text": "btc_rsi_min = 50",
+                "callback_data": "m:k:btc_rsi_min"
             },
             {
-                "text": "\ud83e\uddfe Scan History",
-                "callback_data": "m:scan_hist"
+                "text": "risk_per_trade_pct = 1.0",
+                "callback_data": "m:k:risk_per_trade_pct"
             }
         ],
         [
             {
-                "text": "\u274c Cancel Orders",
-                "callback_data": "m:r:cancel"
+                "text": "max_daily_loss_pct = 3.0",
+                "callback_data": "m:k:max_daily_loss_pct"
             },
             {
-                "text": "\ud83d\udd14 Alerts",
-                "callback_data": "m:r:alerts"
+                "text": "max_portfolio_exposure_pct = 5",
+                "callback_data": "m:k:max_portfolio_exposure_pct"
             }
         ],
         [
             {
-                "text": "\ud83e\uddf9 Dust \u2192 BGB",
-                "callback_data": "m:r:dust"
+                "text": "max_position_pct = 15.0",
+                "callback_data": "m:k:max_position_pct"
             },
             {
-                "text": "\ud83d\uded2 Buy",
-                "callback_data": "m:buy"
+                "text": "max_daily_trades = 5",
+                "callback_data": "m:k:max_daily_trades"
             }
         ],
         [
             {
-                "text": "\ud83d\udcb8 Sell",
-                "callback_data": "m:sell"
+                "text": "max_spread_pct = 0.5",
+                "callback_data": "m:k:max_spread_pct"
             },
             {
-                "text": "\ud83d\udd14 Price Alert",
-                "callback_data": "m:al"
+                "text": "rebuy_cooldown_hours = 6.0",
+                "callback_data": "m:k:rebuy_cooldown_hours"
             }
         ],
         [
             {
-                "text": "\ud83d\udcc8 Gainers",
-                "callback_data": "m:r:gain"
+                "text": "atr_stop_enabled = True",
+                "callback_data": "m:k:atr_stop_enabled"
             },
             {
-                "text": "\ud83d\udcc9 Losers",
-                "callback_data": "m:r:lose"
+                "text": "atr_stop_mult = 2.0",
+                "callback_data": "m:k:atr_stop_mult"
             }
         ],
         [
             {
-                "text": "\ud83d\udcca Dashboard",
-                "callback_data": "m:dash"
+                "text": "atr_stop_min_pct = 3.0",
+                "callback_data": "m:k:atr_stop_min_pct"
             },
             {
-                "text": "\ud83e\udde9 Layout",
-                "callback_data": "m:lay"
+                "text": "atr_stop_max_pct = 10.0",
+                "callback_data": "m:k:atr_stop_max_pct"
             }
         ],
         [
             {
-                "text": "\ud83e\udde0 Resume AI",
-                "callback_data": "m:r:airesume"
+                "text": "\u25c0\ufe0f Prev",
+                "callback_data": "m:sp:0"
+            },
+            {
+                "text": "Next \u25b6\ufe0f",
+                "callback_data": "m:sp:2"
             }
         ],
         [
             {
-                "text": "\u2b05\ufe0f Main Menu",
+                "text": "\u2b05\ufe0f Menu",
                 "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83e\uddf0 *TOOLS*\nChoose a tool. Existing commands and functions remain available.",
+    "panel_text": "\u2699\ufe0f *SETTINGS* (page 2/6)\nTap a setting to change it.",
     "out_mid": 3634,
     "kb_mid": 3636,
     "panel_mid": 3638
