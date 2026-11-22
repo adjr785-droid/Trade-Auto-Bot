@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT23.10/\u20a631,802",
+    "kb_ph": "USDT23.12/\u20a631,827",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -52,42 +52,5 @@
             1795311215.95037
         ]
     },
-    "kb_mid": 3405,
-    "out_mid": 3403,
-    "out_text": "\ud83d\udea8 *AI FAILURE \u2014 EMERGENCY\nSELL-ONLY MODE ACTIVATED*\nAll buying and\ndiscretionary/manual selling are\nnow blocked. The bot will\nindependently monitor existing\npositions and execute ONLY\nconfigured protective/exit\nconditions (stop-loss, trailing\nstop, take-profit/partial\n\u2800\n\u2800",
-    "out_mode": "Markdown",
-    "out_time": 1795337672.6852434,
-    "pages": {
-        "p": [
-            "\ud83d\udea8 *AI FAILURE \u2014 EMERGENCY\nSELL-ONLY MODE ACTIVATED*\nAll buying and\ndiscretionary/manual selling are\nnow blocked. The bot will\nindependently monitor existing\npositions and execute ONLY\nconfigured protective/exit\nconditions (stop-loss, trailing\nstop, take-profit/partial\n\u2800\n\u2800",
-            "profit, crash guard, time stop,\nRSI exit, unprotected-position\nexit and the existing 15-minute\nno-upward-trend rule). No\nreplacement buys. Proceeds\nremain in USDT.\nReason: Groq health self-test\nfailed: AI health response was\nnot JSON\nAI recovery does NOT\n\u2800\n\u2800",
-            "automatically resume trading.\nYou will be notified.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
-        ],
-        "i": 2,
-        "mode": "Markdown",
-        "x": [],
-        "cmd": null
-    },
-    "panel_mid": 3404,
-    "panel_rows": [
-        [
-            {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
-            },
-            {
-                "text": "3/3",
-                "callback_data": "pg:x"
-            },
-            {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
-            },
-            {
-                "text": "\ud83c\udfe0",
-                "callback_data": "m:menu"
-            }
-        ]
-    ],
-    "panel_text": "\ud83d\udcc4 *Page 3/3*"
+    "kb_mid": 3406
 }
