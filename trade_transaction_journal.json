@@ -431,5 +431,10 @@
         "time": 1795353234.868024,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 54.17, 'net_pnl_usdt': 5.3011, 'recurring_patterns': {'manual_sell': 9, 'rsi_75': 3, 'partial_profit': 3, 'panic': 3, 'no_upward_trend_rotation': 3}, 'recommendations': 'Reduce reliance on manual sell triggers; focus on higher confidence signals such as RSI 75 that produced positive PnL; limit exposure during panic\u2011driven exits; consider tighter risk limits for low\u2011profit trades; monitor symbols with repeated manual sells for underlying volatility.'}"
+    },
+    {
+        "time": 1795354268.9849648,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 54.17, 'net_pnl_usdt': 5.3011, 'recurring_patterns': {'MANUAL SELL ALL': 6, 'RSI 75': 3, 'PARTIAL PROFIT': 3, 'PANIC': 3, '15-MINUTE NO-UPWARD-TREND ROTATION': 3, 'MANUAL SELL $': 2, 'MANUAL SELL $1.10': 1, 'MANUAL SELL $15.10': 1}, 'recommendations': ['Limit reliance on manual sell signals; consider automated exit criteria.', 'Review RSI 75 entries for over\u2011exposure; add tighter stop\u2011losses.', 'Analyze panic\u2011driven trades; implement stricter volatility filters.', 'Maintain partial profit strategy but verify consistency across symbols.', 'Monitor low\u2011profit rotations; ensure they meet minimum risk\u2011reward thresholds.']}"
     }
 ]

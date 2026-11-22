@@ -1,16 +1,1 @@
-{
-    "GRAM-USDT": {
-        "entry_price": 0.982,
-        "safe_zone": 0.982,
-        "stop_loss": 0.95254,
-        "peak_price": 0.984,
-        "last_price": 0.984,
-        "opened_at": 1795352778.7375712,
-        "sl_pct": 3.0,
-        "strategy": "MANUAL",
-        "purchase_source": "MANUAL",
-        "momentum_watch_started": 1795352778.737572,
-        "xsl": 0.95254,
-        "seen": 1795353447.1205642
-    }
-}
+{}
