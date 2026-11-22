@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689243,
+    "last_update_id": 935689246,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -83,18 +83,34 @@
     "panel_rows": [
         [
             {
-                "text": "\u2795 More coins",
-                "callback_data": "m:more:buy:0"
+                "text": "$2",
+                "callback_data": "m:bc:DOS:2"
+            },
+            {
+                "text": "$5",
+                "callback_data": "m:bc:DOS:5"
+            },
+            {
+                "text": "$10",
+                "callback_data": "m:bc:DOS:10"
+            },
+            {
+                "text": "$15",
+                "callback_data": "m:bc:DOS:15"
+            },
+            {
+                "text": "ALL",
+                "callback_data": "m:bc:DOS:ALL"
             }
         ],
         [
             {
-                "text": "\u2b05\ufe0f Menu",
-                "callback_data": "m:menu"
+                "text": "\u2b05\ufe0f Back",
+                "callback_data": "m:buy"
             }
         ]
     ],
-    "panel_text": "\ud83d\uded2 *BUY* \u2014 choose a coin:",
+    "panel_text": "\ud83d\uded2 *BUY DOS*\nFree USDT: $23.10\nChoose how much:",
     "out_mid": 3899,
     "panel_mid": 3900
 }
