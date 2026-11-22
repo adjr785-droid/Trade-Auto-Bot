@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689346,
+    "last_update_id": 935689354,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -71,46 +71,82 @@
     "panel_rows": [
         [
             {
-                "text": "\ud83e\udd16 Bot",
-                "callback_data": "/bot"
-            },
-            {
-                "text": "\ud83d\udcc8 Stats",
-                "callback_data": "/stats"
+                "text": "dynamic_auto_buy_enabled = True",
+                "callback_data": "m:k:dynamic_auto_buy_enabled"
             }
         ],
         [
             {
-                "text": "\u2699\ufe0f Settings",
-                "callback_data": "m:set"
-            },
-            {
-                "text": "\ud83d\udcbc Holdings",
-                "callback_data": "m:r:holdings"
+                "text": "auto_buy_reserve_pct = 5.0",
+                "callback_data": "m:k:auto_buy_reserve_pct"
             }
         ],
         [
             {
-                "text": "\ud83d\udcdc Trade History",
-                "callback_data": "m:r:history"
-            },
-            {
-                "text": "\ud83e\udde0 Ask AI",
-                "callback_data": "m:ai:1"
+                "text": "dynamic_auto_buy_max_pct = 20.0",
+                "callback_data": "m:k:dynamic_auto_buy_max_pct"
             }
         ],
         [
             {
-                "text": "\ud83e\uddf9 Clear Chat",
-                "callback_data": "/clear"
+                "text": "dynamic_auto_buy_min_usdt = 1.02",
+                "callback_data": "m:k:dynamic_auto_buy_min_usdt"
+            }
+        ],
+        [
+            {
+                "text": "dynamic_auto_buy_max_usdt = 0.0",
+                "callback_data": "m:k:dynamic_auto_buy_max_usdt"
+            }
+        ],
+        [
+            {
+                "text": "guardian_enabled = True",
+                "callback_data": "m:k:guardian_enabled"
+            }
+        ],
+        [
+            {
+                "text": "guardian_audit_interval_minutes = 15",
+                "callback_data": "m:k:guardian_audit_interval_minutes"
+            }
+        ],
+        [
+            {
+                "text": "max_portfolio_correlation = 0.85",
+                "callback_data": "m:k:max_portfolio_correlation"
+            }
+        ],
+        [
+            {
+                "text": "momentum_1h_enabled = True",
+                "callback_data": "m:k:momentum_1h_enabled"
+            }
+        ],
+        [
+            {
+                "text": "mom_1h_min_pct = 0.5",
+                "callback_data": "m:k:mom_1h_min_pct"
+            }
+        ],
+        [
+            {
+                "text": "\u25c0\ufe0f Prev",
+                "callback_data": "m:sp:5"
             },
             {
-                "text": "\ud83d\udea8 PANIC SELL",
-                "callback_data": "/panic"
+                "text": "Next \u25b6\ufe0f",
+                "callback_data": "m:sp:7"
+            }
+        ],
+        [
+            {
+                "text": "\u2b05\ufe0f Menu",
+                "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
+    "panel_text": "\u2699\ufe0f *SETTINGS* (page 7/9)\nTap a setting to change it.",
     "out_mid": 3995,
     "panel_mid": 4001
 }
