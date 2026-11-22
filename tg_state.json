@@ -64,9 +64,44 @@
     },
     "kb_mid": 4125,
     "radar": [
-        "LTC-USDT",
         "BTW-USDT",
         "TRX-USDT"
     ],
-    "panel_hidden": true
+    "out_mid": 4126,
+    "out_text": "\ud83d\udcbc *HOURLY HOLDINGS*\n\ud83d\udcbc *Total Portfolio Value:* $22.91 USDT | \u20a631,543\n\n\ud83d\udcb5 *Available USDT Cash*\nTotal: $0.03 | Free to Trade: $0.03\n\ud83d\udfe1 *BGB Wallet Balance (not auto-converted)*\nTotal: 0.0018448246 BGB | Free: 0.0018448246 BGB | Value: $0.0029 USDT\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\n\ud83d\udcbc *Coin Holdings (Value: $22.85)*\n\u2800\n\u2800",
+    "out_mode": "Markdown",
+    "out_time": 1795387910.477795,
+    "pages": {
+        "p": [
+            "\ud83d\udcbc *HOURLY HOLDINGS*\n\ud83d\udcbc *Total Portfolio Value:* $22.91 USDT | \u20a631,543\n\n\ud83d\udcb5 *Available USDT Cash*\nTotal: $0.03 | Free to Trade: $0.03\n\ud83d\udfe1 *BGB Wallet Balance (not auto-converted)*\nTotal: 0.0018448246 BGB | Free: 0.0018448246 BGB | Value: $0.0029 USDT\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\n\ud83d\udcbc *Coin Holdings (Value: $22.85)*\n\u2800\n\u2800",
+            "\ud83e\ude99 *WLD*\nQuantity: 96.54374\nCurrent price: 0.236700 USDT\nMarket value: $22.85\nATH (Bitget lifetime): 11.9570 USDT\nATL (Bitget lifetime): 0.226900 USDT\n\ud83d\udd34 Entry: 0.238100 USDT | PnL: -0.59% ($-0.14)\nRSI (1h): 67.85\nMA5 (1h): 0.238200\nMA10 (1h): 0.236210\n\u2800\n\u2800",
+            "Market sentiment: \ud83d\udfe1 Neutral / Mixed\nBot trailing stop: ON (8.0% below peak)\nPeak price: 0.239900\nExchange stop level: 0.230957\n\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\nand 8 more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT22.91/\u20a631,543\n\u2800\n\u2800"
+        ],
+        "i": 0,
+        "mode": "Markdown",
+        "x": [],
+        "cmd": null
+    },
+    "panel_mid": 4127,
+    "panel_rows": [
+        [
+            {
+                "text": "\u25c0",
+                "callback_data": "pg:p"
+            },
+            {
+                "text": "1/3",
+                "callback_data": "pg:x"
+            },
+            {
+                "text": "\u25b6",
+                "callback_data": "pg:n"
+            },
+            {
+                "text": "\ud83c\udfe0",
+                "callback_data": "m:menu"
+            }
+        ]
+    ],
+    "panel_text": "\ud83d\udcc4 *Page 1/3*"
 }
