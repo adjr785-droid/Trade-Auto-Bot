@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689526,
+    "last_update_id": 935689527,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -36,8 +36,8 @@
             1795304212.30103
         ],
         "/stats": [
-            2,
-            1795366649.6570988
+            1,
+            1795380725.8458014
         ],
         "m:scan_hist": [
             1,
@@ -73,7 +73,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "1/2",
+                "text": "2/2",
                 "callback_data": "pg:x"
             },
             {
@@ -90,14 +90,14 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/2*",
+    "panel_text": "\ud83d\udcc4 *Page 2/2*",
     "out_time": 1795380700.9961035,
     "pages": {
         "p": [
             "\ud83d\udcc8 *TRADE STATS*\nClosed trades: 29\nWin rate: 55% (16 wins, 13 losses)\nAverage per trade: $+0.18\nNet profit: $+5.34\nBest: $+2.97 | Worst: $-0.66\n\n*By strategy*\nMANUAL: 22 trades | win 64% | avg $+0.27 | total $+6.03\nOLDER: 2 trades | win 0% | avg $-0.15 | total $-0.29\n\u2800\n\u2800",
             "OTHER: 5 trades | win 40% | avg $-0.08 | total $-0.40\n\n\ud83e\udde0 *AI:* Overall win rate is modest at 55% with a small net profit of $5.34;\nmanual strategy performs well (64% win, +$6.03) while the older strategy shows\n0% win and a loss, warranting attention.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 0,
+        "i": 1,
         "mode": "Markdown",
         "x": [
             {
