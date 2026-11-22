@@ -1,10 +1,10 @@
 name: BitgetBot
+
 on:
   schedule:
     - cron: '*/5 * * * *'
   workflow_dispatch:
 
-# Prevents overlapping runs which cause Git conflicts
 concurrency:
   group: bitget-trading-bot
   cancel-in-progress: false
@@ -25,7 +25,8 @@ jobs:
 
       - run: pip install requests ccxt
 
-      - env:
+      - name: Run Bitget bot
+        env:
           TG_TOKEN: ${{ secrets.TG_TOKEN }}
           TG_CHAT_ID: ${{ secrets.TG_CHAT_ID }}
           BITGET_API_KEY: ${{ secrets.BITGET_API_KEY }}
