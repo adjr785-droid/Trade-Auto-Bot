@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689078,
+    "last_update_id": 935689080,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -61,7 +61,7 @@
         ]
     },
     "kb_mid": 3730,
-    "out_text": "\u2705 `max_hold_hours` = `527`\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "\u2705 `max_hold_hours` = `296`\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
@@ -89,8 +89,8 @@
             }
         ]
     ],
-    "panel_text": "\u2699\ufe0f *max hold hours*\nCurrent value: `527`",
-    "out_time": 1795364147.4066644,
-    "out_mid": 3764,
-    "panel_mid": 3765
+    "panel_text": "\u2699\ufe0f *max hold hours*\nCurrent value: `296`",
+    "out_time": 1795364166.7779016,
+    "out_mid": 3768,
+    "panel_mid": 3769
 }
