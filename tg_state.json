@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935689381,
+    "last_update_id": 935689383,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT23.18/\u20a631,914",
+    "kb_ph": "USDT23.12/\u20a631,836",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -60,68 +60,46 @@
             1795362988.7943418
         ]
     },
-    "kb_mid": 4038,
+    "kb_mid": 4042,
     "radar": [
         "SKYAI-USDT",
         "ICNT-USDT",
         "TRX-USDT"
     ],
-    "out_mid": 4036,
-    "out_text": "\ud83d\udd0d *SCAN COMPLETE*\nChecked 462 markets.\nMatched: 1 | Queued: 0.\nautomatic buying is paused\n\ud83e\udde0 AI market view: BULLISH | medium\n\n\u2705 *MATCHED COINS*\n1. *WLD-USDT* \u2014 BREAKOUT matched,\n\u2800\n\u2800",
+    "out_text": "\u26a0\ufe0f BGB conversion outcome is UNKNOWN\nfor SKYAI; do not retry until Bitget\nconversion history and balances are\nchecked. Reason: bitget\n{\"code\":\"13011\",\"msg\":\"Can be convert 1\ntimes every 6\nhours\",\"requestTime\":1795378420737,\"data\"\n:null}\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795378358.8782969,
+    "out_time": 1795378422.1778316,
+    "panel_rows": [
+        [
+            {
+                "text": "\u25c0",
+                "callback_data": "pg:p"
+            },
+            {
+                "text": "1/2",
+                "callback_data": "pg:x"
+            },
+            {
+                "text": "\u25b6",
+                "callback_data": "pg:n"
+            },
+            {
+                "text": "\ud83c\udfe0",
+                "callback_data": "m:menu"
+            }
+        ]
+    ],
+    "panel_text": "\ud83d\udcc4 *Page 1/2*",
+    "out_mid": 4043,
     "pages": {
         "p": [
-            "\ud83d\udd0d *SCAN COMPLETE*\nChecked 462 markets.\nMatched: 1 | Queued: 0.\nautomatic buying is paused\n\ud83e\udde0 AI market view: BULLISH | medium\n\n\u2705 *MATCHED COINS*\n1. *WLD-USDT* \u2014 BREAKOUT matched,\n\u2800\n\u2800",
-            "automatic buying is paused\nPrice 0.238100 | 24h +4.16% | RSI 67.0 |\n\u23f8 not queued\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+            "\u26a0\ufe0f BGB conversion outcome is UNKNOWN\nfor SKYAI; do not retry until Bitget\nconversion history and balances are\nchecked. Reason: bitget\n{\"code\":\"13011\",\"msg\":\"Can be convert 1\ntimes every 6\nhours\",\"requestTime\":1795378420737,\"data\"\n:null}\n\u2800\n\u2800",
+            "\n\ud83d\uded1 *PANIC COMPLETE.* All positions sold.\nAuto-buy PAUSED.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
         "i": 0,
         "mode": "Markdown",
         "x": [],
-        "cmd": null
+        "cmd": "panic_confirm"
     },
-    "panel_mid": 4037,
-    "panel_rows": [
-        [
-            {
-                "text": "\ud83e\udd16 Bot",
-                "callback_data": "/bot"
-            },
-            {
-                "text": "\ud83d\udcc8 Stats",
-                "callback_data": "/stats"
-            }
-        ],
-        [
-            {
-                "text": "\u2699\ufe0f Settings",
-                "callback_data": "m:set"
-            },
-            {
-                "text": "\ud83d\udcbc Holdings",
-                "callback_data": "m:r:holdings"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udcdc Trade History",
-                "callback_data": "m:r:history"
-            },
-            {
-                "text": "\ud83e\udde0 Ask AI",
-                "callback_data": "m:ai:1"
-            }
-        ],
-        [
-            {
-                "text": "\ud83e\uddf9 Clear Chat",
-                "callback_data": "/clear"
-            },
-            {
-                "text": "\ud83d\udea8 PANIC SELL",
-                "callback_data": "/panic"
-            }
-        ]
-    ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below."
+    "panel_mid": 4044
 }

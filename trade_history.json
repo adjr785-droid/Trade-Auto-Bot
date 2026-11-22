@@ -192,5 +192,12 @@
         "time": 1795372054.9453168,
         "reason": "15-MINUTE NO-UPWARD-TREND ROTATION",
         "strategy": "MANUAL"
+    },
+    {
+        "sym": "SKYAI-USDT",
+        "pnl": -0.012559600000003847,
+        "time": 1795378417.5650144,
+        "reason": "PANIC",
+        "strategy": "MANUAL"
     }
 ]

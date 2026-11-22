@@ -767,5 +767,41 @@
         "time": 1795378343.7359776,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 57.14, 'net_pnl_usdt': 5.354, 'recurring_patterns': [{'reason': 'RSI 75', 'occurrences': 3, 'symbols': ['BLESS-USDT', 'SKYAI-USDT', 'DGAI-USDT']}, {'reason': 'PARTIAL PROFIT', 'occurrences': 3, 'symbols': ['BLESS-USDT', 'SKYAI-USDT', 'DGAI-USDT']}, {'reason': '15-MINUTE NO-UPWARD-TREND ROTATION', 'occurrences': 6, 'symbols': ['UNI-USDT', 'PUMP-USDT', 'BLESS-USDT', 'GRAM-USDT', 'JCT-USDT', 'COLLECT-USDT', 'DOS-USDT']}, {'reason': 'MANUAL SELL ALL', 'occurrences': 2, 'symbols': ['BGB-USDT', 'ONDO-USDT']}, {'reason': 'PANIC', 'occurrences': 3, 'symbols': ['TRX-USDT', 'ENA-USDT', 'WLD-USDT']}], 'recommendations': ['Review the effectiveness of RSI 75 entries; they show mixed outcomes and may need tighter confirmation.', \"Limit exposure to trades triggered by '15-MINUTE NO-UPWARD-TREND ROTATION' as they produce small, inconsistent profits.\", 'Avoid panic-driven exits; consider"
+    },
+    {
+        "time": 1795378416.4047966,
+        "event": "sell_fill_verified",
+        "symbol": "SKYAI-USDT",
+        "filled": 627.98,
+        "average": 0.03668,
+        "order_id": "1508491896711487489",
+        "reason": "PANIC",
+        "attempt": 1
+    },
+    {
+        "time": 1795378417.5660086,
+        "event": "trade_closed",
+        "symbol": "SKYAI-USDT",
+        "pnl_usdt": -0.012559600000003847,
+        "reason": "PANIC",
+        "strategy": "MANUAL"
+    },
+    {
+        "time": 1795378417.9240093,
+        "event": "full_sale_verified_or_dust",
+        "symbol": "SKYAI-USDT",
+        "remaining_base": 0.00348,
+        "remaining_value_usdt": 0.0001276464,
+        "filled": 627.98
+    },
+    {
+        "time": 1795378421.7645316,
+        "event": "ai_sell_review",
+        "symbol": "SKYAI-USDT",
+        "review": {
+            "review": "The position was exited at an average price of 0.03668 USDT, resulting in a realized loss of 0.01256 USDT. The exit was triggered by panic, indicating emotional decision\u2011making rather than a systematic risk rule. Only 0.00348 base tokens remain, suggesting the position was not fully closed, which may expose the account to further market risk.",
+            "lesson": "Implement stricter emotional controls and adhere to predefined exit criteria (e.g., stop\u2011loss thresholds) to avoid panic\u2011driven sells. Ensure full position closure when exit signals are met, or use automated order execution to remove manual bias. Review risk parameters to align with volatility of the asset.",
+            "confidence": "medium"
+        }
     }
 ]
