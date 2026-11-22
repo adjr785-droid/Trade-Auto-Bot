@@ -49,8 +49,8 @@
             "last_error": ""
         },
         "command_review": {
-            "last_success": 1795380086.349105,
-            "successes": 18,
+            "last_success": 1795380404.5198264,
+            "successes": 19,
             "last_error": ""
         },
         "near_miss_review": {
@@ -59,7 +59,7 @@
             "last_error": ""
         }
     },
-    "last_stage_success": 1795380209.8436794,
+    "last_stage_success": 1795380404.5198264,
     "last_success": 1795380186.3217406,
     "emergency_ended": 1795366791.6880443,
     "recovery_start_alerted": false
