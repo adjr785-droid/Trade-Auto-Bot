@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935688900,
+    "last_update_id": 935688902,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -32,8 +32,8 @@
             1795352296.0258873
         ],
         "/analyse": [
-            1,
-            1795352934.0877857
+            3,
+            1795352972.9336605
         ],
         "m:r:analyse": [
             4,
@@ -71,7 +71,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "2/8",
+                "text": "4/8",
                 "callback_data": "pg:x"
             },
             {
@@ -84,7 +84,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 2/8*",
+    "panel_text": "\ud83d\udcc4 *Page 4/8*",
     "out_mid": 3584,
     "pages": {
         "p": [
@@ -97,7 +97,7 @@
             "> MA5 > MA10)\n\u2022 RSI 61.9 is healthy (room to\nrun before overbought)\n\u2022 24h change +3.14% shows\nsteady, not extreme, momentum\n\u2022 24h volume $2.4M (liquid\nenough: above the $1M minimum)\n\u2022 Spread: 0.00% (OK for\nauto-buy)\n\u2022 Status: \ud83d\udd36 Potential, manual\n\u2800\n\u2800",
             "only (misses scanner rules)\n\u2022 \ud83e\udde0 AI: CAUTION \u2014 Fails\nscanner rules, watchlist only,\nmoderate RSI\n\nBuy manually with `/buy COIN\namount` if you agree.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 1,
+        "i": 3,
         "mode": "Markdown",
         "x": [],
         "cmd": "/analyse"
