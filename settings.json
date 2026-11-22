@@ -79,5 +79,5 @@
     "near_miss_max_per_scan": 3,
     "radar_max": 30,
     "radar_rsi_margin": 10.0,
-    "momentum_watch_minutes": 118
+    "momentum_watch_minutes": 231
 }
