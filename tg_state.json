@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT23.14/\u20a631,862",
+    "kb_ph": "USDT23.11/\u20a631,819",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -60,7 +60,7 @@
             1795362988.7943418
         ]
     },
-    "kb_mid": 3951,
+    "kb_mid": 3953,
     "out_text": "\u2705 `momentum_watch_minutes` = `230`\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
