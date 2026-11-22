@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689094,
+    "last_update_id": 935689096,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -61,7 +61,7 @@
         ]
     },
     "kb_mid": 3730,
-    "out_text": "\u2705 `partial_tp_pct` = `5.5`\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "\u2705 `partial_tp_pct` = `8.5938`\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
@@ -89,8 +89,8 @@
             }
         ]
     ],
-    "panel_text": "\u2699\ufe0f *partial tp pct*\nCurrent value: `5.5`",
-    "out_time": 1795364465.8964183,
-    "out_mid": 3775,
-    "panel_mid": 3776
+    "panel_text": "\u2699\ufe0f *partial tp pct*\nCurrent value: `8.5938`",
+    "out_time": 1795364492.1111324,
+    "out_mid": 3780,
+    "panel_mid": 3781
 }
