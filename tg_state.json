@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935689419,
+    "last_update_id": 935689448,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT22.99/\u20a631,650",
+    "kb_ph": "USDT23.13/\u20a631,849",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -60,62 +60,41 @@
             1795362988.7943418
         ]
     },
-    "kb_mid": 4055,
+    "kb_mid": 4065,
     "radar": [
         "SKYAI-USDT",
         "ICNT-USDT",
         "TRX-USDT"
     ],
-    "out_mid": 4053,
-    "out_text": "\ud83c\udfc6 *TOP 3 SETUPS RIGHT NOW*\n_Read-only scan. Nothing was bought._\n\n\u26a0\ufe0f Market filter active: only 20% of\ncoins are up today. Auto-buy is blocked;\na manual buy is your own call.\n\n*1. WLD-USDT* \u2014 BREAKOUT\n\u2800\n\u2800",
+    "out_mid": 4066,
+    "out_text": "\ud83d\udcdf *OUTPUT*\nResults appear here.",
     "out_mode": "Markdown",
-    "out_time": 1795379282.4615512,
+    "panel_mid": 4067,
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
+                "text": "\u2796\u2796 -25%",
+                "callback_data": "m:kv:signal_expiry_minutes:--"
             },
             {
-                "text": "5/9",
-                "callback_data": "pg:x"
+                "text": "\u2796 -10%",
+                "callback_data": "m:kv:signal_expiry_minutes:-"
             },
             {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
+                "text": "\u2795 +10%",
+                "callback_data": "m:kv:signal_expiry_minutes:+"
             },
             {
-                "text": "\ud83c\udfe0",
-                "callback_data": "m:menu"
-            },
+                "text": "\u2795\u2795 +25%",
+                "callback_data": "m:kv:signal_expiry_minutes:++"
+            }
+        ],
+        [
             {
-                "text": "\ud83d\udd0e Analyse a coin",
-                "callback_data": "m:an"
+                "text": "\u2b05\ufe0f Settings",
+                "callback_data": "m:sp:0"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 5/9*",
-    "pages": {
-        "p": [
-            "\ud83c\udfc6 *TOP 3 SETUPS RIGHT NOW*\n_Read-only scan. Nothing was bought._\n\n\u26a0\ufe0f Market filter active: only 20% of\ncoins are up today. Auto-buy is blocked;\na manual buy is your own call.\n\n*1. WLD-USDT* \u2014 BREAKOUT\n\u2800\n\u2800",
-            "Price: 0.237500 USDT | 24h: +3.62% | RSI:\n67.0\nSuggested stop: 0.201875 (15% below\nprice)\nWhy:\n\u2022 Confirmed breakout: price cleared the\nrecent 20h high on 2.80x average volume\n\u2022 24h change +3.62% shows steady, not\n\u2800\n\u2800",
-            "extreme, momentum\n\u2022 24h volume $1.7M (liquid enough: above\nthe $1M minimum)\n\u2022 Spread: 0.08% (OK for auto-buy)\n\u2022 Status: \u2705 Passes all filters\n\u2022 \ud83e\udde0 AI: OK \u2014 Passes scanner, low\nspread, RSI acceptable\n\n\u2800\n\u2800",
-            "*2. ICNT-USDT* \u2014 WATCHLIST (no full\nscanner setup)\nPrice: 0.357800 USDT | 24h: +2.58% | RSI:\n55.2\nSuggested stop: 0.304130 (15% below\nprice)\nWhy:\n\u2022 Short-term trend is up (price > MA5 >\n\u2800\n\u2800",
-            "MA10)\n\u2022 RSI 55.2 is healthy (room to run\nbefore overbought)\n\u2022 24h change +2.58% shows steady, not\nextreme, momentum\n\u2022 24h volume $1.5M (liquid enough: above\nthe $1M minimum)\n\u2022 Spread: 0.06% (OK for auto-buy)\n\u2800\n\u2800",
-            "\u2022 Status: \ud83d\udd36 Potential, manual only\n(misses scanner rules)\n\u2022 \ud83e\udde0 AI: CAUTION \u2014 Fails scanner,\nmarket filter exceeds 20% up limit\n\n*3. TRX-USDT* \u2014 WATCHLIST (no full\nscanner setup)\nPrice: 0.305620 USDT | 24h: +0.04% | RSI:\n\u2800\n\u2800",
-            "56.2\nSuggested stop: 0.259777 (15% below\nprice)\nWhy:\n\u2022 Short-term trend is up (price > MA5 >\nMA10)\n\u2022 RSI 56.2 is healthy (room to run\nbefore overbought)\n\u2800\n\u2800",
-            "\u2022 24h volume $3.8M (liquid enough: above\nthe $1M minimum)\n\u2022 Spread: 0.00% (OK for auto-buy)\n\u2022 Status: \ud83d\udd36 Potential, manual only\n(misses scanner rules)\n\u2022 \ud83e\udde0 AI: WEAK \u2014 Fails scanner,\nnegligible change, low momentum\n\n\u2800\n\u2800",
-            "Buy manually with `/buy COIN amount` if\nyou agree.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
-        ],
-        "i": 4,
-        "mode": "Markdown",
-        "x": [
-            {
-                "text": "\ud83d\udd0e Analyse a coin",
-                "callback_data": "m:an"
-            }
-        ],
-        "cmd": "/analyse"
-    },
-    "panel_mid": 4057
+    "panel_text": "\u2699\ufe0f *signal expiry minutes*\nCurrent value: `30`"
 }
