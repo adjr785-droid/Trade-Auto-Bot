@@ -17,7 +17,7 @@
         "pos": [],
         "hn": 26
     },
-    "last_cmd": "/bot",
+    "last_cmd": "m:r:holdings",
     "page_mem": {
         "/bot": [
             5,
