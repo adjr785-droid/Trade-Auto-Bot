@@ -148,5 +148,15 @@
         "time": 1795347367.9070277,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 55.0, 'net_pnl_usdt': 4.9856, 'recurring_patterns': ['Frequent manual sell-all actions often result in losses', 'RSI 75 signals correlate with larger positive PnL', 'Partial profit exits (+5% to +6.2%) yield modest gains', '15\u2011minute no\u2011upward\u2011trend rotation entries produce very small positive PnL'], 'recommendations': ['Limit manual sell\u2011all orders unless clear exit criteria are met', 'Prioritize trades triggered by RSI 75 signals, as they have shown strong upside', 'Consider tightening profit\u2011target thresholds for partial exits to capture gains earlier', 'Review the effectiveness of short\u2011term rotation strategy, as returns are minimal and may not justify execution costs']}"
+    },
+    {
+        "time": 1795347557.8245783,
+        "event": "ai_manual_buy_review",
+        "symbol": "WLD-USDT",
+        "review": {
+            "risk_level": "medium",
+            "warning": "The market filter indicates only 21% of coins are up today, suggesting broader bearish sentiment. RSI is above 60, which may signal overbought conditions. Proceed with caution and consider tighter stop\u2011losses.",
+            "summary": "Buying WLD-USDT with $6.94 at $0.2343 carries moderate risk due to overall market weakness and a relatively high RSI. Verify alignment with your risk tolerance before executing."
+        }
     }
 ]
