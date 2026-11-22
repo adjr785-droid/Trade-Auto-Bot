@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689080,
+    "last_update_id": 935689082,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -66,30 +66,82 @@
     "panel_rows": [
         [
             {
-                "text": "\u2796\u2796 -25%",
-                "callback_data": "m:kv:max_hold_hours:--"
-            },
-            {
-                "text": "\u2796 -10%",
-                "callback_data": "m:kv:max_hold_hours:-"
-            },
-            {
-                "text": "\u2795 +10%",
-                "callback_data": "m:kv:max_hold_hours:+"
-            },
-            {
-                "text": "\u2795\u2795 +25%",
-                "callback_data": "m:kv:max_hold_hours:++"
+                "text": "crash_guard_pct = 10.0",
+                "callback_data": "m:k:crash_guard_pct"
             }
         ],
         [
             {
-                "text": "\u2b05\ufe0f Settings",
+                "text": "rsi_exit = 75",
+                "callback_data": "m:k:rsi_exit"
+            }
+        ],
+        [
+            {
+                "text": "btc_rsi_min = 50",
+                "callback_data": "m:k:btc_rsi_min"
+            }
+        ],
+        [
+            {
+                "text": "risk_per_trade_pct = 1.0",
+                "callback_data": "m:k:risk_per_trade_pct"
+            }
+        ],
+        [
+            {
+                "text": "max_daily_loss_pct = 3.0",
+                "callback_data": "m:k:max_daily_loss_pct"
+            }
+        ],
+        [
+            {
+                "text": "max_portfolio_exposure_pct = 50.0",
+                "callback_data": "m:k:max_portfolio_exposure_pct"
+            }
+        ],
+        [
+            {
+                "text": "max_position_pct = 15.0",
+                "callback_data": "m:k:max_position_pct"
+            }
+        ],
+        [
+            {
+                "text": "max_daily_trades = 5",
+                "callback_data": "m:k:max_daily_trades"
+            }
+        ],
+        [
+            {
+                "text": "max_spread_pct = 0.5",
+                "callback_data": "m:k:max_spread_pct"
+            }
+        ],
+        [
+            {
+                "text": "rebuy_cooldown_hours = 6.0",
+                "callback_data": "m:k:rebuy_cooldown_hours"
+            }
+        ],
+        [
+            {
+                "text": "\u25c0\ufe0f Prev",
                 "callback_data": "m:sp:0"
+            },
+            {
+                "text": "Next \u25b6\ufe0f",
+                "callback_data": "m:sp:2"
+            }
+        ],
+        [
+            {
+                "text": "\u2b05\ufe0f Menu",
+                "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\u2699\ufe0f *max hold hours*\nCurrent value: `296`",
+    "panel_text": "\u2699\ufe0f *SETTINGS* (page 2/8)\nTap a setting to change it.",
     "out_time": 1795364166.7779016,
     "out_mid": 3768,
     "panel_mid": 3769
