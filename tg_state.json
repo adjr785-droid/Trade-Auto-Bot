@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935689288,
+    "last_update_id": 935689289,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT23.11/\u20a631,819",
+    "kb_ph": "USDT23.14/\u20a631,862",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -60,8 +60,8 @@
             1795362988.7943418
         ]
     },
-    "kb_mid": 3938,
-    "out_text": "\u2705 `momentum_watch_minutes` = `231`\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "kb_mid": 3951,
+    "out_text": "\u2705 `momentum_watch_minutes` = `230`\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
@@ -89,8 +89,8 @@
             }
         ]
     ],
-    "panel_text": "\u2699\ufe0f *momentum watch minutes*\nCurrent value: `231`",
-    "out_time": 1795375436.277621,
-    "out_mid": 3948,
-    "panel_mid": 3949
+    "panel_text": "\u2699\ufe0f *momentum watch minutes*\nCurrent value: `230`",
+    "out_time": 1795375476.2035725,
+    "out_mid": 3950,
+    "panel_mid": 3952
 }
