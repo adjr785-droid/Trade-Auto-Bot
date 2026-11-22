@@ -1,1 +1,15 @@
-{}
+{
+    "JCT-USDT": {
+        "entry_price": 0.00161,
+        "safe_zone": 0.00161,
+        "stop_loss": 0.001497,
+        "peak_price": 0.00161,
+        "last_price": 0.00161,
+        "opened_at": 1795361451.997065,
+        "sl_pct": 7.04,
+        "strategy": "MANUAL",
+        "purchase_source": "MANUAL",
+        "momentum_watch_started": 1795361451.9970653,
+        "xsl": 0.001497
+    }
+}

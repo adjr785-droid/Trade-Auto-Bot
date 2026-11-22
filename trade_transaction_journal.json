@@ -461,5 +461,15 @@
         "time": 1795361361.922679,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.0, 'net_pnl_usdt': 5.3247, 'recurring_patterns': ['MANUAL SELL ALL appears in multiple trades across different symbols', 'RSI 75 trigger yields positive pnl in several assets', 'PARTIAL PROFIT entries with ~5-6% target', 'PANIC sells result in small losses or gains', '15-MINUTE NO-UPWARD-TREND ROTATION triggers low\u2011pnl trades'], 'recommendations': ['Limit reliance on manual sell\u2011all commands; evaluate each position before exiting', 'Reassess RSI 75 as an entry signal \u2013 it has produced gains but may need tighter confirmation', 'Implement stricter controls to avoid panic\u2011driven exits, especially on volatile pairs', 'Consider consolidating the 15\u2011minute rotation strategy or raising its profit target to improve contribution', 'Aim to increase win rate above 60% by refining entry criteria and position sizing']}"
+    },
+    {
+        "time": 1795361459.8781989,
+        "event": "ai_manual_buy_review",
+        "symbol": "JCT-USDT",
+        "review": {
+            "risk_level": "moderate",
+            "warning": "Market conditions indicate only a small fraction of coins are gaining today (21%). Combined with a neutral RSI (~47) and no existing position, the trade carries moderate risk. Ensure position sizing aligns with your risk tolerance and consider broader market trends before proceeding.",
+            "summary": "A manual buy of 23.18\u202fUSDT worth of JCT at $0.001609 is suggested. Given the limited upside in the broader market and a neutral RSI, proceed cautiously and monitor price action closely."
+        }
     }
 ]
