@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689183,
+    "last_update_id": 935689184,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -68,24 +68,78 @@
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
-            },
+                "text": "rsi_min = 42",
+                "callback_data": "m:k:rsi_min"
+            }
+        ],
+        [
             {
-                "text": "1/2",
-                "callback_data": "pg:x"
-            },
+                "text": "rsi_max = 48",
+                "callback_data": "m:k:rsi_max"
+            }
+        ],
+        [
             {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
-            },
+                "text": "stop_loss_pct = 15",
+                "callback_data": "m:k:stop_loss_pct"
+            }
+        ],
+        [
             {
-                "text": "\ud83c\udfe0",
+                "text": "sl_sell_percent = 0.5",
+                "callback_data": "m:k:sl_sell_percent"
+            }
+        ],
+        [
+            {
+                "text": "dca_reserve = 2.0",
+                "callback_data": "m:k:dca_reserve"
+            }
+        ],
+        [
+            {
+                "text": "auto_buy_enabled = False",
+                "callback_data": "m:k:auto_buy_enabled"
+            }
+        ],
+        [
+            {
+                "text": "auto_buy_amount_usdt = 6.4994",
+                "callback_data": "m:k:auto_buy_amount_usdt"
+            }
+        ],
+        [
+            {
+                "text": "max_tokens_before_consolidation = 3",
+                "callback_data": "m:k:max_tokens_before_consolidation"
+            }
+        ],
+        [
+            {
+                "text": "max_hold_hours = 296",
+                "callback_data": "m:k:max_hold_hours"
+            }
+        ],
+        [
+            {
+                "text": "trail_pct = 8.0",
+                "callback_data": "m:k:trail_pct"
+            }
+        ],
+        [
+            {
+                "text": "Next \u25b6\ufe0f",
+                "callback_data": "m:sp:1"
+            }
+        ],
+        [
+            {
+                "text": "\u2b05\ufe0f Menu",
                 "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/2*",
+    "panel_text": "\u2699\ufe0f *SETTINGS* (page 1/8)\nTap a setting to change it.",
     "out_time": 1795365699.3131182,
     "pages": {
         "p": [
