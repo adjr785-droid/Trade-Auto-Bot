@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935688710,
+    "last_update_id": 935688711,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -24,8 +24,8 @@
     "last_cmd": "/bot",
     "page_mem": {
         "/bot": [
-            3,
-            1795332364.525703
+            4,
+            1795332418.7580864
         ],
         "m:r:holdings": [
             4,
@@ -71,7 +71,7 @@
             "185.40)\n\n*2. UNI-USDT* - WEAK (best\navailable, not a full setup)\nPrice 4.5970 | 24h +3.28% | RSI\n48.1\nWhy: Trend not confirmed yet\n(price 4.5970, MA5 4.6320, MA10\n4.6793)\n\n\u2800\n\u2800",
             "*3. LINK-USDT* - WEAK (best\navailable, not a full setup)\nPrice 8.5590 | 24h +1.97% | RSI\n49.8\nWhy: Trend not confirmed yet\n(price 8.5590, MA5 8.5526, MA10\n8.5784)\n\nFull reasons: /analyse\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 3,
+        "i": 4,
         "mode": "Markdown",
         "x": [
             {
@@ -88,7 +88,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "4/12",
+                "text": "5/12",
                 "callback_data": "pg:x"
             },
             {
@@ -105,7 +105,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 4/12*",
+    "panel_text": "\ud83d\udcc4 *Page 5/12*",
     "out_mid": 3376,
     "panel_mid": 3377
 }
