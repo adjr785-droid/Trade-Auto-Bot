@@ -604,5 +604,10 @@
         "time": 1795366796.0647066,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 55.56, 'net_pnl_usdt': 5.3057, 'recurring_patterns': {'RSI_75_trades': 4, 'partial_profit_trades': 3, 'manual_sell_all_trades': 4, 'panic_trades': 3, 'no_upward_trend_rotation_trades': 5}, 'recommendations': 'Maintain current risk parameters; focus on confirming RSI 75 signals with additional filters before entry. Reduce exposure to manual sell triggers lacking clear criteria. Consider tightening stop\u2011losses on panic\u2011driven exits. Monitor pattern consistency before scaling up position sizes.'}"
+    },
+    {
+        "time": 1795368547.8114452,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 55.56, 'net_pnl_usdt': 5.3057, 'recurring_patterns': ['RSI 75 triggers positive pnl in multiple symbols (BLESS-USDT, SKYAI-USDT, DGAI-USDT)', 'Partial profit entries (+5% to +6.2%) appear in several trades', 'Manual sell all often results in small losses or near\u2011break\u2011even', '15\u2011minute no\u2011upward\u2011trend rotation yields mixed small outcomes'], 'recommendations': ['Maintain current risk limits; avoid increasing position size despite positive net pnl', 'Prioritize signals that have historically produced gains (e.g., RSI 75) and verify with additional confirmation', 'Limit manual sell\u2011all actions unless clear stop\u2011loss criteria are met', 'Monitor and possibly reduce exposure during panic\u2011driven exits as they show mixed results']}"
     }
 ]
