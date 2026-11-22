@@ -559,5 +559,10 @@
         "time": 1795364399.3443456,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 53.85, 'net_pnl_usdt': 5.3048, 'recurring_patterns': ['RSI 75', 'MANUAL SELL ALL', '15-MINUTE NO-UPWARD-TREND ROTATION', 'PARTIAL PROFIT', 'PANIC'], 'recommendations': ['Limit exposure to trades triggered solely by RSI 75 until further validation', 'Review manual sell decisions that resulted in losses and consider stricter criteria', 'Avoid rapid trades during 15\u2011minute no\u2011upward\u2011trend rotations unless clear profit potential exists', 'Implement tighter stop\u2011losses for panic\u2011driven exits', 'Focus on assets with consistent positive partial profit outcomes and reduce frequency of manual full\u2011sell actions']}"
+    },
+    {
+        "time": 1795364710.782752,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 53.85, 'net_pnl_usdt': 5.3048, 'recurring_patterns': ['MANUAL SELL ALL', 'RSI 75', 'PARTIAL PROFIT', '15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC'], 'recommendations': ['Consider tightening entry criteria for RSI\u2011based signals, as RSI 75 appears frequently but yields mixed results', 'Review manual sell decisions; frequent manual exits may limit upside potential', 'Evaluate the profitability of partial profit targets; they occur often and generally contribute positively', 'Monitor assets flagged by the 15\u2011minute no\u2011upward\u2011trend rotation pattern; they show small but consistent gains', 'Limit panic\u2011driven trades; they tend to produce negative PnL and increase volatility']}"
     }
 ]

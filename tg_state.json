@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689112,
+    "last_update_id": 935689115,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -66,72 +66,72 @@
     "panel_rows": [
         [
             {
-                "text": "atr_stop_enabled = True",
-                "callback_data": "m:k:atr_stop_enabled"
+                "text": "partial_tp_pct = 8.5938",
+                "callback_data": "m:k:partial_tp_pct"
             }
         ],
         [
             {
-                "text": "atr_stop_mult = 2.0",
-                "callback_data": "m:k:atr_stop_mult"
+                "text": "partial_tp_fraction = 0.5",
+                "callback_data": "m:k:partial_tp_fraction"
             }
         ],
         [
             {
-                "text": "atr_stop_min_pct = 3.0",
-                "callback_data": "m:k:atr_stop_min_pct"
+                "text": "dynamic_trail = True",
+                "callback_data": "m:k:dynamic_trail"
             }
         ],
         [
             {
-                "text": "atr_stop_max_pct = 10.0",
-                "callback_data": "m:k:atr_stop_max_pct"
+                "text": "sell_if_stop_fails = True",
+                "callback_data": "m:k:sell_if_stop_fails"
             }
         ],
         [
             {
-                "text": "market_filter_enabled = True",
-                "callback_data": "m:k:market_filter_enabled"
+                "text": "scan_prefilter = True",
+                "callback_data": "m:k:scan_prefilter"
             }
         ],
         [
             {
-                "text": "btc_trend_hours = 50",
-                "callback_data": "m:k:btc_trend_hours"
+                "text": "cleanup_hours = 24.0",
+                "callback_data": "m:k:cleanup_hours"
             }
         ],
         [
             {
-                "text": "min_breadth_pct = 30.0",
-                "callback_data": "m:k:min_breadth_pct"
+                "text": "scan_interval_minutes = 30.0",
+                "callback_data": "m:k:scan_interval_minutes"
             }
         ],
         [
             {
-                "text": "offline_alert_hours = 3.0",
-                "callback_data": "m:k:offline_alert_hours"
+                "text": "auto_clear_hours = 24.0",
+                "callback_data": "m:k:auto_clear_hours"
             }
         ],
         [
             {
-                "text": "daily_summary_hour_utc = 20",
-                "callback_data": "m:k:daily_summary_hour_utc"
+                "text": "live_mode_seconds = 270",
+                "callback_data": "m:k:live_mode_seconds"
             }
         ],
         [
             {
-                "text": "max_daily_drawdown_pct = 5.0",
-                "callback_data": "m:k:max_daily_drawdown_pct"
+                "text": "mtf_confirm = True",
+                "callback_data": "m:k:mtf_confirm"
             }
         ],
         [
             {
                 "text": "\u25c0\ufe0f Prev",
-                "callback_data": "m:sp:1"
+                "callback_data": "m:sp:2"
             },
             {
                 "text": "Next \u25b6\ufe0f",
-                "callback_data": "m:sp:3"
+                "callback_data": "m:sp:4"
             }
         ],
         [
@@ -141,8 +141,8 @@
             }
         ]
     ],
-    "panel_text": "\u2699\ufe0f *SETTINGS* (page 3/8)\nTap a setting to change it.",
+    "panel_text": "\u2699\ufe0f *SETTINGS* (page 4/8)\nTap a setting to change it.",
     "out_time": 1795364630.6444669,
     "out_mid": 3784,
-    "panel_mid": 3785
+    "panel_mid": 3786
 }
