@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935688656,
+    "last_update_id": 935688658,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -18,7 +18,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "3/7",
+                "text": "5/7",
                 "callback_data": "pg:x"
             },
             {
@@ -31,7 +31,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 3/7*",
+    "panel_text": "\ud83d\udcc4 *Page 5/7*",
     "out_text": "\ud83c\udfc6 *TOP 3 SETUPS RIGHT NOW*\n_Read-only scan. Nothing was\nbought._\n\n\u26a0\ufe0f Market filter active: BTC\nis below its 50h average.\nAuto-buy is blocked; a manual\nbuy is your own call.\n\n*1. DGAI-USDT* \u2014 WEAK (best\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "out_time": 1795322498.3495486,
@@ -55,8 +55,8 @@
             1795304943.5284274
         ],
         "/analyse": [
-            2,
-            1795322515.966462
+            4,
+            1795322526.2434235
         ],
         "m:r:analyse": [
             4,
@@ -87,7 +87,7 @@
             "Why:\n\u2022 Trend not confirmed yet\n(price 0.097920, MA5 0.098166,\nMA10 0.098244)\n\u2022 RSI 46.9 is healthy (room to\nrun before overbought)\n\u2022 24h change +6.49% shows\nsteady, not extreme, momentum\n\u2022 24h volume $3.6M (liquid\nenough: above the $1M minimum)\n\u2800\n\u2800",
             "\u2022 Spread: 0.02% (OK for\nauto-buy)\n\nNo coin passes all scanner rules\nright now, so these are the\nstrongest available. Be\ncautious.\n\nBuy manually with `/buy COIN\namount` if you agree.\n\u2800\n\u2800"
         ],
-        "i": 2,
+        "i": 4,
         "mode": "Markdown",
         "x": [],
         "cmd": "/analyse"
