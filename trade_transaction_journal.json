@@ -476,5 +476,15 @@
         "time": 1795361513.4109738,
         "event": "ai_portfolio_review",
         "summary": "{'portfolio_risk': 'Daily limit (9)', 'attention': [{'symbol': 'JCT-USDT', 'action': 'hold', 'reason': 'Position is at entry with 0% PnL and stop loss only 8.7% below entry; no clear signal to exit or add. Monitor price relative to stop.'}], 'summary': 'Current portfolio contains a single manual JCT-USDT position at entry price. Risk is within daily limit. No immediate action required; maintain the position and watch for price movement toward the stop level.'}"
+    },
+    {
+        "time": 1795361725.6329746,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (9)', 'attention': [{'symbol': 'JCT-USDT', 'action': 'monitor', 'reason': 'Position is slightly negative (-0.25% PnL) and close to stop level (0.001497). No immediate exit recommended without further price movement.'}], 'summary': 'Overall portfolio risk remains within the daily limit. The only open position (JCT-USDT) shows a minor loss and is near its stop price. Continue to monitor price action closely; consider tightening the stop if the price approaches the stop level, but avoid premature liquidation.'}"
+    },
+    {
+        "time": 1795361726.570929,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.0, 'net_pnl_usdt': 5.3247, 'recurring_patterns': ['MANUAL SELL ALL appears in multiple trades across different symbols', 'RSI 75 trigger yields positive pnl in several assets', 'PARTIAL PROFIT entries with ~5-6% gains', 'PANIC exits result in small losses or gains', '15-MINUTE NO-UPWARD-TREND ROTATION triggers low\u2011pnl trades'], 'recommendations': ['Consider tightening manual sell criteria to avoid frequent small losses', 'Review RSI 75 threshold; it has produced consistent gains but monitor for over\u2011extension', 'Limit panic\u2011driven exits; implement stricter trend confirmation before closing positions', 'Evaluate the profitability of 15\u2011minute rotation strategy; current pnl is marginal', 'Maintain current win\u2011rate focus but aim to improve net pnl by scaling successful patterns and pruning underperforming triggers']}"
     }
 ]
