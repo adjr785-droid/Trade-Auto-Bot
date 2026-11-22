@@ -1,0 +1,15 @@
+{
+    "version": 1,
+    "mission": "Bitget spot trading; preserve capital, follow approved strategy logic, audit decisions and operational faults.",
+    "strategies": [
+        "TREND",
+        "OVERSOLD",
+        "BREAKOUT"
+    ],
+    "constraints": [
+        "No leverage",
+        "Never silently alter strategy rules",
+        "No automatic liquidation solely from audit findings",
+        "Critical data-integrity uncertainty blocks new entries"
+    ]
+}
