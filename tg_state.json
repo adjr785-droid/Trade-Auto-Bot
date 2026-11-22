@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689006,
+    "last_update_id": 935689007,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -65,92 +65,46 @@
     "panel_rows": [
         [
             {
-                "text": "\u2328\ufe0f \ud83e\uddf0 Tools",
-                "callback_data": "m:lay:t:tools"
+                "text": "\ud83e\udd16 Bot",
+                "callback_data": "/bot"
             },
             {
-                "text": "\u2328\ufe0f \ud83c\udfc6 Analyse",
-                "callback_data": "m:lay:t:analyse"
+                "text": "\ud83d\udcc8 Stats",
+                "callback_data": "/stats"
             }
         ],
         [
             {
-                "text": "\ud83d\udccb \ud83e\udd16 Bot",
-                "callback_data": "m:lay:t:bot"
+                "text": "\u2699\ufe0f Settings",
+                "callback_data": "m:set"
             },
             {
-                "text": "\ud83d\udccb \ud83d\udcc8 Stats",
-                "callback_data": "m:lay:t:stats"
+                "text": "\ud83d\udcbc Holdings",
+                "callback_data": "m:r:holdings"
             }
         ],
         [
             {
-                "text": "\ud83d\udccb \ud83d\udd0e Analyse Coin",
-                "callback_data": "m:lay:t:an"
+                "text": "\ud83d\udcdc Trade History",
+                "callback_data": "m:r:history"
             },
             {
-                "text": "\ud83d\udccb \u2699\ufe0f Settings",
-                "callback_data": "m:lay:t:set"
+                "text": "\ud83e\udde0 Ask AI",
+                "callback_data": "m:ai:1"
             }
         ],
         [
             {
-                "text": "\ud83d\udccb \ud83d\udcbc Holdings",
-                "callback_data": "m:lay:t:hold"
+                "text": "\ud83e\uddf9 Clear Chat",
+                "callback_data": "/clear"
             },
             {
-                "text": "\ud83d\udccb \ud83d\udcdc Trade History",
-                "callback_data": "m:lay:t:hist"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udccb \ud83e\udde0 Ask AI",
-                "callback_data": "m:lay:t:ai"
-            },
-            {
-                "text": "\ud83d\udccb \ud83e\uddf9 Clear Chat",
-                "callback_data": "m:lay:t:clear"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udccb \ud83d\udea8 PANIC SELL",
-                "callback_data": "m:lay:t:panic"
-            }
-        ],
-        [
-            {
-                "text": "\u2796",
-                "callback_data": "m:lay:pl:-"
-            },
-            {
-                "text": "\ud83d\udccf Page: 12 lines",
-                "callback_data": "m:lay"
-            },
-            {
-                "text": "\u2795",
-                "callback_data": "m:lay:pl:+"
-            }
-        ],
-        [
-            {
-                "text": "\u270f\ufe0f Rename buttons",
-                "callback_data": "m:lay:rn"
-            },
-            {
-                "text": "\u21a9\ufe0f Reset layout",
-                "callback_data": "m:lay:reset"
-            }
-        ],
-        [
-            {
-                "text": "\u2b05\ufe0f Tools",
-                "callback_data": "m:tools"
+                "text": "\ud83d\udea8 PANIC SELL",
+                "callback_data": "/panic"
             }
         ]
     ],
-    "panel_text": "\ud83e\udde9 *LAYOUT*\nTap a button to move it.\n\u2328\ufe0f = bottom key (below the text box)\n\ud83d\udccb = Menu list\nBottom keys: 3/6 (Menu always stays)\n\u2705 Layout reset.",
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
     "out_mid": 3669,
     "panel_mid": 3682
 }
