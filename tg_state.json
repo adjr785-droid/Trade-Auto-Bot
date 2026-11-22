@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT22.94/\u20a631,579",
+    "kb_ph": "USDT22.92/\u20a631,557",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -98,6 +98,6 @@
     ],
     "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
     "out_mid": 3315,
-    "kb_mid": 3317,
+    "kb_mid": 3320,
     "panel_mid": 3319
 }
