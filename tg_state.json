@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689045,
+    "last_update_id": 935689047,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -20,8 +20,8 @@
     "last_cmd": "/bot",
     "page_mem": {
         "/bot": [
-            3,
-            1795363324.7089446
+            5,
+            1795363356.5799167
         ],
         "m:r:holdings": [
             3,
@@ -69,7 +69,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "4/7",
+                "text": "6/7",
                 "callback_data": "pg:x"
             },
             {
@@ -86,7 +86,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 4/7*",
+    "panel_text": "\ud83d\udcc4 *Page 6/7*",
     "out_time": 1795363305.3252263,
     "kb_mid": 3730,
     "out_mid": 3733,
@@ -100,7 +100,7 @@
             "Limits: 5 trades/day, 3.0% daily\nloss, 15.0% max per coin\nExtra safeguards: 4h trend check\nON | BTC shock pause 3%/h |\ncombined open risk cap 3% |\nsmaller buys after 2 losses in a\nrow | parallel scan ON\n\n\ud83d\uded1 *HOLDINGS ADVICE*\nNo priced coin holdings right\n\u2800\n\u2800",
             "now.\n\n\ud83e\udde0 *AI:* Bot shows a -0.07\u202fUSDT\nbalance and auto\u2011buy is paused;\ntoday\u2019s PnL is down 1.64%\n(still above the -5% auto\u2011buy\npause threshold) but no active\npositions or holdings.\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 3,
+        "i": 5,
         "mode": "Markdown",
         "x": [
             {
