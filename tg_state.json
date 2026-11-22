@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689020,
+    "last_update_id": 935689022,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -58,8 +58,8 @@
             1795352377.989315
         ],
         "m:r:gain": [
-            1,
-            1795362969.732152
+            2,
+            1795362988.7943418
         ]
     },
     "kb_mid": 3708,
@@ -72,7 +72,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "2/3",
+                "text": "3/3",
                 "callback_data": "pg:x"
             },
             {
@@ -89,7 +89,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 2/3*",
+    "panel_text": "\ud83d\udcc4 *Page 3/3*",
     "out_time": 1795362964.8140635,
     "out_mid": 3712,
     "pages": {
@@ -98,7 +98,7 @@
             "```\n 7. NEAR       +5.61%\n 8. HYPE       +3.33%\n 9. GRAM       +3.03%\n10. ENA        +2.93%```\n_Minimum 24H volume: $1M._\n\n\ud83e\udde0 *AI:* Top 10 gainers show\nextreme moves, especially PWT\n(+373.65%); however, low filter\nand minimum $1M volume suggest\n\u2800",
             "possible low liquidity\u2014monitor\nfor volatility and potential\nprice manipulation.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 1,
+        "i": 2,
         "mode": "Markdown",
         "x": [
             {
