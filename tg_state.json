@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935688711,
+    "last_update_id": 935688715,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT22.96/\u20a631,610",
+    "kb_ph": "USDT22.95/\u20a631,596",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -24,8 +24,8 @@
     "last_cmd": "/bot",
     "page_mem": {
         "/bot": [
-            4,
-            1795332418.7580864
+            5,
+            1795332508.9595392
         ],
         "m:r:holdings": [
             4,
@@ -52,7 +52,7 @@
             1795311215.95037
         ]
     },
-    "kb_mid": 3379,
+    "kb_mid": 3380,
     "out_text": "\ud83e\udd16 *BOT*\n\ud83d\udd58 Since last check (2.8 h ago):\n\ud83d\udd34 balance -0.11 USDT | new: ENA\nExchange connection: \u2705 OK\nPortfolio: $22.97 USDT |\n\u20a631,618\nUSDT cash: $0.03 (free $0.03)\nAuto-buy: ON (dynamic\nallocation; legacy target\n$3.7348)\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "out_time": 1795332270.320687,
@@ -71,7 +71,7 @@
             "185.40)\n\n*2. UNI-USDT* - WEAK (best\navailable, not a full setup)\nPrice 4.5970 | 24h +3.28% | RSI\n48.1\nWhy: Trend not confirmed yet\n(price 4.5970, MA5 4.6320, MA10\n4.6793)\n\n\u2800\n\u2800",
             "*3. LINK-USDT* - WEAK (best\navailable, not a full setup)\nPrice 8.5590 | 24h +1.97% | RSI\n49.8\nWhy: Trend not confirmed yet\n(price 8.5590, MA5 8.5526, MA10\n8.5784)\n\nFull reasons: /analyse\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 4,
+        "i": 5,
         "mode": "Markdown",
         "x": [
             {
@@ -88,7 +88,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "5/12",
+                "text": "6/12",
                 "callback_data": "pg:x"
             },
             {
@@ -105,7 +105,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 5/12*",
+    "panel_text": "\ud83d\udcc4 *Page 6/12*",
     "out_mid": 3376,
-    "panel_mid": 3377
+    "panel_mid": 3381
 }
