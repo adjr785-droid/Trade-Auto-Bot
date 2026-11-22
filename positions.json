@@ -10,5 +10,16 @@
         "strategy": "MANUAL",
         "xsl": 0.024746,
         "seen": 1795311343.957702
+    },
+    "TRX-USDT": {
+        "entry_price": 0.30556,
+        "safe_zone": 0.30556,
+        "stop_loss": 0.296393,
+        "peak_price": 0.30556,
+        "last_price": 0.30556,
+        "opened_at": 1795311378.0803318,
+        "sl_pct": 3.0,
+        "strategy": "MANUAL",
+        "xsl": 0.296393
     }
 }
