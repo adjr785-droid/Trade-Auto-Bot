@@ -178,5 +178,12 @@
         "time": 1795362878.5146089,
         "reason": "15-MINUTE NO-UPWARD-TREND ROTATION",
         "strategy": "MANUAL"
+    },
+    {
+        "sym": "COLLECT-USDT",
+        "pnl": 0.0008875200000039668,
+        "time": 1795366142.168787,
+        "reason": "15-MINUTE NO-UPWARD-TREND ROTATION",
+        "strategy": "MANUAL"
     }
 ]

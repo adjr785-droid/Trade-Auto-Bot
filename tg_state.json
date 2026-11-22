@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935689199,
+    "last_update_id": 935689203,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT23.16/\u20a631,880",
+    "kb_ph": "USDT23.13/\u20a631,839",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -62,8 +62,8 @@
             1795362988.7943418
         ]
     },
-    "kb_mid": 3866,
-    "out_text": "\ud83d\udd04 *AI RECOVERY \u2014 STAGE 1/3*\nGroq health check passed. Buying stays\nblocked until 3 consecutive checks pass;\n2 more to go. Normal mode returns\nautomatically.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "kb_mid": 3869,
+    "out_text": "\u23f8 Replacement buy skipped: Auto-buy is\npaused; existing risk settings remain in\nforce.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
@@ -108,7 +108,7 @@
         ]
     ],
     "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
-    "out_time": 1795365856.1447167,
+    "out_time": 1795366151.1599002,
     "out_mid": 3860,
     "panel_mid": 3861
 }

@@ -594,5 +594,58 @@
         "time": 1795365697.8646114,
         "event": "ai_portfolio_review",
         "summary": "{'portfolio_risk': 'Daily limit (10)', 'attention': [{'symbol': 'COLLECT-USDT', 'action': 'hold', 'reason': 'Position is very recent (11 minutes), small unrealized gain (5%), and stop is close to entry. No clear signal to adjust.'}], 'summary': 'Overall portfolio risk is within the daily limit. The only open position shows a modest profit and is within its stop range. Recommend holding until further market signals develop.'}"
+    },
+    {
+        "time": 1795366136.805711,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (10)', 'attention': [{'symbol': 'COLLECT-USDT', 'action': 'hold', 'reason': 'Position is very small, recent entry price is near current price, and PnL is modestly positive (+2%). No immediate risk signals; maintain until further market movement.'}], 'summary': 'Overall portfolio risk remains within the daily limit. The only open position (COLLECT-USDT) shows a slight gain and is well within its stop loss margin. No aggressive actions are recommended at this time; monitor price movements and adjust only if the stop level is approached or market conditions change significantly.'}"
+    },
+    {
+        "time": 1795366137.653678,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 53.85, 'net_pnl_usdt': 5.3048, 'recurring_patterns': ['RSI 75', 'MANUAL SELL ALL', '15-MINUTE NO-UPWARD-TREND ROTATION', 'PARTIAL PROFIT', 'PANIC'], 'recommendations': ['Limit exposure to trades triggered solely by RSI 75 without additional confirmation', 'Review manual sell decisions that resulted in losses, especially large sell orders', 'Avoid rapid-fire trades during 15\u2011minute no\u2011upward\u2011trend rotations unless clear signal emerges', 'Implement stricter panic\u2011sell safeguards to reduce negative pnl', 'Consider scaling out profits gradually rather than full manual sells to improve win consistency']}"
+    },
+    {
+        "time": 1795366141.1108518,
+        "event": "sell_fill_verified",
+        "symbol": "COLLECT-USDT",
+        "filled": 887.52,
+        "average": 0.026025,
+        "order_id": "1508440410908467200",
+        "reason": "15-MINUTE NO-UPWARD-TREND ROTATION",
+        "attempt": 1
+    },
+    {
+        "time": 1795366142.1693769,
+        "event": "trade_closed",
+        "symbol": "COLLECT-USDT",
+        "pnl_usdt": 0.0008875200000039668,
+        "reason": "15-MINUTE NO-UPWARD-TREND ROTATION",
+        "strategy": "MANUAL"
+    },
+    {
+        "time": 1795366142.6214807,
+        "event": "full_sale_verified_or_dust",
+        "symbol": "COLLECT-USDT",
+        "remaining_base": 0.00953,
+        "remaining_value_usdt": 0.00024801825,
+        "filled": 887.52
+    },
+    {
+        "time": 1795366150.4902143,
+        "event": "ai_sell_review",
+        "symbol": "COLLECT-USDT",
+        "review": {
+            "review": "The trade on COLLECT-USDT was exited at an average price of 0.026025 USDT per COLLECT, realizing a profit of 0.00088752 USDT. The exit was triggered by a 15\u2011minute no\u2011upward\u2011trend rotation, indicating a short\u2011term lack of buying pressure. The position size was modest (remaining base 0.00953 COLLECT, sold quantity 887.52 USDT).",
+            "lesson": "In volatile or low\u2011momentum environments, short\u2011term trend filters can help preserve capital by exiting before potential drawdowns. However, the realized PnL was small, suggesting that the position size relative to the price movement was limited; scaling position size or adjusting the trigger thresholds could improve profitability while still respecting risk limits.",
+            "confidence": "medium"
+        }
+    },
+    {
+        "time": 1795366150.4913535,
+        "event": "momentum_watch_sold",
+        "symbol": "COLLECT-USDT",
+        "source": "MANUAL",
+        "detail": "15m move +0.02%; live vs entry +0.02%"
     }
 ]
