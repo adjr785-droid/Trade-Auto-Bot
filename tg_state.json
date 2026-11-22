@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935688829,
+    "last_update_id": 935688830,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -24,8 +24,8 @@
     "last_cmd": "/bot",
     "page_mem": {
         "/bot": [
-            5,
-            1795350083.466485
+            6,
+            1795350089.6170118
         ],
         "m:r:holdings": [
             7,
@@ -63,7 +63,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "6/10",
+                "text": "7/10",
                 "callback_data": "pg:x"
             },
             {
@@ -80,7 +80,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 6/10*",
+    "panel_text": "\ud83d\udcc4 *Page 7/10*",
     "out_mid": 3493,
     "pages": {
         "p": [
@@ -95,7 +95,7 @@
             "($+0.07)\nAdvice: \ud83d\udfe2 HOLD\nWhy: Trend is up (price > MA5 >\nMA10), RSI 61\n\u274c Long-term: not suited (below\n50-day average, 100-day change\n-32%)\n\n\n\u2705 No sell advised right now.\n\u2800\n\u2800",
             "For possible new buys use\n/analyse.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 5,
+        "i": 6,
         "mode": "Markdown",
         "x": [
             {
