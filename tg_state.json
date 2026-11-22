@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935688878,
+    "last_update_id": 935688880,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -28,8 +28,8 @@
             1795350207.5197356
         ],
         "m:r:holdings": [
-            3,
-            1795352284.5598893
+            4,
+            1795352296.0258873
         ],
         "/analyse": [
             1,
@@ -63,28 +63,46 @@
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
+                "text": "\ud83e\udd16 Bot",
+                "callback_data": "/bot"
             },
             {
-                "text": "4/5",
-                "callback_data": "pg:x"
+                "text": "\ud83d\udcc8 Stats",
+                "callback_data": "/stats"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udd0e Analyse Coin",
+                "callback_data": "m:an"
             },
             {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
+                "text": "\u2699\ufe0f Settings",
+                "callback_data": "m:set"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udcbc Holdings",
+                "callback_data": "m:r:holdings"
             },
             {
-                "text": "\ud83c\udfe0",
-                "callback_data": "m:menu"
+                "text": "\ud83e\udde0 Ask AI",
+                "callback_data": "m:ai:1"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\uddf9 Clear Chat",
+                "callback_data": "/clear"
             },
             {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
+                "text": "\ud83d\udea8 PANIC SELL",
+                "callback_data": "/panic"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 4/5*",
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
     "pages": {
         "p": [
             "\ud83d\udcbc *Total Portfolio Value:*\n$23.49 USDT | \u20a632,342\n\n\ud83d\udcb5 *Available USDT Cash*\nTotal: $0.03 | Free to Trade:\n$0.03\n\ud83d\udfe1 *BGB Wallet Balance (not\nauto-converted)*\nTotal: 0.0018072246 BGB | Free:\n0.0018072246 BGB | Value:\n\u2800\n\u2800",
@@ -93,7 +111,7 @@
             "Bot trailing stop: ON (8.0%\nbelow peak)\nPeak price: 0.014062\nExchange stop level: 0.012937\n\n\n\u26a0\ufe0f Held but with no USDT\nprice: AIDOGE: 0.602, COQ:\n0.00711, DGRAM: 0.00447 and 8\nmore...\n\u2800\n\u2800",
             "\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:*\nUSDT23.49/\u20a632,342\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 3,
+        "i": 4,
         "mode": "Markdown",
         "x": [
             {
