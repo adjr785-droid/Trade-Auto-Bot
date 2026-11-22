@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935688958,
+    "last_update_id": 935688959,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -84,8 +84,22 @@
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udd0e Analyse a coin",
-                "callback_data": "m:an"
+                "text": "GRAM",
+                "callback_data": "m:a:GRAM"
+            },
+            {
+                "text": "WLD",
+                "callback_data": "m:a:WLD"
+            },
+            {
+                "text": "TAO",
+                "callback_data": "m:a:TAO"
+            }
+        ],
+        [
+            {
+                "text": "\u2795 More coins",
+                "callback_data": "m:more:analyse:0"
             }
         ],
         [
@@ -95,5 +109,5 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udd0e Want a specific coin?"
+    "panel_text": "\ud83d\udd0e *ANALYSE A COIN* \u2014 choose:"
 }
