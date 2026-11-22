@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689354,
+    "last_update_id": 935689357,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -71,82 +71,30 @@
     "panel_rows": [
         [
             {
-                "text": "dynamic_auto_buy_enabled = True",
-                "callback_data": "m:k:dynamic_auto_buy_enabled"
-            }
-        ],
-        [
-            {
-                "text": "auto_buy_reserve_pct = 5.0",
-                "callback_data": "m:k:auto_buy_reserve_pct"
-            }
-        ],
-        [
-            {
-                "text": "dynamic_auto_buy_max_pct = 20.0",
-                "callback_data": "m:k:dynamic_auto_buy_max_pct"
-            }
-        ],
-        [
-            {
-                "text": "dynamic_auto_buy_min_usdt = 1.02",
-                "callback_data": "m:k:dynamic_auto_buy_min_usdt"
-            }
-        ],
-        [
-            {
-                "text": "dynamic_auto_buy_max_usdt = 0.0",
-                "callback_data": "m:k:dynamic_auto_buy_max_usdt"
-            }
-        ],
-        [
-            {
-                "text": "guardian_enabled = True",
-                "callback_data": "m:k:guardian_enabled"
-            }
-        ],
-        [
-            {
-                "text": "guardian_audit_interval_minutes = 15",
-                "callback_data": "m:k:guardian_audit_interval_minutes"
-            }
-        ],
-        [
-            {
-                "text": "max_portfolio_correlation = 0.85",
-                "callback_data": "m:k:max_portfolio_correlation"
-            }
-        ],
-        [
-            {
-                "text": "momentum_1h_enabled = True",
-                "callback_data": "m:k:momentum_1h_enabled"
-            }
-        ],
-        [
-            {
-                "text": "mom_1h_min_pct = 0.5",
-                "callback_data": "m:k:mom_1h_min_pct"
-            }
-        ],
-        [
-            {
-                "text": "\u25c0\ufe0f Prev",
-                "callback_data": "m:sp:5"
+                "text": "\u2796\u2796 -25%",
+                "callback_data": "m:kv:rotation_retry_hours:--"
             },
             {
-                "text": "Next \u25b6\ufe0f",
-                "callback_data": "m:sp:7"
+                "text": "\u2796 -10%",
+                "callback_data": "m:kv:rotation_retry_hours:-"
+            },
+            {
+                "text": "\u2795 +10%",
+                "callback_data": "m:kv:rotation_retry_hours:+"
+            },
+            {
+                "text": "\u2795\u2795 +25%",
+                "callback_data": "m:kv:rotation_retry_hours:++"
             }
         ],
         [
             {
-                "text": "\u2b05\ufe0f Menu",
-                "callback_data": "m:menu"
+                "text": "\u2b05\ufe0f Settings",
+                "callback_data": "m:sp:0"
             }
         ]
     ],
-    "panel_text": "\u2699\ufe0f *SETTINGS* (page 7/9)\nTap a setting to change it.",
+    "panel_text": "\u2699\ufe0f *rotation retry hours*\nCurrent value: `0.1379`",
     "out_mid": 3995,
     "panel_mid": 4001
 }
