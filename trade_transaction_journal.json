@@ -813,5 +813,15 @@
             "warning": "RSI is elevated (67) and market filter indicates only 20% of coins are up today, suggesting bearish sentiment. No existing position and BTC filter is inactive, increasing exposure risk.",
             "summary": "Given the high RSI and unfavorable market filter, proceeding with a manual buy of WLD-USDT at $0.2379 for $23.01 carries high risk. Consider waiting for more favorable conditions."
         }
+    },
+    {
+        "time": 1795379233.2761526,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (13)', 'attention': [{'symbol': 'WLD-USDT', 'action': 'hold', 'reason': 'Position is very small, recent PnL is slightly negative (-0.17%). Stop loss is close to entry, but price is above stop. No strong signal to exit; monitor for further movement.'}], 'summary': 'Overall portfolio risk is within the daily limit. The only open position (WLD-USDT) shows minimal loss and remains above its stop level. Recommend holding and watching price action; no new orders should be placed at this time.'}"
+    },
+    {
+        "time": 1795379234.1578202,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 55.17, 'net_pnl_usdt': 5.3414, 'recurring_patterns': ['RSI 75', 'PARTIAL PROFIT', '15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC'], 'recommendations': 'Maintain current strategy but tighten risk controls on panic exits. Prioritize trades with RSI 75 signals that have shown positive PnL, but verify overbought conditions. Reduce reliance on manual sell-all actions without clear trend confirmation. Continue monitoring partial profit targets around 5\u20116% for consistency. Consider adding stop\u2011losses for volatile assets that exhibit frequent panic\u2011driven losses.'}"
     }
 ]
