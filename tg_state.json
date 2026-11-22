@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689266,
+    "last_update_id": 935689269,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -68,100 +68,14 @@
     "panel_rows": [
         [
             {
-                "text": "BTC",
-                "callback_data": "m:b:BTC"
+                "text": "\u2705 Confirm",
+                "callback_data": "m:bx:SKYAI:ALL"
             },
             {
-                "text": "ETH",
-                "callback_data": "m:b:ETH"
-            },
-            {
-                "text": "SOL",
-                "callback_data": "m:b:SOL"
-            }
-        ],
-        [
-            {
-                "text": "USDGO",
-                "callback_data": "m:b:USDGO"
-            },
-            {
-                "text": "EVAA",
-                "callback_data": "m:b:EVAA"
-            },
-            {
-                "text": "DOGE",
-                "callback_data": "m:b:DOGE"
-            }
-        ],
-        [
-            {
-                "text": "ZEC",
-                "callback_data": "m:b:ZEC"
-            },
-            {
-                "text": "IDOL",
-                "callback_data": "m:b:IDOL"
-            },
-            {
-                "text": "MTX",
-                "callback_data": "m:b:MTX"
-            }
-        ],
-        [
-            {
-                "text": "PWT",
-                "callback_data": "m:b:PWT"
-            },
-            {
-                "text": "BGB",
-                "callback_data": "m:b:BGB"
-            },
-            {
-                "text": "HYPE",
-                "callback_data": "m:b:HYPE"
-            }
-        ],
-        [
-            {
-                "text": "UMXM",
-                "callback_data": "m:b:UMXM"
-            },
-            {
-                "text": "DGAI",
-                "callback_data": "m:b:DGAI"
-            },
-            {
-                "text": "NEAR",
-                "callback_data": "m:b:NEAR"
-            }
-        ],
-        [
-            {
-                "text": "SUI",
-                "callback_data": "m:b:SUI"
-            },
-            {
-                "text": "TRX",
-                "callback_data": "m:b:TRX"
-            },
-            {
-                "text": "COLLECT",
-                "callback_data": "m:b:COLLECT"
-            }
-        ],
-        [
-            {
-                "text": "Next \u25b6\ufe0f",
-                "callback_data": "m:more:buy:1"
-            }
-        ],
-        [
-            {
-                "text": "\u2b05\ufe0f Back",
-                "callback_data": "m:buy"
+                "text": "\u274c Cancel",
+                "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\u2795 *MORE COINS* (page 1/26)\nBiggest 24h volume first. Tap a coin."
+    "panel_text": "\u26a0\ufe0f *CONFIRM BUY*\nSKYAI for ALL free USDT at about 0.036640 USDT."
 }
