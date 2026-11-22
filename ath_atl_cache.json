@@ -76,5 +76,11 @@
         "atl": 0.2269,
         "checked_at": 1795347716.3434386,
         "status": "complete"
+    },
+    "GRAM-USDT": {
+        "ath": 8.28731,
+        "atl": 0.55,
+        "checked_at": 1795353021.092138,
+        "status": "complete"
     }
 }
