@@ -398,7 +398,7 @@ def save(f,d):
   os.replace(f+".tmp",f)
  except Exception as e:print(f"SAVE ERR {f}: {e}")
 def cfg():
- d={"rsi_min":42,"rsi_max":48,"stop_loss_pct":5.0,"auto_buy_enabled":True,"auto_buy_amount_usdt":10.0,"max_tokens_before_consolidation":3,"max_hold_hours":48,"trail_pct":8.0,"crash_guard_pct":10.0,"rsi_exit":75,"btc_rsi_min":50,"risk_per_trade_pct":1.0,"max_daily_loss_pct":3.0,"max_portfolio_exposure_pct":50.0,"max_position_pct":15.0,"max_daily_trades":5,"max_spread_pct":0.5,"auto_mode_v1":False,"rebuy_cooldown_hours":6.0,"atr_stop_enabled":True,"atr_stop_mult":2.0,"atr_stop_min_pct":3.0,"atr_stop_max_pct":10.0,"market_filter_enabled":True,"btc_trend_hours":50,"min_breadth_pct":30.0,"offline_alert_hours":3.0,"daily_summary_hour_utc":20,"max_daily_drawdown_pct":5.0,"partial_tp_pct":5.0,"partial_tp_fraction":0.5,"dynamic_trail":True,"sell_if_stop_fails":True,"scan_prefilter":True,"cleanup_hours":24.0,"scan_interval_minutes":15.0,"auto_clear_hours":24.0,"live_mode_seconds":270,"mtf_confirm":True,"btc_shock_pct":3.0,"max_open_risk_pct":3.0,"loss_streak_trigger":2,"loss_streak_size_factor":0.5,"scan_parallel":True,"page_chars":600,"page_lines":12,"page_width":32,"output_stale_minutes":30}
+ d={"rsi_min":42,"rsi_max":48,"stop_loss_pct":5.0,"auto_buy_enabled":True,"auto_buy_amount_usdt":10.0,"max_tokens_before_consolidation":3,"max_hold_hours":48,"trail_pct":8.0,"crash_guard_pct":10.0,"rsi_exit":75,"btc_rsi_min":50,"risk_per_trade_pct":1.0,"max_daily_loss_pct":3.0,"max_portfolio_exposure_pct":50.0,"max_position_pct":15.0,"max_daily_trades":5,"max_spread_pct":0.5,"auto_mode_v1":False,"rebuy_cooldown_hours":6.0,"atr_stop_enabled":True,"atr_stop_mult":2.0,"atr_stop_min_pct":3.0,"atr_stop_max_pct":10.0,"market_filter_enabled":True,"btc_trend_hours":50,"min_breadth_pct":30.0,"offline_alert_hours":3.0,"daily_summary_hour_utc":20,"max_daily_drawdown_pct":5.0,"partial_tp_pct":5.0,"partial_tp_fraction":0.5,"dynamic_trail":True,"sell_if_stop_fails":True,"scan_prefilter":True,"cleanup_hours":24.0,"scan_interval_minutes":15.0,"auto_clear_hours":24.0,"live_mode_seconds":270,"mtf_confirm":True,"btc_shock_pct":3.0,"max_open_risk_pct":3.0,"loss_streak_trigger":2,"loss_streak_size_factor":0.5,"scan_parallel":True,"page_chars":600,"page_lines":12,"page_width":32,"output_stale_minutes":30,"smart_risk_enabled":True,"max_coin_exposure_pct":20.0,"max_sector_exposure_pct":35.0,"liquidity_depth_usdt":5000.0,"max_book_imbalance_pct":85.0,"regime_risk_factor":0.65,"execution_slippage_pct":0.35,"stop_watchdog_enabled":True,"portfolio_stress_pct":12.0,"signal_expiry_minutes":30,"adaptive_risk_enabled":True}
  s=load(CFG,d)
  for k,v in d.items():s.setdefault(k,v)
  if not s.get('auto_mode_v1'):s['auto_buy_enabled']=True;s['auto_mode_v1']=True;save(CFG,s)
@@ -1191,7 +1191,16 @@ def manage():
   ptp=float(s.get('partial_tp_pct',0) or 0);pf=float(s.get('partial_tp_fraction',0.5) or 0)
   try:partial_profit(sym,d,db,s,lv,inc,ptp,pf)
   except Exception as e:print(f"PARTIAL PROFIT ERR {sym}: {e}")
-  ratchet(sym,d,lvl,lv);db[sym]=d
+  ratchet(sym,d,lvl,lv)
+  # Stop watchdog: verify the exchange stop order and attempt re-arming on a cooldown.
+  if s.get("stop_watchdog_enabled",True) and not in_cd(f"stopwatch_{sym}",900):
+   mk_cd(f"stopwatch_{sym}")
+   orders,verified=open_sells(sym)
+   if verified and len(orders)!=1:
+    tg(f"⚠️ *STOP WATCHDOG:* {sym} has {len(orders)} protective sell orders; attempting to restore one verified stop.")
+    ok=place_trailing_sl(sym,B('free',sym.split('-')[0]))
+    if not ok and s.get("sell_if_stop_fails",True):unprotected_exit(sym,db)
+  db[sym]=d
  save(DB,db)
 def partial_profit(sym,d,db,s,lv,inc,ptp,pf):
  if not (ptp>0 and 0<pf<1 and not d.get('partial_done') and inc>=ptp):return
@@ -1260,7 +1269,9 @@ def risk_sized_budget(sym,price,stop,available_usdt):
   distance=max(0.005,(price-stop)/price);risk_cash=equity*float(s.get('risk_per_trade_pct',1.0))/100
   by_risk=risk_cash/distance;max_position=equity*float(s.get('max_position_pct',15.0))/100;max_exposure=equity*float(s.get('max_portfolio_exposure_pct',50.0))/100
   remaining=max(0.0,max_exposure-exposure)
-  return max(0.0,min(float(available_usdt),by_risk,max_position,remaining,float(s.get('auto_buy_amount_usdt',10.0))))
+  factor=market_regime(s).get("factor",1.0) if s.get("adaptive_risk_enabled",True) else 1.0
+  factor=min(1.0,max(0.25,float(factor)))
+  return max(0.0,min(float(available_usdt),by_risk*factor,max_position*factor,remaining,float(s.get('auto_buy_amount_usdt',10.0))))
  except:return 0.0
 def buy_rejection(sym,reason):
  key=f"buy_reject_notice:{sym}:{reason[:60]}"
@@ -1291,6 +1302,46 @@ def btc_shock(s):
   if ch<=-lim:r=f"BTC fell {ch:.1f}% within the hour"
  except Exception:r=""
  _SHOCK["t"],_SHOCK["r"]=time.time(),r;return r
+_REGIME={"t":0,"name":"UNKNOWN","factor":1.0,"reason":""}
+def market_regime(s):
+ """Conservative BTC regime snapshot; never overrides existing strategy signals."""
+ if time.time()-_REGIME["t"]<300:return _REGIME.copy()
+ name="UNKNOWN";factor=1.0;reason="Data unavailable; neutral sizing."
+ try:
+  o=ex.fetch_ohlcv("BTC/USDT",'1h',limit=60)
+  c=[float(x[4]) for x in o[:-1]]
+  if len(c)>=50:
+   m20=sum(c[-20:])/20;m50=sum(c[-50:])/50;chg=(c[-1]-c[-24])/c[-24]*100 if c[-24]>0 else 0
+   if c[-1]<m50 and m20<m50:name="BEARISH";factor=0.5;reason="BTC below declining medium averages."
+   elif abs(chg)>=5:name="HIGH VOLATILITY";factor=0.5;reason=f"BTC 24h move {chg:+.1f}% is extreme."
+   elif c[-1]>m20>m50:name="BULLISH";factor=1.0;reason="BTC trend is positive."
+   else:name="SIDEWAYS";factor=0.75;reason="BTC trend is mixed/sideways."
+ except Exception as e:reason=f"Regime unavailable ({str(e)[:80]})."
+ _REGIME.update(t=time.time(),name=name,factor=factor,reason=reason);return _REGIME.copy()
+def execution_quality(sym,s):
+ """Reject weak execution conditions without placing orders."""
+ try:
+  ob=ex.fetch_order_book(S(sym),limit=20);bids=ob.get('bids') or [];asks=ob.get('asks') or []
+  if not bids or not asks:return False,"Order-book depth unavailable."
+  bid=float(bids[0][0]);ask=float(asks[0][0]);mid=(bid+ask)/2
+  if mid<=0:return False,"Invalid order-book midpoint."
+  spr=(ask-bid)/mid*100
+  if spr>float(s.get('max_spread_pct',0.5)):return False,f"Order-book spread {spr:.2f}% exceeds limit."
+  depth=sum(float(x[0])*float(x[1]) for x in bids[:10])+sum(float(x[0])*float(x[1]) for x in asks[:10])
+  if depth<float(s.get('liquidity_depth_usdt',5000)):return False,f"Top-10 book depth ${depth:.0f} below limit."
+  imb=sum(float(x[0])*float(x[1]) for x in bids[:10]);askd=sum(float(x[0])*float(x[1]) for x in asks[:10]);total=imb+askd
+  pct=max(imb,askd)/total*100 if total else 100
+  if pct>float(s.get('max_book_imbalance_pct',85)):return False,f"Order-book imbalance {pct:.0f}% is unusually concentrated."
+  return True,f"Spread {spr:.2f}%; depth ${depth:.0f}."
+ except Exception as e:return False,f"Execution quality check failed: {str(e)[:120]}"
+def coin_exposure_pct(sym):
+ try:
+  eq=equity_now();q=B('total',sym.split('-')[0]);px=live(sym)
+  return q*px/eq*100 if eq>0 and px else 0.0
+ except Exception:return 0.0
+def stale_signal(qd,s):
+ try:return time.time()-float(qd.get('timestamp',0))>float(s.get('signal_expiry_minutes',30))*60
+ except:return True
 def open_risk_pct():
  try:
   db=load(DB);eq=equity_now()
@@ -1338,6 +1389,12 @@ def exec_q():
    if in_cd(f"fail_{sym}",300):buy_rejection(sym,"Previous fail.");continue
    if sym in db:buy_rejection(sym,"Position exists.");q.pop(sym,None);save(QF,q);continue
    if not live(sym):buy_rejection(sym,"No price.");continue
+   if stale_signal(qd,s):buy_rejection(sym,"Queued signal expired; waiting for a fresh scan.");q.pop(sym,None);save(QF,q);continue
+   if s.get("smart_risk_enabled",True):
+    eqok,eqwhy=execution_quality(sym,s)
+    if not eqok:buy_rejection(sym,eqwhy);continue
+    coinlim=float(s.get("max_coin_exposure_pct",20.0))
+    if coin_exposure_pct(sym)>coinlim:buy_rejection(sym,f"Coin exposure exceeds {coinlim:g}% of equity.");continue
    hrs=float(s.get('rebuy_cooldown_hours',6.0))
    if hrs>0 and in_cd(f"stopout_{sym}",hrs*3600):buy_rejection(sym,f"Re-buy cooldown ({hrs:g}h after a loss).");q.pop(sym,None);save(QF,q);continue
    sprd=spread_pct(sym);lim=float(s.get('max_spread_pct',0.5))
@@ -1563,7 +1620,7 @@ def cmd_set(txt):
  if k not in s:tg(f"❌ Unknown key. Valid: `{'`, `'.join(s.keys())}`");return
  try:new=val.lower() in ('true','1','yes','on') if isinstance(s[k],bool) else float(val) if isinstance(s[k],float) else int(val)
  except:tg(f"❌ Invalid value for {k}");return
- limits={"risk_per_trade_pct":(0.1,2.0),"max_daily_loss_pct":(0.5,10.0),"max_portfolio_exposure_pct":(5.0,100.0),"max_position_pct":(1.0,50.0),"max_daily_trades":(1,50),"max_spread_pct":(0.05,3.0),"trail_pct":(0.0,30.0),"scan_interval_minutes":(5.0,240.0),"auto_clear_hours":(0.0,168.0),"live_mode_seconds":(0,330),"stop_loss_pct":(0.5,20.0),"rsi_min":(1.0,99.0),"rsi_max":(1.0,99.0),"rsi_exit":(0.0,99.0),"auto_buy_amount_usdt":(1.0,100000.0),"max_tokens_before_consolidation":(1,30),"max_hold_hours":(1,720),"crash_guard_pct":(1.0,50.0),"btc_rsi_min":(0.0,99.0),"rebuy_cooldown_hours":(0.0,168.0),"atr_stop_mult":(0.5,6.0),"atr_stop_min_pct":(1.0,10.0),"atr_stop_max_pct":(2.0,25.0),"btc_trend_hours":(10,200),"min_breadth_pct":(0.0,100.0),"offline_alert_hours":(0.0,72.0),"daily_summary_hour_utc":(0,23)}
+ limits={"risk_per_trade_pct":(0.1,2.0),"max_daily_loss_pct":(0.5,10.0),"max_portfolio_exposure_pct":(5.0,100.0),"max_position_pct":(1.0,50.0),"max_daily_trades":(1,50),"max_spread_pct":(0.05,3.0),"trail_pct":(0.0,30.0),"scan_interval_minutes":(5.0,240.0),"auto_clear_hours":(0.0,168.0),"live_mode_seconds":(0,330),"stop_loss_pct":(0.5,20.0),"rsi_min":(1.0,99.0),"rsi_max":(1.0,99.0),"rsi_exit":(0.0,99.0),"auto_buy_amount_usdt":(1.0,100000.0),"max_tokens_before_consolidation":(1,30),"max_hold_hours":(1,720),"crash_guard_pct":(1.0,50.0),"btc_rsi_min":(0.0,99.0),"rebuy_cooldown_hours":(0.0,168.0),"atr_stop_mult":(0.5,6.0),"atr_stop_min_pct":(1.0,10.0),"atr_stop_max_pct":(2.0,25.0),"btc_trend_hours":(10,200),"min_breadth_pct":(0.0,100.0),"offline_alert_hours":(0.0,72.0),"daily_summary_hour_utc":(0,23),"max_coin_exposure_pct":(1.0,100.0),"liquidity_depth_usdt":(0.0,1000000.0),"max_book_imbalance_pct":(50.0,99.0),"regime_risk_factor":(0.1,1.0),"execution_slippage_pct":(0.05,5.0),"portfolio_stress_pct":(1.0,50.0),"signal_expiry_minutes":(1,240)}
  if k in limits and not (limits[k][0] <= new <= limits[k][1]):tg(f"❌ `{k}` must be between {limits[k][0]} and {limits[k][1]}.");return
  if k=="rsi_min" and new>=s.get("rsi_max",99):tg("❌ rsi_min must be lower than rsi_max.");return
  if k=="rsi_max" and new<=s.get("rsi_min",1):tg("❌ rsi_max must be higher than rsi_min.");return
