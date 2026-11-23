@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935690063,
+    "last_update_id": 935690066,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT22.43/\u20a630,678",
+    "kb_ph": "USDT22.40/\u20a630,642",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -24,8 +24,8 @@
             1795408039.230187
         ],
         "m:r:holdings": [
-            2,
-            1795468547.2458673
+            1,
+            1795477273.4382005
         ],
         "/analyse": [
             6,
@@ -64,10 +64,10 @@
         "UMXM-USDT",
         "ARIA-USDT"
     ],
-    "kb_mid": 4881,
-    "out_text": "\ud83d\udcbc *PORTFOLIO* $22.43 | \u20a630,678\n\ud83d\udcb5 Cash free $0.03 | In coins $22.38 (100%)\n\ud83d\udfe1 BGB 7.3634122e-05 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *ARIA* $8.00 (36%)\n+0.08% (+$0.01) | Entry 0.311181\nPrice 0.311430 | Stop 0.280063 (-10%)\nRSI 57 | Bullish | ATH -78%\n\n\ud83d\udfe2 *JCT* $7.70 (34%)\n\u2800\n\u2800",
+    "kb_mid": 4884,
+    "out_text": "\ud83d\udea8 *AI FAILURE \u2014 AUTOMATIC BUYING PAUSED*\nAuto-Buy is blocked while AI recovery is checked. Manual Buy and Sell remain\navailable to you; AI warnings never lock manual trades. The bot continues\nconfigured protective exits on existing positions. No automatic replacement\nbuys. Proceeds remain in USDT.\nReason: AI stage performance_review failed: Expecting ',' delimiter: line 1\ncolumn 562 (char 561)\nThe bot will notify you about recovery.\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795477165.0526917,
+    "out_time": 1795477283.0345712,
     "panel_rows": [
         [
             {
@@ -75,7 +75,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "1/3",
+                "text": "2/3",
                 "callback_data": "pg:x"
             },
             {
@@ -92,23 +92,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/3*",
+    "panel_text": "\ud83d\udcc4 *Page 2/3*",
     "out_mid": 4879,
-    "pages": {
-        "p": [
-            "\ud83d\udcbc *PORTFOLIO* $22.43 | \u20a630,678\n\ud83d\udcb5 Cash free $0.03 | In coins $22.38 (100%)\n\ud83d\udfe1 BGB 7.3634122e-05 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *ARIA* $8.00 (36%)\n+0.08% (+$0.01) | Entry 0.311181\nPrice 0.311430 | Stop 0.280063 (-10%)\nRSI 57 | Bullish | ATH -78%\n\n\ud83d\udfe2 *JCT* $7.70 (34%)\n\u2800\n\u2800",
-            "+0.00% (+$0.00) | Entry 0.001580\nPrice 0.001580 | Stop 0.001490 (-6%)\nRSI 46 | Bearish | ATH -92%\n\n\ud83d\udd34 *DOS* $6.68 (30%)\n-0.88% (-$0.06) | Entry 0.135800\nPrice 0.134600 | Stop 0.122220 (-9%)\nRSI 43 | Mixed | ATH -85%\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\n\u2800\n\u2800",
-            "and 8 more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT22.43/\u20a630,678\n\n\ud83e\udde0 *AI:* Portfolio is $22.43 total, 100% in coins; ARIA, JCT, DOS each hold\n~30\u201136% with stops 6\u201110% below entry and RSI below 60, while several assets\nlack USDT pricing, requiring attention.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
-        ],
-        "i": 0,
-        "mode": "Markdown",
-        "x": [
-            {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
-            }
-        ],
-        "cmd": "m:r:holdings"
-    },
-    "panel_mid": 4880
+    "panel_hidden": true
 }

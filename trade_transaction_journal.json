@@ -1670,5 +1670,10 @@
             "warning": "The RSI is near neutral and the price is low; ensure liquidity and slippage are acceptable. Verify that the BTC filter does not block this trade and that the market filter criteria are met before proceeding.",
             "summary": "Manual buy of 7.71\u202fUSDT of JCT-USDT at 0.00158\u202fUSDT per token is possible, but consider moderate risk due to limited market data and potential price volatility. Confirm all filters and risk parameters before execution."
         }
+    },
+    {
+        "time": 1795477281.2643955,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'DOS-USDT', 'action': 'monitor', 'reason': 'Position is down -1.1% and approaching stop level (0.12222) with limited upside; consider tightening stop or reducing size if risk tolerance is low.'}, {'symbol': 'ARIA-USDT', 'action': 'hold', 'reason': 'Small negative PnL (-0.19%) but price is still above stop (0.280063); position age is low, monitor for further movement.'}, {'symbol': 'JCT-USDT', 'action': 'hold', 'reason': 'Slight positive PnL (0.13%) and price is near stop (0.00149); maintain vigilance as volatility may quickly erode gains.'}], 'summary': 'Overall portfolio risk remains PASS. The DOS-USDT position shows the most concern due to proximity to its stop and negative performance; consider risk mitigation. ARIA-USDT and JCT-USDT are within acceptable parameters but should be watched closely given their recent entry and stop prox"
     }
 ]
