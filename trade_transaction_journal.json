@@ -1588,5 +1588,15 @@
         "time": 1795468323.5577035,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 5.8372, 'recurring_patterns': ['15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC', 'MANUAL SELL', 'RSI 75', 'PARTIAL PROFIT'], 'recommendations': ['Limit exposure to panic-driven entries; consider tighter stop\u2011losses', 'Review RSI\u2011based signals for false positives before execution', 'Prioritize trades with partial profit targets that have shown positive outcomes', 'Monitor symbols with repeated manual sell actions for underlying strategy issues', 'Maintain current risk parameters given modest net P&L and win rate']}"
+    },
+    {
+        "time": 1795468764.149636,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'DOS-USDT', 'action': 'monitor', 'reason': 'Position is down -1.84% and price is approaching the stop level (0.12222). No immediate action recommended without further price movement; consider tightening stop if downside persists.'}, {'symbol': 'IDOL-USDT', 'action': 'monitor', 'reason': 'Position is down -2.62% and price is close to the stop (0.01533). Maintain observation; evaluate tightening stop if price continues to decline.'}], 'summary': 'Both manual positions are currently in modest loss and nearing their stop thresholds. Maintain monitoring and be prepared to adjust stops if further downside is observed. No new orders should be placed at this time.'}"
+    },
+    {
+        "time": 1795468765.026858,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 5.8372, 'recurring_patterns': ['PANIC', '15-MINUTE NO-UPWARD-TREND ROTATION', 'MANUAL SELL', 'RSI 75'], 'recommendations': 'Maintain current risk limits; avoid frequent panic exits as they contribute to losses. Consider tightening entry criteria for high\u2011volatility symbols (e.g., WLD-USDT) and prioritize setups with clear technical signals such as RSI overbought/oversold. Continue monitoring pattern performance and adjust position sizing if win rate drifts below 55%.'}"
     }
 ]

@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935690049,
+    "last_update_id": 935690050,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT23.48/\u20a632,114",
+    "kb_ph": "USDT23.39/\u20a631,996",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -61,35 +61,53 @@
         ]
     },
     "radar": [],
-    "kb_mid": 4845,
+    "kb_mid": 4847,
     "out_text": "\u2705 *AI RECOVERY VERIFIED \u2014 NORMAL MODE RESTORED*\nThree consecutive AI health checks passed and resumed automatically. Existing\nbuy settings are unchanged; normal deterministic risk checks still apply.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "out_time": 1795468561.5912497,
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
+                "text": "\ud83e\udd16 Bot",
+                "callback_data": "/bot"
             },
             {
-                "text": "3/3",
-                "callback_data": "pg:x"
+                "text": "\ud83d\udcc8 Stats",
+                "callback_data": "/stats"
+            }
+        ],
+        [
+            {
+                "text": "\u2699\ufe0f Settings",
+                "callback_data": "m:set"
             },
             {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
+                "text": "\ud83d\udcbc Holdings",
+                "callback_data": "m:r:holdings"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udcdc Trade History",
+                "callback_data": "m:r:history"
             },
             {
-                "text": "\ud83c\udfe0",
-                "callback_data": "m:menu"
+                "text": "\ud83e\udde0 Ask AI",
+                "callback_data": "m:ai:1"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\uddf9 Clear Chat",
+                "callback_data": "/clear"
             },
             {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
+                "text": "\ud83d\udea8 PANIC SELL",
+                "callback_data": "/panic"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 3/3*",
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
     "out_mid": 4842,
-    "panel_hidden": true
+    "panel_mid": 4848
 }
