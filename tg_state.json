@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689770,
+    "last_update_id": 935689772,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -74,53 +74,33 @@
     "panel_rows": [
         [
             {
-                "text": "\ud83d\uded2 Buy",
-                "callback_data": "m:buy"
+                "text": "\ud83d\uded2 Trade",
+                "callback_data": "m:tl:trade"
             },
             {
-                "text": "\ud83d\udcb8 Sell",
-                "callback_data": "m:sell"
+                "text": "\ud83d\udd14 Alerts",
+                "callback_data": "m:tl:alerts"
             }
         ],
         [
             {
-                "text": "\u274c Cancel Open Orders",
-                "callback_data": "m:r:cancel"
+                "text": "\ud83d\udd0d Scan",
+                "callback_data": "m:tl:scan"
             },
             {
-                "text": "\ud83e\uddf9 Dust \u2192 BGB",
-                "callback_data": "m:r:dust"
+                "text": "\ud83d\udee0\ufe0f System",
+                "callback_data": "m:tl:sys"
             }
         ],
         [
             {
-                "text": "\ud83d\udd04 Sync manual coins",
-                "callback_data": "m:r:sync"
-            }
-        ],
-        [
-            {
-                "text": "\u23f8 Pause auto-buy",
-                "callback_data": "m:r:pause"
-            },
-            {
-                "text": "\u25b6\ufe0f Resume auto-buy",
-                "callback_data": "m:r:resume"
-            }
-        ],
-        [
-            {
-                "text": "\u2b05\ufe0f Tools",
-                "callback_data": "m:tools"
-            },
-            {
-                "text": "\ud83c\udfe0 Main Menu",
+                "text": "\u2b05\ufe0f Main Menu",
                 "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83d\uded2 *TRADE*",
+    "panel_text": "\ud83e\uddf0 *TOOLS*\nChoose a group.",
     "out_time": 1795408505.1155002,
     "out_mid": 4411,
-    "panel_hidden": true
+    "panel_mid": 4414
 }
