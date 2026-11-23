@@ -83,5 +83,5 @@
     "weak_market_mode": true,
     "weak_market_floor_pct": 15.0,
     "weak_market_size_factor": 0.5,
-    "h1_all_setups": false
+    "h1_all_setups": true
 }
