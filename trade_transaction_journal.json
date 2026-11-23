@@ -1418,5 +1418,15 @@
         "time": 1795448873.84153,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.4632, 'recurring_patterns': ['RSI 75 signals appear in multiple profitable trades', '15-MINUTE NO-UPWARD-TREND ROTATION appears frequently with small gains or losses', 'PANIC trades often result in negative PnL', 'PARTIAL PROFIT exits yield moderate gains'], 'recommendations': ['Prioritize trades triggered by RSI 75 as they show higher success rate', 'Limit exposure to PANIC-driven trades; consider stricter stop\u2011loss rules', 'Evaluate the effectiveness of the 15\u2011minute rotation strategy; current gains are modest and sometimes negative', 'Maintain current win\u2011rate focus but aim to improve overall net PnL by scaling down high\u2011risk manual sells']}"
+    },
+    {
+        "time": 1795449284.3829274,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (5)', 'attention': [{'symbol': 'JCT-USDT', 'action': 'hold', 'reason': 'Position is small, recent entry with modest positive PnL (0.81%). Stop loss is relatively close (\u224815% below entry), so maintain watch but avoid additional exposure.'}], 'summary': 'Overall portfolio risk remains within the daily limit. Current position shows slight profit; maintain the trade and monitor price relative to the stop level. No new orders recommended.'}"
+    },
+    {
+        "time": 1795449285.9052267,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.4632, 'recurring_patterns': ['RSI 75 (3 occurrences)', '15-MINUTE NO-UPWARD-TREND ROTATION (7 occurrences)', 'PANIC (4 occurrences)', 'PARTIAL PROFIT (3 occurrences)'], 'recommendations': ['Limit exposure to PANIC-driven trades; consider adding stricter stop\u2011loss rules', 'Prioritize signals with higher historical success such as RSI 75 and PARTIAL PROFIT entries', 'Monitor and possibly reduce frequency of low\u2011impact 15\u2011minute rotation trades', 'Aim to improve win\u2011rate above 60% by tightening entry criteria and reviewing manual sell decisions']}"
     }
 ]
