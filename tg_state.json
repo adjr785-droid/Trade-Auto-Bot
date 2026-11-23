@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689951,
+    "last_update_id": 935689954,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -40,8 +40,8 @@
             1795380739.3167899
         ],
         "m:scan_hist": [
-            4,
-            1795408740.9761732
+            3,
+            1795459783.0081277
         ],
         "m:ai:1": [
             3,
@@ -86,7 +86,7 @@
             "```\nDOGE     60     - RSI high\nDOGS     54     - RSI high\nDOS      48  +4.9 No setup\nDOT      58     - RSI high\nDTEC     45     - No setup\nDYDX     64     - RSI high\nEDEN     52     - RSI high\nEDGE     70     - RSI high\nEGL1     85  +4.1 RSI high\nEIGEN    48     - No setup\n```",
             "```\nENA      52     - RSI high\nENJ      61     - RSI high\nENS      44     - No setup\nENSO     41     - RSI low\nERA      59     - RSI high\n```\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 0,
+        "i": 3,
         "mode": "Markdown",
         "x": [
             {
@@ -103,7 +103,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "1/16",
+                "text": "4/16",
                 "callback_data": "pg:x"
             },
             {
@@ -122,7 +122,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/16*",
+    "panel_text": "\ud83d\udcc4 *Page 4/16*",
     "out_mid": 4700,
     "panel_mid": 4701
 }
