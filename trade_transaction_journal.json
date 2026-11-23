@@ -1062,5 +1062,10 @@
             "warning": "The RSI is low (38.05) indicating potential oversold conditions, but the price is near recent lows and market depth is unknown. No existing position and BTC filter is inactive, so exposure is limited to this trade. Verify liquidity and order book depth before proceeding.",
             "summary": "Considering the low RSI and current price of 0.01573 USDT per IDOL, the trade carries moderate risk. Ensure you have sufficient USDT balance for the 23.68 USDT order and confirm market depth to avoid slippage. Proceed only if you are comfortable with the potential volatility."
         }
+    },
+    {
+        "time": 1795401460.0722077,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (13)', 'attention': [{'symbol': 'IDOL-USDT', 'action': 'monitor', 'reason': 'Position is slightly negative (-0.51% PnL) and close to stop (0.01413). No clear upside signal; consider tightening stop or exiting if price approaches stop.'}], 'summary': 'Overall portfolio risk is within the daily limit. The only open position (IDOL-USDT) is marginally down and near its stop level. Recommend close monitoring and be prepared to exit if price moves toward the stop. No new entries are suggested at this time.'}"
     }
 ]

@@ -88,5 +88,11 @@
         "atl": 0.00501,
         "checked_at": 1795398081.0289464,
         "status": "complete"
+    },
+    "IDOL-USDT": {
+        "ath": 0.04774,
+        "atl": 0.00685,
+        "checked_at": 1795401437.8948786,
+        "status": "complete"
     }
 }
