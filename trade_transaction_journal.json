@@ -1388,5 +1388,15 @@
         "filled": 79.76,
         "average": 0.025952,
         "spend_estimate": 2.06993152
+    },
+    {
+        "time": 1795448263.5548217,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'COLLECT-USDT', 'action': 'monitor', 'reason': 'Position is down -2.33% with stop 0.022086, close to stop loss; consider tightening stop or reducing size.'}, {'symbol': 'JCT-USDT', 'action': 'hold', 'reason': 'Small positive PnL (+1.24%) and price above entry; no immediate risk, but monitor for reversal.'}], 'summary': 'Overall portfolio risk remains PASS. One position (COLLECT-USDT) shows negative performance and is approaching its stop level; recommend close monitoring and possible stop adjustment. The JCT-USDT position is modestly profitable; maintain current stance while keeping an eye on market movements.'}"
+    },
+    {
+        "time": 1795448264.542495,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.4632, 'recurring_patterns': ['RSI 75 appears in multiple trades (SKYAI-USDT, DGAI-USDT, INJ-USDT)', '15-MINUTE NO-UPWARD-TREND ROTATION is a frequent trigger across several symbols', 'PANIC-driven exits occur on TRX-USDT, ENA-USDT, WLD-USDT, SKYAI-USDT', 'Partial profit exits are used for SKYAI-USDT, DGAI-USDT, UMXM-USDT'], 'recommendations': ['Limit reliance on panic exits; they contribute to losses and volatility', 'Prioritize trades flagged by RSI 75, which have shown positive PnL in this sample', 'Review the effectiveness of the 15\u2011minute no\u2011upward\u2011trend rotation signal, as outcomes are mixed', 'Consider tightening profit\u2011target thresholds for partial profit exits to capture gains earlier', 'Maintain current win\u2011rate focus but aim to increase sample size before scaling']}"
     }
 ]

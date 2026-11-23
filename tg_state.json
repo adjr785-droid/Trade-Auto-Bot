@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT24.84/\u20a633,971",
+    "kb_ph": "USDT24.78/\u20a633,887",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -63,31 +63,6 @@
     "radar": [
         "JCT-USDT"
     ],
-    "kb_mid": 4582,
-    "out_mid": 4575,
-    "out_text": "\u26d4 *AUTO-BUY REJECTED \u2014 ARX-USDT*\nReason: Order-book imbalance 88% is unusually concentrated.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
-    "out_mode": "Markdown",
-    "out_time": 1795444500.1587021,
-    "panel_rows": [
-        [
-            {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
-            },
-            {
-                "text": "1/5",
-                "callback_data": "pg:x"
-            },
-            {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
-            },
-            {
-                "text": "\ud83c\udfe0",
-                "callback_data": "m:menu"
-            }
-        ]
-    ],
-    "panel_text": "\ud83d\udcc4 *Page 1/5*",
+    "kb_mid": 4583,
     "panel_hidden": true
 }
