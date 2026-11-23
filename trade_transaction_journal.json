@@ -1408,5 +1408,15 @@
         "time": 1795448548.4582324,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.4632, 'recurring_patterns': ['RSI 75', '15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC', 'PARTIAL PROFIT'], 'recommendations': ['Limit exposure to PANIC-driven exits; consider adding stop\u2011loss thresholds to avoid negative pnl spikes', 'Review RSI\u2011based entries; while profitable, ensure they align with broader trend analysis', 'Maintain partial profit strategy but tighten target ranges to lock in gains earlier', 'Monitor low\u2011pnl trades (<0.01 USDT) for potential over\u2011trading; consolidate positions where appropriate']}"
+    },
+    {
+        "time": 1795448872.9117453,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'JCT-USDT', 'action': 'hold', 'reason': 'Position is very small, recent PnL is modestly positive (+0.93%), and stop loss is comfortably below entry. No immediate risk signals.'}], 'summary': 'Overall portfolio risk remains acceptable. Maintain current position in JCT-USDT; monitor price action for any adverse moves toward the stop level.'}"
+    },
+    {
+        "time": 1795448873.84153,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.4632, 'recurring_patterns': ['RSI 75 signals appear in multiple profitable trades', '15-MINUTE NO-UPWARD-TREND ROTATION appears frequently with small gains or losses', 'PANIC trades often result in negative PnL', 'PARTIAL PROFIT exits yield moderate gains'], 'recommendations': ['Prioritize trades triggered by RSI 75 as they show higher success rate', 'Limit exposure to PANIC-driven trades; consider stricter stop\u2011loss rules', 'Evaluate the effectiveness of the 15\u2011minute rotation strategy; current gains are modest and sometimes negative', 'Maintain current win\u2011rate focus but aim to improve overall net PnL by scaling down high\u2011risk manual sells']}"
     }
 ]
