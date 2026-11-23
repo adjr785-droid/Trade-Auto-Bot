@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689578,
+    "last_update_id": 935689581,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -30,8 +30,8 @@
             1795393430.8571026
         ],
         "/analyse": [
-            4,
-            1795395974.4187007
+            3,
+            1795396025.505319
         ],
         "m:r:analyse": [
             4,
@@ -68,22 +68,55 @@
         "SKYAI-USDT"
     ],
     "kb_mid": 4193,
-    "out_text": "\ud83d\uded1 *PANIC COMPLETE.* All positions sold. Auto-buy PAUSED.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "Why:\n\u2022 Short-term trend is up (price > MA5 > MA10)\n\u2022 RSI 53.3 is healthy (room to run before overbought)\n\u2022 24h volume $2.5M (liquid enough: above the $1M minimum)\n\u2022 Spread: 0.16% (OK for auto-buy)\n\u2022 Status: \ud83d\udd36 Potential, manual only (misses scanner rules)\n\u2022 \ud83e\udde0 AI: WEAK \u2014 Very high spread, negative change, scanner rules fail\n\nNo coin passes all scanner rules right now, so these are the strongest\navailable. Be cautious.\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
             {
-                "text": "\u2705 YES, SELL EVERYTHING",
-                "callback_data": "panic_confirm"
+                "text": "\u25c0",
+                "callback_data": "pg:p"
             },
             {
-                "text": "\u274c Cancel",
-                "callback_data": "panic_cancel"
+                "text": "4/6",
+                "callback_data": "pg:x"
+            },
+            {
+                "text": "\u25b6",
+                "callback_data": "pg:n"
+            },
+            {
+                "text": "\ud83c\udfe0",
+                "callback_data": "m:menu"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udd0e Analyse a coin",
+                "callback_data": "m:an"
             }
         ]
     ],
-    "panel_text": "\ud83d\udc47 *Actions*",
-    "out_time": 1795396004.4030647,
-    "out_mid": 4191,
-    "panel_hidden": true
+    "panel_text": "\ud83d\udcc4 *Page 4/6*",
+    "out_time": 1795396021.4541676,
+    "out_mid": 4194,
+    "pages": {
+        "p": [
+            "\ud83c\udfc6 *TOP 3* \u00b7 \u25b6 details\n*1. BNB* \ud83d\udd36 WATCH\n558.67 | +1.4% | RSI 63\n\ud83e\udde0 CAUTION \u00b7 Low spread but RSI h\n*2. ICNT* \ud83d\udd36 WATCH\n0.362100 | +2.3% | RSI 54\n\ud83e\udde0 CAUTION \u00b7 High spread, scanner\n*3. SKYAI* \ud83d\udd36 WATCH\n0.037500 | -2.0% | RSI 53\n\ud83e\udde0 WEAK \u00b7 Very high spread, ne\n\u2800\n\u2800",
+            "\ud83c\udfc6 *TOP 3 SETUPS RIGHT NOW*\n_Read-only scan. Nothing was bought._\n\n*1. BNB-USDT* \u2014 WATCHLIST (no full scanner setup)\nPrice: 558.67 USDT | 24h: +1.45% | RSI: 63.4\nSuggested stop: 474.87 (15% below price)\nWhy:\n\u2022 Short-term trend is up (price > MA5 > MA10)\n\u2022 RSI 63.4 is healthy (room to run before overbought)\n\u2022 24h change +1.45% shows steady, not extreme, momentum\n\u2800\n\u2800",
+            "\u2022 24h volume $2.5M (liquid enough: above the $1M minimum)\n\u2022 Spread: 0.00% (OK for auto-buy)\n\u2022 Status: \ud83d\udd36 Potential, manual only (misses scanner rules)\n\u2022 \ud83e\udde0 AI: CAUTION \u2014 Low spread but RSI high, scanner rules not met\n\n*2. ICNT-USDT* \u2014 WATCHLIST (no full scanner setup)\nPrice: 0.362100 USDT | 24h: +2.32% | RSI: 54.1\nSuggested stop: 0.307785 (15% below price)\nWhy:\n\u2022 Short-term trend is up (price > MA5 > MA10)\n\u2800\n\u2800",
+            "\u2022 RSI 54.1 is healthy (room to run before overbought)\n\u2022 24h change +2.32% shows steady, not extreme, momentum\n\u2022 24h volume $1.4M (liquid enough: above the $1M minimum)\n\u2022 Spread: 0.06% (OK for auto-buy)\n\u2022 Status: \ud83d\udd36 Potential, manual only (misses scanner rules)\n\u2022 \ud83e\udde0 AI: CAUTION \u2014 High spread, scanner rules fail, moderate RSI\n\n*3. SKYAI-USDT* \u2014 WATCHLIST (no full scanner setup)\nPrice: 0.037500 USDT | 24h: -1.99% | RSI: 53.3\nSuggested stop: 0.031875 (15% below price)\n\u2800\n\u2800",
+            "Why:\n\u2022 Short-term trend is up (price > MA5 > MA10)\n\u2022 RSI 53.3 is healthy (room to run before overbought)\n\u2022 24h volume $2.5M (liquid enough: above the $1M minimum)\n\u2022 Spread: 0.16% (OK for auto-buy)\n\u2022 Status: \ud83d\udd36 Potential, manual only (misses scanner rules)\n\u2022 \ud83e\udde0 AI: WEAK \u2014 Very high spread, negative change, scanner rules fail\n\nNo coin passes all scanner rules right now, so these are the strongest\navailable. Be cautious.\n\u2800\n\u2800",
+            "\nBuy manually with `/buy COIN amount` if you agree.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+        ],
+        "i": 3,
+        "mode": "Markdown",
+        "x": [
+            {
+                "text": "\ud83d\udd0e Analyse a coin",
+                "callback_data": "m:an"
+            }
+        ],
+        "cmd": "/analyse"
+    },
+    "panel_mid": 4195
 }
