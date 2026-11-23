@@ -10,18 +10,32 @@
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
         "xsl": 0.124936,
-        "seen": 1795477055.330469
+        "seen": 1795477119.0604563
     },
     "ARIA-USDT": {
         "entry_price": 0.311181,
         "safe_zone": 0.311181,
         "stop_loss": 0.280063,
-        "peak_price": 0.311181,
-        "last_price": 0.311181,
+        "peak_price": 0.31121,
+        "last_price": 0.31121,
         "opened_at": 1795477079.5856636,
         "sl_pct": 10.0,
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
-        "xsl": 0.280063
+        "xsl": 0.2863132,
+        "seen": 1795477119.343942
+    },
+    "JCT-USDT": {
+        "entry_price": 0.00158,
+        "safe_zone": 0.00158,
+        "stop_loss": 0.00149,
+        "peak_price": 0.00158,
+        "last_price": 0.001579,
+        "opened_at": 1795477111.3874416,
+        "sl_pct": 5.71,
+        "strategy": "MANUAL",
+        "purchase_source": "MANUAL",
+        "xsl": 0.00149,
+        "seen": 1795477122.4760654
     }
 }

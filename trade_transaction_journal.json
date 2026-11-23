@@ -1660,5 +1660,15 @@
             "warning": "The RSI is neutral and the price is near recent levels; no strong trend signals. Ensure position sizing aligns with your risk tolerance and consider the impact of fees on a small $8 trade.",
             "summary": "Buying ARIA-USDT at $0.31119 with $8 USDT carries moderate risk. No existing position and a neutral RSI suggest limited upside. Proceed only if it fits your overall portfolio strategy and you accept potential loss of the full amount."
         }
+    },
+    {
+        "time": 1795477114.2469425,
+        "event": "ai_manual_buy_review",
+        "symbol": "JCT-USDT",
+        "review": {
+            "risk_level": "moderate",
+            "warning": "The RSI is near neutral and the price is low; ensure liquidity and slippage are acceptable. Verify that the BTC filter does not block this trade and that the market filter criteria are met before proceeding.",
+            "summary": "Manual buy of 7.71\u202fUSDT of JCT-USDT at 0.00158\u202fUSDT per token is possible, but consider moderate risk due to limited market data and potential price volatility. Confirm all filters and risk parameters before execution."
+        }
     }
 ]
