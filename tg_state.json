@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689634,
+    "last_update_id": 935689636,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -26,8 +26,8 @@
             1795366572.7668848
         ],
         "m:r:holdings": [
-            1,
-            1795393430.8571026
+            2,
+            1795401490.3234775
         ],
         "/analyse": [
             5,
@@ -76,7 +76,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "1/4",
+                "text": "3/4",
                 "callback_data": "pg:x"
             },
             {
@@ -93,7 +93,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/4*",
+    "panel_text": "\ud83d\udcc4 *Page 3/4*",
     "out_mid": 4248,
     "pages": {
         "p": [
@@ -102,7 +102,7 @@
             "Bot trailing stop: ON (8.0% below peak)\nPeak price: 0.015700\nExchange stop level: 0.014130\n\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\nand 8 more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT23.60/\u20a632,279\n\n\u2800\n\u2800",
             "\ud83e\udde0 *AI:* Portfolio is tiny ($23.60) with negligible USDT cash ($0.02) and a\nsmall IDOL position trailing 8% stop; monitor trailing stop and low liquidity,\nespecially the unpriced tokens.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 0,
+        "i": 2,
         "mode": "Markdown",
         "x": [
             {
