@@ -1521,5 +1521,15 @@
         "time": 1795462523.1659713,
         "event": "ai_portfolio_review",
         "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'JCT-USDT', 'action': 'monitor', 'reason': 'Position is down -1.97% and approaching its stop level (0.001379). Consider tightening stop or reducing exposure if downside risk increases.'}], 'summary': 'Overall portfolio risk remains acceptable (PASS). The only open position, JCT-USDT, is slightly negative and near its stop price. Maintain vigilance, adjust stop if market moves unfavorably, and avoid adding new exposure to this asset until clarity improves.'}"
+    },
+    {
+        "time": 1795464252.259961,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'JCT-USDT', 'action': 'monitor', 'reason': 'Position is down -2.03% and approaching stop level (0.001379). No immediate action required but watch for further downside.'}], 'summary': 'Overall portfolio risk passes safeguards. BTC filter is active, so avoid initiating new BTC\u2011related trades. Existing JCT\u2011USDT position is modestly losing; maintain vigilance and be prepared to exit if price breaches the stop threshold.'}"
+    },
+    {
+        "time": 1795464253.1588945,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.4632, 'recurring_patterns': {'RSI 75': 3, 'PARTIAL PROFIT': 3, '15-MINUTE NO-UPWARD-TREND ROTATION': 7, 'PANIC': 4}, 'recommendations': {'focus_on_high_confidence_signals': ['RSI 75'], 'reduce_panic_trades': {'note': 'PANIC trades contributed negative PnL and high variance'}, 'monitor_partial_profit_strategy': {'note': 'Partial profit entries show mixed results, consider tighter targets'}, 'maintain_conservative_position_sizing': {'note': 'Overall net PnL is modest; avoid scaling up until pattern consistency improves'}, 'uncertainty': 'Moderate due to limited sample size (30 trades) and mixed outcome of pattern-based trades'}}"
     }
 ]

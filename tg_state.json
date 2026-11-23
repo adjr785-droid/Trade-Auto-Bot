@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935689989,
+    "last_update_id": 935689993,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT24.15/\u20a633,024",
+    "kb_ph": "USDT24.22/\u20a633,127",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -61,29 +61,10 @@
         ]
     },
     "radar": [],
-    "kb_mid": 4750,
-    "out_text": "\u2139\ufe0f Git sync used conflict recovery.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "kb_mid": 4755,
+    "panel_hidden": true,
+    "out_mid": 4756,
+    "out_text": "\ud83d\udd04 *AI RECOVERY \u2014 STAGE 1/3*\nGroq health check passed. Buying stays blocked until 3 consecutive checks pass;\n2 more to go. Normal mode returns automatically.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795462530.0470955,
-    "panel_rows": [
-        [
-            {
-                "text": "\ud83d\udd0d Scan now",
-                "callback_data": "m:r:scan"
-            },
-            {
-                "text": "\ud83e\uddfe Scan History",
-                "callback_data": "m:scan_hist"
-            }
-        ],
-        [
-            {
-                "text": "\u2b05\ufe0f Menu",
-                "callback_data": "m:menu"
-            }
-        ]
-    ],
-    "panel_text": "\ud83d\udcda *COIN LIST*\n\u2705 Ready 1 | \ud83d\udc40 Watching 30 | \ud83c\udd95 New 0 | \ud83d\udcbc Held 1 | \u26d4 Rejected 430\n\ud83d\udfe1 Manual candidates (\u226575%): 1\nExecution: \ud83d\udce5 queued 0 | \u26d4 blocked 1 | \ud83d\udfe2 held 1\n\n\u2705 *NES* 0.159840 | BLOCKED | 1H +1.00% | RSI 23 | seen 9x\n\ud83d\udcbc *JCT* 0.001592 | HELD | 1H -0.78% | RSI 52 | seen 9x\n\ud83d\udc40 *BGSC* 0.00095900 | NOT_ELIGIBLE | 1H +13.47% | RSI 69 | seen 9x\n\ud83d\udc40 *ARIA* 0.282930 | NOT_ELIGIBLE | 1H +8.62% | RSI 46 | seen 9x\n\ud83d\udc40 *UMXM* 0.004320 | NOT_ELIGIBLE | 1H +2.36% | RSI 37 | seen 9x\n\ud83d\udc40 *BLESS* 0.015476 | NOT_ELIGIBLE | \ud83d\udfe1 75% MANUAL | 1H +0.83% | RSI 43 | seen 9x\n\ud83d\udc40 *KII* 0.084882 | NOT_ELIGIBLE | 1H +0.48% | RSI 76 | seen 9x\n\ud83d\udc40 *ARX* 0.173890 | NOT_ELIGIBLE | 1H +0.36% | RSI 57 | seen 9x\n\ud83d\udc40 *IDOL* 0.016680 | NOT_ELIGIBLE | 1H +0.31% | RSI 45 | seen 9x\n\ud83d\udc40 *DOS* 0.135600 | NOT_ELIGIBLE | 1H +0.29% | RSI 46 | seen 9x\n\ud83d\udc40 *COLLECT* 0.024681 | NOT_ELIGIBLE | 1H +0.14% | RSI 36 | seen 9x\n\ud83d\udc40 *PAXG* 3646.64 | NOT_ELIGIBLE | 1H +0.04% | RSI 64 | seen 9x",
-    "out_mid": 4743,
-    "panel_hidden": true
+    "out_time": 1795464244.6998584
 }
