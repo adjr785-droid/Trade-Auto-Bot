@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689863,
+    "last_update_id": 935689870,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -67,35 +67,63 @@
     "out_mid": 4584,
     "out_text": "\u26d4 *AUTO-BUY REJECTED \u2014 ARX-USDT*\nReason: Queued signal expired; waiting for a fresh scan.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795448295.5806508,
+    "out_time": 1795448454.4612632,
     "panel_rows": [
         [
             {
-                "text": "\ud83d\uded2 Trade",
-                "callback_data": "m:tl:trade"
+                "text": "\u25c0",
+                "callback_data": "pg:p"
             },
             {
-                "text": "\ud83d\udd14 Alerts",
-                "callback_data": "m:tl:alerts"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udd0d Scan",
-                "callback_data": "m:tl:scan"
+                "text": "1/16",
+                "callback_data": "pg:x"
             },
             {
-                "text": "\ud83d\udee0\ufe0f System",
-                "callback_data": "m:tl:sys"
-            }
-        ],
-        [
+                "text": "\u25b6",
+                "callback_data": "pg:n"
+            },
             {
-                "text": "\u2b05\ufe0f Main Menu",
+                "text": "\ud83c\udfe0",
                 "callback_data": "m:menu"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udd0d Why not bought?",
+                "callback_data": "m:whylist:0"
             }
         ]
     ],
-    "panel_text": "\ud83e\uddf0 *TOOLS*\nChoose a group.",
-    "panel_mid": 4589
+    "panel_text": "\ud83d\udcc4 *Page 1/16*",
+    "pages": {
+        "p": [
+            "\ud83d\udd0e *SCAN HISTORY* \u00b7 469/469 coins (first 150)\n23 scans \u00b7 22.2h\n```\nCOIN    RSI    1H WHY\n------------------------------\nBLESS    67  +3.9 QUEUED\nCOLLECT  62  +0.6 QUEUED\nWLD      67     - Auto-buy off\nINJ      66  +1.3 QUEUED\nJCT      48  +1.8 QUEUED\n```\n\u2800",
+            "```\nKII      65  +0.1 QUEUED\nARX      65  +4.6 QUEUED\nBTC      65     - Top 15\nETH      66     - Top 15\nSOL      83     - Top 15\nPWT      45     - Top 15\nUSDGO    41     - Top 15\nHYPE     79     - Top 15\nDOGE     81     - Top 15\nZEC      76     - Top 15\n```",
+            "```\nSUI      81     - Top 15\nBGB      66     - Top 15\nEVAA     51     - Top 15\nNEAR     72     - Top 15\nENA      79     - Top 15\nMTX      41     - Top 15\nDGAI     67     - Top 15\nACE       -     - Spread wide\nPUMP     69  -0.1 RSI high\nDOS      48  +3.6 Trend weak\n```",
+            "```\nTRX      81  +0.1 RSI high\nBNB      65  -0.3 RSI high\nBLESS    61  -3.8 RSI high\nADA      78  +1.1 RSI high\nPEPE     76  +0.1 RSI high\nWLD      77  -0.3 RSI high\nARIA     50  -9.5 RSI high\nCOLLECT  50  -1.5 RSI high\nBTW      61  -0.4 RSI high\nTAO      70  -0.7 RSI high\n```",
+            "```\nIDOL     46  +2.5 Trend weak\nUNI      81  +1.4 RSI high\nUMXM     37  -0.9 RSI low\nLINK     76  -0.2 RSI high\nLTC      82  +0.0 RSI high\nICNT     32  -0.1 RSI low\nONDO     83  -0.8 RSI high\nPAXG     78  +0.3 RSI high\nEGL1     85  +4.0 RSI high\nNES      27  +0.0 RSI low\n```",
+            "```\nARX      70  +0.3 RSI high\nJCT      55  +0.1 RSI high\nKII      79  +0.3 RSI high\nINJ      80  +0.1 RSI high\nBGSC     75  -8.0 RSI high\nGRAM     67  -0.2 RSI high\nASTER    68     - Vol low\nNIGHT    58     - Vol low\nKAS      79     - Vol low\nSKY      51     - Vol low\n```",
+            "```\nAVAX     75     - Vol low\nJUP      70     - Vol low\nEDGE     85     - Vol low\nQNT      85     - Vol low\nDATA     72     - Vol low\nCYS      62     - Vol low\nBLUE     54     - Vol low\nBCH      75     - Vol low\nARB      66     - Vol low\nLIT      82     - Vol low\n```",
+            "```\nGWEI     65     - Vol low\nBR       46     - Vol low\nVELO     49     - Vol low\nFARTCOI  81     - Vol low\nILY      55     - Vol low\nZRO      71     - Vol low\nFET      73     - Vol low\nQ        66     - Vol low\nPRESPCX  88     - Vol low\nPENGU    77     - Vol low\n```",
+            "```\nAPR      88     - Vol low\nTRUMP    72     - Vol low\nPI       71     - Vol low\nAERO     71     - Vol low\nGRVT     44     - Vol low\nPROS     45     - Vol low\nETHFI    70     - Vol low\nACN      76     - Vol low\nLAB      63     - Vol low\nICP      78     - Vol low\n```",
+            "```\nPYUSD    51     - Vol low\nDOT      78     - Vol low\nMMT      35     - Vol low\nCP       47     - Vol low\nAAVE     70     - Vol low\nCC       80     - Vol low\nSHIB     77     - Vol low\nAIN      37     - Vol low\nVET      82     - Vol low\nHBAR     79     - Vol low\n```",
+            "```\nMAGMA    62     - Vol low\nZBCN     67     - Vol low\nSKYAI    46     - Vol low\nCRV      74     - Vol low\nBSV      67     - Vol low\nVELVET   71     - Vol low\nBMT      46     - Vol low\nJTO      80     - Vol low\nMON      54     - Vol low\nVIRTUAL  78     - Vol low\n```",
+            "```\nVTHO     81     - Vol low\nUNITAS   38     - Vol low\nPONS     64     - Vol low\nFIL      79     - Vol low\nGRASS    66     - Vol low\nUAI      82     - Vol low\nWLFI     46     - Vol low\nPYTH     77     - Vol low\nLIGHT    78     - Vol low\nKERNEL   50     - Vol low\n```",
+            "```\nPREOPAI  67     - Vol low\nSOON     65     - Vol low\nKAIA     78     - Vol low\nAPT      74     - Vol low\nALGO     74     - Vol low\nPOL      66     - Vol low\nUP       53     - Vol low\nSSV      72     - Vol low\nFLOCK    75     - Vol low\nENSO     41     - Vol low\n```",
+            "```\nLAT      54     - Vol low\nWBTC     65     - Vol low\nBILL     68     - Vol low\nMYX      81     - Vol low\nPENDLE   77     - Vol low\nTIA      71     - Vol low\nPORTAL   72     - Vol low\nSEI      73     - Vol low\nPCI      49     - Vol low\nPEAQ     76     - Vol low\n```",
+            "```\nIR       47     - Vol low\nOPEN     70     - Vol low\nCAKE     79     - Vol low\nAXIS     64     - Vol low\nAEON     68     - Vol low\nNAORIS   39     - Vol low\nDNA      54     - Vol low\nSTETH    76     - Vol low\nTRADOOR  53     - Vol low\nLUNC     72     - Vol low\n```",
+            "```\nALIGN    50     - Vol low\nMORPHO   72     - Vol low\nNIL      73     - Vol low\nAI       56     - Vol low\nIRYS     36     - Vol low\n```\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+        ],
+        "i": 0,
+        "mode": "Markdown",
+        "x": [
+            {
+                "text": "\ud83d\udd0d Why not bought?",
+                "callback_data": "m:whylist:0"
+            }
+        ],
+        "cmd": "m:scan_hist"
+    },
+    "out_mid": 4600,
+    "panel_mid": 4601
 }
