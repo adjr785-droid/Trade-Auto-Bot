@@ -6945,6 +6945,23 @@
             "decision": "SKIP",
             "reason": "Vol below $5M",
             "min_volume": 5000000
+        },
+        {
+            "time": 1795458558,
+            "rank": 35,
+            "sym": "IDOL-USDT",
+            "vol": 1491072.02,
+            "chg": 18.099,
+            "price": 0.0169,
+            "rsi": 45.59,
+            "rr": null,
+            "ma5": 0.01686,
+            "ma10": 0.016846,
+            "decision": "SETUP \u2014 QUEUED",
+            "reason": "TREND matched; queued",
+            "min_volume": 1000000,
+            "h1": 0.54,
+            "strategy": "TREND"
         }
     ]
 }
