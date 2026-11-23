@@ -4,25 +4,12 @@
         "safe_zone": 0.1358,
         "stop_loss": 0.12222,
         "peak_price": 0.1358,
-        "last_price": 0.1331,
+        "last_price": 0.1335,
         "opened_at": 1795466001.4516773,
         "sl_pct": 10.0,
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
         "xsl": 0.124936,
-        "seen": 1795472231.4481487
-    },
-    "IDOL-USDT": {
-        "entry_price": 0.016852,
-        "safe_zone": 0.016852,
-        "stop_loss": 0.01533,
-        "peak_price": 0.016852,
-        "last_price": 0.01574,
-        "opened_at": 1795466156.4071832,
-        "sl_pct": 9.03,
-        "strategy": "MANUAL",
-        "purchase_source": "MANUAL",
-        "xsl": 0.01550384,
-        "seen": 1795472231.6916814
+        "seen": 1795475332.5605478
     }
 }

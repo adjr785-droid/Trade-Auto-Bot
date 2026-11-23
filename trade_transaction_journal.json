@@ -1614,5 +1614,15 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795475336.8362374,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'DOS-USDT', 'action': 'monitor', 'reason': 'Current unrealized loss of -1.69% and stop level (0.12222) is ~8% below entry; consider tightening stop if volatility permits, but maintain position pending further price action.'}], 'summary': 'Overall portfolio risk remains acceptable. The only open position shows a modest loss; no immediate exit is required, but tighter risk management is advisable.'}"
+    },
+    {
+        "time": 1795475337.7730277,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 5.8372, 'recurring_patterns': ['15-MINUTE NO-UPWARD-TREND ROTATION appears in multiple trades', 'PANIC exits appear in several trades', 'MANUAL SELL triggers both profit and loss', 'RSI 75 signals used for entries', 'PARTIAL PROFIT exits used'], 'recommendations': ['Consider tightening criteria for panic exits to avoid small losses', 'Review the effectiveness of the 15\u2011minute no\u2011upward\u2011trend rotation signal; it yields mixed results', 'Validate RSI 75 as a reliable entry signal before scaling up', 'Limit manual sell interventions to clear strategy rules to reduce ad\u2011hoc decisions', 'Maintain current win\u2011rate focus but aim to improve average win size relative to losses']}"
     }
 ]
