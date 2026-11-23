@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935689796,
+    "last_update_id": 935689797,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT25.35/\u20a634,669",
+    "kb_ph": "USDT25.49/\u20a634,855",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -68,66 +68,64 @@
         "ICNT-USDT",
         "BNB-USDT"
     ],
-    "kb_mid": 4439,
-    "out_text": "```\nLTC      47  +1.5 Trend weak\nEGL1     57  +1.2 RSI high\nDOS      37  +0.3 RSI low\nINJ      44  +1.9 Trend weak\nBR       61  +2.3 RSI high\nONDO     39  +2.1 RSI low\nJCT      44  +1.3 Trend weak\nUNI      62     - Vol low\nKII      61     - Vol low\nLINK     64     - Vol low\n```",
+    "kb_mid": 4442,
+    "out_text": "\ud83d\udcbc *HOURLY HOLDINGS*\n\ud83d\udcbc *Total Portfolio Value:* $25.49 USDT | \u20a634,855\n\n\ud83d\udcb5 *Available USDT Cash*\nTotal: $0.02 | Free to Trade: $0.02\n\ud83d\udfe1 *BGB Wallet Balance (not auto-converted)*\nTotal: 3.937587e-05 BGB | Free: 3.937587e-05 BGB | Value: $0.0001 USDT\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\n\ud83d\udcbc *Coin Holdings (Value: $25.37)*\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
+                "text": "\ud83e\udd16 Bot",
+                "callback_data": "/bot"
             },
             {
-                "text": "5/16",
-                "callback_data": "pg:x"
-            },
-            {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
-            },
-            {
-                "text": "\ud83c\udfe0",
-                "callback_data": "m:menu"
+                "text": "\ud83d\udcc8 Stats",
+                "callback_data": "/stats"
             }
         ],
         [
             {
-                "text": "\ud83d\udd0d Why not bought?",
-                "callback_data": "m:whylist:0"
+                "text": "\u2699\ufe0f Settings",
+                "callback_data": "m:set"
+            },
+            {
+                "text": "\ud83d\udcbc Holdings",
+                "callback_data": "m:r:holdings"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udcdc Trade History",
+                "callback_data": "m:r:history"
+            },
+            {
+                "text": "\ud83e\udde0 Ask AI",
+                "callback_data": "m:ai:1"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\uddf9 Clear Chat",
+                "callback_data": "/clear"
+            },
+            {
+                "text": "\ud83d\udea8 PANIC SELL",
+                "callback_data": "/panic"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 5/16*",
-    "out_time": 1795408962.1586905,
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
+    "out_time": 1795408983.301435,
     "out_mid": 4440,
     "pages": {
         "p": [
-            "\ud83d\udd0e *SCAN HISTORY* \u00b7 465/465 coins (first 150)\n11 scans \u00b7 11.2h\n```\nCOIN    RSI    1H WHY\n------------------------------\nWLD      67     - Auto-buy off\nARX      62     - Auto-buy off\nKII      65  +0.1 QUEUED\nSKYAI    51  +0.8 Near miss\nBTC      59     - Top 15\n```\n\u2800",
-            "```\nETH      64     - Top 15\nSOL      63     - Top 15\nUSDGO    49     - Top 15\nPWT      56     - Top 15\nEVAA     39     - Top 15\nDOGE     56     - Top 15\nZEC      52     - Top 15\nMTX      44     - Top 15\nBGB      58     - Top 15\nHYPE     56     - Top 15\n```",
-            "```\nNEAR     61     - Top 15\nDGAI     64     - Top 15\nSUI      54     - Top 15\nACE      40     - Top 15\nBLESS    59  +6.0 RSI high\nUMXM     44  -4.4 1H low\nPUMP     53  +1.2 RSI high\nIDOL     39  +7.2 RSI low\nTRX      44  +0.5 Trend weak\nCOLLECT  43  +1.1 Trend weak\n```",
-            "```\nENA      44  +2.3 Trend weak\nADA      41  +1.3 RSI low\nBNB      50  +0.9 RSI high\nWLD      46  +1.6 Trend weak\nBTW      51  +0.5 RSI high\nPEPE     36  +2.4 RSI low\nICNT     60  -2.4 RSI high\nNES       -     - 24h range\nARX      42  +0.6 RSI low\nTAO      47  +1.2 Trend weak\n```",
-            "```\nLTC      47  +1.5 Trend weak\nEGL1     57  +1.2 RSI high\nDOS      37  +0.3 RSI low\nINJ      44  +1.9 Trend weak\nBR       61  +2.3 RSI high\nONDO     39  +2.1 RSI low\nJCT      44  +1.3 Trend weak\nUNI      62     - Vol low\nKII      61     - Vol low\nLINK     64     - Vol low\n```",
-            "```\nARIA     73     - Vol low\nNIGHT    64     - Vol low\nMMT      47     - Vol low\nGRAM     59     - Vol low\nEDGE     68     - Vol low\nAVAX     55     - Vol low\nMAGMA    55     - Vol low\nCP       49     - Vol low\nPAXG     68     - Vol low\nPROS     40     - Vol low\n```",
-            "```\nASTER    59     - Vol low\nFET      47     - Vol low\nGWEI     45     - Vol low\nTRUMP    49     - Vol low\nBLUE     47     - Vol low\nLIT      54     - Vol low\nVELO     63     - Vol low\nGRVT     48     - Vol low\nJUP      71     - Vol low\nILY      67     - Vol low\n```",
-            "```\nACN      79     - Vol low\nJTO      58     - Vol low\nPYUSD    46     - Vol low\nNAORIS   51     - Vol low\nPI       66     - Vol low\nPRESPCX  83     - Vol low\nZBCN     54     - Vol low\nAERO     64     - Vol low\nQNT      52     - Vol low\nWBTC     59     - Vol low\n```",
-            "```\nENSO     54     - Vol low\nETHFI    63     - Vol low\nBCH      51     - Vol low\nAI       62     - Vol low\nDATA     40     - Vol low\nARB      58     - Vol low\nCC       64     - Vol low\nCYS      41     - Vol low\nIR       51     - Vol low\nLAB      37     - Vol low\n```",
-            "```\nPONS     58     - Vol low\nICP      60     - Vol low\nFARTCOI  55     - Vol low\nSHIB     51     - Vol low\nBMT      63     - Vol low\nSSV      59     - Vol low\nKERNEL   62     - Vol low\nSOON     60     - Vol low\nHBAR     50     - Vol low\nBILL     54     - Vol low\n```",
-            "```\nAAVE     50     - Vol low\nLAT      56     - Vol low\nQ        65     - Vol low\nSKY      31     - Vol low\nAIN      36     - Vol low\nBSV      46     - Vol low\nBSB      55     - Vol low\nCRV      52     - Vol low\nPYTH     57     - Vol low\nDOT      52     - Vol low\n```",
-            "```\nAPT      61     - Vol low\nVIRTUAL  52     - Vol low\nAB       46     - Vol low\nZRO      49     - Vol low\nDNA      57     - Vol low\nPENDLE   62     - Vol low\nAXIS     46     - Vol low\nPCI      82     - Vol low\nKAIA     59     - Vol low\nSEI      51     - Vol low\n```",
-            "```\nUP       48     - Vol low\nGRASS    50     - Vol low\nAPR      52     - Vol low\nPOL      61     - Vol low\nWAI      44     - Vol low\nVELVET   66     - Vol low\nMEGA     49     - Vol low\nFIL      56     - Vol low\nPORTAL   46     - Vol low\nALLO     49     - Vol low\n```",
-            "```\nPRL      47     - Vol low\nETC      73     - Vol low\nUNITAS   72     - Vol low\nAEON     50     - Vol low\nWLFI     46     - Vol low\nUPC      44     - Vol low\nMHA      31     - Vol low\nUAI      49     - Vol low\nTIA      54     - Vol low\nALIGN    55     - Vol low\n```",
-            "```\nOPEN     60     - Vol low\nSOPH     41     - Vol low\nAIO      56     - Vol low\nCAKE     65     - Vol low\n2U2      53     - Vol low\nSTRK     65     - Vol low\nKAS      58     - Vol low\nTCOM     57     - Vol low\nIRYS     43     - Vol low\nPEAQ     53     - Vol low\n```",
-            "```\nPENGU    52     - Vol low\nAR       54     - Vol low\nDMC      38     - Vol low\nKOR      44     - Vol low\nDTEC     46     - Vol low\n```\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+            "\ud83d\udcbc *HOURLY HOLDINGS*\n\ud83d\udcbc *Total Portfolio Value:* $25.49 USDT | \u20a634,855\n\n\ud83d\udcb5 *Available USDT Cash*\nTotal: $0.02 | Free to Trade: $0.02\n\ud83d\udfe1 *BGB Wallet Balance (not auto-converted)*\nTotal: 3.937587e-05 BGB | Free: 3.937587e-05 BGB | Value: $0.0001 USDT\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\n\ud83d\udcbc *Coin Holdings (Value: $25.37)*\n\u2800\n\u2800",
+            "\ud83e\ude99 *IDOL*\nQuantity: 1506.7717\nCurrent price: 0.016840 USDT\nMarket value: $25.37\nATH (Bitget lifetime): 0.047740 USDT\nATL (Bitget lifetime): 0.006850 USDT\n\ud83d\udfe2 Entry: 0.015700 USDT | PnL: +7.26% ($+1.72)\nRSI (1h): 43.8\nMA5 (1h): 0.015540\nMA10 (1h): 0.014983\n\u2800\n\u2800",
+            "Market sentiment: \ud83d\udfe1 Neutral / Mixed\nBot trailing stop: ON (8.0% below peak)\nPeak price: 0.017250\nExchange stop level: 0.015870\n\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\nand 8 more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT25.49/\u20a634,855\n\u2800\n\u2800"
         ],
-        "i": 4,
+        "i": 0,
         "mode": "Markdown",
-        "x": [
-            {
-                "text": "\ud83d\udd0d Why not bought?",
-                "callback_data": "m:whylist:0"
-            }
-        ],
-        "cmd": "m:scan_hist"
+        "x": [],
+        "cmd": null
     },
     "panel_mid": 4441
 }
