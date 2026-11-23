@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689716,
+    "last_update_id": 935689718,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -26,8 +26,8 @@
             1795401618.2929714
         ],
         "m:r:holdings": [
-            1,
-            1795407574.4273546
+            2,
+            1795407598.2160256
         ],
         "/analyse": [
             5,
@@ -74,28 +74,32 @@
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
+                "text": "\ud83d\uded2 Trade",
+                "callback_data": "m:tl:trade"
             },
             {
-                "text": "2/4",
-                "callback_data": "pg:x"
+                "text": "\ud83d\udd14 Alerts",
+                "callback_data": "m:tl:alerts"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udd0d Scan",
+                "callback_data": "m:tl:scan"
             },
             {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
-            },
+                "text": "\ud83d\udee0\ufe0f System",
+                "callback_data": "m:tl:sys"
+            }
+        ],
+        [
             {
-                "text": "\ud83c\udfe0",
+                "text": "\u2b05\ufe0f Main Menu",
                 "callback_data": "m:menu"
-            },
-            {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 2/4*",
+    "panel_text": "\ud83e\uddf0 *TOOLS*\nChoose a group.",
     "out_time": 1795407547.9497108,
     "out_mid": 4354,
     "pages": {
@@ -105,7 +109,7 @@
             "Bot trailing stop: ON (8.0% below peak)\nPeak price: 0.017250\nExchange stop level: 0.015870\n\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\nand 8 more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT25.73/\u20a635,185\n\n\u2800\n\u2800",
             "\ud83e\udde0 *AI:* Portfolio is $25.73 USDT, with $0.02 cash; IDOL holds $25.68 (+8.5%\nPnL) under an 8% trailing stop, but many tokens lack USDT pricing, indicating\nvaluation uncertainty.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 1,
+        "i": 2,
         "mode": "Markdown",
         "x": [
             {
