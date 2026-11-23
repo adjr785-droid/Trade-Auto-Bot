@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689572,
+    "last_update_id": 935689574,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -30,8 +30,8 @@
             1795393430.8571026
         ],
         "/analyse": [
-            1,
-            1795395952.892404
+            3,
+            1795395969.533413
         ],
         "m:r:analyse": [
             4,
@@ -77,7 +77,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "2/5",
+                "text": "4/5",
                 "callback_data": "pg:x"
             },
             {
@@ -96,7 +96,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 2/5*",
+    "panel_text": "\ud83d\udcc4 *Page 4/5*",
     "out_mid": 4184,
     "out_time": 1795395929.5335033,
     "pages": {
@@ -107,7 +107,7 @@
             "\u2022 RSI 63.4 is healthy (room to run before overbought)\n\u2022 24h change +1.50% shows steady, not extreme, momentum\n\u2022 24h volume $2.5M (liquid enough: above the $1M minimum)\n\u2022 Spread: 0.00% (OK for auto-buy)\n\u2022 Status: \ud83d\udd36 Potential, manual only (misses scanner rules)\n\u2022 \ud83e\udde0 AI: WEAK \u2014 Fails scanner rules, despite low spread\n\n*3. ICNT-USDT* \u2014 WATCHLIST (no full scanner setup)\nPrice: 0.361000 USDT | 24h: +2.06% | RSI: 54.1\nSuggested stop: 0.306850 (15% below price)\n\u2800\n\u2800",
             "Why:\n\u2022 Short-term trend is up (price > MA5 > MA10)\n\u2022 RSI 54.1 is healthy (room to run before overbought)\n\u2022 24h change +2.06% shows steady, not extreme, momentum\n\u2022 24h volume $1.4M (liquid enough: above the $1M minimum)\n\u2022 Spread: 0.03% (OK for auto-buy)\n\u2022 Status: \ud83d\udd36 Potential, manual only (misses scanner rules)\n\u2022 \ud83e\udde0 AI: WEAK \u2014 Fails scanner rules, modest spread\n\nBuy manually with `/buy COIN amount` if you agree.\n\u2800\n\u2800"
         ],
-        "i": 1,
+        "i": 3,
         "mode": "Markdown",
         "x": [
             {
