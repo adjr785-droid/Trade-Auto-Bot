@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689659,
+    "last_update_id": 935689662,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -68,7 +68,7 @@
         "EGL1-USDT"
     ],
     "kb_mid": 4280,
-    "out_text": "\u2705 `scan_workers` = `12`\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "\u274c `scan_workers` must be between 1 and 16.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
@@ -96,8 +96,8 @@
             }
         ]
     ],
-    "panel_text": "\u2699\ufe0f *scan workers*\nCurrent value: `12`",
-    "out_time": 1795406312.4664202,
-    "out_mid": 4282,
-    "panel_mid": 4283
+    "panel_text": "\u2699\ufe0f *scan workers*\nCurrent value: `15`",
+    "out_time": 1795406337.0502157,
+    "out_mid": 4288,
+    "panel_mid": 4289
 }
