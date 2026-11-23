@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690034,
+    "last_update_id": 935690035,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -62,52 +62,30 @@
     },
     "radar": [],
     "kb_mid": 4814,
-    "out_mid": 4815,
-    "out_text": "\ud83d\udd04 *AI RECOVERY \u2014 STAGE 1/3*\nGroq health check passed. Buying stays blocked until 3 consecutive checks pass;\n2 more to go. Normal mode returns automatically.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "\ud83d\udfe1 *MANUAL BUY CANDIDATES*\nMinimum setup score: *75%*\n_Only fresh Coin List records meeting the threshold and critical safety checks\nare shown._\n\n\ud83d\udfe1 *DOS* \u2014 *75%* | RSI: *46.2* | 24h change: *-4.57%*\n\ud83d\udfe1 *IDOL* \u2014 *75%* | RSI: *45.7* | 24h change: *+23.07%*\n\ud83d\udfe1 *CYS* \u2014 *75%* | RSI: *75.5* | 24h change: *+38.41%*\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795465925.8727078,
-    "panel_mid": 4816,
+    "out_time": 1795465938.080732,
     "panel_rows": [
         [
             {
-                "text": "\ud83e\udd16 Bot",
-                "callback_data": "/bot"
-            },
-            {
-                "text": "\ud83d\udcc8 Stats",
-                "callback_data": "/stats"
+                "text": "\ud83d\udfe1 DOS \u00b7 75%",
+                "callback_data": "m:mc:DOS"
             }
         ],
         [
             {
-                "text": "\u2699\ufe0f Settings",
-                "callback_data": "m:set"
-            },
-            {
-                "text": "\ud83d\udcbc Holdings",
-                "callback_data": "m:r:holdings"
+                "text": "\ud83d\udfe1 IDOL \u00b7 75%",
+                "callback_data": "m:mc:IDOL"
             }
         ],
         [
             {
-                "text": "\ud83d\udcdc Trade History",
-                "callback_data": "m:r:history"
-            },
-            {
-                "text": "\ud83e\udde0 Ask AI",
-                "callback_data": "m:ai:1"
-            }
-        ],
-        [
-            {
-                "text": "\ud83e\uddf9 Clear Chat",
-                "callback_data": "/clear"
-            },
-            {
-                "text": "\ud83d\udea8 PANIC SELL",
-                "callback_data": "/panic"
+                "text": "\ud83d\udfe1 CYS \u00b7 75%",
+                "callback_data": "m:mc:CYS"
             }
         ]
     ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below."
+    "panel_text": "\ud83d\udc47 *Actions*",
+    "out_mid": 4818,
+    "panel_mid": 4819
 }
