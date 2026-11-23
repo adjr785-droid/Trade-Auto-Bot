@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935689933,
+    "last_update_id": 935689935,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT24.59/\u20a633,632",
+    "kb_ph": "USDT24.70/\u20a633,774",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -63,6 +63,39 @@
     "radar": [
         "BTW-USDT"
     ],
-    "kb_mid": 4675,
-    "panel_hidden": true
+    "kb_mid": 4679,
+    "out_mid": 4676,
+    "out_text": "\u26d4 *AUTO-BUY REJECTED \u2014 IDOL-USDT*\nReason: Top-10 book depth $4674 below limit.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_mode": "Markdown",
+    "out_time": 1795458909.5943913,
+    "panel_mid": 4680,
+    "panel_rows": [
+        [
+            {
+                "text": "\ud83d\uded2 Trade",
+                "callback_data": "m:tl:trade"
+            },
+            {
+                "text": "\ud83d\udd14 Alerts",
+                "callback_data": "m:tl:alerts"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udd0d Scan",
+                "callback_data": "m:tl:scan"
+            },
+            {
+                "text": "\ud83d\udee0\ufe0f System",
+                "callback_data": "m:tl:sys"
+            }
+        ],
+        [
+            {
+                "text": "\u2b05\ufe0f Main Menu",
+                "callback_data": "m:menu"
+            }
+        ]
+    ],
+    "panel_text": "\ud83e\uddf0 *TOOLS*\nChoose a group."
 }

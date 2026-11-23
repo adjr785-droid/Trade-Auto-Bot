@@ -71,5 +71,7 @@
     "buy_reject_notice:ARX-USDT:Queued signal expired; waiting for a fresh scan.": 1795448300.0235455,
     "buy_reject_notice:IDOL-USDT:Top-10 book depth $4212 below limit.": 1795458569.604269,
     "buy_reject_notice:IDOL-USDT:Top-10 book depth $4354 below limit.": 1795458662.3076215,
-    "buy_reject_notice:IDOL-USDT:Top-10 book depth $4932 below limit.": 1795458747.3923016
+    "buy_reject_notice:IDOL-USDT:Top-10 book depth $4932 below limit.": 1795458747.3923016,
+    "buy_reject_notice:IDOL-USDT:Top-10 book depth $4511 below limit.": 1795458840.399595,
+    "buy_reject_notice:IDOL-USDT:Top-10 book depth $4674 below limit.": 1795458914.6610177
 }
