@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935689819,
+    "last_update_id": 935689820,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT26.09/\u20a635,679",
+    "kb_ph": "USDT25.95/\u20a635,494",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -66,38 +66,38 @@
         "SKYAI-USDT",
         "ICNT-USDT"
     ],
-    "kb_mid": 4471,
+    "kb_mid": 4473,
     "out_text": "\ud83d\udcc8 *TOP 10 GAINERS (24H)*\n\n```\n\ud83d\udcc8 GAINERS\n 1. PWT      +1501.11%\n 2. BLESS     +36.90%\n 3. ARIA      +22.81%\n 4. DGAI      +19.46%\n 5. PUMP       +9.64%\n 6. ICNT       +9.14%\n```\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udee0\ufe0f Audit",
-                "callback_data": "m:r:audit"
+                "text": "\ud83d\uded2 Trade",
+                "callback_data": "m:tl:trade"
             },
             {
-                "text": "\ud83e\udde9 Layout",
-                "callback_data": "m:lay"
+                "text": "\ud83d\udd14 Alerts",
+                "callback_data": "m:tl:alerts"
             }
         ],
         [
             {
-                "text": "\ud83e\udde0 Resume AI Mode",
-                "callback_data": "m:r:airesume"
+                "text": "\ud83d\udd0d Scan",
+                "callback_data": "m:tl:scan"
+            },
+            {
+                "text": "\ud83d\udee0\ufe0f System",
+                "callback_data": "m:tl:sys"
             }
         ],
         [
             {
-                "text": "\u2b05\ufe0f Tools",
-                "callback_data": "m:tools"
-            },
-            {
-                "text": "\ud83c\udfe0 Main Menu",
+                "text": "\u2b05\ufe0f Main Menu",
                 "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83d\udee0\ufe0f *SYSTEM*",
+    "panel_text": "\ud83e\uddf0 *TOOLS*\nChoose a group.",
     "out_time": 1795409983.1792862,
     "out_mid": 4469,
     "pages": {
