@@ -63,17 +63,34 @@
         ]
     },
     "radar": [
-        "IDOL-USDT",
         "TRX-USDT",
-        "JCT-USDT",
-        "BNB-USDT",
-        "KII-USDT",
-        "WLD-USDT"
+        "ARX-USDT"
     ],
     "kb_mid": 4495,
-    "panel_hidden": true,
     "out_mid": 4496,
-    "out_text": "\ud83d\udee0\ufe0f *AUTO-AUDIT COMPLETE*\n\ud83e\uddf9 Removed ghost: IDOL-USDT\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "\ud83d\udd0d *SCAN COMPLETE*\nChecked 462 markets in 6s.\nNo coin matched any setup.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795427924.7365034
+    "out_time": 1795427944.9211688,
+    "panel_rows": [
+        [
+            {
+                "text": "\u25c0",
+                "callback_data": "pg:p"
+            },
+            {
+                "text": "1/2",
+                "callback_data": "pg:x"
+            },
+            {
+                "text": "\u25b6",
+                "callback_data": "pg:n"
+            },
+            {
+                "text": "\ud83c\udfe0",
+                "callback_data": "m:menu"
+            }
+        ]
+    ],
+    "panel_text": "\ud83d\udcc4 *Page 1/2*",
+    "panel_hidden": true
 }
