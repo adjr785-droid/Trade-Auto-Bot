@@ -953,5 +953,15 @@
         "time": 1795395091.9271493,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 55.17, 'net_pnl_usdt': 5.3414, 'recurring_patterns': ['RSI 75', 'PARTIAL PROFIT', '15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC'], 'recommendations': 'Maintain current risk parameters; focus on trades triggered by RSI 75 and partial profit exits as they show positive contributions. Reduce reliance on panic\u2011driven exits and 15\u2011minute rotation signals which yield mixed results. Continue manual oversight for manual sell decisions and consider tightening stop\u2011losses on symbols with frequent negative PANIC entries.'}"
+    },
+    {
+        "time": 1795395896.3422348,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (13)', 'attention': [{'symbol': 'WLD-USDT', 'action': 'monitor', 'reason': 'Position is slightly underwater (-1.64% PnL) and close to stop (stop at 0.230957, current price 0.2342). No immediate exit recommended; watch price action and consider tightening stop if downside persists.'}], 'summary': 'Overall portfolio risk is within the daily limit. The only open position (WLD-USDT) shows a modest loss and is near its stop level. Maintain the position, monitor closely, and be prepared to adjust the stop if the price continues to decline.'}"
+    },
+    {
+        "time": 1795395897.2424374,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 55.17, 'net_pnl_usdt': 5.3414, 'recurring_patterns': ['RSI 75', 'PARTIAL PROFIT', '15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC'], 'recommendations': ['Review RSI\u2011based entries; they yielded several wins but also a loss, so tighten thresholds or combine with additional filters.', 'Limit manual panic sells; they contributed negative PnL and indicate emotional exits.', 'Consider scaling out partial profits consistently rather than single large exits to lock in gains.', 'Monitor low\u2011impact rotations (15\u2011minute no\u2011upward\u2011trend) as they produce small but frequent gains; ensure transaction costs don\u2019t erode profit.']}"
     }
 ]
