@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689542,
+    "last_update_id": 935689544,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -19,7 +19,7 @@
         ],
         "hn": 29
     },
-    "last_cmd": "/bot",
+    "last_cmd": "m:r:holdings",
     "page_mem": {
         "/bot": [
             7,
@@ -27,7 +27,7 @@
         ],
         "m:r:holdings": [
             1,
-            1795380679.1767015
+            1795393430.8571026
         ],
         "/analyse": [
             6,
@@ -67,52 +67,51 @@
         "SKYAI-USDT",
         "LTC-USDT"
     ],
-    "out_text": "\ud83d\udd0d *SCAN COMPLETE*\nChecked 462 markets in 10s.\nNo coin matched any setup.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "\ud83d\udcbc *Total Portfolio Value:* $22.83 USDT | \u20a631,229\n\n\ud83d\udcb5 *Available USDT Cash*\nTotal: $0.03 | Free to Trade: $0.03\n\ud83d\udfe1 *BGB Wallet Balance (not auto-converted)*\nTotal: 0.0018448246 BGB | Free: 0.0018448246 BGB | Value: $0.0029 USDT\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\n\ud83d\udcbc *Coin Holdings (Value: $22.77)*\n\ud83e\ude99 *WLD*\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
             {
-                "text": "\ud83e\udd16 Bot",
-                "callback_data": "/bot"
+                "text": "\u25c0",
+                "callback_data": "pg:p"
             },
             {
-                "text": "\ud83d\udcc8 Stats",
-                "callback_data": "/stats"
-            }
-        ],
-        [
-            {
-                "text": "\u2699\ufe0f Settings",
-                "callback_data": "m:set"
+                "text": "2/4",
+                "callback_data": "pg:x"
             },
             {
-                "text": "\ud83d\udcbc Holdings",
-                "callback_data": "m:r:holdings"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udcdc Trade History",
-                "callback_data": "m:r:history"
+                "text": "\u25b6",
+                "callback_data": "pg:n"
             },
             {
-                "text": "\ud83e\udde0 Ask AI",
-                "callback_data": "m:ai:1"
-            }
-        ],
-        [
-            {
-                "text": "\ud83e\uddf9 Clear Chat",
-                "callback_data": "/clear"
+                "text": "\ud83c\udfe0",
+                "callback_data": "m:menu"
             },
             {
-                "text": "\ud83d\udea8 PANIC SELL",
-                "callback_data": "/panic"
+                "text": "\ud83d\udd04",
+                "callback_data": "rf:go"
             }
         ]
     ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
-    "out_time": 1795393374.44103,
-    "out_mid": 4141,
-    "panel_mid": 4144
+    "panel_text": "\ud83d\udcc4 *Page 2/4*",
+    "out_time": 1795393418.6158323,
+    "out_mid": 4145,
+    "pages": {
+        "p": [
+            "\ud83d\udcbc *Total Portfolio Value:* $22.83 USDT | \u20a631,229\n\n\ud83d\udcb5 *Available USDT Cash*\nTotal: $0.03 | Free to Trade: $0.03\n\ud83d\udfe1 *BGB Wallet Balance (not auto-converted)*\nTotal: 0.0018448246 BGB | Free: 0.0018448246 BGB | Value: $0.0029 USDT\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\n\ud83d\udcbc *Coin Holdings (Value: $22.77)*\n\ud83e\ude99 *WLD*\n\u2800\n\u2800",
+            "Quantity: 96.54374\nCurrent price: 0.235900 USDT\nMarket value: $22.77\nATH (Bitget lifetime): 11.9570 USDT\nATL (Bitget lifetime): 0.226900 USDT\n\ud83d\udd34 Entry: 0.238100 USDT | PnL: -0.92% ($-0.21)\nRSI (1h): 59.99\nMA5 (1h): 0.238380\nMA10 (1h): 0.236730\nMarket sentiment: \ud83d\udfe1 Neutral / Mixed\n\u2800\n\u2800",
+            "Bot trailing stop: ON (8.0% below peak)\nPeak price: 0.239900\nExchange stop level: 0.230957\n\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\nand 8 more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT22.83/\u20a631,229\n\n\u2800\n\u2800",
+            "\ud83e\udde0 *AI:* Portfolio is $22.83 total, with only $0.03 USDT cash; WLD position is\ndown 0.92% and trailing stop active at 8% below peak, so limited liquidity and\nmodest downside risk.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+        ],
+        "i": 1,
+        "mode": "Markdown",
+        "x": [
+            {
+                "text": "\ud83d\udd04",
+                "callback_data": "rf:go"
+            }
+        ],
+        "cmd": "m:r:holdings"
+    },
+    "panel_mid": 4146
 }
