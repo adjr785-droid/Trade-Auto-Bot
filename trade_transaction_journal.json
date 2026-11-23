@@ -1272,5 +1272,30 @@
         "time": 1795430774.8917105,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 6.1087, 'recurring_patterns': {'15-MINUTE NO-UPWARD-TREND ROTATION': 9, 'PANIC': 4, 'RSI 75': 2, 'PARTIAL PROFIT': 3, 'MANUAL SELL': 2}, 'recommendations': 'Maintain current risk limits. Consider tightening entry criteria for trades triggered by short\u2011term trend rotations, as they dominate the sample but yield modest PnL. Review panic\u2011sell decisions; they contributed to several losses. Continue leveraging RSI\u201175 signals, which produced positive outcomes. Keep win\u2011rate monitoring and avoid increasing position size until a larger sample confirms pattern stability.'}"
+    },
+    {
+        "time": 1795430804.9564705,
+        "event": "ai_buy_approved",
+        "symbol": "JCT-USDT",
+        "ai": {
+            "decision": "BUY",
+            "reason": "The trade meets all risk controls (risk_controls=PASS), has a low spread (0.124%), modest estimated market impact (0.031%), a neutral RSI (47.7) and a strong score (213.49) with a trend setup. No material risk flags are present, so the bot can proceed with the buy."
+        }
+    },
+    {
+        "time": 1795430804.9586642,
+        "event": "buy_order_submitted",
+        "symbol": "JCT-USDT",
+        "spend_usdt": 1.75,
+        "estimated_impact_pct": 0.030950170225940352,
+        "setup": "TREND"
+    },
+    {
+        "time": 1795430806.5600145,
+        "event": "buy_fill_verified",
+        "symbol": "JCT-USDT",
+        "filled": 1082.9,
+        "average": 0.001616,
+        "spend_estimate": 1.7499664000000001
     }
 ]

@@ -64,12 +64,12 @@
             "last_error": ""
         },
         "buy_gate": {
-            "last_success": 1795429447.402905,
-            "successes": 1,
+            "last_success": 1795430804.4048505,
+            "successes": 2,
             "last_error": ""
         }
     },
-    "last_stage_success": 1795430773.9376283,
+    "last_stage_success": 1795430804.4048505,
     "last_success": 1795430766.7332203,
     "emergency_ended": 1795366791.6880443,
     "recovery_start_alerted": false

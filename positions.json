@@ -11,5 +11,17 @@
         "purchase_source": "AUTO",
         "xsl": 6.22352,
         "seen": 1795430768.5069292
+    },
+    "JCT-USDT": {
+        "entry_price": 0.001616,
+        "safe_zone": 0.001616,
+        "stop_loss": 0.001358,
+        "peak_price": 0.001616,
+        "last_price": 0.001616,
+        "opened_at": 1795430806.5617836,
+        "sl_pct": 3.73,
+        "strategy": "TREND",
+        "purchase_source": "AUTO",
+        "xsl": 0.001556
     }
 }
