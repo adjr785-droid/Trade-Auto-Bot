@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935689735,
+    "last_update_id": 935689736,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT25.68/\u20a635,123",
+    "kb_ph": "USDT25.71/\u20a635,164",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -19,7 +19,7 @@
         ],
         "hn": 31
     },
-    "last_cmd": "m:r:holdings",
+    "last_cmd": "/stats",
     "page_mem": {
         "/bot": [
             1,
@@ -68,63 +68,50 @@
         "ICNT-USDT",
         "BNB-USDT"
     ],
-    "kb_mid": 4368,
-    "out_text": "\ud83d\udcca *ANALYSIS: UMXM-USDT*\nLive price: 0.004920 USDT\n24h change: -20.13%\nRSI(14): 38.4800 \u2014 Neutral\nMA5: 0.005272 | MA10: 0.005286 | MA20: 0.005410\nMACD: -0.00028888 | Signal: -0.00032265 | Histogram: 0.00003377\nATR(14): 0.00062000 (12.60% of price)\nLast hour vol vs 20h avg: 0.99x\nBid/ask spread: 0.407%\nTechnical checks: 1/4\n\u2800\n\u2800",
+    "kb_mid": 4372,
+    "out_text": "\ud83d\udcc8 *TRADE STATS*\nClosed trades: 31\nWin rate: 55% (17 wins, 14 losses)\nAverage per trade: $+0.20\nNet profit: $+6.07\nBest: $+2.97 | Worst: $-0.66\n\n*By strategy*\nMANUAL: 24 trades | win 62% | avg $+0.28 | total $+6.76\nOLDER: 2 trades | win 0% | avg $-0.15 | total $-0.29\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
             {
-                "text": "\ud83e\udd16 Bot",
-                "callback_data": "/bot"
+                "text": "\u25c0",
+                "callback_data": "pg:p"
             },
             {
-                "text": "\ud83d\udcc8 Stats",
-                "callback_data": "/stats"
-            }
-        ],
-        [
-            {
-                "text": "\u2699\ufe0f Settings",
-                "callback_data": "m:set"
+                "text": "1/2",
+                "callback_data": "pg:x"
             },
             {
-                "text": "\ud83d\udcbc Holdings",
-                "callback_data": "m:r:holdings"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udcdc Trade History",
-                "callback_data": "m:r:history"
+                "text": "\u25b6",
+                "callback_data": "pg:n"
             },
             {
-                "text": "\ud83e\udde0 Ask AI",
-                "callback_data": "m:ai:1"
-            }
-        ],
-        [
-            {
-                "text": "\ud83e\uddf9 Clear Chat",
-                "callback_data": "/clear"
+                "text": "\ud83c\udfe0",
+                "callback_data": "m:menu"
             },
             {
-                "text": "\ud83d\udea8 PANIC SELL",
-                "callback_data": "/panic"
+                "text": "\ud83d\udd04",
+                "callback_data": "rf:go"
             }
         ]
     ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
-    "out_time": 1795407731.2303777,
+    "panel_text": "\ud83d\udcc4 *Page 1/2*",
+    "out_time": 1795407968.8417165,
     "pages": {
         "p": [
-            "\ud83d\udcca *ANALYSIS: UMXM-USDT*\nLive price: 0.004920 USDT\n24h change: -20.13%\nRSI(14): 38.4800 \u2014 Neutral\nMA5: 0.005272 | MA10: 0.005286 | MA20: 0.005410\nMACD: -0.00028888 | Signal: -0.00032265 | Histogram: 0.00003377\nATR(14): 0.00062000 (12.60% of price)\nLast hour vol vs 20h avg: 0.99x\nBid/ask spread: 0.407%\nTechnical checks: 1/4\n\u2800\n\u2800",
-            "Assessment: *WAIT / WEAK SETUP*\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+            "\ud83d\udcc8 *TRADE STATS*\nClosed trades: 31\nWin rate: 55% (17 wins, 14 losses)\nAverage per trade: $+0.20\nNet profit: $+6.07\nBest: $+2.97 | Worst: $-0.66\n\n*By strategy*\nMANUAL: 24 trades | win 62% | avg $+0.28 | total $+6.76\nOLDER: 2 trades | win 0% | avg $-0.15 | total $-0.29\n\u2800\n\u2800",
+            "OTHER: 5 trades | win 40% | avg $-0.08 | total $-0.40\n\n\ud83e\udde0 *AI:* Overall net profit is modest (+$6.07) with a 55% win rate; manual\nstrategy performs well (62% win, +$6.76), but the older strategy shows 0% win\nand a loss, warranting review.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
         "i": 0,
         "mode": "Markdown",
-        "x": [],
-        "cmd": "m:a:UMXM"
+        "x": [
+            {
+                "text": "\ud83d\udd04",
+                "callback_data": "rf:go"
+            }
+        ],
+        "cmd": "/stats"
     },
-    "out_mid": 4362,
-    "panel_mid": 4369
+    "out_mid": 4370,
+    "panel_mid": 4371
 }
