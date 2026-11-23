@@ -199,5 +199,12 @@
         "time": 1795378417.5650144,
         "reason": "PANIC",
         "strategy": "MANUAL"
+    },
+    {
+        "sym": "WLD-USDT",
+        "pnl": -0.38752900000000357,
+        "time": 1795395998.266161,
+        "reason": "PANIC",
+        "strategy": "MANUAL"
     }
 ]

@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935689577,
+    "last_update_id": 935689578,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT22.66/\u20a630,992",
+    "kb_ph": "USDT22.64/\u20a630,960",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -67,8 +67,8 @@
         "UMXM-USDT",
         "SKYAI-USDT"
     ],
-    "kb_mid": 4189,
-    "out_text": "\ud83d\udea8 *CONFIRM PANIC*\nThis sells ALL positions at market and pauses auto-buy.\nConfirm within 15 minutes.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "kb_mid": 4193,
+    "out_text": "\ud83d\uded1 *PANIC COMPLETE.* All positions sold. Auto-buy PAUSED.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
@@ -83,7 +83,7 @@
         ]
     ],
     "panel_text": "\ud83d\udc47 *Actions*",
-    "out_time": 1795395984.17084,
-    "out_mid": 4187,
-    "panel_mid": 4188
+    "out_time": 1795396004.4030647,
+    "out_mid": 4191,
+    "panel_hidden": true
 }

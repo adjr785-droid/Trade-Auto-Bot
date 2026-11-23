@@ -963,5 +963,41 @@
         "time": 1795395897.2424374,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 55.17, 'net_pnl_usdt': 5.3414, 'recurring_patterns': ['RSI 75', 'PARTIAL PROFIT', '15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC'], 'recommendations': ['Review RSI\u2011based entries; they yielded several wins but also a loss, so tighten thresholds or combine with additional filters.', 'Limit manual panic sells; they contributed negative PnL and indicate emotional exits.', 'Consider scaling out partial profits consistently rather than single large exits to lock in gains.', 'Monitor low\u2011impact rotations (15\u2011minute no\u2011upward\u2011trend) as they produce small but frequent gains; ensure transaction costs don\u2019t erode profit.']}"
+    },
+    {
+        "time": 1795395997.064008,
+        "event": "sell_fill_verified",
+        "symbol": "WLD-USDT",
+        "filled": 96.54,
+        "average": 0.2340858193494924,
+        "order_id": "1508565635461488640",
+        "reason": "PANIC",
+        "attempt": 1
+    },
+    {
+        "time": 1795395998.2669604,
+        "event": "trade_closed",
+        "symbol": "WLD-USDT",
+        "pnl_usdt": -0.38752900000000357,
+        "reason": "PANIC",
+        "strategy": "MANUAL"
+    },
+    {
+        "time": 1795395998.636237,
+        "event": "full_sale_verified_or_dust",
+        "symbol": "WLD-USDT",
+        "remaining_base": 0.00374,
+        "remaining_value_usdt": 0.00087516,
+        "filled": 96.54
+    },
+    {
+        "time": 1795396004.0443552,
+        "event": "ai_sell_review",
+        "symbol": "WLD-USDT",
+        "review": {
+            "review": "The trade was exited at an average price of 0.23409\u202fUSDT, resulting in a realized loss of \u20130.38753\u202fUSDT on the sold 96.54\u202fWLD. The exit was triggered by panic rather than a systematic signal, and a small residual position (0.00374\u202fWLD) remains. The loss magnitude is modest relative to the position size, but the emotional trigger indicates a weakness in discipline.",
+            "lesson": "Implement stricter stop\u2011loss or volatility\u2011based exit rules to avoid panic\u2011driven decisions. Ensure that any remaining base amount is either fully liquidated or managed with a clear plan to prevent orphaned balances. Reinforce risk\u2011management protocols to align exits with predefined criteria rather than emotion.",
+            "confidence": "medium"
+        }
     }
 ]
