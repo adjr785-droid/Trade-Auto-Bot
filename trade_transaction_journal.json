@@ -1147,5 +1147,15 @@
         "time": 1795408293.874748,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 6.1087, 'recurring_patterns': ['15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC', 'RSI 75', 'PARTIAL PROFIT'], 'recommendations': ['Limit exposure to trades flagged as PANIC until market stabilises', 'Prioritise entries with RSI 75 signals which showed positive PnL', 'Consider scaling out with PARTIAL PROFIT targets rather than full exits', 'Review the effectiveness of the 15\u2011minute no\u2011upward\u2011trend rotation strategy; it produced mixed results and may need tighter criteria']}"
+    },
+    {
+        "time": 1795408659.339465,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [], 'summary': 'Current portfolio passes risk checks. The only open position (IDOL-USDT) is showing a modest 8.22% profit and remains within its stop level. No immediate actions are required; continue to monitor the position and maintain existing risk parameters.'}"
+    },
+    {
+        "time": 1795408660.2128968,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 6.1087, 'recurring_patterns': ['15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC', 'RSI 75', 'PARTIAL PROFIT'], 'recommendations': ['Limit exposure to trades triggered by PANIC signals, as they show mixed outcomes and higher loss frequency.', 'Prioritize entries with RSI 75 signals, which have produced consistent positive PnL in the sample set.', 'Continue using PARTIAL PROFIT exits, which contributed to several of the larger gains.', 'Monitor and possibly refine the 15\u2011MINUTE NO\u2011UPWARD\u2011TREND ROTATION strategy, as it yields small but frequent profits but also occasional losses.']}"
     }
 ]
