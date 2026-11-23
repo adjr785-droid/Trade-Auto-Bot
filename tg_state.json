@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689893,
+    "last_update_id": 935689894,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -71,21 +71,45 @@
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udd0d Scan now",
-                "callback_data": "m:r:scan"
+                "text": "\ud83e\udd16 Bot",
+                "callback_data": "/bot"
             },
             {
-                "text": "\ud83e\uddfe Scan History",
-                "callback_data": "m:scan_hist"
+                "text": "\ud83d\udcc8 Stats",
+                "callback_data": "/stats"
             }
         ],
         [
             {
-                "text": "\u2b05\ufe0f Menu",
-                "callback_data": "m:menu"
+                "text": "\u2699\ufe0f Settings",
+                "callback_data": "m:set"
+            },
+            {
+                "text": "\ud83d\udcbc Holdings",
+                "callback_data": "m:r:holdings"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udcdc Trade History",
+                "callback_data": "m:r:history"
+            },
+            {
+                "text": "\ud83e\udde0 Ask AI",
+                "callback_data": "m:ai:1"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\uddf9 Clear Chat",
+                "callback_data": "/clear"
+            },
+            {
+                "text": "\ud83d\udea8 PANIC SELL",
+                "callback_data": "/panic"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcda *COIN LIST*\n\u2705 Ready 0 | \ud83d\udc40 Watching 26 | \ud83c\udd95 New 0 | \ud83d\udcbc Held 2 | \u26d4 Rejected 434\n\n\ud83d\udcbc *JCT* 0.001634 | 1H +0.12% | RSI 55 | seen 2x\n\ud83d\udcbc *COLLECT* 0.025325 | 1H -1.49% | RSI 50 | seen 2x\n\ud83d\udc40 *EGL1* 0.010020 | 1H +3.99% | RSI 85 | seen 2x\n\ud83d\udc40 *DOS* 0.139300 | 1H +3.56% | RSI 48 | seen 2x\n\ud83d\udc40 *IDOL* 0.017120 | 1H +2.48% | RSI 46 | seen 2x\n\ud83d\udc40 *UNI* 5.1640 | 1H +1.39% | RSI 81 | seen 2x\n\ud83d\udc40 *ADA* 0.154500 | 1H +1.09% | RSI 78 | seen 2x\n\ud83d\udc40 *ARX* 0.176750 | 1H +0.30% | RSI 70 | seen 2x\n\ud83d\udc40 *PAXG* 3668.30 | 1H +0.29% | RSI 78 | seen 2x\n\ud83d\udc40 *KII* 0.084697 | 1H +0.26% | RSI 79 | seen 2x\n\ud83d\udc40 *TRX* 0.310690 | 1H +0.13% | RSI 81 | seen 2x\n\ud83d\udc40 *INJ* 6.8000 | 1H +0.10% | RSI 80 | seen 2x",
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
     "panel_mid": 4611
 }
