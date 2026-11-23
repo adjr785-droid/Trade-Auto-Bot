@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689551,
+    "last_update_id": 935689553,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -42,8 +42,8 @@
             1795380739.3167899
         ],
         "m:scan_hist": [
-            1,
-            1795393835.3619123
+            2,
+            1795393855.4326925
         ],
         "m:ai:1": [
             3,
@@ -76,7 +76,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "2/3",
+                "text": "3/3",
                 "callback_data": "pg:x"
             },
             {
@@ -101,7 +101,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 2/3*",
+    "panel_text": "\ud83d\udcc4 *Page 3/3*",
     "out_mid": 4153,
     "out_time": 1795393795.2435234,
     "pages": {
@@ -110,7 +110,7 @@
             "```\nUSDGO         51.4      - SKIP\nEVAA          26.4      - SKIP\nPWT           61.9      - SKIP\nDOGE          55.7      - SKIP\nZEC           57.0      - SKIP\nMTX           50.3      - SKIP\nBGB           59.4      - SKIP\nHYPE          60.8      - SKIP\nNEAR          56.8      - SKIP\nUMXM          40.0      - SKIP\n```",
             "```\nDGAI          69.7      - SKIP\nIDOL          36.2      - SKIP\nSUI           54.9      - SKIP\nACE           49.6      - SKIP\nBLESS         55.7      - SKIP\nCOLLECT       55.4      - SKIP\nADA           54.4      - SKIP```\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 1,
+        "i": 2,
         "mode": "Markdown",
         "x": [
             {
