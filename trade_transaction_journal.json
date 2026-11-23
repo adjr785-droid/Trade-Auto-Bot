@@ -903,5 +903,15 @@
         "time": 1795390200.8592947,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 55.17, 'net_pnl_usdt': 5.3414, 'recurring_patterns': ['RSI 75', 'PARTIAL PROFIT', '15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC'], 'recommendations': 'Maintain current strategy but tighten risk controls on panic exits. Prioritize trades with RSI 75 signals that have shown positive PnL, but verify overbought conditions. Reduce reliance on manual sell-all actions without clear trend confirmation. Continue monitoring partial profit targets around 5\u20116% as they have contributed positively. Consider adding stop\u2011losses for volatile assets (e.g., TRX, WLD) to limit downside.'}"
+    },
+    {
+        "time": 1795393050.5512414,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (13)', 'attention': [{'symbol': 'WLD-USDT', 'action': 'hold', 'reason': 'Position is slightly negative (-0.76% PnL) and close to stop level (0.230957). Given the small loss and limited upside, maintaining the position while monitoring price action is prudent. No clear breakout signal or improved fundamentals justify an immediate exit or additional exposure.'}], 'summary': 'Overall portfolio risk remains within the daily limit. The only open position (WLD-USDT) shows a modest loss and is near its stop. Recommend holding and closely watching price; consider exiting if price breaches the stop or if a negative trend confirms. No new entries are advised at this time.'}"
+    },
+    {
+        "time": 1795393051.4503403,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 55.17, 'net_pnl_usdt': 5.3414, 'recurring_patterns': ['RSI 75 (3 occurrences)', 'PARTIAL PROFIT (3 occurrences)', '15-MINUTE NO-UPWARD-TREND ROTATION (6 occurrences)', 'PANIC (3 occurrences)', 'MANUAL SELL (2 occurrences)'], 'recommendations': 'Maintain current risk parameters; focus on trades triggered by RSI 75 and partial profit exits as they show positive contribution. Reduce exposure to PANIC\u2011driven exits and 15\u2011minute rotation signals which yield mixed results. Consider tightening stop\u2011losses on symbols with frequent panic sells (e.g., TRX\u2011USDT, WLD\u2011USDT, SKYAI\u2011USDT).'}"
     }
 ]
