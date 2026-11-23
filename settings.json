@@ -30,7 +30,7 @@
     "daily_summary_hour_utc": 20,
     "max_daily_drawdown_pct": 5.0,
     "partial_tp_pct": 21.4843,
-    "partial_tp_fraction": 0.175,
+    "partial_tp_fraction": 0.275,
     "dynamic_trail": true,
     "sell_if_stop_fails": true,
     "scan_prefilter": true,
