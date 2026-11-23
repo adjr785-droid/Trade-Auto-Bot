@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689744,
+    "last_update_id": 935689746,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -74,46 +74,82 @@
     "panel_rows": [
         [
             {
-                "text": "\ud83e\udd16 Bot",
-                "callback_data": "/bot"
-            },
-            {
-                "text": "\ud83d\udcc8 Stats",
-                "callback_data": "/stats"
+                "text": "rsi_exit = 75",
+                "callback_data": "m:k:rsi_exit"
             }
         ],
         [
             {
-                "text": "\u2699\ufe0f Settings",
-                "callback_data": "m:set"
-            },
-            {
-                "text": "\ud83d\udcbc Holdings",
-                "callback_data": "m:r:holdings"
+                "text": "btc_rsi_min = 50",
+                "callback_data": "m:k:btc_rsi_min"
             }
         ],
         [
             {
-                "text": "\ud83d\udcdc Trade History",
-                "callback_data": "m:r:history"
-            },
-            {
-                "text": "\ud83e\udde0 Ask AI",
-                "callback_data": "m:ai:1"
+                "text": "risk_per_trade_pct = 1.0",
+                "callback_data": "m:k:risk_per_trade_pct"
             }
         ],
         [
             {
-                "text": "\ud83e\uddf9 Clear Chat",
-                "callback_data": "/clear"
+                "text": "max_daily_loss_pct = 3.0",
+                "callback_data": "m:k:max_daily_loss_pct"
+            }
+        ],
+        [
+            {
+                "text": "max_portfolio_exposure_pct = 50.0",
+                "callback_data": "m:k:max_portfolio_exposure_pct"
+            }
+        ],
+        [
+            {
+                "text": "max_position_pct = 15.0",
+                "callback_data": "m:k:max_position_pct"
+            }
+        ],
+        [
+            {
+                "text": "max_daily_trades = 30",
+                "callback_data": "m:k:max_daily_trades"
+            }
+        ],
+        [
+            {
+                "text": "max_spread_pct = 0.5",
+                "callback_data": "m:k:max_spread_pct"
+            }
+        ],
+        [
+            {
+                "text": "rebuy_cooldown_hours = 6.0",
+                "callback_data": "m:k:rebuy_cooldown_hours"
+            }
+        ],
+        [
+            {
+                "text": "atr_stop_enabled = True",
+                "callback_data": "m:k:atr_stop_enabled"
+            }
+        ],
+        [
+            {
+                "text": "\u25c0\ufe0f Prev",
+                "callback_data": "m:sp:0"
             },
             {
-                "text": "\ud83d\udea8 PANIC SELL",
-                "callback_data": "/panic"
+                "text": "Next \u25b6\ufe0f",
+                "callback_data": "m:sp:2"
+            }
+        ],
+        [
+            {
+                "text": "\u2b05\ufe0f Menu",
+                "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
+    "panel_text": "\u2699\ufe0f *SETTINGS* (page 2/9)\nTap a setting to change it.",
     "out_time": 1795408018.618603,
     "pages": {
         "p": [
