@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935689555,
+    "last_update_id": 935689556,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT22.90/\u20a631,322",
+    "kb_ph": "USDT22.75/\u20a631,111",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -62,71 +62,42 @@
             1795362988.7943418
         ]
     },
-    "kb_mid": 4156,
+    "kb_mid": 4157,
     "radar": [
         "SKYAI-USDT",
         "LTC-USDT"
     ],
-    "out_text": "\ud83d\udd0e *SCAN HISTORY \u2014 QUERY*\nMatched 464 of 464 unique coins | all coins\nLatest result per coin \u00b7 9 scans, 3236 raw records in window\nPage 1/24 | Window 7.0h\n\n```COIN         RSI    R:R  DECISION\n---------------------------------------\nBTC           62.4      - SKIP\nETH           64.4      - SKIP\nSOL           57.7      - SKIP\n```\n\u2800",
+    "out_mid": 4159,
+    "out_text": "\ud83d\udcdf *OUTPUT*\nResults appear here.",
     "out_mode": "Markdown",
+    "panel_mid": 4160,
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
+                "text": "\ud83d\uded2 Trade",
+                "callback_data": "m:tl:trade"
             },
             {
-                "text": "3/3",
-                "callback_data": "pg:x"
+                "text": "\ud83d\udd14 Alerts",
+                "callback_data": "m:tl:alerts"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udd0d Scan",
+                "callback_data": "m:tl:scan"
             },
             {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
-            },
+                "text": "\ud83d\udee0\ufe0f System",
+                "callback_data": "m:tl:sys"
+            }
+        ],
+        [
             {
-                "text": "\ud83c\udfe0",
+                "text": "\u2b05\ufe0f Main Menu",
                 "callback_data": "m:menu"
-            },
-            {
-                "text": "Next \u27a1\ufe0f",
-                "callback_data": "scan_history:2:"
-            },
-            {
-                "text": "\ud83d\udd0d Why not bought?",
-                "callback_data": "m:whylist:0"
-            },
-            {
-                "text": "\ud83d\udd79\ufe0f Main Menu",
-                "callback_data": "/menu"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 3/3*",
-    "out_mid": 4153,
-    "out_time": 1795393795.2435234,
-    "pages": {
-        "p": [
-            "\ud83d\udd0e *SCAN HISTORY \u2014 QUERY*\nMatched 464 of 464 unique coins | all coins\nLatest result per coin \u00b7 9 scans, 3236 raw records in window\nPage 1/24 | Window 7.0h\n\n```COIN         RSI    R:R  DECISION\n---------------------------------------\nBTC           62.4      - SKIP\nETH           64.4      - SKIP\nSOL           57.7      - SKIP\n```\n\u2800",
-            "```\nUSDGO         51.4      - SKIP\nEVAA          26.4      - SKIP\nPWT           61.9      - SKIP\nDOGE          55.7      - SKIP\nZEC           57.0      - SKIP\nMTX           50.3      - SKIP\nBGB           59.4      - SKIP\nHYPE          60.8      - SKIP\nNEAR          56.8      - SKIP\nUMXM          40.0      - SKIP\n```",
-            "```\nDGAI          69.7      - SKIP\nIDOL          36.2      - SKIP\nSUI           54.9      - SKIP\nACE           49.6      - SKIP\nBLESS         55.7      - SKIP\nCOLLECT       55.4      - SKIP\nADA           54.4      - SKIP```\n\u2800\n\u2800\n\u2800\n\u2800"
-        ],
-        "i": 2,
-        "mode": "Markdown",
-        "x": [
-            {
-                "text": "Next \u27a1\ufe0f",
-                "callback_data": "scan_history:2:"
-            },
-            {
-                "text": "\ud83d\udd0d Why not bought?",
-                "callback_data": "m:whylist:0"
-            },
-            {
-                "text": "\ud83d\udd79\ufe0f Main Menu",
-                "callback_data": "/menu"
-            }
-        ],
-        "cmd": "m:scan_hist"
-    },
-    "panel_mid": 4154
+    "panel_text": "\ud83e\uddf0 *TOOLS*\nChoose a group."
 }
