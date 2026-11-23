@@ -1928,11 +1928,13 @@ def cmd_scan_history(txt="/scan_history"):
  table="COIN    RSI    1H WHY\n"+"-"*30+"\n"+"\n".join(rows)
  query=" ".join(parts) if parts else "all coins"
  more=f" (first {len(shown)})" if len(found)>len(shown) else ""
- msg=f"🔎 *SCAN HISTORY* · {len(found)}/{len(items)} coins{more}\n{n_scans} scans · {age/3600:.1f}h"+("" if not parts else " · "+query)+f"\n```{table}```"
+ msg=f"🔎 *SCAN HISTORY* · {len(found)}/{len(items)} coins{more}\n{n_scans} scans · {age/3600:.1f}h"+("" if not parts else " · "+query)+f"\n```\n{table}\n```"
  _send(msg,"Markdown",{"inline_keyboard":[[{"text":"🔍 Why not bought?","callback_data":"m:whylist:0"}]]})
 def _hist_code(x,s):
  d=str(x.get("decision","SKIP")).upper();rs=str(x.get("reason",""))
- if "NOT QUEUED" in d:return "Blocked"
+ if "NOT QUEUED" in d:
+  rl=rs.lower()
+  return "Mkt filter" if "market" in rl else "BTC filter" if "btc" in rl else "Auto-buy off" if "paused" in rl else "Cooldown" if "cooldown" in rl else "Guardian" if "guardian" in rl else "Blocked"
  if "QUEUED" in d:return "QUEUED"
  if "BOUGHT" in d or d.startswith("BUY"):return "BOUGHT"
  if "SOLD" in d or "SELL" in d:return "SOLD"
