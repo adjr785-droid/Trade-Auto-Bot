@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689950,
+    "last_update_id": 935689951,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -64,12 +64,12 @@
         "BTW-USDT"
     ],
     "kb_mid": 4699,
-    "out_text": "\ud83d\udd0e *SCAN HISTORY* \u00b7 462/462 coins (first 150)\n5 scans \u00b7 1.2h\n```\nCOIN    RSI    1H WHY\n------------------------------\n0G       53     - RSI high\n10SET    54     - RSI high\n1INCH    53     - RSI high\n2U2      53     - RSI high\n2Z       53     - RSI high\n```\n\u2800",
+    "out_text": "\ud83d\udd0e *SCAN HISTORY* \u00b7 462/462 coins (first 150)\n5 scans \u00b7 1.3h\n```\nCOIN    RSI    1H WHY\n------------------------------\n0G       53     - RSI high\n10SET    54     - RSI high\n1INCH    53     - RSI high\n2U2      53     - RSI high\n2Z       53     - RSI high\n```\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795459727.259851,
+    "out_time": 1795459757.0830126,
     "pages": {
         "p": [
-            "\ud83d\udd0e *SCAN HISTORY* \u00b7 462/462 coins (first 150)\n5 scans \u00b7 1.2h\n```\nCOIN    RSI    1H WHY\n------------------------------\n0G       53     - RSI high\n10SET    54     - RSI high\n1INCH    53     - RSI high\n2U2      53     - RSI high\n2Z       53     - RSI high\n```\n\u2800",
+            "\ud83d\udd0e *SCAN HISTORY* \u00b7 462/462 coins (first 150)\n5 scans \u00b7 1.3h\n```\nCOIN    RSI    1H WHY\n------------------------------\n0G       53     - RSI high\n10SET    54     - RSI high\n1INCH    53     - RSI high\n2U2      53     - RSI high\n2Z       53     - RSI high\n```\n\u2800",
             "```\nA        66     - RSI high\nA8       46     - No setup\nAAVE     51     - RSI high\nAB       46     - No setup\nACE      32  -7.7 RSI low\nACH      59     - RSI high\nACN      77     - RSI high\nACT      55     - RSI high\nADA      78  +1.3 RSI high\nAEON     56     - RSI high\n```",
             "```\nAERO     51     - RSI high\nAEVO     57     - RSI high\nAGLD     47     - No setup\nAI       54     - RSI high\nAIA      42     - No setup\nAIAV     48     - RSI high\nAIN      50     - RSI high\nAIO      56     - RSI high\nALGO     68     - RSI high\nALICE    55     - RSI high\n```",
             "```\nALIGN    45     - No setup\nALLO     64     - RSI high\nALPH     60     - RSI high\nANIME    57     - RSI high\nANKR     61     - RSI high\nAPE      49     - RSI high\nAPI3     68     - RSI high\nAPR      78     - RSI high\nAPT      57     - RSI high\nAR       65     - RSI high\n```",
@@ -123,6 +123,6 @@
         ]
     ],
     "panel_text": "\ud83d\udcc4 *Page 1/16*",
-    "out_mid": 4697,
-    "panel_mid": 4698
+    "out_mid": 4700,
+    "panel_mid": 4701
 }
