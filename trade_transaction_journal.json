@@ -1177,5 +1177,15 @@
         "time": 1795409521.0056036,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 6.1087, 'recurring_patterns': ['PANIC (3 occurrences)', '15-MINUTE NO-UPWARD-TREND ROTATION (7 occurrences)', 'PARTIAL PROFIT (3 occurrences)', 'RSI 75 (2 occurrences)', 'MANUAL SELL (2 occurrences)'], 'recommendations': 'Limit exposure to panic-driven exits; consider tighter stop\u2011losses or manual review before executing panic trades. Review the effectiveness of the 15\u2011minute no\u2011upward\u2011trend rotation signal, as it yields mixed results. Prioritize strategies with higher win contribution such as RSI\u201175 and partial profit exits, and monitor manual sell decisions for consistency.'}"
+    },
+    {
+        "time": 1795409801.3762016,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'IDOL-USDT', 'action': 'hold', 'reason': 'Position shows a 9.94% unrealized gain and is at its stop level; no immediate risk signals. Continue monitoring for any adverse price movement.'}], 'summary': 'The portfolio passes risk checks. The only position, IDOL-USDT, is currently profitable and at its stop price, suggesting a hold stance while watching for price reversal. No new orders are recommended.'}"
+    },
+    {
+        "time": 1795409802.6599245,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 6.1087, 'recurring_patterns': {'15-MINUTE NO-UPWARD-TREND ROTATION': 6, 'PANIC': 5, 'RSI 75': 2, 'MANUAL SELL ALL': 2, 'PARTIAL PROFIT': 3}, 'recommendations': ['Review and tighten criteria for panic exits, as they account for 5 of 30 trades and include two large losses.', 'Consider adjusting RSI\u201175 trigger; it produced mixed results (both profit and loss).', 'Evaluate manual sell signals to ensure they are based on clear price targets rather than ad\u2011hoc decisions.', 'Maintain current partial\u2011profit strategy but monitor consistency across symbols.']}"
     }
 ]
