@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT24.73/\u20a633,816",
+    "kb_ph": "USDT24.71/\u20a633,796",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -61,7 +61,7 @@
         ]
     },
     "radar": [],
-    "kb_mid": 4708,
+    "kb_mid": 4710,
     "out_text": "\ud83c\udfc6 *TOP 3* \u00b7 \u25b6 details\n*1. BGSC* \ud83d\udd36 WATCH\n0.00089600 | +78.6% | RSI 62\n\ud83e\udde0 CAUTION \u00b7 No scanner pass, hig\n*2. KII* \ud83d\udd36 WATCH\n0.084682 | +4.3% | RSI 75\n\ud83e\udde0 CAUTION \u00b7 Fails scanner, RSI 7\n*3. TRX* \ud83d\udd36 WEAK\n0.311100 | +1.9% | RSI 78\n\ud83e\udde0 WEAK \u00b7 Weak setup, fails sc\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "out_time": 1795459913.7204735,
