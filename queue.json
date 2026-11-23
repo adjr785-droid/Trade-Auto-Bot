@@ -1,11 +1,1 @@
-{
-    "KII-USDT": {
-        "timestamp": 1795405242,
-        "type": "BREAKOUT",
-        "sl": 0.069646,
-        "score": 320.67,
-        "price": 0.081936,
-        "chg": 0.339,
-        "ai_priority_adjustment": 0.0
-    }
-}
+{}

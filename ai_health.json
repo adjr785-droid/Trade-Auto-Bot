@@ -29,8 +29,8 @@
             "failures": 3
         },
         "market_regime": {
-            "last_success": 1795405240.9992096,
-            "successes": 29,
+            "last_success": 1795407523.797312,
+            "successes": 30,
             "last_error": ""
         },
         "manual_buy_review": {
@@ -49,8 +49,8 @@
             "last_error": ""
         },
         "command_review": {
-            "last_success": 1795406971.8153443,
-            "successes": 28,
+            "last_success": 1795407546.8280141,
+            "successes": 29,
             "last_error": ""
         },
         "near_miss_review": {
@@ -59,12 +59,12 @@
             "last_error": ""
         },
         "opportunity_ranking": {
-            "last_success": 1795405244.3945131,
-            "successes": 1,
+            "last_success": 1795407526.8689775,
+            "successes": 2,
             "last_error": ""
         }
     },
-    "last_stage_success": 1795407514.8092792,
+    "last_stage_success": 1795407546.8280141,
     "last_success": 1795407507.054244,
     "emergency_ended": 1795366791.6880443,
     "recovery_start_alerted": false
