@@ -437,11 +437,12 @@ def save(f,d):
   os.replace(f+".tmp",f)
  except Exception as e:print(f"SAVE ERR {f}: {e}")
 def cfg():
- d={"rsi_min":42,"rsi_max":48,"stop_loss_pct":5.0,"auto_buy_enabled":True,"auto_buy_amount_usdt":10.0,"max_tokens_before_consolidation":3,"trail_pct":8.0,"crash_guard_pct":10.0,"rsi_exit":75,"btc_rsi_min":50,"risk_per_trade_pct":1.0,"max_daily_loss_pct":3.0,"max_portfolio_exposure_pct":50.0,"max_position_pct":15.0,"max_daily_trades":5,"max_spread_pct":0.5,"auto_mode_v1":False,"rebuy_cooldown_hours":6.0,"atr_stop_enabled":True,"atr_stop_mult":2.0,"atr_stop_min_pct":3.0,"atr_stop_max_pct":10.0,"market_filter_enabled":True,"btc_trend_hours":50,"min_breadth_pct":30.0,"offline_alert_hours":3.0,"daily_summary_hour_utc":20,"max_daily_drawdown_pct":5.0,"partial_tp_pct":5.0,"partial_tp_fraction":0.5,"dynamic_trail":True,"sell_if_stop_fails":True,"scan_prefilter":True,"cleanup_hours":24.0,"scan_interval_minutes":15.0,"auto_clear_hours":24.0,"live_mode_seconds":270,"mtf_confirm":True,"btc_shock_pct":3.0,"max_open_risk_pct":3.0,"loss_streak_trigger":2,"loss_streak_size_factor":0.5,"scan_parallel":True,"page_chars":600,"page_lines":12,"page_width":32,"output_stale_minutes":5,"smart_risk_enabled":True,"max_coin_exposure_pct":20.0,"max_sector_exposure_pct":35.0,"liquidity_depth_usdt":5000.0,"max_book_imbalance_pct":85.0,"regime_risk_factor":0.65,"execution_slippage_pct":0.35,"stop_watchdog_enabled":True,"portfolio_stress_pct":12.0,"signal_expiry_minutes":30,"adaptive_risk_enabled":True,"dynamic_auto_buy_enabled":True,"auto_buy_reserve_pct":5.0,"dynamic_auto_buy_max_pct":20.0,"dynamic_auto_buy_min_usdt":1.02,"dynamic_auto_buy_max_usdt":0.0,"guardian_enabled":True,"guardian_audit_interval_minutes":15,"max_portfolio_correlation":0.85,"momentum_1h_enabled":True,"mom_1h_min_pct":0.5,"mom_1h_max_pct":6.0,"max_24h_pct":100.0,"near_miss_alerts":True,"near_miss_rsi_margin":3.0,"near_miss_1h_margin":0.5,"near_miss_cooldown_minutes":60,"near_miss_max_per_scan":3,"radar_max":30,"radar_rsi_margin":10.0}
+ d={"rsi_min":42,"rsi_max":48,"stop_loss_pct":5.0,"auto_buy_enabled":True,"auto_buy_amount_usdt":10.0,"max_tokens_before_consolidation":3,"trail_pct":8.0,"crash_guard_pct":10.0,"rsi_exit":75,"btc_rsi_min":50,"risk_per_trade_pct":1.0,"max_daily_loss_pct":3.0,"max_portfolio_exposure_pct":50.0,"max_position_pct":15.0,"max_daily_trades":5,"max_spread_pct":0.5,"auto_mode_v1":False,"rebuy_cooldown_hours":6.0,"atr_stop_enabled":True,"atr_stop_mult":2.0,"atr_stop_min_pct":3.0,"atr_stop_max_pct":10.0,"market_filter_enabled":True,"btc_trend_hours":50,"min_breadth_pct":30.0,"offline_alert_hours":3.0,"daily_summary_hour_utc":20,"max_daily_drawdown_pct":5.0,"partial_tp_pct":10.0,"partial_tp_fraction":0.5,"dynamic_trail":True,"sell_if_stop_fails":True,"scan_prefilter":True,"cleanup_hours":24.0,"scan_interval_minutes":15.0,"auto_clear_hours":24.0,"live_mode_seconds":270,"mtf_confirm":True,"btc_shock_pct":3.0,"max_open_risk_pct":3.0,"loss_streak_trigger":2,"loss_streak_size_factor":0.5,"scan_parallel":True,"page_chars":600,"page_lines":12,"page_width":32,"output_stale_minutes":5,"smart_risk_enabled":True,"max_coin_exposure_pct":20.0,"max_sector_exposure_pct":35.0,"liquidity_depth_usdt":5000.0,"max_book_imbalance_pct":85.0,"regime_risk_factor":0.65,"execution_slippage_pct":0.35,"stop_watchdog_enabled":True,"portfolio_stress_pct":12.0,"signal_expiry_minutes":30,"adaptive_risk_enabled":True,"dynamic_auto_buy_enabled":True,"auto_buy_reserve_pct":5.0,"dynamic_auto_buy_max_pct":20.0,"dynamic_auto_buy_min_usdt":1.02,"dynamic_auto_buy_max_usdt":0.0,"guardian_enabled":True,"guardian_audit_interval_minutes":15,"max_portfolio_correlation":0.85,"momentum_1h_enabled":True,"mom_1h_min_pct":0.5,"mom_1h_max_pct":6.0,"max_24h_pct":100.0,"near_miss_alerts":True,"near_miss_rsi_margin":3.0,"near_miss_1h_margin":0.5,"near_miss_cooldown_minutes":60,"near_miss_max_per_scan":3,"scan_workers":8,"radar_max":30,"radar_rsi_margin":10.0}
  s=load(CFG,d)
  for k,v in d.items():s.setdefault(k,v)
  for _k in ('max_hold_hours','momentum_watch_minutes','rotation_retry_hours'):
   if _k in s:s.pop(_k,None);save(CFG,s)
+ if not s.get('tp10_v1'):s['partial_tp_pct']=10.0;s['tp10_v1']=True;save(CFG,s)
  if not s.get('auto_mode_v1'):s['auto_buy_enabled']=True;s['auto_mode_v1']=True;save(CFG,s)
  return s
 def in_cd(k,s=5):return time.time()-load(CD,{}).get(k,0)<s
@@ -576,6 +577,11 @@ def _calc(sym):
   return float(o[-1][4]),c[-1],_rsi(c),round(sum(c[-5:])/5,6),round(sum(c[-10:])/10,6)
  except:return (None,)*5
 _PF={};_H1={};_NM=[];_RADAR=[]
+def tk_spread(t):
+ try:
+  b=float(t.get('bid') or 0);a=float(t.get('ask') or 0)
+  return (a-b)/((a+b)/2)*100 if b>0 and a>0 and a>=b else None
+ except Exception:return None
 def mom_on(s):return bool(s.get('momentum_1h_enabled',True))
 def pre_ok(chg,s):
  # candle-fetch prefilter: with the 1H momentum window the 24h change only needs to stay under a loose ceiling
@@ -1924,8 +1930,43 @@ def cmd_scan_history(txt="/scan_history"):
  if page<total:nav.append({"text":"Next ➡️","callback_data":f"scan_history:{page+1}:{' '.join(parts)}"})
  keyboard=[]
  if nav:keyboard.append(nav)
+ keyboard.append([{"text":"🔍 Why not bought?","callback_data":"m:whylist:0"}])
  keyboard.append([{"text":"🕹️ Main Menu","callback_data":"/menu"}])
  _send(msg,"Markdown",{"inline_keyboard":keyboard})
+def _why_latest():
+ h=scan_history_state();best={}
+ for x in h.get("items",[]):best[str(x.get("sym",""))]=x
+ return best
+def ui_whylist(pg=0):
+ best=_why_latest()
+ def rk(x):
+  d=str(x.get("decision","")).upper()
+  return (0 if d.startswith("SETUP") else 1 if x.get("near_miss") else 2,int(x.get("rank",9999) or 9999))
+ coins=[x for x in sorted(best.values(),key=rk) if int(x.get("rank",0) or 0)>15 and x.get("rsi") is not None]
+ per=18;n=max(1,(len(coins)+per-1)//per);pg=max(0,min(pg,n-1))
+ nav=[]
+ if pg>0:nav.append(_B("◀️ Prev",f"m:whylist:{pg-1}"))
+ if pg<n-1:nav.append(_B("Next ▶️",f"m:whylist:{pg+1}"))
+ ui_send(f"🔍 *WHY NOT BOUGHT?* (page {pg+1}/{n})\nSetups first, then near-misses, then the rest. Tap a coin.",_grid([_B(str(x['sym']).split('-')[0],"m:why:"+str(x['sym']).split('-')[0]) for x in coins[pg*per:(pg+1)*per]],3)+([nav] if nav else [])+[[_B("⬅️ Scan History","m:scan_hist")]])
+def why_text(coin):
+ s=cfg();best=_why_latest();x=best.get(coin.upper()+"-USDT")
+ if not x:return f"🔍 *WHY: {coin}*\nNo scan record in the history window."
+ vol=float(x.get("vol",0) or 0);mv=float(x.get("min_volume",0) or 0)
+ L=[f"🔍 *WHY: {coin}* — {str(x.get('decision','SKIP'))}",str(x.get('reason','-'))[:90]]
+ h=x.get("h1");r=x.get("rsi");p=x.get("price");ma5=x.get("ma5");ma10=x.get("ma10");chg=float(x.get("chg",0) or 0)
+ L.append(f"#{x.get('rank')} · ${vol/1e6:.1f}M"+(f" (min ${mv/1e6:.0f}M)" if mv else ""))
+ lo,hi=float(s['rsi_min']),float(s['rsi_max']);a,b=float(s.get('mom_1h_min_pct',0.5)),float(s.get('mom_1h_max_pct',6.0))
+ def ck(ok,t):L.append(("✅ " if ok else "❌ ")+t)
+ ck(pre_ok(chg,s),f"24h {chg:+.1f}%")
+ if h is None:L.append("❔ 1H: no data")
+ else:ck(a<=h<=b,f"1H {h:+.2f}% (need {a:g}-{b:g})")
+ if r is None:L.append("❔ RSI: no data")
+ else:ck(lo<=r<=hi,f"RSI {r:.1f} (need {lo:g}-{hi:g})")
+ if None in (p,ma5,ma10):L.append("❔ Trend: no data")
+ else:ck(p>ma5>ma10,"Price > MA5 > MA10")
+ if "4h trend" in str(x.get("reason","")):L.append("❌ 4h trend down")
+ if x.get("near_miss"):L.append("🎯 "+str(x["near_miss"])[:60])
+ return "\n".join(L)
 def send_near_miss(s,ai_market=None):
  if not s.get('near_miss_alerts',True) or not _NM:return
  cdm=float(s.get('near_miss_cooldown_minutes',60))*60
@@ -1975,7 +2016,7 @@ def fast_watch():
   return
  send_near_miss(s,None)
 def scan(force=False):
- st=load(SC);now=time.time()
+ st=load(SC);now=time.time();_t0=time.time()
  iv=max(1.0,float(cfg().get('scan_interval_minutes',15) or 15))
  if not force and now-st.get('last',0)<max(60,iv*60-240):return
  db=load(DB);q=load(QF);s=cfg();ai_market=ai_market_context(s);guardian_ok,guardian_reason=guardian_audit();auto_enabled=bool(s.get("auto_buy_enabled")) and guardian_ok;btc_is_blocked=btc_blocked(s) if auto_enabled else False
@@ -1985,7 +2026,7 @@ def scan(force=False):
  buying_allowed=auto_enabled and not btc_is_blocked and not mf;block_reason=(f"Guardian integrity check: {guardian_reason}" if not guardian_ok else "automatic buying is paused" if not auto_enabled else "BTC safety filter blocked buying" if btc_is_blocked else f"market filter: {mf}" if mf else "")
  try:tk=ex.fetch_tickers();mk=ex.load_markets()
  except Exception as e:print(f"SCAN ERROR: {e}");tg(f"⚠️ *SCAN FAILED:* {e}");return
- v=[{'sym':k.replace("/","-"),'vol':t['quoteVolume'] or 0,'chg':t['percentage'] or 0,'last':t.get('last')} for k,t in tk.items() if k.endswith('/USDT') and not skip(k.split('/')[0]) and not (k in mk and not mk[k].get('spot',False))]
+ v=[{'sym':k.replace("/","-"),'vol':t['quoteVolume'] or 0,'chg':t['percentage'] or 0,'last':t.get('last'),'bid':t.get('bid'),'ask':t.get('ask')} for k,t in tk.items() if k.endswith('/USDT') and not skip(k.split('/')[0]) and not (k in mk and not mk[k].get('spot',False))]
  v.sort(key=lambda x:x['vol'],reverse=True);ct=int(time.time());qu=False
  for sym,d in list(q.items()):
   if ct-d.get('timestamp',0)>86400:q.pop(sym,None);qu=True
@@ -2000,9 +2041,11 @@ def scan(force=False):
     i=rank-16;th=(1000000 if i<=84 else 3000000 if i<=183 else 4000000 if i<=383 else 5000000);chg=float(t['chg'] or 0)
     if float(t['vol'] or 0)<th:continue
     if s.get('scan_prefilter',True) and not pre_ok(chg,s):continue
+    _sp=tk_spread(t)
+    if _sp is not None and _sp>2*float(s.get('max_spread_pct',0.5)):continue
     cand.append(t['sym'])
    from concurrent.futures import ThreadPoolExecutor
-   with ThreadPoolExecutor(max_workers=4) as pool:
+   with ThreadPoolExecutor(max_workers=int(s.get('scan_workers',8) or 8)) as pool:
     for sy,res in zip(cand,pool.map(_calc,cand)):_PF[sy]=res
   except Exception as e:print(f"PREFETCH ERR: {e}");_PF.clear()
  for rank,t in enumerate(v[:500],start=1):
@@ -2012,8 +2055,10 @@ def scan(force=False):
    i=rank-16;threshold=(1000000 if i<=84 else 3000000 if i<=183 else 4000000 if i<=383 else 5000000);recd["min_volume"]=threshold
    if vol<threshold:recd["reason"]=f"Vol below ${threshold/1e6:.0f}M"
    elif s.get('scan_prefilter',True) and not pre_ok(chg,s):recd["reason"]="24H change outside every setup range (skipped before candle fetch)"
+   elif s.get('scan_parallel',True) and (tk_spread(t) or 0)>2*float(s.get('max_spread_pct',0.5)):recd["reason"]=f"Spread {tk_spread(t):.2f}% is more than twice your {float(s.get('max_spread_pct',0.5)):g}% limit (skipped before candle fetch)"
    else:
     p,pr,r,ma5,ma10=_PF.get(sym) or data(sym);recd.update(price=p,rsi=r,ma5=ma5,ma10=ma10)
+    if _H1.get(sym) is not None:recd['h1']=round(_H1[sym],2)
     if not p or r is None:recd["reason"]="No candle data"
     else:
      setup=sl=None;breakout_volume=None
@@ -2080,7 +2125,7 @@ def scan(force=False):
  if full:st['last_full']=st['last']
  save(SC,st)
  if matched:
-  msg=f"🔍 *SCAN COMPLETE*\nChecked {len(records)} markets.\nMatched: {matched} | Queued: {queued}." + ("\n" + block_reason if not buying_allowed else "")
+  msg=f"🔍 *SCAN COMPLETE*\nChecked {len(records)} markets in {time.time()-_t0:.0f}s.\nMatched: {matched} | Queued: {queued}." + ("\n" + block_reason if not buying_allowed else "")
   if ai_market:
    regime=str(ai_market.get('regime',''))[:60];risk=str(ai_market.get('risk_level',''))[:30]
    if regime or risk:msg+="\n🧠 AI market view: "+" | ".join(x for x in (regime,risk) if x)
@@ -2096,7 +2141,7 @@ def scan(force=False):
    msg+="\n"+"\n".join(body)
   except Exception as e:print(f"MATCH LIST ERR: {e}")
   tg(msg)
- elif full:tg(f"🔍 *SCAN COMPLETE*\nChecked {len(records)} markets.\nNo coin matched any setup.")
+ elif full:tg(f"🔍 *SCAN COMPLETE*\nChecked {len(records)} markets in {time.time()-_t0:.0f}s.\nNo coin matched any setup.")
 def fp(p):
  if p is None:return "N/A"
  return f"{p:.2f}" if p>=100 else f"{p:.4f}" if p>=1 else f"{p:.6f}" if p>=0.001 else f"{p:.8f}"
@@ -2126,7 +2171,7 @@ def cmd_set(txt):
  if k not in s:tg(f"❌ Unknown key. Valid: `{'`, `'.join(s.keys())}`");return
  try:new=val.lower() in ('true','1','yes','on') if isinstance(s[k],bool) else float(val) if isinstance(s[k],float) else int(val)
  except:tg(f"❌ Invalid value for {k}");return
- limits={"risk_per_trade_pct":(0.1,2.0),"max_daily_loss_pct":(0.5,10.0),"max_portfolio_exposure_pct":(5.0,100.0),"max_position_pct":(1.0,50.0),"max_daily_trades":(1,50),"max_spread_pct":(0.05,3.0),"trail_pct":(0.0,30.0),"scan_interval_minutes":(5.0,240.0),"auto_clear_hours":(0.0,168.0),"live_mode_seconds":(0,330),"stop_loss_pct":(0.5,20.0),"rsi_min":(1.0,99.0),"rsi_max":(1.0,99.0),"rsi_exit":(0.0,99.0),"auto_buy_amount_usdt":(1.0,100000.0),"max_tokens_before_consolidation":(1,30),"crash_guard_pct":(1.0,50.0),"btc_rsi_min":(0.0,99.0),"rebuy_cooldown_hours":(0.0,168.0),"atr_stop_mult":(0.5,6.0),"atr_stop_min_pct":(1.0,10.0),"atr_stop_max_pct":(2.0,25.0),"btc_trend_hours":(10,200),"min_breadth_pct":(0.0,100.0),"offline_alert_hours":(0.0,72.0),"daily_summary_hour_utc":(0,23),"max_coin_exposure_pct":(1.0,100.0),"liquidity_depth_usdt":(0.0,1000000.0),"max_book_imbalance_pct":(50.0,99.0),"regime_risk_factor":(0.1,1.0),"execution_slippage_pct":(0.05,5.0),"portfolio_stress_pct":(1.0,50.0),"signal_expiry_minutes":(1,240),"mom_1h_min_pct":(0.0,20.0),"mom_1h_max_pct":(0.5,30.0),"max_24h_pct":(30.0,500.0),"near_miss_rsi_margin":(0.5,10.0),"near_miss_1h_margin":(0.1,3.0),"near_miss_cooldown_minutes":(5,1440),"near_miss_max_per_scan":(1,10),"radar_max":(5,60),"radar_rsi_margin":(3.0,25.0)}
+ limits={"risk_per_trade_pct":(0.1,2.0),"max_daily_loss_pct":(0.5,10.0),"max_portfolio_exposure_pct":(5.0,100.0),"max_position_pct":(1.0,50.0),"max_daily_trades":(1,50),"max_spread_pct":(0.05,3.0),"trail_pct":(0.0,30.0),"scan_interval_minutes":(5.0,240.0),"auto_clear_hours":(0.0,168.0),"live_mode_seconds":(0,330),"stop_loss_pct":(0.5,20.0),"rsi_min":(1.0,99.0),"rsi_max":(1.0,99.0),"rsi_exit":(0.0,99.0),"auto_buy_amount_usdt":(1.0,100000.0),"max_tokens_before_consolidation":(1,30),"crash_guard_pct":(1.0,50.0),"btc_rsi_min":(0.0,99.0),"rebuy_cooldown_hours":(0.0,168.0),"atr_stop_mult":(0.5,6.0),"atr_stop_min_pct":(1.0,10.0),"atr_stop_max_pct":(2.0,25.0),"btc_trend_hours":(10,200),"min_breadth_pct":(0.0,100.0),"offline_alert_hours":(0.0,72.0),"daily_summary_hour_utc":(0,23),"max_coin_exposure_pct":(1.0,100.0),"liquidity_depth_usdt":(0.0,1000000.0),"max_book_imbalance_pct":(50.0,99.0),"regime_risk_factor":(0.1,1.0),"execution_slippage_pct":(0.05,5.0),"portfolio_stress_pct":(1.0,50.0),"signal_expiry_minutes":(1,240),"mom_1h_min_pct":(0.0,20.0),"mom_1h_max_pct":(0.5,30.0),"max_24h_pct":(30.0,500.0),"near_miss_rsi_margin":(0.5,10.0),"near_miss_1h_margin":(0.1,3.0),"near_miss_cooldown_minutes":(5,1440),"near_miss_max_per_scan":(1,10),"scan_workers":(1,16),"radar_max":(5,60),"radar_rsi_margin":(3.0,25.0)}
  if k in limits and not (limits[k][0] <= new <= limits[k][1]):tg(f"❌ `{k}` must be between {limits[k][0]} and {limits[k][1]}.");return
  if k=="rsi_min" and new>=s.get("rsi_max",99):tg("❌ rsi_min must be lower than rsi_max.");return
  if k=="rsi_max" and new<=s.get("rsi_min",1):tg("❌ rsi_max must be higher than rsi_min.");return
@@ -2174,7 +2219,7 @@ def ui_more(kind,pg=0):
  if pg<n-1:nav.append(_B("Next ▶️",f"m:more:{kind}:{pg+1}"))
  ui_send(f"➕ *MORE COINS* (page {pg+1}/{n})\nBiggest 24h volume first. Tap a coin.",_grid([_B(c,pre+c) for c in v[pg*per:(pg+1)*per]],3)+([nav] if nav else [])+[[_B("⬅️ Back",back)]])
 def ui_settings_page(pg=0):
- keys=[k for k in cfg() if k!="auto_mode_v1"];per=10;n=(len(keys)+per-1)//per;pg=max(0,min(pg,n-1));cur=cfg()
+ keys=[k for k in cfg() if k not in ("auto_mode_v1","tp10_v1")];per=10;n=(len(keys)+per-1)//per;pg=max(0,min(pg,n-1));cur=cfg()
  btns=[_B(f"{k} = {cur[k]}"[:60],f"m:k:{k}") for k in keys[pg*per:(pg+1)*per]]
  nav=[]
  if pg>0:nav.append(_B("◀️ Prev",f"m:sp:{pg-1}"))
@@ -2291,6 +2336,8 @@ def ui_cb(t):
             ])
   elif a=="scan_hist":
    cmd_scan_history("/scan_history")
+  elif a=="whylist":ui_whylist(int(p[2]) if len(p)>2 else 0)
+  elif a=="why" and len(p)>2:_send(why_text(p[2]),"Markdown",{"inline_keyboard":[[_B("⬅️ Why list","m:whylist:0"),_B("🔎 Analyse "+p[2],"m:a:"+p[2])]]})
   elif a=="r" and len(p)>2 and p[2] in ("gain","lose"):
    tg(gl(10,p[2][0]))
   elif a=="r" and len(p)>2 and p[2]=="market":
