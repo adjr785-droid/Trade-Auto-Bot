@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689567,
+    "last_update_id": 935689569,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -42,8 +42,8 @@
             1795380739.3167899
         ],
         "m:scan_hist": [
-            2,
-            1795395167.5418015
+            0,
+            1795395222.6027174
         ],
         "m:ai:1": [
             3,
@@ -77,7 +77,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "3/16",
+                "text": "1/16",
                 "callback_data": "pg:x"
             },
             {
@@ -96,7 +96,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 3/16*",
+    "panel_text": "\ud83d\udcc4 *Page 1/16*",
     "kb_mid": 4177,
     "pages": {
         "p": [
@@ -117,7 +117,7 @@
             "```\nSTRK     58     - Vol low\nAIO      54     - Vol low\nOPEN     56     - Vol low\nKAS      57     - Vol low\nSOPH     31     - Vol low\n2U2      53     - Vol low\nTCOM     38     - Vol low\nAR       52     - Vol low\nUS       45     - Vol low\nKOR      40     - Vol low\n```",
             "```\nDTEC     43     - Vol low\nAIAV     57     - Vol low\nPENGU    50     - Vol low\nMOEW     59     - Vol low\nVERONA   33     - Vol low\n```\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 2,
+        "i": 0,
         "mode": "Markdown",
         "x": [
             {
