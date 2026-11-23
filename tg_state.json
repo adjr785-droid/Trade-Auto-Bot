@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935689984,
+    "last_update_id": 935689985,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT24.25/\u20a633,168",
+    "kb_ph": "USDT24.27/\u20a633,188",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -61,10 +61,10 @@
         ]
     },
     "radar": [],
-    "kb_mid": 4742,
+    "kb_mid": 4745,
     "out_text": "\ud83d\udd0e *SCAN HISTORY* \u00b7 463/463 coins (first 150)\n9 scans \u00b7 2.0h\n```\nCOIN    RSI    1H WHY\n------------------------------\nNES      23  +0.6 Auto-buy off\n0G       49     - RSI high\n10SET    52     - RSI high\n1INCH    51     - RSI high\n2U2      53     - RSI high\n```\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795462342.9804173,
+    "out_time": 1795462372.5548832,
     "panel_rows": [
         [
             {
@@ -121,6 +121,6 @@
         ],
         "cmd": "m:scan_hist"
     },
-    "out_mid": 4740,
-    "panel_mid": 4741
+    "out_mid": 4743,
+    "panel_mid": 4744
 }
