@@ -103973,6 +103973,23 @@
             "decision": "SKIP",
             "reason": "Vol below $5M",
             "min_volume": 5000000
+        },
+        {
+            "time": 1795431204,
+            "rank": 38,
+            "sym": "JCT-USDT",
+            "vol": 1022512.0,
+            "chg": -0.554,
+            "price": 0.001615,
+            "rsi": 47.69,
+            "rr": null,
+            "ma5": 0.001598,
+            "ma10": 0.001587,
+            "decision": "SETUP \u2014 QUEUED",
+            "reason": "TREND matched; queued",
+            "min_volume": 1000000,
+            "h1": 1.77,
+            "strategy": "TREND"
         }
     ]
 }

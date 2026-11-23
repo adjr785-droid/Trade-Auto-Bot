@@ -61,14 +61,15 @@
         ]
     },
     "radar": [
+        "WLD-USDT",
         "ARX-USDT",
         "TRX-USDT"
     ],
-    "kb_mid": 4541,
+    "kb_mid": 4543,
     "out_mid": 4539,
-    "out_text": "\ud83d\udea8 *AI FAILURE \u2014 EMERGENCY SELL-ONLY MODE ACTIVATED*\nAll buying and discretionary/manual selling are now blocked. The bot will\nindependently monitor existing positions and execute ONLY configured\nprotective/exit conditions (stop-loss, trailing stop, take-profit/partial\nprofit, crash guard, time stop, RSI exit, unprotected-position exit and the\nexisting 15-minute no-upward-trend rule). No replacement buys. Proceeds remain\nin USDT.\nReason: AI stage performance_review failed: Expecting ',' delimiter: line 1\ncolumn 546 (char 545)\nAI recovery does NOT automatically resume trading. You will be notified.\n\u2800\n\u2800",
+    "out_text": "\u26d4 *AUTO-BUY REJECTED \u2014 JCT-USDT*\nReason: Position exists.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795431066.4407616,
+    "out_time": 1795431215.055971,
     "panel_mid": 4540,
     "panel_rows": [
         [
