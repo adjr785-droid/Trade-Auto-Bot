@@ -67,5 +67,6 @@
     "buy_reject_notice:BLESS-USDT:Queued signal expired; waiting for a fresh scan.": 1795439387.000554,
     "buy_reject_notice:ARX-USDT:Top-10 book depth $1411 below limit.": 1795444328.7307634,
     "buy_reject_notice:ARX-USDT:Top-10 book depth $1727 below limit.": 1795444431.163136,
-    "buy_reject_notice:ARX-USDT:Order-book imbalance 88% is unusually concentrated.": 1795444506.4493937
+    "buy_reject_notice:ARX-USDT:Order-book imbalance 88% is unusually concentrated.": 1795444506.4493937,
+    "buy_reject_notice:ARX-USDT:Queued signal expired; waiting for a fresh scan.": 1795448300.0235455
 }
