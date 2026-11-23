@@ -1227,5 +1227,10 @@
         "time": 1795423532.5902977,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 6.1087, 'recurring_patterns': {'15-MINUTE NO-UPWARD-TREND ROTATION': 7, 'PANIC': 4, 'RSI 75': 2, 'PARTIAL PROFIT': 3, 'MANUAL SELL': 2}, 'recommendations': 'Maintain current risk parameters but consider tightening entry criteria for trades flagged as \"PANIC\" and \"15-MINUTE NO-UPWARD-TREND ROTATION\" due to their mixed outcomes. Monitor RSI\u2011based entries closely; they yielded positive PnL in this sample. Continue manual oversight for large manual sell actions to avoid potential missed upside.'}"
+    },
+    {
+        "time": 1795427926.0356529,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 6.1087, 'recurring_patterns': {'PANIC': 4, '15-MINUTE NO-UPWARD-TREND ROTATION': 7, 'RSI 75': 2, 'PARTIAL PROFIT': 3, 'MANUAL SELL': 2}, 'recommendations': 'Maintain current strategy but tighten entry criteria for high\u2011volatility symbols. Reduce exposure to PANIC\u2011driven exits by implementing tighter stop\u2011losses or longer observation windows. Consider scaling back trades that rely solely on short\u2011term rotation signals until a clearer upward trend is confirmed. Monitor RSI\u2011based entries for consistency, as they yielded positive outcomes in limited cases.'}"
     }
 ]
