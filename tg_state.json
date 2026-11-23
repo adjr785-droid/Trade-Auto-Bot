@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935689937,
+    "last_update_id": 935689938,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT24.67/\u20a633,734",
+    "kb_ph": "USDT24.65/\u20a633,714",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -63,10 +63,10 @@
     "radar": [
         "BTW-USDT"
     ],
-    "kb_mid": 4683,
-    "out_text": "\ud83e\uddf9 *DUST \u2192 BGB*\n13 eligible coin(s), about $0.02 priced:\nTRX: 1.86e-05 (\u2248$0.0000)\nUNI: 9.04e-05 (\u2248$0.0004)\nGRAM: 0.00637 (\u2248$0.0064)\nENA: 0.00767 (\u2248$0.0008)\nSKYAI: 0.00348 (\u2248$0.0001)\nIDOL: 0.00172 (\u2248$0.0000)\nICNT: 0.00025 (\u2248$0.0001)\nPUMP: 0.0099 (\u2248$0.0000)\n\u2800\n\u2800",
+    "kb_mid": 4685,
+    "out_text": "\ud83e\uddf9 *DUST \u2192 BGB*\n\u26a0\ufe0f TRX, UNI, GRAM, ENA, SKYAI, IDOL, ICNT, PUMP, BLESS, MMT, COLLECT, UMXM,\nDOS: outcome UNKNOWN (bitget {\"code\":\"13011\",\"msg\":\"Can be convert 1 times every\n6 hours\",\"requestTime\":1795458949960,\"data\":null})\nDo not retry until you check Bitget's conversion history and balances.\nFinal status is in Bitget conversion history.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795458931.3379798,
+    "out_time": 1795458951.2699983,
     "panel_rows": [
         [
             {
@@ -100,25 +100,6 @@
         ]
     ],
     "panel_text": "\ud83d\udcc4 *Page 1/2*",
-    "out_mid": 4681,
-    "pages": {
-        "p": [
-            "\ud83e\uddf9 *DUST \u2192 BGB*\n13 eligible coin(s), about $0.02 priced:\nTRX: 1.86e-05 (\u2248$0.0000)\nUNI: 9.04e-05 (\u2248$0.0004)\nGRAM: 0.00637 (\u2248$0.0064)\nENA: 0.00767 (\u2248$0.0008)\nSKYAI: 0.00348 (\u2248$0.0001)\nIDOL: 0.00172 (\u2248$0.0000)\nICNT: 0.00025 (\u2248$0.0001)\nPUMP: 0.0099 (\u2248$0.0000)\n\u2800\n\u2800",
-            "BLESS: 0.00107 (\u2248$0.0000)\nMMT: 0.0661 (\u2248$0.0126)\nCOLLECT: 0.00953 (\u2248$0.0002)\nUMXM: 0.00605 (\u2248$0.0000)\nDOS: 0.00868 (\u2248$0.0012)\n\nNothing is sold at market. Bitget converts these small balances to BGB. Coins in\nyour active trades are never included.\n\u2800\n\u2800\n\u2800\n\u2800"
-        ],
-        "i": 0,
-        "mode": "Markdown",
-        "x": [
-            {
-                "text": "\u2705 Convert all to BGB",
-                "callback_data": "/dust confirm"
-            },
-            {
-                "text": "\u274c Cancel",
-                "callback_data": "/dust cancel"
-            }
-        ],
-        "cmd": "m:r:dust"
-    },
-    "panel_mid": 4682
+    "out_mid": 4684,
+    "panel_hidden": true
 }
