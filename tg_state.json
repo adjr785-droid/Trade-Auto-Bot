@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689791,
+    "last_update_id": 935689793,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -69,7 +69,7 @@
         "BNB-USDT"
     ],
     "kb_mid": 4436,
-    "out_text": "\ud83d\udd0d *WHY: BLESS* \u2014 SKIP\nTrend range; RSI 42-48; MA trend; Oversold recovery; Breakout trend\n#16 \u00b7 $3.6M (min $1M)\n\u2705 24h +41.5%\n\u274c 1H +6.04% (need 0.5-6)\n\u274c RSI 59.0 (need 42-48)\n\u274c Price > MA5 > MA10\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "\ud83d\udd0d *WHY: COLLECT* \u2014 SKIP\nMA trend; Oversold recovery; Breakout trend\n#21 \u00b7 $3.0M (min $1M)\n\u2705 24h +4.2%\n\u2705 1H +1.08% (need 0.5-6)\n\u2705 RSI 42.6 (need 42-48)\n\u274c Price > MA5 > MA10\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
@@ -78,13 +78,13 @@
                 "callback_data": "m:whylist:0"
             },
             {
-                "text": "\ud83d\udd0e Analyse BLESS",
-                "callback_data": "m:a:BLESS"
+                "text": "\ud83d\udd0e Analyse COLLECT",
+                "callback_data": "m:a:COLLECT"
             }
         ]
     ],
     "panel_text": "\ud83d\udc47 *Actions*",
-    "out_time": 1795408839.9567733,
-    "out_mid": 4434,
-    "panel_mid": 4435
+    "out_time": 1795408860.34305,
+    "out_mid": 4437,
+    "panel_mid": 4438
 }
