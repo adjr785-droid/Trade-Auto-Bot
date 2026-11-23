@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935689766,
+    "last_update_id": 935689767,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT25.65/\u20a635,082",
+    "kb_ph": "USDT25.52/\u20a634,896",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -68,53 +68,55 @@
         "ICNT-USDT",
         "BNB-USDT"
     ],
-    "kb_mid": 4399,
-    "out_text": "\u2705 `partial_tp_fraction` = `0.275`\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "kb_mid": 4408,
+    "out_text": "\ud83c\udfc6 *TOP 3* \u00b7 \u25b6 details\n*1. IDOL* \u2705 TREND\n0.016900 | -2.2% | RSI 44\n\ud83e\udde0 OK \u00b7 Scanner passed, mode\n*2. ICNT* \ud83d\udd36 WATCH\n0.364200 | +7.5% | RSI 53\n\ud83e\udde0 CAUTION \u00b7 Fails scanner rules,\n*3. EGL1* \ud83d\udd36 WATCH\n0.008740 | +4.8% | RSI 65\n\ud83e\udde0 CAUTION \u00b7 Fails scanner rules,\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
             {
-                "text": "\ud83e\udd16 Bot",
-                "callback_data": "/bot"
+                "text": "\u25c0",
+                "callback_data": "pg:p"
             },
             {
-                "text": "\ud83d\udcc8 Stats",
-                "callback_data": "/stats"
+                "text": "1/5",
+                "callback_data": "pg:x"
+            },
+            {
+                "text": "\u25b6",
+                "callback_data": "pg:n"
+            },
+            {
+                "text": "\ud83c\udfe0",
+                "callback_data": "m:menu"
             }
         ],
         [
             {
-                "text": "\u2699\ufe0f Settings",
-                "callback_data": "m:set"
-            },
-            {
-                "text": "\ud83d\udcbc Holdings",
-                "callback_data": "m:r:holdings"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udcdc Trade History",
-                "callback_data": "m:r:history"
-            },
-            {
-                "text": "\ud83e\udde0 Ask AI",
-                "callback_data": "m:ai:1"
-            }
-        ],
-        [
-            {
-                "text": "\ud83e\uddf9 Clear Chat",
-                "callback_data": "/clear"
-            },
-            {
-                "text": "\ud83d\udea8 PANIC SELL",
-                "callback_data": "/panic"
+                "text": "\ud83d\udd0e Analyse a coin",
+                "callback_data": "m:an"
             }
         ]
     ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
-    "out_time": 1795408399.2497346,
-    "out_mid": 4403,
-    "panel_mid": 4404
+    "panel_text": "\ud83d\udcc4 *Page 1/5*",
+    "out_time": 1795408449.9215274,
+    "out_mid": 4407,
+    "pages": {
+        "p": [
+            "\ud83c\udfc6 *TOP 3* \u00b7 \u25b6 details\n*1. IDOL* \u2705 TREND\n0.016900 | -2.2% | RSI 44\n\ud83e\udde0 OK \u00b7 Scanner passed, mode\n*2. ICNT* \ud83d\udd36 WATCH\n0.364200 | +7.5% | RSI 53\n\ud83e\udde0 CAUTION \u00b7 Fails scanner rules,\n*3. EGL1* \ud83d\udd36 WATCH\n0.008740 | +4.8% | RSI 65\n\ud83e\udde0 CAUTION \u00b7 Fails scanner rules,\n\u2800\n\u2800",
+            "\ud83c\udfc6 *TOP 3 SETUPS RIGHT NOW*\n_Read-only scan. Nothing was bought._\n\n*1. IDOL-USDT* \u2014 TREND\nPrice: 0.016900 USDT | 24h: -2.20% | RSI: 43.8\nSuggested stop: 0.014365 (15% below price)\nWhy:\n\u2022 Trend setup: price 0.016900 is above MA5 0.015540 which is above MA10\n0.014983, with RSI 43.8 inside your 42-48 entry zone\n\u2022 24h volume $3.0M (liquid enough: above the $1M minimum)\n\u2800\n\u2800",
+            "\u2022 Spread: 0.12% (OK for auto-buy)\n\u2022 Status: \u2705 Passes all filters\n\u2022 \ud83e\udde0 AI: OK \u2014 Scanner passed, moderate RSI, low spread.\n\n*2. ICNT-USDT* \u2014 WATCHLIST (no full scanner setup)\nPrice: 0.364200 USDT | 24h: +7.53% | RSI: 52.7\nSuggested stop: 0.309570 (15% below price)\nWhy:\n\u2022 Short-term trend is up (price > MA5 > MA10)\n\u2022 RSI 52.7 is healthy (room to run before overbought)\n\u2800\n\u2800",
+            "\u2022 24h change +7.53% shows steady, not extreme, momentum\n\u2022 24h volume $1.4M (liquid enough: above the $1M minimum)\n\u2022 Spread: 0.03% (OK for auto-buy)\n\u2022 Status: \ud83d\udd36 Potential, manual only (misses scanner rules)\n\u2022 \ud83e\udde0 AI: CAUTION \u2014 Fails scanner rules, despite positive 24h change.\n\n*3. EGL1-USDT* \u2014 WATCHLIST (no full scanner setup)\nPrice: 0.008740 USDT | 24h: +4.79% | RSI: 64.8\nSuggested stop: 0.007429 (15% below price)\nWhy:\n\u2800\n\u2800",
+            "\u2022 Short-term trend is up (price > MA5 > MA10)\n\u2022 RSI 64.8 is healthy (room to run before overbought)\n\u2022 24h change +4.79% shows steady, not extreme, momentum\n\u2022 24h volume $1.2M (liquid enough: above the $1M minimum)\n\u2022 Spread: 0.46% (OK for auto-buy)\n\u2022 Status: \ud83d\udd36 Potential, manual only (misses scanner rules)\n\u2022 \ud83e\udde0 AI: CAUTION \u2014 Fails scanner rules, high spread and elevated RSI.\n\nBuy manually with `/buy COIN amount` if you agree.\n\u2800\n\u2800\n\u2800"
+        ],
+        "i": 0,
+        "mode": "Markdown",
+        "x": [
+            {
+                "text": "\ud83d\udd0e Analyse a coin",
+                "callback_data": "m:an"
+            }
+        ],
+        "cmd": "/analyse"
+    },
+    "panel_mid": 4409
 }
