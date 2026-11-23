@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935689748,
+    "last_update_id": 935689751,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT25.62/\u20a635,040",
+    "kb_ph": "USDT25.73/\u20a635,185",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -68,8 +68,8 @@
         "ICNT-USDT",
         "BNB-USDT"
     ],
-    "kb_mid": 4376,
-    "out_text": "\ud83e\udd16 *BOT*\n\ud83d\udd58 Since last check (108 min ago): \ud83d\udfe2 balance +2.06 USDT\nExchange connection: \u2705 OK\nPortfolio: $25.65 USDT | \u20a635,082\nUSDT cash: $0.02 (free $0.02)\nAuto-buy: ON (dynamic allocation; legacy target $6.4994)\nBTC safety filter: OK\nMarket filter: OK (no market-wide block)\nRisk controls: \u2705 trading allowed\nToday vs start of day: +12.01% (auto-buy pauses at -5.0%)\n\u2800\n\u2800",
+    "kb_mid": 4379,
+    "out_text": "\u2705 `partial_tp_pct` = `19.5312`\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
@@ -97,26 +97,8 @@
             }
         ]
     ],
-    "panel_text": "\u2699\ufe0f *partial tp pct*\nCurrent value: `10.0`",
-    "out_time": 1795408018.618603,
-    "pages": {
-        "p": [
-            "\ud83e\udd16 *BOT*\n\ud83d\udd58 Since last check (108 min ago): \ud83d\udfe2 balance +2.06 USDT\nExchange connection: \u2705 OK\nPortfolio: $25.65 USDT | \u20a635,082\nUSDT cash: $0.02 (free $0.02)\nAuto-buy: ON (dynamic allocation; legacy target $6.4994)\nBTC safety filter: OK\nMarket filter: OK (no market-wide block)\nRisk controls: \u2705 trading allowed\nToday vs start of day: +12.01% (auto-buy pauses at -5.0%)\n\u2800\n\u2800",
-            "Money in coins: 100% of portfolio (cap 50.0%)\nRe-buy cooldown active: none\nLast market scan: 8 min ago (runs every 30 min) | Queued coins: 0\nBot-tracked positions: 1 | Holdings priced: 1\n\ud83d\udfe2 Last: UMXM \u2014 PARTIAL PROFIT +10.4% | PnL $+1.11 | 2.8h ago\n\n\ud83e\udded *STRATEGY*\nEntries: TREND (RSI 42-48, price > MA5 > MA10), OVERSOLD bounce (RSI < 30),\nBREAKOUT (RSI 50-70 + volume breakout)\nProtection: stop-loss 15% | trailing stop 8.0% below peak | crash guard 10.0%\n\u2800\n\u2800",
-            "Exit: RSI >= 75\nProfit taking: sell 50% at +10.0% then stop moves to break-even\nDynamic trailing: ON (wider in strong trends, tighter when momentum fades)\nEntry safety: spread limit 0.5% | stop fails -> sell at market | scan pre-filter\nON\nNear-instant mode: ON (stays awake 270s per run)\nAuto-clear chat: every 24h\nLimits: 30 trades/day, 3.0% daily loss, 15.0% max per coin\nExtra safeguards: 4h trend check ON | BTC shock pause 3%/h | combined open risk\ncap 3% | smaller buys after 2 losses in a row | parallel scan ON\n\u2800\n\u2800",
-            "\n\ud83d\udcbc *HOLDINGS ADVICE*\n_Technical view only, not financial advice._\n\n\ud83d\udfe2 \ud83e\ude99 *IDOL* \u2014 $25.60 | PnL +8.2% ($+1.94)\nAdvice: \ud83d\udfe2 HOLD\nWhy: Trend is up (price > MA5 > MA10), RSI 44\n\u26a0\ufe0f Long-term: speculative (100-day change -1%, above 50-day average)\n\n\n\u2800\n\u2800",
-            "\u2705 No sell advised right now. For possible new buys use /analyse.\n\n\ud83e\udde0 *AI:* Bot is healthy: exchange connected, auto\u2011buy active, no safety filters\ntriggered, portfolio $25.65 USDT with 100% in coins, and the only position\n(IDOL) is up 8.2% \u2013 no immediate sell needed.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
-        ],
-        "i": 3,
-        "mode": "Markdown",
-        "x": [
-            {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
-            }
-        ],
-        "cmd": "/bot"
-    },
-    "out_mid": 4374,
-    "panel_mid": 4375
+    "panel_text": "\u2699\ufe0f *partial tp pct*\nCurrent value: `19.5312`",
+    "out_time": 1795408179.2553723,
+    "out_mid": 4383,
+    "panel_mid": 4384
 }
