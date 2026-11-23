@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689694,
+    "last_update_id": 935689696,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -73,82 +73,18 @@
     "panel_rows": [
         [
             {
-                "text": "max_24h_pct = 100.0",
-                "callback_data": "m:k:max_24h_pct"
+                "text": "\ud83d\udd04 Switch ON/OFF",
+                "callback_data": "m:kv:h1_all_setups:t"
             }
         ],
         [
             {
-                "text": "near_miss_alerts = True",
-                "callback_data": "m:k:near_miss_alerts"
-            }
-        ],
-        [
-            {
-                "text": "near_miss_rsi_margin = 3.0",
-                "callback_data": "m:k:near_miss_rsi_margin"
-            }
-        ],
-        [
-            {
-                "text": "near_miss_1h_margin = 0.5",
-                "callback_data": "m:k:near_miss_1h_margin"
-            }
-        ],
-        [
-            {
-                "text": "near_miss_cooldown_minutes = 60",
-                "callback_data": "m:k:near_miss_cooldown_minutes"
-            }
-        ],
-        [
-            {
-                "text": "near_miss_max_per_scan = 3",
-                "callback_data": "m:k:near_miss_max_per_scan"
-            }
-        ],
-        [
-            {
-                "text": "radar_max = 30",
-                "callback_data": "m:k:radar_max"
-            }
-        ],
-        [
-            {
-                "text": "radar_rsi_margin = 10.0",
-                "callback_data": "m:k:radar_rsi_margin"
-            }
-        ],
-        [
-            {
-                "text": "scan_workers = 15",
-                "callback_data": "m:k:scan_workers"
-            }
-        ],
-        [
-            {
-                "text": "weak_market_mode = True",
-                "callback_data": "m:k:weak_market_mode"
-            }
-        ],
-        [
-            {
-                "text": "\u25c0\ufe0f Prev",
-                "callback_data": "m:sp:6"
-            },
-            {
-                "text": "Next \u25b6\ufe0f",
-                "callback_data": "m:sp:8"
-            }
-        ],
-        [
-            {
-                "text": "\u2b05\ufe0f Menu",
-                "callback_data": "m:menu"
+                "text": "\u2b05\ufe0f Settings",
+                "callback_data": "m:sp:0"
             }
         ]
     ],
-    "panel_text": "\u2699\ufe0f *SETTINGS* (page 8/9)\nTap a setting to change it.",
+    "panel_text": "\u2699\ufe0f *h1 all setups*\nCurrent value: `False`",
     "out_time": 1795406585.9436002,
     "out_mid": 4315,
     "panel_mid": 4320
