@@ -274,6 +274,13 @@ def _paginate(text,W,L):
 def _nav_rows(i,k):
  b=lambda t,c:{"text":t,"callback_data":c}
  return [[b("◀","pg:p"),b(f"{i+1}/{k}","pg:x"),b("▶","pg:n"),b("🏠","m:menu")]]
+def _nav_with(nav,flat):
+ for x in flat or []:
+  cb=x.get("callback_data")
+  if cb in ("m:menu","/menu"):continue
+  if cb=="rf:go":nav[0].append(x)
+  else:nav.append([x])
+ return nav
 def page_nav(t):
  st=load(ST,{});pg=st.get("pages") or {};ps=pg.get("p") or []
  if len(ps)<2:_hide_panel();return
@@ -284,7 +291,7 @@ def page_nav(t):
  save(ST,st)
  out=_mid("out_mid")
  if not (out and _edit(out,ps[i],pg.get("mode") or "Markdown",None)):_make_out(ps[i],pg.get("mode") or "Markdown")
- nav=_nav_rows(i,len(ps));nav[0]+=pg.get("x") or []
+ nav=_nav_with(_nav_rows(i,len(ps)),pg.get("x") or [])
  _panel(f"📄 *Page {i+1}/{len(ps)}*",nav)
 def _send(m,mode,btn=None):
  try:
@@ -313,7 +320,7 @@ def _send(m,mode,btn=None):
   rows=(btn.get("inline_keyboard") if isinstance(btn,dict) else btn) if btn else []
   rb={"text":"🔄","callback_data":"rf:go"}
   extra=([[rb]] if rf else [])+rows
-  flat=[x for r in extra for x in r if x.get("callback_data")!="m:menu"]
+  flat=[x for r in extra for x in r if x.get("callback_data") not in ("m:menu","/menu")]
   try:
    st=load(ST,{});st["out_text"]=(show or "")[:3800];st["out_mode"]=mode or "Markdown";st["out_time"]=time.time();st.pop("out_stale",None)
    if rf:st["last_cmd"]=cmd
@@ -322,7 +329,7 @@ def _send(m,mode,btn=None):
    save(ST,st)
   except Exception:pass
   if len(ps)>1:
-   nav=_nav_rows(i0,len(ps));nav[0]+=flat
+   nav=_nav_with(_nav_rows(i0,len(ps)),flat)
    _panel("📄 *Page %d/%d*"%(i0+1,len(ps)),nav)
   elif rf:_panel("🔄 *Refresh*",[[rb,{"text":"🏠","callback_data":"m:menu"}]+[x for r in rows for x in r if x.get("callback_data")!="m:menu"]])
   elif btn:_panel("👇 *Actions*",rows)
@@ -1871,7 +1878,7 @@ def cmd_scan_history(txt="/scan_history"):
  items=list(_lat.values());n_scans=len({x.get("time") for x in raw_items})
  try: parts=shlex.split(txt)[1:]
  except: parts=txt.split()[1:]
- filters=[];page=1;limit=20;bad=[]
+ filters=[];page=1;limit=150;bad=[]
  for token in parts:
   t=token.strip();low=t.lower()
   if low.startswith("page="):
@@ -1902,37 +1909,52 @@ def cmd_scan_history(txt="/scan_history"):
     if not isinstance(actual,(int,float)):return False
     if not {"<":actual<val,">":actual>val,"<=":actual<=val,">=":actual>=val,"=":actual==val}[op]:return False
   return True
- found=sorted((x for x in items if matches(x)), key=lambda x: (int(x.get("rank", 10**9) or 10**9), -float(x.get("time", 0) or 0)))
- total=max(1,(len(found)+limit-1)//limit)
- if page>total:tg(f"Only {total} page(s) match.");return
- chunk=found[(page-1)*limit:page*limit];changed=False
- for x in chunk:
-  if not isinstance(x.get("rsi"),(int,float)):
+ def _rk(x):
+  d=str(x.get("decision","")).upper()
+  return (0 if d.startswith("SETUP") else 1 if x.get("near_miss") else 2,int(x.get("rank",10**9) or 10**9),-float(x.get("time",0) or 0))
+ found=sorted((x for x in items if matches(x)),key=_rk)
+ shown=found[:limit];changed=False
+ for x in shown:
+  if not isinstance(x.get("rsi"),(int,float)) and "candle fetch" not in str(x.get("reason","")):
    _rsi_value=scan_history_rsi(str(x.get("sym","")))
    if isinstance(_rsi_value,(int,float)):x["rsi"]=_rsi_value;changed=True
  if changed:save(SH,h)
- age=max(0,time.time()-h.get("window_start",time.time()));rows=[]
- for x in chunk:
-  r=x.get("rsi");rsi=f"{r:.1f}" if isinstance(r,(int,float)) else "N/A"
-  sym=str(x.get("sym","?")).replace("-USDT","")[:12];raw_decision=str(x.get("decision","SKIP")).upper()
-  if "NOT QUEUED" in raw_decision or "REJECT" in raw_decision: decision="REJECTED"
-  elif "QUEUED" in raw_decision: decision="QUEUED"
-  elif "BUY" in raw_decision or "BOUGHT" in raw_decision: decision="BUY"
-  elif "SELL" in raw_decision or "SOLD" in raw_decision: decision="SOLD"
-  else: decision="SKIP"
-  rr=x.get("rr");rr_text=f"1:{rr:.1f}" if isinstance(rr,(int,float)) and rr>0 else "-"
-  rows.append(f"{sym:<12} {rsi:>5} {rr_text:>6} {decision}")
- table="COIN         RSI    R:R  DECISION\n"+"-"*39+"\n"+"\n".join(rows)
+ age=max(0,time.time()-h.get("window_start",time.time()));cs=cfg();rows=[]
+ for x in shown:
+  r=x.get("rsi");rsi=f"{r:.0f}" if isinstance(r,(int,float)) else "-"
+  hh=x.get("h1");h1=f"{hh:+.1f}" if isinstance(hh,(int,float)) else "-"
+  sym=str(x.get("sym","?")).replace("-USDT","")[:7]
+  rows.append(f"{sym:<7}{rsi:>4}{h1:>6} {_hist_code(x,cs)[:14]}")
+ table="COIN    RSI    1H WHY\n"+"-"*30+"\n"+"\n".join(rows)
  query=" ".join(parts) if parts else "all coins"
- msg=f"🔎 *SCAN HISTORY — QUERY*\nMatched {len(found)} of {len(items)} unique coins | {query}\nLatest result per coin · {n_scans} scans, {len(raw_items)} raw records in window\nPage {page}/{total} | Window {age/3600:.1f}h\n\n```{table}```"
- nav=[]
- if page>1:nav.append({"text":"⬅️ Previous","callback_data":f"scan_history:{page-1}:{' '.join(parts)}"})
- if page<total:nav.append({"text":"Next ➡️","callback_data":f"scan_history:{page+1}:{' '.join(parts)}"})
- keyboard=[]
- if nav:keyboard.append(nav)
- keyboard.append([{"text":"🔍 Why not bought?","callback_data":"m:whylist:0"}])
- keyboard.append([{"text":"🕹️ Main Menu","callback_data":"/menu"}])
- _send(msg,"Markdown",{"inline_keyboard":keyboard})
+ more=f" (first {len(shown)})" if len(found)>len(shown) else ""
+ msg=f"🔎 *SCAN HISTORY* · {len(found)}/{len(items)} coins{more}\n{n_scans} scans · {age/3600:.1f}h"+("" if not parts else " · "+query)+f"\n```{table}```"
+ _send(msg,"Markdown",{"inline_keyboard":[[{"text":"🔍 Why not bought?","callback_data":"m:whylist:0"}]]})
+def _hist_code(x,s):
+ d=str(x.get("decision","SKIP")).upper();rs=str(x.get("reason",""))
+ if "NOT QUEUED" in d:return "Blocked"
+ if "QUEUED" in d:return "QUEUED"
+ if "BOUGHT" in d or d.startswith("BUY"):return "BOUGHT"
+ if "SOLD" in d or "SELL" in d:return "SOLD"
+ if "Top 15" in rs:return "Top 15"
+ if "Vol below" in rs:return "Vol low"
+ if "24H change" in rs:return "24h range"
+ if "Spread" in rs:return "Spread wide"
+ if "No candle" in rs:return "No data"
+ if "4h trend" in rs:return "4h down"
+ r=x.get("rsi");hh=x.get("h1")
+ if x.get("near_miss"):return "Near miss"
+ try:
+  lo,hi=float(s["rsi_min"]),float(s["rsi_max"])
+  if isinstance(r,(int,float)):
+   if r>hi:return "RSI high"
+   if r<lo:return "RSI low"
+  if isinstance(hh,(int,float)) and mom_on(s):
+   if hh<float(s.get("mom_1h_min_pct",0.5)):return "1H low"
+   if hh>float(s.get("mom_1h_max_pct",6.0)):return "1H high"
+  if None not in (x.get("price"),x.get("ma5"),x.get("ma10")) and not (x["price"]>x["ma5"]>x["ma10"]):return "Trend weak"
+ except Exception:pass
+ return "No setup"
 def _why_latest():
  h=scan_history_state();best={}
  for x in h.get("items",[]):best[str(x.get("sym",""))]=x
