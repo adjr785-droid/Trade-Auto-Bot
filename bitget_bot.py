@@ -199,10 +199,10 @@ def _carrier(ph):
  rm=kb_markup()
  if ph:rm["input_field_placeholder"]=ph
  old=_mid("kb_mid")
+ if old:_del_msg(old)
  nm=_create("💰 "+(ph or "Balance"),None,rm,silent=True)
  if nm:
   st=load(ST,{});st["kb_mid"]=nm;st["kb_ph"]=ph;st["kb_keys"]=str(rm["keyboard"]);save(ST,st)
-  if old and old!=nm:_del_msg(old)
 def _kb_refresh():
  st=load(ST,{});keys=str(kb_markup()["keyboard"]);ph=(compact_balance() or "")[:64]
  if not st.get("kb_mid") or st.get("kb_keys")!=keys or (ph and ph!=st.get("kb_ph")):_carrier(ph)
@@ -2055,7 +2055,7 @@ def fast_watch():
 def scan(force=False):
  st=load(SC);now=time.time();_t0=time.time()
  iv=max(1.0,float(cfg().get('scan_interval_minutes',15) or 15))
- if not force and now-st.get('last',0)<max(60,iv*60-240):return
+ if not force and now-st.get('last',0)<max(60,iv*60-30):return
  db=load(DB);q=load(QF);s=cfg();ai_market=ai_market_context(s);guardian_ok,guardian_reason=guardian_audit();auto_enabled=bool(s.get("auto_buy_enabled")) and guardian_ok;btc_is_blocked=btc_blocked(s) if auto_enabled else False
  mf=market_filter(s) if auto_enabled and not btc_is_blocked else ""
  if mf and not cd("mktblock",21600):tg(f"⏸ *MARKET FILTER:* {mf}.")
@@ -2178,7 +2178,7 @@ def scan(force=False):
    msg+="\n"+"\n".join(body)
   except Exception as e:print(f"MATCH LIST ERR: {e}")
   tg(msg)
- elif full:tg(f"🔍 *SCAN COMPLETE*\nChecked {len(records)} markets in {time.time()-_t0:.0f}s.\nNo coin matched any setup.")
+ else:tg(f"🔍 *SCAN COMPLETE*\nChecked {len(records)} markets in {time.time()-_t0:.0f}s.\nNo coin matched any setup.")
 def fp(p):
  if p is None:return "N/A"
  return f"{p:.2f}" if p>=100 else f"{p:.4f}" if p>=1 else f"{p:.6f}" if p>=0.001 else f"{p:.8f}"
@@ -2590,7 +2590,7 @@ def live_loop(t0):
   now=time.time()
   if now-last_light>=60:
    for fn in (ai_health_check,manage,check_alerts,scan,fast_watch,exec_q):
-    if fn is scan and deadline-time.time()<180:continue
+    if fn is scan and deadline-time.time()<60:continue
     run_step(fn)
    last_light=time.time()
   if now-last_heavy>=300:
