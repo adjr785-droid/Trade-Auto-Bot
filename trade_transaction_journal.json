@@ -1640,5 +1640,15 @@
         "time": 1795476544.7948608,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 5.8372, 'recurring_patterns': {'15-MINUTE NO-UPWARD-TREND ROTATION': 7, 'PANIC': 4, 'MANUAL SELL': 4, 'RSI 75': 2, 'PARTIAL PROFIT': 2}, 'recommendations': ['Limit exposure to trades triggered by panic signals; they show a higher loss frequency.', 'Review the effectiveness of the 15\u2011minute no\u2011upward\u2011trend rotation filter, as it yields mixed results.', 'Consider tightening RSI thresholds or adding confirmation filters before entering RSI\u2011based trades.', 'Maintain current position sizing for partial profit exits, which have contributed positively.', 'Implement stricter manual sell criteria to avoid frequent small losses.']}"
+    },
+    {
+        "time": 1795476920.1785853,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'DOS-USDT', 'action': 'monitor', 'reason': 'Position is 182 days old with a -1.03% PnL; current price is near entry and above stop. Consider tightening stop to protect downside while awaiting potential recovery.'}], 'summary': 'Overall portfolio risk remains PASS. The only open position (DOS-USDT) shows a modest loss and is aging. No immediate action required beyond tighter risk management and continued observation.'}"
+    },
+    {
+        "time": 1795476921.11402,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 5.8372, 'recurring_patterns': ['15-MINUTE NO-UPWARD-TREND ROTATION appears in multiple trades', 'PANIC exits appear in several trades', 'MANUAL SELL triggers both profit and loss', 'RSI 75 signals used for entries', 'PARTIAL PROFIT exits used'], 'recommendations': ['Consider tightening criteria for panic exits to avoid small losses', 'Review the effectiveness of the 15\u2011minute no\u2011upward\u2011trend rotation signal; it yields mixed results', 'Validate RSI 75 as a reliable entry signal before scaling up', 'Limit manual sell interventions to clear strategy rules to reduce ad\u2011hoc decisions', 'Maintain current win\u2011rate focus but aim to improve average win size relative to losses']}"
     }
 ]
