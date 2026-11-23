@@ -1448,5 +1448,15 @@
         "time": 1795451736.2121768,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.4632, 'recurring_patterns': {'RSI 75': 3, '15-MINUTE NO-UPWARD-TREND ROTATION': 7, 'PANIC': 4, 'PARTIAL PROFIT': 3}, 'recommendations': ['Limit exposure to PANIC-driven exits; consider tighter stop\u2011loss thresholds', 'Review RSI\u2011based entries to ensure they align with broader trend analysis', 'Prioritize trades with clear profit targets over partial profit scalps', 'Monitor high\u2011frequency rotation signals for false positives and reduce position size on those trades']}"
+    },
+    {
+        "time": 1795455237.2894845,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'JCT-USDT', 'action': 'monitor', 'reason': 'Position is down -1.6% and price is approaching stop level (0.001379); consider tightening stop or preparing exit if price breaches stop.'}], 'summary': 'Overall portfolio risk passes safeguards. The only open position shows modest loss and is near its stop; maintain vigilance and be ready to act if price moves further down.'}"
+    },
+    {
+        "time": 1795455238.180493,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.4632, 'recurring_patterns': {'RSI 75': 3, 'PARTIAL PROFIT': 3, '15-MINUTE NO-UPWARD-TREND ROTATION': 7, 'PANIC': 4}, 'recommendations': {'risk_management': 'Limit exposure on PANIC-driven trades; consider tighter stop\u2011losses or manual review before executing panic exits', 'strategy_focus': 'Prioritize signals with higher historical win rates such as RSI 75 and PARTIAL PROFIT entries; de\u2011emphasize low\u2011confidence rotation signals', 'position_sizing': 'Maintain conservative position sizes given modest net PnL and observed volatility', 'uncertainty': 'Performance metrics are based on a limited sample (30 trades); future results may vary and should be monitored closely'}}"
     }
 ]
