@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT24.66/\u20a633,724",
+    "kb_ph": "USDT24.68/\u20a633,750",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -65,7 +65,7 @@
         "ARX-USDT",
         "TRX-USDT"
     ],
-    "kb_mid": 4555,
+    "kb_mid": 4556,
     "out_text": "Quantity: 0.2997\nCurrent price: 6.4050 USDT\nMarket value: $1.92\nATH (Bitget lifetime): 52.9800 USDT\nATL (Bitget lifetime): 1.2210 USDT\n\ud83d\udd34 Entry: 6.4160 USDT | PnL: -0.17% ($-0.00)\nRSI (1h): 66.09\nMA5 (1h): 6.2912\nMA10 (1h): 6.2310\nMarket sentiment: \ud83d\udfe2 Bullish\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "out_time": 1795431600.8294291,
