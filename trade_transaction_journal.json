@@ -1548,5 +1548,15 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795465634.4380956,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'JCT-USDT', 'action': 'monitor', 'reason': 'Position is down 2.96% and approaching its stop level (0.001379). Consider tightening the stop or preparing to exit if price continues to decline.'}], 'summary': 'Overall portfolio risk remains acceptable. The only active position (JCT-USDT) is modestly losing and near its stop; maintain vigilance and be ready to adjust risk parameters.'}"
+    },
+    {
+        "time": 1795465635.2200232,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.4632, 'recurring_patterns': {'RSI 75': 3, 'PARTIAL PROFIT': 3, '15-MINUTE NO-UPWARD-TREND ROTATION': 7, 'PANIC': 4}, 'recommendations': {'focus_on_high_confidence_signals': ['RSI 75'], 'reduce_panic_trades': {'note': 'PANIC trades contributed negative PnL and high uncertainty'}, 'maintain_partial_profit_strategy': {'note': 'Partial profit exits showed positive contributions but limited sample size'}, 'caution': 'Small sample size (30 trades) limits statistical confidence; consider gathering more data before scaling strategies'}}"
     }
 ]
