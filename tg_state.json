@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689624,
+    "last_update_id": 935689625,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -63,58 +63,58 @@
         ]
     },
     "radar": [
-        "UMXM-USDT",
-        "SKYAI-USDT",
-        "ICNT-USDT",
-        "BLESS-USDT"
+        "IDOL-USDT"
     ],
     "kb_mid": 4237,
-    "out_mid": 4238,
-    "out_text": "\ud83d\udee0\ufe0f *AUTO-AUDIT COMPLETE*\n\ud83e\uddf9 Removed ghost: UMXM-USDT\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "\ud83c\udfc6 *TOP 3* \u00b7 \u25b6 details\n*1. IDOL* \ud83d\udd36 WATCH\n0.015820 | -9.6% | RSI 38\n\ud83e\udde0 CAUTION \u00b7 Negative 24h change,\n*2. PUMP* \ud83d\udd36 WEAK\n0.002527 | +8.9% | RSI 58\n\ud83e\udde0 WEAK \u00b7 Positive change but \n*3. COLLECT* \ud83d\udd36 WEAK\n0.025478 | +2.5% | RSI 47\n\ud83e\udde0 CAUTION \u00b7 Small gain, moderate\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795401302.7429495,
-    "panel_mid": 4239,
+    "out_time": 1795401332.3906894,
     "panel_rows": [
         [
             {
-                "text": "\ud83e\udd16 Bot",
-                "callback_data": "/bot"
+                "text": "\u25c0",
+                "callback_data": "pg:p"
             },
             {
-                "text": "\ud83d\udcc8 Stats",
-                "callback_data": "/stats"
+                "text": "1/6",
+                "callback_data": "pg:x"
+            },
+            {
+                "text": "\u25b6",
+                "callback_data": "pg:n"
+            },
+            {
+                "text": "\ud83c\udfe0",
+                "callback_data": "m:menu"
             }
         ],
         [
             {
-                "text": "\u2699\ufe0f Settings",
-                "callback_data": "m:set"
-            },
-            {
-                "text": "\ud83d\udcbc Holdings",
-                "callback_data": "m:r:holdings"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udcdc Trade History",
-                "callback_data": "m:r:history"
-            },
-            {
-                "text": "\ud83e\udde0 Ask AI",
-                "callback_data": "m:ai:1"
-            }
-        ],
-        [
-            {
-                "text": "\ud83e\uddf9 Clear Chat",
-                "callback_data": "/clear"
-            },
-            {
-                "text": "\ud83d\udea8 PANIC SELL",
-                "callback_data": "/panic"
+                "text": "\ud83d\udd0e Analyse a coin",
+                "callback_data": "m:an"
             }
         ]
     ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below."
+    "panel_text": "\ud83d\udcc4 *Page 1/6*",
+    "out_mid": 4241,
+    "pages": {
+        "p": [
+            "\ud83c\udfc6 *TOP 3* \u00b7 \u25b6 details\n*1. IDOL* \ud83d\udd36 WATCH\n0.015820 | -9.6% | RSI 38\n\ud83e\udde0 CAUTION \u00b7 Negative 24h change,\n*2. PUMP* \ud83d\udd36 WEAK\n0.002527 | +8.9% | RSI 58\n\ud83e\udde0 WEAK \u00b7 Positive change but \n*3. COLLECT* \ud83d\udd36 WEAK\n0.025478 | +2.5% | RSI 47\n\ud83e\udde0 CAUTION \u00b7 Small gain, moderate\n\u2800\n\u2800",
+            "\ud83c\udfc6 *TOP 3 SETUPS RIGHT NOW*\n_Read-only scan. Nothing was bought._\n\n*1. IDOL-USDT* \u2014 WATCHLIST (no full scanner setup)\nPrice: 0.015820 USDT | 24h: -9.60% | RSI: 38.0\nSuggested stop: 0.013447 (15% below price)\nWhy:\n\u2022 Short-term trend is up (price > MA5 > MA10)\n\u2022 24h volume $3.5M (liquid enough: above the $1M minimum)\n\u2022 Spread: 0.06% (OK for auto-buy)\n\u2800\n\u2800",
+            "\u2022 Status: \ud83d\udd36 Potential, manual only (misses scanner rules)\n\u2022 \ud83e\udde0 AI: CAUTION \u2014 Negative 24h change, low RSI, no scanner pass\n\n*2. PUMP-USDT* \u2014 WEAK (best available, not a full setup)\nPrice: 0.002527 USDT | 24h: +8.88% | RSI: 58.1\nSuggested stop: 0.002148 (15% below price)\nWhy:\n\u2022 Trend not confirmed yet (price 0.002527, MA5 0.002575, MA10 0.002570)\n\u2022 RSI 58.1 is healthy (room to run before overbought)\n\u2022 24h change +8.88% shows steady, not extreme, momentum\n\u2800\n\u2800",
+            "\u2022 24h volume $3.0M (liquid enough: above the $1M minimum)\n\u2022 Spread: 0.08% (OK for auto-buy)\n\u2022 Status: \ud83d\udd36 Potential, manual only (misses scanner rules)\n\u2022 \ud83e\udde0 AI: WEAK \u2014 Positive change but high spread, no scanner pass\n\n*3. COLLECT-USDT* \u2014 WEAK (best available, not a full setup)\nPrice: 0.025478 USDT | 24h: +2.54% | RSI: 46.7\nSuggested stop: 0.021656 (15% below price)\nWhy:\n\u2022 Trend not confirmed yet (price 0.025478, MA5 0.025642, MA10 0.025756)\n\u2800\n\u2800",
+            "\u2022 RSI 46.7 is healthy (room to run before overbought)\n\u2022 24h change +2.54% shows steady, not extreme, momentum\n\u2022 24h volume $3.0M (liquid enough: above the $1M minimum)\n\u2022 Spread: 0.00% (OK for auto-buy)\n\u2022 Status: \ud83d\udd36 Potential, manual only (misses scanner rules)\n\u2022 \ud83e\udde0 AI: CAUTION \u2014 Small gain, moderate spread, lacks scanner confirmation\n\nNo coin passes all scanner rules right now, so these are the strongest\navailable. Be cautious.\n\n\u2800\n\u2800",
+            "Buy manually with `/buy COIN amount` if you agree.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+        ],
+        "i": 0,
+        "mode": "Markdown",
+        "x": [
+            {
+                "text": "\ud83d\udd0e Analyse a coin",
+                "callback_data": "m:an"
+            }
+        ],
+        "cmd": "/analyse"
+    },
+    "panel_mid": 4242
 }
