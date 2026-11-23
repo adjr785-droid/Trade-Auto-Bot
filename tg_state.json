@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935689700,
+    "last_update_id": 935689703,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT25.67/\u20a635,102",
+    "kb_ph": "USDT25.71/\u20a635,164",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -67,8 +67,8 @@
         "SKYAI-USDT",
         "EGL1-USDT"
     ],
-    "kb_mid": 4322,
-    "out_text": "\u2705 `h1_all_setups` = `True`\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "kb_mid": 4325,
+    "out_text": "\u2705 `max_daily_trades` = `12`\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
@@ -96,8 +96,8 @@
             }
         ]
     ],
-    "panel_text": "\u2699\ufe0f *max daily trades*\nCurrent value: `6`",
-    "out_time": 1795406836.7812054,
-    "out_mid": 4321,
-    "panel_mid": 4323
+    "panel_text": "\u2699\ufe0f *max daily trades*\nCurrent value: `12`",
+    "out_time": 1795406893.1138897,
+    "out_mid": 4329,
+    "panel_mid": 4330
 }
