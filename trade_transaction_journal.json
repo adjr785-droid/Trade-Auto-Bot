@@ -1197,5 +1197,15 @@
         "time": 1795411586.2367604,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 6.1087, 'recurring_patterns': {'PANIC': 4, '15-MINUTE NO-UPWARD-TREND ROTATION': 7, 'RSI 75': 2, 'PARTIAL PROFIT': 3, 'MANUAL SELL': 2}, 'recommendations': 'Maintain current strategy but limit exposure to PANIC-driven exits and short\u2011term rotation trades. Consider tighter stop\u2011losses on high\u2011volatility symbols (e.g., WLD-USDT) and prioritize trades with clear technical signals such as RSI over 70. Monitor manual sell decisions to ensure they align with profit targets rather than reactive timing.'}"
+    },
+    {
+        "time": 1795413267.8592312,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [], 'summary': 'The portfolio currently passes risk checks. The single position (IDOL-USDT) shows a modest profit (~9.24%) and remains within its stop level. No immediate adjustments are recommended; continue monitoring the position and maintain existing risk parameters.'}"
+    },
+    {
+        "time": 1795413268.7006028,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 6.1087, 'recurring_patterns': {'15-MINUTE NO-UPWARD-TREND ROTATION': 7, 'PANIC': 4, 'RSI 75': 2, 'PARTIAL PROFIT': 3, 'MANUAL SELL': 2}, 'recommendations': {'reduce_panic_trades': 'High frequency of panic exits correlates with negative PnL; consider tighter stop\u2011loss thresholds or delay panic decisions.', 'monitor_rsi_signals': 'RSI\u2011based entries yielded positive returns; maintain but validate with additional momentum filters.', 'review_no_upward_trend_strategy': \"The '15\u2011minute no\u2011upward\u2011trend rotation' appears often with mixed outcomes; evaluate its risk\u2011reward before further use.\"}}"
     }
 ]
