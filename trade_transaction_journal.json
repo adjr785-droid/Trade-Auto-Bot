@@ -1553,5 +1553,20 @@
         "time": 1795465928.2716503,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.4632, 'recurring_patterns': ['RSI 75 (3 occurrences)', '15-MINUTE NO-UPWARD-TREND ROTATION (7 occurrences)', 'PANIC (4 occurrences)', 'PARTIAL PROFIT (3 occurrences)'], 'recommendations': ['Limit exposure to PANIC-driven exits; consider adding stop\u2011loss thresholds to avoid negative pnl spikes', 'Review RSI 75 entries for consistency; they show modest gains but could be refined with additional confirmation signals', 'Maintain focus on 15\u2011minute rotation signals but validate with broader trend analysis to reduce false positives', 'Overall, keep position sizing conservative given modest net pnl and a 60% win rate; monitor trade frequency to ensure risk stays within predefined limits']}"
+    },
+    {
+        "time": 1795466004.2490885,
+        "event": "ai_manual_buy_review",
+        "symbol": "DOS-USDT",
+        "review": {
+            "risk_level": "medium",
+            "warning": "The RSI is moderately low (46.25) indicating potential downward momentum, and the price is near recent support. Ensure the trade fits your overall risk limits and position sizing rules.",
+            "summary": "Considering a $6.75 USDT buy of DOS-USDT at $0.1357 with no existing position and a BTC filter active, the trade carries medium risk. Verify that the market filter criteria are met and that the order size aligns with your risk management parameters before proceeding."
+        }
+    },
+    {
+        "time": 1795466015.0414586,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'DOS-USDT', 'action': 'HOLD', 'reason': 'Position is at entry price with no profit/loss; stop-loss is 5% below entry. Monitor price relative to stop and BTC filter; no immediate action required.'}], 'summary': 'Portfolio risk passes safeguards. Current position in DOS-USDT is flat; maintain the position while watching the stop level and overall market conditions. No new orders are recommended at this time.'}"
     }
 ]
