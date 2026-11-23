@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689625,
+    "last_update_id": 935689628,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -72,30 +72,28 @@
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
+                "text": "ARX",
+                "callback_data": "m:b:ARX"
             },
             {
-                "text": "1/6",
-                "callback_data": "pg:x"
-            },
-            {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
-            },
-            {
-                "text": "\ud83c\udfe0",
-                "callback_data": "m:menu"
+                "text": "WLD",
+                "callback_data": "m:b:WLD"
             }
         ],
         [
             {
-                "text": "\ud83d\udd0e Analyse a coin",
-                "callback_data": "m:an"
+                "text": "\u2795 More coins",
+                "callback_data": "m:more:buy:0"
+            }
+        ],
+        [
+            {
+                "text": "\u2b05\ufe0f Menu",
+                "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/6*",
+    "panel_text": "\ud83d\uded2 *BUY* \u2014 choose a coin:",
     "out_mid": 4241,
     "pages": {
         "p": [
