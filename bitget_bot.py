@@ -1207,81 +1207,32 @@ def manual_candidate_detail(sym):
  rows += [[_B("🔄 Refresh candidate","m:mc:"+sym.split("-")[0]),_B("⬅️ Analyse","m:an")]]
  ui_send("\n".join(lines),rows)
 def analyse_top3():
- tg("🏆 Scanning the market for the 3 best setups... this can take a minute.")
- s=cfg();cands=rank_setups()
- if cands is None:tg("⚠️ Could not load Bitget data.");return
- top=cands[:3]
- if not top:tg("🏆 *TOP 3 SETUPS*\nCould not read market data for any coin right now. Try again shortly.");return
- sl=s['stop_loss_pct'];out=["📊 *TOP 3 MARKET SETUPS — RESEARCH ONLY*","_Live market ranking; this is not the database auto-buy approval list._",""]
+ # Analyse is intentionally a concise manual-candidate list only.
+ # Coin List remains the source of truth; this view never promotes a coin
+ # into the automatic-buy queue or changes any execution/safety rule.
+ settings=cfg()
+ threshold=float(settings.get("manual_candidate_min_score",75.0))
  try:
-  mf=market_filter(s)
-  if mf:out+=[f"⚠️ Market filter active: {mf}. Auto-buy is blocked; a manual buy is your own call.",""]
- except Exception:pass
- lim=float(s.get('max_spread_pct',0.5));rbh=float(s.get('rebuy_cooldown_hours',6.0))
- try:btcb=bool(btc_blocked(s))
- except Exception:btcb=False
- amap={};summ=[]
- try:
-  ar=ai_stage('analyse_review',{'btc_filter_active':btcb,'market_filter':str(market_filter(s) or ''),'candidates':[{'symbol':c['sym'],'setup':c['setup'],'passes_scanner_rules':c['full'],'rsi':round(c['rsi'],1),'chg_24h_pct':round(c['chg'],2),'spread_pct':spread_pct(c['sym'])} for c in top]},ttl=120,max_tokens=500,soft=True)
-  if ar and isinstance(ar.get('reviews'),list):amap={str(x.get('symbol','')).upper().replace('/','-'):x for x in ar['reviews'] if isinstance(x,dict)}
- except Exception as e:print('ANALYSE AI ERR',str(e)[:120])
- for n,c in enumerate(top,1):
-  lab=c["setup"]
-  out+=[f"*{n}. {c['sym']}* — {lab}",f"Price: {fp(c['p'])} USDT | 24h: {c['chg']:+.2f}% | RSI: {c['rsi']:.1f}",f"Suggested stop: {fp(c['p']*(1-sl/100))} ({sl}% below price)","Why:"]+["• "+w for w in c["why"]]
-  sp=spread_pct(c['sym'])
-  out.append("• Spread: "+(f"{sp:.2f}% ("+("OK for auto-buy" if sp<=lim else f"wider than your {lim:g}% limit, auto-buy would skip it")+")" if sp is not None else "unavailable"))
-  if rbh>0 and in_cd(f"stopout_{c['sym']}",rbh*3600):out.append(f"• Re-buy cooldown active after a recent loss on this coin ({rbh:g}h)")
-  av=amap.get(c['sym'].upper());vd=str(av.get('verdict','')).upper() if av else ''
-  if not c['full']:stt="🔶 Potential, manual only (misses scanner rules)"
-  elif btcb or vd in ('CAUTION','WEAK') or (sp is not None and sp>lim):stt="⚠️ Passes with a note"
-  else:stt="✅ Passes all filters"
-  out.append("• Status: "+stt+(" | BTC filter active" if btcb else ""))
-  try:
-   memo=coin_db_get(c['sym'])
-   out.append("• Coin memory: "+(f"{memo.get('signal_status') or 'UNKNOWN'} / {memo.get('execution_status') or 'UNASSESSED'} | seen {memo.get('scans',0)} scans" if memo else "not yet recorded by scanner"))
-   if memo and memo.get("ai_advisory"):out.append("• AI notebook note: "+str(memo["ai_advisory"])[:100])
-  except Exception:pass
-  out.append("• 🧠 AI: "+(vd+" — "+str(av.get('reason',''))[:120] if av else "unavailable right now"))
-  out.append("")
-  _sn=str(c['setup']).split(" ")[0].replace("WATCHLIST","WATCH");_ic=stt.split(" ")[0]
-  summ+=[f"*{n}. {c['sym'].split('-')[0]}* {_ic} {_sn}",f"{fp(c['p'])} | {c['chg']:+.1f}% | RSI {c['rsi']:.0f}","🧠 "+((vd+" · "+str(av.get('reason',''))[:20]) if av else "AI n/a")]
- # Coin List is the authority for both approval lists. Never infer auto eligibility from this live research ranking.
- auto_rows=[];manual_rows=[]
- try:
-  auto_rows=coin_db_auto_ready_candidates(3)
-  out += ["", "🟢 *TOP 3 AUTO READY — COIN LIST DATABASE*", "_Requires signal READY + execution QUEUED + unexpired fresh record._"]
-  if auto_rows:
-   for n,m in enumerate(auto_rows,1):
-    out.append(f"{n}. *{m['sym'].split('-')[0]}* — {fp(m.get('price'))} USDT | RSI {float(m.get('rsi') or 0):.1f} | {float(m.get('h1') or 0):+.2f}% 1H")
-    out.append(f"   Execution: {m.get('execution_status')} | {m.get('scans',0)} scans")
-  else:
-   out.append("No coin is currently both READY and QUEUED in Coin List. A READY signal that is blocked, held, or expired is not auto-buy eligible.")
- except Exception as e:print("ANALYSE AUTO READY DATABASE ERR",str(e)[:120])
- try:
-  manual_rows=coin_db_manual_candidates(3)
-  out += ["", "🟡 *TOP 3 MANUAL BUY CANDIDATES — COIN LIST DATABASE*", f"Minimum setup score: {float(s.get('manual_candidate_min_score',75.0)):.0f}%", "_Separate manual shortlist. These coins are never added to the automatic-buy queue._"]
-  if manual_rows:
-   for n,m in enumerate(manual_rows,1):
-    out.append(f"{n}. *{m['sym'].split('-')[0]}* — *{float(m.get('score') or 0):.0f}%* | {fp(m.get('price'))} USDT | RSI {float(m.get('rsi') or 0):.1f}")
-    out.append("   Missed: "+str(m.get('manual_reason') or 'Review setup')[:150])
-  else:
-   out.append("No fresh, safety-qualified Coin List records currently meet the manual-candidate threshold.")
- except Exception as e:print("ANALYSE MANUAL CANDIDATES ERR",str(e)[:120])
- if not any(c["full"] for c in top):out.append("No coin passes all scanner rules right now, so these are the strongest available. Be cautious.\n")
- out.append("Buy manually with `/buy COIN amount` if you agree.")
- # Page 1 = one-screen summary of all 3 coins (padded to a full page); full details follow on the next pages.
- try:
-  if int(s.get('page_chars',0) or 0)>0:
-   W=int(s.get('page_width',32) or 32);L=int(s.get('page_lines',12) or 12);cap=max(2,L-2)
-   sw=_wrap("\n".join(["📊 *MARKET SETUPS* · ▶ details"]+summ),W).split("\n") if isinstance(_wrap("x",W),str) else _wrap("\n".join(["📊 *MARKET SETUPS* · ▶ details"]+summ),W)
-   if len(sw)<=cap:out=sw+["⠀"]*(cap-len(sw))+out
- except Exception as e:print("ANALYSE SUMMARY ERR",str(e)[:100])
- kb=[[_B("🔎 Analyse a coin","m:an")]]
- try:
-  for m in manual_rows[:8] if 'manual_rows' in locals() else []:
-   kb.append([_B(f"🟡 {m['sym'].split('-')[0]} · {float(m.get('score') or 0):.0f}% details",f"m:mc:{m['sym'].split('-')[0]}")])
- except Exception:pass
- _send("\n".join(out),"Markdown",{"inline_keyboard":kb})
+  candidates=coin_db_manual_candidates(50)
+ except Exception as e:
+  print("ANALYSE MANUAL CANDIDATES ERR",str(e)[:120])
+  tg("⚠️ Could not read manual-buy candidates from Coin List. Try again shortly.")
+  return
+ lines=["🟡 *MANUAL BUY CANDIDATES*",f"Minimum setup score: *{threshold:.0f}%*","_Only fresh Coin List records meeting the threshold and critical safety checks are shown._",""]
+ if candidates:
+  for item in candidates:
+   sym=str(item.get("sym") or "").split("-")[0]
+   score=float(item.get("score") or 0)
+   lines.append(f"🟡 *{sym}* — *{score:.0f}%*")
+ else:
+  lines.append("No coins currently meet the manual-buy score and safety requirements.")
+ keyboard=[]
+ for item in candidates[:20]:
+  sym=str(item.get("sym") or "").split("-")[0]
+  score=float(item.get("score") or 0)
+  keyboard.append([_B(f"🟡 {sym} · {score:.0f}%",f"m:mc:{sym}")])
+ _send("\n".join(lines),"Markdown",{"inline_keyboard":keyboard or [[_B("🔄 Refresh","/analyse")]]})
+
 def hold_advice(sym,price,entry,rsi,ma5,ma10,s):
  pnl=(price-entry)/entry*100 if entry else None;sl=float(s.get('stop_loss_pct',5));rx=float(s.get('rsi_exit',75) or 0)
  down=rsi is not None and ma5 is not None and ma10 is not None and price<ma5<ma10 and rsi<50
