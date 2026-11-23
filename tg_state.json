@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690013,
+    "last_update_id": 935690014,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -62,9 +62,9 @@
     },
     "radar": [],
     "kb_mid": 4779,
-    "out_text": "\u26a0\ufe0f *AI RECOVERY RESET*\nAn AI stage failed at recovery stage 2/3 (AI stage performance_review failed:\nExpecting ',' delimiter: line 1 column 452 (char 451)). Recovery restarts from\n0/3; buying stays blocked.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "\ud83d\udfe1 *MANUAL BUY CANDIDATES*\nMinimum setup score: *75%*\n_Only fresh Coin List records meeting the threshold and critical safety checks\nare shown._\n\n\ud83d\udfe1 *CYS* \u2014 *75%*\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795465117.0351512,
+    "out_time": 1795465128.926572,
     "panel_rows": [
         [
             {
@@ -74,6 +74,6 @@
         ]
     ],
     "panel_text": "\ud83d\udc47 *Actions*",
-    "out_mid": 4776,
-    "panel_mid": 4778
+    "out_mid": 4780,
+    "panel_mid": 4781
 }
