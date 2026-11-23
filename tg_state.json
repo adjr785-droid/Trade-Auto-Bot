@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935689618,
+    "last_update_id": 935689621,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT22.51/\u20a630,779",
+    "kb_ph": "USDT23.55/\u20a632,203",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -67,68 +67,25 @@
         "UMXM-USDT",
         "SKYAI-USDT"
     ],
-    "kb_mid": 4216,
-    "out_text": "\ud83d\udcc8 *TRADE STATS*\nClosed trades: 30\nWin rate: 53% (16 wins, 14 losses)\nAverage per trade: $+0.17\nNet profit: $+4.95\nBest: $+2.97 | Worst: $-0.66\n\n*By strategy*\nMANUAL: 23 trades | win 61% | avg $+0.25 | total $+5.64\nOLDER: 2 trades | win 0% | avg $-0.15 | total $-0.29\n\u2800\n\u2800",
+    "kb_mid": 4224,
+    "out_text": "\u2705 `auto_buy_enabled` = `True`\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
             {
-                "text": "\ud83e\udd16 Bot",
-                "callback_data": "/bot"
-            },
-            {
-                "text": "\ud83d\udcc8 Stats",
-                "callback_data": "/stats"
+                "text": "\ud83d\udd04 Switch ON/OFF",
+                "callback_data": "m:kv:auto_buy_enabled:t"
             }
         ],
         [
             {
-                "text": "\u2699\ufe0f Settings",
-                "callback_data": "m:set"
-            },
-            {
-                "text": "\ud83d\udcbc Holdings",
-                "callback_data": "m:r:holdings"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udcdc Trade History",
-                "callback_data": "m:r:history"
-            },
-            {
-                "text": "\ud83e\udde0 Ask AI",
-                "callback_data": "m:ai:1"
-            }
-        ],
-        [
-            {
-                "text": "\ud83e\uddf9 Clear Chat",
-                "callback_data": "/clear"
-            },
-            {
-                "text": "\ud83d\udea8 PANIC SELL",
-                "callback_data": "/panic"
+                "text": "\u2b05\ufe0f Settings",
+                "callback_data": "m:sp:0"
             }
         ]
     ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
-    "out_time": 1795396495.8499198,
-    "out_mid": 4219,
-    "pages": {
-        "p": [
-            "\ud83d\udcc8 *TRADE STATS*\nClosed trades: 30\nWin rate: 53% (16 wins, 14 losses)\nAverage per trade: $+0.17\nNet profit: $+4.95\nBest: $+2.97 | Worst: $-0.66\n\n*By strategy*\nMANUAL: 23 trades | win 61% | avg $+0.25 | total $+5.64\nOLDER: 2 trades | win 0% | avg $-0.15 | total $-0.29\n\u2800\n\u2800",
-            "OTHER: 5 trades | win 40% | avg $-0.08 | total $-0.40\n\n\ud83e\udde0 *AI:* The bot shows a modest 53% win rate with a net profit of $4.95 over 30\ntrades, but the OLDER strategy is underperforming (0% win, -$0.29), which may\nneed review.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
-        ],
-        "i": 0,
-        "mode": "Markdown",
-        "x": [
-            {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
-            }
-        ],
-        "cmd": "/stats"
-    },
-    "panel_mid": 4220
+    "panel_text": "\u2699\ufe0f *auto buy enabled*\nCurrent value: `True`",
+    "out_time": 1795396531.1984565,
+    "out_mid": 4223,
+    "panel_mid": 4225
 }
