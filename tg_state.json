@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935689639,
+    "last_update_id": 935689642,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT23.50/\u20a632,135",
+    "kb_ph": "USDT23.57/\u20a632,238",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -22,8 +22,8 @@
     "last_cmd": "/bot",
     "page_mem": {
         "/bot": [
-            7,
-            1795366572.7668848
+            1,
+            1795401618.2929714
         ],
         "m:r:holdings": [
             2,
@@ -65,7 +65,7 @@
     "radar": [
         "IDOL-USDT"
     ],
-    "kb_mid": 4257,
+    "kb_mid": 4258,
     "out_text": "\ud83e\udd16 *BOT*\n\ud83d\udd58 Since last check (0 min ago): \ud83d\udd34 balance -0.03 USDT\nExchange connection: \u2705 OK\nPortfolio: $23.59 USDT | \u20a632,258\nUSDT cash: $0.02 (free $0.02)\nAuto-buy: ON (dynamic allocation; legacy target $6.4994)\nBTC safety filter: OK\nMarket filter: OK (no market-wide block)\nRisk controls: \u26d4 Daily limit (13)\nToday vs start of day: +2.79% (auto-buy pauses at -5.0%)\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "out_time": 1795401554.1423607,
@@ -76,7 +76,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "1/5",
+                "text": "2/5",
                 "callback_data": "pg:x"
             },
             {
@@ -93,7 +93,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/5*",
+    "panel_text": "\ud83d\udcc4 *Page 2/5*",
     "pages": {
         "p": [
             "\ud83e\udd16 *BOT*\n\ud83d\udd58 Since last check (0 min ago): \ud83d\udd34 balance -0.03 USDT\nExchange connection: \u2705 OK\nPortfolio: $23.59 USDT | \u20a632,258\nUSDT cash: $0.02 (free $0.02)\nAuto-buy: ON (dynamic allocation; legacy target $6.4994)\nBTC safety filter: OK\nMarket filter: OK (no market-wide block)\nRisk controls: \u26d4 Daily limit (13)\nToday vs start of day: +2.79% (auto-buy pauses at -5.0%)\n\u2800\n\u2800",
@@ -102,7 +102,7 @@
             "\n\ud83d\udcbc *HOLDINGS ADVICE*\n_Technical view only, not financial advice._\n\n\ud83d\udd34 \ud83e\ude99 *IDOL* \u2014 $23.54 | PnL -0.5% ($-0.12)\nAdvice: \ud83d\udfe2 HOLD\nWhy: Trend is up (price > MA5 > MA10), RSI 38\n\u26a0\ufe0f Long-term: speculative (100-day change -9%, below 50-day average)\n\n\n\u2800\n\u2800",
             "\u2705 No sell advised right now. For possible new buys use /analyse.\n\n\ud83e\udde0 *AI:* Bot shows a small negative USDT balance (-0.03), minimal free cash\n($0.02), auto\u2011buy enabled, and today\u2019s PnL up +2.79%; monitor daily loss limit\nand low liquidity before adding new positions.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 0,
+        "i": 1,
         "mode": "Markdown",
         "x": [
             {
@@ -113,5 +113,5 @@
         "cmd": "/bot"
     },
     "out_mid": 4255,
-    "panel_mid": 4256
+    "panel_mid": 4259
 }

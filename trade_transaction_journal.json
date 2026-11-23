@@ -1067,5 +1067,15 @@
         "time": 1795401460.0722077,
         "event": "ai_portfolio_review",
         "summary": "{'portfolio_risk': 'Daily limit (13)', 'attention': [{'symbol': 'IDOL-USDT', 'action': 'monitor', 'reason': 'Position is slightly negative (-0.51% PnL) and close to stop (0.01413). No clear upside signal; consider tightening stop or exiting if price approaches stop.'}], 'summary': 'Overall portfolio risk is within the daily limit. The only open position (IDOL-USDT) is marginally down and near its stop level. Recommend close monitoring and be prepared to exit if price moves toward the stop. No new entries are suggested at this time.'}"
+    },
+    {
+        "time": 1795401628.1637223,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (13)', 'attention': [{'symbol': 'IDOL-USDT', 'action': 'monitor', 'reason': 'Position is slightly negative (-0.83% PnL) and close to stop (0.01413). No clear upside signal; consider tightening stop or exiting if price approaches stop.'}], 'summary': 'Overall portfolio risk is within the daily limit. The only open position (IDOL-USDT) is marginally down and near its stop level. Recommend close monitoring and be prepared to exit if price nears the stop. No new entries are suggested at this time.'}"
+    },
+    {
+        "time": 1795401628.9844072,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 6.1087, 'recurring_patterns': ['15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC', 'RSI 75', 'PARTIAL PROFIT'], 'recommendations': 'Maintain focus on strategies that yielded positive PnL such as RSI 75 signals and partial\u2011profit exits. Limit exposure to PANIC\u2011driven trades, as they contributed multiple losses. Consider tightening criteria for the 15\u2011minute no\u2011upward\u2011trend rotation entries, reviewing their risk\u2011reward before execution.'}"
     }
 ]
