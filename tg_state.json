@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689785,
+    "last_update_id": 935689786,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -74,16 +74,102 @@
     "panel_rows": [
         [
             {
-                "text": "\u2b05\ufe0f Why list",
-                "callback_data": "m:whylist:0"
+                "text": "KII",
+                "callback_data": "m:why:KII"
             },
             {
-                "text": "\ud83d\udd0e Analyse KII",
-                "callback_data": "m:a:KII"
+                "text": "SKYAI",
+                "callback_data": "m:why:SKYAI"
+            },
+            {
+                "text": "BLESS",
+                "callback_data": "m:why:BLESS"
+            }
+        ],
+        [
+            {
+                "text": "UMXM",
+                "callback_data": "m:why:UMXM"
+            },
+            {
+                "text": "PUMP",
+                "callback_data": "m:why:PUMP"
+            },
+            {
+                "text": "IDOL",
+                "callback_data": "m:why:IDOL"
+            }
+        ],
+        [
+            {
+                "text": "TRX",
+                "callback_data": "m:why:TRX"
+            },
+            {
+                "text": "COLLECT",
+                "callback_data": "m:why:COLLECT"
+            },
+            {
+                "text": "ENA",
+                "callback_data": "m:why:ENA"
+            }
+        ],
+        [
+            {
+                "text": "ADA",
+                "callback_data": "m:why:ADA"
+            },
+            {
+                "text": "BNB",
+                "callback_data": "m:why:BNB"
+            },
+            {
+                "text": "WLD",
+                "callback_data": "m:why:WLD"
+            }
+        ],
+        [
+            {
+                "text": "BTW",
+                "callback_data": "m:why:BTW"
+            },
+            {
+                "text": "PEPE",
+                "callback_data": "m:why:PEPE"
+            },
+            {
+                "text": "ICNT",
+                "callback_data": "m:why:ICNT"
+            }
+        ],
+        [
+            {
+                "text": "ARX",
+                "callback_data": "m:why:ARX"
+            },
+            {
+                "text": "TAO",
+                "callback_data": "m:why:TAO"
+            },
+            {
+                "text": "LTC",
+                "callback_data": "m:why:LTC"
+            }
+        ],
+        [
+            {
+                "text": "Next \u25b6\ufe0f",
+                "callback_data": "m:whylist:1"
+            }
+        ],
+        [
+            {
+                "text": "\u2b05\ufe0f Scan History",
+                "callback_data": "m:scan_hist"
             }
         ]
     ],
-    "panel_text": "\ud83d\udc47 *Actions*",
+    "panel_text": "\ud83d\udd0d *WHY NOT BOUGHT?* (page 1/8)\nSetups first, then near-misses, then the rest. Tap a coin.",
     "out_time": 1795408755.368827,
     "out_mid": 4425,
     "panel_mid": 4426
