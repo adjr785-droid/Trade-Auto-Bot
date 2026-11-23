@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT25.62/\u20a635,040",
+    "kb_ph": "USDT25.67/\u20a635,102",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -63,12 +63,13 @@
         ]
     },
     "radar": [
+        "IDOL-USDT",
         "SKYAI-USDT",
-        "ICNT-USDT"
+        "KII-USDT"
     ],
-    "kb_mid": 4475,
+    "kb_mid": 4479,
     "out_mid": 4476,
-    "out_text": "\ud83d\udcdf *OUTPUT*\nResults appear here.",
+    "out_text": "\ud83d\udd0d *SCAN COMPLETE*\nChecked 462 markets in 5s.\nNo coin matched any setup.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_mid": 4477,
     "panel_rows": [
@@ -113,5 +114,6 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below."
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
+    "out_time": 1795411596.4769661
 }
