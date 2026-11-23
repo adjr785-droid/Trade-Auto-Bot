@@ -1217,5 +1217,15 @@
         "time": 1795417931.003661,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 6.1087, 'recurring_patterns': ['15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC', 'RSI 75'], 'recommendations': ['Limit exposure to trades triggered by short\u2011term trend rotations until a clearer upward bias is confirmed', 'Review panic\u2011sell triggers; consider tighter stop\u2011loss thresholds or manual confirmation to avoid frequent small losses', 'Use RSI 75 signals cautiously; verify with additional momentum indicators before entering partial profit positions', 'Maintain current win\u2011rate focus but aim to improve average win size relative to loss size']}"
+    },
+    {
+        "time": 1795423531.6575677,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [], 'summary': 'The portfolio currently holds a single position (IDOL-USDT) with a 12.87% unrealized gain. Risk parameters are satisfied (PASS). No immediate actions are recommended; continue monitoring the position and maintain existing stop-loss at the entry level (0.0157).'}"
+    },
+    {
+        "time": 1795423532.5902977,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 6.1087, 'recurring_patterns': {'15-MINUTE NO-UPWARD-TREND ROTATION': 7, 'PANIC': 4, 'RSI 75': 2, 'PARTIAL PROFIT': 3, 'MANUAL SELL': 2}, 'recommendations': 'Maintain current risk parameters but consider tightening entry criteria for trades flagged as \"PANIC\" and \"15-MINUTE NO-UPWARD-TREND ROTATION\" due to their mixed outcomes. Monitor RSI\u2011based entries closely; they yielded positive PnL in this sample. Continue manual oversight for large manual sell actions to avoid potential missed upside.'}"
     }
 ]

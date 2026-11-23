@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT26.43/\u20a636,154",
+    "kb_ph": "USDT26.87/\u20a636,751",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -63,31 +63,6 @@
         ]
     },
     "radar": [],
-    "kb_mid": 4490,
-    "out_mid": 4488,
-    "out_text": "\ud83d\udd0d *SCAN COMPLETE*\nChecked 462 markets in 6s.\nNo coin matched any setup.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
-    "out_mode": "Markdown",
-    "out_time": 1795417948.0004578,
-    "panel_rows": [
-        [
-            {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
-            },
-            {
-                "text": "1/3",
-                "callback_data": "pg:x"
-            },
-            {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
-            },
-            {
-                "text": "\ud83c\udfe0",
-                "callback_data": "m:menu"
-            }
-        ]
-    ],
-    "panel_text": "\ud83d\udcc4 *Page 1/3*",
+    "kb_mid": 4491,
     "panel_hidden": true
 }
