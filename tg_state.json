@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689610,
+    "last_update_id": 935689615,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -19,7 +19,7 @@
         ],
         "hn": 29
     },
-    "last_cmd": "m:r:holdings",
+    "last_cmd": "/stats",
     "page_mem": {
         "/bot": [
             7,
@@ -68,38 +68,49 @@
         "SKYAI-USDT"
     ],
     "kb_mid": 4216,
-    "out_text": "\u2705 *AUDIT COMPLETE:* No issues found.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "\ud83d\udcc8 *TRADE STATS*\nClosed trades: 30\nWin rate: 53% (16 wins, 14 losses)\nAverage per trade: $+0.17\nNet profit: $+4.95\nBest: $+2.97 | Worst: $-0.66\n\n*By strategy*\nMANUAL: 23 trades | win 61% | avg $+0.25 | total $+5.64\nOLDER: 2 trades | win 0% | avg $-0.15 | total $-0.29\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udee0\ufe0f Audit",
-                "callback_data": "m:r:audit"
+                "text": "\u25c0",
+                "callback_data": "pg:p"
             },
             {
-                "text": "\ud83e\udde9 Layout",
-                "callback_data": "m:lay"
-            }
-        ],
-        [
-            {
-                "text": "\ud83e\udde0 Resume AI Mode",
-                "callback_data": "m:r:airesume"
-            }
-        ],
-        [
-            {
-                "text": "\u2b05\ufe0f Tools",
-                "callback_data": "m:tools"
+                "text": "1/2",
+                "callback_data": "pg:x"
             },
             {
-                "text": "\ud83c\udfe0 Main Menu",
+                "text": "\u25b6",
+                "callback_data": "pg:n"
+            },
+            {
+                "text": "\ud83c\udfe0",
                 "callback_data": "m:menu"
+            },
+            {
+                "text": "\ud83d\udd04",
+                "callback_data": "rf:go"
             }
         ]
     ],
-    "panel_text": "\ud83d\udee0\ufe0f *SYSTEM*",
-    "out_time": 1795396469.4510727,
-    "out_mid": 4214,
-    "panel_hidden": true
+    "panel_text": "\ud83d\udcc4 *Page 1/2*",
+    "out_time": 1795396495.8499198,
+    "out_mid": 4219,
+    "pages": {
+        "p": [
+            "\ud83d\udcc8 *TRADE STATS*\nClosed trades: 30\nWin rate: 53% (16 wins, 14 losses)\nAverage per trade: $+0.17\nNet profit: $+4.95\nBest: $+2.97 | Worst: $-0.66\n\n*By strategy*\nMANUAL: 23 trades | win 61% | avg $+0.25 | total $+5.64\nOLDER: 2 trades | win 0% | avg $-0.15 | total $-0.29\n\u2800\n\u2800",
+            "OTHER: 5 trades | win 40% | avg $-0.08 | total $-0.40\n\n\ud83e\udde0 *AI:* The bot shows a modest 53% win rate with a net profit of $4.95 over 30\ntrades, but the OLDER strategy is underperforming (0% win, -$0.29), which may\nneed review.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+        ],
+        "i": 0,
+        "mode": "Markdown",
+        "x": [
+            {
+                "text": "\ud83d\udd04",
+                "callback_data": "rf:go"
+            }
+        ],
+        "cmd": "/stats"
+    },
+    "panel_mid": 4220
 }
