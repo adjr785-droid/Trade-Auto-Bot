@@ -1,1 +1,11 @@
-{}
+{
+    "IDOL-USDT": {
+        "timestamp": 1795458558,
+        "type": "TREND",
+        "sl": 0.014331,
+        "score": 206.42,
+        "price": 0.0169,
+        "chg": 18.099,
+        "ai_priority_adjustment": 2.0
+    }
+}
