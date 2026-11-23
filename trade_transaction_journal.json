@@ -1398,5 +1398,15 @@
         "time": 1795448264.542495,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.4632, 'recurring_patterns': ['RSI 75 appears in multiple trades (SKYAI-USDT, DGAI-USDT, INJ-USDT)', '15-MINUTE NO-UPWARD-TREND ROTATION is a frequent trigger across several symbols', 'PANIC-driven exits occur on TRX-USDT, ENA-USDT, WLD-USDT, SKYAI-USDT', 'Partial profit exits are used for SKYAI-USDT, DGAI-USDT, UMXM-USDT'], 'recommendations': ['Limit reliance on panic exits; they contribute to losses and volatility', 'Prioritize trades flagged by RSI 75, which have shown positive PnL in this sample', 'Review the effectiveness of the 15\u2011minute no\u2011upward\u2011trend rotation signal, as outcomes are mixed', 'Consider tightening profit\u2011target thresholds for partial profit exits to capture gains earlier', 'Maintain current win\u2011rate focus but aim to increase sample size before scaling']}"
+    },
+    {
+        "time": 1795448547.6859417,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'JCT-USDT', 'action': 'hold', 'reason': 'Small positive PnL (+1.49%) and price still above stop; however limited data on setup and market conditions, so maintain position with tight monitoring.'}, {'symbol': 'COLLECT-USDT', 'action': 'consider reducing exposure', 'reason': 'Negative PnL (-2.81%) and price approaching stop (0.025222 vs stop 0.022086). Breakout setup uncertain; risk management suggests scaling out or tightening stop.'}], 'summary': 'Overall portfolio risk remains acceptable (PASS). JCT-USDT shows modest gains; continue holding but watch for adverse moves. COLLECT-USDT is underperforming; evaluate reducing size or tightening stop to protect capital. No new orders are recommended without further market confirmation.'}"
+    },
+    {
+        "time": 1795448548.4582324,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.4632, 'recurring_patterns': ['RSI 75', '15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC', 'PARTIAL PROFIT'], 'recommendations': ['Limit exposure to PANIC-driven exits; consider adding stop\u2011loss thresholds to avoid negative pnl spikes', 'Review RSI\u2011based entries; while profitable, ensure they align with broader trend analysis', 'Maintain partial profit strategy but tighten target ranges to lock in gains earlier', 'Monitor low\u2011pnl trades (<0.01 USDT) for potential over\u2011trading; consolidate positions where appropriate']}"
     }
 ]

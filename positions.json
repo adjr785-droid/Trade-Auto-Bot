@@ -4,9 +4,9 @@
         "safe_zone": 0.001614,
         "stop_loss": 0.001372,
         "peak_price": 0.001659,
-        "last_price": 0.001634,
+        "last_price": 0.001638,
         "opened_at": 1795431051.1366172,
-        "seen": 1795448363.9141433,
+        "seen": 1795448540.7875557,
         "xsl": 0.0015207600000000001
     },
     "COLLECT-USDT": {
@@ -14,12 +14,12 @@
         "safe_zone": 0.025952,
         "stop_loss": 0.022086,
         "peak_price": 0.025952,
-        "last_price": 0.025329,
+        "last_price": 0.025222,
         "opened_at": 1795444350.3211844,
         "sl_pct": 3.0,
         "strategy": "BREAKOUT",
         "purchase_source": "AUTO",
         "xsl": 0.025173,
-        "seen": 1795448364.6523721
+        "seen": 1795448541.186506
     }
 }
