@@ -1019,5 +1019,33 @@
         "time": 1795396397.9615376,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 53.33, 'net_pnl_usdt': 4.9539, 'recurring_patterns': ['RSI 75 (3 occurrences)', 'PARTIAL PROFIT (2 occurrences)', 'MANUAL SELL (2 occurrences)', 'PANIC (4 occurrences)', '15-MINUTE NO-UPWARD-TREND ROTATION (7 occurrences)'], 'recommendations': ['Review and tighten criteria for PANIC exits, as they contribute to losses', 'Consider adjusting RSI 75 trigger to a higher threshold or adding confirmation filters', 'Limit reliance on manual sell commands without quantitative justification', 'Monitor the effectiveness of the 15\u2011minute no\u2011upward\u2011trend rotation strategy; it yields many small gains but also occasional losses', 'Overall, maintain a conservative position size until win rate improves above 60%']}"
+    },
+    {
+        "time": 1795398058.414584,
+        "event": "sell_fill_verified",
+        "symbol": "UMXM-USDT",
+        "filled": 2082.47,
+        "average": 0.0059512241232766,
+        "order_id": "1508574281729777664",
+        "reason": "PARTIAL PROFIT +10.4%",
+        "attempt": 1
+    },
+    {
+        "time": 1795398059.4990003,
+        "event": "trade_closed",
+        "symbol": "UMXM-USDT",
+        "pnl_usdt": 1.1145881799998207,
+        "reason": "PARTIAL PROFIT +10.4%",
+        "strategy": "MANUAL"
+    },
+    {
+        "time": 1795398072.7749028,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (13)', 'attention': [{'symbol': 'UMXM-USDT', 'action': 'hold', 'reason': 'Position is up 10.23% with a tight stop at entry; no clear signal to add or exit.'}], 'summary': 'Current portfolio risk is within the daily limit. The only open position, UMXM-USDT, shows a healthy profit and is protected by a stop at the entry price. Recommend holding and monitoring for any adverse price movement.'}"
+    },
+    {
+        "time": 1795398073.805609,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 6.1087, 'recurring_patterns': {'15-MINUTE NO-UPWARD-TREND ROTATION': 7, 'PANIC': 4, 'RSI 75': 2, 'PARTIAL PROFIT': 3, 'MANUAL SELL': 2}, 'recommendations': {'reduce_panic_trades': 'High frequency of panic exits correlates with negative PnL; consider tighter stop\u2011loss thresholds or delay panic decisions.', 'monitor_rsi_signals': 'RSI 75 entries yielded positive returns; however, limit exposure to avoid over\u2011reliance on a single indicator.', 'review_rotation_strategy': 'The 15\u2011minute no\u2011upward\u2011trend rotation produced mixed results; refine entry criteria or shorten holding periods.', 'maintain_win_rate_focus': 'Current win rate is modest; prioritize trade setups with higher historical success rates before scaling position size.'}}"
     }
 ]

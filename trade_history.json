@@ -206,5 +206,12 @@
         "time": 1795395998.266161,
         "reason": "PANIC",
         "strategy": "MANUAL"
+    },
+    {
+        "sym": "UMXM-USDT",
+        "pnl": 1.1145881799998207,
+        "time": 1795398059.498468,
+        "reason": "PARTIAL PROFIT +10.4%",
+        "strategy": "MANUAL"
     }
 ]
