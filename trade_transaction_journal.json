@@ -1598,5 +1598,15 @@
         "time": 1795468765.026858,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 5.8372, 'recurring_patterns': ['PANIC', '15-MINUTE NO-UPWARD-TREND ROTATION', 'MANUAL SELL', 'RSI 75'], 'recommendations': 'Maintain current risk limits; avoid frequent panic exits as they contribute to losses. Consider tightening entry criteria for high\u2011volatility symbols (e.g., WLD-USDT) and prioritize setups with clear technical signals such as RSI overbought/oversold. Continue monitoring pattern performance and adjust position sizing if win rate drifts below 55%.'}"
+    },
+    {
+        "time": 1795472027.6253273,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'DOS-USDT', 'action': 'monitor', 'reason': 'Position is -1.77% PnL and price is approaching stop (0.12222). Consider tightening stop or preparing to exit if price breaches stop.'}, {'symbol': 'IDOL-USDT', 'action': 'monitor', 'reason': 'Position is -4.64% PnL and price is near stop (0.01533). High risk of further loss; evaluate reducing exposure or exiting.'}], 'summary': 'Both manual positions are currently underwater and close to their stop levels. Maintain vigilance, consider adjusting stops tighter or exiting to limit further downside, while acknowledging uncertainty about short\u2011term price movements.'}"
+    },
+    {
+        "time": 1795472028.4973094,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 5.8372, 'recurring_patterns': ['15-MINUTE NO-UPWARD-TREND ROTATION appears in multiple trades', 'PANIC exits appear in several trades', 'MANUAL SELL actions appear in multiple trades', 'RSI 75 triggers both wins and losses', 'PARTIAL PROFIT triggers both wins and losses'], 'recommendations': ['Review and tighten criteria for panic exits to avoid small losses', 'Consider adding confirmation to RSI 75 signals before entry', 'Limit exposure on manual sell decisions; use predefined profit targets', 'Monitor and possibly adjust strategy around 15\u2011minute no\u2011upward\u2011trend rotations as they dominate trade frequency']}"
     }
 ]
