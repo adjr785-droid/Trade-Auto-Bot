@@ -1297,5 +1297,15 @@
         "time": 1795431887.5501807,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 6.1087, 'recurring_patterns': ['15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC', 'RSI 75', 'PARTIAL PROFIT'], 'recommendations': 'Maintain focus on strategies that generated positive PnL such as RSI 75 signals and partial\u2011profit exits. Limit exposure to PANIC\u2011driven trades, which show mixed results. Continue using short\u2011term rotation signals cautiously, monitoring their win\u2011rate before scaling up. Consider tightening manual sell thresholds to protect against small negative outcomes.'}"
+    },
+    {
+        "time": 1795435083.5140762,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [], 'summary': 'Both positions (INJ-USDT and JCT-USDT) are modestly profitable with stops well below current prices. No immediate action is required; continue monitoring price action and maintain existing stops. Remain cautious of potential volatility, especially for the JCT-USDT position which has limited data on its setup.'}"
+    },
+    {
+        "time": 1795435084.411221,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 6.1087, 'recurring_patterns': {'MANUAL_SELL_ALL': 2, 'PARTIAL_PROFIT': 3, 'RSI_75': 2, 'NO_UPWARD_TREND_ROTATION': 7, 'PANIC': 4}, 'recommendations': 'Focus on higher\u2011confidence signals such as RSI\\u202f75 and partial\u2011profit exits. Limit exposure to trades triggered by PANIC or short\u2011term no\u2011upward\u2011trend rotations until a clearer edge is demonstrated. Consider tightening stop\u2011losses on volatile symbols (e.g., WLD\u2011USDT) and review manual sell decisions for consistency.'}"
     }
 ]
