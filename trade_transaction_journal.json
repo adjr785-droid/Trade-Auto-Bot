@@ -1558,5 +1558,23 @@
         "time": 1795465635.2200232,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.4632, 'recurring_patterns': {'RSI 75': 3, 'PARTIAL PROFIT': 3, '15-MINUTE NO-UPWARD-TREND ROTATION': 7, 'PANIC': 4}, 'recommendations': {'focus_on_high_confidence_signals': ['RSI 75'], 'reduce_panic_trades': {'note': 'PANIC trades contributed negative PnL and high uncertainty'}, 'maintain_partial_profit_strategy': {'note': 'Partial profit exits showed positive contributions but limited sample size'}, 'caution': 'Small sample size (30 trades) limits statistical confidence; consider gathering more data before scaling strategies'}}"
+    },
+    {
+        "time": 1795465691.566731,
+        "event": "trade_closed",
+        "symbol": "JCT-USDT",
+        "pnl_usdt": -0.6954636999999992,
+        "reason": "MANUAL SELL ALL",
+        "strategy": "OTHER"
+    },
+    {
+        "time": 1795465701.6769917,
+        "event": "ai_manual_sell_review",
+        "symbol": "JCT-USDT",
+        "review": {
+            "review": "The manual sell resulted in a realized loss of approximately -0.70\u202fUSDT on a position that exited at an average price of 0.001575\u202fUSDT per base unit. The remaining base balance of 0.0171\u202fJCT suggests the position was only partially liquidated, leaving exposure to further price movement. The loss indicates that the exit price was likely below the entry cost basis, and the decision to sell manually may have been driven by risk concerns or market conditions, but the outcome was unfavorable.",
+            "lesson": "When exiting a position, especially manually, ensure that the exit price covers the entry cost plus transaction fees to avoid realized losses. Consider using predefined stop\u2011loss or take\u2011profit levels to automate exits and reduce emotional decision\u2011making. If a partial exit is performed, monitor the remaining balance closely and reassess the market context before holding the residual position.",
+            "confidence": "medium"
+        }
     }
 ]
