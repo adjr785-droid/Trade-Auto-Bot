@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689871,
+    "last_update_id": 935689872,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -71,45 +71,43 @@
     "panel_rows": [
         [
             {
-                "text": "\ud83e\udd16 Bot",
-                "callback_data": "/bot"
+                "text": "\ud83d\udee1 Safe",
+                "callback_data": "m:pre:safe"
             },
             {
-                "text": "\ud83d\udcc8 Stats",
-                "callback_data": "/stats"
+                "text": "\u2696\ufe0f Balanced",
+                "callback_data": "m:pre:balanced"
+            },
+            {
+                "text": "\ud83d\ude80 Active",
+                "callback_data": "m:pre:active"
             }
         ],
         [
             {
-                "text": "\u2699\ufe0f Settings",
-                "callback_data": "m:set"
-            },
-            {
-                "text": "\ud83d\udcbc Holdings",
-                "callback_data": "m:r:holdings"
+                "text": "\ud83d\udfe2 Auto-buy: ON",
+                "callback_data": "m:tg:auto_buy_enabled"
             }
         ],
         [
             {
-                "text": "\ud83d\udcdc Trade History",
-                "callback_data": "m:r:history"
-            },
-            {
-                "text": "\ud83e\udde0 Ask AI",
-                "callback_data": "m:ai:1"
+                "text": "\ud83d\udfe2 Weak-market half size: ON",
+                "callback_data": "m:tg:weak_market_mode"
             }
         ],
         [
             {
-                "text": "\ud83e\uddf9 Clear Chat",
-                "callback_data": "/clear"
-            },
+                "text": "\ud83d\udfe2 1H rule for all setups: ON",
+                "callback_data": "m:tg:h1_all_setups"
+            }
+        ],
+        [
             {
-                "text": "\ud83d\udea8 PANIC SELL",
-                "callback_data": "/panic"
+                "text": "\u2b05\ufe0f Menu",
+                "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
+    "panel_text": "\u2699\ufe0f *SETTINGS*\nMode: Custom\nSafe = small trades, few per day. Active = bigger trades, more per day.\nEverything else adjusts itself.",
     "panel_mid": 4606
 }
