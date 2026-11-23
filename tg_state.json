@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689581,
+    "last_update_id": 935689584,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -30,8 +30,8 @@
             1795393430.8571026
         ],
         "/analyse": [
-            3,
-            1795396025.505319
+            2,
+            1795396044.514481
         ],
         "m:r:analyse": [
             4,
@@ -77,7 +77,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "4/6",
+                "text": "3/6",
                 "callback_data": "pg:x"
             },
             {
@@ -96,7 +96,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 4/6*",
+    "panel_text": "\ud83d\udcc4 *Page 3/6*",
     "out_time": 1795396021.4541676,
     "out_mid": 4194,
     "pages": {
@@ -108,7 +108,7 @@
             "Why:\n\u2022 Short-term trend is up (price > MA5 > MA10)\n\u2022 RSI 53.3 is healthy (room to run before overbought)\n\u2022 24h volume $2.5M (liquid enough: above the $1M minimum)\n\u2022 Spread: 0.16% (OK for auto-buy)\n\u2022 Status: \ud83d\udd36 Potential, manual only (misses scanner rules)\n\u2022 \ud83e\udde0 AI: WEAK \u2014 Very high spread, negative change, scanner rules fail\n\nNo coin passes all scanner rules right now, so these are the strongest\navailable. Be cautious.\n\u2800\n\u2800",
             "\nBuy manually with `/buy COIN amount` if you agree.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 3,
+        "i": 2,
         "mode": "Markdown",
         "x": [
             {
