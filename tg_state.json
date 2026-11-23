@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689996,
+    "last_update_id": 935689998,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -28,8 +28,8 @@
             1795431007.8580713
         ],
         "/analyse": [
-            1,
-            1795464326.1586018
+            3,
+            1795464353.6252987
         ],
         "m:r:analyse": [
             4,
@@ -72,7 +72,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "2/7",
+                "text": "4/7",
                 "callback_data": "pg:x"
             },
             {
@@ -97,7 +97,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 2/7*",
+    "panel_text": "\ud83d\udcc4 *Page 4/7*",
     "out_mid": 4760,
     "pages": {
         "p": [
@@ -109,7 +109,7 @@
             "\u2022 Spread: 0.09% (OK for auto-buy)\n\u2022 Status: \ud83d\udd36 Potential, manual only (misses scanner rules) | BTC filter active\n\u2022 Coin memory: WATCHING / NOT_ELIGIBLE | seen 10 scans\n\u2022 \ud83e\udde0 AI: WEAK \u2014 Fails scanner rules; large 24h gain but high RSI.\n\n\n\ud83d\udfe2 *TOP 3 AUTO READY \u2014 COIN LIST DATABASE*\n_Requires signal READY + execution QUEUED + unexpired fresh record._\nNo coin is currently both READY and QUEUED in Coin List. A READY signal that is\nblocked, held, or expired is not auto-buy eligible.\n\u2800\n\u2800",
             "\n\ud83d\udfe1 *TOP 3 MANUAL BUY CANDIDATES \u2014 COIN LIST DATABASE*\nMinimum setup score: 75%\n_Separate manual shortlist. These coins are never added to the automatic-buy\nqueue._\n1. *CYS* \u2014 *75%* | 0.057910 USDT | RSI 75.5\n   Missed: RSI 75.5 outside 42-48\nBuy manually with `/buy COIN amount` if you agree.\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 1,
+        "i": 3,
         "mode": "Markdown",
         "x": [
             {
