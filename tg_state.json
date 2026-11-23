@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689740,
+    "last_update_id": 935689741,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -22,8 +22,8 @@
     "last_cmd": "/bot",
     "page_mem": {
         "/bot": [
-            2,
-            1795408035.1472044
+            3,
+            1795408039.230187
         ],
         "m:r:holdings": [
             2,
@@ -78,7 +78,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "3/5",
+                "text": "4/5",
                 "callback_data": "pg:x"
             },
             {
@@ -95,7 +95,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 3/5*",
+    "panel_text": "\ud83d\udcc4 *Page 4/5*",
     "out_time": 1795408018.618603,
     "pages": {
         "p": [
@@ -105,7 +105,7 @@
             "\n\ud83d\udcbc *HOLDINGS ADVICE*\n_Technical view only, not financial advice._\n\n\ud83d\udfe2 \ud83e\ude99 *IDOL* \u2014 $25.60 | PnL +8.2% ($+1.94)\nAdvice: \ud83d\udfe2 HOLD\nWhy: Trend is up (price > MA5 > MA10), RSI 44\n\u26a0\ufe0f Long-term: speculative (100-day change -1%, above 50-day average)\n\n\n\u2800\n\u2800",
             "\u2705 No sell advised right now. For possible new buys use /analyse.\n\n\ud83e\udde0 *AI:* Bot is healthy: exchange connected, auto\u2011buy active, no safety filters\ntriggered, portfolio $25.65 USDT with 100% in coins, and the only position\n(IDOL) is up 8.2% \u2013 no immediate sell needed.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 2,
+        "i": 3,
         "mode": "Markdown",
         "x": [
             {
