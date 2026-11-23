@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690024,
+    "last_update_id": 935690028,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -68,32 +68,16 @@
     "panel_rows": [
         [
             {
-                "text": "\ud83d\uded2 Trade",
-                "callback_data": "m:tl:trade"
+                "text": "\u2705 Confirm",
+                "callback_data": "m:sx:JCT:100"
             },
             {
-                "text": "\ud83d\udd14 Alerts",
-                "callback_data": "m:tl:alerts"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udd0d Scan",
-                "callback_data": "m:tl:scan"
-            },
-            {
-                "text": "\ud83d\udee0\ufe0f System",
-                "callback_data": "m:tl:sys"
-            }
-        ],
-        [
-            {
-                "text": "\u2b05\ufe0f Main Menu",
+                "text": "\u274c Cancel",
                 "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83e\uddf0 *TOOLS*\nChoose a group.",
+    "panel_text": "\u26a0\ufe0f *CONFIRM SELL*\n100% of JCT (about $23.29) at market.",
     "out_mid": 4797,
     "panel_mid": 4798
 }
