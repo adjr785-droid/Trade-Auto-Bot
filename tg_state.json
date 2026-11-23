@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935690006,
+    "last_update_id": 935690009,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT24.03/\u20a632,863",
+    "kb_ph": "USDT24.04/\u20a632,884",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -61,53 +61,29 @@
         ]
     },
     "radar": [],
-    "kb_mid": 4766,
+    "kb_mid": 4768,
     "out_text": "\ud83d\udd0e *SCAN HISTORY* \u00b7 463/463 coins (first 150)\n10 scans \u00b7 2.6h\n```\nCOIN    RSI    1H WHY\n------------------------------\nNES      23  +0.6 BTC filter\n0G       45     - No setup\n10SET    50     - RSI high\n1INCH    47     - No setup\n2U2      53     - RSI high\n```\n\u2800",
     "out_mode": "Markdown",
     "out_time": 1795464455.5577753,
     "panel_rows": [
         [
             {
-                "text": "\ud83e\udd16 Bot",
-                "callback_data": "/bot"
+                "text": "\ud83d\udd0d Scan now",
+                "callback_data": "m:r:scan"
             },
             {
-                "text": "\ud83d\udcc8 Stats",
-                "callback_data": "/stats"
+                "text": "\ud83e\uddfe Scan History",
+                "callback_data": "m:scan_hist"
             }
         ],
         [
             {
-                "text": "\u2699\ufe0f Settings",
-                "callback_data": "m:set"
-            },
-            {
-                "text": "\ud83d\udcbc Holdings",
-                "callback_data": "m:r:holdings"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udcdc Trade History",
-                "callback_data": "m:r:history"
-            },
-            {
-                "text": "\ud83e\udde0 Ask AI",
-                "callback_data": "m:ai:1"
-            }
-        ],
-        [
-            {
-                "text": "\ud83e\uddf9 Clear Chat",
-                "callback_data": "/clear"
-            },
-            {
-                "text": "\ud83d\udea8 PANIC SELL",
-                "callback_data": "/panic"
+                "text": "\u2b05\ufe0f Menu",
+                "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
+    "panel_text": "\ud83d\udcda *COIN LIST*\n\u2705 Ready 0 | \ud83d\udc40 Watching 29 | \ud83c\udd95 New 0 | \ud83d\udcbc Held 1 | \u26d4 Rejected 432\n\ud83d\udfe1 Manual candidates (\u226575%): 1\nExecution: \ud83d\udce5 queued 0 | \u26d4 blocked 0 | \ud83d\udfe2 held 1\n\n\ud83d\udcbc *JCT* 0.001589 | HELD | 1H -1.80% | RSI 48 | seen 10x\n\ud83d\udc40 *ARIA* 0.303420 | NOT_ELIGIBLE | 1H +10.32% | RSI 54 | seen 10x\n\ud83d\udc40 *CYS* 0.057910 | NOT_ELIGIBLE | \ud83d\udfe1 75% MANUAL | 1H +2.21% | RSI 75 | seen 10x\n\ud83d\udc40 *UMXM* 0.004220 | NOT_ELIGIBLE | 1H +1.77% | RSI 39 | seen 10x\n\ud83d\udc40 *DOS* 0.136000 | NOT_ELIGIBLE | 1H +0.86% | RSI 46 | seen 10x\n\ud83d\udc40 *EGL1* 0.009640 | NOT_ELIGIBLE | 1H +0.48% | RSI 70 | seen 10x\n\ud83d\udc40 *IDOL* 0.016670 | NOT_ELIGIBLE | 1H +0.40% | RSI 46 | seen 10x\n\ud83d\udc40 *ICNT* 0.304900 | NOT_ELIGIBLE | 1H +0.38% | RSI 26 | seen 10x\n\ud83d\udc40 *KII* 0.084793 | NOT_ELIGIBLE | 1H +0.25% | RSI 77 | seen 10x\n\ud83d\udc40 *COLLECT* 0.024608 | NOT_ELIGIBLE | 1H +0.00% | RSI 35 | seen 10x\n\ud83d\udc40 *BNB* 559.61 | NOT_ELIGIBLE | 1H -0.08% | RSI 50 | seen 10x\n\ud83d\udc40 *PAXG* 3635.30 | NOT_ELIGIBLE | 1H -0.19% | RSI 61 | seen 10x",
     "pages": {
         "p": [
             "\ud83d\udd0e *SCAN HISTORY* \u00b7 463/463 coins (first 150)\n10 scans \u00b7 2.6h\n```\nCOIN    RSI    1H WHY\n------------------------------\nNES      23  +0.6 BTC filter\n0G       45     - No setup\n10SET    50     - RSI high\n1INCH    47     - No setup\n2U2      53     - RSI high\n```\n\u2800",
