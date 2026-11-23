@@ -1438,5 +1438,15 @@
             "warning": "Manual order size is small relative to typical volatility; ensure price slippage and transaction fees are acceptable. Verify that the position aligns with your overall portfolio risk limits.",
             "summary": "The request is to buy JCT-USDT at $0.001622 for $22.26 (\u224813,720 JCT). RSI is neutral (54.97) and no market or BTC filters are active. Existing position present, so this adds to exposure. Proceed with caution, monitor price movement, and confirm order parameters before execution."
         }
+    },
+    {
+        "time": 1795451735.4081955,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (5)', 'attention': [{'symbol': 'JCT-USDT', 'action': 'hold', 'reason': 'Position is small, slight positive PnL (0.55%), but stop is relatively close to entry. No clear exit signal; monitor price relative to stop.'}], 'summary': 'Overall portfolio risk is within the daily limit. The only open position (JCT-USDT) shows modest profit but remains close to its stop level. Recommend holding and closely watching price action; consider tightening stop if price moves against the position.'}"
+    },
+    {
+        "time": 1795451736.2121768,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.4632, 'recurring_patterns': {'RSI 75': 3, '15-MINUTE NO-UPWARD-TREND ROTATION': 7, 'PANIC': 4, 'PARTIAL PROFIT': 3}, 'recommendations': ['Limit exposure to PANIC-driven exits; consider tighter stop\u2011loss thresholds', 'Review RSI\u2011based entries to ensure they align with broader trend analysis', 'Prioritize trades with clear profit targets over partial profit scalps', 'Monitor high\u2011frequency rotation signals for false positives and reduce position size on those trades']}"
     }
 ]
