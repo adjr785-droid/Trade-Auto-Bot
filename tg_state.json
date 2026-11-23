@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689881,
+    "last_update_id": 935689883,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -75,7 +75,7 @@
                 "callback_data": "m:pre:safe"
             },
             {
-                "text": "\u2696\ufe0f Balanced",
+                "text": "\u2705 \u2696\ufe0f Balanced",
                 "callback_data": "m:pre:balanced"
             },
             {
@@ -108,6 +108,6 @@
             }
         ]
     ],
-    "panel_text": "\u2699\ufe0f *SETTINGS*\n\u2705 Weak-market half size is now ON.\nMode: Custom\nSafe = small trades, few per day. Active = bigger trades, more per day.\nEverything else adjusts itself.",
+    "panel_text": "\u2699\ufe0f *SETTINGS*\n\u2705 \u2696\ufe0f Balanced mode set.\nMode: \u2696\ufe0f Balanced\nSafe = small trades, few per day. Active = bigger trades, more per day.\nEverything else adjusts itself.",
     "panel_mid": 4609
 }
