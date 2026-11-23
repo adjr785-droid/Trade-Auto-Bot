@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690061,
+    "last_update_id": 935690062,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -71,22 +71,46 @@
     "panel_rows": [
         [
             {
-                "text": "\ud83d\uded2 Continue to manual buy",
-                "callback_data": "m:b:ARIA"
+                "text": "\ud83e\udd16 Bot",
+                "callback_data": "/bot"
+            },
+            {
+                "text": "\ud83d\udcc8 Stats",
+                "callback_data": "/stats"
             }
         ],
         [
             {
-                "text": "\ud83d\udd04 Refresh candidate",
-                "callback_data": "m:mc:ARIA"
+                "text": "\u2699\ufe0f Settings",
+                "callback_data": "m:set"
             },
             {
-                "text": "\u2b05\ufe0f Analyse",
-                "callback_data": "m:an"
+                "text": "\ud83d\udcbc Holdings",
+                "callback_data": "m:r:holdings"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udcdc Trade History",
+                "callback_data": "m:r:history"
+            },
+            {
+                "text": "\ud83e\udde0 Ask AI",
+                "callback_data": "m:ai:1"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\uddf9 Clear Chat",
+                "callback_data": "/clear"
+            },
+            {
+                "text": "\ud83d\udea8 PANIC SELL",
+                "callback_data": "/panic"
             }
         ]
     ],
-    "panel_text": "\ud83d\udfe1 *MANUAL BUY CANDIDATE \u2014 ARIA*\nSetup score: *75%* (minimum 75%)\nCurrent price: 0.312730 USDT\n1H change: +2.02% | RSI: 56.8\nDatabase signal: WATCHING | Auto execution: NOT_ELIGIBLE\nLast scan: 26 minutes ago\n\n\u2705 *Passed conditions:* Minimum liquidity, Momentum (1H/24H), Price / MA trend\n\u26a0\ufe0f *Missed conditions:* RSI entry range\n\ud83e\udde0 AI note: low: RSI 56.79, 24h up 16.3% and 1h up 2.02%, but not eligible.\n\ud83d\udcc8 1H move has risen for 3 scans in a row\nAutomatic-buy exclusion: RSI 56.8 outside 42-48\nSpread safety: 0.118% \u2014 within 0.5% limit\nCritical safety: PASSED at latest database assessment\nCandidate freshness: FRESH\nManual review only. This score never grants automatic-buy eligibility.",
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
     "out_mid": 4866,
-    "panel_mid": 4867
+    "panel_mid": 4878
 }
