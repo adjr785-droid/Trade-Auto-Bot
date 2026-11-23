@@ -1537,5 +1537,10 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795465115.4258873,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'JCT-USDT', 'action': 'monitor', 'reason': 'Position is down 3.08% and approaching its stop level (0.001379). Consider tightening the stop or preparing to exit if price continues to decline.'}], 'summary': 'Overall portfolio risk remains acceptable. The only active position (JCT-USDT) is modestly losing and nearing its stop. Maintain vigilance, adjust risk controls, and avoid adding new exposure until the position stabilizes.'}"
     }
 ]

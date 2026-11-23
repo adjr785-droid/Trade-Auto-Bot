@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935690009,
+    "last_update_id": 935690013,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT24.04/\u20a632,884",
+    "kb_ph": "USDT23.94/\u20a632,742",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -61,58 +61,19 @@
         ]
     },
     "radar": [],
-    "kb_mid": 4768,
-    "out_text": "\ud83d\udd0e *SCAN HISTORY* \u00b7 463/463 coins (first 150)\n10 scans \u00b7 2.6h\n```\nCOIN    RSI    1H WHY\n------------------------------\nNES      23  +0.6 BTC filter\n0G       45     - No setup\n10SET    50     - RSI high\n1INCH    47     - No setup\n2U2      53     - RSI high\n```\n\u2800",
+    "kb_mid": 4779,
+    "out_text": "\u26a0\ufe0f *AI RECOVERY RESET*\nAn AI stage failed at recovery stage 2/3 (AI stage performance_review failed:\nExpecting ',' delimiter: line 1 column 452 (char 451)). Recovery restarts from\n0/3; buying stays blocked.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795464455.5577753,
+    "out_time": 1795465117.0351512,
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udd0d Scan now",
-                "callback_data": "m:r:scan"
-            },
-            {
-                "text": "\ud83e\uddfe Scan History",
-                "callback_data": "m:scan_hist"
-            }
-        ],
-        [
-            {
-                "text": "\u2b05\ufe0f Menu",
-                "callback_data": "m:menu"
+                "text": "\ud83d\udfe1 CYS \u00b7 75%",
+                "callback_data": "m:mc:CYS"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcda *COIN LIST*\n\u2705 Ready 0 | \ud83d\udc40 Watching 29 | \ud83c\udd95 New 0 | \ud83d\udcbc Held 1 | \u26d4 Rejected 432\n\ud83d\udfe1 Manual candidates (\u226575%): 1\nExecution: \ud83d\udce5 queued 0 | \u26d4 blocked 0 | \ud83d\udfe2 held 1\n\n\ud83d\udcbc *JCT* 0.001589 | HELD | 1H -1.80% | RSI 48 | seen 10x\n\ud83d\udc40 *ARIA* 0.303420 | NOT_ELIGIBLE | 1H +10.32% | RSI 54 | seen 10x\n\ud83d\udc40 *CYS* 0.057910 | NOT_ELIGIBLE | \ud83d\udfe1 75% MANUAL | 1H +2.21% | RSI 75 | seen 10x\n\ud83d\udc40 *UMXM* 0.004220 | NOT_ELIGIBLE | 1H +1.77% | RSI 39 | seen 10x\n\ud83d\udc40 *DOS* 0.136000 | NOT_ELIGIBLE | 1H +0.86% | RSI 46 | seen 10x\n\ud83d\udc40 *EGL1* 0.009640 | NOT_ELIGIBLE | 1H +0.48% | RSI 70 | seen 10x\n\ud83d\udc40 *IDOL* 0.016670 | NOT_ELIGIBLE | 1H +0.40% | RSI 46 | seen 10x\n\ud83d\udc40 *ICNT* 0.304900 | NOT_ELIGIBLE | 1H +0.38% | RSI 26 | seen 10x\n\ud83d\udc40 *KII* 0.084793 | NOT_ELIGIBLE | 1H +0.25% | RSI 77 | seen 10x\n\ud83d\udc40 *COLLECT* 0.024608 | NOT_ELIGIBLE | 1H +0.00% | RSI 35 | seen 10x\n\ud83d\udc40 *BNB* 559.61 | NOT_ELIGIBLE | 1H -0.08% | RSI 50 | seen 10x\n\ud83d\udc40 *PAXG* 3635.30 | NOT_ELIGIBLE | 1H -0.19% | RSI 61 | seen 10x",
-    "pages": {
-        "p": [
-            "\ud83d\udd0e *SCAN HISTORY* \u00b7 463/463 coins (first 150)\n10 scans \u00b7 2.6h\n```\nCOIN    RSI    1H WHY\n------------------------------\nNES      23  +0.6 BTC filter\n0G       45     - No setup\n10SET    50     - RSI high\n1INCH    47     - No setup\n2U2      53     - RSI high\n```\n\u2800",
-            "```\n2Z       45     - No setup\nA        57     - RSI high\nA8       44     - No setup\nAAVE     47     - No setup\nAB       47     - No setup\nACE      32  -7.7 RSI low\nACH      53     - RSI high\nACN      62     - RSI high\nACT      53     - RSI high\nADA      78  +1.3 RSI high\n```",
-            "```\nAEON     63     - RSI high\nAERO     43     - No setup\nAEVO     48     - No setup\nAGLD     44     - No setup\nAI       49     - RSI high\nAIA      45     - No setup\nAIAV     46     - No setup\nAIN      45     - No setup\nAIO      51     - RSI high\nALGO     57     - RSI high\n```",
-            "```\nALICE    45     - No setup\nALIGN    49     - RSI high\nALLO     57     - RSI high\nALPH     59     - RSI high\nANIME    49     - RSI high\nANKR     53     - RSI high\nAPE      47     - No setup\nAPI3     57     - RSI high\nAPR      81     - RSI high\nAPT      50     - RSI high\n```",
-            "```\nAR       55     - RSI high\nARB      43     - No setup\nARIA     50  -9.9 RSI high\nARKM     32     - RSI low\nARPA     48     - RSI high\nARTX     83     - RSI high\nARX      70  +0.3 RSI high\nASR      61     - RSI high\nASTER    50     - RSI high\nASTR     52     - RSI high\n```",
-            "```\nATH      52     - RSI high\nATM      66     - RSI high\nATOM     72     - RSI high\nAUCTION  54     - RSI high\nAVA      60     - RSI high\nAVAX     56     - RSI high\nAVNT     41     - RSI low\nAVV      52     - RSI high\nAWE      48     - RSI high\nAXIS     52     - RSI high\n```",
-            "```\nAXL      42     - No setup\nAXS      52     - RSI high\nB        41     - RSI low\nB2       48     - No setup\nBABY     74     - RSI high\nBABYDOG  53     - RSI high\nBABYSHA  52     - RSI high\nBANANAS  56     - RSI high\nBANK     47     - No setup\nBARD     40     - RSI low\n```",
-            "```\nBAT      45     - No setup\nBAY      40     - RSI low\nBB       50     - RSI high\nBCH      50     - RSI high\nBEAM     45     - No setup\nBERA     46     - No setup\nBGB      61     - RSI high\nBGBTC    48     - No setup\nBGSC     75  -8.6 RSI high\nBGSOL    54     - RSI high\n```",
-            "```\nBICO     53     - RSI high\nBIGTIME  46     - No setup\nBILL     51     - RSI high\nBIO      48     - No setup\nBIRB     41     - RSI low\nBLEND    44     - No setup\nBLESS    61  -4.2 RSI high\nBLUAI    52     - RSI high\nBLUE     48     - No setup\nBMT      39     - RSI low\n```",
-            "```\nBNB      65  -0.2 RSI high\nBOME     46     - No setup\nBONK     55     - RSI high\nBR       40     - RSI low\nBREV     44     - No setup\nBSB      47     - No setup\nBSV      54     - RSI high\nBTC      47     - No setup\nBTT      52     - RSI high\nBTW      61  -0.1 RSI high\n```",
-            "```\nC        52     - RSI high\nCAKE     61     - RSI high\nCARV     48     - RSI high\nCATI     47     - No setup\nCBK      64     - RSI high\nCC       60     - RSI high\nCELO     53     - RSI high\nCETUS    53     - RSI high\nCFX      59     - RSI high\nCGN      41     - RSI low\n```",
-            "```\nCGPT     45     - No setup\nCHEEMS   47     - No setup\nCHR      50     - RSI high\nCHZ      49     - RSI high\nCKB      48     - No setup\nCLANKER  47     - No setup\nCLEAR    46     - No setup\nCNPY     56     - RSI high\nCOAI     46     - No setup\nCOLLECT  50  -1.5 RSI high\n```",
-            "```\nCOMP     52     - RSI high\nCOOKIE   48     - No setup\nCORE     40     - RSI low\nCOW      56     - RSI high\nCP       48     - No setup\nCRO       -     - No setup\nCROSS     9     - RSI low\nCRV      46     - No setup\nCTC      50     - RSI high\nCTSI     46     - No setup\n```",
-            "```\nCUDIS    52     - RSI high\nCYBER    56     - RSI high\nCYS      75     - RSI high\nDATA     52     - RSI high\nDBR      61     - RSI high\nDEBIT    44     - No setup\nDEEP     57     - RSI high\nDGAI     66     - RSI high\nDMC      49     - RSI high\nDNA      62     - RSI high\n```",
-            "```\nDODO     50     - RSI high\nDOGE     55     - RSI high\nDOGS     52     - RSI high\nDOS      48  +4.9 No setup\nDOT      54     - RSI high\nDTEC     40     - RSI low\nDYDX     55     - RSI high\nEDEN     51     - RSI high\nEDGE     59     - RSI high\nEGL1     85  +4.1 RSI high\n```",
-            "```\nEIGEN    42     - No setup\nENA      46     - No setup\nENJ      55     - RSI high\nENS      41     - RSI low\nENSO     37     - RSI low\n```\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
-        ],
-        "i": 0,
-        "mode": "Markdown",
-        "x": [
-            {
-                "text": "\ud83d\udd0d Why not bought?",
-                "callback_data": "m:whylist:0"
-            }
-        ],
-        "cmd": "m:scan_hist"
-    },
-    "out_mid": 4764,
-    "panel_mid": 4765
+    "panel_text": "\ud83d\udc47 *Actions*",
+    "out_mid": 4776,
+    "panel_mid": 4778
 }
