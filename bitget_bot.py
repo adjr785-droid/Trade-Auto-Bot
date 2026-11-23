@@ -1223,7 +1223,11 @@ def analyse_top3():
   for item in candidates:
    sym=str(item.get("sym") or "").split("-")[0]
    score=float(item.get("score") or 0)
-   lines.append(f"🟡 *{sym}* — *{score:.0f}%*")
+   rsi=item.get("rsi")
+   change=item.get("chg")
+   rsi_text=f"{float(rsi):.1f}" if rsi is not None else "N/A"
+   change_text=f"{float(change):+.2f}%" if change is not None else "N/A"
+   lines.append(f"🟡 *{sym}* — *{score:.0f}%* | RSI: *{rsi_text}* | 24h change: *{change_text}*")
  else:
   lines.append("No coins currently meet the manual-buy score and safety requirements.")
  keyboard=[]
