@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT24.70/\u20a633,776",
+    "kb_ph": "USDT24.70/\u20a633,775",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -65,10 +65,10 @@
         "ARX-USDT",
         "TRX-USDT"
     ],
-    "kb_mid": 4557,
-    "out_text": "\ud83d\udd04 *AI RECOVERY \u2014 STAGE 2/3*\nGroq health check passed. Buying stays blocked until 3 consecutive checks pass;\n1 more to go. Normal mode returns automatically.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "kb_mid": 4560,
+    "out_text": "\ud83d\udcbc *HOURLY HOLDINGS*\n\ud83d\udcbc *Total Portfolio Value:* $24.69 USDT | \u20a633,772\n\n\ud83d\udcb5 *Available USDT Cash*\nTotal: $20.97 | Free to Trade: $20.97\n\ud83d\udfe1 *BGB Wallet Balance (not auto-converted)*\nTotal: 3.937587e-05 BGB | Free: 3.937587e-05 BGB | Value: $0.0001 USDT\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\n\ud83d\udcbc *Coin Holdings (Value: $3.70)*\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795431876.952949,
+    "out_time": 1795431901.3307943,
     "panel_rows": [
         [
             {
@@ -76,7 +76,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "2/5",
+                "text": "1/5",
                 "callback_data": "pg:x"
             },
             {
@@ -86,14 +86,23 @@
             {
                 "text": "\ud83c\udfe0",
                 "callback_data": "m:menu"
-            },
-            {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 2/5*",
+    "panel_text": "\ud83d\udcc4 *Page 1/5*",
     "out_mid": 4553,
-    "panel_hidden": true
+    "pages": {
+        "p": [
+            "\ud83d\udcbc *HOURLY HOLDINGS*\n\ud83d\udcbc *Total Portfolio Value:* $24.69 USDT | \u20a633,772\n\n\ud83d\udcb5 *Available USDT Cash*\nTotal: $20.97 | Free to Trade: $20.97\n\ud83d\udfe1 *BGB Wallet Balance (not auto-converted)*\nTotal: 3.937587e-05 BGB | Free: 3.937587e-05 BGB | Value: $0.0001 USDT\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\n\ud83d\udcbc *Coin Holdings (Value: $3.70)*\n\u2800\n\u2800",
+            "\ud83e\ude99 *INJ*\nQuantity: 0.2997\nCurrent price: 6.3880 USDT\nMarket value: $1.91\nATH (Bitget lifetime): 52.9800 USDT\nATL (Bitget lifetime): 1.2210 USDT\n\ud83d\udd34 Entry: 6.4160 USDT | PnL: -0.44% ($-0.01)\nRSI (1h): 66.29\nMA5 (1h): 6.3248\nMA10 (1h): 6.2518\n\u2800\n\u2800",
+            "Market sentiment: \ud83d\udfe2 Bullish\nBot trailing stop: ON (8.0% below peak)\nPeak price: 6.4660\nExchange stop level: 6.2235\n\n\ud83e\ude99 *JCT*\nQuantity: 1081.8171\nCurrent price: 0.001649 USDT\nMarket value: $1.78\nATH (Bitget lifetime): 0.019589 USDT\n\u2800\n\u2800",
+            "ATL (Bitget lifetime): 0.00015000 USDT\n\ud83d\udfe2 Entry: 0.001614 USDT | PnL: +2.17% ($+0.04)\nRSI (1h): 53.05\nMA5 (1h): 0.001606\nMA10 (1h): 0.001590\nMarket sentiment: \ud83d\udfe2 Bullish\nBot trailing stop: ON (8.0% below peak)\nPeak price: 0.001653\nExchange stop level: 0.001521\n\n\u2800\n\u2800",
+            "\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\nand 8 more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT24.69/\u20a633,772\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+        ],
+        "i": 0,
+        "mode": "Markdown",
+        "x": [],
+        "cmd": null
+    },
+    "panel_mid": 4558
 }
