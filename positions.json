@@ -1,1 +1,13 @@
-{}
+{
+    "BGB-USDT": {
+        "entry_price": 1.5685,
+        "safe_zone": 1.5685,
+        "stop_loss": 1.521445,
+        "peak_price": 1.5685,
+        "last_price": 1.5685,
+        "opened_at": 1795465772.3583221,
+        "sl_pct": 3.0,
+        "strategy": "MANUAL",
+        "purchase_source": "MANUAL"
+    }
+}

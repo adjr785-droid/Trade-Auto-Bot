@@ -1576,5 +1576,15 @@
             "lesson": "When exiting a position, especially manually, ensure that the exit price covers the entry cost plus transaction fees to avoid realized losses. Consider using predefined stop\u2011loss or take\u2011profit levels to automate exits and reduce emotional decision\u2011making. If a partial exit is performed, monitor the remaining balance closely and reassess the market context before holding the residual position.",
             "confidence": "medium"
         }
+    },
+    {
+        "time": 1795465774.4247184,
+        "event": "ai_manual_buy_review",
+        "symbol": "BGB-USDT",
+        "review": {
+            "risk_level": "low",
+            "warning": "None",
+            "summary": "The requested manual buy of 1.01\u202fUSDT of BGB-USDT at a price of 1.5684 USDT per BGB is within a low\u2011risk profile given the current RSI of 60.5 and no existing position. However, the market filter is empty and the BTC filter is active, which may affect broader portfolio constraints. Proceed only if this aligns with your overall risk limits and compliance rules."
+        }
     }
 ]
