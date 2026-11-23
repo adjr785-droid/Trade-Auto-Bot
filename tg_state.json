@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT24.88/\u20a634,031",
+    "kb_ph": "USDT25.33/\u20a634,649",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -63,7 +63,35 @@
         ]
     },
     "radar": [
-        "IDOL-USDT"
+        "IDOL-USDT",
+        "SKYAI-USDT",
+        "EGL1-USDT"
     ],
-    "kb_mid": 4261
+    "kb_mid": 4271,
+    "out_mid": 4262,
+    "out_text": "\u26d4 *AUTO-BUY REJECTED \u2014 KII-USDT*\nReason: Risk: Daily limit (13)\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_mode": "Markdown",
+    "out_time": 1795405249.4586308,
+    "panel_rows": [
+        [
+            {
+                "text": "\u25c0",
+                "callback_data": "pg:p"
+            },
+            {
+                "text": "1/3",
+                "callback_data": "pg:x"
+            },
+            {
+                "text": "\u25b6",
+                "callback_data": "pg:n"
+            },
+            {
+                "text": "\ud83c\udfe0",
+                "callback_data": "m:menu"
+            }
+        ]
+    ],
+    "panel_text": "\ud83d\udcc4 *Page 1/3*",
+    "panel_hidden": true
 }
