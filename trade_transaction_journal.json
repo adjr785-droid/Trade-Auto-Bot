@@ -1009,5 +1009,15 @@
             "warning": "The RSI is near neutral and the price is low; liquidity may be limited for UMXM-USDT. Ensure the trade aligns with your risk tolerance and position sizing rules.",
             "summary": "Considering a $22.58 USDT purchase at $0.00537 with RSI 47.5, the trade carries moderate risk. Verify market depth and confirm that the order size fits your overall portfolio exposure before proceeding."
         }
+    },
+    {
+        "time": 1795396396.9904962,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (14)', 'attention': [{'symbol': 'UMXM-USDT', 'action': 'monitor', 'reason': 'Position is slightly underwater (-1.22% PnL) and close to stop (stop at 0.004875 vs current 0.00535). Consider tightening stop or exiting if price approaches stop.'}], 'summary': 'Overall portfolio risk remains within daily limit. The only open position is marginally losing and near its stop level; recommend close monitoring and possible risk mitigation.'}"
+    },
+    {
+        "time": 1795396397.9615376,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 53.33, 'net_pnl_usdt': 4.9539, 'recurring_patterns': ['RSI 75 (3 occurrences)', 'PARTIAL PROFIT (2 occurrences)', 'MANUAL SELL (2 occurrences)', 'PANIC (4 occurrences)', '15-MINUTE NO-UPWARD-TREND ROTATION (7 occurrences)'], 'recommendations': ['Review and tighten criteria for PANIC exits, as they contribute to losses', 'Consider adjusting RSI 75 trigger to a higher threshold or adding confirmation filters', 'Limit reliance on manual sell commands without quantitative justification', 'Monitor the effectiveness of the 15\u2011minute no\u2011upward\u2011trend rotation strategy; it yields many small gains but also occasional losses', 'Overall, maintain a conservative position size until win rate improves above 60%']}"
     }
 ]
