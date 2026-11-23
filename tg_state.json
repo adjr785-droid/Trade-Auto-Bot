@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689698,
+    "last_update_id": 935689700,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -73,78 +73,30 @@
     "panel_rows": [
         [
             {
-                "text": "rsi_min = 42",
-                "callback_data": "m:k:rsi_min"
+                "text": "\u2796\u2796 -25%",
+                "callback_data": "m:kv:max_daily_trades:--"
+            },
+            {
+                "text": "\u2796 -10%",
+                "callback_data": "m:kv:max_daily_trades:-"
+            },
+            {
+                "text": "\u2795 +10%",
+                "callback_data": "m:kv:max_daily_trades:+"
+            },
+            {
+                "text": "\u2795\u2795 +25%",
+                "callback_data": "m:kv:max_daily_trades:++"
             }
         ],
         [
             {
-                "text": "rsi_max = 48",
-                "callback_data": "m:k:rsi_max"
-            }
-        ],
-        [
-            {
-                "text": "stop_loss_pct = 15",
-                "callback_data": "m:k:stop_loss_pct"
-            }
-        ],
-        [
-            {
-                "text": "sl_sell_percent = 0.5",
-                "callback_data": "m:k:sl_sell_percent"
-            }
-        ],
-        [
-            {
-                "text": "dca_reserve = 2.4143",
-                "callback_data": "m:k:dca_reserve"
-            }
-        ],
-        [
-            {
-                "text": "auto_buy_enabled = True",
-                "callback_data": "m:k:auto_buy_enabled"
-            }
-        ],
-        [
-            {
-                "text": "auto_buy_amount_usdt = 6.4994",
-                "callback_data": "m:k:auto_buy_amount_usdt"
-            }
-        ],
-        [
-            {
-                "text": "max_tokens_before_consolidation = 3",
-                "callback_data": "m:k:max_tokens_before_consolidation"
-            }
-        ],
-        [
-            {
-                "text": "trail_pct = 8.0",
-                "callback_data": "m:k:trail_pct"
-            }
-        ],
-        [
-            {
-                "text": "crash_guard_pct = 10.0",
-                "callback_data": "m:k:crash_guard_pct"
-            }
-        ],
-        [
-            {
-                "text": "Next \u25b6\ufe0f",
-                "callback_data": "m:sp:1"
-            }
-        ],
-        [
-            {
-                "text": "\u2b05\ufe0f Menu",
-                "callback_data": "m:menu"
+                "text": "\u2b05\ufe0f Settings",
+                "callback_data": "m:sp:0"
             }
         ]
     ],
-    "panel_text": "\u2699\ufe0f *SETTINGS* (page 1/9)\nTap a setting to change it.",
+    "panel_text": "\u2699\ufe0f *max daily trades*\nCurrent value: `6`",
     "out_time": 1795406836.7812054,
     "out_mid": 4321,
     "panel_mid": 4323
