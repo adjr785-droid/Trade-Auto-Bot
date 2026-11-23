@@ -20,21 +20,21 @@ def ai_emergency_active():
  return bool(ai_emergency_state().get("emergency_mode"))
 
 def activate_ai_emergency(reason):
- """Latch sell-only mode on any confirmed AI health/stage failure."""
+ """Pause automated buying on AI health failure; preserve manual trade controls and protective exits."""
  hs=ai_emergency_state();already=bool(hs.get("emergency_mode"))
  _lost=int(hs.get("consecutive_successes",0)) if already else 0
- hs.update({"emergency_mode":True,"trading_mode":"SELL_ONLY","emergency_started":hs.get("emergency_started") or time.time(),
-  "emergency_reason":str(reason)[:240],"consecutive_successes":0,"resume_requires_user_confirmation":True})
+ hs.update({"emergency_mode":True,"trading_mode":"AUTO_BUY_PAUSED_MANUAL_OPEN","emergency_started":hs.get("emergency_started") or time.time(),
+  "emergency_reason":str(reason)[:240],"consecutive_successes":0,"resume_requires_user_confirmation":False})
  save(AI_HEALTH,hs)
  if already and _lost>0 and not str(reason).startswith("Groq health self-test"):tg(f"⚠️ *AI RECOVERY RESET*\nAn AI stage failed at recovery stage {_lost}/3 ({str(reason)[:120]}). Recovery restarts from 0/3; buying stays blocked.")
  if not already:
-  tg("🚨 *AI FAILURE — EMERGENCY SELL-ONLY MODE ACTIVATED*\nAll buying and discretionary/manual selling are now blocked. The bot will independently monitor existing positions and execute ONLY configured protective/exit conditions (stop-loss, trailing stop, take-profit/partial profit, crash guard, time stop, RSI exit, unprotected-position exit and the existing 15-minute no-upward-trend rule). No replacement buys. Proceeds remain in USDT.\nReason: "+str(reason)[:220]+"\nAI recovery does NOT automatically resume trading. You will be notified.")
+  tg("🚨 *AI FAILURE — AUTOMATIC BUYING PAUSED*\nAuto-Buy is blocked while AI recovery is checked. Manual Buy and Sell remain available to you; AI warnings never lock manual trades. The bot continues configured protective exits on existing positions. No automatic replacement buys. Proceeds remain in USDT.\nReason: "+str(reason)[:220]+"\nThe bot will notify you about recovery.")
 
 def ai_sell_reason_allowed(reason):
  """Allow only the bot's predefined, deterministic exit conditions in emergency mode."""
  r=str(reason or "").strip().upper()
  prefixes=("SL HIT", "STOP LOSS", "TRAILING STOP", "RSI ", "CRASH GUARD",
-  "PARTIAL PROFIT", "UNPROTECTED")
+  "PARTIAL PROFIT", "UNPROTECTED", "PANIC")
  return any(r.startswith(x) for x in prefixes)
 
 def ai_emergency_resume(auto=False):
@@ -665,7 +665,6 @@ def free_qty(sym,d):
  try:b=B('free',sym.split('-')[0]);return min(d,b) if b>0 else d
  except:return d
 def m_buy(cs,usdt):
- if ai_emergency_active():raise RuntimeError("AI emergency SELL-ONLY mode is active; all buys are locked")
  sym=cs.replace("/","-");p=live(sym)
  if not p:raise Exception(f"No price for {cs}")
  try:o=ex.create_order(cs,'market','buy',usdt,None,{'createMarketBuyOrderRequiresPrice':False})
@@ -853,11 +852,15 @@ def sell(sym,pct,reason):
   else:tg(f"✅ *SOLD ({reason})*\n🪙 {total_filled:.8g} {sym}\nCost basis not tracked; realized PnL not calculated.")
   if full_exit and remaining*p>=1.02:
    journal_event("full_sale_incomplete",symbol=sym,remaining_base=remaining,remaining_value_usdt=remaining*p,filled=total_filled)
+   coin_db_mark_execution(sym,"HELD","Full exit incomplete; residual position remains",{"remaining":remaining,"filled":total_filled,"reason":reason})
    tg(f"⚠️ *PARTIAL SALE — POSITION RETAINED:* {sym}; approximately {remaining:.8g} remains (${remaining*p:.2f}). It will stay tracked; no replacement buy will be made.")
    return False
+  if not full_exit:
+   coin_db_mark_execution(sym,"HELD","Partial sale completed; residual position remains",{"remaining":remaining,"filled":total_filled,"reason":reason})
   if full_exit:
    journal_event("full_sale_verified_or_dust",symbol=sym,remaining_base=remaining,remaining_value_usdt=remaining*p if remaining else 0.0,filled=total_filled)
    if remaining>0:tg(f"🟡 {sym}: remaining balance is below the $1.02 tradable-order threshold and is treated as exchange dust.")
+   coin_db_mark_execution(sym,"SOLD","Protective/full sale confirmed",{"filled":total_filled,"average_exit":avg_px,"remaining":remaining,"reason":reason})
    dust_result=cleanup_spot_dust_after_sale(sym);tg(dust_result)
    # Post-exit AI review informs future analysis; it never delays or reverses a protective sale.
    ai=ai_stage('sell_review',{'symbol':sym,'reason':reason,'sold_quantity':total_filled,'average_exit':avg_px,
@@ -896,10 +899,14 @@ def cmd_buy(txt):
   ob=B('total',c) if old else 0.0;f,a=m_buy(f"{c}/USDT",amt);sl=sl_pct(sym,old) if old else sl_pct(sym)
   if old:
    e0=old['entry_price'];avg=round((ob*e0+f*a)/(ob+f),6) if ob>0 else round(a,6)
-   old.update(entry_price=avg,safe_zone=avg,stop_loss=round(avg*(1-sl/100),6),last_price=a,peak_price=max(old.get('peak_price',avg),a),opened_at=time.time(),purchase_source='MANUAL');db[sym]=old;save(DB,db);ok=place_trailing_sl(sym,free_qty(sym,ob+f))
+   old.update(entry_price=avg,safe_zone=avg,stop_loss=round(avg*(1-sl/100),6),last_price=a,peak_price=max(old.get('peak_price',avg),a),opened_at=time.time(),purchase_source='MANUAL');db[sym]=old;save(DB,db)
+   coin_db_mark_execution(sym,"BOUGHT","Manual DCA fill confirmed",{"filled":f,"average":a,"spend_usdt":amt,"source":"MANUAL"})
+   ok=place_trailing_sl(sym,free_qty(sym,ob+f))
    tg(f"➕ *DCA ADDED:* {c} @ {a:.6f}\nSpent: ${amt:.2f}\nNew avg entry: {avg:.6f}\n"+(STOP_OK if ok else STOP_NO))
   else:
-   db[sym]=NP(round(a,6),round(a*(1-sl/100),6),sl);db[sym]['strategy']="MANUAL";db[sym]['purchase_source']='MANUAL';db[sym]['opened_at']=time.time();save(DB,db);ok=place_trailing_sl(sym,free_qty(sym,f))
+   db[sym]=NP(round(a,6),round(a*(1-sl/100),6),sl);db[sym]['strategy']="MANUAL";db[sym]['purchase_source']='MANUAL';db[sym]['opened_at']=time.time();save(DB,db)
+   coin_db_mark_execution(sym,"BOUGHT","Manual buy fill confirmed",{"filled":f,"average":a,"spend_usdt":amt,"source":"MANUAL"})
+   ok=place_trailing_sl(sym,free_qty(sym,f))
    tg(f"✅ *BOUGHT:* {c} @ {a:.6f}\nSpent: ${amt:.2f}\n"+(STOP_OK if ok else STOP_NO))
   if ai_manual:
    journal_event('ai_manual_buy_review',symbol=sym,review=ai_manual)
@@ -938,9 +945,11 @@ def cmd_sell(txt):
   fully_filled=full_exit and filled>=q*0.999
   if rem<=0 or rem*p<1.02:
    db.pop(sym,None);save(DB,db)
+   coin_db_mark_execution(sym,"SOLD","Manual full sale confirmed",{"filled":filled,"average":px,"pnl_usdt":pnl})
    tg(f"✅ *SOLD:* {filled:.8g} {c} @ {px:.6f}\nPnL: ${pnl:.2f}\nPosition closed.")
   else:
    place_trailing_sl(sym,rem);save(DB,db)
+   coin_db_mark_execution(sym,"HELD","Manual partial sale; residual position remains",{"remaining":rem,"filled":filled,"average":px})
    tg(f"✅ *SOLD:* {filled:.8g} {c} @ {px:.6f}\nPnL: ${pnl:.2f}\nRemaining: {rem:.8g} {c} (stop re-armed)")
   if fully_filled:
    tg(cleanup_spot_dust_after_sale(sym))
@@ -973,7 +982,6 @@ def cmd_sync():
    db[sym]=NP(p,round(p*(1-cfg()['stop_loss_pct']/100),6));save(DB,db);added.append(sym);place_trailing_sl(sym,a)
  tg(f"✅ *SYNCED:* Added {len(added)} coins:\n`{chr(10).join(added)}`" if added else "✅ No new manual coins found to sync.")
 def panic_sell():
- if ai_emergency_active():tg("⛔ Emergency SELL-ONLY mode is active. The bot is managing configured exits; manual bulk liquidation is disabled in this mode.");return
  db=load(DB)
  if not db:
   try:u=B('free','USDT')
@@ -1185,6 +1193,11 @@ def analyse_top3():
   elif btcb or vd in ('CAUTION','WEAK') or (sp is not None and sp>lim):stt="⚠️ Passes with a note"
   else:stt="✅ Passes all filters"
   out.append("• Status: "+stt+(" | BTC filter active" if btcb else ""))
+  try:
+   memo=coin_db_get(c['sym'])
+   out.append("• Coin memory: "+(f"{memo.get('signal_status') or 'UNKNOWN'} / {memo.get('execution_status') or 'UNASSESSED'} | seen {memo.get('scans',0)} scans" if memo else "not yet recorded by scanner"))
+   if memo and memo.get("ai_advisory"):out.append("• AI notebook note: "+str(memo["ai_advisory"])[:100])
+  except Exception:pass
   out.append("• 🧠 AI: "+(vd+" — "+str(av.get('reason',''))[:120] if av else "unavailable right now"))
   out.append("")
   _sn=str(c['setup']).split(" ")[0].replace("WATCHLIST","WATCH");_ic=stt.split(" ")[0]
@@ -1308,6 +1321,11 @@ def analyse_coin(txt):
   verdict='WAIT / WEAK SETUP' if price<ma20 or (rsi is not None and rsi>=75) or (hist is not None and hist<0) else 'TECHNICAL SETUP LOOKS POSITIVE' if score>=3 and spread is not None and spread<=cfg().get('max_spread_pct',0.5) else 'WAIT FOR STRONGER CONFIRMATION'
   def fmt(v):return fp(v) if isinstance(v,(int,float)) else 'N/A'
   lines=[f"📊 *ANALYSIS: {sym}*",f"Live price: {fmt(price)} USDT",f"24h change: {change:+.2f}%" if isinstance(change,(int,float)) else "24h change: N/A",f"RSI(14): {fmt(rsi)} — "+("Overbought" if rsi is not None and rsi>=70 else "Oversold" if rsi is not None and rsi<=30 else "Neutral" if rsi is not None else "N/A"),f"MA5: {fmt(ma5)} | MA10: {fmt(ma10)} | MA20: {fmt(ma20)}",f"MACD: {fmt(macd)} | Signal: {fmt(signal)} | Histogram: {fmt(hist)}",f"ATR(14): {fmt(atr)} ({(atr/price*100):.2f}% of price)" if atr is not None and price else "ATR(14): N/A",f"Last hour vol vs 20h avg: {(lastvol/avgvol):.2f}x" if avgvol else "Volume: N/A",f"Bid/ask spread: {spread:.3f}%" if spread is not None else "Bid/ask spread: N/A",f"Technical checks: {score}/4",f"Assessment: *{verdict}*"]
+  try:
+   memo=coin_db_get(sym)
+   lines.append("Coin database: "+(f"{memo.get('signal_status') or 'UNKNOWN'} / {memo.get('execution_status') or 'UNASSESSED'} | seen {memo.get('scans',0)} scans | "+str(memo.get('reason') or '')[:100] if memo else "not yet recorded by scanner"))
+   if memo and memo.get("ai_advisory"):lines.append("AI notebook note: "+str(memo["ai_advisory"])[:180])
+  except Exception:pass
   tg("\n".join(lines))
  except Exception as e:tg(f"❌ Could not analyse {sym}: {e}")
 def _ai_reason(model):
@@ -1326,8 +1344,9 @@ def ai_stage(stage, payload, ttl=90, max_tokens=500, soft=False):
   schemas={
    'market_regime':'Return keys regime, risk_level, summary.',
    'opportunity_ranking':'Return rankings as an array of {symbol, adjustment, reason}; adjustment must be between -5 and +5.',
+   'coin_advisory':'Return reviews as an array of {symbol, risk_level, comment}. Advisory only; do not change deterministic status or execution.',
    'portfolio_review':'Return keys portfolio_risk, attention as an array of {symbol, action, reason}, summary. Advice only.',
-   'buy_gate':'Return keys decision (BUY or VETO), reason. VETO only for a clear material risk in supplied data.',
+   'buy_advisory':'Return keys risk_level, warning, summary. Advisory only; deterministic safeguards decide eligibility and execution.',
    'manual_buy_review':'Return keys risk_level, warning, summary. Advisory only; the user explicitly requested this manual order.',
    'sell_review':'Return keys review, lesson, confidence. This is post-exit analysis only.',
    'analyse_review':'Return reviews as an array of {symbol, verdict (OK, CAUTION or WEAK), reason (max 14 words)}, one per candidate. Advisory only; the user decides manually and may buy coins that miss some filters.',
@@ -1689,6 +1708,10 @@ def guardian_audit(force=False):
    for sym,d in q.items():
     if not isinstance(d,dict) or not d.get("timestamp"):findings.append(f"queued signal invalid: {sym}")
  except Exception as e:findings.append(f"queue audit error: {e}")
+ try:
+  db_ok,db_msg=coin_db_integrity()
+  if not db_ok:findings.append("coin database integrity: "+db_msg)
+ except Exception as e:findings.append("coin database audit failed: "+str(e)[:120])
  # Store the immutable charter once, then validate its persisted structure on each audit.
  charter={"version":1,"mission":"Bitget spot trading; preserve capital, follow approved strategy logic, audit decisions and operational faults.","strategies":["TREND","OVERSOLD","BREAKOUT"],"constraints":["No leverage","Never silently alter strategy rules","No automatic liquidation solely from audit findings","Critical data-integrity uncertainty blocks new entries"]}
  if not os.path.exists(GCHARTER):save(GCHARTER,charter)
@@ -1705,6 +1728,7 @@ def guardian_audit(force=False):
  return healthy,summary
 
 def buy_rejection(sym,reason):
+ coin_db_mark_execution(sym,"BLOCKED",reason,{"source":"auto_buy_execution"})
  key=f"buy_reject_notice:{sym}:{reason[:60]}"
  if not in_cd(key,900):tg(f"⛔ *AUTO-BUY REJECTED — {sym}*\nReason: {reason}");mk_cd(key)
 def protect_retry(sym,f):
@@ -1793,6 +1817,10 @@ def loss_streak_adjust(sp,s):
 def exec_q():
  q=load(QF);db=load(DB);s=cfg();mx=s["max_tokens_before_consolidation"]
  if not q:return
+ if ai_emergency_active():
+  for sym in list(q):buy_rejection(sym,"AI emergency active; automatic buys paused. Manual trading remains available.")
+  q.clear();save(QF,q)
+  return
  if not s["auto_buy_enabled"]:
   for sym in q:buy_rejection(sym,"Auto-buy paused.")
   return
@@ -1818,7 +1846,10 @@ def exec_q():
   ub=B('free','USDT')
   reserve_pct=max(0.0,min(50.0,float(s.get('auto_buy_reserve_pct',5.0))))
   ub=max(0.0,ub*(1-reserve_pct/100.0))
-  for sym,qd in sorted(q.items(),key=lambda x:float(x[1].get('score',0))+float(x[1].get('ai_priority_adjustment',0)),reverse=True):
+  for sym,qd in sorted(q.items(),key=lambda x:float(x[1].get('score',0)),reverse=True):
+   db_ready,db_reason=coin_db_can_execute(sym,qd)
+   if not db_ready:
+    buy_rejection(sym,db_reason);q.pop(sym,None);save(QF,q);continue
    if in_cd(f"fail_{sym}",300):buy_rejection(sym,"Previous fail.");continue
    if sym in db:buy_rejection(sym,"Position exists.");q.pop(sym,None);save(QF,q);continue
    if not live(sym):buy_rejection(sym,"No price.");continue
@@ -1847,13 +1878,16 @@ def exec_q():
    impact_ok,impact,impact_reason=estimate_market_impact(sym,sp);impact_limit=float(s.get("execution_slippage_pct",0.35))
    if not impact_ok or impact is None or impact>impact_limit:
     buy_rejection(sym,impact_reason if not impact_ok else f"Estimated impact {impact:.3f}% exceeds {impact_limit:.3f}%.");continue
-   # AI is a final advisory quality gate only after every deterministic buy check passed.
-   ai=ai_stage('buy_gate',{'symbol':sym,'setup':qd.get('type'),'score':qd.get('score'),'price':live(sym),
+   # AI supervises and warns; it never approves, vetoes, or changes a deterministic order.
+   ai=ai_stage('buy_advisory',{'symbol':sym,'setup':qd.get('type'),'score':qd.get('score'),'price':live(sym),
     'rsi':data(sym)[2],'spread_pct':sprd,'estimated_impact_pct':impact,'spend_usdt':sp,
     'btc_filter':btc_blocked(s),'market_filter':market_filter(s),'risk_controls':'PASS'},ttl=120,max_tokens=250)
-   if ai and ai.get('decision') not in ('BUY','ALLOW','PROCEED'):
-    buy_rejection(sym,'AI advisory veto: '+str(ai.get('reason','AI did not approve this entry'))[:180]);journal_event('ai_buy_veto',symbol=sym,ai=ai);continue
-   if ai:journal_event('ai_buy_approved',symbol=sym,ai=ai)
+   if ai_emergency_active():
+    buy_rejection(sym,"AI supervisor failed during pre-buy review; automatic order cancelled.")
+    q.pop(sym,None);save(QF,q);return
+   if ai:
+    journal_event('ai_buy_advisory',symbol=sym,advisory=ai)
+    qd['ai_advisory']=str(ai.get('warning') or ai.get('summary') or '')[:240]
    journal_event("buy_order_submitted",symbol=sym,spend_usdt=sp,estimated_impact_pct=impact,setup=qd.get("type","OTHER"))
    try:f,a=m_buy(S(sym),sp)
    except Exception as e:
@@ -1863,7 +1897,9 @@ def exec_q():
    journal_event("buy_fill_verified",symbol=sym,filled=f,average=a,spend_estimate=f*a)
    mxs=round(a*(1-pct/100),6);sl=qd.get('sl') or mxs
    if sl>=a or sl>mxs:sl=mxs
-   db[sym]=NP(round(a,6),sl,pct);db[sym]['strategy']=qd.get('type','OTHER');db[sym]['purchase_source']='AUTO';db[sym]['opened_at']=time.time();save(DB,db);ok=place_trailing_sl(sym,free_qty(sym,f)) or protect_retry(sym,f);tg(f"🛒 *EXECUTED — DYNAMIC AUTO-BUY!*\n{sym}|💵{sp:.2f}@{a:.6f}\nAllocation: score {alloc_meta.get('score_factor',0):.2f}x, setup {alloc_meta.get('setup_factor',0):.2f}x, volatility {alloc_meta.get('vol_factor',0):.2f}x, regime {alloc_meta.get('regime_factor',0):.2f}x\n"+(STOP_OK if ok else STOP_NO))
+   db[sym]=NP(round(a,6),sl,pct);db[sym]['strategy']=qd.get('type','OTHER');db[sym]['purchase_source']='AUTO';db[sym]['opened_at']=time.time();save(DB,db)
+   coin_db_mark_execution(sym,"BOUGHT","Auto-buy fill confirmed",{"filled":f,"average":a,"spend_usdt":sp,"setup":qd.get("type")})
+   ok=place_trailing_sl(sym,free_qty(sym,f)) or protect_retry(sym,f);tg(f"🛒 *EXECUTED — DYNAMIC AUTO-BUY!*\n{sym}|💵{sp:.2f}@{a:.6f}\nAllocation: score {alloc_meta.get('score_factor',0):.2f}x, setup {alloc_meta.get('setup_factor',0):.2f}x, volatility {alloc_meta.get('vol_factor',0):.2f}x, regime {alloc_meta.get('regime_factor',0):.2f}x\n"+(STOP_OK if ok else STOP_NO))
    if not ok and s.get('sell_if_stop_fails',True):unprotected_exit(sym,db)
    q.pop(sym,None);save(QF,q);ub=B('free','USDT');time.sleep(2);break
  except Exception as e:tg(f"⚠️ *QUEUE FAILED:* `{e}`")
@@ -1872,7 +1908,12 @@ def scan_history_state():
  if not isinstance(h,dict):h={}
  now=time.time();start=float(h.get("window_start",0) or 0)
  if not start or now-start>=86400:h={"window_start":now,"items":[]};save(SH,h)
- h.setdefault("items",[]);return h
+ h.setdefault("items",[])
+ try:
+  db_items=coin_db_history_records()
+  if db_items:h["items"]=db_items
+ except Exception as e:print("COIN DB HISTORY READ ERR",str(e)[:120])
+ return h
 def scan_history_rsi(sym):
  try:
   cached=data(sym)[2]
@@ -2023,10 +2064,22 @@ def send_near_miss(s,ai_market=None):
  _create("\n".join(lines)[:3900],"Markdown",{"inline_keyboard":rows},silent=False)
 def coin_db_conn():
  import sqlite3
- c=sqlite3.connect(COINDB,timeout=10)
+ c=sqlite3.connect(COINDB,timeout=20)
+ c.execute("PRAGMA busy_timeout=20000")
  c.execute("CREATE TABLE IF NOT EXISTS coins(sym TEXT PRIMARY KEY,first_seen REAL,last_seen REAL,scans INTEGER,price REAL,chg24 REAL,h1 REAL,rsi REAL,ma5 REAL,ma10 REAL,vol REAL,candles INTEGER,status TEXT,setup TEXT,reason TEXT)")
  c.execute("CREATE TABLE IF NOT EXISTS snaps(sym TEXT,t REAL,price REAL,h1 REAL,rsi REAL,status TEXT)")
  c.execute("CREATE INDEX IF NOT EXISTS snaps_sym ON snaps(sym,t)")
+ cc={x[1] for x in c.execute("PRAGMA table_info(coins)")}
+ for n,t in (("signal_status","TEXT"),("execution_status","TEXT"),("checks_json","TEXT"),("decision_at","REAL"),("expires_at","REAL"),("scan_id","TEXT"),("ai_advisory","TEXT"),("ai_advisory_at","REAL")):
+  if n not in cc:c.execute(f"ALTER TABLE coins ADD COLUMN {n} {t}")
+ sc={x[1] for x in c.execute("PRAGMA table_info(snaps)")}
+ for n,t in (("decision","TEXT"),("reason","TEXT"),("execution_status","TEXT"),("scan_id","TEXT"),
+              ("rank","INTEGER"),("vol","REAL"),("chg","REAL"),("ma5","REAL"),("ma10","REAL"),
+              ("min_volume","REAL"),("spread_pct","REAL"),("near_miss_json","TEXT")):
+  if n not in sc:c.execute(f"ALTER TABLE snaps ADD COLUMN {n} {t}")
+ c.execute("CREATE TABLE IF NOT EXISTS execution_events(id INTEGER PRIMARY KEY AUTOINCREMENT,t REAL,sym TEXT,status TEXT,reason TEXT,details_json TEXT)")
+ c.execute("CREATE INDEX IF NOT EXISTS execution_events_sym ON execution_events(sym,t)")
+ c.commit()
  return c
 _REJ=("Vol below","Spread","Top 15","24H","No candle","Not evaluated","Skipped")
 def coin_status(rec,held):
@@ -2035,42 +2088,170 @@ def coin_status(rec,held):
  if d.startswith("SETUP"):return "READY"
  if r.startswith(_REJ):return "REJECTED"
  return "WATCHING"
-def coin_db_update(records,held,newc=None,keep_days=3,keep_snaps=6):
- # The scanner writes every coin it looked at into the coin database (one row per coin + a short history).
- now=time.time();held=set(held);newc=newc or {};conn=coin_db_conn()
+def coin_db_integrity():
+ c=coin_db_conn()
+ try:
+  r=c.execute("PRAGMA quick_check").fetchone()
+  cols={x[1] for x in c.execute("PRAGMA table_info(coins)")}
+  need={"sym","first_seen","last_seen","scans","status","signal_status","execution_status","checks_json"}
+  missing=need-cols
+  return (bool(r and str(r[0]).lower()=="ok" and not missing),
+          "SQLite healthy" if r and str(r[0]).lower()=="ok" and not missing else "SQLite quick_check/schema failed: "+", ".join(sorted(missing)))
+ finally:c.close()
+def coin_db_mark_execution(sym,status,reason="",details=None):
+ c=None
+ try:
+  now=time.time();status=str(status).upper();reason=str(reason or "")[:240];c=coin_db_conn()
+  row=c.execute("SELECT first_seen,scans,signal_status,checks_json,status FROM coins WHERE sym=?",(sym,)).fetchone()
+  fs,sc,signal,raw,legacy=row if row else (now,0,"MANUAL","{}","WATCHING")
+  try:checks=json.loads(raw or "{}")
+  except Exception:checks={}
+  checks["last_execution_event"]={"status":status,"reason":reason,"time":now,"details":details or {}}
+  if status=="BOUGHT":legacy="BOUGHT";signal=signal or "MANUAL"
+  elif status=="SOLD":legacy="READY" if signal=="READY" else "WATCHING"
+  c.execute("""INSERT INTO coins(sym,first_seen,last_seen,scans,status,signal_status,execution_status,checks_json,decision_at,reason)
+   VALUES(?,?,?,?,?,?,?,?,?,?) ON CONFLICT(sym) DO UPDATE SET last_seen=excluded.last_seen,status=excluded.status,
+   signal_status=COALESCE(coins.signal_status,excluded.signal_status),execution_status=excluded.execution_status,
+   checks_json=excluded.checks_json,decision_at=excluded.decision_at,
+   reason=CASE WHEN excluded.reason<>'' THEN excluded.reason ELSE coins.reason END""",
+   (sym,fs,now,sc,legacy,signal,status,json.dumps(checks,default=str),now,reason))
+  c.execute("INSERT INTO execution_events(t,sym,status,reason,details_json) VALUES(?,?,?,?,?)",
+   (now,sym,status,reason,json.dumps(details or {},default=str)))
+  c.commit()
+ except Exception as e:print("COIN EXECUTION STATE ERR",sym,str(e)[:150])
+ finally:
+  if c:
+   try:c.close()
+   except:pass
+def coin_db_update(records,held,newc=None,keep_days=3,keep_snaps=96,queue=None,buying_allowed=True,block_reason="",settings=None):
+ now=time.time();held=set(held);newc=newc or {};queue=queue if isinstance(queue,dict) else {};settings=settings or {};c=coin_db_conn()
  try:
   for rec in records:
    sym=rec.get("sym")
    if not sym:continue
-   st=coin_status(rec,held);setup=str(rec.get("reason","")).split(" ")[0] if st=="READY" else None
-   row=conn.execute("SELECT first_seen,scans FROM coins WHERE sym=?",(sym,)).fetchone()
-   fs,sc=(row[0],row[1]) if row else (now,0)
-   h1=rec.get("h1")
-   conn.execute("INSERT OR REPLACE INTO coins VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",(sym,fs,now,sc+1,rec.get("price"),rec.get("chg"),h1,rec.get("rsi"),rec.get("ma5"),rec.get("ma10"),rec.get("vol"),None,st,setup,str(rec.get("reason",""))[:120]))
-   conn.execute("INSERT INTO snaps VALUES(?,?,?,?,?,?)",(sym,now,rec.get("price"),h1,rec.get("rsi"),st))
+   legacy=coin_status(rec,held);decision=str(rec.get("decision",""));reason=str(rec.get("reason",""))
+   signal="READY" if decision.startswith("SETUP") else ("REJECTED" if reason.startswith(_REJ) else "WATCHING")
+   qd=queue.get(sym) if isinstance(queue.get(sym),dict) else None
+   ts=float(rec.get("time") or now);expiry=float((qd or {}).get("expires_at") or ts+float(settings.get("signal_expiry_minutes",30))*60)
+   execution="HELD" if sym in held else "QUEUED" if qd and signal=="READY" and expiry>now else "BLOCKED" if signal=="READY" else "NOT_ELIGIBLE"
+   prev=c.execute("SELECT h1 FROM snaps WHERE sym=? AND h1 IS NOT NULL ORDER BY t DESC LIMIT 2",(sym,)).fetchall()
+   h1_now=rec.get("h1")
+   rising_3=bool(isinstance(h1_now,(int,float)) and len(prev)==2 and prev[0][0] is not None and prev[1][0] is not None
+                 and float(h1_now)>float(prev[0][0])>float(prev[1][0]))
+   checks={"scanner":{"decision":decision,"reason":reason,"rank":rec.get("rank"),"min_volume":rec.get("min_volume"),
+    "volume_24h":rec.get("vol"),"change_24h_pct":rec.get("chg"),"price":rec.get("price"),"h1_pct":rec.get("h1"),
+    "rsi":rec.get("rsi"),"ma5":rec.get("ma5"),"ma10":rec.get("ma10"),"spread_pct":rec.get("spread_pct"),
+    "strategy":rec.get("strategy"),"near_miss":rec.get("near_miss"),"h1_rising_three_scans":rising_3},
+    "execution":{"status":execution,"buying_allowed_at_scan":bool(buying_allowed),"block_reason":str(block_reason or "")[:240],
+    "queue_timestamp":(qd or {}).get("timestamp"),"queue_score":(qd or {}).get("score"),"signal_expires_at":expiry}}
+   row=c.execute("SELECT first_seen,scans FROM coins WHERE sym=?",(sym,)).fetchone();fs,sc=row if row else (now,0)
+   advisory=str((qd or {}).get("ai_advisory",""))[:240]
+   c.execute("""INSERT INTO coins(sym,first_seen,last_seen,scans,price,chg24,h1,rsi,ma5,ma10,vol,candles,status,setup,reason,
+    signal_status,execution_status,checks_json,decision_at,expires_at,scan_id,ai_advisory)
+    VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ON CONFLICT(sym) DO UPDATE SET
+    last_seen=excluded.last_seen,scans=excluded.scans,price=excluded.price,chg24=excluded.chg24,h1=excluded.h1,
+    rsi=excluded.rsi,ma5=excluded.ma5,ma10=excluded.ma10,vol=excluded.vol,candles=excluded.candles,status=excluded.status,
+    setup=excluded.setup,reason=excluded.reason,signal_status=excluded.signal_status,execution_status=excluded.execution_status,
+    checks_json=excluded.checks_json,decision_at=excluded.decision_at,expires_at=excluded.expires_at,
+    scan_id=excluded.scan_id,ai_advisory=COALESCE(NULLIF(excluded.ai_advisory,''),coins.ai_advisory)""",
+    (sym,fs,now,sc+1,rec.get("price"),rec.get("chg"),rec.get("h1"),rec.get("rsi"),rec.get("ma5"),rec.get("ma10"),
+     rec.get("vol"),rec.get("candles"),legacy,rec.get("strategy"),reason[:240],signal,execution,json.dumps(checks,default=str),
+     now,expiry,str(rec.get("time") or int(now)),advisory))
+   c.execute("""INSERT INTO snaps(sym,t,price,h1,rsi,status,decision,reason,execution_status,scan_id,
+    rank,vol,chg,ma5,ma10,min_volume,spread_pct,near_miss_json)
+    VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
+    (sym,now,rec.get("price"),rec.get("h1"),rec.get("rsi"),legacy,decision,reason[:240],execution,
+     str(rec.get("time") or int(now)),rec.get("rank"),rec.get("vol"),rec.get("chg"),rec.get("ma5"),rec.get("ma10"),
+     rec.get("min_volume"),rec.get("spread_pct"),json.dumps(rec.get("near_miss")) if rec.get("near_miss") else None))
   for sym,(p,h,n) in newc.items():
-   row=conn.execute("SELECT first_seen,scans FROM coins WHERE sym=?",(sym,)).fetchone()
-   fs,sc=(row[0],row[1]) if row else (now,0)
-   conn.execute("INSERT OR REPLACE INTO coins VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",(sym,fs,now,sc+1,p,None,h,None,None,None,None,n,"NEW",None,f"Too new to score ({n} candles)"))
-  conn.execute("DELETE FROM coins WHERE last_seen<?",(now-keep_days*86400,))
-  conn.execute("DELETE FROM snaps WHERE rowid IN (SELECT rowid FROM (SELECT rowid,ROW_NUMBER() OVER (PARTITION BY sym ORDER BY t DESC) rn FROM snaps) WHERE rn>?)",(keep_snaps,))
-  conn.commit()
- finally:conn.close()
-def coin_db_rows(limit=12):
- conn=coin_db_conn()
+   row=c.execute("SELECT first_seen,scans FROM coins WHERE sym=?",(sym,)).fetchone();fs,sc=row if row else (now,0)
+   checks={"scanner":{"decision":"NEW","reason":f"Too new to score ({n} candles)","candles":n,"h1_pct":h},
+           "execution":{"status":"NOT_ELIGIBLE","reason":"Insufficient candle history"}}
+   c.execute("""INSERT INTO coins(sym,first_seen,last_seen,scans,price,h1,candles,status,reason,signal_status,execution_status,
+    checks_json,decision_at,scan_id) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?) ON CONFLICT(sym) DO UPDATE SET
+    last_seen=excluded.last_seen,scans=excluded.scans,price=excluded.price,h1=excluded.h1,candles=excluded.candles,
+    status='NEW',reason=excluded.reason,signal_status='NEW',execution_status='NOT_ELIGIBLE',checks_json=excluded.checks_json,
+    decision_at=excluded.decision_at,scan_id=excluded.scan_id""",
+    (sym,fs,now,sc+1,p,h,n,"NEW",f"Too new to score ({n} candles)","NEW","NOT_ELIGIBLE",json.dumps(checks),now,str(int(now))))
+   c.execute("INSERT INTO snaps(sym,t,price,h1,rsi,status,decision,reason,execution_status,scan_id) VALUES(?,?,?,?,?,?,?,?,?,?)",
+    (sym,now,p,h,None,"NEW","NEW",f"Too new to score ({n} candles)","NOT_ELIGIBLE",str(int(now))))
+  c.execute("DELETE FROM coins WHERE last_seen<? AND status<>'BOUGHT'",(now-keep_days*86400,))
+  c.execute("DELETE FROM snaps WHERE rowid IN (SELECT rowid FROM (SELECT rowid,ROW_NUMBER() OVER (PARTITION BY sym ORDER BY t DESC) rn FROM snaps) WHERE rn>?)",(keep_snaps,))
+  c.commit()
+ finally:c.close()
+def coin_db_can_execute(sym,qd):
+ c=coin_db_conn()
  try:
-  cnt=dict(conn.execute("SELECT status,COUNT(*) FROM coins GROUP BY status").fetchall())
-  rows=conn.execute("SELECT sym,status,price,h1,rsi,scans,reason FROM coins WHERE status IN ('READY','NEW','WATCHING','BOUGHT') ORDER BY CASE status WHEN 'READY' THEN 0 WHEN 'NEW' THEN 1 WHEN 'BOUGHT' THEN 2 ELSE 3 END, COALESCE(h1,-99) DESC LIMIT ?",(limit,)).fetchall()
-  return cnt,rows
- finally:conn.close()
+  row=c.execute("SELECT signal_status,execution_status,expires_at,status FROM coins WHERE sym=?",(sym,)).fetchone()
+  if not row:return False,"No coin database record; waiting for a fresh scanner decision."
+  signal,execution,expiry,legacy=row
+  if signal!="READY":return False,f"Database signal status is {signal or 'UNKNOWN'}, not READY."
+  if execution!="QUEUED":return False,f"Database execution status is {execution or 'UNASSESSED'}, not QUEUED."
+  if expiry is not None and float(expiry)<=time.time():return False,"Database signal expired; waiting for a fresh scan."
+  if legacy=="BOUGHT":return False,"Database says this coin is already held."
+  return True,"Database confirms READY and QUEUED."
+ finally:c.close()
+def coin_db_ai_rows(limit=25):
+ c=coin_db_conn()
+ try:
+  rows=c.execute("""SELECT sym,signal_status,execution_status,price,chg24,h1,rsi,scans,reason,setup
+   FROM coins ORDER BY CASE signal_status WHEN 'READY' THEN 0 WHEN 'NEW' THEN 1 WHEN 'WATCHING' THEN 2 ELSE 3 END,
+   last_seen DESC LIMIT ?""",(int(limit),)).fetchall()
+  return [{"symbol":x[0],"signal_status":x[1],"execution_status":x[2],"price":x[3],"change_24h_pct":x[4],
+   "change_1h_pct":x[5],"rsi":x[6],"scans_seen":x[7],"scanner_reason":x[8],"setup":x[9]} for x in rows]
+ finally:c.close()
+def coin_db_set_ai_advisory(sym,comment):
+ c=coin_db_conn()
+ try:
+  c.execute("UPDATE coins SET ai_advisory=?,ai_advisory_at=? WHERE sym=?",(str(comment or "")[:300],time.time(),sym))
+  c.commit()
+ finally:c.close()
+def coin_db_get(sym):
+ c=coin_db_conn()
+ try:
+  row=c.execute("SELECT first_seen,last_seen,scans,signal_status,execution_status,reason,ai_advisory,checks_json,ai_advisory_at FROM coins WHERE sym=?",(sym,)).fetchone()
+  if not row:return None
+  try:checks=json.loads(row[7] or "{}")
+  except Exception:checks={}
+  return {"first_seen":row[0],"last_seen":row[1],"scans":row[2],"signal_status":row[3],
+   "execution_status":row[4],"reason":row[5],"ai_advisory":row[6],"checks":checks,"ai_advisory_at":row[8]}
+ finally:c.close()
+def coin_db_history_records(hours=24,limit=60000):
+ c=coin_db_conn()
+ try:
+  rows=c.execute("""SELECT s.sym,s.t,s.price,s.h1,s.rsi,s.status,s.decision,
+   CASE WHEN c.execution_status IN ('BLOCKED','EXPIRED','FAILED') THEN c.reason ELSE s.reason END,
+   COALESCE(c.execution_status,s.execution_status),s.scan_id,s.rank,s.vol,s.chg,s.ma5,s.ma10,
+   s.min_volume,s.spread_pct,s.near_miss_json
+   FROM snaps s LEFT JOIN coins c ON c.sym=s.sym WHERE s.t>=? ORDER BY s.t DESC LIMIT ?""",
+   (time.time()-float(hours)*3600,int(limit))).fetchall()
+  out=[]
+  for x in rows:
+   try:nm=json.loads(x[17]) if x[17] else None
+   except Exception:nm=None
+   out.append({"sym":x[0],"time":x[1],"price":x[2],"h1":x[3],"rsi":x[4],"status":x[5],
+    "decision":x[6] or "SKIP","reason":x[7] or "","execution_status":x[8],"scan_id":x[9],
+    "rank":x[10],"vol":x[11],"chg":x[12],"ma5":x[13],"ma10":x[14],"min_volume":x[15],
+    "spread_pct":x[16],"near_miss":nm})
+  return out
+ finally:c.close()
+def coin_db_rows(limit=12):
+ c=coin_db_conn()
+ try:
+  cnt=dict(c.execute("SELECT status,COUNT(*) FROM coins GROUP BY status").fetchall())
+  ec=dict(c.execute("SELECT execution_status,COUNT(*) FROM coins GROUP BY execution_status").fetchall())
+  rows=c.execute("SELECT sym,status,execution_status,price,h1,rsi,scans,reason FROM coins WHERE status IN ('READY','NEW','WATCHING','BOUGHT') ORDER BY CASE status WHEN 'READY' THEN 0 WHEN 'NEW' THEN 1 WHEN 'BOUGHT' THEN 2 ELSE 3 END,COALESCE(h1,-99) DESC LIMIT ?",(limit,)).fetchall()
+  return cnt,rows,ec
+ finally:c.close()
 def cmd_coins():
- try:cnt,rows=coin_db_rows()
+ try:cnt,rows,ec=coin_db_rows()
  except Exception as e:ui_send(f"❌ Coin list error: {e}",[_MENU_BTN]);return
  if not cnt:ui_send("📚 *COIN LIST*\nEmpty. It fills after the next scan.",[[_B("🔍 Scan now","m:r:scan")],_MENU_BTN]);return
  ic={"READY":"✅","NEW":"🆕","BOUGHT":"💼","WATCHING":"👀"}
- lines=["📚 *COIN LIST*",f"✅ Ready {cnt.get('READY',0)} | 👀 Watching {cnt.get('WATCHING',0)} | 🆕 New {cnt.get('NEW',0)} | 💼 Held {cnt.get('BOUGHT',0)} | ⛔ Rejected {cnt.get('REJECTED',0)}",""]
- for sym,st,p,h,r,n,why in rows:
-  ln=f"{ic.get(st,'')} *{sym.split('-')[0]}* {fp(p) if p else '-'}"
+ lines=["📚 *COIN LIST*",f"✅ Ready {cnt.get('READY',0)} | 👀 Watching {cnt.get('WATCHING',0)} | 🆕 New {cnt.get('NEW',0)} | 💼 Held {cnt.get('BOUGHT',0)} | ⛔ Rejected {cnt.get('REJECTED',0)}",
+  f"Execution: 📥 queued {ec.get('QUEUED',0)} | ⛔ blocked {ec.get('BLOCKED',0)} | 🟢 held {ec.get('HELD',0)}",""]
+ for sym,st,exst,p,h,r,n,why in rows:
+  ln=f"{ic.get(st,'')} *{sym.split('-')[0]}* {fp(p) if p else '-'} | {exst or 'UNASSESSED'}"
   if h is not None:ln+=f" | 1H {h:+.2f}%"
   if r is not None:ln+=f" | RSI {r:.0f}"
   lines.append(ln+f" | seen {n}x")
@@ -2129,7 +2310,8 @@ def scan(force=False):
  mf=market_filter(s) if auto_enabled and not btc_is_blocked else ""
  if mf and not cd("mktblock",21600):tg(f"⏸ *MARKET FILTER:* {mf}.")
  rbh=float(s.get('rebuy_cooldown_hours',6.0))
- buying_allowed=auto_enabled and not btc_is_blocked and not mf;block_reason=(f"Guardian integrity check: {guardian_reason}" if not guardian_ok else "automatic buying is paused" if not auto_enabled else "BTC safety filter blocked buying" if btc_is_blocked else f"market filter: {mf}" if mf else "")
+ buying_allowed=auto_enabled and not btc_is_blocked and not mf and not ai_emergency_active()
+ block_reason=(f"Guardian integrity check: {guardian_reason}" if not guardian_ok else "AI emergency: automatic buying paused" if ai_emergency_active() else "automatic buying is paused" if not auto_enabled else "BTC safety filter blocked buying" if btc_is_blocked else f"market filter: {mf}" if mf else "")
  try:tk=ex.fetch_tickers();mk=ex.load_markets()
  except Exception as e:print(f"SCAN ERROR: {e}");tg(f"⚠️ *SCAN FAILED:* {e}");return
  v=[{'sym':k.replace("/","-"),'vol':t['quoteVolume'] or 0,'chg':t['percentage'] or 0,'last':t.get('last'),'bid':t.get('bid'),'ask':t.get('ask')} for k,t in tk.items() if k.endswith('/USDT') and not skip(k.split('/')[0]) and not (k in mk and not mk[k].get('spot',False))]
@@ -2156,7 +2338,7 @@ def scan(force=False):
   except Exception as e:print(f"PREFETCH ERR: {e}");_PF.clear()
  for rank,t in enumerate(v[:500],start=1):
   sym=t['sym'];vol=float(t['vol'] or 0);chg=float(t['chg'] or 0)
-  recd={"time":ct,"rank":rank,"sym":sym,"vol":vol,"chg":chg,"price":t.get("last"),"rsi":None,"rr":None,"ma5":None,"ma10":None,"decision":"SKIP","reason":"Top 15 excluded" if rank<=15 else "Not evaluated"}
+  recd={"time":ct,"rank":rank,"sym":sym,"vol":vol,"chg":chg,"price":t.get("last"),"spread_pct":tk_spread(t),"rsi":None,"rr":None,"ma5":None,"ma10":None,"decision":"SKIP","reason":"Top 15 excluded" if rank<=15 else "Not evaluated"}
   if rank>15:
    i=rank-16;threshold=(1000000 if i<=84 else 3000000 if i<=183 else 4000000 if i<=383 else 5000000);recd["min_volume"]=threshold
    if vol<threshold:recd["reason"]=f"Vol below ${threshold/1e6:.0f}M"
@@ -2185,7 +2367,7 @@ def scan(force=False):
        recd["decision"]="SETUP — QUEUED";recd["reason"]=setup+" matched; queued"
        if sym not in q or q[sym].get('score',0)<score:
         if sym not in q:tg(f"📥 *QUEUED:* {sym}\nScore:{score:.1f}")
-        q[sym]={"timestamp":ct,"type":setup,"sl":sl,"score":score,"price":p,"chg":chg};qu=True
+        q[sym]={"timestamp":ct,"created_at":ct,"scan_id":str(ct),"expires_at":ct+float(s.get("signal_expiry_minutes",30))*60,"type":setup,"sl":sl,"score":score,"price":p,"chg":chg,"source":"deterministic_scanner"};qu=True
        queued+=1
      elif "4h trend is down" not in str(recd.get("reason","")):
       reasons=[]
@@ -2204,28 +2386,26 @@ def scan(force=False):
        if nmr:recd["near_miss"]=nmr[1];_NM.append({"sym":sym,"score":nmr[0],"why":nmr[1],"rsi":round(r,1),"h1":round(nmr[2],2),"chg":round(chg,2),"price":p})
       except Exception as e:print("NEAR-MISS ERR",str(e)[:100])
   records.append(recd)
- # AI opportunity ranking is batched (not one API call per coin); it can adjust priority, never create a setup.
- try:
-  batch=[{'symbol':sy,'setup':qd.get('type'),'score':qd.get('score'),'price':qd.get('price')} for sy,qd in list(q.items())[:12]]
-  if batch:
-   ranked=ai_stage('opportunity_ranking',{'market_regime':ai_market or {},'candidates':batch},ttl=240,max_tokens=450)
-   if ranked and isinstance(ranked.get('rankings'),list):
-    amap={str(x.get('symbol','')).upper():x for x in ranked['rankings'] if isinstance(x,dict)}
-    for sy,qd in q.items():
-     item=amap.get(sy.upper())
-     if item:
-      try:qd['ai_priority_adjustment']=max(-5.0,min(5.0,float(item.get('adjustment',0))))
-      except Exception:qd['ai_priority_adjustment']=0.0
-      q[sy]=qd
-    if q:save(QF,q)
- except Exception as e:print('AI opportunity ranking error:',e)
  try:
   _rs=load(ST,{});_rs["radar"]=[y for _,y in sorted(_RADAR)[:int(s.get('radar_max',30))]];save(ST,_rs)
  except Exception as e:print("RADAR SAVE ERR",str(e)[:100])
  try:send_near_miss(s,ai_market)
  except Exception as e:print("NEAR-MISS SEND ERR",str(e)[:120])
- try:coin_db_update(records,load(DB).keys(),dict(_NEWC))
+ try:coin_db_update(records,load(DB).keys(),dict(_NEWC),queue=q,buying_allowed=buying_allowed,block_reason=block_reason,settings=s)
  except Exception as e:print("COIN DB ERR",str(e)[:120])
+ try:
+  _coin_rows=coin_db_ai_rows(25)
+  if _coin_rows:
+   _coin_review=ai_stage("coin_advisory",{"coins":_coin_rows},ttl=240,max_tokens=700)
+   _reviews=_coin_review.get("reviews",[]) if isinstance(_coin_review,dict) else []
+   _review_map={str(x.get("symbol","")).upper().replace("/","-"):x for x in _reviews if isinstance(x,dict)}
+   for _coin in _coin_rows:
+    _item=_review_map.get(str(_coin["symbol"]).upper())
+    if _item:
+     _comment=str(_item.get("comment") or _item.get("reason") or "")[:300]
+     if _comment:coin_db_set_ai_advisory(_coin["symbol"],str(_item.get("risk_level","INFO"))+": "+_comment)
+   if _review_map:journal_event("ai_coin_advisory",reviewed=len(_review_map),source="coins.db")
+ except Exception as e:print("AI COIN ADVISORY ERR",str(e)[:140])
  try:send_new_alerts(s)
  except Exception as e:print("NEW-TOKEN ALERT ERR",str(e)[:120])
  full=force or now-st.get('last_full',0)>=3300
