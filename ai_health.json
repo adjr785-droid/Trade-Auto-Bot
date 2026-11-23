@@ -49,8 +49,8 @@
             "last_error": ""
         },
         "command_review": {
-            "last_success": 1795429360.4847705,
-            "successes": 35,
+            "last_success": 1795430941.31068,
+            "successes": 37,
             "last_error": ""
         },
         "near_miss_review": {
@@ -64,8 +64,8 @@
             "last_error": ""
         },
         "buy_gate": {
-            "last_success": 1795429447.402905,
-            "successes": 1,
+            "last_success": 1795430804.4048505,
+            "successes": 2,
             "last_error": ""
         }
     },
