@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689985,
+    "last_update_id": 935689988,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -68,30 +68,42 @@
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
+                "text": "\ud83d\udd0d Scan now",
+                "callback_data": "m:r:scan"
             },
             {
-                "text": "1/16",
-                "callback_data": "pg:x"
-            },
-            {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
-            },
-            {
-                "text": "\ud83c\udfe0",
-                "callback_data": "m:menu"
+                "text": "\ud83e\uddfe Scan History",
+                "callback_data": "m:scan_hist"
             }
         ],
         [
             {
-                "text": "\ud83d\udd0d Why not bought?",
-                "callback_data": "m:whylist:0"
+                "text": "\ud83d\udcda Coin List",
+                "callback_data": "m:coins"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udcc8 Gainers",
+                "callback_data": "m:r:gain"
+            },
+            {
+                "text": "\ud83d\udcc9 Losers",
+                "callback_data": "m:r:lose"
+            }
+        ],
+        [
+            {
+                "text": "\u2b05\ufe0f Tools",
+                "callback_data": "m:tools"
+            },
+            {
+                "text": "\ud83c\udfe0 Main Menu",
+                "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/16*",
+    "panel_text": "\ud83d\udd0d *SCAN*",
     "pages": {
         "p": [
             "\ud83d\udd0e *SCAN HISTORY* \u00b7 463/463 coins (first 150)\n9 scans \u00b7 2.0h\n```\nCOIN    RSI    1H WHY\n------------------------------\nNES      23  +0.6 Auto-buy off\n0G       49     - RSI high\n10SET    52     - RSI high\n1INCH    51     - RSI high\n2U2      53     - RSI high\n```\n\u2800",
