@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT23.47/\u20a632,093",
+    "kb_ph": "USDT23.48/\u20a632,114",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -61,10 +61,10 @@
         ]
     },
     "radar": [],
-    "kb_mid": 4844,
-    "out_text": "\ud83d\udcbc *PORTFOLIO* $23.47 | \u20a632,093\n\ud83d\udcb5 Cash free $0.03 | In coins $23.44 (100%)\n\ud83d\udfe1 BGB 7.3634122e-05 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udd34 *IDOL* $16.80 (72%)\n-2.15% (-$0.37) | Entry 0.016852\nPrice 0.016490 | Stop 0.015330 (-7%)\nRSI 45 | Bearish | ATH -65%\n\n\ud83d\udd34 *DOS* $6.64 (28%)\n\u2800\n\u2800",
+    "kb_mid": 4845,
+    "out_text": "\u2705 *AI RECOVERY VERIFIED \u2014 NORMAL MODE RESTORED*\nThree consecutive AI health checks passed and resumed automatically. Existing\nbuy settings are unchanged; normal deterministic risk checks still apply.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795468451.5661697,
+    "out_time": 1795468561.5912497,
     "panel_rows": [
         [
             {
@@ -91,21 +91,5 @@
     ],
     "panel_text": "\ud83d\udcc4 *Page 3/3*",
     "out_mid": 4842,
-    "pages": {
-        "p": [
-            "\ud83d\udcbc *PORTFOLIO* $23.47 | \u20a632,093\n\ud83d\udcb5 Cash free $0.03 | In coins $23.44 (100%)\n\ud83d\udfe1 BGB 7.3634122e-05 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udd34 *IDOL* $16.80 (72%)\n-2.15% (-$0.37) | Entry 0.016852\nPrice 0.016490 | Stop 0.015330 (-7%)\nRSI 45 | Bearish | ATH -65%\n\n\ud83d\udd34 *DOS* $6.64 (28%)\n\u2800\n\u2800",
-            "-1.55% (-$0.10) | Entry 0.135800\nPrice 0.133700 | Stop 0.122220 (-9%)\nRSI 45 | Mixed | ATH -85%\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\nand 8 more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT23.47/\u20a632,093\n\n\ud83e\udde0 *AI:* Portfolio is $23.47 total, with $16.80 in IDOL and $6.64 in DOS; BGB\n\u2800\n\u2800",
-            "value is negligible, and eight assets lack USDT pricing, so monitor those and\nstop\u2011loss levels closely.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
-        ],
-        "i": 2,
-        "mode": "Markdown",
-        "x": [
-            {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
-            }
-        ],
-        "cmd": "m:r:holdings"
-    },
-    "panel_mid": 4843
+    "panel_hidden": true
 }
