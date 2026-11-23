@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT24.77/\u20a633,878",
+    "kb_ph": "USDT24.77/\u20a633,873",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -63,7 +63,7 @@
     "radar": [
         "JCT-USDT"
     ],
-    "kb_mid": 4599,
+    "kb_mid": 4602,
     "out_text": "\ud83d\udd0e *SCAN HISTORY* \u00b7 469/469 coins (first 150)\n23 scans \u00b7 22.2h\n```\nCOIN    RSI    1H WHY\n------------------------------\nBLESS    67  +3.9 QUEUED\nCOLLECT  62  +0.6 QUEUED\nWLD      67     - Auto-buy off\nINJ      66  +1.3 QUEUED\nJCT      48  +1.8 QUEUED\n```\n\u2800",
     "out_mode": "Markdown",
     "out_time": 1795448454.4612632,
