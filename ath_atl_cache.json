@@ -100,5 +100,11 @@
         "atl": 0.0583,
         "checked_at": 1795444288.1071134,
         "status": "complete"
+    },
+    "DOS-USDT": {
+        "ath": 0.8965,
+        "atl": 0.02,
+        "checked_at": 1795468330.2636514,
+        "status": "complete"
     }
 }
