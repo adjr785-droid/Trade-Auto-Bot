@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689832,
+    "last_update_id": 935689834,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -19,7 +19,7 @@
         ],
         "hn": 31
     },
-    "last_cmd": "m:r:gain",
+    "last_cmd": "m:r:holdings",
     "page_mem": {
         "/bot": [
             3,
@@ -67,51 +67,49 @@
         "ARX-USDT"
     ],
     "kb_mid": 4501,
-    "out_mid": 4502,
-    "out_text": "\ud83d\udcdf *OUTPUT*\nResults appear here.",
+    "out_text": "\ud83d\udcbc *Total Portfolio Value:* $24.67 USDT | \u20a633,740\n\n\ud83d\udcb5 *Available USDT Cash*\nTotal: $24.64 | Free to Trade: $24.64\n\ud83d\udfe1 *BGB Wallet Balance (not auto-converted)*\nTotal: 3.937587e-05 BGB | Free: 3.937587e-05 BGB | Value: $0.0001 USDT\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\n\ud83d\udcbc *Coin Holdings*\nNo eligible USDT-priced assets.\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "panel_mid": 4503,
     "panel_rows": [
         [
             {
-                "text": "\ud83e\udd16 Bot",
-                "callback_data": "/bot"
+                "text": "\u25c0",
+                "callback_data": "pg:p"
             },
             {
-                "text": "\ud83d\udcc8 Stats",
-                "callback_data": "/stats"
-            }
-        ],
-        [
-            {
-                "text": "\u2699\ufe0f Settings",
-                "callback_data": "m:set"
+                "text": "1/2",
+                "callback_data": "pg:x"
             },
             {
-                "text": "\ud83d\udcbc Holdings",
-                "callback_data": "m:r:holdings"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udcdc Trade History",
-                "callback_data": "m:r:history"
+                "text": "\u25b6",
+                "callback_data": "pg:n"
             },
             {
-                "text": "\ud83e\udde0 Ask AI",
-                "callback_data": "m:ai:1"
-            }
-        ],
-        [
-            {
-                "text": "\ud83e\uddf9 Clear Chat",
-                "callback_data": "/clear"
+                "text": "\ud83c\udfe0",
+                "callback_data": "m:menu"
             },
             {
-                "text": "\ud83d\udea8 PANIC SELL",
-                "callback_data": "/panic"
+                "text": "\ud83d\udd04",
+                "callback_data": "rf:go"
             }
         ]
     ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below."
+    "panel_text": "\ud83d\udcc4 *Page 1/2*",
+    "out_time": 1795429257.217196,
+    "pages": {
+        "p": [
+            "\ud83d\udcbc *Total Portfolio Value:* $24.67 USDT | \u20a633,740\n\n\ud83d\udcb5 *Available USDT Cash*\nTotal: $24.64 | Free to Trade: $24.64\n\ud83d\udfe1 *BGB Wallet Balance (not auto-converted)*\nTotal: 3.937587e-05 BGB | Free: 3.937587e-05 BGB | Value: $0.0001 USDT\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\n\ud83d\udcbc *Coin Holdings*\nNo eligible USDT-priced assets.\n\u2800\n\u2800",
+            "\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT24.67/\u20a633,740\n\n\ud83e\udde0 *AI:* Portfolio value is only $24.67 USDT with negligible BGB holdings and no\nUSDT\u2011priced assets; consider adding diversified, liquid positions before\nallocating significant risk.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+        ],
+        "i": 0,
+        "mode": "Markdown",
+        "x": [
+            {
+                "text": "\ud83d\udd04",
+                "callback_data": "rf:go"
+            }
+        ],
+        "cmd": "m:r:holdings"
+    },
+    "out_mid": 4506,
+    "panel_mid": 4507
 }
