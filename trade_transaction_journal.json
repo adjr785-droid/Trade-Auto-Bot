@@ -1107,5 +1107,15 @@
         "time": 1795406459.5584905,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 6.1087, 'recurring_patterns': {'PANIC': 4, '15-MINUTE NO-UPWARD-TREND ROTATION': 7, 'PARTIAL PROFIT': 3, 'RSI 75': 2, 'MANUAL SELL': 2}, 'recommendations': 'Maintain current strategy but tighten entry criteria for PANIC exits, monitor RSI\u2011based entries for consistency, and consider reducing exposure to high\u2011volatility symbols where frequent panic sells occur. Continue partial profit taking while ensuring stop\u2011losses protect against larger drawdowns.'}"
+    },
+    {
+        "time": 1795406798.6972528,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (13)', 'attention': [{'symbol': 'IDOL-USDT', 'action': 'hold', 'reason': 'Position is 90+ days old, showing 8.85% profit and is at entry price; stop equals entry, indicating a break\u2011even protection. No clear signal to add or exit.'}], 'summary': 'Overall portfolio risk is within the daily limit. The only position (IDOL-USDT) is profitable and mature; maintain the position while monitoring for any adverse price movement. No new trades are recommended at this time.'}"
+    },
+    {
+        "time": 1795406799.5323,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 6.1087, 'recurring_patterns': {'PANIC': 4, '15-MINUTE NO-UPWARD-TREND ROTATION': 7, 'RSI 75': 2, 'PARTIAL PROFIT': 3, 'MANUAL SELL': 2}, 'recommendations': 'Maintain current risk parameters but tighten entry criteria for PANIC\u2011driven exits and short\u2011term rotation signals. Prioritize trades with RSI\u2011based signals that have shown positive PnL. Monitor symbols with repeated panic losses (e.g., WLD-USDT, SKYAI-USDT) and consider reducing exposure. Continue manual oversight for large manual sell actions.'}"
     }
 ]

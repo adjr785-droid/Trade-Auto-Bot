@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935689691,
+    "last_update_id": 935689694,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT25.30/\u20a634,608",
+    "kb_ph": "USDT25.76/\u20a635,226",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -67,78 +67,78 @@
         "SKYAI-USDT",
         "EGL1-USDT"
     ],
-    "kb_mid": 4318,
+    "kb_mid": 4319,
     "out_text": "\u2705 `max_daily_trades` = `6`\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
             {
-                "text": "auto_buy_reserve_pct = 5.0",
-                "callback_data": "m:k:auto_buy_reserve_pct"
+                "text": "max_24h_pct = 100.0",
+                "callback_data": "m:k:max_24h_pct"
             }
         ],
         [
             {
-                "text": "dynamic_auto_buy_max_pct = 20.0",
-                "callback_data": "m:k:dynamic_auto_buy_max_pct"
+                "text": "near_miss_alerts = True",
+                "callback_data": "m:k:near_miss_alerts"
             }
         ],
         [
             {
-                "text": "dynamic_auto_buy_min_usdt = 1.02",
-                "callback_data": "m:k:dynamic_auto_buy_min_usdt"
+                "text": "near_miss_rsi_margin = 3.0",
+                "callback_data": "m:k:near_miss_rsi_margin"
             }
         ],
         [
             {
-                "text": "dynamic_auto_buy_max_usdt = 0.0",
-                "callback_data": "m:k:dynamic_auto_buy_max_usdt"
+                "text": "near_miss_1h_margin = 0.5",
+                "callback_data": "m:k:near_miss_1h_margin"
             }
         ],
         [
             {
-                "text": "guardian_enabled = True",
-                "callback_data": "m:k:guardian_enabled"
+                "text": "near_miss_cooldown_minutes = 60",
+                "callback_data": "m:k:near_miss_cooldown_minutes"
             }
         ],
         [
             {
-                "text": "guardian_audit_interval_minutes = 15",
-                "callback_data": "m:k:guardian_audit_interval_minutes"
+                "text": "near_miss_max_per_scan = 3",
+                "callback_data": "m:k:near_miss_max_per_scan"
             }
         ],
         [
             {
-                "text": "max_portfolio_correlation = 0.85",
-                "callback_data": "m:k:max_portfolio_correlation"
+                "text": "radar_max = 30",
+                "callback_data": "m:k:radar_max"
             }
         ],
         [
             {
-                "text": "momentum_1h_enabled = True",
-                "callback_data": "m:k:momentum_1h_enabled"
+                "text": "radar_rsi_margin = 10.0",
+                "callback_data": "m:k:radar_rsi_margin"
             }
         ],
         [
             {
-                "text": "mom_1h_min_pct = 0.5",
-                "callback_data": "m:k:mom_1h_min_pct"
+                "text": "scan_workers = 15",
+                "callback_data": "m:k:scan_workers"
             }
         ],
         [
             {
-                "text": "mom_1h_max_pct = 6.0",
-                "callback_data": "m:k:mom_1h_max_pct"
+                "text": "weak_market_mode = True",
+                "callback_data": "m:k:weak_market_mode"
             }
         ],
         [
             {
                 "text": "\u25c0\ufe0f Prev",
-                "callback_data": "m:sp:5"
+                "callback_data": "m:sp:6"
             },
             {
                 "text": "Next \u25b6\ufe0f",
-                "callback_data": "m:sp:7"
+                "callback_data": "m:sp:8"
             }
         ],
         [
@@ -148,8 +148,8 @@
             }
         ]
     ],
-    "panel_text": "\u2699\ufe0f *SETTINGS* (page 7/9)\nTap a setting to change it.",
+    "panel_text": "\u2699\ufe0f *SETTINGS* (page 8/9)\nTap a setting to change it.",
     "out_time": 1795406585.9436002,
     "out_mid": 4315,
-    "panel_mid": 4317
+    "panel_mid": 4320
 }
