@@ -1548,5 +1548,10 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795465928.2716503,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.4632, 'recurring_patterns': ['RSI 75 (3 occurrences)', '15-MINUTE NO-UPWARD-TREND ROTATION (7 occurrences)', 'PANIC (4 occurrences)', 'PARTIAL PROFIT (3 occurrences)'], 'recommendations': ['Limit exposure to PANIC-driven exits; consider adding stop\u2011loss thresholds to avoid negative pnl spikes', 'Review RSI 75 entries for consistency; they show modest gains but could be refined with additional confirmation signals', 'Maintain focus on 15\u2011minute rotation signals but validate with broader trend analysis to reduce false positives', 'Overall, keep position sizing conservative given modest net pnl and a 60% win rate; monitor trade frequency to ensure risk stays within predefined limits']}"
     }
 ]
