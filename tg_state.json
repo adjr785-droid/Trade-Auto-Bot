@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935689537,
+    "last_update_id": 935689539,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT22.87/\u20a631,282",
+    "kb_ph": "USDT22.82/\u20a631,203",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -62,12 +62,45 @@
             1795362988.7943418
         ]
     },
-    "kb_mid": 4132,
+    "kb_mid": 4138,
     "radar": [
         "LTC-USDT",
         "SKYAI-USDT",
         "TRX-USDT",
         "INJ-USDT",
         "BTW-USDT"
-    ]
+    ],
+    "out_mid": 4139,
+    "out_text": "\ud83d\udcdf *OUTPUT*\nResults appear here.",
+    "out_mode": "Markdown",
+    "panel_mid": 4140,
+    "panel_rows": [
+        [
+            {
+                "text": "\ud83d\uded2 Trade",
+                "callback_data": "m:tl:trade"
+            },
+            {
+                "text": "\ud83d\udd14 Alerts",
+                "callback_data": "m:tl:alerts"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udd0d Scan",
+                "callback_data": "m:tl:scan"
+            },
+            {
+                "text": "\ud83d\udee0\ufe0f System",
+                "callback_data": "m:tl:sys"
+            }
+        ],
+        [
+            {
+                "text": "\u2b05\ufe0f Main Menu",
+                "callback_data": "m:menu"
+            }
+        ]
+    ],
+    "panel_text": "\ud83e\uddf0 *TOOLS*\nChoose a group."
 }
