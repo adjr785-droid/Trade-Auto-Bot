@@ -82,5 +82,11 @@
         "atl": 0.55,
         "checked_at": 1795353021.092138,
         "status": "complete"
+    },
+    "UMXM-USDT": {
+        "ath": 2.3957,
+        "atl": 0.00501,
+        "checked_at": 1795398081.0289464,
+        "status": "complete"
     }
 }
