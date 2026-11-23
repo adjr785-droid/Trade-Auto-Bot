@@ -1117,5 +1117,15 @@
         "time": 1795406799.5323,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 6.1087, 'recurring_patterns': {'PANIC': 4, '15-MINUTE NO-UPWARD-TREND ROTATION': 7, 'RSI 75': 2, 'PARTIAL PROFIT': 3, 'MANUAL SELL': 2}, 'recommendations': 'Maintain current risk parameters but tighten entry criteria for PANIC\u2011driven exits and short\u2011term rotation signals. Prioritize trades with RSI\u2011based signals that have shown positive PnL. Monitor symbols with repeated panic losses (e.g., WLD-USDT, SKYAI-USDT) and consider reducing exposure. Continue manual oversight for large manual sell actions.'}"
+    },
+    {
+        "time": 1795407514.8080213,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [], 'summary': 'Current portfolio risk passes all checks. The only open position (IDOL-USDT) is a manual trade with a modest 8.28% profit and a stop at entry price, indicating a conservative risk profile. No immediate actions are recommended; continue monitoring the position and maintain existing risk safeguards.'}"
+    },
+    {
+        "time": 1795407515.6626995,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 6.1087, 'recurring_patterns': ['15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC', 'RSI 75', 'PARTIAL PROFIT'], 'recommendations': 'Maintain current win\u2011rate focus but limit exposure to PANIC\u2011driven exits, which show negative PnL. Prioritize trades flagged by RSI\\u202f75 and PARTIAL PROFIT signals as they contributed positive returns. Consider tightening the criteria for 15\u2011minute no\u2011upward\u2011trend rotations, as results are mixed. Continue manual oversight for large manual sell actions to avoid unexpected losses.'}"
     }
 ]
