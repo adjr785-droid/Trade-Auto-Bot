@@ -1167,5 +1167,15 @@
         "time": 1795408970.370631,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 6.1087, 'recurring_patterns': ['15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC', 'RSI 75', 'PARTIAL PROFIT'], 'recommendations': 'Maintain current win\u2011rate discipline but tighten risk on panic\u2011driven exits. Consider adding stricter confirmation before executing \"PANIC\" sells and evaluate the effectiveness of the 15\u2011minute no\u2011upward\u2011trend rotation signal, as it appears frequently with mixed outcomes. Continue leveraging RSI\u201175 entries while monitoring for overbought conditions. Overall, adopt a more conservative position sizing to protect the modest net profit.'}"
+    },
+    {
+        "time": 1795409520.048229,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [], 'summary': 'Current portfolio risk passes safeguards. No immediate actions required for IDOL-USDT; position remains within acceptable parameters.'}"
+    },
+    {
+        "time": 1795409521.0056036,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 6.1087, 'recurring_patterns': ['PANIC (3 occurrences)', '15-MINUTE NO-UPWARD-TREND ROTATION (7 occurrences)', 'PARTIAL PROFIT (3 occurrences)', 'RSI 75 (2 occurrences)', 'MANUAL SELL (2 occurrences)'], 'recommendations': 'Limit exposure to panic-driven exits; consider tighter stop\u2011losses or manual review before executing panic trades. Review the effectiveness of the 15\u2011minute no\u2011upward\u2011trend rotation signal, as it yields mixed results. Prioritize strategies with higher win contribution such as RSI\u201175 and partial profit exits, and monitor manual sell decisions for consistency.'}"
     }
 ]
