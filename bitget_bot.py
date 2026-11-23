@@ -444,7 +444,7 @@ def save(f,d):
   os.replace(f+".tmp",f)
  except Exception as e:print(f"SAVE ERR {f}: {e}")
 def cfg():
- d={"rsi_min":42,"rsi_max":48,"stop_loss_pct":5.0,"auto_buy_enabled":True,"auto_buy_amount_usdt":10.0,"max_tokens_before_consolidation":3,"trail_pct":8.0,"crash_guard_pct":10.0,"rsi_exit":75,"btc_rsi_min":50,"risk_per_trade_pct":1.0,"max_daily_loss_pct":3.0,"max_portfolio_exposure_pct":50.0,"max_position_pct":15.0,"max_daily_trades":5,"max_spread_pct":0.5,"auto_mode_v1":False,"rebuy_cooldown_hours":6.0,"atr_stop_enabled":True,"atr_stop_mult":2.0,"atr_stop_min_pct":3.0,"atr_stop_max_pct":10.0,"market_filter_enabled":True,"btc_trend_hours":50,"min_breadth_pct":30.0,"offline_alert_hours":3.0,"daily_summary_hour_utc":20,"max_daily_drawdown_pct":5.0,"partial_tp_pct":10.0,"partial_tp_fraction":0.5,"dynamic_trail":True,"sell_if_stop_fails":True,"scan_prefilter":True,"cleanup_hours":24.0,"scan_interval_minutes":15.0,"auto_clear_hours":24.0,"live_mode_seconds":270,"mtf_confirm":True,"btc_shock_pct":3.0,"max_open_risk_pct":3.0,"loss_streak_trigger":2,"loss_streak_size_factor":0.5,"scan_parallel":True,"page_chars":600,"page_lines":12,"page_width":32,"output_stale_minutes":5,"smart_risk_enabled":True,"max_coin_exposure_pct":20.0,"max_sector_exposure_pct":35.0,"liquidity_depth_usdt":5000.0,"max_book_imbalance_pct":85.0,"regime_risk_factor":0.65,"execution_slippage_pct":0.35,"stop_watchdog_enabled":True,"portfolio_stress_pct":12.0,"signal_expiry_minutes":30,"adaptive_risk_enabled":True,"dynamic_auto_buy_enabled":True,"auto_buy_reserve_pct":5.0,"dynamic_auto_buy_max_pct":20.0,"dynamic_auto_buy_min_usdt":1.02,"dynamic_auto_buy_max_usdt":0.0,"guardian_enabled":True,"guardian_audit_interval_minutes":15,"max_portfolio_correlation":0.85,"momentum_1h_enabled":True,"mom_1h_min_pct":0.5,"mom_1h_max_pct":6.0,"max_24h_pct":100.0,"near_miss_alerts":True,"near_miss_rsi_margin":3.0,"near_miss_1h_margin":0.5,"near_miss_cooldown_minutes":60,"near_miss_max_per_scan":3,"scan_workers":8,"radar_max":30,"radar_rsi_margin":10.0}
+ d={"rsi_min":42,"rsi_max":48,"stop_loss_pct":5.0,"auto_buy_enabled":True,"auto_buy_amount_usdt":10.0,"max_tokens_before_consolidation":3,"trail_pct":8.0,"crash_guard_pct":10.0,"rsi_exit":75,"btc_rsi_min":50,"risk_per_trade_pct":1.0,"max_daily_loss_pct":3.0,"max_portfolio_exposure_pct":50.0,"max_position_pct":15.0,"max_daily_trades":5,"max_spread_pct":0.5,"auto_mode_v1":False,"rebuy_cooldown_hours":6.0,"atr_stop_enabled":True,"atr_stop_mult":2.0,"atr_stop_min_pct":3.0,"atr_stop_max_pct":10.0,"market_filter_enabled":True,"btc_trend_hours":50,"min_breadth_pct":30.0,"weak_market_mode":True,"weak_market_floor_pct":15.0,"weak_market_size_factor":0.5,"h1_all_setups":False,"offline_alert_hours":3.0,"daily_summary_hour_utc":20,"max_daily_drawdown_pct":5.0,"partial_tp_pct":10.0,"partial_tp_fraction":0.5,"dynamic_trail":True,"sell_if_stop_fails":True,"scan_prefilter":True,"cleanup_hours":24.0,"scan_interval_minutes":15.0,"auto_clear_hours":24.0,"live_mode_seconds":270,"mtf_confirm":True,"btc_shock_pct":3.0,"max_open_risk_pct":3.0,"loss_streak_trigger":2,"loss_streak_size_factor":0.5,"scan_parallel":True,"page_chars":600,"page_lines":12,"page_width":32,"output_stale_minutes":5,"smart_risk_enabled":True,"max_coin_exposure_pct":20.0,"max_sector_exposure_pct":35.0,"liquidity_depth_usdt":5000.0,"max_book_imbalance_pct":85.0,"regime_risk_factor":0.65,"execution_slippage_pct":0.35,"stop_watchdog_enabled":True,"portfolio_stress_pct":12.0,"signal_expiry_minutes":30,"adaptive_risk_enabled":True,"dynamic_auto_buy_enabled":True,"auto_buy_reserve_pct":5.0,"dynamic_auto_buy_max_pct":20.0,"dynamic_auto_buy_min_usdt":1.02,"dynamic_auto_buy_max_usdt":0.0,"guardian_enabled":True,"guardian_audit_interval_minutes":15,"max_portfolio_correlation":0.85,"momentum_1h_enabled":True,"mom_1h_min_pct":0.5,"mom_1h_max_pct":6.0,"max_24h_pct":100.0,"near_miss_alerts":True,"near_miss_rsi_margin":3.0,"near_miss_1h_margin":0.5,"near_miss_cooldown_minutes":60,"near_miss_max_per_scan":3,"scan_workers":8,"radar_max":30,"radar_rsi_margin":10.0}
  s=load(CFG,d)
  for k,v in d.items():s.setdefault(k,v)
  for _k in ('max_hold_hours','momentum_watch_minutes','rotation_retry_hours'):
@@ -480,11 +480,11 @@ def spread_pct(sym):
   if b and a and a>=b:return (a-b)/((a+b)/2)*100
  except:pass
  return None
-_MKT={"t":0,"r":""}
+_MKT={"t":0,"r":"","w":""}
 def market_filter(s):
  if not s.get('market_filter_enabled',True):return ""
  if time.time()-_MKT["t"]<300:return _MKT["r"]
- reason=""
+ reason="";weak=""
  try:
   n=max(10,int(s.get('btc_trend_hours',50)))
   o=ex.fetch_ohlcv("BTC/USDT",'1h',limit=n+10)
@@ -494,9 +494,20 @@ def market_filter(s):
    ch=[t.get('percentage') for k,t in ex.fetch_tickers().items() if k.endswith('/USDT') and (t.get('quoteVolume') or 0)>=1000000 and t.get('percentage') is not None]
    if len(ch)>=30:
     up=sum(1 for x in ch if x>0)/len(ch)*100
-    if up<float(s.get('min_breadth_pct',30.0)):reason=f"only {up:.0f}% of coins are up today"
- except Exception as e:print("MARKET FILTER ERR:",e);reason=""
- _MKT["t"],_MKT["r"]=time.time(),reason;return reason
+    if up<float(s.get('min_breadth_pct',30.0)):
+     msg=f"only {up:.0f}% of coins are up today"
+     if s.get('weak_market_mode',True) and up>=float(s.get('weak_market_floor_pct',15.0)):weak=msg
+     else:reason=msg
+ except Exception as e:print("MARKET FILTER ERR:",e);reason="";weak=""
+ _MKT["t"],_MKT["r"],_MKT["w"]=time.time(),reason,weak;return reason
+def weak_market(s):
+ # weak (not crashing) market: buying stays allowed at reduced size; returns the reason text or ""
+ if market_filter(s):return ""
+ return _MKT.get("w","") if s.get('market_filter_enabled',True) else ""
+def setup_range(sym,chg,s,kind):
+ # BREAKOUT / OVERSOLD: 24h range by default; the 1H window when h1_all_setups is on
+ if mom_on(s) and s.get('h1_all_setups',False):return trend_range(sym,chg,s)
+ return (0.0<chg<25.0) if kind=="BREAKOUT" else (-30.0<chg<-8.0)
 def setup_score(setup,vol,r,ma5,ma10,bvol=None):
  sc=({"BREAKOUT":3,"TREND":2,"OVERSOLD":1}.get(setup,0))*100+min(vol/1e6,100)*0.2
  if ma10:sc+=max(0.0,min(20.0,(ma5-ma10)/ma10*1000))
@@ -1124,8 +1135,8 @@ def rank_setups(exclude=()):
   if not p or r is None or ma5 is None or ma10 is None:continue
   setup=None;bv=None
   if trend_range(sym,chg,s) and s['rsi_min']<=r<=s['rsi_max'] and p>ma5>ma10:setup="TREND"
-  elif -30.0<chg<-8.0 and r<30 and p>pr:setup="OVERSOLD"
-  elif 0.0<chg<25.0 and 50.0<=r<=70.0 and p>ma5>ma10:
+  elif setup_range(sym,chg,s,"OVERSOLD") and r<30 and p>pr:setup="OVERSOLD"
+  elif setup_range(sym,chg,s,"BREAKOUT") and 50.0<=r<=70.0 and p>ma5>ma10:
    ok,bv,bl=breakout_confirmation(sym)
    if ok:setup="BREAKOUT"
   why=[];pts=0
@@ -1637,6 +1648,7 @@ def dynamic_auto_buy_budget(sym, qd, price, stop, available_usdt, s):
   # risk_sized_budget already constrains stop-distance, exposure and configured risk.
   base=risk_sized_budget(sym,price,stop,available_usdt)
   base=loss_streak_adjust(base,s)
+  if weak_market(s):base*=max(0.1,min(1.0,float(s.get("weak_market_size_factor",0.5))))
   size=base*score_factor*setup_factor*vol_factor*regime_factor
   maxpct=float(s.get("dynamic_auto_buy_max_pct",20.0))/100.0
   try:eq=equity_now(); size=min(size,eq*maxpct) if eq>0 else 0
@@ -1808,6 +1820,7 @@ def exec_q():
    if in_cd(f"fail_{sym}",300):buy_rejection(sym,"Previous fail.");continue
    if sym in db:buy_rejection(sym,"Position exists.");q.pop(sym,None);save(QF,q);continue
    if not live(sym):buy_rejection(sym,"No price.");continue
+   if str(qd.get("type","")).upper()=="OVERSOLD" and weak_market(s):buy_rejection(sym,"Weak market: OVERSOLD skipped.");continue
    if stale_signal(qd,s):buy_rejection(sym,"Queued signal expired; waiting for a fresh scan.");q.pop(sym,None);save(QF,q);continue
    if s.get("smart_risk_enabled",True):
     eqok,eqwhy=execution_quality(sym,s)
@@ -2087,8 +2100,8 @@ def scan(force=False):
     else:
      setup=sl=None;breakout_volume=None
      if trend_range(sym,chg,s) and s['rsi_min']<=r<=s['rsi_max'] and p>ma5>ma10:setup="TREND";sl=round(ma5*(1-s['stop_loss_pct']/100),6)
-     elif -30.0<chg<-8.0 and r<30 and p>pr:setup="OVERSOLD";sl=round(p*(1-s['stop_loss_pct']/100),6)
-     elif 0.0<chg<25.0 and 50.0<=r<=70.0 and p>ma5>ma10:
+     elif setup_range(sym,chg,s,"OVERSOLD") and r<30 and p>pr:setup="OVERSOLD";sl=round(p*(1-s['stop_loss_pct']/100),6)
+     elif setup_range(sym,chg,s,"BREAKOUT") and 50.0<=r<=70.0 and p>ma5>ma10:
       confirmed,breakout_volume,_=breakout_confirmation(sym)
       if confirmed:setup="BREAKOUT";sl=round(p*(1-s['stop_loss_pct']/100),6)
      if setup in ("TREND","BREAKOUT") and not trend_4h_ok(sym,s):
@@ -2110,8 +2123,8 @@ def scan(force=False):
       if not trend_range(sym,chg,s):reasons.append("Trend range")
       if not (s['rsi_min']<=r<=s['rsi_max']):reasons.append(f"RSI {s['rsi_min']}-{s['rsi_max']}")
       if not (p>ma5>ma10):reasons.append("MA trend")
-      if not (-30.0<chg<-8.0 and r<30 and p>pr):reasons.append("Oversold recovery")
-      if not (0.0<chg<25.0 and 50.0<=r<=70.0 and p>ma5>ma10):reasons.append("Breakout trend")
+      if not (setup_range(sym,chg,s,"OVERSOLD") and r<30 and p>pr):reasons.append("Oversold recovery")
+      if not (setup_range(sym,chg,s,"BREAKOUT") and 50.0<=r<=70.0 and p>ma5>ma10):reasons.append("Breakout trend")
       else:reasons.append("No breakout")
       recd["reason"]="; ".join(reasons) or "No match"
       try:
@@ -2195,7 +2208,7 @@ def cmd_set(txt):
  if k not in s:tg(f"❌ Unknown key. Valid: `{'`, `'.join(s.keys())}`");return
  try:new=val.lower() in ('true','1','yes','on') if isinstance(s[k],bool) else float(val) if isinstance(s[k],float) else int(val)
  except:tg(f"❌ Invalid value for {k}");return
- limits={"risk_per_trade_pct":(0.1,2.0),"max_daily_loss_pct":(0.5,10.0),"max_portfolio_exposure_pct":(5.0,100.0),"max_position_pct":(1.0,50.0),"max_daily_trades":(1,50),"max_spread_pct":(0.05,3.0),"trail_pct":(0.0,30.0),"scan_interval_minutes":(5.0,240.0),"auto_clear_hours":(0.0,168.0),"live_mode_seconds":(0,330),"stop_loss_pct":(0.5,20.0),"rsi_min":(1.0,99.0),"rsi_max":(1.0,99.0),"rsi_exit":(0.0,99.0),"auto_buy_amount_usdt":(1.0,100000.0),"max_tokens_before_consolidation":(1,30),"crash_guard_pct":(1.0,50.0),"btc_rsi_min":(0.0,99.0),"rebuy_cooldown_hours":(0.0,168.0),"atr_stop_mult":(0.5,6.0),"atr_stop_min_pct":(1.0,10.0),"atr_stop_max_pct":(2.0,25.0),"btc_trend_hours":(10,200),"min_breadth_pct":(0.0,100.0),"offline_alert_hours":(0.0,72.0),"daily_summary_hour_utc":(0,23),"max_coin_exposure_pct":(1.0,100.0),"liquidity_depth_usdt":(0.0,1000000.0),"max_book_imbalance_pct":(50.0,99.0),"regime_risk_factor":(0.1,1.0),"execution_slippage_pct":(0.05,5.0),"portfolio_stress_pct":(1.0,50.0),"signal_expiry_minutes":(1,240),"mom_1h_min_pct":(0.0,20.0),"mom_1h_max_pct":(0.5,30.0),"max_24h_pct":(30.0,500.0),"near_miss_rsi_margin":(0.5,10.0),"near_miss_1h_margin":(0.1,3.0),"near_miss_cooldown_minutes":(5,1440),"near_miss_max_per_scan":(1,10),"scan_workers":(1,16),"radar_max":(5,60),"radar_rsi_margin":(3.0,25.0)}
+ limits={"weak_market_floor_pct":(0.0,50.0),"weak_market_size_factor":(0.1,1.0),"risk_per_trade_pct":(0.1,2.0),"max_daily_loss_pct":(0.5,10.0),"max_portfolio_exposure_pct":(5.0,100.0),"max_position_pct":(1.0,50.0),"max_daily_trades":(1,50),"max_spread_pct":(0.05,3.0),"trail_pct":(0.0,30.0),"scan_interval_minutes":(5.0,240.0),"auto_clear_hours":(0.0,168.0),"live_mode_seconds":(0,330),"stop_loss_pct":(0.5,20.0),"rsi_min":(1.0,99.0),"rsi_max":(1.0,99.0),"rsi_exit":(0.0,99.0),"auto_buy_amount_usdt":(1.0,100000.0),"max_tokens_before_consolidation":(1,30),"crash_guard_pct":(1.0,50.0),"btc_rsi_min":(0.0,99.0),"rebuy_cooldown_hours":(0.0,168.0),"atr_stop_mult":(0.5,6.0),"atr_stop_min_pct":(1.0,10.0),"atr_stop_max_pct":(2.0,25.0),"btc_trend_hours":(10,200),"min_breadth_pct":(0.0,100.0),"offline_alert_hours":(0.0,72.0),"daily_summary_hour_utc":(0,23),"max_coin_exposure_pct":(1.0,100.0),"liquidity_depth_usdt":(0.0,1000000.0),"max_book_imbalance_pct":(50.0,99.0),"regime_risk_factor":(0.1,1.0),"execution_slippage_pct":(0.05,5.0),"portfolio_stress_pct":(1.0,50.0),"signal_expiry_minutes":(1,240),"mom_1h_min_pct":(0.0,20.0),"mom_1h_max_pct":(0.5,30.0),"max_24h_pct":(30.0,500.0),"near_miss_rsi_margin":(0.5,10.0),"near_miss_1h_margin":(0.1,3.0),"near_miss_cooldown_minutes":(5,1440),"near_miss_max_per_scan":(1,10),"scan_workers":(1,16),"radar_max":(5,60),"radar_rsi_margin":(3.0,25.0)}
  if k in limits and not (limits[k][0] <= new <= limits[k][1]):tg(f"❌ `{k}` must be between {limits[k][0]} and {limits[k][1]}.");return
  if k=="rsi_min" and new>=s.get("rsi_max",99):tg("❌ rsi_min must be lower than rsi_max.");return
  if k=="rsi_max" and new<=s.get("rsi_min",1):tg("❌ rsi_max must be higher than rsi_min.");return
