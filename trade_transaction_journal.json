@@ -1307,5 +1307,15 @@
         "time": 1795435084.411221,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 6.1087, 'recurring_patterns': {'MANUAL_SELL_ALL': 2, 'PARTIAL_PROFIT': 3, 'RSI_75': 2, 'NO_UPWARD_TREND_ROTATION': 7, 'PANIC': 4}, 'recommendations': 'Focus on higher\u2011confidence signals such as RSI\\u202f75 and partial\u2011profit exits. Limit exposure to trades triggered by PANIC or short\u2011term no\u2011upward\u2011trend rotations until a clearer edge is demonstrated. Consider tightening stop\u2011losses on volatile symbols (e.g., WLD\u2011USDT) and review manual sell decisions for consistency.'}"
+    },
+    {
+        "time": 1795439357.8554423,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'INJ-USDT', 'action': 'hold', 'reason': 'Position is slightly profitable (0.2% PnL) and above stop level; no clear exit signal.'}, {'symbol': 'JCT-USDT', 'action': 'consider reducing exposure', 'reason': 'Small loss (-0.12% PnL) and price is close to stop (0.001372); uncertainty about further downside.'}], 'summary': 'Overall portfolio risk remains acceptable. Maintain INJ-USDT while monitoring JCT-USDT for potential stop\u2011loss breach. No new entries recommended at this time.'}"
+    },
+    {
+        "time": 1795439358.6470222,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 6.1087, 'recurring_patterns': {'PANIC': 4, '15-MINUTE NO-UPWARD-TREND ROTATION': 7, 'RSI 75': 2, 'PARTIAL PROFIT': 3, 'MANUAL SELL': 2}, 'recommendations': 'Limit exposure to trades triggered by PANIC signals, as they contributed to multiple losses. Prioritize strategies with RSI 75 and PARTIAL PROFIT exits, which showed positive PnL. Consider tightening the criteria for 15\u2011minute no\u2011upward\u2011trend rotations, as they produced mixed results. Maintain current win\u2011rate focus but aim to reduce loss frequency before scaling position size.'}"
     }
 ]
