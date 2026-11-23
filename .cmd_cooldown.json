@@ -77,5 +77,6 @@
     "buy_reject_notice:IDOL-USDT:Top-10 book depth $4462 below limit.": 1795458989.0676713,
     "buy_reject_notice:IDOL-USDT:Insufficient USDT ($0.03).": 1795459078.4763587,
     "buy:BGB-USDT": 1795465769.2784743,
-    "buy:CYC-USDT": 1795466084.840462
+    "buy:CYC-USDT": 1795466084.840462,
+    "buy:ARIA-USDT": 1795477076.344973
 }
