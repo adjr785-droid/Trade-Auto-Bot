@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689958,
+    "last_update_id": 935689959,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -99,22 +99,32 @@
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udd0d Scan now",
-                "callback_data": "m:r:scan"
+                "text": "\ud83d\uded2 Trade",
+                "callback_data": "m:tl:trade"
             },
             {
-                "text": "\ud83e\uddfe Scan History",
-                "callback_data": "m:scan_hist"
+                "text": "\ud83d\udd14 Alerts",
+                "callback_data": "m:tl:alerts"
             }
         ],
         [
             {
-                "text": "\u2b05\ufe0f Menu",
+                "text": "\ud83d\udd0d Scan",
+                "callback_data": "m:tl:scan"
+            },
+            {
+                "text": "\ud83d\udee0\ufe0f System",
+                "callback_data": "m:tl:sys"
+            }
+        ],
+        [
+            {
+                "text": "\u2b05\ufe0f Main Menu",
                 "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcda *COIN LIST*\n\u2705 Ready 1 | \ud83d\udc40 Watching 29 | \ud83c\udd95 New 0 | \ud83d\udcbc Held 1 | \u26d4 Rejected 431\nExecution: \ud83d\udce5 queued 0 | \u26d4 blocked 0 | \ud83d\udfe2 held 0\n\n\u2705 *IDOL* 0.016900 | UNASSESSED | 1H +0.54% | RSI 46 | seen 5x\n\ud83d\udcbc *JCT* 0.001606 | UNASSESSED | 1H -0.43% | RSI 47 | seen 5x\n\ud83d\udc40 *ARIA* 0.293950 | UNASSESSED | 1H +18.34% | RSI 39 | seen 5x\n\ud83d\udc40 *BGSC* 0.00083700 | UNASSESSED | 1H +2.65% | RSI 62 | seen 5x\n\ud83d\udc40 *BLESS* 0.016051 | UNASSESSED | 1H +0.80% | RSI 37 | seen 5x\n\ud83d\udc40 *BTW* 0.741116 | UNASSESSED | 1H +0.38% | RSI 58 | seen 5x\n\ud83d\udc40 *DOS* 0.135400 | UNASSESSED | 1H +0.34% | RSI 46 | seen 5x\n\ud83d\udc40 *UMXM* 0.004230 | UNASSESSED | 1H +0.27% | RSI 39 | seen 5x\n\ud83d\udc40 *CYS* 0.056880 | UNASSESSED | 1H +0.25% | RSI 77 | seen 5x\n\ud83d\udc40 *KII* 0.084638 | UNASSESSED | 1H +0.17% | RSI 75 | seen 5x\n\ud83d\udc40 *KAS* 0.027940 | UNASSESSED | 1H +0.16% | RSI 62 | seen 5x\n\ud83d\udc40 *GRAM* 1.0090 | UNASSESSED | 1H +0.14% | RSI 57 | seen 5x",
+    "panel_text": "\ud83e\uddf0 *TOOLS*\nChoose a group.",
     "out_mid": 4700,
     "panel_mid": 4701
 }
