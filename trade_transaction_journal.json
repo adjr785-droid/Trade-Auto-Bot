@@ -1287,5 +1287,15 @@
         "time": 1795431479.7099426,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 6.1087, 'recurring_patterns': {'15-MINUTE NO-UPWARD-TREND ROTATION': 7, 'PANIC': 4, 'RSI 75': 2, 'PARTIAL PROFIT': 3, 'MANUAL SELL': 2}, 'recommendations': 'Maintain current risk parameters but consider tightening entry criteria for trades flagged as \"PANIC\" and \"15-MINUTE NO-UPWARD-TREND ROTATION\" due to their mixed outcomes. Monitor RSI\u2011based entries closely; they yielded positive PnL in this sample but represent a small subset. Continue manual oversight for large position exits to avoid unnecessary losses.'}"
+    },
+    {
+        "time": 1795431886.635686,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'INJ-USDT', 'action': 'monitor', 'reason': 'Position is slightly negative (-0.37%) and close to stop level (stop at 5.4655 vs price 6.392). Age is high (41 days) indicating a longer\u2011term trade; consider tightening stop or reducing size if downside risk increases.'}, {'symbol': 'JCT-USDT', 'action': 'hold', 'reason': 'Small positive PnL (+2.42%) with price above entry and stop comfortably below (stop 0.001372 vs price 0.001653). Position is young (14 days) and setup unknown, so maintain watchful stance.'}], 'summary': 'Overall portfolio risk remains PASS. The INJ-USDT trade warrants close monitoring due to proximity to its stop and modest loss, while the JCT-USDT trade is modestly profitable and can be held, pending further signal clarification.'}"
+    },
+    {
+        "time": 1795431887.5501807,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 6.1087, 'recurring_patterns': ['15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC', 'RSI 75', 'PARTIAL PROFIT'], 'recommendations': 'Maintain focus on strategies that generated positive PnL such as RSI 75 signals and partial\u2011profit exits. Limit exposure to PANIC\u2011driven trades, which show mixed results. Continue using short\u2011term rotation signals cautiously, monitoring their win\u2011rate before scaling up. Consider tightening manual sell thresholds to protect against small negative outcomes.'}"
     }
 ]
