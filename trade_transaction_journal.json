@@ -1630,5 +1630,15 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795476543.7465346,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'DOS-USDT', 'action': 'monitor', 'reason': 'Position shows a modest loss (-1.18%) and is approaching its stop level (stop 0.12222 vs current price 0.1342). No clear exit signal yet, but risk management suggests close monitoring.'}], 'summary': 'Overall portfolio risk remains acceptable. The only active position (DOS-USDT) is slightly underwater and nearing its stop price; continue to watch closely and be prepared to exit if the price breaches the stop.'}"
+    },
+    {
+        "time": 1795476544.7948608,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 5.8372, 'recurring_patterns': {'15-MINUTE NO-UPWARD-TREND ROTATION': 7, 'PANIC': 4, 'MANUAL SELL': 4, 'RSI 75': 2, 'PARTIAL PROFIT': 2}, 'recommendations': ['Limit exposure to trades triggered by panic signals; they show a higher loss frequency.', 'Review the effectiveness of the 15\u2011minute no\u2011upward\u2011trend rotation filter, as it yields mixed results.', 'Consider tightening RSI thresholds or adding confirmation filters before entering RSI\u2011based trades.', 'Maintain current position sizing for partial profit exits, which have contributed positively.', 'Implement stricter manual sell criteria to avoid frequent small losses.']}"
     }
 ]
