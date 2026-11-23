@@ -3,7 +3,7 @@
     "rsi_max": 48,
     "stop_loss_pct": 15,
     "sl_sell_percent": 0.5,
-    "dca_reserve": 0.9889,
+    "dca_reserve": 1.9314,
     "auto_buy_enabled": true,
     "auto_buy_amount_usdt": 6.4994,
     "max_tokens_before_consolidation": 3,
