@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935689598,
+    "last_update_id": 935689602,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT22.46/\u20a630,722",
+    "kb_ph": "USDT22.34/\u20a630,551",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -67,53 +67,39 @@
         "UMXM-USDT",
         "SKYAI-USDT"
     ],
-    "kb_mid": 4204,
-    "out_text": "\ud83e\udde0 AI manual-buy advisory: Considering a $22.58 USDT purchase at $0.00537 with\nRSI 47.5, the trade carries moderate risk. Verify market depth and confirm that\nthe order size fits your overall portfolio exposure before proceeding.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "kb_mid": 4210,
+    "out_text": "\u2139\ufe0f AI emergency mode is not active.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
             {
-                "text": "\ud83e\udd16 Bot",
-                "callback_data": "/bot"
+                "text": "\ud83d\udee0\ufe0f Audit",
+                "callback_data": "m:r:audit"
             },
             {
-                "text": "\ud83d\udcc8 Stats",
-                "callback_data": "/stats"
+                "text": "\ud83e\udde9 Layout",
+                "callback_data": "m:lay"
             }
         ],
         [
             {
-                "text": "\u2699\ufe0f Settings",
-                "callback_data": "m:set"
-            },
-            {
-                "text": "\ud83d\udcbc Holdings",
-                "callback_data": "m:r:holdings"
+                "text": "\ud83e\udde0 Resume AI Mode",
+                "callback_data": "m:r:airesume"
             }
         ],
         [
             {
-                "text": "\ud83d\udcdc Trade History",
-                "callback_data": "m:r:history"
+                "text": "\u2b05\ufe0f Tools",
+                "callback_data": "m:tools"
             },
             {
-                "text": "\ud83e\udde0 Ask AI",
-                "callback_data": "m:ai:1"
-            }
-        ],
-        [
-            {
-                "text": "\ud83e\uddf9 Clear Chat",
-                "callback_data": "/clear"
-            },
-            {
-                "text": "\ud83d\udea8 PANIC SELL",
-                "callback_data": "/panic"
+                "text": "\ud83c\udfe0 Main Menu",
+                "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
-    "out_time": 1795396143.0685706,
-    "out_mid": 4200,
-    "panel_mid": 4206
+    "panel_text": "\ud83d\udee0\ufe0f *SYSTEM*",
+    "out_time": 1795396415.1376097,
+    "out_mid": 4209,
+    "panel_hidden": true
 }
