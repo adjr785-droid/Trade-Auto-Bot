@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935689778,
+    "last_update_id": 935689780,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT25.65/\u20a635,082",
+    "kb_ph": "USDT25.71/\u20a635,164",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -42,8 +42,8 @@
             1795380739.3167899
         ],
         "m:scan_hist": [
-            0,
-            1795395222.6027174
+            1,
+            1795408706.2227268
         ],
         "m:ai:1": [
             3,
@@ -68,47 +68,40 @@
         "ICNT-USDT",
         "BNB-USDT"
     ],
-    "kb_mid": 4421,
-    "out_text": "\ud83d\udd0e *SCAN HISTORY* \u00b7 465/465 coins (first 150)\n11 scans \u00b7 11.1h\n```\nCOIN    RSI    1H WHY\n------------------------------\nWLD      67     - Auto-buy off\nARX      62     - Auto-buy off\nKII      65  +0.1 QUEUED\nSKYAI    51  +0.8 Near miss\nBTC      59     - Top 15\n```\n\u2800",
+    "kb_mid": 4424,
+    "out_text": "\ud83d\udd0e *SCAN HISTORY* \u00b7 465/465 coins (first 150)\n11 scans \u00b7 11.2h\n```\nCOIN    RSI    1H WHY\n------------------------------\nWLD      67     - Auto-buy off\nARX      62     - Auto-buy off\nKII      65  +0.1 QUEUED\nSKYAI    51  +0.8 Near miss\nBTC      59     - Top 15\n```\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udd0d Scan now",
-                "callback_data": "m:r:scan"
+                "text": "\u25c0",
+                "callback_data": "pg:p"
             },
             {
-                "text": "\ud83e\uddfe Scan History",
-                "callback_data": "m:scan_hist"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udcc8 Gainers",
-                "callback_data": "m:r:gain"
+                "text": "2/16",
+                "callback_data": "pg:x"
             },
             {
-                "text": "\ud83d\udcc9 Losers",
-                "callback_data": "m:r:lose"
-            }
-        ],
-        [
-            {
-                "text": "\u2b05\ufe0f Tools",
-                "callback_data": "m:tools"
+                "text": "\u25b6",
+                "callback_data": "pg:n"
             },
             {
-                "text": "\ud83c\udfe0 Main Menu",
+                "text": "\ud83c\udfe0",
                 "callback_data": "m:menu"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udd0d Why not bought?",
+                "callback_data": "m:whylist:0"
             }
         ]
     ],
-    "panel_text": "\ud83d\udd0d *SCAN*",
-    "out_time": 1795408651.4893048,
-    "out_mid": 4419,
+    "panel_text": "\ud83d\udcc4 *Page 2/16*",
+    "out_time": 1795408690.484898,
     "pages": {
         "p": [
-            "\ud83d\udd0e *SCAN HISTORY* \u00b7 465/465 coins (first 150)\n11 scans \u00b7 11.1h\n```\nCOIN    RSI    1H WHY\n------------------------------\nWLD      67     - Auto-buy off\nARX      62     - Auto-buy off\nKII      65  +0.1 QUEUED\nSKYAI    51  +0.8 Near miss\nBTC      59     - Top 15\n```\n\u2800",
+            "\ud83d\udd0e *SCAN HISTORY* \u00b7 465/465 coins (first 150)\n11 scans \u00b7 11.2h\n```\nCOIN    RSI    1H WHY\n------------------------------\nWLD      67     - Auto-buy off\nARX      62     - Auto-buy off\nKII      65  +0.1 QUEUED\nSKYAI    51  +0.8 Near miss\nBTC      59     - Top 15\n```\n\u2800",
             "```\nETH      64     - Top 15\nSOL      63     - Top 15\nUSDGO    49     - Top 15\nPWT      56     - Top 15\nEVAA     39     - Top 15\nDOGE     56     - Top 15\nZEC      52     - Top 15\nMTX      44     - Top 15\nBGB      58     - Top 15\nHYPE     56     - Top 15\n```",
             "```\nNEAR     61     - Top 15\nDGAI     64     - Top 15\nSUI      54     - Top 15\nACE      40     - Top 15\nBLESS    59  +6.0 RSI high\nUMXM     44  -4.4 1H low\nPUMP     53  +1.2 RSI high\nIDOL     39  +7.2 RSI low\nTRX      44  +0.5 Trend weak\nCOLLECT  43  +1.1 Trend weak\n```",
             "```\nENA      44  +2.3 Trend weak\nADA      41  +1.3 RSI low\nBNB      50  +0.9 RSI high\nWLD      46  +1.6 Trend weak\nBTW      51  +0.5 RSI high\nPEPE     36  +2.4 RSI low\nICNT     60  -2.4 RSI high\nNES       -     - 24h range\nARX      42  +0.6 RSI low\nTAO      47  +1.2 Trend weak\n```",
@@ -125,7 +118,7 @@
             "```\nOPEN     60     - Vol low\nSOPH     41     - Vol low\nAIO      56     - Vol low\nCAKE     65     - Vol low\n2U2      53     - Vol low\nSTRK     65     - Vol low\nKAS      58     - Vol low\nTCOM     57     - Vol low\nIRYS     43     - Vol low\nPEAQ     53     - Vol low\n```",
             "```\nPENGU    52     - Vol low\nAR       54     - Vol low\nDMC      38     - Vol low\nKOR      44     - Vol low\nDTEC     46     - Vol low\n```\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 0,
+        "i": 1,
         "mode": "Markdown",
         "x": [
             {
@@ -135,5 +128,6 @@
         ],
         "cmd": "m:scan_hist"
     },
-    "panel_mid": 4420
+    "out_mid": 4422,
+    "panel_mid": 4423
 }
