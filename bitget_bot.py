@@ -444,7 +444,7 @@ def save(f,d):
   os.replace(f+".tmp",f)
  except Exception as e:print(f"SAVE ERR {f}: {e}")
 def cfg():
- d={"rsi_min":42,"rsi_max":48,"stop_loss_pct":5.0,"auto_buy_enabled":True,"auto_buy_amount_usdt":10.0,"max_tokens_before_consolidation":3,"trail_pct":8.0,"crash_guard_pct":10.0,"rsi_exit":75,"btc_rsi_min":50,"risk_per_trade_pct":1.0,"max_daily_loss_pct":3.0,"max_portfolio_exposure_pct":50.0,"max_position_pct":15.0,"max_daily_trades":5,"max_spread_pct":0.5,"auto_mode_v1":False,"rebuy_cooldown_hours":6.0,"atr_stop_enabled":True,"atr_stop_mult":2.0,"atr_stop_min_pct":3.0,"atr_stop_max_pct":10.0,"market_filter_enabled":True,"btc_trend_hours":50,"min_breadth_pct":30.0,"weak_market_mode":True,"weak_market_floor_pct":15.0,"weak_market_size_factor":0.5,"h1_all_setups":False,"offline_alert_hours":3.0,"daily_summary_hour_utc":20,"max_daily_drawdown_pct":5.0,"partial_tp_pct":10.0,"partial_tp_fraction":0.5,"dynamic_trail":True,"sell_if_stop_fails":True,"scan_prefilter":True,"cleanup_hours":24.0,"scan_interval_minutes":15.0,"auto_clear_hours":24.0,"live_mode_seconds":270,"mtf_confirm":True,"btc_shock_pct":3.0,"max_open_risk_pct":3.0,"loss_streak_trigger":2,"loss_streak_size_factor":0.5,"scan_parallel":True,"page_chars":600,"page_lines":12,"page_width":32,"output_stale_minutes":5,"smart_risk_enabled":True,"max_coin_exposure_pct":20.0,"max_sector_exposure_pct":35.0,"liquidity_depth_usdt":5000.0,"max_book_imbalance_pct":85.0,"regime_risk_factor":0.65,"execution_slippage_pct":0.35,"stop_watchdog_enabled":True,"portfolio_stress_pct":12.0,"signal_expiry_minutes":30,"adaptive_risk_enabled":True,"dynamic_auto_buy_enabled":True,"auto_buy_reserve_pct":5.0,"dynamic_auto_buy_max_pct":20.0,"dynamic_auto_buy_min_usdt":1.02,"dynamic_auto_buy_max_usdt":0.0,"guardian_enabled":True,"guardian_audit_interval_minutes":15,"max_portfolio_correlation":0.85,"momentum_1h_enabled":True,"mom_1h_min_pct":0.5,"mom_1h_max_pct":6.0,"max_24h_pct":100.0,"near_miss_alerts":True,"near_miss_rsi_margin":3.0,"near_miss_1h_margin":0.5,"near_miss_cooldown_minutes":60,"near_miss_max_per_scan":3,"scan_workers":8,"radar_max":30,"radar_rsi_margin":10.0}
+ d={"rsi_min":42,"rsi_max":48,"stop_loss_pct":5.0,"auto_buy_enabled":True,"auto_buy_amount_usdt":10.0,"max_tokens_before_consolidation":3,"trail_pct":8.0,"crash_guard_pct":10.0,"rsi_exit":75,"btc_rsi_min":50,"risk_per_trade_pct":1.0,"max_daily_loss_pct":3.0,"max_portfolio_exposure_pct":50.0,"max_position_pct":15.0,"max_daily_trades":5,"max_spread_pct":0.5,"auto_mode_v1":False,"rebuy_cooldown_hours":6.0,"atr_stop_enabled":True,"atr_stop_mult":2.0,"atr_stop_min_pct":3.0,"atr_stop_max_pct":10.0,"market_filter_enabled":True,"btc_trend_hours":50,"min_breadth_pct":30.0,"weak_market_mode":True,"weak_market_floor_pct":15.0,"weak_market_size_factor":0.5,"h1_all_setups":False,"offline_alert_hours":3.0,"daily_summary_hour_utc":20,"max_daily_drawdown_pct":5.0,"partial_tp_pct":10.0,"partial_tp_fraction":0.5,"dynamic_trail":True,"sell_if_stop_fails":True,"scan_prefilter":True,"cleanup_hours":24.0,"scan_interval_minutes":15.0,"auto_clear_hours":24.0,"live_mode_seconds":270,"mtf_confirm":True,"btc_shock_pct":3.0,"max_open_risk_pct":3.0,"loss_streak_trigger":2,"loss_streak_size_factor":0.5,"scan_parallel":True,"page_chars":600,"page_lines":12,"page_width":32,"output_stale_minutes":5,"smart_risk_enabled":True,"max_coin_exposure_pct":20.0,"max_sector_exposure_pct":35.0,"liquidity_depth_usdt":5000.0,"max_book_imbalance_pct":85.0,"regime_risk_factor":0.65,"execution_slippage_pct":0.35,"stop_watchdog_enabled":True,"portfolio_stress_pct":12.0,"signal_expiry_minutes":30,"adaptive_risk_enabled":True,"dynamic_auto_buy_enabled":True,"auto_buy_reserve_pct":5.0,"dynamic_auto_buy_max_pct":20.0,"dynamic_auto_buy_min_usdt":1.02,"dynamic_auto_buy_max_usdt":0.0,"guardian_enabled":True,"guardian_audit_interval_minutes":15,"max_portfolio_correlation":0.85,"momentum_1h_enabled":True,"mom_1h_min_pct":0.5,"mom_1h_max_pct":6.0,"max_24h_pct":100.0,"near_miss_alerts":True,"near_miss_rsi_margin":3.0,"near_miss_1h_margin":0.5,"near_miss_cooldown_minutes":60,"near_miss_max_per_scan":3,"scan_workers":8,"radar_max":30,"radar_rsi_margin":10.0,"manual_candidate_min_score":75.0}
  s=load(CFG,d)
  for k,v in d.items():s.setdefault(k,v)
  for _k in ('max_hold_hours','momentum_watch_minutes','rotation_retry_hours'):
@@ -1202,6 +1202,14 @@ def analyse_top3():
   out.append("")
   _sn=str(c['setup']).split(" ")[0].replace("WATCHLIST","WATCH");_ic=stt.split(" ")[0]
   summ+=[f"*{n}. {c['sym'].split('-')[0]}* {_ic} {_sn}",f"{fp(c['p'])} | {c['chg']:+.1f}% | RSI {c['rsi']:.0f}","🧠 "+((vd+" · "+str(av.get('reason',''))[:20]) if av else "AI n/a")]
+ try:
+  manual_rows=coin_db_manual_candidates(8)
+  if manual_rows:
+   out += ["", "🟡 *MANUAL BUY CANDIDATES — DATABASE FILTER*", f"Minimum setup score: {float(s.get('manual_candidate_min_score',75.0)):.0f}%", "_These coins missed at least one entry condition. Manual review only; no automatic buy._"]
+   for m in manual_rows:
+    out.append(f"• *{m['sym'].split('-')[0]}* — {float(m.get('score') or 0):.0f}% | {fp(m.get('price'))} USDT | RSI {float(m.get('rsi') or 0):.1f} | seen {m.get('scans',0)}x")
+    out.append("  Missed: "+str(m.get('manual_reason') or 'Review setup')[:150])
+ except Exception as e:print("ANALYSE MANUAL CANDIDATES ERR",str(e)[:120])
  if not any(c["full"] for c in top):out.append("No coin passes all scanner rules right now, so these are the strongest available. Be cautious.\n")
  out.append("Buy manually with `/buy COIN amount` if you agree.")
  # Page 1 = one-screen summary of all 3 coins (padded to a full page); full details follow on the next pages.
@@ -1325,6 +1333,8 @@ def analyse_coin(txt):
    memo=coin_db_get(sym)
    lines.append("Coin database: "+(f"{memo.get('signal_status') or 'UNKNOWN'} / {memo.get('execution_status') or 'UNASSESSED'} | seen {memo.get('scans',0)} scans | "+str(memo.get('reason') or '')[:100] if memo else "not yet recorded by scanner"))
    if memo and memo.get("ai_advisory"):lines.append("AI notebook note: "+str(memo["ai_advisory"])[:180])
+   if memo and memo.get("checks",{}).get("manual_candidate"): 
+    mc=memo["checks"]["manual_candidate"];lines.append(f"Manual candidate score: {float(mc.get('score') or 0):.0f}% — "+("🟡 MANUAL BUY CANDIDATE (review only)" if mc.get("eligible") else "Not qualified"));lines.append("Manual filter: "+str(mc.get("reason") or "")[:160])
   except Exception:pass
   tg("\n".join(lines))
  except Exception as e:tg(f"❌ Could not analyse {sym}: {e}")
@@ -2070,7 +2080,7 @@ def coin_db_conn():
  c.execute("CREATE TABLE IF NOT EXISTS snaps(sym TEXT,t REAL,price REAL,h1 REAL,rsi REAL,status TEXT)")
  c.execute("CREATE INDEX IF NOT EXISTS snaps_sym ON snaps(sym,t)")
  cc={x[1] for x in c.execute("PRAGMA table_info(coins)")}
- for n,t in (("signal_status","TEXT"),("execution_status","TEXT"),("checks_json","TEXT"),("decision_at","REAL"),("expires_at","REAL"),("scan_id","TEXT"),("ai_advisory","TEXT"),("ai_advisory_at","REAL")):
+ for n,t in (("signal_status","TEXT"),("execution_status","TEXT"),("checks_json","TEXT"),("decision_at","REAL"),("expires_at","REAL"),("scan_id","TEXT"),("ai_advisory","TEXT"),("ai_advisory_at","REAL"),("manual_score","REAL"),("manual_candidate","INTEGER"),("manual_reason","TEXT")):
   if n not in cc:c.execute(f"ALTER TABLE coins ADD COLUMN {n} {t}")
  sc={x[1] for x in c.execute("PRAGMA table_info(snaps)")}
  for n,t in (("decision","TEXT"),("reason","TEXT"),("execution_status","TEXT"),("scan_id","TEXT"),
@@ -2123,6 +2133,33 @@ def coin_db_mark_execution(sym,status,reason="",details=None):
   if c:
    try:c.close()
    except:pass
+def manual_candidate_assess(rec,settings=None):
+ """Score non-auto-ready setups for manual review; never grants execution permission."""
+ s=settings or cfg();why=[];checks={}
+ try:
+  rank=int(rec.get("rank") or 0);vol=float(rec.get("vol") or 0);minvol=float(rec.get("min_volume") or 0)
+  spread=rec.get("spread_pct");spread=float(spread) if spread is not None else None
+  p=rec.get("price");r=rec.get("rsi");ma5=rec.get("ma5");ma10=rec.get("ma10");h=rec.get("h1");chg=float(rec.get("chg") or 0)
+  if None in (p,r,ma5,ma10):return 0.0,False,"Insufficient market data",{}
+  p=float(p);r=float(r);ma5=float(ma5);ma10=float(ma10)
+  if rank<=15:return 0.0,False,"Excluded top-15 liquidity rank",{}
+  if minvol<=0 or vol<minvol:return 0.0,False,"Below minimum liquidity requirement",{}
+  if spread is None:return 0.0,False,"Spread unavailable; safety cannot be verified",{}
+  if spread>float(s.get("max_spread_pct",0.5)):return 0.0,False,f"Spread {spread:.3f}% exceeds safety limit",{}
+  if "4h trend is down" in str(rec.get("reason","")).lower():return 0.0,False,"4H trend safety filter failed",{}
+  momentum_ok=(float(s.get("mom_1h_min_pct",0.5))<=float(h)<=float(s.get("mom_1h_max_pct",6.0))) if mom_on(s) and h is not None else (pre_ok(chg,s) if not mom_on(s) else False)
+  rsi_ok=float(s.get("rsi_min",42))<=r<=float(s.get("rsi_max",48))
+  trend_ok=p>ma5>ma10
+  liquidity_ok=vol>=minvol
+  checks={"liquidity":liquidity_ok,"momentum":momentum_ok,"rsi":rsi_ok,"trend":trend_ok}
+  score=round(sum(25 for v in checks.values() if v),1)
+  if not momentum_ok:why.append("1H/24H momentum outside entry range")
+  if not rsi_ok:why.append(f"RSI {r:.1f} outside {s.get('rsi_min')}-{s.get('rsi_max')}")
+  if not trend_ok:why.append("Price/MA trend not fully confirmed")
+  threshold=float(s.get("manual_candidate_min_score",75.0))
+  eligible=score>=threshold and not str(rec.get("decision","")).startswith("SETUP")
+  return score,eligible,("; ".join(why) if why else "Strong partial setup; manual review only"),checks
+ except Exception as e:return 0.0,False,"Unable to score safely: "+str(e)[:80],{}
 def coin_db_update(records,held,newc=None,keep_days=3,keep_snaps=96,queue=None,buying_allowed=True,block_reason="",settings=None):
  now=time.time();held=set(held);newc=newc or {};queue=queue if isinstance(queue,dict) else {};settings=settings or {};c=coin_db_conn()
  try:
@@ -2130,6 +2167,7 @@ def coin_db_update(records,held,newc=None,keep_days=3,keep_snaps=96,queue=None,b
    sym=rec.get("sym")
    if not sym:continue
    legacy=coin_status(rec,held);decision=str(rec.get("decision",""));reason=str(rec.get("reason",""))
+   manual_score,manual_candidate,manual_reason,manual_checks=manual_candidate_assess(rec,settings)
    signal="READY" if decision.startswith("SETUP") else ("REJECTED" if reason.startswith(_REJ) else "WATCHING")
    qd=queue.get(sym) if isinstance(queue.get(sym),dict) else None
    ts=float(rec.get("time") or now);expiry=float((qd or {}).get("expires_at") or ts+float(settings.get("signal_expiry_minutes",30))*60)
@@ -2141,22 +2179,24 @@ def coin_db_update(records,held,newc=None,keep_days=3,keep_snaps=96,queue=None,b
    checks={"scanner":{"decision":decision,"reason":reason,"rank":rec.get("rank"),"min_volume":rec.get("min_volume"),
     "volume_24h":rec.get("vol"),"change_24h_pct":rec.get("chg"),"price":rec.get("price"),"h1_pct":rec.get("h1"),
     "rsi":rec.get("rsi"),"ma5":rec.get("ma5"),"ma10":rec.get("ma10"),"spread_pct":rec.get("spread_pct"),
-    "strategy":rec.get("strategy"),"near_miss":rec.get("near_miss"),"h1_rising_three_scans":rising_3},
+    "strategy":rec.get("strategy"),"near_miss":rec.get("near_miss"),"h1_rising_three_scans":rising_3,
+    "manual_candidate":{"score":manual_score,"eligible":manual_candidate,"reason":manual_reason,"checks":manual_checks,"threshold":float(settings.get("manual_candidate_min_score",75.0))}},
     "execution":{"status":execution,"buying_allowed_at_scan":bool(buying_allowed),"block_reason":str(block_reason or "")[:240],
     "queue_timestamp":(qd or {}).get("timestamp"),"queue_score":(qd or {}).get("score"),"signal_expires_at":expiry}}
    row=c.execute("SELECT first_seen,scans FROM coins WHERE sym=?",(sym,)).fetchone();fs,sc=row if row else (now,0)
    advisory=str((qd or {}).get("ai_advisory",""))[:240]
    c.execute("""INSERT INTO coins(sym,first_seen,last_seen,scans,price,chg24,h1,rsi,ma5,ma10,vol,candles,status,setup,reason,
-    signal_status,execution_status,checks_json,decision_at,expires_at,scan_id,ai_advisory)
-    VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ON CONFLICT(sym) DO UPDATE SET
+    signal_status,execution_status,checks_json,decision_at,expires_at,scan_id,ai_advisory,manual_score,manual_candidate,manual_reason)
+    VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ON CONFLICT(sym) DO UPDATE SET
     last_seen=excluded.last_seen,scans=excluded.scans,price=excluded.price,chg24=excluded.chg24,h1=excluded.h1,
     rsi=excluded.rsi,ma5=excluded.ma5,ma10=excluded.ma10,vol=excluded.vol,candles=excluded.candles,status=excluded.status,
     setup=excluded.setup,reason=excluded.reason,signal_status=excluded.signal_status,execution_status=excluded.execution_status,
     checks_json=excluded.checks_json,decision_at=excluded.decision_at,expires_at=excluded.expires_at,
-    scan_id=excluded.scan_id,ai_advisory=COALESCE(NULLIF(excluded.ai_advisory,''),coins.ai_advisory)""",
+    scan_id=excluded.scan_id,ai_advisory=COALESCE(NULLIF(excluded.ai_advisory,''),coins.ai_advisory),
+    manual_score=excluded.manual_score,manual_candidate=excluded.manual_candidate,manual_reason=excluded.manual_reason""",
     (sym,fs,now,sc+1,rec.get("price"),rec.get("chg"),rec.get("h1"),rec.get("rsi"),rec.get("ma5"),rec.get("ma10"),
      rec.get("vol"),rec.get("candles"),legacy,rec.get("strategy"),reason[:240],signal,execution,json.dumps(checks,default=str),
-     now,expiry,str(rec.get("time") or int(now)),advisory))
+     now,expiry,str(rec.get("time") or int(now)),advisory,manual_score,int(manual_candidate),manual_reason[:240]))
    c.execute("""INSERT INTO snaps(sym,t,price,h1,rsi,status,decision,reason,execution_status,scan_id,
     rank,vol,chg,ma5,ma10,min_volume,spread_pct,near_miss_json)
     VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
@@ -2235,12 +2275,21 @@ def coin_db_history_records(hours=24,limit=60000):
     "spread_pct":x[16],"near_miss":nm})
   return out
  finally:c.close()
+def coin_db_manual_candidates(limit=10):
+ c=coin_db_conn()
+ try:
+  fresh_after=time.time()-max(1800.0,float(cfg().get("scan_interval_minutes",15.0))*120.0)
+  rows=c.execute("SELECT sym,price,chg24,h1,rsi,scans,manual_score,manual_reason,reason,execution_status FROM coins WHERE manual_candidate=1 AND status<>'BOUGHT' AND last_seen>=? ORDER BY manual_score DESC,last_seen DESC LIMIT ?",(fresh_after,int(limit))).fetchall()
+  return [{"sym":x[0],"price":x[1],"chg":x[2],"h1":x[3],"rsi":x[4],"scans":x[5],"score":x[6],"manual_reason":x[7],"scanner_reason":x[8],"execution_status":x[9]} for x in rows]
+ finally:c.close()
 def coin_db_rows(limit=12):
  c=coin_db_conn()
  try:
   cnt=dict(c.execute("SELECT status,COUNT(*) FROM coins GROUP BY status").fetchall())
   ec=dict(c.execute("SELECT execution_status,COUNT(*) FROM coins GROUP BY execution_status").fetchall())
-  rows=c.execute("SELECT sym,status,execution_status,price,h1,rsi,scans,reason FROM coins WHERE status IN ('READY','NEW','WATCHING','BOUGHT') ORDER BY CASE status WHEN 'READY' THEN 0 WHEN 'NEW' THEN 1 WHEN 'BOUGHT' THEN 2 ELSE 3 END,COALESCE(h1,-99) DESC LIMIT ?",(limit,)).fetchall()
+  fresh_after=time.time()-max(1800.0,float(cfg().get("scan_interval_minutes",15.0))*120.0)
+  cnt["MANUAL_CANDIDATE"]=c.execute("SELECT COUNT(*) FROM coins WHERE manual_candidate=1 AND status<>'BOUGHT' AND last_seen>=?",(fresh_after,)).fetchone()[0]
+  rows=c.execute("SELECT sym,status,execution_status,price,h1,rsi,scans,reason,manual_candidate,manual_score FROM coins WHERE status IN ('READY','NEW','WATCHING','BOUGHT') ORDER BY CASE status WHEN 'READY' THEN 0 WHEN 'NEW' THEN 1 WHEN 'BOUGHT' THEN 2 ELSE 3 END,COALESCE(h1,-99) DESC LIMIT ?",(limit,)).fetchall()
   return cnt,rows,ec
  finally:c.close()
 def cmd_coins():
@@ -2249,9 +2298,11 @@ def cmd_coins():
  if not cnt:ui_send("📚 *COIN LIST*\nEmpty. It fills after the next scan.",[[_B("🔍 Scan now","m:r:scan")],_MENU_BTN]);return
  ic={"READY":"✅","NEW":"🆕","BOUGHT":"💼","WATCHING":"👀"}
  lines=["📚 *COIN LIST*",f"✅ Ready {cnt.get('READY',0)} | 👀 Watching {cnt.get('WATCHING',0)} | 🆕 New {cnt.get('NEW',0)} | 💼 Held {cnt.get('BOUGHT',0)} | ⛔ Rejected {cnt.get('REJECTED',0)}",
+  f"🟡 Manual candidates (≥{float(cfg().get('manual_candidate_min_score',75.0)):.0f}%): {cnt.get('MANUAL_CANDIDATE',0)}",
   f"Execution: 📥 queued {ec.get('QUEUED',0)} | ⛔ blocked {ec.get('BLOCKED',0)} | 🟢 held {ec.get('HELD',0)}",""]
- for sym,st,exst,p,h,r,n,why in rows:
+ for sym,st,exst,p,h,r,n,why,mc,mscore in rows:
   ln=f"{ic.get(st,'')} *{sym.split('-')[0]}* {fp(p) if p else '-'} | {exst or 'UNASSESSED'}"
+  if mc:ln+=f" | 🟡 {float(mscore or 0):.0f}% MANUAL"
   if h is not None:ln+=f" | 1H {h:+.2f}%"
   if r is not None:ln+=f" | RSI {r:.0f}"
   lines.append(ln+f" | seen {n}x")
@@ -2461,7 +2512,7 @@ def cmd_set(txt):
  if k not in s:tg(f"❌ Unknown key. Valid: `{'`, `'.join(s.keys())}`");return
  try:new=val.lower() in ('true','1','yes','on') if isinstance(s[k],bool) else float(val) if isinstance(s[k],float) else int(val)
  except:tg(f"❌ Invalid value for {k}");return
- limits={"weak_market_floor_pct":(0.0,50.0),"weak_market_size_factor":(0.1,1.0),"risk_per_trade_pct":(0.1,2.0),"max_daily_loss_pct":(0.5,10.0),"max_portfolio_exposure_pct":(5.0,100.0),"max_position_pct":(1.0,50.0),"max_daily_trades":(1,50),"max_spread_pct":(0.05,3.0),"trail_pct":(0.0,30.0),"scan_interval_minutes":(5.0,240.0),"auto_clear_hours":(0.0,168.0),"live_mode_seconds":(0,330),"stop_loss_pct":(0.5,20.0),"rsi_min":(1.0,99.0),"rsi_max":(1.0,99.0),"rsi_exit":(0.0,99.0),"auto_buy_amount_usdt":(1.0,100000.0),"max_tokens_before_consolidation":(1,30),"crash_guard_pct":(1.0,50.0),"btc_rsi_min":(0.0,99.0),"rebuy_cooldown_hours":(0.0,168.0),"atr_stop_mult":(0.5,6.0),"atr_stop_min_pct":(1.0,10.0),"atr_stop_max_pct":(2.0,25.0),"btc_trend_hours":(10,200),"min_breadth_pct":(0.0,100.0),"offline_alert_hours":(0.0,72.0),"daily_summary_hour_utc":(0,23),"max_coin_exposure_pct":(1.0,100.0),"liquidity_depth_usdt":(0.0,1000000.0),"max_book_imbalance_pct":(50.0,99.0),"regime_risk_factor":(0.1,1.0),"execution_slippage_pct":(0.05,5.0),"portfolio_stress_pct":(1.0,50.0),"signal_expiry_minutes":(1,240),"mom_1h_min_pct":(0.0,20.0),"mom_1h_max_pct":(0.5,30.0),"max_24h_pct":(30.0,500.0),"near_miss_rsi_margin":(0.5,10.0),"near_miss_1h_margin":(0.1,3.0),"near_miss_cooldown_minutes":(5,1440),"near_miss_max_per_scan":(1,10),"scan_workers":(1,16),"radar_max":(5,60),"radar_rsi_margin":(3.0,25.0)}
+ limits={"weak_market_floor_pct":(0.0,50.0),"weak_market_size_factor":(0.1,1.0),"risk_per_trade_pct":(0.1,2.0),"max_daily_loss_pct":(0.5,10.0),"max_portfolio_exposure_pct":(5.0,100.0),"max_position_pct":(1.0,50.0),"max_daily_trades":(1,50),"max_spread_pct":(0.05,3.0),"trail_pct":(0.0,30.0),"scan_interval_minutes":(5.0,240.0),"auto_clear_hours":(0.0,168.0),"live_mode_seconds":(0,330),"stop_loss_pct":(0.5,20.0),"rsi_min":(1.0,99.0),"rsi_max":(1.0,99.0),"rsi_exit":(0.0,99.0),"auto_buy_amount_usdt":(1.0,100000.0),"max_tokens_before_consolidation":(1,30),"crash_guard_pct":(1.0,50.0),"btc_rsi_min":(0.0,99.0),"rebuy_cooldown_hours":(0.0,168.0),"atr_stop_mult":(0.5,6.0),"atr_stop_min_pct":(1.0,10.0),"atr_stop_max_pct":(2.0,25.0),"btc_trend_hours":(10,200),"min_breadth_pct":(0.0,100.0),"offline_alert_hours":(0.0,72.0),"daily_summary_hour_utc":(0,23),"max_coin_exposure_pct":(1.0,100.0),"liquidity_depth_usdt":(0.0,1000000.0),"max_book_imbalance_pct":(50.0,99.0),"regime_risk_factor":(0.1,1.0),"execution_slippage_pct":(0.05,5.0),"portfolio_stress_pct":(1.0,50.0),"signal_expiry_minutes":(1,240),"mom_1h_min_pct":(0.0,20.0),"mom_1h_max_pct":(0.5,30.0),"max_24h_pct":(30.0,500.0),"near_miss_rsi_margin":(0.5,10.0),"near_miss_1h_margin":(0.1,3.0),"near_miss_cooldown_minutes":(5,1440),"near_miss_max_per_scan":(1,10),"scan_workers":(1,16),"radar_max":(5,60),"radar_rsi_margin":(3.0,25.0),"manual_candidate_min_score":(50.0,100.0)}
  if k in limits and not (limits[k][0] <= new <= limits[k][1]):tg(f"❌ `{k}` must be between {limits[k][0]} and {limits[k][1]}.");return
  if k=="rsi_min" and new>=s.get("rsi_max",99):tg("❌ rsi_min must be lower than rsi_max.");return
  if k=="rsi_max" and new<=s.get("rsi_min",1):tg("❌ rsi_max must be higher than rsi_min.");return
@@ -2517,6 +2568,7 @@ def ui_settings_page(pg=0,note=""):
  cur=cfg();mode=next((n for n,v in PRESETS.items() if all(float(cur.get(k,-1))==float(x) for k,x in v.items())),None)
  rows=[[_B(("✅ " if n==mode else "")+PRESET_NAMES[n],f"m:pre:{n}") for n in PRESETS]]
  rows+=[[_B(f"{'🟢' if cur.get(k) else '⚪'} {lb}: {'ON' if cur.get(k) else 'OFF'}",f"m:tg:{k}")] for k,lb in SET_SWITCHES]
+ rows+=[[_B(f"🟡 Manual candidate minimum: {float(cur.get('manual_candidate_min_score',75.0)):.0f}%", "m:k:manual_candidate_min_score")]]
  txt="⚙️ *SETTINGS*\n"+(note+"\n" if note else "")+f"Mode: {PRESET_NAMES.get(mode,'Custom')}\nSafe = small trades, few per day. Active = bigger trades, more per day.\nEverything else adjusts itself."
  ui_send(txt,rows+[_MENU_BTN])
 def ui_setting(k):
