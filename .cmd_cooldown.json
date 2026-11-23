@@ -24,7 +24,7 @@
     "buy:DGAI-USDT": 1795255467.823076,
     "mktblock": 1795339751.985673,
     "buy:ICNT-USDT": 1795270462.693076,
-    "stopwatch_COLLECT-USDT": 1795315398.9722042,
+    "stopwatch_COLLECT-USDT": 1795444418.5182488,
     "sell:COLLECT-USDT": 1795311337.225628,
     "buy:TRX-USDT": 1795311376.4742937,
     "stopwatch_TRX-USDT": 1795350908.8692737,
@@ -64,5 +64,8 @@
     "buy_reject_notice:BLESS-USDT:Top-10 book depth $3415 below limit.": 1795435181.5978787,
     "buy_reject_notice:BLESS-USDT:Top-10 book depth $3995 below limit.": 1795435254.272222,
     "buy_reject_notice:BLESS-USDT:Top-10 book depth $4665 below limit.": 1795435326.8935523,
-    "buy_reject_notice:BLESS-USDT:Queued signal expired; waiting for a fresh scan.": 1795439387.000554
+    "buy_reject_notice:BLESS-USDT:Queued signal expired; waiting for a fresh scan.": 1795439387.000554,
+    "buy_reject_notice:ARX-USDT:Top-10 book depth $1411 below limit.": 1795444328.7307634,
+    "buy_reject_notice:ARX-USDT:Top-10 book depth $1727 below limit.": 1795444431.163136,
+    "buy_reject_notice:ARX-USDT:Order-book imbalance 88% is unusually concentrated.": 1795444506.4493937
 }

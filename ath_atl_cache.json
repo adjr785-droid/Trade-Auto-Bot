@@ -94,5 +94,11 @@
         "atl": 0.00685,
         "checked_at": 1795401437.8948786,
         "status": "complete"
+    },
+    "BGB-USDT": {
+        "ath": 8.5,
+        "atl": 0.0583,
+        "checked_at": 1795444288.1071134,
+        "status": "complete"
     }
 }

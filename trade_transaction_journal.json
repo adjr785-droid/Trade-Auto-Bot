@@ -1363,5 +1363,30 @@
         "time": 1795444280.03047,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.4632, 'recurring_patterns': ['RSI 75 (3 occurrences)', '15-MINUTE NO-UPWARD-TREND ROTATION (7 occurrences)', 'PANIC (4 occurrences)', 'PARTIAL PROFIT (3 occurrences)'], 'recommendations': ['Limit exposure to high\u2011volatility \"PANIC\" exits; consider tighter stop\u2011losses or manual confirmation before closing positions under panic conditions', 'Leverage the positive signal from \"RSI 75\" entries but validate with additional indicators to avoid over\u2011reliance on a single metric', 'Review the consistency of \"15\u2011MINUTE NO\u2011UPWARD\u2011TREND ROTATION\" trades; they show modest gains but may benefit from longer holding periods or confirmation of trend reversal', 'Maintain current win\u2011rate focus but aim to improve net PnL by reducing small\u2011loss trades and optimizing position sizing for higher\u2011profit opportunities']}"
+    },
+    {
+        "time": 1795444348.643478,
+        "event": "ai_buy_approved",
+        "symbol": "COLLECT-USDT",
+        "ai": {
+            "decision": "BUY",
+            "reason": "Risk controls passed, low spread and impact, RSI moderate, high score and breakout setup indicate favorable entry; no material risk identified in provided data."
+        }
+    },
+    {
+        "time": 1795444348.6450436,
+        "event": "buy_order_submitted",
+        "symbol": "COLLECT-USDT",
+        "spend_usdt": 2.07,
+        "estimated_impact_pct": 0.0019251131003832154,
+        "setup": "BREAKOUT"
+    },
+    {
+        "time": 1795444350.3198504,
+        "event": "buy_fill_verified",
+        "symbol": "COLLECT-USDT",
+        "filled": 79.76,
+        "average": 0.025952,
+        "spend_estimate": 2.06993152
     }
 ]
