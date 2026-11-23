@@ -80,7 +80,7 @@
     "radar_rsi_margin": 10.0,
     "scan_workers": 15,
     "tp10_v1": true,
-    "weak_market_mode": true,
+    "weak_market_mode": false,
     "weak_market_floor_pct": 15.0,
     "weak_market_size_factor": 0.5,
     "h1_all_setups": true,
