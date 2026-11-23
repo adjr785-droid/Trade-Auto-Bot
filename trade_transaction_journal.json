@@ -943,5 +943,15 @@
         "time": 1795394562.9824753,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 55.17, 'net_pnl_usdt': 5.3414, 'recurring_patterns': ['RSI 75 (3 occurrences)', 'PARTIAL PROFIT (3 occurrences)', '15-MINUTE NO-UPWARD-TREND ROTATION (6 occurrences)', 'PANIC (3 occurrences)', 'MANUAL SELL (2 occurrences)'], 'recommendations': 'Maintain current risk parameters; focus on trades triggered by RSI 75 and partial profit exits as they show positive contribution. Reduce exposure to PANIC\u2011driven exits and 15\u2011minute rotation signals which yield mixed results. Consider tightening stop\u2011losses on symbols with frequent panic exits (e.g., TRX\u2011USDT, WLD\u2011USDT, SKYAI\u2011USDT).'}"
+    },
+    {
+        "time": 1795395091.1512194,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (13)', 'attention': [{'symbol': 'WLD-USDT', 'action': 'monitor', 'reason': 'Position is slightly underwater (-1.47% PnL) and close to stop (0.230957). No immediate exit recommended; watch price action and consider tightening stop if downside persists.'}], 'summary': 'Overall portfolio risk is within the daily limit. The only open position (WLD-USDT) shows a modest loss and is near its stop level. Maintain the position, monitor closely, and be prepared to adjust the stop if the price continues to decline.'}"
+    },
+    {
+        "time": 1795395091.9271493,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 55.17, 'net_pnl_usdt': 5.3414, 'recurring_patterns': ['RSI 75', 'PARTIAL PROFIT', '15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC'], 'recommendations': 'Maintain current risk parameters; focus on trades triggered by RSI 75 and partial profit exits as they show positive contributions. Reduce reliance on panic\u2011driven exits and 15\u2011minute rotation signals which yield mixed results. Continue manual oversight for manual sell decisions and consider tightening stop\u2011losses on symbols with frequent negative PANIC entries.'}"
     }
 ]
