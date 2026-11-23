@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689980,
+    "last_update_id": 935689981,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -62,38 +62,56 @@
     },
     "radar": [],
     "kb_mid": 4734,
-    "out_text": "\ud83d\udd04 *AI RECOVERY \u2014 STAGE 2/3*\nGroq health check passed. Buying stays blocked until 3 consecutive checks pass;\n1 more to go. Normal mode returns automatically.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "\ud83c\udfc6 *TOP 3* \u00b7 \u25b6 details\n*1. NES* \u26a0\ufe0f OVERSOLD\n0.159670 | -33.5% | RSI 23\n\ud83e\udde0 CAUTION \u00b7 Oversold but large d\n*2. KII* \ud83d\udd36 WEAK\n0.084881 | +4.6% | RSI 76\n\ud83e\udde0 CAUTION \u00b7 Scanner rules failed\n*3. CYS* \ud83d\udd36 WEAK\n0.056010 | +35.8% | RSI 77\n\ud83e\udde0 CAUTION \u00b7 Scanner rules failed\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795462230.8251643,
+    "out_time": 1795462262.198196,
     "panel_rows": [
         [
             {
-                "text": "\ud83d\uded2 Trade",
-                "callback_data": "m:tl:trade"
+                "text": "\u25c0",
+                "callback_data": "pg:p"
             },
             {
-                "text": "\ud83d\udd14 Alerts",
-                "callback_data": "m:tl:alerts"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udd0d Scan",
-                "callback_data": "m:tl:scan"
+                "text": "1/7",
+                "callback_data": "pg:x"
             },
             {
-                "text": "\ud83d\udee0\ufe0f System",
-                "callback_data": "m:tl:sys"
-            }
-        ],
-        [
+                "text": "\u25b6",
+                "callback_data": "pg:n"
+            },
             {
-                "text": "\u2b05\ufe0f Main Menu",
+                "text": "\ud83c\udfe0",
                 "callback_data": "m:menu"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udd0e Analyse a coin",
+                "callback_data": "m:an"
             }
         ]
     ],
-    "panel_text": "\ud83e\uddf0 *TOOLS*\nChoose a group.",
-    "out_mid": 4727,
-    "panel_mid": 4735
+    "panel_text": "\ud83d\udcc4 *Page 1/7*",
+    "out_mid": 4737,
+    "pages": {
+        "p": [
+            "\ud83c\udfc6 *TOP 3* \u00b7 \u25b6 details\n*1. NES* \u26a0\ufe0f OVERSOLD\n0.159670 | -33.5% | RSI 23\n\ud83e\udde0 CAUTION \u00b7 Oversold but large d\n*2. KII* \ud83d\udd36 WEAK\n0.084881 | +4.6% | RSI 76\n\ud83e\udde0 CAUTION \u00b7 Scanner rules failed\n*3. CYS* \ud83d\udd36 WEAK\n0.056010 | +35.8% | RSI 77\n\ud83e\udde0 CAUTION \u00b7 Scanner rules failed\n\u2800\n\u2800",
+            "\ud83c\udfc6 *TOP 3 SETUPS RIGHT NOW*\n_Read-only scan. Nothing was bought._\n\n*1. NES-USDT* \u2014 OVERSOLD\nPrice: 0.159670 USDT | 24h: -33.52% | RSI: 23.1\nSuggested stop: 0.135719 (15% below price)\nWhy:\n\u2022 Oversold bounce: RSI 23.1 is below 30 and price is back above the previous\nclose\n\u2022 24h volume $1.2M (liquid enough: above the $1M minimum)\n\u2800\n\u2800",
+            "\u2022 Spread: 0.14% (OK for auto-buy)\n\u2022 Status: \u26a0\ufe0f Passes with a note | BTC filter active\n\u2022 Coin memory: READY / BLOCKED | seen 9 scans\n\u2022 AI notebook note: HIGH: RSI 23.11 indicates oversold; 24h drop -32%;\nexecution BLOCKED, high downside risk.\n\u2022 \ud83e\udde0 AI: CAUTION \u2014 Oversold but large drop; scanner passed but risk high\n\n*2. KII-USDT* \u2014 WEAK (best available, not a full setup)\nPrice: 0.084881 USDT | 24h: +4.57% | RSI: 75.8\nSuggested stop: 0.072149 (15% below price)\n\u2800\n\u2800",
+            "Why:\n\u2022 Short-term trend is up (price > MA5 > MA10)\n\u2022 RSI 75.8 is overbought (risk of pullback)\n\u2022 24h change +4.57% shows steady, not extreme, momentum\n\u2022 24h volume $1.4M (liquid enough: above the $1M minimum)\n\u2022 Spread: 0.00% (OK for auto-buy)\n\u2022 Status: \ud83d\udd36 Potential, manual only (misses scanner rules) | BTC filter active\n\u2022 Coin memory: WATCHING / NOT_ELIGIBLE | seen 9 scans\n\u2022 AI notebook note: MEDIUM: RSI 75.76 overbought, 24h rise ~4.5%; monitor for\nreversal.\n\u2800\n\u2800",
+            "\u2022 \ud83e\udde0 AI: CAUTION \u2014 Scanner rules failed; setup weak\n\n*3. CYS-USDT* \u2014 WEAK (best available, not a full setup)\nPrice: 0.056010 USDT | 24h: +35.75% | RSI: 77.2\nSuggested stop: 0.047608 (15% below price)\nWhy:\n\u2022 Short-term trend is up (price > MA5 > MA10)\n\u2022 RSI 77.2 is overbought (risk of pullback)\n\u2022 24h volume $1.2M (liquid enough: above the $1M minimum)\n\u2022 Spread: 0.16% (OK for auto-buy)\n\u2800\n\u2800",
+            "\u2022 Status: \ud83d\udd36 Potential, manual only (misses scanner rules) | BTC filter active\n\u2022 Coin memory: WATCHING / NOT_ELIGIBLE | seen 9 scans\n\u2022 \ud83e\udde0 AI: CAUTION \u2014 Scanner rules failed; setup weak\n\n\n\ud83d\udfe1 *MANUAL BUY CANDIDATES \u2014 DATABASE FILTER*\nMinimum setup score: 75%\n_These coins missed at least one entry condition. Manual review only; no\nautomatic buy._\n\u2022 *BLESS* \u2014 75% | 0.015476 USDT | RSI 42.5 | seen 9x\n\u2800\n\u2800",
+            "  Missed: Price/MA trend not fully confirmed\nBuy manually with `/buy COIN amount` if you agree.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+        ],
+        "i": 0,
+        "mode": "Markdown",
+        "x": [
+            {
+                "text": "\ud83d\udd0e Analyse a coin",
+                "callback_data": "m:an"
+            }
+        ],
+        "cmd": "/analyse"
+    },
+    "panel_mid": 4738
 }
