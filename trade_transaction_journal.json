@@ -1516,5 +1516,10 @@
         "time": 1795462238.9472463,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.4632, 'recurring_patterns': {'RSI_75': 4, '15_MINUTE_NO_UPWARD_TREND_ROTATION': 7, 'PANIC': 4, 'PARTIAL_PROFIT': 3, 'MANUAL_SELL': 2}, 'recommendations': ['Limit exposure to trades flagged with \"PANIC\" as they show mixed outcomes', 'Prioritize \"RSI 75\" signals that have yielded positive PnL in this sample, but verify with additional indicators', 'Re\u2011evaluate the \"15\u2011minute no\u2011upward\u2011trend rotation\" strategy due to inconsistent results', 'Maintain current win\u2011rate target but consider reducing position size on high\u2011volatility symbols like WLD-USDT and SKYAI-USDT']}"
+    },
+    {
+        "time": 1795462523.1659713,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'JCT-USDT', 'action': 'monitor', 'reason': 'Position is down -1.97% and approaching its stop level (0.001379). Consider tightening stop or reducing exposure if downside risk increases.'}], 'summary': 'Overall portfolio risk remains acceptable (PASS). The only open position, JCT-USDT, is slightly negative and near its stop price. Maintain vigilance, adjust stop if market moves unfavorably, and avoid adding new exposure to this asset until clarity improves.'}"
     }
 ]
