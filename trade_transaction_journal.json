@@ -1458,5 +1458,15 @@
         "time": 1795455238.180493,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.4632, 'recurring_patterns': {'RSI 75': 3, 'PARTIAL PROFIT': 3, '15-MINUTE NO-UPWARD-TREND ROTATION': 7, 'PANIC': 4}, 'recommendations': {'risk_management': 'Limit exposure on PANIC-driven trades; consider tighter stop\u2011losses or manual review before executing panic exits', 'strategy_focus': 'Prioritize signals with higher historical win rates such as RSI 75 and PARTIAL PROFIT entries; de\u2011emphasize low\u2011confidence rotation signals', 'position_sizing': 'Maintain conservative position sizes given modest net PnL and observed volatility', 'uncertainty': 'Performance metrics are based on a limited sample (30 trades); future results may vary and should be monitored closely'}}"
+    },
+    {
+        "time": 1795458822.0912697,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'JCT-USDT', 'action': 'monitor', 'reason': 'Position is slightly underwater (-0.49% PnL) and approaching stop level (0.001379); consider tightening stop or preparing to exit if price continues downward.'}], 'summary': 'Overall portfolio risk remains acceptable, but the sole position JCT-USDT shows marginal loss and is near its stop. Maintain close watch, adjust risk parameters conservatively, and be ready to exit if further downside occurs.'}"
+    },
+    {
+        "time": 1795458822.8170087,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.4632, 'recurring_patterns': {'RSI 75': 3, 'PARTIAL PROFIT': 3, '15-MINUTE NO-UPWARD-TREND ROTATION': 7, 'PANIC': 4}, 'recommendations': {'focus_on_high_confidence_signals': ['RSI 75'], 'reduce_panic_trades': {'note': 'PANIC trades contributed negative PnL and high variance'}, 'monitor_partial_profit_strategy': {'note': 'Partial profit entries show mixed results, consider tighter targets'}, 'maintain_conservative_position_sizing': {'note': 'Overall win rate is moderate; keep exposure low until pattern consistency improves'}, 'uncertainty': 'Data limited to 30 trades; performance may not generalize'}}"
     }
 ]
