@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935689727,
+    "last_update_id": 935689729,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT25.50/\u20a634,876",
+    "kb_ph": "USDT25.44/\u20a634,793",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -68,64 +68,41 @@
         "ICNT-USDT",
         "BNB-USDT"
     ],
-    "kb_mid": 4360,
-    "out_text": "\ud83c\udfc6 *TOP 3* \u00b7 \u25b6 details\n*1. BNB* \ud83d\udd36 WATCH\n558.90 | +3.2% | RSI 57\n\ud83e\udde0 CAUTION \u00b7 Fails scanner rules;\n*2. ICNT* \ud83d\udd36 WATCH\n0.361900 | +6.9% | RSI 53\n\ud83e\udde0 CAUTION \u00b7 Fails scanner; high \n*3. EGL1* \ud83d\udd36 WATCH\n0.008770 | +5.2% | RSI 65\n\ud83e\udde0 CAUTION \u00b7 Fails scanner; very \n\u2800\n\u2800",
+    "kb_mid": 4364,
+    "out_text": "\ud83d\udcca *ANALYSIS: UMXM-USDT*\nLive price: 0.004920 USDT\n24h change: -20.13%\nRSI(14): 38.4800 \u2014 Neutral\nMA5: 0.005272 | MA10: 0.005286 | MA20: 0.005410\nMACD: -0.00028888 | Signal: -0.00032265 | Histogram: 0.00003377\nATR(14): 0.00062000 (12.60% of price)\nLast hour vol vs 20h avg: 0.99x\nBid/ask spread: 0.407%\nTechnical checks: 1/4\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
             {
-                "text": "IDOL",
-                "callback_data": "m:a:IDOL"
+                "text": "\u25c0",
+                "callback_data": "pg:p"
             },
             {
-                "text": "KII",
-                "callback_data": "m:a:KII"
+                "text": "1/2",
+                "callback_data": "pg:x"
             },
             {
-                "text": "ARX",
-                "callback_data": "m:a:ARX"
-            }
-        ],
-        [
+                "text": "\u25b6",
+                "callback_data": "pg:n"
+            },
             {
-                "text": "WLD",
-                "callback_data": "m:a:WLD"
-            }
-        ],
-        [
-            {
-                "text": "\u2795 More coins",
-                "callback_data": "m:more:analyse:0"
-            }
-        ],
-        [
-            {
-                "text": "\u2b05\ufe0f Menu",
+                "text": "\ud83c\udfe0",
                 "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83d\udd0e *ANALYSE A COIN* \u2014 choose:",
-    "out_time": 1795407652.1369162,
-    "out_mid": 4359,
+    "panel_text": "\ud83d\udcc4 *Page 1/2*",
+    "out_time": 1795407731.2303777,
     "pages": {
         "p": [
-            "\ud83c\udfc6 *TOP 3* \u00b7 \u25b6 details\n*1. BNB* \ud83d\udd36 WATCH\n558.90 | +3.2% | RSI 57\n\ud83e\udde0 CAUTION \u00b7 Fails scanner rules;\n*2. ICNT* \ud83d\udd36 WATCH\n0.361900 | +6.9% | RSI 53\n\ud83e\udde0 CAUTION \u00b7 Fails scanner; high \n*3. EGL1* \ud83d\udd36 WATCH\n0.008770 | +5.2% | RSI 65\n\ud83e\udde0 CAUTION \u00b7 Fails scanner; very \n\u2800\n\u2800",
-            "\ud83c\udfc6 *TOP 3 SETUPS RIGHT NOW*\n_Read-only scan. Nothing was bought._\n\n*1. BNB-USDT* \u2014 WATCHLIST (no full scanner setup)\nPrice: 558.90 USDT | 24h: +3.21% | RSI: 56.5\nSuggested stop: 475.06 (15% below price)\nWhy:\n\u2022 Short-term trend is up (price > MA5 > MA10)\n\u2022 RSI 56.5 is healthy (room to run before overbought)\n\u2022 24h change +3.21% shows steady, not extreme, momentum\n\u2800\n\u2800",
-            "\u2022 24h volume $2.6M (liquid enough: above the $1M minimum)\n\u2022 Spread: 0.00% (OK for auto-buy)\n\u2022 Status: \ud83d\udd36 Potential, manual only (misses scanner rules)\n\u2022 \ud83e\udde0 AI: CAUTION \u2014 Fails scanner rules; moderate spread, watch volatility\n\n*2. ICNT-USDT* \u2014 WATCHLIST (no full scanner setup)\nPrice: 0.361900 USDT | 24h: +6.92% | RSI: 52.7\nSuggested stop: 0.307615 (15% below price)\nWhy:\n\u2022 Short-term trend is up (price > MA5 > MA10)\n\u2800\n\u2800",
-            "\u2022 RSI 52.7 is healthy (room to run before overbought)\n\u2022 24h change +6.92% shows steady, not extreme, momentum\n\u2022 24h volume $1.4M (liquid enough: above the $1M minimum)\n\u2022 Spread: 0.06% (OK for auto-buy)\n\u2022 Status: \ud83d\udd36 Potential, manual only (misses scanner rules)\n\u2022 \ud83e\udde0 AI: CAUTION \u2014 Fails scanner; high spread, elevated 24h gain\n\n*3. EGL1-USDT* \u2014 WATCHLIST (no full scanner setup)\nPrice: 0.008770 USDT | 24h: +5.16% | RSI: 64.8\nSuggested stop: 0.007455 (15% below price)\n\u2800\n\u2800",
-            "Why:\n\u2022 Short-term trend is up (price > MA5 > MA10)\n\u2022 RSI 64.8 is healthy (room to run before overbought)\n\u2022 24h change +5.16% shows steady, not extreme, momentum\n\u2022 24h volume $1.1M (liquid enough: above the $1M minimum)\n\u2022 Spread: 0.34% (OK for auto-buy)\n\u2022 Status: \ud83d\udd36 Potential, manual only (misses scanner rules)\n\u2022 \ud83e\udde0 AI: CAUTION \u2014 Fails scanner; very high spread, RSI above typical range\n\nNo coin passes all scanner rules right now, so these are the strongest\n\u2800\n\u2800",
-            "available. Be cautious.\n\nBuy manually with `/buy COIN amount` if you agree.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+            "\ud83d\udcca *ANALYSIS: UMXM-USDT*\nLive price: 0.004920 USDT\n24h change: -20.13%\nRSI(14): 38.4800 \u2014 Neutral\nMA5: 0.005272 | MA10: 0.005286 | MA20: 0.005410\nMACD: -0.00028888 | Signal: -0.00032265 | Histogram: 0.00003377\nATR(14): 0.00062000 (12.60% of price)\nLast hour vol vs 20h avg: 0.99x\nBid/ask spread: 0.407%\nTechnical checks: 1/4\n\u2800\n\u2800",
+            "Assessment: *WAIT / WEAK SETUP*\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 4,
+        "i": 0,
         "mode": "Markdown",
-        "x": [
-            {
-                "text": "\ud83d\udd0e Analyse a coin",
-                "callback_data": "m:an"
-            }
-        ],
-        "cmd": "/analyse"
+        "x": [],
+        "cmd": "m:a:UMXM"
     },
-    "panel_mid": 4361
+    "out_mid": 4362,
+    "panel_mid": 4363
 }
