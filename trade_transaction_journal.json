@@ -1207,5 +1207,15 @@
         "time": 1795413268.7006028,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 6.1087, 'recurring_patterns': {'15-MINUTE NO-UPWARD-TREND ROTATION': 7, 'PANIC': 4, 'RSI 75': 2, 'PARTIAL PROFIT': 3, 'MANUAL SELL': 2}, 'recommendations': {'reduce_panic_trades': 'High frequency of panic exits correlates with negative PnL; consider tighter stop\u2011loss thresholds or delay panic decisions.', 'monitor_rsi_signals': 'RSI\u2011based entries yielded positive returns; maintain but validate with additional momentum filters.', 'review_no_upward_trend_strategy': \"The '15\u2011minute no\u2011upward\u2011trend rotation' appears often with mixed outcomes; evaluate its risk\u2011reward before further use.\"}}"
+    },
+    {
+        "time": 1795417930.1032257,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'IDOL-USDT', 'action': 'monitor', 'reason': 'Position shows 10% profit but stop loss is at entry; consider tightening stop to protect gains while allowing upside.'}], 'summary': 'Overall portfolio risk is acceptable. The only open position (IDOL-USDT) is profitable; adjust risk management to lock in part of the profit.'}"
+    },
+    {
+        "time": 1795417931.003661,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 6.1087, 'recurring_patterns': ['15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC', 'RSI 75'], 'recommendations': ['Limit exposure to trades triggered by short\u2011term trend rotations until a clearer upward bias is confirmed', 'Review panic\u2011sell triggers; consider tighter stop\u2011loss thresholds or manual confirmation to avoid frequent small losses', 'Use RSI 75 signals cautiously; verify with additional momentum indicators before entering partial profit positions', 'Maintain current win\u2011rate focus but aim to improve average win size relative to loss size']}"
     }
 ]
