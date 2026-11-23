@@ -1163,13 +1163,56 @@ def rank_setups(exclude=()):
   tier=setup or ("WATCHLIST (no full scanner setup)" if p>ma5>ma10 and r<75 else "WEAK (best available, not a full setup)")
   cands.append({"sym":sym,"setup":tier,"full":bool(setup),"pts":pts+(0 if setup or p>ma5>ma10 else -10),"why":why,"p":p,"rsi":r,"chg":chg})
  cands.sort(key=lambda x:x["pts"],reverse=True);return cands
+def manual_candidate_detail(sym):
+ """Show database-backed manual-candidate evidence; never submits an order."""
+ sym=str(sym or "").upper().replace("/","-")
+ if not sym.endswith("-USDT"):sym+="-USDT"
+ memo=coin_db_get(sym)
+ if not memo:
+  ui_send(f"⚠️ No Coin List record for {sym}. Run a fresh scan first.",[[ _B("⬅️ Analyse","m:an") ]]);return
+ mc=(memo.get("checks",{}).get("scanner",{}) or {}).get("manual_candidate",{}) or {}
+ s=cfg();threshold=float(s.get("manual_candidate_min_score",75.0));score=float(mc.get("score") or 0)
+ fresh_window=max(1800.0,float(s.get("scan_interval_minutes",15.0))*120.0)
+ age=max(0.0,time.time()-float(memo.get("last_seen") or 0));fresh=age<=fresh_window
+ checks=mc.get("checks") if isinstance(mc.get("checks"),dict) else {}
+ labels={"liquidity":"Minimum liquidity","momentum":"Momentum (1H/24H)","rsi":"RSI entry range","trend":"Price / MA trend"}
+ passed=[labels.get(k,k) for k,v in checks.items() if v]
+ failed=[labels.get(k,k) for k,v in checks.items() if not v]
+ # Recheck spread at detail time. A missing or excessive spread disables this candidate shortcut.
+ spr=spread_pct(sym);spread_ok=spr is not None and spr<=float(s.get("max_spread_pct",0.5))
+ db_eligible=bool(mc.get("eligible")) and score>=threshold
+ safe=db_eligible and fresh and spread_ok and memo.get("signal_status")!="BOUGHT"
+ px=live(sym) or 0.0
+ lines=[f"🟡 *MANUAL BUY CANDIDATE — {sym.split('-')[0]}*",f"Setup score: *{score:.0f}%* (minimum {threshold:.0f}%)",
+  f"Current price: {fp(px) if px else 'Unavailable'} USDT",f"1H change: {float((memo.get('checks',{}).get('scanner',{}) or {}).get('h1_pct') or 0):+.2f}% | RSI: {float((memo.get('checks',{}).get('scanner',{}) or {}).get('rsi') or 0):.1f}",
+  f"Database signal: {memo.get('signal_status') or 'UNKNOWN'} | Auto execution: {memo.get('execution_status') or 'UNKNOWN'}",
+  f"Last scan: {age/60:.0f} minutes ago" if memo.get('last_seen') else "Last scan: unknown", "",
+  "✅ *Passed conditions:* "+(", ".join(passed) if passed else "None recorded"),
+  "⚠️ *Missed conditions:* "+(", ".join(failed) if failed else "None recorded"),
+  "Automatic-buy exclusion: "+str(mc.get('reason') or memo.get('reason') or "Did not meet all automatic entry rules")[:180],
+  f"Spread safety: {spr:.3f}% — {'within' if spread_ok else 'outside/unverified against'} {float(s.get('max_spread_pct',0.5)):g}% limit" if spr is not None else "Spread safety: UNAVAILABLE — cannot verify",
+  "Critical safety: "+("PASSED at latest database assessment" if db_eligible else "FAILED / no longer qualified"),
+  "Candidate freshness: "+("FRESH" if fresh else "STALE — wait for a new scan"),
+  "Manual review only. This score never grants automatic-buy eligibility."]
+ rows=[]
+ if safe and px>0:
+  rows.append([_B("🛒 Continue to manual buy","m:b:"+sym.split("-")[0])])
+ else:
+  why=[]
+  if not db_eligible:why.append("database candidate checks no longer pass")
+  if not fresh:why.append("scan record is stale")
+  if not spread_ok:why.append("spread is too wide or unavailable")
+  if not px:why.append("live price unavailable")
+  lines.append("\n⛔ Candidate shortcut unavailable: "+", ".join(why)+".")
+ rows += [[_B("🔄 Refresh candidate","m:mc:"+sym.split("-")[0]),_B("⬅️ Analyse","m:an")]]
+ ui_send("\n".join(lines),rows)
 def analyse_top3():
  tg("🏆 Scanning the market for the 3 best setups... this can take a minute.")
  s=cfg();cands=rank_setups()
  if cands is None:tg("⚠️ Could not load Bitget data.");return
  top=cands[:3]
  if not top:tg("🏆 *TOP 3 SETUPS*\nCould not read market data for any coin right now. Try again shortly.");return
- sl=s['stop_loss_pct'];out=["🏆 *TOP 3 SETUPS RIGHT NOW*","_Read-only scan. Nothing was bought._",""]
+ sl=s['stop_loss_pct'];out=["📊 *TOP 3 MARKET SETUPS — RESEARCH ONLY*","_Live market ranking; this is not the database auto-buy approval list._",""]
  try:
   mf=market_filter(s)
   if mf:out+=[f"⚠️ Market filter active: {mf}. Auto-buy is blocked; a manual buy is your own call.",""]
@@ -1202,13 +1245,27 @@ def analyse_top3():
   out.append("")
   _sn=str(c['setup']).split(" ")[0].replace("WATCHLIST","WATCH");_ic=stt.split(" ")[0]
   summ+=[f"*{n}. {c['sym'].split('-')[0]}* {_ic} {_sn}",f"{fp(c['p'])} | {c['chg']:+.1f}% | RSI {c['rsi']:.0f}","🧠 "+((vd+" · "+str(av.get('reason',''))[:20]) if av else "AI n/a")]
+ # Coin List is the authority for both approval lists. Never infer auto eligibility from this live research ranking.
+ auto_rows=[];manual_rows=[]
  try:
-  manual_rows=coin_db_manual_candidates(8)
+  auto_rows=coin_db_auto_ready_candidates(3)
+  out += ["", "🟢 *TOP 3 AUTO READY — COIN LIST DATABASE*", "_Requires signal READY + execution QUEUED + unexpired fresh record._"]
+  if auto_rows:
+   for n,m in enumerate(auto_rows,1):
+    out.append(f"{n}. *{m['sym'].split('-')[0]}* — {fp(m.get('price'))} USDT | RSI {float(m.get('rsi') or 0):.1f} | {float(m.get('h1') or 0):+.2f}% 1H")
+    out.append(f"   Execution: {m.get('execution_status')} | {m.get('scans',0)} scans")
+  else:
+   out.append("No coin is currently both READY and QUEUED in Coin List. A READY signal that is blocked, held, or expired is not auto-buy eligible.")
+ except Exception as e:print("ANALYSE AUTO READY DATABASE ERR",str(e)[:120])
+ try:
+  manual_rows=coin_db_manual_candidates(3)
+  out += ["", "🟡 *TOP 3 MANUAL BUY CANDIDATES — COIN LIST DATABASE*", f"Minimum setup score: {float(s.get('manual_candidate_min_score',75.0)):.0f}%", "_Separate manual shortlist. These coins are never added to the automatic-buy queue._"]
   if manual_rows:
-   out += ["", "🟡 *MANUAL BUY CANDIDATES — DATABASE FILTER*", f"Minimum setup score: {float(s.get('manual_candidate_min_score',75.0)):.0f}%", "_These coins missed at least one entry condition. Manual review only; no automatic buy._"]
-   for m in manual_rows:
-    out.append(f"• *{m['sym'].split('-')[0]}* — {float(m.get('score') or 0):.0f}% | {fp(m.get('price'))} USDT | RSI {float(m.get('rsi') or 0):.1f} | seen {m.get('scans',0)}x")
-    out.append("  Missed: "+str(m.get('manual_reason') or 'Review setup')[:150])
+   for n,m in enumerate(manual_rows,1):
+    out.append(f"{n}. *{m['sym'].split('-')[0]}* — *{float(m.get('score') or 0):.0f}%* | {fp(m.get('price'))} USDT | RSI {float(m.get('rsi') or 0):.1f}")
+    out.append("   Missed: "+str(m.get('manual_reason') or 'Review setup')[:150])
+  else:
+   out.append("No fresh, safety-qualified Coin List records currently meet the manual-candidate threshold.")
  except Exception as e:print("ANALYSE MANUAL CANDIDATES ERR",str(e)[:120])
  if not any(c["full"] for c in top):out.append("No coin passes all scanner rules right now, so these are the strongest available. Be cautious.\n")
  out.append("Buy manually with `/buy COIN amount` if you agree.")
@@ -1216,10 +1273,15 @@ def analyse_top3():
  try:
   if int(s.get('page_chars',0) or 0)>0:
    W=int(s.get('page_width',32) or 32);L=int(s.get('page_lines',12) or 12);cap=max(2,L-2)
-   sw=_wrap("\n".join(["🏆 *TOP 3* · ▶ details"]+summ),W).split("\n") if isinstance(_wrap("x",W),str) else _wrap("\n".join(["🏆 *TOP 3* · ▶ details"]+summ),W)
+   sw=_wrap("\n".join(["📊 *MARKET SETUPS* · ▶ details"]+summ),W).split("\n") if isinstance(_wrap("x",W),str) else _wrap("\n".join(["📊 *MARKET SETUPS* · ▶ details"]+summ),W)
    if len(sw)<=cap:out=sw+["⠀"]*(cap-len(sw))+out
  except Exception as e:print("ANALYSE SUMMARY ERR",str(e)[:100])
- _send("\n".join(out),"Markdown",{"inline_keyboard":[[_B("🔎 Analyse a coin","m:an")]]})
+ kb=[[_B("🔎 Analyse a coin","m:an")]]
+ try:
+  for m in manual_rows[:8] if 'manual_rows' in locals() else []:
+   kb.append([_B(f"🟡 {m['sym'].split('-')[0]} · {float(m.get('score') or 0):.0f}% details",f"m:mc:{m['sym'].split('-')[0]}")])
+ except Exception:pass
+ _send("\n".join(out),"Markdown",{"inline_keyboard":kb})
 def hold_advice(sym,price,entry,rsi,ma5,ma10,s):
  pnl=(price-entry)/entry*100 if entry else None;sl=float(s.get('stop_loss_pct',5));rx=float(s.get('rsi_exit',75) or 0)
  down=rsi is not None and ma5 is not None and ma10 is not None and price<ma5<ma10 and rsi<50
@@ -2275,11 +2337,24 @@ def coin_db_history_records(hours=24,limit=60000):
     "spread_pct":x[16],"near_miss":nm})
   return out
  finally:c.close()
+def coin_db_auto_ready_candidates(limit=3):
+ """Return only fresh, unexpired Coin List records approved for automatic execution."""
+ c=coin_db_conn()
+ try:
+  fresh_after=time.time()-max(1800.0,float(cfg().get("scan_interval_minutes",15.0))*120.0)
+  rows=c.execute("""SELECT sym,price,h1,rsi,scans,execution_status,last_seen,expires_at
+   FROM coins WHERE signal_status='READY' AND execution_status='QUEUED' AND status<>'BOUGHT'
+   AND last_seen>=? AND (expires_at IS NULL OR expires_at>?)
+   ORDER BY COALESCE(h1,-999) DESC,last_seen DESC LIMIT ?""",
+   (fresh_after,time.time(),int(limit))).fetchall()
+  return [{"sym":x[0],"price":x[1],"h1":x[2],"rsi":x[3],"scans":x[4],"execution_status":x[5],"last_seen":x[6],"expires_at":x[7]} for x in rows]
+ finally:c.close()
 def coin_db_manual_candidates(limit=10):
  c=coin_db_conn()
  try:
   fresh_after=time.time()-max(1800.0,float(cfg().get("scan_interval_minutes",15.0))*120.0)
-  rows=c.execute("SELECT sym,price,chg24,h1,rsi,scans,manual_score,manual_reason,reason,execution_status FROM coins WHERE manual_candidate=1 AND status<>'BOUGHT' AND last_seen>=? ORDER BY manual_score DESC,last_seen DESC LIMIT ?",(fresh_after,int(limit))).fetchall()
+  threshold=float(cfg().get("manual_candidate_min_score",75.0))
+  rows=c.execute("SELECT sym,price,chg24,h1,rsi,scans,manual_score,manual_reason,reason,execution_status FROM coins WHERE manual_candidate=1 AND manual_score>=? AND status<>'BOUGHT' AND last_seen>=? ORDER BY manual_score DESC,last_seen DESC LIMIT ?",(threshold,fresh_after,int(limit))).fetchall()
   return [{"sym":x[0],"price":x[1],"chg":x[2],"h1":x[3],"rsi":x[4],"scans":x[5],"score":x[6],"manual_reason":x[7],"scanner_reason":x[8],"execution_status":x[9]} for x in rows]
  finally:c.close()
 def coin_db_rows(limit=12):
@@ -2590,6 +2665,8 @@ def ui_cb(t):
   elif a=="buy":
    cs=ui_coins("buy")
    ui_send("🛒 *BUY* — choose a coin:",_grid([_B(c,f"m:b:{c}") for c in cs],3)+[[_B("➕ More coins","m:more:buy:0")],_MENU_BTN])
+  elif a=="mc" and len(p)>2:
+   manual_candidate_detail(p[2])
   elif a=="b":
    c=p[2];free=B('free','USDT');amts=[x for x in (2,5,10,15) if x<=free]
    ui_send(f"🛒 *BUY {c}*\nFree USDT: ${free:.2f}\nChoose how much:",[[_B(f"${x}",f"m:bc:{c}:{x}") for x in amts]+[_B("ALL",f"m:bc:{c}:ALL")],[_B("✏️ Custom amount",f"m:cu:b:{c}")],[_B("⬅️ Back","m:buy")]])
