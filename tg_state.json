@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689590,
+    "last_update_id": 935689592,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -73,52 +73,102 @@
     "panel_rows": [
         [
             {
-                "text": "\ud83d\uded2 Buy",
+                "text": "BTC",
+                "callback_data": "m:b:BTC"
+            },
+            {
+                "text": "ETH",
+                "callback_data": "m:b:ETH"
+            },
+            {
+                "text": "SOL",
+                "callback_data": "m:b:SOL"
+            }
+        ],
+        [
+            {
+                "text": "USDGO",
+                "callback_data": "m:b:USDGO"
+            },
+            {
+                "text": "EVAA",
+                "callback_data": "m:b:EVAA"
+            },
+            {
+                "text": "PWT",
+                "callback_data": "m:b:PWT"
+            }
+        ],
+        [
+            {
+                "text": "DOGE",
+                "callback_data": "m:b:DOGE"
+            },
+            {
+                "text": "ZEC",
+                "callback_data": "m:b:ZEC"
+            },
+            {
+                "text": "MTX",
+                "callback_data": "m:b:MTX"
+            }
+        ],
+        [
+            {
+                "text": "BGB",
+                "callback_data": "m:b:BGB"
+            },
+            {
+                "text": "HYPE",
+                "callback_data": "m:b:HYPE"
+            },
+            {
+                "text": "NEAR",
+                "callback_data": "m:b:NEAR"
+            }
+        ],
+        [
+            {
+                "text": "DGAI",
+                "callback_data": "m:b:DGAI"
+            },
+            {
+                "text": "SUI",
+                "callback_data": "m:b:SUI"
+            },
+            {
+                "text": "IDOL",
+                "callback_data": "m:b:IDOL"
+            }
+        ],
+        [
+            {
+                "text": "UMXM",
+                "callback_data": "m:b:UMXM"
+            },
+            {
+                "text": "ACE",
+                "callback_data": "m:b:ACE"
+            },
+            {
+                "text": "BLESS",
+                "callback_data": "m:b:BLESS"
+            }
+        ],
+        [
+            {
+                "text": "Next \u25b6\ufe0f",
+                "callback_data": "m:more:buy:1"
+            }
+        ],
+        [
+            {
+                "text": "\u2b05\ufe0f Back",
                 "callback_data": "m:buy"
-            },
-            {
-                "text": "\ud83d\udcb8 Sell",
-                "callback_data": "m:sell"
-            }
-        ],
-        [
-            {
-                "text": "\u274c Cancel Open Orders",
-                "callback_data": "m:r:cancel"
-            },
-            {
-                "text": "\ud83e\uddf9 Dust \u2192 BGB",
-                "callback_data": "m:r:dust"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udd04 Sync manual coins",
-                "callback_data": "m:r:sync"
-            }
-        ],
-        [
-            {
-                "text": "\u23f8 Pause auto-buy",
-                "callback_data": "m:r:pause"
-            },
-            {
-                "text": "\u25b6\ufe0f Resume auto-buy",
-                "callback_data": "m:r:resume"
-            }
-        ],
-        [
-            {
-                "text": "\u2b05\ufe0f Tools",
-                "callback_data": "m:tools"
-            },
-            {
-                "text": "\ud83c\udfe0 Main Menu",
-                "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83d\uded2 *TRADE*",
+    "panel_text": "\u2795 *MORE COINS* (page 1/26)\nBiggest 24h volume first. Tap a coin.",
     "out_time": 1795396085.2620902,
     "out_mid": 4197,
     "pages": {
