@@ -1506,5 +1506,15 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795462238.097126,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'JCT-USDT', 'action': 'HOLD', 'reason': 'Current unrealized loss of -1.85% is modest; stop loss is still 13% below entry, providing downside protection. No immediate signal to exit.'}], 'summary': 'Portfolio risk remains acceptable. Maintain the JCT-USDT position while monitoring for further downside. No new actions recommended at this time.'}"
+    },
+    {
+        "time": 1795462238.9472463,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.4632, 'recurring_patterns': {'RSI_75': 4, '15_MINUTE_NO_UPWARD_TREND_ROTATION': 7, 'PANIC': 4, 'PARTIAL_PROFIT': 3, 'MANUAL_SELL': 2}, 'recommendations': ['Limit exposure to trades flagged with \"PANIC\" as they show mixed outcomes', 'Prioritize \"RSI 75\" signals that have yielded positive PnL in this sample, but verify with additional indicators', 'Re\u2011evaluate the \"15\u2011minute no\u2011upward\u2011trend rotation\" strategy due to inconsistent results', 'Maintain current win\u2011rate target but consider reducing position size on high\u2011volatility symbols like WLD-USDT and SKYAI-USDT']}"
     }
 ]
