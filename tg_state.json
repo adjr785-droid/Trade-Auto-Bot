@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT22.40/\u20a630,642",
+    "kb_ph": "USDT22.38/\u20a630,608",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -64,10 +64,10 @@
         "UMXM-USDT",
         "ARIA-USDT"
     ],
-    "kb_mid": 4884,
-    "out_text": "\ud83d\udea8 *AI FAILURE \u2014 AUTOMATIC BUYING PAUSED*\nAuto-Buy is blocked while AI recovery is checked. Manual Buy and Sell remain\navailable to you; AI warnings never lock manual trades. The bot continues\nconfigured protective exits on existing positions. No automatic replacement\nbuys. Proceeds remain in USDT.\nReason: AI stage performance_review failed: Expecting ',' delimiter: line 1\ncolumn 562 (char 561)\nThe bot will notify you about recovery.\n\u2800\n\u2800\n\u2800\n\u2800",
+    "kb_mid": 4885,
+    "out_text": "\ud83d\udd0d *SCAN COMPLETE*\nChecked 462 markets in 9s.\nMatched: 1 | Queued: 0.\nAI emergency: automatic buying paused\n\ud83e\udde0 AI market view: SIDEWAYS | LOW\n\n\u2705 *MATCHED COINS*\n1. *ICNT-USDT* \u2014 OVERSOLD matched, AI emergency: automatic buying paused\n   Price 0.309100 | 24h -12.19% | RSI 28.5 | \u23f8 not queued\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795477283.0345712,
+    "out_time": 1795477301.749858,
     "panel_rows": [
         [
             {
