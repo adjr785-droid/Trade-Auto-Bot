@@ -1568,5 +1568,15 @@
         "time": 1795466015.0414586,
         "event": "ai_portfolio_review",
         "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'DOS-USDT', 'action': 'HOLD', 'reason': 'Position is at entry price with no profit/loss; stop-loss is 5% below entry. Monitor price relative to stop and BTC filter; no immediate action required.'}], 'summary': 'Portfolio risk passes safeguards. Current position in DOS-USDT is flat; maintain the position while watching the stop level and overall market conditions. No new orders are recommended at this time.'}"
+    },
+    {
+        "time": 1795466159.3131669,
+        "event": "ai_manual_buy_review",
+        "symbol": "IDOL-USDT",
+        "review": {
+            "risk_level": "moderate",
+            "warning": "The RSI is near neutral (45.69) and the price is low; ensure the asset's liquidity and volatility are acceptable before proceeding. Verify that the BTC filter does not block this trade and that no existing position conflicts with the intended exposure.",
+            "summary": "Manual buy of 17.19\u202fUSDT of IDOL-USDT at 0.01685 appears acceptable but carries moderate risk due to limited market data and potential price volatility. Confirm all filters and risk limits before execution."
+        }
     }
 ]

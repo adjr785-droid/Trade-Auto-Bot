@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935690038,
+    "last_update_id": 935690039,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT23.99/\u20a632,804",
+    "kb_ph": "USDT23.97/\u20a632,779",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -61,10 +61,10 @@
         ]
     },
     "radar": [],
-    "kb_mid": 4822,
-    "out_text": "\ud83e\udde0 AI manual-buy advisory: Considering a $6.75 USDT buy of DOS-USDT at $0.1357\nwith no existing position and a BTC filter active, the trade carries medium\nrisk. Verify that the market filter criteria are met and that the order size\naligns with your risk management parameters before proceeding.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "kb_mid": 4829,
+    "out_text": "\ud83e\udde0 AI manual-buy advisory: Manual buy of 17.19\u202fUSDT of IDOL-USDT at 0.01685\nappears acceptable but carries moderate risk due to limited market data and\npotential price volatility. Confirm all filters and risk limits before\nexecution.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795466004.7793949,
+    "out_time": 1795466159.8496406,
     "panel_rows": [
         [
             {
