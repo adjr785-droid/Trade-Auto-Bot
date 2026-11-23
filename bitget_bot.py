@@ -1810,7 +1810,7 @@ def exec_q():
  allowed,reason=risk_controls()
  if not allowed:
   for sym in q:buy_rejection(sym,f"Risk: {reason}")
-  if not in_cd('risk_pause_notice',3600):tg(f"🛑 *RISK BREAKER:* {reason}. Paused.")
+  if not cd('risk_pause_notice',3600):tg(f"🛑 *RISK BREAKER:* {reason}. Paused.")
   return
  try:
   ub=B('free','USDT')
