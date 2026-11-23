@@ -57,5 +57,6 @@
     "risk_pause_notice": 1795406148.7425482,
     "buy_reject_notice:KII-USDT:Top-10 book depth $891 below limit.": 1795406951.8557653,
     "buy_reject_notice:KII-USDT:Top-10 book depth $760 below limit.": 1795407024.597214,
-    "buy_reject_notice:KII-USDT:Queued signal expired; waiting for a fresh scan.": 1795407535.78806
+    "buy_reject_notice:KII-USDT:Queued signal expired; waiting for a fresh scan.": 1795407535.78806,
+    "stopwatch_INJ-USDT": 1795430768.5072045
 }

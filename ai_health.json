@@ -1,11 +1,11 @@
 {
-    "last_check": 1795429225.8234918,
+    "last_check": 1795430766.7332203,
     "status": "healthy",
     "model": "openai/gpt-oss-120b",
-    "latency_ms": 233,
+    "latency_ms": 303,
     "last_error": "",
     "consecutive_failures": 0,
-    "consecutive_successes": 52,
+    "consecutive_successes": 53,
     "last_response_valid": true,
     "alerted_status": "healthy",
     "emergency_mode": false,
@@ -18,12 +18,12 @@
             "last_failure": 1795339738.9050465,
             "failures": 2,
             "last_error": "",
-            "last_success": 1795423530.9952166,
-            "successes": 67
+            "last_success": 1795430773.4653747,
+            "successes": 68
         },
         "performance_review": {
-            "last_success": 1795429229.3109436,
-            "successes": 79,
+            "last_success": 1795430773.9376283,
+            "successes": 80,
             "last_error": "",
             "last_failure": 1795365698.7489345,
             "failures": 3
@@ -69,8 +69,8 @@
             "last_error": ""
         }
     },
-    "last_stage_success": 1795429447.402905,
-    "last_success": 1795429225.8234918,
+    "last_stage_success": 1795430773.9376283,
+    "last_success": 1795430766.7332203,
     "emergency_ended": 1795366791.6880443,
     "recovery_start_alerted": false
 }
