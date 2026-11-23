@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689993,
+    "last_update_id": 935689995,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -62,9 +62,66 @@
     },
     "radar": [],
     "kb_mid": 4755,
-    "panel_hidden": true,
-    "out_mid": 4756,
-    "out_text": "\ud83d\udd04 *AI RECOVERY \u2014 STAGE 1/3*\nGroq health check passed. Buying stays blocked until 3 consecutive checks pass;\n2 more to go. Normal mode returns automatically.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "\ud83d\udcca *MARKET SETUPS* \u00b7 \u25b6 details\n*1. DOS* \u26a0\ufe0f TREND\n0.136000 | -4.3% | RSI 46\n\ud83e\udde0 CAUTION \u00b7 Scanner passed, but \n*2. KII* \ud83d\udd36 WEAK\n0.084792 | +4.3% | RSI 77\n\ud83e\udde0 WEAK \u00b7 Fails scanner rules;\n*3. CYS* \ud83d\udd36 WEAK\n0.057870 | +41.0% | RSI 75\n\ud83e\udde0 WEAK \u00b7 Fails scanner rules;\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795464244.6998584
+    "out_time": 1795464284.1571636,
+    "panel_rows": [
+        [
+            {
+                "text": "\u25c0",
+                "callback_data": "pg:p"
+            },
+            {
+                "text": "1/7",
+                "callback_data": "pg:x"
+            },
+            {
+                "text": "\u25b6",
+                "callback_data": "pg:n"
+            },
+            {
+                "text": "\ud83c\udfe0",
+                "callback_data": "m:menu"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udd0e Analyse a coin",
+                "callback_data": "m:an"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udfe1 CYS \u00b7 75% details",
+                "callback_data": "m:mc:CYS"
+            }
+        ]
+    ],
+    "panel_text": "\ud83d\udcc4 *Page 1/7*",
+    "out_mid": 4760,
+    "pages": {
+        "p": [
+            "\ud83d\udcca *MARKET SETUPS* \u00b7 \u25b6 details\n*1. DOS* \u26a0\ufe0f TREND\n0.136000 | -4.3% | RSI 46\n\ud83e\udde0 CAUTION \u00b7 Scanner passed, but \n*2. KII* \ud83d\udd36 WEAK\n0.084792 | +4.3% | RSI 77\n\ud83e\udde0 WEAK \u00b7 Fails scanner rules;\n*3. CYS* \ud83d\udd36 WEAK\n0.057870 | +41.0% | RSI 75\n\ud83e\udde0 WEAK \u00b7 Fails scanner rules;\n\u2800\n\u2800",
+            "\ud83d\udcca *TOP 3 MARKET SETUPS \u2014 RESEARCH ONLY*\n_Live market ranking; this is not the database auto-buy approval list._\n\n*1. DOS-USDT* \u2014 TREND\nPrice: 0.136000 USDT | 24h: -4.29% | RSI: 46.2\nSuggested stop: 0.115600 (15% below price)\nWhy:\n\u2022 Trend setup: price 0.136000 is above MA5 0.135880 which is above MA10\n0.134750, with RSI 46.2 inside your 42-48 entry zone\n\u2022 RSI 46.2 is healthy (room to run before overbought)\n\u2800\n\u2800",
+            "\u2022 24h volume $4.3M (liquid enough: above the $1M minimum)\n\u2022 Spread: 0.15% (OK for auto-buy)\n\u2022 Status: \u26a0\ufe0f Passes with a note | BTC filter active\n\u2022 Coin memory: WATCHING / NOT_ELIGIBLE | seen 10 scans\n\u2022 AI notebook note: medium: 1h up modest, 24h down 4.3%, RSI 46 near neutral,\ntrend down on 4h; monitor but no clear ent\n\u2022 \ud83e\udde0 AI: CAUTION \u2014 Scanner passed, but negative 24h change and moderate RSI.\n\n*2. KII-USDT* \u2014 WEAK (best available, not a full setup)\nPrice: 0.084792 USDT | 24h: +4.35% | RSI: 77.3\n\u2800\n\u2800",
+            "Suggested stop: 0.072073 (15% below price)\nWhy:\n\u2022 Short-term trend is up (price > MA5 > MA10)\n\u2022 RSI 77.3 is overbought (risk of pullback)\n\u2022 24h change +4.35% shows steady, not extreme, momentum\n\u2022 24h volume $1.4M (liquid enough: above the $1M minimum)\n\u2022 Spread: 0.00% (OK for auto-buy)\n\u2022 Status: \ud83d\udd36 Potential, manual only (misses scanner rules) | BTC filter active\n\u2022 Coin memory: WATCHING / NOT_ELIGIBLE | seen 10 scans\n\u2022 AI notebook note: high: RSI 77.3 very high, 24h up 4.3%; overbought, high\n\u2800\n\u2800",
+            "risk.\n\u2022 \ud83e\udde0 AI: WEAK \u2014 Fails scanner rules; high RSI and minimal spread.\n\n*3. CYS-USDT* \u2014 WEAK (best available, not a full setup)\nPrice: 0.057870 USDT | 24h: +41.04% | RSI: 75.5\nSuggested stop: 0.049189 (15% below price)\nWhy:\n\u2022 Short-term trend is up (price > MA5 > MA10)\n\u2022 RSI 75.5 is overbought (risk of pullback)\n\u2022 24h volume $1.3M (liquid enough: above the $1M minimum)\n\u2800\n\u2800",
+            "\u2022 Spread: 0.09% (OK for auto-buy)\n\u2022 Status: \ud83d\udd36 Potential, manual only (misses scanner rules) | BTC filter active\n\u2022 Coin memory: WATCHING / NOT_ELIGIBLE | seen 10 scans\n\u2022 \ud83e\udde0 AI: WEAK \u2014 Fails scanner rules; large 24h gain but high RSI.\n\n\n\ud83d\udfe2 *TOP 3 AUTO READY \u2014 COIN LIST DATABASE*\n_Requires signal READY + execution QUEUED + unexpired fresh record._\nNo coin is currently both READY and QUEUED in Coin List. A READY signal that is\nblocked, held, or expired is not auto-buy eligible.\n\u2800\n\u2800",
+            "\n\ud83d\udfe1 *TOP 3 MANUAL BUY CANDIDATES \u2014 COIN LIST DATABASE*\nMinimum setup score: 75%\n_Separate manual shortlist. These coins are never added to the automatic-buy\nqueue._\n1. *CYS* \u2014 *75%* | 0.057910 USDT | RSI 75.5\n   Missed: RSI 75.5 outside 42-48\nBuy manually with `/buy COIN amount` if you agree.\n\u2800\n\u2800\n\u2800\n\u2800"
+        ],
+        "i": 0,
+        "mode": "Markdown",
+        "x": [
+            {
+                "text": "\ud83d\udd0e Analyse a coin",
+                "callback_data": "m:an"
+            },
+            {
+                "text": "\ud83d\udfe1 CYS \u00b7 75% details",
+                "callback_data": "m:mc:CYS"
+            }
+        ],
+        "cmd": "/analyse"
+    },
+    "panel_mid": 4761
 }
