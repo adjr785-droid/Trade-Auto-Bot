@@ -78,7 +78,7 @@
     "near_miss_max_per_scan": 3,
     "radar_max": 30,
     "radar_rsi_margin": 10.0,
-    "scan_workers": 8,
+    "scan_workers": 12,
     "tp10_v1": true,
     "weak_market_mode": true,
     "weak_market_floor_pct": 15.0,
