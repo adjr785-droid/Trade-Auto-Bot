@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689988,
+    "last_update_id": 935689989,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -78,32 +78,12 @@
         ],
         [
             {
-                "text": "\ud83d\udcda Coin List",
-                "callback_data": "m:coins"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udcc8 Gainers",
-                "callback_data": "m:r:gain"
-            },
-            {
-                "text": "\ud83d\udcc9 Losers",
-                "callback_data": "m:r:lose"
-            }
-        ],
-        [
-            {
-                "text": "\u2b05\ufe0f Tools",
-                "callback_data": "m:tools"
-            },
-            {
-                "text": "\ud83c\udfe0 Main Menu",
+                "text": "\u2b05\ufe0f Menu",
                 "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83d\udd0d *SCAN*",
+    "panel_text": "\ud83d\udcda *COIN LIST*\n\u2705 Ready 1 | \ud83d\udc40 Watching 30 | \ud83c\udd95 New 0 | \ud83d\udcbc Held 1 | \u26d4 Rejected 430\n\ud83d\udfe1 Manual candidates (\u226575%): 1\nExecution: \ud83d\udce5 queued 0 | \u26d4 blocked 1 | \ud83d\udfe2 held 1\n\n\u2705 *NES* 0.159840 | BLOCKED | 1H +1.00% | RSI 23 | seen 9x\n\ud83d\udcbc *JCT* 0.001592 | HELD | 1H -0.78% | RSI 52 | seen 9x\n\ud83d\udc40 *BGSC* 0.00095900 | NOT_ELIGIBLE | 1H +13.47% | RSI 69 | seen 9x\n\ud83d\udc40 *ARIA* 0.282930 | NOT_ELIGIBLE | 1H +8.62% | RSI 46 | seen 9x\n\ud83d\udc40 *UMXM* 0.004320 | NOT_ELIGIBLE | 1H +2.36% | RSI 37 | seen 9x\n\ud83d\udc40 *BLESS* 0.015476 | NOT_ELIGIBLE | \ud83d\udfe1 75% MANUAL | 1H +0.83% | RSI 43 | seen 9x\n\ud83d\udc40 *KII* 0.084882 | NOT_ELIGIBLE | 1H +0.48% | RSI 76 | seen 9x\n\ud83d\udc40 *ARX* 0.173890 | NOT_ELIGIBLE | 1H +0.36% | RSI 57 | seen 9x\n\ud83d\udc40 *IDOL* 0.016680 | NOT_ELIGIBLE | 1H +0.31% | RSI 45 | seen 9x\n\ud83d\udc40 *DOS* 0.135600 | NOT_ELIGIBLE | 1H +0.29% | RSI 46 | seen 9x\n\ud83d\udc40 *COLLECT* 0.024681 | NOT_ELIGIBLE | 1H +0.14% | RSI 36 | seen 9x\n\ud83d\udc40 *PAXG* 3646.64 | NOT_ELIGIBLE | 1H +0.04% | RSI 64 | seen 9x",
     "pages": {
         "p": [
             "\ud83d\udd0e *SCAN HISTORY* \u00b7 463/463 coins (first 150)\n9 scans \u00b7 2.0h\n```\nCOIN    RSI    1H WHY\n------------------------------\nNES      23  +0.6 Auto-buy off\n0G       49     - RSI high\n10SET    52     - RSI high\n1INCH    51     - RSI high\n2U2      53     - RSI high\n```\n\u2800",
