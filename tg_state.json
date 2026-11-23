@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689807,
+    "last_update_id": 935689808,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -67,69 +67,38 @@
         "ICNT-USDT"
     ],
     "kb_mid": 4459,
-    "out_text": "\ud83d\udcbc *Total Portfolio Value:* $26.03 USDT | \u20a635,597\n\n\ud83d\udcb5 *Available USDT Cash*\nTotal: $0.02 | Free to Trade: $0.02\n\ud83d\udfe1 *BGB Wallet Balance (not auto-converted)*\nTotal: 3.937587e-05 BGB | Free: 3.937587e-05 BGB | Value: $0.0001 USDT\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\n\ud83d\udcbc *Coin Holdings (Value: $25.98)*\n\ud83e\ude99 *IDOL*\n\u2800\n\u2800",
+    "out_text": "\u2139\ufe0f Git sync used conflict recovery.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
             {
-                "text": "\ud83e\udd16 Bot",
-                "callback_data": "/bot"
+                "text": "\ud83d\uded2 Trade",
+                "callback_data": "m:tl:trade"
             },
             {
-                "text": "\ud83d\udcc8 Stats",
-                "callback_data": "/stats"
+                "text": "\ud83d\udd14 Alerts",
+                "callback_data": "m:tl:alerts"
             }
         ],
         [
             {
-                "text": "\u2699\ufe0f Settings",
-                "callback_data": "m:set"
+                "text": "\ud83d\udd0d Scan",
+                "callback_data": "m:tl:scan"
             },
             {
-                "text": "\ud83d\udcbc Holdings",
-                "callback_data": "m:r:holdings"
+                "text": "\ud83d\udee0\ufe0f System",
+                "callback_data": "m:tl:sys"
             }
         ],
         [
             {
-                "text": "\ud83d\udcdc Trade History",
-                "callback_data": "m:r:history"
-            },
-            {
-                "text": "\ud83e\udde0 Ask AI",
-                "callback_data": "m:ai:1"
-            }
-        ],
-        [
-            {
-                "text": "\ud83e\uddf9 Clear Chat",
-                "callback_data": "/clear"
-            },
-            {
-                "text": "\ud83d\udea8 PANIC SELL",
-                "callback_data": "/panic"
+                "text": "\u2b05\ufe0f Main Menu",
+                "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
+    "panel_text": "\ud83e\uddf0 *TOOLS*\nChoose a group.",
     "out_mid": 4454,
-    "out_time": 1795409538.2706842,
-    "pages": {
-        "p": [
-            "\ud83d\udcbc *Total Portfolio Value:* $26.03 USDT | \u20a635,597\n\n\ud83d\udcb5 *Available USDT Cash*\nTotal: $0.02 | Free to Trade: $0.02\n\ud83d\udfe1 *BGB Wallet Balance (not auto-converted)*\nTotal: 3.937587e-05 BGB | Free: 3.937587e-05 BGB | Value: $0.0001 USDT\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\n\ud83d\udcbc *Coin Holdings (Value: $25.98)*\n\ud83e\ude99 *IDOL*\n\u2800\n\u2800",
-            "Quantity: 1506.7717\nCurrent price: 0.017240 USDT\nMarket value: $25.98\nATH (Bitget lifetime): 0.047740 USDT\nATL (Bitget lifetime): 0.006850 USDT\n\ud83d\udfe2 Entry: 0.015700 USDT | PnL: +9.81% ($+2.32)\nRSI (1h): 43.8\nMA5 (1h): 0.015540\nMA10 (1h): 0.014983\nMarket sentiment: \ud83d\udfe1 Neutral / Mixed\n\u2800\n\u2800",
-            "Bot trailing stop: ON (8.0% below peak)\nPeak price: 0.017250\nExchange stop level: 0.015870\n\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\nand 8 more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT26.03/\u20a635,597\n\n\u2800\n\u2800",
-            "\ud83e\udde0 *AI:* Portfolio value $26.03 USDT with $0.02 cash; IDOL holds $25.98 (9.8%\ngain) under trailing stop (8% below peak); several tokens lack USDT pricing,\nindicating valuation uncertainty.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
-        ],
-        "i": 1,
-        "mode": "Markdown",
-        "x": [
-            {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
-            }
-        ],
-        "cmd": "m:r:holdings"
-    },
-    "panel_mid": 4455
+    "out_time": 1795409807.2854764,
+    "panel_mid": 4461
 }
