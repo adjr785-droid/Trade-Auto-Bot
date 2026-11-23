@@ -207,7 +207,7 @@ def _kb_refresh():
  st=load(ST,{});keys=str(kb_markup()["keyboard"]);ph=(compact_balance() or "")[:64]
  if not st.get("kb_mid") or st.get("kb_keys")!=keys or (ph and ph!=st.get("kb_ph")):_carrier(ph)
 IMPORTANT=("*SOLD","*BOUGHT","*BUY FAILED","*SELL FAILED","*SELL NOT VERIFIED","*SL NOT VERIFIED","*PANIC","*CRASH","*STATE NOT SAVED","*PARTIAL PROFIT","*DCA ADDED","*EXECUTED","*ALERT:*","*RISK BREAKER","*QUEUE FAILED","*STOP")
-REFRESH=("/bot","/stats","m:r:holdings","m:r:gain","m:r:lose")
+REFRESH=("/bot","/stats","m:r:holdings")
 def _mark_pnl(t):
  out=[]
  for ln in t.split("\n"):
@@ -1053,7 +1053,7 @@ def get_bitget_ath_atl(sym):
 def get_holdings_text():
  try:balance=ex.fetch_balance();totals=balance.get('total') or {};free=balance.get('free') or {}
  except Exception as e:return f"❌ Could not fetch exchange holdings: {e}"
- usdt_total=float(totals.get('USDT',0.0));usdt_free=float(free.get('USDT',0.0));total_coins_value=0.0;count=0;unpriced=[];coin_lines=[]
+ usdt_total=float(totals.get('USDT',0.0));usdt_free=float(free.get('USDT',0.0));total_coins_value=0.0;unpriced=[];rows=[];db=load(DB)
  for coin,qty in sorted(totals.items()):
   try: qty=float(qty or 0)
   except (TypeError,ValueError): continue
@@ -1061,41 +1061,40 @@ def get_holdings_text():
   sym=f"{coin}-USDT";price=live(sym)
   if not price:unpriced.append(f"{coin}: {qty:.8g}")
   if not price or qty*price<0.10: continue
-  total_coins_value += qty*price
-  db=load(DB);entry_data=db.get(sym,{});entry=entry_data.get('entry_price')
+  val=qty*price;total_coins_value+=val
+  ed=db.get(sym,{});entry=ed.get('entry_price');stop=ed.get('stop_loss')
   _,_,rsi,ma5,ma10=data(sym)
-  sentiment="⚪ Unavailable"
+  trend="n/a";ic="⚪"
   if rsi is not None and ma5 is not None and ma10 is not None:
-   if price>ma5>ma10 and rsi>=50:sentiment="🟢 Bullish"
-   elif price<ma5<ma10 and rsi<50:sentiment="🔴 Bearish"
-   else:sentiment="🟡 Neutral / Mixed"
-  pnl_line="Entry / PnL: Not tracked by bot"
+   if price>ma5>ma10 and rsi>=50:trend="Bullish"
+   elif price<ma5<ma10 and rsi<50:trend="Bearish"
+   else:trend="Mixed"
   if entry:
-   pnl=(price-entry)/entry*100;pnl_usdt=(price-entry)*qty
-   pnl_line=f"Entry: {fp(entry)} USDT | PnL: {pnl:+.2f}% (${pnl_usdt:+.2f})"
-  tp=cfg().get('trail_pct',0) or 0
-  ath,atl,ath_status=get_bitget_ath_atl(sym)
-  ath_line=f"ATH (Bitget lifetime): {fp(ath)} USDT" if ath else "ATH (Bitget lifetime): Unavailable"
-  atl_line=f"ATL (Bitget lifetime): {fp(atl)} USDT" if atl else "ATL (Bitget lifetime): Unavailable"
-  coin_lines.extend([f"🪙 *{coin}*",f"Quantity: {qty:.8g}",f"Current price: {fp(price)} USDT",f"Market value: ${qty*price:.2f}",ath_line,atl_line,pnl_line,f"RSI (1h): {rsi if rsi is not None else 'N/A'}",f"MA5 (1h): {fp(ma5) if ma5 is not None else 'N/A'}",f"MA10 (1h): {fp(ma10) if ma10 is not None else 'N/A'}",f"Market sentiment: {sentiment}",f"Bot trailing stop: {'ON ('+str(tp)+'% below peak)' if tp>0 else 'OFF'}",f"Peak price: {fp(entry_data.get('peak_price')) if entry_data.get('peak_price') else 'N/A'}",f"Exchange stop level: {fp(entry_data.get('xsl')) if entry_data.get('xsl') else 'Not verified'}"])
-  coin_lines.append("");count+=1
+   pnl=(price-entry)/entry*100;pu=(price-entry)*qty;ic="🟢" if pnl>=0 else "🔴"
+   l2=f"{pnl:+.2f}% ({'+' if pu>=0 else '-'}${abs(pu):.2f}) | Entry {fp(entry)}"
+  else:l2="Entry not tracked by bot"
+  l3=f"Price {fp(price)}"+(f" | Stop {fp(stop)} ({(float(stop)/price-1)*100:+.0f}%)" if stop else " | No stop tracked")
+  try:
+   ath=get_bitget_ath_atl(sym)[0];athtxt=f" | ATH {(price/float(ath)-1)*100:+.0f}%" if ath else ""
+  except Exception:athtxt=""
+  l4=f"RSI {rsi:.0f} | {trend}{athtxt}" if rsi is not None else f"RSI n/a | {trend}{athtxt}"
+  rows.append((val,coin,ic,l2,l3,l4))
  total_portfolio_value=wallet_value(totals)
  _BAL["t"],_BAL["m"]=time.time(),balance_text(total_portfolio_value)
- bgb_total=float(totals.get('BGB',0.0) or 0.0)
- bgb_free=float(free.get('BGB',0.0) or 0.0)
- bgb_price=live('BGB-USDT') if bgb_total>0 else None
- bgb_value=bgb_total*bgb_price if bgb_price else None
- bgb_report=(f"🟡 *BGB Wallet Balance (not auto-converted)*\nTotal: {bgb_total:.8g} BGB | Free: {bgb_free:.8g} BGB"
-                +(f" | Value: ${bgb_value:.4f} USDT" if bgb_value is not None else " | USDT value: unavailable"))
- _r=ngn_rate();lines=[f"💼 *Total Portfolio Value:* ${total_portfolio_value:.2f} USDT"+(f" | ₦{total_portfolio_value*_r:,.0f}" if _r else ""),"",f"💵 *Available USDT Cash*",f"Total: ${usdt_total:.2f} | Free to Trade: ${usdt_free:.2f}",bgb_report,"━━━━━━━━━━━━━━━━━━━━"]
+ bgb_total=float(totals.get('BGB',0.0) or 0.0);bgb_price=live('BGB-USDT') if bgb_total>0 else None
+ _r=ngn_rate();tp=total_portfolio_value or 0.0
+ share=(lambda v:f" ({v/tp*100:.0f}%)" if tp>0 else "")
+ lines=[f"💼 *PORTFOLIO* ${tp:.2f}"+(f" | ₦{tp*_r:,.0f}" if _r else ""),f"💵 Cash free ${usdt_free:.2f} | In coins ${total_coins_value:.2f}{share(total_coins_value)}"]
+ if bgb_total>0:lines.append(f"🟡 BGB {bgb_total:.8g}"+(f" (${bgb_total*bgb_price:.2f})" if bgb_price else "")+" - not auto-converted")
+ lines.append("━━━━━━━━━━━━━━")
+ for val,coin,ic,l2,l3,l4 in sorted(rows,reverse=True):
+  lines+=[f"{ic} *{coin}* ${val:.2f}{share(val)}",l2,l3,l4,""]
+ if not rows:lines.append("No coin holdings.")
  if unpriced:
-  note="\n⚠️ Held but with no USDT price: "+", ".join(unpriced[:3])
-  if len(unpriced)>3: note+=f" and {len(unpriced)-3} more..."
-  coin_lines.append(note)
- footer=f"\n\n📊 *LIVE SPOT WALLET BALANCE:* {compact_balance()}"
- if count==0:return "\n".join(lines) + "\n\n💼 *Coin Holdings*\nNo eligible USDT-priced assets."+footer
- lines.append(f"\n💼 *Coin Holdings (Value: ${total_coins_value:.2f})*\n")
- return "\n".join(lines) + "\n".join(coin_lines)+footer
+  note="⚠️ Held but with no USDT price: "+", ".join(unpriced[:3])
+  if len(unpriced)>3:note+=f" and {len(unpriced)-3} more..."
+  lines.append(note)
+ return "\n".join(lines).rstrip()+f"\n\n📊 *LIVE SPOT WALLET BALANCE:* {compact_balance()}"
 def check_hourly_balance():
  st=load(SC);now=time.time()
  if now-st.get('last_bal_alert',0)>=3600:tg(f"💼 *HOURLY HOLDINGS*\n{get_holdings_text()}");st['last_bal_alert']=now;save(SC,st)
@@ -1189,6 +1188,8 @@ def manual_candidate_detail(sym):
   f"Last scan: {age/60:.0f} minutes ago" if memo.get('last_seen') else "Last scan: unknown", "",
   "✅ *Passed conditions:* "+(", ".join(passed) if passed else "None recorded"),
   "⚠️ *Missed conditions:* "+(", ".join(failed) if failed else "None recorded"),
+  *(["🧠 AI note: "+str(memo["ai_advisory"])[:180]] if memo.get("ai_advisory") else []),
+  *(["📈 1H move has risen for 3 scans in a row"] if (memo.get("checks",{}).get("scanner",{}) or {}).get("h1_rising_three_scans") else []),
   "Automatic-buy exclusion: "+str(mc.get('reason') or memo.get('reason') or "Did not meet all automatic entry rules")[:180],
   f"Spread safety: {spr:.3f}% — {'within' if spread_ok else 'outside/unverified against'} {float(s.get('max_spread_pct',0.5)):g}% limit" if spr is not None else "Spread safety: UNAVAILABLE — cannot verify",
   "Critical safety: "+("PASSED at latest database assessment" if db_eligible else "FAILED / no longer qualified"),
@@ -2001,7 +2002,8 @@ def cmd_scan_history(txt="/scan_history"):
   if not isinstance(x.get("rsi"),(int,float)) and "candle fetch" not in str(x.get("reason","")):
    _rsi_value=scan_history_rsi(str(x.get("sym","")))
    if isinstance(_rsi_value,(int,float)):x["rsi"]=_rsi_value;changed=True
- if changed:save(SH,h)
+ if changed:
+  _h2=dict(h);_h2["items"]=[x for x in h.get("items",[]) if str(x.get("decision","")).startswith("SETUP")][-300:];save(SH,_h2)  # full history lives in coins.db
  age=max(0,time.time()-h.get("window_start",time.time()));cs=cfg();rows=[]
  for x in shown:
   r=x.get("rsi");rsi=f"{r:.0f}" if isinstance(r,(int,float)) else "-"
@@ -2177,7 +2179,7 @@ def manual_candidate_assess(rec,settings=None):
   eligible=score>=threshold and not str(rec.get("decision","")).startswith("SETUP")
   return score,eligible,("; ".join(why) if why else "Strong partial setup; manual review only"),checks
  except Exception as e:return 0.0,False,"Unable to score safely: "+str(e)[:80],{}
-def coin_db_update(records,held,newc=None,keep_days=3,keep_snaps=96,queue=None,buying_allowed=True,block_reason="",settings=None):
+def coin_db_update(records,held,newc=None,keep_days=3,keep_snaps=24,queue=None,buying_allowed=True,block_reason="",settings=None):
  now=time.time();held=set(held);newc=newc or {};queue=queue if isinstance(queue,dict) else {};settings=settings or {};c=coin_db_conn()
  try:
   for rec in records:
@@ -2319,7 +2321,7 @@ def coin_db_rows(limit=12):
   ec=dict(c.execute("SELECT execution_status,COUNT(*) FROM coins GROUP BY execution_status").fetchall())
   fresh_after=time.time()-max(1800.0,float(cfg().get("scan_interval_minutes",15.0))*120.0)
   cnt["MANUAL_CANDIDATE"]=c.execute("SELECT COUNT(*) FROM coins WHERE manual_candidate=1 AND status<>'BOUGHT' AND last_seen>=?",(fresh_after,)).fetchone()[0]
-  rows=c.execute("SELECT sym,status,execution_status,price,h1,rsi,scans,reason,manual_candidate,manual_score FROM coins WHERE status IN ('READY','NEW','WATCHING','BOUGHT') ORDER BY CASE status WHEN 'READY' THEN 0 WHEN 'NEW' THEN 1 WHEN 'BOUGHT' THEN 2 ELSE 3 END,COALESCE(h1,-99) DESC LIMIT ?",(limit,)).fetchall()
+  rows=c.execute("SELECT sym,status,execution_status,price,h1,rsi,scans,reason,manual_candidate,manual_score,ai_advisory,checks_json FROM coins WHERE status IN ('READY','NEW','WATCHING','BOUGHT') ORDER BY CASE status WHEN 'READY' THEN 0 WHEN 'NEW' THEN 1 WHEN 'BOUGHT' THEN 2 ELSE 3 END,COALESCE(h1,-99) DESC LIMIT ?",(limit,)).fetchall()
   return cnt,rows,ec
  finally:c.close()
 def cmd_coins():
@@ -2330,13 +2332,25 @@ def cmd_coins():
  lines=["📚 *COIN LIST*",f"✅ Ready {cnt.get('READY',0)} | 👀 Watching {cnt.get('WATCHING',0)} | 🆕 New {cnt.get('NEW',0)} | 💼 Held {cnt.get('BOUGHT',0)} | ⛔ Rejected {cnt.get('REJECTED',0)}",
   f"🟡 Manual candidates (≥{float(cfg().get('manual_candidate_min_score',75.0)):.0f}%): {cnt.get('MANUAL_CANDIDATE',0)}",
   f"Execution: 📥 queued {ec.get('QUEUED',0)} | ⛔ blocked {ec.get('BLOCKED',0)} | 🟢 held {ec.get('HELD',0)}",""]
- for sym,st,exst,p,h,r,n,why,mc,mscore in rows:
+ for sym,st,exst,p,h,r,n,why,mc,mscore,adv,cj in rows:
+  try:rising=bool(json.loads(cj or "{}").get("scanner",{}).get("h1_rising_three_scans"))
+  except Exception:rising=False
   ln=f"{ic.get(st,'')} *{sym.split('-')[0]}* {fp(p) if p else '-'} | {exst or 'UNASSESSED'}"
   if mc:ln+=f" | 🟡 {float(mscore or 0):.0f}% MANUAL"
-  if h is not None:ln+=f" | 1H {h:+.2f}%"
+  if h is not None:ln+=f" | 1H {h:+.2f}%"+(" 📈" if rising else "")
   if r is not None:ln+=f" | RSI {r:.0f}"
   lines.append(ln+f" | seen {n}x")
+  if adv:lines.append("   🧠 "+str(adv)[:110])
  ui_send("\n".join(lines)[:3800],[[_B("🔍 Scan now","m:r:scan"),_B("🧾 Scan History","m:scan_hist")],_MENU_BTN])
+def scan_stall_watch():
+ # Buying needs a fresh scanner record. If the scanner has not completed for a long time, say so instead of staying quiet.
+ try:
+  last=float(load(SC,{}).get('last',0) or 0)
+  if last<=0:return
+  lim=max(2700.0,float(cfg().get('scan_interval_minutes',15) or 15)*180.0);age=time.time()-last
+  if age>lim and not cd("scan_stall",3600):
+   tg(f"⚠️ *ALERT:* SCANNER STALLED\nNo scan has completed for {age/60:.0f} minutes. The buyer needs a fresh scan, so automatic buying is waiting. Tap Tools > Scan > Scan now.")
+ except Exception as e:print("STALL WATCH ERR",str(e)[:100])
 def send_new_alerts(s):
  # New tokens (under 50 hourly candles) cannot be scored; alert only, never auto-buy. Rare: one alert per coin per 3h, max 2 per scan.
  try:
@@ -2477,7 +2491,7 @@ def scan(force=False):
  try:
   _coin_rows=coin_db_ai_rows(25)
   if _coin_rows:
-   _coin_review=ai_stage("coin_advisory",{"coins":_coin_rows},ttl=240,max_tokens=700)
+   _coin_review=ai_stage("coin_advisory",{"coins":_coin_rows},ttl=240,max_tokens=700,soft=True)
    _reviews=_coin_review.get("reviews",[]) if isinstance(_coin_review,dict) else []
    _review_map={str(x.get("symbol","")).upper().replace("/","-"):x for x in _reviews if isinstance(x,dict)}
    for _coin in _coin_rows:
@@ -2490,7 +2504,7 @@ def scan(force=False):
  try:send_new_alerts(s)
  except Exception as e:print("NEW-TOKEN ALERT ERR",str(e)[:120])
  full=force or now-st.get('last_full',0)>=3300
- sh["items"].extend(records if full else [x for x in records if str(x.get('decision','')).startswith('SETUP')]);sh["items"]=sh["items"][-15000:];save(SH,sh)
+ sh["items"]=([x for x in sh["items"] if str(x.get('decision','')).startswith('SETUP')]+[x for x in records if str(x.get('decision','')).startswith('SETUP')])[-300:];save(SH,sh)  # full history lives in coins.db
  if qu or not buying_allowed:save(QF,q)
  st['last']=time.time()
  if full:st['last_full']=st['last']
@@ -2522,19 +2536,6 @@ def get_market_row(sym,chg=None):
   except:chg=0
  r=data(sym)[2];rsi=f"{r:.1f}" if r is not None else "-"
  return {'coin':sym.split('-')[0],'price':fp(live(sym)),'chg':float(chg or 0),'rsi':rsi}
-def gl(limit=10,which=None):
- try:tk=ex.fetch_tickers()
- except:return "❌ Unable to fetch market data."
- v=sorted([{'sym':k.replace("/","-"),'chg':t['percentage'] or 0} for k,t in tk.items() if k.endswith('/USDT') and not skip(k.split('/')[0]) and (t['quoteVolume'] or 0)>=1000000],key=lambda x:x['chg'],reverse=True)
- gainers=[x for x in v if x['chg']>0][:limit];losers=[x for x in reversed(v) if x['chg']<0][:limit]
- def blk(title,rows):
-  out=[title]
-  for i,x in enumerate(rows,1):out.append(f"{i:>2}. {x['sym'].split('-')[0][:8]:<8} {x['chg']:>+7.2f}%")
-  if not rows:out.append("none")
-  return "\n".join(out)
- if which=="g":return f"📈 *TOP {limit} GAINERS (24H)*\n\n```\n{blk('📈 GAINERS',gainers)}```\n_Minimum 24H volume: $1M._"
- if which=="l":return f"📉 *TOP {limit} LOSERS (24H)*\n\n```\n{blk('📉 LOSERS',losers)}```\n_Minimum 24H volume: $1M._"
- return f"📊 *TOP {limit} MOVERS (24H)*\n\n```\n{blk('📈 GAINERS',gainers)}```\n```\n{blk('📉 LOSERS',losers)}```\n_Minimum 24H volume: $1M._"
 def cmd_set(txt):
  p=txt.split()
  if len(p)!=3:tg("❌ Usage: `/set <key> <value>`");return
@@ -2714,23 +2715,19 @@ def ui_cb(t):
    _T=[_B("⬅️ Tools","m:tools"),_B("🏠 Main Menu","m:menu")]
    if p[2]=="trade":ui_send("🛒 *TRADE*",[[_B("🛒 Buy","m:buy"),_B("💸 Sell","m:sell")],[_B("❌ Cancel Open Orders","m:r:cancel"),_B("🧹 Dust → BGB","m:r:dust")],[_B("🔄 Sync manual coins","m:r:sync")],[_B("⏸ Pause auto-buy","m:r:pause"),_B("▶️ Resume auto-buy","m:r:resume")],_T])
    elif p[2]=="alerts":ui_send("🔔 *ALERTS*",[[_B("🔔 Set alert","m:al"),_B("📋 My alerts","m:r:alerts")],[_B("🗑 Cancel all alerts","m:r:cancelalerts")],_T])
-   elif p[2]=="scan":ui_send("🔍 *SCAN*",[[_B("🔍 Scan now","m:r:scan"),_B("🧾 Scan History","m:scan_hist")],[_B("📚 Coin List","m:coins")],[_B("📈 Gainers","m:r:gain"),_B("📉 Losers","m:r:lose")],_T])
+   elif p[2]=="scan":ui_send("🔍 *SCAN*",[[_B("🔍 Scan now","m:r:scan"),_B("🧾 Scan History","m:scan_hist")],[_B("📚 Coin List","m:coins")],_T])
    elif p[2]=="sys":ui_send("🛠️ *SYSTEM*",[[_B("🛠️ Audit","m:r:audit"),_B("🧩 Layout","m:lay")],[_B("🧠 Resume AI Mode","m:r:airesume")],_T])
   elif a=="more" and len(p)>3:ui_more(p[2],int(p[3]))
   elif a=="dash":
    ui_send("📊 *DASHBOARD*\nChoose a dashboard screen.",[
-              [_B("📊 Market","m:r:market"),_B("📈 Performance","m:r:stats")],
-              [_B("🧾 Trade History","m:r:history"),_B("🛡️ Risk & Bot","m:r:bot")],
+              [_B("📈 Performance","m:r:stats"),_B("🧾 Trade History","m:r:history")],
+              [_B("🛡️ Risk & Bot","m:r:bot")],
               [_B("⬅️ Tools","m:tools"),_B("🏠 Main Menu","m:menu")]
             ])
   elif a=="scan_hist":
    cmd_scan_history("/scan_history")
   elif a=="whylist":ui_whylist(int(p[2]) if len(p)>2 else 0)
   elif a=="why" and len(p)>2:_send(why_text(p[2]),"Markdown",{"inline_keyboard":[[_B("⬅️ Why list","m:whylist:0"),_B("🔎 Analyse "+p[2],"m:a:"+p[2])]]})
-  elif a=="r" and len(p)>2 and p[2] in ("gain","lose"):
-   tg(gl(10,p[2][0]))
-  elif a=="r" and len(p)>2 and p[2]=="market":
-   ui_send(gl(10),[[_B("⬅️ Menu","m:menu"),_B("🔄 Refresh","m:r:market")]])
   elif a=="r" and len(p)>2 and p[2]=="history":
    H=load(HIST);lines=["🧾 *TRADE HISTORY*"]
    for x in H[-12:]:lines.append(f"{str(x.get('sym','?')).replace('-USDT','')} | {x.get('reason','?')} | PnL ${float(x.get('pnl',0)):+.2f}")
@@ -2806,7 +2803,7 @@ def handle(t,age):
  elif l=="/pause":setc('auto_buy_enabled',False,"⏸ Auto-buy paused.")
  elif l in ("/resume","▶️ resume"):setc('auto_buy_enabled',True,"▶️ Auto-buy resumed.")
  elif l in ("🧠 ask ai", "ai_info"):_send(MSG["ai_info"]+"\n\nOr tap a question:","Markdown",{"inline_keyboard":[[_B("📈 Market overview","m:ai:1"),_B("💼 Review my holdings","m:ai:2")],[_B("🏆 Best coin to buy","m:ai:3"),_B("⚠️ Biggest risk","m:ai:4")],[_B("🛑 Closest to stop","m:ai:5"),_B("🧭 Safe to buy now?","m:ai:6")],[_B("📊 My results","m:ai:7"),_B("👀 Next 24 hours","m:ai:8")]]})
-_AI_CMD={"/holdings":"holdings","/portfolio":"holdings","💼 holdings":"holdings","💰 balance":"holdings","/balance":"holdings","/stats":"performance stats","/status":"bot status","/bot":"bot status","🤖 bot":"bot status","/alerts":"price alerts","/audit":"system audit","/scan_history":"scan history","m:r:market":"market overview","m:r:history":"trade history","m:r:gain":"top gainers","m:r:lose":"top losers"}
+_AI_CMD={"/holdings":"holdings","/portfolio":"holdings","💼 holdings":"holdings","💰 balance":"holdings","/balance":"holdings","/stats":"performance stats","/status":"bot status","/bot":"bot status","🤖 bot":"bot status","/alerts":"price alerts","/audit":"system audit","/scan_history":"scan history","m:r:history":"trade history"}
 _AICAP={"on":False,"buf":[]}
 def _ai_run(kind,fn,*a):
  # Runs a read-only command normally, then appends one advisory AI insight. Never delays or blocks the command's own output.
@@ -2975,7 +2972,7 @@ if __name__=="__main__":
    _st["display_reset_v4"]=True;save(ST,_st)
  except Exception as e:print(f"DISPLAY RESET ERR: {e}")
  try:
-  for fn in (heartbeat,_C.clear,cleanup_telegram_output,stale_output,_kb_refresh,auto_clear_daily,scan_history_state,audit_system,ai_health_check,tg_check,manage,track_day_equity,git_sync,check_hourly_balance,check_alerts,check_daily_summary,scan,exec_q):run_step(fn)
+  for fn in (heartbeat,_C.clear,cleanup_telegram_output,stale_output,_kb_refresh,auto_clear_daily,scan_history_state,audit_system,ai_health_check,tg_check,manage,track_day_equity,git_sync,check_hourly_balance,check_alerts,check_daily_summary,scan,scan_stall_watch,exec_q):run_step(fn)
   live_loop(T0)
   run_step(_kb_refresh)
  except Exception as e:
