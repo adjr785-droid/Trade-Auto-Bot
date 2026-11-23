@@ -1681,5 +1681,15 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795478230.0440507,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'DOS-USDT', 'action': 'monitor', 'reason': 'PnL -0.37% and price (0.1353) is approaching stop (0.12222); consider tightening stop or preparing exit if further downside.'}, {'symbol': 'ARIA-USDT', 'action': 'hold', 'reason': 'Small positive PnL (+0.05%) with price (0.31134) comfortably above stop (0.28006); no immediate risk.'}, {'symbol': 'JCT-USDT', 'action': 'monitor', 'reason': 'Flat PnL (0.0%) and price (0.00158) is close to stop (0.00149); watch for volatility and be ready to exit if price slips.'}], 'summary': 'Overall portfolio risk remains PASS. Two positions require monitoring due to proximity to stop levels, while ARIA-USDT can be held for now.'}"
+    },
+    {
+        "time": 1795478230.8804135,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 5.8372, 'recurring_patterns': ['15-MINUTE NO-UPWARD-TREND ROTATION appears in multiple trades', 'PANIC appears in several trades', 'MANUAL SELL appears in multiple trades', 'RSI 75 appears in a few trades', 'PARTIAL PROFIT appears in a few trades'], 'recommendations': ['Consider tightening entry criteria to avoid PANIC-driven exits', 'Review the effectiveness of the 15\u2011minute no\u2011upward\u2011trend rotation signal, as it yields mixed results', 'Limit reliance on manual sell decisions without clear profit targets', 'Monitor RSI 75 signals for consistency before acting', 'Maintain current risk controls; overall win rate is modest and net PnL is positive but small']}"
     }
 ]
