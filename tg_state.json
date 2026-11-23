@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935689850,
+    "last_update_id": 935689851,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT24.68/\u20a633,749",
+    "kb_ph": "USDT24.66/\u20a633,731",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -65,39 +65,53 @@
         "ARX-USDT",
         "TRX-USDT"
     ],
-    "kb_mid": 4543,
+    "kb_mid": 4545,
     "out_mid": 4539,
-    "out_text": "\u26d4 *AUTO-BUY REJECTED \u2014 JCT-USDT*\nReason: Position exists.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "\ud83d\udd04 *AI RECOVERY \u2014 STAGE 1/3*\nGroq health check passed. Buying stays blocked until 3 consecutive checks pass;\n2 more to go. Normal mode returns automatically.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795431215.055971,
+    "out_time": 1795431471.3405273,
     "panel_mid": 4540,
     "panel_rows": [
         [
             {
-                "text": "\ud83d\uded2 Trade",
-                "callback_data": "m:tl:trade"
+                "text": "\ud83e\udd16 Bot",
+                "callback_data": "/bot"
             },
             {
-                "text": "\ud83d\udd14 Alerts",
-                "callback_data": "m:tl:alerts"
+                "text": "\ud83d\udcc8 Stats",
+                "callback_data": "/stats"
             }
         ],
         [
             {
-                "text": "\ud83d\udd0d Scan",
-                "callback_data": "m:tl:scan"
+                "text": "\u2699\ufe0f Settings",
+                "callback_data": "m:set"
             },
             {
-                "text": "\ud83d\udee0\ufe0f System",
-                "callback_data": "m:tl:sys"
+                "text": "\ud83d\udcbc Holdings",
+                "callback_data": "m:r:holdings"
             }
         ],
         [
             {
-                "text": "\u2b05\ufe0f Main Menu",
-                "callback_data": "m:menu"
+                "text": "\ud83d\udcdc Trade History",
+                "callback_data": "m:r:history"
+            },
+            {
+                "text": "\ud83e\udde0 Ask AI",
+                "callback_data": "m:ai:1"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\uddf9 Clear Chat",
+                "callback_data": "/clear"
+            },
+            {
+                "text": "\ud83d\udea8 PANIC SELL",
+                "callback_data": "/panic"
             }
         ]
     ],
-    "panel_text": "\ud83e\uddf0 *TOOLS*\nChoose a group."
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below."
 }

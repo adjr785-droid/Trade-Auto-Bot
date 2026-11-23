@@ -1277,5 +1277,15 @@
         "time": 1795431064.6393661,
         "event": "ai_portfolio_review",
         "summary": "{'portfolio_risk': 'PASS', 'attention': [], 'summary': 'Current portfolio risk passes the predefined checks. Both positions are very small and show minimal profit or flat P&L. No immediate action is recommended; continue monitoring price movements and maintain existing stops.'}"
+    },
+    {
+        "time": 1795431478.5881536,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'INJ-USDT', 'action': 'monitor', 'reason': 'Position is slightly below entry (-0.03%) and approaching its stop level (5.4655). Consider tightening stop or reducing size if price continues downward.'}, {'symbol': 'JCT-USDT', 'action': 'monitor', 'reason': 'Position is at break-even with stop very close to entry (0.001372). Any downside move will trigger stop; watch closely and be ready to exit if price falls.'}], 'summary': 'Overall portfolio risk remains acceptable (PASS). Both holdings are near their stop thresholds; maintain vigilance and be prepared to adjust stops or exit if adverse price movement occurs.'}"
+    },
+    {
+        "time": 1795431479.7099426,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 6.1087, 'recurring_patterns': {'15-MINUTE NO-UPWARD-TREND ROTATION': 7, 'PANIC': 4, 'RSI 75': 2, 'PARTIAL PROFIT': 3, 'MANUAL SELL': 2}, 'recommendations': 'Maintain current risk parameters but consider tightening entry criteria for trades flagged as \"PANIC\" and \"15-MINUTE NO-UPWARD-TREND ROTATION\" due to their mixed outcomes. Monitor RSI\u2011based entries closely; they yielded positive PnL in this sample but represent a small subset. Continue manual oversight for large position exits to avoid unnecessary losses.'}"
     }
 ]
