@@ -1,1 +1,11 @@
-{}
+{
+    "BLESS-USDT": {
+        "timestamp": 1795435096,
+        "type": "BREAKOUT",
+        "sl": 0.016822,
+        "score": 342.82,
+        "price": 0.0197901,
+        "chg": 41.005,
+        "ai_priority_adjustment": 3.0
+    }
+}

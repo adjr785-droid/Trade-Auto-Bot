@@ -59,5 +59,9 @@
     "buy_reject_notice:KII-USDT:Top-10 book depth $760 below limit.": 1795407024.597214,
     "buy_reject_notice:KII-USDT:Queued signal expired; waiting for a fresh scan.": 1795407535.78806,
     "stopwatch_INJ-USDT": 1795435077.0165904,
-    "buy_reject_notice:JCT-USDT:Position exists.": 1795431215.0567992
+    "buy_reject_notice:JCT-USDT:Position exists.": 1795431215.0567992,
+    "buy_reject_notice:BLESS-USDT:Top-10 book depth $3557 below limit.": 1795435109.2215147,
+    "buy_reject_notice:BLESS-USDT:Top-10 book depth $3415 below limit.": 1795435181.5978787,
+    "buy_reject_notice:BLESS-USDT:Top-10 book depth $3995 below limit.": 1795435254.272222,
+    "buy_reject_notice:BLESS-USDT:Top-10 book depth $4665 below limit.": 1795435326.8935523
 }
