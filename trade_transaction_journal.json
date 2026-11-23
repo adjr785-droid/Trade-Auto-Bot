@@ -1578,5 +1578,15 @@
             "warning": "The RSI is near neutral (45.69) and the price is low; ensure the asset's liquidity and volatility are acceptable before proceeding. Verify that the BTC filter does not block this trade and that no existing position conflicts with the intended exposure.",
             "summary": "Manual buy of 17.19\u202fUSDT of IDOL-USDT at 0.01685 appears acceptable but carries moderate risk due to limited market data and potential price volatility. Confirm all filters and risk limits before execution."
         }
+    },
+    {
+        "time": 1795468322.6100664,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'DOS-USDT', 'action': 'monitor', 'reason': 'PnL is -0.88% and price is approaching stop level (0.12222). Consider tightening stop or preparing to exit if price breaches stop.'}, {'symbol': 'IDOL-USDT', 'action': 'monitor', 'reason': 'PnL is -1.61% and price is close to stop (0.01533). High risk of further loss; evaluate tightening stop or exiting.'}], 'summary': 'Both positions are under water with prices nearing their stop levels. Maintain vigilance, consider adjusting stops tighter, and be prepared to exit if stops are hit. No new entries recommended given current market conditions.'}"
+    },
+    {
+        "time": 1795468323.5577035,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 5.8372, 'recurring_patterns': ['15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC', 'MANUAL SELL', 'RSI 75', 'PARTIAL PROFIT'], 'recommendations': ['Limit exposure to panic-driven entries; consider tighter stop\u2011losses', 'Review RSI\u2011based signals for false positives before execution', 'Prioritize trades with partial profit targets that have shown positive outcomes', 'Monitor symbols with repeated manual sell actions for underlying strategy issues', 'Maintain current risk parameters given modest net P&L and win rate']}"
     }
 ]

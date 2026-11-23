@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935690039,
+    "last_update_id": 935690041,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT23.97/\u20a632,779",
+    "kb_ph": "USDT23.63/\u20a632,321",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -61,31 +61,53 @@
         ]
     },
     "radar": [],
-    "kb_mid": 4829,
-    "out_text": "\ud83e\udde0 AI manual-buy advisory: Manual buy of 17.19\u202fUSDT of IDOL-USDT at 0.01685\nappears acceptable but carries moderate risk due to limited market data and\npotential price volatility. Confirm all filters and risk limits before\nexecution.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "kb_mid": 4832,
+    "out_mid": 4833,
+    "out_text": "\ud83d\udd04 *AI RECOVERY \u2014 STAGE 2/3*\nGroq health check passed. Buying stays blocked until 3 consecutive checks pass;\n1 more to go. Normal mode returns automatically.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795466159.8496406,
+    "out_time": 1795468311.1483815,
+    "panel_mid": 4834,
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udfe1 DOS \u00b7 75%",
-                "callback_data": "m:mc:DOS"
+                "text": "\ud83e\udd16 Bot",
+                "callback_data": "/bot"
+            },
+            {
+                "text": "\ud83d\udcc8 Stats",
+                "callback_data": "/stats"
             }
         ],
         [
             {
-                "text": "\ud83d\udfe1 IDOL \u00b7 75%",
-                "callback_data": "m:mc:IDOL"
+                "text": "\u2699\ufe0f Settings",
+                "callback_data": "m:set"
+            },
+            {
+                "text": "\ud83d\udcbc Holdings",
+                "callback_data": "m:r:holdings"
             }
         ],
         [
             {
-                "text": "\ud83d\udfe1 CYS \u00b7 75%",
-                "callback_data": "m:mc:CYS"
+                "text": "\ud83d\udcdc Trade History",
+                "callback_data": "m:r:history"
+            },
+            {
+                "text": "\ud83e\udde0 Ask AI",
+                "callback_data": "m:ai:1"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\uddf9 Clear Chat",
+                "callback_data": "/clear"
+            },
+            {
+                "text": "\ud83d\udea8 PANIC SELL",
+                "callback_data": "/panic"
             }
         ]
     ],
-    "panel_text": "\ud83d\udc47 *Actions*",
-    "out_mid": 4818,
-    "panel_mid": 4819
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below."
 }
