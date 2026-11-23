@@ -60,6 +60,24 @@
             "min_volume": 1000000.0,
             "spread_pct": 0.18876234820360832,
             "near_miss": null
+        },
+        {
+            "time": 1795475347,
+            "rank": 42,
+            "sym": "ICNT-USDT",
+            "vol": 1250057.27,
+            "chg": -12.816,
+            "price": 0.3068,
+            "spread_pct": 0.06518904823990662,
+            "rsi": 28.47,
+            "rr": null,
+            "ma5": 0.30468,
+            "ma10": 0.31071,
+            "decision": "SETUP \u2014 NOT QUEUED",
+            "reason": "OVERSOLD matched, BTC safety filter blocked buying",
+            "min_volume": 1000000,
+            "h1": 0.69,
+            "strategy": "OVERSOLD"
         }
     ]
 }

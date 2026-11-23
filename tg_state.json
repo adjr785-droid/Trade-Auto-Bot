@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT22.39/\u20a630,618",
+    "kb_ph": "USDT22.38/\u20a630,605",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -60,11 +60,14 @@
             1795362988.7943418
         ]
     },
-    "radar": [],
-    "kb_mid": 4854,
+    "radar": [
+        "UMXM-USDT",
+        "ARIA-USDT"
+    ],
+    "kb_mid": 4857,
     "panel_hidden": true,
     "out_mid": 4855,
-    "out_text": "\ud83d\udee0\ufe0f *AUTO-AUDIT COMPLETE*\n\ud83e\uddf9 Removed ghost: IDOL-USDT\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "\ud83d\udd0d *SCAN COMPLETE*\nChecked 462 markets in 8s.\nMatched: 1 | Queued: 0.\nBTC safety filter blocked buying\n\ud83e\udde0 AI market view: SIDEWAYS | low\n\n\u2705 *MATCHED COINS*\n1. *ICNT-USDT* \u2014 OVERSOLD matched, BTC safety filter blocked buying\n   Price 0.306800 | 24h -12.82% | RSI 28.5 | \u23f8 not queued\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795475331.2946796
+    "out_time": 1795475350.8170874
 }
