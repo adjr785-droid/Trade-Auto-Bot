@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690001,
+    "last_update_id": 935690003,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -68,36 +68,32 @@
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
+                "text": "\ud83d\uded2 Trade",
+                "callback_data": "m:tl:trade"
             },
             {
-                "text": "7/7",
-                "callback_data": "pg:x"
+                "text": "\ud83d\udd14 Alerts",
+                "callback_data": "m:tl:alerts"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udd0d Scan",
+                "callback_data": "m:tl:scan"
             },
             {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
-            },
+                "text": "\ud83d\udee0\ufe0f System",
+                "callback_data": "m:tl:sys"
+            }
+        ],
+        [
             {
-                "text": "\ud83c\udfe0",
+                "text": "\u2b05\ufe0f Main Menu",
                 "callback_data": "m:menu"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udd0e Analyse a coin",
-                "callback_data": "m:an"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udfe1 CYS \u00b7 75% details",
-                "callback_data": "m:mc:CYS"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 7/7*",
+    "panel_text": "\ud83e\uddf0 *TOOLS*\nChoose a group.",
     "out_mid": 4760,
     "pages": {
         "p": [
