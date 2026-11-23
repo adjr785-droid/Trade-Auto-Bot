@@ -53,5 +53,6 @@
     "stopwatch_UMXM-USDT": 1795398066.4863892,
     "buy:IDOL-USDT": 1795401394.4321852,
     "stopwatch_IDOL-USDT": 1795406132.907678,
-    "buy_reject_notice:KII-USDT:Risk: Daily limit (13)": 1795405253.059735
+    "buy_reject_notice:KII-USDT:Risk: Daily limit (13)": 1795405253.059735,
+    "risk_pause_notice": 1795406148.7425482
 }
