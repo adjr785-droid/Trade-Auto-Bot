@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935690014,
+    "last_update_id": 935690018,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT23.94/\u20a632,742",
+    "kb_ph": "USDT23.96/\u20a632,762",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -61,19 +61,49 @@
         ]
     },
     "radar": [],
-    "kb_mid": 4779,
-    "out_text": "\ud83d\udfe1 *MANUAL BUY CANDIDATES*\nMinimum setup score: *75%*\n_Only fresh Coin List records meeting the threshold and critical safety checks\nare shown._\n\n\ud83d\udfe1 *CYS* \u2014 *75%*\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "kb_mid": 4785,
+    "out_text": "\ud83d\udd0d *SCAN COMPLETE*\nChecked 462 markets in 9s.\nMatched: 1 | Queued: 0.\nAI emergency: automatic buying paused\n\ud83e\udde0 AI market view: SIDEWAYS | LOW\n\n\u2705 *MATCHED COINS*\n1. *ICNT-USDT* \u2014 OVERSOLD matched, AI emergency: automatic buying paused\n   Price 0.306600 | 24h -14.71% | RSI 26.4 | \u23f8 not queued\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795465128.926572,
+    "out_time": 1795465179.1501455,
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udfe1 CYS \u00b7 75%",
-                "callback_data": "m:mc:CYS"
+                "text": "\ud83d\udd0d Scan now",
+                "callback_data": "m:r:scan"
+            },
+            {
+                "text": "\ud83e\uddfe Scan History",
+                "callback_data": "m:scan_hist"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udcda Coin List",
+                "callback_data": "m:coins"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udcc8 Gainers",
+                "callback_data": "m:r:gain"
+            },
+            {
+                "text": "\ud83d\udcc9 Losers",
+                "callback_data": "m:r:lose"
+            }
+        ],
+        [
+            {
+                "text": "\u2b05\ufe0f Tools",
+                "callback_data": "m:tools"
+            },
+            {
+                "text": "\ud83c\udfe0 Main Menu",
+                "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83d\udc47 *Actions*",
-    "out_mid": 4780,
-    "panel_mid": 4781
+    "panel_text": "\ud83d\udd0d *SCAN*",
+    "out_mid": 4784,
+    "panel_hidden": true
 }
