@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689903,
+    "last_update_id": 935689907,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -70,46 +70,40 @@
     "panel_rows": [
         [
             {
-                "text": "\ud83e\udd16 Bot",
-                "callback_data": "/bot"
+                "text": "$2",
+                "callback_data": "m:bc:JCT:2"
             },
             {
-                "text": "\ud83d\udcc8 Stats",
-                "callback_data": "/stats"
+                "text": "$5",
+                "callback_data": "m:bc:JCT:5"
+            },
+            {
+                "text": "$10",
+                "callback_data": "m:bc:JCT:10"
+            },
+            {
+                "text": "$15",
+                "callback_data": "m:bc:JCT:15"
+            },
+            {
+                "text": "ALL",
+                "callback_data": "m:bc:JCT:ALL"
             }
         ],
         [
             {
-                "text": "\u2699\ufe0f Settings",
-                "callback_data": "m:set"
-            },
-            {
-                "text": "\ud83d\udcbc Holdings",
-                "callback_data": "m:r:holdings"
+                "text": "\u270f\ufe0f Custom amount",
+                "callback_data": "m:cu:b:JCT"
             }
         ],
         [
             {
-                "text": "\ud83d\udcdc Trade History",
-                "callback_data": "m:r:history"
-            },
-            {
-                "text": "\ud83e\udde0 Ask AI",
-                "callback_data": "m:ai:1"
-            }
-        ],
-        [
-            {
-                "text": "\ud83e\uddf9 Clear Chat",
-                "callback_data": "/clear"
-            },
-            {
-                "text": "\ud83d\udea8 PANIC SELL",
-                "callback_data": "/panic"
+                "text": "\u2b05\ufe0f Back",
+                "callback_data": "m:buy"
             }
         ]
     ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
+    "panel_text": "\ud83d\uded2 *BUY JCT*\nFree USDT: $22.29\nChoose how much:",
     "out_mid": 4614,
     "pages": {
         "p": [
