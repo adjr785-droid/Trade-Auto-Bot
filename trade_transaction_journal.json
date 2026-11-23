@@ -1272,5 +1272,10 @@
         "time": 1795430774.8917105,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 6.1087, 'recurring_patterns': {'15-MINUTE NO-UPWARD-TREND ROTATION': 9, 'PANIC': 4, 'RSI 75': 2, 'PARTIAL PROFIT': 3, 'MANUAL SELL': 2}, 'recommendations': 'Maintain current risk limits. Consider tightening entry criteria for trades triggered by short\u2011term trend rotations, as they dominate the sample but yield modest PnL. Review panic\u2011sell decisions; they contributed to several losses. Continue leveraging RSI\u201175 signals, which produced positive outcomes. Keep win\u2011rate monitoring and avoid increasing position size until a larger sample confirms pattern stability.'}"
+    },
+    {
+        "time": 1795431064.6393661,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [], 'summary': 'Current portfolio risk passes the predefined checks. Both positions are very small and show minimal profit or flat P&L. No immediate action is recommended; continue monitoring price movements and maintain existing stops.'}"
     }
 ]
