@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT24.25/\u20a633,167",
+    "kb_ph": "USDT24.15/\u20a633,024",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -61,10 +61,10 @@
         ]
     },
     "radar": [],
-    "kb_mid": 4748,
-    "out_text": "\ud83d\udea8 *AI FAILURE \u2014 AUTOMATIC BUYING PAUSED*\nAuto-Buy is blocked while AI recovery is checked. Manual Buy and Sell remain\navailable to you; AI warnings never lock manual trades. The bot continues\nconfigured protective exits on existing positions. No automatic replacement\nbuys. Proceeds remain in USDT.\nReason: AI stage performance_review failed: Expecting ',' delimiter: line 1\ncolumn 471 (char 470)\nThe bot will notify you about recovery.\n\u2800\n\u2800\n\u2800\n\u2800",
+    "kb_mid": 4750,
+    "out_text": "\u2139\ufe0f Git sync used conflict recovery.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795462525.034722,
+    "out_time": 1795462530.0470955,
     "panel_rows": [
         [
             {
