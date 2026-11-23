@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689914,
+    "last_update_id": 935689915,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -70,16 +70,32 @@
     "panel_rows": [
         [
             {
-                "text": "\u2705 Confirm",
-                "callback_data": "m:bx:JCT:ALL"
+                "text": "\ud83d\uded2 Trade",
+                "callback_data": "m:tl:trade"
             },
             {
-                "text": "\u274c Cancel",
+                "text": "\ud83d\udd14 Alerts",
+                "callback_data": "m:tl:alerts"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udd0d Scan",
+                "callback_data": "m:tl:scan"
+            },
+            {
+                "text": "\ud83d\udee0\ufe0f System",
+                "callback_data": "m:tl:sys"
+            }
+        ],
+        [
+            {
+                "text": "\u2b05\ufe0f Main Menu",
                 "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\u26a0\ufe0f *CONFIRM BUY*\nJCT for ALL free USDT at about 0.001625 USDT.",
+    "panel_text": "\ud83e\uddf0 *TOOLS*\nChoose a group.",
     "out_mid": 4628,
-    "panel_hidden": true
+    "panel_mid": 4631
 }
