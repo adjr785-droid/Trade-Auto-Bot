@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935689758,
+    "last_update_id": 935689760,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT25.71/\u20a635,164",
+    "kb_ph": "USDT25.59/\u20a634,999",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -68,8 +68,8 @@
         "ICNT-USDT",
         "BNB-USDT"
     ],
-    "kb_mid": 4388,
-    "out_text": "\u2705 `partial_tp_pct` = `21.4843`\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "kb_mid": 4391,
+    "out_text": "\u2705 `partial_tp_fraction` = `0.275`\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
@@ -97,8 +97,8 @@
             }
         ]
     ],
-    "panel_text": "\u2699\ufe0f *partial tp fraction*\nCurrent value: `0.5`",
-    "out_time": 1795408186.7336612,
-    "out_mid": 4385,
-    "panel_mid": 4389
+    "panel_text": "\u2699\ufe0f *partial tp fraction*\nCurrent value: `0.275`",
+    "out_time": 1795408346.4382837,
+    "out_mid": 4393,
+    "panel_mid": 4394
 }
