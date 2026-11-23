@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690044,
+    "last_update_id": 935690045,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -78,22 +78,12 @@
         ],
         [
             {
-                "text": "\ud83d\udcda Coin List",
-                "callback_data": "m:coins"
-            }
-        ],
-        [
-            {
-                "text": "\u2b05\ufe0f Tools",
-                "callback_data": "m:tools"
-            },
-            {
-                "text": "\ud83c\udfe0 Main Menu",
+                "text": "\u2b05\ufe0f Menu",
                 "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83d\udd0d *SCAN*",
+    "panel_text": "\ud83d\udcda *COIN LIST*\n\u2705 Ready 0 | \ud83d\udc40 Watching 28 | \ud83c\udd95 New 0 | \ud83d\udcbc Held 2 | \u26d4 Rejected 432\n\ud83d\udfe1 Manual candidates (\u226575%): 1\nExecution: \ud83d\udce5 queued 0 | \u26d4 blocked 0 | \ud83d\udfe2 held 2\n\n\ud83d\udcbc *IDOL* 0.016590 | HELD | 1H -0.20% | RSI 45 | seen 12x\n   \ud83e\udde0 low: RSI 45.7, strong 24h gain 23%.\n\ud83d\udcbc *DOS* 0.134000 | HELD | 1H -0.82% | RSI 45 | seen 12x\n   \ud83e\udde0 medium: RSI 46.25 neutral; modest 24h drop -4.6%; not eligible for execution.\n\ud83d\udc40 *CYS* 0.057910 | NOT_ELIGIBLE | \ud83d\udfe1 75% MANUAL | 1H +2.86% | RSI 76 | seen 12x\n\ud83d\udc40 *UMXM* 0.004330 | NOT_ELIGIBLE | 1H +2.31% | RSI 39 | seen 12x\n   \ud83e\udde0 high: RSI 39.0 low, 24h down -19.5%.\n\ud83d\udc40 *ARIA* 0.304390 | NOT_ELIGIBLE | 1H +0.54% | RSI 55 | seen 12x\n   \ud83e\udde0 low: RSI 53.8, strong 24h gain 14.9%.\n\ud83d\udc40 *COLLECT* 0.024681 | NOT_ELIGIBLE | 1H +0.28% \ud83d\udcc8 | RSI 37 | seen 12x\n   \ud83e\udde0 high: RSI 35.4 low, 24h down -4.6%.\n\ud83d\udc40 *KII* 0.084953 | NOT_ELIGIBLE | 1H +0.17% | RSI 78 | seen 12x\n   \ud83e\udde0 high: RSI 77.3 overbought, 24h up 4.5%.\n\ud83d\udc40 *GRAM* 0.999000 | NOT_ELIGIBLE | 1H +0.10% \ud83d\udcc8 | RSI 53 | seen 12x\n\ud83d\udc40 *ASTER* 0.509100 | NOT_ELIGIBLE | 1H +0.02% \ud83d\udcc8 | RSI 47 | seen 12x\n\ud83d\udc40 *LINK* 9.0020 | NOT_ELIGIBLE | 1H +0.00% \ud83d\udcc8 | RSI 51 | seen 12x\n   \ud83e\udde0 low: RSI 52.4, 24h up 2.5%.\n\ud83d\udc40 *TAO* 192.20 | NOT_ELIGIBLE | 1H -0.04% \ud83d\udcc8 | RSI 47 | seen 12x\n   \ud83e\udde0 low: RSI 50.0, 24h up 1.4%.\n\ud83d\udc40 *TRX* 0.309580 | NOT_ELIGIBLE | 1H -0.08% \ud83d\udcc8 | RSI 62 | seen 12x\n   \ud83e\udde0 low: RSI 63.2, modest 24h rise 1.3%.",
     "out_mid": 4837,
     "panel_mid": 4838
 }
