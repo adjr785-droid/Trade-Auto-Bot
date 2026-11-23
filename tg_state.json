@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935689945,
+    "last_update_id": 935689946,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT24.61/\u20a633,653",
+    "kb_ph": "USDT24.56/\u20a633,593",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -63,25 +63,5 @@
     "radar": [
         "BTW-USDT"
     ],
-    "kb_mid": 4691,
-    "out_text": "\u26d4 *AUTO-BUY REJECTED \u2014 IDOL-USDT*\nReason: Insufficient USDT ($0.03).\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
-    "out_mode": "Markdown",
-    "out_time": 1795459073.5462098,
-    "panel_rows": [
-        [
-            {
-                "text": "JCT",
-                "callback_data": "m:s:JCT"
-            }
-        ],
-        [
-            {
-                "text": "\u2b05\ufe0f Menu",
-                "callback_data": "m:menu"
-            }
-        ]
-    ],
-    "panel_text": "\ud83d\udcb8 *SELL* \u2014 choose a position:",
-    "out_mid": 4684,
-    "panel_mid": 4688
+    "kb_mid": 4692
 }

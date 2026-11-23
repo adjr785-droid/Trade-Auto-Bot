@@ -1468,5 +1468,15 @@
         "time": 1795458822.8170087,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.4632, 'recurring_patterns': {'RSI 75': 3, 'PARTIAL PROFIT': 3, '15-MINUTE NO-UPWARD-TREND ROTATION': 7, 'PANIC': 4}, 'recommendations': {'focus_on_high_confidence_signals': ['RSI 75'], 'reduce_panic_trades': {'note': 'PANIC trades contributed negative PnL and high variance'}, 'monitor_partial_profit_strategy': {'note': 'Partial profit entries show mixed results, consider tighter targets'}, 'maintain_conservative_position_sizing': {'note': 'Overall win rate is moderate; keep exposure low until pattern consistency improves'}, 'uncertainty': 'Data limited to 30 trades; performance may not generalize'}}"
+    },
+    {
+        "time": 1795459681.1746707,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [], 'summary': 'The portfolio currently passes risk checks. The single position (JCT-USDT) shows a small negative P&L (-0.55%) and is close to its stop level (current price 0.001613 vs stop 0.001379). No immediate action is recommended; monitor the trade closely and consider tightening the stop if the price continues to decline. No changes to overall risk posture are needed at this time.'}"
+    },
+    {
+        "time": 1795459681.9740217,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.4632, 'recurring_patterns': ['RSI 75 (3 occurrences)', '15-MINUTE NO-UPWARD-TREND ROTATION (7 occurrences)', 'PANIC (4 occurrences)', 'PARTIAL PROFIT (3 occurrences)'], 'recommendations': ['Limit exposure to PANIC-driven exits; consider stricter stop\u2011loss thresholds', 'Prioritize signals with higher confidence such as RSI 75 that have shown positive PnL', 'Review and possibly reduce frequency of 15\u2011minute rotation trades due to modest returns', 'Maintain current position sizing while monitoring overall win\u2011rate stability']}"
     }
 ]
