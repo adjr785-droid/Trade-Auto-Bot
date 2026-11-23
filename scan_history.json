@@ -10,7 +10,7 @@
             "status": "READY",
             "decision": "SETUP \u2014 NOT QUEUED",
             "reason": "OVERSOLD matched, AI emergency: automatic buying paused",
-            "execution_status": "BLOCKED",
+            "execution_status": "NOT_ELIGIBLE",
             "scan_id": "1795465175",
             "rank": 39,
             "vol": 1398389.74,

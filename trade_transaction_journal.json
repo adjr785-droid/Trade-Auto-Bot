@@ -1608,5 +1608,11 @@
         "time": 1795472028.4973094,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 5.8372, 'recurring_patterns': ['15-MINUTE NO-UPWARD-TREND ROTATION appears in multiple trades', 'PANIC exits appear in several trades', 'MANUAL SELL actions appear in multiple trades', 'RSI 75 triggers both wins and losses', 'PARTIAL PROFIT triggers both wins and losses'], 'recommendations': ['Review and tighten criteria for panic exits to avoid small losses', 'Consider adding confirmation to RSI 75 signals before entry', 'Limit exposure on manual sell decisions; use predefined profit targets', 'Monitor and possibly adjust strategy around 15\u2011minute no\u2011upward\u2011trend rotations as they dominate trade frequency']}"
+    },
+    {
+        "time": 1795472044.8999474,
+        "event": "ai_coin_advisory",
+        "reviewed": 25,
+        "source": "coins.db"
     }
 ]
