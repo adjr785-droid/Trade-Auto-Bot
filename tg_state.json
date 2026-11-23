@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935689913,
+    "last_update_id": 935689914,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT24.75/\u20a633,848",
+    "kb_ph": "USDT24.73/\u20a633,818",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -63,10 +63,10 @@
     "radar": [
         "JCT-USDT"
     ],
-    "kb_mid": 4625,
-    "out_text": "\ud83c\udfc6 *TOP 3* \u00b7 \u25b6 details\n*1. BTW* \ud83d\udd36 WATCH\n0.748811 | +5.3% | RSI 61\n\ud83e\udde0 CAUTION \u00b7 No scanner pass; mod\n*2. JCT* \ud83d\udd36 WATCH\n0.001627 | +0.7% | RSI 55\n\ud83e\udde0 CAUTION \u00b7 No scanner pass; low\n*3. PUMP* \ud83d\udd36 WATCH\n0.002663 | +4.2% | RSI 69\n\ud83e\udde0 CAUTION \u00b7 No scanner pass; hig\n\u2800\n\u2800",
+    "kb_mid": 4629,
+    "out_text": "\u2795 *DCA ADDED:* JCT @ 0.001623\nSpent: $22.26\nNew avg entry: 0.001622\n\ud83d\udee1\ufe0f Exchange protective sell: Verified\n\ud83d\udcc8 Bot-side trailing: Active\n\n\ud83e\udde0 AI manual-buy advisory: The request is to buy JCT-USDT at $0.001622 for\n$22.26 (\u224813,720 JCT). RSI is neutral (54.97) and no market or BTC filters are\nactive. Existing position present, so this adds to exposure. Proceed with\ncaution, monitor price movement, and confirm order parameters before execution.\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795449335.5190647,
+    "out_time": 1795449393.210676,
     "panel_rows": [
         [
             {
@@ -80,25 +80,6 @@
         ]
     ],
     "panel_text": "\u26a0\ufe0f *CONFIRM BUY*\nJCT for ALL free USDT at about 0.001625 USDT.",
-    "out_mid": 4624,
-    "pages": {
-        "p": [
-            "\ud83c\udfc6 *TOP 3* \u00b7 \u25b6 details\n*1. BTW* \ud83d\udd36 WATCH\n0.748811 | +5.3% | RSI 61\n\ud83e\udde0 CAUTION \u00b7 No scanner pass; mod\n*2. JCT* \ud83d\udd36 WATCH\n0.001627 | +0.7% | RSI 55\n\ud83e\udde0 CAUTION \u00b7 No scanner pass; low\n*3. PUMP* \ud83d\udd36 WATCH\n0.002663 | +4.2% | RSI 69\n\ud83e\udde0 CAUTION \u00b7 No scanner pass; hig\n\u2800\n\u2800",
-            "\ud83c\udfc6 *TOP 3 SETUPS RIGHT NOW*\n_Read-only scan. Nothing was bought._\n\n*1. BTW-USDT* \u2014 WATCHLIST (no full scanner setup)\nPrice: 0.748811 USDT | 24h: +5.31% | RSI: 61.5\nSuggested stop: 0.636489 (15% below price)\nWhy:\n\u2022 Short-term trend is up (price > MA5 > MA10)\n\u2022 RSI 61.5 is healthy (room to run before overbought)\n\u2022 24h change +5.31% shows steady, not extreme, momentum\n\u2800\n\u2800",
-            "\u2022 24h volume $1.9M (liquid enough: above the $1M minimum)\n\u2022 Spread: 0.14% (OK for auto-buy)\n\u2022 Status: \ud83d\udd36 Potential, manual only (misses scanner rules)\n\u2022 \ud83e\udde0 AI: CAUTION \u2014 No scanner pass; moderate RSI, high 24h gain\n\n*2. JCT-USDT* \u2014 WATCHLIST (no full scanner setup)\nPrice: 0.001627 USDT | 24h: +0.74% | RSI: 55.0\nSuggested stop: 0.001383 (15% below price)\nWhy:\n\u2022 Short-term trend is up (price > MA5 > MA10)\n\u2800\n\u2800",
-            "\u2022 RSI 55.0 is healthy (room to run before overbought)\n\u2022 24h volume $1.3M (liquid enough: above the $1M minimum)\n\u2022 Spread: 0.06% (OK for auto-buy)\n\u2022 Status: \ud83d\udd36 Potential, manual only (misses scanner rules)\n\u2022 \ud83e\udde0 AI: CAUTION \u2014 No scanner pass; low 24h gain, neutral RSI\n\n*3. PUMP-USDT* \u2014 WATCHLIST (no full scanner setup)\nPrice: 0.002663 USDT | 24h: +4.23% | RSI: 69.3\nSuggested stop: 0.002264 (15% below price)\nWhy:\n\u2800\n\u2800",
-            "\u2022 Short-term trend is up (price > MA5 > MA10)\n\u2022 24h change +4.23% shows steady, not extreme, momentum\n\u2022 24h volume $4.3M (liquid enough: above the $1M minimum)\n\u2022 Spread: 0.07% (OK for auto-buy)\n\u2022 Status: \ud83d\udd36 Potential, manual only (misses scanner rules)\n\u2022 \ud83e\udde0 AI: CAUTION \u2014 No scanner pass; high RSI, moderate 24h gain\n\nNo coin passes all scanner rules right now, so these are the strongest\navailable. Be cautious.\n\n\u2800\n\u2800",
-            "Buy manually with `/buy COIN amount` if you agree.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
-        ],
-        "i": 0,
-        "mode": "Markdown",
-        "x": [
-            {
-                "text": "\ud83d\udd0e Analyse a coin",
-                "callback_data": "m:an"
-            }
-        ],
-        "cmd": "/analyse"
-    },
-    "panel_mid": 4626
+    "out_mid": 4628,
+    "panel_hidden": true
 }

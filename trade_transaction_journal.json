@@ -1428,5 +1428,15 @@
         "time": 1795449285.9052267,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.4632, 'recurring_patterns': ['RSI 75 (3 occurrences)', '15-MINUTE NO-UPWARD-TREND ROTATION (7 occurrences)', 'PANIC (4 occurrences)', 'PARTIAL PROFIT (3 occurrences)'], 'recommendations': ['Limit exposure to PANIC-driven trades; consider adding stricter stop\u2011loss rules', 'Prioritize signals with higher historical success such as RSI 75 and PARTIAL PROFIT entries', 'Monitor and possibly reduce frequency of low\u2011impact 15\u2011minute rotation trades', 'Aim to improve win\u2011rate above 60% by tightening entry criteria and reviewing manual sell decisions']}"
+    },
+    {
+        "time": 1795449392.669172,
+        "event": "ai_manual_buy_review",
+        "symbol": "JCT-USDT",
+        "review": {
+            "risk_level": "medium",
+            "warning": "Manual order size is small relative to typical volatility; ensure price slippage and transaction fees are acceptable. Verify that the position aligns with your overall portfolio risk limits.",
+            "summary": "The request is to buy JCT-USDT at $0.001622 for $22.26 (\u224813,720 JCT). RSI is neutral (54.97) and no market or BTC filters are active. Existing position present, so this adds to exposure. Proceed with caution, monitor price movement, and confirm order parameters before execution."
+        }
     }
 ]
