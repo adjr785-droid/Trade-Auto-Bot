@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935689808,
+    "last_update_id": 935689810,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT26.06/\u20a635,638",
+    "kb_ph": "USDT25.95/\u20a635,494",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -66,39 +66,39 @@
         "SKYAI-USDT",
         "ICNT-USDT"
     ],
-    "kb_mid": 4459,
-    "out_text": "\u2139\ufe0f Git sync used conflict recovery.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "kb_mid": 4463,
+    "out_text": "\u2705 *AUDIT COMPLETE:* No issues found.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
             {
-                "text": "\ud83d\uded2 Trade",
-                "callback_data": "m:tl:trade"
+                "text": "\ud83d\udee0\ufe0f Audit",
+                "callback_data": "m:r:audit"
             },
             {
-                "text": "\ud83d\udd14 Alerts",
-                "callback_data": "m:tl:alerts"
+                "text": "\ud83e\udde9 Layout",
+                "callback_data": "m:lay"
             }
         ],
         [
             {
-                "text": "\ud83d\udd0d Scan",
-                "callback_data": "m:tl:scan"
-            },
-            {
-                "text": "\ud83d\udee0\ufe0f System",
-                "callback_data": "m:tl:sys"
+                "text": "\ud83e\udde0 Resume AI Mode",
+                "callback_data": "m:r:airesume"
             }
         ],
         [
             {
-                "text": "\u2b05\ufe0f Main Menu",
+                "text": "\u2b05\ufe0f Tools",
+                "callback_data": "m:tools"
+            },
+            {
+                "text": "\ud83c\udfe0 Main Menu",
                 "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83e\uddf0 *TOOLS*\nChoose a group.",
-    "out_mid": 4454,
-    "out_time": 1795409807.2854764,
-    "panel_mid": 4461
+    "panel_text": "\ud83d\udee0\ufe0f *SYSTEM*",
+    "out_time": 1795409938.4704187,
+    "out_mid": 4462,
+    "panel_hidden": true
 }
