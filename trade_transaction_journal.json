@@ -1047,5 +1047,10 @@
         "time": 1795398073.805609,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 6.1087, 'recurring_patterns': {'15-MINUTE NO-UPWARD-TREND ROTATION': 7, 'PANIC': 4, 'RSI 75': 2, 'PARTIAL PROFIT': 3, 'MANUAL SELL': 2}, 'recommendations': {'reduce_panic_trades': 'High frequency of panic exits correlates with negative PnL; consider tighter stop\u2011loss thresholds or delay panic decisions.', 'monitor_rsi_signals': 'RSI 75 entries yielded positive returns; however, limit exposure to avoid over\u2011reliance on a single indicator.', 'review_rotation_strategy': 'The 15\u2011minute no\u2011upward\u2011trend rotation produced mixed results; refine entry criteria or shorten holding periods.', 'maintain_win_rate_focus': 'Current win rate is modest; prioritize trade setups with higher historical success rates before scaling position size.'}}"
+    },
+    {
+        "time": 1795401305.7671547,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 6.1087, 'recurring_patterns': {'PANIC': 4, '15-MINUTE NO-UPWARD-TREND ROTATION': 7, 'RSI 75': 2, 'PARTIAL PROFIT': 3, 'MANUAL SELL': 2}, 'recommendations': 'Maintain current strategy but limit exposure to PANIC-driven exits and short\u2011term rotation trades. Consider tighter stop\u2011losses on high\u2011volatility symbols (e.g., WLD-USDT) and prioritize trades with technical signals like RSI 75 that have shown positive PnL. Monitor manual sell decisions to ensure they align with overall risk limits.'}"
     }
 ]
