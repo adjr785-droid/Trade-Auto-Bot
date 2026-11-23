@@ -1586,5 +1586,23 @@
             "warning": "None",
             "summary": "The requested manual buy of 1.01\u202fUSDT of BGB-USDT at a price of 1.5684 USDT per BGB is within a low\u2011risk profile given the current RSI of 60.5 and no existing position. However, the market filter is empty and the BTC filter is active, which may affect broader portfolio constraints. Proceed only if this aligns with your overall risk limits and compliance rules."
         }
+    },
+    {
+        "time": 1795465799.0700467,
+        "event": "trade_closed",
+        "symbol": "BGB-USDT",
+        "pnl_usdt": -0.00041959999999995377,
+        "reason": "MANUAL SELL ALL",
+        "strategy": "MANUAL"
+    },
+    {
+        "time": 1795465807.195093,
+        "event": "ai_manual_sell_review",
+        "symbol": "BGB-USDT",
+        "review": {
+            "review": "The manual sell was executed at an average price of 1.5681 USDT, resulting in a realized loss of 0.0004196 USDT on the 1.049 BGB sold. The loss is very small relative to the position size, but it indicates the exit price was slightly below the entry cost basis. The remaining base balance is negligible (0.00007363 BGB).",
+            "lesson": "When manually exiting a position, verify the current market price against the cost basis to avoid small avoidable losses. Consider using limit orders or tighter price monitoring for marginally profitable or loss\u2011making exits.",
+            "confidence": "high"
+        }
     }
 ]
