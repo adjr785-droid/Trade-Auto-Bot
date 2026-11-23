@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935689959,
+    "last_update_id": 935689961,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT24.62/\u20a633,674",
+    "kb_ph": "USDT24.68/\u20a633,755",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -60,71 +60,50 @@
             1795362988.7943418
         ]
     },
-    "radar": [
-        "BTW-USDT"
-    ],
-    "kb_mid": 4699,
-    "out_text": "\ud83d\udd0e *SCAN HISTORY* \u00b7 462/462 coins (first 150)\n5 scans \u00b7 1.3h\n```\nCOIN    RSI    1H WHY\n------------------------------\n0G       53     - RSI high\n10SET    54     - RSI high\n1INCH    53     - RSI high\n2U2      53     - RSI high\n2Z       53     - RSI high\n```\n\u2800",
+    "radar": [],
+    "kb_mid": 4705,
+    "out_text": "\ud83d\udd0d *SCAN COMPLETE*\nChecked 462 markets in 8s.\nNo coin matched any setup.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795459757.0830126,
-    "pages": {
-        "p": [
-            "\ud83d\udd0e *SCAN HISTORY* \u00b7 462/462 coins (first 150)\n5 scans \u00b7 1.3h\n```\nCOIN    RSI    1H WHY\n------------------------------\n0G       53     - RSI high\n10SET    54     - RSI high\n1INCH    53     - RSI high\n2U2      53     - RSI high\n2Z       53     - RSI high\n```\n\u2800",
-            "```\nA        66     - RSI high\nA8       46     - No setup\nAAVE     51     - RSI high\nAB       46     - No setup\nACE      32  -7.7 RSI low\nACH      59     - RSI high\nACN      77     - RSI high\nACT      55     - RSI high\nADA      78  +1.3 RSI high\nAEON     56     - RSI high\n```",
-            "```\nAERO     51     - RSI high\nAEVO     57     - RSI high\nAGLD     47     - No setup\nAI       54     - RSI high\nAIA      42     - No setup\nAIAV     48     - RSI high\nAIN      50     - RSI high\nAIO      56     - RSI high\nALGO     68     - RSI high\nALICE    55     - RSI high\n```",
-            "```\nALIGN    45     - No setup\nALLO     64     - RSI high\nALPH     60     - RSI high\nANIME    57     - RSI high\nANKR     61     - RSI high\nAPE      49     - RSI high\nAPI3     68     - RSI high\nAPR      78     - RSI high\nAPT      57     - RSI high\nAR       65     - RSI high\n```",
-            "```\nARB      48     - No setup\nARIA     50  -9.9 RSI high\nARKM     45     - No setup\nARPA     54     - RSI high\nARTX     70     - RSI high\nARX      70  +0.3 RSI high\nASR      68     - RSI high\nASTER    55     - RSI high\nASTR     57     - RSI high\nATH      70     - RSI high\n```",
-            "```\nATM      70     - RSI high\nATOM     72     - RSI high\nAUCTION  60     - RSI high\nAVA      60     - RSI high\nAVAX     60     - RSI high\nAVNT     52     - RSI high\nAVV      51     - RSI high\nAWE      54     - RSI high\nAXIS     48     - RSI high\nAXL      50     - RSI high\n```",
-            "```\nAXS      60     - RSI high\nB        45     - No setup\nB2       50     - RSI high\nBABY     74     - RSI high\nBABYDOG  58     - RSI high\nBABYSHA  53     - RSI high\nBANANAS  59     - RSI high\nBANK     52     - RSI high\nBARD     42     - RSI low\nBAT      53     - RSI high\n```",
-            "```\nBAY      40     - RSI low\nBB       52     - RSI high\nBCH      53     - RSI high\nBEAM     43     - No setup\nBERA     53     - RSI high\nBGB      61     - RSI high\nBGBTC    52     - RSI high\nBGSC     75  -8.6 RSI high\nBGSOL    59     - RSI high\nBICO     57     - RSI high\n```",
-            "```\nBIGTIME  51     - RSI high\nBILL     56     - RSI high\nBIO      54     - RSI high\nBIRB     47     - No setup\nBLEND    45     - No setup\nBLESS    61  -4.2 RSI high\nBLUAI    60     - RSI high\nBLUE     52     - RSI high\nBMT      43     - No setup\nBNB      65  -0.2 RSI high\n```",
-            "```\nBOME     50     - RSI high\nBONK     61     - RSI high\nBR       40     - RSI low\nBREV     47     - No setup\nBSB      51     - RSI high\nBSV      58     - RSI high\nBTC      51     - RSI high\nBTT      67     - RSI high\nBTW      61  -0.1 RSI high\nC        67     - RSI high\n```",
-            "```\nCAKE     65     - RSI high\nCARV     52     - RSI high\nCATI     52     - RSI high\nCBK      64     - RSI high\nCC       66     - RSI high\nCELO     61     - RSI high\nCETUS    63     - RSI high\nCFX      68     - RSI high\nCGN      43     - No setup\nCGPT     56     - RSI high\n```",
-            "```\nCHEEMS   52     - RSI high\nCHR      60     - RSI high\nCHZ      58     - RSI high\nCKB      52     - RSI high\nCLANKER  49     - RSI high\nCLEAR    56     - RSI high\nCNPY     63     - RSI high\nCOAI     51     - RSI high\nCOLLECT  50  -1.5 RSI high\nCOMP     58     - RSI high\n```",
-            "```\nCOOKIE   53     - RSI high\nCORE     54     - RSI high\nCOW      64     - RSI high\nCP       50     - RSI high\nCRO       -     - No setup\nCROSS    11     - RSI low\nCRV      51     - RSI high\nCTC      55     - RSI high\nCTSI     51     - RSI high\nCUDIS    49     - RSI high\n```",
-            "```\nCYBER    62     - RSI high\nCYS      77     - RSI high\nDATA     65     - RSI high\nDBR      53     - RSI high\nDEBIT    44     - No setup\nDEEP     65     - RSI high\nDGAI     79     - RSI high\nDMC      47     - No setup\nDNA      51     - RSI high\nDODO     56     - RSI high\n```",
-            "```\nDOGE     60     - RSI high\nDOGS     54     - RSI high\nDOS      48  +4.9 No setup\nDOT      58     - RSI high\nDTEC     45     - No setup\nDYDX     64     - RSI high\nEDEN     52     - RSI high\nEDGE     70     - RSI high\nEGL1     85  +4.1 RSI high\nEIGEN    48     - No setup\n```",
-            "```\nENA      52     - RSI high\nENJ      61     - RSI high\nENS      44     - No setup\nENSO     41     - RSI low\nERA      59     - RSI high\n```\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
-        ],
-        "i": 3,
-        "mode": "Markdown",
-        "x": [
-            {
-                "text": "\ud83d\udd0d Why not bought?",
-                "callback_data": "m:whylist:0"
-            }
-        ],
-        "cmd": "m:scan_hist"
-    },
+    "out_time": 1795459888.0383391,
     "panel_rows": [
         [
             {
-                "text": "\ud83d\uded2 Trade",
-                "callback_data": "m:tl:trade"
+                "text": "\ud83d\udd0d Scan now",
+                "callback_data": "m:r:scan"
             },
             {
-                "text": "\ud83d\udd14 Alerts",
-                "callback_data": "m:tl:alerts"
+                "text": "\ud83e\uddfe Scan History",
+                "callback_data": "m:scan_hist"
             }
         ],
         [
             {
-                "text": "\ud83d\udd0d Scan",
-                "callback_data": "m:tl:scan"
-            },
-            {
-                "text": "\ud83d\udee0\ufe0f System",
-                "callback_data": "m:tl:sys"
+                "text": "\ud83d\udcda Coin List",
+                "callback_data": "m:coins"
             }
         ],
         [
             {
-                "text": "\u2b05\ufe0f Main Menu",
+                "text": "\ud83d\udcc8 Gainers",
+                "callback_data": "m:r:gain"
+            },
+            {
+                "text": "\ud83d\udcc9 Losers",
+                "callback_data": "m:r:lose"
+            }
+        ],
+        [
+            {
+                "text": "\u2b05\ufe0f Tools",
+                "callback_data": "m:tools"
+            },
+            {
+                "text": "\ud83c\udfe0 Main Menu",
                 "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83e\uddf0 *TOOLS*\nChoose a group.",
-    "out_mid": 4700,
-    "panel_mid": 4701
+    "panel_text": "\ud83d\udd0d *SCAN*",
+    "out_mid": 4704,
+    "panel_hidden": true
 }
