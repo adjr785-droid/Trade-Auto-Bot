@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935689592,
+    "last_update_id": 935689595,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT22.64/\u20a630,960",
+    "kb_ph": "USDT22.51/\u20a630,779",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -67,127 +67,23 @@
         "UMXM-USDT",
         "SKYAI-USDT"
     ],
-    "kb_mid": 4193,
-    "out_text": "\ud83c\udfc6 *TOP 3* \u00b7 \u25b6 details\n*1. UMXM* \u26a0\ufe0f TREND\n0.005340 | -17.1% | RSI 48\n\ud83e\udde0 CAUTION \u00b7 Scanner passes but h\n*2. ICNT* \ud83d\udd36 WATCH\n0.362800 | +2.5% | RSI 54\n\ud83e\udde0 WEAK \u00b7 Fails scanner rules,\n*3. SKYAI* \ud83d\udd36 WATCH\n0.037500 | -1.9% | RSI 53\n\ud83e\udde0 WEAK \u00b7 Fails scanner rules,\n\u2800\n\u2800",
+    "kb_mid": 4201,
+    "out_text": "\ud83e\udde0 AI manual-buy advisory: Considering a $22.58 USDT purchase at $0.00537 with\nRSI 47.5, the trade carries moderate risk. Verify market depth and confirm that\nthe order size fits your overall portfolio exposure before proceeding.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
             {
-                "text": "BTC",
-                "callback_data": "m:b:BTC"
+                "text": "\u2705 Confirm",
+                "callback_data": "m:bx:UMXM:ALL"
             },
             {
-                "text": "ETH",
-                "callback_data": "m:b:ETH"
-            },
-            {
-                "text": "SOL",
-                "callback_data": "m:b:SOL"
-            }
-        ],
-        [
-            {
-                "text": "USDGO",
-                "callback_data": "m:b:USDGO"
-            },
-            {
-                "text": "EVAA",
-                "callback_data": "m:b:EVAA"
-            },
-            {
-                "text": "PWT",
-                "callback_data": "m:b:PWT"
-            }
-        ],
-        [
-            {
-                "text": "DOGE",
-                "callback_data": "m:b:DOGE"
-            },
-            {
-                "text": "ZEC",
-                "callback_data": "m:b:ZEC"
-            },
-            {
-                "text": "MTX",
-                "callback_data": "m:b:MTX"
-            }
-        ],
-        [
-            {
-                "text": "BGB",
-                "callback_data": "m:b:BGB"
-            },
-            {
-                "text": "HYPE",
-                "callback_data": "m:b:HYPE"
-            },
-            {
-                "text": "NEAR",
-                "callback_data": "m:b:NEAR"
-            }
-        ],
-        [
-            {
-                "text": "DGAI",
-                "callback_data": "m:b:DGAI"
-            },
-            {
-                "text": "SUI",
-                "callback_data": "m:b:SUI"
-            },
-            {
-                "text": "IDOL",
-                "callback_data": "m:b:IDOL"
-            }
-        ],
-        [
-            {
-                "text": "UMXM",
-                "callback_data": "m:b:UMXM"
-            },
-            {
-                "text": "ACE",
-                "callback_data": "m:b:ACE"
-            },
-            {
-                "text": "BLESS",
-                "callback_data": "m:b:BLESS"
-            }
-        ],
-        [
-            {
-                "text": "Next \u25b6\ufe0f",
-                "callback_data": "m:more:buy:1"
-            }
-        ],
-        [
-            {
-                "text": "\u2b05\ufe0f Back",
-                "callback_data": "m:buy"
+                "text": "\u274c Cancel",
+                "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\u2795 *MORE COINS* (page 1/26)\nBiggest 24h volume first. Tap a coin.",
-    "out_time": 1795396085.2620902,
-    "out_mid": 4197,
-    "pages": {
-        "p": [
-            "\ud83c\udfc6 *TOP 3* \u00b7 \u25b6 details\n*1. UMXM* \u26a0\ufe0f TREND\n0.005340 | -17.1% | RSI 48\n\ud83e\udde0 CAUTION \u00b7 Scanner passes but h\n*2. ICNT* \ud83d\udd36 WATCH\n0.362800 | +2.5% | RSI 54\n\ud83e\udde0 WEAK \u00b7 Fails scanner rules,\n*3. SKYAI* \ud83d\udd36 WATCH\n0.037500 | -1.9% | RSI 53\n\ud83e\udde0 WEAK \u00b7 Fails scanner rules,\n\u2800\n\u2800",
-            "\ud83c\udfc6 *TOP 3 SETUPS RIGHT NOW*\n_Read-only scan. Nothing was bought._\n\n*1. UMXM-USDT* \u2014 TREND\nPrice: 0.005340 USDT | 24h: -17.11% | RSI: 47.5\nSuggested stop: 0.004539 (15% below price)\nWhy:\n\u2022 Trend setup: price 0.005340 is above MA5 0.005334 which is above MA10\n0.005282, with RSI 47.5 inside your 42-48 entry zone\n\u2022 RSI 47.5 is healthy (room to run before overbought)\n\u2800\n\u2800",
-            "\u2022 24h volume $4.0M (liquid enough: above the $1M minimum)\n\u2022 Spread: 0.19% (OK for auto-buy)\n\u2022 Status: \u26a0\ufe0f Passes with a note\n\u2022 \ud83e\udde0 AI: CAUTION \u2014 Scanner passes but high spread, negative 24h change\n\n*2. ICNT-USDT* \u2014 WATCHLIST (no full scanner setup)\nPrice: 0.362800 USDT | 24h: +2.54% | RSI: 54.1\nSuggested stop: 0.308380 (15% below price)\nWhy:\n\u2022 Short-term trend is up (price > MA5 > MA10)\n\u2800\n\u2800",
-            "\u2022 RSI 54.1 is healthy (room to run before overbought)\n\u2022 24h change +2.54% shows steady, not extreme, momentum\n\u2022 24h volume $1.4M (liquid enough: above the $1M minimum)\n\u2022 Spread: 0.08% (OK for auto-buy)\n\u2022 Status: \ud83d\udd36 Potential, manual only (misses scanner rules)\n\u2022 \ud83e\udde0 AI: WEAK \u2014 Fails scanner rules, limited data reliability\n\n*3. SKYAI-USDT* \u2014 WATCHLIST (no full scanner setup)\nPrice: 0.037500 USDT | 24h: -1.91% | RSI: 53.3\nSuggested stop: 0.031875 (15% below price)\n\u2800\n\u2800",
-            "Why:\n\u2022 Short-term trend is up (price > MA5 > MA10)\n\u2022 RSI 53.3 is healthy (room to run before overbought)\n\u2022 24h volume $2.5M (liquid enough: above the $1M minimum)\n\u2022 Spread: 0.03% (OK for auto-buy)\n\u2022 Status: \ud83d\udd36 Potential, manual only (misses scanner rules)\n\u2022 \ud83e\udde0 AI: WEAK \u2014 Fails scanner rules, insufficient confidence\n\nBuy manually with `/buy COIN amount` if you agree.\n\u2800\n\u2800\n\u2800"
-        ],
-        "i": 0,
-        "mode": "Markdown",
-        "x": [
-            {
-                "text": "\ud83d\udd0e Analyse a coin",
-                "callback_data": "m:an"
-            }
-        ],
-        "cmd": "/analyse"
-    },
-    "panel_mid": 4198
+    "panel_text": "\u26a0\ufe0f *CONFIRM BUY*\nUMXM for ALL free USDT at about 0.005360 USDT.",
+    "out_time": 1795396143.0685706,
+    "out_mid": 4200,
+    "panel_hidden": true
 }

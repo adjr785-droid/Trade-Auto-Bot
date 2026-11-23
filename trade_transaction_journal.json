@@ -999,5 +999,15 @@
             "lesson": "Implement stricter stop\u2011loss or volatility\u2011based exit rules to avoid panic\u2011driven decisions. Ensure that any remaining base amount is either fully liquidated or managed with a clear plan to prevent orphaned balances. Reinforce risk\u2011management protocols to align exits with predefined criteria rather than emotion.",
             "confidence": "medium"
         }
+    },
+    {
+        "time": 1795396142.6971688,
+        "event": "ai_manual_buy_review",
+        "symbol": "UMXM-USDT",
+        "review": {
+            "risk_level": "moderate",
+            "warning": "The RSI is near neutral and the price is low; liquidity may be limited for UMXM-USDT. Ensure the trade aligns with your risk tolerance and position sizing rules.",
+            "summary": "Considering a $22.58 USDT purchase at $0.00537 with RSI 47.5, the trade carries moderate risk. Verify market depth and confirm that the order size fits your overall portfolio exposure before proceeding."
+        }
     }
 ]
