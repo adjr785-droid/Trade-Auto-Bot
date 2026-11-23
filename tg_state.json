@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935689845,
+    "last_update_id": 935689846,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT24.68/\u20a633,757",
+    "kb_ph": "USDT24.67/\u20a633,745",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -17,7 +17,7 @@
         "pos": [],
         "hn": 31
     },
-    "last_cmd": "/bot",
+    "last_cmd": "/stats",
     "page_mem": {
         "/bot": [
             3,
@@ -64,52 +64,50 @@
         "ARX-USDT",
         "TRX-USDT"
     ],
-    "kb_mid": 4523,
-    "out_mid": 4527,
-    "out_text": "\ud83d\udcdf *OUTPUT*\nResults appear here.",
+    "kb_mid": 4531,
+    "out_text": "\ud83d\udcc8 *TRADE STATS*\nClosed trades: 31\nWin rate: 55% (17 wins, 14 losses)\nAverage per trade: $+0.20\nNet profit: $+6.07\nBest: $+2.97 | Worst: $-0.66\n\n*By strategy*\nMANUAL: 24 trades | win 62% | avg $+0.28 | total $+6.76\nOLDER: 2 trades | win 0% | avg $-0.15 | total $-0.29\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "panel_mid": 4528,
     "panel_rows": [
         [
             {
-                "text": "\ud83e\udd16 Bot",
-                "callback_data": "/bot"
+                "text": "\u25c0",
+                "callback_data": "pg:p"
             },
             {
-                "text": "\ud83d\udcc8 Stats",
-                "callback_data": "/stats"
-            }
-        ],
-        [
-            {
-                "text": "\u2699\ufe0f Settings",
-                "callback_data": "m:set"
+                "text": "1/2",
+                "callback_data": "pg:x"
             },
             {
-                "text": "\ud83d\udcbc Holdings",
-                "callback_data": "m:r:holdings"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udcdc Trade History",
-                "callback_data": "m:r:history"
+                "text": "\u25b6",
+                "callback_data": "pg:n"
             },
             {
-                "text": "\ud83e\udde0 Ask AI",
-                "callback_data": "m:ai:1"
-            }
-        ],
-        [
-            {
-                "text": "\ud83e\uddf9 Clear Chat",
-                "callback_data": "/clear"
+                "text": "\ud83c\udfe0",
+                "callback_data": "m:menu"
             },
             {
-                "text": "\ud83d\udea8 PANIC SELL",
-                "callback_data": "/panic"
+                "text": "\ud83d\udd04",
+                "callback_data": "rf:go"
             }
         ]
     ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below."
+    "panel_text": "\ud83d\udcc4 *Page 1/2*",
+    "out_mid": 4529,
+    "out_time": 1795430904.9875345,
+    "pages": {
+        "p": [
+            "\ud83d\udcc8 *TRADE STATS*\nClosed trades: 31\nWin rate: 55% (17 wins, 14 losses)\nAverage per trade: $+0.20\nNet profit: $+6.07\nBest: $+2.97 | Worst: $-0.66\n\n*By strategy*\nMANUAL: 24 trades | win 62% | avg $+0.28 | total $+6.76\nOLDER: 2 trades | win 0% | avg $-0.15 | total $-0.29\n\u2800\n\u2800",
+            "OTHER: 5 trades | win 40% | avg $-0.08 | total $-0.40\n\n\ud83e\udde0 *AI:* Overall net profit is modest (+$6.07) with a 55% win rate; manual\nstrategy performs well (62% win, +$6.76), but the older strategy shows 0% win\nand a loss, warranting review.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+        ],
+        "i": 0,
+        "mode": "Markdown",
+        "x": [
+            {
+                "text": "\ud83d\udd04",
+                "callback_data": "rf:go"
+            }
+        ],
+        "cmd": "/stats"
+    },
+    "panel_mid": 4530
 }
