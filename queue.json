@@ -1,13 +1,4 @@
 {
-    "INJ-USDT": {
-        "timestamp": 1795429389,
-        "type": "BREAKOUT",
-        "sl": 5.4655,
-        "score": 322.71,
-        "price": 6.43,
-        "chg": 4.877,
-        "ai_priority_adjustment": 3.0
-    },
     "JCT-USDT": {
         "timestamp": 1795429389,
         "type": "TREND",

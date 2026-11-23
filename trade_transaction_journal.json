@@ -1237,5 +1237,30 @@
         "time": 1795429230.1375625,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 6.1087, 'recurring_patterns': {'15-MINUTE NO-UPWARD-TREND ROTATION': 7, 'PANIC': 4, 'RSI 75': 2, 'PARTIAL PROFIT': 3, 'MANUAL SELL': 2}, 'recommendations': 'Maintain current risk parameters but tighten entry criteria for trades flagged with \"PANIC\" and \"15-MINUTE NO-UPWARD-TREND ROTATION\" as they show mixed outcomes. Consider adding a confirmation filter (e.g., volume or broader trend) before executing trades that rely solely on short\u2011term rotation signals. Monitor RSI\u2011based entries; they yielded positive PnL but represent a small sample. Overall, continue conservative position sizing and avoid manual sell triggers unless a clear stop\u2011loss is breached.'}"
+    },
+    {
+        "time": 1795429447.9128003,
+        "event": "ai_buy_approved",
+        "symbol": "INJ-USDT",
+        "ai": {
+            "decision": "BUY",
+            "reason": "All risk controls passed, estimated market impact is minimal (0.023%), spread is low (1.56%), RSI is moderate (66) and the breakout setup with a high score (322.71) indicates a favorable entry. No material risk flags present."
+        }
+    },
+    {
+        "time": 1795429447.9144108,
+        "event": "buy_order_submitted",
+        "symbol": "INJ-USDT",
+        "spend_usdt": 2.08,
+        "estimated_impact_pct": 0.023384519448126227,
+        "setup": "BREAKOUT"
+    },
+    {
+        "time": 1795429449.289263,
+        "event": "buy_fill_verified",
+        "symbol": "INJ-USDT",
+        "filled": 0.3,
+        "average": 6.416,
+        "spend_estimate": 1.9248
     }
 ]
