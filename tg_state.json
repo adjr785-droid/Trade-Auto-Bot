@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689662,
+    "last_update_id": 935689664,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -74,19 +74,19 @@
         [
             {
                 "text": "\u2796\u2796 -25%",
-                "callback_data": "m:kv:scan_workers:--"
+                "callback_data": "m:kv:dca_reserve:--"
             },
             {
                 "text": "\u2796 -10%",
-                "callback_data": "m:kv:scan_workers:-"
+                "callback_data": "m:kv:dca_reserve:-"
             },
             {
                 "text": "\u2795 +10%",
-                "callback_data": "m:kv:scan_workers:+"
+                "callback_data": "m:kv:dca_reserve:+"
             },
             {
                 "text": "\u2795\u2795 +25%",
-                "callback_data": "m:kv:scan_workers:++"
+                "callback_data": "m:kv:dca_reserve:++"
             }
         ],
         [
@@ -96,7 +96,7 @@
             }
         ]
     ],
-    "panel_text": "\u2699\ufe0f *scan workers*\nCurrent value: `15`",
+    "panel_text": "\u2699\ufe0f *dca reserve*\nCurrent value: `2.0`",
     "out_time": 1795406337.0502157,
     "out_mid": 4288,
     "panel_mid": 4289
