@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689837,
+    "last_update_id": 935689840,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -61,55 +61,46 @@
         ]
     },
     "radar": [
-        "TRX-USDT",
-        "ARX-USDT"
+        "ARX-USDT",
+        "TRX-USDT"
     ],
     "kb_mid": 4510,
-    "out_text": "\ud83e\udd16 *BOT*\n\ud83d\udd58 Since last check (5.9 h ago): \ud83d\udd34 balance -0.98 USDT | closed: IDOL\nExchange connection: \u2705 OK\nPortfolio: $24.67 USDT | \u20a633,739\nUSDT cash: $24.64 (free $24.64)\nAuto-buy: ON (dynamic allocation; legacy target $6.4994)\nBTC safety filter: OK\nMarket filter: OK (no market-wide block)\nRisk controls: \u2705 trading allowed\nToday vs start of day: +7.86% (auto-buy pauses at -5.0%)\n\u2800\n\u2800",
+    "out_text": "\ud83d\udd0d *SCAN COMPLETE*\nChecked 462 markets in 6s.\nMatched: 2 | Queued: 2.\n\ud83e\udde0 AI market view: BULLISH | low\n\n\u2705 *MATCHED COINS*\n1. *INJ-USDT* \u2014 BREAKOUT matched; queued\n   Price 6.4300 | 24h +4.88% | RSI 66.1 | \u2705 queued\n2. *JCT-USDT* \u2014 TREND matched; queued\n   Price 0.001612 | 24h +3.07% | RSI 47.7 | \u2705 queued\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
+                "text": "\ud83d\udd0d Scan now",
+                "callback_data": "m:r:scan"
             },
             {
-                "text": "1/4",
-                "callback_data": "pg:x"
+                "text": "\ud83e\uddfe Scan History",
+                "callback_data": "m:scan_hist"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udcc8 Gainers",
+                "callback_data": "m:r:gain"
             },
             {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
+                "text": "\ud83d\udcc9 Losers",
+                "callback_data": "m:r:lose"
+            }
+        ],
+        [
+            {
+                "text": "\u2b05\ufe0f Tools",
+                "callback_data": "m:tools"
             },
             {
-                "text": "\ud83c\udfe0",
+                "text": "\ud83c\udfe0 Main Menu",
                 "callback_data": "m:menu"
-            },
-            {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/4*",
-    "out_time": 1795429361.4775019,
-    "pages": {
-        "p": [
-            "\ud83e\udd16 *BOT*\n\ud83d\udd58 Since last check (5.9 h ago): \ud83d\udd34 balance -0.98 USDT | closed: IDOL\nExchange connection: \u2705 OK\nPortfolio: $24.67 USDT | \u20a633,739\nUSDT cash: $24.64 (free $24.64)\nAuto-buy: ON (dynamic allocation; legacy target $6.4994)\nBTC safety filter: OK\nMarket filter: OK (no market-wide block)\nRisk controls: \u2705 trading allowed\nToday vs start of day: +7.86% (auto-buy pauses at -5.0%)\n\u2800\n\u2800",
-            "Money in coins: 0% of portfolio (cap 50.0%)\nRe-buy cooldown active: none\nLast market scan: 23 min ago (runs every 30 min) | Queued coins: 0\nBot-tracked positions: 0 | Holdings priced: 0\n\ud83d\udfe2 Last: UMXM \u2014 PARTIAL PROFIT +10.4% | PnL $+1.11 | 8.7h ago\n\n\ud83e\udded *STRATEGY*\nEntries: TREND (RSI 42-48, price > MA5 > MA10), OVERSOLD bounce (RSI < 30),\nBREAKOUT (RSI 50-70 + volume breakout)\nProtection: stop-loss 15% | trailing stop 8.0% below peak | crash guard 10.0%\n\u2800\n\u2800",
-            "Exit: RSI >= 75\nProfit taking: sell 28% at +21.4843% then stop moves to break-even\nDynamic trailing: ON (wider in strong trends, tighter when momentum fades)\nEntry safety: spread limit 0.5% | stop fails -> sell at market | scan pre-filter\nON\nNear-instant mode: ON (stays awake 270s per run)\nAuto-clear chat: every 24h\nLimits: 30 trades/day, 3.0% daily loss, 15.0% max per coin\nExtra safeguards: 4h trend check ON | BTC shock pause 3%/h | combined open risk\ncap 3% | smaller buys after 2 losses in a row | parallel scan ON\n\u2800\n\u2800",
-            "\n\ud83d\uded1 *HOLDINGS ADVICE*\nNo priced coin holdings right now.\n\n\ud83e\udde0 *AI:* Bot reports a negative USDT balance (-0.98) despite $24.67 total,\nauto\u2011buy is active, and no current holdings; monitor the unexpected deficit and\nensure funding before new trades.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
-        ],
-        "i": 0,
-        "mode": "Markdown",
-        "x": [
-            {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
-            }
-        ],
-        "cmd": "/bot"
-    },
-    "out_mid": 4513,
-    "panel_mid": 4514
+    "panel_text": "\ud83d\udd0d *SCAN*",
+    "out_time": 1795429392.4757347,
+    "out_mid": 4516,
+    "panel_hidden": true
 }
