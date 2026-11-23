@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935689820,
+    "last_update_id": 935689828,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT25.95/\u20a635,494",
+    "kb_ph": "USDT25.62/\u20a635,040",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -66,54 +66,52 @@
         "SKYAI-USDT",
         "ICNT-USDT"
     ],
-    "kb_mid": 4473,
-    "out_text": "\ud83d\udcc8 *TOP 10 GAINERS (24H)*\n\n```\n\ud83d\udcc8 GAINERS\n 1. PWT      +1501.11%\n 2. BLESS     +36.90%\n 3. ARIA      +22.81%\n 4. DGAI      +19.46%\n 5. PUMP       +9.64%\n 6. ICNT       +9.14%\n```\n\u2800",
+    "kb_mid": 4475,
+    "out_mid": 4476,
+    "out_text": "\ud83d\udcdf *OUTPUT*\nResults appear here.",
     "out_mode": "Markdown",
+    "panel_mid": 4477,
     "panel_rows": [
         [
             {
-                "text": "\ud83d\uded2 Trade",
-                "callback_data": "m:tl:trade"
+                "text": "\ud83e\udd16 Bot",
+                "callback_data": "/bot"
             },
             {
-                "text": "\ud83d\udd14 Alerts",
-                "callback_data": "m:tl:alerts"
+                "text": "\ud83d\udcc8 Stats",
+                "callback_data": "/stats"
             }
         ],
         [
             {
-                "text": "\ud83d\udd0d Scan",
-                "callback_data": "m:tl:scan"
+                "text": "\u2699\ufe0f Settings",
+                "callback_data": "m:set"
             },
             {
-                "text": "\ud83d\udee0\ufe0f System",
-                "callback_data": "m:tl:sys"
+                "text": "\ud83d\udcbc Holdings",
+                "callback_data": "m:r:holdings"
             }
         ],
         [
             {
-                "text": "\u2b05\ufe0f Main Menu",
-                "callback_data": "m:menu"
+                "text": "\ud83d\udcdc Trade History",
+                "callback_data": "m:r:history"
+            },
+            {
+                "text": "\ud83e\udde0 Ask AI",
+                "callback_data": "m:ai:1"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\uddf9 Clear Chat",
+                "callback_data": "/clear"
+            },
+            {
+                "text": "\ud83d\udea8 PANIC SELL",
+                "callback_data": "/panic"
             }
         ]
     ],
-    "panel_text": "\ud83e\uddf0 *TOOLS*\nChoose a group.",
-    "out_time": 1795409983.1792862,
-    "out_mid": 4469,
-    "pages": {
-        "p": [
-            "\ud83d\udcc8 *TOP 10 GAINERS (24H)*\n\n```\n\ud83d\udcc8 GAINERS\n 1. PWT      +1501.11%\n 2. BLESS     +36.90%\n 3. ARIA      +22.81%\n 4. DGAI      +19.46%\n 5. PUMP       +9.64%\n 6. ICNT       +9.14%\n```\n\u2800",
-            "```\n 7. BTW        +5.54%\n 8. INJ        +4.86%\n 9. HYPE       +4.59%\n10. EGL1       +4.54%```\n_Minimum 24H volume: $1M._\n\n\ud83e\udde0 *AI:* BTC filter is inactive; the top 24\u2011hour gainers show extreme moves\n(e.g., PWT +1501%) but many may have low liquidity, so monitor volume before\nconsidering exposure.\n\u2800\n\u2800"
-        ],
-        "i": 0,
-        "mode": "Markdown",
-        "x": [
-            {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
-            }
-        ],
-        "cmd": "m:r:gain"
-    },
-    "panel_mid": 4470
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below."
 }

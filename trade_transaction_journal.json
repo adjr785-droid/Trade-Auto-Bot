@@ -1187,5 +1187,15 @@
         "time": 1795409802.6599245,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 6.1087, 'recurring_patterns': {'15-MINUTE NO-UPWARD-TREND ROTATION': 6, 'PANIC': 5, 'RSI 75': 2, 'MANUAL SELL ALL': 2, 'PARTIAL PROFIT': 3}, 'recommendations': ['Review and tighten criteria for panic exits, as they account for 5 of 30 trades and include two large losses.', 'Consider adjusting RSI\u201175 trigger; it produced mixed results (both profit and loss).', 'Evaluate manual sell signals to ensure they are based on clear price targets rather than ad\u2011hoc decisions.', 'Maintain current partial\u2011profit strategy but monitor consistency across symbols.']}"
+    },
+    {
+        "time": 1795411585.3755195,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [], 'summary': 'The portfolio currently holds a single position (IDOL-USDT) with a 7.96% unrealized gain and a stop at the entry price, indicating a modest profit and limited downside. No immediate actions are required; continue to monitor the position and maintain the existing stop level. Maintain current risk posture.'}"
+    },
+    {
+        "time": 1795411586.2367604,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 6.1087, 'recurring_patterns': {'PANIC': 4, '15-MINUTE NO-UPWARD-TREND ROTATION': 7, 'RSI 75': 2, 'PARTIAL PROFIT': 3, 'MANUAL SELL': 2}, 'recommendations': 'Maintain current strategy but limit exposure to PANIC-driven exits and short\u2011term rotation trades. Consider tighter stop\u2011losses on high\u2011volatility symbols (e.g., WLD-USDT) and prioritize trades with clear technical signals such as RSI over 70. Monitor manual sell decisions to ensure they align with profit targets rather than reactive timing.'}"
     }
 ]
