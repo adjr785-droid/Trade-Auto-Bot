@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935689786,
+    "last_update_id": 935689788,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT25.68/\u20a635,123",
+    "kb_ph": "USDT25.74/\u20a635,205",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -68,8 +68,8 @@
         "ICNT-USDT",
         "BNB-USDT"
     ],
-    "kb_mid": 4427,
-    "out_text": "\ud83d\udd0d *WHY: KII* \u2014 SETUP \u2014 QUEUED\nBREAKOUT matched; queued\n#38 \u00b7 $1.0M (min $1M)\n\u2705 24h +0.3%\n\u274c 1H +0.05% (need 0.5-6)\n\u274c RSI 64.6 (need 42-48)\n\u2705 Price > MA5 > MA10\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "kb_mid": 4430,
+    "out_text": "\ud83d\udd0d *WHY: SKYAI* \u2014 SKIP\nRSI 42-48; Oversold recovery; Breakout trend\n#27 \u00b7 $2.0M (min $1M)\n\u2705 24h -3.7%\n\u2705 1H +0.82% (need 0.5-6)\n\u274c RSI 51.0 (need 42-48)\n\u2705 Price > MA5 > MA10\n\ud83c\udfaf RSI 51.0 is 3.0 above 48\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
@@ -170,7 +170,7 @@
         ]
     ],
     "panel_text": "\ud83d\udd0d *WHY NOT BOUGHT?* (page 1/8)\nSetups first, then near-misses, then the rest. Tap a coin.",
-    "out_time": 1795408755.368827,
-    "out_mid": 4425,
-    "panel_mid": 4426
+    "out_time": 1795408782.9691179,
+    "out_mid": 4428,
+    "panel_mid": 4429
 }
