@@ -3,8 +3,8 @@ try:import fcntl
 except ImportError:fcntl=None
 TK=os.environ.get('TG_TOKEN');CHAT=str(os.environ.get('TG_CHAT_ID',''));API=f"https://api.telegram.org/bot{TK}"
 DB,ST,CFG,QF,LF,CD,SC,HIST,LOCK,SH,OUT,AL,ATHATL_CACHE="positions.json","tg_state.json","settings.json","queue.json","profit_ledger.json",".cmd_cooldown.json","scan_state.json","trade_history.json",".bot.lock","scan_history.json","telegram_output.json","alerts.json","ath_atl_cache.json"
-GUARDIAN="bot_guardian.json";GCHARTER="core_charter.json";GAUDIT="guardian_audit.json";JOURNAL="trade_transaction_journal.json";BREAKER="trade_circuit_breaker.json";AI_HEALTH="ai_health.json"
-FILES=[DB,ST,CFG,QF,LF,CD,SC,HIST,SH,OUT,AL,ATHATL_CACHE,JOURNAL,BREAKER,GUARDIAN,GCHARTER,GAUDIT,AI_HEALTH]
+COINDB="coins.db";GUARDIAN="bot_guardian.json";GCHARTER="core_charter.json";GAUDIT="guardian_audit.json";JOURNAL="trade_transaction_journal.json";BREAKER="trade_circuit_breaker.json";AI_HEALTH="ai_health.json"
+FILES=[COINDB,DB,ST,CFG,QF,LF,CD,SC,HIST,SH,OUT,AL,ATHATL_CACHE,JOURNAL,BREAKER,GUARDIAN,GCHARTER,GAUDIT,AI_HEALTH]
 STABLE=['USDC','USDT','DAI','FDUSD','TUSD','USDD','USDE'];LEV=['3L','3S','5L','5S','10L','10S','2L','2S'];BL=['RPANW','CT','ONE']
 ex=ccxt.bitget({'apiKey':os.environ.get('BITGET_API_KEY'),'secret':os.environ.get('BITGET_API_SECRET'),'password':os.environ.get('BITGET_API_PASSPHRASE'),'enableRateLimit':True});ex.options['createMarketBuyOrderRequiresPrice']=False
 GROQ_API_KEY=os.environ.get('GROQ_API_KEY','').strip()
@@ -449,6 +449,7 @@ def cfg():
  for k,v in d.items():s.setdefault(k,v)
  for _k in ('max_hold_hours','momentum_watch_minutes','rotation_retry_hours'):
   if _k in s:s.pop(_k,None);save(CFG,s)
+ if not s.get('one_h_v1'):s['h1_all_setups']=True;s['one_h_v1']=True;save(CFG,s)
  if not s.get('tp10_v1'):s['partial_tp_pct']=10.0;s['tp10_v1']=True;save(CFG,s)
  if not s.get('auto_mode_v1'):s['auto_buy_enabled']=True;s['auto_mode_v1']=True;save(CFG,s)
  return s
@@ -586,15 +587,18 @@ def _rsi(c,n=14):
 def _calc(sym):
  try:
   o=ex.fetch_ohlcv(S(sym),'1h',limit=100)
-  if len(o)<50:return (None,)*5
+  if len(o)<3:return (None,)*5
   c=[float(k[4]) for k in o[:-1]]
   try:
    f=max(0.0,min(1.0,(time.time()-float(o[-1][0])/1000.0)/3600.0));pm=c[-2]+(c[-1]-c[-2])*f
    _H1[sym]=(float(o[-1][4])/pm-1.0)*100.0 if pm>0 else None
   except Exception:_H1[sym]=None
+  if len(o)<50:
+   if _H1.get(sym) is not None:_NEWC[sym]=(float(o[-1][4]),_H1[sym],len(o))
+   return (None,)*5
   return float(o[-1][4]),c[-1],_rsi(c),round(sum(c[-5:])/5,6),round(sum(c[-10:])/10,6)
  except:return (None,)*5
-_PF={};_H1={};_NM=[];_RADAR=[]
+_PF={};_H1={};_NM=[];_RADAR=[];_NEWC={}
 def tk_spread(t):
  try:
   b=float(t.get('bid') or 0);a=float(t.get('ask') or 0)
@@ -603,7 +607,7 @@ def tk_spread(t):
 def mom_on(s):return bool(s.get('momentum_1h_enabled',True))
 def pre_ok(chg,s):
  # candle-fetch prefilter: with the 1H momentum window the 24h change only needs to stay under a loose ceiling
- if mom_on(s):return -30.0<chg<float(s.get('max_24h_pct',100.0))
+ if mom_on(s):return True  # 1H is the only momentum test; no 24h limits
  return -30.0<chg<-8.0 or 0.0<chg<30.0
 def near_miss(sym,chg,r,p,ma5,ma10,s):
  # TREND setup missed by a small margin (RSI window and/or 1H window); trend structure and 24h ceiling must already pass.
@@ -872,7 +876,6 @@ def parse(txt,usage,allow_all=False):
  if a<=0:tg("❌ Amount must be positive.");return None
  return c,a
 def cmd_buy(txt):
- if ai_emergency_active():tg("⛔ *BUY LOCKED:* AI emergency SELL-ONLY mode is active. No buying is permitted until AI recovery is verified; normal mode then resumes automatically.");return
  r=parse(txt,"❌ Usage: `/buy COIN USDT_AMOUNT` or `/buy COIN ALL`",True)
  if not r:return
  c,amt=r;sym=f"{c}-USDT"
@@ -888,7 +891,7 @@ def cmd_buy(txt):
   tg(f"❌ *BUY FAILED:* You have ${ub:.2f} free USDT; the order plus the $0.02 fee reserve would exceed it.");return
  # User-initiated /buy remains under the user's authority; AI provides a warning, never blocks it.
  ai_manual=ai_stage('manual_buy_review',{'symbol':sym,'amount_usdt':amt,'price':live(sym),'rsi':data(sym)[2],
-  'btc_filter_active':btc_blocked(cfg()),'market_filter':market_filter(cfg()),'existing_position':bool(old)},ttl=60,max_tokens=220)
+  'btc_filter_active':btc_blocked(cfg()),'market_filter':market_filter(cfg()),'existing_position':bool(old)},ttl=60,max_tokens=220,soft=True)
  try:
   ob=B('total',c) if old else 0.0;f,a=m_buy(f"{c}/USDT",amt);sl=sl_pct(sym,old) if old else sl_pct(sym)
   if old:
@@ -903,7 +906,6 @@ def cmd_buy(txt):
    tg('🧠 AI manual-buy advisory: '+str(ai_manual.get('summary',ai_manual.get('warning','Review available')))[:500])
  except Exception as e:tg(f"❌ *BUY FAILED:* {e}")
 def cmd_sell(txt):
- if ai_emergency_active():tg("⛔ *MANUAL SELL LOCKED:* Emergency mode reserves selling for the bot's configured exit conditions only.");return
  r=parse(txt,"❌ Usage: `/sell COIN USDT_AMOUNT` (or `ALL`)",True)
  if not r:return
  c,amt=r;sym=f"{c}-USDT";cs=f"{c}/USDT"
@@ -943,7 +945,7 @@ def cmd_sell(txt):
   if fully_filled:
    tg(cleanup_spot_dust_after_sale(sym))
   ai_review=ai_stage('sell_review',{'symbol':sym,'reason':'MANUAL SELL','sold_quantity':filled,'average_exit':px,
-   'remaining_base':rem,'realized_pnl_usdt':pnl},ttl=60,max_tokens=220)
+   'remaining_base':rem,'realized_pnl_usdt':pnl},ttl=60,max_tokens=220,soft=True)
   if ai_review:journal_event('ai_manual_sell_review',symbol=sym,review=ai_review)
  except Exception as e:tg(f"❌ *SELL FAILED:* {e}")
 def cmd_cancel_all():
@@ -2019,6 +2021,73 @@ def send_near_miss(s,ai_market=None):
   rows.append([_B(f"🛒 Buy {coin}",f"m:b:{coin}"),_B(f"🔎 Analyse {coin}",f"m:a:{coin}")])
   mk_cd("nm_"+c["sym"])
  _create("\n".join(lines)[:3900],"Markdown",{"inline_keyboard":rows},silent=False)
+def coin_db_conn():
+ import sqlite3
+ c=sqlite3.connect(COINDB,timeout=10)
+ c.execute("CREATE TABLE IF NOT EXISTS coins(sym TEXT PRIMARY KEY,first_seen REAL,last_seen REAL,scans INTEGER,price REAL,chg24 REAL,h1 REAL,rsi REAL,ma5 REAL,ma10 REAL,vol REAL,candles INTEGER,status TEXT,setup TEXT,reason TEXT)")
+ c.execute("CREATE TABLE IF NOT EXISTS snaps(sym TEXT,t REAL,price REAL,h1 REAL,rsi REAL,status TEXT)")
+ c.execute("CREATE INDEX IF NOT EXISTS snaps_sym ON snaps(sym,t)")
+ return c
+_REJ=("Vol below","Spread","Top 15","24H","No candle","Not evaluated","Skipped")
+def coin_status(rec,held):
+ d=str(rec.get("decision",""));r=str(rec.get("reason",""))
+ if rec.get("sym") in held:return "BOUGHT"
+ if d.startswith("SETUP"):return "READY"
+ if r.startswith(_REJ):return "REJECTED"
+ return "WATCHING"
+def coin_db_update(records,held,newc=None,keep_days=3,keep_snaps=6):
+ # The scanner writes every coin it looked at into the coin database (one row per coin + a short history).
+ now=time.time();held=set(held);newc=newc or {};conn=coin_db_conn()
+ try:
+  for rec in records:
+   sym=rec.get("sym")
+   if not sym:continue
+   st=coin_status(rec,held);setup=str(rec.get("reason","")).split(" ")[0] if st=="READY" else None
+   row=conn.execute("SELECT first_seen,scans FROM coins WHERE sym=?",(sym,)).fetchone()
+   fs,sc=(row[0],row[1]) if row else (now,0)
+   h1=rec.get("h1")
+   conn.execute("INSERT OR REPLACE INTO coins VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",(sym,fs,now,sc+1,rec.get("price"),rec.get("chg"),h1,rec.get("rsi"),rec.get("ma5"),rec.get("ma10"),rec.get("vol"),None,st,setup,str(rec.get("reason",""))[:120]))
+   conn.execute("INSERT INTO snaps VALUES(?,?,?,?,?,?)",(sym,now,rec.get("price"),h1,rec.get("rsi"),st))
+  for sym,(p,h,n) in newc.items():
+   row=conn.execute("SELECT first_seen,scans FROM coins WHERE sym=?",(sym,)).fetchone()
+   fs,sc=(row[0],row[1]) if row else (now,0)
+   conn.execute("INSERT OR REPLACE INTO coins VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",(sym,fs,now,sc+1,p,None,h,None,None,None,None,n,"NEW",None,f"Too new to score ({n} candles)"))
+  conn.execute("DELETE FROM coins WHERE last_seen<?",(now-keep_days*86400,))
+  conn.execute("DELETE FROM snaps WHERE rowid IN (SELECT rowid FROM (SELECT rowid,ROW_NUMBER() OVER (PARTITION BY sym ORDER BY t DESC) rn FROM snaps) WHERE rn>?)",(keep_snaps,))
+  conn.commit()
+ finally:conn.close()
+def coin_db_rows(limit=12):
+ conn=coin_db_conn()
+ try:
+  cnt=dict(conn.execute("SELECT status,COUNT(*) FROM coins GROUP BY status").fetchall())
+  rows=conn.execute("SELECT sym,status,price,h1,rsi,scans,reason FROM coins WHERE status IN ('READY','NEW','WATCHING','BOUGHT') ORDER BY CASE status WHEN 'READY' THEN 0 WHEN 'NEW' THEN 1 WHEN 'BOUGHT' THEN 2 ELSE 3 END, COALESCE(h1,-99) DESC LIMIT ?",(limit,)).fetchall()
+  return cnt,rows
+ finally:conn.close()
+def cmd_coins():
+ try:cnt,rows=coin_db_rows()
+ except Exception as e:ui_send(f"❌ Coin list error: {e}",[_MENU_BTN]);return
+ if not cnt:ui_send("📚 *COIN LIST*\nEmpty. It fills after the next scan.",[[_B("🔍 Scan now","m:r:scan")],_MENU_BTN]);return
+ ic={"READY":"✅","NEW":"🆕","BOUGHT":"💼","WATCHING":"👀"}
+ lines=["📚 *COIN LIST*",f"✅ Ready {cnt.get('READY',0)} | 👀 Watching {cnt.get('WATCHING',0)} | 🆕 New {cnt.get('NEW',0)} | 💼 Held {cnt.get('BOUGHT',0)} | ⛔ Rejected {cnt.get('REJECTED',0)}",""]
+ for sym,st,p,h,r,n,why in rows:
+  ln=f"{ic.get(st,'')} *{sym.split('-')[0]}* {fp(p) if p else '-'}"
+  if h is not None:ln+=f" | 1H {h:+.2f}%"
+  if r is not None:ln+=f" | RSI {r:.0f}"
+  lines.append(ln+f" | seen {n}x")
+ ui_send("\n".join(lines)[:3800],[[_B("🔍 Scan now","m:r:scan"),_B("🧾 Scan History","m:scan_hist")],_MENU_BTN])
+def send_new_alerts(s):
+ # New tokens (under 50 hourly candles) cannot be scored; alert only, never auto-buy. Rare: one alert per coin per 3h, max 2 per scan.
+ try:
+  if not s.get('new_token_alerts',True) or not _NEWC:return
+  mn=float(s.get('mom_1h_min_pct',0.5));held=[k.split("-")[0] for k in load(DB)]
+  c=[(sym,v) for sym,v in sorted(_NEWC.items(),key=lambda x:-x[1][1]) if v[1]>=mn and sym.split("-")[0] not in held and not in_cd("new_"+sym,10800)][:2]
+  if not c:return
+  lines=["🆕 *ALERT:* NEW TOKEN MOVING","_Too new to score (no RSI or trend). Nothing was bought. Risky: thin and very volatile._",""];rows=[]
+  for sym,(p,h,n) in c:
+   coin=sym.split("-")[0];lines.append(f"*{coin}* — {fp(p)} USDT | 1H {h:+.2f}% | listed about {n}h ago")
+   rows.append([_B(f"🛒 Buy {coin}",f"m:b:{coin}"),_B(f"🔎 Analyse {coin}",f"m:a:{coin}")]);mk_cd("new_"+sym)
+  _create("\n".join(lines)[:3900],"Markdown",{"inline_keyboard":rows},silent=False)
+ finally:_NEWC.clear()
 def fast_watch():
  # Once a minute in live mode: re-check the radar (coins near the entry rules) so alerts fire without waiting for the next full scan.
  s=cfg()
@@ -2155,6 +2224,10 @@ def scan(force=False):
  except Exception as e:print("RADAR SAVE ERR",str(e)[:100])
  try:send_near_miss(s,ai_market)
  except Exception as e:print("NEAR-MISS SEND ERR",str(e)[:120])
+ try:coin_db_update(records,load(DB).keys(),dict(_NEWC))
+ except Exception as e:print("COIN DB ERR",str(e)[:120])
+ try:send_new_alerts(s)
+ except Exception as e:print("NEW-TOKEN ALERT ERR",str(e)[:120])
  full=force or now-st.get('last_full',0)>=3300
  sh["items"].extend(records if full else [x for x in records if str(x.get('decision','')).startswith('SETUP')]);sh["items"]=sh["items"][-15000:];save(SH,sh)
  if qu or not buying_allowed:save(QF,q)
@@ -2255,13 +2328,17 @@ def ui_more(kind,pg=0):
  if pg>0:nav.append(_B("◀️ Prev",f"m:more:{kind}:{pg-1}"))
  if pg<n-1:nav.append(_B("Next ▶️",f"m:more:{kind}:{pg+1}"))
  ui_send(f"➕ *MORE COINS* (page {pg+1}/{n})\nBiggest 24h volume first. Tap a coin.",_grid([_B(c,pre+c) for c in v[pg*per:(pg+1)*per]],3)+([nav] if nav else [])+[[_B("⬅️ Back",back)]])
-def ui_settings_page(pg=0):
- keys=[k for k in cfg() if k not in ("auto_mode_v1","tp10_v1")];per=10;n=(len(keys)+per-1)//per;pg=max(0,min(pg,n-1));cur=cfg()
- btns=[_B(f"{k} = {cur[k]}"[:60],f"m:k:{k}") for k in keys[pg*per:(pg+1)*per]]
- nav=[]
- if pg>0:nav.append(_B("◀️ Prev",f"m:sp:{pg-1}"))
- if pg<n-1:nav.append(_B("Next ▶️",f"m:sp:{pg+1}"))
- ui_send(f"⚙️ *SETTINGS* (page {pg+1}/{n})\nTap a setting to change it.",_grid(btns,1)+([nav] if nav else [])+[_MENU_BTN])
+PRESETS={"safe":{"risk_per_trade_pct":0.5,"max_position_pct":8.0,"max_portfolio_exposure_pct":30.0,"max_daily_trades":5},
+ "balanced":{"risk_per_trade_pct":1.0,"max_position_pct":15.0,"max_portfolio_exposure_pct":50.0,"max_daily_trades":13},
+ "active":{"risk_per_trade_pct":1.5,"max_position_pct":20.0,"max_portfolio_exposure_pct":60.0,"max_daily_trades":25}}
+PRESET_NAMES={"safe":"🛡 Safe","balanced":"⚖️ Balanced","active":"🚀 Active"}
+SET_SWITCHES=(("auto_buy_enabled","Auto-buy"),("weak_market_mode","Weak-market half size"),("h1_all_setups","1H rule for all setups"))
+def ui_settings_page(pg=0,note=""):
+ cur=cfg();mode=next((n for n,v in PRESETS.items() if all(float(cur.get(k,-1))==float(x) for k,x in v.items())),None)
+ rows=[[_B(("✅ " if n==mode else "")+PRESET_NAMES[n],f"m:pre:{n}") for n in PRESETS]]
+ rows+=[[_B(f"{'🟢' if cur.get(k) else '⚪'} {lb}: {'ON' if cur.get(k) else 'OFF'}",f"m:tg:{k}")] for k,lb in SET_SWITCHES]
+ txt="⚙️ *SETTINGS*\n"+(note+"\n" if note else "")+f"Mode: {PRESET_NAMES.get(mode,'Custom')}\nSafe = small trades, few per day. Active = bigger trades, more per day.\nEverything else adjusts itself."
+ ui_send(txt,rows+[_MENU_BTN])
 def ui_setting(k):
  cur=cfg()
  if k not in cur:ui_send("❌ Unknown setting.",[_MENU_BTN]);return
@@ -2283,7 +2360,7 @@ def ui_cb(t):
    ui_send("🛒 *BUY* — choose a coin:",_grid([_B(c,f"m:b:{c}") for c in cs],3)+[[_B("➕ More coins","m:more:buy:0")],_MENU_BTN])
   elif a=="b":
    c=p[2];free=B('free','USDT');amts=[x for x in (2,5,10,15) if x<=free]
-   ui_send(f"🛒 *BUY {c}*\nFree USDT: ${free:.2f}\nChoose how much:",[[_B(f"${x}",f"m:bc:{c}:{x}") for x in amts]+[_B("ALL",f"m:bc:{c}:ALL")],[_B("⬅️ Back","m:buy")]])
+   ui_send(f"🛒 *BUY {c}*\nFree USDT: ${free:.2f}\nChoose how much:",[[_B(f"${x}",f"m:bc:{c}:{x}") for x in amts]+[_B("ALL",f"m:bc:{c}:ALL")],[_B("✏️ Custom amount",f"m:cu:b:{c}")],[_B("⬅️ Back","m:buy")]])
   elif a=="bc":
    c,x=p[2],p[3];px=live(f"{c}-USDT")
    ui_send(f"⚠️ *CONFIRM BUY*\n{c} for {'ALL free USDT' if x=='ALL' else '$'+x} at about {fp(px)} USDT.",[[_B("✅ Confirm",f"m:bx:{c}:{x}"),_B("❌ Cancel","m:menu")]])
@@ -2294,10 +2371,15 @@ def ui_cb(t):
    else:ui_send("💸 *SELL* — choose a position:",_grid([_B(c,f"m:s:{c}") for c in cs],3)+[_MENU_BTN])
   elif a=="s":
    c=p[2];fb=B('free',c);px=live(f"{c}-USDT") or 0
-   ui_send(f"💸 *SELL {c}*\nYou hold {fb:.8g} (about ${fb*px:.2f}).\nHow much?",[[_B(f"{x}%",f"m:sc:{c}:{x}") for x in (25,50,75,100)],[_B("⬅️ Back","m:sell")]])
+   ui_send(f"💸 *SELL {c}*\nYou hold {fb:.8g} (about ${fb*px:.2f}).\nHow much?",[[_B(f"{x}%",f"m:sc:{c}:{x}") for x in (25,50,75,100)],[_B("✏️ Custom amount",f"m:cu:s:{c}")],[_B("⬅️ Back","m:sell")]])
   elif a=="sc":
    c,x=p[2],int(p[3]);fb=B('free',c);px=live(f"{c}-USDT") or 0
    ui_send(f"⚠️ *CONFIRM SELL*\n{x}% of {c} (about ${fb*px*x/100:.2f}) at market.",[[_B("✅ Confirm",f"m:sx:{c}:{x}"),_B("❌ Cancel","m:menu")]])
+  elif a=="coins":cmd_coins()
+  elif a=="cu" and len(p)>3:
+   st=load(ST,{});st["amt_pending"]={"side":p[2],"coin":p[3],"t":time.time()};save(ST,st)
+   ui_send(f"✏️ *{'BUY' if p[2]=='b' else 'SELL'} {p[3]}*\nSend the amount in USDT (example: 7.5).",[[_B("❌ Cancel","m:menu")]])
+  elif a=="sxu" and len(p)>3:handle(f"/sell {p[2]} {p[3]}",0)
   elif a=="sx":
    c,x=p[2],int(p[3])
    if x>=100:handle(f"/sell {c} ALL",0)
@@ -2323,6 +2405,12 @@ def ui_cb(t):
   elif a=="set":ui_settings_page(0)
   elif a=="sp":ui_settings_page(int(p[2]))
   elif a=="k":ui_setting(p[2])
+  elif a=="pre" and len(p)>2 and p[2] in PRESETS:
+   s=cfg()
+   for k,v in PRESETS[p[2]].items():s[k]=type(s.get(k,v))(v) if not isinstance(s.get(k),bool) else v
+   save(CFG,s);ui_settings_page(0,f"✅ {PRESET_NAMES[p[2]]} mode set.")
+  elif a=="tg" and len(p)>2 and p[2] in dict(SET_SWITCHES):
+   s=cfg();s[p[2]]=not bool(s.get(p[2]));save(CFG,s);ui_settings_page(0,f"✅ {dict(SET_SWITCHES)[p[2]]} is now {'ON' if s[p[2]] else 'OFF'}.")
   elif a=="kv":
    k,d=p[2],p[3];v=cfg().get(k)
    if isinstance(v,bool):new=not v
@@ -2362,7 +2450,7 @@ def ui_cb(t):
    _T=[_B("⬅️ Tools","m:tools"),_B("🏠 Main Menu","m:menu")]
    if p[2]=="trade":ui_send("🛒 *TRADE*",[[_B("🛒 Buy","m:buy"),_B("💸 Sell","m:sell")],[_B("❌ Cancel Open Orders","m:r:cancel"),_B("🧹 Dust → BGB","m:r:dust")],[_B("🔄 Sync manual coins","m:r:sync")],[_B("⏸ Pause auto-buy","m:r:pause"),_B("▶️ Resume auto-buy","m:r:resume")],_T])
    elif p[2]=="alerts":ui_send("🔔 *ALERTS*",[[_B("🔔 Set alert","m:al"),_B("📋 My alerts","m:r:alerts")],[_B("🗑 Cancel all alerts","m:r:cancelalerts")],_T])
-   elif p[2]=="scan":ui_send("🔍 *SCAN*",[[_B("🔍 Scan now","m:r:scan"),_B("🧾 Scan History","m:scan_hist")],[_B("📈 Gainers","m:r:gain"),_B("📉 Losers","m:r:lose")],_T])
+   elif p[2]=="scan":ui_send("🔍 *SCAN*",[[_B("🔍 Scan now","m:r:scan"),_B("🧾 Scan History","m:scan_hist")],[_B("📚 Coin List","m:coins")],[_B("📈 Gainers","m:r:gain"),_B("📉 Losers","m:r:lose")],_T])
    elif p[2]=="sys":ui_send("🛠️ *SYSTEM*",[[_B("🛠️ Audit","m:r:audit"),_B("🧩 Layout","m:lay")],[_B("🧠 Resume AI Mode","m:r:airesume")],_T])
   elif a=="more" and len(p)>3:ui_more(p[2],int(p[3]))
   elif a=="dash":
@@ -2396,6 +2484,17 @@ def handle(t,age):
   return
  if not t.startswith(("/","scan_history")):
   try:
+   _ap=load(ST,{}).get("amt_pending")
+   if _ap:
+    st=load(ST,{});st.pop("amt_pending",None);save(ST,st)
+    if time.time()-float(_ap.get("t",0))<600:
+     try:amt=round(float(t.replace(",","").replace("$","").strip()),2)
+     except Exception:amt=None
+     if amt and amt>0:
+      c=_ap["coin"]
+      if _ap["side"]=="b":ui_send(f"⚠️ *CONFIRM BUY*\n{c} for ${amt:g} at about {fp(live(f'{c}-USDT'))} USDT.",[[_B("✅ Confirm",f"m:bx:{c}:{amt:g}"),_B("❌ Cancel","m:menu")]])
+      else:ui_send(f"⚠️ *CONFIRM SELL*\n${amt:g} of {c} at market.",[[_B("✅ Confirm",f"m:sxu:{c}:{amt:g}"),_B("❌ Cancel","m:menu")]])
+      return
    _pd=load(ST,{}).get("rename_pending")
    if _pd:rename_apply(t);return
   except Exception as e:print(f"RENAME ERR: {e}")
