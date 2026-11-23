@@ -2,14 +2,14 @@
     "IDOL-USDT": {
         "entry_price": 0.0157,
         "safe_zone": 0.0157,
-        "stop_loss": 0.01413,
-        "peak_price": 0.0157,
-        "last_price": 0.01554,
+        "stop_loss": 0.0157,
+        "peak_price": 0.01658,
+        "last_price": 0.01658,
         "opened_at": 1795401397.5495398,
         "sl_pct": 10.0,
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
-        "xsl": 0.014444,
-        "seen": 1795401818.8061116
+        "xsl": 0.0157,
+        "seen": 1795405215.2225075
     }
 }
