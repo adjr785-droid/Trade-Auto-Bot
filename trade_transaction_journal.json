@@ -1087,5 +1087,15 @@
         "time": 1795405224.2028363,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 6.1087, 'recurring_patterns': {'PANIC': 4, '15-MINUTE NO-UPWARD-TREND ROTATION': 7, 'PARTIAL PROFIT': 3, 'RSI 75': 2, 'MANUAL SELL': 2}, 'recommendations': 'Maintain current strategy but limit exposure to PANIC-driven exits, which have produced net negative PnL. Consider tightening criteria for 15\u2011minute rotation signals, as they yield modest gains. Continue leveraging RSI\u201175 entries, which show positive outcomes. Overall risk exposure appears modest; prioritize capital preservation while seeking higher\u2011probability setups.'}"
+    },
+    {
+        "time": 1795406140.2099845,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (13)', 'attention': [{'symbol': 'IDOL-USDT', 'action': 'hold', 'reason': 'Position is modest (entry 0.0157 USDT) with a small positive PnL (+4.71%). No stop loss breach and price remains above entry, so maintaining the position aligns with current risk limits.'}], 'summary': 'Overall portfolio risk remains within the daily limit. The only open position (IDOL-USDT) shows a modest gain and is safely above its stop level. No immediate action required; continue monitoring price relative to stop and overall exposure.'}"
+    },
+    {
+        "time": 1795406141.183604,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 6.1087, 'recurring_patterns': {'15-MINUTE NO-UPWARD-TREND ROTATION': 7, 'PANIC': 4, 'RSI 75': 2, 'PARTIAL PROFIT': 3, 'MANUAL SELL': 2}, 'recommendations': 'Maintain current risk parameters but consider tightening stop\u2011loss triggers during rapid\u2011panic periods. The frequent \"15\u2011MINUTE NO\u2011UPWARD\u2011TREND ROTATION\" signals suggest the bot is often entering low\u2011momentum windows; evaluate adding a minimum momentum filter. RSI\u2011based entries showed positive returns, so keep RSI 75 as a trigger but monitor for over\u2011extension. Overall performance is modestly positive; continue conservative position sizing and avoid manual overrides that bypass automated safeguards.'}"
     }
 ]
