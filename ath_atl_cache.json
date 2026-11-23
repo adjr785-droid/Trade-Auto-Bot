@@ -106,5 +106,11 @@
         "atl": 0.02,
         "checked_at": 1795468330.2636514,
         "status": "complete"
+    },
+    "ARIA-USDT": {
+        "ath": 1.44444,
+        "atl": 0.004,
+        "checked_at": 1795477154.092532,
+        "status": "complete"
     }
 }
