@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935689857,
+    "last_update_id": 935689859,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT24.67/\u20a633,746",
+    "kb_ph": "USDT24.85/\u20a633,981",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -64,31 +64,10 @@
         "JCT-USDT",
         "WLD-USDT"
     ],
-    "kb_mid": 4571,
-    "out_mid": 4568,
-    "out_text": "\u26d4 *AUTO-BUY REJECTED \u2014 BLESS-USDT*\nReason: Queued signal expired; waiting for a fresh scan.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "kb_mid": 4576,
+    "panel_hidden": true,
+    "out_mid": 4575,
+    "out_text": "\u2705 \ud83e\uddf9 BGB dust converted: 0.09970000 INJ \u2192 0.43971297 BGB | Fee: 0.00879426\nBGB. Order: 1508768085158076417.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795439386.9994383,
-    "panel_rows": [
-        [
-            {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
-            },
-            {
-                "text": "1/5",
-                "callback_data": "pg:x"
-            },
-            {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
-            },
-            {
-                "text": "\ud83c\udfe0",
-                "callback_data": "m:menu"
-            }
-        ]
-    ],
-    "panel_text": "\ud83d\udcc4 *Page 1/5*",
-    "panel_hidden": true
+    "out_time": 1795444266.864421
 }

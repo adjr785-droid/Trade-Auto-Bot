@@ -1317,5 +1317,51 @@
         "time": 1795439358.6470222,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 6.1087, 'recurring_patterns': {'PANIC': 4, '15-MINUTE NO-UPWARD-TREND ROTATION': 7, 'RSI 75': 2, 'PARTIAL PROFIT': 3, 'MANUAL SELL': 2}, 'recommendations': 'Limit exposure to trades triggered by PANIC signals, as they contributed to multiple losses. Prioritize strategies with RSI 75 and PARTIAL PROFIT exits, which showed positive PnL. Consider tightening the criteria for 15\u2011minute no\u2011upward\u2011trend rotations, as they produced mixed results. Maintain current win\u2011rate focus but aim to reduce loss frequency before scaling position size.'}"
+    },
+    {
+        "time": 1795444258.3146403,
+        "event": "sell_fill_verified",
+        "symbol": "INJ-USDT",
+        "filled": 0.2,
+        "average": 6.929,
+        "order_id": "1508768058134175745",
+        "reason": "RSI 75",
+        "attempt": 1
+    },
+    {
+        "time": 1795444259.42367,
+        "event": "trade_closed",
+        "symbol": "INJ-USDT",
+        "pnl_usdt": 0.10259999999999998,
+        "reason": "RSI 75",
+        "strategy": "BREAKOUT"
+    },
+    {
+        "time": 1795444260.1199079,
+        "event": "full_sale_verified_or_dust",
+        "symbol": "INJ-USDT",
+        "remaining_base": 0.0997,
+        "remaining_value_usdt": 0.6908213,
+        "filled": 0.2
+    },
+    {
+        "time": 1795444273.417539,
+        "event": "ai_sell_review",
+        "symbol": "INJ-USDT",
+        "review": {
+            "review": "The position was exited at an average price of 6.929 USDT, realizing a modest profit of 0.1026 USDT on the sold 0.2 INJ. The exit was triggered by an RSI reading of 75, indicating overbought conditions. A small amount of base (0.0997 INJ) remains untraded, suggesting the exit was partial and may leave exposure to further price movement.",
+            "lesson": "Using RSI as a sole exit trigger can be effective for capturing short-term overbought reversals, but the modest profit and remaining base highlight the need for complementary criteria (e.g., profit targets, trailing stops) to fully capture upside and manage residual exposure.",
+            "confidence": "medium"
+        }
+    },
+    {
+        "time": 1795444278.8815527,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [], 'summary': 'The portfolio currently passes risk checks. The only open position is JCT-USDT with a modest 2.79% unrealized gain and a stop loss comfortably below the entry price, indicating limited downside risk. No immediate action is required; continue to monitor the position and maintain existing risk parameters.'}"
+    },
+    {
+        "time": 1795444280.03047,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.4632, 'recurring_patterns': ['RSI 75 (3 occurrences)', '15-MINUTE NO-UPWARD-TREND ROTATION (7 occurrences)', 'PANIC (4 occurrences)', 'PARTIAL PROFIT (3 occurrences)'], 'recommendations': ['Limit exposure to high\u2011volatility \"PANIC\" exits; consider tighter stop\u2011losses or manual confirmation before closing positions under panic conditions', 'Leverage the positive signal from \"RSI 75\" entries but validate with additional indicators to avoid over\u2011reliance on a single metric', 'Review the consistency of \"15\u2011MINUTE NO\u2011UPWARD\u2011TREND ROTATION\" trades; they show modest gains but may benefit from longer holding periods or confirmation of trend reversal', 'Maintain current win\u2011rate focus but aim to improve net PnL by reducing small\u2011loss trades and optimizing position sizing for higher\u2011profit opportunities']}"
     }
 ]

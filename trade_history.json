@@ -213,5 +213,12 @@
         "time": 1795398059.498468,
         "reason": "PARTIAL PROFIT +10.4%",
         "strategy": "MANUAL"
+    },
+    {
+        "sym": "INJ-USDT",
+        "pnl": 0.10259999999999998,
+        "time": 1795444259.4230435,
+        "reason": "RSI 75",
+        "strategy": "BREAKOUT"
     }
 ]
