@@ -29,8 +29,8 @@
             "failures": 3
         },
         "market_regime": {
-            "last_success": 1795417945.2217643,
-            "successes": 34,
+            "last_success": 1795423549.7843392,
+            "successes": 35,
             "last_error": ""
         },
         "manual_buy_review": {
@@ -64,7 +64,7 @@
             "last_error": ""
         }
     },
-    "last_stage_success": 1795423531.658752,
+    "last_stage_success": 1795423549.7843392,
     "last_success": 1795423523.147952,
     "emergency_ended": 1795366791.6880443,
     "recovery_start_alerted": false
