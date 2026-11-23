@@ -4,13 +4,13 @@
         "safe_zone": 6.416,
         "stop_loss": 5.4655,
         "peak_price": 6.466,
-        "last_price": 6.459,
+        "last_price": 6.451,
         "opened_at": 1795429449.2904963,
         "sl_pct": 3.0,
         "strategy": "BREAKOUT",
         "purchase_source": "AUTO",
         "xsl": 6.22352,
-        "seen": 1795430942.4292586
+        "seen": 1795431005.972151
     },
     "JCT-USDT": {
         "entry_price": 0.001616,
@@ -23,6 +23,6 @@
         "strategy": "TREND",
         "purchase_source": "AUTO",
         "xsl": 0.001556,
-        "seen": 1795430942.610648
+        "seen": 1795431006.345216
     }
 }

@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935689848,
+    "last_update_id": 935689849,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -25,7 +25,7 @@
         ],
         "m:r:holdings": [
             1,
-            1795409550.2397125
+            1795431007.8580713
         ],
         "/analyse": [
             4,
@@ -74,7 +74,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "1/5",
+                "text": "2/5",
                 "callback_data": "pg:x"
             },
             {
@@ -91,7 +91,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/5*",
+    "panel_text": "\ud83d\udcc4 *Page 2/5*",
     "out_time": 1795430941.9745965,
     "pages": {
         "p": [
@@ -101,7 +101,7 @@
             "\ud83d\udd34 Entry: 0.001616 USDT | PnL: -0.19% ($-0.00)\nRSI (1h): 47.69\nMA5 (1h): 0.001598\nMA10 (1h): 0.001587\nMarket sentiment: \ud83d\udfe1 Neutral / Mixed\nBot trailing stop: ON (8.0% below peak)\nPeak price: 0.001616\nExchange stop level: 0.001556\n\n\n\u2800\n\u2800",
             "\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\nand 8 more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT24.68/\u20a633,747\n\n\ud83e\udde0 *AI:* Portfolio is tiny ($24.68 total) with most value in USDT; INJ shows\nmodest +0.67% gain and trailing stop active, while JCT is slightly down; several\ncoins lack USDT pricing, requiring attention.\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 0,
+        "i": 1,
         "mode": "Markdown",
         "x": [
             {
