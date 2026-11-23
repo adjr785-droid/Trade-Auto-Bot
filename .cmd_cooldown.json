@@ -13,8 +13,8 @@
     "buy:INJ-USDT": 1795202249.1361806,
     "sell:INJ-USDT": 1795195499.5678596,
     "buy:JCT-USDT": 1795449379.0219297,
-    "sell:JCT-USDT": 1795202099.5561574,
-    "sell:BGB-USDT": 1795207998.762581,
+    "sell:JCT-USDT": 1795465688.7791138,
+    "sell:BGB-USDT": 1795465796.1938117,
     "buy:MMT-USDT": 1795223817.8872025,
     "buy:PUMP-USDT": 1795341735.0527556,
     "sell:PUMP-USDT": 1795245632.9717505,
@@ -75,5 +75,6 @@
     "buy_reject_notice:IDOL-USDT:Top-10 book depth $4511 below limit.": 1795458840.399595,
     "buy_reject_notice:IDOL-USDT:Top-10 book depth $4674 below limit.": 1795458914.6610177,
     "buy_reject_notice:IDOL-USDT:Top-10 book depth $4462 below limit.": 1795458989.0676713,
-    "buy_reject_notice:IDOL-USDT:Insufficient USDT ($0.03).": 1795459078.4763587
+    "buy_reject_notice:IDOL-USDT:Insufficient USDT ($0.03).": 1795459078.4763587,
+    "buy:BGB-USDT": 1795465769.2784743
 }

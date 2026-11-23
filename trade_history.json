@@ -220,5 +220,19 @@
         "time": 1795444259.4230435,
         "reason": "RSI 75",
         "strategy": "BREAKOUT"
+    },
+    {
+        "sym": "JCT-USDT",
+        "pnl": -0.6954636999999992,
+        "time": 1795465691.565836,
+        "reason": "MANUAL SELL ALL",
+        "strategy": "OTHER"
+    },
+    {
+        "sym": "BGB-USDT",
+        "pnl": -0.00041959999999995377,
+        "time": 1795465799.0693069,
+        "reason": "MANUAL SELL ALL",
+        "strategy": "MANUAL"
     }
 ]
