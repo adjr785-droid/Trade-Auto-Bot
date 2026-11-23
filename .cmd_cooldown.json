@@ -63,5 +63,6 @@
     "buy_reject_notice:BLESS-USDT:Top-10 book depth $3557 below limit.": 1795435109.2215147,
     "buy_reject_notice:BLESS-USDT:Top-10 book depth $3415 below limit.": 1795435181.5978787,
     "buy_reject_notice:BLESS-USDT:Top-10 book depth $3995 below limit.": 1795435254.272222,
-    "buy_reject_notice:BLESS-USDT:Top-10 book depth $4665 below limit.": 1795435326.8935523
+    "buy_reject_notice:BLESS-USDT:Top-10 book depth $4665 below limit.": 1795435326.8935523,
+    "buy_reject_notice:BLESS-USDT:Queued signal expired; waiting for a fresh scan.": 1795439387.000554
 }

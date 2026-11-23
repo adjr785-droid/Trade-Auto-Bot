@@ -29,8 +29,8 @@
             "failures": 4
         },
         "market_regime": {
-            "last_success": 1795435095.026017,
-            "successes": 39,
+            "last_success": 1795439378.866486,
+            "successes": 40,
             "last_error": ""
         },
         "manual_buy_review": {
@@ -59,8 +59,8 @@
             "last_error": ""
         },
         "opportunity_ranking": {
-            "last_success": 1795435103.1395164,
-            "successes": 5,
+            "last_success": 1795439380.8180556,
+            "successes": 6,
             "last_error": ""
         },
         "buy_gate": {
@@ -69,7 +69,7 @@
             "last_error": ""
         }
     },
-    "last_stage_success": 1795439357.85768,
+    "last_stage_success": 1795439380.8180556,
     "last_success": 1795439350.721408,
     "emergency_ended": 1795435075.924199,
     "recovery_start_alerted": false
