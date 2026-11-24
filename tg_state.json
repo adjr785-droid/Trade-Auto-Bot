@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690095,
+    "last_update_id": 935690096,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -20,8 +20,8 @@
     "last_cmd": "/bot",
     "page_mem": {
         "/bot": [
-            3,
-            1795408039.230187
+            1,
+            1795493361.8607023
         ],
         "m:r:holdings": [
             0,
@@ -76,7 +76,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "1/2",
+                "text": "2/2",
                 "callback_data": "pg:x"
             },
             {
@@ -93,7 +93,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/2*",
+    "panel_text": "\ud83d\udcc4 *Page 2/2*",
     "audit_down": {},
     "audit_last": 1795493243.6140645,
     "out_mid": 4961,
@@ -102,7 +102,7 @@
             "\ud83d\udda5 *SYSTEM* \u2014 HEALTHY \u2705\nBuying: PAUSED \u26d4 (Loss limit ($-1.10 / -$0.66))\nHealth: Bot 100% | AI 93% (Normal)\nLayers: \u2705 Exchange \u2705 Scanner \u2705 Database \u2705 Buyer \u2705 Stops\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83e\udded *STRATEGY*\nEntry: TREND, RSI 42-48, 1H +0.5\u20136%, price > MA5 > MA10, must be rising vs last\nscan\nExit: stop 15% | trail 8.0% | RSI 75 | sell 28% at +21.4843%\nRisk: 0.5% per trade | max 5 trades/day | pause at -5.0% day\n\u2800\n\u2800",
             "\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udcbc $21.92 | \u20a630,247 | Cash $0.04 | Coins $21.84\nToday -2.06% | Last scan 12 min ago | Queue 0 | Positions 2\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 0,
+        "i": 1,
         "mode": "Markdown",
         "x": [
             {
