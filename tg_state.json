@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690071,
+    "last_update_id": 935690073,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -25,7 +25,7 @@
         ],
         "m:r:holdings": [
             1,
-            1795477273.4382005
+            1795489486.1116805
         ],
         "/analyse": [
             6,
@@ -66,9 +66,9 @@
         "ARX-USDT"
     ],
     "kb_mid": 4918,
-    "out_text": "\ud83d\udcbc *PORTFOLIO* $21.82 | \u20a630,121\n\ud83d\udcb5 Cash free $6.25 | In coins $15.55 (71%)\n\ud83d\udfe1 BGB 0.00078233412 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *ARIA* $8.01 (37%)\n+0.26% (+$0.02) | Entry 0.311181\nPrice 0.311990 | Stop 0.280063 (-10%)\nRSI 56 | Bullish | ATH -78%\n\n\ud83d\udd34 *JCT* $7.54 (35%)\n\u2800\n\u2800",
+    "out_text": "\ud83d\udcbc *PORTFOLIO* $21.82 | \u20a630,121\n\ud83d\udcb5 Cash free $6.25 | In coins $15.55 (71%)\n\ud83d\udfe1 BGB 0.00078233412 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *ARIA* $8.01 (37%)\n+0.22% (+$0.02) | Entry 0.311181\nPrice 0.311880 | Stop 0.280063 (-10%)\nRSI 56 | Bullish | ATH -78%\n\n\ud83d\udd34 *JCT* $7.54 (35%)\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795489458.361318,
+    "out_time": 1795489471.4416862,
     "panel_rows": [
         [
             {
@@ -76,7 +76,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "1/3",
+                "text": "2/3",
                 "callback_data": "pg:x"
             },
             {
@@ -93,15 +93,14 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/3*",
-    "out_mid": 4916,
+    "panel_text": "\ud83d\udcc4 *Page 2/3*",
     "pages": {
         "p": [
-            "\ud83d\udcbc *PORTFOLIO* $21.82 | \u20a630,121\n\ud83d\udcb5 Cash free $6.25 | In coins $15.55 (71%)\n\ud83d\udfe1 BGB 0.00078233412 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *ARIA* $8.01 (37%)\n+0.26% (+$0.02) | Entry 0.311181\nPrice 0.311990 | Stop 0.280063 (-10%)\nRSI 56 | Bullish | ATH -78%\n\n\ud83d\udd34 *JCT* $7.54 (35%)\n\u2800\n\u2800",
-            "-2.09% (-$0.16) | Entry 0.001580\nPrice 0.001547 | Stop 0.001490 (-4%)\nRSI 41 | Bearish | ATH -92%\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\nand 8 more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT21.82/\u20a630,121\n\n\ud83e\udde0 *AI:* Portfolio $21.82 USDT, 71% in coins; ARIA up 0.26% with stop 10% below\n\u2800\n\u2800",
-            "entry, JCT down 2.09% near stop; several assets lack USDT price\u2014monitor\nvaluation.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+            "\ud83d\udcbc *PORTFOLIO* $21.82 | \u20a630,121\n\ud83d\udcb5 Cash free $6.25 | In coins $15.55 (71%)\n\ud83d\udfe1 BGB 0.00078233412 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *ARIA* $8.01 (37%)\n+0.22% (+$0.02) | Entry 0.311181\nPrice 0.311880 | Stop 0.280063 (-10%)\nRSI 56 | Bullish | ATH -78%\n\n\ud83d\udd34 *JCT* $7.54 (35%)\n\u2800\n\u2800",
+            "-2.09% (-$0.16) | Entry 0.001580\nPrice 0.001547 | Stop 0.001490 (-4%)\nRSI 41 | Bearish | ATH -92%\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\nand 8 more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT21.82/\u20a630,121\n\n\ud83e\udde0 *AI:* Portfolio totals $21.82 (\u2248\u00a530,121) with $6.25 cash and 71% in coins;\n\u2800\n\u2800",
+            "ARIA up 0.22% but near stop, JCT down 2.09%; several assets lack USDT pricing,\nrequiring price verification.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 0,
+        "i": 1,
         "mode": "Markdown",
         "x": [
             {
@@ -111,5 +110,6 @@
         ],
         "cmd": "m:r:holdings"
     },
-    "panel_mid": 4917
+    "out_mid": 4919,
+    "panel_mid": 4920
 }
