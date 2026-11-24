@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690369,
+    "last_update_id": 935690371,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -68,19 +68,41 @@
     "audit_last": 1795540003.3962414,
     "kb_mid": 5423,
     "audit_ai_cls": "",
-    "out_text": "\ud83d\udfe1 *MANUAL BUY*\n_Passed the manual rules (score \u2265 75%). Review and buy by hand, or wait for\nAuto._\n\nNone right now.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "\ud83d\udc41 *WATCH LIST*\n_Rising coins being watched. They move up when they pass the manual rules._\n\n*CYS* | 1H +1.73% | RSI 58 | seen 35x\n*WLD* | 1H +0.88% | RSI 39 | seen 35x\n*JCT* | 1H +0.73% | RSI 35 | seen 35x\n*PUMP* | 1H +0.66% | RSI 36 | seen 35x\n*LINK* | 1H +0.60% | RSI 39 | seen 35x\n*LTC* | 1H +0.58% | RSI 39 | seen 35x\n*PEPE* | 1H +0.50% | RSI 37 | seen 35x\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795540013.6762955,
+    "out_time": 1795540053.9742577,
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udc41 Watch (11)",
-                "callback_data": "m:at:W"
+                "text": "\u25c0",
+                "callback_data": "pg:p"
             },
             {
-                "text": "\u25b6 \ud83d\udfe1 Manual (0)",
-                "callback_data": "m:at:M"
+                "text": "1/2",
+                "callback_data": "pg:x"
             },
+            {
+                "text": "\u25b6",
+                "callback_data": "pg:n"
+            },
+            {
+                "text": "\ud83c\udfe0",
+                "callback_data": "m:menu"
+            }
+        ],
+        [
+            {
+                "text": "\u25b6 \ud83d\udc41 Watch (11)",
+                "callback_data": "m:at:W"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udfe1 Manual (0)",
+                "callback_data": "m:at:M"
+            }
+        ],
+        [
             {
                 "text": "\ud83e\udd16 Auto (0)",
                 "callback_data": "m:at:A"
@@ -88,12 +110,149 @@
         ],
         [
             {
+                "text": "CYS",
+                "callback_data": "m:mc:CYS"
+            }
+        ],
+        [
+            {
+                "text": "WLD",
+                "callback_data": "m:mc:WLD"
+            }
+        ],
+        [
+            {
+                "text": "JCT",
+                "callback_data": "m:mc:JCT"
+            }
+        ],
+        [
+            {
+                "text": "PUMP",
+                "callback_data": "m:mc:PUMP"
+            }
+        ],
+        [
+            {
+                "text": "LINK",
+                "callback_data": "m:mc:LINK"
+            }
+        ],
+        [
+            {
+                "text": "LTC",
+                "callback_data": "m:mc:LTC"
+            }
+        ],
+        [
+            {
+                "text": "PEPE",
+                "callback_data": "m:mc:PEPE"
+            }
+        ],
+        [
+            {
+                "text": "ADA",
+                "callback_data": "m:mc:ADA"
+            }
+        ],
+        [
+            {
+                "text": "BNB",
+                "callback_data": "m:mc:BNB"
+            }
+        ],
+        [
+            {
+                "text": "BTW",
+                "callback_data": "m:mc:BTW"
+            }
+        ],
+        [
+            {
+                "text": "UNI",
+                "callback_data": "m:mc:UNI"
+            }
+        ],
+        [
+            {
                 "text": "\ud83d\udd04 Refresh",
-                "callback_data": "m:at:M"
+                "callback_data": "m:at:W"
             }
         ]
     ],
-    "panel_text": "\ud83d\udc47 *Actions*",
-    "out_mid": 5425,
-    "panel_mid": 5426
+    "panel_text": "\ud83d\udcc4 *Page 1/2*",
+    "out_mid": 5429,
+    "pages": {
+        "p": [
+            "\ud83d\udc41 *WATCH LIST*\n_Rising coins being watched. They move up when they pass the manual rules._\n\n*CYS* | 1H +1.73% | RSI 58 | seen 35x\n*WLD* | 1H +0.88% | RSI 39 | seen 35x\n*JCT* | 1H +0.73% | RSI 35 | seen 35x\n*PUMP* | 1H +0.66% | RSI 36 | seen 35x\n*LINK* | 1H +0.60% | RSI 39 | seen 35x\n*LTC* | 1H +0.58% | RSI 39 | seen 35x\n*PEPE* | 1H +0.50% | RSI 37 | seen 35x\n\u2800\n\u2800",
+            "*ADA* | 1H +0.12% | RSI 39 | seen 35x\n*BNB* | 1H +0.00% | RSI 39 | seen 35x\n*BTW* | 1H -0.20% | RSI 56 | seen 35x\n*UNI* | 1H -0.27% | RSI 39 | seen 35x\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+        ],
+        "i": 0,
+        "mode": "Markdown",
+        "x": [
+            {
+                "text": "\u25b6 \ud83d\udc41 Watch (11)",
+                "callback_data": "m:at:W"
+            },
+            {
+                "text": "\ud83d\udfe1 Manual (0)",
+                "callback_data": "m:at:M"
+            },
+            {
+                "text": "\ud83e\udd16 Auto (0)",
+                "callback_data": "m:at:A"
+            },
+            {
+                "text": "CYS",
+                "callback_data": "m:mc:CYS"
+            },
+            {
+                "text": "WLD",
+                "callback_data": "m:mc:WLD"
+            },
+            {
+                "text": "JCT",
+                "callback_data": "m:mc:JCT"
+            },
+            {
+                "text": "PUMP",
+                "callback_data": "m:mc:PUMP"
+            },
+            {
+                "text": "LINK",
+                "callback_data": "m:mc:LINK"
+            },
+            {
+                "text": "LTC",
+                "callback_data": "m:mc:LTC"
+            },
+            {
+                "text": "PEPE",
+                "callback_data": "m:mc:PEPE"
+            },
+            {
+                "text": "ADA",
+                "callback_data": "m:mc:ADA"
+            },
+            {
+                "text": "BNB",
+                "callback_data": "m:mc:BNB"
+            },
+            {
+                "text": "BTW",
+                "callback_data": "m:mc:BTW"
+            },
+            {
+                "text": "UNI",
+                "callback_data": "m:mc:UNI"
+            },
+            {
+                "text": "\ud83d\udd04 Refresh",
+                "callback_data": "m:at:W"
+            }
+        ],
+        "cmd": "m:at:W"
+    },
+    "panel_mid": 5430
 }
