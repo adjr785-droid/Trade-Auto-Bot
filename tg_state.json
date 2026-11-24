@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690399,
+    "last_update_id": 935690400,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -75,168 +75,46 @@
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
+                "text": "\ud83d\udda5 System",
+                "callback_data": "/bot"
             },
             {
-                "text": "4/6",
-                "callback_data": "pg:x"
+                "text": "\ud83d\udcc8 Stats",
+                "callback_data": "/stats"
+            }
+        ],
+        [
+            {
+                "text": "\u2699\ufe0f Settings",
+                "callback_data": "m:set"
             },
             {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
+                "text": "\ud83d\udcbc Holdings",
+                "callback_data": "m:r:holdings"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udcdc Trade History",
+                "callback_data": "m:r:history"
             },
             {
-                "text": "\ud83c\udfe0",
-                "callback_data": "m:menu"
+                "text": "\ud83e\udde0 Ask AI",
+                "callback_data": "m:ai:1"
             }
         ],
         [
             {
-                "text": "\u25b6 \ud83d\udc41 Watch (78)",
-                "callback_data": "m:at:W"
-            }
-        ],
-        [
+                "text": "\ud83e\uddf9 Clear Chat",
+                "callback_data": "/clear"
+            },
             {
-                "text": "\ud83d\udfe1 Manual (0)",
-                "callback_data": "m:at:M"
-            }
-        ],
-        [
-            {
-                "text": "\ud83e\udd16 Auto (0)",
-                "callback_data": "m:at:A"
-            }
-        ],
-        [
-            {
-                "text": "PROS",
-                "callback_data": "m:mc:PROS"
-            }
-        ],
-        [
-            {
-                "text": "BTC",
-                "callback_data": "m:mc:BTC"
-            }
-        ],
-        [
-            {
-                "text": "ETH",
-                "callback_data": "m:mc:ETH"
-            }
-        ],
-        [
-            {
-                "text": "SOL",
-                "callback_data": "m:mc:SOL"
-            }
-        ],
-        [
-            {
-                "text": "USDGO",
-                "callback_data": "m:mc:USDGO"
-            }
-        ],
-        [
-            {
-                "text": "HYPE",
-                "callback_data": "m:mc:HYPE"
-            }
-        ],
-        [
-            {
-                "text": "SUI",
-                "callback_data": "m:mc:SUI"
-            }
-        ],
-        [
-            {
-                "text": "MTX",
-                "callback_data": "m:mc:MTX"
-            }
-        ],
-        [
-            {
-                "text": "ZEC",
-                "callback_data": "m:mc:ZEC"
-            }
-        ],
-        [
-            {
-                "text": "DOGE",
-                "callback_data": "m:mc:DOGE"
-            }
-        ],
-        [
-            {
-                "text": "BGB",
-                "callback_data": "m:mc:BGB"
-            }
-        ],
-        [
-            {
-                "text": "NEAR",
-                "callback_data": "m:mc:NEAR"
-            }
-        ],
-        [
-            {
-                "text": "EVAA",
-                "callback_data": "m:mc:EVAA"
-            }
-        ],
-        [
-            {
-                "text": "DOS",
-                "callback_data": "m:mc:DOS"
-            }
-        ],
-        [
-            {
-                "text": "BTW",
-                "callback_data": "m:mc:BTW"
-            }
-        ],
-        [
-            {
-                "text": "IDOL",
-                "callback_data": "m:mc:IDOL"
-            }
-        ],
-        [
-            {
-                "text": "KII",
-                "callback_data": "m:mc:KII"
-            }
-        ],
-        [
-            {
-                "text": "NES",
-                "callback_data": "m:mc:NES"
-            }
-        ],
-        [
-            {
-                "text": "SKY",
-                "callback_data": "m:mc:SKY"
-            }
-        ],
-        [
-            {
-                "text": "NIGHT",
-                "callback_data": "m:mc:NIGHT"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udd04 Refresh",
-                "callback_data": "m:at:W"
+                "text": "\ud83d\udea8 PANIC SELL",
+                "callback_data": "/panic"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 4/6*",
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
     "out_mid": 5498,
     "pages": {
         "p": [
