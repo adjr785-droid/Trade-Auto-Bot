@@ -54,8 +54,8 @@
             "last_error": ""
         },
         "near_miss_review": {
-            "last_success": 1795559470.5309494,
-            "successes": 11,
+            "last_success": 1795560535.3568974,
+            "successes": 12,
             "last_error": ""
         },
         "opportunity_ranking": {
@@ -76,7 +76,7 @@
             "failures": 6
         }
     },
-    "last_stage_success": 1795560490.1445048,
+    "last_stage_success": 1795560535.3568974,
     "last_success": 1795560300.779379,
     "emergency_ended": 1795560301.2779193,
     "recovery_start_alerted": false

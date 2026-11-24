@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT27.98/\u20a638,616",
+    "kb_ph": "USDT27.91/\u20a638,527",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -79,7 +79,7 @@
     ],
     "audit_down": {},
     "audit_last": 1795560300.2071722,
-    "kb_mid": 5643,
+    "kb_mid": 5645,
     "audit_ai_cls": "",
     "perf_breaker": {
         "until": 1795645210.5830717,
