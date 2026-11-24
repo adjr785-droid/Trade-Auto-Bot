@@ -2483,5 +2483,10 @@
         "time": 1795554556.3453743,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.3491, 'recurring_patterns': ['PANIC', '15-MINUTE NO-UPWARD-TREND ROTATION', 'MANUAL SELL'], 'recommendations': 'Maintain current risk limits; reduce exposure to high\u2011volatility symbols that trigger PANIC exits; consider tightening the 15\u2011minute trend filter; monitor manual sell triggers for consistency before scaling up position size.'}"
+    },
+    {
+        "time": 1795556861.6158972,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.3491, 'recurring_patterns': {'PANIC': 5, '15-MINUTE NO-UPWARD-TREND ROTATION': 5, 'MANUAL SELL': 4, 'PARTIAL PROFIT +10.4%': 1, 'RSI 75': 1, 'TRAILING STOP (8.0%)': 1}, 'recommendations': 'Reduce reliance on panic exits; implement stricter trend validation before 15\u2011minute rotation trades; consolidate manual sell signals into a single risk rule; consider tighter stop\u2011loss thresholds to limit large negative outs (e.g., -0.4\\u202fUSDT); maintain current win\u2011rate focus but aim to improve average profit per winning trade.'}"
     }
 ]
