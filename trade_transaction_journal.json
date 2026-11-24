@@ -2007,5 +2007,23 @@
         "time": 1795496710.3960652,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 6.7681, 'recurring_patterns': {'15-MINUTE NO-UPWARD-TREND ROTATION': 9, 'PANIC': 6, 'MANUAL SELL': 3, 'PARTIAL PROFIT +10.4%': 1, 'RSI 75': 1, 'TRAILING STOP (8.0%)': 1}, 'recommendations': 'The bot shows modest profitability with a win rate just above 50\\u202f%. The most frequent trigger is the 15\u2011minute no\u2011upward\u2011trend rotation, suggesting the current short\u2011term trend filter may be too aggressive. PANIC exits also appear often and correlate with larger losses. Consider tightening the trend\u2011detection window, reducing panic\u2011trigger sensitivity, and applying stricter risk limits on manual/stop\u2011loss exits. Continue monitoring win\u2011rate and P&L drift; if win\u2011rate falls below ~55\\u202f% or net P&L turns negative over the next 30 trades, pause new entries for review.'}"
+    },
+    {
+        "time": 1795496801.519066,
+        "event": "trade_closed",
+        "symbol": "ADA-USDT",
+        "pnl_usdt": 0.004647399999999488,
+        "reason": "MANUAL SELL $3.46",
+        "strategy": "MANUAL"
+    },
+    {
+        "time": 1795496811.4905508,
+        "event": "ai_manual_sell_review",
+        "symbol": "ADA-USDT",
+        "review": {
+            "review": "The position was manually closed at an average exit price of 0.1488 USDT, realizing a modest profit of 0.0046474 USDT on the 23.237 ADA sold. The remaining base of 69.819961 ADA was left untouched. The profit margin is very small relative to the position size, indicating limited upside capture or possibly a conservative exit strategy.",
+            "lesson": "When exiting a spot position, ensure that the realized P&L justifies transaction costs and opportunity cost. Small gains may be acceptable if they meet risk\u2011reward thresholds, but consider setting clearer profit targets or using limit orders to capture larger moves. Also, monitor the remaining base to decide whether to hold for longer-term appreciation or to re\u2011allocate capital.",
+            "confidence": "high"
+        }
     }
 ]
