@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690375,
+    "last_update_id": 935690376,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -24,8 +24,8 @@
             1795493361.8607023
         ],
         "m:r:holdings": [
-            0,
-            1795496908.3771744
+            1,
+            1795540153.686725
         ],
         "/analyse": [
             6,
@@ -82,7 +82,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "1/2",
+                "text": "2/2",
                 "callback_data": "pg:x"
             },
             {
@@ -99,13 +99,13 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/2*",
+    "panel_text": "\ud83d\udcc4 *Page 2/2*",
     "pages": {
         "p": [
             "\ud83d\udcbc *PORTFOLIO* $28.10 | \u20a638,789\n\ud83d\udcb5 Cash free $0.02 | In coins $28.03 (100%)\n\ud83d\udfe1 BGB 0.00019439193 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *ICNT* $28.03 (100%)\n+0.26% (+$0.07) | Entry 0.320168\nPrice 0.321000 | Stop 0.303615 (-5%)\nRSI 46 | Bearish | ATH -47%\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\n\u2800\n\u2800",
             "and 8 more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT28.10/\u20a638,789\n\n\ud83e\udde0 *AI:* Portfolio totals $28.10 (\u2248\u202f38,789\u202f\u20a9) with $0.02 cash and $28.03 in\nICNT; several tokens lack USDT pricing, and the stop loss for ICNT is\nnear\u2011trigger at 0.3036, warranting monitoring.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 0,
+        "i": 1,
         "mode": "Markdown",
         "x": [
             {
