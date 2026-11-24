@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690505,
+    "last_update_id": 935690506,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -86,9 +86,9 @@
         "since": 1795558810.5830717,
         "loss": -1.4850249000000058
     },
-    "out_text": "\ud83d\udda5 *SYSTEM* \u2014 ATTENTION \u26a0\ufe0f\nBuying: PAUSED \u26d4 (auto-buy is off)\nHealth: Bot 100% | AI 95% (Recovering 2/3)\nLayers: \u2705 Exchange \u2705 Scanner \u2705 Database \u2705 Buyer \u2705 Stops\n\ud83d\udd27 AI issue: unknown error\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83e\udded *STRATEGY*\nEntry: TREND, RSI 42-48, 1H +0.5\u20136%, price > MA5 > MA10, must be rising vs last\nscan\nExit: stop 15% | trail 8.0% | RSI 75+ (dynamic)\n\u2800\n\u2800",
+    "out_text": "\u274c `manual_candidate_min_score` must be between 70.0 and 70.0.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795560138.6289287,
+    "out_time": 1795560257.7697,
     "panel_rows": [
         [
             {
@@ -116,21 +116,6 @@
         ]
     ],
     "panel_text": "\u2699\ufe0f *manual candidate min score*\nCurrent value: `70.0`",
-    "out_mid": 5617,
-    "pages": {
-        "p": [
-            "\ud83d\udda5 *SYSTEM* \u2014 ATTENTION \u26a0\ufe0f\nBuying: PAUSED \u26d4 (auto-buy is off)\nHealth: Bot 100% | AI 95% (Recovering 2/3)\nLayers: \u2705 Exchange \u2705 Scanner \u2705 Database \u2705 Buyer \u2705 Stops\n\ud83d\udd27 AI issue: unknown error\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83e\udded *STRATEGY*\nEntry: TREND, RSI 42-48, 1H +0.5\u20136%, price > MA5 > MA10, must be rising vs last\nscan\nExit: stop 15% | trail 8.0% | RSI 75+ (dynamic)\n\u2800\n\u2800",
-            "Size: 50% of balance (all-in if half < $5) | max 5 trades/day | pause at -5.0%\nday\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udcbc $28.01 | \u20a638,655 | Cash $27.96 | Coins $0.00\nToday +25.17% | Last scan 1 min ago | Queue 0 | Positions 0\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
-        ],
-        "i": 0,
-        "mode": "Markdown",
-        "x": [
-            {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
-            }
-        ],
-        "cmd": "/bot"
-    },
-    "panel_mid": 5618
+    "out_mid": 5620,
+    "panel_mid": 5621
 }
