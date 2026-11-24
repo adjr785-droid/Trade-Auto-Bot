@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690465,
+    "last_update_id": 935690467,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -62,6 +62,10 @@
         "m:at:W": [
             5,
             1795558649.4358172
+        ],
+        "m:coins": [
+            2,
+            1795559422.7125235
         ]
     },
     "radar": [
@@ -89,7 +93,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "1/4",
+                "text": "3/4",
                 "callback_data": "pg:x"
             },
             {
@@ -114,7 +118,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/4*",
+    "panel_text": "\ud83d\udcc4 *Page 3/4*",
     "pages": {
         "p": [
             "\ud83d\udcda *COIN LIST*\n\u2705 Ready 0 | \ud83c\udd95 New 0 | \ud83d\udcbc Held 0 | \u26d4 Rejected 442\nPipeline: \ud83d\udc41 Watch 0 \u2192 \ud83d\udfe1 Manual 0 \u2192 \ud83e\udd16 Auto 0 | \u2935 Dropped 459 | Archived 0\nExecution: \ud83d\udce5 queued 0 | \u26d4 blocked 0 | \ud83d\udfe2 held 0\n\n\ud83d\udc41 *PROS* 0.677900 | NOT_ELIGIBLE | 1H -0.44% | RSI 72 | seen 40x\n   \ud83e\udde0 high: RSI 71.7 (overbought), 24h up 17.3% with 1h drop; high risk.\n\ud83d\udc41 *BTW* 0.777166 | SOLD | seen 40x\n   \ud83e\udde0 low: RSI 56.1, 24h down 2%; stable.\n *PEPE* 0.00000350 | NOT_ELIGIBLE | 1H +0.96% | RSI 54 | seen 40x\n\u2800\n\u2800",
@@ -122,7 +126,7 @@
             "   \ud83e\udde0 medium: RSI 39.8, slight 1h gain, 24h down 4.2%; oversold signals.\n *COLLECT* 0.025317 | NOT_ELIGIBLE | 1H +0.24% \ud83d\udcc8 | RSI 51 | seen 40x\n   \ud83e\udde0 medium: RSI 50.7, modest gains; monitor.\n *LINK* 8.8490 | NOT_ELIGIBLE | 1H +0.20% | RSI 43 | seen 40x\n   \ud83e\udde0 low: RSI 43.2, stable price; low risk.\n *LTC* 40.8800 | NOT_ELIGIBLE | 1H +0.17% | RSI 48 | seen 40x\n   \ud83e\udde0 low: RSI 47.5, small movements; low risk.\n *ADA* 0.144300 | NOT_ELIGIBLE | 1H +0.16% | RSI 43 | seen 40x\n   \ud83e\udde0 medium: RSI 43, modest 1h gain, 24h down 2.2%; watch.\n *UNI* 4.7160 | NOT_ELIGIBLE | 1H +0.14% | RSI 44 | seen 40x\n\u2800\n\u2800",
             "   \ud83e\udde0 low: RSI 43.9, stable, low volatility.\n\n\u2935 *DROPPED \u2014 retained for recovery:* PEPE (3/10), ARX (2/10), SUI (2/10), ENA\n(2/10), PUMP (2/10)\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 0,
+        "i": 2,
         "mode": "Markdown",
         "x": [
             {
