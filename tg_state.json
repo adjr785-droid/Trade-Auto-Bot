@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935690270,
+    "last_update_id": 935690271,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT23.10/\u20a631,884",
+    "kb_ph": "USDT23.24/\u20a632,077",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -66,13 +66,11 @@
     ],
     "audit_down": {},
     "audit_last": 1795522539.9195647,
-    "kb_mid": 5236,
-    "out_mid": 5235,
-    "out_text": "\ud83d\udd0d *SCAN COMPLETE*\nChecked 462 markets in 14s.\nNo coin matched any setup.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "kb_mid": 5240,
+    "out_text": "\ud83d\udd0d *SCAN COMPLETE*\nChecked 462 markets in 13s.\nNo coin matched any setup.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795522535.2494721,
+    "out_time": 1795522593.7418032,
     "audit_ai_cls": "",
-    "panel_mid": 5237,
     "panel_rows": [
         [
             {
@@ -91,5 +89,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcda *COIN LIST*\n\u2705 Ready 0 | \ud83d\udc40 Watching 23 | \ud83c\udd95 New 0 | \ud83d\udcbc Held 3 | \u26d4 Rejected 436\nPipeline: \ud83d\udc41 Watch 2 \u2192 \ud83d\udfe1 Manual 0 \u2192 \ud83e\udd16 Auto 0\nExecution: \ud83d\udce5 queued 0 | \u26d4 blocked 0 | \ud83d\udfe2 held 3\n\n\ud83d\udcbc *ADA* 0.146100 | HELD | 1H -0.14% | RSI 48 | seen 29x\n   \ud83e\udde0 low: RSI 48, small movements, large cap; relatively low risk.\n\ud83d\udcbc *BLESS* 0.018683 | HELD | 1H -2.31% | RSI 61 | seen 29x\n   \ud83e\udde0 high: Held status, RSI 61.4 overbought, both 1h and 24h down; elevated risk.\n\ud83d\udcbc *ICNT* 0.332300 | HELD | seen 29x\n   \ud83e\udde0 high: 1.5% 1h rise but 14.3% 24h drop, RSI 38.0 (oversold); high risk.\n\ud83d\udc40 *BGSC* 0.001248 | NOT_ELIGIBLE | 1H +33.72% \ud83d\udcc8 | RSI 53 | seen 29x\n   \ud83e\udde0 high: Extreme 1h surge 33% but low price, RSI 53; speculative risk.\n\ud83d\udc40 *DGAI* 1.0893 | NOT_ELIGIBLE | 1H +2.23% \ud83d\udcc8 | RSI 61 | seen 29x\n   \ud83e\udde0 medium: RSI near 60 suggests overbought; modest 1h gain but 24h up; still not eligible for execution.\n\ud83d\udc40 *CYS* 0.053210 | NOT_ELIGIBLE | 1H +1.53% | RSI 48 | seen 29x\n   \ud83e\udde0 medium: RSI 47.9, 24h up 13.7%; moderate risk.\n\ud83d\udc40 *BNB* 549.83 | NOT_ELIGIBLE | 1H +0.57% \ud83d\udcc8 | RSI 46 | seen 29x\n   \ud83e\udde0 low: RSI 45.6 within target range, modest 1h rise, slight 24h decline; large cap, lower risk.\n\ud83d\udc40 *ONDO* 0.283800 | NOT_ELIGIBLE | 1H +0.40% \ud83d\udcc8 | RSI 44 | seen 29x\n   \ud83e\udde0 medium: RSI 43.7, 24h down 3%; moderate risk.\n\ud83d\udc40 *EGL1* 0.009330 | NOT_ELIGIBLE | 1H +0.13% \ud83d\udcc8 | RSI 52 | seen 29x\n   \ud83e\udde0 medium: RSI 52, modest gains; moderate risk.\n\ud83d\udc40 *PUMP* 0.002450 | NOT_ELIGIBLE | 1H +0.11% | RSI 39 | seen 29x\n   \ud83e\udde0 high: RSI low (38.75) indicates oversold but 24h down 4.7%; price very low, high volatility.\n\ud83d\udc40 *BTW* 0.701450 | NOT_ELIGIBLE | 1H -0.02% | RSI 45 | seen 29x\n   \ud83e\udde0 low: RSI 44.96, minimal changes; lower risk.\n\ud83d\udc40 *TRX* 0.307750 | NOT_ELIGIBLE | 1H -0.04% \ud83d\udcc8 | RSI 45 | seen 29x\n   \ud83e\udde0 low: RSI 44.7, stable price, minimal changes; large cap, low risk."
+    "panel_text": "\ud83d\udcda *COIN LIST*\n\u2705 Ready 0 | \ud83d\udc40 Watching 23 | \ud83c\udd95 New 0 | \ud83d\udcbc Held 3 | \u26d4 Rejected 436\nPipeline: \ud83d\udc41 Watch 2 \u2192 \ud83d\udfe1 Manual 0 \u2192 \ud83e\udd16 Auto 0\nExecution: \ud83d\udce5 queued 0 | \u26d4 blocked 0 | \ud83d\udfe2 held 3\n\n\ud83d\udcbc *ADA* 0.146100 | HELD | 1H -0.14% | RSI 48 | seen 29x\n   \ud83e\udde0 low: RSI 48, small movements, large cap; relatively low risk.\n\ud83d\udcbc *BLESS* 0.018683 | HELD | 1H -2.31% | RSI 61 | seen 29x\n   \ud83e\udde0 high: Held status, RSI 61.4 overbought, both 1h and 24h down; elevated risk.\n\ud83d\udcbc *ICNT* 0.332300 | HELD | seen 29x\n   \ud83e\udde0 high: 1.5% 1h rise but 14.3% 24h drop, RSI 38.0 (oversold); high risk.\n\ud83d\udc40 *BGSC* 0.001248 | NOT_ELIGIBLE | 1H +33.72% \ud83d\udcc8 | RSI 53 | seen 29x\n   \ud83e\udde0 high: Extreme 1h surge 33% but low price, RSI 53; speculative risk.\n\ud83d\udc40 *DGAI* 1.0893 | NOT_ELIGIBLE | 1H +2.23% \ud83d\udcc8 | RSI 61 | seen 29x\n   \ud83e\udde0 medium: RSI near 60 suggests overbought; modest 1h gain but 24h up; still not eligible for execution.\n\ud83d\udc40 *CYS* 0.053210 | NOT_ELIGIBLE | 1H +1.53% | RSI 48 | seen 29x\n   \ud83e\udde0 medium: RSI 47.9, 24h up 13.7%; moderate risk.\n\ud83d\udc40 *BNB* 549.83 | NOT_ELIGIBLE | 1H +0.57% \ud83d\udcc8 | RSI 46 | seen 29x\n   \ud83e\udde0 low: RSI 45.6 within target range, modest 1h rise, slight 24h decline; large cap, lower risk.\n\ud83d\udc40 *ONDO* 0.283800 | NOT_ELIGIBLE | 1H +0.40% \ud83d\udcc8 | RSI 44 | seen 29x\n   \ud83e\udde0 medium: RSI 43.7, 24h down 3%; moderate risk.\n\ud83d\udc40 *EGL1* 0.009330 | NOT_ELIGIBLE | 1H +0.13% \ud83d\udcc8 | RSI 52 | seen 29x\n   \ud83e\udde0 medium: RSI 52, modest gains; moderate risk.\n\ud83d\udc40 *PUMP* 0.002450 | NOT_ELIGIBLE | 1H +0.11% | RSI 39 | seen 29x\n   \ud83e\udde0 high: RSI low (38.75) indicates oversold but 24h down 4.7%; price very low, high volatility.\n\ud83d\udc40 *BTW* 0.701450 | NOT_ELIGIBLE | 1H -0.02% | RSI 45 | seen 29x\n   \ud83e\udde0 low: RSI 44.96, minimal changes; lower risk.\n\ud83d\udc40 *TRX* 0.307750 | NOT_ELIGIBLE | 1H -0.04% \ud83d\udcc8 | RSI 45 | seen 29x\n   \ud83e\udde0 low: RSI 44.7, stable price, minimal changes; large cap, low risk.",
+    "out_mid": 5238,
+    "panel_hidden": true
 }
