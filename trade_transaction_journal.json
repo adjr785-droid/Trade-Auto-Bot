@@ -2061,5 +2061,23 @@
         "time": 1795499723.5264354,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.7739, 'recurring_patterns': {'reasons': {'PANIC': 6, '15-MINUTE NO-UPWARD-TREND ROTATION': 6, 'MANUAL SELL': 3, 'PARTIAL PROFIT +10.4%': 1, 'RSI 75': 1, 'TRAILING STOP (8.0%)': 1}}, 'recommendations': 'Maintain current risk parameters but tighten entry filters for PANIC-driven trades, as they show mixed outcomes. Consider reducing exposure to 15\u2011minute no\u2011upward\u2011trend rotations until a clearer upward signal is confirmed. Review manual sell triggers to ensure they align with predefined profit/loss thresholds. Monitor high\u2011variance symbols (e.g., WLD\u2011USDT, JCT\u2011USDT) closely and limit position size.'}"
+    },
+    {
+        "time": 1795499766.4615893,
+        "event": "trade_closed",
+        "symbol": "ADA-USDT",
+        "pnl_usdt": 0.0286830999999994,
+        "reason": "MANUAL SELL $5.22",
+        "strategy": "MANUAL"
+    },
+    {
+        "time": 1795499776.2125611,
+        "event": "ai_manual_sell_review",
+        "symbol": "ADA-USDT",
+        "review": {
+            "review": "The position was manually closed at an average exit price of 0.14942\u202fUSDT, realizing a modest profit of 0.02868\u202fUSDT on the sold 34.893\u202fADA. The remaining base balance of 34.927\u202fADA suggests the sell was only partially executed, leaving a near\u2011identical amount unsold. The profit margin is very small relative to the position size, indicating limited upside capture and potential missed opportunity for a larger gain if the market moved favorably after the exit. The manual trigger may have been driven by risk limits or external factors rather than a data\u2011driven signal.",
+            "lesson": "When exiting manually, ensure the order fully matches the intended quantity to avoid residual exposure. Evaluate whether the exit price sufficiently exceeds the entry cost plus fees to justify the trade, especially for low\u2011margin moves. Incorporate tighter profit targets or trailing mechanisms to capture more upside while still protecting downside, and verify order execution completeness before concluding the trade.",
+            "confidence": "medium"
+        }
     }
 ]

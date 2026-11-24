@@ -269,5 +269,12 @@
         "time": 1795496801.5179014,
         "reason": "MANUAL SELL $3.46",
         "strategy": "MANUAL"
+    },
+    {
+        "sym": "ADA-USDT",
+        "pnl": 0.0286830999999994,
+        "time": 1795499766.459961,
+        "reason": "MANUAL SELL $5.22",
+        "strategy": "MANUAL"
     }
 ]
