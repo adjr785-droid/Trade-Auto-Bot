@@ -2309,5 +2309,15 @@
         "time": 1795528984.2307386,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.3491, 'recurring_patterns': {'PANIC': 5, '15-MINUTE NO-UPWARD-TREND ROTATION': 5, 'MANUAL SELL': 5, 'PARTIAL PROFIT': 1, 'RSI 75': 1, 'TRAILING STOP (8.0%)': 1}, 'recommendations': 'Reduce exposure to PANIC\u2011driven entries; prioritize signals with defined technical criteria (e.g., RSI, partial profit targets). Tighten stop\u2011loss thresholds and avoid high\u2011volatility symbols that have produced large negative PnL (e.g., WLD\u2011USDT, DOS\u2011USDT). Continue monitoring win\u2011rate but focus on risk\u2011adjusted returns.'}"
+    },
+    {
+        "time": 1795532468.2452235,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (8)', 'attention': [{'symbol': 'ICNT-USDT', 'action': 'hold', 'reason': 'Position is modest (entry 0.3253, current 0.3325) with a small positive PnL (+2.2%). Stop loss at 0.3085 provides ~7.5% downside buffer. No immediate risk signals; continue monitoring.'}], 'summary': 'Overall portfolio risk remains within the daily limit. The only open position (ICNT-USDT) shows a slight gain and is comfortably above its stop level. Maintain current stance and re-evaluate if price approaches the stop or market conditions change.'}"
+    },
+    {
+        "time": 1795532468.9702368,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.3491, 'recurring_patterns': ['Frequent PANIC exits', 'Repeated 15-MINUTE NO-UPWARD-TREND ROTATION entries', 'Multiple MANUAL SELL actions'], 'recommendations': ['Limit PANIC-driven trades and enforce stricter entry criteria', 'Review 15\u2011minute rotation strategy for false signals', 'Consolidate manual sell triggers into automated risk controls', 'Maintain current position sizing until win rate stabilizes above 65%']}"
     }
 ]

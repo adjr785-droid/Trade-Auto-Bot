@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935690321,
+    "last_update_id": 935690323,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT22.82/\u20a631,497",
+    "kb_ph": "USDT22.69/\u20a631,309",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -63,30 +63,54 @@
     "radar": [],
     "audit_down": {},
     "audit_last": 1795528996.036117,
-    "kb_mid": 5337,
+    "kb_mid": 5339,
     "audit_ai_cls": "",
-    "out_text": "\u2139\ufe0f Git sync used conflict recovery.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_mid": 5340,
+    "out_text": "\u23f8 *BTC FILTER:* BTC RSI is 46.43 (needs \u2265 50).\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795528989.4187016,
+    "out_time": 1795532458.127148,
+    "panel_mid": 5341,
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udd0d Scan now",
-                "callback_data": "m:r:scan"
+                "text": "\ud83d\udda5 System",
+                "callback_data": "/bot"
             },
             {
-                "text": "\ud83e\uddfe Scan History",
-                "callback_data": "m:scan_hist"
+                "text": "\ud83d\udcc8 Stats",
+                "callback_data": "/stats"
             }
         ],
         [
             {
-                "text": "\u2b05\ufe0f Menu",
-                "callback_data": "m:menu"
+                "text": "\u2699\ufe0f Settings",
+                "callback_data": "m:set"
+            },
+            {
+                "text": "\ud83d\udcbc Holdings",
+                "callback_data": "m:r:holdings"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udcdc Trade History",
+                "callback_data": "m:r:history"
+            },
+            {
+                "text": "\ud83e\udde0 Ask AI",
+                "callback_data": "m:ai:1"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\uddf9 Clear Chat",
+                "callback_data": "/clear"
+            },
+            {
+                "text": "\ud83d\udea8 PANIC SELL",
+                "callback_data": "/panic"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcda *COIN LIST*\n\u2705 Ready 0 | \ud83d\udc40 Watching 25 | \ud83c\udd95 New 0 | \ud83d\udcbc Held 1 | \u26d4 Rejected 436\nPipeline: \ud83d\udc41 Watch 3 \u2192 \ud83d\udfe1 Manual 0 \u2192 \ud83e\udd16 Auto 0\nExecution: \ud83d\udce5 queued 0 | \u26d4 blocked 0 | \ud83d\udfe2 held 0\n\n\ud83d\udcbc *ICNT* 0.331900 | BOUGHT | seen 32x\n   \ud83e\udde0 high: 1.5% 1h rise but 14.3% 24h drop, RSI 38.0 (oversold); high risk.\n\ud83d\udc40 *PROS* 0.681400 | NOT_ELIGIBLE | 1H +1.27% | RSI 82 | seen 32x\n   \ud83e\udde0 high: RSI 82.37 overbought, 24h up 21% but very high RSI indicates elevated risk.\n\ud83d\udc40 *BTW* 0.706800 | NOT_ELIGIBLE | 1H +0.88% \ud83d\udcc8 | RSI 45 | seen 32x\n   \ud83e\udde0 medium: RSI 45.04 moderate, 24h down 6.4% despite 1h rise; watch.\n\ud83d\udc40 *JCT* 0.001490 | NOT_ELIGIBLE | 1H +0.10% \ud83d\udcc8 | RSI 29 | seen 32x\n   \ud83e\udde0 high: RSI 28.75 oversold, 24h down 7.4%; high risk.\n\ud83d\udc40 *TRX* 0.308330 | NOT_ELIGIBLE | 1H -0.01% | RSI 49 | seen 32x\n   \ud83e\udde0 low: RSI 49.13 near neutral, minimal changes; low risk.\n\ud83d\udc40 *BNB* 549.70 | NOT_ELIGIBLE | 1H -0.33% | RSI 45 | seen 32x\n   \ud83e\udde0 low: RSI 45.37 moderate, small declines; relatively stable.\n\ud83d\udc40 *EGL1* 0.009340 | NOT_ELIGIBLE | 1H -0.38% | RSI 53 | seen 32x\n   \ud83e\udde0 low: RSI 52.77 moderate, flat performance; low risk.\n\ud83d\udc40 *COLLECT* 0.025303 | NOT_ELIGIBLE | 1H -0.48% | RSI 55 | seen 32x\n   \ud83e\udde0 low: RSI 54.54 moderate, small declines; low risk.\n\ud83d\udc40 *DGAI* 1.0811 | NOT_ELIGIBLE | 1H -0.49% | RSI 61 | seen 32x\n   \ud83e\udde0 medium: RSI 61 above neutral; 24h up 7.9% but 1h down slightly; not eligible, monitor.\n\ud83d\udc40 *KAS* 0.026170 | NOT_ELIGIBLE | 1H -0.50% | RSI 40 | seen 32x\n   \ud83e\udde0 medium: RSI 40.5 near lower band, 24h down 4.3%; moderate risk.\n\ud83d\udc40 *ONDO* 0.281700 | NOT_ELIGIBLE | 1H -0.72% | RSI 42 | seen 32x\n   \ud83e\udde0 low: RSI 41.61 near lower band, modest declines; low risk.\n\ud83d\udc40 *LTC* 40.6000 | NOT_ELIGIBLE | 1H -0.88% | RSI 43 | seen 32x\n   \ud83e\udde0 low: RSI 43.0 moderate, stable price; low risk.",
-    "out_mid": 5330,
-    "panel_mid": 5333
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below."
 }
