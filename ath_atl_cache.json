@@ -112,5 +112,11 @@
         "atl": 0.004,
         "checked_at": 1795477154.092532,
         "status": "complete"
+    },
+    "ADA-USDT": {
+        "ath": 1.326,
+        "atl": 0.1333,
+        "checked_at": 1795495875.7287328,
+        "status": "complete"
     }
 }
