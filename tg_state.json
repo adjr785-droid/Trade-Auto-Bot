@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690318,
+    "last_update_id": 935690319,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -71,12 +71,32 @@
     "panel_rows": [
         [
             {
-                "text": "\u2b05\ufe0f Menu",
+                "text": "\ud83d\uded2 Trade",
+                "callback_data": "m:tl:trade"
+            },
+            {
+                "text": "\ud83d\udd14 Alerts",
+                "callback_data": "m:tl:alerts"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udd0d Scan",
+                "callback_data": "m:tl:scan"
+            },
+            {
+                "text": "\ud83d\udee0\ufe0f System",
+                "callback_data": "m:tl:sys"
+            }
+        ],
+        [
+            {
+                "text": "\u2b05\ufe0f Main Menu",
                 "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83e\uddfe *TRADE HISTORY*\nSKYAI | PANIC | PnL $-0.01\nWLD | PANIC | PnL $-0.39\nUMXM | PARTIAL PROFIT +10.4% | PnL $+1.11\nINJ | RSI 75 | PnL $+0.10\nJCT | MANUAL SELL ALL | PnL $-0.70\nBGB | MANUAL SELL ALL | PnL $-0.00\nDOS | TRAILING STOP (8.0%) | PnL $-0.51\nARIA | PANIC | PnL $+0.14\nJCT | PANIC | PnL $-0.16\nADA | MANUAL SELL $8.00 | PnL $-0.01\nADA | MANUAL SELL $3.46 | PnL $+0.00\nADA | MANUAL SELL $5.22 | PnL $+0.03",
+    "panel_text": "\ud83e\uddf0 *TOOLS*\nChoose a group.",
     "out_mid": 5330,
-    "panel_hidden": true
+    "panel_mid": 5333
 }
