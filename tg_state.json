@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT28.30/\u20a639,054",
+    "kb_ph": "USDT28.29/\u20a639,041",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -66,8 +66,8 @@
     },
     "radar": [],
     "audit_down": {},
-    "audit_last": 1795554274.5454485,
-    "kb_mid": 5501,
+    "audit_last": 1795554561.9736643,
+    "kb_mid": 5505,
     "audit_ai_cls": "",
     "out_text": "\ud83d\udfe1 *MANUAL BUY*\n_Passed at least 5/7 core and 2/3 additional criteria. Manual review only._\n\nNone right now.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
