@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690185,
+    "last_update_id": 935690187,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -75,36 +75,16 @@
     "panel_rows": [
         [
             {
-                "text": "25%",
-                "callback_data": "m:sc:ADA:25"
+                "text": "\u2705 Confirm",
+                "callback_data": "m:sxu:ADA:8"
             },
             {
-                "text": "50%",
-                "callback_data": "m:sc:ADA:50"
-            },
-            {
-                "text": "75%",
-                "callback_data": "m:sc:ADA:75"
-            },
-            {
-                "text": "100%",
-                "callback_data": "m:sc:ADA:100"
-            }
-        ],
-        [
-            {
-                "text": "\u270f\ufe0f Custom amount",
-                "callback_data": "m:cu:s:ADA"
-            }
-        ],
-        [
-            {
-                "text": "\u2b05\ufe0f Back",
-                "callback_data": "m:sell"
+                "text": "\u274c Cancel",
+                "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcb8 *SELL ADA*\nYou hold 146.89196 (about $21.81).\nHow much?",
+    "panel_text": "\u26a0\ufe0f *CONFIRM SELL*\n$8 of ADA at market.",
     "out_mid": 5090,
     "panel_mid": 5091
 }
