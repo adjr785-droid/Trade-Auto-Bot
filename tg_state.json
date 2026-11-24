@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690359,
+    "last_update_id": 935690362,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -73,30 +73,22 @@
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
+                "text": "\ud83d\udd0d Scan now",
+                "callback_data": "m:r:scan"
             },
             {
-                "text": "1/16",
-                "callback_data": "pg:x"
-            },
-            {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
-            },
-            {
-                "text": "\ud83c\udfe0",
-                "callback_data": "m:menu"
+                "text": "\ud83e\uddfe Scan History",
+                "callback_data": "m:scan_hist"
             }
         ],
         [
             {
-                "text": "\ud83d\udd0d Why not bought?",
-                "callback_data": "m:whylist:0"
+                "text": "\u2b05\ufe0f Menu",
+                "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/16*",
+    "panel_text": "\ud83d\udcda *COIN LIST*\n\u2705 Ready 0 | \ud83c\udd95 New 0 | \ud83d\udcbc Held 1 | \u26d4 Rejected 436\nPipeline: \ud83d\udc41 Watch 7 \u2192 \ud83d\udfe1 Manual 0 \u2192 \ud83e\udd16 Auto 0\nExecution: \ud83d\udce5 queued 0 | \u26d4 blocked 0 | \ud83d\udfe2 held 1\n\n\ud83d\udcbc *ICNT* 0.320500 | HELD | seen 34x\n   \ud83e\udde0 high: 1.5% 1h rise but 14.3% 24h drop, RSI 38.0 (oversold); high risk.\n\ud83d\udc41 *CYS* 0.054530 | NOT_ELIGIBLE | 1H +2.28% \ud83d\udcc8 | RSI 57 | seen 34x\n   \ud83e\udde0 medium: RSI 49.5, 24h up 10%, 1h up 1.7%; positive but still not eligible.\n\ud83d\udc41 *BTW* 0.724771 | NOT_ELIGIBLE | 1H +0.02% | RSI 55 | seen 34x\n   \ud83e\udde0 medium: RSI 56, 24h down ~2.4% but 1h up 1.97%; watch.\n\ud83d\udc41 *BNB* 545.78 | NOT_ELIGIBLE | 1H -0.99% | RSI 40 | seen 34x\n   \ud83e\udde0 medium: RSI near 47, 24h down ~3.8%, stable large cap but still not eligible.\n\ud83d\udc41 *UNI* 4.6740 | NOT_ELIGIBLE | 1H -1.11% | RSI 38 | seen 34x\n   \ud83e\udde0 medium: RSI 42.75, 24h down ~8.5%; large cap, moderate risk.\n\ud83d\udc41 *WLD* 0.229300 | NOT_ELIGIBLE | 1H -1.62% | RSI 36 | seen 34x\n   \ud83e\udde0 high: RSI 42, 24h down ~8%, price low; high risk.\n\ud83d\udc41 *ADA* 0.142800 | NOT_ELIGIBLE | 1H -1.64% | RSI 38 | seen 34x\n   \ud83e\udde0 medium: RSI 44, 24h down ~6%; major coin, monitor.\n\ud83d\udc41 *PUMP* 0.002396 | NOT_ELIGIBLE | 1H -1.92% | RSI 34 | seen 34x\n   \ud83e\udde0 high: RSI low, 24h down ~9.7%, price very low; high downside risk.",
     "pages": {
         "p": [
             "\ud83d\udd0e *SCAN HISTORY* \u00b7 464/464 coins (first 150)\n24 scans \u00b7 22.9h\n```\nCOIN    RSI    1H WHY\n------------------------------\nADA      48  +0.9 Auto-buy off\nICNT     26  +0.9 Auto-buy off\nBTC      39     - Top 15\nETH      38     - Top 15\nSOL      31     - Top 15\n```\n\u2800",
