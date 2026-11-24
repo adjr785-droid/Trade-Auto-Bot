@@ -2051,5 +2051,15 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795499722.5691924,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (8) - risk parameters remain unchanged', 'attention': [{'symbol': 'ADA-USDT', 'action': 'hold', 'reason': 'Small profit (0.67%) and tight stop; insufficient upside to justify adjustment; monitor price near stop (0.143577).'}, {'symbol': 'ICNT-USDT', 'action': 'hold', 'reason': 'Moderate profit (4.53%) with stop well below current price; position still within acceptable risk; continue monitoring.'}], 'summary': 'Both positions are modestly profitable and respect current stop levels. No immediate changes are recommended; maintain vigilance given daily risk limit and market volatility.'}"
+    },
+    {
+        "time": 1795499723.5264354,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.7739, 'recurring_patterns': {'reasons': {'PANIC': 6, '15-MINUTE NO-UPWARD-TREND ROTATION': 6, 'MANUAL SELL': 3, 'PARTIAL PROFIT +10.4%': 1, 'RSI 75': 1, 'TRAILING STOP (8.0%)': 1}}, 'recommendations': 'Maintain current risk parameters but tighten entry filters for PANIC-driven trades, as they show mixed outcomes. Consider reducing exposure to 15\u2011minute no\u2011upward\u2011trend rotations until a clearer upward signal is confirmed. Review manual sell triggers to ensure they align with predefined profit/loss thresholds. Monitor high\u2011variance symbols (e.g., WLD\u2011USDT, JCT\u2011USDT) closely and limit position size.'}"
     }
 ]
