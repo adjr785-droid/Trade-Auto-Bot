@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690313,
+    "last_update_id": 935690317,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -17,7 +17,7 @@
         "pos": [],
         "hn": 31
     },
-    "last_cmd": "m:r:holdings",
+    "last_cmd": "/stats",
     "page_mem": {
         "/bot": [
             1,
