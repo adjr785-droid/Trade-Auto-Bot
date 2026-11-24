@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935690139,
+    "last_update_id": 935690141,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT21.97/\u20a630,323",
+    "kb_ph": "USDT22.04/\u20a630,417",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -66,41 +66,61 @@
         "LINK-USDT",
         "ARIA-USDT"
     ],
-    "out_text": "\ud83e\uddf9 Cleared 3 bot message(s).\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "\u2705 No new manual coins found to sync.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795494417.121168,
+    "out_time": 1795494467.9800801,
     "panel_rows": [
         [
             {
-                "text": "\ud83d\uded2 Trade",
-                "callback_data": "m:tl:trade"
+                "text": "\ud83d\uded2 Buy",
+                "callback_data": "m:buy"
             },
             {
-                "text": "\ud83d\udd14 Alerts",
-                "callback_data": "m:tl:alerts"
+                "text": "\ud83d\udcb8 Sell",
+                "callback_data": "m:sell"
             }
         ],
         [
             {
-                "text": "\ud83d\udd0d Scan",
-                "callback_data": "m:tl:scan"
+                "text": "\u274c Cancel Open Orders",
+                "callback_data": "m:r:cancel"
             },
             {
-                "text": "\ud83d\udee0\ufe0f System",
-                "callback_data": "m:tl:sys"
+                "text": "\ud83e\uddf9 Dust \u2192 BGB",
+                "callback_data": "m:r:dust"
             }
         ],
         [
             {
-                "text": "\u2b05\ufe0f Main Menu",
+                "text": "\ud83d\udd04 Sync manual coins",
+                "callback_data": "m:r:sync"
+            }
+        ],
+        [
+            {
+                "text": "\u23f8 Pause auto-buy",
+                "callback_data": "m:r:pause"
+            },
+            {
+                "text": "\u25b6\ufe0f Resume auto-buy",
+                "callback_data": "m:r:resume"
+            }
+        ],
+        [
+            {
+                "text": "\u2b05\ufe0f Tools",
+                "callback_data": "m:tools"
+            },
+            {
+                "text": "\ud83c\udfe0 Main Menu",
                 "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83e\uddf0 *TOOLS*\nChoose a group.",
+    "panel_text": "\ud83d\uded2 *TRADE*",
     "audit_down": {},
     "audit_last": 1795494401.0992463,
-    "out_mid": 5019,
-    "kb_mid": 5021,
-    "panel_mid": 5023
+    "kb_mid": 5025,
+    "out_mid": 5024,
+    "panel_hidden": true
 }
