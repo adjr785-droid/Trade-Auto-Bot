@@ -2463,5 +2463,15 @@
         "time": 1795553966.9497244,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.3491, 'recurring_patterns': ['Frequent PANIC exits', 'Repeated 15\u2011minute no\u2011upward\u2011trend rotation entries', 'Multiple manual sell actions (including trailing stop)'], 'recommendations': ['Limit PANIC\u2011driven trades and enforce stricter entry criteria', 'Review 15\u2011minute rotation strategy for false signals', 'Implement tighter stop\u2011losses on manual sell positions', 'Monitor high\u2011volatility symbols (e.g., WLD, JCT) more closely', 'Maintain current risk exposure until pattern adjustments show improvement']}"
+    },
+    {
+        "time": 1795554257.575594,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (6)', 'attention': [{'symbol': 'ICNT-USDT', 'action': 'hold', 'reason': 'Position is very recent (age 335 minutes) with a small positive PnL (0.95%). Current price is slightly above entry and stop is comfortably below price, indicating limited downside. No clear signal to add or exit.'}], 'summary': 'Overall portfolio risk remains within the daily limit. The only open position (ICNT-USDT) shows modest profit and is within its stop loss range. Maintain the position and monitor for any adverse price movement or new signals before considering adjustments.'}"
+    },
+    {
+        "time": 1795554258.3867786,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.3491, 'recurring_patterns': ['PANIC appears in multiple trades across different symbols', '15-MINUTE NO-UPWARD-TREND ROTATION repeats for several assets', 'MANUAL SELL actions recurring for ADA, BGB, DOS, JCT', 'Trailing stop triggered once with significant loss'], 'recommendations': ['Reduce exposure to panic-driven exits; consider tighter volatility filters', 'Review and possibly tighten criteria for 15\u2011minute no\u2011upward\u2011trend rotations to avoid small losses', 'Limit manual sell interventions to predefined profit targets; avoid ad\u2011hoc exits', 'Implement stricter stop\u2011loss thresholds to prevent large drawdowns like the -0.69 USDT loss', 'Overall maintain a conservative stance given modest net PnL and notable loss events']}"
     }
 ]
