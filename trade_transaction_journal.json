@@ -1764,5 +1764,11 @@
         "time": 1795489371.774095,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 5.9833, 'recurring_patterns': {'15-MINUTE NO-UPWARD-TREND ROTATION': 9, 'PANIC': 4, 'MANUAL SELL ALL': 3, 'RSI 75': 2, 'MANUAL SELL $15.10': 1, 'TRAILING STOP (8.0%)': 1}, 'recommendations': ['Review and tighten criteria for \"15-MINUTE NO-UPWARD-TREND ROTATION\" entries to avoid low\u2011impact trades', 'Implement stricter controls on panic\u2011driven exits; consider adding a confirmation filter before closing positions', 'Re\u2011evaluate RSI 75 threshold as it produced mixed results; test alternative overbought levels', 'Limit manual sell\u2011all actions to higher confidence signals or larger profit targets', 'Monitor trailing\u2011stop parameters to ensure they capture upside without premature exits']}"
+    },
+    {
+        "time": 1795489388.4544148,
+        "event": "ai_coin_advisory",
+        "reviewed": 25,
+        "source": "coins.db"
     }
 ]
