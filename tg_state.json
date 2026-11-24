@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690213,
+    "last_update_id": 935690215,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -74,32 +74,16 @@
     "panel_rows": [
         [
             {
-                "text": "ADA",
-                "callback_data": "m:b:ADA"
+                "text": "\u2705 Confirm",
+                "callback_data": "m:bx:ICNT:ALL"
             },
             {
-                "text": "ICNT",
-                "callback_data": "m:b:ICNT"
-            },
-            {
-                "text": "NES",
-                "callback_data": "m:b:NES"
-            }
-        ],
-        [
-            {
-                "text": "\u2795 More coins",
-                "callback_data": "m:more:buy:0"
-            }
-        ],
-        [
-            {
-                "text": "\u2b05\ufe0f Menu",
+                "text": "\u274c Cancel",
                 "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83d\uded2 *BUY* \u2014 choose a coin:",
+    "panel_text": "\u26a0\ufe0f *CONFIRM BUY*\nICNT for ALL free USDT at about 0.320600 USDT.",
     "kb_mid": 5127,
     "out_mid": 5126,
     "panel_mid": 5129
