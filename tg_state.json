@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690143,
+    "last_update_id": 935690144,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -44,8 +44,8 @@
             1795493849.5473812
         ],
         "m:ai:1": [
-            3,
-            1795363418.449952
+            1,
+            1795494538.4787006
         ],
         "m:r:dust": [
             1,
@@ -76,7 +76,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "1/7",
+                "text": "2/7",
                 "callback_data": "pg:x"
             },
             {
@@ -89,7 +89,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/7*",
+    "panel_text": "\ud83d\udcc4 *Page 2/7*",
     "audit_down": {},
     "audit_last": 1795494401.0992463,
     "kb_mid": 5030,
@@ -104,7 +104,7 @@
             "- Even if a high\u2011quality setup appeared, the **BTC filter would still block**\nauto\u2011execution until BTC\u2019s market conditions satisfy the filter\u2019s internal\nrules.\n\n**What to Do About the BTC Filter**\n\n- The system is deliberately preventing auto\u2011buys because BTC\u2019s RSI is below\nyour 42\u201148 window and the filter\u2019s other criteria (e.g., volatility, spread)\nare not met.  \n- **You may still place a manual **/buy** order** if you are comfortable\n\u2800\n\u2800",
             "overriding the filter, but **we do not recommend bypassing deterministic risk\nchecks**. Manual entry should respect the same stop\u2011loss (\u2264\u202f15\u202f%), spread\n(<\u202f0.5\u202f%), and position\u2011size limits you have configured.\n\n**Fees & Slippage Considerations**\n\n- Spot\u2011trade taker fees on most US\u2011based exchanges are **\u2248\u202f0.10\u202f%** (plus\nany maker rebate if you provide liquidity).  \n- With the current market spread near your 0.5\u202f% ceiling, expect **effective\nentry/exit costs of ~\n\u2800\n\u2800"
         ],
-        "i": 0,
+        "i": 1,
         "mode": "Markdown",
         "x": [],
         "cmd": "m:ai:1"
