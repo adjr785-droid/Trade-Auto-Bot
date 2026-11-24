@@ -2279,5 +2279,15 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795527474.9364796,
+        "event": "ai_manual_buy_review",
+        "symbol": "ICNT-USDT",
+        "review": {
+            "risk_level": "moderate",
+            "warning": "BTC is trading below its 50\u2011hour average, indicating potential downward pressure. Existing position adds exposure; small trade size limits absolute risk but still subject to market volatility.",
+            "summary": "Proceed with caution. The trade size is modest (5.01\u202fUSDT) and RSI is neutral, but the bearish BTC trend and existing exposure suggest a moderate risk profile. Consider waiting for clearer price direction or tighter risk controls before executing."
+        }
     }
 ]

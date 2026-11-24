@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935690306,
+    "last_update_id": 935690308,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT22.63/\u20a631,240",
+    "kb_ph": "USDT22.67/\u20a631,292",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -63,55 +63,24 @@
     "radar": [],
     "audit_down": {},
     "audit_last": 1795527378.804305,
-    "kb_mid": 5301,
+    "kb_mid": 5304,
     "audit_ai_cls": "",
-    "out_text": "\ud83d\udcbc *PORTFOLIO* $22.63 | \u20a631,240\n\ud83d\udcb5 Cash free $5.03 | In coins $17.55 (78%)\n\ud83d\udfe1 BGB 0.00019439193 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *ICNT* $17.55 (78%)\n+2.48% (+$0.42) | Entry 0.323391\nPrice 0.331400 | Stop 0.306672 (-7%)\nRSI 54 | Mixed | ATH -45%\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\n\u2800\n\u2800",
+    "out_text": "\u2795 *DCA ADDED:* ICNT @ 0.332154\nSpent: $5.01\nNew avg entry: 0.325333\n\ud83d\udee1\ufe0f Exchange protective sell: Verified\n\ud83d\udcc8 Bot-side trailing: Active\n\n\ud83e\udde0 AI manual-buy advisory: Proceed with caution. The trade size is modest\n(5.01\u202fUSDT) and RSI is neutral, but the bearish BTC trend and existing exposure\nsuggest a moderate risk profile. Consider waiting for clearer price direction or\ntighter risk controls before executing.\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795527391.4295719,
+    "out_time": 1795527475.488079,
     "panel_rows": [
         [
             {
-                "text": "$2",
-                "callback_data": "m:bc:ICNT:2"
+                "text": "\u2705 Confirm",
+                "callback_data": "m:bx:ICNT:ALL"
             },
             {
-                "text": "$5",
-                "callback_data": "m:bc:ICNT:5"
-            },
-            {
-                "text": "ALL",
-                "callback_data": "m:bc:ICNT:ALL"
-            }
-        ],
-        [
-            {
-                "text": "\u270f\ufe0f Custom amount",
-                "callback_data": "m:cu:b:ICNT"
-            }
-        ],
-        [
-            {
-                "text": "\u2b05\ufe0f Back",
-                "callback_data": "m:buy"
+                "text": "\u274c Cancel",
+                "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83d\uded2 *BUY ICNT*\nFree USDT: $5.03\nChoose how much:",
-    "out_mid": 5299,
-    "pages": {
-        "p": [
-            "\ud83d\udcbc *PORTFOLIO* $22.63 | \u20a631,240\n\ud83d\udcb5 Cash free $5.03 | In coins $17.55 (78%)\n\ud83d\udfe1 BGB 0.00019439193 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *ICNT* $17.55 (78%)\n+2.48% (+$0.42) | Entry 0.323391\nPrice 0.331400 | Stop 0.306672 (-7%)\nRSI 54 | Mixed | ATH -45%\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\n\u2800\n\u2800",
-            "and 8 more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT22.63/\u20a631,240\n\n\ud83e\udde0 *AI:* Portfolio shows $22.63 total value, with $5.03 cash and 78% in ICNT;\nseveral tokens lack USDT pricing, and the ICNT stop\u2011loss is 7% below current\nprice, warranting monitoring.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
-        ],
-        "i": 0,
-        "mode": "Markdown",
-        "x": [
-            {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
-            }
-        ],
-        "cmd": "m:r:holdings"
-    },
-    "panel_mid": 5300
+    "panel_text": "\u26a0\ufe0f *CONFIRM BUY*\nICNT for ALL free USDT at about 0.332700 USDT.",
+    "out_mid": 5303,
+    "panel_hidden": true
 }
