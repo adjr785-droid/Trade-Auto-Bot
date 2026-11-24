@@ -40,26 +40,6 @@
             "min_volume": 1000000.0,
             "spread_pct": 0.03234675723758337,
             "near_miss": null
-        },
-        {
-            "sym": "ICNT-USDT",
-            "time": 1795475347.901301,
-            "price": 0.3068,
-            "h1": 0.69,
-            "rsi": 28.47,
-            "status": "READY",
-            "decision": "SETUP \u2014 NOT QUEUED",
-            "reason": "OVERSOLD matched, BTC safety filter blocked buying",
-            "execution_status": "HELD",
-            "scan_id": "1795475347",
-            "rank": 42,
-            "vol": 1250057.27,
-            "chg": -12.816,
-            "ma5": 0.30468,
-            "ma10": 0.31071,
-            "min_volume": 1000000.0,
-            "spread_pct": 0.06518904823990662,
-            "near_miss": null
         }
     ]
 }
