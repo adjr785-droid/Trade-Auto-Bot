@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935690354,
+    "last_update_id": 935690357,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT28.18/\u20a638,886",
+    "kb_ph": "USDT28.19/\u20a638,910",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -65,40 +65,40 @@
     ],
     "audit_down": {},
     "audit_last": 1795537539.5730457,
-    "kb_mid": 5403,
+    "kb_mid": 5408,
     "audit_ai_cls": "",
-    "out_text": "\ud83d\udc41 *WATCH LIST*\n_Rising coins being watched. They move up when they pass the manual rules._\n\n*CYS* | 1H +2.28% | RSI 57 | seen 34x\n*BTW* | 1H +0.02% | RSI 55 | seen 34x\n*BNB* | 1H -0.99% | RSI 40 | seen 34x\n*UNI* | 1H -1.11% | RSI 38 | seen 34x\n*WLD* | 1H -1.62% | RSI 36 | seen 34x\n*ADA* | 1H -1.64% | RSI 38 | seen 34x\n*PUMP* | 1H -1.92% | RSI 34 | seen 34x\n\u2800\n\u2800",
+    "out_text": "\ud83d\udfe1 *MANUAL BUY*\n_Passed the manual rules (score \u2265 75%). Review and buy by hand, or wait for\nAuto._\n\nNone right now.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795537569.146993,
+    "out_time": 1795537613.2478437,
     "panel_rows": [
         [
             {
-                "text": "\ud83d\uded2 Trade",
-                "callback_data": "m:tl:trade"
+                "text": "\ud83d\udd0d Scan now",
+                "callback_data": "m:r:scan"
             },
             {
-                "text": "\ud83d\udd14 Alerts",
-                "callback_data": "m:tl:alerts"
+                "text": "\ud83e\uddfe Scan History",
+                "callback_data": "m:scan_hist"
             }
         ],
         [
             {
-                "text": "\ud83d\udd0d Scan",
-                "callback_data": "m:tl:scan"
-            },
-            {
-                "text": "\ud83d\udee0\ufe0f System",
-                "callback_data": "m:tl:sys"
+                "text": "\ud83d\udcda Coin List",
+                "callback_data": "m:coins"
             }
         ],
         [
             {
-                "text": "\u2b05\ufe0f Main Menu",
+                "text": "\u2b05\ufe0f Tools",
+                "callback_data": "m:tools"
+            },
+            {
+                "text": "\ud83c\udfe0 Main Menu",
                 "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83e\uddf0 *TOOLS*\nChoose a group.",
-    "out_mid": 5401,
-    "panel_mid": 5402
+    "panel_text": "\ud83d\udd0d *SCAN*",
+    "out_mid": 5406,
+    "panel_mid": 5407
 }
