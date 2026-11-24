@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT28.20/\u20a638,922",
+    "kb_ph": "USDT28.22/\u20a638,946",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -69,12 +69,12 @@
         "DGAI-USDT"
     ],
     "audit_down": {},
-    "audit_last": 1795540003.3962414,
-    "kb_mid": 5435,
+    "audit_last": 1795540285.497324,
+    "kb_mid": 5437,
     "audit_ai_cls": "",
-    "out_text": "\ud83d\udcbc *PORTFOLIO* $28.10 | \u20a638,789\n\ud83d\udcb5 Cash free $0.02 | In coins $28.03 (100%)\n\ud83d\udfe1 BGB 0.00019439193 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *ICNT* $28.03 (100%)\n+0.26% (+$0.07) | Entry 0.320168\nPrice 0.321000 | Stop 0.303615 (-5%)\nRSI 46 | Bearish | ATH -47%\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\n\u2800\n\u2800",
+    "out_text": "\ud83d\udcbc *HOURLY HOLDINGS*\n\ud83d\udcbc *PORTFOLIO* $28.23 | \u20a638,958\n\ud83d\udcb5 Cash free $0.02 | In coins $28.16 (100%)\n\ud83d\udfe1 BGB 0.00019439193 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *ICNT* $28.16 (100%)\n+0.70% (+$0.19) | Entry 0.320168\nPrice 0.322400 | Stop 0.303615 (-6%)\nRSI 46 | Bearish | ATH -47%\n\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795540143.0004642,
+    "out_time": 1795540284.2902524,
     "panel_rows": [
         [
             {
@@ -82,7 +82,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "2/2",
+                "text": "1/2",
                 "callback_data": "pg:x"
             },
             {
@@ -92,28 +92,19 @@
             {
                 "text": "\ud83c\udfe0",
                 "callback_data": "m:menu"
-            },
-            {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 2/2*",
+    "panel_text": "\ud83d\udcc4 *Page 1/2*",
     "pages": {
         "p": [
-            "\ud83d\udcbc *PORTFOLIO* $28.10 | \u20a638,789\n\ud83d\udcb5 Cash free $0.02 | In coins $28.03 (100%)\n\ud83d\udfe1 BGB 0.00019439193 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *ICNT* $28.03 (100%)\n+0.26% (+$0.07) | Entry 0.320168\nPrice 0.321000 | Stop 0.303615 (-5%)\nRSI 46 | Bearish | ATH -47%\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\n\u2800\n\u2800",
-            "and 8 more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT28.10/\u20a638,789\n\n\ud83e\udde0 *AI:* Portfolio totals $28.10 (\u2248\u202f38,789\u202f\u20a9) with $0.02 cash and $28.03 in\nICNT; several tokens lack USDT pricing, and the stop loss for ICNT is\nnear\u2011trigger at 0.3036, warranting monitoring.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+            "\ud83d\udcbc *HOURLY HOLDINGS*\n\ud83d\udcbc *PORTFOLIO* $28.23 | \u20a638,958\n\ud83d\udcb5 Cash free $0.02 | In coins $28.16 (100%)\n\ud83d\udfe1 BGB 0.00019439193 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *ICNT* $28.16 (100%)\n+0.70% (+$0.19) | Entry 0.320168\nPrice 0.322400 | Stop 0.303615 (-6%)\nRSI 46 | Bearish | ATH -47%\n\n\u2800\n\u2800",
+            "\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\nand 8 more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT28.23/\u20a638,958\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 1,
+        "i": 0,
         "mode": "Markdown",
-        "x": [
-            {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
-            }
-        ],
-        "cmd": "m:r:holdings"
+        "x": [],
+        "cmd": null
     },
     "out_mid": 5431,
     "panel_mid": 5432
