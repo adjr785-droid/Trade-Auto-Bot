@@ -2587,5 +2587,20 @@
         "time": 1795560294.4448438,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 4.4473, 'recurring_patterns': ['High frequency of PANIC exits', 'Repeated 15-MINUTE NO-UPWARD-TREND ROTATION triggers', 'Multiple MANUAL SELL actions', 'Occasional TRAILING STOP usage'], 'recommendations': ['Reduce reliance on PANIC-driven exits; implement stricter volatility filters', 'Consider extending observation window beyond 15 minutes before rotating positions', 'Limit manual sell interventions to predefined profit/loss thresholds', 'Review trailing stop parameters to avoid premature exits', 'Overall adopt a more conservative position sizing to mitigate downside risk']}"
+    },
+    {
+        "time": 1795560441.7519848,
+        "event": "ai_manual_buy_review",
+        "symbol": "UMXM-USDT",
+        "review": {
+            "risk_level": "moderate",
+            "warning": "The market filter indicates BTC is below its 50\u2011hour average, which may suggest short\u2011term downward pressure. RSI is near neutral (\u224851), offering no strong momentum signal. The trade size is small (\u2248$28), but the asset (UMXM-USDT) is a low\u2011price token with limited liquidity, increasing slippage risk.",
+            "summary": "Proceed with caution. The signal is not strongly bullish, and the price is below the 50\u2011hour average. Consider waiting for clearer trend confirmation or using a tighter position size."
+        }
+    },
+    {
+        "time": 1795560452.1528988,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $1.49; auto-buy paused for 23.5h', 'attention': [{'symbol': 'UMXM-USDT', 'action': 'hold', 'reason': 'Position is at break-even with no profit; stop loss is close to entry, indicating limited upside. Maintain until clearer signal emerges.'}], 'summary': 'Current portfolio risk is elevated due to recent losses and auto-buy pause. The only open position (UMXM-USDT) shows no profit and is near its stop level. Recommend holding without adding new exposure until performance improves and risk controls reset.'}"
     }
 ]

@@ -1,1 +1,15 @@
-{}
+{
+    "UMXM-USDT": {
+        "entry_price": 0.0043,
+        "safe_zone": 0.0043,
+        "stop_loss": 0.00387,
+        "peak_price": 0.0043,
+        "last_price": 0.0043,
+        "opened_at": 1795560434.142029,
+        "sl_pct": 10.0,
+        "strategy": "MANUAL",
+        "purchase_source": "MANUAL",
+        "xsl": 0.003956,
+        "seen": 1795560442.7290275
+    }
+}
