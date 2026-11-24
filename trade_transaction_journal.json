@@ -1997,5 +1997,15 @@
             "warning": "BTC filter is active and the market filter indicates BTC is below its 50\u2011hour average, which may increase downside risk. The RSI is low (38), suggesting oversold conditions but also potential further decline. Proceed with caution and ensure alignment with your risk limits.",
             "summary": "Attempting a manual buy of 7.99\u202fUSDT of ICNT-USDT at 0.3161\u202fUSDT per token carries high risk given current market conditions and active BTC filter. No existing position is present."
         }
+    },
+    {
+        "time": 1795496709.4258444,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (7)', 'attention': [{'symbol': 'ADA-USDT', 'action': 'monitor', 'reason': 'Position is small (entry 0.1486) with modest profit (7%). Stop is close to entry; price near stop. Watch for downside risk.'}, {'symbol': 'ICNT-USDT', 'action': 'monitor', 'reason': 'Position shows healthy profit (69%) and price is above stop. Still relatively new (8 days); consider tightening stop if volatility rises.'}], 'summary': 'Overall portfolio risk is within the daily limit. Both positions are profitable, but ADA-USDT is near its stop level and should be closely watched. No immediate action required beyond monitoring.'}"
+    },
+    {
+        "time": 1795496710.3960652,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 6.7681, 'recurring_patterns': {'15-MINUTE NO-UPWARD-TREND ROTATION': 9, 'PANIC': 6, 'MANUAL SELL': 3, 'PARTIAL PROFIT +10.4%': 1, 'RSI 75': 1, 'TRAILING STOP (8.0%)': 1}, 'recommendations': 'The bot shows modest profitability with a win rate just above 50\\u202f%. The most frequent trigger is the 15\u2011minute no\u2011upward\u2011trend rotation, suggesting the current short\u2011term trend filter may be too aggressive. PANIC exits also appear often and correlate with larger losses. Consider tightening the trend\u2011detection window, reducing panic\u2011trigger sensitivity, and applying stricter risk limits on manual/stop\u2011loss exits. Continue monitoring win\u2011rate and P&L drift; if win\u2011rate falls below ~55\\u202f% or net P&L turns negative over the next 30 trades, pause new entries for review.'}"
     }
 ]
