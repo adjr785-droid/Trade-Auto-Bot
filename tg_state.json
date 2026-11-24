@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690298,
+    "last_update_id": 935690299,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -78,7 +78,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "2/2",
+                "text": "1/2",
                 "callback_data": "pg:x"
             },
             {
@@ -91,14 +91,14 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 2/2*",
+    "panel_text": "\ud83d\udcc4 *Page 1/2*",
     "out_mid": 5282,
     "pages": {
         "p": [
             "\ud83d\udcbc *HOURLY HOLDINGS*\n\ud83d\udcbc *PORTFOLIO* $22.98 | \u20a631,711\n\ud83d\udcb5 Cash free $0.03 | In coins $22.90 (100%)\n\ud83d\udfe1 BGB 0.00019439193 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *ICNT* $17.81 (78%)\n+3.99% (+$0.68) | Entry 0.323391\nPrice 0.336300 | Stop 0.306672 (-9%)\nRSI 52 | Bullish | ATH -45%\n\n\u2800\n\u2800",
             "\ud83d\udd34 *ADA* $5.09 (22%)\n-1.95% (-$0.10) | Entry 0.148600\nPrice 0.145700 | Stop 0.143577 (-1%)\nRSI 48 | Bearish | ATH -89%\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\nand 8 more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT22.98/\u20a631,711\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 1,
+        "i": 0,
         "mode": "Markdown",
         "x": [],
         "cmd": null
