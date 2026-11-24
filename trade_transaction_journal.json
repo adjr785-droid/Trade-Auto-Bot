@@ -2273,5 +2273,11 @@
         "time": 1795527358.501561,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.3491, 'recurring_patterns': ['Frequent PANIC exits', 'Repeated 15\u2011MINUTE NO\u2011UPWARD\u2011TREND ROTATION entries', 'Multiple MANUAL SELL actions (including trailing stop)'], 'recommendations': ['Limit PANIC\u2011driven trades and enforce stricter entry criteria', 'Review 15\u2011minute rotation strategy for false signals', 'Implement tighter stop\u2011loss controls on manual sell positions', 'Consider reducing position size on high\u2011volatility symbols (e.g., WLD, JCT)', 'Maintain current risk parameters until pattern adjustments are validated']}"
+    },
+    {
+        "time": 1795527374.5486073,
+        "event": "ai_coin_advisory",
+        "reviewed": 25,
+        "source": "coins.db"
     }
 ]
