@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935690144,
+    "last_update_id": 935690147,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT22.07/\u20a630,460",
+    "kb_ph": "USDT22.12/\u20a630,527",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -66,48 +66,41 @@
         "LINK-USDT",
         "ARIA-USDT"
     ],
-    "out_text": "\ud83e\udde0 AI (openai/gpt-oss-120b via Groq):\n\n**Market\u2011Regime Snapshot**\n\n| Indicator | Value | Interpretation (per your RSI\u201142\u201148 rule) |\n|-----------|-------|-------------------------------------------|\n| **BTC RSI** | **39.09** | Below the 42\u201148 band \u2192 BTC is in an *oversold /\npotentially bottom\u2011forming* zone, but still in a modestly bearish\u2011to\u2011neutral\nmarket. |\n| **BTC filter** | **BLOCKED** | Your system\u2019s protective filter (likely based\n\u2800\n\u2800",
+    "out_text": "\u2705 *AUDIT COMPLETE:* No issues found.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795494488.0549452,
+    "out_time": 1795494569.0991824,
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
+                "text": "\ud83d\udee0\ufe0f Audit",
+                "callback_data": "m:r:audit"
             },
             {
-                "text": "2/7",
-                "callback_data": "pg:x"
+                "text": "\ud83e\udde9 Layout",
+                "callback_data": "m:lay"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\udde0 Resume AI Mode",
+                "callback_data": "m:r:airesume"
+            }
+        ],
+        [
+            {
+                "text": "\u2b05\ufe0f Tools",
+                "callback_data": "m:tools"
             },
             {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
-            },
-            {
-                "text": "\ud83c\udfe0",
+                "text": "\ud83c\udfe0 Main Menu",
                 "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 2/7*",
+    "panel_text": "\ud83d\udee0\ufe0f *SYSTEM*",
     "audit_down": {},
     "audit_last": 1795494401.0992463,
-    "kb_mid": 5030,
-    "out_mid": 5028,
-    "pages": {
-        "p": [
-            "\ud83e\udde0 AI (openai/gpt-oss-120b via Groq):\n\n**Market\u2011Regime Snapshot**\n\n| Indicator | Value | Interpretation (per your RSI\u201142\u201148 rule) |\n|-----------|-------|-------------------------------------------|\n| **BTC RSI** | **39.09** | Below the 42\u201148 band \u2192 BTC is in an *oversold /\npotentially bottom\u2011forming* zone, but still in a modestly bearish\u2011to\u2011neutral\nmarket. |\n| **BTC filter** | **BLOCKED** | Your system\u2019s protective filter (likely based\n\u2800\n\u2800",
-            "on volatility, trend, or funding\u2011rate thresholds) is currently **preventing any\nauto\u2011buy** signals, even if a candidate looks attractive. |\n| **Overall crypto spot sentiment** | Mixed\u2011to\u2011bearish | Most major pairs are\ntrading flat\u2011to\u2011down on\u2011trend; volume is modest and spreads are near the\n0.5\u202f% ceiling you set. |\n\n**Portfolio Exposure (USDT\u2011denominated)**  \n\n| Item | Amount | Comment |\n|------|--------|---------|\n\u2800\n\u2800",
-            "| **Free USDT** | **0.04\u202fUSDT** | Practically negligible for new positions. |\n| **Auto\u2011Buy budget** | **$6.50** (blocked) | Would be used if the BTC filter\ncleared. |\n| **Open positions** | 2 | See risk assessment below. |\n| **Total allocated** | \u2248\u202f$0.32 (ARIA) + $0.09 (JCT) | <\u202f1\u202f% of the\nauto\u2011buy budget \u2013 very low exposure. |\n\n**Open\u2011Position Risk Labels**\n\n| Symbol | Entry | Live | P/L | Stop\u2011loss | Age (min) | Risk label* | Rationale\n\u2800\n\u2800",
-            "|\n|--------|-------|------|-----|-----------|-----------|-------------|-----------\n|\n| **ARIA\u2011USDT** | 0.311195 | 0.3170 | **+1.87\u202f%** | 0.280076 (\u2248\u202f\u201110\u202f% from\nentry) | 29 | **HOLD** | Small unrealized gain, stop comfortably below entry\n(\u2248\u202f10\u202f% buffer, within your 15\u202f% max). No immediate downside pressure; keep\nthe trade and monitor BTC RSI for any reversal. |\n| **JCT\u2011USDT** | 0.001571 | 0.001552 | **\u20111.21\u202f%** | 0.001481 (\u2248\u202f\u20115.7\u202f%\nfrom entry) | 30 | **HOLD / WATCH** | Loss is modest and stop\u2011loss still\nprovides ~5\u202f% cushion. Given the overall market softness, stay in position but\n\u2800\n\u2800",
-            "be ready to **REDUCE** (partial close) if the pair breaches the stop or if BTC\nRSI drops further into deep oversold territory (e.g., <\u202f35). |\n\n\\*Labels follow the requested **BUY\u202fWATCH / HOLD / REDUCE / EXIT** style.\n\u201cHOLD / WATCH\u201d means the trade is still within risk parameters but should be\nwatched closely for any adverse move.\n\n**Candidate Queue**\n\n- **No queued candidates** at the moment.  \n\u2800\n\u2800",
-            "- Even if a high\u2011quality setup appeared, the **BTC filter would still block**\nauto\u2011execution until BTC\u2019s market conditions satisfy the filter\u2019s internal\nrules.\n\n**What to Do About the BTC Filter**\n\n- The system is deliberately preventing auto\u2011buys because BTC\u2019s RSI is below\nyour 42\u201148 window and the filter\u2019s other criteria (e.g., volatility, spread)\nare not met.  \n- **You may still place a manual **/buy** order** if you are comfortable\n\u2800\n\u2800",
-            "overriding the filter, but **we do not recommend bypassing deterministic risk\nchecks**. Manual entry should respect the same stop\u2011loss (\u2264\u202f15\u202f%), spread\n(<\u202f0.5\u202f%), and position\u2011size limits you have configured.\n\n**Fees & Slippage Considerations**\n\n- Spot\u2011trade taker fees on most US\u2011based exchanges are **\u2248\u202f0.10\u202f%** (plus\nany maker rebate if you provide liquidity).  \n- With the current market spread near your 0.5\u202f% ceiling, expect **effective\nentry/exit costs of ~\n\u2800\n\u2800"
-        ],
-        "i": 1,
-        "mode": "Markdown",
-        "x": [],
-        "cmd": "m:ai:1"
-    },
-    "panel_mid": 5029
+    "kb_mid": 5033,
+    "out_mid": 5032,
+    "panel_hidden": true
 }
