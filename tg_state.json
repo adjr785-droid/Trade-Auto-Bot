@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690512,
+    "last_update_id": 935690514,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -86,68 +86,48 @@
         "since": 1795558810.5830717,
         "loss": -1.4850249000000058
     },
-    "out_text": "\ud83d\udcc8 *TRADE STATS* (after estimated fees)\nClosed trades: 41\nWin rate: 54% (22 wins, 19 losses)\nAverage win: $+0.42 | Average loss: $-0.21\nProfit factor: 2.29\nExpectancy per trade: $+0.13\nNet profit: $+5.14\nBest: $+2.97 | Worst: $-0.70\n\n*By strategy*\n\u2800\n\u2800",
+    "out_text": "\ud83e\uddfe *TRADE HISTORY*\n\ud83d\udd34 WLD | PANIC | PnL $-0.39\n\ud83d\udfe2 UMXM | PARTIAL PROFIT +10.4% | PnL $+1.11\n\ud83d\udfe2 INJ | RSI 75 | PnL $+0.10\n\ud83d\udd34 JCT | MANUAL SELL ALL | PnL $-0.70\n\ud83d\udfe2 BGB | MANUAL SELL ALL | PnL $-0.00\n\ud83d\udd34 DOS | TRAILING STOP (8.0%) | PnL $-0.51\n\ud83d\udfe2 ARIA | PANIC | PnL $+0.14\n\ud83d\udd34 JCT | PANIC | PnL $-0.16\n\ud83d\udd34 ADA | MANUAL SELL $8.00 | PnL $-0.01\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795560360.9110138,
+    "out_time": 1795560378.2977421,
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udda5 System",
-                "callback_data": "/bot"
+                "text": "\ud83d\uded2 Trade",
+                "callback_data": "m:tl:trade"
             },
             {
-                "text": "\ud83d\udcc8 Stats",
-                "callback_data": "/stats"
+                "text": "\ud83d\udd14 Alerts",
+                "callback_data": "m:tl:alerts"
             }
         ],
         [
             {
-                "text": "\u2699\ufe0f Settings",
-                "callback_data": "m:set"
+                "text": "\ud83d\udd0d Scan",
+                "callback_data": "m:tl:scan"
             },
             {
-                "text": "\ud83d\udcbc Holdings",
-                "callback_data": "m:r:holdings"
+                "text": "\ud83d\udee0\ufe0f System",
+                "callback_data": "m:tl:sys"
             }
         ],
         [
             {
-                "text": "\ud83d\udcdc Trade History",
-                "callback_data": "m:r:history"
-            },
-            {
-                "text": "\ud83e\udde0 Ask AI",
-                "callback_data": "m:ai:1"
-            }
-        ],
-        [
-            {
-                "text": "\ud83e\uddf9 Clear Chat",
-                "callback_data": "/clear"
-            },
-            {
-                "text": "\ud83d\udea8 PANIC SELL",
-                "callback_data": "/panic"
+                "text": "\u2b05\ufe0f Main Menu",
+                "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
+    "panel_text": "\ud83e\uddf0 *TOOLS*\nChoose a group.",
     "pages": {
         "p": [
-            "\ud83d\udcc8 *TRADE STATS* (after estimated fees)\nClosed trades: 41\nWin rate: 54% (22 wins, 19 losses)\nAverage win: $+0.42 | Average loss: $-0.21\nProfit factor: 2.29\nExpectancy per trade: $+0.13\nNet profit: $+5.14\nBest: $+2.97 | Worst: $-0.70\n\n*By strategy*\n\u2800\n\u2800",
-            "MANUAL: 32 trades | win 59% | avg $+0.20 | total $+6.42\nBREAKOUT: 1 trades | win 100% | avg $+0.10 | total $+0.10\nOLDER: 2 trades | win 0% | avg $-0.15 | total $-0.29\nOTHER: 6 trades | win 33% | avg $-0.18 | total $-1.09\n\n\ud83d\udd2c *RULE RESULTS* (what coins did after each stage)\n\ud83d\udc41 Watch: collecting data\n\ud83d\udfe1 Manual: collecting data\n\ud83e\udd16 Auto: collecting data\nWin = beats round-trip fees at 4h. Needs a few days of scans to mean anything.\n\u2800\n\u2800",
-            "\n\ud83e\udde0 *AI:* Overall win rate is 54% with a solid profit factor of 2.29, but the\nsmall sample size\u2014especially only one breakout trade and limited auto\ndata\u2014means performance conclusions remain uncertain.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+            "\ud83e\uddfe *TRADE HISTORY*\n\ud83d\udd34 WLD | PANIC | PnL $-0.39\n\ud83d\udfe2 UMXM | PARTIAL PROFIT +10.4% | PnL $+1.11\n\ud83d\udfe2 INJ | RSI 75 | PnL $+0.10\n\ud83d\udd34 JCT | MANUAL SELL ALL | PnL $-0.70\n\ud83d\udfe2 BGB | MANUAL SELL ALL | PnL $-0.00\n\ud83d\udd34 DOS | TRAILING STOP (8.0%) | PnL $-0.51\n\ud83d\udfe2 ARIA | PANIC | PnL $+0.14\n\ud83d\udd34 JCT | PANIC | PnL $-0.16\n\ud83d\udd34 ADA | MANUAL SELL $8.00 | PnL $-0.01\n\u2800\n\u2800",
+            "\ud83d\udfe2 ADA | MANUAL SELL $3.46 | PnL $+0.00\n\ud83d\udfe2 ADA | MANUAL SELL $5.22 | PnL $+0.03\n\ud83d\udfe2 BTW | PANIC | PnL $+0.22\n\n\ud83e\udde0 *AI:* Trade history shows mixed outcomes: one partial profit (+10.4%),\nseveral panic and manual sell actions yielding small losses, and a trailing stop\nloss (-0.51); monitor panic triggers and consider tighter risk controls.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
         "i": 0,
         "mode": "Markdown",
-        "x": [
-            {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
-            }
-        ],
-        "cmd": "/stats"
+        "x": [],
+        "cmd": "m:r:history"
     },
-    "out_mid": 5628,
-    "panel_mid": 5629
+    "out_mid": 5631,
+    "panel_mid": 5632
 }
