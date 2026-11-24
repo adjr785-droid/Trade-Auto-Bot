@@ -1840,5 +1840,15 @@
         "time": 1795494083.109316,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 5.9833, 'recurring_patterns': {'15-MINUTE NO-UPWARD-TREND ROTATION': 9, 'PANIC': 4, 'MANUAL SELL ALL': 3, 'RSI 75': 2, 'MANUAL SELL $15.10': 1, 'TRAILING STOP (8.0%)': 1}, 'recommendations': ['Review and tighten criteria for \"15-MINUTE NO-UPWARD-TREND ROTATION\" entries to avoid low\u2011impact trades', 'Implement stricter controls on panic\u2011driven exits to reduce loss frequency', 'Consider adjusting RSI threshold or adding confirmation filters before executing RSI\u2011based trades', 'Limit exposure on manual sell\u2011all actions until broader portfolio performance is confirmed']}"
+    },
+    {
+        "time": 1795494370.9475584,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Loss limit ($-1.10 / -$0.66)', 'attention': [{'symbol': 'JCT-USDT', 'action': 'consider reducing exposure', 'reason': 'Position is slightly underwater (-1.02% PnL) and close to stop level (0.001481 vs current 0.001555). Market volatility could push it further down.'}, {'symbol': 'ARIA-USDT', 'action': 'monitor', 'reason': 'Small positive PnL (0.81%) but price is approaching the stop (0.280076) with current price 0.31373; a pullback could trigger stop loss.'}, {'symbol': 'BTC-USDT', 'action': 'watch BTC price movement', 'reason': 'btc_filter is true and BTC price is at $60,508.27; significant BTC swings can affect correlated altcoins like ARIA and JCT.'}], 'summary': 'Overall portfolio is near the defined loss limit. Both positions are close to their stop levels, with JCT already in a small loss. Recommend tightening risk controls, possibly tightening stops or scaling "
+    },
+    {
+        "time": 1795494371.9550328,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 5.9833, 'recurring_patterns': ['15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC', 'MANUAL SELL ALL', 'RSI 75'], 'recommendations': ['Review and tighten criteria for \"PANIC\" exits to avoid frequent small losses', 'Consider raising RSI threshold above 75 to reduce premature exits', 'Limit reliance on manual sell signals without additional technical confirmation', 'Monitor performance of \"15-MINUTE NO-UPWARD-TREND ROTATION\" strategy; it shows mixed results and may need tighter filters']}"
     }
 ]
