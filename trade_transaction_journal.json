@@ -1948,5 +1948,10 @@
             "warning": "BTC is below its 50\u2011hour average, indicating broader market weakness. Proceed with caution and ensure position size aligns with your risk tolerance.",
             "summary": "Buying ADA with $21.85 at $0.1486, RSI 47.7 suggests no strong overbought/oversold signal. Market conditions are slightly bearish due to BTC trend. Consider limiting exposure."
         }
+    },
+    {
+        "time": 1795495848.9295144,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (6)', 'attention': [{'symbol': 'ADA-USDT', 'action': 'hold', 'reason': 'Position is small, recent entry with modest 7% profit, stop loss still comfortably below entry. No immediate risk signals.'}], 'summary': 'Overall portfolio risk is within the daily limit. The only open position (ADA-USDT) shows a small gain and remains within its stop loss margin. No new actions are recommended at this time.'}"
     }
 ]

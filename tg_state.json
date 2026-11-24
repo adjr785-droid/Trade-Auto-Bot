@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935690164,
+    "last_update_id": 935690171,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT21.90/\u20a630,225",
+    "kb_ph": "USDT21.92/\u20a630,246",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -68,23 +68,19 @@
     ],
     "audit_down": {},
     "audit_last": 1795495131.2554612,
-    "out_text": "\ud83e\udde0 AI manual-buy advisory: Buying ADA with $21.85 at $0.1486, RSI 47.7 suggests\nno strong overbought/oversold signal. Market conditions are slightly bearish due\nto BTC trend. Consider limiting exposure.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "kb_mid": 5075,
+    "out_mid": 5076,
+    "out_text": "\ud83d\udea8 *AI FAILURE \u2014 AUTO-BUY PAUSED*\nThe audit is recovering the AI (3 checks needed). Manual buy and sell and all\nstops stay on.\nReason: AI stage performance_review failed: Expecting ',' delimiter: line 1\ncolumn 587 (char 586)\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
+    "out_time": 1795495850.4054587,
+    "panel_mid": 5077,
     "panel_rows": [
         [
             {
-                "text": "\u2705 Confirm",
-                "callback_data": "m:bx:ADA:ALL"
-            },
-            {
-                "text": "\u274c Cancel",
-                "callback_data": "m:menu"
+                "text": "\ud83d\udfe1 ICNT \u00b7 75%",
+                "callback_data": "m:mc:ICNT"
             }
         ]
     ],
-    "panel_text": "\u26a0\ufe0f *CONFIRM BUY*\nADA for ALL free USDT at about 0.148600 USDT.",
-    "out_time": 1795495350.7409172,
-    "kb_mid": 5067,
-    "out_mid": 5066,
-    "panel_hidden": true
+    "panel_text": "\ud83d\udc47 *Actions*"
 }
