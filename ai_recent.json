@@ -31,6 +31,11 @@
             1795550484.4930196,
             "OTHER",
             "coin_advisory: Expecting ',' delimiter: line 1 column 2718 (char 2717)"
+        ],
+        [
+            1795556881.537389,
+            "OTHER",
+            "coin_advisory: Expecting ',' delimiter: line 1 column 2585 (char 2584)"
         ]
     ]
 }

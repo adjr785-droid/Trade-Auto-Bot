@@ -64,15 +64,19 @@
             1795554410.4614184
         ]
     },
-    "radar": [],
+    "radar": [
+        "LTC-USDT",
+        "WLD-USDT",
+        "TRX-USDT"
+    ],
     "audit_down": {},
-    "audit_last": 1795554561.9736643,
+    "audit_last": 1795556885.5904343,
     "kb_mid": 5507,
-    "audit_ai_cls": "",
+    "audit_ai_cls": "OTHER",
     "out_mid": 5508,
-    "out_text": "\ud83d\udee0\ufe0f *AUTO-AUDIT COMPLETE*\n\ud83e\uddf9 Removed ghost: ICNT-USDT\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "\ud83d\udee0 AUDIT\n\u2705 Fixed: AI \u2014 unknown error (stage: coin_advisory). Retrying; no automatic fix\nknown for this error.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795556858.9977858,
+    "out_time": 1795556886.6680949,
     "panel_mid": 5509,
     "panel_rows": [
         [
