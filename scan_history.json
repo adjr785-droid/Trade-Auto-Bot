@@ -20,26 +20,6 @@
             "min_volume": 1000000.0,
             "spread_pct": 0.0674081563869341,
             "near_miss": null
-        },
-        {
-            "sym": "ICNT-USDT",
-            "time": 1795477299.0203633,
-            "price": 0.3091,
-            "h1": 1.21,
-            "rsi": 28.47,
-            "status": "READY",
-            "decision": "SETUP \u2014 NOT QUEUED",
-            "reason": "OVERSOLD matched, AI emergency: automatic buying paused",
-            "execution_status": "HELD",
-            "scan_id": "1795477298",
-            "rank": 42,
-            "vol": 1253550.32,
-            "chg": -12.188,
-            "ma5": 0.30468,
-            "ma10": 0.31071,
-            "min_volume": 1000000.0,
-            "spread_pct": 0.03234675723758337,
-            "near_miss": null
         }
     ]
 }
