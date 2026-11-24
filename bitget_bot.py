@@ -444,7 +444,7 @@ def save(f,d):
   os.replace(f+".tmp",f)
  except Exception as e:print(f"SAVE ERR {f}: {e}")
 def cfg():
- d={"oversold_enabled":False,"rising_guard":True,"rsi_min":42,"rsi_max":48,"stop_loss_pct":5.0,"auto_buy_enabled":True,"auto_buy_amount_usdt":10.0,"max_tokens_before_consolidation":3,"trail_pct":8.0,"crash_guard_pct":10.0,"rsi_exit":75,"btc_rsi_min":50,"risk_per_trade_pct":0.5,"max_daily_loss_pct":3.0,"max_portfolio_exposure_pct":50.0,"max_position_pct":15.0,"max_daily_trades":5,"max_spread_pct":0.5,"auto_mode_v1":False,"rebuy_cooldown_hours":6.0,"atr_stop_enabled":True,"atr_stop_mult":2.0,"atr_stop_min_pct":3.0,"atr_stop_max_pct":10.0,"market_filter_enabled":True,"btc_trend_hours":50,"min_breadth_pct":30.0,"weak_market_mode":True,"weak_market_floor_pct":15.0,"weak_market_size_factor":0.5,"h1_all_setups":False,"offline_alert_hours":3.0,"daily_summary_hour_utc":20,"max_daily_drawdown_pct":5.0,"dynamic_trail":True,"sell_if_stop_fails":True,"scan_prefilter":True,"cleanup_hours":24.0,"scan_interval_minutes":15.0,"auto_clear_hours":24.0,"live_mode_seconds":270,"mtf_confirm":True,"btc_shock_pct":3.0,"max_open_risk_pct":3.0,"fee_pct_side":0.1,"perf_breaker_trades":10,"perf_breaker_hours":24.0,"loss_streak_trigger":2,"loss_streak_size_factor":0.5,"scan_parallel":True,"page_chars":600,"page_lines":12,"page_width":32,"output_stale_minutes":5,"smart_risk_enabled":True,"max_coin_exposure_pct":20.0,"max_sector_exposure_pct":35.0,"liquidity_depth_usdt":5000.0,"max_book_imbalance_pct":85.0,"regime_risk_factor":0.65,"execution_slippage_pct":0.35,"stop_watchdog_enabled":True,"portfolio_stress_pct":12.0,"signal_expiry_minutes":30,"adaptive_risk_enabled":True,"dynamic_auto_buy_enabled":True,"auto_buy_reserve_pct":5.0,"dynamic_auto_buy_max_pct":20.0,"dynamic_auto_buy_min_usdt":1.02,"dynamic_auto_buy_max_usdt":0.0,"guardian_enabled":True,"guardian_audit_interval_minutes":15,"max_portfolio_correlation":0.85,"momentum_1h_enabled":True,"mom_1h_min_pct":0.5,"mom_1h_max_pct":6.0,"max_24h_pct":100.0,"near_miss_alerts":True,"near_miss_rsi_margin":3.0,"near_miss_1h_margin":0.5,"near_miss_cooldown_minutes":60,"near_miss_max_per_scan":3,"scan_workers":8,"radar_max":30,"radar_rsi_margin":10.0,"manual_candidate_min_score":70.0}
+ d={"oversold_enabled":False,"rising_guard":True,"rsi_min":42,"rsi_max":48,"stop_loss_pct":5.0,"auto_buy_enabled":True,"auto_buy_amount_usdt":10.0,"max_tokens_before_consolidation":3,"trail_pct":8.0,"crash_guard_pct":10.0,"rsi_exit":75,"btc_rsi_min":50,"risk_per_trade_pct":0.5,"max_daily_loss_pct":3.0,"max_portfolio_exposure_pct":50.0,"max_position_pct":15.0,"max_daily_trades":5,"max_spread_pct":0.5,"auto_mode_v1":False,"rebuy_cooldown_hours":6.0,"atr_stop_enabled":True,"atr_stop_mult":2.0,"atr_stop_min_pct":3.0,"atr_stop_max_pct":10.0,"market_filter_enabled":True,"btc_trend_hours":50,"min_breadth_pct":30.0,"weak_market_mode":True,"weak_market_floor_pct":15.0,"weak_market_size_factor":0.5,"h1_all_setups":False,"offline_alert_hours":3.0,"daily_summary_hour_utc":20,"max_daily_drawdown_pct":5.0,"dynamic_trail":True,"sell_if_stop_fails":True,"scan_prefilter":True,"cleanup_hours":24.0,"scan_interval_minutes":15.0,"auto_clear_hours":24.0,"live_mode_seconds":270,"mtf_confirm":True,"btc_shock_pct":3.0,"max_open_risk_pct":3.0,"half_or_all_sizing":True,"half_or_all_threshold_usdt":5.0,"fee_pct_side":0.1,"perf_breaker_trades":10,"perf_breaker_hours":24.0,"loss_streak_trigger":2,"loss_streak_size_factor":0.5,"scan_parallel":True,"page_chars":600,"page_lines":12,"page_width":32,"output_stale_minutes":5,"smart_risk_enabled":True,"max_coin_exposure_pct":20.0,"max_sector_exposure_pct":35.0,"liquidity_depth_usdt":5000.0,"max_book_imbalance_pct":85.0,"regime_risk_factor":0.65,"execution_slippage_pct":0.35,"stop_watchdog_enabled":True,"portfolio_stress_pct":12.0,"signal_expiry_minutes":30,"adaptive_risk_enabled":True,"dynamic_auto_buy_enabled":True,"auto_buy_reserve_pct":5.0,"dynamic_auto_buy_max_pct":20.0,"dynamic_auto_buy_min_usdt":1.02,"dynamic_auto_buy_max_usdt":0.0,"guardian_enabled":True,"guardian_audit_interval_minutes":15,"max_portfolio_correlation":0.85,"momentum_1h_enabled":True,"mom_1h_min_pct":0.5,"mom_1h_max_pct":6.0,"max_24h_pct":100.0,"near_miss_alerts":True,"near_miss_rsi_margin":3.0,"near_miss_1h_margin":0.5,"near_miss_cooldown_minutes":60,"near_miss_max_per_scan":3,"scan_workers":8,"radar_max":30,"radar_rsi_margin":10.0,"manual_candidate_min_score":70.0}
  s=load(CFG,d)
  for k,v in d.items():s.setdefault(k,v)
  if float(s.get("manual_candidate_min_score",70.0) or 70.0)!=70.0:
@@ -1430,7 +1430,7 @@ def cmd_status():
  lines=[f"🖥 *SYSTEM* — {head}",f"Buying: {system_buy_state(s)}",f"Health: Bot {bot_pct}% | AI {str(ap)+'%' if ap is not None else 'n/a'} ({ai_mode})",f"Layers: {lay}"]+([f"🔧 AI issue: {AI_CAUSE.get(le[0],le[0])}"] if (le:=ai_last_error()) and (hs.get("emergency_mode") or (ap is not None and ap<70)) else [])+["━━━━━━━━━━━━━━",
   "🧭 *STRATEGY*",f"Entry: TREND, RSI {s.get('rsi_min')}-{s.get('rsi_max')}, {mom}, price > MA5 > MA10"+(", must be rising vs last scan" if s.get('rising_guard',True) else ""),
   f"Exit: stop {s.get('stop_loss_pct')}% | trail {s.get('trail_pct')}% | RSI {s.get('rsi_exit')}+ (dynamic)",
-  f"Risk: {s.get('risk_per_trade_pct')}% per trade | max {s.get('max_daily_trades')} trades/day | pause at -{s.get('max_daily_drawdown_pct')}% day",
+  (f"Size: 50% of balance (all-in if half < ${float(s.get('half_or_all_threshold_usdt',5.0)):g})" if s.get("half_or_all_sizing",True) else f"Risk: {s.get('risk_per_trade_pct')}% per trade")+f" | max {s.get('max_daily_trades')} trades/day | pause at -{s.get('max_daily_drawdown_pct')}% day",
   "━━━━━━━━━━━━━━",f"💼 ${total:.2f}"+(f" | ₦{total*r:,.0f}" if r else "")+f" | Cash ${usdt_free:.2f} | Coins ${coin_val:.2f}",
   f"Today {ddp:+.2f}% | Last scan {ago} | Queue {len(q)} | Positions {len(db)}"]
  tg("\n".join(lines))
@@ -1899,6 +1899,12 @@ def dynamic_auto_buy_budget(sym, qd, price, stop, available_usdt, s):
  """Adaptive order sizing bounded by risk, portfolio, signal quality, and wallet reserve."""
  try:
   score=float(qd.get("score",0) or 0); setup=str(qd.get("type","OTHER")).upper()
+  if s.get("half_or_all_sizing",True):
+   # Fixed rule: spend 50% of the free USDT; if 50% would be under the threshold (5 USDT), spend all of it (at least the 1.02 minimum).
+   minsize=1.00;thr=float(s.get("half_or_all_threshold_usdt",5.0))   # Bitget minimum order is $1.00 (the 0.02 fee reserve is already taken off)
+   half=(available_usdt+0.02)*0.5;size=half if half>=thr else available_usdt   # half of the FREE balance (available already has the $0.02 reserve off)
+   if size<minsize:return 0.0,{"reason":f"balance ${available_usdt:.2f} below the ${minsize:.2f} minimum","score":score}
+   return round(min(size,available_usdt),2),{"score_factor":1.0,"setup_factor":1.0,"vol_factor":1.0,"regime_factor":1.0,"score":score,"reason":f"50 percent of balance, or all-in when half is under ${thr:g}"}
   # Score multiplier is gradual and bounded, not a fixed amount per trade.
   score_factor=max(0.35,min(1.25,0.45+score/220.0))
   setup_factor={"BREAKOUT":1.0,"TREND":0.9,"OVERSOLD":0.75}.get(setup,0.65)
@@ -2075,7 +2081,8 @@ def exec_q():
  try:
   ub=B('free','USDT')
   reserve_pct=max(0.0,min(50.0,float(s.get('auto_buy_reserve_pct',5.0))))
-  ub=max(0.0,ub*(1-reserve_pct/100.0))
+  # 50% / all-in sizing keeps only the $0.02 fee reserve (Bitget minimum order is $1.00, so $1.02 free is enough); otherwise the % reserve applies.
+  ub=max(0.0,ub-0.02) if s.get("half_or_all_sizing",True) else max(0.0,ub*(1-reserve_pct/100.0))
   for sym,qd in sorted(q.items(),key=lambda x:float(x[1].get('score',0)),reverse=True):
    db_ready,db_reason=coin_db_can_execute(sym,qd)
    if not db_ready:
@@ -2100,11 +2107,11 @@ def exec_q():
    if len(db)>=mx:buy_rejection(sym,f"Max positions ({mx}).");continue
    if spend<1.00:buy_rejection(sym,f"Insufficient USDT (${spend:.2f}).");q.pop(sym,None);save(QF,q);continue
    cap=float(s.get('max_open_risk_pct',3.0) or 0)
-   if cap>0 and db:
+   if cap>0 and db and not s.get("half_or_all_sizing",True):
     orp=open_risk_pct()
     if orp+float(s.get('risk_per_trade_pct',1.0))>cap:buy_rejection(sym,f"Combined open risk {orp:.1f}% (limit {cap:g}%).");continue
    pct=sl_pct(sym);sp,alloc_meta=dynamic_auto_buy_budget(sym,qd,live(sym),qd.get('sl') or live(sym)*(1-pct/100),spend,s)
-   if sp<1.02:buy_rejection(sym,f"Size too small (${sp:.2f}).");continue
+   if sp<(1.00 if s.get("half_or_all_sizing",True) else 1.02):buy_rejection(sym,f"Size too small (${sp:.2f}).");continue
    impact_ok,impact,impact_reason=estimate_market_impact(sym,sp);impact_limit=float(s.get("execution_slippage_pct",0.35))
    if not impact_ok or impact is None or impact>impact_limit:
     buy_rejection(sym,impact_reason if not impact_ok else f"Estimated impact {impact:.3f}% exceeds {impact_limit:.3f}%.");continue
@@ -3165,7 +3172,7 @@ PRESETS={"safe":{"risk_per_trade_pct":0.5,"max_position_pct":8.0,"max_portfolio_
  "balanced":{"risk_per_trade_pct":0.5,"max_position_pct":15.0,"max_portfolio_exposure_pct":50.0,"max_daily_trades":13},
  "active":{"risk_per_trade_pct":0.5,"max_position_pct":20.0,"max_portfolio_exposure_pct":60.0,"max_daily_trades":25}}
 PRESET_NAMES={"safe":"🛡 Safe","balanced":"⚖️ Balanced","active":"🚀 Active"}
-SET_SWITCHES=(("auto_buy_enabled","Auto-buy"),("rising_guard","Falling-knife guard"),("weak_market_mode","Weak-market half size"),("h1_all_setups","1H rule for all setups"))
+SET_SWITCHES=(("auto_buy_enabled","Auto-buy"),("rising_guard","Falling-knife guard"),("weak_market_mode","Weak-market half size"),("h1_all_setups","1H rule for all setups"),("half_or_all_sizing","50% / all-in sizing"))
 def ui_settings_page(pg=0,note=""):
  cur=cfg();mode=next((n for n,v in PRESETS.items() if all(float(cur.get(k,-1))==float(x) for k,x in v.items())),None)
  rows=[[_B(("✅ " if n==mode else "")+PRESET_NAMES[n],f"m:pre:{n}") for n in PRESETS]]
