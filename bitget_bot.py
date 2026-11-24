@@ -444,14 +444,15 @@ def save(f,d):
   os.replace(f+".tmp",f)
  except Exception as e:print(f"SAVE ERR {f}: {e}")
 def cfg():
- d={"oversold_enabled":False,"rising_guard":True,"rsi_min":42,"rsi_max":48,"stop_loss_pct":5.0,"auto_buy_enabled":True,"auto_buy_amount_usdt":10.0,"max_tokens_before_consolidation":3,"trail_pct":8.0,"crash_guard_pct":10.0,"rsi_exit":75,"btc_rsi_min":50,"risk_per_trade_pct":0.5,"max_daily_loss_pct":3.0,"max_portfolio_exposure_pct":50.0,"max_position_pct":15.0,"max_daily_trades":5,"max_spread_pct":0.5,"auto_mode_v1":False,"rebuy_cooldown_hours":6.0,"atr_stop_enabled":True,"atr_stop_mult":2.0,"atr_stop_min_pct":3.0,"atr_stop_max_pct":10.0,"market_filter_enabled":True,"btc_trend_hours":50,"min_breadth_pct":30.0,"weak_market_mode":True,"weak_market_floor_pct":15.0,"weak_market_size_factor":0.5,"h1_all_setups":False,"offline_alert_hours":3.0,"daily_summary_hour_utc":20,"max_daily_drawdown_pct":5.0,"partial_tp_pct":10.0,"partial_tp_fraction":0.5,"dynamic_trail":True,"sell_if_stop_fails":True,"scan_prefilter":True,"cleanup_hours":24.0,"scan_interval_minutes":15.0,"auto_clear_hours":24.0,"live_mode_seconds":270,"mtf_confirm":True,"btc_shock_pct":3.0,"max_open_risk_pct":3.0,"loss_streak_trigger":2,"loss_streak_size_factor":0.5,"scan_parallel":True,"page_chars":600,"page_lines":12,"page_width":32,"output_stale_minutes":5,"smart_risk_enabled":True,"max_coin_exposure_pct":20.0,"max_sector_exposure_pct":35.0,"liquidity_depth_usdt":5000.0,"max_book_imbalance_pct":85.0,"regime_risk_factor":0.65,"execution_slippage_pct":0.35,"stop_watchdog_enabled":True,"portfolio_stress_pct":12.0,"signal_expiry_minutes":30,"adaptive_risk_enabled":True,"dynamic_auto_buy_enabled":True,"auto_buy_reserve_pct":5.0,"dynamic_auto_buy_max_pct":20.0,"dynamic_auto_buy_min_usdt":1.02,"dynamic_auto_buy_max_usdt":0.0,"guardian_enabled":True,"guardian_audit_interval_minutes":15,"max_portfolio_correlation":0.85,"momentum_1h_enabled":True,"mom_1h_min_pct":0.5,"mom_1h_max_pct":6.0,"max_24h_pct":100.0,"near_miss_alerts":True,"near_miss_rsi_margin":3.0,"near_miss_1h_margin":0.5,"near_miss_cooldown_minutes":60,"near_miss_max_per_scan":3,"scan_workers":8,"radar_max":30,"radar_rsi_margin":10.0,"manual_candidate_min_score":75.0}
+ d={"oversold_enabled":False,"rising_guard":True,"rsi_min":42,"rsi_max":48,"stop_loss_pct":5.0,"auto_buy_enabled":True,"auto_buy_amount_usdt":10.0,"max_tokens_before_consolidation":3,"trail_pct":8.0,"crash_guard_pct":10.0,"rsi_exit":75,"btc_rsi_min":50,"risk_per_trade_pct":0.5,"max_daily_loss_pct":3.0,"max_portfolio_exposure_pct":50.0,"max_position_pct":15.0,"max_daily_trades":5,"max_spread_pct":0.5,"auto_mode_v1":False,"rebuy_cooldown_hours":6.0,"atr_stop_enabled":True,"atr_stop_mult":2.0,"atr_stop_min_pct":3.0,"atr_stop_max_pct":10.0,"market_filter_enabled":True,"btc_trend_hours":50,"min_breadth_pct":30.0,"weak_market_mode":True,"weak_market_floor_pct":15.0,"weak_market_size_factor":0.5,"h1_all_setups":False,"offline_alert_hours":3.0,"daily_summary_hour_utc":20,"max_daily_drawdown_pct":5.0,"dynamic_trail":True,"sell_if_stop_fails":True,"scan_prefilter":True,"cleanup_hours":24.0,"scan_interval_minutes":15.0,"auto_clear_hours":24.0,"live_mode_seconds":270,"mtf_confirm":True,"btc_shock_pct":3.0,"max_open_risk_pct":3.0,"loss_streak_trigger":2,"loss_streak_size_factor":0.5,"scan_parallel":True,"page_chars":600,"page_lines":12,"page_width":32,"output_stale_minutes":5,"smart_risk_enabled":True,"max_coin_exposure_pct":20.0,"max_sector_exposure_pct":35.0,"liquidity_depth_usdt":5000.0,"max_book_imbalance_pct":85.0,"regime_risk_factor":0.65,"execution_slippage_pct":0.35,"stop_watchdog_enabled":True,"portfolio_stress_pct":12.0,"signal_expiry_minutes":30,"adaptive_risk_enabled":True,"dynamic_auto_buy_enabled":True,"auto_buy_reserve_pct":5.0,"dynamic_auto_buy_max_pct":20.0,"dynamic_auto_buy_min_usdt":1.02,"dynamic_auto_buy_max_usdt":0.0,"guardian_enabled":True,"guardian_audit_interval_minutes":15,"max_portfolio_correlation":0.85,"momentum_1h_enabled":True,"mom_1h_min_pct":0.5,"mom_1h_max_pct":6.0,"max_24h_pct":100.0,"near_miss_alerts":True,"near_miss_rsi_margin":3.0,"near_miss_1h_margin":0.5,"near_miss_cooldown_minutes":60,"near_miss_max_per_scan":3,"scan_workers":8,"radar_max":30,"radar_rsi_margin":10.0,"manual_candidate_min_score":75.0}
  s=load(CFG,d)
  for k,v in d.items():s.setdefault(k,v)
  for _k in ('max_hold_hours','momentum_watch_minutes','rotation_retry_hours'):
   if _k in s:s.pop(_k,None);save(CFG,s)
  if not s.get('one_h_v1'):s['h1_all_setups']=True;s['one_h_v1']=True;save(CFG,s)
+ if not s.get('risk_v3'):s['risk_per_trade_pct']=0.5;s['risk_v3']=True;save(CFG,s)
  if not s.get('knife_v1'):s['risk_per_trade_pct']=0.5;s['oversold_enabled']=False;s['rising_guard']=True;s['knife_v1']=True;save(CFG,s)
- if not s.get('tp10_v1'):s['partial_tp_pct']=10.0;s['tp10_v1']=True;save(CFG,s)
+ if 'partial_tp_pct' in s or 'partial_tp_fraction' in s:s.pop('partial_tp_pct',None);s.pop('partial_tp_fraction',None);save(CFG,s)
  if not s.get('auto_mode_v1'):s['auto_buy_enabled']=True;s['auto_mode_v1']=True;save(CFG,s)
  return s
 def in_cd(k,s=5):return time.time()-load(CD,{}).get(k,0)<s
@@ -1318,10 +1319,9 @@ def cmd_status():
  except Exception:ddp=0.0
  q=load(QF);ls=load(SC).get('last',0);ago=f"{(now-ls)/60:.0f} min ago" if ls else "never"
  mom=f"1H +{float(s.get('mom_1h_min_pct',0.5)):g}–{float(s.get('mom_1h_max_pct',6.0)):g}%" if mom_on(s) else "24H range"
- ptp=float(s.get('partial_tp_pct',0) or 0)
- lines=[f"🖥 *SYSTEM* — {head}",f"Buying: {system_buy_state(s)}",f"Health: Bot {bot_pct}% | AI {str(ap)+'%' if ap is not None else 'n/a'} ({ai_mode})",f"Layers: {lay}","━━━━━━━━━━━━━━",
+ lines=[f"🖥 *SYSTEM* — {head}",f"Buying: {system_buy_state(s)}",f"Health: Bot {bot_pct}% | AI {str(ap)+'%' if ap is not None else 'n/a'} ({ai_mode})",f"Layers: {lay}"]+([f"🔧 AI issue: {AI_CAUSE.get(le[0],le[0])}"] if (le:=ai_last_error()) and (hs.get("emergency_mode") or (ap is not None and ap<70)) else [])+["━━━━━━━━━━━━━━",
   "🧭 *STRATEGY*",f"Entry: TREND, RSI {s.get('rsi_min')}-{s.get('rsi_max')}, {mom}, price > MA5 > MA10"+(", must be rising vs last scan" if s.get('rising_guard',True) else ""),
-  f"Exit: stop {s.get('stop_loss_pct')}% | trail {s.get('trail_pct')}% | RSI {s.get('rsi_exit')}"+(f" | sell {float(s.get('partial_tp_fraction',0.5))*100:.0f}% at +{ptp:g}%" if ptp>0 else ""),
+  f"Exit: stop {s.get('stop_loss_pct')}% | trail {s.get('trail_pct')}% | RSI {s.get('rsi_exit')}+ (dynamic)",
   f"Risk: {s.get('risk_per_trade_pct')}% per trade | max {s.get('max_daily_trades')} trades/day | pause at -{s.get('max_daily_drawdown_pct')}% day",
   "━━━━━━━━━━━━━━",f"💼 ${total:.2f}"+(f" | ₦{total*r:,.0f}" if r else "")+f" | Cash ${usdt_free:.2f} | Coins ${coin_val:.2f}",
   f"Today {ddp:+.2f}% | Last scan {ago} | Queue {len(q)} | Positions {len(db)}"]
@@ -1369,11 +1369,70 @@ def analyse_coin(txt):
 def _ai_reason(model):
  # gpt-oss models spend max_tokens on hidden reasoning; keep it low so the JSON answer is not cut off
  return {'reasoning_effort':'low'} if 'gpt-oss' in str(model) else {}
-def _ai_note(ok):
- # remember whether the last 20 AI calls worked (feeds the AI health percentage)
+_AI_OPTIONAL=("near_miss_review","coin_advisory","command_review","portfolio_review","opportunity_ranking")
+def ai_error_class(msg):
+ m=str(msg).lower()
+ if "missing" in m or "not configured" in m:return "NO_KEY"
+ if "http 401" in m or "http 403" in m:return "BAD_KEY"
+ if "http 429" in m or "rate limit" in m:return "RATE_LIMIT"
+ if "http 400" in m or "http 404" in m or "unavailable. check groq_model" in m or "model_not_found" in m or "decommission" in m:return "MODEL"
+ if any(f"http {c}" in m for c in (500,502,503,504)):return "SERVER"
+ if "timed out" in m or "timeout" in m or "connection" in m or "resolve" in m:return "NETWORK"
+ if "not json" in m or "unexpected content" in m or "must be an object" in m or "expecting value" in m or "empty" in m:return "FORMAT"
+ return "OTHER"
+AI_CAUSE={"NO_KEY":"API key missing","BAD_KEY":"API key rejected","RATE_LIMIT":"rate limit (too many calls)","MODEL":"model unavailable","SERVER":"Groq server error","NETWORK":"network trouble reaching Groq","FORMAT":"answers cut off or not in the right format","OTHER":"unknown error"}
+def _ai_note(ok,err=""):
+ # remember whether the last 20 AI calls worked, and why the failed ones failed (feeds AI health % and the audit)
  try:
-  d=load(AI_RECENT,{});r=list(d.get("r",[]))[-19:]+[1 if ok else 0];save(AI_RECENT,{"r":r})
+  d=load(AI_RECENT,{});r=list(d.get("r",[]))[-19:]+[1 if ok else 0];d["r"]=r
+  if not ok:d["e"]=(list(d.get("e",[]))+[[time.time(),ai_error_class(err),str(err)[:120]]])[-20:]
+  elif len(r)>=5 and all(r[-5:]) and (d.get("boost",1)!=1):d["boost"]=1
+  save(AI_RECENT,d)
  except Exception:pass
+def ai_model():
+ try:
+  m=os.environ.get('GROQ_MODEL','').strip()
+  return m or str(load(AI_RECENT,{}).get("model") or "") or GROQ_MODEL or 'openai/gpt-oss-120b'
+ except Exception:return GROQ_MODEL or 'openai/gpt-oss-120b'
+def ai_boost():
+ try:return max(1,min(4,int(load(AI_RECENT,{}).get("boost",1) or 1)))
+ except Exception:return 1
+def ai_shed():
+ try:
+  e=load(AI_RECENT,{}).get("e",[]);return any(x[1]=="RATE_LIMIT" and time.time()-float(x[0])<300 for x in e)
+ except Exception:return False
+def ai_last_error():
+ try:
+  e=load(AI_RECENT,{}).get("e",[]);return (e[-1][1],e[-1][2],float(e[-1][0])) if e else None
+ except Exception:return None
+def ai_diagnose_and_fix():
+ """Audit step: find out why the AI is failing and fix what can be fixed. Returns (class, cause, fix, fixable) or None."""
+ hs=ai_emergency_state();le=ai_last_error()
+ if not le:return None
+ cls,msg,tm=le
+ r=list(load(AI_RECENT,{}).get("r",[]))
+ if not hs.get("emergency_mode") and (time.time()-tm>900 or (len(r)>=3 and all(r[-3:]))):return None   # healthy again: nothing to diagnose
+ cause=AI_CAUSE.get(cls,"unknown error");d=load(AI_RECENT,{})
+ stage=msg.split(":")[0] if ":" in msg else ""
+ if stage:cause+=f" (stage: {stage})"
+ if cls in ("NO_KEY","BAD_KEY"):
+  return cls,cause,"Cannot fix from here. Put a valid key in GitHub: Settings > Secrets > Actions > GROQ_API_KEY.",False
+ if cls=="RATE_LIMIT":return cls,cause,"Optional AI features are paused for 5 minutes so the essential checks can pass.",True
+ if cls in ("SERVER","NETWORK"):return cls,cause,"Retrying with a delay on every run until Groq answers.",True
+ if cls=="FORMAT":
+  if int(d.get("boost",1) or 1)<4:d["boost"]=int(d.get("boost",1) or 1)*2;save(AI_RECENT,d);return cls,cause,f"Raised the AI answer length x{d['boost']}.",True
+  return cls,cause,"Answer length is already at maximum; waiting for Groq to recover.",True
+ if cls=="MODEL":
+  try:
+   key=os.environ.get('GROQ_API_KEY','').strip() or GROQ_API_KEY
+   r=requests.get('https://api.groq.com/openai/v1/models',headers={'Authorization':'Bearer '+key},timeout=10)
+   ids=[m.get('id') for m in r.json().get('data',[]) if m.get('id')]
+   pref=[m for m in ids if 'gpt-oss' in m] or [m for m in ids if 'llama' in m and 'versatile' in m] or ids
+   cur=ai_model();pick=next((m for m in pref if m!=cur),None)
+   if pick:d["model"]=pick;save(AI_RECENT,d);return cls,cause,f"Switched to model {pick} (found in Groq's live list).",True
+  except Exception as e:return cls,cause,"Could not read Groq's model list: "+str(e)[:60],False
+  return cls,cause,"No other model available right now.",False
+ return cls,cause,"Retrying; no automatic fix known for this error.",True
 def ai_health_pct():
  try:
   r=list(load(AI_RECENT,{}).get("r",[]))
@@ -1384,8 +1443,9 @@ def ai_health_pct():
 def ai_stage(stage, payload, ttl=90, max_tokens=500, soft=False):
  """Structured Groq AI analysis. Advisory only; deterministic guards remain authoritative."""
  api_key=os.environ.get('GROQ_API_KEY','').strip() or GROQ_API_KEY
- model=os.environ.get('GROQ_MODEL','').strip() or GROQ_MODEL or 'openai/gpt-oss-120b'
+ model=ai_model()
  if not api_key:return None
+ if soft and stage in _AI_OPTIONAL and ai_shed():return None  # rate limited: drop optional AI features, keep the essentials
  try:
   body=json.dumps(payload,sort_keys=True,default=str,separators=(',',':'))
   cache_key=(stage,body[:12000]);now=time.time();cached=_AI_CACHE.get(cache_key)
@@ -1408,7 +1468,7 @@ def ai_stage(stage, payload, ttl=90, max_tokens=500, soft=False):
    "Be conservative and explicitly represent uncertainty. Schema: "+schemas.get(stage,'Return a concise JSON object with summary and reason.')+
    " Stage="+stage+". Input JSON="+body[:12000])
   r=requests.post('https://api.groq.com/openai/v1/chat/completions',headers={'Authorization':'Bearer '+api_key,'Content-Type':'application/json'},
-   json={'model':model,'messages':[{'role':'system','content':'Return valid compact JSON only.'},{'role':'user','content':prompt}], 'temperature':0.1,'max_tokens':max(max_tokens,1024),**_ai_reason(model)},timeout=18)
+   json={'model':model,'messages':[{'role':'system','content':'Return valid compact JSON only.'},{'role':'user','content':prompt}], 'temperature':0.1,'max_tokens':max(max_tokens,1024)*ai_boost(),**_ai_reason(model)},timeout=18)
   if not r.ok:raise RuntimeError('Groq HTTP '+str(r.status_code))
   content=r.json().get('choices',[{}])[0].get('message',{}).get('content','')
   content=str(content).strip();start=content.find('{');end=content.rfind('}')
@@ -1423,7 +1483,7 @@ def ai_stage(stage, payload, ttl=90, max_tokens=500, soft=False):
   _ai_note(True)
   return result
  except Exception as e:
-  print('AI STAGE '+str(stage)+' unavailable: '+str(e)[:180]);_ai_note(False)
+  print('AI STAGE '+str(stage)+' unavailable: '+str(e)[:180]);_ai_note(False,f'{stage}: {e}')
   try:
    hs=load(AI_HEALTH,{});stages=hs.setdefault('stages',{});ss=stages.setdefault(stage,{})
    ss['last_failure']=time.time();ss['failures']=int(ss.get('failures',0))+1;ss['last_error']=str(e)[:180];save(AI_HEALTH,hs)
@@ -1438,6 +1498,7 @@ def ai_health_check(force=False):
  if not force and now-float(hs.get('last_check',0) or 0)<240:return
  key=os.environ.get('GROQ_API_KEY','').strip() or GROQ_API_KEY
  if not key:
+  _ai_note(False,'GROQ_API_KEY is missing')
   hs.update({'last_check':now,'status':'unconfigured','last_error':'GROQ_API_KEY is missing','consecutive_failures':int(hs.get('consecutive_failures',0))+1})
   save(AI_HEALTH,hs)
   hs['consecutive_successes']=0;save(AI_HEALTH,hs)
@@ -1445,13 +1506,13 @@ def ai_health_check(force=False):
    hs['alerted_status']='unconfigured';save(AI_HEALTH,hs)
   activate_ai_emergency('GROQ_API_KEY is missing or not configured')
   return
- model=os.environ.get('GROQ_MODEL','').strip() or GROQ_MODEL or 'openai/gpt-oss-120b';started=time.time()
+ model=ai_model();started=time.time()
  if hs.get('emergency_mode') and int(hs.get('consecutive_successes',0))==0 and not hs.get('recovery_start_alerted'):
   hs['recovery_start_alerted']=True;save(AI_HEALTH,hs)
   tg('🛠 *AUDIT — AI RECOVERY STARTING*\nStage 1/3 is running. Auto-buy resumes after 3 passes.')
  try:
   r=requests.post('https://api.groq.com/openai/v1/chat/completions',headers={'Authorization':'Bearer '+key,'Content-Type':'application/json'},
-   json={'model':model,'messages':[{'role':'system','content':'Return valid JSON only.'},{'role':'user','content':'AI health self-test. Return exactly this JSON object: {"status":"ok","test":"passed"}'}], 'temperature':0,'max_tokens':512,**_ai_reason(model)},timeout=12)
+   json={'model':model,'messages':[{'role':'system','content':'Return valid JSON only.'},{'role':'user','content':'AI health self-test. Return exactly this JSON object: {"status":"ok","test":"passed"}'}], 'temperature':0,'max_tokens':512*ai_boost(),**_ai_reason(model)},timeout=12)
   if not r.ok:raise RuntimeError('Groq HTTP '+str(r.status_code))
   content=str(r.json().get('choices',[{}])[0].get('message',{}).get('content','')).strip();a=content.find('{');b=content.rfind('}')
   if a<0 or b<=a:raise ValueError('AI health response was not JSON')
@@ -1473,7 +1534,7 @@ def ai_health_check(force=False):
   hs.update({'last_check':time.time(),'status':'unhealthy','model':model,'latency_ms':round((time.time()-started)*1000),'last_error':str(e)[:220],'consecutive_failures':count,'consecutive_successes':0,'last_response_valid':False})
   save(AI_HEALTH,hs)
   hs['alerted_status']='unhealthy';save(AI_HEALTH,hs)
-  _ai_note(False);activate_ai_emergency('Groq health self-test failed: '+str(e)[:200])
+  _ai_note(False,'health check: '+str(e));activate_ai_emergency('Groq health self-test failed: '+str(e)[:200])
   if _prog>0:tg(f'⚠️ *AUDIT — AI RECOVERY RESET*\nFailed at stage {_prog}/3 ({str(e)[:100]}). Restarting from 0/3. Auto-buy stays paused.')
 
 def ai_market_context(s):
@@ -1489,7 +1550,7 @@ def ai_market_context(s):
 
 def ask_ai(p):
  api_key=os.environ.get('GROQ_API_KEY','').strip() or GROQ_API_KEY
- model=os.environ.get('GROQ_MODEL','').strip() or GROQ_MODEL or 'openai/gpt-oss-120b'
+ model=ai_model()
  if not api_key:
   tg("⚠️ Groq AI is not configured. Create a free API key at https://console.groq.com/keys, add it as GROQ_API_KEY in your bot host's Secrets/Environment Variables, then restart the bot. GROQ_MODEL is optional (default: openai/gpt-oss-120b). The free tier has usage limits.");return
  try:
@@ -1540,10 +1601,19 @@ def manage():
   if lv<=lvl:
    if sell(sym,1.0,why):db.pop(sym,None);save(DB,db)
    continue
-  if r and s['rsi_exit']>0 and r>=s['rsi_exit'] and sell(sym,1.0,f"RSI {s['rsi_exit']}"):db.pop(sym,None);save(DB,db);continue
-  ptp=float(s.get('partial_tp_pct',0) or 0);pf=float(s.get('partial_tp_fraction',0.5) or 0)
-  try:partial_profit(sym,d,db,s,lv,inc,ptp,pf)
-  except Exception as e:print(f"PARTIAL PROFIT ERR {sym}: {e}")
+  # Dynamic RSI exit: reaching the RSI level only arms it. Hold while momentum continues (the trailing stop still protects);
+  # sell when price drops below MA5, RSI falls 5 points from its peak, or RSI reaches 95.
+  rx=float(s.get('rsi_exit',0) or 0)
+  if r and rx>0:
+   if r>=rx:d['rsi_peak']=max(float(d.get('rsi_peak',0) or 0),float(r))
+   pk=float(d.get('rsi_peak',0) or 0)
+   if pk>0:
+    why=None
+    if r>=95:why=f"RSI {r:.0f} (extreme)"
+    elif dt[3] and lv<dt[3]:why=f"RSI exit: price below MA5 after RSI {pk:.0f}"
+    elif r<=pk-5:why=f"RSI exit: RSI fell {pk:.0f}→{r:.0f}"
+    if why and sell(sym,1.0,why):db.pop(sym,None);save(DB,db);continue
+    db[sym]=d
   ratchet(sym,d,lvl,lv)
   # Stop watchdog: verify the exchange stop order and attempt re-arming on a cooldown.
   if s.get("stop_watchdog_enabled",True) and not in_cd(f"stopwatch_{sym}",900):
@@ -1579,17 +1649,6 @@ def manage():
      'trades':[{'pnl':x.get('pnl'),'reason':x.get('reason'),'symbol':x.get('sym')} for x in closed[-20:]]},ttl=1800,max_tokens=350)
     if ai:journal_event('ai_performance_review',review=str(ai)[:900])
   except Exception as e:print('AI performance review error:',e)
-def partial_profit(sym,d,db,s,lv,inc,ptp,pf):
- if not (ptp>0 and 0<pf<1 and not d.get('partial_done') and inc>=ptp):return
- coin=sym.split('-')[0];qh=B('total',coin)
- if qh*lv*pf>=5.0 and qh*lv*(1-pf)>=5.0:
-  d['partial_done']=True;db[sym]=d;save(DB,db)
-  if sell(sym,pf,f"PARTIAL PROFIT +{inc:.1f}%"):
-   time.sleep(1);rem=B('total',coin);d.pop('xsl',None)
-   if rem*lv>=1.02:
-    place_trailing_sl(sym,rem);d['xsl']=load(DB).get(sym,{}).get('xsl',0)
-    tg(f"💰 *PARTIAL PROFIT:* sold {pf*100:.0f}% of {coin} at +{inc:.1f}%. Remaining {rem:.6g} {coin} keeps a protective stop; trailing continues.")
- else:d['partial_done']=True
 def btc_blocked(s):
  m=s.get('btc_rsi_min',0)
  if m<=0:return False
@@ -2122,7 +2181,7 @@ def coin_db_conn():
  c.execute("CREATE TABLE IF NOT EXISTS snaps(sym TEXT,t REAL,price REAL,h1 REAL,rsi REAL,status TEXT)")
  c.execute("CREATE INDEX IF NOT EXISTS snaps_sym ON snaps(sym,t)")
  cc={x[1] for x in c.execute("PRAGMA table_info(coins)")}
- for n,t in (("signal_status","TEXT"),("execution_status","TEXT"),("checks_json","TEXT"),("decision_at","REAL"),("expires_at","REAL"),("scan_id","TEXT"),("ai_advisory","TEXT"),("ai_advisory_at","REAL"),("manual_score","REAL"),("manual_candidate","INTEGER"),("manual_reason","TEXT")):
+ for n,t in (("signal_status","TEXT"),("execution_status","TEXT"),("checks_json","TEXT"),("decision_at","REAL"),("expires_at","REAL"),("scan_id","TEXT"),("ai_advisory","TEXT"),("ai_advisory_at","REAL"),("manual_score","REAL"),("manual_candidate","INTEGER"),("stage","TEXT"),("stage_ok_at","REAL"),("manual_reason","TEXT")):
   if n not in cc:c.execute(f"ALTER TABLE coins ADD COLUMN {n} {t}")
  sc={x[1] for x in c.execute("PRAGMA table_info(snaps)")}
  for n,t in (("decision","TEXT"),("reason","TEXT"),("execution_status","TEXT"),("scan_id","TEXT"),
@@ -2208,6 +2267,24 @@ def manual_candidate_assess(rec,settings=None):
   eligible=score>=threshold and not str(rec.get("decision","")).startswith("SETUP")
   return score,eligible,("; ".join(why) if why else "Strong partial setup; manual review only"),checks
  except Exception as e:return 0.0,False,"Unable to score safely: "+str(e)[:80],{}
+def stage_decide(prev,watch_ok,manual_ok,auto_ok,ok_at,now):
+ # Watch -> Manual -> Auto. A coin moves up one stage per scan, never skips, and moves down as soon as it fails a stage.
+ # A coin that no longer qualifies even for the watch list is kept on it for 24h, then dropped.
+ prev=prev or ""
+ if watch_ok:ok_at=now
+ if not watch_ok:
+  if prev and ok_at and now-float(ok_at)<86400:return "WATCH",ok_at
+  return "",ok_at
+ if auto_ok and prev in ("MANUAL","AUTO"):return "AUTO",ok_at
+ if manual_ok and prev in ("WATCH","MANUAL","AUTO"):return "MANUAL",ok_at
+ return "WATCH",ok_at
+def coin_stage_prev(sym):
+ try:
+  c=coin_db_conn()
+  try:r=c.execute("SELECT stage FROM coins WHERE sym=?",(sym,)).fetchone()
+  finally:c.close()
+  return (r[0] or "") if r else ""
+ except Exception:return ""
 def coin_db_update(records,held,newc=None,keep_days=3,keep_snaps=24,queue=None,buying_allowed=True,block_reason="",settings=None):
  now=time.time();held=set(held);newc=newc or {};queue=queue if isinstance(queue,dict) else {};settings=settings or {};c=coin_db_conn()
  try:
@@ -2231,20 +2308,28 @@ def coin_db_update(records,held,newc=None,keep_days=3,keep_snaps=24,queue=None,b
     "manual_candidate":{"score":manual_score,"eligible":manual_candidate,"reason":manual_reason,"checks":manual_checks,"threshold":float(settings.get("manual_candidate_min_score",75.0))}},
     "execution":{"status":execution,"buying_allowed_at_scan":bool(buying_allowed),"block_reason":str(block_reason or "")[:240],
     "queue_timestamp":(qd or {}).get("timestamp"),"queue_score":(qd or {}).get("score"),"signal_expires_at":expiry}}
-   row=c.execute("SELECT first_seen,scans FROM coins WHERE sym=?",(sym,)).fetchone();fs,sc=row if row else (now,0)
+   row=c.execute("SELECT first_seen,scans,stage,stage_ok_at FROM coins WHERE sym=?",(sym,)).fetchone();fs,sc=(row[0],row[1]) if row else (now,0)
+   try:
+    _h=rec.get("h1");_r=rec.get("r") if False else rec.get("rsi")
+    _mom=((float(settings.get("mom_1h_min_pct",0.5))<=float(_h)<=float(settings.get("mom_1h_max_pct",6.0))) if _h is not None else False) if mom_on(settings or cfg()) else pre_ok(float(rec.get("chg") or 0),settings or cfg())
+    _w=bool(signal!="REJECTED" and _r is not None and _mom and float(_r)<=float(settings.get("rsi_max",48)))
+   except Exception:_w=False
+   if sym in held:stg,sok="",None
+   else:stg,sok=stage_decide(row[2] if row else "",_w,bool(manual_candidate) or signal=="READY",signal=="READY",row[3] if row else None,now)
+   if stg!="AUTO" and execution=="QUEUED":execution="BLOCKED"
    advisory=str((qd or {}).get("ai_advisory",""))[:240]
    c.execute("""INSERT INTO coins(sym,first_seen,last_seen,scans,price,chg24,h1,rsi,ma5,ma10,vol,candles,status,setup,reason,
-    signal_status,execution_status,checks_json,decision_at,expires_at,scan_id,ai_advisory,manual_score,manual_candidate,manual_reason)
-    VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ON CONFLICT(sym) DO UPDATE SET
+    signal_status,execution_status,checks_json,decision_at,expires_at,scan_id,ai_advisory,manual_score,manual_candidate,manual_reason,stage,stage_ok_at)
+    VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?) ON CONFLICT(sym) DO UPDATE SET
     last_seen=excluded.last_seen,scans=excluded.scans,price=excluded.price,chg24=excluded.chg24,h1=excluded.h1,
     rsi=excluded.rsi,ma5=excluded.ma5,ma10=excluded.ma10,vol=excluded.vol,candles=excluded.candles,status=excluded.status,
     setup=excluded.setup,reason=excluded.reason,signal_status=excluded.signal_status,execution_status=excluded.execution_status,
     checks_json=excluded.checks_json,decision_at=excluded.decision_at,expires_at=excluded.expires_at,
     scan_id=excluded.scan_id,ai_advisory=COALESCE(NULLIF(excluded.ai_advisory,''),coins.ai_advisory),
-    manual_score=excluded.manual_score,manual_candidate=excluded.manual_candidate,manual_reason=excluded.manual_reason""",
+    manual_score=excluded.manual_score,manual_candidate=excluded.manual_candidate,manual_reason=excluded.manual_reason,stage=excluded.stage,stage_ok_at=excluded.stage_ok_at""",
     (sym,fs,now,sc+1,rec.get("price"),rec.get("chg"),rec.get("h1"),rec.get("rsi"),rec.get("ma5"),rec.get("ma10"),
      rec.get("vol"),rec.get("candles"),legacy,rec.get("strategy"),reason[:240],signal,execution,json.dumps(checks,default=str),
-     now,expiry,str(rec.get("time") or int(now)),advisory,manual_score,int(manual_candidate),manual_reason[:240]))
+     now,expiry,str(rec.get("time") or int(now)),advisory,manual_score,int(manual_candidate),manual_reason[:240],stg,sok))
    c.execute("""INSERT INTO snaps(sym,t,price,h1,rsi,status,decision,reason,execution_status,scan_id,
     rank,vol,chg,ma5,ma10,min_volume,spread_pct,near_miss_json)
     VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
@@ -2270,9 +2355,10 @@ def coin_db_update(records,held,newc=None,keep_days=3,keep_snaps=24,queue=None,b
 def coin_db_can_execute(sym,qd):
  c=coin_db_conn()
  try:
-  row=c.execute("SELECT signal_status,execution_status,expires_at,status FROM coins WHERE sym=?",(sym,)).fetchone()
+  row=c.execute("SELECT signal_status,execution_status,expires_at,status,stage FROM coins WHERE sym=?",(sym,)).fetchone()
   if not row:return False,"No coin database record; waiting for a fresh scanner decision."
-  signal,execution,expiry,legacy=row
+  signal,execution,expiry,legacy,stage=row
+  if stage!="AUTO":return False,f"Stage is {stage or 'none'}; a coin must pass Watch > Manual > Auto first."
   if signal!="READY":return False,f"Database signal status is {signal or 'UNKNOWN'}, not READY."
   if execution!="QUEUED":return False,f"Database execution status is {execution or 'UNASSESSED'}, not QUEUED."
   if expiry is not None and float(expiry)<=time.time():return False,"Database signal expired; waiting for a fresh scan."
@@ -2340,7 +2426,7 @@ def coin_db_manual_candidates(limit=10):
  try:
   fresh_after=time.time()-max(1800.0,float(cfg().get("scan_interval_minutes",15.0))*120.0)
   threshold=float(cfg().get("manual_candidate_min_score",75.0))
-  rows=c.execute("SELECT sym,price,chg24,h1,rsi,scans,manual_score,manual_reason,reason,execution_status FROM coins WHERE manual_candidate=1 AND manual_score>=? AND status<>'BOUGHT' AND last_seen>=? ORDER BY manual_score DESC,last_seen DESC LIMIT ?",(threshold,fresh_after,int(limit))).fetchall()
+  rows=c.execute("SELECT sym,price,chg24,h1,rsi,scans,manual_score,manual_reason,reason,execution_status FROM coins WHERE manual_candidate=1 AND stage='MANUAL' AND manual_score>=? AND status<>'BOUGHT' AND last_seen>=? ORDER BY manual_score DESC,last_seen DESC LIMIT ?",(threshold,fresh_after,int(limit))).fetchall()
   return [{"sym":x[0],"price":x[1],"chg":x[2],"h1":x[3],"rsi":x[4],"scans":x[5],"score":x[6],"manual_reason":x[7],"scanner_reason":x[8],"execution_status":x[9]} for x in rows]
  finally:c.close()
 def coin_db_rows(limit=12):
@@ -2349,8 +2435,10 @@ def coin_db_rows(limit=12):
   cnt=dict(c.execute("SELECT status,COUNT(*) FROM coins GROUP BY status").fetchall())
   ec=dict(c.execute("SELECT execution_status,COUNT(*) FROM coins GROUP BY execution_status").fetchall())
   fresh_after=time.time()-max(1800.0,float(cfg().get("scan_interval_minutes",15.0))*120.0)
-  cnt["MANUAL_CANDIDATE"]=c.execute("SELECT COUNT(*) FROM coins WHERE manual_candidate=1 AND status<>'BOUGHT' AND last_seen>=?",(fresh_after,)).fetchone()[0]
-  rows=c.execute("SELECT sym,status,execution_status,price,h1,rsi,scans,reason,manual_candidate,manual_score,ai_advisory,checks_json FROM coins WHERE status IN ('READY','NEW','WATCHING','BOUGHT') ORDER BY CASE status WHEN 'READY' THEN 0 WHEN 'NEW' THEN 1 WHEN 'BOUGHT' THEN 2 ELSE 3 END,COALESCE(h1,-99) DESC LIMIT ?",(limit,)).fetchall()
+  cnt["MANUAL_CANDIDATE"]=c.execute("SELECT COUNT(*) FROM coins WHERE manual_candidate=1 AND stage='MANUAL' AND status<>'BOUGHT' AND last_seen>=?",(fresh_after,)).fetchone()[0]
+  cnt["W"]=c.execute("SELECT COUNT(*) FROM coins WHERE stage='WATCH' AND status<>'BOUGHT' AND last_seen>=?",(fresh_after,)).fetchone()[0]
+  cnt["A"]=c.execute("SELECT COUNT(*) FROM coins WHERE stage='AUTO' AND status<>'BOUGHT' AND last_seen>=?",(fresh_after,)).fetchone()[0]
+  rows=c.execute("SELECT sym,status,execution_status,price,h1,rsi,scans,reason,(manual_candidate=1 AND stage='MANUAL'),manual_score,ai_advisory,checks_json FROM coins WHERE status IN ('READY','NEW','WATCHING','BOUGHT') ORDER BY CASE status WHEN 'READY' THEN 0 WHEN 'NEW' THEN 1 WHEN 'BOUGHT' THEN 2 ELSE 3 END,COALESCE(h1,-99) DESC LIMIT ?",(limit,)).fetchall()
   return cnt,rows,ec
  finally:c.close()
 def cmd_coins():
@@ -2359,7 +2447,7 @@ def cmd_coins():
  if not cnt:ui_send("📚 *COIN LIST*\nEmpty. It fills after the next scan.",[[_B("🔍 Scan now","m:r:scan")],_MENU_BTN]);return
  ic={"READY":"✅","NEW":"🆕","BOUGHT":"💼","WATCHING":"👀"}
  lines=["📚 *COIN LIST*",f"✅ Ready {cnt.get('READY',0)} | 👀 Watching {cnt.get('WATCHING',0)} | 🆕 New {cnt.get('NEW',0)} | 💼 Held {cnt.get('BOUGHT',0)} | ⛔ Rejected {cnt.get('REJECTED',0)}",
-  f"🟡 Manual candidates (≥{float(cfg().get('manual_candidate_min_score',75.0)):.0f}%): {cnt.get('MANUAL_CANDIDATE',0)}",
+  f"Pipeline: 👁 Watch {cnt.get('W',0)} → 🟡 Manual {cnt.get('MANUAL_CANDIDATE',0)} → 🤖 Auto {cnt.get('A',0)}",
   f"Execution: 📥 queued {ec.get('QUEUED',0)} | ⛔ blocked {ec.get('BLOCKED',0)} | 🟢 held {ec.get('HELD',0)}",""]
  for sym,st,exst,p,h,r,n,why,mc,mscore,adv,cj in rows:
   try:rising=bool(json.loads(cj or "{}").get("scanner",{}).get("h1_rising_three_scans"))
@@ -2398,8 +2486,14 @@ def coin_db_maintenance():
    try:c.close()
    except Exception:pass
 def audit_ai():
- # AI health checks and the 3-stage recovery are owned by the audit.
+ """AI health checks, diagnosis and fixing are owned by the audit. Returns (class, cause, fix, fixable) while the AI has a problem, else None."""
  ai_health_check()
+ info=ai_diagnose_and_fix()
+ if info and info[0] in ("MODEL","FORMAT","SERVER","NETWORK") and info[3]:
+  if info[0] in ("SERVER","NETWORK"):time.sleep(5)
+  ai_health_check(True)          # retry right away with the fix / after a short wait
+  info=ai_diagnose_and_fix()
+ return info
 def system_audit():
  """Runs on every run: checks every layer, fixes what it can, and reports only changes."""
  s=cfg();now=time.time();fixed=[];down={}
@@ -2450,8 +2544,23 @@ def system_audit():
    if not healthy:down["Buyer"]=str(summary)[:80]
  except Exception as e:down["Buyer"]=str(e)[:60]
  # 7 AI (the recovery stages send their own audit messages)
- try:audit_ai()
+ ai_info=None
+ try:ai_info=audit_ai()
  except Exception as e:print("AUDIT AI ERR",str(e)[:100])
+ ai_line=""
+ try:
+  st0=load(ST,{});lastcls=st0.get("audit_ai_cls","")
+  if ai_info:
+   cls,cause,fix,fixable=ai_info
+   if not fixable:down["AI"]=cause+". "+fix
+   if cls!=lastcls and fixable:ai_line=f"AI — {cause}. {fix}"
+   st0["audit_ai_cls"]=cls
+  else:
+   if lastcls:fixed.append("AI problem cleared ("+AI_CAUSE.get(lastcls,lastcls)+")")
+   st0["audit_ai_cls"]=""
+  save(ST,st0)
+ except Exception as e:print("AUDIT AI DIAG ERR",str(e)[:100])
+ if ai_line:fixed.append(ai_line)
  # report only changes
  st=load(ST,{});prev=st.get("audit_down",{}) if isinstance(st.get("audit_down"),dict) else {}
  new=[k for k in down if k not in prev];back=[k for k in prev if k not in down]
@@ -2571,6 +2680,8 @@ def scan(force=False):
       matched+=1;rr=None;recd["rr"]=None;score=setup_score(setup,vol,r,ma5,ma10,breakout_volume)
       if not buying_allowed:recd["decision"]="SETUP — NOT QUEUED";recd["reason"]=f"{setup} matched, {block_reason}"
       elif rbh>0 and in_cd(f"stopout_{sym}",rbh*3600):recd["decision"]="SETUP — NOT QUEUED";recd["reason"]=f"{setup} matched, re-buy cooldown"
+      elif coin_stage_prev(sym) not in ("MANUAL","AUTO"):
+       _ps=coin_stage_prev(sym) or "none";recd["decision"]="SETUP — NOT QUEUED";recd["reason"]=f"{setup} matched; stage {_ps}, must pass Watch > Manual > Auto first"
       else:
        recd["decision"]="SETUP — QUEUED";recd["reason"]=setup+" matched; queued"
        if sym not in q or q[sym].get('score',0)<score:
