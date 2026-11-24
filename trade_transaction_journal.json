@@ -2079,5 +2079,15 @@
             "lesson": "When exiting manually, ensure the order fully matches the intended quantity to avoid residual exposure. Evaluate whether the exit price sufficiently exceeds the entry cost plus fees to justify the trade, especially for low\u2011margin moves. Incorporate tighter profit targets or trailing mechanisms to capture more upside while still protecting downside, and verify order execution completeness before concluding the trade.",
             "confidence": "medium"
         }
+    },
+    {
+        "time": 1795499802.5796316,
+        "event": "ai_manual_buy_review",
+        "symbol": "BLESS-USDT",
+        "review": {
+            "risk_level": "moderate",
+            "warning": "BTC market filter is active and BTC is below its 50\u2011hour average, indicating broader bearish pressure. Proceed with caution.",
+            "summary": "Buying 5.21\u202fUSDT of BLESS\u2011USDT at 0.0162077\u202fUSDT per token with RSI 47.14. No existing position. Small trade size but market conditions are slightly unfavorable."
+        }
     }
 ]
