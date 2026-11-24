@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT22.39/\u20a630,618",
+    "kb_ph": "USDT22.37/\u20a630,875",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -64,10 +64,10 @@
         "UMXM-USDT",
         "ARIA-USDT"
     ],
-    "kb_mid": 4888,
     "panel_hidden": true,
-    "out_mid": 4887,
-    "out_text": "\ud83d\udd04 *AI RECOVERY \u2014 STAGE 1/3*\nGroq health check passed. Buying stays blocked until 3 consecutive checks pass;\n2 more to go. Normal mode returns automatically.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_mid": 4890,
+    "out_text": "\ud83d\udd04 *AI RECOVERY \u2014 STAGE 2/3*\nGroq health check passed. Buying stays blocked until 3 consecutive checks pass;\n1 more to go. Normal mode returns automatically.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795478223.610632
+    "out_time": 1795481774.3108,
+    "kb_mid": 4891
 }

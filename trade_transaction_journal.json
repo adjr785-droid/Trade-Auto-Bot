@@ -1691,5 +1691,15 @@
         "time": 1795478230.8804135,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 5.8372, 'recurring_patterns': ['15-MINUTE NO-UPWARD-TREND ROTATION appears in multiple trades', 'PANIC appears in several trades', 'MANUAL SELL appears in multiple trades', 'RSI 75 appears in a few trades', 'PARTIAL PROFIT appears in a few trades'], 'recommendations': ['Consider tightening entry criteria to avoid PANIC-driven exits', 'Review the effectiveness of the 15\u2011minute no\u2011upward\u2011trend rotation signal, as it yields mixed results', 'Limit reliance on manual sell decisions without clear profit targets', 'Monitor RSI 75 signals for consistency before acting', 'Maintain current risk controls; overall win rate is modest and net PnL is positive but small']}"
+    },
+    {
+        "time": 1795481781.0172565,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'ARIA-USDT', 'action': 'monitor', 'reason': 'Unrealized loss of -0.63% and price approaching stop (0.30922 vs stop 0.28006). Consider tightening stop if volatility increases.'}, {'symbol': 'JCT-USDT', 'action': 'monitor', 'reason': 'Unrealized loss of -1.2% and price very close to stop (0.001561 vs stop 0.00149). High risk of stop hit; evaluate tightening or partial exit.'}, {'symbol': 'DOS-USDT', 'action': 'hold', 'reason': 'Small positive PnL (+0.52%) and price above stop; no immediate action required.'}], 'summary': 'Overall portfolio risk remains PASS. Two positions (ARIA-USDT, JCT-USDT) are under slight loss and near their stop levels; monitor closely and consider adjusting stops to protect capital. DOS-USDT is modestly profitable and can be held for now.'}"
+    },
+    {
+        "time": 1795481781.7315223,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 5.8372, 'recurring_patterns': ['15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC', 'RSI 75', 'MANUAL SELL'], 'recommendations': 'Maintain current risk parameters; avoid trading during panic signals and high\u2011frequency rotation periods. Prioritize setups with RSI >70 that have historically yielded positive pnl. Consider reducing exposure on symbols with repeated manual sell losses. Monitor win\u2011rate trend for potential adjustments.'}"
     }
 ]
