@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690372,
+    "last_update_id": 935690373,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -60,8 +60,8 @@
             1795362988.7943418
         ],
         "m:at:W": [
-            1,
-            1795540085.75166
+            0,
+            1795540095.0708883
         ]
     },
     "radar": [
@@ -82,7 +82,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "2/2",
+                "text": "1/2",
                 "callback_data": "pg:x"
             },
             {
@@ -185,14 +185,14 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 2/2*",
+    "panel_text": "\ud83d\udcc4 *Page 1/2*",
     "out_mid": 5429,
     "pages": {
         "p": [
             "\ud83d\udc41 *WATCH LIST*\n_Rising coins being watched. They move up when they pass the manual rules._\n\n*CYS* | 1H +1.73% | RSI 58 | seen 35x\n*WLD* | 1H +0.88% | RSI 39 | seen 35x\n*JCT* | 1H +0.73% | RSI 35 | seen 35x\n*PUMP* | 1H +0.66% | RSI 36 | seen 35x\n*LINK* | 1H +0.60% | RSI 39 | seen 35x\n*LTC* | 1H +0.58% | RSI 39 | seen 35x\n*PEPE* | 1H +0.50% | RSI 37 | seen 35x\n\u2800\n\u2800",
             "*ADA* | 1H +0.12% | RSI 39 | seen 35x\n*BNB* | 1H +0.00% | RSI 39 | seen 35x\n*BTW* | 1H -0.20% | RSI 56 | seen 35x\n*UNI* | 1H -0.27% | RSI 39 | seen 35x\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 1,
+        "i": 0,
         "mode": "Markdown",
         "x": [
             {
