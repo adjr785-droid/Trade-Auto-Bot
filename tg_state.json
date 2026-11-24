@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690115,
+    "last_update_id": 935690118,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -71,28 +71,22 @@
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
+                "text": "\ud83d\udd0d Scan now",
+                "callback_data": "m:r:scan"
             },
             {
-                "text": "2/2",
-                "callback_data": "pg:x"
-            },
+                "text": "\ud83e\uddfe Scan History",
+                "callback_data": "m:scan_hist"
+            }
+        ],
+        [
             {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
-            },
-            {
-                "text": "\ud83c\udfe0",
+                "text": "\u2b05\ufe0f Menu",
                 "callback_data": "m:menu"
-            },
-            {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 2/2*",
+    "panel_text": "\ud83d\udcda *COIN LIST*\n\u2705 Ready 0 | \ud83d\udc40 Watching 30 | \ud83c\udd95 New 0 | \ud83d\udcbc Held 2 | \u26d4 Rejected 430\n\ud83d\udfe1 Manual candidates (\u226575%): 0\nExecution: \ud83d\udce5 queued 0 | \u26d4 blocked 0 | \ud83d\udfe2 held 0\n\n\ud83d\udcbc *ARIA* 0.312100 | BOUGHT | 1H +0.48% | RSI 56 | seen 19x\n   \ud83e\udde0 LOW: Held status; RSI 55.71, strong 16.31% 24h gain.\n\ud83d\udcbc *JCT* 0.001551 | BOUGHT | 1H +0.18% | RSI 41 | seen 19x\n   \ud83e\udde0 MEDIUM: Held status; RSI 40.55, slight decline 1.59% 24h.\n\ud83d\udc40 *BGSC* 0.001048 | NOT_ELIGIBLE | 1H +19.04% \ud83d\udcc8 | RSI 63 | seen 19x\n\ud83d\udc40 *IDOL* 0.016760 | NOT_ELIGIBLE | 1H +3.73% | RSI 44 | seen 19x\n   \ud83e\udde0 LOW: RSI 44.28, modest 3.37% gain 24h.\n\ud83d\udc40 *ARX* 0.176320 | NOT_ELIGIBLE | 1H +1.14% | RSI 58 | seen 19x\n   \ud83e\udde0 LOW: RSI 57.71, price up 5.93% 24h.\n\ud83d\udc40 *TAO* 189.50 | NOT_ELIGIBLE | 1H +0.72% | RSI 40 | seen 19x\n   \ud83e\udde0 MEDIUM: RSI 39.63 near oversold; flat 24h.\n\ud83d\udc40 *SKY* 0.039580 | NOT_ELIGIBLE | 1H +0.66% | RSI 39 | seen 19x\n\ud83d\udc40 *COLLECT* 0.024374 | NOT_ELIGIBLE | 1H +0.53% | RSI 31 | seen 19x\n   \ud83e\udde0 HIGH: RSI 30.86 very low; price down 4.31% 24h; high risk.\n\ud83d\udc40 *PUMP* 0.002491 | NOT_ELIGIBLE | 1H +0.41% | RSI 38 | seen 19x\n   \ud83e\udde0 MEDIUM: RSI 38.43 near oversold; modest declines; still not eligible.\n\ud83d\udc40 *BNB* 552.41 | NOT_ELIGIBLE | 1H +0.38% | RSI 38 | seen 19x\n   \ud83e\udde0 MEDIUM: RSI 37.98, price down 0.63% 24h; no eligibility.\n\ud83d\udc40 *LINK* 9.0200 | NOT_ELIGIBLE | 1H +0.35% | RSI 50 | seen 19x\n   \ud83e\udde0 LOW: RSI 49.67, price up 2.66% 24h.\n\ud83d\udc40 *LTC* 41.1800 | NOT_ELIGIBLE | 1H +0.16% | RSI 49 | seen 19x\n   \ud83e\udde0 LOW: RSI 48.77, price up 3.47% 24h.",
     "audit_down": {},
     "audit_last": 1795493618.36863,
     "kb_mid": 4988,
