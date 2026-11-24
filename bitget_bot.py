@@ -1208,7 +1208,7 @@ def manual_candidate_detail(sym):
   if not px:why.append("live price unavailable")
   lines.append("\n⛔ Candidate shortcut unavailable: "+", ".join(why)+".")
  rows += [[_B("🔄 Refresh candidate","m:mc:"+sym.split("-")[0]),_B("⬅️ Analyse","/analyse")]]
- ui_send("\n".join(lines),rows)
+ _send("\n".join(lines),"Markdown",{"inline_keyboard":rows})
 def analyse_top3(tab="M"):
  # Analyse: three tabs that follow the pipeline Watch list > Manual buy > Auto buy. Lists only; never changes execution rules.
  tab=tab if tab in ("W","M","A") else "M";settings=cfg()
@@ -2471,7 +2471,7 @@ def cmd_coins():
   if r is not None:ln+=f" | RSI {r:.0f}"
   lines.append(ln+f" | seen {n}x")
   if adv:lines.append("   🧠 "+str(adv)[:110])
- ui_send("\n".join(lines)[:3800],[[_B("🔍 Scan now","m:r:scan"),_B("🧾 Scan History","m:scan_hist")],_MENU_BTN])
+ _send("\n".join(lines),"Markdown",{"inline_keyboard":[[_B("🔍 Scan now","m:r:scan"),_B("🧾 Scan History","m:scan_hist")],_MENU_BTN]})
 def rising_vs_last_scan(sym,p,r,now):
  # Falling-knife guard: the price must be higher and RSI not lower than at the previous scan (within the last hour).
  try:
@@ -2969,7 +2969,7 @@ def ui_cb(t):
   elif a=="r" and len(p)>2 and p[2]=="history":
    H=load(HIST);lines=["🧾 *TRADE HISTORY*"]
    for x in H[-12:]:lines.append(f"{str(x.get('sym','?')).replace('-USDT','')} | {x.get('reason','?')} | PnL ${float(x.get('pnl',0)):+.2f}")
-   ui_send("\n".join(lines),[[_B("⬅️ Menu","m:menu")]])
+   _send("\n".join(lines),"Markdown",{"inline_keyboard":[[_B("⬅️ Menu","m:menu")]]})
   elif a=="r" and len(p)>2 and p[2]=="cancel":
    cmd_cancel_all()
   elif a=="ai" and len(p)>2 and p[2] in AI_Q:ask_ai(AI_Q[p[2]])
