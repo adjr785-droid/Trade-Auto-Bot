@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT23.26/\u20a632,097",
+    "kb_ph": "USDT23.25/\u20a632,090",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -61,10 +61,36 @@
         ]
     },
     "radar": [
-        "DOS-USDT"
+        "DOS-USDT",
+        "DGAI-USDT"
     ],
     "audit_down": {},
-    "audit_last": 1795516922.5714169,
-    "kb_mid": 5225,
+    "audit_last": 1795520374.5053337,
+    "kb_mid": 5230,
+    "out_mid": 5226,
+    "out_text": "\ud83d\udd0d *SCAN COMPLETE*\nChecked 462 markets in 14s.\nNo coin matched any setup.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_mode": "Markdown",
+    "out_time": 1795520369.293937,
+    "panel_rows": [
+        [
+            {
+                "text": "\u25c0",
+                "callback_data": "pg:p"
+            },
+            {
+                "text": "1/3",
+                "callback_data": "pg:x"
+            },
+            {
+                "text": "\u25b6",
+                "callback_data": "pg:n"
+            },
+            {
+                "text": "\ud83c\udfe0",
+                "callback_data": "m:menu"
+            }
+        ]
+    ],
+    "panel_text": "\ud83d\udcc4 *Page 1/3*",
     "panel_hidden": true
 }
