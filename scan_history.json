@@ -2,6 +2,26 @@
     "window_start": 1795455227.9525108,
     "items": [
         {
+            "sym": "ADA-USDT",
+            "time": 1795496189.5530005,
+            "price": 0.1485,
+            "h1": 0.87,
+            "rsi": 47.74,
+            "status": "BOUGHT",
+            "decision": "SETUP \u2014 NOT QUEUED",
+            "reason": "TREND matched, AI emergency: automatic buying paused",
+            "execution_status": "HELD",
+            "scan_id": "1795496188",
+            "rank": 24,
+            "vol": 3018993.024,
+            "chg": 2.626,
+            "ma5": 0.14828,
+            "ma10": 0.14826,
+            "min_volume": 1000000.0,
+            "spread_pct": 0.0674081563869341,
+            "near_miss": null
+        },
+        {
             "sym": "ICNT-USDT",
             "time": 1795477299.0203633,
             "price": 0.3091,
@@ -10,7 +30,7 @@
             "status": "READY",
             "decision": "SETUP \u2014 NOT QUEUED",
             "reason": "OVERSOLD matched, AI emergency: automatic buying paused",
-            "execution_status": "NOT_ELIGIBLE",
+            "execution_status": "BOUGHT",
             "scan_id": "1795477298",
             "rank": 42,
             "vol": 1253550.32,
@@ -30,7 +50,7 @@
             "status": "READY",
             "decision": "SETUP \u2014 NOT QUEUED",
             "reason": "OVERSOLD matched, BTC safety filter blocked buying",
-            "execution_status": "NOT_ELIGIBLE",
+            "execution_status": "BOUGHT",
             "scan_id": "1795475347",
             "rank": 42,
             "vol": 1250057.27,
@@ -50,7 +70,7 @@
             "status": "READY",
             "decision": "SETUP \u2014 NOT QUEUED",
             "reason": "OVERSOLD matched, AI emergency: automatic buying paused",
-            "execution_status": "NOT_ELIGIBLE",
+            "execution_status": "BOUGHT",
             "scan_id": "1795465175",
             "rank": 39,
             "vol": 1398389.74,
@@ -100,24 +120,6 @@
             "min_volume": 1000000.0,
             "spread_pct": 0.18876234820360832,
             "near_miss": null
-        },
-        {
-            "time": 1795496188,
-            "rank": 24,
-            "sym": "ADA-USDT",
-            "vol": 3018993.024,
-            "chg": 2.626,
-            "price": 0.1485,
-            "spread_pct": 0.0674081563869341,
-            "rsi": 47.74,
-            "rr": null,
-            "ma5": 0.14828,
-            "ma10": 0.14826,
-            "decision": "SETUP \u2014 NOT QUEUED",
-            "reason": "TREND matched, AI emergency: automatic buying paused",
-            "min_volume": 1000000,
-            "h1": 0.87,
-            "strategy": "TREND"
         }
     ]
 }

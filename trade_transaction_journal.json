@@ -2045,5 +2045,11 @@
         "time": 1795499342.9983046,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.7739, 'recurring_patterns': ['High frequency of \"PANIC\" exits (7 occurrences)', 'Frequent \"15-MINUTE NO-UPWARD-TREND ROTATION\" exits (6 occurrences)', 'Multiple manual sell actions (4 occurrences)', 'Several trades on same symbols (e.g., JCT-USDT, DOS-USDT)'], 'recommendations': ['Review and tighten panic\u2011exit criteria to avoid premature closures', 'Consider extending observation window beyond 15\u2011minute no\u2011upward\u2011trend to reduce churn', 'Consolidate manual sell triggers into a unified risk\u2011management rule', 'Implement position sizing limits for repeatedly traded symbols to diversify exposure']}"
+    },
+    {
+        "time": 1795499362.352546,
+        "event": "ai_coin_advisory",
+        "reviewed": 25,
+        "source": "coins.db"
     }
 ]
