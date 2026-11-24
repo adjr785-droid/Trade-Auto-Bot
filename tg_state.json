@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT28.13/\u20a638,824",
+    "kb_ph": "USDT28.16/\u20a638,861",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -65,11 +65,58 @@
         ]
     },
     "radar": [
-        "BTW-USDT",
-        "DGAI-USDT"
+        "CYS-USDT"
     ],
     "audit_down": {},
-    "audit_last": 1795540285.497324,
-    "kb_mid": 5438,
-    "audit_ai_cls": ""
+    "audit_last": 1795543369.283634,
+    "kb_mid": 5442,
+    "audit_ai_cls": "",
+    "out_mid": 5439,
+    "out_text": "\ud83d\udd0d *SCAN COMPLETE*\nChecked 462 markets in 11s.\nNo coin matched any setup.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_mode": "Markdown",
+    "out_time": 1795543364.497709,
+    "panel_mid": 5440,
+    "panel_rows": [
+        [
+            {
+                "text": "\ud83d\udda5 System",
+                "callback_data": "/bot"
+            },
+            {
+                "text": "\ud83d\udcc8 Stats",
+                "callback_data": "/stats"
+            }
+        ],
+        [
+            {
+                "text": "\u2699\ufe0f Settings",
+                "callback_data": "m:set"
+            },
+            {
+                "text": "\ud83d\udcbc Holdings",
+                "callback_data": "m:r:holdings"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udcdc Trade History",
+                "callback_data": "m:r:history"
+            },
+            {
+                "text": "\ud83e\udde0 Ask AI",
+                "callback_data": "m:ai:1"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\uddf9 Clear Chat",
+                "callback_data": "/clear"
+            },
+            {
+                "text": "\ud83d\udea8 PANIC SELL",
+                "callback_data": "/panic"
+            }
+        ]
+    ],
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below."
 }
