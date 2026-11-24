@@ -2099,5 +2099,15 @@
         "time": 1795500273.7632797,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.3491, 'recurring_patterns': ['PANIC', '15-MINUTE NO-UPWARD-TREND ROTATION', 'MANUAL SELL'], 'recommendations': 'Maintain current risk limits; reduce exposure to high\u2011volatility symbols that trigger PANIC exits; consider tightening the 15\u2011minute trend filter; monitor manual sell triggers for consistency before scaling up position sizes.'}"
+    },
+    {
+        "time": 1795504856.1127448,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (9)', 'attention': [{'symbol': 'ADA-USDT', 'action': 'monitor', 'reason': 'Small loss (-0.2%) and price approaching stop level (0.143577). Consider tightening stop or exiting if price continues downward.'}, {'symbol': 'ICNT-USDT', 'action': 'hold', 'reason': 'Positive PnL (+3.81%) and price above entry; stop is at entry, providing breakeven protection.'}, {'symbol': 'BLESS-USDT', 'action': 'hold', 'reason': 'Strong unrealized gain (+7.88%) with price well above entry; stop at entry secures profit.'}], 'summary': 'Overall portfolio is within the daily risk limit. One position (ADA-USDT) shows a marginal loss and is near its stop; monitor closely or adjust stop to limit downside. The other two positions are profitable and have protective stops at entry, so maintaining them is reasonable. No new orders are recommended at this time.'}"
+    },
+    {
+        "time": 1795504856.7688386,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.3491, 'recurring_patterns': ['PANIC', '15-MINUTE NO-UPWARD-TREND ROTATION', 'MANUAL SELL'], 'recommendations': 'Maintain current risk limits; reduce exposure to high\u2011volatility symbols that trigger PANIC exits; consider tightening the 15\u2011minute trend filter; monitor manual sell triggers for consistency before scaling up position sizes.'}"
     }
 ]
