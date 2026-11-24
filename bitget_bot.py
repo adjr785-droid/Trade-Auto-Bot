@@ -1170,7 +1170,7 @@ def manual_candidate_detail(sym):
  if not sym.endswith("-USDT"):sym+="-USDT"
  memo=coin_db_get(sym)
  if not memo:
-  ui_send(f"⚠️ No Coin List record for {sym}. Run a fresh scan first.",[[ _B("⬅️ Analyse","m:an") ]]);return
+  ui_send(f"⚠️ No Coin List record for {sym}. Run a fresh scan first.",[[ _B("⬅️ Analyse","/analyse") ]]);return
  mc=(memo.get("checks",{}).get("scanner",{}) or {}).get("manual_candidate",{}) or {}
  s=cfg();threshold=float(s.get("manual_candidate_min_score",75.0));score=float(mc.get("score") or 0)
  fresh_window=max(1800.0,float(s.get("scan_interval_minutes",15.0))*120.0)
@@ -1207,38 +1207,36 @@ def manual_candidate_detail(sym):
   if not spread_ok:why.append("spread is too wide or unavailable")
   if not px:why.append("live price unavailable")
   lines.append("\n⛔ Candidate shortcut unavailable: "+", ".join(why)+".")
- rows += [[_B("🔄 Refresh candidate","m:mc:"+sym.split("-")[0]),_B("⬅️ Analyse","m:an")]]
+ rows += [[_B("🔄 Refresh candidate","m:mc:"+sym.split("-")[0]),_B("⬅️ Analyse","/analyse")]]
  ui_send("\n".join(lines),rows)
-def analyse_top3():
- # Analyse is intentionally a concise manual-candidate list only.
- # Coin List remains the source of truth; this view never promotes a coin
- # into the automatic-buy queue or changes any execution/safety rule.
- settings=cfg()
+def analyse_top3(tab="M"):
+ # Analyse: three tabs that follow the pipeline Watch list > Manual buy > Auto buy. Lists only; never changes execution rules.
+ tab=tab if tab in ("W","M","A") else "M";settings=cfg()
  threshold=float(settings.get("manual_candidate_min_score",75.0))
  try:
-  candidates=coin_db_manual_candidates(50)
+  cnt=coin_db_stage_counts()
+  items=coin_db_manual_candidates(50) if tab=="M" else coin_db_stage_list("WATCH" if tab=="W" else "AUTO",50)
  except Exception as e:
-  print("ANALYSE MANUAL CANDIDATES ERR",str(e)[:120])
-  tg("⚠️ Could not read manual-buy candidates from Coin List. Try again shortly.")
-  return
- lines=["🟡 *MANUAL BUY CANDIDATES*",f"Minimum setup score: *{threshold:.0f}%*","_Only fresh Coin List records meeting the threshold and critical safety checks are shown._",""]
- if candidates:
-  for item in candidates:
-   sym=str(item.get("sym") or "").split("-")[0]
-   score=float(item.get("score") or 0)
-   rsi=item.get("rsi")
-   change=item.get("chg")
-   rsi_text=f"{float(rsi):.1f}" if rsi is not None else "N/A"
-   change_text=f"{float(change):+.2f}%" if change is not None else "N/A"
-   lines.append(f"🟡 *{sym}* — *{score:.0f}%* | RSI: *{rsi_text}* | 24h change: *{change_text}*")
- else:
-  lines.append("No coins currently meet the manual-buy score and safety requirements.")
- keyboard=[]
- for item in candidates[:20]:
-  sym=str(item.get("sym") or "").split("-")[0]
-  score=float(item.get("score") or 0)
-  keyboard.append([_B(f"🟡 {sym} · {score:.0f}%",f"m:mc:{sym}")])
- _send("\n".join(lines),"Markdown",{"inline_keyboard":keyboard or [[_B("🔄 Refresh","/analyse")]]})
+  print("ANALYSE LIST ERR",str(e)[:120]);tg("⚠️ Could not read the coin lists. Try again shortly.");return
+ title={"W":"👁 *WATCH LIST*","M":"🟡 *MANUAL BUY*","A":"🤖 *AUTO BUY*"}[tab]
+ sub={"W":"_Rising coins being watched. They move up when they pass the manual rules._",
+      "M":f"_Passed the manual rules (score ≥ {threshold:.0f}%). Review and buy by hand, or wait for Auto._",
+      "A":"_Passed every rule. Eligible for automatic buying._"}[tab]
+ lines=[title,sub,""]
+ for it in items:
+  sym=str(it.get("sym") or "").split("-")[0];h=it.get("h1");r=it.get("rsi")
+  ln=f"*{sym}*"
+  if tab=="M":ln+=f" — *{float(it.get('score') or 0):.0f}%*"
+  ln+=(f" | 1H {float(h):+.2f}%" if h is not None else "")+(f" | RSI {float(r):.0f}" if r is not None else "")+f" | seen {it.get('scans',0)}x"
+  lines.append(ln)
+ if not items:lines.append("None right now.")
+ def tb(k,lbl):return _B(("▶ " if tab==k else "")+f"{lbl} ({cnt.get({'W':'WATCH','M':'MANUAL','A':'AUTO'}[k],0)})",f"m:at:{k}")
+ keyboard=[[tb("W","👁 Watch"),tb("M","🟡 Manual"),tb("A","🤖 Auto")]]
+ for it in items[:20]:
+  sym=str(it.get("sym") or "").split("-")[0]
+  keyboard.append([_B(f"{sym}"+(f" · {float(it.get('score') or 0):.0f}%" if tab=="M" else ""),f"m:mc:{sym}")])
+ keyboard.append([_B("🔄 Refresh",f"m:at:{tab}")])
+ _send("\n".join(lines)[:3800],"Markdown",{"inline_keyboard":keyboard})
 
 def hold_advice(sym,price,entry,rsi,ma5,ma10,s):
  pnl=(price-entry)/entry*100 if entry else None;sl=float(s.get('stop_loss_pct',5));rx=float(s.get('rsi_exit',75) or 0)
@@ -2429,6 +2427,21 @@ def coin_db_manual_candidates(limit=10):
   rows=c.execute("SELECT sym,price,chg24,h1,rsi,scans,manual_score,manual_reason,reason,execution_status FROM coins WHERE manual_candidate=1 AND stage='MANUAL' AND manual_score>=? AND status<>'BOUGHT' AND last_seen>=? ORDER BY manual_score DESC,last_seen DESC LIMIT ?",(threshold,fresh_after,int(limit))).fetchall()
   return [{"sym":x[0],"price":x[1],"chg":x[2],"h1":x[3],"rsi":x[4],"scans":x[5],"score":x[6],"manual_reason":x[7],"scanner_reason":x[8],"execution_status":x[9]} for x in rows]
  finally:c.close()
+def coin_db_stage_list(stage,limit=20):
+ c=coin_db_conn()
+ try:
+  fresh_after=time.time()-max(1800.0,float(cfg().get("scan_interval_minutes",15.0))*120.0)
+  rows=c.execute("SELECT sym,price,h1,rsi,scans,first_seen,manual_score FROM coins WHERE stage=? AND status<>'BOUGHT' AND last_seen>=? ORDER BY COALESCE(h1,-99) DESC LIMIT ?",(stage,fresh_after,int(limit))).fetchall()
+  return [{"sym":x[0],"price":x[1],"h1":x[2],"rsi":x[3],"scans":x[4],"first_seen":x[5],"score":x[6]} for x in rows]
+ finally:c.close()
+def coin_db_stage_counts():
+ try:
+  c=coin_db_conn()
+  try:
+   fresh_after=time.time()-max(1800.0,float(cfg().get("scan_interval_minutes",15.0))*120.0)
+   return dict(c.execute("SELECT stage,COUNT(*) FROM coins WHERE stage IN ('WATCH','MANUAL','AUTO') AND status<>'BOUGHT' AND last_seen>=? GROUP BY stage",(fresh_after,)).fetchall())
+  finally:c.close()
+ except Exception:return {}
 def coin_db_rows(limit=12):
  c=coin_db_conn()
  try:
@@ -2845,6 +2858,7 @@ def ui_cb(t):
   elif a=="buy":
    cs=ui_coins("buy")
    ui_send("🛒 *BUY* — choose a coin:",_grid([_B(c,f"m:b:{c}") for c in cs],3)+[[_B("➕ More coins","m:more:buy:0")],_MENU_BTN])
+  elif a=="at" and len(p)>2:analyse_top3(p[2])
   elif a=="mc" and len(p)>2:
    manual_candidate_detail(p[2])
   elif a=="b":
