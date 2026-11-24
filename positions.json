@@ -11,5 +11,17 @@
         "purchase_source": "MANUAL",
         "xsl": 0.143577,
         "seen": 1795496156.8433933
+    },
+    "ICNT-USDT": {
+        "entry_price": 0.3166,
+        "safe_zone": 0.3166,
+        "stop_loss": 0.300232,
+        "peak_price": 0.3166,
+        "last_price": 0.3166,
+        "opened_at": 1795496225.1731193,
+        "sl_pct": 5.17,
+        "strategy": "MANUAL",
+        "purchase_source": "MANUAL",
+        "xsl": 0.300232
     }
 }

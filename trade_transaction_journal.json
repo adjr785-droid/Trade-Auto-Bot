@@ -1987,5 +1987,15 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795496233.5196972,
+        "event": "ai_manual_buy_review",
+        "symbol": "ICNT-USDT",
+        "review": {
+            "risk_level": "high",
+            "warning": "BTC filter is active and the market filter indicates BTC is below its 50\u2011hour average, which may increase downside risk. The RSI is low (38), suggesting oversold conditions but also potential further decline. Proceed with caution and ensure alignment with your risk limits.",
+            "summary": "Attempting a manual buy of 7.99\u202fUSDT of ICNT-USDT at 0.3161\u202fUSDT per token carries high risk given current market conditions and active BTC filter. No existing position is present."
+        }
     }
 ]
