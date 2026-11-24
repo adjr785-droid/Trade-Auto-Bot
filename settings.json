@@ -85,7 +85,7 @@
     "one_h_v1": true,
     "oversold_enabled": false,
     "rising_guard": true,
-    "manual_candidate_min_score": 75.0,
+    "manual_candidate_min_score": 70.0,
     "knife_v1": true,
     "risk_v3": true
 }
