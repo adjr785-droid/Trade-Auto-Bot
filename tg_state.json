@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935690285,
+    "last_update_id": 935690286,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT22.87/\u20a631,569",
+    "kb_ph": "USDT22.87/\u20a631,568",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -66,19 +66,19 @@
     ],
     "audit_down": {},
     "audit_last": 1795523719.2502558,
-    "kb_mid": 5265,
+    "kb_mid": 5270,
     "audit_ai_cls": "",
-    "out_text": "\ud83d\udc41 *WATCH LIST*\n_Rising coins being watched. They move up when they pass the manual rules._\n\n*CYS* | 1H +0.98% | RSI 48 | seen 30x\n*BNB* | 1H +0.58% | RSI 46 | seen 30x\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "\ud83d\udfe1 *MANUAL BUY*\n_Passed the manual rules (score \u2265 75%). Review and buy by hand, or wait for\nAuto._\n\nNone right now.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795523732.6337504,
+    "out_time": 1795523768.3435404,
     "panel_rows": [
         [
             {
-                "text": "\u25b6 \ud83d\udc41 Watch (2)",
+                "text": "\ud83d\udc41 Watch (2)",
                 "callback_data": "m:at:W"
             },
             {
-                "text": "\ud83d\udfe1 Manual (0)",
+                "text": "\u25b6 \ud83d\udfe1 Manual (0)",
                 "callback_data": "m:at:M"
             },
             {
@@ -88,24 +88,12 @@
         ],
         [
             {
-                "text": "CYS",
-                "callback_data": "m:mc:CYS"
-            }
-        ],
-        [
-            {
-                "text": "BNB",
-                "callback_data": "m:mc:BNB"
-            }
-        ],
-        [
-            {
                 "text": "\ud83d\udd04 Refresh",
-                "callback_data": "m:at:W"
+                "callback_data": "m:at:M"
             }
         ]
     ],
     "panel_text": "\ud83d\udc47 *Actions*",
-    "out_mid": 5266,
-    "panel_mid": 5267
+    "out_mid": 5268,
+    "panel_mid": 5269
 }
