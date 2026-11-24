@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT22.24/\u20a630,701",
+    "kb_ph": "USDT22.35/\u20a630,843",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -70,6 +70,43 @@
         "ARIA-USDT"
     ],
     "audit_down": {},
-    "audit_last": 1795499728.0539815,
-    "kb_mid": 5184
+    "audit_last": 1795500289.9514925,
+    "kb_mid": 5188,
+    "out_mid": 5185,
+    "out_text": "\ud83d\udcbc *HOURLY HOLDINGS*\n\ud83d\udcbc *PORTFOLIO* $22.27 | \u20a630,731\n\ud83d\udcb5 Cash free $0.03 | In coins $22.19 (100%)\n\ud83d\udfe1 BGB 0.00019439193 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *ICNT* $11.77 (53%)\n+3.02% (+$0.34) | Entry 0.317708\nPrice 0.327300 | Stop 0.317708 (-3%)\nRSI 55 | Bullish | ATH -46%\n\n\u2800\n\u2800",
+    "out_mode": "Markdown",
+    "out_time": 1795500288.9614906,
+    "pages": {
+        "p": [
+            "\ud83d\udcbc *HOURLY HOLDINGS*\n\ud83d\udcbc *PORTFOLIO* $22.27 | \u20a630,731\n\ud83d\udcb5 Cash free $0.03 | In coins $22.19 (100%)\n\ud83d\udfe1 BGB 0.00019439193 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *ICNT* $11.77 (53%)\n+3.02% (+$0.34) | Entry 0.317708\nPrice 0.327300 | Stop 0.317708 (-3%)\nRSI 55 | Bullish | ATH -46%\n\n\u2800\n\u2800",
+            "\ud83d\udfe2 *BLESS* $5.23 (23%)\n+0.40% (+$0.02) | Entry 0.016263\nPrice 0.016328 | Stop 0.014636 (-10%)\nRSI 53 | Bullish | ATH -93%\n\n\ud83d\udfe2 *ADA* $5.19 (23%)\n+0.07% (+$0.00) | Entry 0.148600\nPrice 0.148700 | Stop 0.143577 (-3%)\nRSI 56 | Bullish | ATH -89%\n\n\u2800\n\u2800",
+            "\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\nand 8 more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT22.27/\u20a630,731\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+        ],
+        "i": 0,
+        "mode": "Markdown",
+        "x": [],
+        "cmd": null
+    },
+    "panel_mid": 5186,
+    "panel_rows": [
+        [
+            {
+                "text": "\u25c0",
+                "callback_data": "pg:p"
+            },
+            {
+                "text": "1/3",
+                "callback_data": "pg:x"
+            },
+            {
+                "text": "\u25b6",
+                "callback_data": "pg:n"
+            },
+            {
+                "text": "\ud83c\udfe0",
+                "callback_data": "m:menu"
+            }
+        ]
+    ],
+    "panel_text": "\ud83d\udcc4 *Page 1/3*"
 }
