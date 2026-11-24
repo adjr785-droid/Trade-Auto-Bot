@@ -276,5 +276,13 @@
         "time": 1795499766.459961,
         "reason": "MANUAL SELL $5.22",
         "strategy": "MANUAL"
+    },
+    {
+        "sym": "BTW-USDT",
+        "pnl": 0.2232101199999992,
+        "fee": 0.055911,
+        "time": 1795559261.1907623,
+        "reason": "PANIC",
+        "strategy": "MANUAL"
     }
 ]

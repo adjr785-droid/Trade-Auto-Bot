@@ -2529,5 +2529,41 @@
         "time": 1795559241.077458,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.3491, 'recurring_patterns': ['PANIC frequent (5 occurrences)', '15-MINUTE NO-UPWARD-TREND ROTATION (5 occurrences)', 'MANUAL SELL actions (4 occurrences)', 'Multiple trades on same symbols (e.g., JCT-USDT, DOS-USDT, ADA-USDT)'], 'recommendations': ['Reduce reliance on panic exits; consider tighter stop\u2011loss thresholds', 'Review 15\u2011minute rotation strategy as it yields mixed results', 'Consolidate manual sell triggers into a unified risk rule', 'Limit exposure to repeatedly traded symbols to diversify risk', 'Maintain current win\u2011rate focus but aim to improve average win size to offset occasional large losses']}"
+    },
+    {
+        "time": 1795559260.0516121,
+        "event": "sell_fill_verified",
+        "symbol": "BTW-USDT",
+        "filled": 35.56,
+        "average": 0.786154,
+        "order_id": "1509250410216103938",
+        "reason": "PANIC",
+        "attempt": 1
+    },
+    {
+        "time": 1795559261.1926172,
+        "event": "trade_closed",
+        "symbol": "BTW-USDT",
+        "pnl_usdt": 0.2232101199999992,
+        "reason": "PANIC",
+        "strategy": "MANUAL"
+    },
+    {
+        "time": 1795559261.6088898,
+        "event": "full_sale_verified_or_dust",
+        "symbol": "BTW-USDT",
+        "remaining_base": 0.0044,
+        "remaining_value_usdt": 0.0034590776000000003,
+        "filled": 35.56
+    },
+    {
+        "time": 1795559274.2952209,
+        "event": "ai_sell_review",
+        "symbol": "BTW-USDT",
+        "review": {
+            "review": "The position was closed at an average exit price of 0.786154\u202fUSDT, realizing a P&L of +0.2232\u202fUSDT on the trade. The exit was triggered by a panic signal rather than a predefined risk rule, and a small residual base (0.0044\u202fBTW) remains unfilled. The sold quantity (35.56\u202fBTW) represents the bulk of the position, but the remaining base indicates incomplete execution, which could affect final P&L if market moves further.",
+            "lesson": "Avoid panic\u2011driven exits that bypass deterministic risk safeguards. Ensure that stop\u2011loss or target orders are pre\u2011set to capture exits automatically. When a partial fill occurs, consider whether to adjust the remaining order or close the residual exposure to prevent leftover positions.",
+            "confidence": "medium"
+        }
     }
 ]

@@ -87,5 +87,10 @@
     "rising_guard": true,
     "manual_candidate_min_score": 70.0,
     "knife_v1": true,
-    "risk_v3": true
+    "risk_v3": true,
+    "half_or_all_sizing": true,
+    "half_or_all_threshold_usdt": 5.0,
+    "fee_pct_side": 0.1,
+    "perf_breaker_trades": 10,
+    "perf_breaker_hours": 24.0
 }
