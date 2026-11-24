@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690378,
+    "last_update_id": 935690379,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -69,21 +69,41 @@
     "audit_last": 1795551731.9326227,
     "kb_mid": 5454,
     "audit_ai_cls": "",
-    "out_text": "\ud83d\udfe1 *MANUAL BUY*\n_Passed at least 5/7 core and 2/3 additional criteria. Manual review only._\n\nNone right now.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "\ud83d\udc41 *WATCH LIST*\n_Rising coins being watched. They move up when they pass the manual rules._\n\n*BTW* | 24H +2.86% | 1H +0.08% | RSI 64 | seen 38x\n*PEPE* | 24H -1.21% | 1H -0.32% | RSI 48 | seen 38x\n*BNB* | 24H -2.27% | 1H -0.39% | RSI 44 | seen 38x\n*PUMP* | 24H -6.15% | 1H -0.41% | RSI 39 | seen 38x\n*AVAX* | 24H -4.64% | 1H -0.43% | RSI 38 | seen 38x\n*ADA* | 24H -3.42% | 1H -0.75% | RSI 42 | seen 38x\n*LINK* | 24H -2.25% | 1H -0.78% | RSI 42 | seen 38x\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795551738.8655612,
-    "out_mid": 5457,
-    "panel_mid": 5458,
+    "out_time": 1795551785.1868432,
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udc41 Watch (14)",
-                "callback_data": "m:at:W"
+                "text": "\u25c0",
+                "callback_data": "pg:p"
             },
             {
-                "text": "\u25b6 \ud83d\udfe1 Manual (0)",
-                "callback_data": "m:at:M"
+                "text": "1/2",
+                "callback_data": "pg:x"
             },
+            {
+                "text": "\u25b6",
+                "callback_data": "pg:n"
+            },
+            {
+                "text": "\ud83c\udfe0",
+                "callback_data": "m:menu"
+            }
+        ],
+        [
+            {
+                "text": "\u25b6 \ud83d\udc41 Watch (14)",
+                "callback_data": "m:at:W"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udfe1 Manual (0)",
+                "callback_data": "m:at:M"
+            }
+        ],
+        [
             {
                 "text": "\ud83e\udd16 Auto (0)",
                 "callback_data": "m:at:A"
@@ -91,10 +111,179 @@
         ],
         [
             {
+                "text": "BTW",
+                "callback_data": "m:mc:BTW"
+            }
+        ],
+        [
+            {
+                "text": "PEPE",
+                "callback_data": "m:mc:PEPE"
+            }
+        ],
+        [
+            {
+                "text": "BNB",
+                "callback_data": "m:mc:BNB"
+            }
+        ],
+        [
+            {
+                "text": "PUMP",
+                "callback_data": "m:mc:PUMP"
+            }
+        ],
+        [
+            {
+                "text": "AVAX",
+                "callback_data": "m:mc:AVAX"
+            }
+        ],
+        [
+            {
+                "text": "ADA",
+                "callback_data": "m:mc:ADA"
+            }
+        ],
+        [
+            {
+                "text": "LINK",
+                "callback_data": "m:mc:LINK"
+            }
+        ],
+        [
+            {
+                "text": "TAO",
+                "callback_data": "m:mc:TAO"
+            }
+        ],
+        [
+            {
+                "text": "LTC",
+                "callback_data": "m:mc:LTC"
+            }
+        ],
+        [
+            {
+                "text": "ONDO",
+                "callback_data": "m:mc:ONDO"
+            }
+        ],
+        [
+            {
+                "text": "UNI",
+                "callback_data": "m:mc:UNI"
+            }
+        ],
+        [
+            {
+                "text": "WLD",
+                "callback_data": "m:mc:WLD"
+            }
+        ],
+        [
+            {
+                "text": "CYS",
+                "callback_data": "m:mc:CYS"
+            }
+        ],
+        [
+            {
+                "text": "JCT",
+                "callback_data": "m:mc:JCT"
+            }
+        ],
+        [
+            {
                 "text": "\ud83d\udd04 Refresh",
-                "callback_data": "m:at:M"
+                "callback_data": "m:at:W"
             }
         ]
     ],
-    "panel_text": "\ud83d\udc47 *Actions*"
+    "panel_text": "\ud83d\udcc4 *Page 1/2*",
+    "out_mid": 5459,
+    "pages": {
+        "p": [
+            "\ud83d\udc41 *WATCH LIST*\n_Rising coins being watched. They move up when they pass the manual rules._\n\n*BTW* | 24H +2.86% | 1H +0.08% | RSI 64 | seen 38x\n*PEPE* | 24H -1.21% | 1H -0.32% | RSI 48 | seen 38x\n*BNB* | 24H -2.27% | 1H -0.39% | RSI 44 | seen 38x\n*PUMP* | 24H -6.15% | 1H -0.41% | RSI 39 | seen 38x\n*AVAX* | 24H -4.64% | 1H -0.43% | RSI 38 | seen 38x\n*ADA* | 24H -3.42% | 1H -0.75% | RSI 42 | seen 38x\n*LINK* | 24H -2.25% | 1H -0.78% | RSI 42 | seen 38x\n\u2800\n\u2800",
+            "*TAO* | 24H -6.39% | 1H -0.81% | RSI 31 | seen 38x\n*LTC* | 24H -2.40% | 1H -0.84% | RSI 46 | seen 38x\n*ONDO* | 24H -4.94% | 1H -0.84% | RSI 38 | seen 38x\n*UNI* | 24H -4.58% | 1H -0.87% | RSI 42 | seen 38x\n*WLD* | 24H -3.20% | 1H -1.08% | RSI 44 | seen 38x\n*CYS* | 24H -6.78% | 1H -2.36% | RSI 47 | seen 38x\n*JCT* | 24H -10.69% | 1H -2.62% | RSI 26 | seen 38x\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+        ],
+        "i": 0,
+        "mode": "Markdown",
+        "x": [
+            {
+                "text": "\u25b6 \ud83d\udc41 Watch (14)",
+                "callback_data": "m:at:W"
+            },
+            {
+                "text": "\ud83d\udfe1 Manual (0)",
+                "callback_data": "m:at:M"
+            },
+            {
+                "text": "\ud83e\udd16 Auto (0)",
+                "callback_data": "m:at:A"
+            },
+            {
+                "text": "BTW",
+                "callback_data": "m:mc:BTW"
+            },
+            {
+                "text": "PEPE",
+                "callback_data": "m:mc:PEPE"
+            },
+            {
+                "text": "BNB",
+                "callback_data": "m:mc:BNB"
+            },
+            {
+                "text": "PUMP",
+                "callback_data": "m:mc:PUMP"
+            },
+            {
+                "text": "AVAX",
+                "callback_data": "m:mc:AVAX"
+            },
+            {
+                "text": "ADA",
+                "callback_data": "m:mc:ADA"
+            },
+            {
+                "text": "LINK",
+                "callback_data": "m:mc:LINK"
+            },
+            {
+                "text": "TAO",
+                "callback_data": "m:mc:TAO"
+            },
+            {
+                "text": "LTC",
+                "callback_data": "m:mc:LTC"
+            },
+            {
+                "text": "ONDO",
+                "callback_data": "m:mc:ONDO"
+            },
+            {
+                "text": "UNI",
+                "callback_data": "m:mc:UNI"
+            },
+            {
+                "text": "WLD",
+                "callback_data": "m:mc:WLD"
+            },
+            {
+                "text": "CYS",
+                "callback_data": "m:mc:CYS"
+            },
+            {
+                "text": "JCT",
+                "callback_data": "m:mc:JCT"
+            },
+            {
+                "text": "\ud83d\udd04 Refresh",
+                "callback_data": "m:at:W"
+            }
+        ],
+        "cmd": "m:at:W"
+    },
+    "panel_mid": 5460
 }
