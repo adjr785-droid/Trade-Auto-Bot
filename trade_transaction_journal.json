@@ -2299,5 +2299,15 @@
         "time": 1795528691.5324848,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.3491, 'recurring_patterns': {'PANIC': 5, '15-MINUTE NO-UPWARD-TREND ROTATION': 5, 'MANUAL SELL': 5, 'PARTIAL PROFIT +10.4%': 1, 'RSI 75': 1, 'TRAILING STOP (8.0%)': 1}, 'recommendations': 'Maintain current risk limits but reduce exposure to high\u2011frequency panic exits. Consider tightening panic trigger thresholds and favor strategies with longer trend confirmation (e.g., 15\u2011minute rotation) that showed positive PnL. Monitor manual sell patterns for potential over\u2011trading.'}"
+    },
+    {
+        "time": 1795528983.2535,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (9)', 'attention': [{'symbol': 'ICNT-USDT', 'action': 'hold', 'reason': 'Position is modest (0.325333 BTC equivalent) with a small positive PnL (2.33%). Stop is comfortably below entry, and BTC filter is active, suggesting caution on new BTC\u2011related exposure.'}], 'summary': 'Current position shows a modest gain and remains within risk parameters. No immediate action required; monitor BTC price and stop level. Avoid adding new BTC\u2011linked trades while the btc_filter is true.'}"
+    },
+    {
+        "time": 1795528984.2307386,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.3491, 'recurring_patterns': {'PANIC': 5, '15-MINUTE NO-UPWARD-TREND ROTATION': 5, 'MANUAL SELL': 5, 'PARTIAL PROFIT': 1, 'RSI 75': 1, 'TRAILING STOP (8.0%)': 1}, 'recommendations': 'Reduce exposure to PANIC\u2011driven entries; prioritize signals with defined technical criteria (e.g., RSI, partial profit targets). Tighten stop\u2011loss thresholds and avoid high\u2011volatility symbols that have produced large negative PnL (e.g., WLD\u2011USDT, DOS\u2011USDT). Continue monitoring win\u2011rate but focus on risk\u2011adjusted returns.'}"
     }
 ]
