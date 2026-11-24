@@ -1856,5 +1856,15 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795495126.0302873,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Loss limit ($-1.10 / -$0.66)', 'attention': [{'symbol': 'ARIA-USDT', 'action': 'hold', 'reason': 'Position is modestly profitable (+2.03%) and above stop level; no clear signal to adjust. Monitor price relative to stop (0.280076) and market volatility.'}, {'symbol': 'JCT-USDT', 'action': 'consider reducing exposure', 'reason': 'Small loss (-0.76%) and price is close to stop (0.001481). Given limited upside and risk tolerance, a partial exit or tighter stop may protect capital.'}], 'summary': 'Overall portfolio risk remains within the defined loss limit. ARIA-USDT shows a small gain and can be held while watching the stop threshold. JCT-USDT is marginally underwater and near its stop; a cautious reduction or tighter stop is advisable. Maintain current risk parameters and avoid new entries until market direction clarifies.'}"
+    },
+    {
+        "time": 1795495126.9092665,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 5.9833, 'recurring_patterns': {'15-MINUTE NO-UPWARD-TREND ROTATION': 9, 'PANIC': 4, 'MANUAL SELL ALL': 3, 'RSI 75': 2, 'MANUAL SELL $15.10': 1, 'TRAILING STOP (8.0%)': 1}, 'recommendations': ['Review and tighten criteria for \"15-MINUTE NO-UPWARD-TREND ROTATION\" entries to avoid low\u2011impact trades', 'Implement stricter controls on panic\u2011driven exits to reduce loss frequency', 'Consider adjusting RSI threshold or adding confirmation filters before executing RSI\u2011based trades', 'Limit manual sell\u2011all actions to higher confidence signals or predefined profit targets']}"
     }
 ]
