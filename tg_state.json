@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935690200,
+    "last_update_id": 935690201,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT21.85/\u20a630,154",
+    "kb_ph": "USDT21.86/\u20a630,172",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -68,10 +68,9 @@
     ],
     "audit_down": {},
     "audit_last": 1795496193.0016415,
-    "kb_mid": 5108,
-    "out_text": "\ud83d\udcbc *PORTFOLIO* $21.85 | \u20a630,154\n\ud83d\udcb5 Cash free $0.02 | In coins $21.79 (100%)\n\ud83d\udfe1 BGB 0.00078233412 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udd34 *ADA* $13.80 (63%)\n-0.20% (-$0.03) | Entry 0.148600\nPrice 0.148300 | Stop 0.143577 (-3%)\nRSI 48 | Mixed | ATH -89%\n\n\ud83d\udfe2 *ICNT* $7.99 (37%)\n\u2800\n\u2800",
+    "out_text": "\ud83e\uddf9 Cleared 4 bot message(s).\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795496266.7661164,
+    "out_time": 1795496334.8290014,
     "panel_rows": [
         [
             {
@@ -115,22 +114,7 @@
         ]
     ],
     "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
-    "out_mid": 5106,
-    "pages": {
-        "p": [
-            "\ud83d\udcbc *PORTFOLIO* $21.85 | \u20a630,154\n\ud83d\udcb5 Cash free $0.02 | In coins $21.79 (100%)\n\ud83d\udfe1 BGB 0.00078233412 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udd34 *ADA* $13.80 (63%)\n-0.20% (-$0.03) | Entry 0.148600\nPrice 0.148300 | Stop 0.143577 (-3%)\nRSI 48 | Mixed | ATH -89%\n\n\ud83d\udfe2 *ICNT* $7.99 (37%)\n\u2800\n\u2800",
-            "+0.09% (+$0.01) | Entry 0.316600\nPrice 0.316900 | Stop 0.300232 (-5%)\nRSI 38 | Mixed | ATH -48%\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\nand 8 more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT21.85/\u20a630,154\n\n\ud83e\udde0 *AI:* Portfolio is tiny ($21.85) with most value in ADA and ICNT; BGB isn\u2019t\n\u2800\n\u2800",
-            "auto\u2011converted and several tokens lack USDT pricing, so monitor price feeds and\nstop\u2011loss proximity closely.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
-        ],
-        "i": 1,
-        "mode": "Markdown",
-        "x": [
-            {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
-            }
-        ],
-        "cmd": "m:r:holdings"
-    },
-    "panel_mid": 5107
+    "out_mid": 5110,
+    "kb_mid": 5112,
+    "panel_hidden": true
 }
