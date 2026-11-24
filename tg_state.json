@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690280,
+    "last_update_id": 935690283,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -17,7 +17,7 @@
         "pos": [],
         "hn": 31
     },
-    "last_cmd": "m:r:holdings",
+    "last_cmd": "/bot",
     "page_mem": {
         "/bot": [
             1,
@@ -67,9 +67,9 @@
     "audit_down": {},
     "audit_last": 1795522539.9195647,
     "kb_mid": 5253,
-    "out_text": "\ud83d\udd0e *SCAN HISTORY* \u00b7 465/465 coins (first 150)\n24 scans \u00b7 18.7h\n```\nCOIN    RSI    1H WHY\n------------------------------\nADA      48  +0.9 Auto-buy off\nICNT     26  +0.9 Auto-buy off\nNES      23  +0.6 BTC filter\nBTC      45     - Top 15\nETH      47     - Top 15\n```\n\u2800",
+    "out_text": "\ud83d\udda5 *SYSTEM* \u2014 HEALTHY \u2705\nBuying: PAUSED \u26d4 (auto-buy is off)\nHealth: Bot 100% | AI 100% (Normal)\nLayers: \u2705 Exchange \u2705 Scanner \u2705 Database \u2705 Buyer \u2705 Stops\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83e\udded *STRATEGY*\nEntry: TREND, RSI 42-48, 1H +0.5\u20136%, price > MA5 > MA10, must be rising vs last\nscan\nExit: stop 15% | trail 8.0% | RSI 75+ (dynamic)\nRisk: 0.5% per trade | max 5 trades/day | pause at -5.0% day\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795522720.438445,
+    "out_time": 1795522757.5605497,
     "audit_ai_cls": "",
     "panel_rows": [
         [
@@ -78,7 +78,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "1/16",
+                "text": "1/2",
                 "callback_data": "pg:x"
             },
             {
@@ -88,45 +88,29 @@
             {
                 "text": "\ud83c\udfe0",
                 "callback_data": "m:menu"
-            }
-        ],
-        [
+            },
             {
-                "text": "\ud83d\udd0d Why not bought?",
-                "callback_data": "m:whylist:0"
+                "text": "\ud83d\udd04",
+                "callback_data": "rf:go"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/16*",
+    "panel_text": "\ud83d\udcc4 *Page 1/2*",
+    "out_mid": 5257,
     "pages": {
         "p": [
-            "\ud83d\udd0e *SCAN HISTORY* \u00b7 465/465 coins (first 150)\n24 scans \u00b7 18.7h\n```\nCOIN    RSI    1H WHY\n------------------------------\nADA      48  +0.9 Auto-buy off\nICNT     26  +0.9 Auto-buy off\nNES      23  +0.6 BTC filter\nBTC      45     - Top 15\nETH      47     - Top 15\n```\n\u2800",
-            "```\nSOL      42     - Top 15\nUSDGO    45     - Top 15\nPWT      38     - Top 15\nHYPE     44     - Top 15\nSUI      43     - Top 15\nMTX      61     - Top 15\nZEC      33     - Top 15\nDOGE     46     - Top 15\nBGB      46     - Top 15\nENA      41     - Top 15\n```",
-            "```\nNEAR     43     - Top 15\nEVAA     27     - Top 15\nDGAI     61     - Top 15\nDOS      46  +0.5 1H low\nPUMP     54  -0.5 RSI high\nBNB      50  -0.0 RSI high\nTRX      75  -0.3 RSI high\nBLESS    43  +1.2 Trend weak\nARIA     46  +8.1 1H high\nADA      58  -0.4 RSI high\n```",
-            "```\nPEPE     52  -0.1 RSI high\nWLD      55  -0.5 RSI high\nACE       -     - Spread wide\nCOLLECT  36  +0.0 RSI low\nBTW      56  -2.1 RSI high\nTAO      54  -0.3 RSI high\nUNI      57  -0.3 RSI high\nONDO     55  -0.7 RSI high\nLTC      59  -0.3 RSI high\nLINK     56  -0.3 RSI high\n```",
-            "```\nUMXM     37  +1.0 RSI low\nPAXG     64  +0.1 RSI high\nJCT      52  -0.2 RSI high\nARX      57  +0.4 RSI high\nEGL1     69  +0.3 RSI high\nIDOL     45  +0.5 Trend weak\nICNT     26  -1.0 RSI low\nKII      76  +0.4 RSI high\nINJ      61  -0.3 RSI high\nBGSC     69 +12.6 RSI high\n```",
-            "```\nCYS      77  -0.8 RSI high\nNES      23  +0.2 RSI low\nGRAM     57  -0.1 RSI high\nKAS      64  -0.5 RSI high\nASTER    56  -0.1 RSI high\nAVAX     49     - Vol low\nSKY      32     - Vol low\nQNT      40     - Vol low\nDATA     50     - Vol low\nJUP      42     - Vol low\n```",
-            "```\nBCH      48     - Vol low\nLIT      47     - Vol low\nNIGHT    50     - Vol low\nARB      50     - Vol low\nFARTCOI  47     - Vol low\nEDGE     57     - Vol low\nVELO     49     - Vol low\nFET      43     - Vol low\nGWEI     38     - Vol low\nZRO      27     - Vol low\n```",
-            "```\nILY      59     - Vol low\nAPR      50     - Vol low\nQ        54     - Vol low\nBLUE     42     - Vol low\nPI       43     - Vol low\nPENGU    40     - Vol low\nPRESPCX  40     - Vol low\nLAB      36     - Vol low\nVET      53     - Vol low\nTRUMP    36     - Vol low\n```",
-            "```\nAAVE     43     - Vol low\nBR       33     - Vol low\nETHFI    39     - Vol low\nPROS     82     - Vol low\nCC       44     - Vol low\nDOT      46     - Vol low\nSHIB     43     - Vol low\nICP      53     - Vol low\nLIGHT    47     - Vol low\nAERO     48     - Vol low\n```",
-            "```\nPREOPAI  61     - Vol low\nVTHO     46     - Vol low\nACN      37     - Vol low\nCP       41     - Vol low\nGRVT     42     - Vol low\nCRV      42     - Vol low\nUNITAS   39     - Vol low\nVELVET   50     - Vol low\nBSV      49     - Vol low\nJTO      51     - Vol low\n```",
-            "```\nWLFI     37     - Vol low\nPYUSD    42     - Vol low\nHBAR     41     - Vol low\nSKYAI    37     - Vol low\nMON      54     - Vol low\nVIRTUAL  36     - Vol low\nFIL      49     - Vol low\nALGO     47     - Vol low\nBMT      31     - Vol low\nZBCN     38     - Vol low\n```",
-            "```\nUAI      29     - Vol low\nFLOCK    36     - Vol low\nGRASS    45     - Vol low\nMMT      55     - Vol low\nAIN      40     - Vol low\nPONS     45     - Vol low\nMAGMA    48     - Vol low\nAEON     55     - Vol low\nKAIA     47     - Vol low\nMYX      44     - Vol low\n```",
-            "```\nAPT      46     - Vol low\nPOL      46     - Vol low\nSOON     36     - Vol low\nUP       40     - Vol low\nPYTH     44     - Vol low\nLAT      37     - Vol low\nSEI      42     - Vol low\nPORTAL   49     - Vol low\nENSO     39     - Vol low\nOPEN     43     - Vol low\n```",
-            "```\nTIA      47     - Vol low\nWBTC     45     - Vol low\nPCI      43     - Vol low\nMORPHO   55     - Vol low\nPEAQ     40     - Vol low\nTRADOOR  41     - Vol low\nPENDLE   38     - Vol low\nCAKE     48     - Vol low\nLUNC     70     - Vol low\nAXIS     42     - Vol low\n```",
-            "```\nSSV      48     - Vol low\nSTETH    47     - Vol low\nCNPY     39     - Vol low\nIRYS     26     - Vol low\nNIL      33     - Vol low\nBILL     42     - Vol low\nPRL      26     - Vol low\nUSD1     50     - Vol low\nCROSS    44     - Vol low\nUPC      44     - Vol low\n```",
-            "```\nAI       52     - Vol low\nIR       53     - Vol low\nDNA      58     - Vol low\nNAORIS   46     - Vol low\nBSB      40     - Vol low\n```\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+            "\ud83d\udda5 *SYSTEM* \u2014 HEALTHY \u2705\nBuying: PAUSED \u26d4 (auto-buy is off)\nHealth: Bot 100% | AI 100% (Normal)\nLayers: \u2705 Exchange \u2705 Scanner \u2705 Database \u2705 Buyer \u2705 Stops\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83e\udded *STRATEGY*\nEntry: TREND, RSI 42-48, 1H +0.5\u20136%, price > MA5 > MA10, must be rising vs last\nscan\nExit: stop 15% | trail 8.0% | RSI 75+ (dynamic)\nRisk: 0.5% per trade | max 5 trades/day | pause at -5.0% day\n\u2800\n\u2800",
+            "\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udcbc $23.18 | \u20a631,986 | Cash $0.03 | Coins $23.11\nToday +3.57% | Last scan 3 min ago | Queue 0 | Positions 3\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
         "i": 0,
         "mode": "Markdown",
         "x": [
             {
-                "text": "\ud83d\udd0d Why not bought?",
-                "callback_data": "m:whylist:0"
+                "text": "\ud83d\udd04",
+                "callback_data": "rf:go"
             }
         ],
-        "cmd": "m:scan_hist"
+        "cmd": "/bot"
     },
-    "out_mid": 5251,
-    "panel_mid": 5252
+    "panel_mid": 5258
 }
