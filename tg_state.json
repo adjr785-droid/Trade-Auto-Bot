@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935690336,
+    "last_update_id": 935690338,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT28.20/\u20a638,926",
+    "kb_ph": "USDT28.19/\u20a638,908",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -65,18 +65,18 @@
     ],
     "audit_down": {},
     "audit_last": 1795533938.988349,
-    "kb_mid": 5369,
+    "kb_mid": 5374,
     "audit_ai_cls": "",
-    "out_text": "\ud83d\udfe1 *MANUAL BUY*\n_Passed the manual rules (score \u2265 75%). Review and buy by hand, or wait for\nAuto._\n\nNone right now.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "\ud83d\udc41 *WATCH LIST*\n_Rising coins being watched. They move up when they pass the manual rules._\n\n*BTW* | 1H +1.97% | RSI 56 | seen 33x\n*CYS* | 1H +1.70% | RSI 50 | seen 33x\n*WLD* | 1H +1.14% | RSI 42 | seen 33x\n*PUMP* | 1H +0.88% | RSI 41 | seen 33x\n*UNI* | 1H +0.68% | RSI 43 | seen 33x\n*BNB* | 1H +0.61% | RSI 47 | seen 33x\n*ADA* | 1H +0.60% | RSI 44 | seen 33x\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udc41 Watch (7)",
+                "text": "\u25b6 \ud83d\udc41 Watch (7)",
                 "callback_data": "m:at:W"
             },
             {
-                "text": "\u25b6 \ud83d\udfe1 Manual (0)",
+                "text": "\ud83d\udfe1 Manual (0)",
                 "callback_data": "m:at:M"
             },
             {
@@ -86,13 +86,55 @@
         ],
         [
             {
+                "text": "BTW",
+                "callback_data": "m:mc:BTW"
+            }
+        ],
+        [
+            {
+                "text": "CYS",
+                "callback_data": "m:mc:CYS"
+            }
+        ],
+        [
+            {
+                "text": "WLD",
+                "callback_data": "m:mc:WLD"
+            }
+        ],
+        [
+            {
+                "text": "PUMP",
+                "callback_data": "m:mc:PUMP"
+            }
+        ],
+        [
+            {
+                "text": "UNI",
+                "callback_data": "m:mc:UNI"
+            }
+        ],
+        [
+            {
+                "text": "BNB",
+                "callback_data": "m:mc:BNB"
+            }
+        ],
+        [
+            {
+                "text": "ADA",
+                "callback_data": "m:mc:ADA"
+            }
+        ],
+        [
+            {
                 "text": "\ud83d\udd04 Refresh",
-                "callback_data": "m:at:M"
+                "callback_data": "m:at:W"
             }
         ]
     ],
     "panel_text": "\ud83d\udc47 *Actions*",
-    "out_time": 1795533972.083272,
-    "out_mid": 5367,
-    "panel_mid": 5368
+    "out_time": 1795533997.2660968,
+    "out_mid": 5372,
+    "panel_mid": 5373
 }
