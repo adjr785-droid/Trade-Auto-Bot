@@ -2519,5 +2519,15 @@
         "time": 1795559043.0209115,
         "event": "ai_portfolio_review",
         "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $1.49; auto-buy paused for 23.9h', 'attention': [{'symbol': 'BTW-USDT', 'action': 'monitor', 'reason': 'Small positive PnL (0.52%) but stop loss is relatively close (\u22485.7% below entry). Maintain position while watching price; consider tightening stop if volatility rises.'}], 'summary': 'Overall portfolio risk is flagged by recent losses, triggering an auto-buy pause. The only open position (BTW-USDT) shows a modest gain but remains near its stop level. Recommend holding the position, tightening risk controls, and refraining from new entries until the performance breaker resets.'}"
+    },
+    {
+        "time": 1795559239.8317232,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $1.49; auto-buy paused for 23.9h', 'attention': [{'symbol': 'BTW-USDT', 'action': 'hold', 'reason': 'Small positive PnL (0.8%) but position is very recent (age_min 4) and stop loss is relatively close; maintain until clearer trend emerges.'}], 'summary': 'Current portfolio risk is elevated due to recent losses and auto-buy pause. The only open position, BTW-USDT, shows a modest gain but limited upside and a nearby stop. Recommend holding without additional exposure and monitoring for any adverse price movement.'}"
+    },
+    {
+        "time": 1795559241.077458,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.3491, 'recurring_patterns': ['PANIC frequent (5 occurrences)', '15-MINUTE NO-UPWARD-TREND ROTATION (5 occurrences)', 'MANUAL SELL actions (4 occurrences)', 'Multiple trades on same symbols (e.g., JCT-USDT, DOS-USDT, ADA-USDT)'], 'recommendations': ['Reduce reliance on panic exits; consider tighter stop\u2011loss thresholds', 'Review 15\u2011minute rotation strategy as it yields mixed results', 'Consolidate manual sell triggers into a unified risk rule', 'Limit exposure to repeatedly traded symbols to diversify risk', 'Maintain current win\u2011rate focus but aim to improve average win size to offset occasional large losses']}"
     }
 ]
