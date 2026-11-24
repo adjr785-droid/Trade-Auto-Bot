@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690328,
+    "last_update_id": 935690330,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -73,26 +73,32 @@
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udc41 Watch (7)",
-                "callback_data": "m:at:W"
+                "text": "\ud83d\udee0\ufe0f Audit",
+                "callback_data": "m:r:audit"
             },
             {
-                "text": "\u25b6 \ud83d\udfe1 Manual (0)",
-                "callback_data": "m:at:M"
-            },
-            {
-                "text": "\ud83e\udd16 Auto (0)",
-                "callback_data": "m:at:A"
+                "text": "\ud83e\udde9 Layout",
+                "callback_data": "m:lay"
             }
         ],
         [
             {
-                "text": "\ud83d\udd04 Refresh",
-                "callback_data": "m:at:M"
+                "text": "\ud83e\udde0 Resume AI Mode",
+                "callback_data": "m:r:airesume"
+            }
+        ],
+        [
+            {
+                "text": "\u2b05\ufe0f Tools",
+                "callback_data": "m:tools"
+            },
+            {
+                "text": "\ud83c\udfe0 Main Menu",
+                "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83d\udc47 *Actions*",
+    "panel_text": "\ud83d\udee0\ufe0f *SYSTEM*",
     "out_mid": 5349,
     "panel_mid": 5350
 }
