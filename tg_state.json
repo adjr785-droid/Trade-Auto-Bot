@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690445,
+    "last_update_id": 935690446,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -85,96 +85,30 @@
     "panel_rows": [
         [
             {
-                "text": "AVAX",
-                "callback_data": "m:b:AVAX"
+                "text": "$2",
+                "callback_data": "m:bc:BTW:2"
             },
             {
-                "text": "PREOPAI",
-                "callback_data": "m:b:PREOPAI"
+                "text": "$5",
+                "callback_data": "m:bc:BTW:5"
             },
             {
-                "text": "BTW",
-                "callback_data": "m:b:BTW"
+                "text": "$10",
+                "callback_data": "m:bc:BTW:10"
+            },
+            {
+                "text": "$15",
+                "callback_data": "m:bc:BTW:15"
+            },
+            {
+                "text": "ALL",
+                "callback_data": "m:bc:BTW:ALL"
             }
         ],
         [
             {
-                "text": "EGL1",
-                "callback_data": "m:b:EGL1"
-            },
-            {
-                "text": "KII",
-                "callback_data": "m:b:KII"
-            },
-            {
-                "text": "CYS",
-                "callback_data": "m:b:CYS"
-            }
-        ],
-        [
-            {
-                "text": "GRAM",
-                "callback_data": "m:b:GRAM"
-            },
-            {
-                "text": "MMT",
-                "callback_data": "m:b:MMT"
-            },
-            {
-                "text": "PYUSD",
-                "callback_data": "m:b:PYUSD"
-            }
-        ],
-        [
-            {
-                "text": "WLFI",
-                "callback_data": "m:b:WLFI"
-            },
-            {
-                "text": "FET",
-                "callback_data": "m:b:FET"
-            },
-            {
-                "text": "ICNT",
-                "callback_data": "m:b:ICNT"
-            }
-        ],
-        [
-            {
-                "text": "BCH",
-                "callback_data": "m:b:BCH"
-            },
-            {
-                "text": "EDGE",
-                "callback_data": "m:b:EDGE"
-            },
-            {
-                "text": "DOT",
-                "callback_data": "m:b:DOT"
-            }
-        ],
-        [
-            {
-                "text": "AAVE",
-                "callback_data": "m:b:AAVE"
-            },
-            {
-                "text": "PAXG",
-                "callback_data": "m:b:PAXG"
-            },
-            {
-                "text": "INJ",
-                "callback_data": "m:b:INJ"
-            }
-        ],
-        [
-            {
-                "text": "\u25c0\ufe0f Prev",
-                "callback_data": "m:more:buy:1"
-            },
-            {
-                "text": "Next \u25b6\ufe0f",
-                "callback_data": "m:more:buy:3"
+                "text": "\u270f\ufe0f Custom amount",
+                "callback_data": "m:cu:b:BTW"
             }
         ],
         [
@@ -184,7 +118,7 @@
             }
         ]
     ],
-    "panel_text": "\u2795 *MORE COINS* (page 3/26)\nBiggest 24h volume first. Tap a coin.",
+    "panel_text": "\ud83d\uded2 *BUY BTW*\nFree USDT: $27.79\nChoose how much:",
     "out_mid": 5552,
     "panel_mid": 5553
 }
