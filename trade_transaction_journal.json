@@ -2125,5 +2125,15 @@
         "time": 1795505777.7286074,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.3491, 'recurring_patterns': ['PANIC', '15-MINUTE NO-UPWARD-TREND ROTATION', 'MANUAL SELL'], 'recommendations': 'Maintain current risk limits; reduce exposure to high\u2011volatility symbols that trigger PANIC exits; consider tightening the 15\u2011minute trend filter; monitor manual sell triggers for consistency before scaling up position sizes.'}"
+    },
+    {
+        "time": 1795507545.8182325,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (9)', 'attention': [{'symbol': 'ADA-USDT', 'action': 'monitor', 'reason': 'Small loss (-0.47%) and price approaching stop level (0.143577). Consider tightening stop or exiting if price continues downward.'}, {'symbol': 'ICNT-USDT', 'action': 'hold', 'reason': 'Modest gain (2.01%) with price above entry; stop equals entry, providing some protection. No immediate action required.'}, {'symbol': 'BLESS-USDT', 'action': 'hold', 'reason': 'Strong gain (11.93%) and price well above stop; maintain position while monitoring for reversal.'}], 'summary': 'Overall portfolio is within the daily risk limit. Focus on ADA-USDT as it nears its stop; otherwise maintain current positions and watch market movements, especially BTC volatility.'}"
+    },
+    {
+        "time": 1795507546.6738,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.3491, 'recurring_patterns': ['Frequent PANIC exits', 'Repeated 15-MINUTE NO-UPWARD-TREND ROTATION entries', 'Multiple MANUAL SELL actions'], 'recommendations': ['Limit PANIC-driven trades and enforce stricter entry criteria', 'Review 15\u2011minute trend filter to avoid false signals', 'Consolidate manual sell decisions into automated risk rules', 'Maintain current position sizing until win rate stabilizes above 65%']}"
     }
 ]
