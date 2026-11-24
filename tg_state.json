@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690303,
+    "last_update_id": 935690306,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -71,32 +71,32 @@
     "panel_rows": [
         [
             {
-                "text": "\ud83d\uded2 Trade",
-                "callback_data": "m:tl:trade"
+                "text": "$2",
+                "callback_data": "m:bc:ICNT:2"
             },
             {
-                "text": "\ud83d\udd14 Alerts",
-                "callback_data": "m:tl:alerts"
+                "text": "$5",
+                "callback_data": "m:bc:ICNT:5"
+            },
+            {
+                "text": "ALL",
+                "callback_data": "m:bc:ICNT:ALL"
             }
         ],
         [
             {
-                "text": "\ud83d\udd0d Scan",
-                "callback_data": "m:tl:scan"
-            },
-            {
-                "text": "\ud83d\udee0\ufe0f System",
-                "callback_data": "m:tl:sys"
+                "text": "\u270f\ufe0f Custom amount",
+                "callback_data": "m:cu:b:ICNT"
             }
         ],
         [
             {
-                "text": "\u2b05\ufe0f Main Menu",
-                "callback_data": "m:menu"
+                "text": "\u2b05\ufe0f Back",
+                "callback_data": "m:buy"
             }
         ]
     ],
-    "panel_text": "\ud83e\uddf0 *TOOLS*\nChoose a group.",
+    "panel_text": "\ud83d\uded2 *BUY ICNT*\nFree USDT: $5.03\nChoose how much:",
     "out_mid": 5299,
     "pages": {
         "p": [
