@@ -1790,5 +1790,15 @@
             "warning": "Manual buy of JCT-USDT at $0.001547 with only $3 USDT exposure is risky. BTC filter active and market filter indicates BTC is below its 50\u2011hour average, suggesting broader bearish momentum. RSI of 40.55 is not oversold enough to offset this. Existing position adds exposure. Proceed only if you accept potential loss of the full amount.",
             "summary": "Given the bearish BTC context, modest USDT amount, and lack of strong oversold signal, the trade carries high risk. Consider waiting for clearer upside or reducing position size."
         }
+    },
+    {
+        "time": 1795492718.5983412,
+        "event": "ai_manual_buy_review",
+        "symbol": "ARIA-USDT",
+        "review": {
+            "risk_level": "high",
+            "warning": "Manual buy request conflicts with active BTC filter and existing position; market filter indicates BTC is below its 50\u2011hour average, suggesting bearish momentum. Proceed only if you accept potential loss of the full $3.23 investment.",
+            "summary": "Given the active BTC filter, existing position, and bearish market signal, the advisory recommends against executing this manual buy. If you choose to proceed, be aware of elevated risk and limited upside."
+        }
     }
 ]

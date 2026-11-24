@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690084,
+    "last_update_id": 935690085,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -66,9 +66,9 @@
         "ARX-USDT"
     ],
     "kb_mid": 4940,
-    "out_text": "\ud83e\udde0 AI manual-buy advisory: Given the bearish BTC context, modest USDT amount,\nand lack of strong oversold signal, the trade carries high risk. Consider\nwaiting for clearer upside or reducing position size.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "\ud83e\udde0 AI manual-buy advisory: Given the active BTC filter, existing position, and\nbearish market signal, the advisory recommends against executing this manual\nbuy. If you choose to proceed, be aware of elevated risk and limited upside.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795492700.6534054,
+    "out_time": 1795492718.8888173,
     "panel_rows": [
         [
             {

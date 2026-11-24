@@ -1,15 +1,15 @@
 {
     "ARIA-USDT": {
-        "entry_price": 0.311181,
-        "safe_zone": 0.311181,
-        "stop_loss": 0.280063,
+        "entry_price": 0.311195,
+        "safe_zone": 0.311195,
+        "stop_loss": 0.280076,
         "peak_price": 0.31265,
-        "last_price": 0.31201,
-        "opened_at": 1795477079.5856636,
+        "last_price": 0.31123,
+        "opened_at": 1795492715.0416498,
         "sl_pct": 10.0,
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
-        "xsl": 0.2863132,
+        "xsl": 0.280076,
         "seen": 1795492669.622427
     },
     "JCT-USDT": {
