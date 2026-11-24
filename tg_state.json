@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690494,
+    "last_update_id": 935690497,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -17,7 +17,7 @@
         "pos": [],
         "hn": 31
     },
-    "last_cmd": "m:r:holdings",
+    "last_cmd": "/bot",
     "page_mem": {
         "/bot": [
             1,
@@ -86,38 +86,49 @@
         "since": 1795558810.5830717,
         "loss": -1.4850249000000058
     },
-    "out_text": "\u2705 *AUDIT COMPLETE:* No issues found.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "\ud83d\udda5 *SYSTEM* \u2014 ATTENTION \u26a0\ufe0f\nBuying: PAUSED \u26d4 (auto-buy is off)\nHealth: Bot 100% | AI 95% (Recovering 2/3)\nLayers: \u2705 Exchange \u2705 Scanner \u2705 Database \u2705 Buyer \u2705 Stops\n\ud83d\udd27 AI issue: unknown error\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83e\udded *STRATEGY*\nEntry: TREND, RSI 42-48, 1H +0.5\u20136%, price > MA5 > MA10, must be rising vs last\nscan\nExit: stop 15% | trail 8.0% | RSI 75+ (dynamic)\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795560109.4863944,
+    "out_time": 1795560138.6289287,
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udee0\ufe0f Audit",
-                "callback_data": "m:r:audit"
+                "text": "\u25c0",
+                "callback_data": "pg:p"
             },
             {
-                "text": "\ud83e\udde9 Layout",
-                "callback_data": "m:lay"
-            }
-        ],
-        [
-            {
-                "text": "\ud83e\udde0 Resume AI Mode",
-                "callback_data": "m:r:airesume"
-            }
-        ],
-        [
-            {
-                "text": "\u2b05\ufe0f Tools",
-                "callback_data": "m:tools"
+                "text": "1/2",
+                "callback_data": "pg:x"
             },
             {
-                "text": "\ud83c\udfe0 Main Menu",
+                "text": "\u25b6",
+                "callback_data": "pg:n"
+            },
+            {
+                "text": "\ud83c\udfe0",
                 "callback_data": "m:menu"
+            },
+            {
+                "text": "\ud83d\udd04",
+                "callback_data": "rf:go"
             }
         ]
     ],
-    "panel_text": "\ud83d\udee0\ufe0f *SYSTEM*",
-    "out_mid": 5613,
-    "panel_hidden": true
+    "panel_text": "\ud83d\udcc4 *Page 1/2*",
+    "out_mid": 5617,
+    "pages": {
+        "p": [
+            "\ud83d\udda5 *SYSTEM* \u2014 ATTENTION \u26a0\ufe0f\nBuying: PAUSED \u26d4 (auto-buy is off)\nHealth: Bot 100% | AI 95% (Recovering 2/3)\nLayers: \u2705 Exchange \u2705 Scanner \u2705 Database \u2705 Buyer \u2705 Stops\n\ud83d\udd27 AI issue: unknown error\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83e\udded *STRATEGY*\nEntry: TREND, RSI 42-48, 1H +0.5\u20136%, price > MA5 > MA10, must be rising vs last\nscan\nExit: stop 15% | trail 8.0% | RSI 75+ (dynamic)\n\u2800\n\u2800",
+            "Size: 50% of balance (all-in if half < $5) | max 5 trades/day | pause at -5.0%\nday\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udcbc $28.01 | \u20a638,655 | Cash $27.96 | Coins $0.00\nToday +25.17% | Last scan 1 min ago | Queue 0 | Positions 0\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+        ],
+        "i": 0,
+        "mode": "Markdown",
+        "x": [
+            {
+                "text": "\ud83d\udd04",
+                "callback_data": "rf:go"
+            }
+        ],
+        "cmd": "/bot"
+    },
+    "panel_mid": 5618
 }
