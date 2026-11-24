@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935690311,
+    "last_update_id": 935690313,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT22.67/\u20a631,292",
+    "kb_ph": "USDT22.83/\u20a631,508",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -63,51 +63,52 @@
     "radar": [],
     "audit_down": {},
     "audit_last": 1795527378.804305,
-    "kb_mid": 5304,
+    "kb_mid": 5313,
     "audit_ai_cls": "",
-    "out_text": "\ud83d\udcbc *PORTFOLIO* $22.67 | \u20a631,292\n\ud83d\udcb5 Cash free $0.02 | In coins $22.63 (100%)\n\ud83d\udfe1 BGB 0.00019439193 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *ICNT* $22.63 (100%)\n+2.26% (+$0.50) | Entry 0.325333\nPrice 0.332700 | Stop 0.308513 (-7%)\nRSI 54 | Bullish | ATH -45%\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\n\u2800\n\u2800",
+    "out_text": "\ud83d\udc41 *WATCH LIST*\n_Rising coins being watched. They move up when they pass the manual rules._\n\n*BTW* | 1H +0.88% | RSI 45 | seen 32x\n*BNB* | 1H -0.33% | RSI 45 | seen 32x\n*CYS* | 1H -1.03% | RSI 53 | seen 32x\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795527545.0894861,
+    "out_time": 1795527582.7441127,
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
+                "text": "\u25b6 \ud83d\udc41 Watch (3)",
+                "callback_data": "m:at:W"
             },
             {
-                "text": "1/2",
-                "callback_data": "pg:x"
+                "text": "\ud83d\udfe1 Manual (0)",
+                "callback_data": "m:at:M"
             },
             {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
-            },
+                "text": "\ud83e\udd16 Auto (0)",
+                "callback_data": "m:at:A"
+            }
+        ],
+        [
             {
-                "text": "\ud83c\udfe0",
-                "callback_data": "m:menu"
-            },
+                "text": "BTW",
+                "callback_data": "m:mc:BTW"
+            }
+        ],
+        [
             {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
+                "text": "BNB",
+                "callback_data": "m:mc:BNB"
+            }
+        ],
+        [
+            {
+                "text": "CYS",
+                "callback_data": "m:mc:CYS"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udd04 Refresh",
+                "callback_data": "m:at:W"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/2*",
-    "out_mid": 5308,
-    "pages": {
-        "p": [
-            "\ud83d\udcbc *PORTFOLIO* $22.67 | \u20a631,292\n\ud83d\udcb5 Cash free $0.02 | In coins $22.63 (100%)\n\ud83d\udfe1 BGB 0.00019439193 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *ICNT* $22.63 (100%)\n+2.26% (+$0.50) | Entry 0.325333\nPrice 0.332700 | Stop 0.308513 (-7%)\nRSI 54 | Bullish | ATH -45%\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\n\u2800\n\u2800",
-            "and 8 more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT22.67/\u20a631,292\n\n\ud83e\udde0 *AI:* Portfolio shows $22.67 total with $0.02 cash; main position ICNT at\n$22.63 (100%) but several assets lack USDT pricing, indicating valuation\nuncertainty and potential hidden exposure.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
-        ],
-        "i": 0,
-        "mode": "Markdown",
-        "x": [
-            {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
-            }
-        ],
-        "cmd": "m:r:holdings"
-    },
-    "panel_mid": 5309
+    "panel_text": "\ud83d\udc47 *Actions*",
+    "out_mid": 5314,
+    "panel_mid": 5315
 }
