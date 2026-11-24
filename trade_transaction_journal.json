@@ -2089,5 +2089,15 @@
             "warning": "BTC market filter is active and BTC is below its 50\u2011hour average, indicating broader bearish pressure. Proceed with caution.",
             "summary": "Buying 5.21\u202fUSDT of BLESS\u2011USDT at 0.0162077\u202fUSDT per token with RSI 47.14. No existing position. Small trade size but market conditions are slightly unfavorable."
         }
+    },
+    {
+        "time": 1795500273.1900527,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (9)', 'attention': [{'symbol': 'ADA-USDT', 'action': 'hold', 'reason': 'Small profit (0.07%) and stop loss close to entry; no strong signal to adjust.'}, {'symbol': 'ICNT-USDT', 'action': 'monitor', 'reason': 'Profit ~2.9% but stop loss equals entry; consider tightening stop if price retraces.'}, {'symbol': 'BLESS-USDT', 'action': 'hold', 'reason': 'Modest gain (0.4%) with stop loss 10% below entry; position is young (8 days) so maintain.'}], 'summary': 'Overall portfolio is within the daily risk limit. Positions show modest gains; no immediate exits are recommended. Keep existing stops, watch ICNT-USDT for potential tightening, and maintain a conservative stance given the limited upside and the daily risk constraints.'}"
+    },
+    {
+        "time": 1795500273.7632797,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.3491, 'recurring_patterns': ['PANIC', '15-MINUTE NO-UPWARD-TREND ROTATION', 'MANUAL SELL'], 'recommendations': 'Maintain current risk limits; reduce exposure to high\u2011volatility symbols that trigger PANIC exits; consider tightening the 15\u2011minute trend filter; monitor manual sell triggers for consistency before scaling up position sizes.'}"
     }
 ]
