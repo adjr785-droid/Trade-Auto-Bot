@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT28.37/\u20a639,150",
+    "kb_ph": "USDT28.30/\u20a639,054",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -67,7 +67,7 @@
     "radar": [],
     "audit_down": {},
     "audit_last": 1795554274.5454485,
-    "kb_mid": 5497,
+    "kb_mid": 5501,
     "audit_ai_cls": "",
     "out_text": "\ud83d\udc41 *WATCH LIST*\n_Rising coins being watched. They move up when they pass the manual rules._\n\n*PROS* | 24H +17.82% | 1H +1.75% | RSI 72 | seen 39x\n*BTC* | 24H -2.08% | seen 39x\n*ETH* | 24H -2.58% | seen 39x\n*SOL* | 24H -4.43% | seen 39x\n*USDGO* | 24H +0.03% | seen 39x\n*HYPE* | 24H -6.16% | seen 39x\n*SUI* | 24H -3.92% | seen 39x\n\u2800\n\u2800",
     "out_mode": "Markdown",
