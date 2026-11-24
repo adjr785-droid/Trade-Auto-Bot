@@ -3,8 +3,8 @@ try:import fcntl
 except ImportError:fcntl=None
 TK=os.environ.get('TG_TOKEN');CHAT=str(os.environ.get('TG_CHAT_ID',''));API=f"https://api.telegram.org/bot{TK}"
 DB,ST,CFG,QF,LF,CD,SC,HIST,LOCK,SH,OUT,AL,ATHATL_CACHE="positions.json","tg_state.json","settings.json","queue.json","profit_ledger.json",".cmd_cooldown.json","scan_state.json","trade_history.json",".bot.lock","scan_history.json","telegram_output.json","alerts.json","ath_atl_cache.json"
-COINDB="coins.db";GUARDIAN="bot_guardian.json";AI_RECENT="ai_recent.json";GCHARTER="core_charter.json";GAUDIT="guardian_audit.json";JOURNAL="trade_transaction_journal.json";BREAKER="trade_circuit_breaker.json";AI_HEALTH="ai_health.json"
-FILES=[COINDB,DB,ST,CFG,QF,LF,CD,SC,HIST,SH,OUT,AL,ATHATL_CACHE,JOURNAL,BREAKER,GUARDIAN,GCHARTER,GAUDIT,AI_HEALTH,AI_RECENT]
+COINDB="coins.db";NEWLIST="new_listing_state.json";GUARDIAN="bot_guardian.json";AI_RECENT="ai_recent.json";GCHARTER="core_charter.json";GAUDIT="guardian_audit.json";JOURNAL="trade_transaction_journal.json";BREAKER="trade_circuit_breaker.json";AI_HEALTH="ai_health.json"
+FILES=[COINDB,NEWLIST,DB,ST,CFG,QF,LF,CD,SC,HIST,SH,OUT,AL,ATHATL_CACHE,JOURNAL,BREAKER,GUARDIAN,GCHARTER,GAUDIT,AI_HEALTH,AI_RECENT]
 STABLE=['USDC','USDT','DAI','FDUSD','TUSD','USDD','USDE'];LEV=['3L','3S','5L','5S','10L','10S','2L','2S'];BL=['RPANW','CT','ONE']
 ex=ccxt.bitget({'apiKey':os.environ.get('BITGET_API_KEY'),'secret':os.environ.get('BITGET_API_SECRET'),'password':os.environ.get('BITGET_API_PASSPHRASE'),'enableRateLimit':True});ex.options['createMarketBuyOrderRequiresPrice']=False
 GROQ_API_KEY=os.environ.get('GROQ_API_KEY','').strip()
@@ -444,9 +444,11 @@ def save(f,d):
   os.replace(f+".tmp",f)
  except Exception as e:print(f"SAVE ERR {f}: {e}")
 def cfg():
- d={"oversold_enabled":False,"rising_guard":True,"rsi_min":42,"rsi_max":48,"stop_loss_pct":5.0,"auto_buy_enabled":True,"auto_buy_amount_usdt":10.0,"max_tokens_before_consolidation":3,"trail_pct":8.0,"crash_guard_pct":10.0,"rsi_exit":75,"btc_rsi_min":50,"risk_per_trade_pct":0.5,"max_daily_loss_pct":3.0,"max_portfolio_exposure_pct":50.0,"max_position_pct":15.0,"max_daily_trades":5,"max_spread_pct":0.5,"auto_mode_v1":False,"rebuy_cooldown_hours":6.0,"atr_stop_enabled":True,"atr_stop_mult":2.0,"atr_stop_min_pct":3.0,"atr_stop_max_pct":10.0,"market_filter_enabled":True,"btc_trend_hours":50,"min_breadth_pct":30.0,"weak_market_mode":True,"weak_market_floor_pct":15.0,"weak_market_size_factor":0.5,"h1_all_setups":False,"offline_alert_hours":3.0,"daily_summary_hour_utc":20,"max_daily_drawdown_pct":5.0,"dynamic_trail":True,"sell_if_stop_fails":True,"scan_prefilter":True,"cleanup_hours":24.0,"scan_interval_minutes":15.0,"auto_clear_hours":24.0,"live_mode_seconds":270,"mtf_confirm":True,"btc_shock_pct":3.0,"max_open_risk_pct":3.0,"loss_streak_trigger":2,"loss_streak_size_factor":0.5,"scan_parallel":True,"page_chars":600,"page_lines":12,"page_width":32,"output_stale_minutes":5,"smart_risk_enabled":True,"max_coin_exposure_pct":20.0,"max_sector_exposure_pct":35.0,"liquidity_depth_usdt":5000.0,"max_book_imbalance_pct":85.0,"regime_risk_factor":0.65,"execution_slippage_pct":0.35,"stop_watchdog_enabled":True,"portfolio_stress_pct":12.0,"signal_expiry_minutes":30,"adaptive_risk_enabled":True,"dynamic_auto_buy_enabled":True,"auto_buy_reserve_pct":5.0,"dynamic_auto_buy_max_pct":20.0,"dynamic_auto_buy_min_usdt":1.02,"dynamic_auto_buy_max_usdt":0.0,"guardian_enabled":True,"guardian_audit_interval_minutes":15,"max_portfolio_correlation":0.85,"momentum_1h_enabled":True,"mom_1h_min_pct":0.5,"mom_1h_max_pct":6.0,"max_24h_pct":100.0,"near_miss_alerts":True,"near_miss_rsi_margin":3.0,"near_miss_1h_margin":0.5,"near_miss_cooldown_minutes":60,"near_miss_max_per_scan":3,"scan_workers":8,"radar_max":30,"radar_rsi_margin":10.0,"manual_candidate_min_score":75.0}
+ d={"oversold_enabled":False,"rising_guard":True,"rsi_min":42,"rsi_max":48,"stop_loss_pct":5.0,"auto_buy_enabled":True,"auto_buy_amount_usdt":10.0,"max_tokens_before_consolidation":3,"trail_pct":8.0,"crash_guard_pct":10.0,"rsi_exit":75,"btc_rsi_min":50,"risk_per_trade_pct":0.5,"max_daily_loss_pct":3.0,"max_portfolio_exposure_pct":50.0,"max_position_pct":15.0,"max_daily_trades":5,"max_spread_pct":0.5,"auto_mode_v1":False,"rebuy_cooldown_hours":6.0,"atr_stop_enabled":True,"atr_stop_mult":2.0,"atr_stop_min_pct":3.0,"atr_stop_max_pct":10.0,"market_filter_enabled":True,"btc_trend_hours":50,"min_breadth_pct":30.0,"weak_market_mode":True,"weak_market_floor_pct":15.0,"weak_market_size_factor":0.5,"h1_all_setups":False,"offline_alert_hours":3.0,"daily_summary_hour_utc":20,"max_daily_drawdown_pct":5.0,"dynamic_trail":True,"sell_if_stop_fails":True,"scan_prefilter":True,"cleanup_hours":24.0,"scan_interval_minutes":15.0,"auto_clear_hours":24.0,"live_mode_seconds":270,"mtf_confirm":True,"btc_shock_pct":3.0,"max_open_risk_pct":3.0,"loss_streak_trigger":2,"loss_streak_size_factor":0.5,"scan_parallel":True,"page_chars":600,"page_lines":12,"page_width":32,"output_stale_minutes":5,"smart_risk_enabled":True,"max_coin_exposure_pct":20.0,"max_sector_exposure_pct":35.0,"liquidity_depth_usdt":5000.0,"max_book_imbalance_pct":85.0,"regime_risk_factor":0.65,"execution_slippage_pct":0.35,"stop_watchdog_enabled":True,"portfolio_stress_pct":12.0,"signal_expiry_minutes":30,"adaptive_risk_enabled":True,"dynamic_auto_buy_enabled":True,"auto_buy_reserve_pct":5.0,"dynamic_auto_buy_max_pct":20.0,"dynamic_auto_buy_min_usdt":1.02,"dynamic_auto_buy_max_usdt":0.0,"guardian_enabled":True,"guardian_audit_interval_minutes":15,"max_portfolio_correlation":0.85,"momentum_1h_enabled":True,"mom_1h_min_pct":0.5,"mom_1h_max_pct":6.0,"max_24h_pct":100.0,"near_miss_alerts":True,"near_miss_rsi_margin":3.0,"near_miss_1h_margin":0.5,"near_miss_cooldown_minutes":60,"near_miss_max_per_scan":3,"scan_workers":8,"radar_max":30,"radar_rsi_margin":10.0,"manual_candidate_min_score":70.0}
  s=load(CFG,d)
  for k,v in d.items():s.setdefault(k,v)
+ if float(s.get("manual_candidate_min_score",70.0) or 70.0)!=70.0:
+  s["manual_candidate_min_score"]=70.0;save(CFG,s)  # Fixed 7/10 MANUAL threshold; legacy percentage setting normalized.
  for _k in ('max_hold_hours','momentum_watch_minutes','rotation_retry_hours'):
   if _k in s:s.pop(_k,None);save(CFG,s)
  if not s.get('one_h_v1'):s['h1_all_setups']=True;s['one_h_v1']=True;save(CFG,s)
@@ -633,17 +635,58 @@ def data(sym):
  h=_C.get(sym)
  if h and time.time()-h[0]<20:return h[1]
  r=_calc(sym);_C[sym]=(time.time(),r);return r
-def breakout_confirmation(sym):
+_BRK_CACHE={};_T4H_CACHE={};_BTC_SCORE_CACHE={"t":0,"ok":None}
+def breakout_metrics(sym):
+ now=time.time();cached=_BRK_CACHE.get(sym)
+ if cached and now-cached[0]<900:return cached[1]
  try:
   candles=ex.fetch_ohlcv(S(sym),'1h',limit=25)
-  if len(candles)<23:return False,None,None
-  closed=candles[:-1];latest=closed[-1];prior=closed[-21:-1]
-  if len(prior)!=20:return False,None,None
-  resistance=max(float(c[2]) for c in prior)
-  close=float(latest[4]);last_volume=float(latest[5] or 0);avg_volume=sum(float(c[5] or 0) for c in prior)/20
-  multiple=(last_volume/avg_volume) if avg_volume>0 else 0.0
-  return close>resistance and multiple>=1.5,multiple,resistance
- except:return False,None,None
+  if not isinstance(candles,list) or len(candles)<23:result=(None,None,None)
+  else:
+   closed=candles[:-1];latest=closed[-1];prior=closed[-21:-1]
+   if len(prior)!=20:result=(None,None,None)
+   else:
+    resistance=max(float(c[2]) for c in prior);close=float(latest[4])
+    last_volume=float(latest[5] or 0);avg_volume=sum(float(c[5] or 0) for c in prior)/20
+    multiple=last_volume/avg_volume if avg_volume>0 else None
+    result=(bool(close>resistance),multiple,resistance)
+ except Exception:result=(None,None,None)
+ _BRK_CACHE[sym]=(now,result);return result
+def breakout_confirmation(sym):
+ breakout,multiple,resistance=breakout_metrics(sym)
+ return bool(breakout is True and multiple is not None and multiple>=1.5),multiple,resistance
+def market_trend_4h(sym):
+ now=time.time();cached=_T4H_CACHE.get(sym)
+ if cached and now-cached[0]<900:return cached[1]
+ result=None
+ try:
+  o=ex.fetch_ohlcv(S(sym),'4h',limit=30)
+  if isinstance(o,list) and len(o)>=13:
+   closes=[float(k[4]) for k in o[:-1] if isinstance(k,(list,tuple)) and len(k)>4 and k[4] is not None]
+   latest=o[-1]
+   if len(closes)>=10 and isinstance(latest,(list,tuple)) and len(latest)>4 and latest[4] is not None:
+    vals=closes[-10:];price=float(latest[4])
+    if price>0 and all(x>0 for x in vals):result=bool(price>=sum(vals)/10)
+ except Exception:result=None
+ _T4H_CACHE[sym]=(now,result);return result
+def btc_market_safety_check(s):
+ now=time.time()
+ if now-_BTC_SCORE_CACHE["t"]<300 and _BTC_SCORE_CACHE["ok"] is not None:return _BTC_SCORE_CACHE["ok"]
+ ok=None
+ try:
+  o=ex.fetch_ohlcv("BTC/USDT",'1h',limit=65)
+  if isinstance(o,list) and len(o)>=55:
+   closes=[float(x[4]) for x in o[:-1] if isinstance(x,(list,tuple)) and len(x)>4 and x[4] is not None]
+   if len(closes)>=51 and all(x>0 for x in closes[-51:]):
+    rsi=_rsi(closes)
+    if rsi is not None:
+     trend=closes[-1]>=sum(closes[-50:])/50
+     shock_limit=float(s.get("btc_shock_pct",3.0) or 0)
+     shock_change=(closes[-1]/closes[-2]-1.0)*100 if len(closes)>=2 else None
+     no_shock=(shock_change is not None and (shock_limit<=0 or shock_change>-shock_limit))
+     ok=bool(rsi>=float(s.get("btc_rsi_min",50.0)) and trend and no_shock)
+ except Exception:ok=None
+ _BTC_SCORE_CACHE.update(t=now,ok=ok);return ok
 def live(sym):
  try:return ex.fetch_ticker(S(sym))['last']
  except:return None
@@ -1172,31 +1215,40 @@ def manual_candidate_detail(sym):
  if not memo:
   ui_send(f"⚠️ No Coin List record for {sym}. Run a fresh scan first.",[[ _B("⬅️ Analyse","/analyse") ]]);return
  mc=(memo.get("checks",{}).get("scanner",{}) or {}).get("manual_candidate",{}) or {}
- s=cfg();threshold=float(s.get("manual_candidate_min_score",75.0));score=float(mc.get("score") or 0)
+ s=cfg();threshold=7;score=float(mc.get("score") or 0)
  fresh_window=max(1800.0,float(s.get("scan_interval_minutes",15.0))*120.0)
  age=max(0.0,time.time()-float(memo.get("last_seen") or 0));fresh=age<=fresh_window
  checks=mc.get("checks") if isinstance(mc.get("checks"),dict) else {}
- labels={"liquidity":"Minimum liquidity","momentum":"Momentum (1H/24H)","rsi":"RSI entry range","trend":"Price / MA trend"}
- passed=[labels.get(k,k) for k,v in checks.items() if v]
- failed=[labels.get(k,k) for k,v in checks.items() if not v]
+ labels=checks.get("labels",{}) if isinstance(checks.get("labels"),dict) else {}
+ passed=[];failed=[];unknown=[]
+ for group_name in ("core","additional"):
+  group=checks.get(group_name,{}) if isinstance(checks.get(group_name),dict) else {}
+  for key,value in group.items():
+   label=labels.get(key,key.replace("_"," ").title())
+   target=passed if value is True else failed if value is False else unknown
+   target.append(("CORE — " if group_name=="core" else "ADDITIONAL — ")+label)
+ core_count=int(checks.get("core_score",0) or 0);add_count=int(checks.get("additional_score",0) or 0)
  # Recheck spread at detail time. A missing or excessive spread disables this candidate shortcut.
  spr=spread_pct(sym);spread_ok=spr is not None and spr<=float(s.get("max_spread_pct",0.5))
- db_eligible=bool(mc.get("eligible")) and score>=threshold
- safe=db_eligible and fresh and spread_ok and memo.get("signal_status")!="BOUGHT"
+ is_auto=bool(score==10 and core_count==7 and add_count==3)
+ db_eligible=(bool(mc.get("eligible")) and score>=threshold) or is_auto
+ safe=bool(mc.get("eligible")) and score>=threshold and fresh and spread_ok and memo.get("signal_status")!="BOUGHT"
  px=live(sym) or 0.0
- lines=[f"🟡 *MANUAL BUY CANDIDATE — {sym.split('-')[0]}*",f"Setup score: *{score:.0f}%* (minimum {threshold:.0f}%)",
+ head=f"🤖 *AUTO-ELIGIBLE CANDIDATE — {sym.split('-')[0]}*" if is_auto else f"🟡 *MANUAL BUY CANDIDATE — {sym.split('-')[0]}*"
+ lines=[head,f"Setup score: *{int(score)}/10* | Core: *{core_count}/7* | Additional: *{add_count}/3*",
   f"Current price: {fp(px) if px else 'Unavailable'} USDT",f"1H change: {float((memo.get('checks',{}).get('scanner',{}) or {}).get('h1_pct') or 0):+.2f}% | RSI: {float((memo.get('checks',{}).get('scanner',{}) or {}).get('rsi') or 0):.1f}",
   f"Database signal: {memo.get('signal_status') or 'UNKNOWN'} | Auto execution: {memo.get('execution_status') or 'UNKNOWN'}",
   f"Last scan: {age/60:.0f} minutes ago" if memo.get('last_seen') else "Last scan: unknown", "",
   "✅ *Passed conditions:* "+(", ".join(passed) if passed else "None recorded"),
   "⚠️ *Missed conditions:* "+(", ".join(failed) if failed else "None recorded"),
+  "ℹ️ *Unavailable evidence:* "+(", ".join(unknown) if unknown else "None"),
   *(["🧠 AI note: "+str(memo["ai_advisory"])[:180]] if memo.get("ai_advisory") else []),
   *(["📈 1H move has risen for 3 scans in a row"] if (memo.get("checks",{}).get("scanner",{}) or {}).get("h1_rising_three_scans") else []),
   "Automatic-buy exclusion: "+str(mc.get('reason') or memo.get('reason') or "Did not meet all automatic entry rules")[:180],
   f"Spread safety: {spr:.3f}% — {'within' if spread_ok else 'outside/unverified against'} {float(s.get('max_spread_pct',0.5)):g}% limit" if spr is not None else "Spread safety: UNAVAILABLE — cannot verify",
-  "Critical safety: "+("PASSED at latest database assessment" if db_eligible else "FAILED / no longer qualified"),
+  "Classification: "+("10/10 AUTO score; independent safety and execution checks remain mandatory" if is_auto else "MANUAL score passed; manual review only" if db_eligible else "Not qualified for MANUAL/AUTO"),
   "Candidate freshness: "+("FRESH" if fresh else "STALE — wait for a new scan"),
-  "Manual review only. This score never grants automatic-buy eligibility."]
+  ("10/10 AUTO classification; independent scanner, risk and execution checks are still mandatory." if is_auto else "MANUAL classification requires at least 5/7 core and 2/3 additional; advisory only.")]
  rows=[]
  if safe and px>0:
   rows.append([_B("🛒 Continue to manual buy","m:b:"+sym.split("-")[0])])
@@ -1212,7 +1264,7 @@ def manual_candidate_detail(sym):
 def analyse_top3(tab="M"):
  # Analyse: three tabs that follow the pipeline Watch list > Manual buy > Auto buy. Lists only; never changes execution rules.
  tab=tab if tab in ("W","M","A") else "M";settings=cfg()
- threshold=float(settings.get("manual_candidate_min_score",75.0))
+ threshold=7
  try:
   cnt=coin_db_stage_counts()
   items=coin_db_manual_candidates(50) if tab=="M" else coin_db_stage_list("WATCH" if tab=="W" else "AUTO",50)
@@ -1220,21 +1272,22 @@ def analyse_top3(tab="M"):
   print("ANALYSE LIST ERR",str(e)[:120]);tg("⚠️ Could not read the coin lists. Try again shortly.");return
  title={"W":"👁 *WATCH LIST*","M":"🟡 *MANUAL BUY*","A":"🤖 *AUTO BUY*"}[tab]
  sub={"W":"_Rising coins being watched. They move up when they pass the manual rules._",
-      "M":f"_Passed the manual rules (score ≥ {threshold:.0f}%). Review and buy by hand, or wait for Auto._",
-      "A":"_Passed every rule. Eligible for automatic buying._"}[tab]
+      "M":"_Passed at least 5/7 core and 2/3 additional criteria. Manual review only._",
+      "A":"_Passed all 7/7 core and 3/3 additional criteria. Still requires independent READY, risk and execution checks._"}[tab]
  lines=[title,sub,""]
  for it in items:
   sym=str(it.get("sym") or "").split("-")[0];h=it.get("h1");r=it.get("rsi")
   ln=f"*{sym}*"
-  if tab=="M":ln+=f" — *{float(it.get('score') or 0):.0f}%*"
-  ln+=(f" | 1H {float(h):+.2f}%" if h is not None else "")+(f" | RSI {float(r):.0f}" if r is not None else "")+f" | seen {it.get('scans',0)}x"
+  if tab=="M":ln+=f" — *{int(float(it.get('score') or 0))}/10*"
+  ch=it.get("chg")
+  ln+=(f" | 24H {float(ch):+.2f}%" if ch is not None else "")+(f" | 1H {float(h):+.2f}%" if h is not None else "")+(f" | RSI {float(r):.0f}" if r is not None else "")+f" | seen {it.get('scans',0)}x"
   lines.append(ln)
  if not items:lines.append("None right now.")
  def tb(k,lbl):return _B(("▶ " if tab==k else "")+f"{lbl} ({cnt.get({'W':'WATCH','M':'MANUAL','A':'AUTO'}[k],0)})",f"m:at:{k}")
  keyboard=[[tb("W","👁 Watch"),tb("M","🟡 Manual"),tb("A","🤖 Auto")]]
  for it in items[:20]:
   sym=str(it.get("sym") or "").split("-")[0]
-  keyboard.append([_B(f"{sym}"+(f" · {float(it.get('score') or 0):.0f}%" if tab=="M" else ""),f"m:mc:{sym}")])
+  keyboard.append([_B(f"{sym}"+(f" · {int(float(it.get('score') or 0))}/10" if tab=="M" else ""),f"m:mc:{sym}")])
  keyboard.append([_B("🔄 Refresh",f"m:at:{tab}")])
  _send("\n".join(lines)[:3800],"Markdown",{"inline_keyboard":keyboard})
 
@@ -1360,7 +1413,7 @@ def analyse_coin(txt):
    lines.append("Coin database: "+(f"{memo.get('signal_status') or 'UNKNOWN'} / {memo.get('execution_status') or 'UNASSESSED'} | seen {memo.get('scans',0)} scans | "+str(memo.get('reason') or '')[:100] if memo else "not yet recorded by scanner"))
    if memo and memo.get("ai_advisory"):lines.append("AI notebook note: "+str(memo["ai_advisory"])[:180])
    if memo and memo.get("checks",{}).get("manual_candidate"): 
-    mc=memo["checks"]["manual_candidate"];lines.append(f"Manual candidate score: {float(mc.get('score') or 0):.0f}% — "+("🟡 MANUAL BUY CANDIDATE (review only)" if mc.get("eligible") else "Not qualified"));lines.append("Manual filter: "+str(mc.get("reason") or "")[:160])
+    mc=memo["checks"]["manual_candidate"];lines.append(f"Manual candidate score: {int(float(mc.get('score') or 0))}/10 — "+("🟡 MANUAL BUY CANDIDATE (review only)" if mc.get("eligible") else "Not qualified"));lines.append("Manual filter: "+str(mc.get("reason") or "")[:160])
   except Exception:pass
   tg("\n".join(lines))
  except Exception as e:tg(f"❌ Could not analyse {sym}: {e}")
@@ -1847,13 +1900,9 @@ def unprotected_exit(sym,db):
  tg(f"🚨 *{sym} has NO exchange stop after a retry.* Selling at market to protect your funds.")
  if sell(sym,1.0,"UNPROTECTED (stop failed)"):db.pop(sym,None);save(DB,db)
 def trend_4h_ok(sym,s):
+ # Preserve the configurable scanner gate; Coin List scoring separately requires real 4H evidence.
  if not s.get('mtf_confirm',True):return True
- try:
-  o=ex.fetch_ohlcv(S(sym),'4h',limit=30)
-  c=[float(k[4]) for k in o[:-1]]
-  if len(c)<12:return True
-  return float(o[-1][4])>=sum(c[-10:])/10
- except Exception:return True
+ return market_trend_4h(sym) is True
 _SHOCK={"t":0,"r":""}
 def btc_shock(s):
  lim=float(s.get('btc_shock_pct',3.0) or 0)
@@ -2233,49 +2282,80 @@ def coin_db_mark_execution(sym,status,reason="",details=None):
    try:c.close()
    except:pass
 def manual_candidate_assess(rec,settings=None):
- """Score non-auto-ready setups for manual review; never grants execution permission."""
- s=settings or cfg();why=[];checks={}
+ """Approved Coin List score: 7 mandatory core checks + 3 additional checks.
+ WATCH needs >=5/7 core; MANUAL needs >=5/7 core and >=2/3 additional;
+ AUTO is only considered at 7/7 core + 3/3 additional and still faces all
+ independent execution/risk gates. Missing evidence never earns a point.
+ """
+ s=settings or cfg()
+ def num(v):
+  try:
+   x=float(v)
+   return x if __import__('math').isfinite(x) else None
+  except Exception:return None
  try:
-  rank=int(rec.get("rank") or 0);vol=float(rec.get("vol") or 0);minvol=float(rec.get("min_volume") or 0)
-  spread=rec.get("spread_pct");spread=float(spread) if spread is not None else None
-  p=rec.get("price");r=rec.get("rsi");ma5=rec.get("ma5");ma10=rec.get("ma10");h=rec.get("h1");chg=float(rec.get("chg") or 0)
-  if None in (p,r,ma5,ma10):return 0.0,False,"Insufficient market data",{}
-  p=float(p);r=float(r);ma5=float(ma5);ma10=float(ma10)
-  if rank<=15:return 0.0,False,"Excluded top-15 liquidity rank",{}
-  if minvol<=0 or vol<minvol:return 0.0,False,"Below minimum liquidity requirement",{}
-  if spread is None:return 0.0,False,"Spread unavailable; safety cannot be verified",{}
-  if spread>float(s.get("max_spread_pct",0.5)):return 0.0,False,f"Spread {spread:.3f}% exceeds safety limit",{}
-  if "4h trend is down" in str(rec.get("reason","")).lower():return 0.0,False,"4H trend safety filter failed",{}
-  momentum_ok=(float(s.get("mom_1h_min_pct",0.5))<=float(h)<=float(s.get("mom_1h_max_pct",6.0))) if mom_on(s) and h is not None else (pre_ok(chg,s) if not mom_on(s) else False)
-  rsi_ok=float(s.get("rsi_min",42))<=r<=float(s.get("rsi_max",48))
-  trend_ok=p>ma5>ma10
-  # A manual candidate must be heading toward the automatic setup: price above MA5 above MA10, 1H momentum confirmed,
-  # and RSI never above the automatic entry ceiling (above it is the exit zone, not an entry).
-  rsi_cap=float(s.get("rsi_max",48))
-  if r>rsi_cap:return 0.0,False,f"RSI {r:.1f} above entry ceiling {rsi_cap:g}",{}
-  if not trend_ok:return 0.0,False,"Price must be above MA5 and MA5 above MA10",{}
-  if not momentum_ok:return 0.0,False,"1H momentum not confirmed",{}
-  liquidity_ok=vol>=minvol
-  checks={"liquidity":liquidity_ok,"momentum":momentum_ok,"rsi":rsi_ok,"trend":trend_ok}
-  score=round(sum(25 for v in checks.values() if v),1)
-  if not momentum_ok:why.append("1H/24H momentum outside entry range")
-  if not rsi_ok:why.append(f"RSI {r:.1f} below entry range {s.get('rsi_min')}-{s.get('rsi_max')}; heading toward it")
-  if not trend_ok:why.append("Price/MA trend not fully confirmed")
-  threshold=float(s.get("manual_candidate_min_score",75.0))
-  eligible=score>=threshold and not str(rec.get("decision","")).startswith("SETUP")
-  return score,eligible,("; ".join(why) if why else "Strong partial setup; manual review only"),checks
- except Exception as e:return 0.0,False,"Unable to score safely: "+str(e)[:80],{}
+  vol=num(rec.get("vol"));minvol=num(rec.get("min_volume"));spread=num(rec.get("spread_pct"))
+  price=num(rec.get("price"));rsi=num(rec.get("rsi"));ma5=num(rec.get("ma5"));ma10=num(rec.get("ma10"))
+  chg=num(rec.get("chg"));trend=rec.get("market_trend_4h")
+  btc=rec.get("btc_market_safe");high=num(rec.get("high_24h"));rr=num(rec.get("rr"))
+  if rr is None and price is not None and high is not None and price>0:
+   risk=price*float(s.get("stop_loss_pct",5.0))/100.0
+   rr=max(0.0,high-price)/risk if risk>0 else None
+  core={
+   "liquidity":None if vol is None or minvol is None or minvol<=0 else vol>=minvol,
+   "spread":None if spread is None else 0<=spread<=float(s.get("max_spread_pct",0.5)),
+   "market_trend":None if trend is None else trend is True,
+   "price_structure":None if price is None or ma5 is None or ma10 is None else price>ma5>ma10,
+   "rsi_condition":None if rsi is None else float(s.get("rsi_min",42))<=rsi<=float(s.get("rsi_max",48)),
+   "momentum_24h":None if chg is None else 0.0<chg<=float(s.get("max_24h_pct",100.0)),
+   "btc_market_safety":None if btc is None else btc is True,
+  }
+  brk=rec.get("breakout_confirmed")
+  volx=num(rec.get("volume_expansion_ratio"))
+  additional={
+   "breakout_confirmation":None if brk is None else brk is True,
+   "volume_expansion":None if volx is None else volx>=1.5,
+   "risk_reward_quality":None if rr is None else rr>=1.5,
+  }
+  core_score=sum(v is True for v in core.values());additional_score=sum(v is True for v in additional.values());score=core_score+additional_score
+  auto=core_score==7 and additional_score==3
+  manual=core_score>=5 and additional_score>=2 and not auto
+  labels={"liquidity":"Liquidity (24H quote volume)","spread":"Bid/ask spread","market_trend":"4H market trend","price_structure":"Price above MA5 above MA10",
+   "rsi_condition":"RSI within configured entry range","momentum_24h":"24H change within safe range","btc_market_safety":"BTC market safety",
+   "breakout_confirmation":"20H resistance breakout","volume_expansion":"Hourly volume expansion ≥1.5x","risk_reward_quality":"Risk/reward ≥1.5:1"}
+  failed=[labels[k] for group in (core,additional) for k,v in group.items() if v is False]
+  unknown=[labels[k] for group in (core,additional) for k,v in group.items() if v is None]
+  reason=(f"AUTO score: 7/7 core + 3/3 additional; independent safety gates still required" if auto else
+          (f"MANUAL: {core_score}/7 core + {additional_score}/3 additional; manual review only" if manual else
+           (f"WATCH: {core_score}/7 core; need at least 5/7" if core_score>=5 else f"DROPPED threshold: {core_score}/7 core; need at least 5/7")))
+  if failed:reason += "; failed: "+", ".join(failed)
+  if unknown:reason += "; unavailable: "+", ".join(unknown)
+  checks={"core":core,"additional":additional,"core_score":core_score,"additional_score":additional_score,"labels":labels,"risk_reward":rr,"volume_expansion_ratio":volx}
+  return score,manual,reason,checks
+ except Exception as e:
+  return 0,False,"Unable to score safely: "+str(e)[:100],{"core":{},"additional":{},"core_score":0,"additional_score":0}
+
 def stage_decide(prev,watch_ok,manual_ok,auto_ok,ok_at,now):
- # Watch -> Manual -> Auto. A coin moves up one stage per scan, never skips, and moves down as soon as it fails a stage.
- # A coin that no longer qualifies even for the watch list is kept on it for 24h, then dropped.
+ """Deterministic lifecycle: WATCH/MANUAL/AUTO, DROPPED, and recoverable ARCHIVED."""
  prev=prev or ""
- if watch_ok:ok_at=now
- if not watch_ok:
-  if prev and ok_at and now-float(ok_at)<86400:return "WATCH",ok_at
-  return "",ok_at
- if auto_ok and prev in ("MANUAL","AUTO"):return "AUTO",ok_at
- if manual_ok and prev in ("WATCH","MANUAL","AUTO"):return "MANUAL",ok_at
- return "WATCH",ok_at
+ if not watch_ok:return "DROPPED",ok_at
+ if prev in ("DROPPED","ARCHIVED"):return "WATCH",now
+ if auto_ok:return "AUTO",now
+ if manual_ok:return "MANUAL",now
+ return "WATCH",now
+def coin_stage_from_scores(prev,manual_checks,ok_at,now):
+ """Apply the approved split thresholds without treating unknown evidence as a failure."""
+ core=manual_checks.get("core",{}) if isinstance(manual_checks,dict) else {}
+ additional=manual_checks.get("additional",{}) if isinstance(manual_checks,dict) else {}
+ core_score=int(manual_checks.get("core_score",sum(v is True for v in core.values()))) if isinstance(manual_checks,dict) else 0
+ additional_score=int(manual_checks.get("additional_score",sum(v is True for v in additional.values()))) if isinstance(manual_checks,dict) else 0
+ keys=("liquidity","spread","market_trend","price_structure","rsi_condition","momentum_24h","btc_market_safety")
+ unknown=sum(1 for k in keys if core.get(k) is None)
+ manual=core_score>=5 and additional_score>=2
+ auto=core_score==7 and additional_score==3
+ if core_score>=5:return stage_decide(prev,True,manual,auto,ok_at,now)
+ if core_score+unknown<5:return stage_decide(prev,False,False,False,ok_at,now)
+ return (prev or "WATCH"),ok_at
 def coin_stage_prev(sym):
  try:
   c=coin_db_conn()
@@ -2303,17 +2383,15 @@ def coin_db_update(records,held,newc=None,keep_days=3,keep_snaps=24,queue=None,b
     "volume_24h":rec.get("vol"),"change_24h_pct":rec.get("chg"),"price":rec.get("price"),"h1_pct":rec.get("h1"),
     "rsi":rec.get("rsi"),"ma5":rec.get("ma5"),"ma10":rec.get("ma10"),"spread_pct":rec.get("spread_pct"),
     "strategy":rec.get("strategy"),"near_miss":rec.get("near_miss"),"h1_rising_three_scans":rising_3,
-    "manual_candidate":{"score":manual_score,"eligible":manual_candidate,"reason":manual_reason,"checks":manual_checks,"threshold":float(settings.get("manual_candidate_min_score",75.0))}},
+    "trend_4h_ok":rec.get("trend_4h_ok"),"rising_guard_ok":rec.get("rising_guard_ok"),
+    "manual_candidate":{"score":manual_score,"eligible":manual_candidate,"reason":manual_reason,"checks":manual_checks,"threshold":{"watch_core":5,"manual_core":5,"manual_additional":2,"auto_core":7,"auto_additional":3}}},
     "execution":{"status":execution,"buying_allowed_at_scan":bool(buying_allowed),"block_reason":str(block_reason or "")[:240],
     "queue_timestamp":(qd or {}).get("timestamp"),"queue_score":(qd or {}).get("score"),"signal_expires_at":expiry}}
    row=c.execute("SELECT first_seen,scans,stage,stage_ok_at FROM coins WHERE sym=?",(sym,)).fetchone();fs,sc=(row[0],row[1]) if row else (now,0)
-   try:
-    _h=rec.get("h1");_r=rec.get("r") if False else rec.get("rsi")
-    _mom=((float(settings.get("mom_1h_min_pct",0.5))<=float(_h)<=float(settings.get("mom_1h_max_pct",6.0))) if _h is not None else False) if mom_on(settings or cfg()) else pre_ok(float(rec.get("chg") or 0),settings or cfg())
-    _w=bool(signal!="REJECTED" and _r is not None and _mom and float(_r)<=float(settings.get("rsi_max",48)))
-   except Exception:_w=False
    if sym in held:stg,sok="",None
-   else:stg,sok=stage_decide(row[2] if row else "",_w,bool(manual_candidate) or signal=="READY",signal=="READY",row[3] if row else None,now)
+   else:
+    _prev_stage=row[2] if row else ""
+    stg,sok=coin_stage_from_scores(_prev_stage,manual_checks,row[3] if row else None,now)
    if stg!="AUTO" and execution=="QUEUED":execution="BLOCKED"
    advisory=str((qd or {}).get("ai_advisory",""))[:240]
    c.execute("""INSERT INTO coins(sym,first_seen,last_seen,scans,price,chg24,h1,rsi,ma5,ma10,vol,candles,status,setup,reason,
@@ -2343,20 +2421,22 @@ def coin_db_update(records,held,newc=None,keep_days=3,keep_snaps=24,queue=None,b
     last_seen=excluded.last_seen,scans=excluded.scans,price=excluded.price,h1=excluded.h1,candles=excluded.candles,
     status='NEW',reason=excluded.reason,signal_status='NEW',execution_status='NOT_ELIGIBLE',checks_json=excluded.checks_json,
     decision_at=excluded.decision_at,scan_id=excluded.scan_id""",
-    (sym,fs,now,sc+1,p,h,n,"NEW",f"Too new to score ({n} candles)","NEW","NOT_ELIGIBLE",json.dumps(checks),now,str(int(now))))
+    (sym,fs,now,sc+1,p,h,n,"NEW",f"New Bitget spot pair; too new to score ({n} hourly candles)","NEW","NOT_ELIGIBLE",json.dumps(checks),now,str(int(now))))
+   c.execute("UPDATE coins SET stage='WATCH',stage_ok_at=COALESCE(stage_ok_at,?) WHERE sym=? AND (stage IS NULL OR stage='')",(now,sym))
    c.execute("INSERT INTO snaps(sym,t,price,h1,rsi,status,decision,reason,execution_status,scan_id) VALUES(?,?,?,?,?,?,?,?,?,?)",
     (sym,now,p,h,None,"NEW","NEW",f"Too new to score ({n} candles)","NOT_ELIGIBLE",str(int(now))))
-  c.execute("DELETE FROM coins WHERE last_seen<? AND status<>'BOUGHT'",(now-keep_days*86400,))
+  c.execute("UPDATE coins SET stage='DROPPED' WHERE stage IN ('WATCH','MANUAL','AUTO') AND status<>'BOUGHT' AND last_seen<?",(now-86400,))
+  c.execute("UPDATE coins SET stage='ARCHIVED' WHERE stage IN ('WATCH','MANUAL','AUTO','DROPPED') AND status<>'BOUGHT' AND last_seen<?",(now-30*86400,))
   c.execute("DELETE FROM snaps WHERE rowid IN (SELECT rowid FROM (SELECT rowid,ROW_NUMBER() OVER (PARTITION BY sym ORDER BY t DESC) rn FROM snaps) WHERE rn>?)",(keep_snaps,))
   c.commit()
  finally:c.close()
 def coin_db_can_execute(sym,qd):
  c=coin_db_conn()
  try:
-  row=c.execute("SELECT signal_status,execution_status,expires_at,status,stage FROM coins WHERE sym=?",(sym,)).fetchone()
+  row=c.execute("SELECT signal_status,execution_status,expires_at,status,stage,manual_score FROM coins WHERE sym=?",(sym,)).fetchone()
   if not row:return False,"No coin database record; waiting for a fresh scanner decision."
-  signal,execution,expiry,legacy,stage=row
-  if stage!="AUTO":return False,f"Stage is {stage or 'none'}; a coin must pass Watch > Manual > Auto first."
+  signal,execution,expiry,legacy,stage,manual_score=row
+  if stage!="AUTO" or int(float(manual_score or 0))!=10:return False,f"Stage/score is {stage or 'none'} / {manual_score or 0}/10; AUTO requires 10/10."
   if signal!="READY":return False,f"Database signal status is {signal or 'UNKNOWN'}, not READY."
   if execution!="QUEUED":return False,f"Database execution status is {execution or 'UNASSESSED'}, not QUEUED."
   if expiry is not None and float(expiry)<=time.time():return False,"Database signal expired; waiting for a fresh scan."
@@ -2413,7 +2493,7 @@ def coin_db_auto_ready_candidates(limit=3):
  try:
   fresh_after=time.time()-max(1800.0,float(cfg().get("scan_interval_minutes",15.0))*120.0)
   rows=c.execute("""SELECT sym,price,h1,rsi,scans,execution_status,last_seen,expires_at
-   FROM coins WHERE signal_status='READY' AND execution_status='QUEUED' AND status<>'BOUGHT'
+   FROM coins WHERE signal_status='READY' AND execution_status='QUEUED' AND status<>'BOUGHT' AND manual_score=10
    AND last_seen>=? AND (expires_at IS NULL OR expires_at>?)
    ORDER BY COALESCE(h1,-999) DESC,last_seen DESC LIMIT ?""",
    (fresh_after,time.time(),int(limit))).fetchall()
@@ -2422,24 +2502,22 @@ def coin_db_auto_ready_candidates(limit=3):
 def coin_db_manual_candidates(limit=10):
  c=coin_db_conn()
  try:
-  fresh_after=time.time()-max(1800.0,float(cfg().get("scan_interval_minutes",15.0))*120.0)
-  threshold=float(cfg().get("manual_candidate_min_score",75.0))
-  rows=c.execute("SELECT sym,price,chg24,h1,rsi,scans,manual_score,manual_reason,reason,execution_status FROM coins WHERE manual_candidate=1 AND stage='MANUAL' AND manual_score>=? AND status<>'BOUGHT' AND last_seen>=? ORDER BY manual_score DESC,last_seen DESC LIMIT ?",(threshold,fresh_after,int(limit))).fetchall()
+  rows=c.execute("SELECT sym,price,chg24,h1,rsi,scans,manual_score,manual_reason,reason,execution_status FROM coins WHERE manual_candidate=1 AND stage='MANUAL' AND manual_score BETWEEN 7 AND 9 AND status<>'BOUGHT' ORDER BY manual_score DESC,last_seen DESC LIMIT ?",(int(limit),)).fetchall()
   return [{"sym":x[0],"price":x[1],"chg":x[2],"h1":x[3],"rsi":x[4],"scans":x[5],"score":x[6],"manual_reason":x[7],"scanner_reason":x[8],"execution_status":x[9]} for x in rows]
  finally:c.close()
 def coin_db_stage_list(stage,limit=20):
  c=coin_db_conn()
  try:
-  fresh_after=time.time()-max(1800.0,float(cfg().get("scan_interval_minutes",15.0))*120.0)
-  rows=c.execute("SELECT sym,price,h1,rsi,scans,first_seen,manual_score FROM coins WHERE stage=? AND status<>'BOUGHT' AND last_seen>=? ORDER BY COALESCE(h1,-99) DESC LIMIT ?",(stage,fresh_after,int(limit))).fetchall()
-  return [{"sym":x[0],"price":x[1],"h1":x[2],"rsi":x[3],"scans":x[4],"first_seen":x[5],"score":x[6]} for x in rows]
+  rows=c.execute("SELECT sym,price,chg24,h1,rsi,scans,first_seen,manual_score FROM coins WHERE stage=? AND status<>'BOUGHT' ORDER BY COALESCE(h1,-99) DESC,last_seen DESC LIMIT ?",(stage,int(limit))).fetchall()
+  return [{"sym":x[0],"price":x[1],"chg":x[2],"h1":x[3],"rsi":x[4],"scans":x[5],"first_seen":x[6],"score":x[7]} for x in rows]
  finally:c.close()
 def coin_db_stage_counts():
  try:
   c=coin_db_conn()
   try:
-   fresh_after=time.time()-max(1800.0,float(cfg().get("scan_interval_minutes",15.0))*120.0)
-   return dict(c.execute("SELECT stage,COUNT(*) FROM coins WHERE stage IN ('WATCH','MANUAL','AUTO') AND status<>'BOUGHT' AND last_seen>=? GROUP BY stage",(fresh_after,)).fetchall())
+   out=dict(c.execute("SELECT stage,COUNT(*) FROM coins WHERE stage IN ('WATCH','MANUAL','AUTO','DROPPED','ARCHIVED') AND status<>'BOUGHT' GROUP BY stage").fetchall())
+   out.update(WATCH=out.get("WATCH",0),MANUAL=out.get("MANUAL",0),AUTO=out.get("AUTO",0),W=out.get("WATCH",0),M=out.get("MANUAL",0),A=out.get("AUTO",0))
+   return out
   finally:c.close()
  except Exception:return {}
 def coin_db_rows(limit=12):
@@ -2448,29 +2526,33 @@ def coin_db_rows(limit=12):
   cnt=dict(c.execute("SELECT status,COUNT(*) FROM coins GROUP BY status").fetchall())
   ec=dict(c.execute("SELECT execution_status,COUNT(*) FROM coins GROUP BY execution_status").fetchall())
   fresh_after=time.time()-max(1800.0,float(cfg().get("scan_interval_minutes",15.0))*120.0)
-  cnt["MANUAL_CANDIDATE"]=c.execute("SELECT COUNT(*) FROM coins WHERE manual_candidate=1 AND stage='MANUAL' AND status<>'BOUGHT' AND last_seen>=?",(fresh_after,)).fetchone()[0]
-  cnt["W"]=c.execute("SELECT COUNT(*) FROM coins WHERE stage='WATCH' AND status<>'BOUGHT' AND last_seen>=?",(fresh_after,)).fetchone()[0]
-  cnt["A"]=c.execute("SELECT COUNT(*) FROM coins WHERE stage='AUTO' AND status<>'BOUGHT' AND last_seen>=?",(fresh_after,)).fetchone()[0]
-  rows=c.execute("SELECT sym,status,execution_status,price,h1,rsi,scans,reason,(manual_candidate=1 AND stage='MANUAL'),manual_score,ai_advisory,checks_json,stage FROM coins WHERE status IN ('READY','NEW','BOUGHT') OR stage IN ('WATCH','MANUAL','AUTO') ORDER BY CASE status WHEN 'READY' THEN 0 WHEN 'NEW' THEN 1 WHEN 'BOUGHT' THEN 2 ELSE 3 END,COALESCE(h1,-99) DESC LIMIT ?",(limit,)).fetchall()
+  cnt["MANUAL_CANDIDATE"]=c.execute("SELECT COUNT(*) FROM coins WHERE manual_candidate=1 AND stage='MANUAL' AND status<>'BOUGHT'").fetchone()[0]
+  cnt["W"]=c.execute("SELECT COUNT(*) FROM coins WHERE stage='WATCH' AND status<>'BOUGHT'").fetchone()[0]
+  cnt["A"]=c.execute("SELECT COUNT(*) FROM coins WHERE stage='AUTO' AND status<>'BOUGHT'").fetchone()[0]
+  cnt["DROPPED"]=c.execute("SELECT COUNT(*) FROM coins WHERE stage='DROPPED' AND status<>'BOUGHT'").fetchone()[0]
+  cnt["ARCHIVED"]=c.execute("SELECT COUNT(*) FROM coins WHERE stage='ARCHIVED' AND status<>'BOUGHT'").fetchone()[0]
+  rows=c.execute("SELECT sym,status,execution_status,price,h1,rsi,scans,reason,(manual_candidate=1 AND stage='MANUAL'),manual_score,ai_advisory,checks_json,stage FROM coins WHERE status IN ('READY','NEW','BOUGHT') OR stage IN ('WATCH','MANUAL','AUTO','DROPPED','ARCHIVED') ORDER BY CASE WHEN stage='AUTO' THEN 0 WHEN stage='MANUAL' THEN 1 WHEN stage='WATCH' THEN 2 WHEN stage='DROPPED' THEN 3 WHEN stage='ARCHIVED' THEN 4 WHEN status='BOUGHT' THEN 5 ELSE 6 END,COALESCE(h1,-99) DESC LIMIT ?",(limit,)).fetchall()
   return cnt,rows,ec
  finally:c.close()
 def cmd_coins():
- try:cnt,rows,ec=coin_db_rows()
+ try:cnt,rows,ec=coin_db_rows();dropped=coin_db_stage_list("DROPPED",5)
  except Exception as e:ui_send(f"❌ Coin list error: {e}",[_MENU_BTN]);return
  if not cnt:ui_send("📚 *COIN LIST*\nEmpty. It fills after the next scan.",[[_B("🔍 Scan now","m:r:scan")],_MENU_BTN]);return
  ic={"READY":"✅","NEW":"🆕","BOUGHT":"💼"};sic={"WATCH":"👁","MANUAL":"🟡","AUTO":"🤖"}
  lines=["📚 *COIN LIST*",f"✅ Ready {cnt.get('READY',0)} | 🆕 New {cnt.get('NEW',0)} | 💼 Held {cnt.get('BOUGHT',0)} | ⛔ Rejected {cnt.get('REJECTED',0)}",
-  f"Pipeline: 👁 Watch {cnt.get('W',0)} → 🟡 Manual {cnt.get('MANUAL_CANDIDATE',0)} → 🤖 Auto {cnt.get('A',0)}",
+  f"Pipeline: 👁 Watch {cnt.get('WATCH',0)} → 🟡 Manual {cnt.get('MANUAL',0)} → 🤖 Auto {cnt.get('AUTO',0)} | ⤵ Dropped {cnt.get('DROPPED',0)} | Archived {cnt.get('ARCHIVED',0)}",
   f"Execution: 📥 queued {ec.get('QUEUED',0)} | ⛔ blocked {ec.get('BLOCKED',0)} | 🟢 held {ec.get('HELD',0)}",""]
  for sym,st,exst,p,h,r,n,why,mc,mscore,adv,cj,stg in rows:
   try:rising=bool(json.loads(cj or "{}").get("scanner",{}).get("h1_rising_three_scans"))
   except Exception:rising=False
   ln=f"{ic.get(st) if st in ('BOUGHT','NEW') else (sic.get(stg) or ic.get(st,''))} *{sym.split('-')[0]}* {fp(p) if p else '-'} | {exst or 'UNASSESSED'}"
-  if mc:ln+=f" | 🟡 {float(mscore or 0):.0f}% MANUAL"
+  if mc:ln+=f" | 🟡 {int(float(mscore or 0))}/10 MANUAL"
   if h is not None:ln+=f" | 1H {h:+.2f}%"+(" 📈" if rising else "")
   if r is not None:ln+=f" | RSI {r:.0f}"
   lines.append(ln+f" | seen {n}x")
   if adv:lines.append("   🧠 "+str(adv)[:110])
+ if dropped:
+  lines += ["", "⤵ *DROPPED — retained for recovery:* "+", ".join(f"{x['sym'].split('-')[0]} ({int(float(x.get('score') or 0))}/10)" for x in dropped)]
  _send("\n".join(lines),"Markdown",{"inline_keyboard":[[_B("🔍 Scan now","m:r:scan"),_B("🧾 Scan History","m:scan_hist")],_MENU_BTN]})
 def rising_vs_last_scan(sym,p,r,now):
  # Falling-knife guard: the price must be higher and RSI not lower than at the previous scan (within the last hour).
@@ -2478,7 +2560,7 @@ def rising_vs_last_scan(sym,p,r,now):
   c=coin_db_conn()
   try:row=c.execute("SELECT t,price,rsi FROM snaps WHERE sym=? AND price IS NOT NULL AND rsi IS NOT NULL ORDER BY t DESC LIMIT 1",(sym,)).fetchone()
   finally:c.close()
- except Exception:return True,""  # database trouble must never block on its own
+ except Exception:return False,"Falling-knife guard: scan-history database unavailable; confirmation failed"
  if not row or now-float(row[0])>3600:return False,"Falling-knife guard: waiting for the next scan to confirm it is rising"
  pp,pr_=float(row[1]),float(row[2])
  if float(p)>pp and float(r)>=pr_:return True,""
@@ -2590,9 +2672,9 @@ def send_new_alerts(s):
   mn=float(s.get('mom_1h_min_pct',0.5));held=[k.split("-")[0] for k in load(DB)]
   c=[(sym,v) for sym,v in sorted(_NEWC.items(),key=lambda x:-x[1][1]) if v[1]>=mn and sym.split("-")[0] not in held and not in_cd("new_"+sym,10800)][:2]
   if not c:return
-  lines=["🆕 *ALERT:* NEW TOKEN MOVING","_Too new to score (no RSI or trend). Nothing was bought. Risky: thin and very volatile._",""];rows=[]
+  lines=["🆕 *ALERT:* NEW BITGET SPOT PAIR MOVING","_Recently detected pair with limited hourly history. No RSI/trend qualification yet. Nothing was bought; early listings are high risk._",""];rows=[]
   for sym,(p,h,n) in c:
-   coin=sym.split("-")[0];lines.append(f"*{coin}* — {fp(p)} USDT | 1H {h:+.2f}% | listed about {n}h ago")
+   coin=sym.split("-")[0];lines.append(f"*{coin}* — {fp(p)} USDT | 1H {h:+.2f}% | {n} hourly candles available")
    rows.append([_B(f"🛒 Buy {coin}",f"m:b:{coin}"),_B(f"🔎 Analyse {coin}",f"m:a:{coin}")]);mk_cd("new_"+sym)
   _create("\n".join(lines)[:3900],"Markdown",{"inline_keyboard":rows},silent=False)
  finally:_NEWC.clear()
@@ -2629,6 +2711,74 @@ def fast_watch():
    except Exception as e:print("FASTWATCH SCAN ERR",str(e)[:120])
   return
  send_near_miss(s,None)
+def discover_new_spot_pairs(markets=None, tickers=None, interval_seconds=900, max_probe=20):
+ """Detect newly appearing Bitget USDT spot pairs; discovery is WATCH-only, never an entry signal.
+ The first successful call seeds a baseline to avoid falsely classifying every existing pair as new.
+ """
+ now=time.time();state=load(NEWLIST,{})
+ if not isinstance(state,dict):state={}
+ if now-float(state.get("last_check",0) or 0)<float(interval_seconds):return 0
+ try:
+  resp=requests.get("https://api.bitget.com/api/v2/spot/public/symbols",timeout=12)
+  resp.raise_for_status();payload=resp.json()
+  if not isinstance(payload,dict) or str(payload.get("code"))!="00000" or not isinstance(payload.get("data"),list):
+   raise ValueError("Bitget symbol endpoint returned an unexpected response")
+  rows=payload["data"]
+  current=set()
+  for row in rows:
+   if not isinstance(row,dict):continue
+   if str(row.get("status","")).lower()!="online":continue
+   if str(row.get("quoteCoin","")).upper()!="USDT":continue
+   base=str(row.get("baseCoin","")).upper();raw=str(row.get("symbol","")).upper()
+   if not base or not raw or skip(base):continue
+   current.add(base+"-USDT")
+  if not state.get("initialized"):
+   state.update({"version":1,"initialized":True,"known_symbols":sorted(current),"tracked":{},"last_check":now,"baseline_at":now})
+   save(NEWLIST,state)
+   print(f"NEW LISTING DISCOVERY: seeded baseline with {len(current)} online USDT spot pairs")
+   return 0
+  known=set(state.get("known_symbols") or []);tracked=state.get("tracked") if isinstance(state.get("tracked"),dict) else {}
+  added=sorted(current-known)
+  for sym in added:
+   tracked[sym]={"first_detected":now,"status":"NEW_LISTING_WATCH","source":"bitget_spot_symbols_api"}
+  # Keep a rolling 24-hour observation window; do not delete historical Coin List records.
+  tracked={k:v for k,v in tracked.items() if isinstance(v,dict) and now-float(v.get("first_detected",now) or now)<=86400}
+  state.update({"version":1,"known_symbols":sorted(known|current),"tracked":tracked,"last_check":now,"last_added_count":len(added)})
+  save(NEWLIST,state)
+  if added:print("NEW BITGET SPOT PAIRS:",", ".join(added[:30]))
+  # Probe recent additions and still-young pairs. Probe failures remain unknown, never positive signals.
+  candidates=sorted(tracked.items(),key=lambda kv:(float(kv[1].get("last_probe",0) or 0),float(kv[1].get("first_detected",now))))[:max_probe]
+  for sym,meta in candidates:
+   try:
+    # Ensure every detected pair with a valid ticker reaches Coin List even if candles are not ready.
+    tick=(tickers or {}).get(S(sym),{}) if isinstance(tickers,dict) else {}
+    fallback_price=float((tick or {}).get("last") or 0)
+    if fallback_price>0:_NEWC[sym]=(fallback_price,0.0,0)
+    candles=ex.fetch_ohlcv(S(sym),"1h",limit=100)
+    if not isinstance(candles,list) or not candles:continue
+    valid=[x for x in candles if isinstance(x,(list,tuple)) and len(x)>5 and x[4] is not None]
+    if not valid:continue
+    price=float(valid[-1][4]);n=len(valid)
+    if price<=0:continue
+    # Use closed hourly candles for an early momentum estimate; avoid a fabricated 24h change.
+    closed=valid[:-1] if len(valid)>1 else valid
+    h=None
+    if len(closed)>=2:
+     prev=float(closed[-2][4]);last=float(closed[-1][4])
+     if prev>0:h=(last/prev-1.0)*100.0
+    if n<50:_NEWC[sym]=(price,float(h) if h is not None else 0.0,n)
+    else:_NEWC.pop(sym,None)
+    meta["last_probe"]=now;meta["hourly_candles"]=n;meta["last_price"]=price;meta["h1_pct"]=h
+    if n>=50:meta["status"]="HISTORY_MATURED_PENDING_NORMAL_SCANNER"
+   except Exception as e:
+    meta["last_probe_error"]=str(e)[:120]
+  state["tracked"]=tracked;save(NEWLIST,state)
+  return len(added)
+ except Exception as e:
+  print("NEW LISTING DISCOVERY ERROR:",str(e)[:180])
+  # Leave last_check unchanged so a transient API failure can be retried next scan.
+  return 0
+
 def scan(force=False):
  st=load(SC);now=time.time();_t0=time.time()
  iv=max(1.0,float(cfg().get('scan_interval_minutes',15) or 15))
@@ -2641,12 +2791,15 @@ def scan(force=False):
  block_reason=(f"Guardian integrity check: {guardian_reason}" if not guardian_ok else "AI emergency: automatic buying paused" if ai_emergency_active() else "automatic buying is paused" if not auto_enabled else "BTC safety filter blocked buying" if btc_is_blocked else f"market filter: {mf}" if mf else "")
  try:tk=ex.fetch_tickers();mk=ex.load_markets()
  except Exception as e:print(f"SCAN ERROR: {e}");tg(f"⚠️ *SCAN FAILED:* {e}");return
- v=[{'sym':k.replace("/","-"),'vol':t['quoteVolume'] or 0,'chg':t['percentage'] or 0,'last':t.get('last'),'bid':t.get('bid'),'ask':t.get('ask')} for k,t in tk.items() if k.endswith('/USDT') and not skip(k.split('/')[0]) and not (k in mk and not mk[k].get('spot',False))]
+ try:discover_new_spot_pairs(mk,tk,interval_seconds=900,max_probe=20)
+ except Exception as e:print("NEW LISTING DISCOVERY FAILED:",str(e)[:140])
+ v=[{'sym':k.replace("/","-"),'vol':t['quoteVolume'] if t.get('quoteVolume') is not None else 0,'vol_available':t.get('quoteVolume') is not None,'chg':t['percentage'] if t.get('percentage') is not None else 0,'chg_available':t.get('percentage') is not None,'last':t.get('last'),'high':t.get('high'),'bid':t.get('bid'),'ask':t.get('ask')} for k,t in tk.items() if k.endswith('/USDT') and not skip(k.split('/')[0]) and not (k in mk and not mk[k].get('spot',False))]
  v.sort(key=lambda x:x['vol'],reverse=True);ct=int(time.time());qu=False
  for sym,d in list(q.items()):
   if ct-d.get('timestamp',0)>86400:q.pop(sym,None);qu=True
  if not buying_allowed and q:q.clear();qu=True
  sh=scan_history_state();records=[];matched=0;queued=0
+ btc_core_safe=btc_market_safety_check(s)
  _PF.clear();_NM.clear();_RADAR.clear()
  if s.get('scan_parallel',True):
   try:
@@ -2665,7 +2818,7 @@ def scan(force=False):
   except Exception as e:print(f"PREFETCH ERR: {e}");_PF.clear()
  for rank,t in enumerate(v[:500],start=1):
   sym=t['sym'];vol=float(t['vol'] or 0);chg=float(t['chg'] or 0)
-  recd={"time":ct,"rank":rank,"sym":sym,"vol":vol,"chg":chg,"price":t.get("last"),"spread_pct":tk_spread(t),"rsi":None,"rr":None,"ma5":None,"ma10":None,"decision":"SKIP","reason":"Top 15 excluded" if rank<=15 else "Not evaluated"}
+  recd={"time":ct,"rank":rank,"sym":sym,"vol":vol if t.get("vol_available",True) else None,"chg":chg if t.get("chg_available",True) else None,"price":t.get("last"),"high_24h":t.get("high"),"spread_pct":tk_spread(t),"rsi":None,"rr":None,"ma5":None,"ma10":None,"btc_market_safe":btc_core_safe,"market_trend_4h":None,"breakout_confirmed":None,"volume_expansion_ratio":None,"decision":"SKIP","reason":"Top 15 excluded" if rank<=15 else "Not evaluated"}
   if rank>15:
    i=rank-16;threshold=(1000000 if i<=84 else 3000000 if i<=183 else 4000000 if i<=383 else 5000000);recd["min_volume"]=threshold
    if vol<threshold:recd["reason"]=f"Vol below ${threshold/1e6:.0f}M"
@@ -2682,11 +2835,15 @@ def scan(force=False):
      elif setup_range(sym,chg,s,"BREAKOUT") and 50.0<=r<=70.0 and p>ma5>ma10:
       confirmed,breakout_volume,_=breakout_confirmation(sym)
       if confirmed:setup="BREAKOUT";sl=round(p*(1-s['stop_loss_pct']/100),6)
-     if setup in ("TREND","BREAKOUT") and not trend_4h_ok(sym,s):
-      recd["reason"]=f"{setup} matched but 4h trend is down";setup=None
+     if setup in ("TREND","BREAKOUT"):
+      recd["trend_4h_ok"]=bool(trend_4h_ok(sym,s))
+      if not recd["trend_4h_ok"]:
+       recd["reason"]=f"{setup} matched but 4h confirmation failed (downtrend or unavailable data)";setup=None
+     else:recd["trend_4h_ok"]=False
      if setup and s.get("rising_guard",True):
-      _ok,_why=rising_vs_last_scan(sym,p,r,ct)
+      _ok,_why=rising_vs_last_scan(sym,p,r,ct);recd["rising_guard_ok"]=bool(_ok)
       if not _ok:recd["reason"]=f"{setup} matched; {_why}";setup=None
+     elif setup:recd["rising_guard_ok"]=True
      if setup:
       recd["strategy"]=setup
       if setup=="BREAKOUT":recd["reason"]=f"BREAKOUT vol {breakout_volume:.2f}x"
@@ -2717,6 +2874,26 @@ def scan(force=False):
        nmr=near_miss(sym,chg,r,p,ma5,ma10,s)
        if nmr:recd["near_miss"]=nmr[1];_NM.append({"sym":sym,"score":nmr[0],"why":nmr[1],"rsi":round(r,1),"h1":round(nmr[2],2),"chg":round(chg,2),"price":p})
       except Exception as e:print("NEAR-MISS ERR",str(e)[:100])
+  if rank>15 and recd.get("price") is not None and recd.get("rsi") is not None:
+   try:
+    _vol_ok=vol>=float(recd.get("min_volume") or 1e100)
+    _spread=recd.get("spread_pct");_spread_ok=_spread is not None and float(_spread)<=float(s.get("max_spread_pct",0.5))
+    _p=float(recd.get("price"));_r=float(recd.get("rsi"));_m5=recd.get("ma5");_m10=recd.get("ma10")
+    _structure=_m5 is not None and _m10 is not None and _p>float(_m5)>float(_m10)
+    _rsi_ok=float(s.get("rsi_min",42))<=_r<=float(s.get("rsi_max",48))
+    _chg_ok=bool(recd.get("chg") is not None and 0.0<float(recd.get("chg"))<=float(s.get("max_24h_pct",100.0)))
+    _pre=sum(bool(x) for x in (_vol_ok,_spread_ok,_structure,_rsi_ok,_chg_ok,btc_core_safe))
+    if _pre>=4:
+     recd["market_trend_4h"]=market_trend_4h(sym)
+     recd["trend_4h_ok"]=recd["market_trend_4h"] is True
+     if sum(bool(x) for x in (_vol_ok,_spread_ok,_structure,_rsi_ok,_chg_ok,btc_core_safe,recd["trend_4h_ok"]))>=5:
+      _brk,_volx,_res=breakout_metrics(sym)
+      recd["breakout_confirmed"]=_brk;recd["volume_expansion_ratio"]=_volx
+      _hi=recd.get("high_24h")
+      if _hi is not None and _p>0:
+       _risk=_p*float(s.get("stop_loss_pct",5.0))/100.0
+       recd["rr"]=max(0.0,float(_hi)-_p)/_risk if _risk>0 else None
+   except Exception as e:print("COIN CORE EVIDENCE ERR",sym,str(e)[:100])
   records.append(recd)
  try:
   _rs=load(ST,{});_rs["radar"]=[y for _,y in sorted(_RADAR)[:int(s.get('radar_max',30))]];save(ST,_rs)
@@ -2780,7 +2957,7 @@ def cmd_set(txt):
  if k not in s:tg(f"❌ Unknown key. Valid: `{'`, `'.join(s.keys())}`");return
  try:new=val.lower() in ('true','1','yes','on') if isinstance(s[k],bool) else float(val) if isinstance(s[k],float) else int(val)
  except:tg(f"❌ Invalid value for {k}");return
- limits={"weak_market_floor_pct":(0.0,50.0),"weak_market_size_factor":(0.1,1.0),"risk_per_trade_pct":(0.1,2.0),"max_daily_loss_pct":(0.5,10.0),"max_portfolio_exposure_pct":(5.0,100.0),"max_position_pct":(1.0,50.0),"max_daily_trades":(1,50),"max_spread_pct":(0.05,3.0),"trail_pct":(0.0,30.0),"scan_interval_minutes":(5.0,240.0),"auto_clear_hours":(0.0,168.0),"live_mode_seconds":(0,330),"stop_loss_pct":(0.5,20.0),"rsi_min":(1.0,99.0),"rsi_max":(1.0,99.0),"rsi_exit":(0.0,99.0),"auto_buy_amount_usdt":(1.0,100000.0),"max_tokens_before_consolidation":(1,30),"crash_guard_pct":(1.0,50.0),"btc_rsi_min":(0.0,99.0),"rebuy_cooldown_hours":(0.0,168.0),"atr_stop_mult":(0.5,6.0),"atr_stop_min_pct":(1.0,10.0),"atr_stop_max_pct":(2.0,25.0),"btc_trend_hours":(10,200),"min_breadth_pct":(0.0,100.0),"offline_alert_hours":(0.0,72.0),"daily_summary_hour_utc":(0,23),"max_coin_exposure_pct":(1.0,100.0),"liquidity_depth_usdt":(0.0,1000000.0),"max_book_imbalance_pct":(50.0,99.0),"regime_risk_factor":(0.1,1.0),"execution_slippage_pct":(0.05,5.0),"portfolio_stress_pct":(1.0,50.0),"signal_expiry_minutes":(1,240),"mom_1h_min_pct":(0.0,20.0),"mom_1h_max_pct":(0.5,30.0),"max_24h_pct":(30.0,500.0),"near_miss_rsi_margin":(0.5,10.0),"near_miss_1h_margin":(0.1,3.0),"near_miss_cooldown_minutes":(5,1440),"near_miss_max_per_scan":(1,10),"scan_workers":(1,16),"radar_max":(5,60),"radar_rsi_margin":(3.0,25.0),"manual_candidate_min_score":(50.0,100.0)}
+ limits={"weak_market_floor_pct":(0.0,50.0),"weak_market_size_factor":(0.1,1.0),"risk_per_trade_pct":(0.1,2.0),"max_daily_loss_pct":(0.5,10.0),"max_portfolio_exposure_pct":(5.0,100.0),"max_position_pct":(1.0,50.0),"max_daily_trades":(1,50),"max_spread_pct":(0.05,3.0),"trail_pct":(0.0,30.0),"scan_interval_minutes":(5.0,240.0),"auto_clear_hours":(0.0,168.0),"live_mode_seconds":(0,330),"stop_loss_pct":(0.5,20.0),"rsi_min":(1.0,99.0),"rsi_max":(1.0,99.0),"rsi_exit":(0.0,99.0),"auto_buy_amount_usdt":(1.0,100000.0),"max_tokens_before_consolidation":(1,30),"crash_guard_pct":(1.0,50.0),"btc_rsi_min":(0.0,99.0),"rebuy_cooldown_hours":(0.0,168.0),"atr_stop_mult":(0.5,6.0),"atr_stop_min_pct":(1.0,10.0),"atr_stop_max_pct":(2.0,25.0),"btc_trend_hours":(10,200),"min_breadth_pct":(0.0,100.0),"offline_alert_hours":(0.0,72.0),"daily_summary_hour_utc":(0,23),"max_coin_exposure_pct":(1.0,100.0),"liquidity_depth_usdt":(0.0,1000000.0),"max_book_imbalance_pct":(50.0,99.0),"regime_risk_factor":(0.1,1.0),"execution_slippage_pct":(0.05,5.0),"portfolio_stress_pct":(1.0,50.0),"signal_expiry_minutes":(1,240),"mom_1h_min_pct":(0.0,20.0),"mom_1h_max_pct":(0.5,30.0),"max_24h_pct":(30.0,500.0),"near_miss_rsi_margin":(0.5,10.0),"near_miss_1h_margin":(0.1,3.0),"near_miss_cooldown_minutes":(5,1440),"near_miss_max_per_scan":(1,10),"scan_workers":(1,16),"radar_max":(5,60),"radar_rsi_margin":(3.0,25.0),"manual_candidate_min_score":(70.0,70.0)}
  if k in limits and not (limits[k][0] <= new <= limits[k][1]):tg(f"❌ `{k}` must be between {limits[k][0]} and {limits[k][1]}.");return
  if k=="rsi_min" and new>=s.get("rsi_max",99):tg("❌ rsi_min must be lower than rsi_max.");return
  if k=="rsi_max" and new<=s.get("rsi_min",1):tg("❌ rsi_max must be higher than rsi_min.");return
@@ -2836,7 +3013,7 @@ def ui_settings_page(pg=0,note=""):
  cur=cfg();mode=next((n for n,v in PRESETS.items() if all(float(cur.get(k,-1))==float(x) for k,x in v.items())),None)
  rows=[[_B(("✅ " if n==mode else "")+PRESET_NAMES[n],f"m:pre:{n}") for n in PRESETS]]
  rows+=[[_B(f"{'🟢' if cur.get(k) else '⚪'} {lb}: {'ON' if cur.get(k) else 'OFF'}",f"m:tg:{k}")] for k,lb in SET_SWITCHES]
- rows+=[[_B(f"🟡 Manual candidate minimum: {float(cur.get('manual_candidate_min_score',75.0)):.0f}%", "m:k:manual_candidate_min_score")]]
+ rows+=[[_B("🟡 Manual candidate minimum: 70%", "m:k:manual_candidate_min_score")]]
  txt="⚙️ *SETTINGS*\n"+(note+"\n" if note else "")+f"Mode: {PRESET_NAMES.get(mode,'Custom')}\nSafe = small trades, few per day. Active = bigger trades, more per day.\nEverything else adjusts itself."
  ui_send(txt,rows+[_MENU_BTN])
 def ui_setting(k):
