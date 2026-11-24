@@ -1800,5 +1800,15 @@
             "warning": "Manual buy request conflicts with active BTC filter and existing position; market filter indicates BTC is below its 50\u2011hour average, suggesting bearish momentum. Proceed only if you accept potential loss of the full $3.23 investment.",
             "summary": "Given the active BTC filter, existing position, and bearish market signal, the advisory recommends against executing this manual buy. If you choose to proceed, be aware of elevated risk and limited upside."
         }
+    },
+    {
+        "time": 1795492849.6772606,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Loss limit ($-1.10 / -$0.65)', 'attention': [{'symbol': 'ARIA-USDT', 'action': 'monitor', 'reason': 'Position is slightly negative (-0.35%); price is above stop but close to it. Consider tightening stop if price declines further.'}, {'symbol': 'JCT-USDT', 'action': 'monitor', 'reason': 'Position is more negative (-1.59%); price is near stop. Evaluate risk tolerance and possibly adjust stop to protect capital.'}], 'summary': 'Both positions are currently in modest loss. No immediate order execution is recommended; continue monitoring and adjust stops conservatively to stay within the defined loss limit.'}"
+    },
+    {
+        "time": 1795492850.4842503,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 5.9833, 'recurring_patterns': ['15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC', 'MANUAL SELL ALL', 'RSI 75'], 'recommendations': ['Review and tighten criteria for \"PANIC\" exits to avoid frequent small losses', 'Consider adjusting the 15\u2011minute no\u2011upward\u2011trend rotation rule to require stronger confirmation before entry', 'Evaluate RSI threshold of 75 for consistency; it appears in both wins and losses', 'Limit exposure on symbols with repeated manual sell-all actions, indicating possible over\u2011trading']}"
     }
 ]
