@@ -2227,5 +2227,15 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795523711.0691683,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (9)', 'attention': [{'symbol': 'ADA-USDT', 'action': 'monitor', 'reason': 'Position is down 1.88% and approaching stop level (0.143577). No immediate exit recommended; consider tightening stop if price continues to decline.'}, {'symbol': 'ICNT-USDT', 'action': 'hold', 'reason': 'Position is up 4.91% with price above entry and stop at entry level. No adverse signals; continue monitoring for any reversal.'}], 'summary': 'Overall portfolio risk remains within the daily limit. ADA-USDT shows modest loss near its stop; tighten risk management if further downside occurs. ICNT-USDT is profitable and stable; maintain current stance while watching market conditions.'}"
+    },
+    {
+        "time": 1795523713.741188,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.3491, 'recurring_patterns': ['PANIC', '15-MINUTE NO-UPWARD-TREND ROTATION', 'MANUAL SELL'], 'recommendations': 'Maintain current risk limits; reduce exposure to high\u2011volatility symbols that trigger PANIC exits; consider tightening the 15\u2011minute trend filter; monitor manual sell triggers for consistency before scaling up position sizes.'}"
     }
 ]
