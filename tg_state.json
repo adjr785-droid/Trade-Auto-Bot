@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT22.88/\u20a631,574",
+    "kb_ph": "USDT22.64/\u20a631,244",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -63,52 +63,6 @@
     "radar": [],
     "audit_down": {},
     "audit_last": 1795527378.804305,
-    "kb_mid": 5316,
-    "audit_ai_cls": "",
-    "out_text": "\ud83d\udc41 *WATCH LIST*\n_Rising coins being watched. They move up when they pass the manual rules._\n\n*BTW* | 1H +0.88% | RSI 45 | seen 32x\n*BNB* | 1H -0.33% | RSI 45 | seen 32x\n*CYS* | 1H -1.03% | RSI 53 | seen 32x\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
-    "out_mode": "Markdown",
-    "out_time": 1795527582.7441127,
-    "panel_rows": [
-        [
-            {
-                "text": "\u25b6 \ud83d\udc41 Watch (3)",
-                "callback_data": "m:at:W"
-            },
-            {
-                "text": "\ud83d\udfe1 Manual (0)",
-                "callback_data": "m:at:M"
-            },
-            {
-                "text": "\ud83e\udd16 Auto (0)",
-                "callback_data": "m:at:A"
-            }
-        ],
-        [
-            {
-                "text": "BTW",
-                "callback_data": "m:mc:BTW"
-            }
-        ],
-        [
-            {
-                "text": "BNB",
-                "callback_data": "m:mc:BNB"
-            }
-        ],
-        [
-            {
-                "text": "CYS",
-                "callback_data": "m:mc:CYS"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udd04 Refresh",
-                "callback_data": "m:at:W"
-            }
-        ]
-    ],
-    "panel_text": "\ud83d\udc47 *Actions*",
-    "out_mid": 5314,
-    "panel_mid": 5315
+    "kb_mid": 5326,
+    "audit_ai_cls": ""
 }

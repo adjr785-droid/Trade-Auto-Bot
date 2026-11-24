@@ -2289,5 +2289,15 @@
             "warning": "BTC is trading below its 50\u2011hour average, indicating potential downward pressure. Existing position adds exposure; small trade size limits absolute risk but still subject to market volatility.",
             "summary": "Proceed with caution. The trade size is modest (5.01\u202fUSDT) and RSI is neutral, but the bearish BTC trend and existing exposure suggest a moderate risk profile. Consider waiting for clearer price direction or tighter risk controls before executing."
         }
+    },
+    {
+        "time": 1795528690.666299,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (9)', 'attention': [{'symbol': 'ICNT-USDT', 'action': 'hold', 'reason': 'Position is modest (0.33 USDT entry) with a small positive PnL (1.99%). Stop is comfortably below entry, and BTC filter is active but does not directly affect this altcoin. No clear signal to increase exposure.'}], 'summary': 'Overall portfolio risk is within the daily limit. The only open position shows a slight gain and remains within its stop loss parameters. Maintain the current stance and monitor for any adverse market moves, especially if BTC volatility spikes.'}"
+    },
+    {
+        "time": 1795528691.5324848,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.3491, 'recurring_patterns': {'PANIC': 5, '15-MINUTE NO-UPWARD-TREND ROTATION': 5, 'MANUAL SELL': 5, 'PARTIAL PROFIT +10.4%': 1, 'RSI 75': 1, 'TRAILING STOP (8.0%)': 1}, 'recommendations': 'Maintain current risk limits but reduce exposure to high\u2011frequency panic exits. Consider tightening panic trigger thresholds and favor strategies with longer trend confirmation (e.g., 15\u2011minute rotation) that showed positive PnL. Monitor manual sell patterns for potential over\u2011trading.'}"
     }
 ]
