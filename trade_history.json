@@ -241,5 +241,19 @@
         "time": 1795489352.2503862,
         "reason": "TRAILING STOP (8.0%)",
         "strategy": "MANUAL"
+    },
+    {
+        "sym": "ARIA-USDT",
+        "pnl": 0.13588149999999938,
+        "time": 1795495269.6723528,
+        "reason": "PANIC",
+        "strategy": "MANUAL"
+    },
+    {
+        "sym": "JCT-USDT",
+        "pnl": -0.15664610000000012,
+        "time": 1795495278.0817227,
+        "reason": "PANIC",
+        "strategy": "MANUAL"
     }
 ]

@@ -1866,5 +1866,77 @@
         "time": 1795495126.9092665,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 5.9833, 'recurring_patterns': {'15-MINUTE NO-UPWARD-TREND ROTATION': 9, 'PANIC': 4, 'MANUAL SELL ALL': 3, 'RSI 75': 2, 'MANUAL SELL $15.10': 1, 'TRAILING STOP (8.0%)': 1}, 'recommendations': ['Review and tighten criteria for \"15-MINUTE NO-UPWARD-TREND ROTATION\" entries to avoid low\u2011impact trades', 'Implement stricter controls on panic\u2011driven exits to reduce loss frequency', 'Consider adjusting RSI threshold or adding confirmation filters before executing RSI\u2011based trades', 'Limit manual sell\u2011all actions to higher confidence signals or predefined profit targets']}"
+    },
+    {
+        "time": 1795495268.6410053,
+        "event": "sell_fill_verified",
+        "symbol": "ARIA-USDT",
+        "filled": 35.9,
+        "average": 0.31498,
+        "order_id": "1508982011158274053",
+        "reason": "PANIC",
+        "attempt": 1
+    },
+    {
+        "time": 1795495269.6736548,
+        "event": "trade_closed",
+        "symbol": "ARIA-USDT",
+        "pnl_usdt": 0.13588149999999938,
+        "reason": "PANIC",
+        "strategy": "MANUAL"
+    },
+    {
+        "time": 1795495270.1496623,
+        "event": "full_sale_verified_or_dust",
+        "symbol": "ARIA-USDT",
+        "remaining_base": 0.064,
+        "remaining_value_usdt": 0.020158719999999998,
+        "filled": 35.9
+    },
+    {
+        "time": 1795495274.3526258,
+        "event": "ai_sell_review",
+        "symbol": "ARIA-USDT",
+        "review": {
+            "review": "The position was closed at an average price of 0.31498\u202fUSDT, realizing a modest profit of 0.1359\u202fUSDT. The exit was triggered by panic rather than a systematic signal, which suggests emotional decision\u2011making. The remaining base of 0.064\u202fARIA indicates a partial unwind, leaving exposure on the book after the sell.",
+            "lesson": "Implement stricter emotional controls and adhere to predefined exit criteria (e.g., stop\u2011loss or target profit levels) to avoid panic\u2011driven exits. Ensure the full position is accounted for in the exit plan to prevent residual exposure. Consider adding a post\u2011trade review step to capture the reason for panic and adjust risk parameters accordingly.",
+            "confidence": "medium"
+        }
+    },
+    {
+        "time": 1795495277.0373044,
+        "event": "sell_fill_verified",
+        "symbol": "JCT-USDT",
+        "filled": 6810.7,
+        "average": 0.001548,
+        "order_id": "1508982046361067521",
+        "reason": "PANIC",
+        "attempt": 1
+    },
+    {
+        "time": 1795495278.0832253,
+        "event": "trade_closed",
+        "symbol": "JCT-USDT",
+        "pnl_usdt": -0.15664610000000012,
+        "reason": "PANIC",
+        "strategy": "MANUAL"
+    },
+    {
+        "time": 1795495281.9598944,
+        "event": "full_sale_verified_or_dust",
+        "symbol": "JCT-USDT",
+        "remaining_base": 0.0995,
+        "remaining_value_usdt": 0.000154026,
+        "filled": 6810.7
+    },
+    {
+        "time": 1795495287.1831477,
+        "event": "ai_sell_review",
+        "symbol": "JCT-USDT",
+        "review": {
+            "review": "The position in JCT-USDT was closed at an average exit price of 0.001548 USDT, resulting in a realized loss of approximately -0.1566 USDT on the 6,810.7 units sold. The exit was triggered by panic rather than a systematic risk rule, and a small residual base (0.0995 JCT) remains unfilled, indicating incomplete liquidation. The loss magnitude is modest relative to the position size, but the emotional trigger suggests a need for tighter stop\u2011loss parameters or clearer exit criteria to avoid panic\u2011driven decisions.",
+            "lesson": "Implement predefined stop\u2011loss thresholds and enforce them automatically to reduce reliance on manual panic exits. Review the remaining base amount to ensure full position closure or a plan for residual holdings. Incorporate a post\u2011trade checklist that flags non\u2011deterministic exits for further review.",
+            "confidence": "medium"
+        }
     }
 ]
