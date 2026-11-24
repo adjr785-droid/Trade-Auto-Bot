@@ -2263,5 +2263,15 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795527357.7230475,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (9)', 'attention': [{'symbol': 'ICNT-USDT', 'action': 'hold', 'reason': 'Position is modestly profitable (+2.51%) and above stop level; no clear signal to adjust. Continue monitoring price relative to stop.'}], 'summary': 'Overall portfolio risk is within the daily limit. The only open position (ICNT-USDT) shows a small gain and remains above its stop price. No immediate action required; maintain the position and watch for any adverse price movement.'}"
+    },
+    {
+        "time": 1795527358.501561,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.3491, 'recurring_patterns': ['Frequent PANIC exits', 'Repeated 15\u2011MINUTE NO\u2011UPWARD\u2011TREND ROTATION entries', 'Multiple MANUAL SELL actions (including trailing stop)'], 'recommendations': ['Limit PANIC\u2011driven trades and enforce stricter entry criteria', 'Review 15\u2011minute rotation strategy for false signals', 'Implement tighter stop\u2011loss controls on manual sell positions', 'Consider reducing position size on high\u2011volatility symbols (e.g., WLD, JCT)', 'Maintain current risk parameters until pattern adjustments are validated']}"
     }
 ]
