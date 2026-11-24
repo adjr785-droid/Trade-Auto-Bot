@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690447,
+    "last_update_id": 935690448,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -85,40 +85,16 @@
     "panel_rows": [
         [
             {
-                "text": "$2",
-                "callback_data": "m:bc:BTW:2"
+                "text": "\u2705 Confirm",
+                "callback_data": "m:bx:BTW:ALL"
             },
             {
-                "text": "$5",
-                "callback_data": "m:bc:BTW:5"
-            },
-            {
-                "text": "$10",
-                "callback_data": "m:bc:BTW:10"
-            },
-            {
-                "text": "$15",
-                "callback_data": "m:bc:BTW:15"
-            },
-            {
-                "text": "ALL",
-                "callback_data": "m:bc:BTW:ALL"
-            }
-        ],
-        [
-            {
-                "text": "\u270f\ufe0f Custom amount",
-                "callback_data": "m:cu:b:BTW"
-            }
-        ],
-        [
-            {
-                "text": "\u2b05\ufe0f Back",
-                "callback_data": "m:buy"
+                "text": "\u274c Cancel",
+                "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83d\uded2 *BUY BTW*\nFree USDT: $27.79\nChoose how much:",
+    "panel_text": "\u26a0\ufe0f *CONFIRM BUY*\nBTW for ALL free USDT at about 0.779549 USDT.",
     "out_mid": 5552,
     "panel_mid": 5553
 }
