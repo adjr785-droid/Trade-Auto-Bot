@@ -118,5 +118,11 @@
         "atl": 0.1333,
         "checked_at": 1795495875.7287328,
         "status": "complete"
+    },
+    "BTW-USDT": {
+        "ath": 2.755835,
+        "atl": 0.0005,
+        "checked_at": 1795559047.3224463,
+        "status": "complete"
     }
 }
