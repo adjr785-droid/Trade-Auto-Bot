@@ -1830,5 +1830,15 @@
         "time": 1795493613.2776856,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 5.9833, 'recurring_patterns': ['15-MINUTE NO-UPWARD-TREND ROTATION appears in 7 trades', 'PANIC appears in 4 trades', 'MANUAL SELL ALL appears in 3 trades', 'RSI 75 appears in 2 trades'], 'recommendations': ['Review and tighten criteria for 15\u2011minute no\u2011upward\u2011trend rotations to avoid low\u2011pnl trades', 'Implement stricter panic\u2011sell safeguards to reduce reactive exits', 'Consider adjusting RSI threshold or adding confirmation filters for RSI\u201175 signals', 'Limit exposure on manual sell\u2011all actions until broader portfolio performance is assessed']}"
+    },
+    {
+        "time": 1795494082.24633,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Loss limit ($-1.10 / -$0.66)', 'attention': [{'symbol': 'JCT-USDT', 'action': 'monitor', 'reason': 'Negative PnL (-0.76%) and price approaching stop level (0.001559 vs stop 0.001481). Consider tightening stop or reducing position if risk tolerance is low.'}, {'symbol': 'ARIA-USDT', 'action': 'hold', 'reason': 'Positive PnL (1.65%) and price comfortably above stop (0.31633 vs stop 0.280076). No immediate action required.'}], 'summary': 'Overall portfolio is near the defined loss limit. Focus on the losing JCT position, as it is close to its stop and could push the portfolio deeper into loss. ARIA is performing well; maintain current stop. If risk appetite is conservative, consider adjusting JCT stop tighter or exiting a portion to protect capital.'}"
+    },
+    {
+        "time": 1795494083.109316,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 5.9833, 'recurring_patterns': {'15-MINUTE NO-UPWARD-TREND ROTATION': 9, 'PANIC': 4, 'MANUAL SELL ALL': 3, 'RSI 75': 2, 'MANUAL SELL $15.10': 1, 'TRAILING STOP (8.0%)': 1}, 'recommendations': ['Review and tighten criteria for \"15-MINUTE NO-UPWARD-TREND ROTATION\" entries to avoid low\u2011impact trades', 'Implement stricter controls on panic\u2011driven exits to reduce loss frequency', 'Consider adjusting RSI threshold or adding confirmation filters before executing RSI\u2011based trades', 'Limit exposure on manual sell\u2011all actions until broader portfolio performance is confirmed']}"
     }
 ]
