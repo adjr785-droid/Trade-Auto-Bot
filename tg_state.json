@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690443,
+    "last_update_id": 935690445,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -85,92 +85,96 @@
     "panel_rows": [
         [
             {
-                "text": "BTC",
-                "callback_data": "m:b:BTC"
+                "text": "AVAX",
+                "callback_data": "m:b:AVAX"
             },
             {
-                "text": "ETH",
-                "callback_data": "m:b:ETH"
+                "text": "PREOPAI",
+                "callback_data": "m:b:PREOPAI"
             },
             {
-                "text": "SOL",
-                "callback_data": "m:b:SOL"
+                "text": "BTW",
+                "callback_data": "m:b:BTW"
             }
         ],
         [
             {
-                "text": "USDGO",
-                "callback_data": "m:b:USDGO"
+                "text": "EGL1",
+                "callback_data": "m:b:EGL1"
             },
             {
-                "text": "DOGE",
-                "callback_data": "m:b:DOGE"
+                "text": "KII",
+                "callback_data": "m:b:KII"
             },
             {
-                "text": "MTX",
-                "callback_data": "m:b:MTX"
+                "text": "CYS",
+                "callback_data": "m:b:CYS"
             }
         ],
         [
             {
-                "text": "ZEC",
-                "callback_data": "m:b:ZEC"
+                "text": "GRAM",
+                "callback_data": "m:b:GRAM"
             },
             {
-                "text": "UMXM",
-                "callback_data": "m:b:UMXM"
+                "text": "MMT",
+                "callback_data": "m:b:MMT"
             },
             {
-                "text": "EVAA",
-                "callback_data": "m:b:EVAA"
+                "text": "PYUSD",
+                "callback_data": "m:b:PYUSD"
             }
         ],
         [
             {
-                "text": "HYPE",
-                "callback_data": "m:b:HYPE"
+                "text": "WLFI",
+                "callback_data": "m:b:WLFI"
             },
             {
-                "text": "DOS",
-                "callback_data": "m:b:DOS"
+                "text": "FET",
+                "callback_data": "m:b:FET"
             },
             {
-                "text": "PWT",
-                "callback_data": "m:b:PWT"
+                "text": "ICNT",
+                "callback_data": "m:b:ICNT"
             }
         ],
         [
             {
-                "text": "BGB",
-                "callback_data": "m:b:BGB"
+                "text": "BCH",
+                "callback_data": "m:b:BCH"
             },
             {
-                "text": "NEAR",
-                "callback_data": "m:b:NEAR"
+                "text": "EDGE",
+                "callback_data": "m:b:EDGE"
             },
             {
-                "text": "DGAI",
-                "callback_data": "m:b:DGAI"
+                "text": "DOT",
+                "callback_data": "m:b:DOT"
             }
         ],
         [
             {
-                "text": "SUI",
-                "callback_data": "m:b:SUI"
+                "text": "AAVE",
+                "callback_data": "m:b:AAVE"
             },
             {
-                "text": "ENA",
-                "callback_data": "m:b:ENA"
+                "text": "PAXG",
+                "callback_data": "m:b:PAXG"
             },
             {
-                "text": "TRX",
-                "callback_data": "m:b:TRX"
+                "text": "INJ",
+                "callback_data": "m:b:INJ"
             }
         ],
         [
+            {
+                "text": "\u25c0\ufe0f Prev",
+                "callback_data": "m:more:buy:1"
+            },
             {
                 "text": "Next \u25b6\ufe0f",
-                "callback_data": "m:more:buy:1"
+                "callback_data": "m:more:buy:3"
             }
         ],
         [
@@ -180,7 +184,7 @@
             }
         ]
     ],
-    "panel_text": "\u2795 *MORE COINS* (page 1/26)\nBiggest 24h volume first. Tap a coin.",
+    "panel_text": "\u2795 *MORE COINS* (page 3/26)\nBiggest 24h volume first. Tap a coin.",
     "out_mid": 5552,
     "panel_mid": 5553
 }
