@@ -2504,5 +2504,15 @@
         "time": 1795558826.3315358,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.3491, 'recurring_patterns': ['PANIC', '15-MINUTE NO-UPWARD-TREND ROTATION', 'MANUAL SELL'], 'recommendations': 'Maintain current risk limits; reduce exposure to high\u2011volatility symbols that trigger PANIC exits; consider tightening the 15\u2011minute trend filter; monitor manual sell triggers for consistency before scaling up position size.'}"
+    },
+    {
+        "time": 1795559023.7087355,
+        "event": "ai_manual_buy_review",
+        "symbol": "BTW-USDT",
+        "review": {
+            "risk_level": "moderate",
+            "warning": "RSI is approaching overbought territory and BTC market conditions are bearish (below 50\u2011hour average). Proceed with caution and consider tighter stop\u2011loss.",
+            "summary": "The proposed BUY of 27.77\u202fUSDT of BTW\u2011USDT at 0.779549 is moderately risky given high RSI and adverse BTC backdrop. Verify alignment with your risk limits before executing."
+        }
     }
 ]
