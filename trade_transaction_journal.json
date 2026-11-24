@@ -2473,5 +2473,15 @@
         "time": 1795554258.3867786,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.3491, 'recurring_patterns': ['PANIC appears in multiple trades across different symbols', '15-MINUTE NO-UPWARD-TREND ROTATION repeats for several assets', 'MANUAL SELL actions recurring for ADA, BGB, DOS, JCT', 'Trailing stop triggered once with significant loss'], 'recommendations': ['Reduce exposure to panic-driven exits; consider tighter volatility filters', 'Review and possibly tighten criteria for 15\u2011minute no\u2011upward\u2011trend rotations to avoid small losses', 'Limit manual sell interventions to predefined profit targets; avoid ad\u2011hoc exits', 'Implement stricter stop\u2011loss thresholds to prevent large drawdowns like the -0.69 USDT loss', 'Overall maintain a conservative stance given modest net PnL and notable loss events']}"
+    },
+    {
+        "time": 1795554555.7133455,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (6)', 'attention': [{'symbol': 'ICNT-USDT', 'action': 'hold', 'reason': 'Position is very recent (age ~340 minutes) with a small positive PnL (0.95%). Price is close to entry and stop is not far, but market volatility around $59,800 BTC suggests caution. No clear exit signal.'}], 'summary': 'Overall portfolio risk is within the daily limit. The only open position (ICNT-USDT) shows marginal profit and is near its stop level. Recommend holding until a stronger trend or stop loss is triggered, while monitoring market volatility.'}"
+    },
+    {
+        "time": 1795554556.3453743,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.3491, 'recurring_patterns': ['PANIC', '15-MINUTE NO-UPWARD-TREND ROTATION', 'MANUAL SELL'], 'recommendations': 'Maintain current risk limits; reduce exposure to high\u2011volatility symbols that trigger PANIC exits; consider tightening the 15\u2011minute trend filter; monitor manual sell triggers for consistency before scaling up position size.'}"
     }
 ]
