@@ -2335,5 +2335,15 @@
         "time": 1795533933.066948,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.3491, 'recurring_patterns': ['PANIC', '15-MINUTE NO-UPWARD-TREND ROTATION', 'MANUAL SELL'], 'recommendations': 'Maintain current risk limits; reduce exposure to high\u2011volatility symbols that trigger PANIC exits; consider tightening the 15\u2011minute trend filter; monitor manual sell triggers for consistency before scaling up position sizes.'}"
+    },
+    {
+        "time": 1795534170.4469173,
+        "event": "ai_manual_buy_review",
+        "symbol": "ICNT-USDT",
+        "review": {
+            "risk_level": "moderate",
+            "warning": "The market filter indicates BTC is below its 50\u2011hour average, which may suggest short\u2011term weakness. RSI is near neutral (53.38), offering no strong momentum signal. Existing position adds exposure, and the BTC filter is active, increasing overall portfolio risk.",
+            "summary": "Given the modest USDT amount (27.99), the neutral RSI, and the bearish BTC filter, proceed with caution. Consider limiting the order size or waiting for clearer price confirmation before executing the manual buy."
+        }
     }
 ]
