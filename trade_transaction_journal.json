@@ -2417,5 +2417,11 @@
         "time": 1795546787.242173,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.3491, 'recurring_patterns': ['Frequent PANIC exits', 'Repeated 15\u2011minute no\u2011upward\u2011trend rotation entries', 'Multiple manual sell actions (including trailing stop)'], 'recommendations': ['Limit PANIC\u2011driven trades and require confirmation before exiting', 'Review 15\u2011minute no\u2011upward\u2011trend rotation strategy for false signals', 'Implement tighter stop\u2011loss parameters for manual sell scenarios', 'Increase position sizing discipline to reduce volatility exposure']}"
+    },
+    {
+        "time": 1795546810.3497581,
+        "event": "ai_coin_advisory",
+        "reviewed": 25,
+        "source": "coins.db"
     }
 ]
