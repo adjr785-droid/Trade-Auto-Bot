@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935690252,
+    "last_update_id": 935690253,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT22.50/\u20a631,053",
+    "kb_ph": "USDT22.44/\u20a630,966",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -71,10 +71,9 @@
     ],
     "audit_down": {},
     "audit_last": 1795499728.0539815,
-    "kb_mid": 5172,
-    "out_text": "\ud83e\udde0 AI manual-buy advisory: Buying 5.21\u202fUSDT of BLESS\u2011USDT at 0.0162077\u202fUSDT\nper token with RSI 47.14. No existing position. Small trade size but market\nconditions are slightly unfavorable.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "\ud83e\uddf9 Cleared 3 bot message(s).\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795499803.0492923,
+    "out_time": 1795499919.183668,
     "panel_rows": [
         [
             {
@@ -118,6 +117,7 @@
         ]
     ],
     "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
-    "out_mid": 5171,
-    "panel_mid": 5174
+    "out_mid": 5175,
+    "kb_mid": 5177,
+    "panel_hidden": true
 }
