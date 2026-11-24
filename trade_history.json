@@ -255,5 +255,12 @@
         "time": 1795495278.0817227,
         "reason": "PANIC",
         "strategy": "MANUAL"
+    },
+    {
+        "sym": "ADA-USDT",
+        "pnl": -0.0053835000000009015,
+        "time": 1795496069.3961651,
+        "reason": "MANUAL SELL $8.00",
+        "strategy": "MANUAL"
     }
 ]

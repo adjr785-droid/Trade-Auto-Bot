@@ -1953,5 +1953,23 @@
         "time": 1795495848.9295144,
         "event": "ai_portfolio_review",
         "summary": "{'portfolio_risk': 'Daily limit (6)', 'attention': [{'symbol': 'ADA-USDT', 'action': 'hold', 'reason': 'Position is small, recent entry with modest 7% profit, stop loss still comfortably below entry. No immediate risk signals.'}], 'summary': 'Overall portfolio risk is within the daily limit. The only open position (ADA-USDT) shows a small gain and remains within its stop loss margin. No new actions are recommended at this time.'}"
+    },
+    {
+        "time": 1795496069.3975155,
+        "event": "trade_closed",
+        "symbol": "ADA-USDT",
+        "pnl_usdt": -0.0053835000000009015,
+        "reason": "MANUAL SELL $8.00",
+        "strategy": "MANUAL"
+    },
+    {
+        "time": 1795496079.4475763,
+        "event": "ai_manual_sell_review",
+        "symbol": "ADA-USDT",
+        "review": {
+            "review": "The manual sell resulted in a realized loss of approximately 0.00538 USDT on the sold 53.835 ADA, yielding an average exit price of 0.1485 USDT per ADA. The remaining base balance of 93.057 ADA was not sold, indicating a partial exit. The loss suggests the exit price was below the acquisition cost for the sold portion, though the exact entry price is unknown, limiting precise attribution of the loss cause.",
+            "lesson": "When executing manual exits, verify that the current market price exceeds the average acquisition cost to avoid realized losses. Consider using limit orders or price alerts to capture more favorable prices, especially in volatile markets. Retain a clear record of entry prices to assess profitability accurately before manual intervention.",
+            "confidence": "medium"
+        }
     }
 ]
