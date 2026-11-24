@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935690215,
+    "last_update_id": 935690217,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT21.98/\u20a630,335",
+    "kb_ph": "USDT21.99/\u20a630,355",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -68,9 +68,9 @@
     ],
     "audit_down": {},
     "audit_last": 1795496716.059601,
-    "out_text": "\u2705 *SOLD:* 23.237 ADA @ 0.148800\n\ud83d\udfe2 PnL: $0.00\nRemaining: 69.819961 ADA (stop re-armed)\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "\u274c *BUY FAILED:* Only $0.03 free USDT. `/buy COIN ALL` keeps $0.02 aside; at\nleast $1.02 free USDT is needed for a $1.00 order.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795496806.403601,
+    "out_time": 1795496871.8531582,
     "panel_rows": [
         [
             {
@@ -84,7 +84,7 @@
         ]
     ],
     "panel_text": "\u26a0\ufe0f *CONFIRM BUY*\nICNT for ALL free USDT at about 0.320600 USDT.",
-    "kb_mid": 5127,
-    "out_mid": 5126,
-    "panel_mid": 5129
+    "kb_mid": 5131,
+    "panel_hidden": true,
+    "out_mid": 5133
 }
