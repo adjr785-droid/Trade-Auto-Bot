@@ -2237,5 +2237,15 @@
         "time": 1795523713.741188,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.3491, 'recurring_patterns': ['PANIC', '15-MINUTE NO-UPWARD-TREND ROTATION', 'MANUAL SELL'], 'recommendations': 'Maintain current risk limits; reduce exposure to high\u2011volatility symbols that trigger PANIC exits; consider tightening the 15\u2011minute trend filter; monitor manual sell triggers for consistency before scaling up position sizes.'}"
+    },
+    {
+        "time": 1795523954.0185199,
+        "event": "ai_manual_buy_review",
+        "symbol": "ICNT-USDT",
+        "review": {
+            "risk_level": "moderate",
+            "warning": "BTC is trading below its 50\u2011hour average, indicating short\u2011term downward pressure. While the RSI is neutral, the market filter suggests caution. Ensure this trade aligns with your overall risk tolerance and position sizing.",
+            "summary": "Considering a $5.71 USDT buy of ICNT-USDT at 0.3358 while you already hold a position and BTC is below its 50\u2011hour average, the trade carries moderate risk. Verify that the exposure fits your portfolio limits before proceeding."
+        }
     }
 ]
