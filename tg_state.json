@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935690099,
+    "last_update_id": 935690102,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT22.17/\u20a630,591",
+    "kb_ph": "USDT22.21/\u20a630,654",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -65,41 +65,52 @@
         "ARIA-USDT",
         "ARX-USDT"
     ],
-    "out_text": "\ud83e\uddf9 Cleared 3 bot message(s).\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udcbc $22.21 | \u20a630,654 | Cash $0.04 | Coins $22.14\nToday -0.74% | Last scan 15 min ago | Queue 0 | Positions 2\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795493386.0910394,
+    "out_time": 1795493439.2887204,
     "panel_rows": [
         [
             {
-                "text": "\ud83d\uded2 Trade",
-                "callback_data": "m:tl:trade"
+                "text": "\u25c0",
+                "callback_data": "pg:p"
             },
             {
-                "text": "\ud83d\udd14 Alerts",
-                "callback_data": "m:tl:alerts"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udd0d Scan",
-                "callback_data": "m:tl:scan"
+                "text": "2/2",
+                "callback_data": "pg:x"
             },
             {
-                "text": "\ud83d\udee0\ufe0f System",
-                "callback_data": "m:tl:sys"
-            }
-        ],
-        [
+                "text": "\u25b6",
+                "callback_data": "pg:n"
+            },
             {
-                "text": "\u2b05\ufe0f Main Menu",
+                "text": "\ud83c\udfe0",
                 "callback_data": "m:menu"
+            },
+            {
+                "text": "\ud83d\udd04",
+                "callback_data": "rf:go"
             }
         ]
     ],
-    "panel_text": "\ud83e\uddf0 *TOOLS*\nChoose a group.",
+    "panel_text": "\ud83d\udcc4 *Page 2/2*",
     "audit_down": {},
     "audit_last": 1795493243.6140645,
-    "out_mid": 4965,
-    "kb_mid": 4967,
-    "panel_mid": 4969
+    "kb_mid": 4973,
+    "out_mid": 4971,
+    "pages": {
+        "p": [
+            "\ud83d\udda5 *SYSTEM* \u2014 HEALTHY \u2705\nBuying: PAUSED \u26d4 (Loss limit ($-1.10 / -$0.67))\nHealth: Bot 100% | AI 93% (Normal)\nLayers: \u2705 Exchange \u2705 Scanner \u2705 Database \u2705 Buyer \u2705 Stops\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83e\udded *STRATEGY*\nEntry: TREND, RSI 42-48, 1H +0.5\u20136%, price > MA5 > MA10, must be rising vs last\nscan\nExit: stop 15% | trail 8.0% | RSI 75 | sell 28% at +21.4843%\nRisk: 0.5% per trade | max 5 trades/day | pause at -5.0% day\n\u2800\n\u2800",
+            "\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udcbc $22.21 | \u20a630,654 | Cash $0.04 | Coins $22.14\nToday -0.74% | Last scan 15 min ago | Queue 0 | Positions 2\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+        ],
+        "i": 1,
+        "mode": "Markdown",
+        "x": [
+            {
+                "text": "\ud83d\udd04",
+                "callback_data": "rf:go"
+            }
+        ],
+        "cmd": "/bot"
+    },
+    "panel_mid": 4972
 }
