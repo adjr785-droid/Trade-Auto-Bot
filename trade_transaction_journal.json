@@ -1701,5 +1701,11 @@
         "time": 1795481781.7315223,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 5.8372, 'recurring_patterns': ['15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC', 'RSI 75', 'MANUAL SELL'], 'recommendations': 'Maintain current risk parameters; avoid trading during panic signals and high\u2011frequency rotation periods. Prioritize setups with RSI >70 that have historically yielded positive pnl. Consider reducing exposure on symbols with repeated manual sell losses. Monitor win\u2011rate trend for potential adjustments.'}"
+    },
+    {
+        "time": 1795481802.2169352,
+        "event": "ai_coin_advisory",
+        "reviewed": 25,
+        "source": "coins.db"
     }
 ]
