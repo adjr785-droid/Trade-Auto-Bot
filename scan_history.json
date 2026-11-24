@@ -100,6 +100,24 @@
             "min_volume": 1000000.0,
             "spread_pct": 0.18876234820360832,
             "near_miss": null
+        },
+        {
+            "time": 1795496188,
+            "rank": 24,
+            "sym": "ADA-USDT",
+            "vol": 3018993.024,
+            "chg": 2.626,
+            "price": 0.1485,
+            "spread_pct": 0.0674081563869341,
+            "rsi": 47.74,
+            "rr": null,
+            "ma5": 0.14828,
+            "ma10": 0.14826,
+            "decision": "SETUP \u2014 NOT QUEUED",
+            "reason": "TREND matched, AI emergency: automatic buying paused",
+            "min_volume": 1000000,
+            "h1": 0.87,
+            "strategy": "TREND"
         }
     ]
 }
