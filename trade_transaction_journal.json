@@ -1850,5 +1850,11 @@
         "time": 1795494371.9550328,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 5.9833, 'recurring_patterns': ['15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC', 'MANUAL SELL ALL', 'RSI 75'], 'recommendations': ['Review and tighten criteria for \"PANIC\" exits to avoid frequent small losses', 'Consider raising RSI threshold above 75 to reduce premature exits', 'Limit reliance on manual sell signals without additional technical confirmation', 'Monitor performance of \"15-MINUTE NO-UPWARD-TREND ROTATION\" strategy; it shows mixed results and may need tighter filters']}"
+    },
+    {
+        "time": 1795494396.1460063,
+        "event": "ai_coin_advisory",
+        "reviewed": 25,
+        "source": "coins.db"
     }
 ]
