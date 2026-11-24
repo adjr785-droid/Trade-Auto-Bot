@@ -2035,5 +2035,15 @@
             "warning": "BTC is currently below its 50\u2011hour average, indicating short\u2011term downward pressure. Existing position adds exposure. Small trade size limits absolute risk but the market bias is bearish.",
             "summary": "Proceed with caution. The trade size (\u2248$3.45) is modest, but the bearish BTC trend and existing exposure suggest a moderate risk. Consider waiting for clearer price action or confirming signals before executing."
         }
+    },
+    {
+        "time": 1795499342.1831381,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (8)', 'attention': [{'symbol': 'ADA-USDT', 'action': 'monitor', 'reason': 'Small profit (0.74%) and price close to stop (0.143577). Position age > 60 days; consider tightening stop if price declines further.'}, {'symbol': 'ICNT-USDT', 'action': 'monitor', 'reason': 'Moderate profit (3.68%) with price above stop (0.301282). Position age > 40 days; maintain current stop but watch for volatility.'}], 'summary': 'Both positions are modestly profitable and within risk limits. No immediate action required; continue monitoring price relative to stops and adjust only if adverse moves occur.'}"
+    },
+    {
+        "time": 1795499342.9983046,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.7739, 'recurring_patterns': ['High frequency of \"PANIC\" exits (7 occurrences)', 'Frequent \"15-MINUTE NO-UPWARD-TREND ROTATION\" exits (6 occurrences)', 'Multiple manual sell actions (4 occurrences)', 'Several trades on same symbols (e.g., JCT-USDT, DOS-USDT)'], 'recommendations': ['Review and tighten panic\u2011exit criteria to avoid premature closures', 'Consider extending observation window beyond 15\u2011minute no\u2011upward\u2011trend to reduce churn', 'Consolidate manual sell triggers into a unified risk\u2011management rule', 'Implement position sizing limits for repeatedly traded symbols to diversify exposure']}"
     }
 ]
