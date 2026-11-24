@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935690290,
+    "last_update_id": 935690291,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT22.88/\u20a631,583",
+    "kb_ph": "USDT22.93/\u20a631,653",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -17,7 +17,7 @@
         "pos": [],
         "hn": 31
     },
-    "last_cmd": "/bot",
+    "last_cmd": "m:r:holdings",
     "page_mem": {
         "/bot": [
             1,
@@ -66,54 +66,52 @@
     ],
     "audit_down": {},
     "audit_last": 1795523719.2502558,
-    "kb_mid": 5275,
+    "kb_mid": 5280,
     "audit_ai_cls": "",
-    "out_text": "\ud83e\udde0 *AI:* Trade history shows a modest net loss of $0.40, with multiple PANIC\nflags and a high RSI on INJ; monitor panic assets and consider tightening stop\nparameters, though overall impact remains small.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "\ud83d\udcbc *PORTFOLIO* $22.93 | \u20a631,653\n\ud83d\udcb5 Cash free $5.74 | In coins $17.14 (75%)\n\ud83d\udfe1 BGB 0.00019439193 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *ICNT* $12.05 (53%)\n+5.47% (+$0.63) | Entry 0.317708\nPrice 0.335100 | Stop 0.317708 (-5%)\nRSI 52 | Bullish | ATH -45%\n\n\ud83d\udd34 *ADA* $5.09 (22%)\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795523825.3628097,
+    "out_time": 1795523863.554724,
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udda5 System",
-                "callback_data": "/bot"
+                "text": "\u25c0",
+                "callback_data": "pg:p"
             },
             {
-                "text": "\ud83d\udcc8 Stats",
-                "callback_data": "/stats"
-            }
-        ],
-        [
-            {
-                "text": "\u2699\ufe0f Settings",
-                "callback_data": "m:set"
+                "text": "1/3",
+                "callback_data": "pg:x"
             },
             {
-                "text": "\ud83d\udcbc Holdings",
-                "callback_data": "m:r:holdings"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udcdc Trade History",
-                "callback_data": "m:r:history"
+                "text": "\u25b6",
+                "callback_data": "pg:n"
             },
             {
-                "text": "\ud83e\udde0 Ask AI",
-                "callback_data": "m:ai:1"
-            }
-        ],
-        [
-            {
-                "text": "\ud83e\uddf9 Clear Chat",
-                "callback_data": "/clear"
+                "text": "\ud83c\udfe0",
+                "callback_data": "m:menu"
             },
             {
-                "text": "\ud83d\udea8 PANIC SELL",
-                "callback_data": "/panic"
+                "text": "\ud83d\udd04",
+                "callback_data": "rf:go"
             }
         ]
     ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
-    "out_mid": 5274,
-    "panel_mid": 5277
+    "panel_text": "\ud83d\udcc4 *Page 1/3*",
+    "out_mid": 5278,
+    "pages": {
+        "p": [
+            "\ud83d\udcbc *PORTFOLIO* $22.93 | \u20a631,653\n\ud83d\udcb5 Cash free $5.74 | In coins $17.14 (75%)\n\ud83d\udfe1 BGB 0.00019439193 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *ICNT* $12.05 (53%)\n+5.47% (+$0.63) | Entry 0.317708\nPrice 0.335100 | Stop 0.317708 (-5%)\nRSI 52 | Bullish | ATH -45%\n\n\ud83d\udd34 *ADA* $5.09 (22%)\n\u2800\n\u2800",
+            "-1.88% (-$0.10) | Entry 0.148600\nPrice 0.145800 | Stop 0.143577 (-2%)\nRSI 48 | Bearish | ATH -89%\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\nand 8 more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT22.93/\u20a631,653\n\n\ud83e\udde0 *AI:* Portfolio shows $22.93 total value, with $5.74 cash and $17.14 in\n\u2800\n\u2800",
+            "coins; BGB is not auto\u2011converted, several assets lack USDT pricing, and\nstop\u2011losses for ICNT and ADA are close to current prices, warranting\nmonitoring.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+        ],
+        "i": 0,
+        "mode": "Markdown",
+        "x": [
+            {
+                "text": "\ud83d\udd04",
+                "callback_data": "rf:go"
+            }
+        ],
+        "cmd": "m:r:holdings"
+    },
+    "panel_mid": 5279
 }
