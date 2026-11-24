@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690188,
+    "last_update_id": 935690192,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -69,22 +69,18 @@
     "audit_down": {},
     "audit_last": 1795495859.743439,
     "kb_mid": 5095,
-    "out_text": "\u2705 *SOLD:* 53.835 ADA @ 0.148500\n\ud83d\udd34 PnL: $-0.01\nRemaining: 93.056961 ADA (stop re-armed)\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "\ud83d\udfe1 *MANUAL BUY CANDIDATES*\nMinimum setup score: *75%*\n_Only fresh Coin List records meeting the threshold and critical safety checks\nare shown._\n\n\ud83d\udfe1 *ICNT* \u2014 *75%* | RSI: *38.0* | 24h change: *-13.07%*\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795496074.1989422,
+    "out_time": 1795496156.1335373,
     "panel_rows": [
         [
             {
-                "text": "\u2705 Confirm",
-                "callback_data": "m:sxu:ADA:8"
-            },
-            {
-                "text": "\u274c Cancel",
-                "callback_data": "m:menu"
+                "text": "\ud83d\udfe1 ICNT \u00b7 75%",
+                "callback_data": "m:mc:ICNT"
             }
         ]
     ],
-    "panel_text": "\u26a0\ufe0f *CONFIRM SELL*\n$8 of ADA at market.",
-    "out_mid": 5094,
-    "panel_hidden": true
+    "panel_text": "\ud83d\udc47 *Actions*",
+    "out_mid": 5099,
+    "panel_mid": 5100
 }

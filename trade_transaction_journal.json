@@ -1971,5 +1971,15 @@
             "lesson": "When executing manual exits, verify that the current market price exceeds the average acquisition cost to avoid realized losses. Consider using limit orders or price alerts to capture more favorable prices, especially in volatile markets. Retain a clear record of entry prices to assess profitability accurately before manual intervention.",
             "confidence": "medium"
         }
+    },
+    {
+        "time": 1795496165.4633336,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (7)', 'attention': [{'symbol': 'ADA-USDT', 'action': 'monitor', 'reason': 'Position is slightly negative (-0.07% PnL) and close to stop level (stop at 0.143577, current price 0.1485). Hold for now but be ready to exit if price approaches stop.'}], 'summary': 'Overall portfolio risk is within the daily limit. The only open position (ADA-USDT) shows a minor loss and is near its stop threshold. Recommend monitoring closely and preparing to exit if the price moves further down toward the stop. No new entries are suggested at this time.'}"
+    },
+    {
+        "time": 1795496166.4530213,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 6.7681, 'recurring_patterns': {'15-MINUTE NO-UPWARD-TREND ROTATION': 9, 'PANIC': 6, 'MANUAL SELL': 3, 'PARTIAL PROFIT +10.4%': 1, 'RSI 75': 1, 'TRAILING STOP (8.0%)': 1}, 'recommendations': 'The bot shows modest profitability with a win rate just above 50\\u202f%. The most frequent trigger is the 15\u2011minute no\u2011upward\u2011trend rotation, suggesting the current short\u2011term trend filter may be too aggressive. PANIC exits also appear often and often result in losses. Consider tightening the rotation trigger thresholds and adding confirmation signals (e.g., volume or multi\u2011timeframe momentum) before entering. Reduce reliance on panic\u2011driven exits by implementing stricter stop\u2011loss rules. Manual sell actions are few but should be reviewed for consistency. Overall, adopt a more conservative position sizing and monitor the identified patterns before scaling up.'}"
     }
 ]
