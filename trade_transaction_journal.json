@@ -1780,5 +1780,15 @@
         "time": 1795492495.3851035,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 5.9833, 'recurring_patterns': {'15-MINUTE NO-UPWARD-TREND ROTATION': 9, 'PANIC': 4, 'MANUAL SELL ALL': 3, 'RSI 75': 2, 'MANUAL SELL $15.10': 1, 'TRAILING STOP (8.0%)': 1}, 'recommendations': ['Review and tighten criteria for \"15-MINUTE NO-UPWARD-TREND ROTATION\" entries to avoid low\u2011impact trades', 'Implement stricter controls on panic\u2011driven exits to reduce loss frequency', 'Consider adjusting RSI threshold or adding confirmation filters before acting on RSI 75 signals', 'Monitor manual sell decisions for consistency and ensure they align with overall risk limits']}"
+    },
+    {
+        "time": 1795492700.363033,
+        "event": "ai_manual_buy_review",
+        "symbol": "JCT-USDT",
+        "review": {
+            "risk_level": "high",
+            "warning": "Manual buy of JCT-USDT at $0.001547 with only $3 USDT exposure is risky. BTC filter active and market filter indicates BTC is below its 50\u2011hour average, suggesting broader bearish momentum. RSI of 40.55 is not oversold enough to offset this. Existing position adds exposure. Proceed only if you accept potential loss of the full amount.",
+            "summary": "Given the bearish BTC context, modest USDT amount, and lack of strong oversold signal, the trade carries high risk. Consider waiting for clearer upside or reducing position size."
+        }
     }
 ]
