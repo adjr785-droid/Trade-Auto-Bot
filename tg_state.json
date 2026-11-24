@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT22.49/\u20a631,040",
+    "kb_ph": "USDT22.53/\u20a631,090",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -71,7 +71,7 @@
     ],
     "audit_down": {},
     "audit_last": 1795499368.043371,
-    "kb_mid": 5159,
+    "kb_mid": 5161,
     "out_text": "\ud83d\udcbc *PORTFOLIO* $22.49 | \u20a631,040\n\ud83d\udcb5 Cash free $0.03 | In coins $22.41 (100%)\n\ud83d\udfe1 BGB 0.00078233412 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *ICNT* $11.95 (53%)\n+4.62% (+$0.53) | Entry 0.317708\nPrice 0.332400 | Stop 0.301282 (-9%)\nRSI 46 | Mixed | ATH -45%\n\n\ud83d\udfe2 *ADA* $10.46 (47%)\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "out_time": 1795499558.6787019,
