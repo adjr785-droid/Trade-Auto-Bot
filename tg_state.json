@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690510,
+    "last_update_id": 935690512,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -17,7 +17,7 @@
         "pos": [],
         "hn": 31
     },
-    "last_cmd": "/bot",
+    "last_cmd": "/stats",
     "page_mem": {
         "/bot": [
             1,
@@ -86,9 +86,9 @@
         "since": 1795558810.5830717,
         "loss": -1.4850249000000058
     },
-    "out_text": "\ud83d\udda5 *SYSTEM* \u2014 HEALTHY \u2705\nBuying: PAUSED \u26d4 (Performance breaker: last 10 trades lost $1.49; auto-buy pau)\nHealth: Bot 100% | AI 95% (Normal)\nLayers: \u2705 Exchange \u2705 Scanner \u2705 Database \u2705 Buyer \u2705 Stops\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83e\udded *STRATEGY*\nEntry: TREND, RSI 42-48, 1H +0.5\u20136%, price > MA5 > MA10, must be rising vs last\nscan\nExit: stop 15% | trail 8.0% | RSI 75+ (dynamic)\nSize: 50% of balance (all-in if half < $5) | max 25 trades/day | pause at -5.0%\n\u2800\n\u2800",
+    "out_text": "\ud83d\udcc8 *TRADE STATS* (after estimated fees)\nClosed trades: 41\nWin rate: 54% (22 wins, 19 losses)\nAverage win: $+0.42 | Average loss: $-0.21\nProfit factor: 2.29\nExpectancy per trade: $+0.13\nNet profit: $+5.14\nBest: $+2.97 | Worst: $-0.70\n\n*By strategy*\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795560325.0856705,
+    "out_time": 1795560360.9110138,
     "panel_rows": [
         [
             {
@@ -132,11 +132,11 @@
         ]
     ],
     "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
-    "out_mid": 5625,
     "pages": {
         "p": [
-            "\ud83d\udda5 *SYSTEM* \u2014 HEALTHY \u2705\nBuying: PAUSED \u26d4 (Performance breaker: last 10 trades lost $1.49; auto-buy pau)\nHealth: Bot 100% | AI 95% (Normal)\nLayers: \u2705 Exchange \u2705 Scanner \u2705 Database \u2705 Buyer \u2705 Stops\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83e\udded *STRATEGY*\nEntry: TREND, RSI 42-48, 1H +0.5\u20136%, price > MA5 > MA10, must be rising vs last\nscan\nExit: stop 15% | trail 8.0% | RSI 75+ (dynamic)\nSize: 50% of balance (all-in if half < $5) | max 25 trades/day | pause at -5.0%\n\u2800\n\u2800",
-            "day\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udcbc $28.01 | \u20a638,655 | Cash $27.96 | Coins $0.00\nToday +25.17% | Last scan 4 min ago | Queue 0 | Positions 0\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+            "\ud83d\udcc8 *TRADE STATS* (after estimated fees)\nClosed trades: 41\nWin rate: 54% (22 wins, 19 losses)\nAverage win: $+0.42 | Average loss: $-0.21\nProfit factor: 2.29\nExpectancy per trade: $+0.13\nNet profit: $+5.14\nBest: $+2.97 | Worst: $-0.70\n\n*By strategy*\n\u2800\n\u2800",
+            "MANUAL: 32 trades | win 59% | avg $+0.20 | total $+6.42\nBREAKOUT: 1 trades | win 100% | avg $+0.10 | total $+0.10\nOLDER: 2 trades | win 0% | avg $-0.15 | total $-0.29\nOTHER: 6 trades | win 33% | avg $-0.18 | total $-1.09\n\n\ud83d\udd2c *RULE RESULTS* (what coins did after each stage)\n\ud83d\udc41 Watch: collecting data\n\ud83d\udfe1 Manual: collecting data\n\ud83e\udd16 Auto: collecting data\nWin = beats round-trip fees at 4h. Needs a few days of scans to mean anything.\n\u2800\n\u2800",
+            "\n\ud83e\udde0 *AI:* Overall win rate is 54% with a solid profit factor of 2.29, but the\nsmall sample size\u2014especially only one breakout trade and limited auto\ndata\u2014means performance conclusions remain uncertain.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
         "i": 0,
         "mode": "Markdown",
@@ -146,7 +146,8 @@
                 "callback_data": "rf:go"
             }
         ],
-        "cmd": "/bot"
+        "cmd": "/stats"
     },
-    "panel_mid": 5626
+    "out_mid": 5628,
+    "panel_mid": 5629
 }
