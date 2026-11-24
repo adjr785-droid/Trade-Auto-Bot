@@ -1712,5 +1712,11 @@
         "time": 1795486285.94447,
         "event": "ai_portfolio_review",
         "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'DOS-USDT', 'action': 'monitor', 'reason': 'Position is down -4.64% and approaching stop (0.12222). Consider tightening stop or reducing size if price continues to decline.'}, {'symbol': 'ARIA-USDT', 'action': 'hold', 'reason': 'Small positive PnL (+0.21%) and price above entry; stop is comfortably below current price.'}, {'symbol': 'JCT-USDT', 'action': 'monitor', 'reason': 'Slight loss (-1.77%) and price near stop (0.00149). Watch for further downside; stop may need adjustment if volatility increases.'}], 'summary': 'Overall portfolio risk remains PASS. Two positions (DOS-USDT, JCT-USDT) are near their stop levels and merit close monitoring. ARIA-USDT is stable with modest upside. Maintain current risk limits and consider stop adjustments only if market moves against the positions.'}"
+    },
+    {
+        "time": 1795486316.655957,
+        "event": "ai_coin_advisory",
+        "reviewed": 25,
+        "source": "coins.db"
     }
 ]
