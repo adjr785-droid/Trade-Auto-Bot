@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935690255,
+    "last_update_id": 935690257,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT22.90/\u20a631,611",
+    "kb_ph": "USDT22.91/\u20a631,613",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -66,7 +66,20 @@
         "LTC-USDT"
     ],
     "audit_down": {},
-    "audit_last": 1795504890.5349886,
-    "kb_mid": 5195,
-    "panel_hidden": true
+    "audit_last": 1795505782.2574315,
+    "kb_mid": 5199,
+    "out_mid": 5197,
+    "out_text": "\ud83d\udfe1 *MANUAL BUY CANDIDATES*\nMinimum setup score: *75%*\n_Only fresh Coin List records meeting the threshold and critical safety checks\nare shown._\n\nNo coins currently meet the manual-buy score and safety requirements.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_mode": "Markdown",
+    "out_time": 1795506006.8365664,
+    "panel_mid": 5198,
+    "panel_rows": [
+        [
+            {
+                "text": "\ud83d\udd04 Refresh",
+                "callback_data": "/analyse"
+            }
+        ]
+    ],
+    "panel_text": "\ud83d\udc47 *Actions*"
 }
