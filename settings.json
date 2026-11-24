@@ -29,8 +29,6 @@
     "offline_alert_hours": 3.0,
     "daily_summary_hour_utc": 20,
     "max_daily_drawdown_pct": 5.0,
-    "partial_tp_pct": 21.4843,
-    "partial_tp_fraction": 0.275,
     "dynamic_trail": true,
     "sell_if_stop_fails": true,
     "scan_prefilter": true,
@@ -88,5 +86,6 @@
     "oversold_enabled": false,
     "rising_guard": true,
     "manual_candidate_min_score": 75.0,
-    "knife_v1": true
+    "knife_v1": true,
+    "risk_v3": true
 }
