@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT21.83/\u20a630,122",
+    "kb_ph": "USDT21.79/\u20a630,072",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -65,7 +65,7 @@
         "ARIA-USDT",
         "ARX-USDT"
     ],
-    "kb_mid": 4940,
+    "kb_mid": 4943,
     "out_text": "\ud83e\udde0 AI manual-buy advisory: Given the active BTC filter, existing position, and\nbearish market signal, the advisory recommends against executing this manual\nbuy. If you choose to proceed, be aware of elevated risk and limited upside.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "out_time": 1795492718.8888173,
