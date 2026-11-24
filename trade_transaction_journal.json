@@ -1820,5 +1820,15 @@
         "time": 1795493238.0650456,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 5.9833, 'recurring_patterns': {'PANIC': 5, '15-MINUTE NO-UPWARD-TREND ROTATION': 7, 'MANUAL SELL': 4, 'RSI 75': 2, 'TRAILING STOP': 1, 'PARTIAL PROFIT': 1}, 'recommendations': 'Focus on reducing panic\u2011driven exits which account for ~14% of trades and contributed several losses. Consider tightening the 15\u2011minute no\u2011upward\u2011trend filter or adding confirmation signals before entry. Review manual sell decisions for consistency. Maintain current RSI\u201175 strategy but monitor its win/loss ratio. Overall, adopt a more conservative position sizing until win\u2011rate stabilises above 60%.'}"
+    },
+    {
+        "time": 1795493611.9467504,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Loss limit ($-1.10 / -$0.66)', 'attention': [{'symbol': 'ARIA-USDT', 'action': 'hold', 'reason': 'Position is modestly profitable (+1.93%) and above stop level; no immediate risk signals.'}, {'symbol': 'JCT-USDT', 'action': 'monitor', 'reason': 'Small loss (-0.95%) and price is close to stop ($0.001481); consider tightening stop if volatility increases.'}], 'summary': 'Overall portfolio risk remains within the defined loss limit. BTC filter is active, so no BTC exposure is recommended. Maintain current ARIA position, but keep a close eye on JCT and be ready to exit if price breaches the stop threshold.'}"
+    },
+    {
+        "time": 1795493613.2776856,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 5.9833, 'recurring_patterns': ['15-MINUTE NO-UPWARD-TREND ROTATION appears in 7 trades', 'PANIC appears in 4 trades', 'MANUAL SELL ALL appears in 3 trades', 'RSI 75 appears in 2 trades'], 'recommendations': ['Review and tighten criteria for 15\u2011minute no\u2011upward\u2011trend rotations to avoid low\u2011pnl trades', 'Implement stricter panic\u2011sell safeguards to reduce reactive exits', 'Consider adjusting RSI threshold or adding confirmation filters for RSI\u201175 signals', 'Limit exposure on manual sell\u2011all actions until broader portfolio performance is assessed']}"
     }
 ]
