@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690210,
+    "last_update_id": 935690213,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -74,17 +74,33 @@
     "panel_rows": [
         [
             {
-                "text": "\u2705 Confirm",
-                "callback_data": "m:sx:ADA:25"
+                "text": "ADA",
+                "callback_data": "m:b:ADA"
             },
             {
-                "text": "\u274c Cancel",
+                "text": "ICNT",
+                "callback_data": "m:b:ICNT"
+            },
+            {
+                "text": "NES",
+                "callback_data": "m:b:NES"
+            }
+        ],
+        [
+            {
+                "text": "\u2795 More coins",
+                "callback_data": "m:more:buy:0"
+            }
+        ],
+        [
+            {
+                "text": "\u2b05\ufe0f Menu",
                 "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\u26a0\ufe0f *CONFIRM SELL*\n25% of ADA (about $3.46) at market.",
+    "panel_text": "\ud83d\uded2 *BUY* \u2014 choose a coin:",
     "kb_mid": 5127,
     "out_mid": 5126,
-    "panel_hidden": true
+    "panel_mid": 5129
 }
