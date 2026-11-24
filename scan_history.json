@@ -80,26 +80,6 @@
             "min_volume": 1000000.0,
             "spread_pct": 0.06525285481239085,
             "near_miss": null
-        },
-        {
-            "sym": "NES-USDT",
-            "time": 1795461934.6781747,
-            "price": 0.15984,
-            "h1": 1.0,
-            "rsi": 23.11,
-            "status": "READY",
-            "decision": "SETUP \u2014 NOT QUEUED",
-            "reason": "OVERSOLD matched, AI emergency: automatic buying paused",
-            "execution_status": "NOT_ELIGIBLE",
-            "scan_id": "1795461934",
-            "rank": 45,
-            "vol": 1161964.85,
-            "chg": -32.148,
-            "ma5": 0.162428,
-            "ma10": 0.164106,
-            "min_volume": 1000000.0,
-            "spread_pct": 0.11257739696041871,
-            "near_miss": null
         }
     ]
 }
