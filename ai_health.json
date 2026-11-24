@@ -22,15 +22,15 @@
             "successes": 140
         },
         "performance_review": {
-            "last_success": 1795557143.0489693,
-            "successes": 147,
+            "last_success": 1795558825.6150637,
+            "successes": 148,
             "last_error": "",
             "last_failure": 1795495849.804014,
             "failures": 9
         },
         "market_regime": {
-            "last_success": 1795556875.157138,
-            "successes": 81,
+            "last_success": 1795558814.7181685,
+            "successes": 82,
             "last_error": ""
         },
         "manual_buy_review": {
@@ -54,8 +54,8 @@
             "last_error": ""
         },
         "near_miss_review": {
-            "last_success": 1795556878.1700385,
-            "successes": 9,
+            "last_success": 1795558818.2171576,
+            "successes": 10,
             "last_error": ""
         },
         "opportunity_ranking": {
@@ -69,14 +69,14 @@
             "last_error": ""
         },
         "coin_advisory": {
-            "last_success": 1795553690.034265,
-            "successes": 29,
-            "last_error": "Expecting ',' delimiter: line 1 column 2585 (char 2584)",
+            "last_success": 1795558819.2064326,
+            "successes": 30,
+            "last_error": "",
             "last_failure": 1795556881.5378318,
             "failures": 6
         }
     },
-    "last_stage_success": 1795557264.1720283,
+    "last_stage_success": 1795558825.6150637,
     "last_success": 1795557150.8682342,
     "emergency_ended": 1795496721.3435984,
     "recovery_start_alerted": false
