@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690491,
+    "last_update_id": 935690493,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -92,36 +92,32 @@
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
+                "text": "\ud83d\udee0\ufe0f Audit",
+                "callback_data": "m:r:audit"
             },
             {
-                "text": "4/4",
-                "callback_data": "pg:x"
+                "text": "\ud83e\udde9 Layout",
+                "callback_data": "m:lay"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\udde0 Resume AI Mode",
+                "callback_data": "m:r:airesume"
+            }
+        ],
+        [
+            {
+                "text": "\u2b05\ufe0f Tools",
+                "callback_data": "m:tools"
             },
             {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
-            },
-            {
-                "text": "\ud83c\udfe0",
+                "text": "\ud83c\udfe0 Main Menu",
                 "callback_data": "m:menu"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udd0d Scan now",
-                "callback_data": "m:r:scan"
-            }
-        ],
-        [
-            {
-                "text": "\ud83e\uddfe Scan History",
-                "callback_data": "m:scan_hist"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 4/4*",
+    "panel_text": "\ud83d\udee0\ufe0f *SYSTEM*",
     "out_mid": 5610,
-    "panel_hidden": true
+    "panel_mid": 5612
 }
