@@ -2289,5 +2289,15 @@
             "warning": "BTC is trading below its 50\u2011hour average, indicating potential downward pressure. Existing position adds exposure; small trade size limits absolute risk but still subject to market volatility.",
             "summary": "Proceed with caution. The trade size is modest (5.01\u202fUSDT) and RSI is neutral, but the bearish BTC trend and existing exposure suggest a moderate risk profile. Consider waiting for clearer price direction or tighter risk controls before executing."
         }
+    },
+    {
+        "time": 1795528400.4191716,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (9)', 'attention': [{'symbol': 'ICNT-USDT', 'action': 'hold', 'reason': 'Position is modest (entry 0.325333 USDT) with a small positive PnL (+2.33%). Stop loss at 0.308513 provides ~5% downside buffer. No immediate signal to increase exposure.'}], 'summary': 'Overall portfolio risk is within the daily limit. The only open position (ICNT-USDT) is performing slightly positive and remains within its risk parameters. Maintain current exposure and monitor price action; consider tightening stop if price retraces toward the stop level.'}"
+    },
+    {
+        "time": 1795528401.2080998,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.3491, 'recurring_patterns': ['Frequent PANIC exits', 'Repeated 15-MINUTE NO-UPWARD-TREND ROTATION entries', 'Multiple MANUAL SELL actions'], 'recommendations': ['Limit PANIC-driven trades and enforce stricter stop\u2011loss criteria', 'Review and possibly tighten the 15\u2011minute no\u2011upward\u2011trend rotation signal to avoid low\u2011profit entries', 'Consolidate manual sell decisions into a systematic exit strategy', 'Maintain current position sizing but increase monitoring of high\u2011volatility symbols like WLD-USDT and JCT-USDT']}"
     }
 ]
