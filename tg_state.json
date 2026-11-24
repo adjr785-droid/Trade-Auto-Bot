@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690514,
+    "last_update_id": 935690518,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -92,32 +92,40 @@
     "panel_rows": [
         [
             {
-                "text": "\ud83d\uded2 Trade",
-                "callback_data": "m:tl:trade"
+                "text": "$2",
+                "callback_data": "m:bc:UMXM:2"
             },
             {
-                "text": "\ud83d\udd14 Alerts",
-                "callback_data": "m:tl:alerts"
+                "text": "$5",
+                "callback_data": "m:bc:UMXM:5"
+            },
+            {
+                "text": "$10",
+                "callback_data": "m:bc:UMXM:10"
+            },
+            {
+                "text": "$15",
+                "callback_data": "m:bc:UMXM:15"
+            },
+            {
+                "text": "ALL",
+                "callback_data": "m:bc:UMXM:ALL"
             }
         ],
         [
             {
-                "text": "\ud83d\udd0d Scan",
-                "callback_data": "m:tl:scan"
-            },
-            {
-                "text": "\ud83d\udee0\ufe0f System",
-                "callback_data": "m:tl:sys"
+                "text": "\u270f\ufe0f Custom amount",
+                "callback_data": "m:cu:b:UMXM"
             }
         ],
         [
             {
-                "text": "\u2b05\ufe0f Main Menu",
-                "callback_data": "m:menu"
+                "text": "\u2b05\ufe0f Back",
+                "callback_data": "m:buy"
             }
         ]
     ],
-    "panel_text": "\ud83e\uddf0 *TOOLS*\nChoose a group.",
+    "panel_text": "\ud83d\uded2 *BUY UMXM*\nFree USDT: $27.96\nChoose how much:",
     "pages": {
         "p": [
             "\ud83e\uddfe *TRADE HISTORY*\n\ud83d\udd34 WLD | PANIC | PnL $-0.39\n\ud83d\udfe2 UMXM | PARTIAL PROFIT +10.4% | PnL $+1.11\n\ud83d\udfe2 INJ | RSI 75 | PnL $+0.10\n\ud83d\udd34 JCT | MANUAL SELL ALL | PnL $-0.70\n\ud83d\udfe2 BGB | MANUAL SELL ALL | PnL $-0.00\n\ud83d\udd34 DOS | TRAILING STOP (8.0%) | PnL $-0.51\n\ud83d\udfe2 ARIA | PANIC | PnL $+0.14\n\ud83d\udd34 JCT | PANIC | PnL $-0.16\n\ud83d\udd34 ADA | MANUAL SELL $8.00 | PnL $-0.01\n\u2800\n\u2800",
