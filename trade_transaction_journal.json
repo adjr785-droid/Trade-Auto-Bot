@@ -2115,5 +2115,15 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795505777.1362417,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (9)', 'attention': [{'symbol': 'ADA-USDT', 'action': 'monitor', 'reason': 'Small loss (-0.13%) and price near stop; consider tightening stop if volatility rises.'}, {'symbol': 'ICNT-USDT', 'action': 'hold', 'reason': 'Profit (+5.16%) but stop equals entry; maintain current stop to protect gains.'}, {'symbol': 'BLESS-USDT', 'action': 'hold', 'reason': 'Healthy profit (+7.92%) with stop at entry; no immediate action needed.'}], 'summary': 'Overall portfolio is within the daily risk limit. Positions are modestly profitable except ADA-USDT, which is slightly below entry. Maintain current stops, watch ADA for potential downside, and avoid new exposure until risk capacity is reassessed.'}"
+    },
+    {
+        "time": 1795505777.7286074,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.3491, 'recurring_patterns': ['PANIC', '15-MINUTE NO-UPWARD-TREND ROTATION', 'MANUAL SELL'], 'recommendations': 'Maintain current risk limits; reduce exposure to high\u2011volatility symbols that trigger PANIC exits; consider tightening the 15\u2011minute trend filter; monitor manual sell triggers for consistency before scaling up position sizes.'}"
     }
 ]

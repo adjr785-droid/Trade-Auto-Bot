@@ -4,38 +4,38 @@
         "safe_zone": 0.1486,
         "stop_loss": 0.143577,
         "peak_price": 0.1498,
-        "last_price": 0.1483,
+        "last_price": 0.1484,
         "opened_at": 1795495342.86449,
         "sl_pct": 3.38,
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
         "xsl": 0.143577,
-        "seen": 1795505077.5709465
+        "seen": 1795505769.1995845
     },
     "ICNT-USDT": {
         "entry_price": 0.317708,
         "safe_zone": 0.317708,
         "stop_loss": 0.317708,
-        "peak_price": 0.3336,
-        "last_price": 0.3289,
+        "peak_price": 0.3341,
+        "last_price": 0.3341,
         "opened_at": 1795496860.2906606,
         "sl_pct": 5.17,
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
         "xsl": 0.317708,
-        "seen": 1795505077.9266496
+        "seen": 1795505769.6618788
     },
     "BLESS-USDT": {
         "entry_price": 0.016263,
         "safe_zone": 0.016263,
         "stop_loss": 0.016263,
-        "peak_price": 0.0175041,
-        "last_price": 0.017431,
+        "peak_price": 0.0175509,
+        "last_price": 0.0175509,
         "opened_at": 1795499794.9712462,
         "sl_pct": 10.0,
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
         "xsl": 0.016263,
-        "seen": 1795505078.2899175
+        "seen": 1795505770.1368139
     }
 }
