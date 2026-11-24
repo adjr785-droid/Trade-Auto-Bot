@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690423,
+    "last_update_id": 935690424,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -60,8 +60,8 @@
             1795362988.7943418
         ],
         "m:at:W": [
-            1,
-            1795558566.3469539
+            2,
+            1795558584.2230866
         ]
     },
     "radar": [
@@ -83,7 +83,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "2/6",
+                "text": "3/6",
                 "callback_data": "pg:x"
             },
             {
@@ -132,7 +132,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 2/6*",
+    "panel_text": "\ud83d\udcc4 *Page 3/6*",
     "out_mid": 5534,
     "pages": {
         "p": [
@@ -143,7 +143,7 @@
             "*ZIG* | 24H +7.06% | seen 39x\n*KITE* | 24H +2.62% | seen 39x\n*CBK* | 24H +2.69% | seen 39x\n*BABY* | 24H +0.20% | seen 39x\n*U* | 24H +0.07% | seen 39x\n*KAVA* | 24H +1.45% | seen 39x\n*B* | 24H +3.17% | seen 39x\n*B2* | 24H +1.02% | seen 39x\n*BAY* | 24H +5.34% | seen 39x\n*EDEN* | 24H +3.02% | seen 39x\n\u2800\n\u2800",
             "*DODO* | 24H +8.74% | seen 39x\n*ZIL* | 24H +3.44% | seen 39x\n*CARV* | 24H +3.98% | seen 39x\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 1,
+        "i": 2,
         "mode": "Markdown",
         "x": [
             {
