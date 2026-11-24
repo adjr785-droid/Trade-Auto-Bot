@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT21.71/\u20a629,961",
+    "kb_ph": "USDT21.86/\u20a630,176",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -65,51 +65,5 @@
         "ARIA-USDT",
         "ARX-USDT"
     ],
-    "kb_mid": 4921,
-    "out_text": "\ud83d\udcbc *PORTFOLIO* $21.82 | \u20a630,121\n\ud83d\udcb5 Cash free $6.25 | In coins $15.55 (71%)\n\ud83d\udfe1 BGB 0.00078233412 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *ARIA* $8.01 (37%)\n+0.22% (+$0.02) | Entry 0.311181\nPrice 0.311880 | Stop 0.280063 (-10%)\nRSI 56 | Bullish | ATH -78%\n\n\ud83d\udd34 *JCT* $7.54 (35%)\n\u2800\n\u2800",
-    "out_mode": "Markdown",
-    "out_time": 1795489471.4416862,
-    "panel_rows": [
-        [
-            {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
-            },
-            {
-                "text": "1/3",
-                "callback_data": "pg:x"
-            },
-            {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
-            },
-            {
-                "text": "\ud83c\udfe0",
-                "callback_data": "m:menu"
-            },
-            {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
-            }
-        ]
-    ],
-    "panel_text": "\ud83d\udcc4 *Page 1/3*",
-    "pages": {
-        "p": [
-            "\ud83d\udcbc *PORTFOLIO* $21.82 | \u20a630,121\n\ud83d\udcb5 Cash free $6.25 | In coins $15.55 (71%)\n\ud83d\udfe1 BGB 0.00078233412 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *ARIA* $8.01 (37%)\n+0.22% (+$0.02) | Entry 0.311181\nPrice 0.311880 | Stop 0.280063 (-10%)\nRSI 56 | Bullish | ATH -78%\n\n\ud83d\udd34 *JCT* $7.54 (35%)\n\u2800\n\u2800",
-            "-2.09% (-$0.16) | Entry 0.001580\nPrice 0.001547 | Stop 0.001490 (-4%)\nRSI 41 | Bearish | ATH -92%\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\nand 8 more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT21.82/\u20a630,121\n\n\ud83e\udde0 *AI:* Portfolio totals $21.82 (\u2248\u00a530,121) with $6.25 cash and 71% in coins;\n\u2800\n\u2800",
-            "ARIA up 0.22% but near stop, JCT down 2.09%; several assets lack USDT pricing,\nrequiring price verification.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
-        ],
-        "i": 0,
-        "mode": "Markdown",
-        "x": [
-            {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
-            }
-        ],
-        "cmd": "m:r:holdings"
-    },
-    "out_mid": 4919,
-    "panel_mid": 4920
+    "kb_mid": 4922
 }
