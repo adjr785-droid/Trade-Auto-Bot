@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935690287,
+    "last_update_id": 935690289,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT22.87/\u20a631,568",
+    "kb_ph": "USDT22.88/\u20a631,583",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -66,34 +66,20 @@
     ],
     "audit_down": {},
     "audit_last": 1795523719.2502558,
-    "kb_mid": 5270,
+    "kb_mid": 5275,
     "audit_ai_cls": "",
-    "out_text": "\ud83e\udd16 *AUTO BUY*\n_Passed every rule. Eligible for automatic buying._\n\nNone right now.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "\ud83e\udde0 *AI:* Trade history shows a modest net loss of $0.40, with multiple PANIC\nflags and a high RSI on INJ; monitor panic assets and consider tightening stop\nparameters, though overall impact remains small.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795523793.432979,
+    "out_time": 1795523825.3628097,
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udc41 Watch (2)",
-                "callback_data": "m:at:W"
-            },
-            {
-                "text": "\ud83d\udfe1 Manual (0)",
-                "callback_data": "m:at:M"
-            },
-            {
-                "text": "\u25b6 \ud83e\udd16 Auto (0)",
-                "callback_data": "m:at:A"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udd04 Refresh",
-                "callback_data": "m:at:A"
+                "text": "\u2b05\ufe0f Menu",
+                "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83d\udc47 *Actions*",
-    "out_mid": 5271,
-    "panel_mid": 5272
+    "panel_text": "\ud83e\uddfe *TRADE HISTORY*\nSKYAI | PANIC | PnL $-0.01\nWLD | PANIC | PnL $-0.39\nUMXM | PARTIAL PROFIT +10.4% | PnL $+1.11\nINJ | RSI 75 | PnL $+0.10\nJCT | MANUAL SELL ALL | PnL $-0.70\nBGB | MANUAL SELL ALL | PnL $-0.00\nDOS | TRAILING STOP (8.0%) | PnL $-0.51\nARIA | PANIC | PnL $+0.14\nJCT | PANIC | PnL $-0.16\nADA | MANUAL SELL $8.00 | PnL $-0.01\nADA | MANUAL SELL $3.46 | PnL $+0.00\nADA | MANUAL SELL $5.22 | PnL $+0.03",
+    "out_mid": 5274,
+    "panel_hidden": true
 }
