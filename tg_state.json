@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690501,
+    "last_update_id": 935690505,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -92,62 +92,30 @@
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udee1 Safe",
-                "callback_data": "m:pre:safe"
+                "text": "\u2796\u2796 -25%",
+                "callback_data": "m:kv:manual_candidate_min_score:--"
             },
             {
-                "text": "\u2705 \u2696\ufe0f Balanced",
-                "callback_data": "m:pre:balanced"
+                "text": "\u2796 -10%",
+                "callback_data": "m:kv:manual_candidate_min_score:-"
             },
             {
-                "text": "\ud83d\ude80 Active",
-                "callback_data": "m:pre:active"
+                "text": "\u2795 +10%",
+                "callback_data": "m:kv:manual_candidate_min_score:+"
+            },
+            {
+                "text": "\u2795\u2795 +25%",
+                "callback_data": "m:kv:manual_candidate_min_score:++"
             }
         ],
         [
             {
-                "text": "\ud83d\udfe2 Auto-buy: ON",
-                "callback_data": "m:tg:auto_buy_enabled"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udfe2 Falling-knife guard: ON",
-                "callback_data": "m:tg:rising_guard"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udfe2 Weak-market half size: ON",
-                "callback_data": "m:tg:weak_market_mode"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udfe2 1H rule for all setups: ON",
-                "callback_data": "m:tg:h1_all_setups"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udfe2 50% / all-in sizing: ON",
-                "callback_data": "m:tg:half_or_all_sizing"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udfe1 Manual candidate minimum: 70%",
-                "callback_data": "m:k:manual_candidate_min_score"
-            }
-        ],
-        [
-            {
-                "text": "\u2b05\ufe0f Menu",
-                "callback_data": "m:menu"
+                "text": "\u2b05\ufe0f Settings",
+                "callback_data": "m:sp:0"
             }
         ]
     ],
-    "panel_text": "\u2699\ufe0f *SETTINGS*\n\u2705 \u2696\ufe0f Balanced mode set.\nMode: \u2696\ufe0f Balanced\nSafe = small trades, few per day. Active = bigger trades, more per day.\nEverything else adjusts itself.",
+    "panel_text": "\u2699\ufe0f *manual candidate min score*\nCurrent value: `70.0`",
     "out_mid": 5617,
     "pages": {
         "p": [
