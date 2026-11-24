@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690308,
+    "last_update_id": 935690309,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -65,9 +65,9 @@
     "audit_last": 1795527378.804305,
     "kb_mid": 5304,
     "audit_ai_cls": "",
-    "out_text": "\u2795 *DCA ADDED:* ICNT @ 0.332154\nSpent: $5.01\nNew avg entry: 0.325333\n\ud83d\udee1\ufe0f Exchange protective sell: Verified\n\ud83d\udcc8 Bot-side trailing: Active\n\n\ud83e\udde0 AI manual-buy advisory: Proceed with caution. The trade size is modest\n(5.01\u202fUSDT) and RSI is neutral, but the bearish BTC trend and existing exposure\nsuggest a moderate risk profile. Consider waiting for clearer price direction or\ntighter risk controls before executing.\n\u2800\n\u2800",
+    "out_text": "\u274c *BUY FAILED:* Only $0.02 free USDT. `/buy COIN ALL` keeps $0.02 aside; at\nleast $1.02 free USDT is needed for a $1.00 order.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795527475.488079,
+    "out_time": 1795527481.3631797,
     "panel_rows": [
         [
             {
@@ -81,6 +81,6 @@
         ]
     ],
     "panel_text": "\u26a0\ufe0f *CONFIRM BUY*\nICNT for ALL free USDT at about 0.332700 USDT.",
-    "out_mid": 5303,
-    "panel_hidden": true
+    "panel_hidden": true,
+    "out_mid": 5305
 }
