@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690293,
+    "last_update_id": 935690295,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -74,52 +74,32 @@
     "panel_rows": [
         [
             {
-                "text": "\ud83d\uded2 Buy",
+                "text": "$2",
+                "callback_data": "m:bc:ICNT:2"
+            },
+            {
+                "text": "$5",
+                "callback_data": "m:bc:ICNT:5"
+            },
+            {
+                "text": "ALL",
+                "callback_data": "m:bc:ICNT:ALL"
+            }
+        ],
+        [
+            {
+                "text": "\u270f\ufe0f Custom amount",
+                "callback_data": "m:cu:b:ICNT"
+            }
+        ],
+        [
+            {
+                "text": "\u2b05\ufe0f Back",
                 "callback_data": "m:buy"
-            },
-            {
-                "text": "\ud83d\udcb8 Sell",
-                "callback_data": "m:sell"
-            }
-        ],
-        [
-            {
-                "text": "\u274c Cancel Open Orders",
-                "callback_data": "m:r:cancel"
-            },
-            {
-                "text": "\ud83e\uddf9 Dust \u2192 BGB",
-                "callback_data": "m:r:dust"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udd04 Sync manual coins",
-                "callback_data": "m:r:sync"
-            }
-        ],
-        [
-            {
-                "text": "\u23f8 Pause auto-buy",
-                "callback_data": "m:r:pause"
-            },
-            {
-                "text": "\u25b6\ufe0f Resume auto-buy",
-                "callback_data": "m:r:resume"
-            }
-        ],
-        [
-            {
-                "text": "\u2b05\ufe0f Tools",
-                "callback_data": "m:tools"
-            },
-            {
-                "text": "\ud83c\udfe0 Main Menu",
-                "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83d\uded2 *TRADE*",
+    "panel_text": "\ud83d\uded2 *BUY ICNT*\nFree USDT: $5.74\nChoose how much:",
     "out_mid": 5278,
     "pages": {
         "p": [
