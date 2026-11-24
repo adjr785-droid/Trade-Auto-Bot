@@ -1718,5 +1718,51 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795489351.1525517,
+        "event": "sell_fill_verified",
+        "symbol": "DOS-USDT",
+        "filled": 49.65,
+        "average": 0.1255,
+        "order_id": "1508957191246913536",
+        "reason": "TRAILING STOP (8.0%)",
+        "attempt": 1
+    },
+    {
+        "time": 1795489352.2516901,
+        "event": "trade_closed",
+        "symbol": "DOS-USDT",
+        "pnl_usdt": -0.5113950000000002,
+        "reason": "TRAILING STOP (8.0%)",
+        "strategy": "MANUAL"
+    },
+    {
+        "time": 1795489352.851883,
+        "event": "full_sale_verified_or_dust",
+        "symbol": "DOS-USDT",
+        "remaining_base": 0.00898,
+        "remaining_value_usdt": 0.00112699,
+        "filled": 49.65
+    },
+    {
+        "time": 1795489362.28532,
+        "event": "ai_sell_review",
+        "symbol": "DOS-USDT",
+        "review": {
+            "review": "The position in DOS-USDT was exited via a trailing stop set at 8.0%, resulting in an average exit price of 0.1255 USDT. The trade realized a loss of approximately 0.5114 USDT on the sold quantity of 49.65 units, leaving a small residual base amount of 0.00898 DOS. The trailing stop triggered after the price moved against the position, indicating that the stop distance may have been too tight relative to the asset\u2019s volatility.",
+            "lesson": "Consider widening the trailing stop percentage for assets with higher price volatility like DOS, or use a hybrid approach that combines a wider trailing stop with a manual review threshold. Monitoring real\u2011time volatility metrics before setting stop parameters can help avoid premature exits that lock in losses. Additionally, ensure that the remaining base amount is either fully liquidated or managed to prevent orphaned balances.",
+            "confidence": "medium"
+        }
+    },
+    {
+        "time": 1795489370.8783534,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Loss limit ($-1.10 / -$0.65)', 'attention': [{'symbol': 'JCT-USDT', 'action': 'monitor', 'reason': 'Position is down -1.96% and close to stop (current 0.001549 vs stop 0.00149). Market volatility could trigger stop; consider tightening stop or reducing size if risk tolerance is low.'}, {'symbol': 'ARIA-USDT', 'action': 'hold', 'reason': 'Small positive PnL (+0.15%) and price above stop (0.31166 vs 0.280063). No immediate risk, but keep watch for reversal as position age >200 periods.'}], 'summary': 'Overall portfolio is near the defined loss limit. The JCT-USDT trade shows negative performance and is near its stop level, warranting close monitoring or protective adjustments. ARIA-USDT is modestly profitable and above its stop, but given its age, maintain vigilance. No new orders are recommended; focus on risk management and confirm stop placements.'}"
+    },
+    {
+        "time": 1795489371.774095,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 5.9833, 'recurring_patterns': {'15-MINUTE NO-UPWARD-TREND ROTATION': 9, 'PANIC': 4, 'MANUAL SELL ALL': 3, 'RSI 75': 2, 'MANUAL SELL $15.10': 1, 'TRAILING STOP (8.0%)': 1}, 'recommendations': ['Review and tighten criteria for \"15-MINUTE NO-UPWARD-TREND ROTATION\" entries to avoid low\u2011impact trades', 'Implement stricter controls on panic\u2011driven exits; consider adding a confirmation filter before closing positions', 'Re\u2011evaluate RSI 75 threshold as it produced mixed results; test alternative overbought levels', 'Limit manual sell\u2011all actions to higher confidence signals or larger profit targets', 'Monitor trailing\u2011stop parameters to ensure they capture upside without premature exits']}"
     }
 ]

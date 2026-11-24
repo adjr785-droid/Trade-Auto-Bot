@@ -234,5 +234,12 @@
         "time": 1795465799.0693069,
         "reason": "MANUAL SELL ALL",
         "strategy": "MANUAL"
+    },
+    {
+        "sym": "DOS-USDT",
+        "pnl": -0.5113950000000002,
+        "time": 1795489352.2503862,
+        "reason": "TRAILING STOP (8.0%)",
+        "strategy": "MANUAL"
     }
 ]
