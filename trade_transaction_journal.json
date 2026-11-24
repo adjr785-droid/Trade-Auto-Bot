@@ -2565,5 +2565,11 @@
             "lesson": "Avoid panic\u2011driven exits that bypass deterministic risk safeguards. Ensure that stop\u2011loss or target orders are pre\u2011set to capture exits automatically. When a partial fill occurs, consider whether to adjust the remaining order or close the residual exposure to prevent leftover positions.",
             "confidence": "medium"
         }
+    },
+    {
+        "time": 1795559473.8995008,
+        "event": "ai_coin_advisory",
+        "reviewed": 25,
+        "source": "coins.db"
     }
 ]
