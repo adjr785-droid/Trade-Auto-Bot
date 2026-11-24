@@ -2141,5 +2141,15 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795509657.1281059,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (9)', 'attention': [{'symbol': 'ADA-USDT', 'action': 'monitor', 'reason': 'Small loss (-0.54%) and price approaching stop (0.1478 vs stop 0.143577). Consider tightening stop if trend remains negative.'}, {'symbol': 'ICNT-USDT', 'action': 'hold', 'reason': 'Positive PnL (+2.89%) and price above entry; stop equals entry, providing a breakeven floor.'}, {'symbol': 'BLESS-USDT', 'action': 'hold', 'reason': 'Strong gain (+11.33%) with price well above stop; no immediate risk, but monitor for reversal.'}], 'summary': 'Overall portfolio is within the daily risk limit. Focus on ADA-USDT as it nears its stop; maintain current positions for ICNT-USDT and BLESS-USDT while keeping stops at breakeven or better. No new orders recommended.'}"
+    },
+    {
+        "time": 1795509657.8993974,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.3491, 'recurring_patterns': ['Frequent PANIC exits', 'Repeated 15\u2011minute no\u2011upward\u2011trend rotation entries', 'Multiple manual sell actions (including trailing stop)'], 'recommendations': ['Limit PANIC\u2011driven trades and enforce stricter entry criteria', 'Review 15\u2011minute rotation strategy for false signals', 'Implement tighter stop\u2011losses on manual sell positions', 'Monitor high\u2011volatility symbols (e.g., WLD\u2011USDT, JCT\u2011USDT) more closely', 'Maintain current risk limits and avoid increasing position size until pattern stability improves']}"
     }
 ]
