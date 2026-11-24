@@ -2319,5 +2319,11 @@
         "time": 1795532468.9702368,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.3491, 'recurring_patterns': ['Frequent PANIC exits', 'Repeated 15-MINUTE NO-UPWARD-TREND ROTATION entries', 'Multiple MANUAL SELL actions'], 'recommendations': ['Limit PANIC-driven trades and enforce stricter entry criteria', 'Review 15\u2011minute rotation strategy for false signals', 'Consolidate manual sell triggers into automated risk controls', 'Maintain current position sizing until win rate stabilizes above 65%']}"
+    },
+    {
+        "time": 1795532502.2474678,
+        "event": "ai_coin_advisory",
+        "reviewed": 25,
+        "source": "coins.db"
     }
 ]
