@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690413,
+    "last_update_id": 935690415,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -79,60 +79,32 @@
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
+                "text": "\ud83d\uded2 Trade",
+                "callback_data": "m:tl:trade"
             },
             {
-                "text": "4/6",
-                "callback_data": "pg:x"
+                "text": "\ud83d\udd14 Alerts",
+                "callback_data": "m:tl:alerts"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udd0d Scan",
+                "callback_data": "m:tl:scan"
             },
             {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
-            },
+                "text": "\ud83d\udee0\ufe0f System",
+                "callback_data": "m:tl:sys"
+            }
+        ],
+        [
             {
-                "text": "\ud83c\udfe0",
+                "text": "\u2b05\ufe0f Main Menu",
                 "callback_data": "m:menu"
-            }
-        ],
-        [
-            {
-                "text": "\u25b6 \ud83d\udc41 Watch (78)",
-                "callback_data": "m:at:W"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udfe1 Manual (0)",
-                "callback_data": "m:at:M"
-            }
-        ],
-        [
-            {
-                "text": "\ud83e\udd16 Auto (0)",
-                "callback_data": "m:at:A"
-            }
-        ],
-        [
-            {
-                "text": "\ud83c\udd95 NEW LISTINGS",
-                "callback_data": "m:nl"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\uddc4 ARCHIVE",
-                "callback_data": "m:ar:D"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udd04 Refresh",
-                "callback_data": "m:at:W"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 4/6*",
+    "panel_text": "\ud83e\uddf0 *TOOLS*\nChoose a group.",
     "out_mid": 5521,
     "pages": {
         "p": [
