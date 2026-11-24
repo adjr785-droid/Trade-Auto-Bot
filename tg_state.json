@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690427,
+    "last_update_id": 935690429,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -65,6 +65,7 @@
         ]
     },
     "radar": [
+        "BNB-USDT",
         "LTC-USDT",
         "WLD-USDT",
         "TRX-USDT"
@@ -73,41 +74,19 @@
     "audit_last": 1795558530.1976388,
     "kb_mid": 5507,
     "audit_ai_cls": "",
-    "out_text": "\ud83d\udc41 *WATCH LIST*\n_Rising coins being watched. They move up when they pass the manual rules._\n\n*PROS* | 24H +17.82% | 1H +1.75% | RSI 72 | seen 39x\n*BTC* | 24H -2.08% | seen 39x\n*ETH* | 24H -2.58% | seen 39x\n*SOL* | 24H -4.43% | seen 39x\n*USDGO* | 24H +0.03% | seen 39x\n*HYPE* | 24H -6.16% | seen 39x\n*SUI* | 24H -3.92% | seen 39x\n\u2800\n\u2800",
+    "out_text": "\ud83d\udd0d *SCAN COMPLETE*\nChecked 462 markets in 15s.\nNo coin matched any setup.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795558544.6480398,
+    "out_time": 1795558686.8626287,
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
-            },
-            {
-                "text": "6/6",
-                "callback_data": "pg:x"
-            },
-            {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
-            },
-            {
-                "text": "\ud83c\udfe0",
-                "callback_data": "m:menu"
-            }
-        ],
-        [
-            {
-                "text": "\u25b6 \ud83d\udc41 Watch (78)",
+                "text": "\ud83d\udc41 Watch (78)",
                 "callback_data": "m:at:W"
-            }
-        ],
-        [
+            },
             {
-                "text": "\ud83d\udfe1 Manual (0)",
+                "text": "\u25b6 \ud83d\udfe1 Manual (0)",
                 "callback_data": "m:at:M"
-            }
-        ],
-        [
+            },
             {
                 "text": "\ud83e\udd16 Auto (0)",
                 "callback_data": "m:at:A"
@@ -117,9 +96,7 @@
             {
                 "text": "\ud83c\udd95 NEW LISTINGS",
                 "callback_data": "m:nl"
-            }
-        ],
-        [
+            },
             {
                 "text": "\ud83d\uddc4 ARCHIVE",
                 "callback_data": "m:ar:D"
@@ -128,50 +105,16 @@
         [
             {
                 "text": "\ud83d\udd04 Refresh",
-                "callback_data": "m:at:W"
+                "callback_data": "m:at:M"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 6/6*",
-    "out_mid": 5534,
-    "pages": {
-        "p": [
-            "\ud83d\udc41 *WATCH LIST*\n_Rising coins being watched. They move up when they pass the manual rules._\n\n*PROS* | 24H +17.82% | 1H +1.75% | RSI 72 | seen 39x\n*BTC* | 24H -2.08% | seen 39x\n*ETH* | 24H -2.58% | seen 39x\n*SOL* | 24H -4.43% | seen 39x\n*USDGO* | 24H +0.03% | seen 39x\n*HYPE* | 24H -6.16% | seen 39x\n*SUI* | 24H -3.92% | seen 39x\n\u2800\n\u2800",
-            "*MTX* | 24H +13.68% | seen 39x\n*ZEC* | 24H -7.53% | seen 39x\n*DOGE* | 24H -1.98% | seen 39x\n*BGB* | 24H -2.07% | seen 39x\n*NEAR* | 24H -3.46% | seen 39x\n*EVAA* | 24H -29.88% | seen 39x\n*DOS* | 24H -27.95% | seen 39x\n*BTW* | 24H +8.01% | seen 39x\n*IDOL* | 24H +5.39% | seen 39x\n*KII* | 24H +0.69% | seen 39x\n\u2800\n\u2800",
-            "*NES* | 24H +14.19% | seen 39x\n*SKY* | 24H +0.27% | seen 39x\n*NIGHT* | 24H +0.70% | seen 39x\n*VELVET* | 24H +0.89% | seen 39x\n*SKYAI* | 24H +0.06% | seen 39x\n*UNITAS* | 24H +2.41% | seen 39x\n*MMT* | 24H +12.13% | seen 39x\n*LUNC* | 24H +6.58% | seen 39x\n*KERNEL* | 24H +0.02% | seen 39x\n*IR* | 24H +4.76% | seen 39x\n\u2800\n\u2800",
-            "*USD1* | 24H +0.04% | seen 39x\n*CROSS* | 24H +0.72% | seen 39x\n*AI* | 24H +7.51% | seen 39x\n*LISTA* | 24H +30.38% | seen 39x\n*SENT* | 24H +0.70% | seen 39x\n*ARTX* | 24H +4.67% | seen 39x\n*MGO* | 24H +2.59% | seen 39x\n*STABLE* | 24H +6.67% | seen 39x\n*AVV* | 24H +3.59% | seen 39x\n*O* | 24H +1.50% | seen 39x\n\u2800\n\u2800",
-            "*ZIG* | 24H +7.06% | seen 39x\n*KITE* | 24H +2.62% | seen 39x\n*CBK* | 24H +2.69% | seen 39x\n*BABY* | 24H +0.20% | seen 39x\n*U* | 24H +0.07% | seen 39x\n*KAVA* | 24H +1.45% | seen 39x\n*B* | 24H +3.17% | seen 39x\n*B2* | 24H +1.02% | seen 39x\n*BAY* | 24H +5.34% | seen 39x\n*EDEN* | 24H +3.02% | seen 39x\n\u2800\n\u2800",
-            "*DODO* | 24H +8.74% | seen 39x\n*ZIL* | 24H +3.44% | seen 39x\n*CARV* | 24H +3.98% | seen 39x\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
-        ],
-        "i": 5,
-        "mode": "Markdown",
-        "x": [
-            {
-                "text": "\u25b6 \ud83d\udc41 Watch (78)",
-                "callback_data": "m:at:W"
-            },
-            {
-                "text": "\ud83d\udfe1 Manual (0)",
-                "callback_data": "m:at:M"
-            },
-            {
-                "text": "\ud83e\udd16 Auto (0)",
-                "callback_data": "m:at:A"
-            },
-            {
-                "text": "\ud83c\udd95 NEW LISTINGS",
-                "callback_data": "m:nl"
-            },
-            {
-                "text": "\ud83d\uddc4 ARCHIVE",
-                "callback_data": "m:ar:D"
-            },
-            {
-                "text": "\ud83d\udd04 Refresh",
-                "callback_data": "m:at:W"
-            }
-        ],
-        "cmd": "m:at:W"
-    },
-    "panel_mid": 5535
+    "panel_text": "\ud83d\udc47 *Actions*",
+    "out_mid": 5538,
+    "panel_mid": 5539,
+    "perf_breaker": {
+        "until": 1795645075.8401003,
+        "since": 1795558675.8401003,
+        "loss": -1.4850249000000058
+    }
 }
