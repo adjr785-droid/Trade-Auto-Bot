@@ -2451,21 +2451,21 @@ def coin_db_rows(limit=12):
   cnt["MANUAL_CANDIDATE"]=c.execute("SELECT COUNT(*) FROM coins WHERE manual_candidate=1 AND stage='MANUAL' AND status<>'BOUGHT' AND last_seen>=?",(fresh_after,)).fetchone()[0]
   cnt["W"]=c.execute("SELECT COUNT(*) FROM coins WHERE stage='WATCH' AND status<>'BOUGHT' AND last_seen>=?",(fresh_after,)).fetchone()[0]
   cnt["A"]=c.execute("SELECT COUNT(*) FROM coins WHERE stage='AUTO' AND status<>'BOUGHT' AND last_seen>=?",(fresh_after,)).fetchone()[0]
-  rows=c.execute("SELECT sym,status,execution_status,price,h1,rsi,scans,reason,(manual_candidate=1 AND stage='MANUAL'),manual_score,ai_advisory,checks_json FROM coins WHERE status IN ('READY','NEW','WATCHING','BOUGHT') ORDER BY CASE status WHEN 'READY' THEN 0 WHEN 'NEW' THEN 1 WHEN 'BOUGHT' THEN 2 ELSE 3 END,COALESCE(h1,-99) DESC LIMIT ?",(limit,)).fetchall()
+  rows=c.execute("SELECT sym,status,execution_status,price,h1,rsi,scans,reason,(manual_candidate=1 AND stage='MANUAL'),manual_score,ai_advisory,checks_json,stage FROM coins WHERE status IN ('READY','NEW','BOUGHT') OR stage IN ('WATCH','MANUAL','AUTO') ORDER BY CASE status WHEN 'READY' THEN 0 WHEN 'NEW' THEN 1 WHEN 'BOUGHT' THEN 2 ELSE 3 END,COALESCE(h1,-99) DESC LIMIT ?",(limit,)).fetchall()
   return cnt,rows,ec
  finally:c.close()
 def cmd_coins():
  try:cnt,rows,ec=coin_db_rows()
  except Exception as e:ui_send(f"❌ Coin list error: {e}",[_MENU_BTN]);return
  if not cnt:ui_send("📚 *COIN LIST*\nEmpty. It fills after the next scan.",[[_B("🔍 Scan now","m:r:scan")],_MENU_BTN]);return
- ic={"READY":"✅","NEW":"🆕","BOUGHT":"💼","WATCHING":"👀"}
- lines=["📚 *COIN LIST*",f"✅ Ready {cnt.get('READY',0)} | 👀 Watching {cnt.get('WATCHING',0)} | 🆕 New {cnt.get('NEW',0)} | 💼 Held {cnt.get('BOUGHT',0)} | ⛔ Rejected {cnt.get('REJECTED',0)}",
+ ic={"READY":"✅","NEW":"🆕","BOUGHT":"💼"};sic={"WATCH":"👁","MANUAL":"🟡","AUTO":"🤖"}
+ lines=["📚 *COIN LIST*",f"✅ Ready {cnt.get('READY',0)} | 🆕 New {cnt.get('NEW',0)} | 💼 Held {cnt.get('BOUGHT',0)} | ⛔ Rejected {cnt.get('REJECTED',0)}",
   f"Pipeline: 👁 Watch {cnt.get('W',0)} → 🟡 Manual {cnt.get('MANUAL_CANDIDATE',0)} → 🤖 Auto {cnt.get('A',0)}",
   f"Execution: 📥 queued {ec.get('QUEUED',0)} | ⛔ blocked {ec.get('BLOCKED',0)} | 🟢 held {ec.get('HELD',0)}",""]
- for sym,st,exst,p,h,r,n,why,mc,mscore,adv,cj in rows:
+ for sym,st,exst,p,h,r,n,why,mc,mscore,adv,cj,stg in rows:
   try:rising=bool(json.loads(cj or "{}").get("scanner",{}).get("h1_rising_three_scans"))
   except Exception:rising=False
-  ln=f"{ic.get(st,'')} *{sym.split('-')[0]}* {fp(p) if p else '-'} | {exst or 'UNASSESSED'}"
+  ln=f"{ic.get(st) if st in ('BOUGHT','NEW') else (sic.get(stg) or ic.get(st,''))} *{sym.split('-')[0]}* {fp(p) if p else '-'} | {exst or 'UNASSESSED'}"
   if mc:ln+=f" | 🟡 {float(mscore or 0):.0f}% MANUAL"
   if h is not None:ln+=f" | 1H {h:+.2f}%"+(" 📈" if rising else "")
   if r is not None:ln+=f" | RSI {r:.0f}"
