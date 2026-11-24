@@ -2247,5 +2247,15 @@
             "warning": "BTC is trading below its 50\u2011hour average, indicating short\u2011term downward pressure. While the RSI is neutral, the market filter suggests caution. Ensure this trade aligns with your overall risk tolerance and position sizing.",
             "summary": "Considering a $5.71 USDT buy of ICNT-USDT at 0.3358 while you already hold a position and BTC is below its 50\u2011hour average, the trade carries moderate risk. Verify that the exposure fits your portfolio limits before proceeding."
         }
+    },
+    {
+        "time": 1795524255.9695244,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (9)', 'attention': [{'symbol': 'ADA-USDT', 'action': 'monitor', 'reason': 'Position is slightly down (-1.95%) and close to stop (0.143577). Age is high (482 min), indicating it has been open for a long time. Consider tightening stop or reducing size if risk tolerance is low.'}, {'symbol': 'ICNT-USDT', 'action': 'hold', 'reason': 'Position is modestly profitable (+4.02%) with a comfortable distance to stop (0.306672). Age is low (5 min), so no immediate action required.'}], 'summary': 'Overall portfolio risk remains within the daily limit. Monitor the ADA-USDT trade closely due to its proximity to the stop and long holding time. The ICNT-USDT trade appears stable; maintain current stance while keeping an eye on market movements.'}"
+    },
+    {
+        "time": 1795524256.6560988,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.3491, 'recurring_patterns': ['Frequent PANIC exits', 'Repeated 15-MINUTE NO-UPWARD-TREND ROTATION entries', 'Multiple MANUAL SELL actions'], 'recommendations': ['Limit PANIC-driven trades and enforce stricter stop\u2011loss criteria', 'Review the effectiveness of the 15\u2011minute no\u2011upward\u2011trend rotation strategy; consider tighter entry filters', 'Consolidate manual sell decisions into automated risk rules to avoid ad\u2011hoc exits', 'Maintain current position sizing but increase monitoring of high\u2011volatility symbols like WLD-USDT and JCT-USDT']}"
     }
 ]
