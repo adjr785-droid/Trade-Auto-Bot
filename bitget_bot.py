@@ -2711,6 +2711,36 @@ def fast_watch():
    except Exception as e:print("FASTWATCH SCAN ERR",str(e)[:120])
   return
  send_near_miss(s,None)
+def send_new_listing_discovery_alerts(state):
+ # Send one immediate Telegram alert per newly detected pair. Failed sends remain pending.
+ tracked=state.get("tracked",{}) if isinstance(state,dict) else {}
+ pending=[(sym,meta) for sym,meta in tracked.items()
+          if isinstance(meta,dict) and not meta.get("discovery_alerted_at")]
+ if not pending:return 0
+ sent=0
+ for start in range(0,len(pending),8):
+  batch=pending[start:start+8]
+  lines=["🆕 *NEW BITGET SPOT LISTING DETECTED*",
+         "_A new online USDT spot pair has appeared on Bitget._",
+         "_Added to Coin List WATCH for observation. This alert is not a buy signal._",""]
+  rows=[]
+  for sym,meta in batch:
+   coin=sym.split("-")[0]
+   detected=meta.get("first_detected")
+   when=datetime.datetime.fromtimestamp(float(detected)).strftime("%Y-%m-%d %H:%M") if detected else "time unavailable"
+   lines.append(f"*{coin}/USDT* — detected {when}; monitoring in WATCH")
+   rows.append([_B(f"🔎 Analyse {coin}",f"m:a:{coin}")])
+  mid=_create("\\n".join(lines),"Markdown",{"inline_keyboard":rows},silent=False)
+  if not mid:break
+  now=time.time()
+  for sym,meta in batch:
+   meta["discovery_alerted_at"]=now
+   meta["discovery_alert_message_id"]=mid
+   sent+=1
+  state["tracked"]=tracked
+  save(NEWLIST,state)
+ return sent
+
 def discover_new_spot_pairs(markets=None, tickers=None, interval_seconds=900, max_probe=20):
  """Detect newly appearing Bitget USDT spot pairs; discovery is WATCH-only, never an entry signal.
  The first successful call seeds a baseline to avoid falsely classifying every existing pair as new.
@@ -2773,6 +2803,10 @@ def discover_new_spot_pairs(markets=None, tickers=None, interval_seconds=900, ma
    except Exception as e:
     meta["last_probe_error"]=str(e)[:120]
   state["tracked"]=tracked;save(NEWLIST,state)
+  try:
+   alerted=send_new_listing_discovery_alerts(state)
+   if alerted:print(f"NEW LISTING TELEGRAM ALERTS SENT: {alerted}")
+  except Exception as e:print("NEW LISTING ALERT ERROR:",str(e)[:140])
   return len(added)
  except Exception as e:
   print("NEW LISTING DISCOVERY ERROR:",str(e)[:180])
