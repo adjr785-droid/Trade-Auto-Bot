@@ -2345,5 +2345,15 @@
             "warning": "The market filter indicates BTC is below its 50\u2011hour average, which may suggest short\u2011term weakness. RSI is near neutral (53.38), offering no strong momentum signal. Existing position adds exposure, and the BTC filter is active, increasing overall portfolio risk.",
             "summary": "Given the modest USDT amount (27.99), the neutral RSI, and the bearish BTC filter, proceed with caution. Consider limiting the order size or waiting for clearer price confirmation before executing the manual buy."
         }
+    },
+    {
+        "time": 1795536477.673267,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily limit (8)', 'attention': [{'symbol': 'ICNT-USDT', 'action': 'monitor', 'reason': 'Position is slightly negative (-0.11% PnL) and close to stop level (0.303615). No immediate exit recommended, but watch price action closely.'}], 'summary': 'Overall portfolio risk remains within the daily limit. The only open position (ICNT-USDT) is marginally down and approaching its stop. Maintain the position for now, but be prepared to exit if price breaches the stop or shows further downside momentum.'}"
+    },
+    {
+        "time": 1795536478.6808703,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 6.3491, 'recurring_patterns': {'PANIC': 5, '15-MINUTE NO-UPWARD-TREND ROTATION': 5, 'MANUAL SELL': 4, 'PARTIAL PROFIT +10.4%': 1, 'RSI 75': 1, 'TRAILING STOP (8.0%)': 1}, 'recommendations': ['Limit exposure to PANIC\u2011driven entries; consider adding stricter volatility filters before opening positions', 'Review and tighten criteria for 15\u2011minute no\u2011upward\u2011trend rotations, as they show mixed outcomes', 'Consolidate manual sell signals into a single risk\u2011management rule to avoid fragmented exits', 'Maintain current win\u2011rate focus but aim to improve average win size while reducing large loss outliers (e.g., -0.695 USDT)', 'Implement tighter stop\u2011loss thresholds and consider scaling out profits earlier to protect net PnL']}"
     }
 ]
