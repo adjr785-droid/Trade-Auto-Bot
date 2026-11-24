@@ -4,20 +4,20 @@
         1,
         1,
         1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
         0,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
         1,
         1
     ],
@@ -41,6 +41,11 @@
             1795559590.1338956,
             "OTHER",
             "performance_review: Expecting ',' delimiter: line 1 column 598 (char 597)"
+        ],
+        [
+            1795563269.4461079,
+            "OTHER",
+            "coin_advisory: Expecting ',' delimiter: line 1 column 2897 (char 2896)"
         ]
     ]
 }
