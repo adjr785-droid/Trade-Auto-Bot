@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690201,
+    "last_update_id": 935690202,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -68,9 +68,9 @@
     ],
     "audit_down": {},
     "audit_last": 1795496193.0016415,
-    "out_text": "\ud83e\uddf9 Cleared 4 bot message(s).\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "\ud83e\uddf9 Cleared 2 bot message(s).\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795496334.8290014,
+    "out_time": 1795496345.8911643,
     "panel_rows": [
         [
             {
@@ -114,7 +114,7 @@
         ]
     ],
     "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
-    "out_mid": 5110,
-    "kb_mid": 5112,
-    "panel_hidden": true
+    "panel_hidden": true,
+    "out_mid": 5113,
+    "kb_mid": 5114
 }
