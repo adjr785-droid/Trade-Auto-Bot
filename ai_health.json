@@ -18,13 +18,13 @@
             "last_failure": 1795339738.9050465,
             "failures": 2,
             "last_error": "",
-            "last_success": 1795646282.8317513,
-            "successes": 180
+            "last_success": 1795646920.7450323,
+            "successes": 181
         },
         "performance_review": {
-            "last_success": 1795642942.4302797,
-            "successes": 188,
-            "last_error": "Expecting ',' delimiter: line 1 column 735 (char 734)",
+            "last_success": 1795646921.707495,
+            "successes": 189,
+            "last_error": "",
             "last_failure": 1795646284.3690383,
             "failures": 18
         },
@@ -34,8 +34,8 @@
             "last_error": ""
         },
         "manual_buy_review": {
-            "last_success": 1795622460.199836,
-            "successes": 36,
+            "last_success": 1795646908.6356091,
+            "successes": 37,
             "last_error": ""
         },
         "sell_review": {
@@ -76,7 +76,7 @@
             "failures": 16
         }
     },
-    "last_stage_success": 1795646480.8930297,
+    "last_stage_success": 1795646921.707495,
     "last_success": 1795646315.665769,
     "emergency_ended": 1795621876.568532,
     "recovery_start_alerted": false

@@ -4,12 +4,25 @@
         "safe_zone": 0.016691,
         "stop_loss": 0.015022,
         "peak_price": 0.0173452,
-        "last_price": 0.0165276,
+        "last_price": 0.0166327,
         "opened_at": 1795622462.930224,
         "sl_pct": 10.0,
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
         "xsl": 0.015957584000000004,
-        "seen": 1795646522.630645
+        "seen": 1795646914.992973
+    },
+    "DGAI-USDT": {
+        "entry_price": 0.995906,
+        "safe_zone": 0.995906,
+        "stop_loss": 0.949098,
+        "peak_price": 0.995906,
+        "last_price": 0.995906,
+        "opened_at": 1795646910.8209713,
+        "sl_pct": 4.7,
+        "strategy": "MANUAL",
+        "purchase_source": "MANUAL",
+        "xsl": 0.949098,
+        "seen": 1795646915.168289
     }
 }

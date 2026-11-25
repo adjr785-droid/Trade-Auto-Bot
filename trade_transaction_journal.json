@@ -3240,5 +3240,25 @@
             "lesson": "Future exits should incorporate clear profit targets and stop\u2011loss thresholds aligned with the trade\u2019s risk\u2011reward profile. Maintaining a disciplined exit strategy\u2014preferably automated\u2014can help avoid manual timing errors, especially when the market shows limited upside. Consider scaling out positions gradually rather than a large single sell to manage exposure and preserve capital.",
             "confidence": "medium"
         }
+    },
+    {
+        "time": 1795646913.9774194,
+        "event": "ai_manual_buy_review",
+        "symbol": "DGAI-USDT",
+        "review": {
+            "risk_level": "moderate",
+            "warning": "The RSI is low (42.79) indicating potential oversold conditions, but the price is near $1.00 and the market may be volatile. No existing position and no BTC filter active increase exposure risk.",
+            "summary": "Consider the low RSI as a possible buying opportunity, but be aware of price volatility and limited capital ($5). Proceed cautiously, possibly using a small portion of the amount and setting a stop\u2011loss."
+        }
+    },
+    {
+        "time": 1795646921.7033293,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'BLESS-USDT', 'action': 'monitor', 'reason': 'Position is down -0.35% and price is within ~10% of its stop level; consider tightening stop or preparing to exit if price approaches stop.'}, {'symbol': 'DGAI-USDT', 'action': 'hold', 'reason': 'New position with no P&L yet; stop is ~4.6% below entry, maintain current stop and monitor for adverse moves.'}], 'summary': 'Overall portfolio risk remains PASS. BLESS-USDT requires close watch due to proximity to its stop; DGAI-USDT is a fresh entry with adequate stop distance. No immediate order actions are recommended; continue monitoring market conditions.'}"
+    },
+    {
+        "time": 1795646922.4438856,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 50.0, 'net_pnl_usdt': 0.0682, 'recurring_patterns': ['PANIC (6 occurrences)', 'MANUAL SELL ALL (3 occurrences)', '15-MINUTE NO-UPWARD-TREND ROTATION (3 occurrences)', 'MANUAL SELL $ (multiple small sells)'], 'recommendations': ['Review and tighten panic\u2011sell triggers to avoid frequent small losses', 'Consider limiting manual sell-all actions unless clear profit targets are met', 'Analyze 15\u2011minute no\u2011upward\u2011trend rotations for false signals and adjust criteria', 'Implement stricter position sizing to reduce impact of large negative trades (e.g., WLD-USDT, DOS-USDT)']}"
     }
 ]
