@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690804,
+    "last_update_id": 935690806,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -87,30 +87,32 @@
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
+                "text": "\ud83d\udd0d Scan now",
+                "callback_data": "m:r:scan"
             },
             {
-                "text": "1/16",
-                "callback_data": "pg:x"
-            },
-            {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
-            },
-            {
-                "text": "\ud83c\udfe0",
-                "callback_data": "m:menu"
+                "text": "\ud83e\uddfe Scan History",
+                "callback_data": "m:scan_hist"
             }
         ],
         [
             {
-                "text": "\ud83d\udd0d Why not bought?",
-                "callback_data": "m:whylist:0"
+                "text": "\ud83d\udcda Coin List",
+                "callback_data": "m:coins"
+            }
+        ],
+        [
+            {
+                "text": "\u2b05\ufe0f Tools",
+                "callback_data": "m:tools"
+            },
+            {
+                "text": "\ud83c\udfe0 Main Menu",
+                "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/16*",
+    "panel_text": "\ud83d\udd0d *SCAN*",
     "out_mid": 6104,
-    "panel_hidden": true
+    "panel_mid": 6108
 }
