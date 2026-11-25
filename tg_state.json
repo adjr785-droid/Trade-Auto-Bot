@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690697,
+    "last_update_id": 935690701,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -40,8 +40,8 @@
             1795380739.3167899
         ],
         "m:scan_hist": [
-            8,
-            1795581378.186969
+            9,
+            1795581382.3829935
         ],
         "m:ai:1": [
             1,
@@ -86,30 +86,32 @@
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
+                "text": "\ud83d\udd0d Scan now",
+                "callback_data": "m:r:scan"
             },
             {
-                "text": "9/16",
-                "callback_data": "pg:x"
-            },
-            {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
-            },
-            {
-                "text": "\ud83c\udfe0",
-                "callback_data": "m:menu"
+                "text": "\ud83e\uddfe Scan History",
+                "callback_data": "m:scan_hist"
             }
         ],
         [
             {
-                "text": "\ud83d\udd0d Why not bought?",
-                "callback_data": "m:whylist:0"
+                "text": "\ud83d\udcda Coin List",
+                "callback_data": "m:coins"
+            }
+        ],
+        [
+            {
+                "text": "\u2b05\ufe0f Tools",
+                "callback_data": "m:tools"
+            },
+            {
+                "text": "\ud83c\udfe0 Main Menu",
+                "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 9/16*",
+    "panel_text": "\ud83d\udd0d *SCAN*",
     "out_time": 1795581310.1068811,
     "out_mid": 5907,
     "pages": {
@@ -131,7 +133,7 @@
             "```\nBILL     33     - Vol low\nUPC      46     - Vol low\nTRADOOR  40     - Vol low\nUP       31     - Vol low\nBSB      37     - Vol low\nPYTH     33     - Vol low\nSTRK     35     - Vol low\nNIL      30     - Vol low\nLDO      39     - Vol low\nSTETH    39     - Vol low\n```",
             "```\nUS       33     - Vol low\nOP       38     - Vol low\nHUMA     32     - Vol low\nMHA      50     - Vol low\nUSD1     74     - Vol low\n```\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 8,
+        "i": 9,
         "mode": "Markdown",
         "x": [
             {
