@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935690557,
+    "last_update_id": 935690558,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT25.22/\u20a634,476",
+    "kb_ph": "USDT25.22/\u20a634,475",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -77,17 +77,17 @@
         "since": 1795558810.5830717,
         "loss": -1.4850249000000058
     },
-    "out_text": "\ud83d\udc41 *WATCH LIST*\n_Rising coins being watched. They move up when they pass the manual rules._\n\n```\nCOIN    RSI    1H    24H  S\n---------------------------\nBTW      81  +0.3  +13.4  6\nPROS     56  -1.9  +14.4  3\n```\n\u2800\n\u2800\n\u2800",
+    "out_text": "\ud83d\udfe1 *MANUAL BUY*\n_Passed at least 5/7 core and 2/3 additional criteria. Manual review only._\n\nNone right now.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795575661.3214052,
+    "out_time": 1795575699.64661,
     "panel_rows": [
         [
             {
-                "text": "\u25b6 \ud83d\udc41 Watch (2)",
+                "text": "\ud83d\udc41 Watch (2)",
                 "callback_data": "m:at:W"
             },
             {
-                "text": "\ud83d\udfe1 Manual (0)",
+                "text": "\u25b6 \ud83d\udfe1 Manual (0)",
                 "callback_data": "m:at:M"
             },
             {
@@ -108,12 +108,12 @@
         [
             {
                 "text": "\ud83d\udd04 Refresh",
-                "callback_data": "m:at:W"
+                "callback_data": "m:at:M"
             }
         ]
     ],
     "panel_text": "\ud83d\udc47 *Actions*",
-    "kb_mid": 5703,
-    "out_mid": 5708,
-    "panel_mid": 5709
+    "kb_mid": 5713,
+    "out_mid": 5711,
+    "panel_mid": 5712
 }
