@@ -2990,5 +2990,15 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795599237.7502296,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $1.49; auto-buy paused for 12.8h', 'attention': [{'symbol': 'MON-USDT', 'action': 'hold', 'reason': 'Small loss (-1.44%) and stop loss not yet triggered; market volatility high, no clear upside signal.'}, {'symbol': 'PUMP-USDT', 'action': 'hold', 'reason': 'Slightly larger loss (-2.48%) but stop loss is very close to current price; exiting may realize loss without clear rebound.'}], 'summary': 'Both positions are modestly underwater with stops near current prices. Given the recent performance breaker and auto\u2011buy pause, a conservative approach is to hold until price moves decisively toward stop levels or a new signal emerges. Monitor BTC price as a market gauge; no new entries are recommended at this time.'}"
+    },
+    {
+        "time": 1795599238.5536003,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 53.33, 'net_pnl_usdt': 0.4815, 'recurring_patterns': ['15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC', 'MANUAL SELL', 'MANUAL SELL ALL', 'TRAILING STOP'], 'recommendations': ['Limit exposure to trades triggered by PANIC signals; consider tighter stop\u2011loss thresholds.', 'Review the effectiveness of the 15\u2011minute no\u2011upward\u2011trend rotation strategy; it produced mixed results.', 'Consolidate manual sell actions into a single, rule\u2011based exit criteria to reduce ad\u2011hoc decisions.', 'Monitor trailing\u2011stop parameters; the current 8% stop generated a significant loss on DOS-USDT.', 'Maintain current win\u2011rate monitoring but aim to improve net PnL by reducing high\u2011loss outliers.']}"
     }
 ]
