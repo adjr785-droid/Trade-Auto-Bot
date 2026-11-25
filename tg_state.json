@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690654,
+    "last_update_id": 935690655,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -84,11 +84,11 @@
     "panel_rows": [
         [
             {
-                "text": "\u2705 \ud83d\udee1 Safe",
+                "text": "\ud83d\udee1 Safe",
                 "callback_data": "m:pre:safe"
             },
             {
-                "text": "\u2696\ufe0f Balanced",
+                "text": "\u2705 \u2696\ufe0f Balanced",
                 "callback_data": "m:pre:balanced"
             },
             {
@@ -133,7 +133,7 @@
             }
         ]
     ],
-    "panel_text": "\u2699\ufe0f *SETTINGS*\n\u2705 \ud83d\udee1 Safe mode set.\nMode: \ud83d\udee1 Safe\nSafe = small trades, few per day. Active = bigger trades, more per day.\nEverything else adjusts itself.",
+    "panel_text": "\u2699\ufe0f *SETTINGS*\n\u2705 \u2696\ufe0f Balanced mode set.\nMode: \u2696\ufe0f Balanced\nSafe = small trades, few per day. Active = bigger trades, more per day.\nEverything else adjusts itself.",
     "out_time": 1795579649.826906,
     "kb_mid": 5849,
     "out_mid": 5845,
