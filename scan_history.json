@@ -1,4 +1,25 @@
 {
     "window_start": 1795629988.8351772,
-    "items": []
+    "items": [
+        {
+            "sym": "BLESS-USDT",
+            "time": 1795620374.410691,
+            "price": 0.0169884,
+            "h1": 4.41,
+            "rsi": 45.6,
+            "status": "READY",
+            "decision": "SETUP \u2014 NOT QUEUED",
+            "reason": "TREND matched, automatic buying is paused",
+            "execution_status": "HELD",
+            "scan_id": "1795620371",
+            "rank": 27,
+            "vol": 1554955.36,
+            "chg": -4.59,
+            "ma5": 0.016819,
+            "ma10": 0.016617,
+            "min_volume": 1000000.0,
+            "spread_pct": 0.0736266422422471,
+            "near_miss": null
+        }
+    ]
 }

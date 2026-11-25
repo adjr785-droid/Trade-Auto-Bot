@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT32.92/\u20a644,992",
+    "kb_ph": "USDT32.67/\u20a644,657",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -72,17 +72,17 @@
         "ARIA-USDT"
     ],
     "audit_down": {},
-    "audit_last": 1795627284.755112,
-    "audit_ai_cls": "",
+    "audit_last": 1795630031.2596445,
+    "audit_ai_cls": "OTHER",
     "perf_breaker": {
         "until": 1795645210.5830717,
         "since": 1795558810.5830717,
         "loss": -1.4850249000000058
     },
-    "kb_mid": 6167,
+    "kb_mid": 6169,
     "panel_hidden": true,
     "out_mid": 6168,
-    "out_text": "\ud83d\udea8 *AI FAILURE*\nAI notes and reviews are paused. Buying, selling and all stops keep running on\nthe rules. The audit is recovering the AI (3 checks).\nReason: AI stage performance_review failed: Expecting ',' delimiter: line 1\ncolumn 470 (char 469)\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "\ud83d\udee0 AUDIT\n\u2705 Fixed: AI \u2014 unknown error (stage: coin_advisory). Retrying; no automatic fix\nknown for this error.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795630003.424206
+    "out_time": 1795630033.793539
 }
