@@ -3062,5 +3062,15 @@
         "time": 1795611113.1878405,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 53.33, 'net_pnl_usdt': 0.4815, 'recurring_patterns': {'most_common_reasons': ['15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC', 'MANUAL SELL ALL'], 'reason_frequencies': {'15-MINUTE NO-UPWARD-TREND ROTATION': 4, 'PANIC': 6, 'MANUAL SELL ALL': 3, 'PARTIAL PROFIT +10.4%': 1, 'RSI 75': 1, 'TRAILING STOP (8.0%)': 1, 'MANUAL SELL $8.00': 1, 'MANUAL SELL $3.46': 1, 'MANUAL SELL $5.22': 1}}, 'recommendations': ['Review and tighten criteria for panic exits, as they account for the highest loss frequency.', 'Consider adjusting the 15\u2011minute no\u2011upward\u2011trend rotation trigger to reduce exposure on short\u2011term reversals.', 'Implement stricter manual sell thresholds to avoid small\u2011scale manual exits that add noise.']}"
+    },
+    {
+        "time": 1795612290.7695296,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $1.49; auto-buy paused for 9.1h', 'attention': [{'symbol': 'MON-USDT', 'action': 'monitor', 'reason': 'Position is down -5.75% and close to stop (current 0.00983 vs stop 0.009788). Consider tightening stop or exiting if price approaches stop.'}], 'summary': 'Overall portfolio risk is elevated due to recent losses and auto\u2011buy pause. The only open position (MON-USDT) is marginally above its stop level and showing a modest loss. Recommend close monitoring, possibly tightening the stop loss, and avoid opening new spots until performance stabilizes.'}"
+    },
+    {
+        "time": 1795612291.842954,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 53.33, 'net_pnl_usdt': 0.4815, 'recurring_patterns': {'most_common_reasons': ['15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC', 'MANUAL SELL ALL'], 'reason_frequencies': {'15-MINUTE NO-UPWARD-TREND ROTATION': 4, 'PANIC': 6, 'MANUAL SELL ALL': 3, 'PARTIAL PROFIT +10.4%': 1, 'RSI 75': 1, 'TRAILING STOP (8.0%)': 1, 'MANUAL SELL $8.00': 1, 'MANUAL SELL $3.46': 1, 'MANUAL SELL $5.22': 1}}, 'recommendations': ['Limit exposure to trades triggered by PANIC signals, as they account for the highest loss contribution.', 'Consider tightening criteria for 15-MINUTE NO-UPWARD-TREND ROTATION entries, given mixed outcomes.', 'Review manual sell thresholds to ensure they align with risk limits and avoid small\u2011scale losses.']}"
     }
 ]
