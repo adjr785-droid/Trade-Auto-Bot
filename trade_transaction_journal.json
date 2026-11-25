@@ -3276,5 +3276,15 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795647125.8655472,
+        "event": "ai_manual_buy_review",
+        "symbol": "GWEI-USDT",
+        "review": {
+            "risk_level": "moderate",
+            "warning": "The RSI is relatively low (41.38) indicating potential oversold conditions, but the price is near recent lows and the trade size is small (\u2248$15). No existing position and no market filter applied. Proceed with caution and ensure stop\u2011loss and position sizing align with your risk management rules.",
+            "summary": "Considering the low RSI and modest trade amount, the trade carries moderate risk. Verify liquidity, confirm the price level against recent support, and apply appropriate risk controls before executing the manual buy."
+        }
     }
 ]
