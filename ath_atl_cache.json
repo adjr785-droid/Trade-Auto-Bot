@@ -124,5 +124,11 @@
         "atl": 0.0005,
         "checked_at": 1795559047.3224463,
         "status": "complete"
+    },
+    "PROS-USDT": {
+        "ath": 1.2896,
+        "atl": 0.05,
+        "checked_at": 1795576573.5478616,
+        "status": "complete"
     }
 }
