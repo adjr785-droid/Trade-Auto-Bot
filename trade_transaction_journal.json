@@ -3114,5 +3114,15 @@
         "time": 1795622150.2781074,
         "event": "ai_portfolio_review",
         "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $1.49; auto-buy paused for 6.4h', 'attention': [{'symbol': 'BLESS-USDT', 'action': 'monitor', 'reason': 'Small loss (-0.17%) and stop is ~10% below entry; position is very small and recent performance is negative, so hold and watch price action before any adjustment.'}], 'summary': 'Current portfolio risk flag remains active due to recent losing streak. No new entries should be initiated while auto-buy is paused. Existing BLESS-USDT position should be monitored; consider exiting if price approaches the stop level or if broader market conditions deteriorate.'}"
+    },
+    {
+        "time": 1795622377.3062952,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $1.49; auto-buy paused for 6.3h', 'attention': [{'symbol': 'BLESS-USDT', 'action': 'monitor', 'reason': 'Small loss (-0.24%) on a manual position; stop loss at 0.014967 is ~10% below entry, giving room to recover but risk remains. Consider tightening stop if price approaches stop level.'}], 'summary': 'Overall portfolio risk is elevated due to recent losing streak and auto-buy pause. No new entries recommended until performance stabilizes. Keep existing position under watch, especially near its stop level, and avoid adding exposure to BLESS-USDT or other assets until risk metrics improve.'}"
+    },
+    {
+        "time": 1795622378.027163,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 53.33, 'net_pnl_usdt': 0.4815, 'recurring_patterns': ['15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC', 'MANUAL SELL', 'TRAILING STOP'], 'recommendations': ['Limit exposure to trades triggered by PANIC signals; consider tighter stop\u2011loss thresholds.', 'Review the effectiveness of the 15\u2011minute no\u2011upward\u2011trend rotation rule; it appears frequently but yields mixed results.', 'Consolidate manual sell actions into a single, rule\u2011based exit strategy to reduce ad\u2011hoc decisions.', 'Monitor trailing\u2011stop parameters; the current 8% stop generated a sizable loss on DOS-USDT.']}"
     }
 ]
