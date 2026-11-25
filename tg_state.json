@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690660,
+    "last_update_id": 935690663,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -72,12 +72,69 @@
         "PREOPAI-USDT"
     ],
     "audit_down": {},
-    "audit_last": 1795579498.0798135,
+    "audit_last": 1795580272.2610846,
     "audit_ai_cls": "",
     "perf_breaker": {
         "until": 1795645210.5830717,
         "since": 1795558810.5830717,
         "loss": -1.4850249000000058
     },
-    "kb_mid": 5855
+    "kb_mid": 5855,
+    "out_mid": 5857,
+    "out_text": "\ud83d\udcdf *OUTPUT*\nResults appear here.",
+    "out_mode": "Markdown",
+    "panel_mid": 5858,
+    "panel_rows": [
+        [
+            {
+                "text": "\ud83d\udee1 Safe",
+                "callback_data": "m:pre:safe"
+            },
+            {
+                "text": "\u2696\ufe0f Balanced",
+                "callback_data": "m:pre:balanced"
+            },
+            {
+                "text": "\u2705 \ud83d\ude80 Active",
+                "callback_data": "m:pre:active"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udfe2 Auto-buy: ON",
+                "callback_data": "m:tg:auto_buy_enabled"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udfe2 Falling-knife guard: ON",
+                "callback_data": "m:tg:rising_guard"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udfe2 Weak-market half size: ON",
+                "callback_data": "m:tg:weak_market_mode"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udfe2 1H rule for all setups: ON",
+                "callback_data": "m:tg:h1_all_setups"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udfe2 50% / all-in sizing: ON",
+                "callback_data": "m:tg:half_or_all_sizing"
+            }
+        ],
+        [
+            {
+                "text": "\u2b05\ufe0f Menu",
+                "callback_data": "m:menu"
+            }
+        ]
+    ],
+    "panel_text": "\u2699\ufe0f *SETTINGS*\n\u2705 \ud83d\ude80 Active mode set.\nMode: \ud83d\ude80 Active\nSafe = small trades, few per day. Active = bigger trades, more per day.\nEverything else adjusts itself."
 }
