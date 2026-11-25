@@ -279,6 +279,7 @@ def _nav_with(nav,flat):
   cb=x.get("callback_data")
   if cb in ("m:menu","/menu"):continue
   if cb=="rf:go":nav[0].append(x)
+  elif str(cb).startswith(("m:at:","m:ar:")) and "(" in str(x.get("text","")) and len(nav)>1 and nav[-1] and str(nav[-1][-1].get("callback_data","")).startswith(("m:at:","m:ar:")) and "(" in str(nav[-1][-1].get("text","")) and len(nav[-1])<3:nav[-1].append(x)   # Analyse tabs share one row
   else:nav.append([x])
  return nav
 def page_nav(t):
@@ -1278,6 +1279,15 @@ def manual_candidate_detail(sym):
   lines.append("\n⛔ Candidate shortcut unavailable: "+", ".join(why)+".")
  rows += [[_B("🔄 Refresh candidate","m:mc:"+sym.split("-")[0]),_B("⬅️ Analyse","/analyse")]]
  _send("\n".join(lines),"Markdown",{"inline_keyboard":rows})
+def _coin_table(items):
+ # Same look as Scan History: a monospace table, one coin per line.
+ rows=[]
+ for it in items:
+  def n(v,fmt):return format(float(v),fmt) if isinstance(v,(int,float)) else "-"
+  sc=it.get("score");sc="-" if sc is None else str(int(float(sc)))
+  rows.append(f"{str(it.get('sym','?')).replace('-USDT','')[:7]:<7}{n(it.get('rsi'),'.0f'):>4}{n(it.get('h1'),'+.1f'):>6}{n(it.get('chg'),'+.1f'):>7}{sc:>3}")
+ if not rows:return "None right now."
+ return "```\n"+f"{'COIN':<7}{'RSI':>4}{'1H':>6}{'24H':>7}{'S':>3}"+"\n"+"-"*27+"\n"+"\n".join(rows)+"\n```"
 def analyse_top3(tab="M"):
  # Analyse: three tabs that follow the pipeline Watch list > Manual buy > Auto buy. Lists only; never changes execution rules.
  tab=tab if tab in ("W","M","A") else "M";settings=cfg()
@@ -1291,15 +1301,7 @@ def analyse_top3(tab="M"):
  sub={"W":"_Rising coins being watched. They move up when they pass the manual rules._",
       "M":"_Passed at least 5/7 core and 2/3 additional criteria. Manual review only._",
       "A":"_Passed all 7/7 core and 3/3 additional criteria. Still requires independent READY, risk and execution checks._"}[tab]
- lines=[title,sub,""]
- for it in items:
-  sym=str(it.get("sym") or "").split("-")[0];h=it.get("h1");r=it.get("rsi")
-  ln=f"*{sym}*"
-  if tab=="M":ln+=f" — *{int(float(it.get('score') or 0))}/10*"
-  ch=it.get("chg")
-  ln+=(f" | 24H {float(ch):+.2f}%" if ch is not None else "")+(f" | 1H {float(h):+.2f}%" if h is not None else "")+(f" | RSI {float(r):.0f}" if r is not None else "")+f" | seen {it.get('scans',0)}x"
-  lines.append(ln)
- if not items:lines.append("None right now.")
+ lines=[title,sub,"",_coin_table(items)]
  def tb(k,lbl):return _B(("▶ " if tab==k else "")+f"{lbl} ({cnt.get({'W':'WATCH','M':'MANUAL','A':'AUTO'}[k],0)})",f"m:at:{k}")
  keyboard=[[tb("W","👁 Watch"),tb("M","🟡 Manual"),tb("A","🤖 Auto")],
            [_B("🆕 NEW LISTINGS","m:nl"),_B("🗄 ARCHIVE","m:ar:D")],
@@ -1320,11 +1322,7 @@ def analyse_archive(tab="D"):
   print("ARCHIVE ERR",str(e)[:120]);tg("⚠️ Could not read the archive. Try again shortly.");return
  title={"D":"⤵ *DROPPED COINS*","A":"🗄 *ARCHIVED COINS*"}[tab]
  sub={"D":"_Stopped qualifying for 24h. Kept for history; they return to Watch if they qualify again._","A":"_Not seen for 30 days. Kept for history._"}[tab]
- lines=[title,sub,""]
- for sym,p,chg,h,r,n,sc,ls in rows:
-  when=datetime.datetime.fromtimestamp(float(ls or 0)).strftime("%d %b %H:%M")
-  lines.append(f"*{str(sym).split('-')[0]}* {int(float(sc or 0))}/10"+(f" | 24H {float(chg):+.1f}%" if chg is not None else "")+(f" | 1H {float(h):+.1f}%" if h is not None else "")+(f" | RSI {float(r):.0f}" if r is not None else "")+f" | seen {n}x | last {when}")
- if not rows:lines.append("None yet.")
+ lines=[title,sub,"",_coin_table([{"sym":s_,"rsi":r_,"h1":h_,"chg":c_,"score":sc_} for s_,p_,c_,h_,r_,n_,sc_,ls_ in rows])]
  tb=lambda k,lbl,key:_B(("▶ " if tab==k else "")+f"{lbl} ({cnt.get(key,0)})",f"m:ar:{k}")
  _send("\n".join(lines),"Markdown",{"inline_keyboard":[[tb("D","⤵ Dropped","DROPPED"),tb("A","🗄 Archived","ARCHIVED")],[_B("⬅️ Analyse","/analyse"),_B("🔄 Refresh",f"m:ar:{tab}")]]})
 def analyse_new_listings():
@@ -2478,7 +2476,8 @@ def coin_stage_from_scores(prev,manual_checks,ok_at,now):
   auto=hard_ok and core_score==7 and additional_score==3
   if hard_ok and core_score>=5:return stage_decide(prev,True,manual,auto,ok_at,now)
   if hard_ok and core_score+unknown>=5 and prev in ("WATCH","MANUAL","AUTO"):return (prev if prev=="WATCH" else "WATCH"),ok_at
-  return stage_decide(prev,False,False,False,ok_at,now)
+  # A failed hard gate (RSI above the ceiling, below the MAs, 1H/24H not rising) leaves the Watch list immediately: no 24h grace.
+  return stage_decide(prev,False,False,False,(ok_at if hard_ok else None),now)
 def coin_stage_prev(sym):
  try:
   c=coin_db_conn()
@@ -2486,14 +2485,35 @@ def coin_stage_prev(sym):
   finally:c.close()
   return (r[0] or "") if r else ""
  except Exception:return ""
+_GATES={}
+def gate_report_text(s=None):
+ # Scan-report lines: how many analysed coins each hard gate blocked, with the rule that is set. Information only; changes no rule.
+ g=_GATES
+ if not g.get("n"):return ""
+ try:s=s or cfg()
+ except Exception:s=s or {}
+ rules={"RSI":f"RSI ≤ {float(s.get('rsi_max',48)):g}","MA":"Price > MA5 > MA10","1H":(f"1H +{float(s.get('mom_1h_min_pct',0.5)):g} to +{float(s.get('mom_1h_max_pct',6.0)):g}%" if mom_on(s) else "1H off"),"24H":f"24H 0 to +{float(s.get('max_24h_pct',100)):g}%","Score":"Core 5+ and Extra 2+"}
+ L=[f"🚧 *GATES* ({g['n']} analysed, {g.get('pass',0)} passed all 4)"]
+ for k in ("RSI","MA","1H","24H","Score"):L.append(f"{k}: blocked {g.get(k,0)} — {rules[k]}")
+ return "\n".join(L)
 def coin_db_update(records,held,newc=None,keep_days=3,keep_snaps=24,queue=None,buying_allowed=True,block_reason="",settings=None):
  now=time.time();held=set(held);newc=newc or {};queue=queue if isinstance(queue,dict) else {};settings=settings or {};c=coin_db_conn()
+ _GATES.clear();_GATES.update({"n":0,"pass":0,"RSI":0,"MA":0,"1H":0,"24H":0,"Score":0})
  try:
   for rec in records:
    sym=rec.get("sym")
    if not sym:continue
    legacy=coin_status(rec,held);decision=str(rec.get("decision",""));reason=str(rec.get("reason",""))
    manual_score,manual_candidate,manual_reason,manual_checks=manual_candidate_assess(rec,settings)
+   try:
+    if rec.get("rsi") is not None and sym not in held:
+     _GATES["n"]+=1;_g=manual_checks.get("gates") or {}
+     for _k,_lab in (("rsi_ceiling","RSI"),("price_above_ma","MA"),("momentum_1h","1H"),("momentum_24h_up","24H")):
+      if _g.get(_k) is not True:_GATES[_lab]+=1
+     if manual_checks.get("hard_ok"):
+      _GATES["pass"]+=1
+      if int(manual_checks.get("core_score",0))<5 or int(manual_checks.get("additional_score",0))<2:_GATES["Score"]+=1
+   except Exception:pass
    signal="READY" if decision.startswith("SETUP") else ("REJECTED" if reason.startswith(_REJ) else "WATCHING")
    qd=queue.get(sym) if isinstance(queue.get(sym),dict) else None
    ts=float(rec.get("time") or now);expiry=float((qd or {}).get("expires_at") or ts+float(settings.get("signal_expiry_minutes",30))*60)
@@ -3088,7 +3108,7 @@ def scan(force=False):
  if full:st['last_full']=st['last']
  save(SC,st)
  if matched:
-  msg=f"🔍 *SCAN COMPLETE*\nChecked {len(records)} markets in {time.time()-_t0:.0f}s.\nMatched: {matched} | Queued: {queued}." + ("\n" + block_reason if not buying_allowed else "")
+  msg=f"🔍 *SCAN COMPLETE*\nChecked {len(records)} markets in {time.time()-_t0:.0f}s.\nMatched: {matched} | Queued: {queued}." + ("\n" + block_reason if not buying_allowed else "")+("\n"+gate_report_text() if gate_report_text() else "")
   if ai_market:
    regime=str(ai_market.get('regime',''))[:60];risk=str(ai_market.get('risk_level',''))[:30]
    if regime or risk:msg+="\n🧠 AI market view: "+" | ".join(x for x in (regime,risk) if x)
@@ -3104,7 +3124,7 @@ def scan(force=False):
    msg+="\n"+"\n".join(body)
   except Exception as e:print(f"MATCH LIST ERR: {e}")
   tg(msg)
- else:tg(f"🔍 *SCAN COMPLETE*\nChecked {len(records)} markets in {time.time()-_t0:.0f}s.\nNo coin matched any setup.")
+ else:tg(f"🔍 *SCAN COMPLETE*\nChecked {len(records)} markets in {time.time()-_t0:.0f}s.\nNo coin matched any setup."+("\n"+gate_report_text() if gate_report_text() else ""))
 def fp(p):
  if p is None:return "N/A"
  return f"{p:.2f}" if p>=100 else f"{p:.4f}" if p>=1 else f"{p:.6f}" if p>=0.001 else f"{p:.8f}"
@@ -3177,7 +3197,6 @@ def ui_settings_page(pg=0,note=""):
  cur=cfg();mode=next((n for n,v in PRESETS.items() if all(float(cur.get(k,-1))==float(x) for k,x in v.items())),None)
  rows=[[_B(("✅ " if n==mode else "")+PRESET_NAMES[n],f"m:pre:{n}") for n in PRESETS]]
  rows+=[[_B(f"{'🟢' if cur.get(k) else '⚪'} {lb}: {'ON' if cur.get(k) else 'OFF'}",f"m:tg:{k}")] for k,lb in SET_SWITCHES]
- rows+=[[_B("🟡 Manual candidate minimum: 70%", "m:k:manual_candidate_min_score")]]
  txt="⚙️ *SETTINGS*\n"+(note+"\n" if note else "")+f"Mode: {PRESET_NAMES.get(mode,'Custom')}\nSafe = small trades, few per day. Active = bigger trades, more per day.\nEverything else adjusts itself."
  ui_send(txt,rows+[_MENU_BTN])
 def ui_setting(k):
@@ -3502,8 +3521,19 @@ def git_sync():
    m=run(["git","pull","--no-rebase","--no-edit","-s","recursive","-X","ours"])
    if m.returncode!=0:run(["git","merge","--abort"]);notify_fail("rebase conflicted; merge failed: "+m.stderr[-250:]);return
    tg("ℹ️ Git sync used conflict recovery.")
+  # GitHub sometimes answers 5xx for a moment; retry with waits and a re-sync before giving up (the runner's disk is thrown away after the run).
   push=run(["git","push"])
-  if push.returncode!=0:notify_fail("git push failed: "+push.stderr[-250:]);return
+  for wait in (5,15,30):
+   if push.returncode==0:break
+   print(f"git push failed, retrying in {wait}s: {push.stderr[-120:]}")
+   time.sleep(wait)
+   rp=run(["git","pull","--rebase","--autostash"])
+   if rp.returncode!=0:
+    run(["git","rebase","--abort"])
+    mm=run(["git","pull","--no-rebase","--no-edit","-s","recursive","-X","ours"])
+    if mm.returncode!=0:run(["git","merge","--abort"])
+   push=run(["git","push"])
+  if push.returncode!=0:notify_fail("git push failed after 4 tries: "+push.stderr[-250:]);return
  except Exception as e:notify_fail("git sync exception: "+str(e))
 def run_step(fn):
  try:fn()
