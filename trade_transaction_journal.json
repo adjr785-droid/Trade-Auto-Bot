@@ -2861,5 +2861,15 @@
         "time": 1795582359.1361241,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 3.5972, 'recurring_patterns': {'reasons_frequency': {'15-MINUTE NO-UPWARD-TREND ROTATION': 5, 'PANIC': 4, 'MANUAL SELL ALL': 3, 'MANUAL SELL $': 3, 'PARTIAL PROFIT +10.4%': 1, 'RSI 75': 1, 'TRAILING STOP (8.0%)': 1}}, 'recommendations': ['Limit exposure to high\u2011volatility symbols that generated large negative PnL (e.g., WLD\u2011USDT, JCT\u2011USDT, DOS\u2011USDT).', 'Review and tighten panic\u2011sell triggers; consider higher thresholds or confirmation before exiting.', 'Prefer strategies with clearer signals (e.g., the 15\u2011minute no\u2011upward\u2011trend rotation) that showed a higher win contribution.', 'Avoid frequent manual sell adjustments at small price levels; consolidate exits to reduce transaction noise.', 'Implement stricter position sizing for symbols with historically large drawdowns to protect overall net PnL.']}"
+    },
+    {
+        "time": 1795582944.856604,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $1.49; auto-buy paused for 17.3h', 'attention': [{'symbol': 'PUMP-USDT', 'action': 'monitor', 'reason': 'Small loss (-0.45%) on a manual position; stop is close to entry. Consider tightening stop or exiting if price approaches stop.'}], 'summary': \"Overall risk is elevated due to recent losing streak and auto-buy pause. No new entries recommended until performance stabilizes. Maintain current positions with close watch on PUMP-USDT's stop level.\"}"
+    },
+    {
+        "time": 1795582945.630007,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 3.5972, 'recurring_patterns': ['15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC', 'MANUAL SELL'], 'recommendations': ['Limit exposure to PANIC-driven exits; consider tighter stop criteria', 'Review and potentially tighten criteria for 15-MINUTE NO-UPWARD-TREND ROTATION signals', 'Consolidate manual sell triggers to reduce fragmented exits', 'Maintain current win-rate focus but aim to improve average win size while reducing large loss events']}"
     }
 ]
