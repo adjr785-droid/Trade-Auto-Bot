@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690675,
+    "last_update_id": 935690676,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -73,7 +73,7 @@
         "PREOPAI-USDT"
     ],
     "audit_down": {},
-    "audit_last": 1795580272.2610846,
+    "audit_last": 1795580624.0459554,
     "audit_ai_cls": "",
     "perf_breaker": {
         "until": 1795645210.5830717,
@@ -86,31 +86,42 @@
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
+                "text": "$2",
+                "callback_data": "m:bc:PUMP:2"
             },
             {
-                "text": "1/16",
-                "callback_data": "pg:x"
+                "text": "$5",
+                "callback_data": "m:bc:PUMP:5"
             },
             {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
+                "text": "$10",
+                "callback_data": "m:bc:PUMP:10"
             },
             {
-                "text": "\ud83c\udfe0",
-                "callback_data": "m:menu"
+                "text": "$15",
+                "callback_data": "m:bc:PUMP:15"
+            },
+            {
+                "text": "ALL",
+                "callback_data": "m:bc:PUMP:ALL"
             }
         ],
         [
             {
-                "text": "\ud83d\udd0d Why not bought?",
-                "callback_data": "m:whylist:0"
+                "text": "\u270f\ufe0f Custom amount",
+                "callback_data": "m:cu:b:PUMP"
+            }
+        ],
+        [
+            {
+                "text": "\u2b05\ufe0f Back",
+                "callback_data": "m:buy"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/16*",
+    "panel_text": "\ud83d\uded2 *BUY PUMP*\nFree USDT: $24.88\nChoose how much:",
     "out_time": 1795580617.12088,
     "out_mid": 5879,
-    "panel_hidden": true
+    "panel_hidden": true,
+    "panel_mid": 5880
 }
