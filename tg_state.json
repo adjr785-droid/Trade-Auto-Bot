@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935690739,
+    "last_update_id": 935690740,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT24.29/\u20a633,199",
+    "kb_ph": "USDT24.19/\u20a633,065",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -17,7 +17,7 @@
         "pos": [],
         "hn": 31
     },
-    "last_cmd": "m:r:holdings",
+    "last_cmd": "/bot",
     "page_mem": {
         "/bot": [
             1,
@@ -79,53 +79,50 @@
         "since": 1795558810.5830717,
         "loss": -1.4850249000000058
     },
-    "kb_mid": 5999,
-    "out_text": "\ud83d\udd0d *SCAN COMPLETE*\nChecked 462 markets in 11s.\nNo coin matched any setup.\n\ud83d\udea7 *GATES* (18 analysed, 0 passed all 4)\nRSI: blocked 5 \u2014 RSI \u2264 48\nMA: blocked 15 \u2014 Price > MA5 > MA10\n1H: blocked 15 \u2014 1H +0.5 to +6%\n24H: blocked 16 \u2014 24H 0 to +100%\nScore: blocked 0 \u2014 Core 5+ and Extra 2+\nSetups seen: Trend 0 | Pullback 0 | Bounce 0 | Breakout 0\n\u2800\n\u2800",
+    "kb_mid": 6004,
+    "out_text": "\ud83d\udda5 *SYSTEM* \u2014 HEALTHY \u2705\nBuying: PAUSED \u26d4 (auto-buy is off)\nHealth: Bot 100% | AI 80% (Normal)\nLayers: \u2705 Exchange \u2705 Scanner \u2705 Database \u2705 Buyer \u2705 Stops\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83e\udded *STRATEGY*\nEntry: TREND, RSI 42-48, 1H +0.5\u20136%, price > MA5 > MA10, must be rising vs last\nscan\nExit: stop 15% | trail 8.0% | RSI 75+ (dynamic)\nSize: 50% of balance (all-in if half < $5) | max 25 trades/day | pause at -5.0%\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795599296.7366931,
+    "out_time": 1795599488.0323744,
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udda5 System",
-                "callback_data": "/bot"
+                "text": "\u25c0",
+                "callback_data": "pg:p"
             },
             {
-                "text": "\ud83d\udcc8 Stats",
-                "callback_data": "/stats"
-            }
-        ],
-        [
-            {
-                "text": "\u2699\ufe0f Settings",
-                "callback_data": "m:set"
+                "text": "1/2",
+                "callback_data": "pg:x"
             },
             {
-                "text": "\ud83d\udcbc Holdings",
-                "callback_data": "m:r:holdings"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udcdc Trade History",
-                "callback_data": "m:r:history"
+                "text": "\u25b6",
+                "callback_data": "pg:n"
             },
             {
-                "text": "\ud83e\udde0 Ask AI",
-                "callback_data": "m:ai:1"
-            }
-        ],
-        [
-            {
-                "text": "\ud83e\uddf9 Clear Chat",
-                "callback_data": "/clear"
+                "text": "\ud83c\udfe0",
+                "callback_data": "m:menu"
             },
             {
-                "text": "\ud83d\udea8 PANIC SELL",
-                "callback_data": "/panic"
+                "text": "\ud83d\udd04",
+                "callback_data": "rf:go"
             }
         ]
     ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
-    "out_mid": 5998,
-    "panel_mid": 6001
+    "panel_text": "\ud83d\udcc4 *Page 1/2*",
+    "out_mid": 6002,
+    "pages": {
+        "p": [
+            "\ud83d\udda5 *SYSTEM* \u2014 HEALTHY \u2705\nBuying: PAUSED \u26d4 (auto-buy is off)\nHealth: Bot 100% | AI 80% (Normal)\nLayers: \u2705 Exchange \u2705 Scanner \u2705 Database \u2705 Buyer \u2705 Stops\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83e\udded *STRATEGY*\nEntry: TREND, RSI 42-48, 1H +0.5\u20136%, price > MA5 > MA10, must be rising vs last\nscan\nExit: stop 15% | trail 8.0% | RSI 75+ (dynamic)\nSize: 50% of balance (all-in if half < $5) | max 25 trades/day | pause at -5.0%\n\u2800\n\u2800",
+            "day\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udcbc $24.10 | \u20a632,947 | Cash $0.02 | Coins $24.03\nToday -4.09% | Last scan 3 min ago | Queue 0 | Positions 2\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+        ],
+        "i": 0,
+        "mode": "Markdown",
+        "x": [
+            {
+                "text": "\ud83d\udd04",
+                "callback_data": "rf:go"
+            }
+        ],
+        "cmd": "/bot"
+    },
+    "panel_mid": 6003
 }
