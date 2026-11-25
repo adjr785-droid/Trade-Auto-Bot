@@ -3109,5 +3109,10 @@
             "warning": "BTC market filter is active and indicates price is below its 50\u2011hour average, suggesting downward momentum. Proceed with caution, especially given the small trade size and lack of an existing position.",
             "summary": "The proposed manual BUY of 7.75\u202fUSDT of BLESS\u2011USDT at $0.0166597 carries moderate risk due to bearish BTC conditions. RSI is neutral, but the market filter flags potential downside. Consider waiting for clearer bullish signals or reducing exposure."
         }
+    },
+    {
+        "time": 1795622150.2781074,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $1.49; auto-buy paused for 6.4h', 'attention': [{'symbol': 'BLESS-USDT', 'action': 'monitor', 'reason': 'Small loss (-0.17%) and stop is ~10% below entry; position is very small and recent performance is negative, so hold and watch price action before any adjustment.'}], 'summary': 'Current portfolio risk flag remains active due to recent losing streak. No new entries should be initiated while auto-buy is paused. Existing BLESS-USDT position should be monitored; consider exiting if price approaches the stop level or if broader market conditions deteriorate.'}"
     }
 ]
