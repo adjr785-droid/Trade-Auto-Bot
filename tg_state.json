@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690721,
+    "last_update_id": 935690722,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -88,16 +88,41 @@
     "panel_rows": [
         [
             {
-                "text": "\u2705 YES, SELL EVERYTHING",
-                "callback_data": "panic_confirm"
+                "text": "$2",
+                "callback_data": "m:bc:MON:2"
             },
             {
-                "text": "\u274c Cancel",
-                "callback_data": "panic_cancel"
+                "text": "$5",
+                "callback_data": "m:bc:MON:5"
+            },
+            {
+                "text": "$10",
+                "callback_data": "m:bc:MON:10"
+            },
+            {
+                "text": "$15",
+                "callback_data": "m:bc:MON:15"
+            },
+            {
+                "text": "ALL",
+                "callback_data": "m:bc:MON:ALL"
+            }
+        ],
+        [
+            {
+                "text": "\u270f\ufe0f Custom amount",
+                "callback_data": "m:cu:b:MON"
+            }
+        ],
+        [
+            {
+                "text": "\u2b05\ufe0f Back",
+                "callback_data": "m:buy"
             }
         ]
     ],
-    "panel_text": "\ud83d\udc47 *Actions*",
+    "panel_text": "\ud83d\uded2 *BUY MON*\nFree USDT: $24.69\nChoose how much:",
     "out_mid": 5953,
-    "panel_hidden": true
+    "panel_hidden": true,
+    "panel_mid": 5948
 }
