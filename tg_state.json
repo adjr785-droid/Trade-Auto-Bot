@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690829,
+    "last_update_id": 935690830,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -86,36 +86,46 @@
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
+                "text": "\ud83d\udda5 System",
+                "callback_data": "/bot"
             },
             {
-                "text": "1/4",
-                "callback_data": "pg:x"
-            },
-            {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
-            },
-            {
-                "text": "\ud83c\udfe0",
-                "callback_data": "m:menu"
+                "text": "\ud83d\udcc8 Stats",
+                "callback_data": "/stats"
             }
         ],
         [
             {
-                "text": "\ud83d\udd0d Scan now",
-                "callback_data": "m:r:scan"
+                "text": "\u2699\ufe0f Settings",
+                "callback_data": "m:set"
+            },
+            {
+                "text": "\ud83d\udcbc Holdings",
+                "callback_data": "m:r:holdings"
             }
         ],
         [
             {
-                "text": "\ud83e\uddfe Scan History",
-                "callback_data": "m:scan_hist"
+                "text": "\ud83d\udcdc Trade History",
+                "callback_data": "m:r:history"
+            },
+            {
+                "text": "\ud83e\udde0 Ask AI",
+                "callback_data": "m:ai:1"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\uddf9 Clear Chat",
+                "callback_data": "/clear"
+            },
+            {
+                "text": "\ud83d\udea8 PANIC SELL",
+                "callback_data": "/panic"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/4*",
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
     "pages": {
         "p": [
             "\ud83d\udcda *COIN LIST*\n\u2705 Ready 0 | \ud83c\udd95 New 0 | \ud83d\udcbc Held 1 | \u26d4 Rejected 443\nPipeline: \ud83d\udc41 Watch 0 \u2192 \ud83d\udfe1 Manual 0 \u2192 \ud83e\udd16 Auto 0 | \u2935 Dropped 456 | Archived 0\nExecution: \ud83d\udce5 queued 0 | \u26d4 blocked 0 | \ud83d\udfe2 held 1\n\n *COLLECT* 0.026689 | NOT_ELIGIBLE | 1H +3.32% | RSI 71 | seen 62x\n   \ud83e\udde0 LOW: RSI 56.7; 24h up 1.3%; relatively stable.\n *WLD* 0.232700 | NOT_ELIGIBLE | 1H +1.96% \ud83d\udcc8 | RSI 50 | seen 62x\n   \ud83e\udde0 MEDIUM: RSI 37.4; 24h down 0.5%; moderate.\n *LTC* 41.1000 | NOT_ELIGIBLE | 1H +1.74% \ud83d\udcc8 | RSI 55 | seen 62x\n\u2800\n\u2800",
