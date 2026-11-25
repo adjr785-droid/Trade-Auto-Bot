@@ -3010,5 +3010,15 @@
         "time": 1795599632.0204647,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 53.33, 'net_pnl_usdt': 0.4815, 'recurring_patterns': {'most_common_reasons': ['15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC', 'MANUAL SELL ALL'], 'reason_frequencies': {'15-MINUTE NO-UPWARD-TREND ROTATION': 4, 'PANIC': 6, 'MANUAL SELL ALL': 4, 'PARTIAL PROFIT +10.4%': 1, 'RSI 75': 1, 'TRAILING STOP (8.0%)': 1, 'MANUAL SELL $8.00': 1, 'MANUAL SELL $3.46': 1, 'MANUAL SELL $5.22': 1}}, 'recommendations': ['Review and tighten criteria for panic exits to avoid frequent small losses', 'Consider adding a confirmation filter before executing 15\u2011minute no\u2011upward\u2011trend rotations', 'Evaluate the effectiveness of manual sell\u2011all actions; they account for multiple losses and may benefit from stricter profit targets', 'Monitor trailing stop parameters; current 8% stop generated a significant loss on DOS-USDT', 'Maintain current win\u2011rate monitoring but aim to improve net PnL by reducing"
+    },
+    {
+        "time": 1795603243.3074381,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily drawdown -5.7% exceeds limit of -5%. Risk is elevated.', 'attention': [{'symbol': 'MON-USDT', 'action': 'monitor', 'reason': 'Position is 4.22% down, stop loss at 0.009788 is close to current price 0.00999; risk of further loss given overall drawdown breach.'}], 'summary': 'Overall portfolio risk is above the defined daily limit. The only open position (MON-USDT) is already near its stop level and contributing to the drawdown. Recommend tightening risk controls, consider reducing exposure or exiting the position if price approaches the stop. No new entries should be initiated until drawdown returns within acceptable bounds.'}"
+    },
+    {
+        "time": 1795603244.2358205,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 53.33, 'net_pnl_usdt': 0.4815, 'recurring_patterns': ['15-MINUTE NO-UPWARD-TREND ROTATION appears in 4 trades', 'PANIC appears in 7 trades', 'MANUAL SELL (including variations) appears in 6 trades', 'TRAILING STOP appears once', 'PARTIAL PROFIT appears once', 'RSI 75 appears once'], 'recommendations': ['Review and tighten criteria for PANIC exits to reduce loss frequency', 'Consider limiting exposure to 15\u2011minute trend signals that have produced mixed results', 'Implement stricter manual sell thresholds to avoid small\u2011loss churn', 'Monitor trailing\u2011stop parameters; current setting generated a sizable loss', 'Maintain current win\u2011rate monitoring but aim to improve net PnL by reducing high\u2011loss events']}"
     }
 ]
