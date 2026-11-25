@@ -3052,5 +3052,15 @@
         "time": 1795606818.2255044,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 53.33, 'net_pnl_usdt': 0.4815, 'recurring_patterns': ['15-MINUTE NO-UPWARD-TREND ROTATION appears in 4 trades', 'PANIC appears in 7 trades', 'MANUAL SELL (including variations) appears in 6 trades', 'TRAILING STOP appears once', 'PARTIAL PROFIT appears once', 'RSI 75 appears once'], 'recommendations': ['Review and tighten criteria for PANIC exits to reduce loss frequency', 'Consider limiting exposure to 15\u2011minute trend signals that have produced mixed results', 'Implement stricter manual sell thresholds to avoid small\u2011loss churn', 'Monitor trailing\u2011stop parameters; current setting generated a sizable loss', 'Maintain current win\u2011rate focus but aim to improve net PnL by reducing high\u2011loss outliers']}"
+    },
+    {
+        "time": 1795611112.3746023,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily drawdown -6.6% exceeds limit of -5%. Risk is elevated.', 'attention': [{'symbol': 'MON-USDT', 'action': 'consider_close', 'reason': 'Position is down -5.75% and approaching stop (0.009788). Closing reduces further drawdown risk.'}, {'symbol': 'BTC-USDT', 'action': 'hold_off_new_entries', 'reason': 'btc_filter is true and portfolio drawdown is already beyond limit; adding BTC exposure would increase risk.'}], 'summary': 'Portfolio risk is above the allowed threshold. Recommend closing the losing MON-USDT position and refrain from initiating new BTC trades until drawdown returns within limits. Monitor market volatility before re\u2011entering.'}"
+    },
+    {
+        "time": 1795611113.1878405,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 53.33, 'net_pnl_usdt': 0.4815, 'recurring_patterns': {'most_common_reasons': ['15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC', 'MANUAL SELL ALL'], 'reason_frequencies': {'15-MINUTE NO-UPWARD-TREND ROTATION': 4, 'PANIC': 6, 'MANUAL SELL ALL': 3, 'PARTIAL PROFIT +10.4%': 1, 'RSI 75': 1, 'TRAILING STOP (8.0%)': 1, 'MANUAL SELL $8.00': 1, 'MANUAL SELL $3.46': 1, 'MANUAL SELL $5.22': 1}}, 'recommendations': ['Review and tighten criteria for panic exits, as they account for the highest loss frequency.', 'Consider adjusting the 15\u2011minute no\u2011upward\u2011trend rotation trigger to reduce exposure on short\u2011term reversals.', 'Implement stricter manual sell thresholds to avoid small\u2011scale manual exits that add noise.']}"
     }
 ]
