@@ -2943,5 +2943,15 @@
             "warning": "Manual buy of MON-USDT at $0.01043 with only $15 USDT is risky. BTC filter active and BTC is below its 50\u2011hour average, indicating broader market weakness. RSI of 40.37 suggests the asset is not oversold yet, and the small capital size limits diversification. Proceed only if you accept potential total loss of the allocated funds.",
             "summary": "Given the bearish BTC context, modest RSI, and limited capital, the trade carries high risk. Consider waiting for clearer bullish signals or allocating a smaller portion of your portfolio."
         }
+    },
+    {
+        "time": 1795589007.6527278,
+        "event": "ai_manual_buy_review",
+        "symbol": "PUMP-USDT",
+        "review": {
+            "risk_level": "high",
+            "warning": "Market filter indicates BTC is below its 50\u2011hour average, suggesting broader bearish momentum. RSI is low (41.3), which may signal oversold conditions but also potential further downside. The trade size is small (\u2248$9.67), but the combination of bearish market context and lack of an existing position increases risk.",
+            "summary": "Given the bearish BTC trend and low RSI, proceeding with a manual buy of PUMP-USDT carries high risk despite the modest trade size. Consider waiting for clearer bullish signals or tighter risk controls before executing."
+        }
     }
 ]
