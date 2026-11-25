@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT24.80/\u20a633,899",
+    "kb_ph": "USDT24.75/\u20a633,826",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -79,7 +79,7 @@
         "since": 1795558810.5830717,
         "loss": -1.4850249000000058
     },
-    "kb_mid": 5783,
+    "kb_mid": 5784,
     "out_text": "```\nTAO      47  -0.8 1H low\nLTC      58  -0.4 RSI high\nCYS      58  -3.1 RSI high\nONDO     50  -0.9 RSI high\nUMXM     40 +18.8 RSI low\nUNI      53  -1.5 RSI high\nLINK     57  -0.6 RSI high\nBGSC     62  +1.6 RSI high\nARX      73  +0.1 RSI high\nBTW      51  +0.5 RSI high\n```",
     "out_mode": "Markdown",
     "out_time": 1795578337.0186355,
