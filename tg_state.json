@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935690722,
+    "last_update_id": 935690724,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT24.74/\u20a633,815",
+    "kb_ph": "USDT24.72/\u20a633,795",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -81,48 +81,23 @@
         "since": 1795558810.5830717,
         "loss": -1.4850249000000058
     },
-    "kb_mid": 5954,
-    "out_text": "\ud83d\uded1 *PANIC COMPLETE.* All positions sold. Auto-buy PAUSED.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "kb_mid": 5956,
+    "out_text": "\ud83e\udde0 AI manual-buy advisory: Given the bearish BTC context, modest RSI, and\nlimited capital, the trade carries high risk. Consider waiting for clearer\nbullish signals or allocating a smaller portion of your portfolio.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795588944.5280352,
+    "out_time": 1795588991.624412,
     "panel_rows": [
         [
             {
-                "text": "$2",
-                "callback_data": "m:bc:MON:2"
+                "text": "\u2705 Confirm",
+                "callback_data": "m:bx:MON:15"
             },
             {
-                "text": "$5",
-                "callback_data": "m:bc:MON:5"
-            },
-            {
-                "text": "$10",
-                "callback_data": "m:bc:MON:10"
-            },
-            {
-                "text": "$15",
-                "callback_data": "m:bc:MON:15"
-            },
-            {
-                "text": "ALL",
-                "callback_data": "m:bc:MON:ALL"
-            }
-        ],
-        [
-            {
-                "text": "\u270f\ufe0f Custom amount",
-                "callback_data": "m:cu:b:MON"
-            }
-        ],
-        [
-            {
-                "text": "\u2b05\ufe0f Back",
-                "callback_data": "m:buy"
+                "text": "\u274c Cancel",
+                "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83d\uded2 *BUY MON*\nFree USDT: $24.69\nChoose how much:",
-    "out_mid": 5953,
+    "panel_text": "\u26a0\ufe0f *CONFIRM BUY*\nMON for $15 at about 0.010430 USDT.",
     "panel_hidden": true,
-    "panel_mid": 5948
+    "out_mid": 5955
 }

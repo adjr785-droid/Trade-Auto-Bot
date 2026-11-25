@@ -2933,5 +2933,15 @@
             "lesson": "Implement stricter adherence to predefined exit criteria (e.g., stop\u2011loss thresholds) to avoid panic\u2011driven exits. Ensure that any remaining base is either fully liquidated or hedged according to the bot's risk management policy. Reinforce monitoring alerts to differentiate between market volatility and genuine panic triggers.",
             "confidence": "medium"
         }
+    },
+    {
+        "time": 1795588991.213154,
+        "event": "ai_manual_buy_review",
+        "symbol": "MON-USDT",
+        "review": {
+            "risk_level": "high",
+            "warning": "Manual buy of MON-USDT at $0.01043 with only $15 USDT is risky. BTC filter active and BTC is below its 50\u2011hour average, indicating broader market weakness. RSI of 40.37 suggests the asset is not oversold yet, and the small capital size limits diversification. Proceed only if you accept potential total loss of the allocated funds.",
+            "summary": "Given the bearish BTC context, modest RSI, and limited capital, the trade carries high risk. Consider waiting for clearer bullish signals or allocating a smaller portion of your portfolio."
+        }
     }
 ]
