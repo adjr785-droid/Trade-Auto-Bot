@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690713,
+    "last_update_id": 935690714,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -37,7 +37,7 @@
         ],
         "/stats": [
             1,
-            1795380739.3167899
+            1795583010.8136437
         ],
         "m:scan_hist": [
             9,
@@ -89,7 +89,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "1/3",
+                "text": "2/3",
                 "callback_data": "pg:x"
             },
             {
@@ -106,7 +106,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/3*",
+    "panel_text": "\ud83d\udcc4 *Page 2/3*",
     "out_time": 1795582999.669014,
     "out_mid": 5931,
     "pages": {
@@ -115,7 +115,7 @@
             "MANUAL: 34 trades | win 59% | avg $+0.18 | total $+6.13\nBREAKOUT: 1 trades | win 100% | avg $+0.10 | total $+0.10\nOLDER: 2 trades | win 0% | avg $-0.15 | total $-0.29\nOTHER: 6 trades | win 33% | avg $-0.18 | total $-1.09\n\n\ud83d\udd2c *RULE RESULTS* (what coins did after each stage)\n\ud83d\udc41 Watch: collecting data\n\ud83d\udfe1 Manual: collecting data\n\ud83e\udd16 Auto: collecting data\nWin = beats round-trip fees at 4h. Needs a few days of scans to mean anything.\n\u2800\n\u2800",
             "\n\ud83e\udde0 *AI:* Overall win rate is modest (53%) with a strong profit factor (2.07),\nbut average profit per trade is low (+$0.11) and some strategies show negative\nresults, so confidence is limited.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 0,
+        "i": 1,
         "mode": "Markdown",
         "x": [
             {
