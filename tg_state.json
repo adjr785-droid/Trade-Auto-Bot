@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935690618,
+    "last_update_id": 935690620,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT24.70/\u20a633,763",
+    "kb_ph": "USDT24.68/\u20a633,738",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -79,10 +79,10 @@
         "since": 1795558810.5830717,
         "loss": -1.4850249000000058
     },
-    "kb_mid": 5794,
-    "out_text": "\ud83d\udea8 *CONFIRM PANIC*\nThis sells ALL positions at market and pauses auto-buy.\nConfirm within 15 minutes.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "kb_mid": 5798,
+    "out_text": "\ud83e\udde0 AI manual-buy advisory: Manual buy of 24.61\u202fUSDT of BLESS\u2011USDT at 0.0175104\nis modest in size. RSI near 50 suggests no strong momentum, but the BTC\u2011related\nmarket filter signals potential downside risk. Consider waiting for clearer\nbullish signals or reducing position size.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795578555.1513202,
+    "out_time": 1795578599.2570732,
     "panel_rows": [
         [
             {
@@ -96,6 +96,6 @@
         ]
     ],
     "panel_text": "\ud83d\udc47 *Actions*",
-    "out_mid": 5792,
-    "panel_mid": 5793
+    "out_mid": 5795,
+    "panel_hidden": true
 }

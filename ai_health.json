@@ -34,13 +34,13 @@
             "last_error": ""
         },
         "manual_buy_review": {
-            "last_success": 1795575791.514788,
-            "successes": 30,
+            "last_success": 1795578593.8663929,
+            "successes": 31,
             "last_error": ""
         },
         "sell_review": {
-            "last_success": 1795559273.6133115,
-            "successes": 21,
+            "last_success": 1795578571.4236612,
+            "successes": 22,
             "last_error": ""
         },
         "analyse_review": {
@@ -76,7 +76,7 @@
             "failures": 8
         }
     },
-    "last_stage_success": 1795578535.4724474,
+    "last_stage_success": 1795578593.8663929,
     "last_success": 1795578525.1238759,
     "emergency_ended": 1795560301.2779193,
     "recovery_start_alerted": false

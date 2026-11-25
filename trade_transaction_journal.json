@@ -2699,5 +2699,51 @@
         "time": 1795578515.6184235,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 4.4473, 'recurring_patterns': {'PANIC': 5, '15-MINUTE NO-UPWARD-TREND ROTATION': 5, 'MANUAL SELL': 4, 'TRAILING STOP (8.0%)': 1, 'RSI 75': 1, 'PARTIAL PROFIT +10.4%': 1}, 'recommendations': 'Reduce reliance on PANIC exits; implement stricter trend validation before 15\u2011minute no\u2011upward\u2011trend rotations; consolidate manual sell triggers into a unified risk rule; consider tighter stop\u2011loss thresholds to limit large negative PnL events.'}"
+    },
+    {
+        "time": 1795578566.4278753,
+        "event": "sell_fill_verified",
+        "symbol": "PROS-USDT",
+        "filled": 38.19,
+        "average": 0.6449,
+        "order_id": "1509331387273650176",
+        "reason": "PANIC",
+        "attempt": 1
+    },
+    {
+        "time": 1795578567.5066364,
+        "event": "trade_closed",
+        "symbol": "PROS-USDT",
+        "pnl_usdt": -0.49265100000000084,
+        "reason": "PANIC",
+        "strategy": "MANUAL"
+    },
+    {
+        "time": 1795578567.9516292,
+        "event": "full_sale_verified_or_dust",
+        "symbol": "PROS-USDT",
+        "remaining_base": 0.00177,
+        "remaining_value_usdt": 0.001141473,
+        "filled": 38.19
+    },
+    {
+        "time": 1795578572.057749,
+        "event": "ai_sell_review",
+        "symbol": "PROS-USDT",
+        "review": {
+            "review": "The trade exited at an average price of 0.6449\u202fUSDT, resulting in a realized loss of approximately 0.493\u202fUSDT on the position. The exit was triggered by panic rather than a systematic signal, and only a small residual base (0.00177\u202fPROS) remains. The loss magnitude relative to the position size suggests the exit was premature and not aligned with risk management protocols.",
+            "lesson": "Avoid panic\u2011driven exits; adhere to predefined stop\u2011loss or signal\u2011based exit criteria. Ensure that any decision to close a position is supported by quantitative triggers rather than emotional responses. Maintain discipline to protect capital and reduce unnecessary losses.",
+            "confidence": "medium"
+        }
+    },
+    {
+        "time": 1795578598.820054,
+        "event": "ai_manual_buy_review",
+        "symbol": "BLESS-USDT",
+        "review": {
+            "risk_level": "moderate",
+            "warning": "BTC market filter active and BTC is below its 50\u2011hour average, indicating broader bearish pressure. Proceed with caution.",
+            "summary": "Manual buy of 24.61\u202fUSDT of BLESS\u2011USDT at 0.0175104 is modest in size. RSI near 50 suggests no strong momentum, but the BTC\u2011related market filter signals potential downside risk. Consider waiting for clearer bullish signals or reducing position size."
+        }
     }
 ]

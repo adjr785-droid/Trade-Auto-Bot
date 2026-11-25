@@ -284,5 +284,13 @@
         "time": 1795559261.1907623,
         "reason": "PANIC",
         "strategy": "MANUAL"
+    },
+    {
+        "sym": "PROS-USDT",
+        "pnl": -0.49265100000000084,
+        "fee": 0.049257,
+        "time": 1795578567.5055482,
+        "reason": "PANIC",
+        "strategy": "MANUAL"
     }
 ]
