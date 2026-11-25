@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690733,
+    "last_update_id": 935690736,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -71,16 +71,47 @@
     "radar": [
         "MON-USDT"
     ],
-    "audit_down": {
-        "Buyer": "Core charter integrity mismatch"
-    },
-    "audit_last": 1795598759.6498227,
-    "audit_ai_cls": "OTHER",
+    "audit_down": {},
+    "audit_last": 1795599243.511251,
+    "audit_ai_cls": "",
     "perf_breaker": {
         "until": 1795645210.5830717,
         "since": 1795558810.5830717,
         "loss": -1.4850249000000058
     },
     "kb_mid": 5991,
-    "panel_hidden": true
+    "out_text": "\ud83d\udfe1 *MANUAL BUY*\n_Passed at least 5/7 core and 2/3 additional criteria. Manual review only._\n\nNone right now.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_mode": "Markdown",
+    "out_time": 1795599251.2782543,
+    "out_mid": 5995,
+    "panel_mid": 5996,
+    "panel_rows": [
+        [
+            {
+                "text": "\ud83d\uded2 Trade",
+                "callback_data": "m:tl:trade"
+            },
+            {
+                "text": "\ud83d\udd14 Alerts",
+                "callback_data": "m:tl:alerts"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udd0d Scan",
+                "callback_data": "m:tl:scan"
+            },
+            {
+                "text": "\ud83d\udee0\ufe0f System",
+                "callback_data": "m:tl:sys"
+            }
+        ],
+        [
+            {
+                "text": "\u2b05\ufe0f Main Menu",
+                "callback_data": "m:menu"
+            }
+        ]
+    ],
+    "panel_text": "\ud83e\uddf0 *TOOLS*\nChoose a group."
 }

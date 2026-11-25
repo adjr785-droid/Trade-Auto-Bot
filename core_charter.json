@@ -3,7 +3,8 @@
     "mission": "Bitget spot trading; preserve capital, follow approved strategy logic, audit decisions and operational faults.",
     "strategies": [
         "TREND",
-        "OVERSOLD",
+        "PULLBACK",
+        "BOUNCE",
         "BREAKOUT"
     ],
     "constraints": [
