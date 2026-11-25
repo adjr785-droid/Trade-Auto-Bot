@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690597,
+    "last_update_id": 935690599,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -40,8 +40,8 @@
             1795380739.3167899
         ],
         "m:scan_hist": [
-            3,
-            1795571837.3977456
+            2,
+            1795578057.4419413
         ],
         "m:ai:1": [
             1,
@@ -90,7 +90,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "1/16",
+                "text": "3/16",
                 "callback_data": "pg:x"
             },
             {
@@ -109,7 +109,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/16*",
+    "panel_text": "\ud83d\udcc4 *Page 3/16*",
     "pages": {
         "p": [
             "\ud83d\udd0e *SCAN HISTORY* \u00b7 462/462 coins (first 150)\n24 scans \u00b7 9.6h\n```\nCOIN    RSI    1H WHY\n------------------------------\nBTC      37     - Top 15\nETH      35     - Top 15\nSOL      35     - Top 15\nDOGE     38     - Top 15\nUSDGO    66     - Top 15\n```\n\u2800",
@@ -129,7 +129,7 @@
             "```\nTIA      33     - Vol low\nPRL      30     - Vol low\nUP       28     - Vol low\nBILL     33     - Vol low\nUPC      41     - Vol low\nSTRK     30     - Vol low\nMAGMA    41     - Vol low\nBSB      32     - Vol low\nLDO      34     - Vol low\nSTETH    37     - Vol low\n```",
             "```\nUS       32     - Vol low\nALIGN    35     - Vol low\nOP       35     - Vol low\nMHA      56     - Vol low\nHUMA     32     - Vol low\n```\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 0,
+        "i": 2,
         "mode": "Markdown",
         "x": [
             {
