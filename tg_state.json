@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT25.20/\u20a634,446",
+    "kb_ph": "USDT25.18/\u20a634,415",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -183,7 +183,7 @@
         ]
     ],
     "panel_text": "\u2795 *MORE COINS* (page 2/26)\nBiggest 24h volume first. Tap a coin.",
-    "kb_mid": 5721,
+    "kb_mid": 5722,
     "out_mid": 5716,
     "panel_mid": 5717
 }
