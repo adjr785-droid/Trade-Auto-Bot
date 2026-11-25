@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690711,
+    "last_update_id": 935690713,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -17,7 +17,7 @@
         "pos": [],
         "hn": 31
     },
-    "last_cmd": "m:r:holdings",
+    "last_cmd": "/stats",
     "page_mem": {
         "/bot": [
             1,
@@ -80,42 +80,50 @@
         "loss": -1.4850249000000058
     },
     "kb_mid": 5924,
-    "out_text": "\ud83d\udfe1 *MANUAL BUY*\n_Passed at least 5/7 core and 2/3 additional criteria. Manual review only._\n\nNone right now.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "\ud83d\udcc8 *TRADE STATS* (after estimated fees)\nClosed trades: 43\nWin rate: 53% (23 wins, 20 losses)\nAverage win: $+0.41 | Average loss: $-0.23\nProfit factor: 2.07\nExpectancy per trade: $+0.11\nNet profit: $+4.85\nBest: $+2.97 | Worst: $-0.70\n\n*By strategy*\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udc41 Watch (0)",
-                "callback_data": "m:at:W"
+                "text": "\u25c0",
+                "callback_data": "pg:p"
             },
             {
-                "text": "\u25b6 \ud83d\udfe1 Manual (0)",
-                "callback_data": "m:at:M"
+                "text": "1/3",
+                "callback_data": "pg:x"
             },
             {
-                "text": "\ud83e\udd16 Auto (0)",
-                "callback_data": "m:at:A"
-            }
-        ],
-        [
-            {
-                "text": "\ud83c\udd95 NEW LISTINGS",
-                "callback_data": "m:nl"
+                "text": "\u25b6",
+                "callback_data": "pg:n"
             },
             {
-                "text": "\ud83d\uddc4 ARCHIVE",
-                "callback_data": "m:ar:D"
-            }
-        ],
-        [
+                "text": "\ud83c\udfe0",
+                "callback_data": "m:menu"
+            },
             {
-                "text": "\ud83d\udd04 Refresh",
-                "callback_data": "m:at:M"
+                "text": "\ud83d\udd04",
+                "callback_data": "rf:go"
             }
         ]
     ],
-    "panel_text": "\ud83d\udc47 *Actions*",
-    "out_mid": 5928,
-    "out_time": 1795582969.7176995,
-    "panel_mid": 5929
+    "panel_text": "\ud83d\udcc4 *Page 1/3*",
+    "out_time": 1795582999.669014,
+    "out_mid": 5931,
+    "pages": {
+        "p": [
+            "\ud83d\udcc8 *TRADE STATS* (after estimated fees)\nClosed trades: 43\nWin rate: 53% (23 wins, 20 losses)\nAverage win: $+0.41 | Average loss: $-0.23\nProfit factor: 2.07\nExpectancy per trade: $+0.11\nNet profit: $+4.85\nBest: $+2.97 | Worst: $-0.70\n\n*By strategy*\n\u2800\n\u2800",
+            "MANUAL: 34 trades | win 59% | avg $+0.18 | total $+6.13\nBREAKOUT: 1 trades | win 100% | avg $+0.10 | total $+0.10\nOLDER: 2 trades | win 0% | avg $-0.15 | total $-0.29\nOTHER: 6 trades | win 33% | avg $-0.18 | total $-1.09\n\n\ud83d\udd2c *RULE RESULTS* (what coins did after each stage)\n\ud83d\udc41 Watch: collecting data\n\ud83d\udfe1 Manual: collecting data\n\ud83e\udd16 Auto: collecting data\nWin = beats round-trip fees at 4h. Needs a few days of scans to mean anything.\n\u2800\n\u2800",
+            "\n\ud83e\udde0 *AI:* Overall win rate is modest (53%) with a strong profit factor (2.07),\nbut average profit per trade is low (+$0.11) and some strategies show negative\nresults, so confidence is limited.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+        ],
+        "i": 0,
+        "mode": "Markdown",
+        "x": [
+            {
+                "text": "\ud83d\udd04",
+                "callback_data": "rf:go"
+            }
+        ],
+        "cmd": "/stats"
+    },
+    "panel_mid": 5932
 }
