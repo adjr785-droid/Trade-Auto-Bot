@@ -2612,5 +2612,10 @@
         "time": 1795563245.8593953,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 4.4473, 'recurring_patterns': ['High frequency of PANIC exits', 'Repeated 15-MINUTE NO-UPWARD-TREND ROTATION triggers', 'Multiple MANUAL SELL actions', 'Occasional TRAILING STOP usage'], 'recommendations': ['Reduce reliance on PANIC-driven exits; implement stricter volatility filters', 'Consider extending observation window beyond 15 minutes before rotating positions', 'Limit manual sell interventions to predefined profit/loss thresholds', 'Review trailing stop parameters to avoid premature exits', 'Overall adopt a more conservative position sizing to mitigate downside risk']}"
+    },
+    {
+        "time": 1795566387.5542386,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 4.4473, 'recurring_patterns': {'PANIC': 5, '15-MINUTE NO-UPWARD-TREND ROTATION': 5, 'MANUAL SELL': 4, 'TRAILING STOP': 1, 'RSI 75': 1, 'PARTIAL PROFIT +10.4%': 1, 'UNKNOWN': 9}, 'recommendations': ['Reduce reliance on PANIC exits; they correlate with higher loss magnitude.', 'Investigate the 15\u2011minute no\u2011upward\u2011trend rotation signal; mixed outcomes suggest refinement before continued use.', 'Apply stricter manual sell criteria; current manual exits show both small gains and sizable losses.', 'Consider implementing tighter risk limits on high\u2011volatility symbols (e.g., WLD\u2011USDT, JCT\u2011USDT) where large negative PnL occurred.', 'Maintain current win\u2011rate monitoring but prioritize improving average win size over win count.']}"
     }
 ]
