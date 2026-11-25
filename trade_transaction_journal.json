@@ -2969,5 +2969,10 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795594771.0074127,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $1.49; auto-buy paused for 14.0h', 'attention': [{'symbol': 'MON-USDT', 'action': 'hold', 'reason': 'Small positive PnL (+0.96%) and price above entry; stop is close but still provides downside protection. Monitor for further upside.'}, {'symbol': 'PUMP-USDT', 'action': 'consider reducing position or tightening stop', 'reason': 'Negative PnL (-1.28%) and price is near the current stop (0.002349). Market volatility may push it below stop; tightening stop or exiting reduces further loss.'}], 'summary': 'Overall portfolio risk remains elevated due to recent losses and auto-buy pause. BTC filter is active, so avoid new BTC exposure. Maintain MON position with current stop, but actively manage PUMP by tightening stop or exiting to limit downside. Remain conservative and monitor market conditions closely.'}"
     }
 ]

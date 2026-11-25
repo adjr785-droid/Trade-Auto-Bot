@@ -4,8 +4,6 @@
         1,
         1,
         1,
-        1,
-        1,
         0,
         1,
         1,
@@ -19,7 +17,9 @@
         0,
         1,
         1,
-        1
+        1,
+        1,
+        0
     ],
     "e": [
         [
@@ -64,6 +64,11 @@
         ],
         [
             1795593506.524205,
+            "OTHER",
+            "performance_review: Expecting ',' delimiter: line 1 column 735 (char 734)"
+        ],
+        [
+            1795594771.8449872,
             "OTHER",
             "performance_review: Expecting ',' delimiter: line 1 column 735 (char 734)"
         ]
