@@ -300,5 +300,13 @@
         "time": 1795580612.39996,
         "reason": "MANUAL SELL ALL",
         "strategy": "MANUAL"
+    },
+    {
+        "sym": "PUMP-USDT",
+        "pnl": -0.14296534000000125,
+        "fee": 0.049384,
+        "time": 1795588933.4064004,
+        "reason": "PANIC",
+        "strategy": "MANUAL"
     }
 ]
