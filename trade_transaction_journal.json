@@ -3026,5 +3026,15 @@
         "event": "ai_coin_advisory",
         "reviewed": 24,
         "source": "coins.db"
+    },
+    {
+        "time": 1795605225.2191954,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily drawdown -6.1% exceeds limit of -5%. Risk is elevated.', 'attention': [{'symbol': 'MON-USDT', 'action': 'monitor', 'reason': 'Position is 271 days old, down 4.79% with price near stop (0.009788). Consider tightening stop or reducing size if risk tolerance is low.'}], 'summary': 'Overall portfolio risk is above the defined limit. The only open position (MON-USDT) is aging and underperforming, approaching its stop level. Recommend reviewing risk controls, possibly adjusting stop loss or exiting to bring drawdown back within the -5% threshold. No new orders are suggested.'}"
+    },
+    {
+        "time": 1795605225.8798933,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 53.33, 'net_pnl_usdt': 0.4815, 'recurring_patterns': {'most_common_reasons': ['PANIC', 'MANUAL SELL ALL', '15-MINUTE NO-UPWARD-TREND ROTATION'], 'reason_frequencies': {'PANIC': 6, 'MANUAL SELL ALL': 4, '15-MINUTE NO-UPWARD-TREND ROTATION': 4}}, 'recommendations': ['Review and tighten panic\u2011sell triggers to avoid frequent small losses', 'Consider limiting manual sell orders to stronger signals or profit targets', 'Monitor 15\u2011minute no\u2011upward\u2011trend rotations; they yield mixed results and may need stricter entry criteria']}"
     }
 ]
