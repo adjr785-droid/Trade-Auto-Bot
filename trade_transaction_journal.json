@@ -2810,5 +2810,15 @@
         "time": 1795580618.8255396,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 3.5972, 'recurring_patterns': {'15-MINUTE NO-UPWARD-TREND ROTATION': 5, 'PANIC': 5, 'MANUAL SELL ALL': 3, 'MANUAL SELL $': 3, 'TRAILING STOP (8.0%)': 1, 'PARTIAL PROFIT +10.4%': 1, 'RSI 75': 1}, 'recommendations': '- Limit reliance on panic exits; they contributed multiple losses. - Review the 15\u2011minute no\u2011upward\u2011trend rotation signal, as it generated mixed results. - Consider tighter stop\u2011loss or trailing\u2011stop parameters to avoid large negative PnL (e.g., -0.69 on JCT\u2011USDT). - Increase sample size before scaling strategy; current win rate is modest and net PnL is low. - Maintain current partial\u2011profit take\u2011profit approach that yielded a +1.11 USDT trade, but apply it more consistently.'}"
+    },
+    {
+        "time": 1795580675.0246212,
+        "event": "ai_manual_buy_review",
+        "symbol": "PUMP-USDT",
+        "review": {
+            "risk_level": "medium",
+            "warning": "The market filter indicates BTC is below its 50\u2011hour average, which may suggest downward momentum. RSI is near neutral (46.19), offering no strong over\u2011bought signal. The trade size is small (\u2248$24.86), but the asset PUMP-USDT is likely volatile. Proceed with caution and consider tighter stop\u2011losses.",
+            "summary": "Given the modest trade size and mixed technical signals, a cautious approach is recommended. Verify liquidity and recent price action before executing the manual buy."
+        }
     }
 ]

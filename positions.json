@@ -1,1 +1,14 @@
-{}
+{
+    "PUMP-USDT": {
+        "entry_price": 0.002432,
+        "safe_zone": 0.002432,
+        "stop_loss": 0.002357,
+        "peak_price": 0.002432,
+        "last_price": 0.002432,
+        "opened_at": 1795580667.101294,
+        "sl_pct": 3.1,
+        "strategy": "MANUAL",
+        "purchase_source": "MANUAL",
+        "xsl": 0.002357
+    }
+}
