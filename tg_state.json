@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT32.55/\u20a644,497",
+    "kb_ph": "USDT32.36/\u20a644,229",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -73,12 +73,48 @@
         "COLLECT-USDT"
     ],
     "audit_down": {},
-    "audit_last": 1795622383.1131632,
+    "audit_last": 1795623520.48603,
     "audit_ai_cls": "",
     "perf_breaker": {
         "until": 1795645210.5830717,
         "since": 1795558810.5830717,
         "loss": -1.4850249000000058
     },
-    "kb_mid": 6132
+    "kb_mid": 6135,
+    "out_mid": 6133,
+    "out_text": "\ud83d\udcbc *HOURLY HOLDINGS*\n\ud83d\udcbc *PORTFOLIO* $32.55 | \u20a644,497\n\ud83d\udcb5 Cash free $0.03 | In coins $32.47 (100%)\n\ud83d\udfe1 BGB 0.00011912253 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udd34 *BLESS* $32.47 (100%)\n-2.97% (-$0.99) | Entry 0.016691\nQty 2005.0867 | Price 0.016195 | Stop 0.015022 (-7%)\nRSI 47 | Mixed | ATH -93%\n\n\u2800\n\u2800",
+    "out_mode": "Markdown",
+    "out_time": 1795623520.1617808,
+    "pages": {
+        "p": [
+            "\ud83d\udcbc *HOURLY HOLDINGS*\n\ud83d\udcbc *PORTFOLIO* $32.55 | \u20a644,497\n\ud83d\udcb5 Cash free $0.03 | In coins $32.47 (100%)\n\ud83d\udfe1 BGB 0.00011912253 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udd34 *BLESS* $32.47 (100%)\n-2.97% (-$0.99) | Entry 0.016691\nQty 2005.0867 | Price 0.016195 | Stop 0.015022 (-7%)\nRSI 47 | Mixed | ATH -93%\n\n\u2800\n\u2800",
+            "\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\nand 8 more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT32.55/\u20a644,497\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+        ],
+        "i": 0,
+        "mode": "Markdown",
+        "x": [],
+        "cmd": null
+    },
+    "panel_mid": 6134,
+    "panel_rows": [
+        [
+            {
+                "text": "\u25c0",
+                "callback_data": "pg:p"
+            },
+            {
+                "text": "1/2",
+                "callback_data": "pg:x"
+            },
+            {
+                "text": "\u25b6",
+                "callback_data": "pg:n"
+            },
+            {
+                "text": "\ud83c\udfe0",
+                "callback_data": "m:menu"
+            }
+        ]
+    ],
+    "panel_text": "\ud83d\udcc4 *Page 1/2*"
 }
