@@ -1,23 +1,23 @@
 {
     "r": [
         1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
         0,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
-        1,
         1,
         1
     ],
@@ -96,6 +96,11 @@
             1795620376.9741614,
             "OTHER",
             "coin_advisory: Expecting ',' delimiter: line 102 column 6 (char 3230)"
+        ],
+        [
+            1795626227.1262853,
+            "OTHER",
+            "coin_advisory: Expecting ',' delimiter: line 82 column 6 (char 2738)"
         ]
     ]
 }
