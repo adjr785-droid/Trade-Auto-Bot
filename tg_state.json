@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935690665,
+    "last_update_id": 935690666,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT25.09/\u20a634,288",
+    "kb_ph": "USDT25.25/\u20a634,519",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -17,7 +17,7 @@
         "pos": [],
         "hn": 31
     },
-    "last_cmd": "/bot",
+    "last_cmd": "m:r:holdings",
     "page_mem": {
         "/bot": [
             1,
@@ -79,53 +79,50 @@
         "since": 1795558810.5830717,
         "loss": -1.4850249000000058
     },
-    "kb_mid": 5862,
-    "out_text": "\ud83d\udfe1 *MANUAL BUY*\n_Passed at least 5/7 core and 2/3 additional criteria. Manual review only._\n\nNone right now.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "kb_mid": 5866,
+    "out_text": "\ud83d\udcbc *PORTFOLIO* $25.25 | \u20a634,519\n\ud83d\udcb5 Cash free $0.02 | In coins $25.15 (100%)\n\ud83d\udfe1 BGB 0.00010697253 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *BLESS* $25.15 (100%)\n+2.28% (+$0.56) | Entry 0.017492\nPrice 0.017890 | Stop 0.015743 (-12%)\nRSI 53 | Mixed | ATH -93%\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udda5 System",
-                "callback_data": "/bot"
+                "text": "\u25c0",
+                "callback_data": "pg:p"
             },
             {
-                "text": "\ud83d\udcc8 Stats",
-                "callback_data": "/stats"
-            }
-        ],
-        [
-            {
-                "text": "\u2699\ufe0f Settings",
-                "callback_data": "m:set"
+                "text": "1/2",
+                "callback_data": "pg:x"
             },
             {
-                "text": "\ud83d\udcbc Holdings",
-                "callback_data": "m:r:holdings"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udcdc Trade History",
-                "callback_data": "m:r:history"
+                "text": "\u25b6",
+                "callback_data": "pg:n"
             },
             {
-                "text": "\ud83e\udde0 Ask AI",
-                "callback_data": "m:ai:1"
-            }
-        ],
-        [
-            {
-                "text": "\ud83e\uddf9 Clear Chat",
-                "callback_data": "/clear"
+                "text": "\ud83c\udfe0",
+                "callback_data": "m:menu"
             },
             {
-                "text": "\ud83d\udea8 PANIC SELL",
-                "callback_data": "/panic"
+                "text": "\ud83d\udd04",
+                "callback_data": "rf:go"
             }
         ]
     ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
-    "out_mid": 5860,
-    "out_time": 1795580308.3197997,
-    "panel_mid": 5861
+    "panel_text": "\ud83d\udcc4 *Page 1/2*",
+    "out_time": 1795580339.3672156,
+    "out_mid": 5864,
+    "pages": {
+        "p": [
+            "\ud83d\udcbc *PORTFOLIO* $25.25 | \u20a634,519\n\ud83d\udcb5 Cash free $0.02 | In coins $25.15 (100%)\n\ud83d\udfe1 BGB 0.00010697253 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *BLESS* $25.15 (100%)\n+2.28% (+$0.56) | Entry 0.017492\nPrice 0.017890 | Stop 0.015743 (-12%)\nRSI 53 | Mixed | ATH -93%\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\n\u2800\n\u2800",
+            "and 8 more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT25.25/\u20a634,519\n\n\ud83e\udde0 *AI:* Portfolio totals $25.25 (\u2248\u20a934,519) with $0.02 cash and $25.15 in\nBLESS; several tokens lack USDT pricing, indicating valuation gaps that should\nbe reviewed before any action.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+        ],
+        "i": 0,
+        "mode": "Markdown",
+        "x": [
+            {
+                "text": "\ud83d\udd04",
+                "callback_data": "rf:go"
+            }
+        ],
+        "cmd": "m:r:holdings"
+    },
+    "panel_mid": 5865
 }
