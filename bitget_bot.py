@@ -428,7 +428,7 @@ def menu():
  bot_keys=layout_bottom()
  btns=[b(lbl(k),d) for k,l,d in LAYOUT_ITEMS if k not in bot_keys and k!='an']
  ui_send("🕹️ *MENU*\nSelect an option below.",[btns[i:i+2] for i in range(0,len(btns),2)])
-def panic_prompt():_send("🚨 *CONFIRM PANIC*\nThis sells ALL positions at market and pauses auto-buy.\nConfirm within 15 minutes.","Markdown",{"inline_keyboard":[[{"text":"✅ YES, SELL EVERYTHING","callback_data":"panic_confirm"},{"text":"❌ Cancel","callback_data":"panic_cancel"}]]})
+def panic_prompt():_send("🚨 *CONFIRM PANIC*\nThis sells ALL positions at market.\nConfirm within 15 minutes.","Markdown",{"inline_keyboard":[[{"text":"✅ YES, SELL EVERYTHING","callback_data":"panic_confirm"},{"text":"❌ Cancel","callback_data":"panic_cancel"}]]})
 def load(f,d=None):
  d=[] if f==HIST else ({} if d is None else d)
  try:
@@ -458,6 +458,7 @@ def cfg():
  if not s.get('setups_v1'):s['oversold_enabled']=True;s['setups_v1']=True;save(CFG,s)
  if 'partial_tp_pct' in s or 'partial_tp_fraction' in s:s.pop('partial_tp_pct',None);s.pop('partial_tp_fraction',None);save(CFG,s)
  if not s.get('auto_mode_v1'):s['auto_buy_enabled']=True;s['auto_mode_v1']=True;save(CFG,s)
+ if not s.get('auto_dyn_v1'):s['auto_buy_enabled']=True;s['auto_dyn_v1']=True;save(CFG,s)   # Auto-buy is dynamic: no Settings switch; it buys whenever the set rules are met
  return s
 def in_cd(k,s=5):return time.time()-load(CD,{}).get(k,0)<s
 def mk_cd(k):d=load(CD,{});d[k]=time.time();save(CD,d)
@@ -1053,8 +1054,8 @@ def panic_sell():
  for sym in list(db):
   if sell(sym,1.0,"PANIC"):db.pop(sym,None)
   else:failed.append(sym)
- save(DB,db);save(QF,{});s=cfg();s['auto_buy_enabled']=False;save(CFG,s)
- tg(f"⚠️ *PANIC INCOMPLETE.* Still held: `{', '.join(failed)}`\nAuto-buy PAUSED." if failed else "🛑 *PANIC COMPLETE.* All positions sold. Auto-buy PAUSED.")
+ save(DB,db);save(QF,{})
+ tg(f"⚠️ *PANIC INCOMPLETE.* Still held: `{', '.join(failed)}`" if failed else "🛑 *PANIC COMPLETE.* All positions sold.")
 def get_bitget_ath_atl(sym):
  cache=load(ATHATL_CACHE,{})
  now=time.time()
@@ -1397,7 +1398,6 @@ def system_layers(s,exchange_ok=True,held=(),db=None):
  return L
 def system_buy_state(s):
  try:
-  if not s.get('auto_buy_enabled'):return "PAUSED ⛔ (auto-buy is off)"
   ok,why=risk_controls()
   if not ok:return f"PAUSED ⛔ ({str(why)[:60]})"
   if btc_blocked(s):return "PAUSED ⛔ (BTC filter)"
@@ -2057,9 +2057,6 @@ def loss_streak_adjust(sp,s):
 def exec_q():
  q=load(QF);db=load(DB);s=cfg();mx=s["max_tokens_before_consolidation"]
  if not q:return
- if not s["auto_buy_enabled"]:
-  for sym in q:buy_rejection(sym,"Auto-buy paused.")
-  return
  if btc_blocked(s):
   for sym in q:buy_rejection(sym,"BTC filter active.")
   return
@@ -2991,12 +2988,12 @@ def scan(force=False):
  st=load(SC);now=time.time();_t0=time.time()
  iv=max(1.0,float(cfg().get('scan_interval_minutes',15) or 15))
  if not force and now-st.get('last',0)<max(60,iv*60-30):return
- db=load(DB);q=load(QF);s=cfg();ai_market=ai_market_context(s);guardian_ok,guardian_reason=guardian_audit();auto_enabled=bool(s.get("auto_buy_enabled")) and guardian_ok;btc_is_blocked=btc_blocked(s) if auto_enabled else False
+ db=load(DB);q=load(QF);s=cfg();ai_market=ai_market_context(s);guardian_ok,guardian_reason=guardian_audit();auto_enabled=guardian_ok;btc_is_blocked=btc_blocked(s) if auto_enabled else False
  mf=market_filter(s) if auto_enabled and not btc_is_blocked else ""
  if mf and not cd("mktblock",21600):tg(f"⏸ *MARKET FILTER:* {mf}.")
  rbh=float(s.get('rebuy_cooldown_hours',6.0))
  buying_allowed=auto_enabled and not btc_is_blocked and not mf
- block_reason=(f"Guardian integrity check: {guardian_reason}" if not guardian_ok else "automatic buying is paused" if not auto_enabled else "BTC safety filter blocked buying" if btc_is_blocked else f"market filter: {mf}" if mf else "")
+ block_reason=(f"Guardian integrity check: {guardian_reason}" if not guardian_ok else "BTC safety filter blocked buying" if btc_is_blocked else f"market filter: {mf}" if mf else "")
  try:tk=ex.fetch_tickers();mk=ex.load_markets()
  except Exception as e:print(f"SCAN ERROR: {e}");tg(f"⚠️ *SCAN FAILED:* {e}");return
  try:discover_new_spot_pairs(mk,tk,interval_seconds=900,max_probe=20)
@@ -3176,11 +3173,11 @@ def cmd_set(txt):
  if k=="rsi_max" and new<=s.get("rsi_min",1):tg("❌ rsi_max must be higher than rsi_min.");return
  s[k]=new;save(CFG,s);tg(f"✅ `{k}` = `{new}`")
 def setc(k,v,m):s=cfg();s[k]=v;save(CFG,s);tg(m)
-MSG={"ai_info":"🧠 *AI ANALYST*\nTo ask the AI a question, type:\n`/ai <your question>`","/help":"🤖 *CMDS*\n`/menu` `/ai [q]` `/analyse` (top 3) `/analyse COIN` `/audit` `/cancel`\n`/bot` `/holdings` `/stats`\n`/clear` `/dust` `/alert COIN PRICE` `/alerts` `/cancel\\_alerts`\n`/scan_history [coin/filter]`\n`/set key value` `/pause` `/resume` `/panic`"}
+MSG={"ai_info":"🧠 *AI ANALYST*\nTo ask the AI a question, type:\n`/ai <your question>`","/help":"🤖 *CMDS*\n`/menu` `/ai [q]` `/analyse` (top 3) `/analyse COIN` `/audit` `/cancel`\n`/bot` `/holdings` `/stats`\n`/clear` `/dust` `/alert COIN PRICE` `/alerts` `/cancel\\_alerts`\n`/scan_history [coin/filter]`\n`/set key value` `/panic`"}
 _UI={"mid":None,"edit_mode":False,"panel_used":False}
 _B=lambda t,c:{"text":t,"callback_data":c}
 _MENU_BTN=[_B("⬅️ Menu","m:menu")]
-RUN={"scan":"/scan","sync":"/sync","holdings":"/holdings","analyse":"/analyse","alerts":"/alerts","cancelalerts":"/cancel_alerts","dust":"/dust","bot":"/bot","audit":"/audit","stats":"/stats","clear":"/clear","pause":"/pause","resume":"/resume","cancel":"/cancel","pricealert":"/alerts","airesume":"/ai_resume"}
+RUN={"scan":"/scan","sync":"/sync","holdings":"/holdings","analyse":"/analyse","alerts":"/alerts","cancelalerts":"/cancel_alerts","dust":"/dust","bot":"/bot","audit":"/audit","stats":"/stats","clear":"/clear","cancel":"/cancel","pricealert":"/alerts","airesume":"/ai_resume"}
 AI_Q={"1":"Give me a market overview.","2":"Review my current holdings and say which to hold or sell.","3":"Which single coin looks best to buy right now and why?","4":"What is the biggest risk in my portfolio right now?","5":"Which of my open positions is closest to its stop-loss, and is that a concern?","6":"Is the market safe for buying right now? Consider the BTC filter.","7":"Summarise my recent trading results and what to improve.","8":"What should I watch out for in the next 24 hours?"}
 def ui_send(text,rows):_panel(text,rows)
 def _grid(btns,n=3):return [btns[i:i+n] for i in range(0,len(btns),n)]
@@ -3221,7 +3218,7 @@ PRESETS={"safe":{"risk_per_trade_pct":0.5,"max_position_pct":8.0,"max_portfolio_
  "balanced":{"risk_per_trade_pct":0.5,"max_position_pct":15.0,"max_portfolio_exposure_pct":50.0,"max_daily_trades":13},
  "active":{"risk_per_trade_pct":0.5,"max_position_pct":20.0,"max_portfolio_exposure_pct":60.0,"max_daily_trades":25}}
 PRESET_NAMES={"safe":"🛡 Safe","balanced":"⚖️ Balanced","active":"🚀 Active"}
-SET_SWITCHES=(("auto_buy_enabled","Auto-buy"),("rising_guard","Falling-knife guard"),("weak_market_mode","Weak-market half size"),("h1_all_setups","1H rule for all setups"),("half_or_all_sizing","50% / all-in sizing"))
+SET_SWITCHES=(("rising_guard","Falling-knife guard"),("weak_market_mode","Weak-market half size"),("h1_all_setups","1H rule for all setups"),("half_or_all_sizing","50% / all-in sizing"))
 def ui_settings_page(pg=0,note=""):
  cur=cfg();mode=next((n for n,v in PRESETS.items() if all(float(cur.get(k,-1))==float(x) for k,x in v.items())),None)
  rows=[[_B(("✅ " if n==mode else "")+PRESET_NAMES[n],f"m:pre:{n}") for n in PRESETS]]
@@ -3342,7 +3339,7 @@ def ui_cb(t):
    ui_send("🧰 *TOOLS*\nChoose a group.",[[_B("🛒 Trade","m:tl:trade"),_B("🔔 Alerts","m:tl:alerts")],[_B("🔍 Scan","m:tl:scan"),_B("🛠️ System","m:tl:sys")],[_B("⬅️ Main Menu","m:menu")]])
   elif a=="tl" and len(p)>2:
    _T=[_B("⬅️ Tools","m:tools"),_B("🏠 Main Menu","m:menu")]
-   if p[2]=="trade":ui_send("🛒 *TRADE*",[[_B("🛒 Buy","m:buy"),_B("💸 Sell","m:sell")],[_B("❌ Cancel Open Orders","m:r:cancel"),_B("🧹 Dust → BGB","m:r:dust")],[_B("🔄 Sync manual coins","m:r:sync")],[_B("⏸ Pause auto-buy","m:r:pause"),_B("▶️ Resume auto-buy","m:r:resume")],_T])
+   if p[2]=="trade":ui_send("🛒 *TRADE*",[[_B("🛒 Buy","m:buy"),_B("💸 Sell","m:sell")],[_B("❌ Cancel Open Orders","m:r:cancel"),_B("🧹 Dust → BGB","m:r:dust")],[_B("🔄 Sync manual coins","m:r:sync")],_T])
    elif p[2]=="alerts":ui_send("🔔 *ALERTS*",[[_B("🔔 Set alert","m:al"),_B("📋 My alerts","m:r:alerts")],[_B("🗑 Cancel all alerts","m:r:cancelalerts")],_T])
    elif p[2]=="scan":ui_send("🔍 *SCAN*",[[_B("🔍 Scan now","m:r:scan"),_B("🧾 Scan History","m:scan_hist")],[_B("📚 Coin List","m:coins")],_T])
    elif p[2]=="sys":ui_send("🛠️ *SYSTEM*",[[_B("🛠️ Audit","m:r:audit"),_B("🧩 Layout","m:lay")],[_B("🧠 Resume AI Mode","m:r:airesume")],_T])
@@ -3429,8 +3426,6 @@ def handle(t,age):
  elif l.startswith("/buy"):cmd_buy(t)
  elif l.startswith("/sell"):cmd_sell(t)
  elif l.startswith("/set"):cmd_set(t)
- elif l=="/pause":setc('auto_buy_enabled',False,"⏸ Auto-buy paused.")
- elif l in ("/resume","▶️ resume"):setc('auto_buy_enabled',True,"▶️ Auto-buy resumed.")
  elif l in ("🧠 ask ai", "ai_info"):_send(MSG["ai_info"]+"\n\nOr tap a question:","Markdown",{"inline_keyboard":[[_B("📈 Market overview","m:ai:1"),_B("💼 Review my holdings","m:ai:2")],[_B("🏆 Best coin to buy","m:ai:3"),_B("⚠️ Biggest risk","m:ai:4")],[_B("🛑 Closest to stop","m:ai:5"),_B("🧭 Safe to buy now?","m:ai:6")],[_B("📊 My results","m:ai:7"),_B("👀 Next 24 hours","m:ai:8")]]})
 _AI_CMD={"/holdings":"holdings","/portfolio":"holdings","💼 holdings":"holdings","💰 balance":"holdings","/balance":"holdings","/stats":"performance stats","/alerts":"price alerts","/audit":"system audit","/scan_history":"scan history","m:r:history":"trade history"}
 _AICAP={"on":False,"buf":[]}
