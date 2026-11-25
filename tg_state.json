@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690762,
+    "last_update_id": 935690764,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -69,11 +69,11 @@
         ]
     },
     "radar": [
-        "GRAM-USDT"
+        "COLLECT-USDT"
     ],
     "audit_down": {},
-    "audit_last": 1795606824.1992211,
-    "audit_ai_cls": "",
+    "audit_last": 1795610850.5574508,
+    "audit_ai_cls": "OTHER",
     "perf_breaker": {
         "until": 1795645210.5830717,
         "since": 1795558810.5830717,
