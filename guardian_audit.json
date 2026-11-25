@@ -518,5 +518,19 @@
         "time": 1795594781.4810023,
         "healthy": true,
         "findings": []
+    },
+    {
+        "time": 1795598750.0288143,
+        "healthy": false,
+        "findings": [
+            "Core charter integrity mismatch"
+        ]
+    },
+    {
+        "time": 1795598759.8516638,
+        "healthy": false,
+        "findings": [
+            "Core charter integrity mismatch"
+        ]
     }
 ]
