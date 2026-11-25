@@ -2689,5 +2689,15 @@
         "time": 1795578231.8888373,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 4.4473, 'recurring_patterns': {'PANIC': 5, '15-MINUTE NO-UPWARD-TREND ROTATION': 5, 'MANUAL SELL': 5, 'TRAILING STOP': 1, 'RSI 75': 1, 'PARTIAL PROFIT +10.4%': 1}, 'recommendations': ['Reduce reliance on PANIC exits; they correlate with higher loss magnitude.', 'Investigate the 15\u2011minute no\u2011upward\u2011trend rotation signal; mixed outcomes suggest refinement before continued use.', 'Apply stricter criteria for manual sell actions; current manual sells show both small gains and sizable losses.', 'Consider implementing tighter risk limits on high\u2011volatility symbols (e.g., WLD\u2011USDT, JCT\u2011USDT) where large negative PnL occurred.', 'Maintain current win\u2011rate monitoring but prioritize risk\u2011adjusted metrics over raw win percentage.']}"
+    },
+    {
+        "time": 1795578514.6851196,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $1.49; auto-buy paused for 18.5h', 'attention': [{'symbol': 'PROS-USDT', 'action': 'hold', 'reason': 'Current PnL is -1.93% and price is near stop (0.6104). Holding avoids triggering stop loss while monitoring for reversal.'}], 'summary': 'Portfolio risk is elevated due to recent losses and auto\u2011buy pause. Existing PROS position is modestly down; maintain the position and reassess if price approaches the stop level or market conditions improve.'}"
+    },
+    {
+        "time": 1795578515.6184235,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 4.4473, 'recurring_patterns': {'PANIC': 5, '15-MINUTE NO-UPWARD-TREND ROTATION': 5, 'MANUAL SELL': 4, 'TRAILING STOP (8.0%)': 1, 'RSI 75': 1, 'PARTIAL PROFIT +10.4%': 1}, 'recommendations': 'Reduce reliance on PANIC exits; implement stricter trend validation before 15\u2011minute no\u2011upward\u2011trend rotations; consolidate manual sell triggers into a unified risk rule; consider tighter stop\u2011loss thresholds to limit large negative PnL events.'}"
     }
 ]

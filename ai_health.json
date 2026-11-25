@@ -18,12 +18,12 @@
             "last_failure": 1795339738.9050465,
             "failures": 2,
             "last_error": "",
-            "last_success": 1795578230.5096695,
-            "successes": 147
+            "last_success": 1795578514.0011237,
+            "successes": 148
         },
         "performance_review": {
-            "last_success": 1795578231.0313895,
-            "successes": 160,
+            "last_success": 1795578514.6875978,
+            "successes": 161,
             "last_error": "",
             "last_failure": 1795559590.1343617,
             "failures": 10
@@ -76,7 +76,7 @@
             "failures": 8
         }
     },
-    "last_stage_success": 1795578231.0313895,
+    "last_stage_success": 1795578514.6875978,
     "last_success": 1795578237.5888221,
     "emergency_ended": 1795560301.2779193,
     "recovery_start_alerted": false
