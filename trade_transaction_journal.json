@@ -3042,5 +3042,15 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795606817.4704852,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily drawdown -6.0% exceeds the -5% limit, indicating elevated risk.', 'attention': [{'symbol': 'MON-USDT', 'action': 'monitor', 'reason': 'Position is 4.7% loss and close to stop (0.009788). BTC filter active may affect correlated assets; consider tightening stop or reducing exposure if risk tolerance is low.'}], 'summary': 'Overall portfolio risk is above the defined limit. The only open position (MON-USDT) is underperforming and nearing its stop level. Recommend close monitoring, possible stop adjustment, or partial exit to bring daily drawdown back within the -5% threshold. No new entries are advised until risk is mitigated.'}"
+    },
+    {
+        "time": 1795606818.2255044,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 53.33, 'net_pnl_usdt': 0.4815, 'recurring_patterns': ['15-MINUTE NO-UPWARD-TREND ROTATION appears in 4 trades', 'PANIC appears in 7 trades', 'MANUAL SELL (including variations) appears in 6 trades', 'TRAILING STOP appears once', 'PARTIAL PROFIT appears once', 'RSI 75 appears once'], 'recommendations': ['Review and tighten criteria for PANIC exits to reduce loss frequency', 'Consider limiting exposure to 15\u2011minute trend signals that have produced mixed results', 'Implement stricter manual sell thresholds to avoid small\u2011loss churn', 'Monitor trailing\u2011stop parameters; current setting generated a sizable loss', 'Maintain current win\u2011rate focus but aim to improve net PnL by reducing high\u2011loss outliers']}"
     }
 ]
