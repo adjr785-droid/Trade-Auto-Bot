@@ -292,5 +292,13 @@
         "time": 1795578567.5055482,
         "reason": "PANIC",
         "strategy": "MANUAL"
+    },
+    {
+        "sym": "BLESS-USDT",
+        "pnl": 0.30036389800000096,
+        "fee": 0.049772,
+        "time": 1795580612.39996,
+        "reason": "MANUAL SELL ALL",
+        "strategy": "MANUAL"
     }
 ]

@@ -2787,5 +2787,28 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795580612.4018314,
+        "event": "trade_closed",
+        "symbol": "BLESS-USDT",
+        "pnl_usdt": 0.30036389800000096,
+        "reason": "MANUAL SELL ALL",
+        "strategy": "MANUAL"
+    },
+    {
+        "time": 1795580617.7552967,
+        "event": "ai_manual_sell_review",
+        "symbol": "BLESS-USDT",
+        "review": {
+            "review": "The position in BLESS-USDT was manually closed at an average exit price of 0.0177057, realizing a profit of approximately 0.3004\u202fUSDT on the sold quantity of 1,405.54 units. A small residual base amount (0.00376) remains unfilled, indicating the exit order may not have fully cleared the position. The manual nature of the sell suggests the decision was driven by discretionary judgment rather than a predefined trigger.",
+            "lesson": "Maintain clear exit criteria to avoid partial fills that leave residual balances. When manually intervening, verify that order size and market depth can accommodate the full position to prevent leftover exposure. Consider using limit orders with appropriate slippage buffers or scaling out gradually to manage liquidity constraints.",
+            "confidence": "high"
+        }
+    },
+    {
+        "time": 1795580618.8255396,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 3.5972, 'recurring_patterns': {'15-MINUTE NO-UPWARD-TREND ROTATION': 5, 'PANIC': 5, 'MANUAL SELL ALL': 3, 'MANUAL SELL $': 3, 'TRAILING STOP (8.0%)': 1, 'PARTIAL PROFIT +10.4%': 1, 'RSI 75': 1}, 'recommendations': '- Limit reliance on panic exits; they contributed multiple losses. - Review the 15\u2011minute no\u2011upward\u2011trend rotation signal, as it generated mixed results. - Consider tighter stop\u2011loss or trailing\u2011stop parameters to avoid large negative PnL (e.g., -0.69 on JCT\u2011USDT). - Increase sample size before scaling strategy; current win rate is modest and net PnL is low. - Maintain current partial\u2011profit take\u2011profit approach that yielded a +1.11 USDT trade, but apply it more consistently.'}"
     }
 ]

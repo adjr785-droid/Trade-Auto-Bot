@@ -22,8 +22,8 @@
             "successes": 151
         },
         "performance_review": {
-            "last_success": 1795580266.142617,
-            "successes": 164,
+            "last_success": 1795580617.759416,
+            "successes": 165,
             "last_error": "",
             "last_failure": 1795559590.1343617,
             "failures": 10
@@ -39,8 +39,8 @@
             "last_error": ""
         },
         "sell_review": {
-            "last_success": 1795578571.4236612,
-            "successes": 22,
+            "last_success": 1795580617.1219096,
+            "successes": 23,
             "last_error": ""
         },
         "analyse_review": {
@@ -76,7 +76,7 @@
             "failures": 8
         }
     },
-    "last_stage_success": 1795580497.084502,
+    "last_stage_success": 1795580617.759416,
     "last_success": 1795580273.0055907,
     "emergency_ended": 1795560301.2779193,
     "recovery_start_alerted": false
