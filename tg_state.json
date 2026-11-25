@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690535,
+    "last_update_id": 935690536,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -40,8 +40,8 @@
             1795380739.3167899
         ],
         "m:scan_hist": [
-            4,
-            1795493849.5473812
+            1,
+            1795571799.7190664
         ],
         "m:ai:1": [
             1,
@@ -88,7 +88,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "1/16",
+                "text": "2/16",
                 "callback_data": "pg:x"
             },
             {
@@ -107,7 +107,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/16*",
+    "panel_text": "\ud83d\udcc4 *Page 2/16*",
     "out_mid": 5676,
     "pages": {
         "p": [
@@ -128,7 +128,7 @@
             "```\nPRL      26     - Vol low\nMUBARAK  37     - Vol low\nUPC      40     - Vol low\nSTRK     34     - Vol low\nSOMI     32     - Vol low\nNPC      35     - Vol low\nBILL     35     - Vol low\nBSB      33     - Vol low\nBMT      28     - Vol low\nBABY     47     - Vol low\n```",
             "```\nUS       36     - Vol low\nLDO      36     - Vol low\nALIGN    39     - Vol low\nLISTA    53     - Vol low\nSTETH    41     - Vol low\n```\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 0,
+        "i": 1,
         "mode": "Markdown",
         "x": [
             {
