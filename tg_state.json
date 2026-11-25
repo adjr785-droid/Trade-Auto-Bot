@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935690729,
+    "last_update_id": 935690731,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT24.57/\u20a633,585",
+    "kb_ph": "USDT24.47/\u20a633,442",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -81,51 +81,53 @@
         "since": 1795558810.5830717,
         "loss": -1.4850249000000058
     },
-    "kb_mid": 5968,
-    "out_text": "\ud83d\udcbc *PORTFOLIO* $24.57 | \u20a633,585\n\ud83d\udcb5 Cash free $0.02 | In coins $24.57 (100%)\n\ud83d\udfe1 BGB 0.00011912253 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udd34 *MON* $14.91 (61%)\n-0.48% (-$0.07) | Entry 0.010430\nPrice 0.010380 | Stop 0.009788 (-6%)\nRSI 40 | Mixed | ATH -79%\n\n\ud83d\udfe2 *PUMP* $9.66 (39%)\n\u2800\n\u2800",
+    "kb_mid": 5971,
+    "out_text": "\ud83d\udea8 *AI FAILURE*\nAI notes and reviews are paused. Buying, selling and all stops keep running on\nthe rules. The audit is recovering the AI (3 checks).\nReason: AI stage performance_review failed: Expecting ',' delimiter: line 1\ncolumn 735 (char 734)\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795589056.097986,
+    "out_time": 1795589348.2803075,
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
+                "text": "\ud83d\udda5 System",
+                "callback_data": "/bot"
             },
             {
-                "text": "1/3",
-                "callback_data": "pg:x"
+                "text": "\ud83d\udcc8 Stats",
+                "callback_data": "/stats"
+            }
+        ],
+        [
+            {
+                "text": "\u2699\ufe0f Settings",
+                "callback_data": "m:set"
             },
             {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
+                "text": "\ud83d\udcbc Holdings",
+                "callback_data": "m:r:holdings"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udcdc Trade History",
+                "callback_data": "m:r:history"
             },
             {
-                "text": "\ud83c\udfe0",
-                "callback_data": "m:menu"
+                "text": "\ud83e\udde0 Ask AI",
+                "callback_data": "m:ai:1"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\uddf9 Clear Chat",
+                "callback_data": "/clear"
             },
             {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
+                "text": "\ud83d\udea8 PANIC SELL",
+                "callback_data": "/panic"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/3*",
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
     "out_mid": 5966,
-    "pages": {
-        "p": [
-            "\ud83d\udcbc *PORTFOLIO* $24.57 | \u20a633,585\n\ud83d\udcb5 Cash free $0.02 | In coins $24.57 (100%)\n\ud83d\udfe1 BGB 0.00011912253 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udd34 *MON* $14.91 (61%)\n-0.48% (-$0.07) | Entry 0.010430\nPrice 0.010380 | Stop 0.009788 (-6%)\nRSI 40 | Mixed | ATH -79%\n\n\ud83d\udfe2 *PUMP* $9.66 (39%)\n\u2800\n\u2800",
-            "+0.00% (+$0.00) | Entry 0.002422\nPrice 0.002422 | Stop 0.002349 (-3%)\nRSI 41 | Mixed | ATH -73%\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\nand 8 more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT24.57/\u20a633,585\n\n\ud83e\udde0 *AI:* Portfolio holds $24.57 total, 61% in MON (price near stop, RSI 40) and\n\u2800\n\u2800",
-            "39% in PUMP; cash is negligible and several assets lack USDT pricing, requiring\nprice\u2011feed verification.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
-        ],
-        "i": 0,
-        "mode": "Markdown",
-        "x": [
-            {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
-            }
-        ],
-        "cmd": "m:r:holdings"
-    },
-    "panel_mid": 5967
+    "panel_hidden": true
 }

@@ -2953,5 +2953,10 @@
             "warning": "Market filter indicates BTC is below its 50\u2011hour average, suggesting broader bearish momentum. RSI is low (41.3), which may signal oversold conditions but also potential further downside. The trade size is small (\u2248$9.67), but the combination of bearish market context and lack of an existing position increases risk.",
             "summary": "Given the bearish BTC trend and low RSI, proceeding with a manual buy of PUMP-USDT carries high risk despite the modest trade size. Consider waiting for clearer bullish signals or tighter risk controls before executing."
         }
+    },
+    {
+        "time": 1795589346.5160875,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $1.49; auto-buy paused for 15.5h', 'attention': [{'symbol': 'MON-USDT', 'action': 'hold', 'reason': 'Position is slightly underwater (-1.63%) and close to stop (0.009788). No clear upside signal; maintain until price recovers or stop is hit.'}, {'symbol': 'PUMP-USDT', 'action': 'hold', 'reason': 'Near breakeven (-0.04%) with stop just below current price. Minimal risk; keep position while monitoring for any adverse move.'}], 'summary': 'Both manual positions are small and near their stop levels. Given the recent performance breaker and paused auto-buy, adopt a cautious stance: hold existing positions, avoid new entries, and reassess once the auto-buy cooldown expires and market conditions improve.'}"
     }
 ]
