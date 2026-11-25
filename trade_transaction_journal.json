@@ -3134,5 +3134,15 @@
             "warning": "BTC filter is active and market filter indicates BTC is below its 50\u2011hour average, which may suggest downward pressure. Proceed with caution and ensure this trade aligns with your overall risk tolerance and portfolio limits.",
             "summary": "Manual buy of 25.75\u202fUSDT of BLESS\u2011USDT at 0.0167264 is a small position. RSI is neutral (47.15). Given the bearish BTC signal and active BTC filter, the trade carries moderate risk. Verify compliance with your risk controls before execution."
         }
+    },
+    {
+        "time": 1795623496.6276114,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $1.49; auto-buy paused for 6.0h', 'attention': [{'symbol': 'BLESS-USDT', 'action': 'monitor', 'reason': 'Position is 2.97% down, stop loss at 0.015022 is ~7% below entry; consider tightening stop or exiting if price approaches stop.'}], 'summary': 'Overall portfolio risk is elevated due to recent losses and auto\u2011buy pause. The only open position (BLESS-USDT) is modestly underwater; maintain vigilance, adjust stop loss if market moves against you, and avoid adding new exposure until performance stabilizes.'}"
+    },
+    {
+        "time": 1795623497.6239097,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 53.33, 'net_pnl_usdt': 0.4815, 'recurring_patterns': {'most_common_reasons': ['15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC', 'MANUAL SELL ALL'], 'reason_frequencies': {'15-MINUTE NO-UPWARD-TREND ROTATION': 4, 'PANIC': 6, 'MANUAL SELL ALL': 3, 'PARTIAL PROFIT +10.4%': 1, 'RSI 75': 1, 'TRAILING STOP (8.0%)': 1, 'MANUAL SELL $8.00': 1, 'MANUAL SELL $3.46': 1, 'MANUAL SELL $5.22': 1}}, 'recommendations': ['Review and tighten criteria for PANIC exits to avoid frequent small losses', 'Consider adding a confirmation filter before executing 15-MINUTE NO-UPWARD-TREND ROTATION trades', 'Limit manual sell-all actions to positions with clear profit targets or stop\u2011loss breaches', 'Monitor trailing\u2011stop parameters to ensure they are not triggering prematurely']}"
     }
 ]
