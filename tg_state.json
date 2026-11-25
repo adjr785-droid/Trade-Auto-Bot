@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690847,
+    "last_update_id": 935690849,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -80,42 +80,49 @@
         "loss": -1.4850249000000058
     },
     "kb_mid": 6208,
-    "out_text": "\ud83d\udfe1 *MANUAL BUY*\n_Passed at least 5/7 core and 2/3 additional criteria. Manual review only._\n\nNone right now.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "\ud83d\udcbc *PORTFOLIO* $33.35 | \u20a645,587\n\ud83d\udcb5 Cash free $24.98 | In coins $8.32 (25%)\n\ud83d\udfe1 BGB 0.00011912253 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udd34 *BLESS* $8.32 (25%)\n-0.98% (-$0.08) | Entry 0.016691\nQty 503.28667 | Price 0.016528 | Stop 0.015022 (-9%)\nRSI 50 | Mixed | ATH -93%\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udc41 Watch (0)",
-                "callback_data": "m:at:W"
+                "text": "\u25c0",
+                "callback_data": "pg:p"
             },
             {
-                "text": "\u25b6 \ud83d\udfe1 Manual (0)",
-                "callback_data": "m:at:M"
+                "text": "1/2",
+                "callback_data": "pg:x"
             },
             {
-                "text": "\ud83e\udd16 Auto (0)",
-                "callback_data": "m:at:A"
-            }
-        ],
-        [
-            {
-                "text": "\ud83c\udd95 NEW LISTINGS",
-                "callback_data": "m:nl"
+                "text": "\u25b6",
+                "callback_data": "pg:n"
             },
             {
-                "text": "\ud83d\uddc4 ARCHIVE",
-                "callback_data": "m:ar:D"
-            }
-        ],
-        [
+                "text": "\ud83c\udfe0",
+                "callback_data": "m:menu"
+            },
             {
-                "text": "\ud83d\udd04 Refresh",
-                "callback_data": "m:at:M"
+                "text": "\ud83d\udd04",
+                "callback_data": "rf:go"
             }
         ]
     ],
-    "panel_text": "\ud83d\udc47 *Actions*",
-    "out_time": 1795646456.9234607,
-    "out_mid": 6210,
-    "panel_mid": 6211
+    "panel_text": "\ud83d\udcc4 *Page 1/2*",
+    "out_time": 1795646481.8764153,
+    "out_mid": 6213,
+    "pages": {
+        "p": [
+            "\ud83d\udcbc *PORTFOLIO* $33.35 | \u20a645,587\n\ud83d\udcb5 Cash free $24.98 | In coins $8.32 (25%)\n\ud83d\udfe1 BGB 0.00011912253 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udd34 *BLESS* $8.32 (25%)\n-0.98% (-$0.08) | Entry 0.016691\nQty 503.28667 | Price 0.016528 | Stop 0.015022 (-9%)\nRSI 50 | Mixed | ATH -93%\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\n\u2800\n\u2800",
+            "and 8 more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT33.35/\u20a645,587\n\n\ud83e\udde0 *AI:* Portfolio totals $33.35 (\u2248\u00a545,587) with $24.98 cash and $8.32 in BLESS\n(25%); several tokens lack USDT pricing, and BLESS stop loss is 9% below entry,\nwarranting monitoring.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+        ],
+        "i": 0,
+        "mode": "Markdown",
+        "x": [
+            {
+                "text": "\ud83d\udd04",
+                "callback_data": "rf:go"
+            }
+        ],
+        "cmd": "m:r:holdings"
+    },
+    "panel_mid": 6214
 }
