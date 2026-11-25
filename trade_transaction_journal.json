@@ -2745,5 +2745,15 @@
             "warning": "BTC market filter active and BTC is below its 50\u2011hour average, indicating broader bearish pressure. Proceed with caution.",
             "summary": "Manual buy of 24.61\u202fUSDT of BLESS\u2011USDT at 0.0175104 is modest in size. RSI near 50 suggests no strong momentum, but the BTC\u2011related market filter signals potential downside risk. Consider waiting for clearer bullish signals or reducing position size."
         }
+    },
+    {
+        "time": 1795578876.8310313,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $1.49; auto-buy paused for 18.4h', 'attention': [{'symbol': 'BLESS-USDT', 'action': 'monitor', 'reason': 'Position is marginally profitable (0.08% PnL) but stop is ~10% below entry; given recent performance losses, consider tightening stop or preparing to exit if price approaches stop.'}], 'summary': 'Overall portfolio risk is elevated due to recent losing streak and paused auto-buy. Maintain a defensive stance: avoid new entries, closely watch existing positions, and be ready to reduce exposure if market moves against them.'}"
+    },
+    {
+        "time": 1795578877.7670147,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 3.8527, 'recurring_patterns': ['PANIC (5 occurrences)', '15-MINUTE NO-UPWARD-TREND ROTATION (4 occurrences)', 'MANUAL SELL (4 occurrences)', 'TRAILING STOP (1 occurrence)', 'RSI 75 (1 occurrence)', 'PARTIAL PROFIT +10.4% (1 occurrence)'], 'recommendations': ['Review and tighten panic-trigger criteria to avoid frequent loss spikes', 'Consider limiting exposure to assets with repeated panic exits (e.g., WLD-USDT, JCT-USDT)', 'Implement stricter trend validation before entering 15\u2011minute rotation trades', 'Monitor manual sell decisions for consistency and align with predefined risk limits', 'Overall maintain current win rate but focus on reducing high\u2011loss outliers to improve net PnL']}"
     }
 ]
