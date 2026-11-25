@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935690590,
+    "last_update_id": 935690591,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT24.62/\u20a633,653",
+    "kb_ph": "USDT24.66/\u20a633,705",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -79,10 +79,10 @@
         "since": 1795558810.5830717,
         "loss": -1.4850249000000058
     },
-    "kb_mid": 5747,
+    "kb_mid": 5752,
     "out_text": "\ud83d\udc41 *WATCH LIST*\n_Rising coins being watched. They move up when they pass the manual rules._\n\nNone right now.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795577854.4541812,
+    "out_time": 1795577890.8720434,
     "panel_rows": [
         [
             {
@@ -116,6 +116,6 @@
         ]
     ],
     "panel_text": "\ud83d\udc47 *Actions*",
-    "out_mid": 5748,
-    "panel_mid": 5749
+    "out_mid": 5750,
+    "panel_mid": 5751
 }
