@@ -2669,5 +2669,15 @@
         "time": 1795576482.165965,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 4.4473, 'recurring_patterns': {'PANIC': 5, '15-MINUTE NO-UPWARD-TREND ROTATION': 5, 'MANUAL SELL': 4, 'TRAILING STOP': 1, 'RSI 75': 1, 'PARTIAL PROFIT +10.4%': 1}, 'recommendations': 'Reduce reliance on panic exits; consider tighter risk controls and longer trend confirmation before closing positions. Review the high frequency of 15\u2011minute no\u2011upward\u2011trend rotations and evaluate if the signal threshold is too sensitive. Manual sell actions suggest inconsistent strategy\u2014standardize exit criteria. Maintain current win\u2011rate but aim to improve average win size while limiting large losses (e.g., -0.695 and -0.511).'}"
+    },
+    {
+        "time": 1795577824.3828762,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $1.49; auto-buy paused for 18.7h', 'attention': [{'symbol': 'PROS-USDT', 'action': 'monitor', 'reason': 'Position is 2.42% down, approaching stop at 0.610438; consider tightening stop or exiting if price continues to decline.'}], 'summary': 'Current portfolio risk is elevated due to recent losses and auto\u2011buy pause. The only open position (PROS-USDT) is modestly underwater and near its stop level. Recommend close monitoring, possibly tightening the stop or exiting to limit further downside while awaiting clearer market direction.'}"
+    },
+    {
+        "time": 1795577825.2495148,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 4.4473, 'recurring_patterns': {'PANIC': 5, '15-MINUTE NO-UPWARD-TREND ROTATION': 5, 'MANUAL SELL': 4, 'TRAILING STOP (8.0%)': 1, 'PARTIAL PROFIT +10.4%': 1, 'RSI 75': 1}, 'recommendations': ['Limit exposure to PANIC-driven entries; require additional confirmation signals before opening positions', 'Review and tighten criteria for 15\u2011minute no\u2011upward\u2011trend rotation signals, as they show mixed outcomes', 'Consolidate manual sell actions into a single risk\u2011management rule to avoid fragmented exits', 'Consider reducing position size on symbols with repeated losses (e.g., WLD\u2011USDT, JCT\u2011USDT)', 'Maintain current win\u2011rate focus but aim to improve net PnL by cutting high\u2011loss outliers']}"
     }
 ]
