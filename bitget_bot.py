@@ -2509,16 +2509,17 @@ def coin_stage_prev(sym):
  except Exception:return ""
 _GATES={}
 def gate_report_text(s=None):
- # Scan-report lines: how many analysed coins each hard gate blocked, with the rule that is set. Information only; changes no rule.
+ # Scan-report block: how many analysed coins each hard gate blocked, then the rules that are set. Information only; changes no rule.
  g=_GATES
  if not g.get("n"):return ""
  try:s=s or cfg()
  except Exception:s=s or {}
- rules={"RSI":f"RSI ≤ {float(s.get('rsi_max',48)):g}","MA":"Price > MA5 > MA10","1H":(f"1H +{float(s.get('mom_1h_min_pct',0.5)):g} to +{float(s.get('mom_1h_max_pct',6.0)):g}%" if mom_on(s) else "1H off"),"24H":f"24H 0 to +{float(s.get('max_24h_pct',100)):g}%","Score":"Core 5+ and Extra 2+"}
- L=[f"🚧 *GATES* ({g['n']} analysed, {g.get('pass',0)} passed all 4)"]
- for k in ("RSI","MA","1H","24H","Score"):L.append(f"{k}: blocked {g.get(k,0)} — {rules[k]}")
  tg_=g.get("tags") or {}
- L.append("Setups seen: Trend %d | Pullback %d | Bounce %d | Breakout %d"%(tg_.get("TREND",0),tg_.get("PULLBACK",0),tg_.get("BOUNCE",0),tg_.get("BREAKOUT",0)))
+ h1=f"1H +{float(s.get('mom_1h_min_pct',0.5)):g} to +{float(s.get('mom_1h_max_pct',6.0)):g}%" if mom_on(s) else "1H off"
+ L=[f"🚧 *GATES* ({g['n']} analysed, {g.get('pass',0)} passed)",
+    f"Blocked: RSI {g.get('RSI',0)} | MA {g.get('MA',0)} | 1H {g.get('1H',0)} | 24H {g.get('24H',0)} | Score {g.get('Score',0)}",
+    f"Setups: Trend {tg_.get('TREND',0)} | Pullback {tg_.get('PULLBACK',0)} | Bounce {tg_.get('BOUNCE',0)} | Breakout {tg_.get('BREAKOUT',0)}",
+    f"Rules: RSI ≤ {float(s.get('rsi_max',48)):g}, Price > MA5 > MA10, {h1}, 24H up, Core 5+ and Extra 2+"]
  return "\n".join(L)
 def coin_db_update(records,held,newc=None,keep_days=3,keep_snaps=24,queue=None,buying_allowed=True,block_reason="",settings=None):
  now=time.time();held=set(held);newc=newc or {};queue=queue if isinstance(queue,dict) else {};settings=settings or {};c=coin_db_conn()
