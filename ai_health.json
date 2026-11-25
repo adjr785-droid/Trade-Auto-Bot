@@ -5,7 +5,7 @@
     "latency_ms": 1234,
     "last_error": "",
     "consecutive_failures": 0,
-    "consecutive_successes": 1,
+    "consecutive_successes": 0,
     "last_response_valid": true,
     "alerted_status": "healthy",
     "emergency_mode": true,
@@ -18,15 +18,15 @@
             "last_failure": 1795339738.9050465,
             "failures": 2,
             "last_error": "",
-            "last_success": 1795589345.7843938,
-            "successes": 159
+            "last_success": 1795593504.7838233,
+            "successes": 160
         },
         "performance_review": {
             "last_success": 1795588816.145574,
             "successes": 171,
             "last_error": "Expecting ',' delimiter: line 1 column 735 (char 734)",
-            "last_failure": 1795589347.3604708,
-            "failures": 11
+            "last_failure": 1795593506.52467,
+            "failures": 12
         },
         "market_regime": {
             "last_success": 1795588830.9170792,
@@ -76,7 +76,7 @@
             "failures": 9
         }
     },
-    "last_stage_success": 1795589345.7843938,
+    "last_stage_success": 1795593504.7838233,
     "last_success": 1795589365.4746425,
     "emergency_ended": 1795560301.2779193,
     "recovery_start_alerted": false
