@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935690827,
+    "last_update_id": 935690829,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT31.68/\u20a643,307",
+    "kb_ph": "USDT31.62/\u20a643,226",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -79,54 +79,64 @@
         "since": 1795558810.5830717,
         "loss": -1.4850249000000058
     },
-    "kb_mid": 6149,
-    "out_text": "\ud83d\udcbc *PORTFOLIO* $31.68 | \u20a643,307\n\ud83d\udcb5 Cash free $0.03 | In coins $31.50 (99%)\n\ud83d\udfe1 BGB 0.00011912253 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udd34 *BLESS* $31.50 (99%)\n-5.87% (-$1.96) | Entry 0.016691\nQty 2005.0867 | Price 0.015711 | Stop 0.015022 (-4%)\nRSI 44 | Bearish | ATH -94%\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\n\u2800\n\u2800",
+    "kb_mid": 6153,
+    "out_text": "\ud83d\udcda *COIN LIST*\n\u2705 Ready 0 | \ud83c\udd95 New 0 | \ud83d\udcbc Held 1 | \u26d4 Rejected 443\nPipeline: \ud83d\udc41 Watch 0 \u2192 \ud83d\udfe1 Manual 0 \u2192 \ud83e\udd16 Auto 0 | \u2935 Dropped 456 | Archived 0\nExecution: \ud83d\udce5 queued 0 | \u26d4 blocked 0 | \ud83d\udfe2 held 1\n\n *COLLECT* 0.026689 | NOT_ELIGIBLE | 1H +3.32% | RSI 71 | seen 62x\n   \ud83e\udde0 LOW: RSI 56.7; 24h up 1.3%; relatively stable.\n *WLD* 0.232700 | NOT_ELIGIBLE | 1H +1.96% \ud83d\udcc8 | RSI 50 | seen 62x\n   \ud83e\udde0 MEDIUM: RSI 37.4; 24h down 0.5%; moderate.\n *LTC* 41.1000 | NOT_ELIGIBLE | 1H +1.74% \ud83d\udcc8 | RSI 55 | seen 62x\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795626299.937143,
+    "out_time": 1795626353.3767283,
     "panel_rows": [
         [
             {
-                "text": "\ud83d\uded2 Trade",
-                "callback_data": "m:tl:trade"
+                "text": "\u25c0",
+                "callback_data": "pg:p"
             },
             {
-                "text": "\ud83d\udd14 Alerts",
-                "callback_data": "m:tl:alerts"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udd0d Scan",
-                "callback_data": "m:tl:scan"
+                "text": "1/4",
+                "callback_data": "pg:x"
             },
             {
-                "text": "\ud83d\udee0\ufe0f System",
-                "callback_data": "m:tl:sys"
-            }
-        ],
-        [
+                "text": "\u25b6",
+                "callback_data": "pg:n"
+            },
             {
-                "text": "\u2b05\ufe0f Main Menu",
+                "text": "\ud83c\udfe0",
                 "callback_data": "m:menu"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udd0d Scan now",
+                "callback_data": "m:r:scan"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\uddfe Scan History",
+                "callback_data": "m:scan_hist"
             }
         ]
     ],
-    "panel_text": "\ud83e\uddf0 *TOOLS*\nChoose a group.",
+    "panel_text": "\ud83d\udcc4 *Page 1/4*",
     "pages": {
         "p": [
-            "\ud83d\udcbc *PORTFOLIO* $31.68 | \u20a643,307\n\ud83d\udcb5 Cash free $0.03 | In coins $31.50 (99%)\n\ud83d\udfe1 BGB 0.00011912253 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udd34 *BLESS* $31.50 (99%)\n-5.87% (-$1.96) | Entry 0.016691\nQty 2005.0867 | Price 0.015711 | Stop 0.015022 (-4%)\nRSI 44 | Bearish | ATH -94%\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\n\u2800\n\u2800",
-            "and 8 more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT31.68/\u20a643,307\n\n\ud83e\udde0 *AI:* Portfolio is $31.68 total, 99% in BLESS (\u2248$31.50) with a -5.87% loss;\nseveral tokens lack USDT pricing, so their value is uncertain and should be\nreviewed.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+            "\ud83d\udcda *COIN LIST*\n\u2705 Ready 0 | \ud83c\udd95 New 0 | \ud83d\udcbc Held 1 | \u26d4 Rejected 443\nPipeline: \ud83d\udc41 Watch 0 \u2192 \ud83d\udfe1 Manual 0 \u2192 \ud83e\udd16 Auto 0 | \u2935 Dropped 456 | Archived 0\nExecution: \ud83d\udce5 queued 0 | \u26d4 blocked 0 | \ud83d\udfe2 held 1\n\n *COLLECT* 0.026689 | NOT_ELIGIBLE | 1H +3.32% | RSI 71 | seen 62x\n   \ud83e\udde0 LOW: RSI 56.7; 24h up 1.3%; relatively stable.\n *WLD* 0.232700 | NOT_ELIGIBLE | 1H +1.96% \ud83d\udcc8 | RSI 50 | seen 62x\n   \ud83e\udde0 MEDIUM: RSI 37.4; 24h down 0.5%; moderate.\n *LTC* 41.1000 | NOT_ELIGIBLE | 1H +1.74% \ud83d\udcc8 | RSI 55 | seen 62x\n\u2800\n\u2800",
+            "   \ud83e\udde0 LOW: RSI 47 near neutral; 24h up 0.8%; low risk.\n *ENA* 0.094000 | NOT_ELIGIBLE | 1H +1.67% \ud83d\udcc8 | RSI 33 | seen 62x\n   \ud83e\udde0 HIGH: RSI 22.2 deep oversold; 24h down 5%; not eligible. Caution.\n *SUI* 0.636300 | NOT_ELIGIBLE | 1H +1.51% \ud83d\udcc8 | RSI 42 | seen 62x\n\ud83e\udde0 MEDIUM: RSI 35.7 indicates near oversold; 24h down 2.1%. No eligibility for\nexecution; monitor.\n *ADA* 0.140900 | NOT_ELIGIBLE | 1H +1.32% \ud83d\udcc8 | RSI 41 | seen 62x\n   \ud83e\udde0 MEDIUM: RSI 35.4; 24h down 2.8%; moderate risk.\n *UNI* 4.5210 | NOT_ELIGIBLE | 1H +0.89% \ud83d\udcc8 | RSI 33 | seen 62x\n   \ud83e\udde0 MEDIUM: RSI 28.3 deep oversold; 24h down 4%; moderate-high risk.\n\u2800\n\u2800",
+            " *ARIA* 0.327880 | NOT_ELIGIBLE | 1H +0.85% | RSI 55 | seen 62x\n   \ud83e\udde0 LOW: RSI 55.8 above typical range; 24h up 7%; but still not eligible.\n *BGSC* 0.00075590 | NOT_ELIGIBLE | 1H +0.73% | RSI 33 | seen 62x\n   \ud83e\udde0 HIGH: RSI 32.97; 24h down 44.5% huge drop; high risk.\n *BNB* 540.69 | NOT_ELIGIBLE | 1H +0.63% \ud83d\udcc8 | RSI 44 | seen 62x\n   \ud83e\udde0 MEDIUM: RSI 38.3; 24h down 1.9%; large price but not eligible.\n *PEPE* 0.00000332 | NOT_ELIGIBLE | 1H +0.41% | RSI 37 | seen 62x\n   \ud83e\udde0 MEDIUM: RSI 45; 24h up 0.3%; low volume, monitor.\n *BTW* 0.896128 | NOT_ELIGIBLE | 1H +0.31% | RSI 77 | seen 62x\n\ud83e\udde0 HIGH: RSI 80 very high; 24h up 23%; potential overbought, risk of reversal.\n\u2800\n\u2800",
+            "\n\u2935 *DROPPED \u2014 retained for recovery:* COLLECT (6/10), WLD (3/10), LTC (3/10),\nENA (2/10), SUI (2/10)\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
         "i": 0,
         "mode": "Markdown",
         "x": [
             {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
+                "text": "\ud83d\udd0d Scan now",
+                "callback_data": "m:r:scan"
+            },
+            {
+                "text": "\ud83e\uddfe Scan History",
+                "callback_data": "m:scan_hist"
             }
         ],
-        "cmd": "m:r:holdings"
+        "cmd": "m:coins"
     },
-    "out_mid": 6147,
-    "panel_mid": 6148
+    "out_mid": 6151,
+    "panel_mid": 6152
 }
