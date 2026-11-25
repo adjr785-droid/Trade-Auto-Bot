@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690635,
+    "last_update_id": 935690636,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -24,8 +24,8 @@
             1795493361.8607023
         ],
         "m:r:holdings": [
-            0,
-            1795578928.2774208
+            1,
+            1795578971.5863664
         ],
         "/analyse": [
             6,
@@ -89,7 +89,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "1/2",
+                "text": "2/2",
                 "callback_data": "pg:x"
             },
             {
@@ -106,7 +106,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/2*",
+    "panel_text": "\ud83d\udcc4 *Page 2/2*",
     "kb_mid": 5819,
     "out_mid": 5817,
     "pages": {
@@ -114,7 +114,7 @@
             "\ud83d\udcbc *PORTFOLIO* $24.81 | \u20a633,913\n\ud83d\udcb5 Cash free $0.02 | In coins $24.74 (100%)\n\ud83d\udfe1 BGB 0.00010697253 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *BLESS* $24.74 (100%)\n+0.63% (+$0.15) | Entry 0.017492\nPrice 0.017602 | Stop 0.015743 (-11%)\nRSI 50 | Mixed | ATH -93%\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\n\u2800\n\u2800",
             "and 8 more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT24.81/\u20a633,913\n\n\ud83e\udde0 *AI:* Portfolio totals $24.81 (\u224833,913\u202fJPY) with $0.02 cash; BLESS holds\n$24.74 (+0.63%) but stop\u2011loss at 0.015743 is 11% below entry, and several\ntokens lack USDT pricing, requiring attention.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 0,
+        "i": 1,
         "mode": "Markdown",
         "x": [
             {
