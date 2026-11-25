@@ -2820,5 +2820,10 @@
             "warning": "The market filter indicates BTC is below its 50\u2011hour average, which may suggest downward momentum. RSI is near neutral (46.19), offering no strong over\u2011bought signal. The trade size is small (\u2248$24.86), but the asset PUMP-USDT is likely volatile. Proceed with caution and consider tighter stop\u2011losses.",
             "summary": "Given the modest trade size and mixed technical signals, a cautious approach is recommended. Verify liquidity and recent price action before executing the manual buy."
         }
+    },
+    {
+        "time": 1795580707.256541,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $1.49; auto-buy paused for 17.9h', 'attention': [{'symbol': 'PUMP-USDT', 'action': 'monitor', 'reason': 'Position has zero PnL and is very close to stop; consider tightening stop or exiting if price moves against.'}, {'symbol': 'BTC-USDT', 'action': 'hold', 'reason': 'BTC filter enabled; price is high ($59,273.71) but no active position, maintain current stance.'}], 'summary': 'Portfolio risk is elevated due to recent losses and auto-buy pause. Existing PUMP-USDT position shows no profit and is near its stop level; monitor closely and be ready to exit. No new entries recommended until risk metrics improve.'}"
     }
 ]

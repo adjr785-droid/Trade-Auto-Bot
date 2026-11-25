@@ -9,6 +9,7 @@
         "sl_pct": 3.1,
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
-        "xsl": 0.002357
+        "xsl": 0.002357,
+        "seen": 1795580698.4921064
     }
 }
