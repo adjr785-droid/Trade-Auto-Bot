@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935690565,
+    "last_update_id": 935690566,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT25.22/\u20a634,475",
+    "kb_ph": "USDT25.20/\u20a634,446",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -77,9 +77,9 @@
         "since": 1795558810.5830717,
         "loss": -1.4850249000000058
     },
-    "out_text": "\ud83d\udc41 *WATCH LIST*\n_Rising coins being watched. They move up when they pass the manual rules._\n\n```\nCOIN    RSI    1H    24H  S\n---------------------------\nBTW      81  +0.3  +13.4  6\nPROS     56  -1.9  +14.4  3\n```\n\u2800\n\u2800\n\u2800",
+    "out_text": "\ud83e\udde0 AI manual-buy advisory: Considering a $25.15 USDT purchase of PROS-USDT with\nno existing position, the current RSI is neutral (53.16) and BTC is below its\n50\u2011hour average, indicating potential market weakness. Proceed with caution and\nbe prepared to adjust or exit if adverse price movement occurs.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795575720.7968638,
+    "out_time": 1795575797.4301074,
     "panel_rows": [
         [
             {
@@ -183,7 +183,7 @@
         ]
     ],
     "panel_text": "\u2795 *MORE COINS* (page 2/26)\nBiggest 24h volume first. Tap a coin.",
-    "kb_mid": 5713,
+    "kb_mid": 5721,
     "out_mid": 5716,
     "panel_mid": 5717
 }
