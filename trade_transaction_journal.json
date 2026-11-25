@@ -3083,5 +3083,10 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795620227.5082552,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 53.33, 'net_pnl_usdt': 0.4815, 'recurring_patterns': {'most_common_reasons': [{'reason': 'PANIC', 'occurrences': 6, 'average_pnl': -0.258}, {'reason': 'MANUAL SELL ALL', 'occurrences': 4, 'average_pnl': -0.151}, {'reason': '15-MINUTE NO-UPWARD-TREND ROTATION', 'occurrences': 4, 'average_pnl': 0.015}], 'high_impact_events': [{'reason': 'PARTIAL PROFIT +10.4%', 'pnl': 1.1145881799998207}, {'reason': 'TRAILING STOP (8.0%)', 'pnl': -0.5113950000000002}]}, 'recommendations': [\"Limit exposure to trades flagged as 'PANIC' \u2013 they show a consistent negative average PnL.\", \"Consider tightening criteria for 'MANUAL SELL ALL' triggers; recent instances yielded net losses.\", 'Maintain the current strategy for short\u2011term rotation signals, but monitor the low average return (~1.5%).', 'Implement a safeguard to avoid large single\u2011trade losses like the trailing stop event that lost ~0.51"
     }
 ]
