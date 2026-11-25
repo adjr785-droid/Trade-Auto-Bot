@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935690815,
+    "last_update_id": 935690816,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT33.56/\u20a645,877",
+    "kb_ph": "USDT33.59/\u20a645,905",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -80,10 +80,10 @@
         "since": 1795558810.5830717,
         "loss": -1.4850249000000058
     },
-    "kb_mid": 6119,
-    "out_text": "\ud83d\udcbc *PORTFOLIO* $33.56 | \u20a645,877\n\ud83d\udcb5 Cash free $25.78 | In coins $7.73 (23%)\n\ud83d\udfe1 BGB 0.00011912253 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udd34 *BLESS* $7.73 (23%)\n-0.12% (-$0.01) | Entry 0.016630\nQty 465.54775 | Price 0.016610 | Stop 0.014967 (-10%)\nRSI 46 | Mixed | ATH -93%\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\n\u2800\n\u2800",
+    "kb_mid": 6122,
+    "out_text": "\ud83e\udde0 AI manual-buy advisory: Manual buy of 25.75\u202fUSDT of BLESS\u2011USDT at 0.0167264\nis a small position. RSI is neutral (47.15). Given the bearish BTC signal and\nactive BTC filter, the trade carries moderate risk. Verify compliance with your\nrisk controls before execution.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795622396.6008456,
+    "out_time": 1795622467.0459359,
     "panel_rows": [
         [
             {
@@ -109,21 +109,6 @@
         ]
     ],
     "panel_text": "\ud83d\udcc4 *Page 1/2*",
-    "pages": {
-        "p": [
-            "\ud83d\udcbc *PORTFOLIO* $33.56 | \u20a645,877\n\ud83d\udcb5 Cash free $25.78 | In coins $7.73 (23%)\n\ud83d\udfe1 BGB 0.00011912253 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udd34 *BLESS* $7.73 (23%)\n-0.12% (-$0.01) | Entry 0.016630\nQty 465.54775 | Price 0.016610 | Stop 0.014967 (-10%)\nRSI 46 | Mixed | ATH -93%\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\n\u2800\n\u2800",
-            "and 8 more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT33.56/\u20a645,877\n\n\ud83e\udde0 *AI:* Portfolio totals $33.56 (\u2248\u202f\u00a5645,877) with $25.78 cash and $7.73 in\nBLESS; several tokens lack USDT pricing, indicating valuation uncertainty and\npotential hidden exposure.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
-        ],
-        "i": 0,
-        "mode": "Markdown",
-        "x": [
-            {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
-            }
-        ],
-        "cmd": "m:r:holdings"
-    },
     "out_mid": 6117,
-    "panel_mid": 6118
+    "panel_hidden": true
 }

@@ -1,15 +1,15 @@
 {
     "BLESS-USDT": {
-        "entry_price": 0.01663,
-        "safe_zone": 0.01663,
-        "stop_loss": 0.014967,
-        "peak_price": 0.01663,
-        "last_price": 0.0165894,
-        "opened_at": 1795622053.766915,
+        "entry_price": 0.016691,
+        "safe_zone": 0.016691,
+        "stop_loss": 0.015022,
+        "peak_price": 0.016709,
+        "last_price": 0.016709,
+        "opened_at": 1795622462.930224,
         "sl_pct": 10.0,
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
-        "xsl": 0.0152996,
-        "seen": 1795622369.9765227
+        "xsl": 0.015372280000000002,
+        "seen": 1795622472.1196754
     }
 }
