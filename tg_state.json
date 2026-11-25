@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690553,
+    "last_update_id": 935690554,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -70,12 +70,60 @@
     },
     "radar": [],
     "audit_down": {},
-    "audit_last": 1795574888.4960034,
+    "audit_last": 1795575599.5556972,
     "audit_ai_cls": "",
     "perf_breaker": {
         "until": 1795645210.5830717,
         "since": 1795558810.5830717,
         "loss": -1.4850249000000058
     },
-    "kb_mid": 5692
+    "out_text": "\ud83e\uddf9 Cleared 3 bot message(s).\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_mode": "Markdown",
+    "out_time": 1795575644.153791,
+    "panel_rows": [
+        [
+            {
+                "text": "\ud83d\udda5 System",
+                "callback_data": "/bot"
+            },
+            {
+                "text": "\ud83d\udcc8 Stats",
+                "callback_data": "/stats"
+            }
+        ],
+        [
+            {
+                "text": "\u2699\ufe0f Settings",
+                "callback_data": "m:set"
+            },
+            {
+                "text": "\ud83d\udcbc Holdings",
+                "callback_data": "m:r:holdings"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udcdc Trade History",
+                "callback_data": "m:r:history"
+            },
+            {
+                "text": "\ud83e\udde0 Ask AI",
+                "callback_data": "m:ai:1"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\uddf9 Clear Chat",
+                "callback_data": "/clear"
+            },
+            {
+                "text": "\ud83d\udea8 PANIC SELL",
+                "callback_data": "/panic"
+            }
+        ]
+    ],
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
+    "out_mid": 5700,
+    "kb_mid": 5703,
+    "panel_hidden": true
 }
