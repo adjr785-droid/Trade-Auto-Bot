@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935690647,
+    "last_update_id": 935690648,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT25.39/\u20a634,709",
+    "kb_ph": "USDT25.45/\u20a634,791",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -79,53 +79,50 @@
         "since": 1795558810.5830717,
         "loss": -1.4850249000000058
     },
-    "out_text": "\ud83e\uddf9 Cleared 3 bot message(s).\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "\ud83d\udcbc *PORTFOLIO* $25.45 | \u20a634,791\n\ud83d\udcb5 Cash free $0.02 | In coins $25.40 (100%)\n\ud83d\udfe1 BGB 0.00010697253 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *BLESS* $25.40 (100%)\n+3.32% (+$0.82) | Entry 0.017492\nPrice 0.018072 | Stop 0.015743 (-13%)\nRSI 53 | Mixed | ATH -93%\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udda5 System",
-                "callback_data": "/bot"
+                "text": "\u25c0",
+                "callback_data": "pg:p"
             },
             {
-                "text": "\ud83d\udcc8 Stats",
-                "callback_data": "/stats"
-            }
-        ],
-        [
-            {
-                "text": "\u2699\ufe0f Settings",
-                "callback_data": "m:set"
+                "text": "1/2",
+                "callback_data": "pg:x"
             },
             {
-                "text": "\ud83d\udcbc Holdings",
-                "callback_data": "m:r:holdings"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udcdc Trade History",
-                "callback_data": "m:r:history"
+                "text": "\u25b6",
+                "callback_data": "pg:n"
             },
             {
-                "text": "\ud83e\udde0 Ask AI",
-                "callback_data": "m:ai:1"
-            }
-        ],
-        [
-            {
-                "text": "\ud83e\uddf9 Clear Chat",
-                "callback_data": "/clear"
+                "text": "\ud83c\udfe0",
+                "callback_data": "m:menu"
             },
             {
-                "text": "\ud83d\udea8 PANIC SELL",
-                "callback_data": "/panic"
+                "text": "\ud83d\udd04",
+                "callback_data": "rf:go"
             }
         ]
     ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
-    "out_time": 1795579502.5166123,
-    "out_mid": 5836,
-    "kb_mid": 5838,
-    "panel_mid": 5840
+    "panel_text": "\ud83d\udcc4 *Page 1/2*",
+    "out_time": 1795579544.1671214,
+    "kb_mid": 5843,
+    "out_mid": 5841,
+    "pages": {
+        "p": [
+            "\ud83d\udcbc *PORTFOLIO* $25.45 | \u20a634,791\n\ud83d\udcb5 Cash free $0.02 | In coins $25.40 (100%)\n\ud83d\udfe1 BGB 0.00010697253 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *BLESS* $25.40 (100%)\n+3.32% (+$0.82) | Entry 0.017492\nPrice 0.018072 | Stop 0.015743 (-13%)\nRSI 53 | Mixed | ATH -93%\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\n\u2800\n\u2800",
+            "and 8 more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT25.45/\u20a634,791\n\n\ud83e\udde0 *AI:* Portfolio totals $25.45 (\u2248\u20a934,791) with $0.02 cash and $25.40 in\nBLESS; several tokens lack USDT pricing, indicating valuation uncertainty and\npotential hidden exposure.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+        ],
+        "i": 0,
+        "mode": "Markdown",
+        "x": [
+            {
+                "text": "\ud83d\udd04",
+                "callback_data": "rf:go"
+            }
+        ],
+        "cmd": "m:r:holdings"
+    },
+    "panel_mid": 5842
 }
