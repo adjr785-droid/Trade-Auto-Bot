@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935690823,
+    "last_update_id": 935690826,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT31.89/\u20a643,584",
+    "kb_ph": "USDT31.68/\u20a643,307",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -17,7 +17,7 @@
         "pos": [],
         "hn": 31
     },
-    "last_cmd": "/stats",
+    "last_cmd": "m:r:holdings",
     "page_mem": {
         "/bot": [
             1,
@@ -79,10 +79,10 @@
         "since": 1795558810.5830717,
         "loss": -1.4850249000000058
     },
-    "kb_mid": 6145,
-    "out_text": "\ud83d\udcc8 *TRADE STATS* (after estimated fees)\nClosed trades: 44\nWin rate: 52% (23 wins, 21 losses)\nAverage win: $+0.41 | Average loss: $-0.23\nProfit factor: 1.98\nExpectancy per trade: $+0.11\nNet profit: $+4.65\nBest: $+2.97 | Worst: $-0.70\n\n*By strategy*\n\u2800\n\u2800",
+    "kb_mid": 6149,
+    "out_text": "\ud83d\udcbc *PORTFOLIO* $31.68 | \u20a643,307\n\ud83d\udcb5 Cash free $0.03 | In coins $31.50 (99%)\n\ud83d\udfe1 BGB 0.00011912253 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udd34 *BLESS* $31.50 (99%)\n-5.87% (-$1.96) | Entry 0.016691\nQty 2005.0867 | Price 0.015711 | Stop 0.015022 (-4%)\nRSI 44 | Bearish | ATH -94%\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795626268.8187006,
+    "out_time": 1795626299.937143,
     "panel_rows": [
         [
             {
@@ -90,7 +90,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "1/3",
+                "text": "1/2",
                 "callback_data": "pg:x"
             },
             {
@@ -107,13 +107,11 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/3*",
-    "out_mid": 6143,
+    "panel_text": "\ud83d\udcc4 *Page 1/2*",
     "pages": {
         "p": [
-            "\ud83d\udcc8 *TRADE STATS* (after estimated fees)\nClosed trades: 44\nWin rate: 52% (23 wins, 21 losses)\nAverage win: $+0.41 | Average loss: $-0.23\nProfit factor: 1.98\nExpectancy per trade: $+0.11\nNet profit: $+4.65\nBest: $+2.97 | Worst: $-0.70\n\n*By strategy*\n\u2800\n\u2800",
-            "MANUAL: 35 trades | win 57% | avg $+0.17 | total $+5.94\nBREAKOUT: 1 trades | win 100% | avg $+0.10 | total $+0.10\nOLDER: 2 trades | win 0% | avg $-0.15 | total $-0.29\nOTHER: 6 trades | win 33% | avg $-0.18 | total $-1.09\n\n\ud83d\udd2c *RULE RESULTS* (what coins did after each stage)\n\ud83d\udc41 Watch: collecting data\n\ud83d\udfe1 Manual: collecting data\n\ud83e\udd16 Auto: collecting data\nWin = beats round-trip fees at 4h. Needs a few days of scans to mean anything.\n\u2800\n\u2800",
-            "\n\ud83e\udde0 *AI:* Overall win rate is modest (52%) with a profit factor of 1.98, but net\nprofit is only $4.65 and rule results lack data, so performance signals remain\nuncertain.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+            "\ud83d\udcbc *PORTFOLIO* $31.68 | \u20a643,307\n\ud83d\udcb5 Cash free $0.03 | In coins $31.50 (99%)\n\ud83d\udfe1 BGB 0.00011912253 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udd34 *BLESS* $31.50 (99%)\n-5.87% (-$1.96) | Entry 0.016691\nQty 2005.0867 | Price 0.015711 | Stop 0.015022 (-4%)\nRSI 44 | Bearish | ATH -94%\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\n\u2800\n\u2800",
+            "and 8 more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT31.68/\u20a643,307\n\n\ud83e\udde0 *AI:* Portfolio is $31.68 total, 99% in BLESS (\u2248$31.50) with a -5.87% loss;\nseveral tokens lack USDT pricing, so their value is uncertain and should be\nreviewed.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
         "i": 0,
         "mode": "Markdown",
@@ -123,7 +121,8 @@
                 "callback_data": "rf:go"
             }
         ],
-        "cmd": "/stats"
+        "cmd": "m:r:holdings"
     },
-    "panel_mid": 6144
+    "out_mid": 6147,
+    "panel_mid": 6148
 }
