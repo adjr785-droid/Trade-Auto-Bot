@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690786,
+    "last_update_id": 935690788,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -81,49 +81,42 @@
         "loss": -1.4850249000000058
     },
     "kb_mid": 6068,
-    "out_text": "\ud83d\udcbc *PORTFOLIO* $33.58 | \u20a645,901\n\ud83d\udcb5 Cash free $33.53 | In coins $0.00 (0%)\n\ud83d\udfe1 BGB 0.00011912253 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\nNo coin holdings.\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\nand 8 more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT33.58/\u20a645,901\n\n\u2800\n\u2800",
+    "out_text": "\ud83d\udfe1 *MANUAL BUY*\n_Passed at least 5/7 core and 2/3 additional criteria. Manual review only._\n\nNone right now.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
+                "text": "\ud83d\udc41 Watch (0)",
+                "callback_data": "m:at:W"
             },
             {
-                "text": "1/2",
-                "callback_data": "pg:x"
+                "text": "\u25b6 \ud83d\udfe1 Manual (0)",
+                "callback_data": "m:at:M"
             },
             {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
+                "text": "\ud83e\udd16 Auto (0)",
+                "callback_data": "m:at:A"
+            }
+        ],
+        [
+            {
+                "text": "\ud83c\udd95 NEW LISTINGS",
+                "callback_data": "m:nl"
             },
             {
-                "text": "\ud83c\udfe0",
-                "callback_data": "m:menu"
-            },
+                "text": "\ud83d\uddc4 ARCHIVE",
+                "callback_data": "m:ar:D"
+            }
+        ],
+        [
             {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
+                "text": "\ud83d\udd04 Refresh",
+                "callback_data": "m:at:M"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/2*",
-    "out_time": 1795620252.8329287,
-    "out_mid": 6076,
-    "panel_mid": 6077,
-    "pages": {
-        "p": [
-            "\ud83d\udcbc *PORTFOLIO* $33.58 | \u20a645,901\n\ud83d\udcb5 Cash free $33.53 | In coins $0.00 (0%)\n\ud83d\udfe1 BGB 0.00011912253 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\nNo coin holdings.\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\nand 8 more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT33.58/\u20a645,901\n\n\u2800\n\u2800",
-            "\ud83e\udde0 *AI:* Portfolio shows $33.58 total with no coin holdings; several assets\n(e.g., AIDOGE, COQ, DGRAM) lack USDT pricing, requiring price data before any\nactionable decisions.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
-        ],
-        "i": 0,
-        "mode": "Markdown",
-        "x": [
-            {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
-            }
-        ],
-        "cmd": "m:r:holdings"
-    }
+    "panel_text": "\ud83d\udc47 *Actions*",
+    "out_time": 1795620270.8232036,
+    "out_mid": 6081,
+    "panel_mid": 6082
 }
