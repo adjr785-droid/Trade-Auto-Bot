@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690577,
+    "last_update_id": 935690580,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -65,7 +65,7 @@
         ],
         "m:coins": [
             3,
-            1795559435.6961186
+            1795576678.7700777
         ]
     },
     "radar": [],
@@ -88,7 +88,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "1/4",
+                "text": "4/4",
                 "callback_data": "pg:x"
             },
             {
@@ -113,7 +113,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/4*",
+    "panel_text": "\ud83d\udcc4 *Page 4/4*",
     "pages": {
         "p": [
             "\ud83d\udcda *COIN LIST*\n\u2705 Ready 0 | \ud83c\udd95 New 0 | \ud83d\udcbc Held 1 | \u26d4 Rejected 444\nPipeline: \ud83d\udc41 Watch 0 \u2192 \ud83d\udfe1 Manual 0 \u2192 \ud83e\udd16 Auto 0 | \u2935 Dropped 458 | Archived 0\nExecution: \ud83d\udce5 queued 0 | \u26d4 blocked 0 | \ud83d\udfe2 held 0\n\n\ud83d\udc41 *BTW* 0.828065 | NOT_ELIGIBLE | 1H +0.27% | RSI 81 | seen 45x\n\ud83e\udde0 HIGH: RSI 81 very overbought; 24h up 13%; not eligible, high risk of\nreversal.\n\ud83d\udcbc *PROS* 0.651400 | BOUGHT | 1H -1.95% | RSI 56 | seen 45x\n   \ud83e\udde0 MEDIUM: RSI 55.6 moderate; 24h up 14%; 1h down 2%; not eligible.\n\u2800\n\u2800",
@@ -121,7 +121,7 @@
             "not eligible but lower risk.\n *LINK* 8.7510 | NOT_ELIGIBLE | 1H -0.14% | RSI 38 | seen 45x\n   \ud83e\udde0 MEDIUM: RSI 38.3 low; price down 2.8% 24h; not eligible.\n *SUI* 0.640800 | NOT_ELIGIBLE | 1H -0.31% | RSI 39 | seen 45x\n\ud83e\udde0 MEDIUM: RSI 39 near oversold; price down 4% 24h; not eligible for execution,\nmonitor.\n *BNB* 542.07 | NOT_ELIGIBLE | 1H -0.41% | RSI 38 | seen 45x\n   \ud83e\udde0 MEDIUM: RSI 38.4; price down 1.7% 24h; not eligible, moderate risk.\n *PUMP* 0.002405 | NOT_ELIGIBLE | 1H -0.44% | RSI 40 | seen 45x\n   \ud83e\udde0 MEDIUM: RSI 40.2; price down 3.5% 24h; not eligible, watch.\n\u2800\n\u2800",
             " *ENA* 0.096530 | NOT_ELIGIBLE | 1H -0.45% | RSI 37 | seen 45x\n   \ud83e\udde0 MEDIUM: RSI 36.7 low; price down 4% 24h; not eligible, caution.\n *WLD* 0.231800 | NOT_ELIGIBLE | 1H -0.45% | RSI 44 | seen 45x\n   \ud83e\udde0 MEDIUM: RSI 43.5; price down 3% 24h; not eligible.\n\n\u2935 *DROPPED \u2014 retained for recovery:* MON (2/10), COLLECT (6/10), BGSC (6/10),\nTRX (3/10), LINK (2/10)\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 0,
+        "i": 3,
         "mode": "Markdown",
         "x": [
             {
