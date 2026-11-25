@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935690732,
+    "last_update_id": 935690733,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT24.70/\u20a633,756",
+    "kb_ph": "USDT24.71/\u20a633,773",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -80,12 +80,12 @@
         "since": 1795558810.5830717,
         "loss": -1.4850249000000058
     },
-    "kb_mid": 5983,
-    "out_mid": 5981,
-    "out_text": "\ud83d\udee0 *AUDIT \u2014 AI RECOVERY 1/3*\nCheck passed. 2 more to go.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "kb_mid": 5985,
+    "out_mid": 5986,
+    "out_text": "\u23f8 *BTC FILTER:* BTC RSI is 45.15 (needs \u2265 50).\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795594782.6910207,
-    "panel_mid": 5982,
+    "out_time": 1795598715.655186,
+    "panel_mid": 5987,
     "panel_rows": [
         [
             {

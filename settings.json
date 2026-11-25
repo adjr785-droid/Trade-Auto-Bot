@@ -83,7 +83,7 @@
     "weak_market_size_factor": 0.5,
     "h1_all_setups": true,
     "one_h_v1": true,
-    "oversold_enabled": false,
+    "oversold_enabled": true,
     "rising_guard": true,
     "manual_candidate_min_score": 70.0,
     "knife_v1": true,
@@ -92,5 +92,7 @@
     "half_or_all_threshold_usdt": 5.0,
     "fee_pct_side": 0.1,
     "perf_breaker_trades": 10,
-    "perf_breaker_hours": 24.0
+    "perf_breaker_hours": 24.0,
+    "pullback_rsi_min": 40,
+    "setups_v1": true
 }

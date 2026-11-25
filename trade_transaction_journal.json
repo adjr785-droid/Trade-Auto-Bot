@@ -2974,5 +2974,15 @@
         "time": 1795594771.0074127,
         "event": "ai_portfolio_review",
         "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $1.49; auto-buy paused for 14.0h', 'attention': [{'symbol': 'MON-USDT', 'action': 'hold', 'reason': 'Small positive PnL (+0.96%) and price above entry; stop is close but still provides downside protection. Monitor for further upside.'}, {'symbol': 'PUMP-USDT', 'action': 'consider reducing position or tightening stop', 'reason': 'Negative PnL (-1.28%) and price is near the current stop (0.002349). Market volatility may push it below stop; tightening stop or exiting reduces further loss.'}], 'summary': 'Overall portfolio risk remains elevated due to recent losses and auto-buy pause. BTC filter is active, so avoid new BTC exposure. Maintain MON position with current stop, but actively manage PUMP by tightening stop or exiting to limit downside. Remain conservative and monitor market conditions closely.'}"
+    },
+    {
+        "time": 1795598724.77484,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $1.49; auto-buy paused for 12.9h', 'attention': [{'symbol': 'PUMP-USDT', 'action': 'consider reducing exposure', 'reason': 'Negative PnL (-2.44%) and price approaching stop level (0.002363 vs stop 0.002349). Market volatility unknown; reducing size may limit further loss.'}, {'symbol': 'MON-USDT', 'action': 'monitor closely', 'reason': 'Positive PnL (1.53%) but stop is relatively close (0.009788) to current price (0.01059). Hold if risk tolerance allows, but be prepared to exit if price reverses.'}], 'summary': 'Overall portfolio shows mixed performance with one losing position near its stop. Given recent overall losses and the auto\u2011buy pause, prioritize risk mitigation: trim or hedge the PUMP-USDT position and keep a tight stop on MON-USDT. No new entries are recommended until the auto\u2011buy cooldown ends and market conditions c"
+    },
+    {
+        "time": 1795598725.5675685,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 53.33, 'net_pnl_usdt': 0.4815, 'recurring_patterns': ['15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC', 'MANUAL SELL'], 'recommendations': ['Review and tighten criteria for PANIC exits to reduce loss frequency', 'Consider limiting exposure to symbols with repeated manual sell triggers', 'Implement stricter trend validation before entering 15\u2011minute rotation trades', 'Monitor symbols with high volatility (e.g., WLD-USDT, JCT-USDT) and apply tighter stop\u2011losses']}"
     }
 ]
