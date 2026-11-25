@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690866,
+    "last_update_id": 935690869,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -87,36 +87,17 @@
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
+                "text": "\u2705 Confirm",
+                "callback_data": "m:bx:GWEI:ALL"
             },
             {
-                "text": "1/4",
-                "callback_data": "pg:x"
-            },
-            {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
-            },
-            {
-                "text": "\ud83c\udfe0",
+                "text": "\u274c Cancel",
                 "callback_data": "m:menu"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udd0d Scan now",
-                "callback_data": "m:r:scan"
-            }
-        ],
-        [
-            {
-                "text": "\ud83e\uddfe Scan History",
-                "callback_data": "m:scan_hist"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/4*",
+    "panel_text": "\u26a0\ufe0f *CONFIRM BUY*\nGWEI for ALL free USDT at about 0.009777 USDT.",
     "out_mid": 6239,
-    "panel_hidden": true
+    "panel_hidden": true,
+    "panel_mid": 6240
 }
