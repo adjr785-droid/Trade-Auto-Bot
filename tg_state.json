@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935690679,
+    "last_update_id": 935690680,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT24.91/\u20a634,045",
+    "kb_ph": "USDT24.90/\u20a634,031",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -80,8 +80,7 @@
         "since": 1795558810.5830717,
         "loss": -1.4850249000000058
     },
-    "kb_mid": 5886,
-    "out_text": "\ud83e\udde0 AI manual-buy advisory: Given the modest trade size and mixed technical\nsignals, a cautious approach is recommended. Verify liquidity and recent price\naction before executing the manual buy.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "\ud83e\uddf9 Cleared 5 bot message(s).\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
@@ -126,7 +125,8 @@
         ]
     ],
     "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
-    "out_time": 1795580675.4611309,
-    "out_mid": 5885,
-    "panel_mid": 5888
+    "out_time": 1795580737.6305516,
+    "out_mid": 5889,
+    "kb_mid": 5891,
+    "panel_hidden": true
 }
