@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935690771,
+    "last_update_id": 935690772,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT33.65/\u20a645,996",
+    "kb_ph": "USDT33.71/\u20a646,075",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -79,50 +79,43 @@
         "since": 1795558810.5830717,
         "loss": -1.4850249000000058
     },
-    "kb_mid": 6052,
-    "out_text": "\ud83d\udcbc *PORTFOLIO* $33.65 | \u20a645,996\n\ud83d\udcb5 Cash free $19.48 | In coins $14.12 (42%)\n\ud83d\udfe1 BGB 0.00011912253 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udd34 *MON* $14.12 (42%)\n-5.75% (-$0.86) | Entry 0.010430\nQty 1436.6619 | Price 0.009830 | Stop 0.009788 (-0%)\nRSI 41 | Mixed | ATH -80%\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\n\u2800\n\u2800",
+    "kb_mid": 6058,
+    "out_text": "\ud83d\udfe1 *MANUAL BUY*\n_Passed at least 5/7 core and 2/3 additional criteria. Manual review only._\n\nNone right now.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795612318.4554212,
+    "out_time": 1795612413.6165838,
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
+                "text": "\ud83d\udc41 Watch (0)",
+                "callback_data": "m:at:W"
             },
             {
-                "text": "1/2",
-                "callback_data": "pg:x"
+                "text": "\u25b6 \ud83d\udfe1 Manual (0)",
+                "callback_data": "m:at:M"
             },
             {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
+                "text": "\ud83e\udd16 Auto (0)",
+                "callback_data": "m:at:A"
+            }
+        ],
+        [
+            {
+                "text": "\ud83c\udd95 NEW LISTINGS",
+                "callback_data": "m:nl"
             },
             {
-                "text": "\ud83c\udfe0",
-                "callback_data": "m:menu"
-            },
+                "text": "\ud83d\uddc4 ARCHIVE",
+                "callback_data": "m:ar:D"
+            }
+        ],
+        [
             {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
+                "text": "\ud83d\udd04 Refresh",
+                "callback_data": "m:at:M"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/2*",
-    "out_mid": 6053,
-    "pages": {
-        "p": [
-            "\ud83d\udcbc *PORTFOLIO* $33.65 | \u20a645,996\n\ud83d\udcb5 Cash free $19.48 | In coins $14.12 (42%)\n\ud83d\udfe1 BGB 0.00011912253 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udd34 *MON* $14.12 (42%)\n-5.75% (-$0.86) | Entry 0.010430\nQty 1436.6619 | Price 0.009830 | Stop 0.009788 (-0%)\nRSI 41 | Mixed | ATH -80%\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\n\u2800\n\u2800",
-            "and 8 more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT33.65/\u20a645,996\n\n\ud83e\udde0 *AI:* Portfolio shows $33.65 total value, with 42% ($14.12) in MON and $19.48\ncash, but several tokens lack USDT pricing, creating valuation uncertainty and\nlimiting risk assessment.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
-        ],
-        "i": 0,
-        "mode": "Markdown",
-        "x": [
-            {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
-            }
-        ],
-        "cmd": "m:r:holdings"
-    },
-    "panel_mid": 6054
+    "panel_text": "\ud83d\udc47 *Actions*",
+    "out_mid": 6056,
+    "panel_mid": 6057
 }
