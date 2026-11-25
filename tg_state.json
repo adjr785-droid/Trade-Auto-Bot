@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935690860,
+    "last_update_id": 935690862,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT33.40/\u20a645,649",
+    "kb_ph": "USDT33.39/\u20a645,642",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -24,8 +24,8 @@
             1795493361.8607023
         ],
         "m:r:holdings": [
-            0,
-            1795579099.625837
+            1,
+            1795646979.0339622
         ],
         "/analyse": [
             6,
@@ -79,10 +79,10 @@
         "since": 1795558810.5830717,
         "loss": -1.4850249000000058
     },
-    "kb_mid": 6231,
-    "out_text": "\ud83d\udcbc *PORTFOLIO* $33.40 | \u20a645,649\n\ud83d\udcb5 Cash free $14.98 | In coins $18.36 (55%)\n\ud83d\udfe1 BGB 0.00011912253 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udd34 *BLESS* $8.37 (25%)\n-0.35% (-$0.03) | Entry 0.016691\nQty 503.28667 | Price 0.016633 | Stop 0.015022 (-10%)\nRSI 50 | Mixed | ATH -93%\n\n\ud83d\udfe2 *DGAI* $5.00 (15%)\n\u2800\n\u2800",
+    "kb_mid": 6234,
+    "out_text": "\ud83d\udcbc *PORTFOLIO* $33.39 | \u20a645,642\n\ud83d\udcb5 Cash free $14.98 | In coins $18.36 (55%)\n\ud83d\udfe1 BGB 0.00011912253 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udd34 *BLESS* $8.37 (25%)\n-0.35% (-$0.03) | Entry 0.016691\nQty 503.28667 | Price 0.016633 | Stop 0.015022 (-10%)\nRSI 50 | Mixed | ATH -93%\n\n\ud83d\udfe2 *DGAI* $5.00 (15%)\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795646956.557191,
+    "out_time": 1795646972.3935997,
     "panel_rows": [
         [
             {
@@ -90,7 +90,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "1/3",
+                "text": "2/3",
                 "callback_data": "pg:x"
             },
             {
@@ -107,15 +107,14 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/3*",
-    "out_mid": 6229,
+    "panel_text": "\ud83d\udcc4 *Page 2/3*",
     "pages": {
         "p": [
-            "\ud83d\udcbc *PORTFOLIO* $33.40 | \u20a645,649\n\ud83d\udcb5 Cash free $14.98 | In coins $18.36 (55%)\n\ud83d\udfe1 BGB 0.00011912253 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udd34 *BLESS* $8.37 (25%)\n-0.35% (-$0.03) | Entry 0.016691\nQty 503.28667 | Price 0.016633 | Stop 0.015022 (-10%)\nRSI 50 | Mixed | ATH -93%\n\n\ud83d\udfe2 *DGAI* $5.00 (15%)\n\u2800\n\u2800",
-            "+0.02% (+$0.00) | Entry 0.995906\nQty 5.01498 | Price 0.996147 | Stop 0.949098 (-5%)\nRSI 43 | Mixed | ATH -67%\n\n\ud83d\udfe2 *SKYAI* $4.99 (15%)\n+0.00% (+$0.00) | Entry 0.033430\nQty 149.41392 | Price 0.033430 | Stop 0.031277 (-6%)\nRSI 42 | Mixed | ATH -96%\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\n\u2800\n\u2800",
-            "and 8 more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT33.40/\u20a645,649\n\n\ud83e\udde0 *AI:* Portfolio totals $33.40 (\u2248\u00a565,649) with $14.98 cash and $18.36 in\ncoins; BLESS, DGAI, SKYAI show minimal gains and stops near entry, while several\nassets lack USDT pricing, requiring price verification.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+            "\ud83d\udcbc *PORTFOLIO* $33.39 | \u20a645,642\n\ud83d\udcb5 Cash free $14.98 | In coins $18.36 (55%)\n\ud83d\udfe1 BGB 0.00011912253 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udd34 *BLESS* $8.37 (25%)\n-0.35% (-$0.03) | Entry 0.016691\nQty 503.28667 | Price 0.016633 | Stop 0.015022 (-10%)\nRSI 50 | Mixed | ATH -93%\n\n\ud83d\udfe2 *DGAI* $5.00 (15%)\n\u2800\n\u2800",
+            "+0.02% (+$0.00) | Entry 0.995906\nQty 5.01498 | Price 0.996133 | Stop 0.949098 (-5%)\nRSI 43 | Mixed | ATH -67%\n\n\ud83d\udd34 *SKYAI* $4.99 (15%)\n-0.09% (-$0.00) | Entry 0.033430\nQty 149.41392 | Price 0.033400 | Stop 0.031277 (-6%)\nRSI 42 | Mixed | ATH -96%\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\n\u2800\n\u2800",
+            "and 8 more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT33.39/\u20a645,642\n\n\ud83e\udde0 *AI:* Portfolio totals $33.39 (\u2248\u00a564,642) with 55% in coins; cash $14.98 is\nlow, BLESS, DGAI, SKYAI each near break\u2011even and have stop losses; several\nassets lack USDT pricing and need price verification.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 0,
+        "i": 1,
         "mode": "Markdown",
         "x": [
             {
@@ -125,5 +124,6 @@
         ],
         "cmd": "m:r:holdings"
     },
-    "panel_mid": 6230
+    "out_mid": 6232,
+    "panel_mid": 6233
 }
