@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935690595,
+    "last_update_id": 935690596,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT24.71/\u20a633,773",
+    "kb_ph": "USDT24.73/\u20a633,800",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -79,10 +79,10 @@
         "since": 1795558810.5830717,
         "loss": -1.4850249000000058
     },
-    "kb_mid": 5760,
-    "out_text": "\ud83d\udcda *COIN LIST*\n\u2705 Ready 0 | \ud83c\udd95 New 0 | \ud83d\udcbc Held 1 | \u26d4 Rejected 443\nPipeline: \ud83d\udc41 Watch 0 \u2192 \ud83d\udfe1 Manual 0 \u2192 \ud83e\udd16 Auto 0 | \u2935 Dropped 459 | Archived 0\nExecution: \ud83d\udce5 queued 0 | \u26d4 blocked 0 | \ud83d\udfe2 held 1\n\n *MON* 0.009870 | NOT_ELIGIBLE | 1H +4.99% \ud83d\udcc8 | RSI 30 | seen 46x\n\ud83e\udde0 HIGH: RSI 25 very oversold; 24h down 22%; 1h up 3%; not eligible, high risk.\n *BTW* 0.845516 | NOT_ELIGIBLE | 1H +2.68% | RSI 78 | seen 46x\n\ud83e\udde0 HIGH: RSI 81 very overbought; 24h up 13%; not eligible, high risk of\nreversal.\n\u2800\n\u2800",
+    "kb_mid": 5763,
+    "out_text": "\ud83d\udd0e *SCAN HISTORY* \u00b7 462/462 coins (first 150)\n24 scans \u00b7 9.6h\n```\nCOIN    RSI    1H WHY\n------------------------------\nBTC      37     - Top 15\nETH      35     - Top 15\nSOL      35     - Top 15\nDOGE     38     - Top 15\nUSDGO    66     - Top 15\n```\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795577948.944802,
+    "out_time": 1795578011.577993,
     "panel_rows": [
         [
             {
@@ -90,7 +90,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "1/4",
+                "text": "1/16",
                 "callback_data": "pg:x"
             },
             {
@@ -104,39 +104,41 @@
         ],
         [
             {
-                "text": "\ud83d\udd0d Scan now",
-                "callback_data": "m:r:scan"
-            }
-        ],
-        [
-            {
-                "text": "\ud83e\uddfe Scan History",
-                "callback_data": "m:scan_hist"
+                "text": "\ud83d\udd0d Why not bought?",
+                "callback_data": "m:whylist:0"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/4*",
-    "out_mid": 5758,
+    "panel_text": "\ud83d\udcc4 *Page 1/16*",
     "pages": {
         "p": [
-            "\ud83d\udcda *COIN LIST*\n\u2705 Ready 0 | \ud83c\udd95 New 0 | \ud83d\udcbc Held 1 | \u26d4 Rejected 443\nPipeline: \ud83d\udc41 Watch 0 \u2192 \ud83d\udfe1 Manual 0 \u2192 \ud83e\udd16 Auto 0 | \u2935 Dropped 459 | Archived 0\nExecution: \ud83d\udce5 queued 0 | \u26d4 blocked 0 | \ud83d\udfe2 held 1\n\n *MON* 0.009870 | NOT_ELIGIBLE | 1H +4.99% \ud83d\udcc8 | RSI 30 | seen 46x\n\ud83e\udde0 HIGH: RSI 25 very oversold; 24h down 22%; 1h up 3%; not eligible, high risk.\n *BTW* 0.845516 | NOT_ELIGIBLE | 1H +2.68% | RSI 78 | seen 46x\n\ud83e\udde0 HIGH: RSI 81 very overbought; 24h up 13%; not eligible, high risk of\nreversal.\n\u2800\n\u2800",
-            " *PEPE* 0.00000346 | NOT_ELIGIBLE | 1H +0.87% \ud83d\udcc8 | RSI 47 | seen 46x\n   \ud83e\udde0 MEDIUM: RSI 47.4; price down 0.75% 24h; not eligible.\n *COLLECT* 0.025445 | NOT_ELIGIBLE | 1H +0.86% | RSI 54 | seen 46x\n\ud83e\udde0 MEDIUM: RSI 42.3 low edge; 24h up 4.6% and 1h up 1.8%; not eligible, moderate\nrisk.\n *ADA* 0.143400 | NOT_ELIGIBLE | 1H +0.75% \ud83d\udcc8 | RSI 36 | seen 46x\n   \ud83e\udde0 MEDIUM: RSI 38.3 low; price down 4% 24h; not eligible, caution.\n *ARIA* 0.302590 | NOT_ELIGIBLE | 1H +0.71% | RSI 45 | seen 46x\n\ud83e\udde0 MEDIUM: RSI 46.2 near upper oversold range; price down 3.5% 24h; not\neligible.\n\u2800\n\u2800",
-            " *PUMP* 0.002428 | NOT_ELIGIBLE | 1H +0.62% \ud83d\udcc8 | RSI 42 | seen 46x\n   \ud83e\udde0 MEDIUM: RSI 40.2; price down 3.5% 24h; not eligible, watch.\n *LINK* 8.7970 | NOT_ELIGIBLE | 1H +0.53% \ud83d\udcc8 | RSI 38 | seen 46x\n   \ud83e\udde0 MEDIUM: RSI 38.3 low; price down 2.8% 24h; not eligible.\n *ENA* 0.097050 | NOT_ELIGIBLE | 1H +0.43% \ud83d\udcc8 | RSI 35 | seen 46x\n   \ud83e\udde0 MEDIUM: RSI 36.7 low; price down 4% 24h; not eligible, caution.\n *WLD* 0.233000 | NOT_ELIGIBLE | 1H +0.37% | RSI 42 | seen 46x\n   \ud83e\udde0 MEDIUM: RSI 43.5; price down 3% 24h; not eligible.\n *SUI* 0.643600 | NOT_ELIGIBLE | 1H +0.33% \ud83d\udcc8 | RSI 38 | seen 46x\n\ud83e\udde0 MEDIUM: RSI 39 near oversold; price down 4% 24h; not eligible for execution,\n\u2800\n\u2800",
-            "monitor.\n *UNI* 4.6160 | NOT_ELIGIBLE | 1H +0.30% \ud83d\udcc8 | RSI 33 | seen 46x\n   \ud83e\udde0 MEDIUM: RSI 34.6 low; price down 4.3% 24h; not eligible.\n\n\u2935 *DROPPED \u2014 retained for recovery:* MON (2/10), BTW (6/10), PEPE (4/10),\nCOLLECT (3/10), ADA (2/10)\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+            "\ud83d\udd0e *SCAN HISTORY* \u00b7 462/462 coins (first 150)\n24 scans \u00b7 9.6h\n```\nCOIN    RSI    1H WHY\n------------------------------\nBTC      37     - Top 15\nETH      35     - Top 15\nSOL      35     - Top 15\nDOGE     38     - Top 15\nUSDGO    66     - Top 15\n```\n\u2800",
+            "```\nPWT      40     - Top 15\nHYPE     28     - Top 15\nZEC      39     - Top 15\nMTX      51     - Top 15\nSUI      38     - Top 15\nENA      35     - Top 15\nNEAR     38     - Top 15\nBGB      34     - Top 15\nEVAA     35     - Top 15\nDGAI     33     - Top 15\n```",
+            "```\nTRX      58  +0.2 RSI high\nDOS      49  +3.6 RSI high\nARIA     62  +2.3 RSI high\nWLD      57  -0.6 RSI high\nBNB      44  -0.5 1H low\nPUMP     50  -1.1 RSI high\nPEPE     55  -0.7 RSI high\nCOLLECT  58  +3.9 RSI high\nBLESS    58  +5.3 RSI high\nADA      54  -0.6 RSI high\n```",
+            "```\nTAO      47  -0.8 1H low\nLTC      58  -0.4 RSI high\nCYS      58  -3.1 RSI high\nONDO     50  -0.9 RSI high\nUMXM     40 +18.8 RSI low\nUNI      53  -1.5 RSI high\nLINK     57  -0.6 RSI high\nBGSC     62  +1.6 RSI high\nARX      73  +0.1 RSI high\nBTW      51  +0.5 RSI high\n```",
+            "```\nJCT      44  -0.3 1H low\nINJ      47  -0.6 1H low\nEGL1     57  -0.3 RSI high\nKAS      52  -0.8 RSI high\nPAXG     47  -0.3 1H low\nASTER    42  -0.2 1H low\nGRAM     50  -0.7 RSI high\nKII      74  -0.1 RSI high\nAVAX     48  -1.1 RSI high\nSKY      44  -0.7 1H low\n```",
+            "```\nQNT      35     - Vol low\nICNT     32     - Vol low\nAPR      43     - Vol low\nIDOL     44     - Vol low\nARB      37     - Vol low\nFET      39     - Vol low\nLIT      41     - Vol low\nWLFI     28     - Vol low\nDATA     40     - Vol low\nBCH      43     - Vol low\n```",
+            "```\nPI       39     - Vol low\nMMT      50     - Vol low\nFARTCOI  38     - Vol low\nNIGHT    40     - Vol low\nEDGE     45     - Vol low\nZRO      37     - Vol low\nVET      36     - Vol low\nJUP      31     - Vol low\nILY      46     - Vol low\nPENGU    34     - Vol low\n```",
+            "```\nGWEI     44     - Vol low\nQ        36     - Vol low\nVELO     55     - Vol low\nACE      30     - Vol low\nVTHO     35     - Vol low\nAAVE     38     - Vol low\nJTO      35     - Vol low\nICP      34     - Vol low\nMON      30     - Vol low\nSHIB     31     - Vol low\n```",
+            "```\nETHFI    40     - Vol low\nNES      55     - Vol low\nLAB      35     - Vol low\nLIGHT    48     - Vol low\nCC       37     - Vol low\nBSV      44     - Vol low\nDOT      37     - Vol low\nPREOPAI  50     - Vol low\nAERO     31     - Vol low\nACN      29     - Vol low\n```",
+            "```\nTRUMP    38     - Vol low\nGRVT     33     - Vol low\nCRV      38     - Vol low\nIRYS     58     - Vol low\nVIRTUAL  33     - Vol low\nFIL      37     - Vol low\nUNITAS   46     - Vol low\nVELVET   57     - Vol low\nALGO     39     - Vol low\nFLOCK    29     - Vol low\n```",
+            "```\nUAI      31     - Vol low\nMYX      34     - Vol low\nGRASS    35     - Vol low\nSKYAI    72     - Vol low\nAEON     38     - Vol low\nPROS     53     - Vol low\nHBAR     37     - Vol low\nSOON     36     - Vol low\nBR       37     - Vol low\nBLUE     35     - Vol low\n```",
+            "```\nMORPHO   32     - Vol low\nAIN      36     - Vol low\nLISTA    47     - Vol low\nCROSS    41     - Vol low\nOPEN     34     - Vol low\nPORTAL   47     - Vol low\nAXIS     40     - Vol low\nSEI      33     - Vol low\nZBCN     34     - Vol low\nPENDLE   31     - Vol low\n```",
+            "```\nPEAQ     34     - Vol low\nKAIA     37     - Vol low\nBABY     48     - Vol low\nPYUSD    52     - Vol low\nPONS     33     - Vol low\nDNA      43     - Vol low\nLAT      56     - Vol low\nPOL      38     - Vol low\nLUNC     51     - Vol low\nCP       33     - Vol low\n```",
+            "```\nARTX     62     - Vol low\nCNPY     38     - Vol low\nCAKE     33     - Vol low\nNIL      30     - Vol low\nMUBARAK  32     - Vol low\nAPT      31     - Vol low\nTRADOOR  39     - Vol low\nSOMI     31     - Vol low\nNPC      30     - Vol low\nPYTH     33     - Vol low\n```",
+            "```\nTIA      33     - Vol low\nPRL      30     - Vol low\nUP       28     - Vol low\nBILL     33     - Vol low\nUPC      41     - Vol low\nSTRK     30     - Vol low\nMAGMA    41     - Vol low\nBSB      32     - Vol low\nLDO      34     - Vol low\nSTETH    37     - Vol low\n```",
+            "```\nUS       32     - Vol low\nALIGN    35     - Vol low\nOP       35     - Vol low\nMHA      56     - Vol low\nHUMA     32     - Vol low\n```\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
         "i": 0,
         "mode": "Markdown",
         "x": [
             {
-                "text": "\ud83d\udd0d Scan now",
-                "callback_data": "m:r:scan"
-            },
-            {
-                "text": "\ud83e\uddfe Scan History",
-                "callback_data": "m:scan_hist"
+                "text": "\ud83d\udd0d Why not bought?",
+                "callback_data": "m:whylist:0"
             }
         ],
-        "cmd": "m:coins"
+        "cmd": "m:scan_hist"
     },
-    "panel_mid": 5759
+    "out_mid": 5761,
+    "panel_mid": 5762
 }
