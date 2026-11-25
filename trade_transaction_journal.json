@@ -2871,5 +2871,15 @@
         "time": 1795582945.630007,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 3.5972, 'recurring_patterns': ['15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC', 'MANUAL SELL'], 'recommendations': ['Limit exposure to PANIC-driven exits; consider tighter stop criteria', 'Review and potentially tighten criteria for 15-MINUTE NO-UPWARD-TREND ROTATION signals', 'Consolidate manual sell triggers to reduce fragmented exits', 'Maintain current win-rate focus but aim to improve average win size while reducing large loss events']}"
+    },
+    {
+        "time": 1795585713.202895,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $1.49; auto-buy paused for 16.5h', 'attention': [{'symbol': 'PUMP-USDT', 'action': 'monitor', 'reason': 'Negative PnL (-1.11%) and price approaching stop (0.002357). Consider tightening stop or exiting if price breaches stop.'}], 'summary': 'Overall portfolio risk is elevated due to recent losses and auto-buy pause. The only open position (PUMP-USDT) is slightly down and near its stop level; recommend close monitoring and be prepared to exit to limit further downside.'}"
+    },
+    {
+        "time": 1795585713.8155131,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 3.5972, 'recurring_patterns': ['15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC', 'MANUAL SELL'], 'recommendations': ['Limit exposure to high\u2011volatility panic exits; consider tighter stop\u2011loss thresholds', 'Review manual sell triggers to ensure they align with predefined profit targets', 'Diversify across symbols to reduce concentration risk', 'Implement stricter validation of trend\u2011rotation signals before entry']}"
     }
 ]
