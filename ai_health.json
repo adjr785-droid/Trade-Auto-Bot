@@ -22,8 +22,8 @@
             "successes": 144
         },
         "performance_review": {
-            "last_success": 1795566386.540412,
-            "successes": 153,
+            "last_success": 1795571588.6353512,
+            "successes": 154,
             "last_error": "",
             "last_failure": 1795559590.1343617,
             "failures": 10
@@ -76,7 +76,7 @@
             "failures": 7
         }
     },
-    "last_stage_success": 1795566386.540412,
+    "last_stage_success": 1795571588.6353512,
     "last_success": 1795563274.425829,
     "emergency_ended": 1795560301.2779193,
     "recovery_start_alerted": false
