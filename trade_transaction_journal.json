@@ -3052,5 +3052,10 @@
         "time": 1795606818.2255044,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 53.33, 'net_pnl_usdt': 0.4815, 'recurring_patterns': ['15-MINUTE NO-UPWARD-TREND ROTATION appears in 4 trades', 'PANIC appears in 7 trades', 'MANUAL SELL (including variations) appears in 6 trades', 'TRAILING STOP appears once', 'PARTIAL PROFIT appears once', 'RSI 75 appears once'], 'recommendations': ['Review and tighten criteria for PANIC exits to reduce loss frequency', 'Consider limiting exposure to 15\u2011minute trend signals that have produced mixed results', 'Implement stricter manual sell thresholds to avoid small\u2011loss churn', 'Monitor trailing\u2011stop parameters; current setting generated a sizable loss', 'Maintain current win\u2011rate focus but aim to improve net PnL by reducing high\u2011loss outliers']}"
+    },
+    {
+        "time": 1795610820.111406,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Daily drawdown -6.6% exceeds the -5% limit, indicating elevated risk.', 'attention': [{'symbol': 'MON-USDT', 'action': 'consider reducing position', 'reason': 'Current P&L is -5.56% and stop is very close to price (0.009788 vs 0.00985). The drawdown breach suggests tightening risk exposure.'}, {'symbol': 'BTC-USDT', 'action': 'monitor', 'reason': 'btc_filter is true; price is $58,672.02. No direct position, but BTC volatility could impact correlated assets.'}], 'summary': 'Overall portfolio risk is above the defined threshold. Reduce exposure on MON-USDT to mitigate further loss and keep a close watch on BTC market movements. No new entries are recommended at this time.'}"
     }
 ]

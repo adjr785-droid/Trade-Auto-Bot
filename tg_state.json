@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935690762,
+    "last_update_id": 935690764,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT23.69/\u20a632,385",
+    "kb_ph": "USDT23.55/\u20a632,191",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -79,5 +79,53 @@
         "since": 1795558810.5830717,
         "loss": -1.4850249000000058
     },
-    "kb_mid": 6038
+    "kb_mid": 6043,
+    "out_mid": 6041,
+    "out_text": "\ud83d\udea8 *AI FAILURE*\nAI notes and reviews are paused. Buying, selling and all stops keep running on\nthe rules. The audit is recovering the AI (3 checks).\nReason: AI stage performance_review failed: Expecting ',' delimiter: line 1\ncolumn 470 (char 469)\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_mode": "Markdown",
+    "out_time": 1795610821.7468085,
+    "panel_mid": 6042,
+    "panel_rows": [
+        [
+            {
+                "text": "\ud83d\udda5 System",
+                "callback_data": "/bot"
+            },
+            {
+                "text": "\ud83d\udcc8 Stats",
+                "callback_data": "/stats"
+            }
+        ],
+        [
+            {
+                "text": "\u2699\ufe0f Settings",
+                "callback_data": "m:set"
+            },
+            {
+                "text": "\ud83d\udcbc Holdings",
+                "callback_data": "m:r:holdings"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udcdc Trade History",
+                "callback_data": "m:r:history"
+            },
+            {
+                "text": "\ud83e\udde0 Ask AI",
+                "callback_data": "m:ai:1"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\uddf9 Clear Chat",
+                "callback_data": "/clear"
+            },
+            {
+                "text": "\ud83d\udea8 PANIC SELL",
+                "callback_data": "/panic"
+            }
+        ]
+    ],
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below."
 }
