@@ -1,11 +1,11 @@
 {
-    "last_check": 1795646315.665769,
+    "last_check": 1795646929.1883523,
     "status": "healthy",
     "model": "openai/gpt-oss-120b",
-    "latency_ms": 904,
+    "latency_ms": 257,
     "last_error": "",
     "consecutive_failures": 0,
-    "consecutive_successes": 1,
+    "consecutive_successes": 2,
     "last_response_valid": true,
     "alerted_status": "healthy",
     "emergency_mode": true,
@@ -34,8 +34,8 @@
             "last_error": ""
         },
         "manual_buy_review": {
-            "last_success": 1795646908.6356091,
-            "successes": 37,
+            "last_success": 1795646936.0599551,
+            "successes": 38,
             "last_error": ""
         },
         "sell_review": {
@@ -49,8 +49,8 @@
             "last_error": ""
         },
         "command_review": {
-            "last_success": 1795646480.8930297,
-            "successes": 88,
+            "last_success": 1795646955.871609,
+            "successes": 89,
             "last_error": ""
         },
         "near_miss_review": {
@@ -76,8 +76,8 @@
             "failures": 16
         }
     },
-    "last_stage_success": 1795646921.707495,
-    "last_success": 1795646315.665769,
+    "last_stage_success": 1795646955.871609,
+    "last_success": 1795646929.1883526,
     "emergency_ended": 1795621876.568532,
     "recovery_start_alerted": false
 }

@@ -3260,5 +3260,15 @@
         "time": 1795646922.4438856,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 50.0, 'net_pnl_usdt': 0.0682, 'recurring_patterns': ['PANIC (6 occurrences)', 'MANUAL SELL ALL (3 occurrences)', '15-MINUTE NO-UPWARD-TREND ROTATION (3 occurrences)', 'MANUAL SELL $ (multiple small sells)'], 'recommendations': ['Review and tighten panic\u2011sell triggers to avoid frequent small losses', 'Consider limiting manual sell-all actions unless clear profit targets are met', 'Analyze 15\u2011minute no\u2011upward\u2011trend rotations for false signals and adjust criteria', 'Implement stricter position sizing to reduce impact of large negative trades (e.g., WLD-USDT, DOS-USDT)']}"
+    },
+    {
+        "time": 1795646941.5097322,
+        "event": "ai_manual_buy_review",
+        "symbol": "SKYAI-USDT",
+        "review": {
+            "risk_level": "medium",
+            "warning": "RSI is moderately low (41.55) indicating potential oversold conditions, but the price is near recent lows and market volatility can be high. No existing position and BTC filter is inactive, so exposure is limited to this trade only.",
+            "summary": "Considering a $5 USDT purchase of SKYAI at $0.03342 with RSI 41.55, the trade carries medium risk. Proceed only if you accept possible price fluctuations and limited upside. Ensure position size aligns with your overall risk management strategy."
+        }
     }
 ]
