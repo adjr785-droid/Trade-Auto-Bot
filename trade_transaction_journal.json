@@ -3201,5 +3201,15 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795642942.4258726,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $1.49; auto-buy paused for 0.6h', 'attention': [{'symbol': 'BLESS-USDT', 'action': 'hold', 'reason': 'Current position shows a modest 3.92% profit and is above the stop level (0.015022). No clear exit signal; maintain while monitoring for downside.'}], 'summary': 'Overall portfolio risk remains elevated due to recent losses and auto-buy pause. Maintain existing profitable position (BLESS-USDT) and avoid new entries until risk metrics improve.'}"
+    },
+    {
+        "time": 1795642943.2789786,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 53.33, 'net_pnl_usdt': 0.4815, 'recurring_patterns': {'most_common_reasons': ['15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC', 'MANUAL SELL ALL'], 'reason_frequencies': {'15-MINUTE NO-UPWARD-TREND ROTATION': 4, 'PANIC': 6, 'MANUAL SELL ALL': 3, 'PARTIAL PROFIT +10.4%': 1, 'RSI 75': 1, 'TRAILING STOP (8.0%)': 1, 'MANUAL SELL $8.00': 1, 'MANUAL SELL $3.46': 1, 'MANUAL SELL $5.22': 1}}, 'recommendations': ['Review and tighten criteria for panic exits to avoid frequent small losses', 'Consider adding a filter to confirm upward trend before entering 15\u2011minute rotation trades', 'Evaluate the effectiveness of manual sell signals; many result in near\u2011zero or negative PnL', 'Maintain partial profit strategy that yielded a large positive trade, but apply it selectively']}"
     }
 ]
