@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT34.04/\u20a646,531",
+    "kb_ph": "USDT34.15/\u20a646,680",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -69,20 +69,47 @@
         ]
     },
     "radar": [
-        "LINK-USDT"
+        "GRAM-USDT",
+        "SKYAI-USDT",
+        "GWEI-USDT",
+        "UNI-USDT",
+        "ADA-USDT",
+        "BNB-USDT",
+        "ENA-USDT"
     ],
     "audit_down": {},
-    "audit_last": 1795633102.9952614,
+    "audit_last": 1795636408.038604,
     "audit_ai_cls": "OTHER",
     "perf_breaker": {
         "until": 1795645210.5830717,
         "since": 1795558810.5830717,
         "loss": -1.4850249000000058
     },
-    "kb_mid": 6177,
-    "panel_hidden": true,
+    "kb_mid": 6181,
     "out_mid": 6178,
-    "out_text": "\u26a0\ufe0f *AUDIT \u2014 AI RECOVERY RESET*\nFailed at stage 2/3 (AI stage performance_review failed: Expecting ','\ndelimiter: line 1 column 581 (char 580)). Restarting from 0/3.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "\ud83d\udee0 *AUDIT \u2014 AI RECOVERY 1/3*\nCheck passed. 2 more to go.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795636380.4650815
+    "out_time": 1795636410.0547926,
+    "panel_rows": [
+        [
+            {
+                "text": "\u25c0",
+                "callback_data": "pg:p"
+            },
+            {
+                "text": "1/2",
+                "callback_data": "pg:x"
+            },
+            {
+                "text": "\u25b6",
+                "callback_data": "pg:n"
+            },
+            {
+                "text": "\ud83c\udfe0",
+                "callback_data": "m:menu"
+            }
+        ]
+    ],
+    "panel_text": "\ud83d\udcc4 *Page 1/2*",
+    "panel_hidden": true
 }
