@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690816,
+    "last_update_id": 935690818,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -81,9 +81,9 @@
         "loss": -1.4850249000000058
     },
     "kb_mid": 6122,
-    "out_text": "\ud83e\udde0 AI manual-buy advisory: Manual buy of 25.75\u202fUSDT of BLESS\u2011USDT at 0.0167264\nis a small position. RSI is neutral (47.15). Given the bearish BTC signal and\nactive BTC filter, the trade carries moderate risk. Verify compliance with your\nrisk controls before execution.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "\ud83d\udcbc *PORTFOLIO* $33.59 | \u20a645,905\n\ud83d\udcb5 Cash free $0.03 | In coins $33.50 (100%)\n\ud83d\udfe1 BGB 0.00011912253 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *BLESS* $33.50 (100%)\n+0.11% (+$0.04) | Entry 0.016691\nQty 2005.0867 | Price 0.016709 | Stop 0.015022 (-10%)\nRSI 47 | Mixed | ATH -93%\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795622467.0459359,
+    "out_time": 1795622500.4799771,
     "panel_rows": [
         [
             {
@@ -109,6 +109,21 @@
         ]
     ],
     "panel_text": "\ud83d\udcc4 *Page 1/2*",
-    "out_mid": 6117,
-    "panel_hidden": true
+    "out_mid": 6125,
+    "pages": {
+        "p": [
+            "\ud83d\udcbc *PORTFOLIO* $33.59 | \u20a645,905\n\ud83d\udcb5 Cash free $0.03 | In coins $33.50 (100%)\n\ud83d\udfe1 BGB 0.00011912253 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *BLESS* $33.50 (100%)\n+0.11% (+$0.04) | Entry 0.016691\nQty 2005.0867 | Price 0.016709 | Stop 0.015022 (-10%)\nRSI 47 | Mixed | ATH -93%\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\n\u2800\n\u2800",
+            "and 8 more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT33.59/\u20a645,905\n\n\ud83e\udde0 *AI:* Portfolio holds $33.59 total, all in BLESS (100%) with a modest 0.11%\ngain, but several tokens lack USDT pricing, indicating valuation uncertainty\nthat should be monitored.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+        ],
+        "i": 0,
+        "mode": "Markdown",
+        "x": [
+            {
+                "text": "\ud83d\udd04",
+                "callback_data": "rf:go"
+            }
+        ],
+        "cmd": "m:r:holdings"
+    },
+    "panel_mid": 6126
 }
