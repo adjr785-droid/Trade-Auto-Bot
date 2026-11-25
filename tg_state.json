@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935690673,
+    "last_update_id": 935690674,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT24.79/\u20a633,886",
+    "kb_ph": "USDT24.95/\u20a634,098",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -69,6 +69,7 @@
         ]
     },
     "radar": [
+        "PUMP-USDT",
         "PREOPAI-USDT"
     ],
     "audit_down": {},
@@ -79,8 +80,8 @@
         "since": 1795558810.5830717,
         "loss": -1.4850249000000058
     },
-    "kb_mid": 5878,
-    "out_text": "\ud83d\udd0e *SCAN HISTORY* \u00b7 462/462 coins (first 150)\n24 scans \u00b7 10.3h\n```\nCOIN    RSI    1H WHY\n------------------------------\nBTC      40     - Top 15\nETH      40     - Top 15\nSOL      42     - Top 15\nDOGE     38     - Top 15\nUSDGO    66     - Top 15\n```\n\u2800",
+    "kb_mid": 5881,
+    "out_text": "\ud83d\udd0d *SCAN COMPLETE*\nChecked 462 markets in 15s.\nNo coin matched any setup.\n\ud83d\udea7 *GATES* (18 analysed, 0 passed all 4)\nRSI: blocked 5 \u2014 RSI \u2264 48\nMA: blocked 15 \u2014 Price > MA5 > MA10\n1H: blocked 6 \u2014 1H +0.5 to +6%\n24H: blocked 14 \u2014 24H 0 to +100%\nScore: blocked 0 \u2014 Core 5+ and Extra 2+\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
@@ -109,36 +110,7 @@
         ]
     ],
     "panel_text": "\ud83d\udcc4 *Page 1/16*",
-    "out_time": 1795580474.9658132,
-    "pages": {
-        "p": [
-            "\ud83d\udd0e *SCAN HISTORY* \u00b7 462/462 coins (first 150)\n24 scans \u00b7 10.3h\n```\nCOIN    RSI    1H WHY\n------------------------------\nBTC      40     - Top 15\nETH      40     - Top 15\nSOL      42     - Top 15\nDOGE     38     - Top 15\nUSDGO    66     - Top 15\n```\n\u2800",
-            "```\nPWT      37     - Top 15\nHYPE     28     - Top 15\nZEC      43     - Top 15\nMTX      56     - Top 15\nSUI      41     - Top 15\nENA      40     - Top 15\nNEAR     43     - Top 15\nBGB      36     - Top 15\nEVAA     42     - Top 15\nDGAI     43     - Top 15\n```",
-            "```\nUMXM      -     - Spread wide\nTRX      57  -0.1 RSI high\nDOS      50  +0.5 RSI high\nARIA     64  +2.1 RSI high\nWLD      53  -0.5 RSI high\nBNB      42  -0.3 1H low\nPEPE     55  +0.0 RSI high\nPUMP     46  -1.1 1H low\nCOLLECT  66  +1.9 RSI high\nBLESS    60  +4.5 RSI high\n```",
-            "```\nADA      49  -0.6 RSI high\nTAO      44  -0.5 1H low\nLTC      54  -0.6 RSI high\nONDO     46  -0.7 1H low\nUNI      47  -1.2 1H low\nBGSC     61  +4.3 RSI high\nCYS      53  -2.1 RSI high\nLINK     53  -0.4 RSI high\nARX      67  -0.8 RSI high\nBTW      47  -1.9 1H low\n```",
-            "```\nJCT      41  -0.6 RSI low\nINJ      45  -0.7 1H low\nEGL1     56  -0.2 RSI high\nKAS      47  -0.9 1H low\nPAXG     46  +0.0 1H low\nASTER    41  -0.3 RSI low\nAVAX     45  -0.6 1H low\nKII      70  -0.1 RSI high\nSKY      41  -1.2 RSI low\nQNT      38     - Vol low\n```",
-            "```\nGRAM     33     - Vol low\nICNT     38     - Vol low\nAPR      51     - Vol low\nIDOL     49     - Vol low\nARB      42     - Vol low\nFET      41     - Vol low\nWLFI     31     - Vol low\nLIT      42     - Vol low\nBCH      43     - Vol low\nDATA     41     - Vol low\n```",
-            "```\nPI       39     - Vol low\nMMT      49     - Vol low\nFARTCOI  44     - Vol low\nEDGE     49     - Vol low\nNIGHT    41     - Vol low\nZRO      39     - Vol low\nVET      40     - Vol low\nILY      49     - Vol low\nPENGU    37     - Vol low\nJUP      31     - Vol low\n```",
-            "```\nGWEI     46     - Vol low\nQ        40     - Vol low\nAAVE     41     - Vol low\nJTO      39     - Vol low\nVTHO     38     - Vol low\nICP      34     - Vol low\nMON      36     - Vol low\nACE      36     - Vol low\nETHFI    42     - Vol low\nSHIB     36     - Vol low\n```",
-            "```\nVELO     52     - Vol low\nNES      53     - Vol low\nLIGHT    49     - Vol low\nLAB      36     - Vol low\nCC       42     - Vol low\nBSV      50     - Vol low\nDOT      41     - Vol low\nPREOPAI  56     - Vol low\nACN      33     - Vol low\nAERO     30     - Vol low\n```",
-            "```\nTRUMP    43     - Vol low\nFIL      41     - Vol low\nVIRTUAL  35     - Vol low\nGRVT     36     - Vol low\nIRYS     55     - Vol low\nCRV      46     - Vol low\nVELVET   57     - Vol low\nUNITAS   46     - Vol low\nALGO     41     - Vol low\nFLOCK    34     - Vol low\n```",
-            "```\nSKYAI    79     - Vol low\nUAI      30     - Vol low\nMYX      38     - Vol low\nAEON     35     - Vol low\nGRASS    37     - Vol low\nPROS     46     - Vol low\nSOON     35     - Vol low\nBR       35     - Vol low\nMORPHO   33     - Vol low\nHBAR     37     - Vol low\n```",
-            "```\nAIN      38     - Vol low\nBLUE     39     - Vol low\nLISTA    47     - Vol low\nCROSS    44     - Vol low\nPORTAL   52     - Vol low\nOPEN     37     - Vol low\nAXIS     39     - Vol low\nSEI      31     - Vol low\nPENDLE   30     - Vol low\nZBCN     39     - Vol low\n```",
-            "```\nPEAQ     39     - Vol low\nKAIA     43     - Vol low\nBABY     51     - Vol low\nPYUSD    52     - Vol low\nDNA      41     - Vol low\nPONS     37     - Vol low\nLAT      52     - Vol low\nPOL      41     - Vol low\nLUNC     45     - Vol low\nPRL      28     - Vol low\n```",
-            "```\nARTX     62     - Vol low\nCP       37     - Vol low\nCNPY     46     - Vol low\nNPC      42     - Vol low\nCAKE     34     - Vol low\nMUBARAK  36     - Vol low\nSOMI     30     - Vol low\nAPT      34     - Vol low\nTIA      37     - Vol low\nTRADOOR  40     - Vol low\n```",
-            "```\nBILL     33     - Vol low\nUPC      46     - Vol low\nPYTH     33     - Vol low\nUP       31     - Vol low\nNIL      30     - Vol low\nSTRK     35     - Vol low\nBSB      37     - Vol low\nMAGMA    40     - Vol low\nLDO      39     - Vol low\nSTETH    39     - Vol low\n```",
-            "```\nUS       33     - Vol low\nOP       38     - Vol low\nMHA      50     - Vol low\nHUMA     32     - Vol low\nUSD1     74     - Vol low\n```\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
-        ],
-        "i": 0,
-        "mode": "Markdown",
-        "x": [
-            {
-                "text": "\ud83d\udd0d Why not bought?",
-                "callback_data": "m:whylist:0"
-            }
-        ],
-        "cmd": "m:scan_hist"
-    },
-    "out_mid": 5876,
-    "panel_mid": 5877
+    "out_time": 1795580499.7766402,
+    "out_mid": 5879,
+    "panel_hidden": true
 }
