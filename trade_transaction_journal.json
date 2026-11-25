@@ -3164,5 +3164,10 @@
         "time": 1795627266.4662273,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 53.33, 'net_pnl_usdt': 0.4815, 'recurring_patterns': {'most_common_reasons': ['15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC', 'MANUAL SELL ALL'], 'reason_frequencies': {'15-MINUTE NO-UPWARD-TREND ROTATION': 4, 'PANIC': 6, 'MANUAL SELL ALL': 3, 'MANUAL SELL $8.00': 1, 'MANUAL SELL $3.46': 1, 'MANUAL SELL $5.22': 1, 'PARTIAL PROFIT +10.4%': 1, 'RSI 75': 1, 'TRAILING STOP (8.0%)': 1}}, 'recommendations': ['Review and tighten criteria for PANIC exits to avoid frequent small losses', 'Consider adding a confirmation filter before executing 15-MINUTE NO-UPWARD-TREND ROTATION trades', 'Limit manual sell interventions to predefined profit targets rather than ad\u2011hoc decisions', 'Monitor trailing stop parameters to ensure they are not triggering prematurely']}"
+    },
+    {
+        "time": 1795630001.4281497,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $1.49; auto-buy paused for 4.2h', 'attention': [{'symbol': 'BLESS-USDT', 'action': 'monitor', 'reason': 'Position is down -1.89% and close to stop (0.015022). Consider tightening stop or exiting if price approaches stop.'}], 'summary': 'Overall portfolio risk is elevated due to recent losses and auto-buy pause. The only open position (BLESS-USDT) is modestly losing and near its stop level. Recommend close monitoring, possibly tighten stop loss, and avoid opening new positions until risk metrics improve.'}"
     }
 ]
