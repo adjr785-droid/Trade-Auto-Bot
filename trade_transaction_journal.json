@@ -2887,5 +2887,15 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795588816.14283,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $1.49; auto-buy paused for 15.7h', 'attention': [{'symbol': 'PUMP-USDT', 'action': 'monitor', 'reason': 'Small loss (-0.29%) on a manual position; stop is close to entry. No immediate action, but watch for further downside.'}], 'summary': 'Overall risk is elevated due to recent losing streak and auto-buy pause. Maintain current positions, avoid new entries until performance stabilizes. Consider tightening stop levels if price moves further against the PUMP-USDT position.'}"
+    },
+    {
+        "time": 1795588817.1281278,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 3.5972, 'recurring_patterns': {'15-MINUTE NO-UPWARD-TREND ROTATION': 5, 'PANIC': 5, 'MANUAL SELL ALL': 3, 'MANUAL SELL $': 3, 'TRAILING STOP (8.0%)': 1, 'PARTIAL PROFIT +10.4%': 1, 'RSI 75': 1}, 'recommendations': '- Limit reliance on panic exits; they contributed multiple losses. - Review the 15\u2011minute no\u2011upward\u2011trend rotation signal, as it generated mixed results. - Consider tighter stop\u2011loss or trailing\u2011stop parameters to avoid large negative PnL (e.g., -0.69 on JCT\u2011USDT). - Increase sample size before scaling strategy; current win rate is modest and net PnL is low. - Maintain current partial\u2011profit take\u2011profit approach that yielded a +1.11 USDT trade, but apply it more consistently.'}"
     }
 ]
