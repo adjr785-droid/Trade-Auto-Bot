@@ -3072,5 +3072,10 @@
         "time": 1795612291.842954,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 53.33, 'net_pnl_usdt': 0.4815, 'recurring_patterns': {'most_common_reasons': ['15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC', 'MANUAL SELL ALL'], 'reason_frequencies': {'15-MINUTE NO-UPWARD-TREND ROTATION': 4, 'PANIC': 6, 'MANUAL SELL ALL': 3, 'PARTIAL PROFIT +10.4%': 1, 'RSI 75': 1, 'TRAILING STOP (8.0%)': 1, 'MANUAL SELL $8.00': 1, 'MANUAL SELL $3.46': 1, 'MANUAL SELL $5.22': 1}}, 'recommendations': ['Limit exposure to trades triggered by PANIC signals, as they account for the highest loss contribution.', 'Consider tightening criteria for 15-MINUTE NO-UPWARD-TREND ROTATION entries, given mixed outcomes.', 'Review manual sell thresholds to ensure they align with risk limits and avoid small\u2011scale losses.']}"
+    },
+    {
+        "time": 1795615410.3759055,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 53.33, 'net_pnl_usdt': 0.4815, 'recurring_patterns': ['15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC', 'MANUAL SELL'], 'recommendations': ['Review and tighten criteria for PANIC exits to reduce loss frequency', 'Consider limiting exposure to symbols with repeated manual sell triggers', 'Implement stricter trend validation before entering 15\u2011minute rotation trades', 'Monitor high\u2011volatility assets (e.g., WLD-USDT, JCT-USDT) and apply tighter stop\u2011losses']}"
     }
 ]
