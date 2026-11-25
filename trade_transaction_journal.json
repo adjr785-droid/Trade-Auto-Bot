@@ -2659,5 +2659,15 @@
             "warning": "Manual buy of PROS-USDT at $0.655 involves market uncertainty; BTC filter active and BTC below 50h average may affect liquidity. Ensure position sizing aligns with risk tolerance and monitor RSI and price action closely.",
             "summary": "Considering a $25.15 USDT purchase of PROS-USDT with no existing position, the current RSI is neutral (53.16) and BTC is below its 50\u2011hour average, indicating potential market weakness. Proceed with caution and be prepared to adjust or exit if adverse price movement occurs."
         }
+    },
+    {
+        "time": 1795576481.2847896,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $1.49; auto-buy paused for 19.1h', 'attention': [{'symbol': 'PROS-USDT', 'action': 'hold', 'reason': 'Small negative PnL (-0.29%) and stop loss still far (\u22487% below entry). No clear exit signal; maintain position while monitoring price near stop.'}], 'summary': 'Current portfolio risk is elevated due to recent losses and auto\u2011buy pause. The only open position (PROS-USDT) shows a minor loss and is within its risk parameters. Recommend holding and closely watching the price relative to the stop level; avoid new entries until risk metrics improve.'}"
+    },
+    {
+        "time": 1795576482.165965,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 4.4473, 'recurring_patterns': {'PANIC': 5, '15-MINUTE NO-UPWARD-TREND ROTATION': 5, 'MANUAL SELL': 4, 'TRAILING STOP': 1, 'RSI 75': 1, 'PARTIAL PROFIT +10.4%': 1}, 'recommendations': 'Reduce reliance on panic exits; consider tighter risk controls and longer trend confirmation before closing positions. Review the high frequency of 15\u2011minute no\u2011upward\u2011trend rotations and evaluate if the signal threshold is too sensitive. Manual sell actions suggest inconsistent strategy\u2014standardize exit criteria. Maintain current win\u2011rate but aim to improve average win size while limiting large losses (e.g., -0.695 and -0.511).'}"
     }
 ]

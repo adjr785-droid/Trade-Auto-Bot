@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935690566,
+    "last_update_id": 935690571,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT25.18/\u20a634,415",
+    "kb_ph": "USDT25.15/\u20a634,374",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -77,113 +77,43 @@
         "since": 1795558810.5830717,
         "loss": -1.4850249000000058
     },
-    "out_text": "\ud83e\udde0 AI manual-buy advisory: Considering a $25.15 USDT purchase of PROS-USDT with\nno existing position, the current RSI is neutral (53.16) and BTC is below its\n50\u2011hour average, indicating potential market weakness. Proceed with caution and\nbe prepared to adjust or exit if adverse price movement occurs.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "kb_mid": 5728,
+    "out_mid": 5729,
+    "out_text": "\u23f8 *BTC FILTER:* BTC RSI is 37.2 (needs \u2265 50).\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795575797.4301074,
+    "out_time": 1795576474.6661603,
+    "panel_mid": 5730,
     "panel_rows": [
         [
             {
-                "text": "COLLECT",
-                "callback_data": "m:b:COLLECT"
+                "text": "\ud83d\udc41 Watch (1)",
+                "callback_data": "m:at:W"
             },
             {
-                "text": "WLD",
-                "callback_data": "m:b:WLD"
+                "text": "\u25b6 \ud83d\udfe1 Manual (0)",
+                "callback_data": "m:at:M"
             },
             {
-                "text": "BGSC",
-                "callback_data": "m:b:BGSC"
+                "text": "\ud83e\udd16 Auto (0)",
+                "callback_data": "m:at:A"
             }
         ],
         [
             {
-                "text": "PEPE",
-                "callback_data": "m:b:PEPE"
+                "text": "\ud83c\udd95 NEW LISTINGS",
+                "callback_data": "m:nl"
             },
             {
-                "text": "PROS",
-                "callback_data": "m:b:PROS"
-            },
-            {
-                "text": "BLESS",
-                "callback_data": "m:b:BLESS"
+                "text": "\ud83d\uddc4 ARCHIVE",
+                "callback_data": "m:ar:D"
             }
         ],
         [
             {
-                "text": "MON",
-                "callback_data": "m:b:MON"
-            },
-            {
-                "text": "PUMP",
-                "callback_data": "m:b:PUMP"
-            },
-            {
-                "text": "BNB",
-                "callback_data": "m:b:BNB"
-            }
-        ],
-        [
-            {
-                "text": "LTC",
-                "callback_data": "m:b:LTC"
-            },
-            {
-                "text": "UNI",
-                "callback_data": "m:b:UNI"
-            },
-            {
-                "text": "ARIA",
-                "callback_data": "m:b:ARIA"
-            }
-        ],
-        [
-            {
-                "text": "ADA",
-                "callback_data": "m:b:ADA"
-            },
-            {
-                "text": "LINK",
-                "callback_data": "m:b:LINK"
-            },
-            {
-                "text": "BTW",
-                "callback_data": "m:b:BTW"
-            }
-        ],
-        [
-            {
-                "text": "PREOPAI",
-                "callback_data": "m:b:PREOPAI"
-            },
-            {
-                "text": "AVAX",
-                "callback_data": "m:b:AVAX"
-            },
-            {
-                "text": "ONDO",
-                "callback_data": "m:b:ONDO"
-            }
-        ],
-        [
-            {
-                "text": "\u25c0\ufe0f Prev",
-                "callback_data": "m:more:buy:0"
-            },
-            {
-                "text": "Next \u25b6\ufe0f",
-                "callback_data": "m:more:buy:2"
-            }
-        ],
-        [
-            {
-                "text": "\u2b05\ufe0f Back",
-                "callback_data": "m:buy"
+                "text": "\ud83d\udd04 Refresh",
+                "callback_data": "m:at:M"
             }
         ]
     ],
-    "panel_text": "\u2795 *MORE COINS* (page 2/26)\nBiggest 24h volume first. Tap a coin.",
-    "kb_mid": 5722,
-    "out_mid": 5716,
-    "panel_mid": 5717
+    "panel_text": "\ud83d\udc47 *Actions*"
 }
