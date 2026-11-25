@@ -16,10 +16,10 @@
         1,
         1,
         1,
+        0,
         1,
-        1,
-        1,
-        0
+        0,
+        1
     ],
     "e": [
         [
@@ -86,6 +86,11 @@
             1795619322.165475,
             "OTHER",
             "performance_review: Expecting ',' delimiter: line 1 column 735 (char 734)"
+        ],
+        [
+            1795619364.2975867,
+            "OTHER",
+            "coin_advisory: Expecting ',' delimiter: line 1 column 2774 (char 2773)"
         ]
     ]
 }

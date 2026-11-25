@@ -68,10 +68,13 @@
             1795576709.5648017
         ]
     },
-    "radar": [],
+    "radar": [
+        "ARIA-USDT",
+        "COLLECT-USDT"
+    ],
     "audit_down": {},
-    "audit_last": 1795615448.3625731,
-    "audit_ai_cls": "",
+    "audit_last": 1795619369.703611,
+    "audit_ai_cls": "OTHER",
     "perf_breaker": {
         "until": 1795645210.5830717,
         "since": 1795558810.5830717,
@@ -79,9 +82,9 @@
     },
     "kb_mid": 6068,
     "out_mid": 6069,
-    "out_text": "\ud83d\udea8 *AI FAILURE*\nAI notes and reviews are paused. Buying, selling and all stops keep running on\nthe rules. The audit is recovering the AI (3 checks).\nReason: AI stage performance_review failed: Expecting ',' delimiter: line 1\ncolumn 735 (char 734)\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "\ud83d\udee0 AUDIT\n\u2705 Fixed: AI \u2014 unknown error (stage: coin_advisory). Retrying; no automatic fix\nknown for this error.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795619322.769953,
+    "out_time": 1795619371.5971923,
     "panel_mid": 6070,
     "panel_rows": [
         [
