@@ -3093,5 +3093,11 @@
         "time": 1795621863.4654965,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 53.33, 'net_pnl_usdt': 0.4815, 'recurring_patterns': ['PANIC', 'MANUAL SELL', '15-MINUTE NO-UPWARD-TREND ROTATION'], 'recommendations': ['Limit exposure to trades flagged as PANIC due to high loss frequency', 'Review manual sell triggers; many small P&L entries suggest inconsistent sizing', 'Consider tightening criteria for 15-MINUTE NO-UPWARD-TREND ROTATION signals, as they yield mixed results', 'Implement stricter risk caps per trade to reduce large negative outliers (e.g., -0.69, -0.51)']}"
+    },
+    {
+        "time": 1795621926.640813,
+        "event": "ai_coin_advisory",
+        "reviewed": 25,
+        "source": "coins.db"
     }
 ]
