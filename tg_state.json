@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935690571,
+    "last_update_id": 935690572,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT25.15/\u20a634,374",
+    "kb_ph": "USDT25.13/\u20a634,342",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -70,27 +70,25 @@
     },
     "radar": [],
     "audit_down": {},
-    "audit_last": 1795575599.5556972,
+    "audit_last": 1795576486.7067516,
     "audit_ai_cls": "",
     "perf_breaker": {
         "until": 1795645210.5830717,
         "since": 1795558810.5830717,
         "loss": -1.4850249000000058
     },
-    "kb_mid": 5728,
-    "out_mid": 5729,
-    "out_text": "\u23f8 *BTC FILTER:* BTC RSI is 37.2 (needs \u2265 50).\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "kb_mid": 5733,
+    "out_text": "\ud83d\udc41 *WATCH LIST*\n_Rising coins being watched. They move up when they pass the manual rules._\n\n```\nCOIN    RSI    1H    24H  S\n---------------------------\nBTW      81  +0.3  +13.4  6\n```\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795576474.6661603,
-    "panel_mid": 5730,
+    "out_time": 1795576489.8618238,
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udc41 Watch (1)",
+                "text": "\u25b6 \ud83d\udc41 Watch (1)",
                 "callback_data": "m:at:W"
             },
             {
-                "text": "\u25b6 \ud83d\udfe1 Manual (0)",
+                "text": "\ud83d\udfe1 Manual (0)",
                 "callback_data": "m:at:M"
             },
             {
@@ -111,9 +109,11 @@
         [
             {
                 "text": "\ud83d\udd04 Refresh",
-                "callback_data": "m:at:M"
+                "callback_data": "m:at:W"
             }
         ]
     ],
-    "panel_text": "\ud83d\udc47 *Actions*"
+    "panel_text": "\ud83d\udc47 *Actions*",
+    "out_mid": 5731,
+    "panel_mid": 5732
 }
