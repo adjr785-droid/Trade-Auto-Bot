@@ -2963,5 +2963,11 @@
         "time": 1795593505.5549002,
         "event": "ai_portfolio_review",
         "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $1.49; auto-buy paused for 14.4h', 'attention': [{'symbol': 'MON-USDT', 'action': 'hold', 'reason': 'Small positive PnL (0.96%) and price above stop; no clear exit signal yet.'}, {'symbol': 'PUMP-USDT', 'action': 'consider reducing exposure', 'reason': 'Negative PnL (-1.2%) and price approaching stop level (0.002349); risk management suggests tightening stop or partial exit.'}], 'summary': 'Overall portfolio risk is elevated due to recent losses and auto\u2011buy pause. Maintain MON-USDT while monitoring for profit targets, and tighten risk on PUMP-USDT. No new entries recommended until risk metrics improve.'}"
+    },
+    {
+        "time": 1795593535.909657,
+        "event": "ai_coin_advisory",
+        "reviewed": 25,
+        "source": "coins.db"
     }
 ]
