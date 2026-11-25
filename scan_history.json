@@ -1,4 +1,33 @@
 {
     "window_start": 1795543332.3727505,
-    "items": []
+    "items": [
+        {
+            "time": 1795620371,
+            "rank": 27,
+            "sym": "BLESS-USDT",
+            "vol": 1554955.36,
+            "chg": -4.59,
+            "price": 0.0169884,
+            "high_24h": 0.0193269,
+            "spread_pct": 0.0736266422422471,
+            "rsi": 45.6,
+            "rr": 3.3765275128911494,
+            "ma5": 0.016819,
+            "ma10": 0.016617,
+            "btc_market_safe": false,
+            "market_trend_4h": true,
+            "breakout_confirmed": false,
+            "volume_expansion_ratio": 1.9446349701593248,
+            "decision": "SETUP \u2014 NOT QUEUED",
+            "reason": "TREND matched, automatic buying is paused",
+            "min_volume": 1000000,
+            "prev_close": 0.0163997,
+            "h1": 4.41,
+            "trend_4h_ok": true,
+            "rising_guard_ok": true,
+            "strategy": "TREND",
+            "rr_target": 0.02272458,
+            "rr_stop_pct": 10.0
+        }
+    ]
 }
