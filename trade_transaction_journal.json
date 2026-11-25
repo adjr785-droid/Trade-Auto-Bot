@@ -3270,5 +3270,11 @@
             "warning": "RSI is moderately low (41.55) indicating potential oversold conditions, but the price is near recent lows and market volatility can be high. No existing position and BTC filter is inactive, so exposure is limited to this trade only.",
             "summary": "Considering a $5 USDT purchase of SKYAI at $0.03342 with RSI 41.55, the trade carries medium risk. Proceed only if you accept possible price fluctuations and limited upside. Ensure position size aligns with your overall risk management strategy."
         }
+    },
+    {
+        "time": 1795647084.30664,
+        "event": "ai_coin_advisory",
+        "reviewed": 25,
+        "source": "coins.db"
     }
 ]

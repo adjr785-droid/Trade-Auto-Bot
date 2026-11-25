@@ -10,32 +10,32 @@
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
         "xsl": 0.015957584000000004,
-        "seen": 1795647001.5397093
+        "seen": 1795647090.573288
     },
     "DGAI-USDT": {
         "entry_price": 0.995906,
         "safe_zone": 0.995906,
         "stop_loss": 0.949098,
         "peak_price": 0.996224,
-        "last_price": 0.996224,
+        "last_price": 0.994132,
         "opened_at": 1795646910.8209713,
         "sl_pct": 4.7,
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
         "xsl": 0.949098,
-        "seen": 1795647001.9117608
+        "seen": 1795647090.9284256
     },
     "SKYAI-USDT": {
         "entry_price": 0.03343,
         "safe_zone": 0.03343,
         "stop_loss": 0.031277,
         "peak_price": 0.03343,
-        "last_price": 0.0334,
+        "last_price": 0.03338,
         "opened_at": 1795646938.3587065,
         "sl_pct": 6.44,
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
         "xsl": 0.031277,
-        "seen": 1795647002.2905467
+        "seen": 1795647091.2828207
     }
 }

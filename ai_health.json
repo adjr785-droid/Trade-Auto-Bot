@@ -29,8 +29,8 @@
             "failures": 18
         },
         "market_regime": {
-            "last_success": 1795646300.3803568,
-            "successes": 110,
+            "last_success": 1795647071.3351336,
+            "successes": 111,
             "last_error": ""
         },
         "manual_buy_review": {
@@ -54,8 +54,8 @@
             "last_error": ""
         },
         "near_miss_review": {
-            "last_success": 1795642964.6149614,
-            "successes": 20,
+            "last_success": 1795647081.0222263,
+            "successes": 21,
             "last_error": ""
         },
         "opportunity_ranking": {
@@ -69,14 +69,14 @@
             "last_error": ""
         },
         "coin_advisory": {
-            "last_success": 1795646307.5213392,
-            "successes": 48,
+            "last_success": 1795647081.7907228,
+            "successes": 49,
             "last_error": "",
             "last_failure": 1795642968.2956622,
             "failures": 16
         }
     },
-    "last_stage_success": 1795646971.1718404,
+    "last_stage_success": 1795647081.7907228,
     "last_success": 1795646929.1883526,
     "emergency_ended": 1795621876.568532,
     "recovery_start_alerted": false
