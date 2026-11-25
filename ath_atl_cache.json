@@ -130,5 +130,11 @@
         "atl": 0.05,
         "checked_at": 1795576573.5478616,
         "status": "complete"
+    },
+    "MON-USDT": {
+        "ath": 0.04933,
+        "atl": 0.0035,
+        "checked_at": 1795589045.4898527,
+        "status": "complete"
     }
 }
