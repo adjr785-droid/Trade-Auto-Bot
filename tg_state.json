@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT24.17/\u20a633,040",
+    "kb_ph": "USDT24.19/\u20a633,070",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -72,14 +72,14 @@
         "MON-USDT"
     ],
     "audit_down": {},
-    "audit_last": 1795599243.511251,
+    "audit_last": 1795599638.1712136,
     "audit_ai_cls": "",
     "perf_breaker": {
         "until": 1795645210.5830717,
         "since": 1795558810.5830717,
         "loss": -1.4850249000000058
     },
-    "kb_mid": 6005,
+    "kb_mid": 6006,
     "out_text": "\ud83d\udda5 *SYSTEM* \u2014 HEALTHY \u2705\nBuying: PAUSED \u26d4 (auto-buy is off)\nHealth: Bot 100% | AI 80% (Normal)\nLayers: \u2705 Exchange \u2705 Scanner \u2705 Database \u2705 Buyer \u2705 Stops\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83e\udded *STRATEGY*\nEntry: TREND, RSI 42-48, 1H +0.5\u20136%, price > MA5 > MA10, must be rising vs last\nscan\nExit: stop 15% | trail 8.0% | RSI 75+ (dynamic)\nSize: 50% of balance (all-in if half < $5) | max 25 trades/day | pause at -5.0%\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "out_time": 1795599488.0323744,
