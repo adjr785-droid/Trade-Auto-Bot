@@ -2845,5 +2845,11 @@
         "time": 1795581270.2485216,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 3.5972, 'recurring_patterns': ['15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC', 'MANUAL SELL'], 'recommendations': ['Limit exposure to PANIC-driven exits; implement stricter volatility filters before triggering panic sells', 'Review and refine the 15\u2011minute no\u2011upward\u2011trend rotation logic to reduce false negatives', 'Consolidate manual sell triggers into a single risk\u2011managed exit strategy with predefined profit/loss thresholds', 'Increase sample size before adjusting strategy parameters to improve statistical confidence']}"
+    },
+    {
+        "time": 1795581496.4350488,
+        "event": "ai_coin_advisory",
+        "reviewed": 25,
+        "source": "coins.db"
     }
 ]
