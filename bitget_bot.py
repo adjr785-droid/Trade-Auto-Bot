@@ -445,7 +445,7 @@ def save(f,d):
   os.replace(f+".tmp",f)
  except Exception as e:print(f"SAVE ERR {f}: {e}")
 def cfg():
- d={"oversold_enabled":False,"rising_guard":True,"rsi_min":42,"rsi_max":48,"stop_loss_pct":5.0,"auto_buy_enabled":True,"auto_buy_amount_usdt":10.0,"max_tokens_before_consolidation":3,"trail_pct":8.0,"crash_guard_pct":10.0,"rsi_exit":75,"btc_rsi_min":50,"risk_per_trade_pct":0.5,"max_daily_loss_pct":3.0,"max_portfolio_exposure_pct":50.0,"max_position_pct":15.0,"max_daily_trades":5,"max_spread_pct":0.5,"auto_mode_v1":False,"rebuy_cooldown_hours":6.0,"atr_stop_enabled":True,"atr_stop_mult":2.0,"atr_stop_min_pct":3.0,"atr_stop_max_pct":10.0,"market_filter_enabled":True,"btc_trend_hours":50,"min_breadth_pct":30.0,"weak_market_mode":True,"weak_market_floor_pct":15.0,"weak_market_size_factor":0.5,"h1_all_setups":False,"offline_alert_hours":3.0,"daily_summary_hour_utc":20,"max_daily_drawdown_pct":5.0,"dynamic_trail":True,"sell_if_stop_fails":True,"scan_prefilter":True,"cleanup_hours":24.0,"scan_interval_minutes":15.0,"auto_clear_hours":24.0,"live_mode_seconds":270,"mtf_confirm":True,"btc_shock_pct":3.0,"max_open_risk_pct":3.0,"half_or_all_sizing":True,"half_or_all_threshold_usdt":5.0,"fee_pct_side":0.1,"perf_breaker_trades":10,"perf_breaker_hours":24.0,"loss_streak_trigger":2,"loss_streak_size_factor":0.5,"scan_parallel":True,"page_chars":600,"page_lines":12,"page_width":32,"output_stale_minutes":5,"smart_risk_enabled":True,"max_coin_exposure_pct":20.0,"max_sector_exposure_pct":35.0,"liquidity_depth_usdt":5000.0,"max_book_imbalance_pct":85.0,"regime_risk_factor":0.65,"execution_slippage_pct":0.35,"stop_watchdog_enabled":True,"portfolio_stress_pct":12.0,"signal_expiry_minutes":30,"adaptive_risk_enabled":True,"dynamic_auto_buy_enabled":True,"auto_buy_reserve_pct":5.0,"dynamic_auto_buy_max_pct":20.0,"dynamic_auto_buy_min_usdt":1.02,"dynamic_auto_buy_max_usdt":0.0,"guardian_enabled":True,"guardian_audit_interval_minutes":15,"max_portfolio_correlation":0.85,"momentum_1h_enabled":True,"mom_1h_min_pct":0.5,"mom_1h_max_pct":6.0,"max_24h_pct":100.0,"near_miss_alerts":True,"near_miss_rsi_margin":3.0,"near_miss_1h_margin":0.5,"near_miss_cooldown_minutes":60,"near_miss_max_per_scan":3,"scan_workers":8,"radar_max":30,"radar_rsi_margin":10.0,"manual_candidate_min_score":70.0}
+ d={"oversold_enabled":True,"pullback_rsi_min":40,"rising_guard":True,"rsi_min":42,"rsi_max":48,"stop_loss_pct":5.0,"auto_buy_enabled":True,"auto_buy_amount_usdt":10.0,"max_tokens_before_consolidation":3,"trail_pct":8.0,"crash_guard_pct":10.0,"rsi_exit":75,"btc_rsi_min":50,"risk_per_trade_pct":0.5,"max_daily_loss_pct":3.0,"max_portfolio_exposure_pct":50.0,"max_position_pct":15.0,"max_daily_trades":5,"max_spread_pct":0.5,"auto_mode_v1":False,"rebuy_cooldown_hours":6.0,"atr_stop_enabled":True,"atr_stop_mult":2.0,"atr_stop_min_pct":3.0,"atr_stop_max_pct":10.0,"market_filter_enabled":True,"btc_trend_hours":50,"min_breadth_pct":30.0,"weak_market_mode":True,"weak_market_floor_pct":15.0,"weak_market_size_factor":0.5,"h1_all_setups":False,"offline_alert_hours":3.0,"daily_summary_hour_utc":20,"max_daily_drawdown_pct":5.0,"dynamic_trail":True,"sell_if_stop_fails":True,"scan_prefilter":True,"cleanup_hours":24.0,"scan_interval_minutes":15.0,"auto_clear_hours":24.0,"live_mode_seconds":270,"mtf_confirm":True,"btc_shock_pct":3.0,"max_open_risk_pct":3.0,"half_or_all_sizing":True,"half_or_all_threshold_usdt":5.0,"fee_pct_side":0.1,"perf_breaker_trades":10,"perf_breaker_hours":24.0,"loss_streak_trigger":2,"loss_streak_size_factor":0.5,"scan_parallel":True,"page_chars":600,"page_lines":12,"page_width":32,"output_stale_minutes":5,"smart_risk_enabled":True,"max_coin_exposure_pct":20.0,"max_sector_exposure_pct":35.0,"liquidity_depth_usdt":5000.0,"max_book_imbalance_pct":85.0,"regime_risk_factor":0.65,"execution_slippage_pct":0.35,"stop_watchdog_enabled":True,"portfolio_stress_pct":12.0,"signal_expiry_minutes":30,"adaptive_risk_enabled":True,"dynamic_auto_buy_enabled":True,"auto_buy_reserve_pct":5.0,"dynamic_auto_buy_max_pct":20.0,"dynamic_auto_buy_min_usdt":1.02,"dynamic_auto_buy_max_usdt":0.0,"guardian_enabled":True,"guardian_audit_interval_minutes":15,"max_portfolio_correlation":0.85,"momentum_1h_enabled":True,"mom_1h_min_pct":0.5,"mom_1h_max_pct":6.0,"max_24h_pct":100.0,"near_miss_alerts":True,"near_miss_rsi_margin":3.0,"near_miss_1h_margin":0.5,"near_miss_cooldown_minutes":60,"near_miss_max_per_scan":3,"scan_workers":8,"radar_max":30,"radar_rsi_margin":10.0,"manual_candidate_min_score":70.0}
  s=load(CFG,d)
  for k,v in d.items():s.setdefault(k,v)
  if float(s.get("manual_candidate_min_score",70.0) or 70.0)!=70.0:
@@ -455,6 +455,7 @@ def cfg():
  if not s.get('one_h_v1'):s['h1_all_setups']=True;s['one_h_v1']=True;save(CFG,s)
  if not s.get('risk_v3'):s['risk_per_trade_pct']=0.5;s['risk_v3']=True;save(CFG,s)
  if not s.get('knife_v1'):s['risk_per_trade_pct']=0.5;s['oversold_enabled']=False;s['rising_guard']=True;s['knife_v1']=True;save(CFG,s)
+ if not s.get('setups_v1'):s['oversold_enabled']=True;s['setups_v1']=True;save(CFG,s)
  if 'partial_tp_pct' in s or 'partial_tp_fraction' in s:s.pop('partial_tp_pct',None);s.pop('partial_tp_fraction',None);save(CFG,s)
  if not s.get('auto_mode_v1'):s['auto_buy_enabled']=True;s['auto_mode_v1']=True;save(CFG,s)
  return s
@@ -511,13 +512,13 @@ def weak_market(s):
  if market_filter(s):return ""
  return _MKT.get("w","") if s.get('market_filter_enabled',True) else ""
 def setup_range(sym,chg,s,kind):
- # BREAKOUT / OVERSOLD: 24h range by default; the 1H window when h1_all_setups is on
+ # BREAKOUT / BOUNCE: 24h range by default; the 1H window when h1_all_setups is on
  if mom_on(s) and s.get('h1_all_setups',False):return trend_range(sym,chg,s)
  return (0.0<chg<25.0) if kind=="BREAKOUT" else (-30.0<chg<-8.0)
 def setup_score(setup,vol,r,ma5,ma10,bvol=None):
- sc=({"BREAKOUT":3,"TREND":2,"OVERSOLD":1}.get(setup,0))*100+min(vol/1e6,100)*0.2
+ sc=({"BREAKOUT":3,"TREND":2,"PULLBACK":2,"BOUNCE":1}.get(setup,0))*100+min(vol/1e6,100)*0.2
  if ma10:sc+=max(0.0,min(20.0,(ma5-ma10)/ma10*1000))
- sc+=max(0.0,min(10.0,(30-r)/3)) if setup=="OVERSOLD" else max(0.0,10-abs(r-55)/2)
+ sc+=max(0.0,min(10.0,(30-r)/3)) if setup=="BOUNCE" else max(0.0,10-abs(r-55)/2)
  if bvol:sc+=min(float(bvol),5.0)*4
  return round(sc,2)
 def cmd_stats():
@@ -1205,14 +1206,14 @@ def rank_setups(exclude=()):
   if not p or r is None or ma5 is None or ma10 is None:continue
   setup=None;bv=None
   if trend_range(sym,chg,s) and s['rsi_min']<=r<=s['rsi_max'] and p>ma5>ma10:setup="TREND"
-  elif s.get("oversold_enabled",False) and setup_range(sym,chg,s,"OVERSOLD") and r<30 and p>pr:setup="OVERSOLD"
+  elif s.get("oversold_enabled",False) and setup_range(sym,chg,s,"BOUNCE") and r<30 and p>pr:setup="BOUNCE"
   elif setup_range(sym,chg,s,"BREAKOUT") and 50.0<=r<=70.0 and p>ma5>ma10:
    ok,bv,bl=breakout_confirmation(sym)
    if ok:setup="BREAKOUT"
   why=[];pts=0
   if setup:
-   pts+={"BREAKOUT":30,"TREND":20,"OVERSOLD":10}[setup]
-   why.append({"BREAKOUT":f"Confirmed breakout: price cleared the recent 20h high on {bv or 0:.2f}x average volume","TREND":f"Trend setup: price {fp(p)} is above MA5 {fp(ma5)} which is above MA10 {fp(ma10)}, with RSI {r:.1f} inside your {s['rsi_min']}-{s['rsi_max']} entry zone","OVERSOLD":f"Oversold bounce: RSI {r:.1f} is below 30 and price is back above the previous close"}[setup])
+   pts+={"BREAKOUT":30,"TREND":20,"BOUNCE":10}[setup]
+   why.append({"BREAKOUT":f"Confirmed breakout: price cleared the recent 20h high on {bv or 0:.2f}x average volume","TREND":f"Trend setup: price {fp(p)} is above MA5 {fp(ma5)} which is above MA10 {fp(ma10)}, with RSI {r:.1f} inside your {s['rsi_min']}-{s['rsi_max']} entry zone","BOUNCE":f"Oversold bounce: RSI {r:.1f} is below 30 and price is back above the previous close"}[setup])
   elif p>ma5>ma10:why.append("Short-term trend is up (price > MA5 > MA10)")
   else:why.append(f"Trend not confirmed yet (price {fp(p)}, MA5 {fp(ma5)}, MA10 {fp(ma10)})")
   if p>ma5>ma10:pts+=5
@@ -1285,9 +1286,9 @@ def _coin_table(items):
  for it in items:
   def n(v,fmt):return format(float(v),fmt) if isinstance(v,(int,float)) else "-"
   sc=it.get("score");sc="-" if sc is None else str(int(float(sc)))
-  rows.append(f"{str(it.get('sym','?')).replace('-USDT','')[:7]:<7}{n(it.get('rsi'),'.0f'):>4}{n(it.get('h1'),'+.1f'):>6}{n(it.get('chg'),'+.1f'):>7}{sc:>3}")
+  rows.append(f"{str(it.get('sym','?')).replace('-USDT','')[:7]:<7}{n(it.get('rsi'),'.0f'):>4}{n(it.get('h1'),'+.1f'):>6}{n(it.get('chg'),'+.1f'):>7}{sc:>3}{ {'TREND':' T','PULLBACK':' P','BOUNCE':' B','BREAKOUT':' K'}.get(str(it.get('tag') or ''),' -'):>3}")
  if not rows:return "None right now."
- return "```\n"+f"{'COIN':<7}{'RSI':>4}{'1H':>6}{'24H':>7}{'S':>3}"+"\n"+"-"*27+"\n"+"\n".join(rows)+"\n```"
+ return "```\n"+f"{'COIN':<7}{'RSI':>4}{'1H':>6}{'24H':>7}{'S':>3}{'TY':>3}"+"\n"+"-"*30+"\n"+"\n".join(rows)+"\n```\n_TY: T Trend, P Pullback, B Bounce, K Breakout_"
 def analyse_top3(tab="M"):
  # Analyse: three tabs that follow the pipeline Watch list > Manual buy > Auto buy. Lists only; never changes execution rules.
  tab=tab if tab in ("W","M","A") else "M";settings=cfg()
@@ -1905,7 +1906,7 @@ def dynamic_auto_buy_budget(sym, qd, price, stop, available_usdt, s):
    return round(min(size,available_usdt),2),{"score_factor":1.0,"setup_factor":1.0,"vol_factor":1.0,"regime_factor":1.0,"score":score,"reason":f"50 percent of balance, or all-in when half is under ${thr:g}"}
   # Score multiplier is gradual and bounded, not a fixed amount per trade.
   score_factor=max(0.35,min(1.25,0.45+score/220.0))
-  setup_factor={"BREAKOUT":1.0,"TREND":0.9,"OVERSOLD":0.75}.get(setup,0.65)
+  setup_factor={"BREAKOUT":1.0,"TREND":0.9,"PULLBACK":0.85,"BOUNCE":0.75}.get(setup,0.65)
   vol=atr_pct(sym);vol_factor=1.0 if not vol else max(0.45,min(1.0,4.0/max(float(vol),1.0)))
   regime=market_regime(s);regime_factor=float(regime.get("factor",0.65 if regime.get("name")=="UNKNOWN" else 1.0))
   # risk_sized_budget already constrains stop-distance, exposure and configured risk.
@@ -1955,7 +1956,7 @@ def guardian_audit(force=False):
   if not db_ok:findings.append("coin database integrity: "+db_msg)
  except Exception as e:findings.append("coin database audit failed: "+str(e)[:120])
  # Store the immutable charter once, then validate its persisted structure on each audit.
- charter={"version":1,"mission":"Bitget spot trading; preserve capital, follow approved strategy logic, audit decisions and operational faults.","strategies":["TREND","OVERSOLD","BREAKOUT"],"constraints":["No leverage","Never silently alter strategy rules","No automatic liquidation solely from audit findings","Critical data-integrity uncertainty blocks new entries"]}
+ charter={"version":1,"mission":"Bitget spot trading; preserve capital, follow approved strategy logic, audit decisions and operational faults.","strategies":["TREND","PULLBACK","BOUNCE","BREAKOUT"],"constraints":["No leverage","Never silently alter strategy rules","No automatic liquidation solely from audit findings","Critical data-integrity uncertainty blocks new entries"]}
  if not os.path.exists(GCHARTER):save(GCHARTER,charter)
  else:
   saved=load(GCHARTER,{})
@@ -2088,7 +2089,7 @@ def exec_q():
    if in_cd(f"fail_{sym}",300):buy_rejection(sym,"Previous fail.");continue
    if sym in db:buy_rejection(sym,"Position exists.");q.pop(sym,None);save(QF,q);continue
    if not live(sym):buy_rejection(sym,"No price.");continue
-   if str(qd.get("type","")).upper()=="OVERSOLD" and weak_market(s):buy_rejection(sym,"Weak market: OVERSOLD skipped.");continue
+   if str(qd.get("type","")).upper()=="BOUNCE" and weak_market(s):buy_rejection(sym,"Weak market: BOUNCE skipped.");continue
    if stale_signal(qd,s):buy_rejection(sym,"Queued signal expired; waiting for a fresh scan.");q.pop(sym,None);save(QF,q);continue
    if s.get("smart_risk_enabled",True):
     eqok,eqwhy=execution_quality(sym,s)
@@ -2304,7 +2305,7 @@ def coin_db_conn():
  c.execute("CREATE TABLE IF NOT EXISTS outcomes(id INTEGER PRIMARY KEY AUTOINCREMENT,sym TEXT,stage TEXT,t0 REAL,p0 REAL,p1 REAL,p4 REAL,p24 REAL,hi REAL,lo REAL,done INTEGER DEFAULT 0)")
  c.execute("CREATE INDEX IF NOT EXISTS snaps_sym ON snaps(sym,t)")
  cc={x[1] for x in c.execute("PRAGMA table_info(coins)")}
- for n,t in (("signal_status","TEXT"),("execution_status","TEXT"),("checks_json","TEXT"),("decision_at","REAL"),("expires_at","REAL"),("scan_id","TEXT"),("ai_advisory","TEXT"),("ai_advisory_at","REAL"),("manual_score","REAL"),("manual_candidate","INTEGER"),("stage","TEXT"),("stage_ok_at","REAL"),("manual_reason","TEXT")):
+ for n,t in (("tag","TEXT"),("signal_status","TEXT"),("execution_status","TEXT"),("checks_json","TEXT"),("decision_at","REAL"),("expires_at","REAL"),("scan_id","TEXT"),("ai_advisory","TEXT"),("ai_advisory_at","REAL"),("manual_score","REAL"),("manual_candidate","INTEGER"),("stage","TEXT"),("stage_ok_at","REAL"),("manual_reason","TEXT")):
   if n not in cc:c.execute(f"ALTER TABLE coins ADD COLUMN {n} {t}")
  sc={x[1] for x in c.execute("PRAGMA table_info(snaps)")}
  for n,t in (("decision","TEXT"),("reason","TEXT"),("execution_status","TEXT"),("scan_id","TEXT"),
@@ -2357,13 +2358,31 @@ def coin_db_mark_execution(sym,status,reason="",details=None):
   if c:
    try:c.close()
    except:pass
+def setup_tag(rec,s):
+ # Which of the four setups a coin currently looks like: TREND, PULLBACK, BOUNCE or BREAKOUT (None if none).
+ def num(v):
+  try:
+   x=float(v);return x if x==x and abs(x)!=float("inf") else None
+  except Exception:return None
+ try:
+  p=num(rec.get("price"));r=num(rec.get("rsi"));m5=num(rec.get("ma5"));m10=num(rec.get("ma10"));h=num(rec.get("h1"));pc=num(rec.get("prev_close"))
+  if p is None or r is None or m5 is None or m10 is None:return None
+  lo,hi=float(s.get("mom_1h_min_pct",0.5)),float(s.get("mom_1h_max_pct",6.0))
+  h1ok=True if not mom_on(s) else (h is not None and lo<=h<=hi)
+  rmin,rmax=float(s.get("rsi_min",42)),float(s.get("rsi_max",48));pmin=float(s.get("pullback_rsi_min",40))
+  if p>m5>m10 and rmin<=r<=rmax and h1ok:return "TREND"
+  if m5>m10 and m10<=p<=m5 and pmin<=r<=rmax and h1ok:return "PULLBACK"
+  if s.get("oversold_enabled",True) and r<30 and pc and p>pc and h is not None and lo<=h<=hi:return "BOUNCE"
+  if rec.get("breakout_confirmed") is True and p>m5>m10 and 50.0<=r<=70.0:return "BREAKOUT"
+ except Exception:pass
+ return None
 def manual_candidate_assess(rec,settings=None):
  """Approved Coin List score: 7 mandatory core checks + 3 additional checks.
  WATCH needs >=5/7 core; MANUAL needs >=5/7 core and >=2/3 additional;
  AUTO is only considered at 7/7 core + 3/3 additional and still faces all
  independent execution/risk gates. Missing evidence never earns a point.
  """
- s=settings or cfg()
+ s=settings or cfg();tag=setup_tag(rec,s)
  def num(v):
   try:
    x=float(v)
@@ -2374,14 +2393,16 @@ def manual_candidate_assess(rec,settings=None):
   price=num(rec.get("price"));rsi=num(rec.get("rsi"));ma5=num(rec.get("ma5"));ma10=num(rec.get("ma10"))
   chg=num(rec.get("chg"));trend=rec.get("market_trend_4h")
   btc=rec.get("btc_market_safe");high=num(rec.get("high_24h"));rr=num(rec.get("rr"))
-  h1v=num(rec.get("h1"))
+  h1v=num(rec.get("h1"));pcl=num(rec.get("prev_close"))
+  _pb_ok=None if price is None or ma5 is None or ma10 is None else (ma5>ma10 and ma10<=price<=ma5)
+  _rmax=float(s.get("rsi_max",48));_chgmax=float(s.get("max_24h_pct",100.0))
   core={
    "liquidity":None if vol is None or minvol is None or minvol<=0 else vol>=minvol,
    "spread":None if spread is None else 0<=spread<=float(s.get("max_spread_pct",0.5)),
    "market_trend":None if trend is None else trend is True,
-   "price_structure":None if price is None or ma5 is None or ma10 is None else price>ma5>ma10,
-   "rsi_condition":None if rsi is None else float(s.get("rsi_min",42))<=rsi<=float(s.get("rsi_max",48)),
-   "momentum_24h":None if chg is None else 0.0<chg<=float(s.get("max_24h_pct",100.0)),
+   "price_structure":(_pb_ok if tag=="PULLBACK" else (None if pcl is None or price is None else price>pcl) if tag=="BOUNCE" else (None if price is None or ma5 is None or ma10 is None else price>ma5>ma10)),
+   "rsi_condition":(None if rsi is None else (float(s.get("pullback_rsi_min",40))<=rsi<=_rmax if tag=="PULLBACK" else rsi<30 if tag=="BOUNCE" else float(s.get("rsi_min",42))<=rsi<=_rmax)),
+   "momentum_24h":None if chg is None else ((chg<=_chgmax) if tag=="BOUNCE" else 0.0<chg<=_chgmax),
    "btc_market_safety":None if btc is None else btc is True,
   }
   brk=rec.get("breakout_confirmed")
@@ -2394,10 +2415,10 @@ def manual_candidate_assess(rec,settings=None):
   core_score=sum(v is True for v in core.values());additional_score=sum(v is True for v in additional.values());score=core_score+additional_score
   # HARD GATES: always required, no score can override them. Missing evidence fails a gate.
   gates={
-   "rsi_ceiling":None if rsi is None else rsi<=float(s.get("rsi_max",48)),
-   "price_above_ma":None if price is None or ma5 is None or ma10 is None else price>ma5>ma10,
+   "rsi_ceiling":None if rsi is None else (rsi<30 if tag=="BOUNCE" else rsi<=_rmax),
+   "price_above_ma":(_pb_ok if tag=="PULLBACK" else (None if price is None else True) if tag=="BOUNCE" else (None if price is None or ma5 is None or ma10 is None else price>ma5>ma10)),
    "momentum_1h":(True if not mom_on(s) else (None if h1v is None else float(s.get("mom_1h_min_pct",0.5))<=h1v<=float(s.get("mom_1h_max_pct",6.0)))),
-   "momentum_24h_up":None if chg is None else 0.0<chg<=float(s.get("max_24h_pct",100.0)),
+   "momentum_24h_up":None if chg is None else ((chg<=_chgmax) if tag=="BOUNCE" else 0.0<chg<=_chgmax),
   }
   hard_ok=all(v is True for v in gates.values())
   glabels={"rsi_ceiling":"RSI at or below the entry ceiling","price_above_ma":"Price above MA5 above MA10","momentum_1h":"1H momentum in range","momentum_24h_up":"24H change above 0%"}
@@ -2415,7 +2436,7 @@ def manual_candidate_assess(rec,settings=None):
            (f"WATCH: {core_score}/7 core; need at least 5/7" if core_score>=5 else f"DROPPED threshold: {core_score}/7 core; need at least 5/7")))
   if failed:reason += "; failed: "+", ".join(failed)
   if unknown:reason += "; unavailable: "+", ".join(unknown)
-  checks={"core":core,"additional":additional,"core_score":core_score,"additional_score":additional_score,"raw_score":score,"labels":labels,"risk_reward":rr,"volume_expansion_ratio":volx,"gates":gates,"hard_ok":hard_ok}
+  checks={"core":core,"additional":additional,"core_score":core_score,"additional_score":additional_score,"raw_score":score,"labels":labels,"risk_reward":rr,"volume_expansion_ratio":volx,"gates":gates,"hard_ok":hard_ok,"setup":tag}
   if not hard_ok:score=min(score,6)   # a failed hard gate can never show a Manual/Auto-level score
   return score,manual,reason,checks
  except Exception as e:
@@ -2495,10 +2516,12 @@ def gate_report_text(s=None):
  rules={"RSI":f"RSI ≤ {float(s.get('rsi_max',48)):g}","MA":"Price > MA5 > MA10","1H":(f"1H +{float(s.get('mom_1h_min_pct',0.5)):g} to +{float(s.get('mom_1h_max_pct',6.0)):g}%" if mom_on(s) else "1H off"),"24H":f"24H 0 to +{float(s.get('max_24h_pct',100)):g}%","Score":"Core 5+ and Extra 2+"}
  L=[f"🚧 *GATES* ({g['n']} analysed, {g.get('pass',0)} passed all 4)"]
  for k in ("RSI","MA","1H","24H","Score"):L.append(f"{k}: blocked {g.get(k,0)} — {rules[k]}")
+ tg_=g.get("tags") or {}
+ L.append("Setups seen: Trend %d | Pullback %d | Bounce %d | Breakout %d"%(tg_.get("TREND",0),tg_.get("PULLBACK",0),tg_.get("BOUNCE",0),tg_.get("BREAKOUT",0)))
  return "\n".join(L)
 def coin_db_update(records,held,newc=None,keep_days=3,keep_snaps=24,queue=None,buying_allowed=True,block_reason="",settings=None):
  now=time.time();held=set(held);newc=newc or {};queue=queue if isinstance(queue,dict) else {};settings=settings or {};c=coin_db_conn()
- _GATES.clear();_GATES.update({"n":0,"pass":0,"RSI":0,"MA":0,"1H":0,"24H":0,"Score":0})
+ _GATES.clear();_GATES.update({"n":0,"pass":0,"RSI":0,"MA":0,"1H":0,"24H":0,"Score":0,"tags":{"TREND":0,"PULLBACK":0,"BOUNCE":0,"BREAKOUT":0}})
  try:
   for rec in records:
    sym=rec.get("sym")
@@ -2508,6 +2531,7 @@ def coin_db_update(records,held,newc=None,keep_days=3,keep_snaps=24,queue=None,b
    try:
     if rec.get("rsi") is not None and sym not in held:
      _GATES["n"]+=1;_g=manual_checks.get("gates") or {}
+     if manual_checks.get("setup") in _GATES["tags"]:_GATES["tags"][manual_checks["setup"]]+=1
      for _k,_lab in (("rsi_ceiling","RSI"),("price_above_ma","MA"),("momentum_1h","1H"),("momentum_24h_up","24H")):
       if _g.get(_k) is not True:_GATES[_lab]+=1
      if manual_checks.get("hard_ok"):
@@ -2538,6 +2562,7 @@ def coin_db_update(records,held,newc=None,keep_days=3,keep_snaps=24,queue=None,b
    if stg!="AUTO" and execution=="QUEUED":execution="BLOCKED"
    try:coin_outcome_track(c,sym,(row[2] if row else "") or "",stg,rec.get("price"),now)
    except Exception as _e:print("OUTCOME ERR",str(_e)[:80])
+   _tag=manual_checks.get("setup") or rec.get("strategy")
    advisory=str((qd or {}).get("ai_advisory",""))[:240]
    c.execute("""INSERT INTO coins(sym,first_seen,last_seen,scans,price,chg24,h1,rsi,ma5,ma10,vol,candles,status,setup,reason,
     signal_status,execution_status,checks_json,decision_at,expires_at,scan_id,ai_advisory,manual_score,manual_candidate,manual_reason,stage,stage_ok_at)
@@ -2551,6 +2576,7 @@ def coin_db_update(records,held,newc=None,keep_days=3,keep_snaps=24,queue=None,b
     (sym,fs,now,sc+1,rec.get("price"),rec.get("chg"),rec.get("h1"),rec.get("rsi"),rec.get("ma5"),rec.get("ma10"),
      rec.get("vol"),rec.get("candles"),legacy,rec.get("strategy"),reason[:240],signal,execution,json.dumps(checks,default=str),
      now,expiry,str(rec.get("time") or int(now)),advisory,manual_score,int(manual_candidate),manual_reason[:240],stg,sok))
+   c.execute("UPDATE coins SET tag=? WHERE sym=?",(_tag or "",sym))
    c.execute("""INSERT INTO snaps(sym,t,price,h1,rsi,status,decision,reason,execution_status,scan_id,
     rank,vol,chg,ma5,ma10,min_volume,spread_pct,near_miss_json)
     VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
@@ -2647,14 +2673,14 @@ def coin_db_auto_ready_candidates(limit=3):
 def coin_db_manual_candidates(limit=10):
  c=coin_db_conn()
  try:
-  rows=c.execute("SELECT sym,price,chg24,h1,rsi,scans,manual_score,manual_reason,reason,execution_status FROM coins WHERE manual_candidate=1 AND stage='MANUAL' AND manual_score BETWEEN 7 AND 9 AND status<>'BOUGHT' ORDER BY manual_score DESC,last_seen DESC LIMIT ?",(int(limit),)).fetchall()
-  return [{"sym":x[0],"price":x[1],"chg":x[2],"h1":x[3],"rsi":x[4],"scans":x[5],"score":x[6],"manual_reason":x[7],"scanner_reason":x[8],"execution_status":x[9]} for x in rows]
+  rows=c.execute("SELECT sym,price,chg24,h1,rsi,scans,manual_score,manual_reason,reason,execution_status,tag FROM coins WHERE manual_candidate=1 AND stage='MANUAL' AND manual_score BETWEEN 7 AND 9 AND status<>'BOUGHT' ORDER BY manual_score DESC,last_seen DESC LIMIT ?",(int(limit),)).fetchall()
+  return [{"sym":x[0],"price":x[1],"chg":x[2],"h1":x[3],"rsi":x[4],"scans":x[5],"score":x[6],"manual_reason":x[7],"scanner_reason":x[8],"execution_status":x[9],"tag":x[10]} for x in rows]
  finally:c.close()
 def coin_db_stage_list(stage,limit=20):
  c=coin_db_conn()
  try:
-  rows=c.execute("SELECT sym,price,chg24,h1,rsi,scans,first_seen,manual_score FROM coins WHERE stage=? AND status<>'BOUGHT' ORDER BY COALESCE(h1,-99) DESC,last_seen DESC LIMIT ?",(stage,int(limit))).fetchall()
-  return [{"sym":x[0],"price":x[1],"chg":x[2],"h1":x[3],"rsi":x[4],"scans":x[5],"first_seen":x[6],"score":x[7]} for x in rows]
+  rows=c.execute("SELECT sym,price,chg24,h1,rsi,scans,first_seen,manual_score,tag FROM coins WHERE stage=? AND status<>'BOUGHT' ORDER BY COALESCE(h1,-99) DESC,last_seen DESC LIMIT ?",(stage,int(limit))).fetchall()
+  return [{"sym":x[0],"price":x[1],"chg":x[2],"h1":x[3],"rsi":x[4],"scans":x[5],"first_seen":x[6],"score":x[7],"tag":x[8]} for x in rows]
  finally:c.close()
 def coin_db_stage_counts():
  try:
@@ -3005,17 +3031,18 @@ def scan(force=False):
    elif s.get('scan_prefilter',True) and not pre_ok(chg,s):recd["reason"]="24H change outside every setup range (skipped before candle fetch)"
    elif s.get('scan_parallel',True) and (tk_spread(t) or 0)>2*float(s.get('max_spread_pct',0.5)):recd["reason"]=f"Spread {tk_spread(t):.2f}% is more than twice your {float(s.get('max_spread_pct',0.5)):g}% limit (skipped before candle fetch)"
    else:
-    p,pr,r,ma5,ma10=_PF.get(sym) or data(sym);recd.update(price=p,rsi=r,ma5=ma5,ma10=ma10)
+    p,pr,r,ma5,ma10=_PF.get(sym) or data(sym);recd.update(price=p,rsi=r,ma5=ma5,ma10=ma10,prev_close=pr)
     if _H1.get(sym) is not None:recd['h1']=round(_H1[sym],2)
     if not p or r is None:recd["reason"]="No candle data"
     else:
      setup=sl=None;breakout_volume=None
      if trend_range(sym,chg,s) and s['rsi_min']<=r<=s['rsi_max'] and p>ma5>ma10:setup="TREND";sl=round(ma5*(1-s['stop_loss_pct']/100),6)
-     elif s.get("oversold_enabled",False) and setup_range(sym,chg,s,"OVERSOLD") and r<30 and p>pr:setup="OVERSOLD";sl=round(p*(1-s['stop_loss_pct']/100),6)
+     elif trend_range(sym,chg,s) and float(s.get('pullback_rsi_min',40))<=r<=s['rsi_max'] and ma5>ma10 and ma10<=p<=ma5:setup="PULLBACK";sl=round(p*(1-s['stop_loss_pct']/100),6)
+     elif s.get("oversold_enabled",False) and setup_range(sym,chg,s,"BOUNCE") and r<30 and p>pr:setup="BOUNCE";sl=round(p*(1-s['stop_loss_pct']/100),6)
      elif setup_range(sym,chg,s,"BREAKOUT") and 50.0<=r<=70.0 and p>ma5>ma10:
       confirmed,breakout_volume,_=breakout_confirmation(sym)
       if confirmed:setup="BREAKOUT";sl=round(p*(1-s['stop_loss_pct']/100),6)
-     if setup in ("TREND","BREAKOUT"):
+     if setup in ("TREND","BREAKOUT","PULLBACK"):
       recd["trend_4h_ok"]=bool(trend_4h_ok(sym,s))
       if not recd["trend_4h_ok"]:
        recd["reason"]=f"{setup} matched but 4h confirmation failed (downtrend or unavailable data)";setup=None
@@ -3043,7 +3070,7 @@ def scan(force=False):
       if not trend_range(sym,chg,s):reasons.append("Trend range")
       if not (s['rsi_min']<=r<=s['rsi_max']):reasons.append(f"RSI {s['rsi_min']}-{s['rsi_max']}")
       if not (p>ma5>ma10):reasons.append("MA trend")
-      if not (setup_range(sym,chg,s,"OVERSOLD") and r<30 and p>pr):reasons.append("Oversold recovery")
+      if not (setup_range(sym,chg,s,"BOUNCE") and r<30 and p>pr):reasons.append("Oversold recovery")
       if not (setup_range(sym,chg,s,"BREAKOUT") and 50.0<=r<=70.0 and p>ma5>ma10):reasons.append("Breakout trend")
       else:reasons.append("No breakout")
       recd["reason"]="; ".join(reasons) or "No match"
