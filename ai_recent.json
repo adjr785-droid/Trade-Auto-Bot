@@ -1,7 +1,5 @@
 {
     "r": [
-        1,
-        1,
         0,
         1,
         1,
@@ -19,7 +17,9 @@
         1,
         1,
         1,
-        1
+        1,
+        1,
+        0
     ],
     "e": [
         [
@@ -71,6 +71,11 @@
             1795594771.8449872,
             "OTHER",
             "performance_review: Expecting ',' delimiter: line 1 column 735 (char 734)"
+        ],
+        [
+            1795599296.2048597,
+            "OTHER",
+            "coin_advisory: Expecting ',' delimiter: line 92 column 6 (char 2760)"
         ]
     ]
 }
