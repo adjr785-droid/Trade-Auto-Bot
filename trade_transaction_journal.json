@@ -3020,5 +3020,11 @@
         "time": 1795603244.2358205,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 53.33, 'net_pnl_usdt': 0.4815, 'recurring_patterns': ['15-MINUTE NO-UPWARD-TREND ROTATION appears in 4 trades', 'PANIC appears in 7 trades', 'MANUAL SELL (including variations) appears in 6 trades', 'TRAILING STOP appears once', 'PARTIAL PROFIT appears once', 'RSI 75 appears once'], 'recommendations': ['Review and tighten criteria for PANIC exits to reduce loss frequency', 'Consider limiting exposure to 15\u2011minute trend signals that have produced mixed results', 'Implement stricter manual sell thresholds to avoid small\u2011loss churn', 'Monitor trailing\u2011stop parameters; current setting generated a sizable loss', 'Maintain current win\u2011rate monitoring but aim to improve net PnL by reducing high\u2011loss events']}"
+    },
+    {
+        "time": 1795603275.9563036,
+        "event": "ai_coin_advisory",
+        "reviewed": 24,
+        "source": "coins.db"
     }
 ]
