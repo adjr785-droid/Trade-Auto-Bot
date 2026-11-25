@@ -3000,5 +3000,15 @@
         "time": 1795599238.5536003,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 53.33, 'net_pnl_usdt': 0.4815, 'recurring_patterns': ['15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC', 'MANUAL SELL', 'MANUAL SELL ALL', 'TRAILING STOP'], 'recommendations': ['Limit exposure to trades triggered by PANIC signals; consider tighter stop\u2011loss thresholds.', 'Review the effectiveness of the 15\u2011minute no\u2011upward\u2011trend rotation strategy; it produced mixed results.', 'Consolidate manual sell actions into a single, rule\u2011based exit criteria to reduce ad\u2011hoc decisions.', 'Monitor trailing\u2011stop parameters; the current 8% stop generated a significant loss on DOS-USDT.', 'Maintain current win\u2011rate monitoring but aim to improve net PnL by reducing high\u2011loss outliers.']}"
+    },
+    {
+        "time": 1795599630.1476486,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $1.49; auto-buy paused for 12.7h', 'attention': [{'symbol': 'MON-USDT', 'action': 'monitor', 'reason': 'Position is down 1.92% and close to stop level (0.009788). Consider tightening stop or reducing exposure if price continues downward.'}, {'symbol': 'PUMP-USDT', 'action': 'monitor', 'reason': 'Position is down 2.64% and price is near stop (0.002349). Evaluate risk tolerance; may exit to prevent further loss.'}], 'summary': 'Both manual positions are currently unrealized losses and approaching their stop thresholds. With recent overall performance negative and auto-buy paused, maintain a cautious stance: monitor price action closely, be prepared to exit if stops are breached, and avoid adding new exposure until performance stabilizes.'}"
+    },
+    {
+        "time": 1795599632.0204647,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 53.33, 'net_pnl_usdt': 0.4815, 'recurring_patterns': {'most_common_reasons': ['15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC', 'MANUAL SELL ALL'], 'reason_frequencies': {'15-MINUTE NO-UPWARD-TREND ROTATION': 4, 'PANIC': 6, 'MANUAL SELL ALL': 4, 'PARTIAL PROFIT +10.4%': 1, 'RSI 75': 1, 'TRAILING STOP (8.0%)': 1, 'MANUAL SELL $8.00': 1, 'MANUAL SELL $3.46': 1, 'MANUAL SELL $5.22': 1}}, 'recommendations': ['Review and tighten criteria for panic exits to avoid frequent small losses', 'Consider adding a confirmation filter before executing 15\u2011minute no\u2011upward\u2011trend rotations', 'Evaluate the effectiveness of manual sell\u2011all actions; they account for multiple losses and may benefit from stricter profit targets', 'Monitor trailing stop parameters; current 8% stop generated a significant loss on DOS-USDT', 'Maintain current win\u2011rate monitoring but aim to improve net PnL by reducing"
     }
 ]
