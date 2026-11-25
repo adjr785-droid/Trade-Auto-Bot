@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690562,
+    "last_update_id": 935690565,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -83,52 +83,106 @@
     "panel_rows": [
         [
             {
-                "text": "\ud83d\uded2 Buy",
+                "text": "COLLECT",
+                "callback_data": "m:b:COLLECT"
+            },
+            {
+                "text": "WLD",
+                "callback_data": "m:b:WLD"
+            },
+            {
+                "text": "BGSC",
+                "callback_data": "m:b:BGSC"
+            }
+        ],
+        [
+            {
+                "text": "PEPE",
+                "callback_data": "m:b:PEPE"
+            },
+            {
+                "text": "PROS",
+                "callback_data": "m:b:PROS"
+            },
+            {
+                "text": "BLESS",
+                "callback_data": "m:b:BLESS"
+            }
+        ],
+        [
+            {
+                "text": "MON",
+                "callback_data": "m:b:MON"
+            },
+            {
+                "text": "PUMP",
+                "callback_data": "m:b:PUMP"
+            },
+            {
+                "text": "BNB",
+                "callback_data": "m:b:BNB"
+            }
+        ],
+        [
+            {
+                "text": "LTC",
+                "callback_data": "m:b:LTC"
+            },
+            {
+                "text": "UNI",
+                "callback_data": "m:b:UNI"
+            },
+            {
+                "text": "ARIA",
+                "callback_data": "m:b:ARIA"
+            }
+        ],
+        [
+            {
+                "text": "ADA",
+                "callback_data": "m:b:ADA"
+            },
+            {
+                "text": "LINK",
+                "callback_data": "m:b:LINK"
+            },
+            {
+                "text": "BTW",
+                "callback_data": "m:b:BTW"
+            }
+        ],
+        [
+            {
+                "text": "PREOPAI",
+                "callback_data": "m:b:PREOPAI"
+            },
+            {
+                "text": "AVAX",
+                "callback_data": "m:b:AVAX"
+            },
+            {
+                "text": "ONDO",
+                "callback_data": "m:b:ONDO"
+            }
+        ],
+        [
+            {
+                "text": "\u25c0\ufe0f Prev",
+                "callback_data": "m:more:buy:0"
+            },
+            {
+                "text": "Next \u25b6\ufe0f",
+                "callback_data": "m:more:buy:2"
+            }
+        ],
+        [
+            {
+                "text": "\u2b05\ufe0f Back",
                 "callback_data": "m:buy"
-            },
-            {
-                "text": "\ud83d\udcb8 Sell",
-                "callback_data": "m:sell"
-            }
-        ],
-        [
-            {
-                "text": "\u274c Cancel Open Orders",
-                "callback_data": "m:r:cancel"
-            },
-            {
-                "text": "\ud83e\uddf9 Dust \u2192 BGB",
-                "callback_data": "m:r:dust"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udd04 Sync manual coins",
-                "callback_data": "m:r:sync"
-            }
-        ],
-        [
-            {
-                "text": "\u23f8 Pause auto-buy",
-                "callback_data": "m:r:pause"
-            },
-            {
-                "text": "\u25b6\ufe0f Resume auto-buy",
-                "callback_data": "m:r:resume"
-            }
-        ],
-        [
-            {
-                "text": "\u2b05\ufe0f Tools",
-                "callback_data": "m:tools"
-            },
-            {
-                "text": "\ud83c\udfe0 Main Menu",
-                "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83d\uded2 *TRADE*",
+    "panel_text": "\u2795 *MORE COINS* (page 2/26)\nBiggest 24h volume first. Tap a coin.",
     "kb_mid": 5713,
     "out_mid": 5716,
     "panel_mid": 5717
