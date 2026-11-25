@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690826,
+    "last_update_id": 935690827,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -86,28 +86,32 @@
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
+                "text": "\ud83d\uded2 Trade",
+                "callback_data": "m:tl:trade"
             },
             {
-                "text": "1/2",
-                "callback_data": "pg:x"
+                "text": "\ud83d\udd14 Alerts",
+                "callback_data": "m:tl:alerts"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udd0d Scan",
+                "callback_data": "m:tl:scan"
             },
             {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
-            },
+                "text": "\ud83d\udee0\ufe0f System",
+                "callback_data": "m:tl:sys"
+            }
+        ],
+        [
             {
-                "text": "\ud83c\udfe0",
+                "text": "\u2b05\ufe0f Main Menu",
                 "callback_data": "m:menu"
-            },
-            {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/2*",
+    "panel_text": "\ud83e\uddf0 *TOOLS*\nChoose a group.",
     "pages": {
         "p": [
             "\ud83d\udcbc *PORTFOLIO* $31.68 | \u20a643,307\n\ud83d\udcb5 Cash free $0.03 | In coins $31.50 (99%)\n\ud83d\udfe1 BGB 0.00011912253 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udd34 *BLESS* $31.50 (99%)\n-5.87% (-$1.96) | Entry 0.016691\nQty 2005.0867 | Price 0.015711 | Stop 0.015022 (-4%)\nRSI 44 | Bearish | ATH -94%\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\n\u2800\n\u2800",
