@@ -2825,5 +2825,15 @@
         "time": 1795580707.256541,
         "event": "ai_portfolio_review",
         "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $1.49; auto-buy paused for 17.9h', 'attention': [{'symbol': 'PUMP-USDT', 'action': 'monitor', 'reason': 'Position has zero PnL and is very close to stop; consider tightening stop or exiting if price moves against.'}, {'symbol': 'BTC-USDT', 'action': 'hold', 'reason': 'BTC filter enabled; price is high ($59,273.71) but no active position, maintain current stance.'}], 'summary': 'Portfolio risk is elevated due to recent losses and auto-buy pause. Existing PUMP-USDT position shows no profit and is near its stop level; monitor closely and be ready to exit. No new entries recommended until risk metrics improve.'}"
+    },
+    {
+        "time": 1795580975.7866976,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $1.49; auto-buy paused for 17.8h', 'attention': [{'symbol': 'PUMP-USDT', 'action': 'monitor', 'reason': 'Position shows slight negative PnL (-0.04%) and is near stop level (0.002357). Consider tightening stop or preparing to exit if price approaches stop.'}, {'symbol': 'BTC-USDT', 'action': 'hold', 'reason': 'BTC filter is active and price is $59,294.01; no immediate signal to adjust BTC exposure.'}], 'summary': 'Overall portfolio risk is elevated due to recent losses and auto-buy pause. Maintain a cautious stance: keep existing positions under close watch, avoid adding new exposure until performance stabilizes, and be ready to exit PUMP-USDT if price nears its stop.'}"
+    },
+    {
+        "time": 1795580976.6858878,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 3.5972, 'recurring_patterns': ['15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC', 'MANUAL SELL'], 'recommendations': ['Limit exposure to PANIC-driven exits; implement stricter volatility filters before triggering panic sells', 'Review and refine the 15\u2011minute no\u2011upward\u2011trend rotation logic to reduce false negatives', 'Consolidate manual sell criteria and apply them only after confirming adverse price movement', 'Consider adding adaptive stop\u2011loss levels to replace abrupt manual interventions', 'Maintain current win\u2011rate focus but aim to improve average win size while reducing large loss occurrences']}"
     }
 ]
