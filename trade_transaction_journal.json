@@ -3099,5 +3099,15 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795622057.1272118,
+        "event": "ai_manual_buy_review",
+        "symbol": "BLESS-USDT",
+        "review": {
+            "risk_level": "moderate",
+            "warning": "BTC market filter is active and indicates price is below its 50\u2011hour average, suggesting downward momentum. Proceed with caution, especially given the small trade size and lack of an existing position.",
+            "summary": "The proposed manual BUY of 7.75\u202fUSDT of BLESS\u2011USDT at $0.0166597 carries moderate risk due to bearish BTC conditions. RSI is neutral, but the market filter flags potential downside. Consider waiting for clearer bullish signals or reducing exposure."
+        }
     }
 ]
