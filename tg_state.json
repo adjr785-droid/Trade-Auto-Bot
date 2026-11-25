@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT24.90/\u20a634,031",
+    "kb_ph": "USDT24.79/\u20a633,877",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -73,7 +73,7 @@
         "PREOPAI-USDT"
     ],
     "audit_down": {},
-    "audit_last": 1795580624.0459554,
+    "audit_last": 1795580982.3492587,
     "audit_ai_cls": "",
     "perf_breaker": {
         "until": 1795645210.5830717,
@@ -126,7 +126,7 @@
     ],
     "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
     "out_time": 1795580839.1492634,
-    "kb_mid": 5891,
+    "kb_mid": 5900,
     "out_mid": 5897,
     "panel_mid": 5898
 }
