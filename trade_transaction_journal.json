@@ -3211,5 +3211,10 @@
         "time": 1795642943.2789786,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 53.33, 'net_pnl_usdt': 0.4815, 'recurring_patterns': {'most_common_reasons': ['15-MINUTE NO-UPWARD-TREND ROTATION', 'PANIC', 'MANUAL SELL ALL'], 'reason_frequencies': {'15-MINUTE NO-UPWARD-TREND ROTATION': 4, 'PANIC': 6, 'MANUAL SELL ALL': 3, 'PARTIAL PROFIT +10.4%': 1, 'RSI 75': 1, 'TRAILING STOP (8.0%)': 1, 'MANUAL SELL $8.00': 1, 'MANUAL SELL $3.46': 1, 'MANUAL SELL $5.22': 1}}, 'recommendations': ['Review and tighten criteria for panic exits to avoid frequent small losses', 'Consider adding a filter to confirm upward trend before entering 15\u2011minute rotation trades', 'Evaluate the effectiveness of manual sell signals; many result in near\u2011zero or negative PnL', 'Maintain partial profit strategy that yielded a large positive trade, but apply it selectively']}"
+    },
+    {
+        "time": 1795646283.5527065,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'BLESS-USDT', 'action': 'monitor', 'reason': 'Current PnL is -0.25% and price is near entry; stop loss at 0.015022 provides limited downside. Consider tightening stop if price moves below 0.0155 to protect capital.'}], 'summary': 'Portfolio risk remains acceptable. No immediate action required for BLESS-USDT beyond close monitoring of price relative to the existing stop level. Maintain current position size and ensure stop loss is enforced.'}"
     }
 ]
