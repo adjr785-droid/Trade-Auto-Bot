@@ -3286,5 +3286,15 @@
             "warning": "The RSI is relatively low (41.38) indicating potential oversold conditions, but the price is near recent lows and the trade size is small (\u2248$15). No existing position and no market filter applied. Proceed with caution and ensure stop\u2011loss and position sizing align with your risk management rules.",
             "summary": "Considering the low RSI and modest trade amount, the trade carries moderate risk. Verify liquidity, confirm the price level against recent support, and apply appropriate risk controls before executing the manual buy."
         }
+    },
+    {
+        "time": 1795649367.3367748,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'BLESS-USDT', 'action': 'monitor', 'reason': 'Small loss (-0.04%) and stop loss relatively close (0.015022). Position is older (448 min) but still near entry; consider tightening stop if price declines further.'}, {'symbol': 'DGAI-USDT', 'action': 'monitor', 'reason': 'Moderate loss (-0.4%) with stop 0.949098, about 4.5% below current price. Position age 41 min; risk is manageable but watch for further downside.'}, {'symbol': 'SKYAI-USDT', 'action': 'hold', 'reason': 'Positive PnL (+0.27%) and price above entry. Stop is 0.031277, ~6.6% below current price, providing buffer. No immediate action required.'}, {'symbol': 'GWEI-USDT', 'action': 'monitor', 'reason': 'Loss of -0.6% with stop 0.009298, only ~5.5% below current price. Position is relatively new (37 min); consider adjusting stop if price trends lower.'}], 'summary': 'Overall port"
+    },
+    {
+        "time": 1795649368.0585077,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 50.0, 'net_pnl_usdt': 0.0682, 'recurring_patterns': ['PANIC (5 occurrences)', 'MANUAL SELL ALL (3 occurrences)', '15-MINUTE NO-UPWARD-TREND ROTATION (3 occurrences)', 'MANUAL SELL $ (multiple small sells)'], 'recommendations': ['Review and tighten panic\u2011sell triggers to avoid frequent small losses', 'Consider limiting manual sell orders to stronger profit targets', 'Monitor symbols with repeated losses (e.g., JCT-USDT, DOS-USDT) and evaluate position sizing', 'Maintain current win\u2011rate focus but aim to improve net PnL by reducing high\u2011impact negative trades']}"
     }
 ]

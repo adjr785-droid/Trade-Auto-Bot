@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT33.37/\u20a645,615",
+    "kb_ph": "USDT33.31/\u20a645,527",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -80,23 +80,6 @@
         "since": 1795558810.5830717,
         "loss": -1.4850249000000058
     },
-    "kb_mid": 6244,
-    "out_text": "\ud83e\udde0 AI manual-buy advisory: Considering the low RSI and modest trade amount, the\ntrade carries moderate risk. Verify liquidity, confirm the price level against\nrecent support, and apply appropriate risk controls before executing the manual\nbuy.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
-    "out_mode": "Markdown",
-    "out_time": 1795647126.1703484,
-    "panel_rows": [
-        [
-            {
-                "text": "\u2705 Confirm",
-                "callback_data": "m:bx:GWEI:ALL"
-            },
-            {
-                "text": "\u274c Cancel",
-                "callback_data": "m:menu"
-            }
-        ]
-    ],
-    "panel_text": "\u26a0\ufe0f *CONFIRM BUY*\nGWEI for ALL free USDT at about 0.009777 USDT.",
-    "panel_hidden": true,
-    "out_mid": 6242
+    "kb_mid": 6245,
+    "panel_hidden": true
 }
