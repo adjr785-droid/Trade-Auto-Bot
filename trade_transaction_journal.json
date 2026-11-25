@@ -2771,5 +2771,15 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795580266.139659,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $1.49; auto-buy paused for 18.0h', 'attention': [{'symbol': 'BLESS-USDT', 'action': 'monitor', 'reason': 'Position is small, modest profit (1.02%); stop loss is far below entry, but overall portfolio risk flag suggests caution. Consider tightening stop or reducing exposure.'}], 'summary': 'Current portfolio risk flag indicates recent losses and auto-buy pause. The only open position (BLESS-USDT) shows a small gain but remains vulnerable. Recommend monitoring closely, possibly adjusting stop loss, and avoiding new entries until risk flag clears.'}"
+    },
+    {
+        "time": 1795580266.806365,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 3.8527, 'recurring_patterns': ['PANIC', '15-MINUTE NO-UPWARD-TREND ROTATION', 'MANUAL SELL'], 'recommendations': ['Limit exposure to PANIC-driven entries; consider stricter entry criteria', 'Review performance of 15-MINUTE NO-UPWARD-TREND ROTATION strategy; adjust stop-loss thresholds', 'Consolidate manual sell decisions to avoid fragmented exits', 'Maintain current win-rate focus but aim to improve average trade size and reduce large negative outliers']}"
     }
 ]
