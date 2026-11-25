@@ -2633,5 +2633,10 @@
         "time": 1795572020.4323516,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 4.4473, 'recurring_patterns': {'PANIC': 5, '15-MINUTE NO-UPWARD-TREND ROTATION': 5, 'MANUAL SELL': 5, 'TRAILING STOP': 1, 'RSI 75': 1, 'PARTIAL PROFIT +10.4%': 1}, 'recommendations': {'risk_management': 'Consider tightening panic\u2011exit thresholds and adding confirmation filters before triggering panic sells; current pattern suggests over\u2011reliance on panic exits.', 'trend_detection': 'The 15\u2011minute no\u2011upward\u2011trend rotation appears frequently; evaluate longer\u2011term trend signals to avoid short\u2011term noise.', 'manual_intervention': 'Manual sell actions are common and contribute to mixed outcomes; implement clearer automated exit rules to reduce discretionary variance.', 'overall': 'Performance is modestly positive but driven by a few large wins; focus on consistency and reducing loss frequency before scaling exposure.'}}"
+    },
+    {
+        "time": 1795574863.0077803,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 4.4473, 'recurring_patterns': {'PANIC': 5, '15-MINUTE NO-UPWARD-TREND ROTATION': 5, 'MANUAL SELL': 4, 'TRAILING STOP': 1, 'RSI 75': 1, 'PARTIAL PROFIT +10.4%': 1}, 'recommendations': ['Limit exposure to PANIC-triggered entries until underlying volatility is better quantified', 'Review and tighten criteria for 15\u2011minute no\u2011upward\u2011trend rotations to avoid marginal gains', 'Implement stricter manual sell thresholds to reduce small\u2011loss churn', 'Monitor trailing\u2011stop parameters for consistency with overall risk budget']}"
     }
 ]
