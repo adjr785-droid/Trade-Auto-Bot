@@ -1135,7 +1135,7 @@ def get_holdings_text():
    pnl=(price-entry)/entry*100;pu=(price-entry)*qty;ic="🟢" if pnl>=0 else "🔴"
    l2=f"{pnl:+.2f}% ({'+' if pu>=0 else '-'}${abs(pu):.2f}) | Entry {fp(entry)}"
   else:l2="Entry not tracked by bot"
-  l3=f"Price {fp(price)}"+(f" | Stop {fp(stop)} ({(float(stop)/price-1)*100:+.0f}%)" if stop else " | No stop tracked")
+  l3=f"Qty {qty:.8g} | Price {fp(price)}"+(f" | Stop {fp(stop)} ({(float(stop)/price-1)*100:+.0f}%)" if stop else " | No stop tracked")
   try:
    ath=get_bitget_ath_atl(sym)[0];athtxt=f" | ATH {(price/float(ath)-1)*100:+.0f}%" if ath else ""
   except Exception:athtxt=""
@@ -1960,6 +1960,7 @@ def guardian_audit(force=False):
  if not os.path.exists(GCHARTER):save(GCHARTER,charter)
  else:
   saved=load(GCHARTER,{})
+  if isinstance(saved,dict) and saved.get("version")==1 and saved.get("strategies") in (["TREND","OVERSOLD","BREAKOUT"],["TREND","BOUNCE","BREAKOUT"]):save(GCHARTER,charter);saved=charter   # approved upgrade: strategy list now has Pullback and Bounce
   if not isinstance(saved,dict) or saved.get("version")!=1 or saved.get("strategies")!=charter["strategies"]:findings.append("Core charter integrity mismatch")
  healthy=not findings;summary="Healthy" if healthy else "; ".join(findings)
  st.update(last_audit=now,healthy=healthy,summary=summary)
