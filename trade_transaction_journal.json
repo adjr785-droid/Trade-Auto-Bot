@@ -2755,5 +2755,15 @@
         "time": 1795578877.7670147,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 3.8527, 'recurring_patterns': ['PANIC (5 occurrences)', '15-MINUTE NO-UPWARD-TREND ROTATION (4 occurrences)', 'MANUAL SELL (4 occurrences)', 'TRAILING STOP (1 occurrence)', 'RSI 75 (1 occurrence)', 'PARTIAL PROFIT +10.4% (1 occurrence)'], 'recommendations': ['Review and tighten panic-trigger criteria to avoid frequent loss spikes', 'Consider limiting exposure to assets with repeated panic exits (e.g., WLD-USDT, JCT-USDT)', 'Implement stricter trend validation before entering 15\u2011minute rotation trades', 'Monitor manual sell decisions for consistency and align with predefined risk limits', 'Overall maintain current win rate but focus on reducing high\u2011loss outliers to improve net PnL']}"
+    },
+    {
+        "time": 1795579482.7448556,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $1.49; auto-buy paused for 18.3h', 'attention': [{'symbol': 'BLESS-USDT', 'action': 'monitor', 'reason': 'Position is small, modest 3% profit, but stop is relatively close (\u224812% below entry). Maintain watch; consider tightening stop if volatility rises.'}], 'summary': 'Overall portfolio risk is elevated due to recent losses and auto\u2011buy pause. Existing BLESS position is modestly profitable; no new entries recommended until risk metrics improve.'}"
+    },
+    {
+        "time": 1795579483.5310304,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': 3.8527, 'recurring_patterns': {'PANIC': 5, '15-MINUTE NO-UPWARD-TREND ROTATION': 4, 'MANUAL SELL': 4, 'PARTIAL PROFIT +10.4%': 1, 'RSI 75': 1, 'TRAILING STOP (8.0%)': 1}, 'recommendations': ['Limit exposure to PANIC-driven entries; consider stricter entry criteria', 'Review and tighten 15\u2011minute no\u2011upward\u2011trend rotation strategy to avoid small losses', 'Implement systematic manual\u2011sell rules to reduce ad\u2011hoc exits', 'Increase position sizing discipline to protect against large single\u2011trade drawdowns (e.g., -0.69, -0.51)', 'Monitor win\u2011rate trend; aim for >60% before scaling up']}"
     }
 ]
