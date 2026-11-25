@@ -1,25 +1,4 @@
 {
     "window_start": 1795543332.3727505,
-    "items": [
-        {
-            "sym": "ADA-USDT",
-            "time": 1795496189.5530005,
-            "price": 0.1485,
-            "h1": 0.87,
-            "rsi": 47.74,
-            "status": "BOUGHT",
-            "decision": "SETUP \u2014 NOT QUEUED",
-            "reason": "TREND matched, AI emergency: automatic buying paused",
-            "execution_status": "NOT_ELIGIBLE",
-            "scan_id": "1795496188",
-            "rank": 24,
-            "vol": 3018993.024,
-            "chg": 2.626,
-            "ma5": 0.14828,
-            "ma10": 0.14826,
-            "min_volume": 1000000.0,
-            "spread_pct": 0.0674081563869341,
-            "near_miss": null
-        }
-    ]
+    "items": []
 }
