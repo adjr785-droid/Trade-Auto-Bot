@@ -3195,5 +3195,11 @@
         "time": 1795639349.7890139,
         "event": "ai_portfolio_review",
         "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $1.49; auto-buy paused for 1.6h', 'attention': [{'symbol': 'BLESS-USDT', 'action': 'monitor', 'reason': 'Position is small, modest profit (1.61%); stop loss is far below entry. Maintain watch but avoid adding more exposure until risk metrics improve.'}], 'summary': 'Current portfolio risk is elevated due to recent losses and auto\u2011buy pause. Existing BLESS position shows a small gain but remains vulnerable. Recommend holding without new entries and reassessing after the pause period.'}"
+    },
+    {
+        "time": 1795639387.0485182,
+        "event": "ai_coin_advisory",
+        "reviewed": 25,
+        "source": "coins.db"
     }
 ]
