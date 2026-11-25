@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935690663,
+    "last_update_id": 935690665,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT24.80/\u20a633,903",
+    "kb_ph": "USDT25.09/\u20a634,288",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -79,62 +79,53 @@
         "since": 1795558810.5830717,
         "loss": -1.4850249000000058
     },
-    "kb_mid": 5855,
-    "out_mid": 5857,
-    "out_text": "\ud83d\udcdf *OUTPUT*\nResults appear here.",
+    "kb_mid": 5862,
+    "out_text": "\ud83d\udfe1 *MANUAL BUY*\n_Passed at least 5/7 core and 2/3 additional criteria. Manual review only._\n\nNone right now.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "panel_mid": 5858,
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udee1 Safe",
-                "callback_data": "m:pre:safe"
+                "text": "\ud83d\udda5 System",
+                "callback_data": "/bot"
             },
             {
-                "text": "\u2696\ufe0f Balanced",
-                "callback_data": "m:pre:balanced"
+                "text": "\ud83d\udcc8 Stats",
+                "callback_data": "/stats"
+            }
+        ],
+        [
+            {
+                "text": "\u2699\ufe0f Settings",
+                "callback_data": "m:set"
             },
             {
-                "text": "\u2705 \ud83d\ude80 Active",
-                "callback_data": "m:pre:active"
+                "text": "\ud83d\udcbc Holdings",
+                "callback_data": "m:r:holdings"
             }
         ],
         [
             {
-                "text": "\ud83d\udfe2 Auto-buy: ON",
-                "callback_data": "m:tg:auto_buy_enabled"
+                "text": "\ud83d\udcdc Trade History",
+                "callback_data": "m:r:history"
+            },
+            {
+                "text": "\ud83e\udde0 Ask AI",
+                "callback_data": "m:ai:1"
             }
         ],
         [
             {
-                "text": "\ud83d\udfe2 Falling-knife guard: ON",
-                "callback_data": "m:tg:rising_guard"
-            }
-        ],
-        [
+                "text": "\ud83e\uddf9 Clear Chat",
+                "callback_data": "/clear"
+            },
             {
-                "text": "\ud83d\udfe2 Weak-market half size: ON",
-                "callback_data": "m:tg:weak_market_mode"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udfe2 1H rule for all setups: ON",
-                "callback_data": "m:tg:h1_all_setups"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udfe2 50% / all-in sizing: ON",
-                "callback_data": "m:tg:half_or_all_sizing"
-            }
-        ],
-        [
-            {
-                "text": "\u2b05\ufe0f Menu",
-                "callback_data": "m:menu"
+                "text": "\ud83d\udea8 PANIC SELL",
+                "callback_data": "/panic"
             }
         ]
     ],
-    "panel_text": "\u2699\ufe0f *SETTINGS*\n\u2705 \ud83d\ude80 Active mode set.\nMode: \ud83d\ude80 Active\nSafe = small trades, few per day. Active = bigger trades, more per day.\nEverything else adjusts itself."
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
+    "out_mid": 5860,
+    "out_time": 1795580308.3197997,
+    "panel_mid": 5861
 }
