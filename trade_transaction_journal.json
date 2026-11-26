@@ -3342,5 +3342,11 @@
         "time": 1795654616.2879133,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 50.0, 'net_pnl_usdt': 0.0682, 'recurring_patterns': ['PANIC', 'MANUAL SELL ALL', '15-MINUTE NO-UPWARD-TREND ROTATION'], 'recommendations': ['Limit exposure to panic-driven exits; implement stricter stop\u2011loss thresholds', 'Review and tighten criteria for manual sell orders to avoid frequent small losses', 'Consider reducing reliance on short\u2011term rotation signals that yielded mixed results']}"
+    },
+    {
+        "time": 1795654676.989281,
+        "event": "ai_coin_advisory",
+        "reviewed": 22,
+        "source": "coins.db"
     }
 ]
