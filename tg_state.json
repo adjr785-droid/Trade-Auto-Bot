@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935691116,
+    "last_update_id": 935691117,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -92,7 +92,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "1/2",
+                "text": "2/2",
                 "callback_data": "pg:x"
             },
             {
@@ -105,13 +105,13 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/2*",
+    "panel_text": "\ud83d\udcc4 *Page 2/2*",
     "pages": {
         "p": [
             "\ud83d\udcca *ANALYSIS: DOS-USDT*\nLive price: 0.077300 USDT\n24h change: -0.26%\nRSI(14): 33.5900 \u2014 Neutral\nMA5: 0.077700 | MA10: 0.078350 | MA20: 0.079515\nMACD: -0.00342849 | Signal: -0.00413949 | Histogram: 0.00071100\nATR(14): 0.001864 (2.41% of price)\nLast hour vol vs 20h avg: 1.03x\nBid/ask spread: 0.259%\nTechnical checks: 2/4\n\u2800\n\u2800",
             "Assessment: *WAIT / WEAK SETUP*\nCoin database: WATCHING / HELD | seen 90 scans | RSI 42-48; MA trend; Oversold\nrecovery; Breakout trend\nAI notebook note: high: RSI 33 (oversold), held status, 24h down 1%; potential\ndownside.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 0,
+        "i": 1,
         "mode": "Markdown",
         "x": [],
         "cmd": null
