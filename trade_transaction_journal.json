@@ -3532,5 +3532,15 @@
             "lesson": "Implement stricter emotional controls and adhere to predefined exit criteria (e.g., stop\u2011loss or target profit levels) to avoid panic\u2011driven exits. Ensure the entire position is evaluated against risk parameters before partial liquidation, and consider closing the full position to eliminate residual exposure.",
             "confidence": "medium"
         }
+    },
+    {
+        "time": 1795655830.345803,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $0.25; auto-buy paused for 24.0h', 'attention': [{'symbol': 'MOVE-USDT', 'action': 'monitor', 'reason': 'Position has zero PnL and is near stop level (0.00555). No clear upside signal; consider tightening stop or exiting if price approaches stop.'}], 'summary': 'Current portfolio risk is elevated due to recent losses and auto-buy pause. The only open position (MOVE-USDT) shows no profit and is close to its stop loss. Recommend close monitoring, possibly tighten stop or close position to limit downside while awaiting clearer entry signals.'}"
+    },
+    {
+        "time": 1795655831.190987,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 0.2386, 'recurring_patterns': {'reasons': ['PANIC', 'MANUAL SELL', 'TRAILING STOP'], 'symbols': ['BLESS-USDT', 'ADA-USDT', 'JCT-USDT']}, 'recommendations': 'Reduce exposure to high\u2011frequency panic exits; prioritize trades with clear technical signals (e.g., RSI) and avoid manual sell triggers without confirmation. Consider tightening trailing stop thresholds and reviewing loss\u2011heavy symbols (JCT-USDT, DOS-USDT, PROS-USDT) before future allocation.'}"
     }
 ]

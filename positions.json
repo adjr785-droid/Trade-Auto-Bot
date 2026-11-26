@@ -1,1 +1,13 @@
-{}
+{
+    "MOVE-USDT": {
+        "entry_price": 0.00653,
+        "safe_zone": 0.00653,
+        "stop_loss": 0.00555,
+        "peak_price": 0.00653,
+        "last_price": 0.00653,
+        "opened_at": 1795655808.6131625,
+        "seen": 1795655815.4697483,
+        "rsi_peak": 84.61,
+        "xsl": 0.005877
+    }
+}
