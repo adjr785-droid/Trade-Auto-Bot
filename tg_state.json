@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935690870,
+    "last_update_id": 935690873,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT33.36/\u20a645,592",
+    "kb_ph": "USDT33.68/\u20a646,036",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -79,10 +79,6 @@
         "since": 1795558810.5830717,
         "loss": -1.4850249000000058
     },
-    "kb_mid": 6248,
-    "panel_hidden": true,
-    "out_mid": 6246,
-    "out_text": "\u2705 *AUDIT \u2014 AI RECOVERY VERIFIED*\n3 checks passed. AI is back to normal.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
-    "out_mode": "Markdown",
-    "out_time": 1795649399.2987494
+    "kb_mid": 6252,
+    "panel_hidden": true
 }
