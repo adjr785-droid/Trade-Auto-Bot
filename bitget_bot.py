@@ -1387,8 +1387,8 @@ def fav_coin(c):
  try:held=float(B('free',c) or 0)
  except Exception:held=0.0
  lines=[f"⭐ *{c}*",f"Price: {fp(px) if px else 'n/a'} USDT",f"You hold: {held:.8g}"+(f" (about ${held*px:.2f})" if px and held else "")]
- kb=[[_B(f"🛒 Buy {c}",f"m:b:{c}")]]
- if px and held*px>=1.0:kb.append([_B(f"🔴 SELL ALL {c}",f"m:sc:{c}:100")])
+ kb=[[_B(f"🟢 {x}%",f"m:bp:{c}:{x}") for x in (25,50,75)]+[_B("🟢 ALL",f"m:bp:{c}:100")],[_B(f"🛒 Buy {c}: other amount",f"m:b:{c}")]]
+ if px and held*px>=1.0:kb.append([_B(f"🔴 {x}%",f"m:sc:{c}:{x}") for x in (25,50,75)]+[_B("🔴 ALL",f"m:sc:{c}:100")])
  kb.append([_B("🗑 Remove from favourites",f"m:fd:{c}")]);kb.append([_B("⬅️ Favourites","m:fv")])
  ui_send("\n".join(lines),kb)
 def fav_change(c,add):
@@ -3316,6 +3316,10 @@ def ui_cb(t):
   elif a=="bc":
    c,x=p[2],p[3];px=live(f"{c}-USDT")
    ui_send(f"⚠️ *CONFIRM BUY*\n{c} for {'ALL free USDT' if x=='ALL' else '$'+x} at about {fp(px)} USDT.",[[_B("✅ Confirm",f"m:bx:{c}:{x}"),_B("❌ Cancel","m:menu")]])
+  elif a=="bp" and len(p)>3:
+   c,pc=p[2],int(p[3]);free=B('free','USDT');px=live(f"{c}-USDT");x="ALL" if pc>=100 else f"{free*pc/100:.2f}"
+   if x!="ALL" and float(x)<1.0:ui_send(f"⚠️ {pc}% of your free USDT (${free:.2f}) is under the $1 minimum order.",[[_B("⬅️ Back",f"m:fc:{c}")]])
+   else:ui_send(f"⚠️ *CONFIRM BUY*\n{c} for {'ALL free USDT' if x=='ALL' else '$'+x} ({pc}% of free USDT) at about {fp(px)} USDT.",[[_B("✅ Confirm",f"m:bx:{c}:{x}"),_B("❌ Cancel","m:menu")]])
   elif a=="bx":handle(f"/buy {p[2]} {p[3]}",0)
   elif a=="sell":
    cs=ui_coins("sell")
