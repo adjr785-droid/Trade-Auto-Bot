@@ -3586,5 +3586,15 @@
             "lesson": "Future exits should be guided by the bot's predefined risk thresholds and market signals rather than manual timing, especially for volatile assets like MOVE. Ensure that any manual sell aligns with the bot's stop\u2011loss or target\u2011profit criteria to avoid unnecessary losses. Consider reviewing the entry price distribution to confirm whether a partial exit was justified.",
             "confidence": "medium"
         }
+    },
+    {
+        "time": 1795657019.9248784,
+        "event": "ai_manual_buy_review",
+        "symbol": "SKYAI-USDT",
+        "review": {
+            "risk_level": "moderate",
+            "warning": "The RSI is slightly below 50 indicating modest bearish momentum, and the price is near recent lows. Ensure this aligns with your risk tolerance and overall portfolio strategy.",
+            "summary": "Considering the modest bearish RSI (45.25) and the current price of 0.03381 USDT per SKYAI, a manual buy of 8.27\u202fUSDT carries moderate risk. No existing position or active BTC filter is present, but proceed cautiously and monitor market conditions."
+        }
     }
 ]
