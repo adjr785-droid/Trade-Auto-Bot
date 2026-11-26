@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT33.57/\u20a645,888",
+    "kb_ph": "USDT33.58/\u20a645,905",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -72,12 +72,12 @@
         "KII-USDT"
     ],
     "audit_down": {},
-    "audit_last": 1795664165.7460637,
+    "audit_last": 1795664585.9669702,
     "audit_ai_cls": "",
     "perf_breaker": {
         "until": 1795742224.733271,
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 6416
+    "kb_mid": 6417
 }
