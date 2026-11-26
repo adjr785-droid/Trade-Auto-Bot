@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690913,
+    "last_update_id": 935690916,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -24,8 +24,8 @@
             1795493361.8607023
         ],
         "m:r:holdings": [
-            0,
-            1795654420.9944532
+            1,
+            1795654797.9737413
         ],
         "/analyse": [
             6,
@@ -92,7 +92,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "1/4",
+                "text": "2/4",
                 "callback_data": "pg:x"
             },
             {
@@ -109,7 +109,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/4*",
+    "panel_text": "\ud83d\udcc4 *Page 2/4*",
     "kb_mid": 6313,
     "pages": {
         "p": [
@@ -118,7 +118,7 @@
             "+1.44% (+$0.07) | Entry 0.995906\nQty 5.01498 | Price 1.0102 | Stop 0.949098 (-6%)\nRSI 46 | Mixed | ATH -66%\n\n\ud83d\udfe2 *PUMP* $3.50 (10%)\n+0.11% (+$0.00) | Entry 0.002610\nQty 1339.6564 | Price 0.002613 | Stop 0.002501 (-4%)\nRSI 70 | Bullish | ATH -71%\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\n\u2800\n\u2800",
             "and 8 more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT33.97/\u20a646,427\n\n\ud83e\udde0 *AI:* Portfolio totals $33.97/\u00a564,427 with $0.02 cash; most positions are\nsmall and near stop levels, and several tokens lack USDT pricing, requiring\nprice\u2011feed verification.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 0,
+        "i": 1,
         "mode": "Markdown",
         "x": [
             {
