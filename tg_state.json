@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691047,
+    "last_update_id": 935691049,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT32.78/\u20a644,800",
+    "kb_ph": "USDT32.76/\u20a644,774",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -79,10 +79,9 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 6581,
-    "out_text": "\ud83d\udcbc *PORTFOLIO* $32.78 | \u20a644,800\n\ud83d\udcb5 Cash free $14.80 | In coins $17.91 (55%)\n\ud83d\udfe1 BGB 0.00019195253 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udd34 *SKYAI* $7.97 (24%)\n-3.61% (-$0.30) | Entry 0.033820\nQty 244.37721 | Price 0.032600 | Stop 0.032210 (-1%)\nRSI 38 | Bearish | ATH -96%\n\n\ud83d\udd34 *TRX* $4.99 (15%)\n\u2800\n\u2800",
+    "out_text": "\ud83e\uddf9 Cleared 3 bot message(s).\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795678185.2052975,
+    "out_time": 1795678231.0995693,
     "panel_rows": [
         [
             {
@@ -126,24 +125,7 @@
         ]
     ],
     "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
-    "out_mid": 6579,
-    "pages": {
-        "p": [
-            "\ud83d\udcbc *PORTFOLIO* $32.78 | \u20a644,800\n\ud83d\udcb5 Cash free $14.80 | In coins $17.91 (55%)\n\ud83d\udfe1 BGB 0.00019195253 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udd34 *SKYAI* $7.97 (24%)\n-3.61% (-$0.30) | Entry 0.033820\nQty 244.37721 | Price 0.032600 | Stop 0.032210 (-1%)\nRSI 38 | Bearish | ATH -96%\n\n\ud83d\udd34 *TRX* $4.99 (15%)\n\u2800\n\u2800",
-            "-0.07% (-$0.00) | Entry 0.304200\nQty 16.426657 | Price 0.303990 | Stop 0.295074 (-3%)\nRSI 42 | Mixed | ATH -70%\n\n\ud83d\udfe2 *MOVE* $4.95 (15%)\n+0.36% (+$0.02) | Entry 0.005911\nQty 835.22024 | Price 0.005932 | Stop 0.005320 (-10%)\nRSI 62 | Mixed | ATH -100%\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\n\u2800\n\u2800",
-            "and 8 more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT32.78/\u20a644,800\n\n\ud83e\udde0 *AI:* Portfolio totals $32.78 cash and $44,800 in coins, but BTC filter is\ninactive; SKYAI stop is only 1% below price and TRX stop 3% below, indicating\ntight risk margins.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
-        ],
-        "i": 0,
-        "mode": "Markdown",
-        "x": [
-            [
-                {
-                    "text": "\ud83d\udd04",
-                    "callback_data": "rf:go"
-                }
-            ]
-        ],
-        "cmd": "m:r:holdings"
-    },
-    "panel_mid": 6580
+    "out_mid": 6582,
+    "kb_mid": 6584,
+    "panel_mid": 6586
 }
