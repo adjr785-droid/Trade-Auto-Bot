@@ -7,6 +7,21 @@ COINDB="coins.db";NEWLIST="new_listing_state.json";GUARDIAN="bot_guardian.json";
 FILES=[COINDB,NEWLIST,DB,ST,CFG,QF,LF,CD,SC,HIST,SH,OUT,AL,ATHATL_CACHE,JOURNAL,BREAKER,GUARDIAN,GCHARTER,GAUDIT,AI_HEALTH,AI_RECENT]
 STABLE=['USDC','USDT','DAI','FDUSD','TUSD','USDD','USDE'];LEV=['3L','3S','5L','5S','10L','10S','2L','2S'];BL=['RPANW','CT','ONE']
 ex=ccxt.bitget({'apiKey':os.environ.get('BITGET_API_KEY'),'secret':os.environ.get('BITGET_API_SECRET'),'password':os.environ.get('BITGET_API_PASSPHRASE'),'enableRateLimit':True});ex.options['createMarketBuyOrderRequiresPrice']=False
+_RL={"ccxt":[],"groq":[]}
+def rl_note(k):
+ # Rate-limit monitor: remember each rate-limit hit (last hour) for the System report and for self-slowing.
+ now=time.time();_RL[k]=[x for x in _RL.get(k,[]) if now-x<3600]+[now]
+def rl_count(k,sec=3600):return sum(1 for x in _RL.get(k,[]) if time.time()-x<sec)
+def rl_workers(w):
+ # 3 or more exchange rate-limit hits in 10 minutes: halve the parallel scan workers until it calms down
+ w=max(1,int(w or 8));return max(2,w//2) if rl_count("ccxt",600)>=3 else w
+_RL_EXC=tuple(getattr(ccxt,n) for n in ('RateLimitExceeded','DDoSProtection') if hasattr(ccxt,n))
+_rl_orig_request=getattr(ex,'request',None)
+def _rl_request(*a,**k):
+ try:return _rl_orig_request(*a,**k)
+ except _RL_EXC:
+  rl_note("ccxt");raise
+if _rl_orig_request:ex.request=_rl_request
 GROQ_API_KEY=os.environ.get('GROQ_API_KEY','').strip()
 GROQ_MODEL=os.environ.get('GROQ_MODEL','openai/gpt-oss-120b').strip() or 'openai/gpt-oss-120b'
 _AI_CACHE={}
@@ -497,7 +512,8 @@ def market_filter(s):
   n=max(10,int(s.get('btc_trend_hours',50)))
   o=ex.fetch_ohlcv("BTC/USDT",'1h',limit=n+10)
   c=[float(k[4]) for k in o[:-1]]
-  if len(c)>=n and c[-1]<sum(c[-n:])/n:reason=f"BTC is below its {n}h average"
+  if len(c)<n:reason="market data unavailable (fail-safe: buying blocked)"
+  elif c[-1]<sum(c[-n:])/n:reason=f"BTC is below its {n}h average"
   if not reason:
    ch=[t.get('percentage') for k,t in ex.fetch_tickers().items() if k.endswith('/USDT') and (t.get('quoteVolume') or 0)>=1000000 and t.get('percentage') is not None]
    if len(ch)>=30:
@@ -506,8 +522,9 @@ def market_filter(s):
      msg=f"only {up:.0f}% of coins are up today"
      if s.get('weak_market_mode',True) and up>=float(s.get('weak_market_floor_pct',15.0)):weak=msg
      else:reason=msg
- except Exception as e:print("MARKET FILTER ERR:",e);reason="";weak=""
- _MKT["t"],_MKT["r"],_MKT["w"]=time.time(),reason,weak;return reason
+ except Exception as e:print("MARKET FILTER ERR:",e);reason="market data unavailable (fail-safe: buying blocked)";weak=""
+ # a failed data read is retried after 60s instead of being cached for 5 minutes
+ _MKT["t"],_MKT["r"],_MKT["w"]=(time.time()-240 if reason.startswith("market data unavailable") else time.time()),reason,weak;return reason
 def weak_market(s):
  # weak (not crashing) market: buying stays allowed at reduced size; returns the reason text or ""
  if market_filter(s):return ""
@@ -981,7 +998,7 @@ def cmd_sell(txt):
  c,amt=r;sym=f"{c}-USDT";cs=f"{c}/USDT"
  if cd(f"sell:{sym}",5):tg(f"⏳ Processing /sell {c}...");return
  db=load(DB)
- if sym not in db:tg(f"❌ No active bot trade for {c}. Type `/sync` if manual.");return
+ if sym not in db:tg(f"❌ No active bot trade for {c}. The bot adds held coins automatically on its next scan.");return
  p=live(sym)
  if not p:tg(f"❌ No price for {c}.");return
  try:
@@ -1033,17 +1050,25 @@ def cmd_cancel_all():
   save(QF, {})
   tg(f"✅ *CANCELLED:* {count} open orders on Bitget.\nRun `/audit` to re-arm stops.")
  except Exception as e:tg(f"❌ Failed to cancel: {e}")
-def cmd_sync():
- tg("🔄 Syncing manual coins to bot database...")
+def auto_sync(verbose=False):
+ # Every scan: coins held on the exchange but not tracked by the bot get tracked, with a stop and trailing stop. Silent unless coins were added.
  try:b=ex.fetch_balance()['total']
- except:tg("❌ Failed to fetch balance.");return
- db=load(DB);added=[]
+ except Exception:
+  if verbose:tg("❌ Failed to fetch balance.")
+  return []
+ db=load(DB);added=[];s=cfg()
  for c,a in b.items():
-  if c in STABLE or a<=0:continue
+  try:a=float(a or 0)
+  except (TypeError,ValueError):continue
+  if c in STABLE or c in BL or c=="BGB" or a<=0:continue
   sym=f"{c}-USDT";p=live(sym)
   if p and a*p>1.02 and sym not in db:
-   db[sym]=NP(p,round(p*(1-cfg()['stop_loss_pct']/100),6));save(DB,db);added.append(sym);place_trailing_sl(sym,a)
- tg(f"✅ *SYNCED:* Added {len(added)} coins:\n`{chr(10).join(added)}`" if added else "✅ No new manual coins found to sync.")
+   db[sym]=NP(p,round(p*(1-s['stop_loss_pct']/100),6));save(DB,db);added.append(sym)
+   if not (place_trailing_sl(sym,a) or protect_retry(sym,a)):tg(f"⚠️ *STOP NOT VERIFIED* for synced coin {sym}. The watchdog will retry.")
+ if added:tg(f"🔄 *AUTO-SYNC:* now tracking {len(added)} coin(s) you hold, with stop and trailing stop:\n`{chr(10).join(added)}`")
+ elif verbose:tg("✅ No new coins found to sync.")
+ return added
+def cmd_sync():auto_sync(True)
 def panic_sell():
  db=load(DB)
  if not db:
@@ -1285,9 +1310,8 @@ def _coin_table(items):
  # Same look as Scan History: a monospace table, one coin per line.
  rows=[]
  for it in items:
-  def n(v,fmt):return format(float(v),fmt) if isinstance(v,(int,float)) else "-"
   sc=it.get("score");sc="-" if sc is None else str(int(float(sc)))
-  rows.append(f"{str(it.get('sym','?')).replace('-USDT','')[:7]:<7}{n(it.get('rsi'),'.0f'):>4}{n(it.get('h1'),'+.1f'):>6}{n(it.get('chg'),'+.1f'):>7}{sc:>3}{ {'TREND':' T','PULLBACK':' P','BOUNCE':' B','BREAKOUT':' K'}.get(str(it.get('tag') or ''),' -'):>3}")
+  rows.append(f"{str(it.get('sym','?')).replace('-USDT','')[:7]:<7}{_fmt(it.get('rsi'),'.0f'):>4}{_fmt(it.get('h1'),'+.1f'):>6}{_fmt(it.get('chg'),'+.1f'):>7}{sc:>3}{ {'TREND':' T','PULLBACK':' P','BOUNCE':' B','BREAKOUT':' K'}.get(str(it.get('tag') or ''),' -'):>3}")
  if not rows:return "None right now."
  return "```\n"+f"{'COIN':<7}{'RSI':>4}{'1H':>6}{'24H':>7}{'S':>3}{'TY':>3}"+"\n"+"-"*30+"\n"+"\n".join(rows)+"\n```\n_TY: T Trend, P Pullback, B Bounce, K Breakout_"
 def analyse_top3(tab="M"):
@@ -1306,7 +1330,8 @@ def analyse_top3(tab="M"):
  lines=[title,sub,"",_coin_table(items)]
  def tb(k,lbl):return _B(("▶ " if tab==k else "")+f"{lbl} ({cnt.get({'W':'WATCH','M':'MANUAL','A':'AUTO'}[k],0)})",f"m:at:{k}")
  keyboard=[[tb("W","👁 Watch"),tb("M","🟡 Manual"),tb("A","🤖 Auto")],
-           [_B("🆕 NEW LISTINGS","m:nl"),_B("🗄 ARCHIVE","m:ar:D")],
+           [_B("🎯 SETUPS","m:su"),_B("🆕 NEW LISTINGS","m:nl")],
+           [_B("🗄 ARCHIVE","m:ar:D")],
            [_B("🔄 Refresh",f"m:at:{tab}")]]
  # Coin names remain in the readable list above; do not create a separate button for every coin.
  _send("\n".join(lines)[:3800],"Markdown",{"inline_keyboard":keyboard})
@@ -1315,11 +1340,8 @@ def analyse_archive(tab="D"):
  """Dropped and Archived coins are never deleted; browse them here for a history check. Read-only list."""
  tab=tab if tab in ("D","A") else "D";stage="DROPPED" if tab=="D" else "ARCHIVED"
  try:
-  c=coin_db_conn()
-  try:
-   cnt=dict(c.execute("SELECT stage,COUNT(*) FROM coins WHERE stage IN ('DROPPED','ARCHIVED') AND status<>'BOUGHT' GROUP BY stage").fetchall())
-   rows=c.execute("SELECT sym,price,chg24,h1,rsi,scans,manual_score,last_seen FROM coins WHERE stage=? AND status<>'BOUGHT' ORDER BY last_seen DESC LIMIT 40",(stage,)).fetchall()
-  finally:c.close()
+  cnt=dict(_dbq("SELECT stage,COUNT(*) FROM coins WHERE stage IN ('DROPPED','ARCHIVED') AND status<>'BOUGHT' GROUP BY stage"))
+  rows=_dbq("SELECT sym,price,chg24,h1,rsi,scans,manual_score,last_seen FROM coins WHERE stage=? AND status<>'BOUGHT' ORDER BY last_seen DESC LIMIT 40",(stage,))
  except Exception as e:
   print("ARCHIVE ERR",str(e)[:120]);tg("⚠️ Could not read the archive. Try again shortly.");return
  title={"D":"⤵ *DROPPED COINS*","A":"🗄 *ARCHIVED COINS*"}[tab]
@@ -1327,6 +1349,22 @@ def analyse_archive(tab="D"):
  lines=[title,sub,"",_coin_table([{"sym":s_,"rsi":r_,"h1":h_,"chg":c_,"score":sc_} for s_,p_,c_,h_,r_,n_,sc_,ls_ in rows])]
  tb=lambda k,lbl,key:_B(("▶ " if tab==k else "")+f"{lbl} ({cnt.get(key,0)})",f"m:ar:{k}")
  _send("\n".join(lines),"Markdown",{"inline_keyboard":[[tb("D","⤵ Dropped","DROPPED"),tb("A","🗄 Archived","ARCHIVED")],[_B("⬅️ Analyse","/analyse"),_B("🔄 Refresh",f"m:ar:{tab}")]]})
+def analyse_setups():
+ """Every coin from the latest scan that looks like Trend, Pullback, Bounce or Breakout, with the hard gates it failed. Read-only list."""
+ try:
+  mx=_dbq("SELECT MAX(last_seen) FROM coins",one=True)[0] or 0
+  rows=_dbq("SELECT sym,rsi,h1,chg24,tag,stage,checks_json FROM coins WHERE tag IN ('TREND','PULLBACK','BOUNCE','BREAKOUT') AND status<>'BOUGHT' AND last_seen>=? ORDER BY tag,COALESCE(h1,-99) DESC LIMIT 40",(float(mx)-600,))
+ except Exception as e:
+  print("SETUPS ERR",str(e)[:120]);tg("⚠️ Could not read the setups list. Try again shortly.");return
+ code={"rsi_ceiling":"R","price_above_ma":"M","momentum_1h":"H","momentum_24h_up":"D"};tc={"TREND":"T","PULLBACK":"P","BOUNCE":"B","BREAKOUT":"K"};out=[]
+ for sym,r_,h_,c_,tag,stg,cj in rows:
+  try:g=((((json.loads(cj or "{}").get("scanner") or {}).get("manual_candidate") or {}).get("checks") or {}).get("gates") or {})
+  except Exception:g={}
+  bl="".join(v for k,v in code.items() if g.get(k) is not True) or "OK"
+  out.append(f"{str(sym).replace('-USDT','')[:7]:<7}{_fmt(r_,'.0f'):>4}{_fmt(h_,'+.1f'):>6}{_fmt(c_,'+.1f'):>7}{' '+tc[tag]:>3} {bl}")
+ body=("```\n"+f"{'COIN':<7}{'RSI':>4}{'1H':>6}{'24H':>7}{'TY':>3} BLOCK"+"\n"+"-"*32+"\n"+"\n".join(out)+"\n```") if out else "No coin matches a setup right now."
+ lines=["🎯 *SETUPS*","_Coins from the latest scan that look like a setup, even if a gate blocks them._","",body,"_TY: T Trend, P Pullback, B Bounce, K Breakout_","_BLOCK: gate failed. R RSI, M MA, H 1H, D 24H. OK = passed all four._"]
+ _send("\n".join(lines),"Markdown",{"inline_keyboard":[[_B("⬅️ Analyse","/analyse"),_B("🔄 Refresh","m:su")]]})
 def analyse_new_listings():
  """Show recently detected Bitget spot listings as a readable list, never as buy buttons."""
  state=load(NEWLIST,{})
@@ -1426,7 +1464,7 @@ def cmd_status():
  except Exception:ddp=0.0
  q=load(QF);ls=load(SC).get('last',0);ago=f"{(now-ls)/60:.0f} min ago" if ls else "never"
  mom=f"1H +{float(s.get('mom_1h_min_pct',0.5)):g}–{float(s.get('mom_1h_max_pct',6.0)):g}%" if mom_on(s) else "24H range"
- lines=[f"🖥 *SYSTEM* — {head}",f"Buying: {system_buy_state(s)}",f"Health: Bot {bot_pct}% | AI {str(ap)+'%' if ap is not None else 'n/a'} ({ai_mode})",f"Layers: {lay}"]+([f"🔧 AI issue: {AI_CAUSE.get(le[0],le[0])}"] if (le:=ai_last_error()) and (hs.get("emergency_mode") or (ap is not None and ap<70)) else [])+["━━━━━━━━━━━━━━",
+ lines=[f"🖥 *SYSTEM* — {head}",f"Buying: {system_buy_state(s)}",f"Health: Bot {bot_pct}% | AI {str(ap)+'%' if ap is not None else 'n/a'} ({ai_mode})",f"Layers: {lay}",f"Rate limits (1h): Exchange {rl_count('ccxt')} | AI {rl_count('groq')}"+(" — scanning slowed" if rl_count("ccxt",600)>=3 else "")]+([f"🔧 AI issue: {AI_CAUSE.get(le[0],le[0])}"] if (le:=ai_last_error()) and (hs.get("emergency_mode") or (ap is not None and ap<70)) else [])+["━━━━━━━━━━━━━━",
   "🧭 *STRATEGY*",f"Entry: TREND, RSI {s.get('rsi_min')}-{s.get('rsi_max')}, {mom}, price > MA5 > MA10"+(", must be rising vs last scan" if s.get('rising_guard',True) else ""),
   f"Exit: stop {s.get('stop_loss_pct')}% | trail {s.get('trail_pct')}% | RSI {s.get('rsi_exit')}+ (dynamic)",
   (f"Size: 50% of balance (all-in if half < ${float(s.get('half_or_all_threshold_usdt',5.0)):g})" if s.get("half_or_all_sizing",True) else f"Risk: {s.get('risk_per_trade_pct')}% per trade")+f" | max {s.get('max_daily_trades')} trades/day | pause at -{s.get('max_daily_drawdown_pct')}% day",
@@ -1481,7 +1519,7 @@ def ai_error_class(msg):
  m=str(msg).lower()
  if "missing" in m or "not configured" in m:return "NO_KEY"
  if "http 401" in m or "http 403" in m:return "BAD_KEY"
- if "http 429" in m or "rate limit" in m:return "RATE_LIMIT"
+ if "http 429" in m or "rate limit" in m:rl_note("groq");return "RATE_LIMIT"
  if "http 400" in m or "http 404" in m or "unavailable. check groq_model" in m or "model_not_found" in m or "decommission" in m:return "MODEL"
  if any(f"http {c}" in m for c in (500,502,503,504)):return "SERVER"
  if "timed out" in m or "timeout" in m or "connection" in m or "resolve" in m:return "NETWORK"
@@ -1726,6 +1764,7 @@ def manage():
   if s.get("stop_watchdog_enabled",True) and not in_cd(f"stopwatch_{sym}",900):
    mk_cd(f"stopwatch_{sym}")
    orders,verified=open_sells(sym)
+   if not verified and not cd(f"stopunver_{sym}",3600):tg(f"⚠️ *STOP NOT VERIFIED:* could not read the exchange orders for {sym}. Checking again next cycle.")
    if verified and len(orders)!=1:
     tg(f"⚠️ *STOP WATCHDOG:* {sym} has {len(orders)} protective sell orders; attempting to restore one verified stop.")
     ok=place_trailing_sl(sym,B('free',sym.split('-')[0]))
@@ -2321,6 +2360,14 @@ def coin_status(rec,held):
  if d.startswith("SETUP"):return "READY"
  if r.startswith(_REJ):return "REJECTED"
  return "WATCHING"
+def _dbq(sql,args=(),one=False,write=False):
+ # One place for the open / run / commit / close pattern used by the coin database helpers.
+ c=coin_db_conn()
+ try:
+  cur=c.execute(sql,args)
+  if write:c.commit();return None
+  return cur.fetchone() if one else cur.fetchall()
+ finally:c.close()
 def coin_db_integrity():
  c=coin_db_conn()
  try:
@@ -2356,14 +2403,16 @@ def coin_db_mark_execution(sym,status,reason="",details=None):
   if c:
    try:c.close()
    except:pass
+def _num(v):
+ # finite float or None
+ try:
+  x=float(v);return x if x==x and abs(x)!=float("inf") else None
+ except Exception:return None
+def _fmt(v,fmt):return format(float(v),fmt) if isinstance(v,(int,float)) else "-"
 def setup_tag(rec,s):
  # Which of the four setups a coin currently looks like: TREND, PULLBACK, BOUNCE or BREAKOUT (None if none).
- def num(v):
-  try:
-   x=float(v);return x if x==x and abs(x)!=float("inf") else None
-  except Exception:return None
  try:
-  p=num(rec.get("price"));r=num(rec.get("rsi"));m5=num(rec.get("ma5"));m10=num(rec.get("ma10"));h=num(rec.get("h1"));pc=num(rec.get("prev_close"))
+  p=_num(rec.get("price"));r=_num(rec.get("rsi"));m5=_num(rec.get("ma5"));m10=_num(rec.get("ma10"));h=_num(rec.get("h1"));pc=_num(rec.get("prev_close"))
   if p is None or r is None or m5 is None or m10 is None:return None
   lo,hi=float(s.get("mom_1h_min_pct",0.5)),float(s.get("mom_1h_max_pct",6.0))
   h1ok=True if not mom_on(s) else (h is not None and lo<=h<=hi)
@@ -2381,17 +2430,12 @@ def manual_candidate_assess(rec,settings=None):
  independent execution/risk gates. Missing evidence never earns a point.
  """
  s=settings or cfg();tag=setup_tag(rec,s)
- def num(v):
-  try:
-   x=float(v)
-   return x if __import__('math').isfinite(x) else None
-  except Exception:return None
  try:
-  vol=num(rec.get("vol"));minvol=num(rec.get("min_volume"));spread=num(rec.get("spread_pct"))
-  price=num(rec.get("price"));rsi=num(rec.get("rsi"));ma5=num(rec.get("ma5"));ma10=num(rec.get("ma10"))
-  chg=num(rec.get("chg"));trend=rec.get("market_trend_4h")
-  btc=rec.get("btc_market_safe");high=num(rec.get("high_24h"));rr=num(rec.get("rr"))
-  h1v=num(rec.get("h1"));pcl=num(rec.get("prev_close"))
+  vol=_num(rec.get("vol"));minvol=_num(rec.get("min_volume"));spread=_num(rec.get("spread_pct"))
+  price=_num(rec.get("price"));rsi=_num(rec.get("rsi"));ma5=_num(rec.get("ma5"));ma10=_num(rec.get("ma10"))
+  chg=_num(rec.get("chg"));trend=rec.get("market_trend_4h")
+  btc=rec.get("btc_market_safe");high=_num(rec.get("high_24h"));rr=_num(rec.get("rr"))
+  h1v=_num(rec.get("h1"));pcl=_num(rec.get("prev_close"))
   _pb_ok=None if price is None or ma5 is None or ma10 is None else (ma5>ma10 and ma10<=price<=ma5)
   _rmax=float(s.get("rsi_max",48));_chgmax=float(s.get("max_24h_pct",100.0))
   core={
@@ -2404,7 +2448,7 @@ def manual_candidate_assess(rec,settings=None):
    "btc_market_safety":None if btc is None else btc is True,
   }
   brk=rec.get("breakout_confirmed")
-  volx=num(rec.get("volume_expansion_ratio"))
+  volx=_num(rec.get("volume_expansion_ratio"))
   additional={
    "breakout_confirmation":None if brk is None else brk is True,
    "volume_expansion":None if volx is None else volx>=1.5,
@@ -2614,30 +2658,20 @@ def coin_db_can_execute(sym,qd):
   return True,"Database confirms READY and QUEUED."
  finally:c.close()
 def coin_db_ai_rows(limit=25):
- c=coin_db_conn()
- try:
-  rows=c.execute("""SELECT sym,signal_status,execution_status,price,chg24,h1,rsi,scans,reason,setup
+ rows=_dbq("""SELECT sym,signal_status,execution_status,price,chg24,h1,rsi,scans,reason,setup
    FROM coins ORDER BY CASE signal_status WHEN 'READY' THEN 0 WHEN 'NEW' THEN 1 WHEN 'WATCHING' THEN 2 ELSE 3 END,
-   last_seen DESC LIMIT ?""",(int(limit),)).fetchall()
-  return [{"symbol":x[0],"signal_status":x[1],"execution_status":x[2],"price":x[3],"change_24h_pct":x[4],
+   last_seen DESC LIMIT ?""",(int(limit),))
+ return [{"symbol":x[0],"signal_status":x[1],"execution_status":x[2],"price":x[3],"change_24h_pct":x[4],
    "change_1h_pct":x[5],"rsi":x[6],"scans_seen":x[7],"scanner_reason":x[8],"setup":x[9]} for x in rows]
- finally:c.close()
 def coin_db_set_ai_advisory(sym,comment):
- c=coin_db_conn()
- try:
-  c.execute("UPDATE coins SET ai_advisory=?,ai_advisory_at=? WHERE sym=?",(str(comment or "")[:300],time.time(),sym))
-  c.commit()
- finally:c.close()
+ _dbq("UPDATE coins SET ai_advisory=?,ai_advisory_at=? WHERE sym=?",(str(comment or "")[:300],time.time(),sym),write=True)
 def coin_db_get(sym):
- c=coin_db_conn()
- try:
-  row=c.execute("SELECT first_seen,last_seen,scans,signal_status,execution_status,reason,ai_advisory,checks_json,ai_advisory_at FROM coins WHERE sym=?",(sym,)).fetchone()
-  if not row:return None
-  try:checks=json.loads(row[7] or "{}")
-  except Exception:checks={}
-  return {"first_seen":row[0],"last_seen":row[1],"scans":row[2],"signal_status":row[3],
+ row=_dbq("SELECT first_seen,last_seen,scans,signal_status,execution_status,reason,ai_advisory,checks_json,ai_advisory_at FROM coins WHERE sym=?",(sym,),one=True)
+ if not row:return None
+ try:checks=json.loads(row[7] or "{}")
+ except Exception:checks={}
+ return {"first_seen":row[0],"last_seen":row[1],"scans":row[2],"signal_status":row[3],
    "execution_status":row[4],"reason":row[5],"ai_advisory":row[6],"checks":checks,"ai_advisory_at":row[8]}
- finally:c.close()
 def coin_db_history_records(hours=24,limit=60000):
  c=coin_db_conn()
  try:
@@ -2659,36 +2693,23 @@ def coin_db_history_records(hours=24,limit=60000):
  finally:c.close()
 def coin_db_auto_ready_candidates(limit=3):
  """Return only fresh, unexpired Coin List records approved for automatic execution."""
- c=coin_db_conn()
- try:
-  fresh_after=time.time()-max(1800.0,float(cfg().get("scan_interval_minutes",15.0))*120.0)
-  rows=c.execute("""SELECT sym,price,h1,rsi,scans,execution_status,last_seen,expires_at
+ fresh_after=time.time()-max(1800.0,float(cfg().get("scan_interval_minutes",15.0))*120.0)
+ rows=_dbq("""SELECT sym,price,h1,rsi,scans,execution_status,last_seen,expires_at
    FROM coins WHERE signal_status='READY' AND execution_status='QUEUED' AND status<>'BOUGHT' AND manual_score=10
    AND last_seen>=? AND (expires_at IS NULL OR expires_at>?)
-   ORDER BY COALESCE(h1,-999) DESC,last_seen DESC LIMIT ?""",
-   (fresh_after,time.time(),int(limit))).fetchall()
-  return [{"sym":x[0],"price":x[1],"h1":x[2],"rsi":x[3],"scans":x[4],"execution_status":x[5],"last_seen":x[6],"expires_at":x[7]} for x in rows]
- finally:c.close()
+   ORDER BY COALESCE(h1,-999) DESC,last_seen DESC LIMIT ?""",(fresh_after,time.time(),int(limit)))
+ return [{"sym":x[0],"price":x[1],"h1":x[2],"rsi":x[3],"scans":x[4],"execution_status":x[5],"last_seen":x[6],"expires_at":x[7]} for x in rows]
 def coin_db_manual_candidates(limit=10):
- c=coin_db_conn()
- try:
-  rows=c.execute("SELECT sym,price,chg24,h1,rsi,scans,manual_score,manual_reason,reason,execution_status,tag FROM coins WHERE manual_candidate=1 AND stage='MANUAL' AND manual_score BETWEEN 7 AND 9 AND status<>'BOUGHT' ORDER BY manual_score DESC,last_seen DESC LIMIT ?",(int(limit),)).fetchall()
-  return [{"sym":x[0],"price":x[1],"chg":x[2],"h1":x[3],"rsi":x[4],"scans":x[5],"score":x[6],"manual_reason":x[7],"scanner_reason":x[8],"execution_status":x[9],"tag":x[10]} for x in rows]
- finally:c.close()
+ rows=_dbq("SELECT sym,price,chg24,h1,rsi,scans,manual_score,manual_reason,reason,execution_status,tag FROM coins WHERE manual_candidate=1 AND stage='MANUAL' AND manual_score BETWEEN 7 AND 9 AND status<>'BOUGHT' ORDER BY manual_score DESC,last_seen DESC LIMIT ?",(int(limit),))
+ return [{"sym":x[0],"price":x[1],"chg":x[2],"h1":x[3],"rsi":x[4],"scans":x[5],"score":x[6],"manual_reason":x[7],"scanner_reason":x[8],"execution_status":x[9],"tag":x[10]} for x in rows]
 def coin_db_stage_list(stage,limit=20):
- c=coin_db_conn()
- try:
-  rows=c.execute("SELECT sym,price,chg24,h1,rsi,scans,first_seen,manual_score,tag FROM coins WHERE stage=? AND status<>'BOUGHT' ORDER BY COALESCE(h1,-99) DESC,last_seen DESC LIMIT ?",(stage,int(limit))).fetchall()
-  return [{"sym":x[0],"price":x[1],"chg":x[2],"h1":x[3],"rsi":x[4],"scans":x[5],"first_seen":x[6],"score":x[7],"tag":x[8]} for x in rows]
- finally:c.close()
+ rows=_dbq("SELECT sym,price,chg24,h1,rsi,scans,first_seen,manual_score,tag FROM coins WHERE stage=? AND status<>'BOUGHT' ORDER BY COALESCE(h1,-99) DESC,last_seen DESC LIMIT ?",(stage,int(limit)))
+ return [{"sym":x[0],"price":x[1],"chg":x[2],"h1":x[3],"rsi":x[4],"scans":x[5],"first_seen":x[6],"score":x[7],"tag":x[8]} for x in rows]
 def coin_db_stage_counts():
  try:
-  c=coin_db_conn()
-  try:
-   out=dict(c.execute("SELECT stage,COUNT(*) FROM coins WHERE stage IN ('WATCH','MANUAL','AUTO','DROPPED','ARCHIVED') AND status<>'BOUGHT' GROUP BY stage").fetchall())
-   out.update(WATCH=out.get("WATCH",0),MANUAL=out.get("MANUAL",0),AUTO=out.get("AUTO",0),W=out.get("WATCH",0),M=out.get("MANUAL",0),A=out.get("AUTO",0))
-   return out
-  finally:c.close()
+  out=dict(_dbq("SELECT stage,COUNT(*) FROM coins WHERE stage IN ('WATCH','MANUAL','AUTO','DROPPED','ARCHIVED') AND status<>'BOUGHT' GROUP BY stage"))
+  out.update(WATCH=out.get("WATCH",0),MANUAL=out.get("MANUAL",0),AUTO=out.get("AUTO",0),W=out.get("WATCH",0),M=out.get("MANUAL",0),A=out.get("AUTO",0))
+  return out
  except Exception:return {}
 def coin_db_rows(limit=12):
  c=coin_db_conn()
@@ -2727,9 +2748,7 @@ def cmd_coins():
 def rising_vs_last_scan(sym,p,r,now):
  # Falling-knife guard: the price must be higher and RSI not lower than at the previous scan (within the last hour).
  try:
-  c=coin_db_conn()
-  try:row=c.execute("SELECT t,price,rsi FROM snaps WHERE sym=? AND price IS NOT NULL AND rsi IS NOT NULL ORDER BY t DESC LIMIT 1",(sym,)).fetchone()
-  finally:c.close()
+  row=_dbq("SELECT t,price,rsi FROM snaps WHERE sym=? AND price IS NOT NULL AND rsi IS NOT NULL ORDER BY t DESC LIMIT 1",(sym,),one=True)
  except Exception:return False,"Falling-knife guard: scan-history database unavailable; confirmation failed"
  if not row or now-float(row[0])>3600:return False,"Falling-knife guard: waiting for the next scan to confirm it is rising"
  pp,pr_=float(row[1]),float(row[2])
@@ -2988,6 +3007,8 @@ def scan(force=False):
  st=load(SC);now=time.time();_t0=time.time()
  iv=max(1.0,float(cfg().get('scan_interval_minutes',15) or 15))
  if not force and now-st.get('last',0)<max(60,iv*60-30):return
+ try:auto_sync()
+ except Exception as _e:print('AUTO-SYNC ERR',str(_e)[:100])
  db=load(DB);q=load(QF);s=cfg();ai_market=ai_market_context(s);guardian_ok,guardian_reason=guardian_audit();auto_enabled=guardian_ok;btc_is_blocked=btc_blocked(s) if auto_enabled else False
  mf=market_filter(s) if auto_enabled and not btc_is_blocked else ""
  if mf and not cd("mktblock",21600):tg(f"⏸ *MARKET FILTER:* {mf}.")
@@ -3018,7 +3039,7 @@ def scan(force=False):
     if _sp is not None and _sp>2*float(s.get('max_spread_pct',0.5)):continue
     cand.append(t['sym'])
    from concurrent.futures import ThreadPoolExecutor
-   with ThreadPoolExecutor(max_workers=int(s.get('scan_workers',8) or 8)) as pool:
+   with ThreadPoolExecutor(max_workers=rl_workers(s.get('scan_workers',8))) as pool:
     for sy,res in zip(cand,pool.map(_calc,cand)):_PF[sy]=res
   except Exception as e:print(f"PREFETCH ERR: {e}");_PF.clear()
  for rank,t in enumerate(v[:500],start=1):
@@ -3247,6 +3268,7 @@ def ui_cb(t):
   elif a=="at" and len(p)>2:analyse_top3(p[2])
   elif a=="nl":analyse_new_listings()
   elif a=="ar":analyse_archive(p[2] if len(p)>2 else "D")
+  elif a=="su":analyse_setups()
   elif a=="mc" and len(p)>2:
    manual_candidate_detail(p[2])
   elif a=="b":
@@ -3258,7 +3280,7 @@ def ui_cb(t):
   elif a=="bx":handle(f"/buy {p[2]} {p[3]}",0)
   elif a=="sell":
    cs=ui_coins("sell")
-   if not cs:ui_send("💸 *SELL*\nNo bot-tracked positions. If you bought manually, tap Sync first.",[[_B("🔄 Sync manual coins","m:r:sync")],_MENU_BTN])
+   if not cs:ui_send("💸 *SELL*\nNo bot-tracked positions. The bot adds coins you hold automatically on its next scan.",[_MENU_BTN])
    else:ui_send("💸 *SELL* — choose a position:",_grid([_B(c,f"m:s:{c}") for c in cs],3)+[_MENU_BTN])
   elif a=="s":
    c=p[2];fb=B('free',c);px=live(f"{c}-USDT") or 0
@@ -3339,7 +3361,7 @@ def ui_cb(t):
    ui_send("🧰 *TOOLS*\nChoose a group.",[[_B("🛒 Trade","m:tl:trade"),_B("🔔 Alerts","m:tl:alerts")],[_B("🔍 Scan","m:tl:scan"),_B("🛠️ System","m:tl:sys")],[_B("⬅️ Main Menu","m:menu")]])
   elif a=="tl" and len(p)>2:
    _T=[_B("⬅️ Tools","m:tools"),_B("🏠 Main Menu","m:menu")]
-   if p[2]=="trade":ui_send("🛒 *TRADE*",[[_B("🛒 Buy","m:buy"),_B("💸 Sell","m:sell")],[_B("❌ Cancel Open Orders","m:r:cancel"),_B("🧹 Dust → BGB","m:r:dust")],[_B("🔄 Sync manual coins","m:r:sync")],_T])
+   if p[2]=="trade":ui_send("🛒 *TRADE*",[[_B("🛒 Buy","m:buy"),_B("💸 Sell","m:sell")],[_B("❌ Cancel Open Orders","m:r:cancel"),_B("🧹 Dust → BGB","m:r:dust")],_T])
    elif p[2]=="alerts":ui_send("🔔 *ALERTS*",[[_B("🔔 Set alert","m:al"),_B("📋 My alerts","m:r:alerts")],[_B("🗑 Cancel all alerts","m:r:cancelalerts")],_T])
    elif p[2]=="scan":ui_send("🔍 *SCAN*",[[_B("🔍 Scan now","m:r:scan"),_B("🧾 Scan History","m:scan_hist")],[_B("📚 Coin List","m:coins")],_T])
    elif p[2]=="sys":ui_send("🛠️ *SYSTEM*",[[_B("🛠️ Audit","m:r:audit"),_B("🧩 Layout","m:lay")],[_B("🧠 Resume AI Mode","m:r:airesume")],_T])
