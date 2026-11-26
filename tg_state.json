@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691082,
+    "last_update_id": 935691083,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT33.30/\u20a645,550",
+    "kb_ph": "USDT33.30/\u20a645,549",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -17,7 +17,7 @@
         "pos": [],
         "hn": 31
     },
-    "last_cmd": "/bot",
+    "last_cmd": "m:r:holdings",
     "page_mem": {
         "/bot": [
             1,
@@ -73,59 +73,60 @@
         "JCT-USDT"
     ],
     "audit_down": {},
-    "audit_last": 1795701334.2839744,
+    "audit_last": 1795702924.765876,
     "audit_ai_cls": "",
     "perf_breaker": {
         "until": 1795742224.733271,
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 6682,
-    "out_mid": 6683,
-    "out_text": "\ud83d\udcdf *OUTPUT*\nResults appear here.",
+    "kb_mid": 6687,
+    "out_text": "\ud83d\udcbc *PORTFOLIO* $33.30 | \u20a645,549\n\ud83d\udcb5 Cash free $23.04 | In coins $10.20 (31%)\n\ud83d\udfe1 BGB 0.00019195253 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *MOVE* $5.21 (16%)\n+5.57% (+$0.27) | Entry 0.005911\nQty 835.22024 | Price 0.006240 | Stop 0.005911 (-5%)\nRSI 59 | Mixed | ATH -99%\n\n\ud83d\udd34 *TRX* $4.99 (15%)\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "panel_mid": 6684,
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udda5 System",
-                "callback_data": "/bot"
+                "text": "\u25c0",
+                "callback_data": "pg:p"
             },
             {
-                "text": "\ud83d\udcc8 Stats",
-                "callback_data": "/stats"
-            }
-        ],
-        [
-            {
-                "text": "\u2699\ufe0f Settings",
-                "callback_data": "m:set"
+                "text": "1/3",
+                "callback_data": "pg:x"
             },
             {
-                "text": "\ud83d\udcbc Holdings",
-                "callback_data": "m:r:holdings"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udcdc Trade History",
-                "callback_data": "m:r:history"
+                "text": "\u25b6",
+                "callback_data": "pg:n"
             },
             {
-                "text": "\ud83e\udde0 Ask AI",
-                "callback_data": "m:ai:1"
-            }
-        ],
-        [
-            {
-                "text": "\ud83e\uddf9 Clear Chat",
-                "callback_data": "/clear"
+                "text": "\ud83c\udfe0",
+                "callback_data": "m:menu"
             },
             {
-                "text": "\ud83d\udea8 PANIC SELL",
-                "callback_data": "/panic"
+                "text": "\ud83d\udd04",
+                "callback_data": "rf:go"
             }
         ]
     ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below."
+    "panel_text": "\ud83d\udcc4 *Page 1/3*",
+    "out_mid": 6685,
+    "out_time": 1795702937.3063524,
+    "pages": {
+        "p": [
+            "\ud83d\udcbc *PORTFOLIO* $33.30 | \u20a645,549\n\ud83d\udcb5 Cash free $23.04 | In coins $10.20 (31%)\n\ud83d\udfe1 BGB 0.00019195253 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *MOVE* $5.21 (16%)\n+5.57% (+$0.27) | Entry 0.005911\nQty 835.22024 | Price 0.006240 | Stop 0.005911 (-5%)\nRSI 59 | Mixed | ATH -99%\n\n\ud83d\udd34 *TRX* $4.99 (15%)\n\u2800\n\u2800",
+            "-0.15% (-$0.01) | Entry 0.304200\nQty 16.426657 | Price 0.303750 | Stop 0.295074 (-3%)\nRSI 44 | Bearish | ATH -70%\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\nand 8 more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT33.30/\u20a645,549\n\n\ud83e\udde0 *AI:* Portfolio shows $33.30 total value with $23.04 cash and $10.20 in\n\u2800\n\u2800",
+            "coins; MOVE and TRX positions are small and near break\u2011even, but several assets\nlack USDT pricing, requiring price updates.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+        ],
+        "i": 0,
+        "mode": "Markdown",
+        "x": [
+            [
+                {
+                    "text": "\ud83d\udd04",
+                    "callback_data": "rf:go"
+                }
+            ]
+        ],
+        "cmd": "m:r:holdings"
+    },
+    "panel_mid": 6686
 }
