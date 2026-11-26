@@ -124,6 +124,19 @@ def wallet_value(totals):
  return v
 def balance_text(v):
  rate=ngn_rate();return f"USDT{v:.2f}"+(f"/₦{v*rate:,.0f}" if rate else "")
+_FREE={"t":0,"v":None}
+def usdt_line():
+ # "USDT33.75": free USDT, shown at the top of every Analyse page (cached 15s)
+ if time.time()-_FREE["t"]<15 and _FREE["v"] is not None:return f"USDT{_FREE['v']:.2f}"
+ try:
+  _FREE["v"]=float((ex.fetch_balance().get("free") or {}).get("USDT",0) or 0);_FREE["t"]=time.time()
+ except Exception:pass
+ return f"USDT{_FREE['v']:.2f}" if _FREE["v"] is not None else ""
+def _ub_inject(m):
+ # one USDT line per command, only inside Analyse pages
+ if not _UI.get("ub") or _UI.get("ub_done") or not isinstance(m,str):return m
+ _UI["ub_done"]=True;u=usdt_line()
+ return (u+"\n"+m) if u else m
 def compact_balance():
  if time.time()-_BAL["t"]<15:return _BAL["m"]
  try:
@@ -191,6 +204,7 @@ def new_display():
   _del_msg(_mid(k));_set_mid(k,None)
  _UI["mid"]=None
 def _panel(text,rows,touch=True):
+ text=_ub_inject(text)
  if touch:_UI["panel_used"]=True
  rm={"inline_keyboard":rows}
  if not _mid("out_mid"):_make_out("📟 *OUTPUT*\nResults appear here.","Markdown")
@@ -311,6 +325,7 @@ def page_nav(t):
  nav=_nav_with(_nav_rows(i,len(ps)),pg.get("x") or [])
  _panel(f"📄 *Page {i+1}/{len(ps)}*",nav)
 def _send(m,mode,btn=None):
+ if mode in (None,"Markdown"):m=_ub_inject(m)
  try:
   n=int(cfg().get('page_chars',600) or 0)
   acc=_UI.get("acc")
@@ -1331,8 +1346,7 @@ def analyse_top3(tab="M"):
  lines=[title,sub,"",_coin_table(items)]
  def tb(k,lbl):return _B(("▶ " if tab==k else "")+f"{lbl} ({cnt.get({'W':'WATCH','M':'MANUAL','A':'AUTO'}[k],0)})",f"m:at:{k}")
  keyboard=[[tb("W","👁 Watch"),tb("M","🟡 Manual"),tb("A","🤖 Auto")],
-           [_B("💱 Buy / Sell a coin",f"m:pk:{tab}")],
-           [_B("🎯 SETUPS (scan, history, trade)","m:su"),_B("🗂 MORE","m:am")],
+           [_B("🎯 SETUPS","m:su"),_B("🗂 MORE","m:am")],
            [_B("🔄 Refresh",f"m:at:{tab}")]]
  # Coin names remain in the readable list above; do not create a separate button for every coin.
  _send("\n".join(lines)[:3800],"Markdown",{"inline_keyboard":keyboard})
@@ -1349,7 +1363,7 @@ def analyse_archive(tab="D"):
  sub={"D":"_Stopped qualifying for 24h. Kept for history; they return to Watch if they qualify again._","A":"_Not seen for 30 days. Kept for history._"}[tab]
  lines=[title,sub,"",_coin_table([{"sym":s_,"rsi":r_,"h1":h_,"chg":c_,"score":sc_} for s_,p_,c_,h_,r_,n_,sc_,ls_ in rows])]
  tb=lambda k,lbl,key:_B(("▶ " if tab==k else "")+f"{lbl} ({cnt.get(key,0)})",f"m:ar:{k}")
- _send("\n".join(lines),"Markdown",{"inline_keyboard":[[tb("D","⤵ Dropped","DROPPED"),tb("A","🗄 Archived","ARCHIVED")],[_B("⬅️ Analyse","/analyse"),_B("🔄 Refresh",f"m:ar:{tab}")],[_B("💱 Buy / Sell a coin",f"m:pk:{'D' if tab=='D' else 'Z'}")]]})
+ _send("\n".join(lines),"Markdown",{"inline_keyboard":[[tb("D","⤵ Dropped","DROPPED"),tb("A","🗄 Archived","ARCHIVED")],[_B("⬅️ Analyse","/analyse"),_B("🔄 Refresh",f"m:ar:{tab}")]]})
 def setups_items():
  """Coins from the latest scan that pass at least 3 of the 5 checks, as tuples (-passed,tag,sym,rsi,1h,24h,blocked)."""
  try:
@@ -1376,9 +1390,10 @@ def analyse_setups():
  out=[f"{str(sym).replace('-USDT','')[:6]:<6}{_fmt(r_,'.0f'):>3}{_fmt(h_,'+.1f'):>5}{_fmt(c_,'+.0f'):>5}{tc.get(tag,'-'):>3} {-n}/5 {bl}" for n,tag,sym,r_,h_,c_,bl in items[:40]]
  body=("```\n"+f"{'COIN':<6}{'RSI':>3}{'1H':>5}{'24H':>5}{'TY':>3} PASS BLOCK"+"\n"+"-"*32+"\n"+"\n".join(out)+"\n```") if out else "No coin passes 3 of the 5 checks right now."
  lines=["🎯 *SETUPS*","_Coins from the latest scan that pass at least 3 of 5 checks._","",body,"_TY: T Trend, P Pullback, B Bounce, K Breakout, - none_","_BLOCK: R RSI, M MA, H 1H, D 24H, S score (Core 5+ and Extra 2+). OK = all passed._"]
- _send("\n".join(lines),"Markdown",{"inline_keyboard":[[_B("🔍 SCAN NOW","m:r:scan"),_B("📜 SCAN HISTORY","/scan_history")],[_B("💱 Buy / Sell a coin","m:pk:su")],[_B("⬅️ Analyse","/analyse"),_B("🔄 Refresh","m:su")]]})
+ _send("\n".join(lines),"Markdown",{"inline_keyboard":[[_B("🔍 SCAN NOW","m:r:scan"),_B("📜 SCAN HISTORY","/scan_history")],[_B("⬅️ Analyse","/analyse"),_B("🔄 Refresh","m:su")]]})
 def coin_search(q):
  """Type any part of a coin name: exact match opens its analysis, several matches give a pick list."""
+ _UI["ub"]=True;_UI["ub_done"]=False
  term=re.sub(r"[^A-Z0-9]","",str(q).upper().replace("-USDT","").replace("/USDT",""))[:20]
  if not term:ui_send("🔍 Type letters or numbers, for example SOL.",[[_B("🔍 Search again","m:se")],[_B("⬅️ Back","m:an")]]);return
  try:
@@ -1470,7 +1485,7 @@ def analyse_new_listings():
   status="history building" if candles is None else f"{int(candles)} hourly candles"
   lines.append(f"• *{coin}/USDT* — detected {when} | {status}")
  if not recent:lines.append("No newly detected listings in the last 24 hours. The first successful discovery scan establishes the baseline.")
- _send("\n".join(lines)[:3800],"Markdown",{"inline_keyboard":[[_B("⬅️ Back to Analyse","/analyse"),_B("🔄 Refresh","m:nl")],[_B("💱 Buy / Sell a coin","m:pk:nl")]]})
+ _send("\n".join(lines)[:3800],"Markdown",{"inline_keyboard":[[_B("⬅️ Back to Analyse","/analyse"),_B("🔄 Refresh","m:nl")]]})
 
 def hold_advice(sym,price,entry,rsi,ma5,ma10,s):
  pnl=(price-entry)/entry*100 if entry else None;sl=float(s.get('stop_loss_pct',5));rx=float(s.get('rsi_exit',75) or 0)
@@ -2341,7 +2356,7 @@ def cmd_scan_history(txt="/scan_history"):
  query=" ".join(parts) if parts else "all coins"
  more=f" (first {len(shown)})" if len(found)>len(shown) else ""
  msg=f"🔎 *SCAN HISTORY* · {len(found)}/{len(items)} coins{more}\n{n_scans} scans · {age/3600:.1f}h"+("" if not parts else " · "+query)+f"\n```\n{table}\n```"
- _send(msg,"Markdown",{"inline_keyboard":[[{"text":"🔍 Why not bought?","callback_data":"m:whylist:0"}],[{"text":"💱 Buy / Sell a coin","callback_data":"m:pk:H"}],[{"text":"⬅️ Analyse","callback_data":"/analyse"}]]})
+ _send(msg,"Markdown",{"inline_keyboard":[[{"text":"🔍 Why not bought?","callback_data":"m:whylist:0"}],[{"text":"⬅️ Analyse","callback_data":"/analyse"}]]})
 def _hist_code(x,s):
  d=str(x.get("decision","SKIP")).upper();rs=str(x.get("reason",""))
  if "NOT QUEUED" in d:
@@ -3579,6 +3594,16 @@ def handle(t,age):
 def ui_cb(t):
  k=_AI_CMD.get(str(t).strip().lower())
  return _ai_run(k,_u0,t) if k else _u0(t)
+_UB_CB={"at","ar","su","pk","fc","fv","fa","fd","nl","am","an","se","a"}
+_ub_cb0=ui_cb;_ub_h0=handle
+def ui_cb(t):
+ p=str(t).split(":");_UI["ub"]=len(p)>1 and p[0]=="m" and (p[1] in _UB_CB or (p[1]=="more" and len(p)>2 and p[2] in ("analyse","fav")));_UI["ub_done"]=False
+ try:return _ub_cb0(t)
+ finally:_UI["ub"]=False
+def handle(t,age):
+ l=str(t).strip().lower();_UI["ub"]=l.startswith(("/analyse","🏆 analyse","/scan_history","scan_history"));_UI["ub_done"]=False
+ try:return _ub_h0(t,age)
+ finally:_UI["ub"]=False
 _TG_N={"n":0}
 def tg_check(poll=0):
  st=load(ST);lid=st.get("last_update_id",0)
