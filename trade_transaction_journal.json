@@ -3694,5 +3694,51 @@
         "time": 1795664580.8001244,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': -0.1018, 'recurring_patterns': {'reasons': ['PANIC', 'MANUAL SELL', 'TRAILING STOP'], 'symbols': ['ADA-USDT', 'BLESS-USDT', 'MOVE-USDT']}, 'recommendations': 'Reduce exposure to high\u2011frequency panic exits; consider tighter stop\u2011loss thresholds and avoid manual sell triggers without clear profit targets. Prioritize trades with stronger signals and monitor trailing\u2011stop parameters closely.'}"
+    },
+    {
+        "time": 1795668581.1942039,
+        "event": "sell_fill_verified",
+        "symbol": "MOVE-USDT",
+        "filled": 964.2,
+        "average": 0.0059397541381456,
+        "order_id": "1509708936382193664",
+        "reason": "CRASH GUARD (-11.3%)",
+        "attempt": 1
+    },
+    {
+        "time": 1795668582.334798,
+        "event": "trade_closed",
+        "symbol": "MOVE-USDT",
+        "pnl_usdt": -0.5691150600000126,
+        "reason": "CRASH GUARD (-11.3%)",
+        "strategy": "OTHER"
+    },
+    {
+        "time": 1795668582.7848396,
+        "event": "full_sale_verified_or_dust",
+        "symbol": "MOVE-USDT",
+        "remaining_base": 0.001674,
+        "remaining_value_usdt": 9.941885999999999e-06,
+        "filled": 964.2
+    },
+    {
+        "time": 1795668592.6178215,
+        "event": "ai_sell_review",
+        "symbol": "MOVE-USDT",
+        "review": {
+            "review": "The trade exited at an average price of 0.00593975\u202fUSDT, resulting in a realized loss of -0.5691\u202fUSDT, which corresponds to a -11.3% drop that triggered the crash\u2011guard. The position was largely liquidated (964.2 units sold) leaving a small residual base of 0.001674\u202fMOVE.",
+            "lesson": "Crash\u2011guard mechanisms are essential for limiting downside in highly volatile assets. However, the loss indicates that the guard may have been activated too late or the threshold was insufficient for this rapid move. Future configurations should consider tighter stop\u2011loss levels or dynamic volatility\u2011adjusted thresholds for assets with large price swings like MOVE.",
+            "confidence": "high"
+        }
+    },
+    {
+        "time": 1795668603.2008212,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $0.25; auto-buy paused for 20.5h', 'attention': [{'symbol': 'SKYAI-USDT', 'action': 'monitor', 'reason': 'Position is losing 1.24% and is near stop at 0.03221; consider tightening stop or exiting if price approaches stop.'}], 'summary': 'Overall portfolio risk remains elevated due to recent losses and auto-buy pause. The only open position (SKYAI-USDT) is slightly underwater and close to its stop level. Recommend close monitoring, possibly tightening the stop loss or exiting to prevent further drawdown. No new entries should be initiated until risk metrics improve.'}"
+    },
+    {
+        "time": 1795668603.9467833,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6945, 'recurring_patterns': {'PANIC': 13, 'MANUAL_SELL': 9, 'CRASH_GUARD': 1}, 'recommendations': ['Review and tighten panic\u2011sell thresholds to reduce frequent loss\u2011making exits', 'Implement stricter position sizing for high\u2011volatility symbols (e.g., MOVE-USDT)', 'Add additional confirmation signals before manual sell actions to avoid premature exits', 'Monitor and adjust crash\u2011guard parameters to prevent large single\u2011trade drawdowns']}"
     }
 ]
