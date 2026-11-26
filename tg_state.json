@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT33.81/\u20a646,213",
+    "kb_ph": "USDT34.04/\u20a646,522",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -82,7 +82,7 @@
         "since": 1795558810.5830717,
         "loss": -1.4850249000000058
     },
-    "kb_mid": 6338,
+    "kb_mid": 6339,
     "out_text": "\ud83e\udde0 AI manual-buy advisory: Given the overbought RSI, elevated price, and absence\nof any existing position or filter safeguards, a manual buy of MOVE-USDT for\n$33.74 is considered high risk. Proceed only if you accept the possibility of a\nrapid loss and have a clear exit strategy.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
