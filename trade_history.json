@@ -396,5 +396,13 @@
         "time": 1795668582.3329124,
         "reason": "CRASH GUARD (-11.3%)",
         "strategy": "OTHER"
+    },
+    {
+        "sym": "TRX-USDT",
+        "pnl": -0.010020225999999991,
+        "fee": 0.009974,
+        "time": 1795720459.3860712,
+        "reason": "MANUAL SELL ALL",
+        "strategy": "MANUAL"
     }
 ]

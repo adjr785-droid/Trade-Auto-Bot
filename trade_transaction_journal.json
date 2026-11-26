@@ -4139,5 +4139,23 @@
         "event": "ai_coin_advisory",
         "reviewed": 15,
         "source": "coins.db"
+    },
+    {
+        "time": 1795720459.3882382,
+        "event": "trade_closed",
+        "symbol": "TRX-USDT",
+        "pnl_usdt": -0.010020225999999991,
+        "reason": "MANUAL SELL ALL",
+        "strategy": "MANUAL"
+    },
+    {
+        "time": 1795720472.14505,
+        "event": "ai_manual_sell_review",
+        "symbol": "TRX-USDT",
+        "review": {
+            "review": "The manual sell resulted in a realized loss of approximately $0.01 USDT on a small position (16.4266 TRX, average exit $0.30359). The loss is modest in absolute terms but indicates the exit price was below the entry cost basis, leading to a negative PnL. The remaining base balance is negligible (5.67e-05 TRX).",
+            "lesson": "When manually exiting a position, verify that the exit price covers the entry cost and any fees to avoid small but unnecessary losses. Consider using limit orders or tighter price monitoring for low\u2011volume assets to improve execution quality.",
+            "confidence": "high"
+        }
     }
 ]

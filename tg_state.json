@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691137,
+    "last_update_id": 935691138,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT33.17/\u20a645,363",
+    "kb_ph": "USDT33.22/\u20a645,441",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -79,10 +79,10 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 6799,
-    "out_text": "\ud83d\udcbc *PORTFOLIO* $33.17 | \u20a645,363\n\ud83d\udcb5 Cash free $4.91 | In coins $28.20 (85%)\n\ud83d\udfe1 BGB 0.00019195253 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *DOS* $23.21 (70%)\n+0.91% (+$0.21) | Entry 0.076900\nQty 299.1604 | Price 0.077600 | Stop 0.073178 (-6%)\nRSI 37 | Mixed | ATH -91%\n\n\ud83d\udd34 *TRX* $4.99 (15%)\n\u2800\n\u2800",
+    "kb_mid": 6805,
+    "out_text": "\u2705 \ud83e\uddf9 BGB dust converted: 0.00005670 TRX \u2192 0.00001139 BGB | Fee: 0.00000023\nBGB. Order: 1509926551746715649.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795720417.290452,
+    "out_time": 1795720465.3968265,
     "panel_rows": [
         [
             {
@@ -109,23 +109,5 @@
     ],
     "panel_text": "\ud83d\udcc4 *Page 1/3*",
     "out_mid": 6801,
-    "pages": {
-        "p": [
-            "\ud83d\udcbc *PORTFOLIO* $33.17 | \u20a645,363\n\ud83d\udcb5 Cash free $4.91 | In coins $28.20 (85%)\n\ud83d\udfe1 BGB 0.00019195253 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *DOS* $23.21 (70%)\n+0.91% (+$0.21) | Entry 0.076900\nQty 299.1604 | Price 0.077600 | Stop 0.073178 (-6%)\nRSI 37 | Mixed | ATH -91%\n\n\ud83d\udd34 *TRX* $4.99 (15%)\n\u2800\n\u2800",
-            "-0.20% (-$0.01) | Entry 0.304200\nQty 16.426657 | Price 0.303600 | Stop 0.295074 (-3%)\nRSI 46 | Mixed | ATH -70%\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\nand 8 more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT33.17/\u20a645,363\n\n\ud83e\udde0 *AI:* Portfolio totals $33.17 with $4.91 cash; DOS and TRX positions are tiny\n\u2800\n\u2800",
-            "and both underperforming, while several assets lack USDT pricing, indicating\nincomplete valuation and potential risk.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
-        ],
-        "i": 0,
-        "mode": "Markdown",
-        "x": [
-            [
-                {
-                    "text": "\ud83d\udd04",
-                    "callback_data": "rf:go"
-                }
-            ]
-        ],
-        "cmd": "m:r:holdings"
-    },
-    "panel_mid": 6802
+    "panel_hidden": true
 }
