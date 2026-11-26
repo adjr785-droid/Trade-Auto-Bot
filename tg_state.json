@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690902,
+    "last_update_id": 935690922,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -17,15 +17,15 @@
         "pos": [],
         "hn": 31
     },
-    "last_cmd": "m:r:holdings",
+    "last_cmd": "/stats",
     "page_mem": {
         "/bot": [
             1,
             1795493361.8607023
         ],
         "m:r:holdings": [
-            0,
-            1795654420.9944532
+            3,
+            1795654825.0606394
         ],
         "/analyse": [
             6,
@@ -75,7 +75,7 @@
         "JCT-USDT"
     ],
     "audit_down": {},
-    "audit_last": 1795654293.5161147,
+    "audit_last": 1795654623.045626,
     "audit_ai_cls": "",
     "perf_breaker": {
         "until": 1795645210.5830717,
