@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691007,
+    "last_update_id": 935691022,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT32.76/\u20a644,774",
+    "kb_ph": "USDT32.75/\u20a644,761",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -79,5 +79,18 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 6497
+    "kb_mid": 6524,
+    "out_mid": 6525,
+    "out_text": "\ud83d\udcdf *OUTPUT*\nResults appear here.",
+    "out_mode": "Markdown",
+    "panel_mid": 6526,
+    "panel_rows": [
+        [
+            {
+                "text": "\u2b05\ufe0f Back",
+                "callback_data": "m:at:M"
+            }
+        ]
+    ],
+    "panel_text": "\ud83d\udcb1 *BUY / SELL*\nNo coins on this list right now."
 }

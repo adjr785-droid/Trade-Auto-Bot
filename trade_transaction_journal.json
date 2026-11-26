@@ -3834,5 +3834,15 @@
         "time": 1795675480.7325134,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6945, 'recurring_patterns': ['High frequency of PANIC exits', 'Manual sell triggers on small profit targets', 'Single large loss from CRASH GUARD on MOVE-USDT'], 'recommendations': ['Review and tighten panic\u2011sell thresholds to avoid frequent small losses', 'Consolidate manual sell strategy to target larger profit margins before exiting', 'Implement stricter risk controls for high\u2011volatility assets like MOVE-USDT to prevent large crash\u2011guard losses', 'Consider reducing position size on symbols with repeated panic exits to limit downside exposure']}"
+    },
+    {
+        "time": 1795675760.205208,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $0.25; auto-buy paused for 18.5h', 'attention': [{'symbol': 'SKYAI-USDT', 'action': 'hold', 'reason': 'Position is losing 3.84% and is close to stop (0.03221). Market price 0.03252 is only slightly above stop; exiting may limit further loss.'}, {'symbol': 'TRX-USDT', 'action': 'hold', 'reason': 'Small positive PnL (0.05%) and price is above stop (0.295074). No immediate risk, but monitor for volatility.'}], 'summary': 'Overall portfolio risk remains elevated due to recent losses and auto\u2011buy pause. Maintain current positions, consider tightening stop for SKYAI-USDT if price approaches stop level, and await clearer market signals before adding new exposure.'}"
+    },
+    {
+        "time": 1795675760.8943572,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6945, 'recurring_patterns': {'PANIC': 13, 'MANUAL SELL': 9, 'CRASH GUARD': 1}, 'recommendations': 'Reduce reliance on panic exits; implement tighter stop\u2011loss thresholds; review manual sell triggers for consistency; consider lowering position size on high\u2011volatility symbols; monitor crash\u2011guard activation frequency and adjust risk parameters accordingly.'}"
     }
 ]
