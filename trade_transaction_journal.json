@@ -3962,5 +3962,15 @@
         "time": 1795692590.9769247,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6945, 'recurring_patterns': {'PANIC': 13, 'MANUAL_SELL': 9, 'CRASH_GUARD': 1}, 'recommendations': ['Limit exposure to high\u2011volatility symbols that trigger frequent PANIC exits', 'Implement stricter stop\u2011loss thresholds to avoid large CRASH GUARD losses', 'Review manual sell triggers to ensure they align with predefined profit targets', 'Consider reducing position size on symbols with repeated negative outcomes (e.g., MOVE-USDT)', 'Increase monitoring of market conditions to pre\u2011empt panic\u2011driven decisions']}"
+    },
+    {
+        "time": 1795696498.2979593,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $0.25; auto-buy paused for 12.7h', 'attention': [{'symbol': 'TRX-USDT', 'action': 'monitor', 'reason': 'Position is slightly underwater (-0.17% PnL) and close to stop (0.295074). No immediate action; consider tightening stop if price declines further.'}, {'symbol': 'MOVE-USDT', 'action': 'hold', 'reason': 'Position is profitable (+5.85% PnL) with stop at entry. Maintain current stop; no need to adjust given recent gains.'}], 'summary': 'Overall portfolio risk remains elevated due to recent losing streak; auto-buy is paused. Both positions are small and manual; continue monitoring TRX-USDT for downside risk while preserving gains on MOVE-USDT. No new entries recommended until risk metrics improve.'}"
+    },
+    {
+        "time": 1795696499.3558059,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6945, 'recurring_patterns': {'loss_causes': ['PANIC exits', 'CRASH GUARD trigger', 'large manual sell positions'], 'symbols_with_multiple_losses': ['MOVE-USDT', 'PROS-USDT', 'PUMP-USDT'], 'loss_distribution': {'PANIC': 6, 'MANUAL SELL': 5, 'CRASH GUARD': 1}}, 'recommendations': {'risk_management': 'Increase stop\u2011loss buffers and avoid panic\u2011driven exits; consider tighter position sizing on high\u2011volatility symbols like MOVE-USDT.', 'trade_review': 'Review manual sell decisions that resulted in losses; implement a checklist before large manual exits.', 'strategy_adjustment': 'Limit exposure to symbols with repeated negative outcomes and prioritize assets with consistent positive pnl.', 'monitoring': 'Enable alerts for rapid price drops to replace reactive panic sells with pre\u2011defined protective actions.'}}"
     }
 ]
