@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691132,
+    "last_update_id": 935691137,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT33.17/\u20a645,364",
+    "kb_ph": "USDT33.17/\u20a645,363",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -69,53 +69,63 @@
         ]
     },
     "radar": [
-        "PWT-USDT"
+        "BGSC-USDT"
     ],
     "audit_down": {},
-    "audit_last": 1795718230.9217546,
-    "audit_ai_cls": "",
+    "audit_last": 1795720390.6299694,
+    "audit_ai_cls": "OTHER",
     "perf_breaker": {
         "until": 1795742224.733271,
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 6794,
-    "out_mid": 6796,
-    "out_text": "\ud83d\udea8 *AI FAILURE*\nAI notes and reviews are paused. Buying, selling and all stops keep running on\nthe rules. The audit is recovering the AI (3 checks).\nReason: AI stage performance_review failed: Expecting ',' delimiter: line 1\ncolumn 534 (char 533)\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "kb_mid": 6799,
+    "out_text": "\ud83d\udcbc *PORTFOLIO* $33.17 | \u20a645,363\n\ud83d\udcb5 Cash free $4.91 | In coins $28.20 (85%)\n\ud83d\udfe1 BGB 0.00019195253 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *DOS* $23.21 (70%)\n+0.91% (+$0.21) | Entry 0.076900\nQty 299.1604 | Price 0.077600 | Stop 0.073178 (-6%)\nRSI 37 | Mixed | ATH -91%\n\n\ud83d\udd34 *TRX* $4.99 (15%)\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795720347.1049318,
-    "panel_mid": 6797,
+    "out_time": 1795720417.290452,
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udc41 Watch (0)",
-                "callback_data": "m:at:W"
+                "text": "\u25c0",
+                "callback_data": "pg:p"
             },
             {
-                "text": "\u25b6 \ud83d\udfe1 Manual (0)",
-                "callback_data": "m:at:M"
+                "text": "1/3",
+                "callback_data": "pg:x"
             },
             {
-                "text": "\ud83e\udd16 Auto (0)",
-                "callback_data": "m:at:A"
-            }
-        ],
-        [
-            {
-                "text": "\ud83c\udfaf SETUPS",
-                "callback_data": "m:su"
+                "text": "\u25b6",
+                "callback_data": "pg:n"
             },
             {
-                "text": "\ud83d\uddc2 MORE",
-                "callback_data": "m:am"
-            }
-        ],
-        [
+                "text": "\ud83c\udfe0",
+                "callback_data": "m:menu"
+            },
             {
-                "text": "\ud83d\udd04 Refresh",
-                "callback_data": "m:at:M"
+                "text": "\ud83d\udd04",
+                "callback_data": "rf:go"
             }
         ]
     ],
-    "panel_text": "\ud83d\udc47 *Actions*"
+    "panel_text": "\ud83d\udcc4 *Page 1/3*",
+    "out_mid": 6801,
+    "pages": {
+        "p": [
+            "\ud83d\udcbc *PORTFOLIO* $33.17 | \u20a645,363\n\ud83d\udcb5 Cash free $4.91 | In coins $28.20 (85%)\n\ud83d\udfe1 BGB 0.00019195253 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *DOS* $23.21 (70%)\n+0.91% (+$0.21) | Entry 0.076900\nQty 299.1604 | Price 0.077600 | Stop 0.073178 (-6%)\nRSI 37 | Mixed | ATH -91%\n\n\ud83d\udd34 *TRX* $4.99 (15%)\n\u2800\n\u2800",
+            "-0.20% (-$0.01) | Entry 0.304200\nQty 16.426657 | Price 0.303600 | Stop 0.295074 (-3%)\nRSI 46 | Mixed | ATH -70%\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\nand 8 more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT33.17/\u20a645,363\n\n\ud83e\udde0 *AI:* Portfolio totals $33.17 with $4.91 cash; DOS and TRX positions are tiny\n\u2800\n\u2800",
+            "and both underperforming, while several assets lack USDT pricing, indicating\nincomplete valuation and potential risk.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+        ],
+        "i": 0,
+        "mode": "Markdown",
+        "x": [
+            [
+                {
+                    "text": "\ud83d\udd04",
+                    "callback_data": "rf:go"
+                }
+            ]
+        ],
+        "cmd": "m:r:holdings"
+    },
+    "panel_mid": 6802
 }

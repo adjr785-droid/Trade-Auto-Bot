@@ -4133,5 +4133,11 @@
         "time": 1795720345.3359523,
         "event": "ai_portfolio_review",
         "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $0.25; auto-buy paused for 6.1h', 'attention': [{'symbol': 'TRX-USDT', 'action': 'monitor', 'reason': 'Position is slightly negative (-0.2% PnL) and close to stop (0.295074). No immediate action; consider tightening stop if price approaches support.'}, {'symbol': 'DOS-USDT', 'action': 'hold', 'reason': 'Small positive PnL (0.91%) and distance to stop (0.073178) is moderate. Continue monitoring; no change needed.'}], 'summary': 'Overall portfolio risk remains elevated due to recent losing streak and paused auto-buy. Both positions are small and near break-even; maintain current stops and avoid new entries until risk metrics improve.'}"
+    },
+    {
+        "time": 1795720384.356548,
+        "event": "ai_coin_advisory",
+        "reviewed": 15,
+        "source": "coins.db"
     }
 ]
