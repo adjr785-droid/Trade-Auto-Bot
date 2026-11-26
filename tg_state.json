@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT34.10/\u20a646,614",
+    "kb_ph": "USDT33.90/\u20a646,331",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -82,49 +82,53 @@
         "since": 1795558810.5830717,
         "loss": -1.4850249000000058
     },
-    "out_text": "\ud83d\udfe1 *MANUAL BUY*\n_Passed at least 5/7 core and 2/3 additional criteria. Manual review only._\n\nNone right now.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "kb_mid": 6318,
+    "out_mid": 6319,
+    "out_text": "\ud83d\udee0\ufe0f *AUTO-AUDIT COMPLETE*\n\ud83d\udd04 Auto-synced: PUMP-USDT\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795654518.473491,
+    "out_time": 1795654889.1390774,
+    "panel_mid": 6320,
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udc41 Watch (0)",
-                "callback_data": "m:at:W"
+                "text": "\ud83d\udda5 System",
+                "callback_data": "/bot"
             },
             {
-                "text": "\u25b6 \ud83d\udfe1 Manual (0)",
-                "callback_data": "m:at:M"
-            },
-            {
-                "text": "\ud83e\udd16 Auto (0)",
-                "callback_data": "m:at:A"
+                "text": "\ud83d\udcc8 Stats",
+                "callback_data": "/stats"
             }
         ],
         [
             {
-                "text": "\ud83c\udfaf SETUPS",
-                "callback_data": "m:su"
+                "text": "\u2699\ufe0f Settings",
+                "callback_data": "m:set"
             },
             {
-                "text": "\ud83c\udd95 NEW LISTINGS",
-                "callback_data": "m:nl"
+                "text": "\ud83d\udcbc Holdings",
+                "callback_data": "m:r:holdings"
             }
         ],
         [
             {
-                "text": "\ud83d\uddc4 ARCHIVE",
-                "callback_data": "m:ar:D"
+                "text": "\ud83d\udcdc Trade History",
+                "callback_data": "m:r:history"
+            },
+            {
+                "text": "\ud83e\udde0 Ask AI",
+                "callback_data": "m:ai:1"
             }
         ],
         [
             {
-                "text": "\ud83d\udd04 Refresh",
-                "callback_data": "m:at:M"
+                "text": "\ud83e\uddf9 Clear Chat",
+                "callback_data": "/clear"
+            },
+            {
+                "text": "\ud83d\udea8 PANIC SELL",
+                "callback_data": "/panic"
             }
         ]
     ],
-    "panel_text": "\ud83d\udc47 *Actions*",
-    "kb_mid": 6293,
-    "out_mid": 6291,
-    "panel_mid": 6292
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below."
 }

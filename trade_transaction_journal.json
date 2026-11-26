@@ -3332,5 +3332,15 @@
         "time": 1795654287.7896585,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 50.0, 'net_pnl_usdt': 0.0682, 'recurring_patterns': ['PANIC', 'MANUAL SELL ALL', '15-MINUTE NO-UPWARD-TREND ROTATION'], 'recommendations': 'Maintain strict risk limits; avoid panic exits; consider reducing exposure to high\u2011volatility symbols; prioritize trades with clear technical signals over manual overrides; monitor for repeated loss patterns before entering new positions.'}"
+    },
+    {
+        "time": 1795654902.9203203,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'GWEI-USDT', 'action': 'monitor', 'reason': 'Negative PnL (-0.22%) and stop is close to current price; risk of further downside.'}, {'symbol': 'PUMP-USDT', 'action': 'hold', 'reason': 'New position with no performance data; uncertainty high, avoid changes until clearer trend.'}], 'summary': 'Overall portfolio risk passes safeguards. Most positions are modestly profitable. Watch GWEI-USDT for potential stop trigger and keep PUMP-USDT unchanged pending more data.'}"
+    },
+    {
+        "time": 1795654903.797938,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 50.0, 'net_pnl_usdt': 0.0682, 'recurring_patterns': {'PANIC': 9, 'MANUAL SELL': 6, '15-MINUTE NO-UPWARD-TREND ROTATION': 3, 'TRAILING STOP (8.0%)': 1, 'RSI 75': 1, 'PARTIAL PROFIT +10.4%': 1}, 'recommendations': 'Reduce exposure to high\u2011volatility symbols that trigger frequent PANIC exits. Consider tightening manual sell thresholds and reviewing the 15\u2011minute no\u2011upward\u2011trend rotation signal, as it appears in multiple losing trades. Prioritize risk\u2011managed entries with clear stop\u2011losses and avoid repeated manual interventions that have not improved net PnL.'}"
     }
 ]
