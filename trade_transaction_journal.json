@@ -4118,5 +4118,15 @@
         "event": "ai_coin_advisory",
         "reviewed": 17,
         "source": "coins.db"
+    },
+    {
+        "time": 1795718223.4559383,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $0.25; auto-buy paused for 6.7h', 'attention': [{'symbol': 'TRX-USDT', 'action': 'monitor', 'reason': 'PnL slightly negative (-0.24%); price near stop (0.30347 vs stop 0.295074). Consider tightening stop if price continues down, but avoid immediate exit due to small loss.'}, {'symbol': 'DOS-USDT', 'action': 'monitor', 'reason': 'Higher negative PnL (-0.78%); price close to stop (0.0763 vs stop 0.073178). Risk of stop trigger is elevated; watch for reversal signals before adjusting.'}], 'summary': 'Overall portfolio risk remains elevated due to recent losing streak and paused auto-buy. Both positions are marginally underwater with prices approaching their stop levels. Maintain a watchful stance, avoid new entries until the performance breaker clears, and be prepared to tighten stops if downward momentum persists.'}"
+    },
+    {
+        "time": 1795718224.476815,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6945, 'recurring_patterns': {'panic_trades': 9, 'manual_sell_trades': 9, 'crash_guard_trades': 1, 'symbols_with_multiple_losses': ['PROS-USDT', 'MOVE-USDT', 'PUMP-USDT']}, 'recommendations': ['Limit panic exits; consider tighter stop\u2011loss thresholds or longer evaluation windows.', 'Review manual sell triggers to ensure they align with predefined profit targets rather than ad\u2011hoc decisions.', 'Investigate the high loss on MOVE-USDT, especially the crash\u2011guard event, and adjust position sizing or volatility filters for that asset.', 'Maintain current win\u2011rate focus but aim to improve average profit per winning trade to offset recurring small losses.']}"
     }
 ]
