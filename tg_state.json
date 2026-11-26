@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT32.78/\u20a644,830",
+    "kb_ph": "USDT32.71/\u20a644,747",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -72,13 +72,13 @@
         "PWT-USDT"
     ],
     "audit_down": {},
-    "audit_last": 1795717342.684581,
+    "audit_last": 1795718230.9217546,
     "audit_ai_cls": "",
     "perf_breaker": {
         "until": 1795742224.733271,
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 6789,
+    "kb_mid": 6790,
     "panel_hidden": true
 }
