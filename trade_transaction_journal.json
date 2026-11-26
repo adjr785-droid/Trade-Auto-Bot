@@ -3890,5 +3890,15 @@
             "warning": "The requested BUY order for MOVE-USDT at $0.005841 with only $4.94 USDT is very small and the asset shows a relatively high RSI (62.36), indicating possible overbought conditions. Market liquidity for MOVE may be limited, increasing slippage risk. Proceed only if you fully understand the potential for rapid price movement and loss of capital.",
             "summary": "Given the small trade size, elevated RSI, and unknown market depth, this manual buy carries high risk. Consider waiting for a lower RSI or confirming stronger liquidity before executing."
         }
+    },
+    {
+        "time": 1795680038.6569145,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $0.25; auto-buy paused for 17.3h', 'attention': [{'symbol': 'SKYAI-USDT', 'action': 'hold', 'reason': 'Negative PnL (-3.52%) and price near stop; exiting may lock loss, but stop is close. Monitor for further downside.'}, {'symbol': 'TRX-USDT', 'action': 'hold', 'reason': 'Near breakeven (-0.01%) with stop relatively far; no clear signal to adjust.'}, {'symbol': 'MOVE-USDT', 'action': 'hold', 'reason': 'Small positive PnL (1.18%) and price above entry; stop is tight, but position is young; consider tightening stop if volatility rises.'}], 'summary': 'Overall portfolio risk remains elevated due to recent losing streak and auto\u2011buy pause. All positions are currently small and near break\u2011even; no immediate trade actions are recommended beyond monitoring stops and market volatility.'}"
+    },
+    {
+        "time": 1795680039.8220327,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6945, 'recurring_patterns': {'high_frequency_reasons': ['PANIC', 'MANUAL SELL', 'CRASH GUARD'], 'symbols_with_multiple_losses': ['MOVE-USDT', 'PROS-USDT', 'PUMP-USDT'], 'loss_concentration': {'MOVE-USDT': {'loss_trades': 2, 'total_loss': -0.6977170600000129}, 'PROS-USDT': {'loss_trades': 1, 'total_loss': -0.49265100000000084}}, 'win_loss_distribution': {'wins': 17, 'losses': 13, 'total_trades': 30}}, 'recommendations': ['Review and tighten panic\u2011sell trigger thresholds to avoid frequent small losses.', 'Consider implementing stricter position sizing for symbols that have shown repeated losses (e.g., MOVE-USDT, PROS-USDT).', 'Add a secondary confirmation layer before manual sell actions to reduce reactive decisions.', 'Monitor crash\u2011guard activation frequency; adjust the percentage threshold if it triggers too often.', 'Maintain current win\u2011rate "
     }
 ]
