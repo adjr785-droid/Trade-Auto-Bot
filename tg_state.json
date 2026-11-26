@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691000,
+    "last_update_id": 935691003,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT32.76/\u20a644,772",
+    "kb_ph": "USDT32.75/\u20a644,768",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -79,39 +79,23 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 6485,
-    "out_text": "\ud83d\udd0d *SCAN COMPLETE*\nChecked 462 markets in 21s.\nNo coin matched any setup.\n\ud83d\udea7 *GATES* (22 analysed, 0 passed)\nBlocked: RSI 17 | MA 17 | 1H 19 | 24H 4 | Score 0\nSetups: Trend 0 | Pullback 0 | Bounce 0 | Breakout 0\nRules: RSI \u2264 48, Price > MA5 > MA10, 1H +0.5 to +6%, 24H up, Core 5+ and Extra\n2+\n\u2800\n\u2800\n\u2800\n\u2800",
+    "kb_mid": 6487,
+    "out_text": "\ud83e\udde0 AI manual-buy advisory: Considering a $5 USDT buy of TRX at $0.30419 with no\nactive BTC filter and no existing position, the trade carries medium risk due to\nlow RSI and limited market context. Proceed cautiously and monitor price action\nclosely.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795674753.6968386,
+    "out_time": 1795674788.2675877,
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udd0d Scan now",
-                "callback_data": "m:r:scan"
+                "text": "\u2705 Confirm",
+                "callback_data": "m:bx:TRX:5"
             },
             {
-                "text": "\ud83e\uddfe Scan History",
-                "callback_data": "m:scan_hist"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udcda Coin List",
-                "callback_data": "m:coins"
-            }
-        ],
-        [
-            {
-                "text": "\u2b05\ufe0f Tools",
-                "callback_data": "m:tools"
-            },
-            {
-                "text": "\ud83c\udfe0 Main Menu",
+                "text": "\u274c Cancel",
                 "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83d\udd0d *SCAN*",
-    "out_mid": 6483,
-    "panel_hidden": true
+    "panel_text": "\u26a0\ufe0f *CONFIRM BUY*\nTRX for $5 at about 0.304190 USDT.",
+    "panel_hidden": true,
+    "out_mid": 6486
 }
