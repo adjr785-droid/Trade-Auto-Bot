@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935690955,
+    "last_update_id": 935690956,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT33.16/\u20a645,320",
+    "kb_ph": "USDT33.14/\u20a645,290",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -80,23 +80,53 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 6372,
-    "out_text": "\ud83e\udde0 AI manual-buy advisory: Considering the modest bearish RSI (45.25) and the\ncurrent price of 0.03381 USDT per SKYAI, a manual buy of 8.27\u202fUSDT carries\nmoderate risk. No existing position or active BTC filter is present, but proceed\ncautiously and monitor market conditions.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "kb_mid": 6376,
+    "out_text": "\ud83d\udfe1 *MANUAL BUY*\n_Passed at least 5/7 core and 2/3 additional criteria. Manual review only._\n\nNone right now.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795657020.2455487,
+    "out_time": 1795657054.1521533,
     "panel_rows": [
         [
             {
-                "text": "\u2705 Confirm",
-                "callback_data": "m:bx:SKYAI:ALL"
+                "text": "\ud83d\udc41 Watch (0)",
+                "callback_data": "m:at:W"
             },
             {
-                "text": "\u274c Cancel",
-                "callback_data": "m:menu"
+                "text": "\u25b6 \ud83d\udfe1 Manual (0)",
+                "callback_data": "m:at:M"
+            },
+            {
+                "text": "\ud83e\udd16 Auto (0)",
+                "callback_data": "m:at:A"
+            }
+        ],
+        [
+            {
+                "text": "\ud83c\udfaf SETUPS",
+                "callback_data": "m:su"
+            },
+            {
+                "text": "\ud83c\udd95 NEW LISTINGS",
+                "callback_data": "m:nl"
+            }
+        ],
+        [
+            {
+                "text": "\u2b50 FAVOURITES",
+                "callback_data": "m:fv"
+            },
+            {
+                "text": "\ud83d\uddc4 ARCHIVE",
+                "callback_data": "m:ar:D"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udd04 Refresh",
+                "callback_data": "m:at:M"
             }
         ]
     ],
-    "panel_text": "\u26a0\ufe0f *CONFIRM BUY*\nSKYAI for ALL free USDT (100% of free USDT) at about 0.033810 USDT.",
-    "out_mid": 6371,
-    "panel_hidden": true
+    "panel_text": "\ud83d\udc47 *Actions*",
+    "out_mid": 6374,
+    "panel_mid": 6375
 }
