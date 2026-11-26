@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT33.31/\u20a645,536",
+    "kb_ph": "USDT33.35/\u20a645,588",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -68,62 +68,44 @@
             1795576709.5648017
         ]
     },
-    "radar": [],
+    "radar": [
+        "PWT-USDT",
+        "JCT-USDT",
+        "BGSC-USDT"
+    ],
     "audit_down": {},
-    "audit_last": 1795692630.0563793,
-    "audit_ai_cls": "OTHER",
+    "audit_last": 1795696552.7473643,
+    "audit_ai_cls": "",
     "perf_breaker": {
         "until": 1795742224.733271,
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 6634,
+    "kb_mid": 6639,
     "out_mid": 6635,
-    "out_text": "\ud83d\udee0\ufe0f *AUTO-AUDIT COMPLETE*\n\ud83e\uddf9 Removed ghost: SKYAI-USDT\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "\ud83d\udee0 AUDIT\n\u2705 Fixed: AI problem cleared (unknown error)\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795696483.8412457,
-    "panel_mid": 6636,
+    "out_time": 1795696553.79573,
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udda5 System",
-                "callback_data": "/bot"
+                "text": "\u25c0",
+                "callback_data": "pg:p"
             },
             {
-                "text": "\ud83d\udcc8 Stats",
-                "callback_data": "/stats"
-            }
-        ],
-        [
-            {
-                "text": "\u2699\ufe0f Settings",
-                "callback_data": "m:set"
+                "text": "1/2",
+                "callback_data": "pg:x"
             },
             {
-                "text": "\ud83d\udcbc Holdings",
-                "callback_data": "m:r:holdings"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udcdc Trade History",
-                "callback_data": "m:r:history"
+                "text": "\u25b6",
+                "callback_data": "pg:n"
             },
             {
-                "text": "\ud83e\udde0 Ask AI",
-                "callback_data": "m:ai:1"
-            }
-        ],
-        [
-            {
-                "text": "\ud83e\uddf9 Clear Chat",
-                "callback_data": "/clear"
-            },
-            {
-                "text": "\ud83d\udea8 PANIC SELL",
-                "callback_data": "/panic"
+                "text": "\ud83c\udfe0",
+                "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below."
+    "panel_text": "\ud83d\udcc4 *Page 1/2*",
+    "panel_hidden": true
 }
