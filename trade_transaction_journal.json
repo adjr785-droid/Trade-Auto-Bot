@@ -3772,5 +3772,15 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795671888.6125789,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $0.25; auto-buy paused for 19.5h', 'attention': [{'symbol': 'SKYAI-USDT', 'action': 'monitor', 'reason': 'Position is down -3.1% with stop close to current price; consider tightening stop or exiting if price approaches stop.'}], 'summary': 'Overall portfolio risk remains elevated due to recent losses and auto-buy pause. The only open position (SKYAI-USDT) is modestly losing and near its stop level. Recommend close monitoring, possibly tighten stop loss, and avoid opening new positions until performance stabilizes.'}"
+    },
+    {
+        "time": 1795671889.7631009,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6945, 'recurring_patterns': {'loss_causes': ['PANIC exits', 'CRASH GUARD trigger', 'manual sell at loss on MOVE-USDT, PROS-USDT'], 'profit_causes': ['PANIC exits on small gains', 'manual sell after modest rise on BLESS-USDT, ADA-USDT'], 'symbol_bias': {'MOVE-USDT': {'trades': 4, 'net_pnl': -0.6398479600000256}, 'PROS-USDT': {'trades': 1, 'net_pnl': -0.492651}, 'BLESS-USDT': {'trades': 4, 'net_pnl': 0.6173614179999999}}}, 'recommendations': ['Limit panic\u2011sell triggers; require a minimum profit threshold before auto\u2011exit.', 'Review and tighten crash\u2011guard parameters to avoid large single\u2011trade losses.', 'Reduce exposure to high\u2011volatility symbols like MOVE-USDT and PROS-USDT until pattern stabilises.', 'Prefer manual sell decisions after confirming sustained upside rather than immediate small gains.', 'Implement a stricter stop\u2011loss or trailing\u2011st"
     }
 ]
