@@ -3844,5 +3844,15 @@
         "time": 1795675760.8943572,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6945, 'recurring_patterns': {'PANIC': 13, 'MANUAL SELL': 9, 'CRASH GUARD': 1}, 'recommendations': 'Reduce reliance on panic exits; implement tighter stop\u2011loss thresholds; review manual sell triggers for consistency; consider lowering position size on high\u2011volatility symbols; monitor crash\u2011guard activation frequency and adjust risk parameters accordingly.'}"
+    },
+    {
+        "time": 1795676563.7736945,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $0.25; auto\u2011buy paused for 18.2\\u202fh', 'attention': [{'symbol': 'SKYAI-USDT', 'action': 'monitor', 'reason': 'Position is down -3.49% and close to stop (0.03221). Consider tightening stop or reducing exposure if price continues below current level.'}, {'symbol': 'TRX-USDT', 'action': 'hold', 'reason': 'Small positive PnL (+0.04%) and price above stop (0.295074). No immediate action required, but watch for volatility.'}], 'summary': 'Overall portfolio risk remains elevated due to recent losses and paused auto\u2011buy. Maintain a cautious stance: keep tight stops on losing positions, avoid adding new exposure until the performance breaker clears, and monitor market conditions closely.'}"
+    },
+    {
+        "time": 1795676564.4750009,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6945, 'recurring_patterns': {'PANIC_trades': 13, 'MANUAL_SELL_trades': 9, 'CRASH_GUARD_trades': 1, 'symbols_with_multiple_losses': ['PROS-USDT', 'MOVE-USDT']}, 'recommendations': ['Review and tighten panic\u2011exit thresholds to avoid frequent small losses', 'Implement stricter position sizing for symbols that have triggered multiple loss events (e.g., MOVE-USDT, PROS-USDT)', 'Consider adding a stop\u2011loss buffer before crash\u2011guard activation to reduce large drawdowns', 'Monitor manual sell decisions for consistency; ensure they align with predefined profit targets']}"
     }
 ]
