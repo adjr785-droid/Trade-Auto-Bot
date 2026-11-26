@@ -1331,9 +1331,7 @@ def analyse_top3(tab="M"):
  def tb(k,lbl):return _B(("▶ " if tab==k else "")+f"{lbl} ({cnt.get({'W':'WATCH','M':'MANUAL','A':'AUTO'}[k],0)})",f"m:at:{k}")
  keyboard=[[tb("W","👁 Watch"),tb("M","🟡 Manual"),tb("A","🤖 Auto")],
            [_B("💱 Buy / Sell a coin",f"m:pk:{tab}")],
-           [_B("🎯 SETUPS","m:su"),_B("⭐ FAVOURITES","m:fv")],
-           [_B("🔍 SCAN NOW","m:r:scan"),_B("📜 SCAN HISTORY","/scan_history")],
-           [_B("🛒 BUY","m:buy"),_B("💸 SELL","m:sell")],
+           [_B("🎯 SETUPS (scan, history, trade)","m:su"),_B("⭐ FAVOURITES","m:fv")],
            [_B("🆕 NEW LISTINGS","m:nl"),_B("🗄 ARCHIVE","m:ar:D")],
            [_B("🔎 ANALYSE A COIN","m:an"),_B("🔄 Refresh",f"m:at:{tab}")]]
  # Coin names remain in the readable list above; do not create a separate button for every coin.
@@ -1378,7 +1376,7 @@ def analyse_setups():
  out=[f"{str(sym).replace('-USDT','')[:6]:<6}{_fmt(r_,'.0f'):>3}{_fmt(h_,'+.1f'):>5}{_fmt(c_,'+.0f'):>5}{tc.get(tag,'-'):>3} {-n}/5 {bl}" for n,tag,sym,r_,h_,c_,bl in items[:40]]
  body=("```\n"+f"{'COIN':<6}{'RSI':>3}{'1H':>5}{'24H':>5}{'TY':>3} PASS BLOCK"+"\n"+"-"*32+"\n"+"\n".join(out)+"\n```") if out else "No coin passes 3 of the 5 checks right now."
  lines=["🎯 *SETUPS*","_Coins from the latest scan that pass at least 3 of 5 checks._","",body,"_TY: T Trend, P Pullback, B Bounce, K Breakout, - none_","_BLOCK: R RSI, M MA, H 1H, D 24H, S score (Core 5+ and Extra 2+). OK = all passed._"]
- _send("\n".join(lines),"Markdown",{"inline_keyboard":[[_B("⬅️ Analyse","/analyse"),_B("🔄 Refresh","m:su")],[_B("💱 Buy / Sell a coin","m:pk:su")]]})
+ _send("\n".join(lines),"Markdown",{"inline_keyboard":[[_B("🔍 SCAN NOW","m:r:scan"),_B("📜 SCAN HISTORY","/scan_history")],[_B("🛒 BUY","m:buy"),_B("💸 SELL","m:sell")],[_B("💱 Buy / Sell a coin","m:pk:su")],[_B("⬅️ Analyse","/analyse"),_B("🔄 Refresh","m:su")]]})
 def fav_list():
  v=load(FAV,[])
  return [str(x).upper() for x in v if isinstance(x,str)] if isinstance(v,list) else []
@@ -2800,7 +2798,7 @@ def coin_db_rows(limit=12):
 def cmd_coins():
  try:cnt,rows,ec=coin_db_rows();dropped=coin_db_stage_list("DROPPED",5)
  except Exception as e:ui_send(f"❌ Coin list error: {e}",[_MENU_BTN]);return
- if not cnt:ui_send("📚 *COIN LIST*\nEmpty. It fills after the next scan.",[[_B("🔍 Scan now","m:r:scan")],_MENU_BTN]);return
+ if not cnt:ui_send("📚 *COIN LIST*\nEmpty. It fills after the next scan.",[_MENU_BTN]);return
  ic={"READY":"✅","NEW":"🆕","BOUGHT":"💼"};sic={"WATCH":"👁","MANUAL":"🟡","AUTO":"🤖"}
  lines=["📚 *COIN LIST*",f"✅ Ready {cnt.get('READY',0)} | 🆕 New {cnt.get('NEW',0)} | 💼 Held {cnt.get('BOUGHT',0)} | ⛔ Rejected {cnt.get('REJECTED',0)}",
   f"Pipeline: 👁 Watch {cnt.get('WATCH',0)} → 🟡 Manual {cnt.get('MANUAL',0)} → 🤖 Auto {cnt.get('AUTO',0)} | ⤵ Dropped {cnt.get('DROPPED',0)} | Archived {cnt.get('ARCHIVED',0)}",
@@ -2816,7 +2814,7 @@ def cmd_coins():
   if adv:lines.append("   🧠 "+str(adv)[:110])
  if dropped:
   lines += ["", "⤵ *DROPPED — retained for recovery:* "+", ".join(f"{x['sym'].split('-')[0]} ({int(float(x.get('score') or 0))}/10)" for x in dropped)]
- _send("\n".join(lines),"Markdown",{"inline_keyboard":[[_B("🔍 Scan now","m:r:scan"),_B("🧾 Scan History","m:scan_hist")],_MENU_BTN]})
+ _send("\n".join(lines),"Markdown",{"inline_keyboard":[_MENU_BTN]})
 def rising_vs_last_scan(sym,p,r,now):
  # Falling-knife guard: the price must be higher and RSI not lower than at the previous scan (within the last hour).
  try:
@@ -3439,12 +3437,11 @@ def ui_cb(t):
    rows=[[_B(("⌨️ " if k in b else "📋 ")+lbl(k),f"m:lay:t:{k}") for k,l,_ in LAYOUT_ITEMS[i:i+2]] for i in range(0,len(LAYOUT_ITEMS),2)]
    ui_send(f"🧩 *LAYOUT*\nTap a button to move it.\n⌨️ = bottom key (below the text box)\n📋 = Menu list\nBottom keys: {len(b)+1}/{LAYOUT_MAX+1} (Menu always stays){note}",rows+[[_B("➖","m:lay:pl:-"),_B("📏 Page: %d lines"%int(cfg().get("page_lines",12) or 12),"m:lay"),_B("➕","m:lay:pl:+")],[_B("✏️ Rename buttons","m:lay:rn"),_B("↩️ Reset layout","m:lay:reset")],[_B("⬅️ Tools","m:tools")]])
   elif a=="tools":
-   ui_send("🧰 *TOOLS*\nChoose a group.",[[_B("🛒 Trade","m:tl:trade"),_B("🔔 Alerts","m:tl:alerts")],[_B("🔍 Scan","m:tl:scan"),_B("🛠️ System","m:tl:sys")],[_B("⬅️ Main Menu","m:menu")]])
+   ui_send("🧰 *TOOLS*\nChoose a group.",[[_B("🧹 Orders & Dust","m:tl:trade"),_B("🔔 Alerts","m:tl:alerts")],[_B("📚 Coin List","m:coins"),_B("🛠️ System","m:tl:sys")],[_B("⬅️ Main Menu","m:menu")]])
   elif a=="tl" and len(p)>2:
    _T=[_B("⬅️ Tools","m:tools"),_B("🏠 Main Menu","m:menu")]
-   if p[2]=="trade":ui_send("🛒 *TRADE*",[[_B("🛒 Buy","m:buy"),_B("💸 Sell","m:sell")],[_B("❌ Cancel Open Orders","m:r:cancel"),_B("🧹 Dust → BGB","m:r:dust")],_T])
+   if p[2]=="trade":ui_send("🧹 *ORDERS & DUST*\n_Buy, Sell, Scan and Scan History are in Analyse → Setups._",[[_B("❌ Cancel Open Orders","m:r:cancel"),_B("🧹 Dust → BGB","m:r:dust")],_T])
    elif p[2]=="alerts":ui_send("🔔 *ALERTS*",[[_B("🔔 Set alert","m:al"),_B("📋 My alerts","m:r:alerts")],[_B("🗑 Cancel all alerts","m:r:cancelalerts")],_T])
-   elif p[2]=="scan":ui_send("🔍 *SCAN*",[[_B("🔍 Scan now","m:r:scan"),_B("🧾 Scan History","m:scan_hist")],[_B("📚 Coin List","m:coins")],_T])
    elif p[2]=="sys":ui_send("🛠️ *SYSTEM*",[[_B("🛠️ Audit","m:r:audit"),_B("🧩 Layout","m:lay")],[_B("🧠 Resume AI Mode","m:r:airesume")],_T])
   elif a=="more" and len(p)>3:ui_more(p[2],int(p[3]))
   elif a=="dash":
