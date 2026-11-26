@@ -3674,5 +3674,15 @@
             "lesson": "Manual exits should be evaluated against predefined profit targets and risk limits to ensure that small gains are not offset by transaction costs or missed larger moves. Maintaining clear criteria for when to intervene manually can improve consistency. Additionally, monitoring the remaining base balance helps verify that the intended position size was fully executed.",
             "confidence": "high"
         }
+    },
+    {
+        "time": 1795664159.9692621,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $0.25; auto-buy paused for 21.7h', 'attention': [{'symbol': 'MOVE-USDT', 'action': 'hold', 'reason': 'Small positive PnL (+1.09%) but stop loss (0.00555) is ~16% below current price; risk of reversal remains.'}, {'symbol': 'SKYAI-USDT', 'action': 'consider reducing exposure', 'reason': 'Negative PnL (-1.57%) and price is approaching stop loss (0.03221); limited upside observed.'}], 'summary': 'Overall portfolio shows modest gains on MOVE but a slight loss on SKYAI. Given the recent performance breaker and paused auto-buy, maintain a cautious stance: keep MOVE while monitoring its stop level, and trim or exit SKYAI if price nears its stop. No new entries are recommended until the risk guard resets.'}"
+    },
+    {
+        "time": 1795664160.6760187,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': -0.1018, 'recurring_patterns': {'common_reasons': ['PANIC', 'MANUAL SELL'], 'symbols_with_multiple_trades': ['ADA-USDT', 'BLESS-USDT', 'MOVE-USDT'], 'losses_associated': ['PANIC', 'TRAILING STOP']}, 'recommendations': ['Review and tighten panic\u2011sell thresholds to avoid frequent small losses', 'Consider limiting manual sell interventions to higher profit thresholds', 'Monitor trailing stop settings to reduce premature exits', 'Focus on symbols with consistent positive pnl (e.g., BLESS-USDT, SKYAI-USDT) and reduce exposure to high\u2011variance assets']}"
     }
 ]
