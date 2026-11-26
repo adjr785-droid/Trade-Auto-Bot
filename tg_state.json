@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935690910,
+    "last_update_id": 935690912,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT33.95/\u20a646,410",
+    "kb_ph": "USDT33.95/\u20a646,408",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -82,39 +82,52 @@
         "since": 1795558810.5830717,
         "loss": -1.4850249000000058
     },
-    "out_text": "\ud83e\udde0 AI manual-buy advisory: Manual buy of 3.5 USDT of PUMP-USDT at 0.002614 is\nhigh risk due to overbought RSI and lack of protective filters. Recommend\nreviewing additional market data before execution.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "\ud83d\udcbc *PORTFOLIO* $33.95 | \u20a646,408\n\ud83d\udcb5 Cash free $0.02 | In coins $33.87 (100%)\n\ud83d\udfe1 BGB 0.00011912253 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udd34 *GWEI* $14.91 (44%)\n-0.16% (-$0.02) | Entry 0.009779\nQty 1527.2213 | Price 0.009763 | Stop 0.009298 (-5%)\nRSI 46 | Mixed | ATH -96%\n\n\ud83d\udfe2 *BLESS* $5.32 (16%)\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795654727.6524127,
+    "out_time": 1795654760.656192,
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udd0d Scan now",
-                "callback_data": "m:r:scan"
+                "text": "\u25c0",
+                "callback_data": "pg:p"
             },
             {
-                "text": "\ud83e\uddfe Scan History",
-                "callback_data": "m:scan_hist"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udcda Coin List",
-                "callback_data": "m:coins"
-            }
-        ],
-        [
-            {
-                "text": "\u2b05\ufe0f Tools",
-                "callback_data": "m:tools"
+                "text": "1/4",
+                "callback_data": "pg:x"
             },
             {
-                "text": "\ud83c\udfe0 Main Menu",
+                "text": "\u25b6",
+                "callback_data": "pg:n"
+            },
+            {
+                "text": "\ud83c\udfe0",
                 "callback_data": "m:menu"
+            },
+            {
+                "text": "\ud83d\udd04",
+                "callback_data": "rf:go"
             }
         ]
     ],
-    "panel_text": "\ud83d\udd0d *SCAN*",
-    "kb_mid": 6305,
-    "out_mid": 6298,
-    "panel_hidden": true
+    "panel_text": "\ud83d\udcc4 *Page 1/4*",
+    "kb_mid": 6310,
+    "out_mid": 6308,
+    "pages": {
+        "p": [
+            "\ud83d\udcbc *PORTFOLIO* $33.95 | \u20a646,408\n\ud83d\udcb5 Cash free $0.02 | In coins $33.87 (100%)\n\ud83d\udfe1 BGB 0.00011912253 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udd34 *GWEI* $14.91 (44%)\n-0.16% (-$0.02) | Entry 0.009779\nQty 1527.2213 | Price 0.009763 | Stop 0.009298 (-5%)\nRSI 46 | Mixed | ATH -96%\n\n\ud83d\udfe2 *BLESS* $5.32 (16%)\n\u2800\n\u2800",
+            "+4.96% (+$0.25) | Entry 0.016691\nQty 303.66667 | Price 0.017519 | Stop 0.016691 (-5%)\nRSI 50 | Mixed | ATH -93%\n\n\ud83d\udfe2 *SKYAI* $5.08 (15%)\n+1.73% (+$0.09) | Entry 0.033430\nQty 149.41392 | Price 0.034010 | Stop 0.031277 (-8%)\nRSI 43 | Mixed | ATH -96%\n\n\ud83d\udfe2 *DGAI* $5.06 (15%)\n\u2800\n\u2800",
+            "+1.41% (+$0.07) | Entry 0.995906\nQty 5.01498 | Price 1.0099 | Stop 0.949098 (-6%)\nRSI 46 | Mixed | ATH -66%\n\n\ud83d\udfe2 *PUMP* $3.50 (10%)\n+0.00% (+$0.00) | Entry 0.002610\nQty 1339.6564 | Price 0.002610 | Stop 0.002501 (-4%)\nRSI 70 | Bullish | ATH -71%\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\n\u2800\n\u2800",
+            "and 8 more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT33.95/\u20a646,408\n\n\ud83e\udde0 *AI:* Portfolio is $33.95 total, 100% in coins with $0.02 cash; several\nassets lack USDT pricing and stop\u2011losses sit 4\u20118% below entry, warranting\nprice\u2011feed verification and risk review.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+        ],
+        "i": 0,
+        "mode": "Markdown",
+        "x": [
+            {
+                "text": "\ud83d\udd04",
+                "callback_data": "rf:go"
+            }
+        ],
+        "cmd": "m:r:holdings"
+    },
+    "panel_mid": 6309
 }
