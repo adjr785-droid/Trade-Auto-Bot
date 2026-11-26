@@ -69,16 +69,41 @@
         ]
     },
     "radar": [
-        "BNB-USDT"
+        "TRX-USDT"
     ],
     "audit_down": {},
-    "audit_last": 1795725432.7254,
-    "audit_ai_cls": "OTHER",
+    "audit_last": 1795728592.7196658,
+    "audit_ai_cls": "",
     "perf_breaker": {
         "until": 1795742224.733271,
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
     "kb_mid": 6831,
+    "out_mid": 6832,
+    "out_text": "\ud83d\udee0 AUDIT\n\u2705 Fixed: AI problem cleared (unknown error)\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_mode": "Markdown",
+    "out_time": 1795728594.6319056,
+    "panel_rows": [
+        [
+            {
+                "text": "\u25c0",
+                "callback_data": "pg:p"
+            },
+            {
+                "text": "1/2",
+                "callback_data": "pg:x"
+            },
+            {
+                "text": "\u25b6",
+                "callback_data": "pg:n"
+            },
+            {
+                "text": "\ud83c\udfe0",
+                "callback_data": "m:menu"
+            }
+        ]
+    ],
+    "panel_text": "\ud83d\udcc4 *Page 1/2*",
     "panel_hidden": true
 }

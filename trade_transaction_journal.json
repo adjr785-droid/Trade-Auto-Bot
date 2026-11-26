@@ -4208,5 +4208,11 @@
         "time": 1795728560.0019674,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6846, 'recurring_patterns': {'PANIC': 13, 'MANUAL_SELL': 13, 'CRASH_GUARD': 1}, 'recommendations': ['Limit reliance on panic exits; implement stricter stop\u2011loss thresholds', 'Review manual sell triggers to ensure they align with strategy criteria', 'Monitor MOVE-USDT exposure closely after large crash\u2011guard loss', 'Consider reducing trade frequency to improve win\u2011rate consistency']}"
+    },
+    {
+        "time": 1795728588.9541137,
+        "event": "ai_coin_advisory",
+        "reviewed": 25,
+        "source": "coins.db"
     }
 ]
