@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690918,
+    "last_update_id": 935690921,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -24,8 +24,8 @@
             1795493361.8607023
         ],
         "m:r:holdings": [
-            1,
-            1795654817.701275
+            3,
+            1795654825.0606394
         ],
         "/analyse": [
             6,
@@ -88,28 +88,46 @@
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
+                "text": "\ud83d\udda5 System",
+                "callback_data": "/bot"
             },
             {
-                "text": "2/4",
-                "callback_data": "pg:x"
+                "text": "\ud83d\udcc8 Stats",
+                "callback_data": "/stats"
+            }
+        ],
+        [
+            {
+                "text": "\u2699\ufe0f Settings",
+                "callback_data": "m:set"
             },
             {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
+                "text": "\ud83d\udcbc Holdings",
+                "callback_data": "m:r:holdings"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udcdc Trade History",
+                "callback_data": "m:r:history"
             },
             {
-                "text": "\ud83c\udfe0",
-                "callback_data": "m:menu"
+                "text": "\ud83e\udde0 Ask AI",
+                "callback_data": "m:ai:1"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\uddf9 Clear Chat",
+                "callback_data": "/clear"
             },
             {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
+                "text": "\ud83d\udea8 PANIC SELL",
+                "callback_data": "/panic"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 2/4*",
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
     "kb_mid": 6313,
     "pages": {
         "p": [
@@ -118,7 +136,7 @@
             "+1.44% (+$0.07) | Entry 0.995906\nQty 5.01498 | Price 1.0102 | Stop 0.949098 (-6%)\nRSI 46 | Mixed | ATH -66%\n\n\ud83d\udfe2 *PUMP* $3.50 (10%)\n+0.11% (+$0.00) | Entry 0.002610\nQty 1339.6564 | Price 0.002613 | Stop 0.002501 (-4%)\nRSI 70 | Bullish | ATH -71%\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\n\u2800\n\u2800",
             "and 8 more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT33.97/\u20a646,427\n\n\ud83e\udde0 *AI:* Portfolio totals $33.97/\u00a564,427 with $0.02 cash; most positions are\nsmall and near stop levels, and several tokens lack USDT pricing, requiring\nprice\u2011feed verification.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 1,
+        "i": 3,
         "mode": "Markdown",
         "x": [
             {
