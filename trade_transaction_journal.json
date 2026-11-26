@@ -3312,5 +3312,15 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795653462.1235285,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'BLESS-USDT', 'action': 'hold', 'reason': 'Small positive PnL (2.67%) and price above entry; stop is comfortably below current price, but monitor for volatility.'}, {'symbol': 'DGAI-USDT', 'action': 'hold', 'reason': 'Modest gain (1.15%) with stop ~5.6% below entry; maintain position while watching market sentiment.'}, {'symbol': 'SKYAI-USDT', 'action': 'hold', 'reason': 'Slight upside (1.17%) and stop is ~7.5% below entry; no immediate risk, but keep an eye on price drift.'}, {'symbol': 'GWEI-USDT', 'action': 'hold', 'reason': 'Near break\u2011even (0.03% PnL); stop is close to current price, indicating higher risk\u2014monitor closely for any adverse move.'}], 'summary': 'Overall portfolio risk remains PASS. All positions are modestly profitable; no clear signal to adjust. Continue holding while closely tracking stop levels, especially for GWEI"
+    },
+    {
+        "time": 1795653463.100021,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 50.0, 'net_pnl_usdt': 0.0682, 'recurring_patterns': ['PANIC (5 occurrences)', 'MANUAL SELL ALL (3 occurrences)', '15-MINUTE NO-UPWARD-TREND ROTATION (3 occurrences)', 'MANUAL SELL $ (multiple small sells)'], 'recommendations': ['Review and tighten panic\u2011sell triggers to avoid frequent small losses', 'Consolidate manual sell criteria to reduce fragmented exits', 'Consider adding stricter trend validation before entering 15\u2011minute rotation trades', 'Monitor high\u2011frequency loss symbols (e.g., JCT-USDT, DOS-USDT) for potential de\u2011listing or strategy adjustment']}"
     }
 ]
