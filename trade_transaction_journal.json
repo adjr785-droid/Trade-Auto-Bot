@@ -4086,5 +4086,15 @@
         "time": 1795712145.2537518,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6945, 'recurring_patterns': {'reason_counts': {'PANIC': 9, 'MANUAL SELL': 9, 'CRASH GUARD': 1}, 'symbols_with_multiple_losses': ['PROS-USDT', 'MOVE-USDT'], 'loss_causes': ['PANIC', 'CRASH GUARD']}, 'recommendations': ['Review and tighten panic\u2011sell trigger thresholds to avoid frequent small losses', 'Implement stricter position sizing for symbols that have shown repeated losses (e.g., PROS-USDT, MOVE-USDT)', 'Consider adding a secondary confirmation step before executing manual sell orders to reduce human error', 'Monitor and adjust the crash\u2011guard parameters to react earlier to rapid drawdowns', 'Overall, adopt a more conservative risk\u2011management stance until win rate improves and net P&L turns positive']}"
+    },
+    {
+        "time": 1795714978.35118,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $0.25; auto-buy paused for 7.6h', 'attention': [{'symbol': 'TRX-USDT', 'action': 'monitor', 'reason': 'PnL -0.43% and price close to stop (0.295074). Position is relatively young (670 min). Consider tightening stop or exiting if price approaches stop.'}, {'symbol': 'DOS-USDT', 'action': 'monitor', 'reason': 'PnL -1.69% with price near stop (0.073178). Position older (199 min) and losing more. Evaluate exit or adjust stop to protect capital.'}], 'summary': 'Both positions are in modest loss and near their stop levels. Given the recent performance breaker and paused auto-buy, prioritize risk management: tighten stops or consider closing to prevent further drawdown. No new entries are recommended until performance metrics improve.'}"
+    },
+    {
+        "time": 1795714979.314069,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6945, 'recurring_patterns': {'reason_counts': {'PANIC': 9, 'MANUAL SELL': 9, 'CRASH GUARD': 1}, 'symbols_with_multiple_losses': ['PROS-USDT', 'MOVE-USDT'], 'loss_causes': ['PANIC', 'CRASH GUARD']}, 'recommendations': ['Review and tighten panic\u2011sell trigger thresholds to avoid frequent small losses', 'Implement stricter position sizing for symbols that have shown repeated losses (e.g., PROS-USDT, MOVE-USDT)', 'Consider adding a secondary confirmation step before executing manual sell orders to reduce human error', 'Monitor and adjust the crash\u2011guard parameters to react earlier to rapid drawdowns', 'Overall, adopt a more conservative risk\u2011management stance until win rate improves and net PnL turns positive']}"
     }
 ]
