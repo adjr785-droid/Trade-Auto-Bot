@@ -3366,5 +3366,15 @@
             "lesson": "When manually exiting, ensure that the rationale aligns with the overall risk management framework and that any remaining base is either re\u2011evaluated for future trades or actively managed to avoid unintended exposure. Document the trigger criteria for manual actions to improve repeatability and auditability.",
             "confidence": "high"
         }
+    },
+    {
+        "time": 1795654727.3468132,
+        "event": "ai_manual_buy_review",
+        "symbol": "PUMP-USDT",
+        "review": {
+            "risk_level": "high",
+            "warning": "RSI is elevated (70.03) indicating overbought conditions; price is very low and may be subject to high volatility or manipulation. No existing position and BTC filter is inactive, but the market filter is empty, increasing uncertainty. Proceed with extreme caution and consider limiting exposure.",
+            "summary": "Manual buy of 3.5 USDT of PUMP-USDT at 0.002614 is high risk due to overbought RSI and lack of protective filters. Recommend reviewing additional market data before execution."
+        }
     }
 ]
