@@ -3656,5 +3656,23 @@
             "lesson": "Maintain clear criteria for manual exits to ensure they are based on objective signals or risk limits. Given the small profit margin, consider tighter stop\u2011loss or take\u2011profit levels to capture more decisive moves, and verify that remaining base is fully cleared to avoid residual exposure.",
             "confidence": "high"
         }
+    },
+    {
+        "time": 1795663897.9727604,
+        "event": "trade_closed",
+        "symbol": "MOVE-USDT",
+        "pnl_usdt": 0.05500100999999977,
+        "reason": "MANUAL SELL $6.33",
+        "strategy": "OTHER"
+    },
+    {
+        "time": 1795663903.3186064,
+        "event": "ai_manual_sell_review",
+        "symbol": "MOVE-USDT",
+        "review": {
+            "review": "The position in MOVE-USDT was manually closed at an average exit price of 0.006587, realizing a modest profit of 0.055 USDT on a sold quantity of 964.93 units. The remaining base balance after the trade is 964.20 units, indicating a near\u2011full liquidation of the position. The profit margin is very small relative to the size of the trade, suggesting limited upside capture or possible slippage. No automated safeguards were overridden; the exit was manual as indicated.",
+            "lesson": "Manual exits should be evaluated against predefined profit targets and risk limits to ensure that small gains are not offset by transaction costs or missed larger moves. Maintaining clear criteria for when to intervene manually can improve consistency. Additionally, monitoring the remaining base balance helps verify that the intended position size was fully executed.",
+            "confidence": "high"
+        }
     }
 ]
