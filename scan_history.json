@@ -1,25 +1,4 @@
 {
-    "window_start": 1795629988.8351772,
-    "items": [
-        {
-            "sym": "DOS-USDT",
-            "time": 1795701327.8053203,
-            "price": 0.0767,
-            "h1": 0.53,
-            "rsi": 29.42,
-            "status": "READY",
-            "decision": "SETUP \u2014 NOT QUEUED",
-            "reason": "BOUNCE matched; stage DROPPED, must pass Watch > Manual > Auto first",
-            "execution_status": "HELD",
-            "scan_id": "1795701321",
-            "rank": 33,
-            "vol": 1083528.87,
-            "chg": -2.417,
-            "ma5": 0.07794,
-            "ma10": 0.07857,
-            "min_volume": 1000000.0,
-            "spread_pct": 0.260416666666656,
-            "near_miss": null
-        }
-    ]
+    "window_start": 1795717271.235082,
+    "items": []
 }

@@ -4102,5 +4102,15 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795717290.0697536,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $0.25; auto-buy paused for 6.9h', 'attention': [{'symbol': 'TRX-USDT', 'action': 'monitor', 'reason': 'PnL -0.29% and price close to stop (0.295074). Position age > 700 min; consider tightening stop or exiting if price approaches stop.'}, {'symbol': 'DOS-USDT', 'action': 'monitor', 'reason': 'PnL -0.39% and price near stop (0.073178). Position age > 200 min; risk of further loss if price declines.'}], 'summary': 'Both positions are slightly underwater and near their stop levels. With the portfolio risk flag active and auto-buy paused, prioritize risk management: tighten stops, consider partial exits, and avoid adding new exposure until performance stabilizes.'}"
+    },
+    {
+        "time": 1795717290.8997333,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6945, 'recurring_patterns': ['High frequency of \"PANIC\" exits across multiple symbols', 'Manual sell actions often at small profit targets', 'Repeated losses on MOVE-USDT including a crash\u2011guard trigger', 'Losses concentrated in a few symbols (PROS-USDT, MOVE-USDT)', 'Wins are scattered, no single symbol dominates performance'], 'recommendations': ['Review and tighten panic\u2011sell thresholds to avoid premature exits', 'Consider consolidating manual sell criteria to capture larger moves rather than frequent small profits', 'Implement stricter position sizing for high\u2011volatility assets like MOVE-USDT and PROS-USDT', 'Add a secondary confirmation filter before triggering crash\u2011guard exits to reduce false positives', 'Monitor symbol\u2011specific performance and consider pausing trading on consistently losing assets until a clear strategy adjustment is def"
     }
 ]
