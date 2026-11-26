@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935690945,
+    "last_update_id": 935690946,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT33.68/\u20a646,030",
+    "kb_ph": "USDT32.88/\u20a644,940",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -80,37 +80,53 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 6353,
-    "out_text": "\u2705 SKYAI added.\n\u2b50 *FAVOURITES*\n_Your own list. Tap a coin to buy, sell or remove it._\n\n```\nCOIN     PRICE RSI    1H    24H\n-------------------------------\nMOVE  0.006529   -     -  +45.8\nSKYAI  0.03385  45  +0.2  -10.4\n```\n\u2800\n\u2800",
+    "kb_mid": 6358,
+    "out_mid": 6359,
+    "out_text": "\ud83d\udfe1 *MANUAL BUY*\n_Passed at least 5/7 core and 2/3 additional criteria. Manual review only._\n\nNone right now.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795656542.8166623,
+    "out_time": 1795656873.5733929,
+    "panel_mid": 6360,
     "panel_rows": [
         [
             {
-                "text": "\ud83d\uded2 Buy MOVE",
-                "callback_data": "m:b:MOVE"
+                "text": "\ud83d\udc41 Watch (0)",
+                "callback_data": "m:at:W"
+            },
+            {
+                "text": "\u25b6 \ud83d\udfe1 Manual (0)",
+                "callback_data": "m:at:M"
+            },
+            {
+                "text": "\ud83e\udd16 Auto (0)",
+                "callback_data": "m:at:A"
             }
         ],
         [
             {
-                "text": "\ud83d\udd34 SELL ALL MOVE",
-                "callback_data": "m:sc:MOVE:100"
+                "text": "\ud83c\udfaf SETUPS",
+                "callback_data": "m:su"
+            },
+            {
+                "text": "\ud83c\udd95 NEW LISTINGS",
+                "callback_data": "m:nl"
             }
         ],
         [
             {
-                "text": "\ud83d\uddd1 Remove from favourites",
-                "callback_data": "m:fd:MOVE"
-            }
-        ],
-        [
-            {
-                "text": "\u2b05\ufe0f Favourites",
+                "text": "\u2b50 FAVOURITES",
                 "callback_data": "m:fv"
+            },
+            {
+                "text": "\ud83d\uddc4 ARCHIVE",
+                "callback_data": "m:ar:D"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udd04 Refresh",
+                "callback_data": "m:at:M"
             }
         ]
     ],
-    "panel_text": "\u2b50 *MOVE*\nPrice: 0.006529 USDT\nYou hold: 5144.1217 (about $33.59)",
-    "out_mid": 6355,
-    "panel_mid": 6356
+    "panel_text": "\ud83d\udc47 *Actions*"
 }

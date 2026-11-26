@@ -3558,5 +3558,15 @@
         "event": "ai_coin_advisory",
         "reviewed": 22,
         "source": "coins.db"
+    },
+    {
+        "time": 1795656886.0900333,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $0.25; auto-buy paused for 23.7h', 'attention': [{'symbol': 'MOVE-USDT', 'action': 'hold', 'reason': 'Current PnL is -2.3% and price is near stop level (0.00555). No clear exit signal; monitor closely.'}], 'summary': 'Portfolio risk flag remains active. Existing MOVE position is modestly down and close to its stop. Recommend holding and watching price action; avoid new entries until performance breaker resets.'}"
+    },
+    {
+        "time": 1795656886.8928936,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 0.2386, 'recurring_patterns': {'reasons': {'PANIC': 7, 'MANUAL SELL ALL': 3, 'MANUAL SELL $': 5, 'TRAILING STOP (8.0%)': 1, 'RSI 75': 1}}, 'recommendations': {'risk_management': 'Consider tightening panic\u2011sell thresholds and reviewing manual sell triggers to reduce frequent small losses.', 'strategy_adjustments': 'Limit exposure to high\u2011volatility symbols that generate repeated panic exits (e.g., BLESS-USDT, PUMP-USDT).', 'confidence': 'moderate uncertainty due to limited sample size (30 trades) and high variance in individual PnL.'}}"
     }
 ]
