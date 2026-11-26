@@ -4050,5 +4050,15 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795704697.782926,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $0.25; auto-buy paused for 10.4h', 'attention': [{'symbol': 'TRX-USDT', 'action': 'monitor', 'reason': 'P&L slightly negative (-0.2%) and price approaching stop (0.295074). No immediate action; consider tightening stop if price declines further.'}, {'symbol': 'MOVE-USDT', 'action': 'hold', 'reason': 'Healthy profit (+4.55%) and price above entry. Stop is at entry level, providing protection; no change needed.'}, {'symbol': 'DOS-USDT', 'action': 'monitor', 'reason': 'Small positive P&L (+0.26%) but price is close to stop (0.073178). Recommend watching for reversal; could tighten stop slightly if volatility increases.'}], 'summary': 'Overall portfolio risk remains elevated due to recent losses; auto\u2011buy is paused. Existing positions are modestly sized and mostly in profit, but two trades are near their stop levels. Maintain curre"
+    },
+    {
+        "time": 1795704698.6366389,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6945, 'recurring_patterns': ['High frequency of PANIC exits', 'Manual sell triggers on small profit targets', 'Single large loss from CRASH GUARD on MOVE-USDT'], 'recommendations': ['Review and tighten panic\u2011sell thresholds to avoid frequent small losses', 'Consolidate manual sell strategy to target larger profit margins', 'Implement stricter position sizing for volatile assets like MOVE-USDT to limit downside exposure', 'Monitor and adjust risk parameters after each loss to maintain overall portfolio health']}"
     }
 ]
