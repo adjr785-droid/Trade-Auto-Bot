@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690969,
+    "last_update_id": 935690970,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -82,7 +82,7 @@
     "kb_mid": 6409,
     "out_text": "\ud83d\udcbc *PORTFOLIO* $33.56 | \u20a645,871\n\ud83d\udcb5 Cash free $19.02 | In coins $14.48 (43%)\n\ud83d\udfe1 BGB 0.00019195253 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udd34 *SKYAI* $8.13 (24%)\n-1.69% (-$0.14) | Entry 0.033820\nQty 244.37721 | Price 0.033250 | Stop 0.032210 (-3%)\nRSI 43 | Mixed | ATH -96%\n\n\ud83d\udfe2 *MOVE* $6.35 (19%)\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795663997.1856265,
+    "out_time": 1795664011.2380624,
     "panel_rows": [
         [
             {
@@ -108,7 +108,6 @@
         ]
     ],
     "panel_text": "\ud83d\udcc4 *Page 1/3*",
-    "out_mid": 6407,
     "pages": {
         "p": [
             "\ud83d\udcbc *PORTFOLIO* $33.56 | \u20a645,871\n\ud83d\udcb5 Cash free $19.02 | In coins $14.48 (43%)\n\ud83d\udfe1 BGB 0.00019195253 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udd34 *SKYAI* $8.13 (24%)\n-1.69% (-$0.14) | Entry 0.033820\nQty 244.37721 | Price 0.033250 | Stop 0.032210 (-3%)\nRSI 43 | Mixed | ATH -96%\n\n\ud83d\udfe2 *MOVE* $6.35 (19%)\n\u2800\n\u2800",
@@ -125,5 +124,6 @@
         ],
         "cmd": "m:r:holdings"
     },
-    "panel_mid": 6408
+    "out_mid": 6410,
+    "panel_mid": 6411
 }
