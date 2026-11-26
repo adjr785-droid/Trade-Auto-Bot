@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935691125,
+    "last_update_id": 935691126,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -88,42 +88,12 @@
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udc41 Watch (0)",
-                "callback_data": "m:at:W"
-            },
-            {
-                "text": "\u25b6 \ud83d\udfe1 Manual (0)",
-                "callback_data": "m:at:M"
-            },
-            {
-                "text": "\ud83e\udd16 Auto (0)",
-                "callback_data": "m:at:A"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udcb1 Buy / Sell a coin",
-                "callback_data": "m:pk:M"
-            }
-        ],
-        [
-            {
-                "text": "\ud83c\udfaf SETUPS (scan, history, trade)",
-                "callback_data": "m:su"
-            },
-            {
-                "text": "\ud83d\uddc2 MORE",
-                "callback_data": "m:am"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udd04 Refresh",
+                "text": "\u2b05\ufe0f Back",
                 "callback_data": "m:at:M"
             }
         ]
     ],
-    "panel_text": "\ud83d\udc47 *Actions*",
+    "panel_text": "\ud83d\udcb1 *BUY / SELL*\nNo coins on this list right now.",
     "out_mid": 6767,
     "panel_mid": 6768
 }
