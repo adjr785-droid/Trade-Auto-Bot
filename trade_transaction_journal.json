@@ -4128,5 +4128,10 @@
         "time": 1795718224.476815,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6945, 'recurring_patterns': {'panic_trades': 9, 'manual_sell_trades': 9, 'crash_guard_trades': 1, 'symbols_with_multiple_losses': ['PROS-USDT', 'MOVE-USDT', 'PUMP-USDT']}, 'recommendations': ['Limit panic exits; consider tighter stop\u2011loss thresholds or longer evaluation windows.', 'Review manual sell triggers to ensure they align with predefined profit targets rather than ad\u2011hoc decisions.', 'Investigate the high loss on MOVE-USDT, especially the crash\u2011guard event, and adjust position sizing or volatility filters for that asset.', 'Maintain current win\u2011rate focus but aim to improve average profit per winning trade to offset recurring small losses.']}"
+    },
+    {
+        "time": 1795720345.3359523,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $0.25; auto-buy paused for 6.1h', 'attention': [{'symbol': 'TRX-USDT', 'action': 'monitor', 'reason': 'Position is slightly negative (-0.2% PnL) and close to stop (0.295074). No immediate action; consider tightening stop if price approaches support.'}, {'symbol': 'DOS-USDT', 'action': 'hold', 'reason': 'Small positive PnL (0.91%) and distance to stop (0.073178) is moderate. Continue monitoring; no change needed.'}], 'summary': 'Overall portfolio risk remains elevated due to recent losing streak and paused auto-buy. Both positions are small and near break-even; maintain current stops and avoid new entries until risk metrics improve.'}"
     }
 ]
