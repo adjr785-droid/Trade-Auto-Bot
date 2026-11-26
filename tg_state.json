@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690885,
+    "last_update_id": 935690886,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -24,8 +24,8 @@
             1795493361.8607023
         ],
         "m:r:holdings": [
-            1,
-            1795653663.7814925
+            0,
+            1795653676.6812968
         ],
         "/analyse": [
             6,
@@ -93,7 +93,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "2/4",
+                "text": "1/4",
                 "callback_data": "pg:x"
             },
             {
@@ -110,7 +110,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 2/4*",
+    "panel_text": "\ud83d\udcc4 *Page 1/4*",
     "pages": {
         "p": [
             "\ud83d\udcbc *PORTFOLIO* $33.91 | \u20a646,353\n\ud83d\udcb5 Cash free $0.03 | In coins $33.80 (100%)\n\ud83d\udfe1 BGB 0.00011912253 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *GWEI* $14.94 (44%)\n+0.06% (+$0.01) | Entry 0.009779\nQty 1527.2213 | Price 0.009785 | Stop 0.009298 (-5%)\nRSI 46 | Mixed | ATH -96%\n\n\ud83d\udfe2 *BLESS* $8.74 (26%)\n\u2800\n\u2800",
@@ -118,7 +118,7 @@
             "+1.19% (+$0.06) | Entry 0.995906\nQty 5.01498 | Price 1.0077 | Stop 0.949098 (-6%)\nRSI 46 | Mixed | ATH -66%\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\nand 8 more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT33.91/\u20a646,353\n\n\ud83e\udde0 *AI:* Portfolio is $33.91 total, 100% in coins; cash is only $0.03, and\n\u2800\n\u2800",
             "stop\u2011losses for GWEI, BLESS, SKYAI, DGAI are 5\u201113% below entry, warrant\nmonitoring for downside risk.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 1,
+        "i": 0,
         "mode": "Markdown",
         "x": [
             {
