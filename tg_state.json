@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT33.09/\u20a645,265",
+    "kb_ph": "USDT33.01/\u20a645,148",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -79,52 +79,53 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 6823,
-    "out_text": "\ud83d\udcbc *PORTFOLIO* $33.22 | \u20a645,440\n\ud83d\udcb5 Cash free $0.02 | In coins $33.14 (100%)\n\ud83d\udfe1 BGB 0.00020311253 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *DOS* $33.14 (100%)\n+0.83% (+$0.27) | Entry 0.077256\nQty 425.45457 | Price 0.077900 | Stop 0.073517 (-6%)\nRSI 37 | Mixed | ATH -91%\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\n\u2800\n\u2800",
+    "kb_mid": 6824,
+    "out_mid": 6825,
+    "out_text": "\u26a0\ufe0f *AUDIT \u2014 AI RECOVERY RESET*\nFailed at stage 2/3 (AI stage performance_review failed: Expecting ','\ndelimiter: line 1 column 434 (char 433)). Restarting from 0/3.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795720867.687259,
+    "out_time": 1795722237.372829,
+    "panel_mid": 6826,
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
+                "text": "\ud83d\udda5 System",
+                "callback_data": "/bot"
             },
             {
-                "text": "1/2",
-                "callback_data": "pg:x"
+                "text": "\ud83d\udcc8 Stats",
+                "callback_data": "/stats"
+            }
+        ],
+        [
+            {
+                "text": "\u2699\ufe0f Settings",
+                "callback_data": "m:set"
             },
             {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
+                "text": "\ud83d\udcbc Holdings",
+                "callback_data": "m:r:holdings"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udcdc Trade History",
+                "callback_data": "m:r:history"
             },
             {
-                "text": "\ud83c\udfe0",
-                "callback_data": "m:menu"
+                "text": "\ud83e\udde0 Ask AI",
+                "callback_data": "m:ai:1"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\uddf9 Clear Chat",
+                "callback_data": "/clear"
             },
             {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
+                "text": "\ud83d\udea8 PANIC SELL",
+                "callback_data": "/panic"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/2*",
-    "out_mid": 6821,
-    "pages": {
-        "p": [
-            "\ud83d\udcbc *PORTFOLIO* $33.22 | \u20a645,440\n\ud83d\udcb5 Cash free $0.02 | In coins $33.14 (100%)\n\ud83d\udfe1 BGB 0.00020311253 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *DOS* $33.14 (100%)\n+0.83% (+$0.27) | Entry 0.077256\nQty 425.45457 | Price 0.077900 | Stop 0.073517 (-6%)\nRSI 37 | Mixed | ATH -91%\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\n\u2800\n\u2800",
-            "and 8 more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT33.22/\u20a645,440\n\n\ud83e\udde0 *AI:* Portfolio totals $33.22 (\u2248\u202f\u00a545,440) with $0.02 cash and all value in\ncoins; DOS position up 0.83% but several assets lack USDT pricing, requiring\nprice\u2011feed verification.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
-        ],
-        "i": 0,
-        "mode": "Markdown",
-        "x": [
-            [
-                {
-                    "text": "\ud83d\udd04",
-                    "callback_data": "rf:go"
-                }
-            ]
-        ],
-        "cmd": "m:r:holdings"
-    },
-    "panel_mid": 6822
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below."
 }

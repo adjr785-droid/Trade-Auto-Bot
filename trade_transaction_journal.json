@@ -4177,5 +4177,10 @@
         "time": 1795720842.5582218,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6846, 'recurring_patterns': {'reasons': {'PANIC': 7, 'MANUAL SELL': 9, 'CRASH GUARD': 1}, 'symbols': {'BLESS-USDT': 4, 'MOVE-USDT': 4, 'ADA-USDT': 3, 'PUMP-USDT': 2, 'others': 14}}, 'recommendations': {'risk_management': 'Consider tightening panic\u2011sell thresholds and reviewing manual\u2011sell triggers to avoid frequent small losses.', 'position_sizing': 'Reduce exposure on assets with repeated crash\u2011guard events (e.g., MOVE-USDT).', 'monitoring': 'Implement alerts for rapid price drops to replace manual panic actions.', 'uncertainty': 'High variability in trade outcomes suggests further data collection before adjusting core strategy.'}}"
+    },
+    {
+        "time": 1795722235.7650368,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $0.25; auto-buy paused for 5.6h', 'attention': [{'symbol': 'DOS-USDT', 'action': 'monitor', 'reason': 'Small positive PnL (0.19%) but close to stop level (0.073517). Maintain position, watch price action for any breach.'}], 'summary': 'Overall risk remains low; no new entries recommended while auto\u2011buy is paused. Continue monitoring existing DOS position and reassess when pause expires.'}"
     }
 ]
