@@ -4060,5 +4060,15 @@
         "time": 1795704698.6366389,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6945, 'recurring_patterns': ['High frequency of PANIC exits', 'Manual sell triggers on small profit targets', 'Single large loss from CRASH GUARD on MOVE-USDT'], 'recommendations': ['Review and tighten panic\u2011sell thresholds to avoid frequent small losses', 'Consolidate manual sell strategy to target larger profit margins', 'Implement stricter position sizing for volatile assets like MOVE-USDT to limit downside exposure', 'Monitor and adjust risk parameters after each loss to maintain overall portfolio health']}"
+    },
+    {
+        "time": 1795708008.416084,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $0.25; auto-buy paused for 9.5h', 'attention': [{'symbol': 'TRX-USDT', 'action': 'monitor', 'reason': 'PnL -0.71% and price approaching stop (0.295074). Consider tightening stop or reducing position if price continues down.'}, {'symbol': 'DOS-USDT', 'action': 'monitor', 'reason': 'PnL -0.39% and price near stop (0.073178). Slightly tighter stop may protect against further loss.'}], 'summary': 'Both positions are slightly underwater and close to their stop levels. With auto\u2011buy paused, focus on risk management: tighten stops, avoid adding to these trades, and wait for clearer upside before re\u2011entering. No new orders are recommended at this time.'}"
+    },
+    {
+        "time": 1795708009.2537923,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6945, 'recurring_patterns': ['High frequency of \"PANIC\" exits across multiple symbols', 'Manual sell actions often with small profit targets', 'Crash guard triggered on MOVE-USDT with large loss', 'Losses concentrated in PANIC and crash guard events'], 'recommendations': ['Review and tighten panic\u2011sell thresholds to avoid premature exits', 'Implement stricter risk limits for high\u2011volatility assets like MOVE-USDT', 'Consider reducing manual sell frequency and rely on predefined profit targets', 'Add additional monitoring for crash\u2011guard triggers to limit large drawdowns']}"
     }
 ]

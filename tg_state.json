@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691118,
+    "last_update_id": 935691120,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT33.41/\u20a645,692",
+    "kb_ph": "USDT32.84/\u20a644,919",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -79,41 +79,53 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 6742,
-    "out_mid": 6737,
-    "out_text": "\ud83d\udcca *ANALYSIS: DOS-USDT*\nLive price: 0.077300 USDT\n24h change: -0.26%\nRSI(14): 33.5900 \u2014 Neutral\nMA5: 0.077700 | MA10: 0.078350 | MA20: 0.079515\nMACD: -0.00342849 | Signal: -0.00413949 | Histogram: 0.00071100\nATR(14): 0.001864 (2.41% of price)\nLast hour vol vs 20h avg: 1.03x\nBid/ask spread: 0.259%\nTechnical checks: 2/4\n\u2800\n\u2800",
+    "kb_mid": 6745,
+    "out_mid": 6746,
+    "out_text": "\ud83d\udee0\ufe0f *AUTO-AUDIT COMPLETE*\n\ud83e\uddf9 Removed ghost: MOVE-USDT\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795704792.6520174,
-    "panel_mid": 6738,
+    "out_time": 1795707993.5342355,
+    "panel_mid": 6747,
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
+                "text": "\ud83d\udda5 System",
+                "callback_data": "/bot"
             },
             {
-                "text": "2/2",
-                "callback_data": "pg:x"
+                "text": "\ud83d\udcc8 Stats",
+                "callback_data": "/stats"
+            }
+        ],
+        [
+            {
+                "text": "\u2699\ufe0f Settings",
+                "callback_data": "m:set"
             },
             {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
+                "text": "\ud83d\udcbc Holdings",
+                "callback_data": "m:r:holdings"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udcdc Trade History",
+                "callback_data": "m:r:history"
             },
             {
-                "text": "\ud83c\udfe0",
-                "callback_data": "m:menu"
+                "text": "\ud83e\udde0 Ask AI",
+                "callback_data": "m:ai:1"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\uddf9 Clear Chat",
+                "callback_data": "/clear"
+            },
+            {
+                "text": "\ud83d\udea8 PANIC SELL",
+                "callback_data": "/panic"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 2/2*",
-    "pages": {
-        "p": [
-            "\ud83d\udcca *ANALYSIS: DOS-USDT*\nLive price: 0.077300 USDT\n24h change: -0.26%\nRSI(14): 33.5900 \u2014 Neutral\nMA5: 0.077700 | MA10: 0.078350 | MA20: 0.079515\nMACD: -0.00342849 | Signal: -0.00413949 | Histogram: 0.00071100\nATR(14): 0.001864 (2.41% of price)\nLast hour vol vs 20h avg: 1.03x\nBid/ask spread: 0.259%\nTechnical checks: 2/4\n\u2800\n\u2800",
-            "Assessment: *WAIT / WEAK SETUP*\nCoin database: WATCHING / HELD | seen 90 scans | RSI 42-48; MA trend; Oversold\nrecovery; Breakout trend\nAI notebook note: high: RSI 33 (oversold), held status, 24h down 1%; potential\ndownside.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
-        ],
-        "i": 1,
-        "mode": "Markdown",
-        "x": [],
-        "cmd": null
-    }
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below."
 }
