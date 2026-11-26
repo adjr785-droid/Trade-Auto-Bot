@@ -3332,5 +3332,15 @@
         "time": 1795654287.7896585,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 50.0, 'net_pnl_usdt': 0.0682, 'recurring_patterns': ['PANIC', 'MANUAL SELL ALL', '15-MINUTE NO-UPWARD-TREND ROTATION'], 'recommendations': 'Maintain strict risk limits; avoid panic exits; consider reducing exposure to high\u2011volatility symbols; prioritize trades with clear technical signals over manual overrides; monitor for repeated loss patterns before entering new positions.'}"
+    },
+    {
+        "time": 1795654615.5437496,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'BLESS-USDT', 'action': 'hold', 'reason': '5.17% profit, stop is at entry; price still above stop, but position is small and recent. No immediate action needed.'}, {'symbol': 'DGAI-USDT', 'action': 'tighten_stop', 'reason': 'Profit modest (1.33%); stop is ~5% below entry. Raising stop closer to current price reduces downside while preserving upside.'}, {'symbol': 'SKYAI-USDT', 'action': 'tighten_stop', 'reason': '1.85% profit; stop is ~7% below entry. Adjusting stop upward improves risk profile.'}, {'symbol': 'GWEI-USDT', 'action': 'hold', 'reason': '0.63% profit; stop is close to entry. Position is very recent; monitor for any reversal before adjusting.'}], 'summary': 'Overall portfolio risk remains PASS. All positions are in modest profit. Consider tightening stops on DGAI-USDT and SKYAI-USDT to lock in gains while keeping upside pote"
+    },
+    {
+        "time": 1795654616.2879133,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 50.0, 'net_pnl_usdt': 0.0682, 'recurring_patterns': ['PANIC', 'MANUAL SELL ALL', '15-MINUTE NO-UPWARD-TREND ROTATION'], 'recommendations': ['Limit exposure to panic-driven exits; implement stricter stop\u2011loss thresholds', 'Review and tighten criteria for manual sell orders to avoid frequent small losses', 'Consider reducing reliance on short\u2011term rotation signals that yielded mixed results']}"
     }
 ]
