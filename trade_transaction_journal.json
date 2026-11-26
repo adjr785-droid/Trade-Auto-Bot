@@ -3638,5 +3638,23 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795663880.478487,
+        "event": "trade_closed",
+        "symbol": "MOVE-USDT",
+        "pnl_usdt": 0.05786909999999931,
+        "reason": "MANUAL SELL $12.82",
+        "strategy": "OTHER"
+    },
+    {
+        "time": 1795663891.2852066,
+        "event": "ai_manual_sell_review",
+        "symbol": "MOVE-USDT",
+        "review": {
+            "review": "The position in MOVE-USDT was manually closed at an average exit price of 0.00656, realizing a PnL of 0.05787\u202fUSDT on a sold quantity of 1,928.97 units, leaving a negligible remaining base of 0.161674 units. The trade yielded a modest profit relative to the size of the position, indicating that the exit price was slightly above the entry cost. The manual nature of the sell suggests the decision was driven by external judgment rather than a predefined trigger.",
+            "lesson": "Maintain clear criteria for manual exits to ensure they are based on objective signals or risk limits. Given the small profit margin, consider tighter stop\u2011loss or take\u2011profit levels to capture more decisive moves, and verify that remaining base is fully cleared to avoid residual exposure.",
+            "confidence": "high"
+        }
     }
 ]
