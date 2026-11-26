@@ -290,12 +290,13 @@ def _nav_rows(i,k):
  b=lambda t,c:{"text":t,"callback_data":c}
  return [[b("◀","pg:p"),b(f"{i+1}/{k}","pg:x"),b("▶","pg:n"),b("🏠","m:menu")]]
 def _nav_with(nav,flat):
- for x in flat or []:
-  cb=x.get("callback_data")
-  if cb in ("m:menu","/menu"):continue
-  if cb=="rf:go":nav[0].append(x)
-  elif str(cb).startswith(("m:at:","m:ar:")) and "(" in str(x.get("text","")) and len(nav)>1 and nav[-1] and str(nav[-1][-1].get("callback_data","")).startswith(("m:at:","m:ar:")) and "(" in str(nav[-1][-1].get("text","")) and len(nav[-1])<3:nav[-1].append(x)   # Analyse tabs share one row
-  else:nav.append([x])
+ # Buttons keep the row layout they were built with (several in one line); the refresh button joins the page row.
+ rows=[r if isinstance(r,list) else [r] for r in (flat or [])]
+ for r in rows:
+  r=[x for x in r if x.get("callback_data") not in ("m:menu","/menu")]
+  if not r:continue
+  if len(r)==1 and r[0].get("callback_data")=="rf:go":nav[0].append(r[0])
+  else:nav.append(r)
  return nav
 def page_nav(t):
  st=load(ST,{});pg=st.get("pages") or {};ps=pg.get("p") or []
@@ -336,7 +337,7 @@ def _send(m,mode,btn=None):
   rows=(btn.get("inline_keyboard") if isinstance(btn,dict) else btn) if btn else []
   rb={"text":"🔄","callback_data":"rf:go"}
   extra=([[rb]] if rf else [])+rows
-  flat=[x for r in extra for x in r if x.get("callback_data") not in ("m:menu","/menu")]
+  flat=[[x for x in r if x.get("callback_data") not in ("m:menu","/menu")] for r in extra];flat=[r for r in flat if r]
   try:
    st=load(ST,{});st["out_text"]=(show or "")[:3800];st["out_mode"]=mode or "Markdown";st["out_time"]=time.time();st.pop("out_stale",None)
    if rf:st["last_cmd"]=cmd
@@ -1376,7 +1377,22 @@ def analyse_setups():
  out=[f"{str(sym).replace('-USDT','')[:6]:<6}{_fmt(r_,'.0f'):>3}{_fmt(h_,'+.1f'):>5}{_fmt(c_,'+.0f'):>5}{tc.get(tag,'-'):>3} {-n}/5 {bl}" for n,tag,sym,r_,h_,c_,bl in items[:40]]
  body=("```\n"+f"{'COIN':<6}{'RSI':>3}{'1H':>5}{'24H':>5}{'TY':>3} PASS BLOCK"+"\n"+"-"*32+"\n"+"\n".join(out)+"\n```") if out else "No coin passes 3 of the 5 checks right now."
  lines=["🎯 *SETUPS*","_Coins from the latest scan that pass at least 3 of 5 checks._","",body,"_TY: T Trend, P Pullback, B Bounce, K Breakout, - none_","_BLOCK: R RSI, M MA, H 1H, D 24H, S score (Core 5+ and Extra 2+). OK = all passed._"]
- _send("\n".join(lines),"Markdown",{"inline_keyboard":[[_B("🔍 SCAN NOW","m:r:scan"),_B("📜 SCAN HISTORY","/scan_history")],[_B("🛒 BUY","m:buy"),_B("💸 SELL","m:sell")],[_B("💱 Buy / Sell a coin","m:pk:su")],[_B("⬅️ Analyse","/analyse"),_B("🔄 Refresh","m:su")]]})
+ _send("\n".join(lines),"Markdown",{"inline_keyboard":[[_B("🔍 SCAN NOW","m:r:scan"),_B("📜 SCAN HISTORY","/scan_history")],[_B("💱 Buy / Sell a coin","m:pk:su")],[_B("⬅️ Analyse","/analyse"),_B("🔄 Refresh","m:su")]]})
+def coin_search(q):
+ """Type any part of a coin name: exact match opens its analysis, several matches give a pick list."""
+ term=re.sub(r"[^A-Z0-9]","",str(q).upper().replace("-USDT","").replace("/USDT",""))[:20]
+ if not term:ui_send("🔍 Type letters or numbers, for example SOL.",[[_B("🔍 Search again","m:se")],[_B("⬅️ Back","m:an")]]);return
+ try:
+  names=[str(r[0]).split("-")[0] for r in _dbq("SELECT sym FROM coins WHERE sym LIKE ? ORDER BY last_seen DESC LIMIT 60",(f"%{term}%",))]
+ except Exception:names=[]
+ names=list(dict.fromkeys(n for n in names if n.upper() not in STABLE))
+ if term in names:analyse_coin(f"/analyse {term}");return
+ if len(names)==1:analyse_coin(f"/analyse {names[0]}");return
+ if names:ui_send(f"🔍 *{len(names)} match(es) for {term}* — tap one:",_grid([_B(n,f"m:a:{n}") for n in names[:24]],3)+[[_B("🔍 Search again","m:se"),_B("⬅️ Back","m:an")]]);return
+ try:
+  if f"{term}/USDT" in ex.load_markets():analyse_coin(f"/analyse {term}");return
+ except Exception:pass
+ ui_send(f"🔍 No coin matches *{term}*.",[[_B("🔍 Search again","m:se"),_B("⬅️ Back","m:an")]])
 def fav_list():
  v=load(FAV,[])
  return [str(x).upper() for x in v if isinstance(x,str)] if isinstance(v,list) else []
@@ -3379,7 +3395,10 @@ def ui_cb(t):
     fb=B('free',c);px=live(f"{c}-USDT") or 0;handle(f"/sell {c} {fb*px*x/100:.2f}",0)
   elif a=="an":
    cs=ui_coins("analyse")
-   ui_send("🔎 *ANALYSE A COIN* — choose:",_grid([_B(c,f"m:a:{c}") for c in cs],3)+[[_B("➕ More coins","m:more:analyse:0")],_MENU_BTN])
+   ui_send("🔎 *ANALYSE A COIN* — choose:",[[_B("🔍 Search any coin","m:se")]]+_grid([_B(c,f"m:a:{c}") for c in cs],3)+[[_B("➕ More coins","m:more:analyse:0")],_MENU_BTN])
+  elif a=="se":
+   st=load(ST,{});st["search_pending"]={"t":time.time()};save(ST,st)
+   ui_send("🔍 *SEARCH A COIN*\nType a coin name or part of it (example: SOL).",[[_B("❌ Cancel","m:an")]])
   elif a=="a":handle(f"/analyse {p[2]}",0)
   elif a=="al":
    cs=ui_coins("alert");al=[x.get("coin") for x in _alerts()]
@@ -3482,6 +3501,10 @@ def handle(t,age):
       if _ap["side"]=="b":ui_send(f"⚠️ *CONFIRM BUY*\n{c} for ${amt:g} at about {fp(live(f'{c}-USDT'))} USDT.",[[_B("✅ Confirm",f"m:bx:{c}:{amt:g}"),_B("❌ Cancel","m:menu")]])
       else:ui_send(f"⚠️ *CONFIRM SELL*\n${amt:g} of {c} at market.",[[_B("✅ Confirm",f"m:sxu:{c}:{amt:g}"),_B("❌ Cancel","m:menu")]])
       return
+   _sp=load(ST,{}).get("search_pending")
+   if _sp:
+    st=load(ST,{});st.pop("search_pending",None);save(ST,st)
+    if time.time()-float(_sp.get("t",0))<600:coin_search(t);return
    _pd=load(ST,{}).get("rename_pending")
    if _pd:rename_apply(t);return
   except Exception as e:print(f"RENAME ERR: {e}")
