@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691122,
+    "last_update_id": 935691123,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT32.43/\u20a644,361",
+    "kb_ph": "USDT32.46/\u20a644,401",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -81,53 +81,53 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 6757,
-    "out_mid": 6758,
-    "out_text": "\u2139\ufe0f Git sync used conflict recovery.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "kb_mid": 6763,
+    "out_text": "\ud83d\udcbc *PORTFOLIO* $32.46 | \u20a644,401\n\ud83d\udcb5 Cash free $4.91 | In coins $27.50 (85%)\n\ud83d\udfe1 BGB 0.00019195253 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udd34 *DOS* $22.53 (69%)\n-2.08% (-$0.48) | Entry 0.076900\nQty 299.1604 | Price 0.075300 | Stop 0.073178 (-3%)\nRSI 33 | Bearish | ATH -92%\n\n\ud83d\udd34 *TRX* $4.97 (15%)\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795712149.8141167,
-    "panel_mid": 6760,
+    "out_time": 1795712240.622911,
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udda5 System",
-                "callback_data": "/bot"
+                "text": "\u25c0",
+                "callback_data": "pg:p"
             },
             {
-                "text": "\ud83d\udcc8 Stats",
-                "callback_data": "/stats"
-            }
-        ],
-        [
-            {
-                "text": "\u2699\ufe0f Settings",
-                "callback_data": "m:set"
+                "text": "1/3",
+                "callback_data": "pg:x"
             },
             {
-                "text": "\ud83d\udcbc Holdings",
-                "callback_data": "m:r:holdings"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udcdc Trade History",
-                "callback_data": "m:r:history"
+                "text": "\u25b6",
+                "callback_data": "pg:n"
             },
             {
-                "text": "\ud83e\udde0 Ask AI",
-                "callback_data": "m:ai:1"
-            }
-        ],
-        [
-            {
-                "text": "\ud83e\uddf9 Clear Chat",
-                "callback_data": "/clear"
+                "text": "\ud83c\udfe0",
+                "callback_data": "m:menu"
             },
             {
-                "text": "\ud83d\udea8 PANIC SELL",
-                "callback_data": "/panic"
+                "text": "\ud83d\udd04",
+                "callback_data": "rf:go"
             }
         ]
     ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below."
+    "panel_text": "\ud83d\udcc4 *Page 1/3*",
+    "out_mid": 6761,
+    "pages": {
+        "p": [
+            "\ud83d\udcbc *PORTFOLIO* $32.46 | \u20a644,401\n\ud83d\udcb5 Cash free $4.91 | In coins $27.50 (85%)\n\ud83d\udfe1 BGB 0.00019195253 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udd34 *DOS* $22.53 (69%)\n-2.08% (-$0.48) | Entry 0.076900\nQty 299.1604 | Price 0.075300 | Stop 0.073178 (-3%)\nRSI 33 | Bearish | ATH -92%\n\n\ud83d\udd34 *TRX* $4.97 (15%)\n\u2800\n\u2800",
+            "-0.50% (-$0.03) | Entry 0.304200\nQty 16.426657 | Price 0.302670 | Stop 0.295074 (-3%)\nRSI 30 | Bearish | ATH -70%\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\nand 8 more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT32.46/\u20a644,401\n\n\ud83e\udde0 *AI:* Portfolio totals $32.46 (\u2248\u00a544,401) with $4.91 cash and $27.50 in\n\u2800\n\u2800",
+            "coins; DOS and TRX show modest losses and bearish RSI, while several assets lack\nUSDT pricing, requiring price verification.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+        ],
+        "i": 0,
+        "mode": "Markdown",
+        "x": [
+            [
+                {
+                    "text": "\ud83d\udd04",
+                    "callback_data": "rf:go"
+                }
+            ]
+        ],
+        "cmd": "m:r:holdings"
+    },
+    "panel_mid": 6762
 }
