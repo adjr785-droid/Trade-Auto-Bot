@@ -3870,5 +3870,15 @@
         "time": 1795676941.8562758,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6945, 'recurring_patterns': {'high_frequency_reasons': ['PANIC', 'MANUAL SELL'], 'symbols_with_multiple_trades': ['ADA-USDT', 'BLESS-USDT', 'MOVE-USDT'], 'notable_events': ['CRASH GUARD (-11.3%)']}, 'recommendations': {'risk_management': 'Consider tightening panic\u2011sell thresholds and adding stop\u2011loss safeguards to limit downside exposure', 'trade_review': 'Audit manual sell decisions for consistency; many manual sells occurred on small profit margins', 'position_sizing': 'Reduce position size on high\u2011volatility assets (e.g., MOVE-USDT) to mitigate large losses', 'uncertainty': 'Data set is limited to 30 trades; patterns may not fully represent longer\u2011term behavior'}}"
+    },
+    {
+        "time": 1795678053.5770745,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $0.25; auto-buy paused for 17.8h', 'attention': [{'symbol': 'SKYAI-USDT', 'action': 'consider reducing exposure', 'reason': 'Position down -3.55% with stop only 0.41% below current price; high downside risk relative to small unrealized loss.'}, {'symbol': 'TRX-USDT', 'action': 'monitor closely', 'reason': 'Position near breakeven (-0.07%) but stop is ~3.6% below entry; limited upside, watch for price movement.'}], 'summary': 'Both manual positions are currently underperforming with limited stop buffers. Given the recent performance breaker and paused auto-buy, it is prudent to tighten risk: consider scaling out of SKYAI-USDT or tightening its stop, and keep a close eye on TRX-USDT for any adverse move. No new entries are recommended until the performance breaker resolves.'}"
+    },
+    {
+        "time": 1795678054.348236,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6945, 'recurring_patterns': {'PANIC': 13, 'MANUAL SELL': 9, 'CRASH GUARD': 1}, 'recommendations': ['Review and tighten panic\u2011sell thresholds to avoid frequent small losses', 'Consider reducing exposure to high\u2011volatility symbols that trigger crash\u2011guard events', 'Implement stricter position sizing for manual sell decisions to limit downside', 'Monitor and adjust risk parameters after each loss to improve overall profitability']}"
     }
 ]
