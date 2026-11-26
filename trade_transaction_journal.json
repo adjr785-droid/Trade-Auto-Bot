@@ -3622,5 +3622,15 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795663792.1150868,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $0.25; auto-buy paused for 21.8h', 'attention': [{'symbol': 'SKYAI-USDT', 'action': 'monitor', 'reason': 'Negative PnL (-2.16%) and price approaching stop (0.03309 vs stop 0.03221). Consider tightening stop or exiting if price breaches stop.'}, {'symbol': 'MOVE-USDT', 'action': 'hold', 'reason': 'Positive PnL (2.71%) and price above entry; stop is comfortably below current price, no immediate action required.'}], 'summary': 'Overall portfolio risk is flagged due to recent losses and auto-buy pause. Maintain vigilance on SKYAI-USDT as it nears its stop level; otherwise, keep current position in MOVE-USDT. No new entries recommended until risk metrics improve.'}"
+    },
+    {
+        "time": 1795663793.006604,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.223, 'recurring_patterns': {'exit_reasons': {'PANIC': 9, 'MANUAL_SELL': 9, 'TRAILING_STOP': 1}, 'symbols_with_multiple_trades': {'ADA-USDT': 3, 'BLESS-USDT': 4, 'PANIC_related_symbols': ['ARIA-USDT', 'JCT-USDT', 'PROS-USDT', 'PUMP-USDT', 'DGAI-USDT', 'SKYAI-USDT', 'GWEI-USDT']}}, 'recommendations': {'risk_management': 'Consider reducing reliance on panic exits; implement predefined profit targets and tighter stop\u2011loss thresholds.', 'trade_execution': 'Increase use of systematic exit strategies (e.g., trailing stops) to replace ad\u2011hoc manual sells.', 'position_sizing': 'Review position sizes on symbols with repeated losses (e.g., JCT-USDT, PROS-USDT) to limit downside exposure.', 'monitoring': 'Add alerts for rapid price moves to avoid panic\u2011driven decisions.', 'evaluation': 'Track win\u2011rate and PnL trends over larger sample sizes before adjusting"
     }
 ]
