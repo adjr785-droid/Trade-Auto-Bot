@@ -3342,5 +3342,15 @@
         "time": 1795654903.797938,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 50.0, 'net_pnl_usdt': 0.0682, 'recurring_patterns': {'PANIC': 9, 'MANUAL SELL': 6, '15-MINUTE NO-UPWARD-TREND ROTATION': 3, 'TRAILING STOP (8.0%)': 1, 'RSI 75': 1, 'PARTIAL PROFIT +10.4%': 1}, 'recommendations': 'Reduce exposure to high\u2011volatility symbols that trigger frequent PANIC exits. Consider tightening manual sell thresholds and reviewing the 15\u2011minute no\u2011upward\u2011trend rotation signal, as it appears in multiple losing trades. Prioritize risk\u2011managed entries with clear stop\u2011losses and avoid repeated manual interventions that have not improved net PnL.'}"
+    },
+    {
+        "time": 1795655521.428065,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'BLESS-USDT', 'action': 'hold', 'reason': 'Positive PnL (3.14%) and price above entry; stop loss still 12% below current price, providing buffer.'}, {'symbol': 'DGAI-USDT', 'action': 'hold', 'reason': 'Small upside (0.26%); stop loss 5% below current price, risk limited. No clear signal to exit.'}, {'symbol': 'SKYAI-USDT', 'action': 'hold', 'reason': 'Modest gain (1.76%); stop loss ~5% below price, still comfortable margin.'}, {'symbol': 'GWEI-USDT', 'action': 'hold', 'reason': 'Near break\u2011even (0.12%); stop loss ~5% below price, but position is very recent (age 140 min) so premature exit may increase churn.'}, {'symbol': 'PUMP-USDT', 'action': 'monitor', 'reason': 'Very recent entry (age 11 min) with unknown setup; stop loss ~15% below price. Recommend observing price action before any decision.'}], 'summary': 'Overall portfolio risk r"
+    },
+    {
+        "time": 1795655522.6813753,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 50.0, 'net_pnl_usdt': -0.2576, 'recurring_patterns': {'high_frequency_reasons': {'PANIC': 6, 'MANUAL SELL ALL': 3, 'MANUAL SELL $': 4, '15-MINUTE NO-UPWARD-TREND ROTATION': 2, 'TRAILING STOP (8.0%)': 1, 'RSI 75': 1, 'PARTIAL PROFIT +10.4%': 1}, 'symbols_with_multiple_trades': {'DOS-USDT': 2, 'ADA-USDT': 3, 'BLESS-USDT': 3, 'JCT-USDT': 2, 'WLD-USDT': 1, 'SKYAI-USDT': 1, 'UMXM-USDT': 1, 'INJ-USDT': 1, 'COLLECT-USDT': 1, 'PROS-USDT': 1, 'PUMP-USDT': 1, 'BTW-USDT': 1, 'BGB-USDT': 1, 'ARIA-USDT': 1}}, 'recommendations': ['Limit exposure to strategies that trigger frequent PANIC exits; consider tighter risk controls.', 'Review manual sell triggers to ensure they are not overly aggressive, especially for small\u2011position symbols like ADA-USDT.', 'Diversify away from symbols with repeated negative outcomes (e.g., WLD-USDT, PROS-USDT).', 'Implement stricter entry filters to reduce "
     }
 ]
