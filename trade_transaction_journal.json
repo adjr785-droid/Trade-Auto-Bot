@@ -3942,5 +3942,15 @@
         "time": 1795687812.442823,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6945, 'recurring_patterns': {'high_frequency_reasons': ['PANIC', 'MANUAL SELL', 'CRASH GUARD'], 'symbols_with_multiple_losses': ['MOVE-USDT', 'PROS-USDT', 'PUMP-USDT'], 'loss_concentration': {'MOVE-USDT': 2, 'PROS-USDT': 1, 'PUMP-USDT': 1}, 'loss_causes': {'PANIC': 6, 'MANUAL SELL': 5, 'CRASH GUARD': 1}}, 'recommendations': {'risk_management': 'Tighten panic\u2011sell thresholds and consider disabling automatic panic exits until volatility is better quantified.', 'position_sizing': 'Reduce exposure on symbols that have shown repeated losses (e.g., MOVE-USDT, PROS-USDT).', 'monitoring': 'Implement additional alerts for rapid price drops that trigger CRASH GUARD to avoid large single\u2011trade drawdowns.', 'strategy_review': 'Re\u2011evaluate manual sell triggers to ensure they align with profit targets rather than ad\u2011hoc decisions.'}}"
+    },
+    {
+        "time": 1795689237.0459313,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $0.25; auto-buy paused for 14.7h', 'attention': [{'symbol': 'SKYAI-USDT', 'action': 'hold', 'reason': 'Small positive PnL (0.68%) and price above entry; stop loss still comfortably below current price.'}, {'symbol': 'TRX-USDT', 'action': 'monitor', 'reason': 'Slight negative PnL (-0.26%) but within stop\u2011loss buffer; consider tightening stop if price approaches 0.2950.'}, {'symbol': 'MOVE-USDT', 'action': 'hold', 'reason': 'Strong positive PnL (5.09%) and price above entry; stop set at entry protects gains.'}], 'summary': 'Overall portfolio shows modest gains with low volatility. Maintain current positions, tighten TRX stop if price nears 0.2950, and avoid new entries until auto\u2011buy pause expires.'}"
+    },
+    {
+        "time": 1795689237.746242,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6945, 'recurring_patterns': ['High frequency of PANIC exits', 'Multiple manual sell actions across symbols', 'Single CRASH GUARD stop triggered on MOVE-USDT'], 'recommendations': ['Review and tighten panic\u2011sell thresholds to avoid premature exits', 'Consolidate manual sell decisions into a systematic profit\u2011target strategy', 'Implement tighter position sizing for volatile assets like MOVE-USDT', 'Add additional stop\u2011loss buffers to reduce reliance on crash\u2011guard triggers', 'Monitor symbols with repeated panic exits for underlying market instability']}"
     }
 ]
