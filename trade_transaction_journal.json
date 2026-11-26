@@ -3932,5 +3932,15 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795687811.4842246,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $0.25; auto\u2011buy paused for 15.1\\u202fh', 'attention': [{'symbol': 'SKYAI-USDT', 'action': 'monitor', 'reason': 'Small profit (+1.09\\u202f%) but close to stop (0.03221). Hold while price stays above stop; consider tightening stop if volatility rises.'}, {'symbol': 'TRX-USDT', 'action': 'monitor', 'reason': 'Slight loss (\u20110.14\\u202f%) and price near stop (0.295074). No immediate action; watch for reversal signals before adjusting stop.'}, {'symbol': 'MOVE-USDT', 'action': 'monitor', 'reason': 'Healthy gain (+3.92\\u202f%) with comfortable distance from stop (0.00532). Maintain current stop; consider raising it to lock in profit if price continues upward.'}], 'summary': 'Overall portfolio shows modest gains with low risk exposure. Auto\u2011buy is paused per risk safeguard; maintain current positions, tighten stops only if price approac"
+    },
+    {
+        "time": 1795687812.442823,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6945, 'recurring_patterns': {'high_frequency_reasons': ['PANIC', 'MANUAL SELL', 'CRASH GUARD'], 'symbols_with_multiple_losses': ['MOVE-USDT', 'PROS-USDT', 'PUMP-USDT'], 'loss_concentration': {'MOVE-USDT': 2, 'PROS-USDT': 1, 'PUMP-USDT': 1}, 'loss_causes': {'PANIC': 6, 'MANUAL SELL': 5, 'CRASH GUARD': 1}}, 'recommendations': {'risk_management': 'Tighten panic\u2011sell thresholds and consider disabling automatic panic exits until volatility is better quantified.', 'position_sizing': 'Reduce exposure on symbols that have shown repeated losses (e.g., MOVE-USDT, PROS-USDT).', 'monitoring': 'Implement additional alerts for rapid price drops that trigger CRASH GUARD to avoid large single\u2011trade drawdowns.', 'strategy_review': 'Re\u2011evaluate manual sell triggers to ensure they align with profit targets rather than ad\u2011hoc decisions.'}}"
     }
 ]
