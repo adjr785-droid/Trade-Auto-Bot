@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935690924,
+    "last_update_id": 935690928,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT33.86/\u20a646,279",
+    "kb_ph": "USDT33.84/\u20a646,247",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -75,12 +75,52 @@
         "JCT-USDT"
     ],
     "audit_down": {},
-    "audit_last": 1795654916.7295668,
+    "audit_last": 1795655527.4610171,
     "audit_ai_cls": "",
     "perf_breaker": {
         "until": 1795645210.5830717,
         "since": 1795558810.5830717,
         "loss": -1.4850249000000058
     },
-    "kb_mid": 6323
+    "kb_mid": 6336,
+    "out_text": "\ud83d\udfe1 Bitget accepted BLESS\u2192BGB dust conversion. Order: 1509654286270406663. Final\nstatus can be checked in Bitget conversion history.\n\n\u2705 *SOLD (PANIC)*\n\ud83e\ude99 5.01 DGAI-USDT\n\ud83d\udfe2 PnL: $0.01\n\n\ud83d\udfe1 DGAI-USDT: remaining balance is below the $1.02 tradable-order threshold and\nis treated as exchange dust.\n\n\u2800\n\u2800",
+    "out_mode": "Markdown",
+    "panel_rows": [
+        [
+            {
+                "text": "\u25c0",
+                "callback_data": "pg:p"
+            },
+            {
+                "text": "1/6",
+                "callback_data": "pg:x"
+            },
+            {
+                "text": "\u25b6",
+                "callback_data": "pg:n"
+            },
+            {
+                "text": "\ud83c\udfe0",
+                "callback_data": "m:menu"
+            }
+        ]
+    ],
+    "panel_text": "\ud83d\udcc4 *Page 1/6*",
+    "out_time": 1795655606.4373176,
+    "out_mid": 6331,
+    "pages": {
+        "p": [
+            "\ud83d\udfe1 Bitget accepted BLESS\u2192BGB dust conversion. Order: 1509654286270406663. Final\nstatus can be checked in Bitget conversion history.\n\n\u2705 *SOLD (PANIC)*\n\ud83e\ude99 5.01 DGAI-USDT\n\ud83d\udfe2 PnL: $0.01\n\n\ud83d\udfe1 DGAI-USDT: remaining balance is below the $1.02 tradable-order threshold and\nis treated as exchange dust.\n\n\u2800\n\u2800",
+            "\u26a0\ufe0f BGB conversion outcome is UNKNOWN for DGAI; do not retry until Bitget\nconversion history and balances are checked. Reason: bitget\n{\"code\":\"13011\",\"msg\":\"Can be convert 1 times every 6\nhours\",\"requestTime\":1795655567058,\"data\":null}\n\n\u2705 *SOLD (PANIC)*\n\ud83e\ude99 149.41 SKYAI-USDT\n\ud83d\udfe2 PnL: $0.08\n\n\ud83d\udfe1 SKYAI-USDT: remaining balance is below the $1.02 tradable-order threshold and\n\u2800\n\u2800",
+            "is treated as exchange dust.\n\n\u26a0\ufe0f BGB conversion outcome is UNKNOWN for SKYAI; do not retry until Bitget\nconversion history and balances are checked. Reason: bitget\n{\"code\":\"13011\",\"msg\":\"Can be convert 1 times every 6\nhours\",\"requestTime\":1795655580780,\"data\":null}\n\n\u2705 *SOLD (PANIC)*\n\ud83e\ude99 1527.22 GWEI-USDT\n\ud83d\udfe2 PnL: $0.02\n\u2800\n\u2800",
+            "\n\ud83d\udfe1 GWEI-USDT: remaining balance is below the $1.02 tradable-order threshold and\nis treated as exchange dust.\n\n\u26a0\ufe0f BGB conversion outcome is UNKNOWN for GWEI; do not retry until Bitget\nconversion history and balances are checked. Reason: bitget\n{\"code\":\"13011\",\"msg\":\"Can be convert 1 times every 6\nhours\",\"requestTime\":1795655590663,\"data\":null}\n\n\u2705 *SOLD (PANIC)*\n\u2800\n\u2800",
+            "\ud83e\ude99 1339.65 PUMP-USDT\n\ud83d\udfe2 PnL: $0.02\n\n\ud83d\udfe1 PUMP-USDT: remaining balance is below the $1.02 tradable-order threshold and\nis treated as exchange dust.\n\n\u26a0\ufe0f BGB conversion outcome is UNKNOWN for PUMP; do not retry until Bitget\nconversion history and balances are checked. Reason: bitget\n{\"code\":\"13011\",\"msg\":\"Can be convert 1 times every 6\nhours\",\"requestTime\":1795655604363,\"data\":null}\n\u2800\n\u2800",
+            "\n\ud83d\uded1 *PANIC COMPLETE.* All positions sold.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+        ],
+        "i": 0,
+        "mode": "Markdown",
+        "x": [],
+        "cmd": "panic_confirm"
+    },
+    "panel_mid": 6333
 }

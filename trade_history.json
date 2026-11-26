@@ -324,5 +324,45 @@
         "time": 1795654703.4608226,
         "reason": "MANUAL SELL $3.50",
         "strategy": "MANUAL"
+    },
+    {
+        "sym": "BLESS-USDT",
+        "pnl": 0.15104048399999956,
+        "fee": 0.010439,
+        "time": 1795655547.0822806,
+        "reason": "PANIC",
+        "strategy": "MANUAL"
+    },
+    {
+        "sym": "DGAI-USDT",
+        "pnl": 0.008582130000000378,
+        "fee": 0.009996,
+        "time": 1795655563.5859766,
+        "reason": "PANIC",
+        "strategy": "MANUAL"
+    },
+    {
+        "sym": "SKYAI-USDT",
+        "pnl": 0.07918729999999936,
+        "fee": 0.010148,
+        "time": 1795655572.3604388,
+        "reason": "PANIC",
+        "strategy": "MANUAL"
+    },
+    {
+        "sym": "GWEI-USDT",
+        "pnl": 0.022408799999930847,
+        "fee": 0.029914,
+        "time": 1795655586.2313187,
+        "reason": "PANIC",
+        "strategy": "MANUAL"
+    },
+    {
+        "sym": "PUMP-USDT",
+        "pnl": 0.02143439999999994,
+        "fee": 0.007033,
+        "time": 1795655600.0272925,
+        "reason": "PANIC",
+        "strategy": "OTHER"
     }
 ]

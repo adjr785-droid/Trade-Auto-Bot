@@ -3352,5 +3352,185 @@
         "time": 1795655522.6813753,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 50.0, 'net_pnl_usdt': -0.2576, 'recurring_patterns': {'high_frequency_reasons': {'PANIC': 6, 'MANUAL SELL ALL': 3, 'MANUAL SELL $': 4, '15-MINUTE NO-UPWARD-TREND ROTATION': 2, 'TRAILING STOP (8.0%)': 1, 'RSI 75': 1, 'PARTIAL PROFIT +10.4%': 1}, 'symbols_with_multiple_trades': {'DOS-USDT': 2, 'ADA-USDT': 3, 'BLESS-USDT': 3, 'JCT-USDT': 2, 'WLD-USDT': 1, 'SKYAI-USDT': 1, 'UMXM-USDT': 1, 'INJ-USDT': 1, 'COLLECT-USDT': 1, 'PROS-USDT': 1, 'PUMP-USDT': 1, 'BTW-USDT': 1, 'BGB-USDT': 1, 'ARIA-USDT': 1}}, 'recommendations': ['Limit exposure to strategies that trigger frequent PANIC exits; consider tighter risk controls.', 'Review manual sell triggers to ensure they are not overly aggressive, especially for small\u2011position symbols like ADA-USDT.', 'Diversify away from symbols with repeated negative outcomes (e.g., WLD-USDT, PROS-USDT).', 'Implement stricter entry filters to reduce "
+    },
+    {
+        "time": 1795655546.0410192,
+        "event": "sell_fill_verified",
+        "symbol": "BLESS-USDT",
+        "filled": 303.66,
+        "average": 0.0171884,
+        "order_id": "1509654263289815046",
+        "reason": "PANIC",
+        "attempt": 1
+    },
+    {
+        "time": 1795655547.0835383,
+        "event": "trade_closed",
+        "symbol": "BLESS-USDT",
+        "pnl_usdt": 0.15104048399999956,
+        "reason": "PANIC",
+        "strategy": "MANUAL"
+    },
+    {
+        "time": 1795655547.608476,
+        "event": "full_sale_verified_or_dust",
+        "symbol": "BLESS-USDT",
+        "remaining_base": 0.00667,
+        "remaining_value_usdt": 0.000114646628,
+        "filled": 303.66
+    },
+    {
+        "time": 1795655559.856179,
+        "event": "ai_sell_review",
+        "symbol": "BLESS-USDT",
+        "review": {
+            "review": "The position was closed at an average price of 0.0171884\u202fUSDT, realizing a modest profit of 0.151\u202fUSDT on the sold 303.66 units. The exit was driven by panic rather than a systematic signal, leaving a small residual balance of 0.00667\u202fBLESS. While the trade was profitable, the emotional trigger introduces uncertainty about repeatability of the outcome.",
+            "lesson": "Avoid panic\u2011driven exits; rely on predefined risk limits and technical triggers. Ensure that any remaining base is either fully liquidated or managed with a clear stop\u2011loss to prevent orphaned balances. Incorporate stricter emotion checks into the decision flow.",
+            "confidence": "medium"
+        }
+    },
+    {
+        "time": 1795655562.5478034,
+        "event": "sell_fill_verified",
+        "symbol": "DGAI-USDT",
+        "filled": 5.01,
+        "average": 0.997619,
+        "order_id": "1509654332458082304",
+        "reason": "PANIC",
+        "attempt": 1
+    },
+    {
+        "time": 1795655563.5873315,
+        "event": "trade_closed",
+        "symbol": "DGAI-USDT",
+        "pnl_usdt": 0.008582130000000378,
+        "reason": "PANIC",
+        "strategy": "MANUAL"
+    },
+    {
+        "time": 1795655564.049111,
+        "event": "full_sale_verified_or_dust",
+        "symbol": "DGAI-USDT",
+        "remaining_base": 0.00498,
+        "remaining_value_usdt": 0.00496849122,
+        "filled": 5.01
+    },
+    {
+        "time": 1795655568.6376734,
+        "event": "ai_sell_review",
+        "symbol": "DGAI-USDT",
+        "review": {
+            "review": "The position was closed at an average price of 0.997619\u202fUSDT, yielding a realized P&L of only 0.0086\u202fUSDT. The exit was triggered by panic rather than a systematic signal, resulting in a very small profit and leaving a residual base balance of 0.00498\u202fDGAI. The trade size (5.01\u202fDGAI) was modest, but the decision to exit was not aligned with predefined risk or exit criteria, increasing uncertainty about future performance.",
+            "lesson": "Avoid panic\u2011driven exits. Stick to the predefined exit strategy and risk limits. Ensure that any partial holdings are either fully liquidated or managed according to the bot's risk parameters to prevent leftover exposure.",
+            "confidence": "low"
+        }
+    },
+    {
+        "time": 1795655571.3321953,
+        "event": "sell_fill_verified",
+        "symbol": "SKYAI-USDT",
+        "filled": 149.41,
+        "average": 0.03396,
+        "order_id": "1509654369330208768",
+        "reason": "PANIC",
+        "attempt": 1
+    },
+    {
+        "time": 1795655572.3617122,
+        "event": "trade_closed",
+        "symbol": "SKYAI-USDT",
+        "pnl_usdt": 0.07918729999999936,
+        "reason": "PANIC",
+        "strategy": "MANUAL"
+    },
+    {
+        "time": 1795655577.0783389,
+        "event": "full_sale_verified_or_dust",
+        "symbol": "SKYAI-USDT",
+        "remaining_base": 0.00392,
+        "remaining_value_usdt": 0.00013312319999999998,
+        "filled": 149.41
+    },
+    {
+        "time": 1795655582.4293053,
+        "event": "ai_sell_review",
+        "symbol": "SKYAI-USDT",
+        "review": {
+            "review": "The position was closed at an average exit price of 0.03396\u202fUSDT, realizing a modest profit of 0.0792\u202fUSDT on the sold quantity of 149.41 units. The exit was triggered by a panic reaction rather than a systematic signal, leaving a small residual base of 0.00392\u202fSKYAI. The profit margin was thin and the decision was driven by emotional bias, which could undermine consistent performance.",
+            "lesson": "Implement stricter emotional controls and predefined exit criteria to avoid panic\u2011driven sales. Ensure that any remaining base is either fully liquidated according to the strategy or managed with a clear plan to prevent orphaned balances. Reinforce risk limits that trigger exits based on objective market signals rather than sentiment.",
+            "confidence": "medium"
+        }
+    },
+    {
+        "time": 1795655585.1899574,
+        "event": "sell_fill_verified",
+        "symbol": "GWEI-USDT",
+        "filled": 1527.22,
+        "average": 0.009793672935137,
+        "order_id": "1509654427400347648",
+        "reason": "PANIC",
+        "attempt": 1
+    },
+    {
+        "time": 1795655586.232672,
+        "event": "trade_closed",
+        "symbol": "GWEI-USDT",
+        "pnl_usdt": 0.022408799999930847,
+        "reason": "PANIC",
+        "strategy": "MANUAL"
+    },
+    {
+        "time": 1795655587.1631556,
+        "event": "full_sale_verified_or_dust",
+        "symbol": "GWEI-USDT",
+        "remaining_base": 0.00125,
+        "remaining_value_usdt": 1.2240000000000001e-05,
+        "filled": 1527.22
+    },
+    {
+        "time": 1795655596.2692745,
+        "event": "ai_sell_review",
+        "symbol": "GWEI-USDT",
+        "review": {
+            "review": "The position was closed at an average exit price of 0.009793672935137 USDT, realizing a small profit of 0.0224 USDT on the sold quantity of 1527.22 units. The exit was triggered by panic, indicating emotional decision\u2011making rather than a systematic risk rule. The remaining base balance of 0.00125 GWEI suggests a near\u2011complete liquidation, leaving minimal exposure.",
+            "lesson": "Implement stricter emotional controls and adhere to predefined exit criteria (e.g., stop\u2011loss or target profit levels) to avoid panic\u2011driven exits. Ensure that any remaining base is either fully liquidated according to the strategy or retained with a clear risk management plan.",
+            "confidence": "medium"
+        }
+    },
+    {
+        "time": 1795655598.9442036,
+        "event": "sell_fill_verified",
+        "symbol": "PUMP-USDT",
+        "filled": 1339.65,
+        "average": 0.002625,
+        "order_id": "1509654485189468181",
+        "reason": "PANIC",
+        "attempt": 1
+    },
+    {
+        "time": 1795655600.0296786,
+        "event": "trade_closed",
+        "symbol": "PUMP-USDT",
+        "pnl_usdt": 0.02143439999999994,
+        "reason": "PANIC",
+        "strategy": "OTHER"
+    },
+    {
+        "time": 1795655600.9788482,
+        "event": "full_sale_verified_or_dust",
+        "symbol": "PUMP-USDT",
+        "remaining_base": 0.00645,
+        "remaining_value_usdt": 1.694415e-05,
+        "filled": 1339.65
+    },
+    {
+        "time": 1795655605.9831004,
+        "event": "ai_sell_review",
+        "symbol": "PUMP-USDT",
+        "review": {
+            "review": "The position was closed at an average exit price of 0.002625 USDT, realizing a modest profit of 0.0214344 USDT on 1339.65 units sold. The exit was triggered by panic rather than a systematic signal, indicating emotional decision\u2011making. Remaining base of 0.00645 was not liquidated, leaving exposure after the trade.",
+            "lesson": "Implement stricter emotional controls and adhere to predefined exit criteria (e.g., stop\u2011loss or target profit levels) to avoid panic\u2011driven exits. Ensure the entire position is evaluated against risk parameters before partial liquidation, and consider closing the full position to eliminate residual exposure.",
+            "confidence": "medium"
+        }
     }
 ]
