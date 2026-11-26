@@ -10,7 +10,7 @@
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
         "xsl": 0.295074,
-        "seen": 1795702995.3485188
+        "seen": 1795703058.5152602
     },
     "MOVE-USDT": {
         "entry_price": 0.005911,
@@ -23,7 +23,7 @@
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
         "xsl": 0.005911,
-        "seen": 1795702995.6002574
+        "seen": 1795703058.775638
     },
     "DOS-USDT": {
         "entry_price": 0.0769,
@@ -35,6 +35,7 @@
         "sl_pct": 4.84,
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
-        "xsl": 0.073178
+        "xsl": 0.073178,
+        "seen": 1795703059.0739925
     }
 }
