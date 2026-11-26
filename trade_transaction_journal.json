@@ -3860,5 +3860,15 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795676940.8546786,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $0.25; auto-buy paused for 18.1h', 'attention': [{'symbol': 'SKYAI-USDT', 'action': 'monitor', 'reason': 'Position is down -3.25% and close to stop (0.03221). Consider tightening stop or reducing exposure if price continues downward.'}, {'symbol': 'TRX-USDT', 'action': 'hold', 'reason': 'Small positive PnL (+0.03%) and price above stop. No immediate action required.'}], 'summary': 'Overall portfolio risk remains elevated due to recent losses and auto-buy pause. Maintain vigilance on SKYAI-USDT; TRX-USDT appears stable. Avoid new entries until risk metrics improve.'}"
+    },
+    {
+        "time": 1795676941.8562758,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6945, 'recurring_patterns': {'high_frequency_reasons': ['PANIC', 'MANUAL SELL'], 'symbols_with_multiple_trades': ['ADA-USDT', 'BLESS-USDT', 'MOVE-USDT'], 'notable_events': ['CRASH GUARD (-11.3%)']}, 'recommendations': {'risk_management': 'Consider tightening panic\u2011sell thresholds and adding stop\u2011loss safeguards to limit downside exposure', 'trade_review': 'Audit manual sell decisions for consistency; many manual sells occurred on small profit margins', 'position_sizing': 'Reduce position size on high\u2011volatility assets (e.g., MOVE-USDT) to mitigate large losses', 'uncertainty': 'Data set is limited to 30 trades; patterns may not fully represent longer\u2011term behavior'}}"
     }
 ]
