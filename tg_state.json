@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935691120,
+    "last_update_id": 935691121,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -70,10 +70,11 @@
     },
     "radar": [
         "PWT-USDT",
+        "KII-USDT",
         "BGSC-USDT"
     ],
     "audit_down": {},
-    "audit_last": 1795708060.131125,
+    "audit_last": 1795711895.1731286,
     "audit_ai_cls": "",
     "perf_breaker": {
         "until": 1795742224.733271,

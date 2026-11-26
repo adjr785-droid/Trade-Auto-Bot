@@ -20,26 +20,6 @@
             "min_volume": 1000000.0,
             "spread_pct": 0.260416666666656,
             "near_miss": null
-        },
-        {
-            "sym": "NEAR-USDT",
-            "time": 1795642965.746706,
-            "price": 3.043,
-            "h1": 1.61,
-            "rsi": 68.76,
-            "status": "READY",
-            "decision": "SETUP \u2014 NOT QUEUED",
-            "reason": "BREAKOUT matched; stage DROPPED, must pass Watch > Manual > Auto first",
-            "execution_status": "NOT_ELIGIBLE",
-            "scan_id": "1795642957",
-            "rank": 16,
-            "vol": 4728705.17,
-            "chg": 6.543,
-            "ma5": 2.889,
-            "ma10": 2.8376,
-            "min_volume": 1000000.0,
-            "spread_pct": 0.03285690816493806,
-            "near_miss": null
         }
     ]
 }
