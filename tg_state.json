@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT33.38/\u20a645,651",
+    "kb_ph": "USDT33.41/\u20a645,692",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -79,7 +79,7 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 6741,
+    "kb_mid": 6742,
     "out_mid": 6737,
     "out_text": "\ud83d\udcca *ANALYSIS: DOS-USDT*\nLive price: 0.077300 USDT\n24h change: -0.26%\nRSI(14): 33.5900 \u2014 Neutral\nMA5: 0.077700 | MA10: 0.078350 | MA20: 0.079515\nMACD: -0.00342849 | Signal: -0.00413949 | Histogram: 0.00071100\nATR(14): 0.001864 (2.41% of price)\nLast hour vol vs 20h avg: 1.03x\nBid/ask spread: 0.259%\nTechnical checks: 2/4\n\u2800\n\u2800",
     "out_mode": "Markdown",
