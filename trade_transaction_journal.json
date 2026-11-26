@@ -4198,5 +4198,15 @@
         "time": 1795725390.0115027,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6846, 'recurring_patterns': {'PANIC': 13, 'MANUAL_SELL': 13, 'CRASH_GUARD': 1}, 'recommendations': ['Limit exposure to high\u2011volatility assets that trigger frequent panic exits', 'Implement stricter stop\u2011loss thresholds to avoid large negative PnL events like the -0.569 MOVE trade', 'Review manual sell triggers to ensure they align with a predefined profit target rather than ad\u2011hoc decisions', 'Consider reducing position size on symbols with repeated negative outcomes (e.g., PROS-USDT, MOVE-USDT)', 'Monitor and adjust the crash\u2011guard parameters to activate earlier and protect capital']}"
+    },
+    {
+        "time": 1795728559.3883677,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $0.25; auto-buy paused for 3.8h', 'attention': [{'symbol': 'DOS-USDT', 'action': 'monitor', 'reason': 'Small loss (-0.07%) and stop is close to current price; consider tightening stop or exiting if price approaches stop.'}], 'summary': 'Overall portfolio risk is elevated due to recent losses and auto-buy pause. No immediate new entries recommended; focus on managing the existing DOS-USDT position and await clearer market signals.'}"
+    },
+    {
+        "time": 1795728560.0019674,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6846, 'recurring_patterns': {'PANIC': 13, 'MANUAL_SELL': 13, 'CRASH_GUARD': 1}, 'recommendations': ['Limit reliance on panic exits; implement stricter stop\u2011loss thresholds', 'Review manual sell triggers to ensure they align with strategy criteria', 'Monitor MOVE-USDT exposure closely after large crash\u2011guard loss', 'Consider reducing trade frequency to improve win\u2011rate consistency']}"
     }
 ]
