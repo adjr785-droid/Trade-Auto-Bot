@@ -3998,5 +3998,15 @@
         "time": 1795699254.9722056,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6945, 'recurring_patterns': {'high_frequency_reasons': ['PANIC', 'MANUAL SELL', 'CRASH GUARD'], 'symbols_with_multiple_losses': ['MOVE-USDT', 'PROS-USDT', 'PUMP-USDT'], 'loss_concentration': {'MOVE-USDT': 2, 'PROS-USDT': 1, 'PUMP-USDT': 1}, 'loss_causes': {'PANIC': 6, 'MANUAL SELL': 5, 'CRASH GUARD': 1}}, 'recommendations': {'risk_management': 'Tighten panic\u2011sell thresholds and consider disabling automatic panic exits until volatility is better understood.', 'position_sizing': 'Reduce exposure on symbols that have shown repeated losses (e.g., MOVE-USDT, PROS-USDT).', 'monitoring': 'Implement additional alerts for rapid price drops that trigger CRASH GUARD to avoid large single\u2011trade losses.', 'review_manual_sells': 'Assess the timing and price levels of manual sell actions; many small manual sells did not offset larger losses.', 'conservative_ap"
+    },
+    {
+        "time": 1795701295.7775936,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $0.25; auto-buy paused for 11.4h', 'attention': [{'symbol': 'TRX-USDT', 'action': 'monitor', 'reason': 'Position is slightly underwater (-0.04% PnL) and close to stop level (0.295074). No immediate action; watch price action for breach.'}, {'symbol': 'MOVE-USDT', 'action': 'hold', 'reason': 'Position is profitable (+4.18% PnL) with stop set at entry. Maintain until clear downside signal.'}], 'summary': 'Overall portfolio risk remains elevated due to recent losing streak; auto\u2011buy is paused. Maintain current positions, closely watch TRX\u2011USDT for stop breach, and keep MOVE\u2011USDT unchanged. Consider reducing exposure if further losses occur.'}"
+    },
+    {
+        "time": 1795701296.5931458,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6945, 'recurring_patterns': ['High frequency of PANIC exits across multiple symbols', 'Manual sell actions often at small profit levels', 'Crash guard triggered on MOVE-USDT with large loss', 'Losses concentrated in PANIC and crash guard events'], 'recommendations': ['Review and tighten panic\u2011sell thresholds to avoid premature exits', 'Implement stricter position sizing for volatile assets like MOVE-USDT', 'Consider adding stop\u2011loss mechanisms to replace manual panic sells', 'Monitor crash\u2011guard triggers and adjust risk limits to reduce large drawdowns', 'Focus on improving win consistency before scaling trade volume']}"
     }
 ]
