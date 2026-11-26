@@ -4,25 +4,25 @@
         "safe_zone": 0.03382,
         "stop_loss": 0.03221,
         "peak_price": 0.03385,
-        "last_price": 0.03263,
+        "last_price": 0.03255,
         "opened_at": 1795657010.8547218,
         "sl_pct": 4.76,
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
         "xsl": 0.03221,
-        "seen": 1795674896.9125228
+        "seen": 1795675470.6255124
     },
     "TRX-USDT": {
         "entry_price": 0.3042,
         "safe_zone": 0.3042,
         "stop_loss": 0.295074,
-        "peak_price": 0.3042,
-        "last_price": 0.30409,
+        "peak_price": 0.30444,
+        "last_price": 0.30444,
         "opened_at": 1795674780.0019028,
         "sl_pct": 3.0,
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
         "xsl": 0.295074,
-        "seen": 1795674897.1377099
+        "seen": 1795675471.1539826
     }
 }

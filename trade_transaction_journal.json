@@ -3824,5 +3824,15 @@
             "warning": "RSI is low (39.11) indicating potential oversold conditions, but price volatility and lack of market filter increase uncertainty. Ensure position sizing aligns with overall portfolio risk limits.",
             "summary": "Considering a $5 USDT buy of TRX at $0.30419 with no active BTC filter and no existing position, the trade carries medium risk due to low RSI and limited market context. Proceed cautiously and monitor price action closely."
         }
+    },
+    {
+        "time": 1795675479.8595493,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $0.25; auto-buy paused for 18.5h', 'attention': [{'symbol': 'SKYAI-USDT', 'action': 'monitor', 'reason': 'Position down -3.76% with stop only 0.34% below current price; risk of further loss if price continues to fall.'}, {'symbol': 'TRX-USDT', 'action': 'hold', 'reason': 'Small positive PnL (+0.08%) and stop comfortably below entry; no immediate action required.'}], 'summary': 'Overall portfolio risk remains elevated due to recent losing streak and auto\u2011buy pause. Maintain vigilance on SKYAI-USDT; consider tightening stop if price drops further. TRX-USDT appears stable for now. No new entries recommended until risk metrics improve.'}"
+    },
+    {
+        "time": 1795675480.7325134,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6945, 'recurring_patterns': ['High frequency of PANIC exits', 'Manual sell triggers on small profit targets', 'Single large loss from CRASH GUARD on MOVE-USDT'], 'recommendations': ['Review and tighten panic\u2011sell thresholds to avoid frequent small losses', 'Consolidate manual sell strategy to target larger profit margins before exiting', 'Implement stricter risk controls for high\u2011volatility assets like MOVE-USDT to prevent large crash\u2011guard losses', 'Consider reducing position size on symbols with repeated panic exits to limit downside exposure']}"
     }
 ]
