@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690905,
+    "last_update_id": 935690907,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -75,7 +75,7 @@
         "JCT-USDT"
     ],
     "audit_down": {},
-    "audit_last": 1795654293.5161147,
+    "audit_last": 1795654623.045626,
     "audit_ai_cls": "",
     "perf_breaker": {
         "until": 1795645210.5830717,
@@ -88,16 +88,32 @@
     "panel_rows": [
         [
             {
-                "text": "\u2b05\ufe0f Analyse",
-                "callback_data": "/analyse"
+                "text": "\ud83d\udd0d Scan now",
+                "callback_data": "m:r:scan"
             },
             {
-                "text": "\ud83d\udd04 Refresh",
-                "callback_data": "m:su"
+                "text": "\ud83e\uddfe Scan History",
+                "callback_data": "m:scan_hist"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udcda Coin List",
+                "callback_data": "m:coins"
+            }
+        ],
+        [
+            {
+                "text": "\u2b05\ufe0f Tools",
+                "callback_data": "m:tools"
+            },
+            {
+                "text": "\ud83c\udfe0 Main Menu",
+                "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83d\udc47 *Actions*",
+    "panel_text": "\ud83d\udd0d *SCAN*",
     "kb_mid": 6294,
     "out_mid": 6295,
     "panel_mid": 6296
