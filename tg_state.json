@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935690886,
+    "last_update_id": 935690888,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT33.93/\u20a646,371",
+    "kb_ph": "USDT34.04/\u20a646,522",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -82,52 +82,53 @@
         "since": 1795558810.5830717,
         "loss": -1.4850249000000058
     },
-    "kb_mid": 6276,
-    "out_text": "\ud83d\udcbc *PORTFOLIO* $33.91 | \u20a646,353\n\ud83d\udcb5 Cash free $0.03 | In coins $33.80 (100%)\n\ud83d\udfe1 BGB 0.00011912253 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *GWEI* $14.94 (44%)\n+0.06% (+$0.01) | Entry 0.009779\nQty 1527.2213 | Price 0.009785 | Stop 0.009298 (-5%)\nRSI 46 | Mixed | ATH -96%\n\n\ud83d\udfe2 *BLESS* $8.74 (26%)\n\u2800\n\u2800",
+    "out_mid": 6280,
+    "out_text": "\ud83e\uddf9 Daily auto-clear: removed 1 message(s).\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795653627.4212332,
+    "out_time": 1795654273.7805388,
+    "panel_mid": 6281,
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
+                "text": "\ud83d\udda5 System",
+                "callback_data": "/bot"
             },
             {
-                "text": "1/4",
-                "callback_data": "pg:x"
+                "text": "\ud83d\udcc8 Stats",
+                "callback_data": "/stats"
+            }
+        ],
+        [
+            {
+                "text": "\u2699\ufe0f Settings",
+                "callback_data": "m:set"
             },
             {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
+                "text": "\ud83d\udcbc Holdings",
+                "callback_data": "m:r:holdings"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udcdc Trade History",
+                "callback_data": "m:r:history"
             },
             {
-                "text": "\ud83c\udfe0",
-                "callback_data": "m:menu"
+                "text": "\ud83e\udde0 Ask AI",
+                "callback_data": "m:ai:1"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\uddf9 Clear Chat",
+                "callback_data": "/clear"
             },
             {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
+                "text": "\ud83d\udea8 PANIC SELL",
+                "callback_data": "/panic"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/4*",
-    "pages": {
-        "p": [
-            "\ud83d\udcbc *PORTFOLIO* $33.91 | \u20a646,353\n\ud83d\udcb5 Cash free $0.03 | In coins $33.80 (100%)\n\ud83d\udfe1 BGB 0.00011912253 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *GWEI* $14.94 (44%)\n+0.06% (+$0.01) | Entry 0.009779\nQty 1527.2213 | Price 0.009785 | Stop 0.009298 (-5%)\nRSI 46 | Mixed | ATH -96%\n\n\ud83d\udfe2 *BLESS* $8.74 (26%)\n\u2800\n\u2800",
-            "+3.99% (+$0.34) | Entry 0.016691\nQty 503.28667 | Price 0.017357 | Stop 0.015022 (-13%)\nRSI 50 | Mixed | ATH -93%\n\n\ud83d\udfe2 *SKYAI* $5.07 (15%)\n+1.53% (+$0.08) | Entry 0.033430\nQty 149.41392 | Price 0.033940 | Stop 0.031277 (-8%)\nRSI 43 | Mixed | ATH -96%\n\n\ud83d\udfe2 *DGAI* $5.05 (15%)\n\u2800\n\u2800",
-            "+1.19% (+$0.06) | Entry 0.995906\nQty 5.01498 | Price 1.0077 | Stop 0.949098 (-6%)\nRSI 46 | Mixed | ATH -66%\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\nand 8 more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT33.91/\u20a646,353\n\n\ud83e\udde0 *AI:* Portfolio is $33.91 total, 100% in coins; cash is only $0.03, and\n\u2800\n\u2800",
-            "stop\u2011losses for GWEI, BLESS, SKYAI, DGAI are 5\u201113% below entry, warrant\nmonitoring for downside risk.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
-        ],
-        "i": 0,
-        "mode": "Markdown",
-        "x": [
-            {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
-            }
-        ],
-        "cmd": "m:r:holdings"
-    },
-    "out_mid": 6273,
-    "panel_mid": 6274
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
+    "kb_mid": 6282
 }

@@ -3322,5 +3322,15 @@
         "time": 1795653463.100021,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 50.0, 'net_pnl_usdt': 0.0682, 'recurring_patterns': ['PANIC (5 occurrences)', 'MANUAL SELL ALL (3 occurrences)', '15-MINUTE NO-UPWARD-TREND ROTATION (3 occurrences)', 'MANUAL SELL $ (multiple small sells)'], 'recommendations': ['Review and tighten panic\u2011sell triggers to avoid frequent small losses', 'Consolidate manual sell criteria to reduce fragmented exits', 'Consider adding stricter trend validation before entering 15\u2011minute rotation trades', 'Monitor high\u2011frequency loss symbols (e.g., JCT-USDT, DOS-USDT) for potential de\u2011listing or strategy adjustment']}"
+    },
+    {
+        "time": 1795654287.1112888,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [], 'summary': 'All four positions are currently profitable with modest gains (0.5%\u20114.6%). Stops are reasonably placed below entry prices, providing downside protection. No immediate actions are required; continue to monitor price movements and maintain existing stops. If any position approaches its stop level, consider tightening the stop to lock in gains.'}"
+    },
+    {
+        "time": 1795654287.7896585,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 50.0, 'net_pnl_usdt': 0.0682, 'recurring_patterns': ['PANIC', 'MANUAL SELL ALL', '15-MINUTE NO-UPWARD-TREND ROTATION'], 'recommendations': 'Maintain strict risk limits; avoid panic exits; consider reducing exposure to high\u2011volatility symbols; prioritize trades with clear technical signals over manual overrides; monitor for repeated loss patterns before entering new positions.'}"
     }
 ]
