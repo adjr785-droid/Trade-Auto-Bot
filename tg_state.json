@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690878,
+    "last_update_id": 935690880,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -40,8 +40,8 @@
             1795583010.8136437
         ],
         "m:scan_hist": [
-            2,
-            1795605441.4943006
+            1,
+            1795653571.825802
         ],
         "m:ai:1": [
             1,
@@ -93,7 +93,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "1/16",
+                "text": "2/16",
                 "callback_data": "pg:x"
             },
             {
@@ -112,7 +112,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/16*",
+    "panel_text": "\ud83d\udcc4 *Page 2/16*",
     "pages": {
         "p": [
             "\ud83d\udd0e *SCAN HISTORY* \u00b7 467/467 coins (first 150)\n24 scans \u00b7 6.5h\n```\nCOIN    RSI    1H WHY\n------------------------------\nNEAR     59  +3.0 Blocked\nSUI      60  +1.2 Mkt filter\nWLD      65  +0.7 Blocked\nBLESS    46  +4.4 Auto-buy off\nLINK     63  +1.3 Mkt filter\n```\n\u2800",
@@ -132,7 +132,7 @@
             "```\nPENDLE   57     - Vol low\nLDO      61     - Vol low\nCAKE     65     - Vol low\nIN       57     - Vol low\nATM      44     - Vol low\nUS       62     - Vol low\nPEAQ     56     - Vol low\nHNT      58     - Vol low\nSOPH     51     - Vol low\nSEI      60     - Vol low\n```",
             "```\nOP       58     - Vol low\nHBAR     66     - Vol low\nTCOM     39     - Vol low\nCROSS    42     - Vol low\nMOEW     55     - Vol low\n```\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 0,
+        "i": 1,
         "mode": "Markdown",
         "x": [
             {
