@@ -3632,5 +3632,11 @@
         "time": 1795663793.006604,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.223, 'recurring_patterns': {'exit_reasons': {'PANIC': 9, 'MANUAL_SELL': 9, 'TRAILING_STOP': 1}, 'symbols_with_multiple_trades': {'ADA-USDT': 3, 'BLESS-USDT': 4, 'PANIC_related_symbols': ['ARIA-USDT', 'JCT-USDT', 'PROS-USDT', 'PUMP-USDT', 'DGAI-USDT', 'SKYAI-USDT', 'GWEI-USDT']}}, 'recommendations': {'risk_management': 'Consider reducing reliance on panic exits; implement predefined profit targets and tighter stop\u2011loss thresholds.', 'trade_execution': 'Increase use of systematic exit strategies (e.g., trailing stops) to replace ad\u2011hoc manual sells.', 'position_sizing': 'Review position sizes on symbols with repeated losses (e.g., JCT-USDT, PROS-USDT) to limit downside exposure.', 'monitoring': 'Add alerts for rapid price moves to avoid panic\u2011driven decisions.', 'evaluation': 'Track win\u2011rate and PnL trends over larger sample sizes before adjusting"
+    },
+    {
+        "time": 1795663826.780552,
+        "event": "ai_coin_advisory",
+        "reviewed": 25,
+        "source": "coins.db"
     }
 ]
