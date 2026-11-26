@@ -3978,5 +3978,15 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795698329.7219563,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $0.25; auto-buy paused for 12.2h', 'attention': [{'symbol': 'TRX-USDT', 'action': 'monitor', 'reason': 'Small loss (-0.07%) and price approaching stop level (0.295074). Consider tightening stop or exiting if price breaches stop.'}, {'symbol': 'MOVE-USDT', 'action': 'hold', 'reason': 'Positive PnL (+5.24%) with price above entry; stop is at entry level, providing a breakeven floor.'}], 'summary': 'Overall portfolio risk remains elevated due to recent performance breaker and auto-buy pause. Maintain vigilance on the TRX position as it nears its stop; MOVE is currently profitable but keep the stop at entry to protect gains. No new entries are recommended until risk metrics improve.'}"
+    },
+    {
+        "time": 1795698330.9237008,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6945, 'recurring_patterns': {'loss_causes': ['PANIC exits', 'CRASH GUARD trigger', 'manual sell at loss on MOVE-USDT, PROS-USDT'], 'profit_causes': ['PANIC exits on small gains', 'manual sell on BLESS-USDT and ADA-USDT'], 'symbol_bias': {'MOVE-USDT': {'trades': 4, 'net_pnl': -0.6398479600000126}, 'PROS-USDT': {'trades': 1, 'net_pnl': -0.492651}, 'BLESS-USDT': {'trades': 4, 'net_pnl': 0.6173614379999999}}}, 'recommendations': ['Limit panic\u2011sell triggers; require a minimum profit threshold before auto\u2011exit.', 'Review and tighten crash\u2011guard parameters to avoid large single\u2011trade losses.', 'Reduce exposure to high\u2011volatility symbols like MOVE-USDT and PROS-USDT until pattern stabilises.', 'Prefer manual sell decisions on symbols that have shown consistent small gains (e.g., BLESS-USDT, ADA-USDT).', 'Implement stricter position sizing to cap per\u2011tra"
     }
 ]
