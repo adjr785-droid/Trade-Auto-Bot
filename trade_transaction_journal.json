@@ -3988,5 +3988,15 @@
         "time": 1795698330.9237008,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6945, 'recurring_patterns': {'loss_causes': ['PANIC exits', 'CRASH GUARD trigger', 'manual sell at loss on MOVE-USDT, PROS-USDT'], 'profit_causes': ['PANIC exits on small gains', 'manual sell on BLESS-USDT and ADA-USDT'], 'symbol_bias': {'MOVE-USDT': {'trades': 4, 'net_pnl': -0.6398479600000126}, 'PROS-USDT': {'trades': 1, 'net_pnl': -0.492651}, 'BLESS-USDT': {'trades': 4, 'net_pnl': 0.6173614379999999}}}, 'recommendations': ['Limit panic\u2011sell triggers; require a minimum profit threshold before auto\u2011exit.', 'Review and tighten crash\u2011guard parameters to avoid large single\u2011trade losses.', 'Reduce exposure to high\u2011volatility symbols like MOVE-USDT and PROS-USDT until pattern stabilises.', 'Prefer manual sell decisions on symbols that have shown consistent small gains (e.g., BLESS-USDT, ADA-USDT).', 'Implement stricter position sizing to cap per\u2011tra"
+    },
+    {
+        "time": 1795699253.721268,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $0.25; auto-buy paused for 11.9h', 'attention': [{'symbol': 'TRX-USDT', 'action': 'monitor', 'reason': 'Small negative PnL (-0.06%) and price near stop; risk of further downside, but position is modest and stop is close to entry.'}, {'symbol': 'MOVE-USDT', 'action': 'consider partial profit', 'reason': 'Positive PnL (+6.02%) with price above stop; however, market volatility is uncertain and auto\u2011buy is paused, so a cautious partial take\u2011profit may reduce exposure.'}], 'summary': 'Overall portfolio risk remains elevated due to recent losses and the auto\u2011buy pause. Maintain vigilance on TRX-USDT near its stop level and evaluate a modest profit\u2011taking on MOVE-USDT while keeping the majority of the position to allow further upside. No new orders should be placed until risk metrics improve.'}"
+    },
+    {
+        "time": 1795699254.9722056,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6945, 'recurring_patterns': {'high_frequency_reasons': ['PANIC', 'MANUAL SELL', 'CRASH GUARD'], 'symbols_with_multiple_losses': ['MOVE-USDT', 'PROS-USDT', 'PUMP-USDT'], 'loss_concentration': {'MOVE-USDT': 2, 'PROS-USDT': 1, 'PUMP-USDT': 1}, 'loss_causes': {'PANIC': 6, 'MANUAL SELL': 5, 'CRASH GUARD': 1}}, 'recommendations': {'risk_management': 'Tighten panic\u2011sell thresholds and consider disabling automatic panic exits until volatility is better understood.', 'position_sizing': 'Reduce exposure on symbols that have shown repeated losses (e.g., MOVE-USDT, PROS-USDT).', 'monitoring': 'Implement additional alerts for rapid price drops that trigger CRASH GUARD to avoid large single\u2011trade losses.', 'review_manual_sells': 'Assess the timing and price levels of manual sell actions; many small manual sells did not offset larger losses.', 'conservative_ap"
     }
 ]
