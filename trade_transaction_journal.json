@@ -3746,5 +3746,15 @@
         "event": "ai_coin_advisory",
         "reviewed": 22,
         "source": "coins.db"
+    },
+    {
+        "time": 1795670009.4260356,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $0.25; auto-buy paused for 20.1h', 'attention': [{'symbol': 'SKYAI-USDT', 'action': 'monitor', 'reason': 'Position is down -2.99% with stop close to current price; consider tightening stop or exiting if price approaches stop.'}], 'summary': 'Overall portfolio risk remains elevated due to recent losses and paused auto-buy. No new entries recommended until risk metrics improve. Maintain close watch on SKYAI-USDT and adjust risk controls as needed.'}"
+    },
+    {
+        "time": 1795670010.4176087,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6945, 'recurring_patterns': {'high_frequency_reasons': ['PANIC', 'MANUAL SELL', 'CRASH GUARD'], 'symbols_with_multiple_losses': ['MOVE-USDT', 'PROS-USDT', 'PUMP-USDT'], 'loss_concentration': {'MOVE-USDT': 2, 'PROS-USDT': 1, 'PUMP-USDT': 1}, 'loss_causes': {'PANIC': 6, 'MANUAL SELL': 7, 'CRASH GUARD': 1}}, 'recommendations': {'risk_management': 'Consider tightening panic\u2011sell thresholds and reviewing manual sell triggers to avoid frequent small losses.', 'position_sizing': 'Reduce exposure on symbols that have shown multiple losses (e.g., MOVE-USDT) until volatility stabilizes.', 'monitoring': 'Implement alerts for rapid price drops to replace reactive panic sells with pre\u2011defined stop\u2011loss orders.', 'uncertainty': 'Current performance data is limited to 30 trades; further data is needed to confirm pattern stability.'}}"
     }
 ]
