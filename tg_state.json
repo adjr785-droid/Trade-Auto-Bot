@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT33.91/\u20a646,353",
+    "kb_ph": "USDT33.93/\u20a646,371",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -82,7 +82,7 @@
         "since": 1795558810.5830717,
         "loss": -1.4850249000000058
     },
-    "kb_mid": 6275,
+    "kb_mid": 6276,
     "out_text": "\ud83d\udcbc *PORTFOLIO* $33.91 | \u20a646,353\n\ud83d\udcb5 Cash free $0.03 | In coins $33.80 (100%)\n\ud83d\udfe1 BGB 0.00011912253 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *GWEI* $14.94 (44%)\n+0.06% (+$0.01) | Entry 0.009779\nQty 1527.2213 | Price 0.009785 | Stop 0.009298 (-5%)\nRSI 46 | Mixed | ATH -96%\n\n\ud83d\udfe2 *BLESS* $8.74 (26%)\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "out_time": 1795653627.4212332,
