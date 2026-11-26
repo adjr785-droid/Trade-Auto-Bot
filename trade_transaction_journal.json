@@ -3782,5 +3782,15 @@
         "time": 1795671889.7631009,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6945, 'recurring_patterns': {'loss_causes': ['PANIC exits', 'CRASH GUARD trigger', 'manual sell at loss on MOVE-USDT, PROS-USDT'], 'profit_causes': ['PANIC exits on small gains', 'manual sell after modest rise on BLESS-USDT, ADA-USDT'], 'symbol_bias': {'MOVE-USDT': {'trades': 4, 'net_pnl': -0.6398479600000256}, 'PROS-USDT': {'trades': 1, 'net_pnl': -0.492651}, 'BLESS-USDT': {'trades': 4, 'net_pnl': 0.6173614179999999}}}, 'recommendations': ['Limit panic\u2011sell triggers; require a minimum profit threshold before auto\u2011exit.', 'Review and tighten crash\u2011guard parameters to avoid large single\u2011trade losses.', 'Reduce exposure to high\u2011volatility symbols like MOVE-USDT and PROS-USDT until pattern stabilises.', 'Prefer manual sell decisions after confirming sustained upside rather than immediate small gains.', 'Implement a stricter stop\u2011loss or trailing\u2011st"
+    },
+    {
+        "time": 1795674308.0034463,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $0.25; auto-buy paused for 18.9h', 'attention': [{'symbol': 'SKYAI-USDT', 'action': 'monitor', 'reason': 'Position is 3.22% down, stop is close to current price; consider tightening stop or exiting if price approaches stop.'}], 'summary': 'Overall portfolio risk is elevated due to recent losses and auto-buy pause. The only open position (SKYAI-USDT) is modestly underwater; maintain vigilance, avoid new entries until performance stabilizes.'}"
+    },
+    {
+        "time": 1795674309.059891,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6945, 'recurring_patterns': {'high_frequency_reasons': ['PANIC', 'MANUAL SELL', 'CRASH GUARD'], 'symbols_with_multiple_losses': ['MOVE-USDT', 'PROS-USDT', 'PUMP-USDT'], 'loss_concentration': {'MOVE-USDT': 2, 'PROS-USDT': 1, 'PUMP-USDT': 1}, 'loss_causes': {'PANIC': 6, 'MANUAL SELL': 5, 'CRASH GUARD': 1}}, 'recommendations': {'risk_management': 'Tighten panic\u2011sell thresholds and consider disabling automatic panic exits until volatility is better quantified.', 'position_sizing': 'Reduce exposure on symbols that have shown repeated losses (e.g., MOVE-USDT, PROS-USDT).', 'monitoring': 'Implement additional alerts for rapid price drops that trigger CRASH GUARD to avoid large single\u2011trade drawdowns.', 'strategy_review': 'Re\u2011evaluate manual sell triggers to ensure they align with profit targets rather than ad\u2011hoc decisions.'}}"
     }
 ]

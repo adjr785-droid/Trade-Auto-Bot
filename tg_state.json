@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935690991,
+    "last_update_id": 935690992,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT32.80/\u20a644,833",
+    "kb_ph": "USDT32.77/\u20a644,796",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -79,5 +79,53 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 6463
+    "kb_mid": 6465,
+    "out_mid": 6466,
+    "out_text": "\ud83d\udfe1 *MANUAL BUY*\n_Passed at least 5/7 core and 2/3 additional criteria. Manual review only._\n\nNone right now.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_mode": "Markdown",
+    "out_time": 1795674299.7190943,
+    "panel_mid": 6467,
+    "panel_rows": [
+        [
+            {
+                "text": "\ud83d\udc41 Watch (0)",
+                "callback_data": "m:at:W"
+            },
+            {
+                "text": "\u25b6 \ud83d\udfe1 Manual (0)",
+                "callback_data": "m:at:M"
+            },
+            {
+                "text": "\ud83e\udd16 Auto (0)",
+                "callback_data": "m:at:A"
+            }
+        ],
+        [
+            {
+                "text": "\ud83c\udfaf SETUPS",
+                "callback_data": "m:su"
+            },
+            {
+                "text": "\ud83c\udd95 NEW LISTINGS",
+                "callback_data": "m:nl"
+            }
+        ],
+        [
+            {
+                "text": "\u2b50 FAVOURITES",
+                "callback_data": "m:fv"
+            },
+            {
+                "text": "\ud83d\uddc4 ARCHIVE",
+                "callback_data": "m:ar:D"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udd04 Refresh",
+                "callback_data": "m:at:M"
+            }
+        ]
+    ],
+    "panel_text": "\ud83d\udc47 *Actions*"
 }
