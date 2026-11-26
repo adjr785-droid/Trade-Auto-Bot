@@ -364,5 +364,13 @@
         "time": 1795655600.0272925,
         "reason": "PANIC",
         "strategy": "OTHER"
+    },
+    {
+        "sym": "MOVE-USDT",
+        "pnl": -0.12860200000000033,
+        "fee": 0.016538,
+        "time": 1795656962.7476392,
+        "reason": "MANUAL SELL $8.30",
+        "strategy": "OTHER"
     }
 ]

@@ -3568,5 +3568,23 @@
         "time": 1795656886.8928936,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 0.2386, 'recurring_patterns': {'reasons': {'PANIC': 7, 'MANUAL SELL ALL': 3, 'MANUAL SELL $': 5, 'TRAILING STOP (8.0%)': 1, 'RSI 75': 1}}, 'recommendations': {'risk_management': 'Consider tightening panic\u2011sell thresholds and reviewing manual sell triggers to reduce frequent small losses.', 'strategy_adjustments': 'Limit exposure to high\u2011volatility symbols that generate repeated panic exits (e.g., BLESS-USDT, PUMP-USDT).', 'confidence': 'moderate uncertainty due to limited sample size (30 trades) and high variance in individual PnL.'}}"
+    },
+    {
+        "time": 1795656962.7494037,
+        "event": "trade_closed",
+        "symbol": "MOVE-USDT",
+        "pnl_usdt": -0.12860200000000033,
+        "reason": "MANUAL SELL $8.30",
+        "strategy": "OTHER"
+    },
+    {
+        "time": 1795656974.1404343,
+        "event": "ai_manual_sell_review",
+        "symbol": "MOVE-USDT",
+        "review": {
+            "review": "The manual sell of MOVE-USDT resulted in a realized loss of $0.1286 on an average exit price of 0.00643 USDT. The position size sold (1,286.02 units) represented roughly a third of the total base holdings, leaving 3,858.10 units still open. The loss indicates that the exit price was below the acquisition cost, and the manual intervention may have been premature or not aligned with the bot's risk parameters.",
+            "lesson": "Future exits should be guided by the bot's predefined risk thresholds and market signals rather than manual timing, especially for volatile assets like MOVE. Ensure that any manual sell aligns with the bot's stop\u2011loss or target\u2011profit criteria to avoid unnecessary losses. Consider reviewing the entry price distribution to confirm whether a partial exit was justified.",
+            "confidence": "medium"
+        }
     }
 ]

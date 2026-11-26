@@ -39,8 +39,8 @@
             "last_error": ""
         },
         "sell_review": {
-            "last_success": 1795655605.3908079,
-            "successes": 31,
+            "last_success": 1795656973.3114543,
+            "successes": 32,
             "last_error": ""
         },
         "analyse_review": {
@@ -76,7 +76,7 @@
             "failures": 18
         }
     },
-    "last_stage_success": 1795656886.0938578,
+    "last_stage_success": 1795656973.3114543,
     "last_success": 1795656893.7543998,
     "emergency_ended": 1795649398.9801934,
     "recovery_start_alerted": false

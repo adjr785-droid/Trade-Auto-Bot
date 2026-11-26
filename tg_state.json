@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935690949,
+    "last_update_id": 935690950,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT32.93/\u20a645,003",
+    "kb_ph": "USDT33.16/\u20a645,327",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -80,10 +80,10 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 6363,
-    "out_text": "\n\u2b50 *FAVOURITES*\n_Your own list. Tap a coin to buy, sell or remove it._\n\n```\nCOIN     PRICE RSI    1H    24H\n-------------------------------\nMOVE  0.006529   -     -  +45.8\nSKYAI  0.03385  45  +0.2  -10.4\n```\n\u2800\n\u2800",
+    "kb_mid": 6365,
+    "out_text": "\u2705 *SOLD:* 1286.02 MOVE @ 0.006430\n\ud83d\udd34 PnL: $-0.13\nRemaining: 3858.1017 MOVE (stop re-armed)\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795656895.4811275,
+    "out_time": 1795656967.5821145,
     "panel_rows": [
         [
             {
@@ -97,6 +97,6 @@
         ]
     ],
     "panel_text": "\u26a0\ufe0f *CONFIRM SELL*\n25% of MOVE (about $8.30) at market.",
-    "out_mid": 6361,
-    "panel_mid": 6362
+    "out_mid": 6364,
+    "panel_hidden": true
 }
