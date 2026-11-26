@@ -3,8 +3,8 @@ try:import fcntl
 except ImportError:fcntl=None
 TK=os.environ.get('TG_TOKEN');CHAT=str(os.environ.get('TG_CHAT_ID',''));API=f"https://api.telegram.org/bot{TK}"
 DB,ST,CFG,QF,LF,CD,SC,HIST,LOCK,SH,OUT,AL,ATHATL_CACHE="positions.json","tg_state.json","settings.json","queue.json","profit_ledger.json",".cmd_cooldown.json","scan_state.json","trade_history.json",".bot.lock","scan_history.json","telegram_output.json","alerts.json","ath_atl_cache.json"
-COINDB="coins.db";NEWLIST="new_listing_state.json";GUARDIAN="bot_guardian.json";AI_RECENT="ai_recent.json";GCHARTER="core_charter.json";GAUDIT="guardian_audit.json";JOURNAL="trade_transaction_journal.json";BREAKER="trade_circuit_breaker.json";AI_HEALTH="ai_health.json"
-FILES=[COINDB,NEWLIST,DB,ST,CFG,QF,LF,CD,SC,HIST,SH,OUT,AL,ATHATL_CACHE,JOURNAL,BREAKER,GUARDIAN,GCHARTER,GAUDIT,AI_HEALTH,AI_RECENT]
+COINDB="coins.db";FAV="favourites.json";NEWLIST="new_listing_state.json";GUARDIAN="bot_guardian.json";AI_RECENT="ai_recent.json";GCHARTER="core_charter.json";GAUDIT="guardian_audit.json";JOURNAL="trade_transaction_journal.json";BREAKER="trade_circuit_breaker.json";AI_HEALTH="ai_health.json"
+FILES=[COINDB,FAV,NEWLIST,DB,ST,CFG,QF,LF,CD,SC,HIST,SH,OUT,AL,ATHATL_CACHE,JOURNAL,BREAKER,GUARDIAN,GCHARTER,GAUDIT,AI_HEALTH,AI_RECENT]
 STABLE=['USDC','USDT','DAI','FDUSD','TUSD','USDD','USDE'];LEV=['3L','3S','5L','5S','10L','10S','2L','2S'];BL=['RPANW','CT','ONE']
 ex=ccxt.bitget({'apiKey':os.environ.get('BITGET_API_KEY'),'secret':os.environ.get('BITGET_API_SECRET'),'password':os.environ.get('BITGET_API_PASSPHRASE'),'enableRateLimit':True});ex.options['createMarketBuyOrderRequiresPrice']=False
 _RL={"ccxt":[],"groq":[]}
@@ -1331,7 +1331,7 @@ def analyse_top3(tab="M"):
  def tb(k,lbl):return _B(("▶ " if tab==k else "")+f"{lbl} ({cnt.get({'W':'WATCH','M':'MANUAL','A':'AUTO'}[k],0)})",f"m:at:{k}")
  keyboard=[[tb("W","👁 Watch"),tb("M","🟡 Manual"),tb("A","🤖 Auto")],
            [_B("🎯 SETUPS","m:su"),_B("🆕 NEW LISTINGS","m:nl")],
-           [_B("🗄 ARCHIVE","m:ar:D")],
+           [_B("⭐ FAVOURITES","m:fv"),_B("🗄 ARCHIVE","m:ar:D")],
            [_B("🔄 Refresh",f"m:at:{tab}")]]
  # Coin names remain in the readable list above; do not create a separate button for every coin.
  _send("\n".join(lines)[:3800],"Markdown",{"inline_keyboard":keyboard})
@@ -1365,6 +1365,41 @@ def analyse_setups():
  body=("```\n"+f"{'COIN':<7}{'RSI':>4}{'1H':>6}{'24H':>7}{'TY':>3} BLOCK"+"\n"+"-"*32+"\n"+"\n".join(out)+"\n```") if out else "No coin matches a setup right now."
  lines=["🎯 *SETUPS*","_Coins from the latest scan that look like a setup, even if a gate blocks them._","",body,"_TY: T Trend, P Pullback, B Bounce, K Breakout_","_BLOCK: gate failed. R RSI, M MA, H 1H, D 24H. OK = passed all four._"]
  _send("\n".join(lines),"Markdown",{"inline_keyboard":[[_B("⬅️ Analyse","/analyse"),_B("🔄 Refresh","m:su")]]})
+def fav_list():
+ v=load(FAV,[])
+ return [str(x).upper() for x in v if isinstance(x,str)] if isinstance(v,list) else []
+def fav_show(msg=""):
+ """Favourites: your own watch list of tokens. Read-only view plus add/remove buttons; never buys or sells."""
+ fl=fav_list();rows=[]
+ for c in fl:
+  sym=f"{c}-USDT"
+  try:r=_dbq("SELECT price,rsi,h1,chg24 FROM coins WHERE sym=?",(sym,),one=True)
+  except Exception:r=None
+  px=(r[0] if r and r[0] else None) or live(sym)
+  rows.append(f"{c[:6]:<6}{(format(float(px),'.6g')[:8] if px else '-'):>8}{_fmt(r[1] if r else None,'.0f'):>4}{_fmt(r[2] if r else None,'+.1f'):>6}{_fmt(r[3] if r else None,'+.1f'):>7}")
+ body=("```\n"+f"{'COIN':<6}{'PRICE':>8}{'RSI':>4}{'1H':>6}{'24H':>7}"+"\n"+"-"*31+"\n"+"\n".join(rows)+"\n```") if rows else "No favourites yet. Tap Add."
+ kb=[[_B("➕ Add coin","m:more:fav:0"),_B("🔄 Refresh","m:fv")]]
+ kb+=_grid([_B(f"⭐ {c}",f"m:fc:{c}") for c in fl],3)+[[_B("⬅️ Analyse","/analyse")]]
+ _send(("\n".join(x for x in (msg,)+("⭐ *FAVOURITES*","_Your own list. Tap a coin to buy, sell or remove it._","",body) if x is not None)),"Markdown",{"inline_keyboard":kb})
+def fav_coin(c):
+ # One favourite: price, what you hold, and Buy / Sell ALL (like panic sell for this coin) / Remove.
+ c=str(c).upper();sym=f"{c}-USDT";px=live(sym)
+ try:held=float(B('free',c) or 0)
+ except Exception:held=0.0
+ lines=[f"⭐ *{c}*",f"Price: {fp(px) if px else 'n/a'} USDT",f"You hold: {held:.8g}"+(f" (about ${held*px:.2f})" if px and held else "")]
+ kb=[[_B(f"🛒 Buy {c}",f"m:b:{c}")]]
+ if px and held*px>=1.0:kb.append([_B(f"🔴 SELL ALL {c}",f"m:sc:{c}:100")])
+ kb.append([_B("🗑 Remove from favourites",f"m:fd:{c}")]);kb.append([_B("⬅️ Favourites","m:fv")])
+ ui_send("\n".join(lines),kb)
+def fav_change(c,add):
+ c=str(c).upper();fl=fav_list();note=""
+ if add:
+  if c in fl:note=f"{c} is already in your list."
+  elif c in STABLE:note=f"{c} is a stablecoin and cannot be added."
+  elif len(fl)>=30:note="The list is full (30 coins). Remove one first."
+  else:fl.append(c);note=f"✅ {c} added."
+ else:fl=[x for x in fl if x!=c];note=f"✅ {c} removed."
+ save(FAV,fl);fav_show(note)
 def analyse_new_listings():
  """Show recently detected Bitget spot listings as a readable list, never as buy buttons."""
  state=load(NEWLIST,{})
@@ -3223,7 +3258,7 @@ def ui_coins(kind):
  except Exception:pass
  return out[:18]
 def ui_more(kind,pg=0):
- pre={"buy":"m:b:","analyse":"m:a:","alert":"m:a2:"}.get(kind,"m:b:");back={"buy":"m:buy","analyse":"m:an","alert":"m:al"}.get(kind,"m:menu")
+ pre={"buy":"m:b:","analyse":"m:a:","alert":"m:a2:","fav":"m:fa:"}.get(kind,"m:b:");back={"buy":"m:buy","analyse":"m:an","alert":"m:al","fav":"m:fv"}.get(kind,"m:menu")
  try:
   tk=ex.fetch_tickers();mk=ex.load_markets()
   v=[(k.split('/')[0],float(t.get('quoteVolume') or 0)) for k,t in tk.items() if k.endswith('/USDT') and not skip(k.split('/')[0]) and not (k in mk and not mk[k].get('spot',False))]
@@ -3269,6 +3304,10 @@ def ui_cb(t):
   elif a=="nl":analyse_new_listings()
   elif a=="ar":analyse_archive(p[2] if len(p)>2 else "D")
   elif a=="su":analyse_setups()
+  elif a=="fv":fav_show()
+  elif a=="fc" and len(p)>2:fav_coin(p[2])
+  elif a=="fa" and len(p)>2:fav_change(p[2],True)
+  elif a=="fd" and len(p)>2:fav_change(p[2],False)
   elif a=="mc" and len(p)>2:
    manual_candidate_detail(p[2])
   elif a=="b":
