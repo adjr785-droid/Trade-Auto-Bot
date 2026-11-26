@@ -3542,5 +3542,15 @@
         "time": 1795655831.190987,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 0.2386, 'recurring_patterns': {'reasons': ['PANIC', 'MANUAL SELL', 'TRAILING STOP'], 'symbols': ['BLESS-USDT', 'ADA-USDT', 'JCT-USDT']}, 'recommendations': 'Reduce exposure to high\u2011frequency panic exits; prioritize trades with clear technical signals (e.g., RSI) and avoid manual sell triggers without confirmation. Consider tightening trailing stop thresholds and reviewing loss\u2011heavy symbols (JCT-USDT, DOS-USDT, PROS-USDT) before future allocation.'}"
+    },
+    {
+        "time": 1795656385.4982126,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $0.25; auto\u2011buy paused for 23.8\\u202fh', 'attention': [{'symbol': 'MOVE-USDT', 'action': 'hold', 'reason': 'Position is small, modest 1\\u202f% profit, but stop loss is close (\u224815\\u202f% below entry). Keep monitoring; do not add or close unless price approaches stop.'}], 'summary': 'Overall risk is elevated due to recent losses and auto\u2011buy pause. Existing MOVE position is marginally profitable; maintain current stance and await clearer signals before adjusting exposure.'}"
+    },
+    {
+        "time": 1795656386.5488484,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 0.2386, 'recurring_patterns': {'high_frequency_reasons': ['PANIC', 'MANUAL SELL'], 'common_symbols': ['BLESS-USDT', 'ADA-USDT'], 'risk_events': ['TRAILING STOP (8.0%)', 'RSI 75']}, 'recommendations': {'reduce_panic_exits': True, 'review_manual_sell_criteria': True, 'tighten_trailing_stop_parameters': True, 'increase_monitoring_on_high_volatility_symbols': ['BLESS-USDT', 'ADA-USDT'], 'maintain_current_position_sizing': True}}"
     }
 ]
