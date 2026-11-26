@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935691007,
+    "last_update_id": 935691010,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -72,12 +72,45 @@
         "TRX-USDT"
     ],
     "audit_down": {},
-    "audit_last": 1795674661.7768152,
+    "audit_last": 1795675486.1230845,
     "audit_ai_cls": "",
     "perf_breaker": {
         "until": 1795742224.733271,
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 6497
+    "kb_mid": 6497,
+    "out_mid": 6500,
+    "out_text": "\ud83d\udcdf *OUTPUT*\nResults appear here.",
+    "out_mode": "Markdown",
+    "panel_mid": 6501,
+    "panel_rows": [
+        [
+            {
+                "text": "\ud83e\uddf9 Orders & Dust",
+                "callback_data": "m:tl:trade"
+            },
+            {
+                "text": "\ud83d\udd14 Alerts",
+                "callback_data": "m:tl:alerts"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udcda Coin List",
+                "callback_data": "m:coins"
+            },
+            {
+                "text": "\ud83d\udee0\ufe0f System",
+                "callback_data": "m:tl:sys"
+            }
+        ],
+        [
+            {
+                "text": "\u2b05\ufe0f Main Menu",
+                "callback_data": "m:menu"
+            }
+        ]
+    ],
+    "panel_text": "\ud83e\uddf0 *TOOLS*\nChoose a group."
 }
