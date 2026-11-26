@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935691112,
+    "last_update_id": 935691114,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -88,40 +88,46 @@
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udc41 Watch (0)",
-                "callback_data": "m:at:W"
-            },
-            {
-                "text": "\u25b6 \ud83d\udfe1 Manual (0)",
-                "callback_data": "m:at:M"
-            },
-            {
-                "text": "\ud83e\udd16 Auto (0)",
-                "callback_data": "m:at:A"
+                "text": "\ud83d\udd0d Search any coin",
+                "callback_data": "m:se"
             }
         ],
         [
             {
-                "text": "\ud83d\udcb1 Buy / Sell a coin",
-                "callback_data": "m:pk:M"
-            }
-        ],
-        [
-            {
-                "text": "\ud83c\udfaf SETUPS (scan, history, trade)",
-                "callback_data": "m:su"
+                "text": "TRX",
+                "callback_data": "m:a:TRX"
             },
             {
-                "text": "\ud83d\uddc2 MORE",
-                "callback_data": "m:am"
+                "text": "MOVE",
+                "callback_data": "m:a:MOVE"
+            },
+            {
+                "text": "DOS",
+                "callback_data": "m:a:DOS"
             }
         ],
         [
             {
-                "text": "\ud83d\udd04 Refresh",
-                "callback_data": "m:at:M"
+                "text": "WLD",
+                "callback_data": "m:a:WLD"
+            },
+            {
+                "text": "NEAR",
+                "callback_data": "m:a:NEAR"
+            }
+        ],
+        [
+            {
+                "text": "\u2795 More coins",
+                "callback_data": "m:more:analyse:0"
+            }
+        ],
+        [
+            {
+                "text": "\u2b05\ufe0f Menu",
+                "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83d\udc47 *Actions*"
+    "panel_text": "\ud83d\udd0e *ANALYSE A COIN* \u2014 choose:"
 }
