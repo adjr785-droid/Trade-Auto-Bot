@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935691085,
+    "last_update_id": 935691086,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -81,16 +81,16 @@
         "loss": -0.25205024200007214
     },
     "kb_mid": 6691,
-    "out_text": "\ud83d\udfe1 *MANUAL BUY*\n_Passed at least 5/7 core and 2/3 additional criteria. Manual review only._\n\nNone right now.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "\ud83d\udc41 *WATCH LIST*\n_Rising coins being watched. They move up when they pass the manual rules._\n\n```\nCOIN    RSI    1H    24H  S TY\n------------------------------\nDOS      29  +0.5   -2.4  6  B\n```\n_TY: T Trend, P Pullback, B Bounce, K Breakout_\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udc41 Watch (1)",
+                "text": "\u25b6 \ud83d\udc41 Watch (1)",
                 "callback_data": "m:at:W"
             },
             {
-                "text": "\u25b6 \ud83d\udfe1 Manual (0)",
+                "text": "\ud83d\udfe1 Manual (0)",
                 "callback_data": "m:at:M"
             },
             {
@@ -101,7 +101,7 @@
         [
             {
                 "text": "\ud83d\udcb1 Buy / Sell a coin",
-                "callback_data": "m:pk:M"
+                "callback_data": "m:pk:W"
             }
         ],
         [
@@ -117,12 +117,12 @@
         [
             {
                 "text": "\ud83d\udd04 Refresh",
-                "callback_data": "m:at:M"
+                "callback_data": "m:at:W"
             }
         ]
     ],
     "panel_text": "\ud83d\udc47 *Actions*",
-    "out_time": 1795702989.1155987,
-    "out_mid": 6689,
-    "panel_mid": 6690
+    "out_time": 1795703000.7110112,
+    "out_mid": 6692,
+    "panel_mid": 6693
 }
