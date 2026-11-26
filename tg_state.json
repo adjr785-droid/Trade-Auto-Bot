@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935691025,
+    "last_update_id": 935691026,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -85,32 +85,26 @@
     "panel_rows": [
         [
             {
-                "text": "\ud83e\uddf9 Orders & Dust",
-                "callback_data": "m:tl:trade"
+                "text": "\u274c Cancel Open Orders",
+                "callback_data": "m:r:cancel"
             },
             {
-                "text": "\ud83d\udd14 Alerts",
-                "callback_data": "m:tl:alerts"
+                "text": "\ud83e\uddf9 Dust \u2192 BGB",
+                "callback_data": "m:r:dust"
             }
         ],
         [
             {
-                "text": "\ud83d\udcda Coin List",
-                "callback_data": "m:coins"
+                "text": "\u2b05\ufe0f Tools",
+                "callback_data": "m:tools"
             },
             {
-                "text": "\ud83d\udee0\ufe0f System",
-                "callback_data": "m:tl:sys"
-            }
-        ],
-        [
-            {
-                "text": "\u2b05\ufe0f Main Menu",
+                "text": "\ud83c\udfe0 Main Menu",
                 "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83e\uddf0 *TOOLS*\nChoose a group.",
+    "panel_text": "\ud83e\uddf9 *ORDERS & DUST*\n_Buy, Sell, Scan and Scan History are in Analyse \u2192 Setups._",
     "out_time": 1795675869.2902327,
     "out_mid": 6531,
     "pages": {
