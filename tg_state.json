@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690997,
+    "last_update_id": 935690998,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -86,46 +86,32 @@
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udda5 System",
-                "callback_data": "/bot"
+                "text": "\ud83d\uded2 Trade",
+                "callback_data": "m:tl:trade"
             },
             {
-                "text": "\ud83d\udcc8 Stats",
-                "callback_data": "/stats"
+                "text": "\ud83d\udd14 Alerts",
+                "callback_data": "m:tl:alerts"
             }
         ],
         [
             {
-                "text": "\u2699\ufe0f Settings",
-                "callback_data": "m:set"
+                "text": "\ud83d\udd0d Scan",
+                "callback_data": "m:tl:scan"
             },
             {
-                "text": "\ud83d\udcbc Holdings",
-                "callback_data": "m:r:holdings"
+                "text": "\ud83d\udee0\ufe0f System",
+                "callback_data": "m:tl:sys"
             }
         ],
         [
             {
-                "text": "\ud83d\udcdc Trade History",
-                "callback_data": "m:r:history"
-            },
-            {
-                "text": "\ud83e\udde0 Ask AI",
-                "callback_data": "m:ai:1"
-            }
-        ],
-        [
-            {
-                "text": "\ud83e\uddf9 Clear Chat",
-                "callback_data": "/clear"
-            },
-            {
-                "text": "\ud83d\udea8 PANIC SELL",
-                "callback_data": "/panic"
+                "text": "\u2b05\ufe0f Main Menu",
+                "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
+    "panel_text": "\ud83e\uddf0 *TOOLS*\nChoose a group.",
     "pages": {
         "p": [
             "\ud83c\udfaf *SETUPS*\n_Coins from the latest scan that pass at least 3 of 5 checks._\n\n```\nCOIN  RSI   1H  24H TY PASS BLOCK\n--------------------------------\nPUMP   72 +0.7  +10  - 3/5 RS\nBLESS  56 +2.3   +7  - 3/5 RM\nARIA   61 +1.5  +12  - 3/5 RS\n```\n\u2800\n\u2800",
