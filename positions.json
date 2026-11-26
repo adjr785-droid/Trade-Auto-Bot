@@ -10,19 +10,19 @@
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
         "xsl": 0.295074,
-        "seen": 1795702909.4952488
+        "seen": 1795702995.3485188
     },
     "MOVE-USDT": {
         "entry_price": 0.005911,
         "safe_zone": 0.005911,
         "stop_loss": 0.005911,
         "peak_price": 0.006267,
-        "last_price": 0.00624,
+        "last_price": 0.006233,
         "opened_at": 1795678151.7707772,
         "sl_pct": 10.0,
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
         "xsl": 0.005911,
-        "seen": 1795702909.9989786
+        "seen": 1795702995.6002574
     }
 }
