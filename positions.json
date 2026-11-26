@@ -4,13 +4,13 @@
         "safe_zone": 0.3042,
         "stop_loss": 0.295074,
         "peak_price": 0.30445,
-        "last_price": 0.30357,
+        "last_price": 0.30353,
         "opened_at": 1795674780.0019028,
         "sl_pct": 3.0,
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
         "xsl": 0.295074,
-        "seen": 1795704771.7014089
+        "seen": 1795704835.7138896
     },
     "MOVE-USDT": {
         "entry_price": 0.005911,
@@ -23,19 +23,19 @@
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
         "xsl": 0.005911,
-        "seen": 1795704772.0578222
+        "seen": 1795704836.0832353
     },
     "DOS-USDT": {
         "entry_price": 0.0769,
         "safe_zone": 0.0769,
         "stop_loss": 0.073178,
         "peak_price": 0.0773,
-        "last_price": 0.0771,
+        "last_price": 0.0773,
         "opened_at": 1795703027.4933937,
         "sl_pct": 4.84,
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
         "xsl": 0.073178,
-        "seen": 1795704772.4332855
+        "seen": 1795704836.4486902
     }
 }
