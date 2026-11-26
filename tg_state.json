@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935690994,
+    "last_update_id": 935690995,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT32.78/\u20a644,806",
+    "kb_ph": "USDT32.78/\u20a644,799",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -79,53 +79,72 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 6475,
-    "out_text": "\ud83d\udfe1 *MANUAL BUY*\n_Passed at least 5/7 core and 2/3 additional criteria. Manual review only._\n\nNone right now.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "kb_mid": 6476,
+    "out_text": "\ud83c\udfaf *SETUPS*\n_Coins from the latest scan that pass at least 3 of 5 checks._\n\n```\nCOIN  RSI   1H  24H TY PASS BLOCK\n--------------------------------\nPUMP   72 +0.7  +10  - 3/5 RS\nBLESS  56 +2.3   +7  - 3/5 RM\nARIA   61 +1.5  +12  - 3/5 RS\n```\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795674396.8842149,
+    "out_time": 1795674647.7095742,
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udc41 Watch (0)",
-                "callback_data": "m:at:W"
+                "text": "\u25c0",
+                "callback_data": "pg:p"
             },
             {
-                "text": "\u25b6 \ud83d\udfe1 Manual (0)",
-                "callback_data": "m:at:M"
+                "text": "1/2",
+                "callback_data": "pg:x"
             },
             {
-                "text": "\ud83e\udd16 Auto (0)",
-                "callback_data": "m:at:A"
+                "text": "\u25b6",
+                "callback_data": "pg:n"
+            },
+            {
+                "text": "\ud83c\udfe0",
+                "callback_data": "m:menu"
             }
         ],
         [
             {
-                "text": "\ud83c\udfaf SETUPS",
-                "callback_data": "m:su"
-            },
-            {
-                "text": "\ud83c\udd95 NEW LISTINGS",
-                "callback_data": "m:nl"
-            }
-        ],
-        [
-            {
-                "text": "\u2b50 FAVOURITES",
-                "callback_data": "m:fv"
-            },
-            {
-                "text": "\ud83d\uddc4 ARCHIVE",
-                "callback_data": "m:ar:D"
+                "text": "\u2b05\ufe0f Analyse",
+                "callback_data": "/analyse"
             }
         ],
         [
             {
                 "text": "\ud83d\udd04 Refresh",
-                "callback_data": "m:at:M"
+                "callback_data": "m:su"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udcb1 Buy / Sell a coin",
+                "callback_data": "m:pk:su"
             }
         ]
     ],
-    "panel_text": "\ud83d\udc47 *Actions*",
-    "out_mid": 6472,
-    "panel_mid": 6473
+    "panel_text": "\ud83d\udcc4 *Page 1/2*",
+    "out_mid": 6477,
+    "pages": {
+        "p": [
+            "\ud83c\udfaf *SETUPS*\n_Coins from the latest scan that pass at least 3 of 5 checks._\n\n```\nCOIN  RSI   1H  24H TY PASS BLOCK\n--------------------------------\nPUMP   72 +0.7  +10  - 3/5 RS\nBLESS  56 +2.3   +7  - 3/5 RM\nARIA   61 +1.5  +12  - 3/5 RS\n```\n\u2800\n\u2800",
+            "_TY: T Trend, P Pullback, B Bounce, K Breakout, - none_\n_BLOCK: R RSI, M MA, H 1H, D 24H, S score (Core 5+ and Extra 2+). OK = all\npassed._\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+        ],
+        "i": 0,
+        "mode": "Markdown",
+        "x": [
+            {
+                "text": "\u2b05\ufe0f Analyse",
+                "callback_data": "/analyse"
+            },
+            {
+                "text": "\ud83d\udd04 Refresh",
+                "callback_data": "m:su"
+            },
+            {
+                "text": "\ud83d\udcb1 Buy / Sell a coin",
+                "callback_data": "m:pk:su"
+            }
+        ],
+        "cmd": "m:su"
+    },
+    "panel_mid": 6478
 }
