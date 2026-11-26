@@ -3532,5 +3532,15 @@
             "lesson": "Implement stricter emotional controls and adhere to predefined exit criteria (e.g., stop\u2011loss or target profit levels) to avoid panic\u2011driven exits. Ensure the entire position is evaluated against risk parameters before partial liquidation, and consider closing the full position to eliminate residual exposure.",
             "confidence": "medium"
         }
+    },
+    {
+        "time": 1795655616.2464147,
+        "event": "ai_manual_buy_review",
+        "symbol": "MOVE-USDT",
+        "review": {
+            "risk_level": "high",
+            "warning": "RSI is extremely overbought (84.61) and price is near recent highs; entering a spot position now carries a high probability of short\u2011term pullback. Additionally, the MOVE token is highly volatile and lacks a proven track record, increasing downside risk.",
+            "summary": "Given the overbought RSI, elevated price, and absence of any existing position or filter safeguards, a manual buy of MOVE-USDT for $33.74 is considered high risk. Proceed only if you accept the possibility of a rapid loss and have a clear exit strategy."
+        }
     }
 ]
