@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935691003,
+    "last_update_id": 935691005,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -80,22 +80,82 @@
         "loss": -0.25205024200007214
     },
     "kb_mid": 6487,
-    "out_text": "\ud83e\udde0 AI manual-buy advisory: Considering a $5 USDT buy of TRX at $0.30419 with no\nactive BTC filter and no existing position, the trade carries medium risk due to\nlow RSI and limited market context. Proceed cautiously and monitor price action\nclosely.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "\ud83d\udfe1 *MANUAL BUY*\n_Passed at least 5/7 core and 2/3 additional criteria. Manual review only._\n\nNone right now.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795674788.2675877,
+    "out_time": 1795674793.4668589,
     "panel_rows": [
         [
             {
-                "text": "\u2705 Confirm",
-                "callback_data": "m:bx:TRX:5"
+                "text": "\ud83d\udc41 Watch (0)",
+                "callback_data": "m:at:W"
             },
             {
-                "text": "\u274c Cancel",
-                "callback_data": "m:menu"
+                "text": "\u25b6 \ud83d\udfe1 Manual (0)",
+                "callback_data": "m:at:M"
+            },
+            {
+                "text": "\ud83e\udd16 Auto (0)",
+                "callback_data": "m:at:A"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udcb1 Buy / Sell a coin",
+                "callback_data": "m:pk:M"
+            }
+        ],
+        [
+            {
+                "text": "\ud83c\udfaf SETUPS",
+                "callback_data": "m:su"
+            },
+            {
+                "text": "\u2b50 FAVOURITES",
+                "callback_data": "m:fv"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udd0d SCAN NOW",
+                "callback_data": "m:r:scan"
+            },
+            {
+                "text": "\ud83d\udcdc SCAN HISTORY",
+                "callback_data": "/scan_history"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\uded2 BUY",
+                "callback_data": "m:buy"
+            },
+            {
+                "text": "\ud83d\udcb8 SELL",
+                "callback_data": "m:sell"
+            }
+        ],
+        [
+            {
+                "text": "\ud83c\udd95 NEW LISTINGS",
+                "callback_data": "m:nl"
+            },
+            {
+                "text": "\ud83d\uddc4 ARCHIVE",
+                "callback_data": "m:ar:D"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udd0e ANALYSE A COIN",
+                "callback_data": "m:an"
+            },
+            {
+                "text": "\ud83d\udd04 Refresh",
+                "callback_data": "m:at:M"
             }
         ]
     ],
-    "panel_text": "\u26a0\ufe0f *CONFIRM BUY*\nTRX for $5 at about 0.304190 USDT.",
-    "panel_hidden": true,
-    "out_mid": 6486
+    "panel_text": "\ud83d\udc47 *Actions*",
+    "out_mid": 6489,
+    "panel_mid": 6490
 }
