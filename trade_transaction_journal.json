@@ -3766,5 +3766,11 @@
         "time": 1795670288.9949307,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6945, 'recurring_patterns': {'high_frequency_reasons': ['PANIC', 'MANUAL SELL', 'CRASH GUARD'], 'symbols_with_multiple_losses': ['MOVE-USDT', 'PROS-USDT', 'PUMP-USDT'], 'loss_concentration': {'MOVE-USDT': 2, 'PROS-USDT': 1, 'PUMP-USDT': 1}, 'loss_severity': {'largest_single_loss': -0.5691150600000126, 'crash_guard_triggered': True}}, 'recommendations': {'risk_management': ['Reduce reliance on panic exits; consider tighter stop\u2011loss thresholds.', 'Review manual sell triggers to ensure they align with predefined profit targets.', 'Implement position sizing limits for symbols showing repeated losses (e.g., MOVE-USDT).'], 'strategy_adjustments': ['Prioritize trades with positive pnl history and lower volatility.', 'Add additional validation before entering new positions on high\u2011risk symbols.'], 'monitoring': ['Increase frequency of performance revie"
+    },
+    {
+        "time": 1795670458.6566627,
+        "event": "ai_coin_advisory",
+        "reviewed": 25,
+        "source": "coins.db"
     }
 ]
