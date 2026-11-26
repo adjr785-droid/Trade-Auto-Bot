@@ -3596,5 +3596,15 @@
             "warning": "The RSI is slightly below 50 indicating modest bearish momentum, and the price is near recent lows. Ensure this aligns with your risk tolerance and overall portfolio strategy.",
             "summary": "Considering the modest bearish RSI (45.25) and the current price of 0.03381 USDT per SKYAI, a manual buy of 8.27\u202fUSDT carries moderate risk. No existing position or active BTC filter is present, but proceed cautiously and monitor market conditions."
         }
+    },
+    {
+        "time": 1795657808.1284685,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $0.25; auto-buy paused for 23.4h', 'attention': [{'symbol': 'MOVE-USDT', 'action': 'hold', 'reason': 'Positive PnL (+2.57%) and price above entry; stop loss still comfortably below current price.'}, {'symbol': 'SKYAI-USDT', 'action': 'monitor', 'reason': 'Slight negative PnL (-0.12%) and price near stop (0.03221); consider tightening stop if price declines further.'}], 'summary': 'Overall portfolio risk remains elevated due to recent losses and auto\u2011buy pause. Maintain current positions, but watch SKYAI-USDT closely for downside risk. No new entries recommended until risk metrics improve.'}"
+    },
+    {
+        "time": 1795657809.0490096,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.223, 'recurring_patterns': {'exit_reasons': {'PANIC': 9, 'MANUAL_SELL_ALL': 3, 'MANUAL_SELL_FIXED_USD': 5, 'TRAILING_STOP': 1}, 'symbols_with_multiple_trades': {'ADA-USDT': 3, 'BLESS-USDT': 4, 'PANIC_related_symbols': ['ARIA-USDT', 'JCT-USDT', 'PROS-USDT', 'PUMP-USDT', 'SKYAI-USDT', 'GWEI-USDT', 'DGAI-USDT']}}, 'recommendations': ['Reduce reliance on panic exits; implement predefined profit targets before panic triggers', 'Consolidate manual sell amounts into a consistent strategy rather than ad\u2011hoc USD values', 'Consider adding tighter trailing\u2011stop or fixed\u2011percentage stop\u2011loss to limit downside', 'Review symbols with repeated losses (e.g., JCT-USDT, PROS-USDT) and evaluate if they should be excluded', 'Maintain current win\u2011rate focus but aim to improve net P&L by cutting small\u2011loss frequency']}"
     }
 ]

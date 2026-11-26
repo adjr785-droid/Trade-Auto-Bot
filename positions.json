@@ -3,24 +3,24 @@
         "entry_price": 0.00653,
         "safe_zone": 0.00653,
         "stop_loss": 0.00555,
-        "peak_price": 0.006595,
-        "last_price": 0.00643,
+        "peak_price": 0.006698,
+        "last_price": 0.006698,
         "opened_at": 1795655808.6131625,
-        "seen": 1795657102.7314162,
+        "seen": 1795657797.212352,
         "rsi_peak": 84.61,
-        "xsl": 0.005877
+        "xsl": 0.0060282
     },
     "SKYAI-USDT": {
         "entry_price": 0.03382,
         "safe_zone": 0.03382,
         "stop_loss": 0.03221,
         "peak_price": 0.03382,
-        "last_price": 0.03373,
+        "last_price": 0.03378,
         "opened_at": 1795657010.8547218,
         "sl_pct": 4.76,
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
         "xsl": 0.03221,
-        "seen": 1795657103.0925035
+        "seen": 1795657800.1006503
     }
 }
