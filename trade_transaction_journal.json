@@ -3916,5 +3916,15 @@
         "time": 1795680905.5725267,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6945, 'recurring_patterns': ['High frequency of PANIC exits across multiple symbols', 'Manual sell actions often triggered at small profit levels', 'One significant CRASH GUARD stop loss event on MOVE-USDT'], 'recommendations': ['Implement stricter panic\u2011sell thresholds or disable automatic panic exits until volatility analysis is refined', 'Consolidate manual sell criteria to target larger profit targets and avoid frequent small exits', 'Review and possibly tighten the CRASH GUARD parameters to prevent large single\u2011trade losses', 'Increase monitoring of symbols with repeated panic behavior (e.g., ARIA, JCT, PROS) and consider reducing exposure', 'Maintain current win\u2011rate focus but prioritize risk\u2011adjusted returns to move net P&L into positive territory']}"
+    },
+    {
+        "time": 1795685399.8955503,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $0.25; auto-buy paused for 15.8h', 'attention': [{'symbol': 'SKYAI-USDT', 'action': 'hold', 'reason': 'Small positive PnL (0.5%) and price near entry; stop loss still 4.8% below current price, providing cushion.'}, {'symbol': 'TRX-USDT', 'action': 'monitor', 'reason': 'Near break-even (0.04% PnL) with stop loss ~3% below entry; price movement is flat, consider tightening stop if downside pressure appears.'}, {'symbol': 'MOVE-USDT', 'action': 'hold', 'reason': 'Strong positive PnL (4.03%) and price comfortably above stop; no immediate risk, but keep watch for volatility.'}], 'summary': 'Overall portfolio shows modest gains with low risk exposure. Auto\u2011buy is paused due to recent losses, so focus on preserving existing positions. No new entries are recommended until the risk pause lifts.'}"
+    },
+    {
+        "time": 1795685400.9430616,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6945, 'recurring_patterns': {'panic_trades': 9, 'manual_sell_trades': 12, 'crash_guard_trades': 1, 'symbols_with_multiple_losses': ['MOVE-USDT', 'PROS-USDT', 'PUMP-USDT'], 'loss_concentration': {'MOVE-USDT': -0.56911506, 'PROS-USDT': -0.492651, 'PUMP-USDT': -0.14296534}}, 'recommendations': ['Limit use of panic exits; consider tighter stop\u2011loss thresholds.', 'Review manual sell decisions for consistency with strategy rules.', 'Apply stricter position sizing for symbols showing repeated losses (e.g., MOVE-USDT, PROS-USDT).', 'Monitor crash\u2011guard triggers and adjust risk parameters to avoid large single\u2011trade drawdowns.', 'Maintain current win\u2011rate focus but aim to improve net P&L by reducing high\u2011impact loss trades.']}"
     }
 ]
