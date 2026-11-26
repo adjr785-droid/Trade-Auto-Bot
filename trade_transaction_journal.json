@@ -3740,5 +3740,11 @@
         "time": 1795668603.9467833,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6945, 'recurring_patterns': {'PANIC': 13, 'MANUAL_SELL': 9, 'CRASH_GUARD': 1}, 'recommendations': ['Review and tighten panic\u2011sell thresholds to reduce frequent loss\u2011making exits', 'Implement stricter position sizing for high\u2011volatility symbols (e.g., MOVE-USDT)', 'Add additional confirmation signals before manual sell actions to avoid premature exits', 'Monitor and adjust crash\u2011guard parameters to prevent large single\u2011trade drawdowns']}"
+    },
+    {
+        "time": 1795668648.3197398,
+        "event": "ai_coin_advisory",
+        "reviewed": 22,
+        "source": "coins.db"
     }
 ]
