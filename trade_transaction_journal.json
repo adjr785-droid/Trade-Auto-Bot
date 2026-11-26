@@ -4014,5 +4014,15 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795702918.3020868,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $0.25; auto-buy paused for 10.9h', 'attention': [{'symbol': 'TRX-USDT', 'action': 'monitor', 'reason': 'Position is slightly underwater (-0.15% PnL) and close to stop loss (0.295074). Consider tightening stop or exiting if price approaches stop.'}, {'symbol': 'MOVE-USDT', 'action': 'hold', 'reason': 'Position is profitable (+5.57% PnL) and price is above entry; stop is at entry level, providing a breakeven protection.'}], 'summary': 'Overall portfolio risk remains elevated due to recent losing streak and auto-buy pause. Maintain vigilance on the TRX-USDT trade, especially as it nears its stop level. The MOVE-USDT trade is performing well; keep the current stop at entry to lock in gains. No new positions are recommended until the performance breaker condition resolves.'}"
+    },
+    {
+        "time": 1795702919.2220035,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6945, 'recurring_patterns': {'PANIC': 13, 'MANUAL SELL': 9, 'CRASH GUARD': 1}, 'recommendations': ['Review and tighten panic\u2011sell thresholds to avoid frequent small losses', 'Consider reducing exposure to high\u2011volatility symbols that trigger crash\u2011guard events', 'Implement stricter position sizing for manual sell decisions to limit downside', 'Monitor and adjust risk parameters after each loss to improve overall profitability']}"
     }
 ]
