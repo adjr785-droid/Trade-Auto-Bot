@@ -3808,5 +3808,11 @@
         "time": 1795674656.917179,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6945, 'recurring_patterns': {'high_frequency_reasons': ['PANIC', 'MANUAL SELL'], 'notable_events': ['CRASH GUARD (-11.3%)'], 'loss_contributors': ['PANIC', 'CRASH GUARD'], 'win_contributors': ['PANIC', 'MANUAL SELL']}, 'recommendations': ['Review and tighten panic\u2011sell thresholds to avoid frequent small losses', 'Implement stricter position sizing for assets with repeated panic exits (e.g., ARIA-USDT, JCT-USDT, PROS-USDT)', 'Consider adding stop\u2011loss safeguards to replace manual panic actions', 'Monitor crash\u2011guard triggers and evaluate if lower volatility limits can prevent large drawdowns like the MOVE-USDT loss', 'Overall, adopt a more conservative risk posture until win rate improves and net P&L turns positive']}"
+    },
+    {
+        "time": 1795674753.2132213,
+        "event": "ai_coin_advisory",
+        "reviewed": 25,
+        "source": "coins.db"
     }
 ]
