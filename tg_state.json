@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691086,
+    "last_update_id": 935691088,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT33.30/\u20a645,541",
+    "kb_ph": "USDT33.28/\u20a645,522",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -80,13 +80,13 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 6691,
-    "out_text": "\ud83d\udc41 *WATCH LIST*\n_Rising coins being watched. They move up when they pass the manual rules._\n\n```\nCOIN    RSI    1H    24H  S TY\n------------------------------\nDOS      29  +0.5   -2.4  6  B\n```\n_TY: T Trend, P Pullback, B Bounce, K Breakout_\n\u2800\n\u2800\n\u2800",
+    "kb_mid": 6696,
+    "out_text": "\ud83d\udc41 *WATCH LIST*\n_Rising coins being watched. They move up when they pass the manual rules._\n\nNone right now.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
             {
-                "text": "\u25b6 \ud83d\udc41 Watch (1)",
+                "text": "\u25b6 \ud83d\udc41 Watch (0)",
                 "callback_data": "m:at:W"
             },
             {
@@ -122,7 +122,7 @@
         ]
     ],
     "panel_text": "\ud83d\udc47 *Actions*",
-    "out_time": 1795703000.7110112,
-    "out_mid": 6692,
-    "panel_mid": 6693
+    "out_time": 1795703038.3186665,
+    "out_mid": 6697,
+    "panel_mid": 6698
 }

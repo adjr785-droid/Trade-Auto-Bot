@@ -4024,5 +4024,15 @@
         "time": 1795702919.2220035,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6945, 'recurring_patterns': {'PANIC': 13, 'MANUAL SELL': 9, 'CRASH GUARD': 1}, 'recommendations': ['Review and tighten panic\u2011sell thresholds to avoid frequent small losses', 'Consider reducing exposure to high\u2011volatility symbols that trigger crash\u2011guard events', 'Implement stricter position sizing for manual sell decisions to limit downside', 'Monitor and adjust risk parameters after each loss to improve overall profitability']}"
+    },
+    {
+        "time": 1795703030.4330218,
+        "event": "ai_manual_buy_review",
+        "symbol": "DOS-USDT",
+        "review": {
+            "risk_level": "moderate",
+            "warning": "RSI is low (33.59) indicating possible oversold conditions, but price volatility can be high for low\u2011cap assets like DOS. No existing position and BTC filter is off, so exposure is limited to this trade only.",
+            "summary": "Consider a small position given the modest USDT amount (23.02) and the current price (0.0768). Monitor RSI and price action closely; be prepared to exit if the asset continues to decline or if volatility spikes."
+        }
     }
 ]
