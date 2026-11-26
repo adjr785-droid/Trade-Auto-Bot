@@ -4182,5 +4182,11 @@
         "time": 1795722235.7650368,
         "event": "ai_portfolio_review",
         "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $0.25; auto-buy paused for 5.6h', 'attention': [{'symbol': 'DOS-USDT', 'action': 'monitor', 'reason': 'Small positive PnL (0.19%) but close to stop level (0.073517). Maintain position, watch price action for any breach.'}], 'summary': 'Overall risk remains low; no new entries recommended while auto\u2011buy is paused. Continue monitoring existing DOS position and reassess when pause expires.'}"
+    },
+    {
+        "time": 1795722272.7382321,
+        "event": "ai_coin_advisory",
+        "reviewed": 15,
+        "source": "coins.db"
     }
 ]
