@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935691005,
+    "last_update_id": 935691006,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -86,76 +86,32 @@
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udc41 Watch (0)",
-                "callback_data": "m:at:W"
+                "text": "\ud83d\uded2 Trade",
+                "callback_data": "m:tl:trade"
             },
             {
-                "text": "\u25b6 \ud83d\udfe1 Manual (0)",
-                "callback_data": "m:at:M"
-            },
-            {
-                "text": "\ud83e\udd16 Auto (0)",
-                "callback_data": "m:at:A"
+                "text": "\ud83d\udd14 Alerts",
+                "callback_data": "m:tl:alerts"
             }
         ],
         [
             {
-                "text": "\ud83d\udcb1 Buy / Sell a coin",
-                "callback_data": "m:pk:M"
+                "text": "\ud83d\udd0d Scan",
+                "callback_data": "m:tl:scan"
+            },
+            {
+                "text": "\ud83d\udee0\ufe0f System",
+                "callback_data": "m:tl:sys"
             }
         ],
         [
             {
-                "text": "\ud83c\udfaf SETUPS",
-                "callback_data": "m:su"
-            },
-            {
-                "text": "\u2b50 FAVOURITES",
-                "callback_data": "m:fv"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udd0d SCAN NOW",
-                "callback_data": "m:r:scan"
-            },
-            {
-                "text": "\ud83d\udcdc SCAN HISTORY",
-                "callback_data": "/scan_history"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\uded2 BUY",
-                "callback_data": "m:buy"
-            },
-            {
-                "text": "\ud83d\udcb8 SELL",
-                "callback_data": "m:sell"
-            }
-        ],
-        [
-            {
-                "text": "\ud83c\udd95 NEW LISTINGS",
-                "callback_data": "m:nl"
-            },
-            {
-                "text": "\ud83d\uddc4 ARCHIVE",
-                "callback_data": "m:ar:D"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udd0e ANALYSE A COIN",
-                "callback_data": "m:an"
-            },
-            {
-                "text": "\ud83d\udd04 Refresh",
-                "callback_data": "m:at:M"
+                "text": "\u2b05\ufe0f Main Menu",
+                "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83d\udc47 *Actions*",
+    "panel_text": "\ud83e\uddf0 *TOOLS*\nChoose a group.",
     "out_mid": 6489,
     "panel_mid": 6490
 }
