@@ -1332,9 +1332,8 @@ def analyse_top3(tab="M"):
  def tb(k,lbl):return _B(("▶ " if tab==k else "")+f"{lbl} ({cnt.get({'W':'WATCH','M':'MANUAL','A':'AUTO'}[k],0)})",f"m:at:{k}")
  keyboard=[[tb("W","👁 Watch"),tb("M","🟡 Manual"),tb("A","🤖 Auto")],
            [_B("💱 Buy / Sell a coin",f"m:pk:{tab}")],
-           [_B("🎯 SETUPS (scan, history, trade)","m:su"),_B("⭐ FAVOURITES","m:fv")],
-           [_B("🆕 NEW LISTINGS","m:nl"),_B("🗄 ARCHIVE","m:ar:D")],
-           [_B("🔎 ANALYSE A COIN","m:an"),_B("🔄 Refresh",f"m:at:{tab}")]]
+           [_B("🎯 SETUPS (scan, history, trade)","m:su"),_B("🗂 MORE","m:am")],
+           [_B("🔄 Refresh",f"m:at:{tab}")]]
  # Coin names remain in the readable list above; do not create a separate button for every coin.
  _send("\n".join(lines)[:3800],"Markdown",{"inline_keyboard":keyboard})
 
@@ -3355,6 +3354,7 @@ def ui_cb(t):
   elif a=="nl":analyse_new_listings()
   elif a=="ar":analyse_archive(p[2] if len(p)>2 else "D")
   elif a=="su":analyse_setups()
+  elif a=="am":ui_send("🗂 *ANALYSE — MORE*",[[_B("⭐ FAVOURITES","m:fv"),_B("🆕 NEW LISTINGS","m:nl")],[_B("🗄 ARCHIVE","m:ar:D"),_B("🔎 ANALYSE A COIN","m:an")],[_B("⬅️ Analyse","/analyse")]])
   elif a=="fv":fav_show()
   elif a=="fc" and len(p)>2:fav_coin(p[2],p[3] if len(p)>3 else "fv")
   elif a=="pk" and len(p)>2:coin_picker(p[2])
