@@ -3756,5 +3756,15 @@
         "time": 1795670010.4176087,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6945, 'recurring_patterns': {'high_frequency_reasons': ['PANIC', 'MANUAL SELL', 'CRASH GUARD'], 'symbols_with_multiple_losses': ['MOVE-USDT', 'PROS-USDT', 'PUMP-USDT'], 'loss_concentration': {'MOVE-USDT': 2, 'PROS-USDT': 1, 'PUMP-USDT': 1}, 'loss_causes': {'PANIC': 6, 'MANUAL SELL': 7, 'CRASH GUARD': 1}}, 'recommendations': {'risk_management': 'Consider tightening panic\u2011sell thresholds and reviewing manual sell triggers to avoid frequent small losses.', 'position_sizing': 'Reduce exposure on symbols that have shown multiple losses (e.g., MOVE-USDT) until volatility stabilizes.', 'monitoring': 'Implement alerts for rapid price drops to replace reactive panic sells with pre\u2011defined stop\u2011loss orders.', 'uncertainty': 'Current performance data is limited to 30 trades; further data is needed to confirm pattern stability.'}}"
+    },
+    {
+        "time": 1795670287.6929083,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $0.25; auto-buy paused for 20.0h', 'attention': [{'symbol': 'SKYAI-USDT', 'action': 'monitor', 'reason': 'Position is 3% down with stop only 1.9% below entry; risk of further loss given recent performance breaker.'}], 'summary': 'Current portfolio risk flag remains active. The only open position (SKYAI-USDT) is modestly underwater and close to its stop. Hold without adding new exposure and consider tightening stop if price declines further. No new trades are recommended until the performance breaker period expires.'}"
+    },
+    {
+        "time": 1795670288.9949307,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6945, 'recurring_patterns': {'high_frequency_reasons': ['PANIC', 'MANUAL SELL', 'CRASH GUARD'], 'symbols_with_multiple_losses': ['MOVE-USDT', 'PROS-USDT', 'PUMP-USDT'], 'loss_concentration': {'MOVE-USDT': 2, 'PROS-USDT': 1, 'PUMP-USDT': 1}, 'loss_severity': {'largest_single_loss': -0.5691150600000126, 'crash_guard_triggered': True}}, 'recommendations': {'risk_management': ['Reduce reliance on panic exits; consider tighter stop\u2011loss thresholds.', 'Review manual sell triggers to ensure they align with predefined profit targets.', 'Implement position sizing limits for symbols showing repeated losses (e.g., MOVE-USDT).'], 'strategy_adjustments': ['Prioritize trades with positive pnl history and lower volatility.', 'Add additional validation before entering new positions on high\u2011risk symbols.'], 'monitoring': ['Increase frequency of performance revie"
     }
 ]
