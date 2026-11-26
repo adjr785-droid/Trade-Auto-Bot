@@ -3,39 +3,39 @@
         "entry_price": 0.03382,
         "safe_zone": 0.03382,
         "stop_loss": 0.03382,
-        "peak_price": 0.03571,
-        "last_price": 0.03571,
+        "peak_price": 0.03616,
+        "last_price": 0.03604,
         "opened_at": 1795657010.8547218,
         "sl_pct": 4.76,
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
         "xsl": 0.03382,
-        "seen": 1795692575.6410396
+        "seen": 1795692816.820234
     },
     "TRX-USDT": {
         "entry_price": 0.3042,
         "safe_zone": 0.3042,
         "stop_loss": 0.295074,
         "peak_price": 0.30445,
-        "last_price": 0.30374,
+        "last_price": 0.30376,
         "opened_at": 1795674780.0019028,
         "sl_pct": 3.0,
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
         "xsl": 0.295074,
-        "seen": 1795692579.1495767
+        "seen": 1795692817.142435
     },
     "MOVE-USDT": {
         "entry_price": 0.005911,
         "safe_zone": 0.005911,
         "stop_loss": 0.005911,
         "peak_price": 0.006235,
-        "last_price": 0.00623,
+        "last_price": 0.006215,
         "opened_at": 1795678151.7707772,
         "sl_pct": 10.0,
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
         "xsl": 0.005911,
-        "seen": 1795692579.8023918
+        "seen": 1795692817.4627204
     }
 }

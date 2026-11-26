@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT33.70/\u20a646,068",
+    "kb_ph": "USDT33.86/\u20a646,282",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -70,18 +70,18 @@
     },
     "radar": [],
     "audit_down": {},
-    "audit_last": 1795689255.7271726,
-    "audit_ai_cls": "",
+    "audit_last": 1795692630.0563793,
+    "audit_ai_cls": "OTHER",
     "perf_breaker": {
         "until": 1795742224.733271,
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 6629,
+    "kb_mid": 6633,
     "out_mid": 6630,
-    "out_text": "\ud83d\udfe1 *MANUAL BUY*\n_Passed at least 5/7 core and 2/3 additional criteria. Manual review only._\n\nNone right now.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "\ud83d\udee0 AUDIT\n\u2705 Fixed: AI \u2014 unknown error (stage: coin_advisory). Retrying; no automatic fix\nknown for this error.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795692574.9143214,
+    "out_time": 1795692631.2263203,
     "panel_mid": 6631,
     "panel_rows": [
         [
