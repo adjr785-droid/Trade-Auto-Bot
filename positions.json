@@ -4,25 +4,25 @@
         "safe_zone": 0.3042,
         "stop_loss": 0.295074,
         "peak_price": 0.30445,
-        "last_price": 0.30198,
+        "last_price": 0.3027,
         "opened_at": 1795674780.0019028,
         "sl_pct": 3.0,
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
         "xsl": 0.295074,
-        "seen": 1795708184.3587978
+        "seen": 1795711834.2126694
     },
     "DOS-USDT": {
         "entry_price": 0.0769,
         "safe_zone": 0.0769,
         "stop_loss": 0.073178,
         "peak_price": 0.0774,
-        "last_price": 0.0763,
+        "last_price": 0.0753,
         "opened_at": 1795703027.4933937,
         "sl_pct": 4.84,
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
         "xsl": 0.073178,
-        "seen": 1795708184.6898408
+        "seen": 1795711834.8871794
     }
 }

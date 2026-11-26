@@ -4076,5 +4076,15 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795711846.2123215,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $0.25; auto-buy paused for 8.4h', 'attention': [{'symbol': 'TRX-USDT', 'action': 'monitor', 'reason': 'PnL -0.49% and price near stop (0.295074). Position age >10 minutes; consider tightening stop or exiting if price approaches stop.'}, {'symbol': 'DOS-USDT', 'action': 'monitor', 'reason': 'PnL -2.08% with price close to stop (0.073178). Position age >2 minutes; high downside risk, recommend evaluating exit or moving stop tighter.'}], 'summary': 'Both positions are underperforming with negative PnL and prices approaching their stops. Given the recent performance breaker and paused auto-buy, adopt a cautious stance: monitor closely, consider tightening stops, and be prepared to exit if downside pressure continues.'}"
+    },
+    {
+        "time": 1795711847.0625827,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6945, 'recurring_patterns': {'panic_trades': 13, 'manual_sell_trades': 9, 'crash_guard_trades': 1, 'symbols_with_multiple_losses': ['PROS-USDT', 'MOVE-USDT', 'PUMP-USDT'], 'common_loss_reasons': ['PANIC', 'CRASH GUARD (-11.3%)']}, 'recommendations': {'risk_management': 'Consider tightening panic\u2011sell thresholds and reviewing crash\u2011guard parameters to avoid large single\u2011trade losses.', 'position_sizing': 'Reduce position size on high\u2011volatility assets (e.g., MOVE-USDT, PROS-USDT) until pattern stabilises.', 'review_process': 'Implement post\u2011trade analysis for panic trades to identify trigger conditions; aim to replace reactive exits with rule\u2011based stops.', 'uncertainty': 'Data limited to 30 trades; patterns may shift with market regime changes. Proceed conservatively.'}}"
     }
 ]
