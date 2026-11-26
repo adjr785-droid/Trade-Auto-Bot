@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT33.56/\u20a645,871",
+    "kb_ph": "USDT33.50/\u20a645,796",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -79,7 +79,7 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 6409,
+    "kb_mid": 6412,
     "out_text": "\ud83d\udcbc *PORTFOLIO* $33.56 | \u20a645,871\n\ud83d\udcb5 Cash free $19.02 | In coins $14.48 (43%)\n\ud83d\udfe1 BGB 0.00019195253 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udd34 *SKYAI* $8.13 (24%)\n-1.69% (-$0.14) | Entry 0.033820\nQty 244.37721 | Price 0.033250 | Stop 0.032210 (-3%)\nRSI 43 | Mixed | ATH -96%\n\n\ud83d\udfe2 *MOVE* $6.35 (19%)\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "out_time": 1795664011.2380624,
