@@ -3552,5 +3552,11 @@
         "time": 1795656386.5488484,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 0.2386, 'recurring_patterns': {'high_frequency_reasons': ['PANIC', 'MANUAL SELL'], 'common_symbols': ['BLESS-USDT', 'ADA-USDT'], 'risk_events': ['TRAILING STOP (8.0%)', 'RSI 75']}, 'recommendations': {'reduce_panic_exits': True, 'review_manual_sell_criteria': True, 'tighten_trailing_stop_parameters': True, 'increase_monitoring_on_high_volatility_symbols': ['BLESS-USDT', 'ADA-USDT'], 'maintain_current_position_sizing': True}}"
+    },
+    {
+        "time": 1795656505.7877445,
+        "event": "ai_coin_advisory",
+        "reviewed": 22,
+        "source": "coins.db"
     }
 ]

@@ -110,7 +110,7 @@
             "status": "READY",
             "decision": "SETUP \u2014 NOT QUEUED",
             "reason": "TREND matched, automatic buying is paused",
-            "execution_status": "HELD",
+            "execution_status": "SOLD",
             "scan_id": "1795620371",
             "rank": 27,
             "vol": 1554955.36,
