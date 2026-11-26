@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935691128,
+    "last_update_id": 935691129,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -78,52 +78,48 @@
         "loss": -0.25205024200007214
     },
     "kb_mid": 6777,
-    "out_text": "\ud83d\udcbc *PORTFOLIO* $32.53 | \u20a644,488\n\ud83d\udcb5 Cash free $4.91 | In coins $27.56 (85%)\n\ud83d\udfe1 BGB 0.00019195253 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udd34 *DOS* $22.59 (69%)\n-1.82% (-$0.42) | Entry 0.076900\nQty 299.1604 | Price 0.075500 | Stop 0.073178 (-3%)\nRSI 31 | Bearish | ATH -92%\n\n\ud83d\udd34 *TRX* $4.98 (15%)\n\u2800\n\u2800",
+    "out_text": "\ud83d\udfe1 *MANUAL BUY*\n_Passed at least 5/7 core and 2/3 additional criteria. Manual review only._\n\nNone right now.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795715060.7285588,
+    "out_time": 1795715088.7632017,
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
+                "text": "\ud83d\udc41 Watch (0)",
+                "callback_data": "m:at:W"
             },
             {
-                "text": "1/3",
-                "callback_data": "pg:x"
+                "text": "\u25b6 \ud83d\udfe1 Manual (0)",
+                "callback_data": "m:at:M"
             },
             {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
+                "text": "\ud83e\udd16 Auto (0)",
+                "callback_data": "m:at:A"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udcb1 Buy / Sell a coin",
+                "callback_data": "m:pk:M"
+            }
+        ],
+        [
+            {
+                "text": "\ud83c\udfaf SETUPS (scan, history, trade)",
+                "callback_data": "m:su"
             },
             {
-                "text": "\ud83c\udfe0",
-                "callback_data": "m:menu"
-            },
+                "text": "\ud83d\uddc2 MORE",
+                "callback_data": "m:am"
+            }
+        ],
+        [
             {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
+                "text": "\ud83d\udd04 Refresh",
+                "callback_data": "m:at:M"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/3*",
-    "out_mid": 6775,
-    "pages": {
-        "p": [
-            "\ud83d\udcbc *PORTFOLIO* $32.53 | \u20a644,488\n\ud83d\udcb5 Cash free $4.91 | In coins $27.56 (85%)\n\ud83d\udfe1 BGB 0.00019195253 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udd34 *DOS* $22.59 (69%)\n-1.82% (-$0.42) | Entry 0.076900\nQty 299.1604 | Price 0.075500 | Stop 0.073178 (-3%)\nRSI 31 | Bearish | ATH -92%\n\n\ud83d\udd34 *TRX* $4.98 (15%)\n\u2800\n\u2800",
-            "-0.42% (-$0.02) | Entry 0.304200\nQty 16.426657 | Price 0.302910 | Stop 0.295074 (-3%)\nRSI 38 | Bearish | ATH -70%\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\nand 8 more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT32.53/\u20a644,488\n\n\ud83e\udde0 *AI:* Portfolio is $32.53 total, with $4.91 cash and 85% in coins; DOS and\n\u2800\n\u2800",
-            "TRX are down modestly, both RSI below 40 and stop\u2011losses set at -3%, monitor\nbearish signals and low cash buffer.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
-        ],
-        "i": 0,
-        "mode": "Markdown",
-        "x": [
-            [
-                {
-                    "text": "\ud83d\udd04",
-                    "callback_data": "rf:go"
-                }
-            ]
-        ],
-        "cmd": "m:r:holdings"
-    },
-    "panel_mid": 6776
+    "panel_text": "\ud83d\udc47 *Actions*",
+    "out_mid": 6779,
+    "panel_mid": 6780
 }
