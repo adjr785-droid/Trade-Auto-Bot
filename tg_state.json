@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691010,
+    "last_update_id": 935691011,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT32.76/\u20a644,774",
+    "kb_ph": "USDT32.76/\u20a644,773",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -79,38 +79,63 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 6497,
-    "out_mid": 6500,
-    "out_text": "\ud83d\udcdf *OUTPUT*\nResults appear here.",
+    "kb_mid": 6506,
+    "out_text": "\ud83d\udfe1 *MANUAL BUY*\n_Passed at least 5/7 core and 2/3 additional criteria. Manual review only._\n\nNone right now.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "panel_mid": 6501,
     "panel_rows": [
         [
             {
-                "text": "\ud83e\uddf9 Orders & Dust",
-                "callback_data": "m:tl:trade"
+                "text": "\ud83d\udc41 Watch (0)",
+                "callback_data": "m:at:W"
             },
             {
-                "text": "\ud83d\udd14 Alerts",
-                "callback_data": "m:tl:alerts"
+                "text": "\u25b6 \ud83d\udfe1 Manual (0)",
+                "callback_data": "m:at:M"
+            },
+            {
+                "text": "\ud83e\udd16 Auto (0)",
+                "callback_data": "m:at:A"
             }
         ],
         [
             {
-                "text": "\ud83d\udcda Coin List",
-                "callback_data": "m:coins"
-            },
-            {
-                "text": "\ud83d\udee0\ufe0f System",
-                "callback_data": "m:tl:sys"
+                "text": "\ud83d\udcb1 Buy / Sell a coin",
+                "callback_data": "m:pk:M"
             }
         ],
         [
             {
-                "text": "\u2b05\ufe0f Main Menu",
-                "callback_data": "m:menu"
+                "text": "\ud83c\udfaf SETUPS (scan, history, trade)",
+                "callback_data": "m:su"
+            },
+            {
+                "text": "\u2b50 FAVOURITES",
+                "callback_data": "m:fv"
+            }
+        ],
+        [
+            {
+                "text": "\ud83c\udd95 NEW LISTINGS",
+                "callback_data": "m:nl"
+            },
+            {
+                "text": "\ud83d\uddc4 ARCHIVE",
+                "callback_data": "m:ar:D"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udd0e ANALYSE A COIN",
+                "callback_data": "m:an"
+            },
+            {
+                "text": "\ud83d\udd04 Refresh",
+                "callback_data": "m:at:M"
             }
         ]
     ],
-    "panel_text": "\ud83e\uddf0 *TOOLS*\nChoose a group."
+    "panel_text": "\ud83d\udc47 *Actions*",
+    "out_mid": 6504,
+    "out_time": 1795675520.1590812,
+    "panel_mid": 6505
 }
