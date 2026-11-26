@@ -3952,5 +3952,15 @@
         "time": 1795689237.746242,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6945, 'recurring_patterns': ['High frequency of PANIC exits', 'Multiple manual sell actions across symbols', 'Single CRASH GUARD stop triggered on MOVE-USDT'], 'recommendations': ['Review and tighten panic\u2011sell thresholds to avoid premature exits', 'Consolidate manual sell decisions into a systematic profit\u2011target strategy', 'Implement tighter position sizing for volatile assets like MOVE-USDT', 'Add additional stop\u2011loss buffers to reduce reliance on crash\u2011guard triggers', 'Monitor symbols with repeated panic exits for underlying market instability']}"
+    },
+    {
+        "time": 1795692590.2965689,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $0.25; auto-buy paused for 13.8h', 'attention': [{'symbol': 'TRX-USDT', 'action': 'monitor', 'reason': 'Small negative PnL (-0.15%) and stop is close to current price; risk of further downside if price breaches stop at 0.295074.'}, {'symbol': 'SKYAI-USDT', 'action': 'hold', 'reason': 'Positive PnL (+5.74%) with stop at entry; price above stop, but position is relatively young (9.8h).'}, {'symbol': 'MOVE-USDT', 'action': 'hold', 'reason': 'Positive PnL (+5.4%) and stop at entry; price comfortably above stop, low immediate risk.'}], 'summary': 'Overall portfolio shows modest gains on two positions and a marginal loss on TRX. Given the recent performance breaker and auto-buy pause, avoid adding new exposure. Keep existing positions, watch TRX closely for stop breach, and consider tightening stops if volatility increases.'}"
+    },
+    {
+        "time": 1795692590.9769247,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6945, 'recurring_patterns': {'PANIC': 13, 'MANUAL_SELL': 9, 'CRASH_GUARD': 1}, 'recommendations': ['Limit exposure to high\u2011volatility symbols that trigger frequent PANIC exits', 'Implement stricter stop\u2011loss thresholds to avoid large CRASH GUARD losses', 'Review manual sell triggers to ensure they align with predefined profit targets', 'Consider reducing position size on symbols with repeated negative outcomes (e.g., MOVE-USDT)', 'Increase monitoring of market conditions to pre\u2011empt panic\u2011driven decisions']}"
     }
 ]
