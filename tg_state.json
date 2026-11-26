@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691138,
+    "last_update_id": 935691139,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT33.22/\u20a645,441",
+    "kb_ph": "USDT33.31/\u20a645,556",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -79,10 +79,10 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 6805,
-    "out_text": "\u2705 \ud83e\uddf9 BGB dust converted: 0.00005670 TRX \u2192 0.00001139 BGB | Fee: 0.00000023\nBGB. Order: 1509926551746715649.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "kb_mid": 6808,
+    "out_text": "\ud83e\udde0 AI manual-buy advisory: Considering the 9.87\u202fUSDT order at 0.0778 with RSI\n37.38 and an existing position, the trade carries moderate risk. Proceed with\ncaution and adhere to risk management protocols.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795720465.3968265,
+    "out_time": 1795720491.2188666,
     "panel_rows": [
         [
             {
