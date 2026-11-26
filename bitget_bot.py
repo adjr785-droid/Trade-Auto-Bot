@@ -1330,9 +1330,12 @@ def analyse_top3(tab="M"):
  lines=[title,sub,"",_coin_table(items)]
  def tb(k,lbl):return _B(("▶ " if tab==k else "")+f"{lbl} ({cnt.get({'W':'WATCH','M':'MANUAL','A':'AUTO'}[k],0)})",f"m:at:{k}")
  keyboard=[[tb("W","👁 Watch"),tb("M","🟡 Manual"),tb("A","🤖 Auto")],
-           [_B("🎯 SETUPS","m:su"),_B("🆕 NEW LISTINGS","m:nl")],
-           [_B("⭐ FAVOURITES","m:fv"),_B("🗄 ARCHIVE","m:ar:D")],
-           [_B("🔄 Refresh",f"m:at:{tab}")]]
+           [_B("💱 Buy / Sell a coin",f"m:pk:{tab}")],
+           [_B("🎯 SETUPS","m:su"),_B("⭐ FAVOURITES","m:fv")],
+           [_B("🔍 SCAN NOW","m:r:scan"),_B("📜 SCAN HISTORY","/scan_history")],
+           [_B("🛒 BUY","m:buy"),_B("💸 SELL","m:sell")],
+           [_B("🆕 NEW LISTINGS","m:nl"),_B("🗄 ARCHIVE","m:ar:D")],
+           [_B("🔎 ANALYSE A COIN","m:an"),_B("🔄 Refresh",f"m:at:{tab}")]]
  # Coin names remain in the readable list above; do not create a separate button for every coin.
  _send("\n".join(lines)[:3800],"Markdown",{"inline_keyboard":keyboard})
 
@@ -1348,23 +1351,34 @@ def analyse_archive(tab="D"):
  sub={"D":"_Stopped qualifying for 24h. Kept for history; they return to Watch if they qualify again._","A":"_Not seen for 30 days. Kept for history._"}[tab]
  lines=[title,sub,"",_coin_table([{"sym":s_,"rsi":r_,"h1":h_,"chg":c_,"score":sc_} for s_,p_,c_,h_,r_,n_,sc_,ls_ in rows])]
  tb=lambda k,lbl,key:_B(("▶ " if tab==k else "")+f"{lbl} ({cnt.get(key,0)})",f"m:ar:{k}")
- _send("\n".join(lines),"Markdown",{"inline_keyboard":[[tb("D","⤵ Dropped","DROPPED"),tb("A","🗄 Archived","ARCHIVED")],[_B("⬅️ Analyse","/analyse"),_B("🔄 Refresh",f"m:ar:{tab}")]]})
-def analyse_setups():
- """Every coin from the latest scan that looks like Trend, Pullback, Bounce or Breakout, with the hard gates it failed. Read-only list."""
+ _send("\n".join(lines),"Markdown",{"inline_keyboard":[[tb("D","⤵ Dropped","DROPPED"),tb("A","🗄 Archived","ARCHIVED")],[_B("⬅️ Analyse","/analyse"),_B("🔄 Refresh",f"m:ar:{tab}")],[_B("💱 Buy / Sell a coin",f"m:pk:{'D' if tab=='D' else 'Z'}")]]})
+def setups_items():
+ """Coins from the latest scan that pass at least 3 of the 5 checks, as tuples (-passed,tag,sym,rsi,1h,24h,blocked)."""
  try:
   mx=_dbq("SELECT MAX(last_seen) FROM coins",one=True)[0] or 0
-  rows=_dbq("SELECT sym,rsi,h1,chg24,tag,stage,checks_json FROM coins WHERE tag IN ('TREND','PULLBACK','BOUNCE','BREAKOUT') AND status<>'BOUGHT' AND last_seen>=? ORDER BY tag,COALESCE(h1,-99) DESC LIMIT 40",(float(mx)-600,))
+  rows=_dbq("SELECT sym,rsi,h1,chg24,tag,checks_json FROM coins WHERE status<>'BOUGHT' AND rsi IS NOT NULL AND last_seen>=?",(float(mx)-600,))
  except Exception as e:
-  print("SETUPS ERR",str(e)[:120]);tg("⚠️ Could not read the setups list. Try again shortly.");return
- code={"rsi_ceiling":"R","price_above_ma":"M","momentum_1h":"H","momentum_24h_up":"D"};tc={"TREND":"T","PULLBACK":"P","BOUNCE":"B","BREAKOUT":"K"};out=[]
- for sym,r_,h_,c_,tag,stg,cj in rows:
-  try:g=((((json.loads(cj or "{}").get("scanner") or {}).get("manual_candidate") or {}).get("checks") or {}).get("gates") or {})
-  except Exception:g={}
-  bl="".join(v for k,v in code.items() if g.get(k) is not True) or "OK"
-  out.append(f"{str(sym).replace('-USDT','')[:7]:<7}{_fmt(r_,'.0f'):>4}{_fmt(h_,'+.1f'):>6}{_fmt(c_,'+.1f'):>7}{' '+tc[tag]:>3} {bl}")
- body=("```\n"+f"{'COIN':<7}{'RSI':>4}{'1H':>6}{'24H':>7}{'TY':>3} BLOCK"+"\n"+"-"*32+"\n"+"\n".join(out)+"\n```") if out else "No coin matches a setup right now."
- lines=["🎯 *SETUPS*","_Coins from the latest scan that look like a setup, even if a gate blocks them._","",body,"_TY: T Trend, P Pullback, B Bounce, K Breakout_","_BLOCK: gate failed. R RSI, M MA, H 1H, D 24H. OK = passed all four._"]
- _send("\n".join(lines),"Markdown",{"inline_keyboard":[[_B("⬅️ Analyse","/analyse"),_B("🔄 Refresh","m:su")]]})
+  print("SETUPS ERR",str(e)[:120]);return None
+ code={"rsi_ceiling":"R","price_above_ma":"M","momentum_1h":"H","momentum_24h_up":"D"};tc={"TREND":"T","PULLBACK":"P","BOUNCE":"B","BREAKOUT":"K"};items=[]
+ for sym,r_,h_,c_,tag,cj in rows:
+  try:ck=((json.loads(cj or "{}").get("scanner") or {}).get("manual_candidate") or {}).get("checks") or {}
+  except Exception:ck={}
+  g=ck.get("gates") or {};bl=[v for k,v in code.items() if g.get(k) is not True]
+  try:sc_ok=int(ck.get("core_score",0))>=5 and int(ck.get("additional_score",0))>=2
+  except Exception:sc_ok=False
+  if not sc_ok:bl.append("S")
+  n=5-len(bl)
+  if n>=3:items.append((-n,tag or "",sym,r_,h_,c_,"".join(bl) or "OK"))
+ items.sort(key=lambda x:(x[0],x[1]==""))
+ return items
+def analyse_setups():
+ """Coins from the latest scan that pass at least 3 of the 5 checks (RSI, MA, 1H, 24H gates and the Core 5+/Extra 2+ score), with what blocked them. Read-only list."""
+ tc={"TREND":"T","PULLBACK":"P","BOUNCE":"B","BREAKOUT":"K"};items=setups_items()
+ if items is None:tg("⚠️ Could not read the setups list. Try again shortly.");return
+ out=[f"{str(sym).replace('-USDT','')[:6]:<6}{_fmt(r_,'.0f'):>3}{_fmt(h_,'+.1f'):>5}{_fmt(c_,'+.0f'):>5}{tc.get(tag,'-'):>3} {-n}/5 {bl}" for n,tag,sym,r_,h_,c_,bl in items[:40]]
+ body=("```\n"+f"{'COIN':<6}{'RSI':>3}{'1H':>5}{'24H':>5}{'TY':>3} PASS BLOCK"+"\n"+"-"*32+"\n"+"\n".join(out)+"\n```") if out else "No coin passes 3 of the 5 checks right now."
+ lines=["🎯 *SETUPS*","_Coins from the latest scan that pass at least 3 of 5 checks._","",body,"_TY: T Trend, P Pullback, B Bounce, K Breakout, - none_","_BLOCK: R RSI, M MA, H 1H, D 24H, S score (Core 5+ and Extra 2+). OK = all passed._"]
+ _send("\n".join(lines),"Markdown",{"inline_keyboard":[[_B("⬅️ Analyse","/analyse"),_B("🔄 Refresh","m:su")],[_B("💱 Buy / Sell a coin","m:pk:su")]]})
 def fav_list():
  v=load(FAV,[])
  return [str(x).upper() for x in v if isinstance(x,str)] if isinstance(v,list) else []
@@ -1379,17 +1393,40 @@ def fav_show(msg=""):
   rows.append(f"{c[:6]:<6}{(format(float(px),'.6g')[:8] if px else '-'):>8}{_fmt(r[1] if r else None,'.0f'):>4}{_fmt(r[2] if r else None,'+.1f'):>6}{_fmt(r[3] if r else None,'+.1f'):>7}")
  body=("```\n"+f"{'COIN':<6}{'PRICE':>8}{'RSI':>4}{'1H':>6}{'24H':>7}"+"\n"+"-"*31+"\n"+"\n".join(rows)+"\n```") if rows else "No favourites yet. Tap Add."
  kb=[[_B("➕ Add coin","m:more:fav:0"),_B("🔄 Refresh","m:fv")]]
- kb+=_grid([_B(f"⭐ {c}",f"m:fc:{c}") for c in fl],3)+[[_B("⬅️ Analyse","/analyse")]]
+ kb+=_grid([_B(f"⭐ {c}",f"m:fc:{c}:fv") for c in fl],3)+[[_B("⬅️ Analyse","/analyse")]]
  _send(("\n".join(x for x in (msg,)+("⭐ *FAVOURITES*","_Your own list. Tap a coin to buy, sell or remove it._","",body) if x is not None)),"Markdown",{"inline_keyboard":kb})
-def fav_coin(c):
- # One favourite: price, what you hold, and Buy / Sell ALL (like panic sell for this coin) / Remove.
- c=str(c).upper();sym=f"{c}-USDT";px=live(sym)
+PICK_BACK={"fv":"m:fv","W":"m:at:W","M":"m:at:M","A":"m:at:A","su":"m:su","D":"m:ar:D","Z":"m:ar:A","nl":"m:nl","H":"/scan_history"}
+def pick_coins(src):
+ """Coins listed on a given Analyse page, so each can be opened for Buy / Sell."""
+ try:
+  if src in ("W","M","A"):it=coin_db_manual_candidates(50) if src=="M" else coin_db_stage_list("WATCH" if src=="W" else "AUTO",50);cs=[x["sym"] for x in it]
+  elif src=="su":cs=[x[2] for x in (setups_items() or [])]
+  elif src in ("D","Z"):cs=[r[0] for r in _dbq("SELECT sym FROM coins WHERE stage=? AND status<>'BOUGHT' ORDER BY last_seen DESC LIMIT 24",("DROPPED" if src=="D" else "ARCHIVED",))]
+  elif src=="nl":
+   tr=(load(NEWLIST,{}) or {}).get("tracked",{});now=time.time()
+   cs=[s for s,m in sorted(tr.items(),key=lambda kv:-float((kv[1] or {}).get("first_detected",0) or 0)) if isinstance(m,dict) and now-float(m.get("first_detected",0) or 0)<=86400]
+  elif src=="H":cs=[x.get("sym","") for x in reversed(scan_history_state().get("items",[]))]
+  else:cs=fav_list()
+ except Exception as e:
+  print("PICK ERR",str(e)[:100]);cs=[]
+ out=[]
+ for s in cs:
+  c=str(s).split("-")[0].upper()
+  if c and c not in out and c not in STABLE:out.append(c)
+ return out[:24]
+def coin_picker(src):
+ cs=pick_coins(src);back=PICK_BACK.get(src,"/analyse")
+ ui_send("💱 *BUY / SELL* — tap a coin from this list:" if cs else "💱 *BUY / SELL*\nNo coins on this list right now.",_grid([_B(c,f"m:fc:{c}:{src}") for c in cs],3)+[[_B("⬅️ Back",back)]])
+def fav_coin(c,src="fv"):
+ # One coin: price, what you hold, and Buy / Sell by 25-50-75-100% (ALL = like panic sell for this coin), plus add/remove favourites.
+ c=str(c).upper();sym=f"{c}-USDT";px=live(sym);back=PICK_BACK.get(src,"/analyse")
  try:held=float(B('free',c) or 0)
  except Exception:held=0.0
  lines=[f"⭐ *{c}*",f"Price: {fp(px) if px else 'n/a'} USDT",f"You hold: {held:.8g}"+(f" (about ${held*px:.2f})" if px and held else "")]
  kb=[[_B(f"🟢 {x}%",f"m:bp:{c}:{x}") for x in (25,50,75)]+[_B("🟢 ALL",f"m:bp:{c}:100")],[_B(f"🛒 Buy {c}: other amount",f"m:b:{c}")]]
  if px and held*px>=1.0:kb.append([_B(f"🔴 {x}%",f"m:sc:{c}:{x}") for x in (25,50,75)]+[_B("🔴 ALL",f"m:sc:{c}:100")])
- kb.append([_B("🗑 Remove from favourites",f"m:fd:{c}")]);kb.append([_B("⬅️ Favourites","m:fv")])
+ kb.append([_B("🗑 Remove from favourites",f"m:fd:{c}")] if c in fav_list() else [_B("⭐ Add to favourites",f"m:fa:{c}")])
+ kb.append([_B("⬅️ Back",back)])
  ui_send("\n".join(lines),kb)
 def fav_change(c,add):
  c=str(c).upper();fl=fav_list();note=""
@@ -1420,7 +1457,7 @@ def analyse_new_listings():
   status="history building" if candles is None else f"{int(candles)} hourly candles"
   lines.append(f"• *{coin}/USDT* — detected {when} | {status}")
  if not recent:lines.append("No newly detected listings in the last 24 hours. The first successful discovery scan establishes the baseline.")
- _send("\n".join(lines)[:3800],"Markdown",{"inline_keyboard":[[_B("⬅️ Back to Analyse","/analyse"),_B("🔄 Refresh","m:nl")]]})
+ _send("\n".join(lines)[:3800],"Markdown",{"inline_keyboard":[[_B("⬅️ Back to Analyse","/analyse"),_B("🔄 Refresh","m:nl")],[_B("💱 Buy / Sell a coin","m:pk:nl")]]})
 
 def hold_advice(sym,price,entry,rsi,ma5,ma10,s):
  pnl=(price-entry)/entry*100 if entry else None;sl=float(s.get('stop_loss_pct',5));rx=float(s.get('rsi_exit',75) or 0)
@@ -2291,7 +2328,7 @@ def cmd_scan_history(txt="/scan_history"):
  query=" ".join(parts) if parts else "all coins"
  more=f" (first {len(shown)})" if len(found)>len(shown) else ""
  msg=f"🔎 *SCAN HISTORY* · {len(found)}/{len(items)} coins{more}\n{n_scans} scans · {age/3600:.1f}h"+("" if not parts else " · "+query)+f"\n```\n{table}\n```"
- _send(msg,"Markdown",{"inline_keyboard":[[{"text":"🔍 Why not bought?","callback_data":"m:whylist:0"}]]})
+ _send(msg,"Markdown",{"inline_keyboard":[[{"text":"🔍 Why not bought?","callback_data":"m:whylist:0"}],[{"text":"💱 Buy / Sell a coin","callback_data":"m:pk:H"}],[{"text":"⬅️ Analyse","callback_data":"/analyse"}]]})
 def _hist_code(x,s):
  d=str(x.get("decision","SKIP")).upper();rs=str(x.get("reason",""))
  if "NOT QUEUED" in d:
@@ -3305,7 +3342,8 @@ def ui_cb(t):
   elif a=="ar":analyse_archive(p[2] if len(p)>2 else "D")
   elif a=="su":analyse_setups()
   elif a=="fv":fav_show()
-  elif a=="fc" and len(p)>2:fav_coin(p[2])
+  elif a=="fc" and len(p)>2:fav_coin(p[2],p[3] if len(p)>3 else "fv")
+  elif a=="pk" and len(p)>2:coin_picker(p[2])
   elif a=="fa" and len(p)>2:fav_change(p[2],True)
   elif a=="fd" and len(p)>2:fav_change(p[2],False)
   elif a=="mc" and len(p)>2:
