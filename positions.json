@@ -4,51 +4,51 @@
         "safe_zone": 0.016691,
         "stop_loss": 0.016691,
         "peak_price": 0.0175538,
-        "last_price": 0.0175538,
+        "last_price": 0.0175193,
         "opened_at": 1795622462.930224,
         "sl_pct": 10.0,
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
         "xsl": 0.016691,
-        "seen": 1795654602.9306285
+        "seen": 1795654708.6763132
     },
     "DGAI-USDT": {
         "entry_price": 0.995906,
         "safe_zone": 0.995906,
         "stop_loss": 0.949098,
         "peak_price": 1.011048,
-        "last_price": 1.009061,
+        "last_price": 1.010303,
         "opened_at": 1795646910.8209713,
         "sl_pct": 4.7,
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
         "xsl": 0.949098,
-        "seen": 1795654606.694379
+        "seen": 1795654709.08994
     },
     "SKYAI-USDT": {
         "entry_price": 0.03343,
         "safe_zone": 0.03343,
         "stop_loss": 0.031277,
         "peak_price": 0.03415,
-        "last_price": 0.03405,
+        "last_price": 0.03401,
         "opened_at": 1795646938.3587065,
         "sl_pct": 6.44,
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
         "xsl": 0.031277,
-        "seen": 1795654607.4299326
+        "seen": 1795654709.4531925
     },
     "GWEI-USDT": {
         "entry_price": 0.009779,
         "safe_zone": 0.009779,
         "stop_loss": 0.009298,
         "peak_price": 0.009841,
-        "last_price": 0.009841,
+        "last_price": 0.009784,
         "opened_at": 1795647116.655862,
         "sl_pct": 4.92,
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
         "xsl": 0.009298,
-        "seen": 1795654608.1883974
+        "seen": 1795654709.8800747
     }
 }

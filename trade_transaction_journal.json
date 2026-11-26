@@ -3348,5 +3348,23 @@
         "event": "ai_coin_advisory",
         "reviewed": 22,
         "source": "coins.db"
+    },
+    {
+        "time": 1795654703.4625528,
+        "event": "trade_closed",
+        "symbol": "BLESS-USDT",
+        "pnl_usdt": 0.1653452460000001,
+        "reason": "MANUAL SELL $3.50",
+        "strategy": "MANUAL"
+    },
+    {
+        "time": 1795654708.29513,
+        "event": "ai_manual_sell_review",
+        "symbol": "BLESS-USDT",
+        "review": {
+            "review": "The position was manually closed at an average exit price of 0.0175193 USDT, realizing a profit of 0.165345246 USDT on the 199.62 units sold. The remaining base balance of 303.66667 units was not liquidated, indicating a partial exit strategy. The manual sell suggests discretionary decision-making rather than automated trigger conditions, which may have limited exposure to further market moves but also left residual exposure.",
+            "lesson": "When manually exiting, ensure that the rationale aligns with the overall risk management framework and that any remaining base is either re\u2011evaluated for future trades or actively managed to avoid unintended exposure. Document the trigger criteria for manual actions to improve repeatability and auditability.",
+            "confidence": "high"
+        }
     }
 ]
