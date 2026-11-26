@@ -3834,5 +3834,11 @@
         "time": 1795675480.7325134,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6945, 'recurring_patterns': ['High frequency of PANIC exits', 'Manual sell triggers on small profit targets', 'Single large loss from CRASH GUARD on MOVE-USDT'], 'recommendations': ['Review and tighten panic\u2011sell thresholds to avoid frequent small losses', 'Consolidate manual sell strategy to target larger profit margins before exiting', 'Implement stricter risk controls for high\u2011volatility assets like MOVE-USDT to prevent large crash\u2011guard losses', 'Consider reducing position size on symbols with repeated panic exits to limit downside exposure']}"
+    },
+    {
+        "time": 1795675628.8810008,
+        "event": "ai_coin_advisory",
+        "reviewed": 25,
+        "source": "coins.db"
     }
 ]
