@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935691083,
+    "last_update_id": 935691084,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -25,7 +25,7 @@
         ],
         "m:r:holdings": [
             1,
-            1795699310.3140209
+            1795702975.4139116
         ],
         "/analyse": [
             6,
@@ -90,7 +90,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "1/3",
+                "text": "2/3",
                 "callback_data": "pg:x"
             },
             {
@@ -107,7 +107,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/3*",
+    "panel_text": "\ud83d\udcc4 *Page 2/3*",
     "out_mid": 6685,
     "out_time": 1795702937.3063524,
     "pages": {
@@ -116,7 +116,7 @@
             "-0.15% (-$0.01) | Entry 0.304200\nQty 16.426657 | Price 0.303750 | Stop 0.295074 (-3%)\nRSI 44 | Bearish | ATH -70%\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\nand 8 more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT33.30/\u20a645,549\n\n\ud83e\udde0 *AI:* Portfolio shows $33.30 total value with $23.04 cash and $10.20 in\n\u2800\n\u2800",
             "coins; MOVE and TRX positions are small and near break\u2011even, but several assets\nlack USDT pricing, requiring price updates.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 0,
+        "i": 1,
         "mode": "Markdown",
         "x": [
             [
