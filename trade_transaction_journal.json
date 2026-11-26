@@ -3854,5 +3854,11 @@
         "time": 1795676564.4750009,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6945, 'recurring_patterns': {'PANIC_trades': 13, 'MANUAL_SELL_trades': 9, 'CRASH_GUARD_trades': 1, 'symbols_with_multiple_losses': ['PROS-USDT', 'MOVE-USDT']}, 'recommendations': ['Review and tighten panic\u2011exit thresholds to avoid frequent small losses', 'Implement stricter position sizing for symbols that have triggered multiple loss events (e.g., MOVE-USDT, PROS-USDT)', 'Consider adding a stop\u2011loss buffer before crash\u2011guard activation to reduce large drawdowns', 'Monitor manual sell decisions for consistency; ensure they align with predefined profit targets']}"
+    },
+    {
+        "time": 1795676738.652049,
+        "event": "ai_coin_advisory",
+        "reviewed": 25,
+        "source": "coins.db"
     }
 ]
