@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935690961,
+    "last_update_id": 935690963,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -86,32 +86,16 @@
     "panel_rows": [
         [
             {
-                "text": "\u2795 Add coin",
-                "callback_data": "m:more:fav:0"
+                "text": "\u2705 Confirm",
+                "callback_data": "m:sx:MOVE:50"
             },
             {
-                "text": "\ud83d\udd04 Refresh",
-                "callback_data": "m:fv"
-            }
-        ],
-        [
-            {
-                "text": "\u2b50 MOVE",
-                "callback_data": "m:fc:MOVE"
-            },
-            {
-                "text": "\u2b50 SKYAI",
-                "callback_data": "m:fc:SKYAI"
-            }
-        ],
-        [
-            {
-                "text": "\u2b05\ufe0f Analyse",
-                "callback_data": "/analyse"
+                "text": "\u274c Cancel",
+                "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83d\udc47 *Actions*",
+    "panel_text": "\u26a0\ufe0f *CONFIRM SELL*\n50% of MOVE (about $12.82) at market.",
     "out_mid": 6395,
     "panel_mid": 6396
 }
