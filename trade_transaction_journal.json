@@ -3684,5 +3684,15 @@
         "time": 1795664160.6760187,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': -0.1018, 'recurring_patterns': {'common_reasons': ['PANIC', 'MANUAL SELL'], 'symbols_with_multiple_trades': ['ADA-USDT', 'BLESS-USDT', 'MOVE-USDT'], 'losses_associated': ['PANIC', 'TRAILING STOP']}, 'recommendations': ['Review and tighten panic\u2011sell thresholds to avoid frequent small losses', 'Consider limiting manual sell interventions to higher profit thresholds', 'Monitor trailing stop settings to reduce premature exits', 'Focus on symbols with consistent positive pnl (e.g., BLESS-USDT, SKYAI-USDT) and reduce exposure to high\u2011variance assets']}"
+    },
+    {
+        "time": 1795664580.2037961,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $0.25; auto-buy paused for 21.6h', 'attention': [{'symbol': 'SKYAI-USDT', 'action': 'monitor', 'reason': 'Negative PnL (-2.96%) and price approaching stop level (0.03221). Consider tightening stop or exiting if price breaches stop.'}, {'symbol': 'MOVE-USDT', 'action': 'hold', 'reason': 'Positive PnL (2.76%) and price above entry; stop is comfortably below current price, no immediate action required.'}], 'summary': 'Overall portfolio risk remains elevated due to recent losing streak and auto-buy pause. Maintain vigilance on SKYAI-USDT as it nears its stop; otherwise, keep current positions unchanged while awaiting clearer market signals.'}"
+    },
+    {
+        "time": 1795664580.8001244,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': -0.1018, 'recurring_patterns': {'reasons': ['PANIC', 'MANUAL SELL', 'TRAILING STOP'], 'symbols': ['ADA-USDT', 'BLESS-USDT', 'MOVE-USDT']}, 'recommendations': 'Reduce exposure to high\u2011frequency panic exits; consider tighter stop\u2011loss thresholds and avoid manual sell triggers without clear profit targets. Prioritize trades with stronger signals and monitor trailing\u2011stop parameters closely.'}"
     }
 ]
