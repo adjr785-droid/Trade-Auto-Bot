@@ -4240,5 +4240,11 @@
         "time": 1795735667.342539,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6846, 'recurring_patterns': {'PANIC': 13, 'MANUAL_SELL': 13, 'CRASH_GUARD': 1}, 'recommendations': ['Limit exposure to high\u2011volatility assets that trigger frequent panic exits', 'Implement stricter stop\u2011loss thresholds to avoid large negative PnL events like the -0.5691 MOVE\u2011USDT trade', 'Review manual sell triggers to ensure they align with a predefined profit target rather than ad\u2011hoc decisions', 'Consider reducing position size on symbols with repeated negative outcomes (e.g., PROS\u2011USDT, MOVE\u2011USDT)', 'Monitor and adjust the crash\u2011guard parameters to activate earlier and protect capital']}"
+    },
+    {
+        "time": 1795735708.9011643,
+        "event": "ai_coin_advisory",
+        "reviewed": 25,
+        "source": "coins.db"
     }
 ]
