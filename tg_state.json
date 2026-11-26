@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT33.68/\u20a646,036",
+    "kb_ph": "USDT33.65/\u20a645,990",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -69,16 +69,44 @@
         ]
     },
     "radar": [
-        "GWEI-USDT"
+        "DGAI-USDT",
+        "SKYAI-USDT",
+        "BLESS-USDT",
+        "KII-USDT"
     ],
     "audit_down": {},
-    "audit_last": 1795649398.2896757,
-    "audit_ai_cls": "OTHER",
+    "audit_last": 1795652642.9861348,
+    "audit_ai_cls": "",
     "perf_breaker": {
         "until": 1795645210.5830717,
         "since": 1795558810.5830717,
         "loss": -1.4850249000000058
     },
-    "kb_mid": 6252,
+    "kb_mid": 6257,
+    "out_mid": 6253,
+    "out_text": "\ud83d\udee0 AUDIT\n\u2705 Fixed: AI problem cleared (unknown error)\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_mode": "Markdown",
+    "out_time": 1795652643.855123,
+    "panel_rows": [
+        [
+            {
+                "text": "\u25c0",
+                "callback_data": "pg:p"
+            },
+            {
+                "text": "1/3",
+                "callback_data": "pg:x"
+            },
+            {
+                "text": "\u25b6",
+                "callback_data": "pg:n"
+            },
+            {
+                "text": "\ud83c\udfe0",
+                "callback_data": "m:menu"
+            }
+        ]
+    ],
+    "panel_text": "\ud83d\udcc4 *Page 1/3*",
     "panel_hidden": true
 }

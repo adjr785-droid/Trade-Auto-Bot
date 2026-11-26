@@ -3306,5 +3306,11 @@
         "time": 1795652608.793556,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 50.0, 'net_pnl_usdt': 0.0682, 'recurring_patterns': ['PANIC (5 occurrences)', 'MANUAL SELL ALL (3 occurrences)', '15-MINUTE NO-UPWARD-TREND ROTATION (3 occurrences)', 'MANUAL SELL $ (multiple small sells)', 'TRAILING STOP (1)', 'RSI 75 (1)', 'PARTIAL PROFIT +10.4% (1)'], 'recommendations': ['Limit exposure to high\u2011volatility panic exits; consider tighter stop\u2011loss thresholds', 'Consolidate manual sell signals into a single strategy to avoid fragmented small losses', 'Review the 15\u2011minute no\u2011upward\u2011trend rotation rule; it yields mixed results and may need stricter entry criteria', 'Prioritize trades with clear profit targets (e.g., partial profit) over reactive exits', 'Maintain current win\u2011rate focus but aim to improve net PnL by reducing frequent small losses']}"
+    },
+    {
+        "time": 1795652637.4125643,
+        "event": "ai_coin_advisory",
+        "reviewed": 25,
+        "source": "coins.db"
     }
 ]
