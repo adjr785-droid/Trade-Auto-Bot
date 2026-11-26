@@ -3,8 +3,6 @@
         1,
         1,
         1,
-        1,
-        1,
         0,
         1,
         1,
@@ -19,14 +17,11 @@
         1,
         1,
         1,
-        1
+        1,
+        1,
+        0
     ],
     "e": [
-        [
-            1795563269.4461079,
-            "OTHER",
-            "coin_advisory: Expecting ',' delimiter: line 1 column 2897 (char 2896)"
-        ],
         [
             1795577846.2582343,
             "OTHER",
@@ -121,6 +116,11 @@
             1795649392.633813,
             "OTHER",
             "coin_advisory: Expecting ',' delimiter: line 102 column 6 (char 2987)"
+        ],
+        [
+            1795654463.1731515,
+            "OTHER",
+            "coin_advisory: Expecting ',' delimiter: line 102 column 6 (char 2924)"
         ]
     ]
 }
