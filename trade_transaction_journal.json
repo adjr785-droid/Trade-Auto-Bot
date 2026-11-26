@@ -3616,5 +3616,11 @@
         "time": 1795661088.105438,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.223, 'recurring_patterns': {'common_reasons': ['MANUAL SELL', 'PANIC'], 'symbols_with_multiple_trades': ['ADA-USDT', 'BLESS-USDT', 'PUMP-USDT'], 'loss_causes': ['MANUAL SELL ALL', 'PANIC', 'TRAILING STOP']}, 'recommendations': {'risk_management': 'Consider tightening panic\u2011sell thresholds and reviewing manual sell triggers to avoid small\u2011loss accumulation.', 'stop_loss_strategy': 'Implement more systematic trailing stop rules rather than ad\u2011hoc manual exits.', 'position_sizing': 'Reduce position size on symbols that have shown repeated losses (e.g., JCT-USDT, DOS-USDT).', 'monitoring': 'Add alerts for consecutive losses on the same symbol to prompt review before further trades.'}}"
+    },
+    {
+        "time": 1795661121.7166684,
+        "event": "ai_coin_advisory",
+        "reviewed": 25,
+        "source": "coins.db"
     }
 ]
