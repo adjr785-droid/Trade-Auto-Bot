@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691076,
+    "last_update_id": 935691077,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT33.31/\u20a645,536",
+    "kb_ph": "USDT33.31/\u20a645,533",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -80,8 +80,7 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 6666,
-    "out_text": "\ud83d\udcbc *PORTFOLIO* $33.31 | \u20a645,536\n\ud83d\udcb5 Cash free $23.04 | In coins $10.21 (31%)\n\ud83d\udfe1 BGB 0.00019195253 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *MOVE* $5.22 (16%)\n+5.74% (+$0.28) | Entry 0.005911\nQty 835.22024 | Price 0.006250 | Stop 0.005911 (-5%)\nRSI 62 | Mixed | ATH -99%\n\n\ud83d\udd34 *TRX* $4.99 (15%)\n\u2800\n\u2800",
+    "out_text": "\ud83e\uddf9 Cleared 3 bot message(s).\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
@@ -126,25 +125,8 @@
         ]
     ],
     "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
-    "out_time": 1795699281.485457,
-    "out_mid": 6664,
-    "pages": {
-        "p": [
-            "\ud83d\udcbc *PORTFOLIO* $33.31 | \u20a645,536\n\ud83d\udcb5 Cash free $23.04 | In coins $10.21 (31%)\n\ud83d\udfe1 BGB 0.00019195253 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *MOVE* $5.22 (16%)\n+5.74% (+$0.28) | Entry 0.005911\nQty 835.22024 | Price 0.006250 | Stop 0.005911 (-5%)\nRSI 62 | Mixed | ATH -99%\n\n\ud83d\udd34 *TRX* $4.99 (15%)\n\u2800\n\u2800",
-            "-0.04% (-$0.00) | Entry 0.304200\nQty 16.426657 | Price 0.304070 | Stop 0.295074 (-3%)\nRSI 40 | Mixed | ATH -70%\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\nand 8 more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT33.31/\u20a645,536\n\n\ud83e\udde0 *AI:* Portfolio totals $33.31 (\u2248\u00a545,536) with $23.04 cash and $10.21 in\n\u2800\n\u2800",
-            "coins; MOVE up 5.74% but lacks USDT price for several held tokens, indicating\nvaluation uncertainty.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
-        ],
-        "i": 1,
-        "mode": "Markdown",
-        "x": [
-            [
-                {
-                    "text": "\ud83d\udd04",
-                    "callback_data": "rf:go"
-                }
-            ]
-        ],
-        "cmd": "m:r:holdings"
-    },
-    "panel_mid": 6665
+    "out_time": 1795699365.2435052,
+    "out_mid": 6667,
+    "kb_mid": 6669,
+    "panel_hidden": true
 }
