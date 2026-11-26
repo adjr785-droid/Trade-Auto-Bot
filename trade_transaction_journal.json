@@ -3880,5 +3880,15 @@
         "time": 1795678054.348236,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6945, 'recurring_patterns': {'PANIC': 13, 'MANUAL SELL': 9, 'CRASH GUARD': 1}, 'recommendations': ['Review and tighten panic\u2011sell thresholds to avoid frequent small losses', 'Consider reducing exposure to high\u2011volatility symbols that trigger crash\u2011guard events', 'Implement stricter position sizing for manual sell decisions to limit downside', 'Monitor and adjust risk parameters after each loss to improve overall profitability']}"
+    },
+    {
+        "time": 1795678160.8035173,
+        "event": "ai_manual_buy_review",
+        "symbol": "MOVE-USDT",
+        "review": {
+            "risk_level": "high",
+            "warning": "The requested BUY order for MOVE-USDT at $0.005841 with only $4.94 USDT is very small and the asset shows a relatively high RSI (62.36), indicating possible overbought conditions. Market liquidity for MOVE may be limited, increasing slippage risk. Proceed only if you fully understand the potential for rapid price movement and loss of capital.",
+            "summary": "Given the small trade size, elevated RSI, and unknown market depth, this manual buy carries high risk. Consider waiting for a lower RSI or confirming stronger liquidity before executing."
+        }
     }
 ]

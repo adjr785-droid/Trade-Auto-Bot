@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691042,
+    "last_update_id": 935691044,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT32.77/\u20a644,790",
+    "kb_ph": "USDT32.77/\u20a644,797",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -79,49 +79,23 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 6574,
-    "out_text": "\n\u2b50 *FAVOURITES*\n_Your own list. Tap a coin to buy, sell or remove it._\n\n```\nCOIN     PRICE RSI    1H    24H\n-------------------------------\nMOVE  0.005922   -     -  +26.2\nSKYAI   0.0327   -     -  -17.4\n```\n\u2800\n\u2800",
+    "kb_mid": 6576,
+    "out_text": "\ud83e\udde0 AI manual-buy advisory: Given the small trade size, elevated RSI, and unknown\nmarket depth, this manual buy carries high risk. Consider waiting for a lower\nRSI or confirming stronger liquidity before executing.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795678109.9205763,
+    "out_time": 1795678161.0840964,
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udfe2 25%",
-                "callback_data": "m:bp:MOVE:25"
+                "text": "\u2705 Confirm",
+                "callback_data": "m:bx:MOVE:4.94"
             },
             {
-                "text": "\ud83d\udfe2 50%",
-                "callback_data": "m:bp:MOVE:50"
-            },
-            {
-                "text": "\ud83d\udfe2 75%",
-                "callback_data": "m:bp:MOVE:75"
-            },
-            {
-                "text": "\ud83d\udfe2 ALL",
-                "callback_data": "m:bp:MOVE:100"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\uded2 Buy MOVE: other amount",
-                "callback_data": "m:b:MOVE"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\uddd1 Remove from favourites",
-                "callback_data": "m:fd:MOVE"
-            }
-        ],
-        [
-            {
-                "text": "\u2b05\ufe0f Back",
-                "callback_data": "m:fv"
+                "text": "\u274c Cancel",
+                "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\u2b50 *MOVE*\nPrice: 0.005841 USDT\nYou hold: 0.001674 (about $0.00)",
-    "out_mid": 6572,
-    "panel_mid": 6573
+    "panel_text": "\u26a0\ufe0f *CONFIRM BUY*\nMOVE for $4.94 (25% of free USDT) at about 0.005841 USDT.",
+    "out_mid": 6575,
+    "panel_hidden": true
 }
