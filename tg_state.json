@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691098,
+    "last_update_id": 935691100,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT33.30/\u20a645,553",
+    "kb_ph": "USDT33.30/\u20a645,551",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -80,113 +80,102 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 6712,
-    "out_text": "\n\u2b50 *FAVOURITES*\n_Your own list. Tap a coin to buy, sell or remove it._\n\n```\nCOIN     PRICE RSI    1H    24H\n-------------------------------\nMOVE  0.006158   -     -  +29.6\nSKYAI  0.03382  53  -3.0   +5.3\n```\n\u2800\n\u2800",
+    "kb_mid": 6715,
+    "out_text": "\u2705 DOS added.\n\u2b50 *FAVOURITES*\n_Your own list. Tap a coin to buy, sell or remove it._\n\n```\nCOIN     PRICE RSI    1H    24H\n-------------------------------\nMOVE  0.006158   -     -  +29.6\nSKYAI  0.03382  53  -3.0   +5.3\nDOS     0.0767  29  +0.5   -2.4\n```\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
             {
-                "text": "MMT",
-                "callback_data": "m:fa:MMT"
+                "text": "\u25c0",
+                "callback_data": "pg:p"
             },
             {
-                "text": "EGL1",
-                "callback_data": "m:fa:EGL1"
+                "text": "1/2",
+                "callback_data": "pg:x"
             },
             {
-                "text": "NES",
-                "callback_data": "m:fa:NES"
+                "text": "\u25b6",
+                "callback_data": "pg:n"
+            },
+            {
+                "text": "\ud83c\udfe0",
+                "callback_data": "m:menu"
             }
         ],
         [
             {
-                "text": "INJ",
-                "callback_data": "m:fa:INJ"
+                "text": "\u2795 Add coin",
+                "callback_data": "m:more:fav:0"
             },
             {
-                "text": "SKY",
-                "callback_data": "m:fa:SKY"
-            },
-            {
-                "text": "PROS",
-                "callback_data": "m:fa:PROS"
-            }
-        ],
-        [
-            {
-                "text": "ARX",
-                "callback_data": "m:fa:ARX"
-            },
-            {
-                "text": "ARIA",
-                "callback_data": "m:fa:ARIA"
-            },
-            {
-                "text": "BLESS",
-                "callback_data": "m:fa:BLESS"
-            }
-        ],
-        [
-            {
-                "text": "MON",
-                "callback_data": "m:fa:MON"
-            },
-            {
-                "text": "QNT",
-                "callback_data": "m:fa:QNT"
-            },
-            {
-                "text": "EDGE",
-                "callback_data": "m:fa:EDGE"
-            }
-        ],
-        [
-            {
-                "text": "IDOL",
-                "callback_data": "m:fa:IDOL"
-            },
-            {
-                "text": "SSV",
-                "callback_data": "m:fa:SSV"
-            },
-            {
-                "text": "TRUMP",
-                "callback_data": "m:fa:TRUMP"
-            }
-        ],
-        [
-            {
-                "text": "ACN",
-                "callback_data": "m:fa:ACN"
-            },
-            {
-                "text": "SEI",
-                "callback_data": "m:fa:SEI"
-            },
-            {
-                "text": "JUP",
-                "callback_data": "m:fa:JUP"
-            }
-        ],
-        [
-            {
-                "text": "\u25c0\ufe0f Prev",
-                "callback_data": "m:more:fav:1"
-            },
-            {
-                "text": "Next \u25b6\ufe0f",
-                "callback_data": "m:more:fav:3"
-            }
-        ],
-        [
-            {
-                "text": "\u2b05\ufe0f Back",
+                "text": "\ud83d\udd04 Refresh",
                 "callback_data": "m:fv"
+            }
+        ],
+        [
+            {
+                "text": "\u2b50 MOVE",
+                "callback_data": "m:fc:MOVE:fv"
+            },
+            {
+                "text": "\u2b50 SKYAI",
+                "callback_data": "m:fc:SKYAI:fv"
+            },
+            {
+                "text": "\u2b50 DOS",
+                "callback_data": "m:fc:DOS:fv"
+            }
+        ],
+        [
+            {
+                "text": "\u2b05\ufe0f Analyse",
+                "callback_data": "/analyse"
             }
         ]
     ],
-    "panel_text": "\u2795 *MORE COINS* (page 3/26)\nBiggest 24h volume first. Tap a coin.",
-    "out_time": 1795703115.4412396,
-    "out_mid": 6710,
-    "panel_mid": 6711
+    "panel_text": "\ud83d\udcc4 *Page 1/2*",
+    "out_time": 1795703154.6466455,
+    "out_mid": 6713,
+    "pages": {
+        "p": [
+            "\u2705 DOS added.\n\u2b50 *FAVOURITES*\n_Your own list. Tap a coin to buy, sell or remove it._\n\n```\nCOIN     PRICE RSI    1H    24H\n-------------------------------\nMOVE  0.006158   -     -  +29.6\nSKYAI  0.03382  53  -3.0   +5.3\nDOS     0.0767  29  +0.5   -2.4\n```\n\u2800",
+            "```\n```\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+        ],
+        "i": 0,
+        "mode": "Markdown",
+        "x": [
+            [
+                {
+                    "text": "\u2795 Add coin",
+                    "callback_data": "m:more:fav:0"
+                },
+                {
+                    "text": "\ud83d\udd04 Refresh",
+                    "callback_data": "m:fv"
+                }
+            ],
+            [
+                {
+                    "text": "\u2b50 MOVE",
+                    "callback_data": "m:fc:MOVE:fv"
+                },
+                {
+                    "text": "\u2b50 SKYAI",
+                    "callback_data": "m:fc:SKYAI:fv"
+                },
+                {
+                    "text": "\u2b50 DOS",
+                    "callback_data": "m:fc:DOS:fv"
+                }
+            ],
+            [
+                {
+                    "text": "\u2b05\ufe0f Analyse",
+                    "callback_data": "/analyse"
+                }
+            ]
+        ],
+        "cmd": "m:fa:DOS"
+    },
+    "panel_mid": 6714
 }
