@@ -4070,5 +4070,11 @@
         "time": 1795708009.2537923,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6945, 'recurring_patterns': ['High frequency of \"PANIC\" exits across multiple symbols', 'Manual sell actions often with small profit targets', 'Crash guard triggered on MOVE-USDT with large loss', 'Losses concentrated in PANIC and crash guard events'], 'recommendations': ['Review and tighten panic\u2011sell thresholds to avoid premature exits', 'Implement stricter risk limits for high\u2011volatility assets like MOVE-USDT', 'Consider reducing manual sell frequency and rely on predefined profit targets', 'Add additional monitoring for crash\u2011guard triggers to limit large drawdowns']}"
+    },
+    {
+        "time": 1795708054.4282188,
+        "event": "ai_coin_advisory",
+        "reviewed": 25,
+        "source": "coins.db"
     }
 ]
