@@ -4167,5 +4167,15 @@
             "warning": "Small position size and oversold RSI suggest potential volatility; ensure stop\u2011loss and monitor market conditions closely.",
             "summary": "Considering the 9.87\u202fUSDT order at 0.0778 with RSI 37.38 and an existing position, the trade carries moderate risk. Proceed with caution and adhere to risk management protocols."
         }
+    },
+    {
+        "time": 1795720841.6554308,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $0.25; auto-buy paused for 5.9h', 'attention': [{'symbol': 'DOS-USDT', 'action': 'monitor', 'reason': 'Small positive PnL (0.83%) but close to stop (0.073517). Maintain position, consider tightening stop if price retraces.'}], 'summary': 'Overall risk is low but auto-buy is paused due to recent losses. Continue monitoring existing position; avoid new entries until performance stabilizes.'}"
+    },
+    {
+        "time": 1795720842.5582218,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6846, 'recurring_patterns': {'reasons': {'PANIC': 7, 'MANUAL SELL': 9, 'CRASH GUARD': 1}, 'symbols': {'BLESS-USDT': 4, 'MOVE-USDT': 4, 'ADA-USDT': 3, 'PUMP-USDT': 2, 'others': 14}}, 'recommendations': {'risk_management': 'Consider tightening panic\u2011sell thresholds and reviewing manual\u2011sell triggers to avoid frequent small losses.', 'position_sizing': 'Reduce exposure on assets with repeated crash\u2011guard events (e.g., MOVE-USDT).', 'monitoring': 'Implement alerts for rapid price drops to replace manual panic actions.', 'uncertainty': 'High variability in trade outcomes suggests further data collection before adjusting core strategy.'}}"
     }
 ]
