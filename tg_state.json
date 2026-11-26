@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935691103,
+    "last_update_id": 935691104,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -85,42 +85,32 @@
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udc41 Watch (0)",
-                "callback_data": "m:at:W"
+                "text": "\ud83e\uddf9 Orders & Dust",
+                "callback_data": "m:tl:trade"
             },
             {
-                "text": "\u25b6 \ud83d\udfe1 Manual (0)",
-                "callback_data": "m:at:M"
-            },
-            {
-                "text": "\ud83e\udd16 Auto (0)",
-                "callback_data": "m:at:A"
+                "text": "\ud83d\udd14 Alerts",
+                "callback_data": "m:tl:alerts"
             }
         ],
         [
             {
-                "text": "\ud83d\udcb1 Buy / Sell a coin",
-                "callback_data": "m:pk:M"
-            }
-        ],
-        [
-            {
-                "text": "\ud83c\udfaf SETUPS (scan, history, trade)",
-                "callback_data": "m:su"
+                "text": "\ud83d\udcda Coin List",
+                "callback_data": "m:coins"
             },
             {
-                "text": "\ud83d\uddc2 MORE",
-                "callback_data": "m:am"
+                "text": "\ud83d\udee0\ufe0f System",
+                "callback_data": "m:tl:sys"
             }
         ],
         [
             {
-                "text": "\ud83d\udd04 Refresh",
-                "callback_data": "m:at:M"
+                "text": "\u2b05\ufe0f Main Menu",
+                "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83d\udc47 *Actions*",
+    "panel_text": "\ud83e\uddf0 *TOOLS*\nChoose a group.",
     "out_time": 1795703483.803836,
     "out_mid": 6721,
     "panel_mid": 6722
