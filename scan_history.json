@@ -100,6 +100,32 @@
             "min_volume": 1000000.0,
             "spread_pct": 0.015088645794038324,
             "near_miss": null
+        },
+        {
+            "time": 1795701321,
+            "rank": 33,
+            "sym": "DOS-USDT",
+            "vol": 1083528.87,
+            "chg": -2.417,
+            "price": 0.0767,
+            "high_24h": 0.0841,
+            "spread_pct": 0.260416666666656,
+            "rsi": 29.42,
+            "rr": null,
+            "ma5": 0.07794,
+            "ma10": 0.07857,
+            "btc_market_safe": true,
+            "market_trend_4h": null,
+            "breakout_confirmed": null,
+            "volume_expansion_ratio": null,
+            "decision": "SETUP \u2014 NOT QUEUED",
+            "reason": "BOUNCE matched; stage DROPPED, must pass Watch > Manual > Auto first",
+            "min_volume": 1000000,
+            "prev_close": 0.0761,
+            "h1": 0.53,
+            "trend_4h_ok": false,
+            "rising_guard_ok": true,
+            "strategy": "BOUNCE"
         }
     ]
 }
