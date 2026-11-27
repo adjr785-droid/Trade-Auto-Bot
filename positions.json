@@ -3,21 +3,21 @@
         "entry_price": 0.077256,
         "safe_zone": 0.077256,
         "stop_loss": 0.073517,
-        "peak_price": 0.0798,
-        "last_price": 0.0797,
+        "peak_price": 0.0807,
+        "last_price": 0.0807,
         "opened_at": 1795720487.514375,
         "sl_pct": 4.84,
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
         "xsl": 0.073517,
-        "seen": 1795758711.827595
+        "seen": 1795760711.5345223
     },
     "PWT-USDT": {
         "entry_price": 0.317999,
         "safe_zone": 0.317999,
         "stop_loss": 0.302099,
         "peak_price": 0.317999,
-        "last_price": 0.314967,
+        "last_price": 0.314124,
         "opened_at": 1795756432.1270068,
         "sl_pct": 5.0,
         "entry_qty": 78.45,
@@ -25,6 +25,6 @@
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
         "xsl": 0.302099,
-        "seen": 1795758712.1555588
+        "seen": 1795760712.2702384
     }
 }

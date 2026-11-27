@@ -4416,5 +4416,15 @@
         "event": "ai_coin_advisory",
         "reviewed": 13,
         "source": "coins.db"
+    },
+    {
+        "time": 1795760719.125803,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'PWT-USDT', 'action': 'monitor', 'reason': 'Position is slightly negative (-1.22% PnL) and close to stop level (0.302099 vs current 0.314124). Consider tightening stop or reducing size if downside risk increases.'}, {'symbol': 'DOS-USDT', 'action': 'hold', 'reason': 'Position is positive (+4.46% PnL) with comfortable distance from stop (0.073517 vs current 0.0807). No immediate action required.'}], 'summary': 'Overall portfolio risk remains PASS. Maintain current exposure on DOS-USDT while closely watching PWT-USDT for potential stop adjustment or partial exit if further downside emerges.'}"
+    },
+    {
+        "time": 1795760720.1205611,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.1652, 'recurring_patterns': {'high_frequency_symbols': ['ADA-USDT', 'BLESS-USDT', 'MOVE-USDT'], 'common_reasons': ['MANUAL SELL', 'PANIC', 'CRASH GUARD'], 'risk_events': ['PANIC', 'CRASH GUARD']}, 'recommendations': ['Limit exposure to assets with frequent panic exits (e.g., PROS-USDT, PUMP-USDT).', 'Implement stricter stop\u2011loss thresholds to avoid large negative PnL spikes such as the -0.5691 USDT on MOVE-USDT.', 'Review manual sell triggers to ensure they are based on predefined criteria rather than ad\u2011hoc decisions.', 'Consider reducing trade frequency on symbols showing mixed outcomes (e.g., ADA-USDT) until a clearer edge is identified.', 'Maintain current win\u2011rate monitoring but prioritize net PnL improvement over win count.']}"
     }
 ]
