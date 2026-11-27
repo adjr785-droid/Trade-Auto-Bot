@@ -4646,5 +4646,23 @@
         "time": 1795788420.2639332,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': -0.1231, 'recurring_patterns': {'PANIC': 9, 'MANUAL SELL': 9, 'CRASH GUARD': 1}, 'recommendations': ['Limit panic\u2011driven exits; implement stricter trigger thresholds before manual sell actions', 'Review and tighten crash\u2011guard parameters to avoid large negative hits', 'Focus on trades with positive manual sell outcomes and reduce exposure to symbols with repeated losses (e.g., MOVE-USDT)']}"
+    },
+    {
+        "time": 1795788528.6469755,
+        "event": "trade_closed",
+        "symbol": "BTW-USDT",
+        "pnl_usdt": 1.1369542400000003,
+        "reason": "MANUAL SELL ALL",
+        "strategy": "MANUAL"
+    },
+    {
+        "time": 1795788530.97584,
+        "event": "ai_manual_sell_review",
+        "symbol": "BTW-USDT",
+        "review": {
+            "review": "The position in BTW-USDT was manually closed at an average exit price of 1.168797, realizing a modest profit of 1.13695424\u202fUSDT on the sold quantity of 5.24 units. The remaining base of 0.00685 suggests a near\u2011full liquidation, leaving minimal exposure. The profit margin was small, indicating limited upside capture or possibly a conservative exit strategy.",
+            "lesson": "When exiting low\u2011liquidity or low\u2011margin assets, consider tighter profit targets or incremental scaling out to lock in gains earlier, especially if the market shows limited depth. Maintaining a small residual position can be useful for future re\u2011entry if the asset rebounds, but the residual exposure should be weighed against the cost of holding and potential slippage.",
+            "confidence": "high"
+        }
     }
 ]
