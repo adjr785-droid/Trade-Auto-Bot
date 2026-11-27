@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935691251,
+    "last_update_id": 935691252,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -24,8 +24,8 @@
             1795739610.5038157
         ],
         "m:r:holdings": [
-            0,
-            1795756924.387857
+            1,
+            1795762043.544755
         ],
         "/analyse": [
             6,
@@ -95,7 +95,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "1/2",
+                "text": "2/2",
                 "callback_data": "pg:x"
             },
             {
@@ -112,13 +112,13 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/2*",
+    "panel_text": "\ud83d\udcc4 *Page 2/2*",
     "pages": {
         "p": [
             "\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *PWT* $24.99 (74%)\n+0.24% (+$0.06) | Entry 0.317999\nQty 78.40293 | Price 0.318760 | Stop 0.302099 (-5%)\nRSI 46 | Mixed | ATH -56%\n\n\ud83d\udfe2 *DOS* $8.64 (26%)\n+2.65% (+$0.22) | Entry 0.077256\nQty 109.00457 | Price 0.079300 | Stop 0.073517 (-7%)\n\u2800\n\u2800",
             "RSI 54 | Bullish | ATH -91%\n\n\ud83e\udde0 *AI:* BTC filter is inactive; holdings show PWT (74%) and DOS (26%) with\nmodest gains, RSI near mid-range, and stop\u2011losses 5\u20117% below entry\u2014monitor\nstop levels and market volatility.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 0,
+        "i": 1,
         "mode": "Markdown",
         "x": [
             [
