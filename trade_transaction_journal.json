@@ -4695,5 +4695,15 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795790540.749819,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'DOS-USDT', 'action': 'monitor', 'reason': 'Position is 181 days old with a small negative PnL (-0.79%). Current price is slightly above stop (0.075584). Consider tightening stop if price approaches support, but avoid premature exit.'}, {'symbol': 'PWT-USDT', 'action': 'monitor', 'reason': 'Position is 29 days old with a modest negative PnL (-0.5%). Price is near the stop level (0.300827). Recommend reviewing stop placement and market sentiment before adjusting.'}], 'summary': 'Both positions show minor drawdowns and are close to their stop levels. Maintain current exposure while closely watching price action. Adjust stops only if clear trend reversal signals appear, preserving capital and adhering to risk safeguards.'}"
+    },
+    {
+        "time": 1795790541.331912,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 63.33, 'net_pnl_usdt': 1.4014, 'recurring_patterns': {'reasons': {'PANIC': 6, 'MANUAL SELL ALL': 3, 'MANUAL SELL $': 5, 'CRASH GUARD': 1}}, 'recommendations': 'Maintain current risk limits, reduce reliance on panic exits, and consider tighter stop\u2011losses. Focus on symbols with consistent positive pnl and avoid repeated manual sell triggers that indicate volatility.'}"
     }
 ]
