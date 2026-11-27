@@ -4851,5 +4851,11 @@
         "time": 1795806386.4029694,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 63.33, 'net_pnl_usdt': 0.372, 'recurring_patterns': 'Frequent PANIC exits and manual sell actions; repeated symbols BLESS-USDT, MOVE-USDT, DOS-USDT show mixed outcomes; occasional large negative PNL from CRASH GUARD and PANIC; wins are modestly higher than losses but overall PNL is low.', 'recommendations': '1. Limit PANIC-triggered sells; implement stricter stop\u2011loss thresholds. 2. Review manual sell decisions for consistency; avoid ad\u2011hoc size changes. 3. Diversify away from repeatedly underperforming symbols (e.g., MOVE-USDT). 4. Increase position sizing discipline to protect against large negative events. 5. Monitor win\u2011rate volatility; current 63% may not sustain profitability without higher average win size.'}"
+    },
+    {
+        "time": 1795806412.3295283,
+        "event": "ai_coin_advisory",
+        "reviewed": 25,
+        "source": "coins.db"
     }
 ]
