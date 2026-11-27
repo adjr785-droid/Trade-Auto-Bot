@@ -4604,5 +4604,15 @@
         "time": 1795779708.9842024,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.1971, 'recurring_patterns': {'panic_trades': 7, 'manual_sell_trades': 13, 'crash_guard_trades': 1, 'symbols_with_multiple_trades': ['BLESS-USDT', 'MOVE-USDT', 'PUMP-USDT']}, 'recommendations': ['Limit exposure to panic-driven exits; consider tighter stop\u2011loss thresholds.', 'Review manual sell decisions for consistency with strategy rules.', 'Monitor symbols with repeated losses (e.g., MOVE-USDT) and consider reducing position size.', 'Maintain current win\u2011rate focus but aim to improve average profit per winning trade to offset net loss.']}"
+    },
+    {
+        "time": 1795782430.6333911,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'DOS-USDT', 'action': 'monitor', 'reason': 'Profit modest (1.85%); stop loss relatively close (0.075584) to current price (0.0809). Hold while price remains above stop, consider tightening stop if volatility increases.'}, {'symbol': 'PWT-USDT', 'action': 'monitor', 'reason': 'Very low profit (0.55%) after 433 minutes; stop loss (0.302099) is ~5.4% below current price (0.319744). Position is aging; watch for price reversal and be ready to exit if price approaches stop.'}, {'symbol': 'BTW-USDT', 'action': 'monitor', 'reason': 'Strongest gain (5.22%) with stop loss set at entry (0.951821). Current price (1.001484) comfortably above stop, but position is 303 minutes old; consider moving stop higher to protect gains.'}], 'summary': 'Overall portfolio risk remains acceptable (PASS). All positions are in profit, but stops are relatively tight "
+    },
+    {
+        "time": 1795782431.2672372,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': -0.1231, 'recurring_patterns': {'reasons': {'PANIC': 7, 'MANUAL SELL': 9, 'CRASH GUARD': 1}}, 'recommendations': ['Limit manual sell triggers to avoid frequent small exits', 'Implement stricter panic\u2011sell thresholds or disable panic mode', 'Review crash\u2011guard parameters to prevent large negative hits', 'Focus on higher\u2011confidence entry signals to improve net P&L']}"
     }
 ]
