@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691376,
+    "last_update_id": 935691377,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT35.27/\u20a648,181",
+    "kb_ph": "USDT35.28/\u20a648,186",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -17,7 +17,7 @@
         "pos": [],
         "hn": 31
     },
-    "last_cmd": "m:r:holdings",
+    "last_cmd": "/stats",
     "page_mem": {
         "/bot": [
             1,
@@ -85,65 +85,53 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 7354,
-    "out_text": "\ud83d\udcda *COIN LIST*\n\u2705 Ready 0 | \ud83c\udd95 New 0 | \ud83d\udcbc Held 2 | \u26d4 Rejected 441\nPipeline: \ud83d\udc41 Watch 0 \u2192 \ud83d\udfe1 Manual 0 \u2192 \ud83e\udd16 Auto 0 | \u2935 Dropped 447 | Archived 0\nExecution: \ud83d\udce5 queued 0 | \u26d4 blocked 0 | \ud83d\udfe2 held 2\n\n *IDOL* 0.016490 | NOT_ELIGIBLE | 1H +6.08% | RSI 51 | seen 121x\n   \ud83e\udde0 MEDIUM: Not eligible; 1h up 6.08% but 24h down 0.4%, RSI 50.9, mixed risk.\n *PORTAL* 0.040122 | NOT_ELIGIBLE | 1H +3.61% | RSI 95 | seen 121x\n   \ud83e\udde0 HIGH: Not eligible; extreme 24h rise 224.9%, RSI 94.7, very high risk.\n *JCT* 0.001531 | NOT_ELIGIBLE | 1H +1.94% | RSI 56 | seen 121x\n\u2800\n\u2800",
+    "kb_mid": 7357,
+    "out_text": "\ud83d\udcc8 *TRADE STATS* (after estimated fees)\nClosed trades: 61\nWin rate: 54% (33 wins, 28 losses)\nAverage win: $+0.35 | Average loss: $-0.20\nProfit factor: 2.05\nExpectancy per trade: $+0.10\nNet profit: $+5.92\nBest: $+2.97 | Worst: $-0.70\n\n*By strategy*\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795802974.1241074,
+    "out_time": 1795803050.210344,
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udda5 System",
-                "callback_data": "/bot"
+                "text": "\u25c0",
+                "callback_data": "pg:p"
             },
             {
-                "text": "\ud83d\udcc8 Stats",
-                "callback_data": "/stats"
-            }
-        ],
-        [
-            {
-                "text": "\u2699\ufe0f Settings",
-                "callback_data": "m:set"
+                "text": "1/3",
+                "callback_data": "pg:x"
             },
             {
-                "text": "\ud83d\udcbc Holdings",
-                "callback_data": "m:r:holdings"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udcdc Trade History",
-                "callback_data": "m:r:history"
+                "text": "\u25b6",
+                "callback_data": "pg:n"
             },
             {
-                "text": "\ud83e\udde0 Ask AI",
-                "callback_data": "m:ai:1"
-            }
-        ],
-        [
-            {
-                "text": "\ud83e\uddf9 Clear Chat",
-                "callback_data": "/clear"
+                "text": "\ud83c\udfe0",
+                "callback_data": "m:menu"
             },
             {
-                "text": "\ud83d\udea8 PANIC SELL",
-                "callback_data": "/panic"
+                "text": "\ud83d\udd04",
+                "callback_data": "rf:go"
             }
         ]
     ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
-    "out_mid": 7352,
+    "panel_text": "\ud83d\udcc4 *Page 1/3*",
     "pages": {
         "p": [
-            "\ud83d\udcda *COIN LIST*\n\u2705 Ready 0 | \ud83c\udd95 New 0 | \ud83d\udcbc Held 2 | \u26d4 Rejected 441\nPipeline: \ud83d\udc41 Watch 0 \u2192 \ud83d\udfe1 Manual 0 \u2192 \ud83e\udd16 Auto 0 | \u2935 Dropped 447 | Archived 0\nExecution: \ud83d\udce5 queued 0 | \u26d4 blocked 0 | \ud83d\udfe2 held 2\n\n *IDOL* 0.016490 | NOT_ELIGIBLE | 1H +6.08% | RSI 51 | seen 121x\n   \ud83e\udde0 MEDIUM: Not eligible; 1h up 6.08% but 24h down 0.4%, RSI 50.9, mixed risk.\n *PORTAL* 0.040122 | NOT_ELIGIBLE | 1H +3.61% | RSI 95 | seen 121x\n   \ud83e\udde0 HIGH: Not eligible; extreme 24h rise 224.9%, RSI 94.7, very high risk.\n *JCT* 0.001531 | NOT_ELIGIBLE | 1H +1.94% | RSI 56 | seen 121x\n\u2800\n\u2800",
-            "   \ud83e\udde0 MEDIUM: Not eligible; 24h up 4.36%, RSI 56, moderate risk.\n *UNI* 4.8090 | NOT_ELIGIBLE | 1H +0.82% | RSI 53 | seen 121x\n   \ud83e\udde0 MEDIUM: Not eligible; 24h up 3.96%, RSI 52.8, moderate risk.\n *LINK* 9.3730 | NOT_ELIGIBLE | 1H +0.66% | RSI 50 | seen 121x\n   \ud83e\udde0 MEDIUM: Not eligible; 24h up 1.32%, RSI 50.5, moderate risk.\n *WLD* 0.246800 | NOT_ELIGIBLE | 1H +0.61% | RSI 51 | seen 121x\n   \ud83e\udde0 MEDIUM: Not eligible; 24h up 1.56%, RSI 50.6, moderate risk.\n *ONDO* 0.289300 | NOT_ELIGIBLE | 1H +0.61% | RSI 48 | seen 121x\n   \ud83e\udde0 LOW: Not eligible; modest moves, RSI 48, low risk.\n *LTC* 43.8300 | NOT_ELIGIBLE | 1H +0.54% | RSI 49 | seen 121x\n\u2800\n\u2800",
-            "   \ud83e\udde0 MEDIUM: Not eligible; 24h up 1.04%, RSI 49.3, moderate risk.\n *SUI* 0.674200 | NOT_ELIGIBLE | 1H +0.51% | RSI 49 | seen 121x\n   \ud83e\udde0 LOW: Not eligible; small gains, RSI 48.6, low volatility.\n *TAO* 185.60 | NOT_ELIGIBLE | 1H +0.44% | RSI 50 | seen 121x\n   \ud83e\udde0 MEDIUM: Not eligible; 24h up 1.42%, RSI 50.1, moderate risk.\n *ADA* 0.149300 | NOT_ELIGIBLE | 1H +0.20% | RSI 47 | seen 121x\n   \ud83e\udde0 LOW: Not eligible; small 1h rise, slight 24h decline, RSI 47.2, low risk.\n *PEPE* 0.00000351 | NOT_ELIGIBLE | 1H +0.20% | RSI 46 | seen 121x\n   \ud83e\udde0 LOW: Not eligible; negligible moves, RSI 46.2, low risk.\n\n\u2800\n\u2800",
-            "\u2935 *DROPPED \u2014 retained for recovery:* IDOL (2/10), PORTAL (3/10), JCT (3/10),\nUNI (3/10), LINK (3/10)\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+            "\ud83d\udcc8 *TRADE STATS* (after estimated fees)\nClosed trades: 61\nWin rate: 54% (33 wins, 28 losses)\nAverage win: $+0.35 | Average loss: $-0.20\nProfit factor: 2.05\nExpectancy per trade: $+0.10\nNet profit: $+5.92\nBest: $+2.97 | Worst: $-0.70\n\n*By strategy*\n\u2800\n\u2800",
+            "MANUAL: 47 trades | win 57% | avg $+0.17 | total $+7.84\nBREAKOUT: 1 trades | win 100% | avg $+0.10 | total $+0.10\nOLDER: 2 trades | win 0% | avg $-0.15 | total $-0.29\nOTHER: 11 trades | win 45% | avg $-0.16 | total $-1.73\n\n\ud83d\udd2c *RULE RESULTS* (what coins did after each stage)\n\ud83d\udc41 Watch (9): 4h +0.1% | win 56% | up +2.5% / down -3.2%\n\ud83d\udfe1 Manual: collecting data\n\ud83e\udd16 Auto: collecting data\nWin = beats round-trip fees at 4h. Needs a few days of scans to mean anything.\n\u2800\n\u2800",
+            "\n\ud83e\udde0 *AI:* Overall performance shows modest profit (+$5.92) with a 54% win rate,\nbut the small sample size and negative averages in several strategies suggest\ncaution and further data collection before drawing firm conclusions.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
         "i": 0,
         "mode": "Markdown",
-        "x": [],
-        "cmd": "m:coins"
+        "x": [
+            [
+                {
+                    "text": "\ud83d\udd04",
+                    "callback_data": "rf:go"
+                }
+            ]
+        ],
+        "cmd": "/stats"
     },
-    "panel_mid": 7353
+    "out_mid": 7355,
+    "panel_mid": 7356
 }
