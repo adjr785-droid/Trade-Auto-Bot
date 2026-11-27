@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935691294,
+    "last_update_id": 935691295,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -94,28 +94,46 @@
     "panel_rows": [
         [
             {
-                "text": "\u2795 Add coin",
-                "callback_data": "m:more:fav:0"
+                "text": "\ud83d\udda5 System",
+                "callback_data": "/bot"
             },
             {
-                "text": "\ud83d\udd04 Refresh",
-                "callback_data": "m:fv"
+                "text": "\ud83d\udcc8 Stats",
+                "callback_data": "/stats"
             }
         ],
         [
             {
-                "text": "\u2b50 DOS",
-                "callback_data": "m:fc:DOS:fv"
+                "text": "\u2699\ufe0f Settings",
+                "callback_data": "m:set"
+            },
+            {
+                "text": "\ud83d\udcbc Holdings",
+                "callback_data": "m:r:holdings"
             }
         ],
         [
             {
-                "text": "\u2b05\ufe0f Analyse",
-                "callback_data": "/analyse"
+                "text": "\ud83d\udcdc Trade History",
+                "callback_data": "m:r:history"
+            },
+            {
+                "text": "\ud83e\udde0 Ask AI",
+                "callback_data": "m:ai:1"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\uddf9 Clear Chat",
+                "callback_data": "/clear"
+            },
+            {
+                "text": "\ud83d\udea8 PANIC SELL",
+                "callback_data": "/panic"
             }
         ]
     ],
-    "panel_text": "\ud83d\udc47 *Actions*",
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
     "out_mid": 7158,
     "panel_mid": 7159
 }
