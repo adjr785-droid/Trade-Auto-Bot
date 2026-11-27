@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT35.13/\u20a647,980",
+    "kb_ph": "USDT34.99/\u20a647,794",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -89,7 +89,7 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 7506,
+    "kb_mid": 7507,
     "out_text": "\ud83d\udcda *COIN LIST*\n\u2705 Ready 0 | \ud83c\udd95 New 0 | \ud83d\udcbc Held 2 | \u26d4 Rejected 441\nPipeline: \ud83d\udc41 Watch 0 \u2192 \ud83d\udfe1 Manual 0 \u2192 \ud83e\udd16 Auto 0 | \u2935 Dropped 447 | Archived 0\nExecution: \ud83d\udce5 queued 0 | \u26d4 blocked 0 | \ud83d\udfe2 held 2\n\n```\nCOIN     PRICE RSI    1H ST  SC\n-------------------------------\nIDOL   0.01687  52  +1.7 -    -\nPORTAL0.040077  92  +0.6 -    -\n```\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
