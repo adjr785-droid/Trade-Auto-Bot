@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT35.16/\u20a648,022",
+    "kb_ph": "USDT35.35/\u20a648,283",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -87,31 +87,6 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 7438,
-    "out_mid": 7434,
-    "out_text": "\ud83d\udd0d *SCAN COMPLETE*\nChecked 460 markets in 15s.\nNo coin matched any setup.\n\ud83d\udea7 *GATES* (19 analysed, 0 passed)\nBlocked: RSI 14 | MA 15 | 1H 17 | 24H 8 | Score 0\nSetups: Trend 0 | Pullback 0 | Bounce 0 | Breakout 0\nRules: RSI \u2264 48, Price > MA5 > MA10, 1H +0.5 to +6%, 24H up, Core 5+ and Extra\n2+\n\u2800\n\u2800\n\u2800\n\u2800",
-    "out_mode": "Markdown",
-    "out_time": 1795811545.4230652,
-    "panel_rows": [
-        [
-            {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
-            },
-            {
-                "text": "1/2",
-                "callback_data": "pg:x"
-            },
-            {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
-            },
-            {
-                "text": "\ud83c\udfe0",
-                "callback_data": "m:menu"
-            }
-        ]
-    ],
-    "panel_text": "\ud83d\udcc4 *Page 1/2*",
+    "kb_mid": 7439,
     "panel_hidden": true
 }

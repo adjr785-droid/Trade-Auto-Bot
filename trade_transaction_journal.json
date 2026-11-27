@@ -4883,5 +4883,15 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795814980.216498,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'DOS-USDT', 'action': 'hold', 'reason': 'Positive PnL (2.48%) and price above stop; monitor for downside as stop is at entry.'}, {'symbol': 'PWT-USDT', 'action': 'hold', 'reason': 'Positive PnL (1.11%) with price above stop; consider tightening stop toward entry if volatility increases.'}, {'symbol': 'BTC-USDT', 'action': 'monitor', 'reason': 'btc_filter is true; BTC price at 59,836.4 may influence market sentiment for altcoins.'}], 'summary': 'Overall portfolio risk remains PASS. Both positions are in modest profit and can be held, but maintain vigilance on stop levels and BTC market movements.'}"
+    },
+    {
+        "time": 1795814981.1039295,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 63.33, 'net_pnl_usdt': 0.372, 'recurring_patterns': {'high_frequency_symbols': ['BLESS-USDT', 'MOVE-USDT', 'DOS-USDT'], 'common_reasons': {'PANIC': 6, 'MANUAL SELL': 13, 'CRASH GUARD': 1}, 'loss_concentration': {'MOVE-USDT': 2, 'PROS-USDT': 1, 'PUMP-USDT': 1, 'TRX-USDT': 1}}, 'recommendations': ['Limit panic\u2011driven exits; implement stricter stop\u2011loss thresholds.', 'Diversify across symbols rather than concentrating on a few high\u2011turnover assets.', 'Review manual sell triggers to ensure they align with predefined profit targets.', 'Maintain current win\u2011rate focus but aim to improve average win size relative to losses.', 'Monitor crash\u2011guard activation frequency and adjust risk parameters to reduce large negative swings.']}"
     }
 ]
