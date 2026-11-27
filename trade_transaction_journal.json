@@ -4715,5 +4715,11 @@
         "time": 1795794133.8603327,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 63.33, 'net_pnl_usdt': 1.4014, 'recurring_patterns': {'reasons': {'PANIC': 9, 'MANUAL SELL': 10, 'CRASH GUARD': 1}}, 'recommendations': 'Maintain current risk limits; avoid panic exits; prioritize manual sell signals with clear profit targets; monitor high\u2011frequency loss symbols (e.g., MOVE-USDT) for potential de\u2011listing or volatility spikes; consider reducing exposure to assets with repeated panic closures.'}"
+    },
+    {
+        "time": 1795794170.7047637,
+        "event": "ai_coin_advisory",
+        "reviewed": 25,
+        "source": "coins.db"
     }
 ]
