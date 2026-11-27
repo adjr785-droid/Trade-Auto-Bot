@@ -489,6 +489,7 @@ def cfg():
  if not s.get('setups_v1'):s['oversold_enabled']=True;s['setups_v1']=True;save(CFG,s)
  if 'partial_tp_pct' in s or 'partial_tp_fraction' in s:s.pop('partial_tp_pct',None);s.pop('partial_tp_fraction',None);save(CFG,s)
  if not s.get('auto_mode_v1'):s['auto_buy_enabled']=True;s['auto_mode_v1']=True;save(CFG,s)
+ if not s.get('fixed5_v1'):s['atr_stop_enabled']=False;s['stop_loss_pct']=5.0;s['fixed5_v1']=True;save(CFG,s)   # fixed 5% stop
  if not s.get('auto_dyn_v1'):s['auto_buy_enabled']=True;s['auto_dyn_v1']=True;save(CFG,s)   # Auto-buy is dynamic: no Settings switch; it buys whenever the set rules are met
  return s
 def in_cd(k,s=5):return time.time()-load(CD,{}).get(k,0)<s
@@ -791,9 +792,19 @@ def hard_sl(sym,qty,pr):
   if ok and any((o.get('id')==oid if oid else False) for o,_ in orders):return True
   return False
  except Exception as e:tg(f"⚠️ *SL NOT VERIFIED* {sym}: `{e}`");return False
+def partial_stop_frac(pos):
+ """Share of the entry amount sold when the fixed stop hits (default 75%). 1.0 = sell all (small positions, or the partial already happened)."""
+ try:
+  fr=float(cfg().get('stop_exit_fraction',0.75) or 1.0)
+  eq=float(pos.get('entry_qty') or 0);eu=float(pos.get('entry_usdt') or 0)
+  if fr>=1.0 or pos.get('partial_done') or eq<=0 or eu*fr<1.5 or eu*(1-fr)<5.0:return 1.0
+  return fr
+ except Exception:return 1.0
 def place_trailing_sl(sym,qty):
- pos=load(DB).get(sym,{});ent=pos.get('entry_price') or live(sym)
+ pos=load(DB).get(sym,{});ent=pos.get('stop_ref') or pos.get('entry_price') or live(sym)
  if not ent:return False
+ fr=partial_stop_frac(pos)
+ if fr<1.0:qty=min(float(qty),float(pos.get('entry_qty'))*fr)   # the exchange stop sells only 75% of the entry amount
  px=round(ent*(1-sl_pct(sym,pos)/100),6);ok=hard_sl(sym,qty,px)
  if ok:
   db=load(DB)
@@ -803,7 +814,7 @@ def ratchet(sym,d,lvl,lv):
  if lvl<=d.get('xsl',0)*1.01 or lvl>=lv*0.995:return
  q=B('total',sym.split('-')[0])
  if hard_sl(sym,q,lvl):d['xsl']=lvl
- elif place_trailing_sl(sym,q):d['xsl']=round(d['entry_price']*(1-sl_pct(sym,d)/100),6)
+ elif place_trailing_sl(sym,q):d['xsl']=round((d.get('stop_ref') or d['entry_price'])*(1-sl_pct(sym,d)/100),6)
 def rec(sym,pnl,why,notional=0.0):
  L=load(LF);L['total_realized_usdt']=L.get('total_realized_usdt',0.0)+pnl;L['trade_count']=L.get('trade_count',0)+1;save(LF,L)
  H=load(HIST)
@@ -995,12 +1006,15 @@ def cmd_buy(txt):
   ob=B('total',c) if old else 0.0;f,a=m_buy(f"{c}/USDT",amt);sl=sl_pct(sym,old) if old else sl_pct(sym)
   if old:
    e0=old['entry_price'];avg=round((ob*e0+f*a)/(ob+f),6) if ob>0 else round(a,6)
-   old.update(entry_price=avg,safe_zone=avg,stop_loss=round(avg*(1-sl/100),6),last_price=a,peak_price=max(old.get('peak_price',avg),a),opened_at=time.time(),purchase_source='MANUAL');db[sym]=old;save(DB,db)
+   old.update(entry_price=avg,safe_zone=avg,stop_loss=round(avg*(1-sl/100),6),last_price=a,peak_price=max(old.get('peak_price',avg),a),opened_at=time.time(),purchase_source='MANUAL')
+   # DCA: the entry amount grows with every add; the stop and the 75% rule restart from the new average
+   old.update(entry_qty=float(old.get('entry_qty') or ob)+float(f),entry_usdt=round(float(old.get('entry_usdt') or ob*e0)+float(f)*float(a),4),dca_count=int(old.get('dca_count',0))+1)
+   old.pop('partial_done',None);old.pop('stop_ref',None);old.pop('xsl',None);db[sym]=old;save(DB,db)
    coin_db_mark_execution(sym,"BOUGHT","Manual DCA fill confirmed",{"filled":f,"average":a,"spend_usdt":amt,"source":"MANUAL"})
    ok=place_trailing_sl(sym,free_qty(sym,ob+f))
-   tg(f"➕ *DCA ADDED:* {c} @ {a:.6f}\nSpent: ${amt:.2f}\nNew avg entry: {avg:.6f}\n"+(STOP_OK if ok else STOP_NO))
+   tg(f"➕ *DCA ADDED:* {c} @ {a:.6f}\nSpent: ${amt:.2f}\nNew avg entry: {avg:.6f}\nTotal entry amount: ${old['entry_usdt']:.2f}\n"+(STOP_OK if ok else STOP_NO))
   else:
-   db[sym]=NP(round(a,6),round(a*(1-sl/100),6),sl);db[sym]['strategy']="MANUAL";db[sym]['purchase_source']='MANUAL';db[sym]['opened_at']=time.time();save(DB,db)
+   db[sym]=NP(round(a,6),round(a*(1-sl/100),6),sl);db[sym].update(entry_qty=float(f),entry_usdt=round(float(f)*float(a),4));db[sym]['strategy']="MANUAL";db[sym]['purchase_source']='MANUAL';db[sym]['opened_at']=time.time();save(DB,db)
    coin_db_mark_execution(sym,"BOUGHT","Manual buy fill confirmed",{"filled":f,"average":a,"spend_usdt":amt,"source":"MANUAL"})
    ok=place_trailing_sl(sym,free_qty(sym,f))
    tg(f"✅ *BOUGHT:* {c} @ {a:.6f}\nSpent: ${amt:.2f}\n"+(STOP_OK if ok else STOP_NO))
@@ -1079,7 +1093,7 @@ def auto_sync(verbose=False):
   if c in STABLE or c in BL or c=="BGB" or a<=0:continue
   sym=f"{c}-USDT";p=live(sym)
   if p and a*p>1.02 and sym not in db:
-   db[sym]=NP(p,round(p*(1-s['stop_loss_pct']/100),6));save(DB,db);added.append(sym)
+   db[sym]=NP(p,round(p*(1-s['stop_loss_pct']/100),6));db[sym].update(entry_qty=a,entry_usdt=round(a*p,4));save(DB,db);added.append(sym)
    if not (place_trailing_sl(sym,a) or protect_retry(sym,a)):tg(f"⚠️ *STOP NOT VERIFIED* for synced coin {sym}. The watchdog will retry.")
  if added:tg(f"🔄 *AUTO-SYNC:* now tracking {len(added)} coin(s) you hold, with stop and trailing stop:\n`{chr(10).join(added)}`")
  elif verbose:tg("✅ No new coins found to sync.")
@@ -1565,8 +1579,11 @@ def cmd_status():
  q=load(QF);ls=load(SC).get('last',0);ago=f"{(now-ls)/60:.0f} min ago" if ls else "never"
  mom=f"1H +{float(s.get('mom_1h_min_pct',0.5)):g}–{float(s.get('mom_1h_max_pct',6.0)):g}%" if mom_on(s) else "24H range"
  lines=[f"🖥 *SYSTEM* — {head}",f"Buying: {system_buy_state(s)}",f"Health: Bot {bot_pct}% | AI {str(ap)+'%' if ap is not None else 'n/a'} ({ai_mode})",f"Layers: {lay}",f"Rate limits (1h): Exchange {rl_count('ccxt')} | AI {rl_count('groq')}"+(" — scanning slowed" if rl_count("ccxt",600)>=3 else "")]+([f"🔧 AI issue: {AI_CAUSE.get(le[0],le[0])}"] if (le:=ai_last_error()) and (hs.get("emergency_mode") or (ap is not None and ap<70)) else [])+["━━━━━━━━━━━━━━",
-  "🧭 *STRATEGY*",f"Entry: TREND, RSI {s.get('rsi_min')}-{s.get('rsi_max')}, {mom}, price > MA5 > MA10"+(", must be rising vs last scan" if s.get('rising_guard',True) else ""),
-  f"Exit: stop {s.get('stop_loss_pct')}% | trail {s.get('trail_pct')}% | RSI {s.get('rsi_exit')}+ (dynamic)",
+  "🧭 *STRATEGY* (4 setups)",f"Trend: price > MA5 > MA10, RSI {s.get('rsi_min')}-{s.get('rsi_max')}, {mom}",
+  f"Pullback: MA5 > MA10, price between MA10 and MA5, RSI {s.get('pullback_rsi_min',40)}-{s.get('rsi_max')}, {mom}",
+  f"Bounce {'ON' if s.get('oversold_enabled',True) else 'OFF'}: RSI under 30, price back above last close, {mom}",
+  f"Breakout: price clears the 20H high, volume 1.5x+, RSI 50-70, hard stop {float(s.get('breakout_stop_pct',2.0)):g}%"+(" | all must be rising vs last scan" if s.get('rising_guard',True) else ""),
+  f"Exit: stop {s.get('stop_loss_pct')}% sells {float(s.get('stop_exit_fraction',0.75))*100:g}% of entry, new stop on the rest | trail {s.get('trail_pct')}% | RSI {s.get('rsi_exit')}+ (dynamic)",
   (f"Size: 50% of balance (all-in if half < ${float(s.get('half_or_all_threshold_usdt',5.0)):g})" if s.get("half_or_all_sizing",True) else f"Risk: {s.get('risk_per_trade_pct')}% per trade")+f" | max {s.get('max_daily_trades')} trades/day | pause at -{s.get('max_daily_drawdown_pct')}% day",
   "━━━━━━━━━━━━━━",f"💼 ${total:.2f}"+(f" | ₦{total*r:,.0f}" if r else "")+f" | Cash ${usdt_free:.2f} | Coins ${coin_val:.2f}",
   f"Today {ddp:+.2f}% | Last scan {ago} | Queue {len(q)} | Positions {len(db)}"]
@@ -1834,9 +1851,12 @@ def manage():
   if lp>0:
    drop=(lv-lp)/lp*100
    if drop<=-s.get('crash_guard_pct',18) and sell(sym,1.0,f"CRASH GUARD ({drop:.1f}%)"):db.pop(sym,None);save(DB,db);continue
+  fl=float(s.get('capital_floor_pct',75) or 0)   # last line of defence: a position is never held below 75% of its entry value
+  if fl>0 and lv<=e*fl/100:
+   if sell(sym,1.0,f"CAPITAL FLOOR (-{100-fl:g}%)"):db.pop(sym,None);save(DB,db);continue
   d['last_price']=lv
   if inc>=5.0 and d['stop_loss']<e:d['stop_loss']=e
-  sp=sl_pct(sym,d);c=[(round(e*(1-sp/100),6),f"SL HIT ({sp}%)"),(d['stop_loss'],"STOP LOSS")]
+  sp=sl_pct(sym,d);c=[(round(float(d.get('stop_ref') or e)*(1-sp/100),6),f"SL HIT ({sp}%)"),(d['stop_loss'],"STOP LOSS")]
   tpe=tp
   if tp>0 and s.get('dynamic_trail',True) and dt[3] and dt[4]:
    if r and r>=60 and lv>dt[3]>dt[4]:tpe=tp*1.25
@@ -1844,6 +1864,25 @@ def manage():
   if tp>0:c.append((d['peak_price']*(1-tpe/100),f"TRAILING STOP ({tpe:.1f}%)"))
   lvl,why=max(c,key=lambda x:x[0])
   if lv<=lvl:
+   fr=partial_stop_frac(d) if (why.startswith(("SL HIT","STOP LOSS")) and lvl<e*0.999) else 1.0
+   if fr<1.0:
+    coin=sym.split("-")[0]
+    try:fb=float(B('total',coin) or 0)
+    except Exception:fb=0.0
+    eq=float(d.get('entry_qty') or 0)
+    if 0<fb<=eq*0.30 or (fb>0 and fb*lv<1.02):frac_now=None   # exchange stop already sold the 75%
+    else:frac_now=min(0.99,fr*eq/fb) if fb>0 else None
+    ex_done=frac_now is None
+    if not ex_done and frac_now>=0.99:fr=1.0
+    elif ex_done or sell(sym,frac_now,f"STOP LOSS: {fr*100:.0f}% of entry amount"):
+     try:rem=float(B('total',coin) or 0)
+     except Exception:rem=0.0
+     if rem*lv<1.02:db.pop(sym,None);save(DB,db);continue
+     d['partial_done']=True;d['stop_ref']=lv;d['stop_loss']=round(lv*(1-sp/100),6);d.pop('xsl',None);db[sym]=d;save(DB,db)
+     ok=place_trailing_sl(sym,rem)
+     tg(f"🛡 *STOP: {fr*100:.0f}% OF ENTRY SOLD* {sym}\nThe remaining {rem:.8g} stays open with a new {sp:g}% stop at {d['stop_loss']:.8g}."+("" if ok else "\n⚠️ Exchange stop for the rest could not be placed; the bot is watching it."))
+     continue
+    else:continue
    if sell(sym,1.0,why):db.pop(sym,None);save(DB,db)
    continue
   # Dynamic RSI exit: reaching the RSI level only arms it. Hold while momentum continues (the trailing stop still protects);
@@ -2246,7 +2285,9 @@ def exec_q():
    if cap>0 and db and not s.get("half_or_all_sizing",True):
     orp=open_risk_pct()
     if orp+float(s.get('risk_per_trade_pct',1.0))>cap:buy_rejection(sym,f"Combined open risk {orp:.1f}% (limit {cap:g}%).");continue
-   pct=sl_pct(sym);sp,alloc_meta=dynamic_auto_buy_budget(sym,qd,live(sym),qd.get('sl') or live(sym)*(1-pct/100),spend,s)
+   pct=sl_pct(sym)
+   if qd.get('type')=="BREAKOUT":pct=min(pct,float(s.get('breakout_stop_pct',2.0)))   # breakouts get a very tight stop
+   sp,alloc_meta=dynamic_auto_buy_budget(sym,qd,live(sym),qd.get('sl') or live(sym)*(1-pct/100),spend,s)
    if sp<(1.00 if s.get("half_or_all_sizing",True) else 1.02):buy_rejection(sym,f"Size too small (${sp:.2f}).");continue
    impact_ok,impact,impact_reason=estimate_market_impact(sym,sp);impact_limit=float(s.get("execution_slippage_pct",0.35))
    if not impact_ok or impact is None or impact>impact_limit:
@@ -2267,7 +2308,8 @@ def exec_q():
    journal_event("buy_fill_verified",symbol=sym,filled=f,average=a,spend_estimate=f*a)
    mxs=round(a*(1-pct/100),6);sl=qd.get('sl') or mxs
    if sl>=a or sl>mxs:sl=mxs
-   db[sym]=NP(round(a,6),sl,pct);db[sym]['strategy']=qd.get('type','OTHER');db[sym]['purchase_source']='AUTO';db[sym]['opened_at']=time.time();save(DB,db)
+   if qd.get('type')=="BREAKOUT":sl=max(sl,mxs)
+   db[sym]=NP(round(a,6),sl,pct);db[sym].update(entry_qty=float(f),entry_usdt=round(float(f)*float(a),4));db[sym]['strategy']=qd.get('type','OTHER');db[sym]['purchase_source']='AUTO';db[sym]['opened_at']=time.time();save(DB,db)
    coin_db_mark_execution(sym,"BOUGHT","Auto-buy fill confirmed",{"filled":f,"average":a,"spend_usdt":sp,"setup":qd.get("type")})
    ok=place_trailing_sl(sym,free_qty(sym,f)) or protect_retry(sym,f);tg(f"🛒 *EXECUTED — DYNAMIC AUTO-BUY!*\n{sym}|💵{sp:.2f}@{a:.6f}\nAllocation: score {alloc_meta.get('score_factor',0):.2f}x, setup {alloc_meta.get('setup_factor',0):.2f}x, volatility {alloc_meta.get('vol_factor',0):.2f}x, regime {alloc_meta.get('regime_factor',0):.2f}x\n"+(STOP_OK if ok else STOP_NO))
    if not ok and s.get('sell_if_stop_fails',True):unprotected_exit(sym,db)
@@ -2543,7 +2585,7 @@ def manual_candidate_assess(rec,settings=None):
    "spread":None if spread is None else 0<=spread<=float(s.get("max_spread_pct",0.5)),
    "market_trend":None if trend is None else trend is True,
    "price_structure":(_pb_ok if tag=="PULLBACK" else (None if pcl is None or price is None else price>pcl) if tag=="BOUNCE" else (None if price is None or ma5 is None or ma10 is None else price>ma5>ma10)),
-   "rsi_condition":(None if rsi is None else (float(s.get("pullback_rsi_min",40))<=rsi<=_rmax if tag=="PULLBACK" else rsi<30 if tag=="BOUNCE" else float(s.get("rsi_min",42))<=rsi<=_rmax)),
+   "rsi_condition":(None if rsi is None else (float(s.get("pullback_rsi_min",40))<=rsi<=_rmax if tag=="PULLBACK" else rsi<30 if tag=="BOUNCE" else 50.0<=rsi<=70.0 if tag=="BREAKOUT" else float(s.get("rsi_min",42))<=rsi<=_rmax)),
    "momentum_24h":None if chg is None else ((chg<=_chgmax) if tag=="BOUNCE" else 0.0<chg<=_chgmax),
    "btc_market_safety":None if btc is None else btc is True,
   }
@@ -2557,7 +2599,7 @@ def manual_candidate_assess(rec,settings=None):
   core_score=sum(v is True for v in core.values());additional_score=sum(v is True for v in additional.values());score=core_score+additional_score
   # HARD GATES: always required, no score can override them. Missing evidence fails a gate.
   gates={
-   "rsi_ceiling":None if rsi is None else (rsi<30 if tag=="BOUNCE" else rsi<=_rmax),
+   "rsi_ceiling":None if rsi is None else (rsi<30 if tag=="BOUNCE" else rsi<=70.0 if tag=="BREAKOUT" else rsi<=_rmax),
    "price_above_ma":(_pb_ok if tag=="PULLBACK" else (None if price is None else True) if tag=="BOUNCE" else (None if price is None or ma5 is None or ma10 is None else price>ma5>ma10)),
    "momentum_1h":(True if not mom_on(s) else (None if h1v is None else float(s.get("mom_1h_min_pct",0.5))<=h1v<=float(s.get("mom_1h_max_pct",6.0)))),
    "momentum_24h_up":None if chg is None else ((chg<=_chgmax) if tag=="BOUNCE" else 0.0<chg<=_chgmax),
@@ -3731,7 +3773,7 @@ def live_loop(t0):
   try:tg_check(poll=int(min(20,max(1,deadline-time.time()-6))))
   except Exception as e:print(f"LIVE POLL ERR: {e}")
   now=time.time()
-  if now-last_light>=60:
+  if now-last_light>=30:
    for fn in (audit_ai,manage,check_alerts,scan,fast_watch,exec_q):
     if fn is scan and deadline-time.time()<60:continue
     run_step(fn)
