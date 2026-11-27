@@ -4614,5 +4614,11 @@
         "time": 1795782431.2672372,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': -0.1231, 'recurring_patterns': {'reasons': {'PANIC': 7, 'MANUAL SELL': 9, 'CRASH GUARD': 1}}, 'recommendations': ['Limit manual sell triggers to avoid frequent small exits', 'Implement stricter panic\u2011sell thresholds or disable panic mode', 'Review crash\u2011guard parameters to prevent large negative hits', 'Focus on higher\u2011confidence entry signals to improve net P&L']}"
+    },
+    {
+        "time": 1795782458.1484082,
+        "event": "ai_coin_advisory",
+        "reviewed": 25,
+        "source": "coins.db"
     }
 ]
