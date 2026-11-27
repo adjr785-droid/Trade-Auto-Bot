@@ -4436,5 +4436,15 @@
         "time": 1795761946.267188,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.1652, 'recurring_patterns': {'PANIC_trades': 7, 'MANUAL_SELL_trades': 9, 'CRASH_GUARD_trades': 1}, 'recommendations': ['Limit exposure to high\u2011volatility assets that trigger frequent PANIC exits', 'Implement stricter stop\u2011loss thresholds to avoid large negative PnL events like the -0.5691 USDT crash guard', 'Review manual sell decisions for consistency and consider automated profit\u2011target rules', 'Monitor overall net PnL and pause new entries until the strategy returns to positive performance']}"
+    },
+    {
+        "time": 1795762228.386206,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'DOS-USDT', 'action': 'hold', 'reason': 'Position is modestly profitable (+2.78%) and price is above stop. No immediate risk signals; continue monitoring.'}, {'symbol': 'PWT-USDT', 'action': 'hold', 'reason': 'Small profit (+0.32%) but price is close to stop (0.3021). Maintain position but watch for downside pressure.'}], 'summary': 'Overall portfolio risk remains acceptable (PASS). Both positions are currently in profit, though PWT-USDT is near its stop level. Recommend holding both positions while keeping a close eye on price movements, especially for PWT-USDT.'}"
+    },
+    {
+        "time": 1795762229.1416886,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.1652, 'recurring_patterns': {'panic_trades': 7, 'manual_sell_trades': 12, 'crash_guard_trades': 1, 'symbols_with_multiple_losses': ['PROS-USDT', 'MOVE-USDT', 'PUMP-USDT']}, 'recommendations': ['Limit reliance on panic exits; consider tighter stop\u2011loss thresholds.', 'Review manual sell decisions that repeatedly result in losses.', 'Investigate the high\u2011impact loss on MOVE-USDT and adjust position sizing.', 'Maintain current win\u2011rate focus but aim to improve overall profitability.']}"
     }
 ]
