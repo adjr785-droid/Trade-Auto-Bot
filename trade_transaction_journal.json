@@ -4500,5 +4500,15 @@
         "time": 1795764146.7089276,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.1971, 'recurring_patterns': {'panic_trades': 7, 'manual_sell_trades': 12, 'crash_guard_trades': 1, 'symbols_with_multiple_trades': ['BLESS-USDT', 'MOVE-USDT', 'PUMP-USDT']}, 'recommendations': ['Limit reliance on panic exits; consider tighter stop\u2011loss thresholds.', 'Review manual sell decisions to ensure they align with predefined profit targets.', 'Monitor symbols with repeated activity (e.g., BLESS-USDT, MOVE-USDT) for over\u2011exposure.', 'Maintain or slightly reduce position sizes until net PnL turns positive.', 'Implement additional risk checks before triggering crash\u2011guard mechanisms.']}"
+    },
+    {
+        "time": 1795764238.200126,
+        "event": "ai_manual_buy_review",
+        "symbol": "BTW-USDT",
+        "review": {
+            "risk_level": "moderate",
+            "warning": "The RSI is near neutral (47.18) and the price is close to recent levels; no strong bullish signal. Ensure position sizing aligns with overall portfolio risk and consider market volatility.",
+            "summary": "Manual buy of 5.0 USDT of BTW-USDT at 0.952748 is permissible but carries moderate risk due to lack of strong technical confirmation. Verify that this trade fits within your risk limits and monitor the position closely."
+        }
     }
 ]
