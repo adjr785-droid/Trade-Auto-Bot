@@ -4546,5 +4546,11 @@
         "time": 1795773917.9155228,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.1971, 'recurring_patterns': {'panic_trades': 7, 'manual_sell_trades': 13, 'crash_guard_trades': 1, 'symbols_with_multiple_trades': ['BLESS-USDT', 'MOVE-USDT', 'PUMP-USDT']}, 'recommendations': ['Limit exposure to panic-driven exits; consider tighter stop\u2011loss thresholds.', 'Review manual sell decisions for consistency with strategy rules.', 'Monitor symbols with repeated losses (e.g., MOVE-USDT) and consider reducing position size.', 'Maintain current win\u2011rate focus but aim to improve net P&L through tighter risk management.']}"
+    },
+    {
+        "time": 1795773940.3591986,
+        "event": "ai_coin_advisory",
+        "reviewed": 25,
+        "source": "coins.db"
     }
 ]
