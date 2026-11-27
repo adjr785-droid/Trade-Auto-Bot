@@ -4552,5 +4552,15 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795775543.0977328,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'PWT-USDT', 'action': 'monitor', 'reason': 'Negative P&L (-1.08%) and price approaching stop level (0.3146 vs stop 0.3021). Consider tightening stop or exiting if further downside appears.'}, {'symbol': 'DOS-USDT', 'action': 'hold', 'reason': 'Small positive P&L (3.03%) with price above entry and stop comfortably lower. No immediate risk.'}, {'symbol': 'ENA-USDT', 'action': 'hold', 'reason': 'Modest positive P&L (0.75%) and price still above stop. Position appears stable.'}, {'symbol': 'BTW-USDT', 'action': 'hold', 'reason': 'Strong positive P&L (4.26%) and price well above stop. Position is healthy.'}], 'summary': 'Overall portfolio risk remains PASS. The only position showing downside pressure is PWT-USDT, where the price is nearing its stop. Recommend close monitoring and possibly adjusting the stop loss. All other positions are in p"
+    },
+    {
+        "time": 1795775543.7645931,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.1971, 'recurring_patterns': ['Frequent PANIC exits', 'Manual sell triggers dominate', 'Occasional CRASH GUARD stop loss'], 'recommendations': ['Limit PANIC exits; implement stricter stop\u2011loss thresholds', 'Prefer systematic sell signals over manual discretionary sells', 'Review CRASH GUARD parameters to avoid large drawdowns', 'Focus on improving win\u2011rate consistency before scaling position size']}"
     }
 ]
