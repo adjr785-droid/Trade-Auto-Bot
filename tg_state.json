@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935691174,
+    "last_update_id": 935691175,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -64,8 +64,8 @@
             1795558649.4358172
         ],
         "m:coins": [
-            2,
-            1795739305.0314307
+            3,
+            1795739339.4125237
         ]
     },
     "radar": [
@@ -90,7 +90,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "3/4",
+                "text": "4/4",
                 "callback_data": "pg:x"
             },
             {
@@ -103,7 +103,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 3/4*",
+    "panel_text": "\ud83d\udcc4 *Page 4/4*",
     "out_mid": 6877,
     "pages": {
         "p": [
@@ -112,7 +112,7 @@
             "   \ud83e\udde0 low: Not eligible; small gains, RSI 49, no strong signal.\n *ADA* 0.148900 | NOT_ELIGIBLE | 1H +0.16% | RSI 52 | seen 101x\n   \ud83e\udde0 low: Not eligible; modest 1h rise, RSI 52, overall stable.\n *BNB* 554.87 | NOT_ELIGIBLE | 1H +0.15% | RSI 53 | seen 101x\n\ud83e\udde0 low: Not eligible; stable large cap, RSI 53, minor 1h change, no immediate\nrisk.\n *KII* 0.084844 | NOT_ELIGIBLE | 1H +0.06% \ud83d\udcc8 | RSI 43 | seen 101x\n\ud83e\udde0 medium: Not eligible; small 1h gain, RSI 43 near oversold, watch for\nreversal.\n *LTC* 43.9200 | NOT_ELIGIBLE | 1H -0.10% | RSI 60 | seen 101x\n\u2800\n\u2800",
             "\ud83e\udde0 medium: Not eligible; 24h up >2%, RSI 60 indicating strength but recent 1h\ndip.\n *JCT* 0.001460 | NOT_ELIGIBLE | 1H -0.87% | RSI 47 | seen 101x\n   \ud83e\udde0 medium: Not eligible; slight 1h decline, RSI 46.9, modest 24h rise.\n *BTC* 60595.67 | NOT_ELIGIBLE | seen 101x\n   \ud83e\udde0 unknown: Not eligible; top\u201115 excluded, missing RSI and 1h data.\n\n\u2935 *DROPPED \u2014 retained for recovery:* PWT (6/10), PEPE (6/10), BGSC (6/10), ENA\n(6/10), ARX (6/10)\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 2,
+        "i": 3,
         "mode": "Markdown",
         "x": [],
         "cmd": "m:coins"
