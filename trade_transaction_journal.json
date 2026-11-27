@@ -4520,5 +4520,15 @@
         "time": 1795767339.9554002,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.1971, 'recurring_patterns': {'panic_trades': 7, 'manual_sell_trades': 12, 'crash_guard_trades': 1, 'symbols_with_multiple_trades': ['BLESS-USDT', 'MOVE-USDT', 'PUMP-USDT']}, 'recommendations': ['Limit reliance on panic exits; consider tighter stop\u2011loss thresholds.', 'Review manual sell decisions to ensure they align with predefined profit targets.', 'Monitor symbols with repeated exposure (e.g., BLESS-USDT, MOVE-USDT) for diversification.', 'Maintain current win\u2011rate focus but aim to improve net P&L by reducing high\u2011loss events.']}"
+    },
+    {
+        "time": 1795771839.758255,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'PWT-USDT', 'action': 'monitor', 'reason': 'Negative PnL (-3.13%) and price approaching stop (0.308 vs stop 0.302). Consider tightening stop or exiting if further downside, but no order execution is recommended.'}, {'symbol': 'DOS-USDT', 'action': 'hold', 'reason': 'Positive PnL (2.65%) with price comfortably above stop (0.0793 vs 0.0735). No immediate action needed.'}, {'symbol': 'ENA-USDT', 'action': 'hold', 'reason': 'Small positive PnL (0.56%) and price slightly above stop (0.10715 vs 0.1012). Continue monitoring.'}, {'symbol': 'BTW-USDT', 'action': 'hold', 'reason': 'Positive PnL (1.47%) and price well above stop (0.9658 vs 0.9042). No action required.'}], 'summary': 'Overall portfolio risk remains PASS. The only position showing downside pressure is PWT-USDT, where the price is near its stop level and the trade is in loss. Recomme"
+    },
+    {
+        "time": 1795771840.4288898,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.1971, 'recurring_patterns': {'panic_trades': 7, 'manual_sell_trades': 13, 'crash_guard_trades': 1, 'symbols_with_multiple_losses': ['PROS-USDT', 'PUMP-USDT', 'MOVE-USDT']}, 'recommendations': ['Limit exposure to high\u2011volatility symbols that trigger panic exits', 'Review and tighten panic\u2011sell thresholds to avoid frequent small losses', 'Consider scaling back manual sell size to preserve capital during drawdowns', 'Monitor crash\u2011guard activation frequency and adjust the -11.3% trigger if needed', 'Maintain current win\u2011rate focus but aim to improve net P&L through tighter risk controls']}"
     }
 ]
