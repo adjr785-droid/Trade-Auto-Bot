@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691209,
+    "last_update_id": 935691211,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT33.82/\u20a646,190",
+    "kb_ph": "USDT33.94/\u20a646,364",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -126,8 +126,8 @@
         ]
     ],
     "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
-    "out_time": 1795746221.0357766,
-    "out_mid": 6946,
-    "kb_mid": 6948,
+    "out_time": 1795746257.484445,
+    "out_mid": 6951,
+    "kb_mid": 6953,
     "panel_hidden": true
 }
