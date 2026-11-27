@@ -16,18 +16,19 @@
         "xsl": 0.075584
     },
     "PWT-USDT": {
-        "entry_price": 0.317999,
-        "safe_zone": 0.317999,
-        "stop_loss": 0.302099,
+        "entry_price": 0.31666,
+        "safe_zone": 0.31666,
+        "stop_loss": 0.300827,
         "peak_price": 0.321106,
-        "last_price": 0.31495,
-        "opened_at": 1795756432.1270068,
+        "last_price": 0.315143,
+        "opened_at": 1795788780.4105988,
         "sl_pct": 5.0,
-        "entry_qty": 78.45,
-        "entry_usdt": 24.947,
+        "entry_qty": 97.86,
+        "entry_usdt": 31.0639,
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
-        "xsl": 0.302099,
-        "seen": 1795788761.68382
+        "seen": 1795788761.68382,
+        "dca_count": 1,
+        "xsl": 0.300827
     }
 }

@@ -4669,5 +4669,15 @@
         "time": 1795788700.7509847,
         "event": "ai_portfolio_review",
         "summary": "{'portfolio_risk': 'PASS', 'attention': [], 'summary': 'Both positions are currently modestly profitable or near breakeven. DOS-USDT shows a small positive PnL (+1.85%) and is above its stop level, so maintaining the position is reasonable. PWT-USDT is slightly negative (-0.93%) but still above its stop; no immediate action is required. Continue monitoring price relative to stops and overall market conditions. No changes recommended at this time.'}"
+    },
+    {
+        "time": 1795788783.542162,
+        "event": "ai_manual_buy_review",
+        "symbol": "PWT-USDT",
+        "review": {
+            "risk_level": "medium",
+            "warning": "Position already exists; adding to it may increase exposure. RSI is near neutral and price is volatile. Ensure this aligns with your risk tolerance and portfolio limits.",
+            "summary": "Considering the existing position and current RSI of 47.79, a small additional buy of $6.12 at $0.31502 carries moderate risk. Proceed only if it fits your overall strategy and you are comfortable with potential further exposure."
+        }
     }
 ]
