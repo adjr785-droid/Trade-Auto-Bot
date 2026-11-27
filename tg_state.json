@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935691392,
+    "last_update_id": 935691393,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -72,8 +72,8 @@
             1795803102.8512123
         ],
         "/scan_history": [
-            2,
-            1795803764.0452096
+            3,
+            1795803788.9263825
         ]
     },
     "radar": [],
@@ -96,7 +96,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "3/17",
+                "text": "4/17",
                 "callback_data": "pg:x"
             },
             {
@@ -109,7 +109,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 3/17*",
+    "panel_text": "\ud83d\udcc4 *Page 4/17*",
     "pages": {
         "p": [
             "USDT0.03\n\ud83d\udd0e *SCAN HISTORY* \u00b7 464/464 coins (first 150)\n28 scans \u00b7 0.0h\n```\nCOIN    RSI    1H WHY\n------------------------------\nPWT      47  +0.9 Blocked\nPEPE     47  +0.7 Blocked\nBTC      38     - Top 15\nETH      37     - Top 15\n```\n\u2800",
@@ -130,7 +130,7 @@
             "```\nHNT      46     - Vol low\nPOWER    37     - Vol low\nUAI      34     - Vol low\nPENDLE   42     - Vol low\nBSV      50     - Vol low\nDTEC     45     - Vol low\n```\n\n\ud83e\udde0 *AI:* BTC shows a low RSI (38) within the top\u201115, indicating possible\nupside, but many listed coins have high RSI or very low volume and some are\n\u2800",
             "blocked, warranting caution before any action.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 2,
+        "i": 3,
         "mode": "Markdown",
         "x": [],
         "cmd": "/scan_history"
