@@ -148,5 +148,11 @@
         "atl": 0.002,
         "checked_at": 1795656396.4167023,
         "status": "complete"
+    },
+    "PWT-USDT": {
+        "ath": 0.717647,
+        "atl": 0.005,
+        "checked_at": 1795756455.0971472,
+        "status": "complete"
     }
 }
