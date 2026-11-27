@@ -454,6 +454,38 @@ def auto_clear_daily():
  if not a:st['clear_anchor']=now;save(SC,st);return
  if now-a>=h*3600:
   st['clear_anchor']=a+int((now-a)//(h*3600))*h*3600;save(SC,st);cmd_clear(auto=True)
+def web_cmds():
+ import re,base64
+ br=os.environ.get("GITHUB_REF_NAME") or "main"
+ try:
+  p=subprocess.run(["git","fetch","--depth=1","origin",br],capture_output=True,text=True,timeout=25)
+  if p.returncode!=0:return
+  g=subprocess.run(["git","show","FETCH_HEAD:web_cmd.json"],capture_output=True,text=True,timeout=10)
+  if g.returncode!=0:return
+  cmds=json.loads(g.stdout)
+ except Exception:return
+ if not isinstance(cmds,list):return
+ st=load(SC);done=st.get("web_done",[]);new=False
+ for c in cmds[-10:]:
+  try:
+   i=str(c.get("id",""));co=str(c.get("coin","")).upper();pc=int(c.get("pct",0));ac=c.get("action")
+   if not i or i in done:continue
+   done.append(i);new=True
+   if time.time()-float(c.get("ts",0))/1000>180:tg(f"⚠️ Web {ac} {co} ignored (too old).");continue
+   if ac not in ("buy","sell") or pc not in (25,50,75,100) or not re.fullmatch(r"[A-Z0-9]{2,12}",co):continue
+   tg(f"🌐 Web {ac} {co} {pc}%")
+   _UI["mid"]=None;_UI["edit_mode"]=False;_UI["cmd"]=None
+   handle(f"m:{'bp' if ac=='buy' else 'sc'}:{co}:{pc}",0)
+  except Exception as e:print(f"WEB CMD ERR: {e}")
+ if new:st["web_done"]=done[-50:];save(SC,st)
+def daily_reset():
+ st=load(SC);now=time.time();a=st.get('reset_anchor')
+ if not a:st['reset_anchor']=now;save(SC,st);return
+ if now-a<86400:return
+ st['reset_anchor']=a+int((now-a)//86400)*86400;save(SC,st)
+ save(HIST,[]);save(SH,{"items":[]});save(LF,{"total_realized_usdt":0.0,"trade_count":0});save(AI_RECENT,{})
+ try:journal_event("daily_reset",cleared="trade history, scan history, profit ledger, ai recent")
+ except Exception:pass
 def menu():
  b=lambda t,c:{"text":t,"callback_data":c}
  bot_keys=layout_bottom()
@@ -1202,9 +1234,7 @@ def get_holdings_text():
  bgb_total=float(totals.get('BGB',0.0) or 0.0);bgb_price=live('BGB-USDT') if bgb_total>0 else None
  _r=ngn_rate();tp=total_portfolio_value or 0.0
  share=(lambda v:f" ({v/tp*100:.0f}%)" if tp>0 else "")
- lines=[f"💼 *PORTFOLIO* ${tp:.2f}"+(f" | ₦{tp*_r:,.0f}" if _r else ""),f"💵 Cash free ${usdt_free:.2f} | In coins ${total_coins_value:.2f}{share(total_coins_value)}"]
- if bgb_total>0:lines.append(f"🟡 BGB {bgb_total:.8g}"+(f" (${bgb_total*bgb_price:.2f})" if bgb_price else "")+" - not auto-converted")
- lines.append("━━━━━━━━━━━━━━")
+ lines=["💼 *HOLDINGS*","━━━━━━━━━━━━━━"]
  for val,coin,ic,l2,l3,l4 in sorted(rows,reverse=True):
   lines+=[f"{ic} *{coin}* ${val:.2f}{share(val)}",l2,l3,l4,""]
  if not rows:lines.append("No coin holdings.")
@@ -1212,7 +1242,7 @@ def get_holdings_text():
   note="⚠️ Held but with no USDT price: "+", ".join(unpriced[:3])
   if len(unpriced)>3:note+=f" and {len(unpriced)-3} more..."
   lines.append(note)
- return "\n".join(lines).rstrip()+f"\n\n📊 *LIVE SPOT WALLET BALANCE:* {compact_balance()}"
+ return "\n".join(lines).rstrip()
 def check_hourly_balance():
  st=load(SC);now=time.time()
  if now-st.get('last_bal_alert',0)>=3600:tg(f"💼 *HOURLY HOLDINGS*\n{get_holdings_text()}");st['last_bal_alert']=now;save(SC,st)
@@ -3662,6 +3692,9 @@ def tg_check(poll=0):
    _m=(_u.get("callback_query") or {}).get("message") if "callback_query" in _u else _u.get("message",{})
    if str((_m or {}).get("chat",{}).get("id",""))==CHAT:_eligible.append(_u)
   for _old in _eligible[:-1]:
+   if "callback_query" in _old:
+    try:requests.post(f"{API}/answerCallbackQuery",json={"callback_query_id":_old["callback_query"]["id"]},timeout=5)
+    except Exception:pass
    _om=(_old.get("callback_query") or {}).get("message") if "callback_query" in _old else _old.get("message",{})
    if _om and _om.get("message_id"):_del_msg(_om.get("message_id"))
   for u in _eligible[-1:]:
@@ -3774,12 +3807,14 @@ def live_loop(t0):
   except Exception as e:print(f"LIVE POLL ERR: {e}")
   now=time.time()
   if now-last_light>=30:
-   for fn in (audit_ai,manage,check_alerts,scan,fast_watch,exec_q):
+   for fn in (web_cmds,audit_ai,manage,check_alerts,scan,fast_watch,exec_q):
     if fn is scan and deadline-time.time()<60:continue
     run_step(fn)
+    try:tg_check(poll=0)
+    except Exception:pass
    last_light=time.time()
   if now-last_heavy>=300:
-   for fn in (auto_clear_daily,check_hourly_balance,check_daily_summary,stale_output):run_step(fn)
+   for fn in (auto_clear_daily,daily_reset,check_hourly_balance,check_daily_summary,stale_output):run_step(fn)
    last_heavy=time.time()
   if _TG_N["n"]>n0:pending=True
   if pending and time.time()-last_sync>=15:run_step(git_sync);last_sync=time.time();pending=False
@@ -3797,7 +3832,7 @@ if __name__=="__main__":
    _st["display_reset_v4"]=True;save(ST,_st)
  except Exception as e:print(f"DISPLAY RESET ERR: {e}")
  try:
-  for fn in (heartbeat,_C.clear,cleanup_telegram_output,stale_output,_kb_refresh,auto_clear_daily,scan_history_state,audit_system,tg_check,manage,track_day_equity,git_sync,check_hourly_balance,check_alerts,check_daily_summary,scan,system_audit,exec_q,coin_db_maintenance):run_step(fn)
+  for fn in (heartbeat,_C.clear,cleanup_telegram_output,stale_output,_kb_refresh,auto_clear_daily,daily_reset,scan_history_state,audit_system,tg_check,manage,track_day_equity,git_sync,check_hourly_balance,check_alerts,check_daily_summary,scan,system_audit,exec_q,coin_db_maintenance):run_step(fn)
   live_loop(T0)
   run_step(_kb_refresh)
  except Exception as e:
