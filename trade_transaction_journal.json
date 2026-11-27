@@ -4390,5 +4390,15 @@
             "warning": "The RSI is near neutral (46.75) and price volatility for PWT-USDT is not provided. Without market filter or existing position, the trade carries typical spot market risk. Ensure you have verified liquidity and price slippage before proceeding.",
             "summary": "Considering a $24.95 USDT purchase at $0.317955 per token with no active filters or existing position, the trade appears acceptable but carries moderate risk due to limited market data and neutral RSI. Proceed only after confirming current order book depth and your risk tolerance."
         }
+    },
+    {
+        "time": 1795756696.4729333,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'PWT-USDT', 'action': 'monitor', 'reason': 'Position is down 2.24% and price is only ~2.9% above the stop level, indicating limited downside buffer.'}, {'symbol': 'DOS-USDT', 'action': 'hold', 'reason': 'Position is up 1.74% with price ~6.6% above the stop, providing a comfortable margin.'}], 'summary': 'Overall portfolio risk remains acceptable (PASS). Keep DOS-USDT as is; closely watch PWT-USDT for further downside and consider adjusting the stop if the loss deepens.'}"
+    },
+    {
+        "time": 1795756697.3873863,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.1652, 'recurring_patterns': {'PANIC_trades': 7, 'MANUAL_SELL_trades': 9, 'CRASH_GUARD_trades': 1}, 'recommendations': ['Limit exposure to high\u2011volatility assets that trigger frequent PANIC exits', 'Implement stricter stop\u2011loss thresholds to avoid large negative PnL events like the -0.5691 USDT crash guard', 'Review manual sell decisions for consistency and consider automated profit\u2011target rules', 'Monitor overall net PnL and pause new entries until the strategy returns to positive performance']}"
     }
 ]
