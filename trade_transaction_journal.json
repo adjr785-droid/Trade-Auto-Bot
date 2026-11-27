@@ -4510,5 +4510,15 @@
             "warning": "The RSI is near neutral (47.18) and the price is close to recent levels; no strong bullish signal. Ensure position sizing aligns with overall portfolio risk and consider market volatility.",
             "summary": "Manual buy of 5.0 USDT of BTW-USDT at 0.952748 is permissible but carries moderate risk due to lack of strong technical confirmation. Verify that this trade fits within your risk limits and monitor the position closely."
         }
+    },
+    {
+        "time": 1795767339.083262,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'PWT-USDT', 'action': 'monitor', 'reason': 'Negative PnL (-1.84%) and price approaching stop (0.312 vs stop 0.302). Consider tightening stop or partial exit if price continues downwards.'}, {'symbol': 'BTW-USDT', 'action': 'monitor', 'reason': 'Slight negative PnL (-0.42%) with price near stop (0.948 vs stop 0.904). No immediate breach but risk if downward momentum persists.'}, {'symbol': 'DOS-USDT', 'action': 'hold', 'reason': 'Positive PnL (2.39%) and price comfortably above stop (0.079 vs stop 0.0735). Continue monitoring.'}, {'symbol': 'ENA-USDT', 'action': 'hold', 'reason': 'Small positive PnL (0.52%) and price above stop (0.107 vs stop 0.101). No immediate risk.'}], 'summary': 'Overall portfolio risk remains PASS. Two positions (PWT-USDT, BTW-USDT) show modest losses and are nearing their stop levels; consider tighter risk control"
+    },
+    {
+        "time": 1795767339.9554002,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.1971, 'recurring_patterns': {'panic_trades': 7, 'manual_sell_trades': 12, 'crash_guard_trades': 1, 'symbols_with_multiple_trades': ['BLESS-USDT', 'MOVE-USDT', 'PUMP-USDT']}, 'recommendations': ['Limit reliance on panic exits; consider tighter stop\u2011loss thresholds.', 'Review manual sell decisions to ensure they align with predefined profit targets.', 'Monitor symbols with repeated exposure (e.g., BLESS-USDT, MOVE-USDT) for diversification.', 'Maintain current win\u2011rate focus but aim to improve net P&L by reducing high\u2011loss events.']}"
     }
 ]
