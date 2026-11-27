@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT34.97/\u20a647,770",
+    "kb_ph": "USDT34.97/\u20a647,767",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -121,7 +121,7 @@
     ],
     "panel_text": "\ud83d\udc47 *Actions*",
     "out_time": 1795801847.5514016,
-    "kb_mid": 7317,
+    "kb_mid": 7318,
     "out_mid": 7315,
     "panel_mid": 7316
 }
