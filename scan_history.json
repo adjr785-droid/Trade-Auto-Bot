@@ -2,6 +2,26 @@
     "window_start": 1795717271.235082,
     "items": [
         {
+            "sym": "PWT-USDT",
+            "time": 1795756366.1150458,
+            "price": 0.318017,
+            "h1": 0.89,
+            "rsi": 46.75,
+            "status": "READY",
+            "decision": "SETUP \u2014 NOT QUEUED",
+            "reason": "TREND matched; stage DROPPED, must pass Watch > Manual > Auto first",
+            "execution_status": "BOUGHT",
+            "scan_id": "1795756361",
+            "rank": 24,
+            "vol": 1408564.56,
+            "chg": 3.133,
+            "ma5": 0.315244,
+            "ma10": 0.311661,
+            "min_volume": 1000000.0,
+            "spread_pct": 0.09117547191167061,
+            "near_miss": null
+        },
+        {
             "sym": "PEPE-USDT",
             "time": 1795738873.664218,
             "price": 3.495e-06,
@@ -40,34 +60,6 @@
             "min_volume": 1000000.0,
             "spread_pct": 0.260416666666656,
             "near_miss": null
-        },
-        {
-            "time": 1795756361,
-            "rank": 24,
-            "sym": "PWT-USDT",
-            "vol": 1408564.56,
-            "chg": 3.133,
-            "price": 0.318017,
-            "high_24h": 0.326879,
-            "spread_pct": 0.09117547191167061,
-            "rsi": 46.75,
-            "rr": 2.340566699264501,
-            "ma5": 0.315244,
-            "ma10": 0.311661,
-            "btc_market_safe": true,
-            "market_trend_4h": true,
-            "breakout_confirmed": false,
-            "volume_expansion_ratio": 1.2286519630979615,
-            "decision": "SETUP \u2014 NOT QUEUED",
-            "reason": "TREND matched; stage DROPPED, must pass Watch > Manual > Auto first",
-            "min_volume": 1000000,
-            "prev_close": 0.316022,
-            "h1": 0.89,
-            "trend_4h_ok": true,
-            "rising_guard_ok": true,
-            "strategy": "TREND",
-            "rr_target": 0.35523399999999994,
-            "rr_stop_pct": 5.0
         }
     ]
 }
