@@ -4248,12 +4248,12 @@
         "source": "coins.db"
     },
     {
-        "time": 1795738844.6794052,
+        "time": 1795739126.3688896,
         "event": "ai_portfolio_review",
-        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $0.25; auto-buy paused for 0.9h', 'attention': [{'symbol': 'DOS-USDT', 'action': 'monitor', 'reason': 'Position is down -1.5% with stop at 0.073517, close to entry price; consider tightening stop or exiting if price approaches stop.'}], 'summary': 'Current portfolio risk flag remains active. The only open position (DOS-USDT) is slightly negative and near its stop level. Recommend close monitoring, possibly adjusting the stop loss or exiting to preserve capital while auto-buy remains paused.'}"
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $0.25; auto-buy paused for 0.9h', 'attention': [{'symbol': 'DOS-USDT', 'action': 'monitor', 'reason': 'Position is losing 1.11% and is close to stop loss (0.073517). Consider tightening stop or exiting if price approaches stop.'}], 'summary': 'Current portfolio risk is elevated due to recent losses and auto-buy pause. The only open position (DOS-USDT) is slightly underwater and near its stop level. Recommend close monitoring, possibly adjusting stop loss or exiting to limit further downside.'}"
     },
     {
-        "time": 1795738845.4952881,
+        "time": 1795739127.1464758,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6846, 'recurring_patterns': {'PANIC': 9, 'MANUAL_SELL': 9, 'CRASH_GUARD': 1}, 'recommendations': ['Limit panic exits and prioritize predefined stop\u2011loss levels', 'Review manual sell triggers to ensure they align with strategy criteria', 'Implement tighter position sizing for high\u2011volatility assets like MOVE-USDT', 'Add post\u2011trade analysis to identify why losses exceed wins despite >50% win rate']}"
     },
