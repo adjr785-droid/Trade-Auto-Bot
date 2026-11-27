@@ -10,14 +10,14 @@
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
         "xsl": 0.075858,
-        "seen": 1795779567.8382387
+        "seen": 1795779626.5375252
     },
     "PWT-USDT": {
         "entry_price": 0.317999,
         "safe_zone": 0.317999,
         "stop_loss": 0.302099,
         "peak_price": 0.321144,
-        "last_price": 0.320955,
+        "last_price": 0.320897,
         "opened_at": 1795756432.1270068,
         "sl_pct": 5.0,
         "entry_qty": 78.45,
@@ -25,14 +25,14 @@
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
         "xsl": 0.302099,
-        "seen": 1795779568.3597717
+        "seen": 1795779626.9243226
     },
     "BTW-USDT": {
         "entry_price": 0.951821,
         "safe_zone": 0.951821,
         "stop_loss": 0.951821,
-        "peak_price": 1.00092,
-        "last_price": 1.00092,
+        "peak_price": 1.001285,
+        "last_price": 1.001285,
         "opened_at": 1795764235.3383274,
         "sl_pct": 5.0,
         "entry_qty": 5.25,
@@ -40,6 +40,6 @@
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
         "xsl": 0.951821,
-        "seen": 1795779568.766706
+        "seen": 1795779627.3294744
     }
 }
