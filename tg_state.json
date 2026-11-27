@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935691208,
+    "last_update_id": 935691209,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -74,18 +74,15 @@
         "BNB-USDT"
     ],
     "audit_down": {},
-    "audit_last": 1795744996.2674556,
-    "audit_ai_cls": "",
+    "audit_last": 1795746211.430879,
+    "audit_ai_cls": "OTHER",
     "perf_breaker": {
         "until": 1795742224.733271,
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 6943,
-    "out_mid": 6944,
-    "out_text": "\ud83d\udea8 *AI FAILURE*\nAI notes and reviews are paused. Buying, selling and all stops keep running on\nthe rules. The audit is recovering the AI (3 checks).\nReason: AI stage performance_review failed: Expecting ',' delimiter: line 1\ncolumn 521 (char 520)\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "\ud83e\uddf9 Cleared 3 bot message(s).\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "panel_mid": 6945,
     "panel_rows": [
         [
             {
@@ -129,5 +126,8 @@
         ]
     ],
     "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
-    "out_time": 1795746205.665221
+    "out_time": 1795746221.0357766,
+    "out_mid": 6946,
+    "kb_mid": 6948,
+    "panel_hidden": true
 }
