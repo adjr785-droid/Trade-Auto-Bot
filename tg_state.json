@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691504,
+    "last_update_id": 935691505,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT34.86/\u20a647,618",
+    "kb_ph": "USDT34.87/\u20a647,633",
     "layout_bottom": [
         "an",
         "clear"
@@ -87,43 +87,52 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 7563,
-    "out_text": "\ud83e\udde0 AI manual-buy advisory: Manual buy of 4.55\u202fUSDT of PWT-USDT at 0.315047 is\npossible but carries moderate risk due to bearish BTC context and sub\u201150 RSI.\nVerify alignment with your risk limits before confirming.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "kb_mid": 7568,
+    "out_text": "\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udd34 *PWT* $19.80 (57%)\n-0.31% (-$0.06) | Entry 0.316106\nQty 62.848396 | Price 0.315113 | Stop 0.300301 (-5%)\nRSI 44 | Mixed | ATH -56%\n\n\ud83d\udfe2 *DOS* $14.98 (43%)\n+1.22% (+$0.18) | Entry 0.079428\nQty 186.32809 | Price 0.080400 | Stop 0.079428 (-1%)\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udcbc Holdings",
-                "callback_data": "m:r:holdings"
-            }
-        ],
-        [
+                "text": "\u25c0",
+                "callback_data": "pg:p"
+            },
             {
-                "text": "\ud83d\udcc8 Stats",
-                "callback_data": "m:r:stats"
-            }
-        ],
-        [
+                "text": "1/2",
+                "callback_data": "pg:x"
+            },
             {
-                "text": "\ud83e\uddfe Trade History",
-                "callback_data": "m:r:history"
-            }
-        ],
-        [
+                "text": "\u25b6",
+                "callback_data": "pg:n"
+            },
             {
-                "text": "\ud83d\udea8 PANIC SELL",
-                "callback_data": "/panic"
-            }
-        ],
-        [
-            {
-                "text": "\ud83c\udfe0 Main Menu",
+                "text": "\ud83c\udfe0",
                 "callback_data": "m:menu"
+            },
+            {
+                "text": "\ud83d\udd04",
+                "callback_data": "rf:go"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcbc *PORTFOLIO*",
-    "out_time": 1795823199.6019833,
-    "out_mid": 7556,
-    "panel_mid": 7565
+    "panel_text": "\ud83d\udcc4 *Page 1/2*",
+    "out_time": 1795823272.638607,
+    "out_mid": 7566,
+    "pages": {
+        "p": [
+            "\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udd34 *PWT* $19.80 (57%)\n-0.31% (-$0.06) | Entry 0.316106\nQty 62.848396 | Price 0.315113 | Stop 0.300301 (-5%)\nRSI 44 | Mixed | ATH -56%\n\n\ud83d\udfe2 *DOS* $14.98 (43%)\n+1.22% (+$0.18) | Entry 0.079428\nQty 186.32809 | Price 0.080400 | Stop 0.079428 (-1%)\n\u2800\n\u2800",
+            "RSI 54 | Mixed | ATH -91%\n\n\ud83e\udde0 *AI:* PWT is down 0.31% and approaching its stop level (0.3003), while DOS is\nup 1.22% but also near its stop (0.0794); monitor both positions closely for\npotential exits.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+        ],
+        "i": 0,
+        "mode": "Markdown",
+        "x": [
+            [
+                {
+                    "text": "\ud83d\udd04",
+                    "callback_data": "rf:go"
+                }
+            ]
+        ],
+        "cmd": "m:r:holdings"
+    },
+    "panel_mid": 7567
 }
