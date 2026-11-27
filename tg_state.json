@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935691359,
+    "last_update_id": 935691361,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -24,8 +24,8 @@
             1795739610.5038157
         ],
         "m:r:holdings": [
-            1,
-            1795788755.8709419
+            0,
+            1795801811.5189013
         ],
         "/analyse": [
             6,
