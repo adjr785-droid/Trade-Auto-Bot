@@ -4584,5 +4584,25 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795779695.0923457,
+        "event": "ai_manual_buy_review",
+        "symbol": "DOS-USDT",
+        "review": {
+            "risk_level": "moderate",
+            "warning": "Manual order size is small but BTC filter is inactive; ensure position sizing aligns with overall portfolio risk. Verify price and liquidity before execution.",
+            "summary": "The proposed buy of 13.01\u202fUSDT of DOS-USDT at 0.0808\u202fUSDT per token (\u2248161\u202fDOS) has an RSI of 54.14, indicating neutral momentum. With an existing position and no BTC filter, the trade adds modest exposure. Proceed only after confirming market depth and that the added risk fits your strategy."
+        }
+    },
+    {
+        "time": 1795779708.2049627,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [], 'summary': 'All three positions (DOS-USDT, PWT-USDT, BTW-USDT) are currently in modest profit and their stops are reasonably placed near entry levels. No immediate action is required; continue to monitor price movements and maintain existing stops. Maintain the current risk posture.'}"
+    },
+    {
+        "time": 1795779708.9842024,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.1971, 'recurring_patterns': {'panic_trades': 7, 'manual_sell_trades': 13, 'crash_guard_trades': 1, 'symbols_with_multiple_trades': ['BLESS-USDT', 'MOVE-USDT', 'PUMP-USDT']}, 'recommendations': ['Limit exposure to panic-driven exits; consider tighter stop\u2011loss thresholds.', 'Review manual sell decisions for consistency with strategy rules.', 'Monitor symbols with repeated losses (e.g., MOVE-USDT) and consider reducing position size.', 'Maintain current win\u2011rate focus but aim to improve average profit per winning trade to offset net loss.']}"
     }
 ]
