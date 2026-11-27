@@ -4314,5 +4314,15 @@
         "time": 1795747593.9207475,
         "event": "ai_portfolio_review",
         "summary": "{'portfolio_risk': 'PASS', 'attention': [], 'summary': 'Current position DOS-USDT shows modest positive PnL (1.61%) and remains within its stop level. No immediate action required; continue monitoring while adhering to existing risk parameters.'}"
+    },
+    {
+        "time": 1795751071.9238932,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'DOS-USDT', 'action': 'HOLD', 'reason': 'Position is marginally profitable (0.96% PnL) and well within stop distance; no immediate risk signals. Consider tightening stop to protect gains if volatility increases.'}], 'summary': 'Overall portfolio risk remains acceptable. The sole position DOS-USDT shows a small positive return and is not triggering any risk alerts. Maintain the position while monitoring market volatility; adjust stop-loss if adverse price movement appears.'}"
+    },
+    {
+        "time": 1795751072.9075952,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6846, 'recurring_patterns': {'high_frequency_reasons': ['PANIC', 'MANUAL SELL', 'CRASH GUARD'], 'symbols_with_multiple_losses': ['PROS-USDT', 'MOVE-USDT', 'JCT-USDT'], 'loss_concentration': {'PANIC': 7, 'MANUAL SELL': 9, 'CRASH GUARD': 1}}, 'recommendations': {'risk_management': 'Limit exposure to assets that trigger PANIC exits; consider tighter stop\u2011loss thresholds.', 'trading_strategy': 'Reduce reliance on manual sell triggers that appear after small gains; focus on higher conviction entries.', 'monitoring': 'Implement alerts for repeated loss patterns on the same symbol (e.g., MOVE-USDT) before executing new trades.', 'uncertainty': 'Current performance data is limited to 30 trades; statistical confidence is low. Adjust strategies cautiously.'}}"
     }
 ]
