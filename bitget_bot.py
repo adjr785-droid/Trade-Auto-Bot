@@ -494,7 +494,7 @@ def menu():
  b=lambda t,c:{"text":t,"callback_data":c}
  bot_keys=layout_bottom()
  btns=[b(lbl(k),d) for k,l,d in LAYOUT_ITEMS if k not in bot_keys and k!='an']
- ui_send("🕹️ *MENU*\nSelect an option below.",[[x] for x in btns])
+ ui_send("🕹️ *MENU*\nSelect an option below.",[btns[i:i+2] for i in range(0,len(btns),2)])
 def panic_prompt():_send("🚨 *CONFIRM PANIC*\nThis sells ALL positions at market.\nConfirm within 15 minutes.","Markdown",{"inline_keyboard":[[{"text":"✅ YES, SELL EVERYTHING","callback_data":"panic_confirm"},{"text":"❌ Cancel","callback_data":"panic_cancel"}]]})
 def load(f,d=None):
  d=[] if f==HIST else ({} if d is None else d)
@@ -1747,40 +1747,37 @@ def ai_stage(stage, payload, ttl=90, max_tokens=500, soft=False):
    'coin_advisory':'Return reviews as an array of {symbol, risk_level, comment}. Advisory only; do not change deterministic status or execution.',
    'portfolio_review':'Return keys portfolio_risk, attention as an array of {symbol, action, reason}, summary. Advice only.',
    'buy_advisory':'Return keys risk_level, warning, summary. Advisory only; deterministic safeguards decide eligibility and execution.',
-   elif a=="tools":
-   ui_send("🧰 *BOT CONTROL CENTER*\nSelect one of the 4 main management groups:",[
-    [_B("📊 Market Analysis", "m:tl:analysis"), _B("💸 Trading & Positions", "m:tl:trading")],
-    [_B("🛠️ System & Wallet", "m:tl:system"), _B("⚙️ Settings & Alerts", "m:tl:settings")],
-    [_B("⬅️ Main Menu", "m:menu")]
-   
-  elif a=="tl" and len(p)>2:
-   _T=[_B("⬅️ Tools", "m:tools"), _B("🏠 Main Menu", "m:menu")]
-   group=p[2]
-   if group=="analysis":
-    ui_send("📊 *MARKET ANALYSIS & DISCOVERY*\nBrowse live pipelines, setups, favorites, and new listings.", [
-     [_B("🏆 Analyse", "/analyse"), _B("🎯 Setups", "m:su")],
-     [_B("⭐ Favourites", "m:fv"), _B("🆕 New Listings", "m:nl")],
-     [_B("🔎 Search Coin", "m:se"), _B("🗄 Archive", "m:ar:D")],
-     
-   elif group=="trading":
-    ui_send("💸 *TRADING & POSITION MANAGEMENT*\nManage orders, holdings, history, and emergency actions.", [
-     [_B("💼 Holdings", "m:r:holdings"), _B("📜 Trade History", "m:r:history")],
-     [_B("🔎 Scan History", "m:scan_hist"), _B("🛒 Buy / 💸 Sell", "m:buy")],
-     [_B("❌ Cancel Orders", "m:r:cancel"), _B("🧹 Dust → BGB", "m:r:dust")],
-     [_B("🚨 PANIC SELL", "/panic"), _B("📚 Coin List", "m:coins")],
-     
-   elif group=="system":
-    ui_send("🛠️ *SYSTEM & WALLET MANAGEMENT*\nMonitor health, run audits, view stats, and manage AI recovery.", [
-     [_B("🖥 System Status", "/bot"), _B("📈 Stats", "/stats")],
-     [_B("🛠️ Run Audit", "m:r:audit"), _B("🧹 Clear Chat", "/clear")],
-     [_B("🧠 Resume AI", "m:r:airesume"), _B("📚 Coin List", "m:coins")],
-    
-   elif group=="settings":
-    ui_send("⚙️ *SETTINGS, ALERTS & CUSTOMIZATION*\nConfigure risk parameters, layout, and price alerts.", [
-     [_B("⚙️ Settings", "m:set"), _B("🧩 Layout", "m:lay")],
-     [_B("🔔 Price Alerts", "m:al"), _B("📋 View Alerts", "m:r:alerts")],
-     [_B("🧠 Ask AI", "m:ai:1"), _B("🗑 Cancel Alerts", "m:r:cancelalerts")],
-   
+   'manual_buy_review':'Return keys risk_level, warning, summary. Advisory only; the user explicitly requested this manual order.',
+   'sell_review':'Return keys review, lesson, confidence. This is post-exit analysis only.',
+   'analyse_review':'Return reviews as an array of {symbol, verdict (OK, CAUTION or WEAK), reason (max 14 words)}, one per candidate. Advisory only; the user decides manually and may buy coins that miss some filters.',
+   'command_review':'Return key insight: one plain-language sentence (max 35 words) that interprets the command output using its specific numbers and flags anything needing attention. Advisory only.',
+   'near_miss_review':'Return reviews as an array of {symbol, view (WATCH or SKIP), reason (max 16 words)}, one per candidate. These coins narrowly missed the entry rules; judge whether the near-miss looks like genuine building momentum or noise. Advisory only.',
+   'performance_review':'Return keys win_rate_pct, net_pnl_usdt, recurring_patterns, recommendations.'}
+  prompt=("You are an advisory AI module inside a live crypto SPOT bot. Return ONLY one valid JSON object, no markdown. "
+   "Never claim to place orders. Never override deterministic exchange/risk safeguards. Do not invent missing data. "
+   "Be conservative and explicitly represent uncertainty. Schema: "+schemas.get(stage,'Return a concise JSON object with summary and reason.')+
+   " Stage="+stage+". Input JSON="+body[:12000])
+  r=requests.post('https://api.groq.com/openai/v1/chat/completions',headers={'Authorization':'Bearer '+api_key,'Content-Type':'application/json'},
+   json={'model':model,'messages':[{'role':'system','content':'Return valid compact JSON only.'},{'role':'user','content':prompt}], 'temperature':0.1,'max_tokens':max(max_tokens,1024)*ai_boost(),**_ai_reason(model)},timeout=18)
+  if not r.ok:raise RuntimeError('Groq HTTP '+str(r.status_code))
+  content=r.json().get('choices',[{}])[0].get('message',{}).get('content','')
+  content=str(content).strip();start=content.find('{');end=content.rfind('}')
+  if start<0 or end<=start:raise ValueError('AI response was not JSON')
+  result=json.loads(content[start:end+1])
+  if not isinstance(result,dict):raise ValueError('AI response must be an object')
+  _AI_CACHE[cache_key]=(now,result);_AI_LAST[stage]=now
+  try:
+   hs=load(AI_HEALTH,{});stages=hs.setdefault('stages',{});ss=stages.setdefault(stage,{})
+   ss['last_success']=now;ss['successes']=int(ss.get('successes',0))+1;ss['last_error']='';hs['last_stage_success']=now;save(AI_HEALTH,hs)
+  except Exception:pass
+  _ai_note(True)
+  return result
+ except Exception as e:
+  print('AI STAGE '+str(stage)+' unavailable: '+str(e)[:180]);_ai_note(False,f'{stage}: {e}')
+  try:
+   hs=load(AI_HEALTH,{});stages=hs.setdefault('stages',{});ss=stages.setdefault(stage,{})
+   ss['last_failure']=time.time();ss['failures']=int(ss.get('failures',0))+1;ss['last_error']=str(e)[:180];save(AI_HEALTH,hs)
+  except Exception:pass
   if not soft:activate_ai_emergency(f"AI stage {stage} failed: {str(e)[:180]}")
   return None
 
