@@ -20,6 +20,34 @@
             "min_volume": 1000000.0,
             "spread_pct": 0.260416666666656,
             "near_miss": null
+        },
+        {
+            "time": 1795738869,
+            "rank": 26,
+            "sym": "PEPE-USDT",
+            "vol": 1113947.0,
+            "chg": -0.626,
+            "price": 3.495e-06,
+            "high_24h": 3.594e-06,
+            "spread_pct": 0.05727376861396698,
+            "rsi": 46.54,
+            "rr": 1.8254649499284683,
+            "ma5": 4e-06,
+            "ma10": 3e-06,
+            "btc_market_safe": true,
+            "market_trend_4h": true,
+            "breakout_confirmed": false,
+            "volume_expansion_ratio": 1.1258535782950907,
+            "decision": "SETUP \u2014 NOT QUEUED",
+            "reason": "PULLBACK matched; stage DROPPED, must pass Watch > Manual > Auto first",
+            "min_volume": 1000000,
+            "prev_close": 3.477e-06,
+            "h1": 0.71,
+            "trend_4h_ok": true,
+            "rising_guard_ok": true,
+            "strategy": "PULLBACK",
+            "rr_target": 3.814e-06,
+            "rr_stop_pct": 5.0
         }
     ]
 }
