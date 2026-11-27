@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691371,
+    "last_update_id": 935691373,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT35.28/\u20a648,193",
+    "kb_ph": "USDT35.29/\u20a648,209",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -78,50 +78,40 @@
     },
     "radar": [],
     "audit_down": {},
-    "audit_last": 1795802492.061815,
+    "audit_last": 1795802889.1942768,
     "audit_ai_cls": "",
     "perf_breaker": {
         "until": 1795742224.733271,
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 7341,
-    "out_text": "USDT0.03\n\ud83d\udfe1 *MANUAL BUY*\n_Passed at least 5/7 core and 2/3 additional criteria. Manual review only._\n\nNone right now.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "kb_mid": 7349,
+    "out_text": "\ud83d\udd0d *SCAN COMPLETE*\nChecked 460 markets in 17s.\nNo coin matched any setup.\n\ud83d\udea7 *GATES* (19 analysed, 0 passed)\nBlocked: RSI 13 | MA 16 | 1H 9 | 24H 4 | Score 0\nSetups: Trend 0 | Pullback 0 | Bounce 0 | Breakout 0\nRules: RSI \u2264 48, Price > MA5 > MA10, 1H +0.5 to +6%, 24H up, Core 5+ and Extra\n2+\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795802874.3142817,
+    "out_time": 1795802939.577216,
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udc41 Watch (0)",
-                "callback_data": "m:at:W"
+                "text": "\ud83d\udd0d SCAN NOW",
+                "callback_data": "m:r:scan"
             },
             {
-                "text": "\u25b6 \ud83d\udfe1 Manual (0)",
-                "callback_data": "m:at:M"
-            },
-            {
-                "text": "\ud83e\udd16 Auto (0)",
-                "callback_data": "m:at:A"
+                "text": "\ud83d\udcdc SCAN HISTORY",
+                "callback_data": "/scan_history"
             }
         ],
         [
             {
-                "text": "\ud83c\udfaf SETUPS",
-                "callback_data": "m:su"
+                "text": "\u2b05\ufe0f Analyse",
+                "callback_data": "/analyse"
             },
-            {
-                "text": "\ud83d\uddc2 MORE",
-                "callback_data": "m:am"
-            }
-        ],
-        [
             {
                 "text": "\ud83d\udd04 Refresh",
-                "callback_data": "m:at:M"
+                "callback_data": "m:su"
             }
         ]
     ],
     "panel_text": "\ud83d\udc47 *Actions*",
-    "out_mid": 7342,
-    "panel_mid": 7343
+    "out_mid": 7347,
+    "panel_hidden": true
 }
