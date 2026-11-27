@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT34.90/\u20a647,667",
+    "kb_ph": "USDT34.85/\u20a647,600",
     "layout_bottom": [
         "an",
         "clear"
@@ -115,7 +115,7 @@
     ],
     "panel_text": "\ud83d\udcc4 *Page 1/2*",
     "out_time": 1795823627.619135,
-    "kb_mid": 7591,
+    "kb_mid": 7594,
     "pages": {
         "p": [
             "\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udd34 *PWT* $19.80 (57%)\n-0.35% (-$0.07) | Entry 0.316106\nQty 62.848396 | Price 0.314999 | Stop 0.300301 (-5%)\nRSI 44 | Mixed | ATH -56%\n\n\ud83d\udfe2 *DOS* $15.02 (43%)\n+1.48% (+$0.22) | Entry 0.079428\nQty 186.32809 | Price 0.080600 | Stop 0.079428 (-1%)\n\u2800\n\u2800",
