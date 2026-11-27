@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935691269,
+    "last_update_id": 935691270,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -72,8 +72,8 @@
             1795762163.4741957
         ],
         "/scan_history": [
-            1,
-            1795762437.1093671
+            2,
+            1795762454.8791695
         ]
     },
     "radar": [
@@ -99,7 +99,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "2/17",
+                "text": "3/17",
                 "callback_data": "pg:x"
             },
             {
@@ -112,7 +112,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 2/17*",
+    "panel_text": "\ud83d\udcc4 *Page 3/17*",
     "pages": {
         "p": [
             "USDT12.98\n\ud83d\udd0e *SCAN HISTORY* \u00b7 465/465 coins (first 150)\n24 scans \u00b7 12.5h\n```\nCOIN    RSI    1H WHY\n------------------------------\nPWT      47  +0.9 Blocked\nPEPE     47  +0.7 Blocked\nDOS      29  +0.5 Blocked\nBTC      72     - Top 15\n```\n\u2800",
@@ -133,7 +133,7 @@
             "```\nPYTH     68     - Vol low\nMOCA     46     - Vol low\nCAKE     69     - Vol low\nSENT     78     - Vol low\nLISTA    56     - Vol low\nALGO     63     - Vol low\n```\n\n\ud83e\udde0 *AI:* The scan shows many coins flagged as low volume and several blocked\nentries, while only BTC, ETH, SOL and other top\u201115 assets have moderate RSI; no\n\u2800",
             "clear bullish signal emerges, warranting caution.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 1,
+        "i": 2,
         "mode": "Markdown",
         "x": [],
         "cmd": "/scan_history"
