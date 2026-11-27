@@ -4767,5 +4767,23 @@
         "time": 1795802485.6180608,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 63.33, 'net_pnl_usdt': 1.4014, 'recurring_patterns': {'reasons': {'PANIC': 9, 'MANUAL SELL': 10, 'CRASH GUARD': 1}}, 'recommendations': 'Maintain current risk limits; avoid panic exits; prioritize manual sell signals with clear profit targets; monitor high\u2011frequency loss symbols (e.g., MOVE-USDT) for potential de\u2011listing; consider reducing exposure to assets with repeated panic closures.'}"
+    },
+    {
+        "time": 1795802578.1078405,
+        "event": "trade_closed",
+        "symbol": "DOS-USDT",
+        "pnl_usdt": 0.08523164000000022,
+        "reason": "MANUAL SELL $2.22",
+        "strategy": "MANUAL"
+    },
+    {
+        "time": 1795802582.7352128,
+        "event": "ai_manual_sell_review",
+        "symbol": "DOS-USDT",
+        "review": {
+            "review": "The position was manually closed at an average exit price of 0.0826 USDT, realizing a modest profit of 0.0852 USDT on the 26.87 units sold. The remaining base of 242.85 units was not liquidated, indicating a partial exit strategy. The profit margin is small relative to the position size, suggesting limited upside capture or a cautious risk approach.",
+            "lesson": "When exiting a spot position, ensure that the exit price sufficiently exceeds the entry cost to justify transaction fees and opportunity cost. Partial sells should be aligned with clear targets or risk thresholds to avoid leaving a large residual position without a defined plan.",
+            "confidence": "medium"
+        }
     }
 ]
