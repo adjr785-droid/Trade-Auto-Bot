@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691520,
+    "last_update_id": 935691521,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT34.85/\u20a647,610",
+    "kb_ph": "USDT34.85/\u20a647,605",
     "layout_bottom": [
         "an",
         "clear"
@@ -87,32 +87,41 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "out_text": "USDT0.02\n\ud83d\udcca *ANALYSIS: PORTAL-USDT*\nLive price: 0.040820 USDT\n24h change: +227.42%\nRSI(14): 92.3100 \u2014 Overbought\nMA5: 0.039354 | MA10: 0.034900 | MA20: 0.025458\nMACD: 0.007156 | Signal: 0.005573 | Histogram: 0.001584\nATR(14): 0.004832 (11.84% of price)\nLast hour vol vs 20h avg: 0.23x\nBid/ask spread: 0.221%\n\u2800\n\u2800",
+    "out_text": "USDT0.02\n\ud83d\udcca *ANALYSIS: ZORA-USDT*\nLive price: 0.004230 USDT\n24h change: -1.95%\nRSI(14): 46.0000 \u2014 Neutral\nMA5: 0.004266 | MA10: 0.004248 | MA20: 0.004281\nMACD: -0.00001333 | Signal: -0.00001196 | Histogram: -0.00000136\nATR(14): 0.00004114 (0.97% of price)\nLast hour vol vs 20h avg: 1.58x\nBid/ask spread: 0.095%\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
             {
-                "text": "\u274c Cancel",
-                "callback_data": "m:an"
+                "text": "\u25c0",
+                "callback_data": "pg:p"
+            },
+            {
+                "text": "1/2",
+                "callback_data": "pg:x"
+            },
+            {
+                "text": "\u25b6",
+                "callback_data": "pg:n"
+            },
+            {
+                "text": "\ud83c\udfe0",
+                "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "USDT0.02\n\ud83d\udd0d *SEARCH A COIN*\nType a coin name or part of it (example: SOL).",
-    "out_time": 1795823445.4692538,
+    "panel_text": "\ud83d\udcc4 *Page 1/2*",
+    "out_time": 1795823546.9806197,
     "out_mid": 7574,
-    "kb_mid": 7580,
+    "kb_mid": 7584,
     "panel_mid": 7577,
     "pages": {
         "p": [
-            "USDT0.02\n\ud83d\udcca *ANALYSIS: PORTAL-USDT*\nLive price: 0.040820 USDT\n24h change: +227.42%\nRSI(14): 92.3100 \u2014 Overbought\nMA5: 0.039354 | MA10: 0.034900 | MA20: 0.025458\nMACD: 0.007156 | Signal: 0.005573 | Histogram: 0.001584\nATR(14): 0.004832 (11.84% of price)\nLast hour vol vs 20h avg: 0.23x\nBid/ask spread: 0.221%\n\u2800\n\u2800",
-            "Technical checks: 2/4\nAssessment: *WAIT / WEAK SETUP*\nCoin database: WATCHING / NOT_ELIGIBLE | seen 128 scans | RSI 42-48; Oversold\nrecovery; Breakout trend\nAI notebook note: high: Not eligible; RSI 92 extremely overbought, 24h up 226%;\nvery high risk.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+            "USDT0.02\n\ud83d\udcca *ANALYSIS: ZORA-USDT*\nLive price: 0.004230 USDT\n24h change: -1.95%\nRSI(14): 46.0000 \u2014 Neutral\nMA5: 0.004266 | MA10: 0.004248 | MA20: 0.004281\nMACD: -0.00001333 | Signal: -0.00001196 | Histogram: -0.00000136\nATR(14): 0.00004114 (0.97% of price)\nLast hour vol vs 20h avg: 1.58x\nBid/ask spread: 0.095%\n\u2800\n\u2800",
+            "Technical checks: 1/4\nAssessment: *WAIT / WEAK SETUP*\nCoin database: REJECTED / NOT_ELIGIBLE | seen 128 scans | Vol below $4M\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
         "i": 0,
         "mode": "Markdown",
         "x": [],
         "cmd": null
-    },
-    "search_pending": {
-        "t": 1795823532.032348
     }
 }
