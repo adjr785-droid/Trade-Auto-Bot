@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691308,
+    "last_update_id": 935691309,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT34.21/\u20a646,723",
+    "kb_ph": "USDT34.20/\u20a646,722",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -80,17 +80,50 @@
         "JCT-USDT"
     ],
     "audit_down": {},
-    "audit_last": 1795779437.2401743,
+    "audit_last": 1795779716.8261268,
     "audit_ai_cls": "",
     "perf_breaker": {
         "until": 1795742224.733271,
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 7198,
-    "panel_hidden": true,
-    "out_mid": 7196,
-    "out_text": "\ud83e\udde0 AI manual-buy advisory: The proposed buy of 13.01\u202fUSDT of DOS-USDT at\n0.0808\u202fUSDT per token (\u2248161\u202fDOS) has an RSI of 54.14, indicating neutral\nmomentum. With an existing position and no BTC filter, the trade adds modest\nexposure. Proceed only after confirming market depth and that the added risk\nfits your strategy.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "kb_mid": 7202,
+    "out_text": "USDT0.03\n\ud83d\udfe1 *MANUAL BUY*\n_Passed at least 5/7 core and 2/3 additional criteria. Manual review only._\n\nNone right now.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795779695.4765549
+    "out_time": 1795779719.3904707,
+    "out_mid": 7200,
+    "panel_mid": 7201,
+    "panel_rows": [
+        [
+            {
+                "text": "\ud83d\udc41 Watch (0)",
+                "callback_data": "m:at:W"
+            },
+            {
+                "text": "\u25b6 \ud83d\udfe1 Manual (0)",
+                "callback_data": "m:at:M"
+            },
+            {
+                "text": "\ud83e\udd16 Auto (0)",
+                "callback_data": "m:at:A"
+            }
+        ],
+        [
+            {
+                "text": "\ud83c\udfaf SETUPS",
+                "callback_data": "m:su"
+            },
+            {
+                "text": "\ud83d\uddc2 MORE",
+                "callback_data": "m:am"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udd04 Refresh",
+                "callback_data": "m:at:M"
+            }
+        ]
+    ],
+    "panel_text": "\ud83d\udc47 *Actions*"
 }
