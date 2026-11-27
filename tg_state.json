@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691491,
+    "last_update_id": 935691494,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT35.06/\u20a647,896",
+    "kb_ph": "USDT35.07/\u20a647,908",
     "layout_bottom": [
         "an",
         "clear"
@@ -87,41 +87,41 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 7541,
-    "out_mid": 7535,
-    "out_text": "\u2139\ufe0f Git sync used conflict recovery.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "kb_mid": 7549,
+    "out_text": "USDT0.03\n\ud83d\udcca *ANALYSIS: PWT-USDT*\nLive price: 0.318851 USDT\n24h change: -0.04%\nRSI(14): 44.3900 \u2014 Neutral\nMA5: 0.314954 | MA10: 0.315019 | MA20: 0.315898\nMACD: -0.00173090 | Signal: -0.00186576 | Histogram: 0.00013486\nATR(14): 0.006942 (2.18% of price)\nLast hour vol vs 20h avg: 1.00x\nBid/ask spread: 0.132%\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "panel_mid": 7536,
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udd0d Search any coin",
-                "callback_data": "m:se"
-            }
-        ],
-        [
-            {
-                "text": "DOS",
-                "callback_data": "m:a:DOS"
+                "text": "\u25c0",
+                "callback_data": "pg:p"
             },
             {
-                "text": "PWT",
-                "callback_data": "m:a:PWT"
-            }
-        ],
-        [
+                "text": "1/2",
+                "callback_data": "pg:x"
+            },
             {
-                "text": "\u2795 More coins",
-                "callback_data": "m:more:analyse:0"
-            }
-        ],
-        [
+                "text": "\u25b6",
+                "callback_data": "pg:n"
+            },
             {
-                "text": "\u2b05\ufe0f Menu",
+                "text": "\ud83c\udfe0",
                 "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "USDT0.03\n\ud83d\udd0e *ANALYSE A COIN* \u2014 choose:",
-    "out_time": 1795822882.7494497
+    "panel_text": "\ud83d\udcc4 *Page 1/2*",
+    "out_time": 1795823036.8982546,
+    "out_mid": 7547,
+    "pages": {
+        "p": [
+            "USDT0.03\n\ud83d\udcca *ANALYSIS: PWT-USDT*\nLive price: 0.318851 USDT\n24h change: -0.04%\nRSI(14): 44.3900 \u2014 Neutral\nMA5: 0.314954 | MA10: 0.315019 | MA20: 0.315898\nMACD: -0.00173090 | Signal: -0.00186576 | Histogram: 0.00013486\nATR(14): 0.006942 (2.18% of price)\nLast hour vol vs 20h avg: 1.00x\nBid/ask spread: 0.132%\n\u2800\n\u2800",
+            "Technical checks: 2/4\nAssessment: *WAIT FOR STRONGER CONFIRMATION*\nCoin database: WATCHING / HELD | seen 128 scans | MA trend; Oversold recovery;\nBreakout trend\nAI notebook note: moderate: Held status; RSI 44.4 suggests near\u2011neutral; modest\n1h gain and small 24h rise; monitor but no clear entry signal.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+        ],
+        "i": 0,
+        "mode": "Markdown",
+        "x": [],
+        "cmd": "m:a:PWT"
+    },
+    "panel_mid": 7548
 }
