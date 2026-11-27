@@ -4309,5 +4309,10 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795747593.9207475,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [], 'summary': 'Current position DOS-USDT shows modest positive PnL (1.61%) and remains within its stop level. No immediate action required; continue monitoring while adhering to existing risk parameters.'}"
     }
 ]
