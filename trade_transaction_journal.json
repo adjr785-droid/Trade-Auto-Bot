@@ -4400,5 +4400,15 @@
         "time": 1795756697.3873863,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.1652, 'recurring_patterns': {'PANIC_trades': 7, 'MANUAL_SELL_trades': 9, 'CRASH_GUARD_trades': 1}, 'recommendations': ['Limit exposure to high\u2011volatility assets that trigger frequent PANIC exits', 'Implement stricter stop\u2011loss thresholds to avoid large negative PnL events like the -0.5691 USDT crash guard', 'Review manual sell decisions for consistency and consider automated profit\u2011target rules', 'Monitor overall net PnL and pause new entries until the strategy returns to positive performance']}"
+    },
+    {
+        "time": 1795758475.385554,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'DOS-USDT', 'action': 'monitor', 'reason': 'Small profit (3.03%) but close to stop (0.0735). Market volatility could erode gains; consider tightening stop if price retraces.'}, {'symbol': 'PWT-USDT', 'action': 'monitor', 'reason': 'Slight loss (-0.95%) and price is near stop (0.3021). Uncertainty in short-term direction; avoid adding exposure until clearer trend emerges.'}], 'summary': 'Overall portfolio risk remains acceptable (PASS). Both positions are modest in size and near their stop levels, so maintain vigilance and be prepared to adjust stops if price moves against you. No new entries are recommended given current market uncertainty.'}"
+    },
+    {
+        "time": 1795758476.025019,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.1652, 'recurring_patterns': {'PANIC_trades': 7, 'MANUAL_SELL_trades': 9, 'CRASH_GUARD_trades': 1}, 'recommendations': ['Limit exposure to high\u2011volatility assets that trigger frequent PANIC exits', 'Implement stricter stop\u2011loss thresholds to avoid large negative PnL events like the -0.5691 USDT crash guard', 'Review manual sell decisions for consistency and consider automated profit\u2011target rules', 'Monitor overall net PnL and pause new entries until the strategy returns to positive performance']}"
     }
 ]
