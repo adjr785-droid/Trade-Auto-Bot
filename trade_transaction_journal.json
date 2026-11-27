@@ -4747,5 +4747,15 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795801734.8617074,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'PWT-USDT', 'action': 'monitor', 'reason': 'Negative PnL (-0.5%) and price approaching stop level (0.315 vs stop 0.3008); consider tightening stop or reducing position if risk tolerance is low.'}, {'symbol': 'DOS-USDT', 'action': 'hold', 'reason': 'Small positive PnL (1.98%) and price above entry; stop is comfortably below current price, no immediate action required.'}], 'summary': 'Overall portfolio risk remains PASS. Maintain current DOS position while closely watching PWT for further downside; adjust stop if price continues toward the current stop threshold.'}"
+    },
+    {
+        "time": 1795801735.6267164,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 63.33, 'net_pnl_usdt': 1.4014, 'recurring_patterns': {'reasons': {'PANIC': 7, 'MANUAL SELL': 11, 'CRASH GUARD': 1}, 'symbols': {'BLESS-USDT': 4, 'MOVE-USDT': 4, 'PUMP-USDT': 2, 'BTW-USDT': 2}}, 'recommendations': ['Limit panic-driven exits; implement stricter stop\u2011loss thresholds', 'Review manual sell triggers to ensure they align with profit targets', 'Monitor symbols with repeated losses (e.g., MOVE-USDT, PUMP-USDT) and consider reducing exposure', 'Enhance crash\u2011guard parameters to activate earlier before large drawdowns']}"
     }
 ]
