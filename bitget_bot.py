@@ -404,10 +404,11 @@ def cmd_dust(txt=""):
  except Exception as e:tg(f"⚠️ Dust check failed, nothing changed: {str(e)[:200]}");return
  if cands is None:tg(f"⚠️ {err}");return
  if not cands:tg("🧹 *DUST*\nNo eligible small balances to convert right now.");return
- lines=[f"{x['coin']}: {x['amount']:.8g}"+(f" (≈${x['value']:.4f})" if x['value'] is not None else " (no USDT price)") for x in cands]
+ lines=[f"{str(x['coin'])[:7]:<8}{format(float(x['amount']),'.6g')[:11]:>11}{(('$'+format(float(x['value']),'.4f')) if x['value'] is not None else 'no price'):>10}" for x in cands]
+ lines=["```",f"{'COIN':<8}{'AMOUNT':>11}{'VALUE':>10}","-"*29]+lines[:40]+["```"] if lines else lines
  if not confirm:
   tot=sum(x['value'] or 0 for x in cands)
-  _send(f"🧹 *DUST → BGB*\n{len(cands)} eligible coin(s)"+(f", about ${tot:.2f} priced" if tot>0 else "")+":\n"+"\n".join(lines[:40])+("\n…" if len(lines)>40 else "")+"\n\nNothing is sold at market. Bitget converts these small balances to BGB. Coins in your active trades are never included.","Markdown",{"inline_keyboard":[[{"text":"✅ Convert all to BGB","callback_data":"/dust confirm"},{"text":"❌ Cancel","callback_data":"/dust cancel"}]]});return
+  _send(f"🧹 *DUST → BGB*\n{len(cands)} eligible coin(s)"+(f", about ${tot:.2f} priced" if tot>0 else "")+":\n"+"\n".join(lines)+"\n\nNothing is sold at market. Bitget converts these small balances to BGB. Coins in your active trades are never included.","Markdown",{"inline_keyboard":[[{"text":"✅ Convert all to BGB","callback_data":"/dust confirm"},{"text":"❌ Cancel","callback_data":"/dust cancel"}]]});return
  if cd("dust:confirm",30):tg("⏳ Dust conversion already processing...");return
  done=[];failed=[];unknown=False
  try:
@@ -655,7 +656,7 @@ def cmd_cancel_alerts():
 def cmd_alerts():
  a=_alerts()
  if not a:tg("🔔 No price alerts set.\nUse `/alert COIN PRICE`.");return
- _send("🔔 *PRICE ALERTS*\n"+"\n".join(f"{x.get('coin')} {x.get('dir')} {fp(x.get('price'))}" for x in a)+"\n\nCancel all: /cancel\\_alerts","Markdown",{"inline_keyboard":[[{"text":"🗑 Cancel all alerts","callback_data":"/cancel_alerts"}]]})
+ _send("🔔 *PRICE ALERTS*\n```\n"+f"{'COIN':<7}{'WHEN':<7}{'PRICE':>12}\n"+"-"*26+"\n"+"\n".join(f"{str(x.get('coin'))[:6]:<7}{str(x.get('dir'))[:5]:<7}{format(float(x.get('price') or 0),'.6g')[:12]:>12}" for x in a)+"\n```\nCancel all: /cancel\\_alerts","Markdown",{"inline_keyboard":[[{"text":"🗑 Cancel all alerts","callback_data":"/cancel_alerts"}]]})
 def check_alerts():
  a=_alerts()
  if not a:return
@@ -2900,15 +2901,13 @@ def cmd_coins():
  lines=["📚 *COIN LIST*",f"✅ Ready {cnt.get('READY',0)} | 🆕 New {cnt.get('NEW',0)} | 💼 Held {cnt.get('BOUGHT',0)} | ⛔ Rejected {cnt.get('REJECTED',0)}",
   f"Pipeline: 👁 Watch {cnt.get('WATCH',0)} → 🟡 Manual {cnt.get('MANUAL',0)} → 🤖 Auto {cnt.get('AUTO',0)} | ⤵ Dropped {cnt.get('DROPPED',0)} | Archived {cnt.get('ARCHIVED',0)}",
   f"Execution: 📥 queued {ec.get('QUEUED',0)} | ⛔ blocked {ec.get('BLOCKED',0)} | 🟢 held {ec.get('HELD',0)}",""]
+ tb=[f"{'COIN':<6}{'PRICE':>8}{'RSI':>4}{'1H':>6} {'ST':<2}{'SC':>4}","-"*31];notes=[]
+ stl={"WATCH":"W","MANUAL":"M","AUTO":"A"};stn={"BOUGHT":"H","NEW":"N","READY":"R","REJECTED":"X"}
  for sym,st,exst,p,h,r,n,why,mc,mscore,adv,cj,stg in rows:
-  try:rising=bool(json.loads(cj or "{}").get("scanner",{}).get("h1_rising_three_scans"))
-  except Exception:rising=False
-  ln=f"{ic.get(st) if st in ('BOUGHT','NEW') else (sic.get(stg) or ic.get(st,''))} *{sym.split('-')[0]}* {fp(p) if p else '-'} | {exst or 'UNASSESSED'}"
-  if mc:ln+=f" | 🟡 {int(float(mscore or 0))}/10 MANUAL"
-  if h is not None:ln+=f" | 1H {h:+.2f}%"+(" 📈" if rising else "")
-  if r is not None:ln+=f" | RSI {r:.0f}"
-  lines.append(ln+f" | seen {n}x")
-  if adv:lines.append("   🧠 "+str(adv)[:110])
+  c=sym.split("-")[0];tag=stn.get(st) if st in ("BOUGHT","NEW") else (stl.get(stg) or stn.get(st,"-"))
+  tb.append(f"{c[:6]:<6}{(format(float(p),'.6g')[:8] if p else '-'):>8}{(format(r,'.0f') if r is not None else '-'):>4}{(format(h,'+.1f') if h is not None else '-'):>6} {tag:<2}{(str(int(float(mscore or 0)))+'/10') if mc else '-':>4}")
+  if adv:notes.append(f"🧠 {c}: "+str(adv)[:110])
+ lines+=["```"]+tb+["```","_ST: W Watch, M Manual, A Auto, R Ready, N New, H Held, X Rejected. SC: manual score._"]+notes
  if dropped:
   lines += ["", "⤵ *DROPPED — retained for recovery:* "+", ".join(f"{x['sym'].split('-')[0]} ({int(float(x.get('score') or 0))}/10)" for x in dropped)]
  _send("\n".join(lines),"Markdown",{"inline_keyboard":[_MENU_BTN]})
