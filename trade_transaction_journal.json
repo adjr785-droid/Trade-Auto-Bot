@@ -4474,5 +4474,15 @@
             "warning": "RSI is elevated (~70) indicating overbought conditions; price is near recent highs and market volatility can be significant. Manual spot purchase of $5 may result in immediate downside risk.",
             "summary": "Given the high RSI and lack of additional filters, the trade carries high risk. Consider waiting for a pullback or confirming signals before entering."
         }
+    },
+    {
+        "time": 1795762918.385324,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'ENA-USDT', 'action': 'monitor', 'reason': 'Small negative PnL (-0.05%) and stop is close to current price; risk of further downside if price falls below stop (0.101223).'}, {'symbol': 'DOS-USDT', 'action': 'hold', 'reason': 'Positive PnL (3.03%) with comfortable distance to stop; no immediate action needed.'}, {'symbol': 'PWT-USDT', 'action': 'hold', 'reason': 'Slight positive PnL (0.32%) and stop is reasonably below current price; maintain position.'}], 'summary': 'Overall portfolio risk remains PASS. Watch ENA-USDT closely due to its proximity to the stop level; other positions are stable. No new orders recommended at this time.'}"
+    },
+    {
+        "time": 1795762919.3261158,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.1971, 'recurring_patterns': {'panic_trades': 7, 'manual_sell_trades': 13, 'crash_guard_trades': 1, 'symbols_with_multiple_trades': ['BLESS-USDT', 'MOVE-USDT', 'PUMP-USDT']}, 'recommendations': ['Limit exposure to panic-driven exits; consider tighter stop\u2011loss thresholds.', 'Review manual sell decisions for consistency with strategy rules.', 'Monitor symbols with repeated losses (e.g., MOVE-USDT) and consider reducing position size.', 'Maintain current win\u2011rate focus but aim to improve average trade P&L to offset net loss.']}"
     }
 ]
