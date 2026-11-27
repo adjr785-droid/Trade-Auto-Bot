@@ -4867,5 +4867,15 @@
         "time": 1795808531.584759,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 63.33, 'net_pnl_usdt': 0.372, 'recurring_patterns': {'high_frequency_symbols': ['BLESS-USDT', 'MOVE-USDT', 'DOS-USDT'], 'common_reasons': {'PANIC': 6, 'MANUAL SELL': 13, 'CRASH GUARD': 1}, 'loss_concentration': {'MOVE-USDT': 2, 'PROS-USDT': 1, 'PUMP-USDT': 1, 'TRX-USDT': 1}}, 'recommendations': ['Limit panic\u2011driven exits; implement stricter stop\u2011loss thresholds.', 'Diversify across symbols rather than concentrating on a few repeated assets.', 'Review manual sell triggers to ensure they align with predefined profit targets.', 'Maintain current win\u2011rate but aim to improve average win size versus loss size.', 'Monitor crash\u2011guard activation frequency and adjust risk parameters accordingly.']}"
+    },
+    {
+        "time": 1795811510.6359437,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [], 'summary': 'Current portfolio passes risk checks. No immediate actions required for DOS-USDT (small positive PnL, stop at entry) or PWT-USDT (slight negative PnL, stop above current price). Maintain positions and monitor for further price movement.'}"
+    },
+    {
+        "time": 1795811511.5261936,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 63.33, 'net_pnl_usdt': 0.372, 'recurring_patterns': 'Frequent PANIC exits and manual sell actions dominate; same symbols appear repeatedly (BLESS-USDT, MOVE-USDT, DOS-USDT); occasional large positive trades (BTW-USDT, DOS-USDT) offset multiple small losses; crash guard triggered on MOVE-USDT', 'recommendations': 'Limit panic\u2011driven exits; implement stricter stop\u2011loss thresholds; diversify away from repeatedly traded symbols; increase position sizing discipline for manual sells; monitor crash\u2011guard triggers to avoid large drawdowns'}"
     }
 ]
