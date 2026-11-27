@@ -1,15 +1,15 @@
 {
-    "last_check": 1795751108.2805781,
+    "last_check": 1795755062.3093233,
     "status": "healthy",
     "model": "openai/gpt-oss-120b",
-    "latency_ms": 295,
+    "latency_ms": 268,
     "last_error": "",
     "consecutive_failures": 0,
-    "consecutive_successes": 2,
+    "consecutive_successes": 3,
     "last_response_valid": true,
     "alerted_status": "healthy",
-    "emergency_mode": true,
-    "trading_mode": "AUTO_BUY_PAUSED_MANUAL_OPEN",
+    "emergency_mode": false,
+    "trading_mode": "NORMAL",
     "emergency_started": 1795337672.3776765,
     "emergency_reason": "AI stage performance_review failed: Expecting ',' delimiter: line 1 column 477 (char 476)",
     "resume_requires_user_confirmation": false,
@@ -29,8 +29,8 @@
             "failures": 22
         },
         "market_regime": {
-            "last_success": 1795751094.0589776,
-            "successes": 146,
+            "last_success": 1795755046.3646443,
+            "successes": 147,
             "last_error": ""
         },
         "manual_buy_review": {
@@ -54,8 +54,8 @@
             "last_error": ""
         },
         "near_miss_review": {
-            "last_success": 1795751099.758514,
-            "successes": 32,
+            "last_success": 1795755052.3178828,
+            "successes": 33,
             "last_error": ""
         },
         "opportunity_ranking": {
@@ -69,15 +69,15 @@
             "last_error": ""
         },
         "coin_advisory": {
-            "last_success": 1795751100.7422214,
-            "successes": 78,
+            "last_success": 1795755053.4666786,
+            "successes": 79,
             "last_error": "",
             "last_failure": 1795725427.5354803,
             "failures": 22
         }
     },
-    "last_stage_success": 1795755021.5545564,
-    "last_success": 1795751108.2805784,
-    "emergency_ended": 1795728593.5376418,
+    "last_stage_success": 1795755053.4666786,
+    "last_success": 1795755062.3093233,
+    "emergency_ended": 1795755062.674488,
     "recovery_start_alerted": false
 }
