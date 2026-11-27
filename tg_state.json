@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935691463,
+    "last_update_id": 935691464,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -64,8 +64,8 @@
             1795558649.4358172
         ],
         "m:coins": [
-            1,
-            1795821557.8374362
+            2,
+            1795821581.2561011
         ],
         "m:su": [
             1,
@@ -99,7 +99,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "2/4",
+                "text": "3/4",
                 "callback_data": "pg:x"
             },
             {
@@ -112,7 +112,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 2/4*",
+    "panel_text": "\ud83d\udcc4 *Page 3/4*",
     "out_time": 1795821534.7600904,
     "pages": {
         "p": [
@@ -121,7 +121,7 @@
             "```\n```\n_ST: W Watch, M Manual, A Auto, R Ready, N New, H Held, X Rejected. SC: manual\nscore._\n\ud83e\udde0 IDOL: high: 1h up 1.57% but 24h down 4.97%, RSI 52, uncertain; high risk.\n\ud83e\udde0 PORTAL: high: RSI 92 extremely high, massive 24h gain; very high risk.\n\ud83e\udde0 PONS: high: RSI 53.9, 24h up 16.4%; risk high.\n\ud83e\udde0 LTC: medium: RSI 56.6, slight positive changes; moderate risk.\n\ud83e\udde0 WLD: medium: Slight 1h dip, 24h up 0.74%, RSI 48, moderate risk.\n\ud83e\udde0 LINK: medium: RSI 46.6, slight down; moderate risk.\n\ud83e\udde0 BNB: high: Large price, RSI 43.4, down trends; risk high for spot entry.\n\u2800",
             "\ud83e\udde0 KII: low: RSI 38.6 low, minor changes; lower risk but watch.\n\ud83e\udde0 PEPE: medium: Very low price, RSI 49.1, slight down 1h, modest 24h rise;\nmonitor.\n\ud83e\udde0 JCT: high: RSI 61.9, 24h up 5.56% after dip; elevated risk.\n\ud83e\udde0 ADA: high: Down trends, RSI 43.1, not eligible; high risk.\n\ud83e\udde0 SUI: medium: Small negative 1h change, RSI 47.6, no clear breakout; monitor.\n\n\u2935 *DROPPED \u2014 retained for recovery:* IDOL (3/10), PORTAL (3/10), PONS (3/10),\nLTC (5/10), WLD (6/10)\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 1,
+        "i": 2,
         "mode": "Markdown",
         "x": [],
         "cmd": "m:coins"
