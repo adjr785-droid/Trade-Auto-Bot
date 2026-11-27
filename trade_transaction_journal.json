@@ -4973,5 +4973,15 @@
             "lesson": "Partial exits can lock in gains while preserving exposure to potential further upside. However, manual interventions introduce subjectivity; establishing clear criteria for manual sells can improve consistency. Monitoring remaining base exposure is essential to ensure it aligns with overall portfolio risk limits.",
             "confidence": "high"
         }
+    },
+    {
+        "time": 1795823199.3218112,
+        "event": "ai_manual_buy_review",
+        "symbol": "PWT-USDT",
+        "review": {
+            "risk_level": "moderate",
+            "warning": "The market filter indicates BTC is below its 50\u2011hour average, which may suggest broader bearish pressure. RSI is below 50, indicating potential downside momentum. Existing position adds exposure. Proceed with caution and consider position sizing relative to overall portfolio risk.",
+            "summary": "Manual buy of 4.55\u202fUSDT of PWT-USDT at 0.315047 is possible but carries moderate risk due to bearish BTC context and sub\u201150 RSI. Verify alignment with your risk limits before confirming."
+        }
     }
 ]
