@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT33.80/\u20a646,172",
+    "kb_ph": "USDT33.84/\u20a646,228",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -87,7 +87,7 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 7160,
+    "kb_mid": 7162,
     "out_text": "\ud83d\udcdf *OUTPUT*\nResults appear here.",
     "out_mode": "Markdown",
     "out_time": 1795774077.5936093,
