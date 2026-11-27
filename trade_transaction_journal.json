@@ -4346,5 +4346,15 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795756289.954593,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [], 'summary': 'The portfolio currently passes risk checks. The only open position (DOS-USDT) shows a modest unrealized gain of 2.26% and remains above its stop level. With BTC price stable around $61,690 and no BTC filter applied, there is no immediate action required. Continue monitoring market conditions and maintain the existing stop loss to protect gains.'}"
+    },
+    {
+        "time": 1795756290.77609,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6846, 'recurring_patterns': {'panic_sells': 9, 'manual_sells': 9, 'crash_guard': 1, 'symbols_with_multiple_trades': ['ADA-USDT', 'BLESS-USDT', 'MOVE-USDT', 'PUMP-USDT']}, 'recommendations': ['Limit panic\u2011sell triggers and require confirmation before exiting positions', 'Implement tighter stop\u2011loss thresholds to avoid large crash\u2011guard losses', 'Diversify across more stable assets to reduce exposure to high\u2011volatility tokens', 'Review manual sell decisions for consistency and avoid ad\u2011hoc sizing']}"
     }
 ]
