@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT34.43/\u20a647,033",
+    "kb_ph": "USDT34.43/\u20a647,031",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -78,12 +78,60 @@
     },
     "radar": [],
     "audit_down": {},
-    "audit_last": 1795789285.751226,
-    "audit_ai_cls": "OTHER",
+    "audit_last": 1795790549.493297,
+    "audit_ai_cls": "",
     "perf_breaker": {
         "until": 1795742224.733271,
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 7263
+    "kb_mid": 7267,
+    "out_mid": 7264,
+    "out_text": "\ud83d\udee0 AUDIT\n\u2705 Fixed: AI problem cleared (unknown error)\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_mode": "Markdown",
+    "out_time": 1795790559.139977,
+    "panel_mid": 7265,
+    "panel_rows": [
+        [
+            {
+                "text": "\ud83d\udda5 System",
+                "callback_data": "/bot"
+            },
+            {
+                "text": "\ud83d\udcc8 Stats",
+                "callback_data": "/stats"
+            }
+        ],
+        [
+            {
+                "text": "\u2699\ufe0f Settings",
+                "callback_data": "m:set"
+            },
+            {
+                "text": "\ud83d\udcbc Holdings",
+                "callback_data": "m:r:holdings"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udcdc Trade History",
+                "callback_data": "m:r:history"
+            },
+            {
+                "text": "\ud83e\udde0 Ask AI",
+                "callback_data": "m:ai:1"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\uddf9 Clear Chat",
+                "callback_data": "/clear"
+            },
+            {
+                "text": "\ud83d\udea8 PANIC SELL",
+                "callback_data": "/panic"
+            }
+        ]
+    ],
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below."
 }
