@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935691458,
+    "last_update_id": 935691460,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -95,32 +95,30 @@
     "panel_rows": [
         [
             {
-                "text": "\ud83e\uddf9 Orders & Dust",
-                "callback_data": "m:tl:trade"
-            },
-            {
-                "text": "\ud83d\udd14 Alerts",
-                "callback_data": "m:tl:alerts"
+                "text": "\ud83d\udcbc Portfolio",
+                "callback_data": "m:pf"
             }
         ],
         [
             {
-                "text": "\ud83d\udcda Coin List",
-                "callback_data": "m:coins"
-            },
-            {
-                "text": "\ud83d\udee0\ufe0f System",
-                "callback_data": "m:tl:sys"
+                "text": "\ud83c\udfc6 Markets",
+                "callback_data": "/analyse"
             }
         ],
         [
             {
-                "text": "\u2b05\ufe0f Main Menu",
-                "callback_data": "m:menu"
+                "text": "\ud83e\uddf0 Tools",
+                "callback_data": "m:tools"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udda5 System",
+                "callback_data": "m:sy"
             }
         ]
     ],
-    "panel_text": "\ud83e\uddf0 *TOOLS*\nChoose a group.",
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nChoose a group.",
     "out_time": 1795821201.6987364,
     "out_mid": 7499,
     "pages": {
@@ -145,5 +143,5 @@
         ],
         "cmd": "m:r:dust"
     },
-    "panel_mid": 7500
+    "panel_mid": 7503
 }
