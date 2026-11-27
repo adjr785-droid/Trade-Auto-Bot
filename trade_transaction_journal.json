@@ -4857,5 +4857,15 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795808530.6202588,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'PWT-USDT', 'action': 'monitor', 'reason': 'Position is slightly negative (-1.09% PnL) and approaching its stop level (0.300608). Consider tightening stop or reducing exposure if downside risk increases.'}], 'summary': 'Overall portfolio risk remains acceptable. BTC filter is active; BTC price is $60,036.08. The DOS-USDT position is profitable (+3.49%) and comfortably above its stop. The PWT-USDT position shows minor loss and is near its stop, warranting close monitoring.'}"
+    },
+    {
+        "time": 1795808531.584759,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 63.33, 'net_pnl_usdt': 0.372, 'recurring_patterns': {'high_frequency_symbols': ['BLESS-USDT', 'MOVE-USDT', 'DOS-USDT'], 'common_reasons': {'PANIC': 6, 'MANUAL SELL': 13, 'CRASH GUARD': 1}, 'loss_concentration': {'MOVE-USDT': 2, 'PROS-USDT': 1, 'PUMP-USDT': 1, 'TRX-USDT': 1}}, 'recommendations': ['Limit panic\u2011driven exits; implement stricter stop\u2011loss thresholds.', 'Diversify across symbols rather than concentrating on a few repeated assets.', 'Review manual sell triggers to ensure they align with predefined profit targets.', 'Maintain current win\u2011rate but aim to improve average win size versus loss size.', 'Monitor crash\u2011guard activation frequency and adjust risk parameters accordingly.']}"
     }
 ]
