@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT33.03/\u20a645,121",
+    "kb_ph": "USDT33.04/\u20a645,127",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -111,7 +111,7 @@
         ]
     ],
     "panel_text": "\ud83d\udcc4 *Page 1/2*",
-    "kb_mid": 7033,
+    "kb_mid": 7034,
     "out_mid": 7031,
     "pages": {
         "p": [
