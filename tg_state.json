@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935691191,
+    "last_update_id": 935691192,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -87,36 +87,32 @@
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udc41 Watch (0)",
-                "callback_data": "m:at:W"
+                "text": "\u2b50 FAVOURITES",
+                "callback_data": "m:fv"
             },
             {
-                "text": "\u25b6 \ud83d\udfe1 Manual (0)",
-                "callback_data": "m:at:M"
-            },
-            {
-                "text": "\ud83e\udd16 Auto (0)",
-                "callback_data": "m:at:A"
+                "text": "\ud83c\udd95 NEW LISTINGS",
+                "callback_data": "m:nl"
             }
         ],
         [
             {
-                "text": "\ud83c\udfaf SETUPS",
-                "callback_data": "m:su"
+                "text": "\ud83d\uddc4 ARCHIVE",
+                "callback_data": "m:ar:D"
             },
             {
-                "text": "\ud83d\uddc2 MORE",
-                "callback_data": "m:am"
+                "text": "\ud83d\udd0e ANALYSE A COIN",
+                "callback_data": "m:an"
             }
         ],
         [
             {
-                "text": "\ud83d\udd04 Refresh",
-                "callback_data": "m:at:M"
+                "text": "\u2b05\ufe0f Analyse",
+                "callback_data": "/analyse"
             }
         ]
     ],
-    "panel_text": "\ud83d\udc47 *Actions*",
+    "panel_text": "USDT0.02\n\ud83d\uddc2 *ANALYSE \u2014 MORE*",
     "kb_mid": 6920,
     "out_mid": 6918,
     "panel_mid": 6919
