@@ -4721,5 +4721,15 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795795513.6026797,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'DOS-USDT', 'action': 'hold', 'reason': 'Small positive PnL (+0.34%) and price above entry; stop loss still provides downside protection.'}, {'symbol': 'PWT-USDT', 'action': 'monitor', 'reason': 'Slight negative PnL (-0.52%) and price approaching stop level (0.3150 vs stop 0.3008); consider tightening stop if risk tolerance is low.'}], 'summary': 'Overall portfolio risk remains PASS. DOS-USDT is marginally profitable and can be held. PWT-USDT shows minor loss and is nearing its stop; monitor closely and adjust stop if needed to limit further downside.'}"
+    },
+    {
+        "time": 1795795514.4881542,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 63.33, 'net_pnl_usdt': 1.4014, 'recurring_patterns': {'exit_reasons': {'PANIC': 9, 'MANUAL_SELL': 10, 'CRASH_GUARD': 1}, 'symbols_with_multiple_trades': {'BTW-USDT': 2, 'BLESS-USDT': 4, 'MOVE-USDT': 4, 'PUMP-USDT': 2}}, 'recommendations': {'risk_management': 'Consider tightening panic\u2011sell thresholds and implementing stricter stop\u2011loss rules to reduce reliance on manual panic exits.', 'position_sizing': 'Maintain conservative position sizes, especially for symbols with high volatility such as MOVE-USDT and PUMP-USDT.', 'monitoring': 'Add alerts for rapid price drops to trigger automated protective actions before manual intervention is needed.', 'review': 'Periodically review manual sell decisions to ensure they align with predefined profit targets rather than emotional responses.'}}"
     }
 ]
