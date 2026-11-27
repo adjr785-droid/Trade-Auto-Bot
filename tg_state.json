@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935691324,
+    "last_update_id": 935691325,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -24,8 +24,8 @@
             1795739610.5038157
         ],
         "m:r:holdings": [
-            0,
-            1795788694.8700774
+            1,
+            1795788755.8709419
         ],
         "/analyse": [
             6,
@@ -95,7 +95,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "1/2",
+                "text": "2/2",
                 "callback_data": "pg:x"
             },
             {
@@ -112,7 +112,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/2*",
+    "panel_text": "\ud83d\udcc4 *Page 2/2*",
     "out_time": 1795788742.8540711,
     "out_mid": 7234,
     "pages": {
@@ -120,7 +120,7 @@
             "\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *DOS* $21.82 (62%)\n+1.85% (+$0.40) | Entry 0.079428\nQty 269.71809 | Price 0.080900 | Stop 0.075584 (-7%)\nRSI 54 | Bullish | ATH -91%\n\n\ud83d\udd34 *PWT* $6.93 (20%)\n-0.93% (-$0.07) | Entry 0.317999\nQty 21.98293 | Price 0.315029 | Stop 0.302099 (-4%)\n\u2800\n\u2800",
             "RSI 48 | Bearish | ATH -56%\n\n\ud83e\udde0 *AI:* BTC filter is inactive; DOS position is modestly up (+1.85%) but only\n5% above its stop level, while PWT is slightly down (-0.93%) and approaching its\nstop, warranting close monitoring.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 0,
+        "i": 1,
         "mode": "Markdown",
         "x": [
             [
