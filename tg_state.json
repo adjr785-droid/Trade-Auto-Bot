@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691192,
+    "last_update_id": 935691194,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT33.56/\u20a645,841",
+    "kb_ph": "USDT33.64/\u20a645,957",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -17,7 +17,7 @@
         "pos": [],
         "hn": 31
     },
-    "last_cmd": "/bot",
+    "last_cmd": "/stats",
     "page_mem": {
         "/bot": [
             1,
@@ -81,39 +81,53 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "out_text": "USDT0.02\n\ud83d\udfe1 *MANUAL BUY*\n_Passed at least 5/7 core and 2/3 additional criteria. Manual review only._\n\nNone right now.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "\ud83d\udcc8 *TRADE STATS* (after estimated fees)\nClosed trades: 56\nWin rate: 52% (29 wins, 27 losses)\nAverage win: $+0.34 | Average loss: $-0.21\nProfit factor: 1.75\nExpectancy per trade: $+0.08\nNet profit: $+4.22\nBest: $+2.97 | Worst: $-0.70\n\n*By strategy*\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795744584.4040287,
+    "out_time": 1795744643.302552,
     "panel_rows": [
         [
             {
-                "text": "\u2b50 FAVOURITES",
-                "callback_data": "m:fv"
+                "text": "\u25c0",
+                "callback_data": "pg:p"
             },
             {
-                "text": "\ud83c\udd95 NEW LISTINGS",
-                "callback_data": "m:nl"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\uddc4 ARCHIVE",
-                "callback_data": "m:ar:D"
+                "text": "1/3",
+                "callback_data": "pg:x"
             },
             {
-                "text": "\ud83d\udd0e ANALYSE A COIN",
-                "callback_data": "m:an"
-            }
-        ],
-        [
+                "text": "\u25b6",
+                "callback_data": "pg:n"
+            },
             {
-                "text": "\u2b05\ufe0f Analyse",
-                "callback_data": "/analyse"
+                "text": "\ud83c\udfe0",
+                "callback_data": "m:menu"
+            },
+            {
+                "text": "\ud83d\udd04",
+                "callback_data": "rf:go"
             }
         ]
     ],
-    "panel_text": "USDT0.02\n\ud83d\uddc2 *ANALYSE \u2014 MORE*",
-    "kb_mid": 6920,
-    "out_mid": 6918,
-    "panel_mid": 6919
+    "panel_text": "\ud83d\udcc4 *Page 1/3*",
+    "kb_mid": 6924,
+    "out_mid": 6922,
+    "pages": {
+        "p": [
+            "\ud83d\udcc8 *TRADE STATS* (after estimated fees)\nClosed trades: 56\nWin rate: 52% (29 wins, 27 losses)\nAverage win: $+0.34 | Average loss: $-0.21\nProfit factor: 1.75\nExpectancy per trade: $+0.08\nNet profit: $+4.22\nBest: $+2.97 | Worst: $-0.70\n\n*By strategy*\n\u2800\n\u2800",
+            "MANUAL: 42 trades | win 55% | avg $+0.15 | total $+6.13\nBREAKOUT: 1 trades | win 100% | avg $+0.10 | total $+0.10\nOLDER: 2 trades | win 0% | avg $-0.15 | total $-0.29\nOTHER: 11 trades | win 45% | avg $-0.16 | total $-1.73\n\n\ud83d\udd2c *RULE RESULTS* (what coins did after each stage)\n\ud83d\udc41 Watch (2): 4h -0.3% | win 0% | up +1.8% / down -3.4%\n\ud83d\udfe1 Manual: collecting data\n\ud83e\udd16 Auto: collecting data\nWin = beats round-trip fees at 4h. Needs a few days of scans to mean anything.\n\u2800\n\u2800",
+            "\n\ud83e\udde0 *AI:* Overall spot bot shows modest profit (+$4.22) with a 52% win rate, but\nlow trade counts in breakout/older strategies and limited watch data make the\nresults statistically uncertain.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+        ],
+        "i": 0,
+        "mode": "Markdown",
+        "x": [
+            [
+                {
+                    "text": "\ud83d\udd04",
+                    "callback_data": "rf:go"
+                }
+            ]
+        ],
+        "cmd": "/stats"
+    },
+    "panel_mid": 6923
 }
