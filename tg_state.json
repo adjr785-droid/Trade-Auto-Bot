@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691346,
+    "last_update_id": 935691348,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT34.73/\u20a647,437",
+    "kb_ph": "USDT34.73/\u20a647,445",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -76,16 +76,52 @@
             1795762454.8791695
         ]
     },
-    "radar": [
-        "ARX-USDT"
-    ],
+    "radar": [],
     "audit_down": {},
-    "audit_last": 1795795520.803533,
+    "audit_last": 1795798156.617922,
     "audit_ai_cls": "",
     "perf_breaker": {
         "until": 1795742224.733271,
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 7284
+    "kb_mid": 7289,
+    "out_text": "USDT0.03\n\ud83d\udfe1 *MANUAL BUY*\n_Passed at least 5/7 core and 2/3 additional criteria. Manual review only._\n\nNone right now.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_mode": "Markdown",
+    "out_time": 1795798163.6619315,
+    "panel_rows": [
+        [
+            {
+                "text": "\ud83d\udc41 Watch (0)",
+                "callback_data": "m:at:W"
+            },
+            {
+                "text": "\u25b6 \ud83d\udfe1 Manual (0)",
+                "callback_data": "m:at:M"
+            },
+            {
+                "text": "\ud83e\udd16 Auto (0)",
+                "callback_data": "m:at:A"
+            }
+        ],
+        [
+            {
+                "text": "\ud83c\udfaf SETUPS",
+                "callback_data": "m:su"
+            },
+            {
+                "text": "\ud83d\uddc2 MORE",
+                "callback_data": "m:am"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udd04 Refresh",
+                "callback_data": "m:at:M"
+            }
+        ]
+    ],
+    "panel_text": "\ud83d\udc47 *Actions*",
+    "out_mid": 7292,
+    "panel_mid": 7293
 }
