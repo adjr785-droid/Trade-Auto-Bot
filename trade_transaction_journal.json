@@ -4272,5 +4272,15 @@
         "time": 1795739420.0956693,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6846, 'recurring_patterns': {'PANIC': 9, 'MANUAL_SELL': 9, 'CRASH_GUARD': 1}, 'recommendations': ['Limit panic exits and prioritize structured exit strategies', 'Implement tighter stop\u2011loss thresholds to avoid large negative trades', 'Review manual sell triggers for consistency and avoid ad\u2011hoc sizing', 'Monitor high\u2011frequency loss symbols (e.g., MOVE-USDT, PROS-USDT) and consider reducing exposure']}"
+    },
+    {
+        "time": 1795744483.1763947,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [], 'summary': 'Current portfolio risk passes safeguards. The only position (DOS-USDT) shows a modest 2.13% unrealized gain and remains within its stop\u2011loss margin. No immediate action is required; continue monitoring price relative to the stop level and market conditions. Maintain current allocation while staying alert to any rapid adverse moves.'}"
+    },
+    {
+        "time": 1795744484.19093,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6846, 'recurring_patterns': {'high_frequency_reasons': ['PANIC', 'MANUAL SELL', 'CRASH GUARD'], 'symbols_with_multiple_losses': ['PROS-USDT', 'MOVE-USDT', 'JCT-USDT'], 'loss_concentration': {'PANIC': 7, 'MANUAL SELL': 9, 'CRASH GUARD': 1}}, 'recommendations': {'risk_management': 'Limit exposure to assets that trigger PANIC exits; consider tighter stop\u2011loss thresholds.', 'trade_execution': 'Prefer systematic entry/exit criteria over manual interventions to reduce variability.', 'position_sizing': 'Reduce position size on high\u2011volatility symbols (e.g., MOVE-USDT, PROS-USDT) until win rate improves.', 'monitoring': 'Implement alerts for repeated PANIC reasons to review underlying market conditions.', 'uncertainty_note': 'Current performance is based on a small sample (30 trades); statistical confidence is limited.'}}"
     }
 ]
