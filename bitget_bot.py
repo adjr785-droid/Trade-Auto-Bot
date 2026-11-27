@@ -483,8 +483,12 @@ def daily_reset():
  if not a:st['reset_anchor']=now;save(SC,st);return
  if now-a<86400:return
  st['reset_anchor']=a+int((now-a)//86400)*86400;save(SC,st)
- save(HIST,[]);save(SH,{"items":[]});save(LF,{"total_realized_usdt":0.0,"trade_count":0});save(AI_RECENT,{})
- try:journal_event("daily_reset",cleared="trade history, scan history, profit ledger, ai recent")
+ save(HIST,[]);save(SH,{"items":[]});save(LF,{"total_realized_usdt":0.0,"trade_count":0})
+ try:
+  d=load(AI_RECENT,{});d=d if isinstance(d,dict) else {};d["r"]=[];d["e"]=[];save(AI_RECENT,d)
+ except Exception:pass
+ save(JOURNAL,[])
+ try:journal_event("daily_reset",cleared="trade history, scan history, profit ledger, journal, ai call history")
  except Exception:pass
 def menu():
  b=lambda t,c:{"text":t,"callback_data":c}
@@ -813,6 +817,9 @@ def m_buy(cs,usdt):
  f=float(o.get('filled') or 0);a=float(o.get('average') or o.get('price') or 0)
  if f<=0 or a<=0:raise Exception("Exchange did not confirm fill.")
  return f,a
+def new_position(a,f,sl_price,sl_pct_,strategy,source):
+ """One place that creates a position record, including the entry amount used by the 75% stop rule."""
+ d=NP(round(a,6),sl_price,sl_pct_);d.update(entry_qty=float(f),entry_usdt=round(float(f)*float(a),4),strategy=strategy,purchase_source=source,opened_at=time.time());return d
 def hard_sl(sym,qty,pr):
  try:
   cs=S(sym)
@@ -936,6 +943,17 @@ def cleanup_spot_dust_after_sale(sym):
   if conversion_attempted:
    return f"⚠️ BGB conversion outcome is UNKNOWN for {coin}; do not retry until Bitget conversion history and balances are checked. Reason: {str(e)[:180]}"
   return f"⚠️ BGB dust conversion skipped for {coin}; balance left untouched. Reason: {str(e)[:220]}"
+def market_sell_fill(cs,q,p,tries=10):
+ """One place for every market sell: places the order and waits for a verified fill. Returns (order_id, filled, avg_price)."""
+ o=ex.create_market_sell_order(cs,q);oid=(o or {}).get('id')
+ filled=float((o or {}).get('filled') or 0.0);px=float((o or {}).get('average') or (o or {}).get('price') or p)
+ if oid and (filled<=0 or not px):
+  for _ in range(tries):
+   time.sleep(0.8)
+   try:o=ex.fetch_order(oid,cs);filled=float(o.get('filled') or 0.0);px=float(o.get('average') or o.get('price') or p)
+   except Exception:continue
+   if filled>0 and px>0:break
+ return oid,filled,px
 def sell(sym,pct,reason):
  """Sell requested amount; full exits are not successful until no tradable balance remains."""
  try:
@@ -957,15 +975,7 @@ def sell(sym,pct,reason):
    if q<=0:
     remaining=fb;break
    try:
-    o=ex.create_market_sell_order(cs,q);oid=(o or {}).get('id')
-    filled=float((o or {}).get('filled') or 0);px=float((o or {}).get('average') or (o or {}).get('price') or p)
-    if oid and (filled<=0 or not px):
-     for _ in range(10):
-      time.sleep(0.8)
-      try:
-       o=ex.fetch_order(oid,cs);filled=float(o.get('filled') or 0);px=float(o.get('average') or o.get('price') or p)
-      except Exception:continue
-      if filled>0:break
+    oid,filled,px=market_sell_fill(cs,q,p,10)
     if filled<=0:
      breaker_failure(f"SELL {sym}: fill not verified");journal_event("sell_fill_unverified",symbol=sym,order_id=oid)
      tg(f"⚠️ *SELL NOT VERIFIED* {sym}: order `{oid}` returned no confirmed fill. Reconcile exchange balance before retrying.");return False
@@ -1046,7 +1056,7 @@ def cmd_buy(txt):
    ok=place_trailing_sl(sym,free_qty(sym,ob+f))
    tg(f"➕ *DCA ADDED:* {c} @ {a:.6f}\nSpent: ${amt:.2f}\nNew avg entry: {avg:.6f}\nTotal entry amount: ${old['entry_usdt']:.2f}\n"+(STOP_OK if ok else STOP_NO))
   else:
-   db[sym]=NP(round(a,6),round(a*(1-sl/100),6),sl);db[sym].update(entry_qty=float(f),entry_usdt=round(float(f)*float(a),4));db[sym]['strategy']="MANUAL";db[sym]['purchase_source']='MANUAL';db[sym]['opened_at']=time.time();save(DB,db)
+   db[sym]=new_position(a,f,round(a*(1-sl/100),6),sl,"MANUAL",'MANUAL');save(DB,db)
    coin_db_mark_execution(sym,"BOUGHT","Manual buy fill confirmed",{"filled":f,"average":a,"spend_usdt":amt,"source":"MANUAL"})
    ok=place_trailing_sl(sym,free_qty(sym,f))
    tg(f"✅ *BOUGHT:* {c} @ {a:.6f}\nSpent: ${amt:.2f}\n"+(STOP_OK if ok else STOP_NO))
@@ -1071,15 +1081,7 @@ def cmd_sell(txt):
   q=float(ex.amount_to_precision(cs,q))
   if q<=0:tg("❌ Amount too small.");return
   full_exit=q>=fb*0.999
-  o=ex.create_market_sell_order(cs,q);oid=(o or {}).get('id')
-  filled=float((o or {}).get('filled') or 0.0);px=float((o or {}).get('average') or (o or {}).get('price') or p)
-  if oid and (filled<=0 or not px):
-   for _ in range(8):
-    time.sleep(0.8)
-    try:
-     o=ex.fetch_order(oid,cs);filled=float(o.get('filled') or 0.0);px=float(o.get('average') or o.get('price') or p)
-    except Exception:continue
-    if filled>0 and px>0:break
+  oid,filled,px=market_sell_fill(cs,q,p,8)
   if filled<=0 or px<=0:
    tg(f"⚠️ *SELL NOT VERIFIED* {sym}: order `{oid}` has no confirmed fill. Reconcile the Bitget balance before retrying.");return
   pnl=(px-db[sym]["entry_price"])*filled;rec(sym,pnl,f"MANUAL SELL {a_s}",px*filled)
@@ -1238,10 +1240,6 @@ def get_holdings_text():
  for val,coin,ic,l2,l3,l4 in sorted(rows,reverse=True):
   lines+=[f"{ic} *{coin}* ${val:.2f}{share(val)}",l2,l3,l4,""]
  if not rows:lines.append("No coin holdings.")
- if unpriced:
-  note="⚠️ Held but with no USDT price: "+", ".join(unpriced[:3])
-  if len(unpriced)>3:note+=f" and {len(unpriced)-3} more..."
-  lines.append(note)
  return "\n".join(lines).rstrip()
 def check_hourly_balance():
  st=load(SC);now=time.time()
@@ -1268,7 +1266,7 @@ def audit_system():
   if sym not in db:
    p=live(sym)
    if p and a*p>1.02:
-    db[sym]=NP(p,round(p*(1-cfg()['stop_loss_pct']/100),6));save(DB,db);ok=place_trailing_sl(sym,a);issues.append(f"🔄 Auto-synced: {sym}")
+    db[sym]=NP(p,round(p*(1-cfg()['stop_loss_pct']/100),6));db[sym].update(entry_qty=a,entry_usdt=round(a*p,4));save(DB,db);ok=place_trailing_sl(sym,a);issues.append(f"🔄 Auto-synced: {sym}")
  qc=False
  for sym in list(q):
   if sym in db or time.time()-q[sym].get('timestamp',0)>86400:q.pop(sym,None);qc=True
@@ -2339,7 +2337,7 @@ def exec_q():
    mxs=round(a*(1-pct/100),6);sl=qd.get('sl') or mxs
    if sl>=a or sl>mxs:sl=mxs
    if qd.get('type')=="BREAKOUT":sl=max(sl,mxs)
-   db[sym]=NP(round(a,6),sl,pct);db[sym].update(entry_qty=float(f),entry_usdt=round(float(f)*float(a),4));db[sym]['strategy']=qd.get('type','OTHER');db[sym]['purchase_source']='AUTO';db[sym]['opened_at']=time.time();save(DB,db)
+   db[sym]=new_position(a,f,sl,pct,qd.get('type','OTHER'),'AUTO');save(DB,db)
    coin_db_mark_execution(sym,"BOUGHT","Auto-buy fill confirmed",{"filled":f,"average":a,"spend_usdt":sp,"setup":qd.get("type")})
    ok=place_trailing_sl(sym,free_qty(sym,f)) or protect_retry(sym,f);tg(f"🛒 *EXECUTED — DYNAMIC AUTO-BUY!*\n{sym}|💵{sp:.2f}@{a:.6f}\nAllocation: score {alloc_meta.get('score_factor',0):.2f}x, setup {alloc_meta.get('setup_factor',0):.2f}x, volatility {alloc_meta.get('vol_factor',0):.2f}x, regime {alloc_meta.get('regime_factor',0):.2f}x\n"+(STOP_OK if ok else STOP_NO))
    if not ok and s.get('sell_if_stop_fails',True):unprotected_exit(sym,db)
