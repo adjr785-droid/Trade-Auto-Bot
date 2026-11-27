@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691483,
+    "last_update_id": 935691484,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT35.06/\u20a647,893",
+    "kb_ph": "USDT35.06/\u20a647,886",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -80,67 +80,106 @@
         "IDOL-USDT"
     ],
     "audit_down": {},
-    "audit_last": 1795822011.9312828,
+    "audit_last": 1795822889.354123,
     "audit_ai_cls": "",
     "perf_breaker": {
         "until": 1795742224.733271,
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 7534,
+    "kb_mid": 7537,
     "out_mid": 7535,
-    "out_text": "\ud83d\udcdf *OUTPUT*\nResults appear here.",
+    "out_text": "\u2139\ufe0f Git sync used conflict recovery.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_mid": 7536,
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udda5 Bot Status",
-                "callback_data": "m:r:bot"
+                "text": "\u2328\ufe0f \ud83e\uddf0 Tools",
+                "callback_data": "m:lay:t:tools"
+            },
+            {
+                "text": "\u2328\ufe0f \ud83c\udfc6 Markets",
+                "callback_data": "m:lay:t:analyse"
             }
         ],
         [
             {
-                "text": "\u2699\ufe0f Settings",
-                "callback_data": "m:set"
+                "text": "\ud83d\udccb \ud83d\udda5 System",
+                "callback_data": "m:lay:t:bot"
+            },
+            {
+                "text": "\ud83d\udccb \ud83d\udcc8 Stats",
+                "callback_data": "m:lay:t:stats"
             }
         ],
         [
             {
-                "text": "\ud83e\udde0 Ask AI",
-                "callback_data": "m:ai:1"
+                "text": "\ud83d\udccb \ud83d\udd0e Analyse Coin",
+                "callback_data": "m:lay:t:an"
+            },
+            {
+                "text": "\ud83d\udccb \u2699\ufe0f Settings",
+                "callback_data": "m:lay:t:set"
             }
         ],
         [
             {
-                "text": "\ud83d\udee0\ufe0f Audit",
-                "callback_data": "m:r:audit"
+                "text": "\ud83d\udccb \ud83d\udcbc Holdings",
+                "callback_data": "m:lay:t:hold"
+            },
+            {
+                "text": "\ud83d\udccb \ud83d\udcdc Trade History",
+                "callback_data": "m:lay:t:hist"
             }
         ],
         [
             {
-                "text": "\ud83e\udde0 Resume AI Mode",
-                "callback_data": "m:r:airesume"
+                "text": "\ud83d\udccb \ud83e\udde0 Ask AI",
+                "callback_data": "m:lay:t:ai"
+            },
+            {
+                "text": "\ud83d\udccb \ud83e\uddf9 Clear Chat",
+                "callback_data": "m:lay:t:clear"
             }
         ],
         [
             {
-                "text": "\ud83e\udde9 Shortcuts",
+                "text": "\ud83d\udccb \ud83d\udea8 PANIC SELL",
+                "callback_data": "m:lay:t:panic"
+            }
+        ],
+        [
+            {
+                "text": "\u2796",
+                "callback_data": "m:lay:pl:-"
+            },
+            {
+                "text": "\ud83d\udccf Page: 12 lines",
                 "callback_data": "m:lay"
+            },
+            {
+                "text": "\u2795",
+                "callback_data": "m:lay:pl:+"
             }
         ],
         [
             {
-                "text": "\ud83e\uddf9 Clear Chat",
-                "callback_data": "m:r:clear"
+                "text": "\u270f\ufe0f Rename buttons",
+                "callback_data": "m:lay:rn"
+            },
+            {
+                "text": "\u21a9\ufe0f Reset layout",
+                "callback_data": "m:lay:reset"
             }
         ],
         [
             {
-                "text": "\ud83c\udfe0 Main Menu",
-                "callback_data": "m:menu"
+                "text": "\u2b05\ufe0f Tools",
+                "callback_data": "m:tools"
             }
         ]
     ],
-    "panel_text": "\ud83d\udda5 *SYSTEM*"
+    "panel_text": "\ud83e\udde9 *SHORTCUTS*\nTap a button to add it next to Menu or remove it.\n\u2328\ufe0f = shortcut (below the text box)\nShortcuts: 2/2",
+    "out_time": 1795822882.7494497
 }
