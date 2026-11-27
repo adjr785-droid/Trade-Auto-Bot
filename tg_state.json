@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691170,
+    "last_update_id": 935691172,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT32.45/\u20a644,331",
+    "kb_ph": "USDT32.37/\u20a644,215",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -79,43 +79,43 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 6875,
-    "out_text": "USDT0.02\n\ud83d\udfe1 *MANUAL BUY*\n_Passed at least 5/7 core and 2/3 additional criteria. Manual review only._\n\nNone right now.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "kb_mid": 6879,
+    "out_text": "\ud83d\udcda *COIN LIST*\n\u2705 Ready 1 | \ud83c\udd95 New 0 | \ud83d\udcbc Held 1 | \u26d4 Rejected 447\nPipeline: \ud83d\udc41 Watch 0 \u2192 \ud83d\udfe1 Manual 0 \u2192 \ud83e\udd16 Auto 0 | \u2935 Dropped 450 | Archived 0\nExecution: \ud83d\udce5 queued 0 | \u26d4 blocked 1 | \ud83d\udfe2 held 1\n\n *PWT* 0.318034 | NOT_ELIGIBLE | 1H +4.30% \ud83d\udcc8 | RSI 44 | seen 101x\n\ud83e\udde0 medium: Not eligible; modest 1h rise, RSI 44, oversold recovery but no clear\nsetup.\n\u2705 *PEPE* 0.00000349 | BLOCKED | 1H +0.71% | RSI 47 | seen 101x\n\ud83e\udde0 high: Execution BLOCKED; low RSI near 46, minimal 1h gain, recent pullback\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795739209.9127088,
+    "out_time": 1795739233.91878,
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udc41 Watch (0)",
-                "callback_data": "m:at:W"
+                "text": "\u25c0",
+                "callback_data": "pg:p"
             },
             {
-                "text": "\u25b6 \ud83d\udfe1 Manual (0)",
-                "callback_data": "m:at:M"
+                "text": "1/4",
+                "callback_data": "pg:x"
             },
             {
-                "text": "\ud83e\udd16 Auto (0)",
-                "callback_data": "m:at:A"
-            }
-        ],
-        [
-            {
-                "text": "\ud83c\udfaf SETUPS",
-                "callback_data": "m:su"
+                "text": "\u25b6",
+                "callback_data": "pg:n"
             },
             {
-                "text": "\ud83d\uddc2 MORE",
-                "callback_data": "m:am"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udd04 Refresh",
-                "callback_data": "m:at:M"
+                "text": "\ud83c\udfe0",
+                "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83d\udc47 *Actions*",
-    "out_mid": 6873,
-    "panel_mid": 6874
+    "panel_text": "\ud83d\udcc4 *Page 1/4*",
+    "out_mid": 6877,
+    "pages": {
+        "p": [
+            "\ud83d\udcda *COIN LIST*\n\u2705 Ready 1 | \ud83c\udd95 New 0 | \ud83d\udcbc Held 1 | \u26d4 Rejected 447\nPipeline: \ud83d\udc41 Watch 0 \u2192 \ud83d\udfe1 Manual 0 \u2192 \ud83e\udd16 Auto 0 | \u2935 Dropped 450 | Archived 0\nExecution: \ud83d\udce5 queued 0 | \u26d4 blocked 1 | \ud83d\udfe2 held 1\n\n *PWT* 0.318034 | NOT_ELIGIBLE | 1H +4.30% \ud83d\udcc8 | RSI 44 | seen 101x\n\ud83e\udde0 medium: Not eligible; modest 1h rise, RSI 44, oversold recovery but no clear\nsetup.\n\u2705 *PEPE* 0.00000349 | BLOCKED | 1H +0.71% | RSI 47 | seen 101x\n\ud83e\udde0 high: Execution BLOCKED; low RSI near 46, minimal 1h gain, recent pullback\n\u2800\n\u2800",
+            "signal; advise caution.\n *BGSC* 0.00096520 | NOT_ELIGIBLE | 1H +0.66% | RSI 58 | seen 101x\n\ud83e\udde0 high: Not eligible; 24h surge ~30% with RSI 58, volatility high; risk\nelevated.\n *ENA* 0.100840 | NOT_ELIGIBLE | 1H +0.62% | RSI 47 | seen 101x\n\ud83e\udde0 medium: Not eligible; slight 1h gain, RSI 46.7, recent decline 24h, watch for\nfurther trend.\n *ARX* 0.154100 | NOT_ELIGIBLE | 1H +0.51% | RSI 46 | seen 101x\n   \ud83e\udde0 high: Not eligible; 24h down 5%, RSI 45, oversold recovery uncertain.\n *WLD* 0.242200 | NOT_ELIGIBLE | 1H +0.18% | RSI 49 | seen 101x\n\u2800\n\u2800",
+            "   \ud83e\udde0 low: Not eligible; small gains, RSI 49, no strong signal.\n *ADA* 0.148900 | NOT_ELIGIBLE | 1H +0.16% | RSI 52 | seen 101x\n   \ud83e\udde0 low: Not eligible; modest 1h rise, RSI 52, overall stable.\n *BNB* 554.87 | NOT_ELIGIBLE | 1H +0.15% | RSI 53 | seen 101x\n\ud83e\udde0 low: Not eligible; stable large cap, RSI 53, minor 1h change, no immediate\nrisk.\n *KII* 0.084844 | NOT_ELIGIBLE | 1H +0.06% \ud83d\udcc8 | RSI 43 | seen 101x\n\ud83e\udde0 medium: Not eligible; small 1h gain, RSI 43 near oversold, watch for\nreversal.\n *LTC* 43.9200 | NOT_ELIGIBLE | 1H -0.10% | RSI 60 | seen 101x\n\u2800\n\u2800",
+            "\ud83e\udde0 medium: Not eligible; 24h up >2%, RSI 60 indicating strength but recent 1h\ndip.\n *JCT* 0.001460 | NOT_ELIGIBLE | 1H -0.87% | RSI 47 | seen 101x\n   \ud83e\udde0 medium: Not eligible; slight 1h decline, RSI 46.9, modest 24h rise.\n *BTC* 60595.67 | NOT_ELIGIBLE | seen 101x\n   \ud83e\udde0 unknown: Not eligible; top\u201115 excluded, missing RSI and 1h data.\n\n\u2935 *DROPPED \u2014 retained for recovery:* PWT (6/10), PEPE (6/10), BGSC (6/10), ENA\n(6/10), ARX (6/10)\n\u2800\n\u2800\n\u2800"
+        ],
+        "i": 0,
+        "mode": "Markdown",
+        "x": [],
+        "cmd": "m:coins"
+    },
+    "panel_mid": 6878
 }
