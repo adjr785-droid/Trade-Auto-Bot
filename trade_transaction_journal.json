@@ -4983,5 +4983,23 @@
             "warning": "The market filter indicates BTC is below its 50\u2011hour average, which may suggest broader bearish pressure. RSI is below 50, indicating potential downside momentum. Existing position adds exposure. Proceed with caution and consider position sizing relative to overall portfolio risk.",
             "summary": "Manual buy of 4.55\u202fUSDT of PWT-USDT at 0.315047 is possible but carries moderate risk due to bearish BTC context and sub\u201150 RSI. Verify alignment with your risk limits before confirming."
         }
+    },
+    {
+        "time": 1795823669.524779,
+        "event": "trade_closed",
+        "symbol": "DOS-USDT",
+        "pnl_usdt": 0.12058632000000008,
+        "reason": "MANUAL SELL $10.00",
+        "strategy": "MANUAL"
+    },
+    {
+        "time": 1795823674.432876,
+        "event": "ai_manual_sell_review",
+        "symbol": "DOS-USDT",
+        "review": {
+            "review": "The position was manually closed at an average exit price of 0.0804 USDT, realizing a modest profit of 0.1206 USDT on the sold 124.06 units. The remaining base of 62.27 units was not liquidated, indicating a partial exit strategy. The profit margin is very small relative to the position size, suggesting limited upside capture or a conservative risk approach.",
+            "lesson": "When exiting manually, ensure that the exit price sufficiently exceeds the entry price to justify transaction costs and opportunity cost. Consider scaling out more aggressively if the market shows strong momentum, or setting clearer profit targets to avoid minimal gains. Retaining a large residual base may expose the portfolio to further market risk without a defined exit plan.",
+            "confidence": "medium"
+        }
     }
 ]
