@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935691300,
+    "last_update_id": 935691301,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -99,7 +99,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "3/3",
+                "text": "2/3",
                 "callback_data": "pg:x"
             },
             {
@@ -112,7 +112,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 3/3*",
+    "panel_text": "\ud83d\udcc4 *Page 2/3*",
     "out_time": 1795779436.2564168,
     "pages": {
         "p": [
@@ -120,7 +120,7 @@
             "Qty 21.98293 | Price 0.321105 | Stop 0.302099 (-6%)\nRSI 44 | Mixed | ATH -55%\n\n\ud83d\udfe2 *BTW* $5.25 (15%)\n+5.16% (+$0.26) | Entry 0.951821\nQty 5.24685 | Price 1.0009 | Stop 0.951821 (-5%)\nRSI 60 | Mixed | ATH -64%\n\n\ud83d\udfe2 *ENA* $5.06 (15%)\n+1.17% (+$0.06) | Entry 0.106550\n\u2800\n\u2800",
             "Qty 46.899518 | Price 0.107800 | Stop 0.101223 (-6%)\nRSI 76 | Bullish | ATH -93%\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 2,
+        "i": 1,
         "mode": "Markdown",
         "x": [],
         "cmd": null
