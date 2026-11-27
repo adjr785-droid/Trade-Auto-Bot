@@ -1,3 +1,46 @@
+# ============================== FILE: main.py ==============================
+"""Single-command launcher for the modular Bitget bot."""
+from bitget_bot.bootstrap import run
+
+if __name__ == "__main__":
+    run()
+
+# ============================== FILE: bitget_bot/bootstrap.py ==============================
+"""Load the legacy-compatible components in their original source order.
+
+The components intentionally share one execution namespace. This preserves the bot's
+existing global state, CCXT client, SQLite helpers, Telegram callback wrapper order,
+and late-bound function references during this staged modular migration.
+"""
+from pathlib import Path
+
+COMPONENTS = [
+    "01_bootstrap_config.py",
+    "02_alerts_and_indicators.py",
+    "03_execution_and_orders.py",
+    "04_portfolio_and_coin_analysis.py",
+    "05_ai_advisor.py",
+    "06_risk_management.py",
+    "07_scan_history_and_database.py",
+    "08_scanner.py",
+    "09_telegram_interface.py",
+    "10_process_runtime.py",
+]
+
+def run():
+    root = Path(__file__).resolve().parent / "components"
+    namespace = {"__name__": "__main__", "__file__": str(root / COMPONENTS[0])}
+    for filename in COMPONENTS:
+        path = root / filename
+        namespace["__file__"] = str(path)
+        source = path.read_text(encoding="utf-8")
+        exec(compile(source, str(path), "exec"), namespace, namespace)
+
+# ============================== FILE: bitget_bot/__init__.py ==============================
+"""Modular Bitget trading bot package."""
+
+# ============================== FILE: bitget_bot/components/01_bootstrap_config.py ==============================
+# Imports, exchange setup, configuration, Telegram presentation helpers
 import requests,json,os,time,ccxt,subprocess,traceback,re,datetime,sys
 try:import fcntl
 except ImportError:fcntl=None
@@ -199,10 +242,6 @@ def _make_out(m,mode):
  if mid:
   st=load(ST,{});st["out_mid"]=mid;st["out_text"]=(m or "")[:3800];st["out_mode"]=mode or "Markdown";save(ST,st)
  return mid
-def new_display():
- for k in ("out_mid","panel_mid"):
-  _del_msg(_mid(k));_set_mid(k,None)
- _UI["mid"]=None
 def _panel(text,rows,touch=True):
  text=_ub_inject(text)
  if touch:_UI["panel_used"]=True
@@ -492,6 +531,9 @@ def cfg():
  if not s.get('fixed5_v1'):s['atr_stop_enabled']=False;s['stop_loss_pct']=5.0;s['fixed5_v1']=True;save(CFG,s)   # fixed 5% stop
  if not s.get('auto_dyn_v1'):s['auto_buy_enabled']=True;s['auto_dyn_v1']=True;save(CFG,s)   # Auto-buy is dynamic: no Settings switch; it buys whenever the set rules are met
  return s
+
+# ============================== FILE: bitget_bot/components/02_alerts_and_indicators.py ==============================
+# Cooldowns, market filters, indicators, and signal measurements
 def in_cd(k,s=5):return time.time()-load(CD,{}).get(k,0)<s
 def mk_cd(k):d=load(CD,{});d[k]=time.time();save(CD,d)
 def cd(k,s=5):
@@ -740,6 +782,9 @@ def btc_market_safety_check(s):
      ok=bool(rsi>=float(s.get("btc_rsi_min",50.0)) and trend and no_shock)
  except Exception:ok=None
  _BTC_SCORE_CACHE.update(t=now,ok=ok);return ok
+
+# ============================== FILE: bitget_bot/components/03_execution_and_orders.py ==============================
+# Order execution, protective stops, buy/sell commands, dust cleanup
 def live(sym):
  try:return ex.fetch_ticker(S(sym))['last']
  except:return None
@@ -1111,6 +1156,9 @@ def panic_sell():
   else:failed.append(sym)
  save(DB,db);save(QF,{})
  tg(f"⚠️ *PANIC INCOMPLETE.* Still held: `{', '.join(failed)}`" if failed else "🛑 *PANIC COMPLETE.* All positions sold.")
+
+# ============================== FILE: bitget_bot/components/04_portfolio_and_coin_analysis.py ==============================
+# Portfolio, holdings, coin analysis, listings, and status
 def get_bitget_ath_atl(sym):
  cache=load(ATHATL_CACHE,{})
  now=time.time()
@@ -1216,11 +1264,6 @@ def get_holdings_text():
 def check_hourly_balance():
  st=load(SC);now=time.time()
  if now-st.get('last_bal_alert',0)>=3600:tg(f"💼 *HOURLY HOLDINGS*\n{get_holdings_text()}");st['last_bal_alert']=now;save(SC,st)
-def last_trade_line():
- H=load(HIST)
- if not H:return "\nNo closed trade recorded."
- t=H[-1];ago=(time.time()-float(t.get('time',0)))/3600
- return f"\nLast: {str(t.get('sym','?')).replace('-USDT','')} — {t.get('reason','?')} | PnL ${float(t.get('pnl',0)):+.2f} | {ago:.1f}h ago"
 def audit_system():
  issues=[];db=load(DB);q=load(QF)
  try:bal=ex.fetch_balance()['total']
@@ -1247,39 +1290,6 @@ def audit_system():
   if qc:save(QF,q)
   if issues:m="🛠️ *AUTO-AUDIT COMPLETE*\n"+"\n".join(issues);tg(m);return m
  return "✅ *AUDIT COMPLETE:* No issues found."
-def rank_setups(exclude=()):
- s=cfg()
- try:tk=ex.fetch_tickers();mk=ex.load_markets()
- except Exception as e:print(f"RANK ERR: {e}");return None
- v=[{'sym':k.replace("/","-"),'vol':t['quoteVolume'] or 0,'chg':t['percentage'] or 0} for k,t in tk.items() if k.endswith('/USDT') and not skip(k.split('/')[0]) and not (k in mk and not mk[k].get('spot',False))]
- v.sort(key=lambda x:x['vol'],reverse=True);cands=[]
- for rank,t in enumerate(v[:500],start=1):
-  if rank<=15 or t['sym'] in exclude:continue
-  i=rank-16;thr=(1000000 if i<=84 else 3000000 if i<=183 else 4000000 if i<=383 else 5000000)
-  if t['vol']<thr:continue
-  if s.get('scan_prefilter',True) and not pre_ok(float(t['chg'] or 0),s):continue
-  sym=t['sym'];chg=float(t['chg'] or 0);p,pr,r,ma5,ma10=data(sym)
-  if not p or r is None or ma5 is None or ma10 is None:continue
-  setup=None;bv=None
-  if trend_range(sym,chg,s) and s['rsi_min']<=r<=s['rsi_max'] and p>ma5>ma10:setup="TREND"
-  elif s.get("oversold_enabled",False) and setup_range(sym,chg,s,"BOUNCE") and r<30 and p>pr:setup="BOUNCE"
-  elif setup_range(sym,chg,s,"BREAKOUT") and 50.0<=r<=70.0 and p>ma5>ma10:
-   ok,bv,bl=breakout_confirmation(sym)
-   if ok:setup="BREAKOUT"
-  why=[];pts=0
-  if setup:
-   pts+={"BREAKOUT":30,"TREND":20,"BOUNCE":10}[setup]
-   why.append({"BREAKOUT":f"Confirmed breakout: price cleared the recent 20h high on {bv or 0:.2f}x average volume","TREND":f"Trend setup: price {fp(p)} is above MA5 {fp(ma5)} which is above MA10 {fp(ma10)}, with RSI {r:.1f} inside your {s['rsi_min']}-{s['rsi_max']} entry zone","BOUNCE":f"Oversold bounce: RSI {r:.1f} is below 30 and price is back above the previous close"}[setup])
-  elif p>ma5>ma10:why.append("Short-term trend is up (price > MA5 > MA10)")
-  else:why.append(f"Trend not confirmed yet (price {fp(p)}, MA5 {fp(ma5)}, MA10 {fp(ma10)})")
-  if p>ma5>ma10:pts+=5
-  if 45<=r<=65:pts+=3;why.append(f"RSI {r:.1f} is healthy (room to run before overbought)")
-  elif r>=75:pts-=5;why.append(f"RSI {r:.1f} is overbought (risk of pullback)")
-  if 1<chg<15:pts+=2;why.append(f"24h change {chg:+.2f}% shows steady, not extreme, momentum")
-  pts+=min(t['vol']/1e8,3);why.append(f"24h volume ${t['vol']/1e6:.1f}M (liquid enough: above the ${thr/1e6:.0f}M minimum)")
-  tier=setup or ("WATCHLIST (no full scanner setup)" if p>ma5>ma10 and r<75 else "WEAK (best available, not a full setup)")
-  cands.append({"sym":sym,"setup":tier,"full":bool(setup),"pts":pts+(0 if setup or p>ma5>ma10 else -10),"why":why,"p":p,"rsi":r,"chg":chg})
- cands.sort(key=lambda x:x["pts"],reverse=True);return cands
 def manual_candidate_detail(sym):
  """Show database-backed manual-candidate evidence; never submits an order."""
  sym=str(sym or "").upper().replace("/","-")
@@ -1501,41 +1511,6 @@ def analyse_new_listings():
  if not recent:lines.append("No newly detected listings in the last 24 hours. The first successful discovery scan establishes the baseline.")
  _send("\n".join(lines)[:3800],"Markdown",{"inline_keyboard":[[_B("⬅️ Back to Analyse","/analyse"),_B("🔄 Refresh","m:nl")]]})
 
-def hold_advice(sym,price,entry,rsi,ma5,ma10,s):
- pnl=(price-entry)/entry*100 if entry else None;sl=float(s.get('stop_loss_pct',5));rx=float(s.get('rsi_exit',75) or 0)
- down=rsi is not None and ma5 is not None and ma10 is not None and price<ma5<ma10 and rsi<50
- up=ma5 is not None and ma10 is not None and price>ma5>ma10
- if rsi is not None and rx and rsi>=rx:return ("💰 TAKE PROFIT" if pnl is None or pnl>0 else "🟠 OVERBOUGHT - consider selling"),"RSI "+f"{rsi:.0f}"+" is overbought; a pullback is likely"
- if pnl is not None and pnl<=-sl:return "🔴 SELL (cut loss)",f"Down {pnl:.1f}%, past your {sl}% stop-loss level"
- if down and pnl is not None and pnl<0:return "🔴 SELL (cut loss)",f"Losing {pnl:.1f}% and the trend is down (price < MA5 < MA10, RSI {rsi:.0f}); loss is likely to grow"
- if down:return "🟠 WEAK - consider selling","Trend is down (price < MA5 < MA10)"+(f", RSI {rsi:.0f}" if rsi is not None else "")
- if up:return "🟢 HOLD","Trend is up (price > MA5 > MA10)"+(f", RSI {rsi:.0f}" if rsi is not None else "")
- return "🟡 HOLD / WATCH","Trend is mixed; keep the stop-loss active"
-def long_term_view(sym):
- try:
-  c=ex.fetch_ohlcv(S(sym),'1d',limit=100);cl=[float(x[4]) for x in c]
-  if len(cl)<50:return "⚪ Long-term: not enough history (new coin, high risk)"
-  ma50=sum(cl[-50:])/50;ch=(cl[-1]/cl[0]-1)*100;vol=float(ex.fetch_ticker(S(sym)).get('quoteVolume') or 0)
-  if vol>=20e6 and cl[-1]>=ma50 and ch>-20:return f"✅ Long-term: reasonable to hold (above 50-day average, {len(cl)}-day change {ch:+.0f}%, liquid)"
-  if cl[-1]<ma50 and (ch<-30 or vol<2e6):return f"❌ Long-term: not suited (below 50-day average, {len(cl)}-day change {ch:+.0f}%"+(", thin volume)" if vol<2e6 else ")")
-  return f"⚠️ Long-term: speculative ({len(cl)}-day change {ch:+.0f}%, {'above' if cl[-1]>=ma50 else 'below'} 50-day average)"
- except Exception as e:
-  print(f"LONG TERM ERR {sym}: {e}");return "⚪ Long-term: unavailable"
-def since_last(total,db):
- try:
-  st=load(ST,{});prev=st.get("bot_seen");now=time.time()
-  pos=sorted(k.replace("-USDT","") for k in db);hn=len(load(HIST))
-  st["bot_seen"]={"t":now,"eq":total,"pos":pos,"hn":hn};save(ST,st)
-  if not prev:return ""
-  mins=(now-prev["t"])/60;ago=f"{mins:.0f} min" if mins<120 else f"{mins/60:.1f} h"
-  d=total-float(prev.get("eq",total));new=[x for x in pos if x not in prev.get("pos",[])];gone=[x for x in prev.get("pos",[]) if x not in pos]
-  parts=[f"{'🟢' if d>=0 else '🔴'} balance {d:+.2f} USDT"]
-  if new:parts.append("new: "+", ".join(new))
-  if gone:parts.append("closed: "+", ".join(gone))
-  n=hn-int(prev.get("hn",hn))
-  if n>0:parts.append(f"{n} trade(s) closed")
-  return f"🕘 Since last check ({ago} ago): "+" | ".join(parts)
- except Exception:return ""
 def system_layers(s,exchange_ok=True,held=(),db=None):
  # Cheap read-only layer checks: (name, ok, detail). The audit (every run) fixes what fails.
  db=db if isinstance(db,dict) else load(DB);L=[("Exchange",bool(exchange_ok),"")]
@@ -1628,6 +1603,9 @@ def analyse_coin(txt):
   except Exception:pass
   tg("\n".join(lines))
  except Exception as e:tg(f"❌ Could not analyse {sym}: {e}")
+
+# ============================== FILE: bitget_bot/components/05_ai_advisor.py ==============================
+# AI advisory, health checks, and recovery logic
 def _ai_reason(model):
  # gpt-oss models spend max_tokens on hidden reasoning; keep it low so the JSON answer is not cut off
  return {'reasoning_effort':'low'} if 'gpt-oss' in str(model) else {}
@@ -1934,6 +1912,9 @@ def manage():
      'trades':[{'pnl':x.get('pnl'),'reason':x.get('reason'),'symbol':x.get('sym')} for x in closed[-20:]]},ttl=1800,max_tokens=350)
     if ai:journal_event('ai_performance_review',review=str(ai)[:900])
   except Exception as e:print('AI performance review error:',e)
+
+# ============================== FILE: bitget_bot/components/06_risk_management.py ==============================
+# Circuit breakers, exposure controls, risk sizing, execution quality
 def btc_blocked(s):
  m=s.get('btc_rsi_min',0)
  if m<=0:return False
@@ -2315,6 +2296,9 @@ def exec_q():
    if not ok and s.get('sell_if_stop_fails',True):unprotected_exit(sym,db)
    q.pop(sym,None);save(QF,q);ub=B('free','USDT');time.sleep(2);break
  except Exception as e:tg(f"⚠️ *QUEUE FAILED:* `{e}`")
+
+# ============================== FILE: bitget_bot/components/07_scan_history_and_database.py ==============================
+# Scan history, coin database, candidate classification, audits
 def scan_history_state():
  h=load(SH,{})
  if not isinstance(h,dict):h={}
@@ -3010,6 +2994,9 @@ def send_new_alerts(s):
    rows.append([_B(f"🛒 Buy {coin}",f"m:b:{coin}"),_B(f"🔎 Analyse {coin}",f"m:a:{coin}")]);mk_cd("new_"+sym)
   _create("\n".join(lines)[:3900],"Markdown",{"inline_keyboard":rows},silent=False)
  finally:_NEWC.clear()
+
+# ============================== FILE: bitget_bot/components/08_scanner.py ==============================
+# Watchers, new listings, market scanning, settings commands
 def fast_watch():
  # Once a minute in live mode: re-check the radar (coins near the entry rules) so alerts fire without waiting for the next full scan.
  s=cfg()
@@ -3317,12 +3304,6 @@ def scan(force=False):
 def fp(p):
  if p is None:return "N/A"
  return f"{p:.2f}" if p>=100 else f"{p:.4f}" if p>=1 else f"{p:.6f}" if p>=0.001 else f"{p:.8f}"
-def get_market_row(sym,chg=None):
- if chg is None:
-  try:chg=ex.fetch_ticker(S(sym))['percentage'] or 0
-  except:chg=0
- r=data(sym)[2];rsi=f"{r:.1f}" if r is not None else "-"
- return {'coin':sym.split('-')[0],'price':fp(live(sym)),'chg':float(chg or 0),'rsi':rsi}
 def cmd_set(txt):
  p=txt.split()
  if len(p)!=3:tg("❌ Usage: `/set <key> <value>`");return
@@ -3342,6 +3323,9 @@ _B=lambda t,c:{"text":t,"callback_data":c}
 _MENU_BTN=[_B("⬅️ Menu","m:menu")]
 RUN={"scan":"/scan","sync":"/sync","holdings":"/holdings","analyse":"/analyse","alerts":"/alerts","cancelalerts":"/cancel_alerts","dust":"/dust","bot":"/bot","audit":"/audit","stats":"/stats","clear":"/clear","cancel":"/cancel","pricealert":"/alerts","airesume":"/ai_resume"}
 AI_Q={"1":"Give me a market overview.","2":"Review my current holdings and say which to hold or sell.","3":"Which single coin looks best to buy right now and why?","4":"What is the biggest risk in my portfolio right now?","5":"Which of my open positions is closest to its stop-loss, and is that a concern?","6":"Is the market safe for buying right now? Consider the BTC filter.","7":"Summarise my recent trading results and what to improve.","8":"What should I watch out for in the next 24 hours?"}
+
+# ============================== FILE: bitget_bot/components/09_telegram_interface.py ==============================
+# Telegram dashboard, callbacks, command routing, polling
 def ui_send(text,rows):_panel(text,rows)
 def _grid(btns,n=3):return [btns[i:i+n] for i in range(0,len(btns),n)]
 def ui_coins(kind):
@@ -3701,6 +3685,9 @@ def tg_check(poll=0):
      _hide_panel(m.get("message_id"))
     except Exception as e:print(f"PANEL ERR: {e}")
  except Exception as e:print(f"TG Err:{e}")
+
+# ============================== FILE: bitget_bot/components/10_process_runtime.py ==============================
+# Process lock, Git sync, scheduled loop, original startup sequence
 def acquire_lock():
  if fcntl is None:return True
  f=open(LOCK,"w")
