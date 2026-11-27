@@ -4380,5 +4380,15 @@
             "lesson": "When exiting a position, ensure the exit price aligns with the predefined risk\u2011reward targets. Partial exits should be documented with clear rationale, especially if a significant base remains. Consider using automated triggers to capture larger moves and avoid leaving sizable residual balances that may be exposed to market volatility.",
             "confidence": "medium"
         }
+    },
+    {
+        "time": 1795756435.2207158,
+        "event": "ai_manual_buy_review",
+        "symbol": "PWT-USDT",
+        "review": {
+            "risk_level": "moderate",
+            "warning": "The RSI is near neutral (46.75) and price volatility for PWT-USDT is not provided. Without market filter or existing position, the trade carries typical spot market risk. Ensure you have verified liquidity and price slippage before proceeding.",
+            "summary": "Considering a $24.95 USDT purchase at $0.317955 per token with no active filters or existing position, the trade appears acceptable but carries moderate risk due to limited market data and neutral RSI. Proceed only after confirming current order book depth and your risk tolerance."
+        }
     }
 ]

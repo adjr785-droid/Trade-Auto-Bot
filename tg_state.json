@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691222,
+    "last_update_id": 935691223,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT33.69/\u20a646,015",
+    "kb_ph": "USDT33.61/\u20a645,911",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -83,9 +83,9 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "out_text": "\ud83d\udd0d *SCAN COMPLETE*\nChecked 462 markets in 19s.\nMatched: 1 | Queued: 0.\n\ud83d\udea7 *GATES* (14 analysed, 1 passed)\nBlocked: RSI 11 | MA 5 | 1H 8 | 24H 4 | Score 1\nSetups: Trend 1 | Pullback 0 | Bounce 0 | Breakout 0\nRules: RSI \u2264 48, Price > MA5 > MA10, 1H +0.5 to +6%, 24H up, Core 5+ and Extra\n2+\n\ud83e\udde0 AI market view: BULLISH | low\n\n\u2800\n\u2800",
+    "out_text": "\ud83e\udde0 AI manual-buy advisory: Considering a $24.95 USDT purchase at $0.317955 per\ntoken with no active filters or existing position, the trade appears acceptable\nbut carries moderate risk due to limited market data and neutral RSI. Proceed\nonly after confirming current order book depth and your risk tolerance.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795756368.7380705,
+    "out_time": 1795756435.545039,
     "panel_rows": [
         [
             {
@@ -108,16 +108,6 @@
     ],
     "panel_text": "\ud83d\udcc4 *Page 1/2*",
     "out_mid": 6985,
-    "kb_mid": 6987,
-    "pages": {
-        "p": [
-            "\ud83d\udd0d *SCAN COMPLETE*\nChecked 462 markets in 19s.\nMatched: 1 | Queued: 0.\n\ud83d\udea7 *GATES* (14 analysed, 1 passed)\nBlocked: RSI 11 | MA 5 | 1H 8 | 24H 4 | Score 1\nSetups: Trend 1 | Pullback 0 | Bounce 0 | Breakout 0\nRules: RSI \u2264 48, Price > MA5 > MA10, 1H +0.5 to +6%, 24H up, Core 5+ and Extra\n2+\n\ud83e\udde0 AI market view: BULLISH | low\n\n\u2800\n\u2800",
-            "\u2705 *MATCHED COINS*\n1. *PWT-USDT* \u2014 TREND matched; stage DROPPED, must pass Watch > Manual > Auto\nfirst\n   Price 0.318017 | 24h +3.13% | RSI 46.8 | \u23f8 not queued\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
-        ],
-        "i": 0,
-        "mode": "Markdown",
-        "x": [],
-        "cmd": null
-    },
-    "panel_mid": 6989
+    "kb_mid": 6994,
+    "panel_hidden": true
 }
