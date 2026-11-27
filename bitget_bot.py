@@ -1752,7 +1752,7 @@ def ai_stage(stage, payload, ttl=90, max_tokens=500, soft=False):
     [_B("📊 Market Analysis", "m:tl:analysis"), _B("💸 Trading & Positions", "m:tl:trading")],
     [_B("🛠️ System & Wallet", "m:tl:system"), _B("⚙️ Settings & Alerts", "m:tl:settings")],
     [_B("⬅️ Main Menu", "m:menu")]
-   ])
+   
   elif a=="tl" and len(p)>2:
    _T=[_B("⬅️ Tools", "m:tools"), _B("🏠 Main Menu", "m:menu")]
    group=p[2]
@@ -1761,30 +1761,26 @@ def ai_stage(stage, payload, ttl=90, max_tokens=500, soft=False):
      [_B("🏆 Analyse", "/analyse"), _B("🎯 Setups", "m:su")],
      [_B("⭐ Favourites", "m:fv"), _B("🆕 New Listings", "m:nl")],
      [_B("🔎 Search Coin", "m:se"), _B("🗄 Archive", "m:ar:D")],
-     _T
-    ])
+     
    elif group=="trading":
     ui_send("💸 *TRADING & POSITION MANAGEMENT*\nManage orders, holdings, history, and emergency actions.", [
      [_B("💼 Holdings", "m:r:holdings"), _B("📜 Trade History", "m:r:history")],
      [_B("🔎 Scan History", "m:scan_hist"), _B("🛒 Buy / 💸 Sell", "m:buy")],
      [_B("❌ Cancel Orders", "m:r:cancel"), _B("🧹 Dust → BGB", "m:r:dust")],
      [_B("🚨 PANIC SELL", "/panic"), _B("📚 Coin List", "m:coins")],
-     _T
-    ])
+     
    elif group=="system":
     ui_send("🛠️ *SYSTEM & WALLET MANAGEMENT*\nMonitor health, run audits, view stats, and manage AI recovery.", [
      [_B("🖥 System Status", "/bot"), _B("📈 Stats", "/stats")],
      [_B("🛠️ Run Audit", "m:r:audit"), _B("🧹 Clear Chat", "/clear")],
      [_B("🧠 Resume AI", "m:r:airesume"), _B("📚 Coin List", "m:coins")],
-     _T
-    ])
+    
    elif group=="settings":
     ui_send("⚙️ *SETTINGS, ALERTS & CUSTOMIZATION*\nConfigure risk parameters, layout, and price alerts.", [
      [_B("⚙️ Settings", "m:set"), _B("🧩 Layout", "m:lay")],
      [_B("🔔 Price Alerts", "m:al"), _B("📋 View Alerts", "m:r:alerts")],
      [_B("🧠 Ask AI", "m:ai:1"), _B("🗑 Cancel Alerts", "m:r:cancelalerts")],
-     _T
-    ])
+   
   if not soft:activate_ai_emergency(f"AI stage {stage} failed: {str(e)[:180]}")
   return None
 
