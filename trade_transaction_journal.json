@@ -4679,5 +4679,15 @@
             "warning": "Position already exists; adding to it may increase exposure. RSI is near neutral and price is volatile. Ensure this aligns with your risk tolerance and portfolio limits.",
             "summary": "Considering the existing position and current RSI of 47.79, a small additional buy of $6.12 at $0.31502 carries moderate risk. Proceed only if it fits your overall strategy and you are comfortable with potential further exposure."
         }
+    },
+    {
+        "time": 1795789248.4288461,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'PWT-USDT', 'action': 'monitor', 'reason': 'Small negative PnL (-0.51%) and price approaching stop (0.315 vs stop 0.3008). Position is young (8 min); consider tightening stop or reducing size if volatility increases.'}, {'symbol': 'DOS-USDT', 'action': 'hold', 'reason': 'Positive PnL (1.1%) and price comfortably above stop (0.0803 vs 0.0756). Position age is moderate (159 min); no immediate action required.'}], 'summary': 'Overall portfolio risk remains acceptable (PASS). Monitor the PWT-USDT trade closely due to its proximity to the stop and slight loss; DOS-USDT appears stable with modest gains. No new orders are recommended at this time.'}"
+    },
+    {
+        "time": 1795789250.4517853,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 63.33, 'net_pnl_usdt': 1.4014, 'recurring_patterns': {'reasons': {'PANIC': 6, 'MANUAL SELL ALL': 3, 'MANUAL SELL $': 5, 'CRASH GUARD': 1}}, 'recommendations': 'Maintain current risk limits, reduce reliance on panic exits, and consider tighter stop\u2011loss thresholds. Focus on symbols with consistent positive pnl and avoid repeated manual sell triggers that indicate volatility.'}"
     }
 ]
