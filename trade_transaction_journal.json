@@ -4841,5 +4841,15 @@
         "time": 1795804446.2786558,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 63.33, 'net_pnl_usdt': 0.372, 'recurring_patterns': {'high_frequency_symbols': ['BLESS-USDT', 'MOVE-USDT', 'DOS-USDT'], 'common_reasons': {'PANIC': 6, 'MANUAL SELL': 13, 'CRASH GUARD': 1}, 'loss_concentration': {'MOVE-USDT': 2, 'PROS-USDT': 1, 'PUMP-USDT': 1, 'TRX-USDT': 1}}, 'recommendations': ['Limit panic\u2011driven exits; implement stricter stop\u2011loss thresholds.', 'Diversify across symbols rather than concentrating on a few high\u2011turnover assets.', 'Review manual sell triggers to ensure they align with predefined profit targets.', 'Maintain current win\u2011rate but aim to improve average win size while reducing large losses (e.g., -0.569 on MOVE).', 'Consider adding automated risk controls to replace ad\u2011hoc manual decisions.']}"
+    },
+    {
+        "time": 1795806385.5568767,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [], 'summary': 'Both positions are in profit and within their stop limits. No immediate action is required. Continue monitoring price movements relative to stops and maintain current risk parameters.'}"
+    },
+    {
+        "time": 1795806386.4029694,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 63.33, 'net_pnl_usdt': 0.372, 'recurring_patterns': 'Frequent PANIC exits and manual sell actions; repeated symbols BLESS-USDT, MOVE-USDT, DOS-USDT show mixed outcomes; occasional large negative PNL from CRASH GUARD and PANIC; wins are modestly higher than losses but overall PNL is low.', 'recommendations': '1. Limit PANIC-triggered sells; implement stricter stop\u2011loss thresholds. 2. Review manual sell decisions for consistency; avoid ad\u2011hoc size changes. 3. Diversify away from repeatedly underperforming symbols (e.g., MOVE-USDT). 4. Increase position sizing discipline to protect against large negative events. 5. Monitor win\u2011rate volatility; current 63% may not sustain profitability without higher average win size.'}"
     }
 ]

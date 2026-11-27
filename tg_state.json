@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691415,
+    "last_update_id": 935691417,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT35.50/\u20a648,487",
+    "kb_ph": "USDT35.84/\u20a648,950",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -85,56 +85,5 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 7402,
-    "out_text": "```\nARIA     49     - Vol low\nINJ      54     - Vol low\nBLESS    26     - Vol low\nPAXG     58     - Vol low\nSKY      51     - Vol low\nFET      60     - Vol low\nPROS     51     - Vol low\nACN      34     - Vol low\nOPEN     49     - Vol low\nASTER    47     - Vol low\n```",
-    "out_mode": "Markdown",
-    "out_time": 1795804148.8799336,
-    "panel_rows": [
-        [
-            {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
-            },
-            {
-                "text": "10/17",
-                "callback_data": "pg:x"
-            },
-            {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
-            },
-            {
-                "text": "\ud83c\udfe0",
-                "callback_data": "m:menu"
-            }
-        ]
-    ],
-    "panel_text": "\ud83d\udcc4 *Page 10/17*",
-    "pages": {
-        "p": [
-            "USDT0.03\n\ud83d\udd0e *SCAN HISTORY* \u00b7 464/464 coins (first 150)\n27 scans \u00b7 0.1h\n```\nCOIN    RSI    1H WHY\n------------------------------\nPWT      47  +0.9 Blocked\nPEPE     47  +0.7 Blocked\nBTC      38     - Top 15\nETH      37     - Top 15\n```\n\u2800",
-            "```\nSOL      50     - Top 15\nUSDGO    38     - Top 15\nZEC      53     - Top 15\nMTX      28     - Top 15\nHYPE     49     - Top 15\nBGB      47     - Top 15\nDGAI     49     - Top 15\nDOGE     53     - Top 15\nNEAR     47     - Top 15\nEVAA     27     - Top 15\n```",
-            "```\nBTW      69     - Top 15\nCOLLECT  45     - Top 15\nSUI      49     - Top 15\nTRX      52  +0.3 RSI high\nENA      56  -0.1 RSI high\nJCT      52  -0.8 RSI high\nWLD      59  +0.1 RSI high\nPUMP     52  +0.5 RSI high\nBNB      58  +0.2 RSI high\nKII      48  -0.1 1H low\n```",
-            "```\nADA      68  +0.0 RSI high\nPWT      46  +0.2 1H low\nPEPE     52  -0.2 RSI high\nBGSC     58  -0.1 RSI high\nUNI      54  +0.3 RSI high\nSKYAI    46  -0.1 1H low\nLTC      66  +0.5 RSI high\nARX      51     - Vol low\nMMT      32     - Vol low\nUMXM     39     - Vol low\n```",
-            "```\nGRAM     59     - Vol low\nSSV      53     - Vol low\nONDO     48     - Vol low\nNES      49     - Vol low\nIDOL     51     - Vol low\nEGL1     28     - Vol low\nLINK     50     - Vol low\nSEI      56     - Vol low\nDOS      61     - Vol low\nTAO      50     - Vol low\n```",
-            "```\nARIA     49     - Vol low\nINJ      54     - Vol low\nBLESS    26     - Vol low\nPAXG     58     - Vol low\nSKY      51     - Vol low\nFET      60     - Vol low\nPROS     51     - Vol low\nACN      34     - Vol low\nOPEN     49     - Vol low\nASTER    47     - Vol low\n```",
-            "```\nQNT      45     - Vol low\nVTHO     40     - Vol low\nB2       53     - Vol low\nME       38     - Vol low\nBCH      39     - Vol low\nHUMA     43     - Vol low\nTRUMP    47     - Vol low\nMON      38     - Vol low\nLAB      49     - Vol low\nILY      57     - Vol low\n```",
-            "```\nJUP      57     - Vol low\nETHFI    34     - Vol low\nCC       39     - Vol low\nVELO     48     - Vol low\nBGBTC    37     - Vol low\nARB      48     - Vol low\nGWEI     30     - Vol low\nVET      54     - Vol low\nDATA     47     - Vol low\nPORTAL   95     - Vol low\n```",
-            "```\nCYS      42     - Vol low\nBIRB     46     - Vol low\nZBCN     37     - Vol low\nMAGMA    49     - Vol low\nAAVE     45     - Vol low\nMOVE     48     - Vol low\nICP      42     - Vol low\nSOON     56     - Vol low\nBGSOL    50     - Vol low\nUNITAS   51     - Vol low\n```",
-            "```\nLAT      43     - Vol low\nINIT     32     - Vol low\nEDGE     32     - Vol low\nDNA      64     - Vol low\nQ        48     - Vol low\nICNT     73     - Vol low\nARTX     40     - Vol low\nAB       53     - Vol low\nAVAX     46     - Vol low\nZRO      32     - Vol low\n```",
-            "```\nGRVT     58     - Vol low\nTIA      48     - Vol low\nPONS     57     - Vol low\nNIGHT    55     - Vol low\nLUNC     48     - Vol low\nSHIB     49     - Vol low\nPOL      46     - Vol low\nLAYER    56     - Vol low\nLIT      53     - Vol low\nKAS      53     - Vol low\n```",
-            "```\nPI       24     - Vol low\n2Z       48     - Vol low\nFARTCOI  43     - Vol low\nUPC      48     - Vol low\nS        40     - Vol low\nBABY     59     - Vol low\nPRL      56     - Vol low\nVELVET   82     - Vol low\nCP       44     - Vol low\nFIL      42     - Vol low\n```",
-            "```\nDEBIT    32     - Vol low\nKOR      41     - Vol low\nWLFI     10     - Vol low\nAERO     37     - Vol low\nAPT      51     - Vol low\nDOT      45     - Vol low\nSYRUP    42     - Vol low\nPREOPAI  70     - Vol low\nTRUST    42     - Vol low\nO        56     - Vol low\n```",
-            "```\nJTO      52     - Vol low\nMOCA     49     - Vol low\nSOPH     46     - Vol low\nKAIO     49     - Vol low\nBR       49     - Vol low\nMHA      51     - Vol low\nSLX      58     - Vol low\nMYX      43     - Vol low\nSOMI     39     - Vol low\nUP       48     - Vol low\n```",
-            "```\nWIF      59     - Vol low\nSENT     64     - Vol low\nNPC      46     - Vol low\nTCOM     53     - Vol low\nIN       33     - Vol low\nMOEW     28     - Vol low\nIRYS     44     - Vol low\nLISTA    47     - Vol low\nBSB      55     - Vol low\nAEON     62     - Vol low\n```",
-            "```\nHNT      46     - Vol low\nPOWER    37     - Vol low\nUAI      34     - Vol low\nPENDLE   42     - Vol low\nBSV      50     - Vol low\nDTEC     45     - Vol low\n```\n\n\ud83e\udde0 *AI:* BTC shows a relatively low RSI (38) yet remains in the top\u201115 list,\nwhile many other coins exhibit high RSI or low volume flags, indicating BTC may\n\u2800",
-            "be the only stable candidate in this scan.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
-        ],
-        "i": 9,
-        "mode": "Markdown",
-        "x": [],
-        "cmd": "/scan_history"
-    },
-    "out_mid": 7397,
-    "panel_mid": 7398
+    "kb_mid": 7403
 }
