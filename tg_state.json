@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691421,
+    "last_update_id": 935691422,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT35.21/\u20a648,095",
+    "kb_ph": "USDT35.20/\u20a648,076",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -17,7 +17,7 @@
         "pos": [],
         "hn": 31
     },
-    "last_cmd": "/stats",
+    "last_cmd": "m:r:holdings",
     "page_mem": {
         "/bot": [
             1,
@@ -77,16 +77,62 @@
         ]
     },
     "radar": [
-        "PWT-USDT",
         "IDOL-USDT"
     ],
     "audit_down": {},
-    "audit_last": 1795806420.2756279,
+    "audit_last": 1795808261.2871418,
     "audit_ai_cls": "",
     "perf_breaker": {
         "until": 1795742224.733271,
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 7419
+    "kb_mid": 7425,
+    "out_text": "\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *DOS* $19.96 (57%)\n+3.49% (+$0.67) | Entry 0.079428\nQty 242.84809 | Price 0.082200 | Stop 0.079428 (-3%)\nRSI 64 | Bullish | ATH -91%\n\n\ud83d\udd34 *PWT* $15.16 (43%)\n-1.07% (-$0.16) | Entry 0.316429\nQty 48.41706 | Price 0.313058 | Stop 0.300608 (-4%)\n\u2800\n\u2800",
+    "out_mode": "Markdown",
+    "out_time": 1795808273.5781739,
+    "panel_rows": [
+        [
+            {
+                "text": "\u25c0",
+                "callback_data": "pg:p"
+            },
+            {
+                "text": "1/2",
+                "callback_data": "pg:x"
+            },
+            {
+                "text": "\u25b6",
+                "callback_data": "pg:n"
+            },
+            {
+                "text": "\ud83c\udfe0",
+                "callback_data": "m:menu"
+            },
+            {
+                "text": "\ud83d\udd04",
+                "callback_data": "rf:go"
+            }
+        ]
+    ],
+    "panel_text": "\ud83d\udcc4 *Page 1/2*",
+    "out_mid": 7423,
+    "pages": {
+        "p": [
+            "\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *DOS* $19.96 (57%)\n+3.49% (+$0.67) | Entry 0.079428\nQty 242.84809 | Price 0.082200 | Stop 0.079428 (-3%)\nRSI 64 | Bullish | ATH -91%\n\n\ud83d\udd34 *PWT* $15.16 (43%)\n-1.07% (-$0.16) | Entry 0.316429\nQty 48.41706 | Price 0.313058 | Stop 0.300608 (-4%)\n\u2800\n\u2800",
+            "RSI 52 | Mixed | ATH -56%\n\n\ud83e\udde0 *AI:* DOS position shows modest gain (+3.49%) but remains 91% below its ATH;\nPWT is down 1.07% and 56% below ATH\u2014monitor both stops as they approach risk\nthresholds.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+        ],
+        "i": 0,
+        "mode": "Markdown",
+        "x": [
+            [
+                {
+                    "text": "\ud83d\udd04",
+                    "callback_data": "rf:go"
+                }
+            ]
+        ],
+        "cmd": "m:r:holdings"
+    },
+    "panel_mid": 7424
 }
