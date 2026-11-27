@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935691204,
+    "last_update_id": 935691205,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -25,7 +25,7 @@
         ],
         "m:r:holdings": [
             1,
-            1795702975.4139116
+            1795745093.656259
         ],
         "/analyse": [
             6,
@@ -90,7 +90,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "1/2",
+                "text": "2/2",
                 "callback_data": "pg:x"
             },
             {
@@ -107,7 +107,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/2*",
+    "panel_text": "\ud83d\udcc4 *Page 2/2*",
     "out_time": 1795745046.6188416,
     "kb_mid": 6934,
     "out_mid": 6937,
@@ -116,7 +116,7 @@
             "\ud83d\udcbc *PORTFOLIO* $33.73 | \u20a646,073\n\ud83d\udcb5 Cash free $0.02 | In coins $33.65 (100%)\n\ud83d\udfe1 BGB 0.00020311253 ($0.00) - not auto-converted\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *DOS* $33.65 (100%)\n+2.39% (+$0.78) | Entry 0.077256\nQty 425.45457 | Price 0.079100 | Stop 0.073517 (-7%)\nRSI 49 | Mixed | ATH -91%\n\n\u26a0\ufe0f Held but with no USDT price: AIDOGE: 0.602, COQ: 0.00711, DGRAM: 0.00447\n\u2800\n\u2800",
             "and 8 more...\n\n\ud83d\udcca *LIVE SPOT WALLET BALANCE:* USDT33.73/\u20a646,073\n\n\ud83e\udde0 *AI:* Portfolio is $33.73 total, fully in DOS (100%) with a modest 2.39%\ngain, but several tokens lack USDT pricing, indicating valuation uncertainty and\na need to monitor those assets.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 0,
+        "i": 1,
         "mode": "Markdown",
         "x": [
             [
