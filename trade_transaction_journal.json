@@ -4811,5 +4811,15 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795803672.0389068,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'DOS-USDT', 'action': 'hold', 'reason': 'Position is up 3.11% with price above entry; consider tightening stop to protect gains, but no immediate risk.'}, {'symbol': 'PWT-USDT', 'action': 'monitor', 'reason': 'Position is down 0.47% and close to stop level; watch price action before deciding to exit or adjust stop.'}], 'summary': 'Overall portfolio risk remains acceptable. DOS-USDT shows modest profit; maintain with a tighter stop. PWT-USDT is marginally negative; continue monitoring for further movement before taking action.'}"
+    },
+    {
+        "time": 1795803672.9836366,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 63.33, 'net_pnl_usdt': 0.372, 'recurring_patterns': {'high_frequency_symbols': ['BLESS-USDT', 'MOVE-USDT', 'DOS-USDT'], 'common_reasons': {'PANIC': 6, 'MANUAL SELL': 13, 'CRASH GUARD': 1}, 'loss_concentration': {'MOVE-USDT': 2, 'PROS-USDT': 1, 'PUMP-USDT': 1, 'TRX-USDT': 1}}, 'recommendations': ['Limit panic\u2011driven exits; implement stricter stop\u2011loss thresholds.', 'Diversify across symbols rather than concentrating on a few high\u2011turnover assets.', 'Review manual sell triggers to ensure they align with predefined profit targets.', 'Maintain current win\u2011rate focus but aim to improve average win size versus loss size.', 'Monitor crash\u2011guard activation frequency and adjust risk parameters to reduce large negative hits.']}"
     }
 ]
