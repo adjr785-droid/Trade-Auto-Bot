@@ -1,16 +1,16 @@
 {
-    "last_update_id": 935691465,
+    "last_update_id": 935691483,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT34.97/\u20a647,767",
+    "kb_ph": "USDT35.06/\u20a647,893",
     "layout_bottom": [
         "tools",
         "analyse"
     ],
-    "kb_keys": "[['\ud83d\udccb Menu']]",
+    "kb_keys": "[['\ud83d\udccb Menu', '\ud83e\uddf0 Tools', '\ud83c\udfc6 Markets']]",
     "bot_seen": {
         "t": 1795429354.8422616,
         "eq": 24.669762035972877,
@@ -89,5 +89,60 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 7508
+    "kb_mid": 7534,
+    "out_mid": 7535,
+    "out_text": "\ud83d\udcdf *OUTPUT*\nResults appear here.",
+    "out_mode": "Markdown",
+    "panel_mid": 7536,
+    "panel_rows": [
+        [
+            {
+                "text": "\ud83d\udda5 Bot Status",
+                "callback_data": "m:r:bot"
+            }
+        ],
+        [
+            {
+                "text": "\u2699\ufe0f Settings",
+                "callback_data": "m:set"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\udde0 Ask AI",
+                "callback_data": "m:ai:1"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udee0\ufe0f Audit",
+                "callback_data": "m:r:audit"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\udde0 Resume AI Mode",
+                "callback_data": "m:r:airesume"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\udde9 Shortcuts",
+                "callback_data": "m:lay"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\uddf9 Clear Chat",
+                "callback_data": "m:r:clear"
+            }
+        ],
+        [
+            {
+                "text": "\ud83c\udfe0 Main Menu",
+                "callback_data": "m:menu"
+            }
+        ]
+    ],
+    "panel_text": "\ud83d\udda5 *SYSTEM*"
 }
