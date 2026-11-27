@@ -62,22 +62,27 @@ def ai_emergency_resume(auto=False):
  save(AI_HEALTH,hs)
  tg("✅ *AUDIT — AI RECOVERY VERIFIED*\n3 checks passed. AI is back to normal"+("." if auto else " (you confirmed)."))
 _C={};_BAL={"t":0,"m":""};LAYOUT_ITEMS=[("tools","🧰 Tools","m:tools"),("analyse","🏆 Markets","/analyse"),("bot","🖥 System","/bot"),("stats","📈 Stats","/stats"),("an","🔎 Analyse Coin","m:an"),("set","⚙️ Settings","m:set"),("hold","💼 Holdings","m:r:holdings"),("hist","📜 Trade History","m:r:history"),("ai","🧠 Ask AI","m:ai:1"),("clear","🧹 Clear Chat","/clear"),("panic","🚨 PANIC SELL","/panic")]
-LAYOUT_DEFAULT=[];LAYOUT_MAX=5
+LAYOUT_DEFAULT=[];LAYOUT_MAX=2
 def layout_bottom():
- return []  # the bottom bar is fixed: only Menu; Portfolio, Markets, Tools and System live inside it
+ try:b=load(ST,{}).get("layout_bottom")
+ except Exception:b=None
+ if not isinstance(b,list):b=list(LAYOUT_DEFAULT)
+ ok={i[0] for i in LAYOUT_ITEMS}
+ return [k for k in dict.fromkeys(b) if k in ok][:LAYOUT_MAX]
 def lbl(k):
  try:n=(load(ST,{}).get("layout_names") or {}).get(k)
  except Exception:n=None
  return n or ({"menu":"📋 Menu"}.get(k) or next((l for i,l,_ in LAYOUT_ITEMS if i==k),k))
 def kb_markup():
  keys=[lbl("menu")]+[lbl(k) for k in layout_bottom()]
+ keys=keys+["\u2800"]*(3-len(keys))  # Menu stays bottom-left; empty shortcut slots are blank keys
  return {"keyboard":[keys[i:i+3] for i in range(0,len(keys),3)],"resize_keyboard":True,"is_persistent":True}
 def bottom_map():
  m={"📋 menu":"m:menu","📊 menu":"m:menu","🏆 analyse (top 3)":"/analyse","🏆 analyse":"/analyse"}
  for k,l,d in LAYOUT_ITEMS:m[l.lower()]=d
  m["📋 menu"]="m:menu"
  for k,l,d in LAYOUT_ITEMS:m[lbl(k).lower()]=d
- m[lbl("menu").lower()]="m:menu"
+ m[lbl("menu").lower()]="m:menu";m["\u2800"]="m:menu"
  return m
 def rename_apply(t):
  st=load(ST,{});pd=st.get("rename_pending") or {};k=pd.get("key")
@@ -2901,13 +2906,14 @@ def cmd_coins():
  lines=["📚 *COIN LIST*",f"✅ Ready {cnt.get('READY',0)} | 🆕 New {cnt.get('NEW',0)} | 💼 Held {cnt.get('BOUGHT',0)} | ⛔ Rejected {cnt.get('REJECTED',0)}",
   f"Pipeline: 👁 Watch {cnt.get('WATCH',0)} → 🟡 Manual {cnt.get('MANUAL',0)} → 🤖 Auto {cnt.get('AUTO',0)} | ⤵ Dropped {cnt.get('DROPPED',0)} | Archived {cnt.get('ARCHIVED',0)}",
   f"Execution: 📥 queued {ec.get('QUEUED',0)} | ⛔ blocked {ec.get('BLOCKED',0)} | 🟢 held {ec.get('HELD',0)}",""]
- tb=[f"{'COIN':<6}{'PRICE':>8}{'RSI':>4}{'1H':>6} {'ST':<2}{'SC':>4}","-"*31];notes=[]
+ tb=[f"{'COIN':<6}{'PRICE':>8}{'RSI':>4}{'1H':>6} S{'SC':>3}{'RK':>3}","-"*32]
  stl={"WATCH":"W","MANUAL":"M","AUTO":"A"};stn={"BOUGHT":"H","NEW":"N","READY":"R","REJECTED":"X"}
  for sym,st,exst,p,h,r,n,why,mc,mscore,adv,cj,stg in rows:
   c=sym.split("-")[0];tag=stn.get(st) if st in ("BOUGHT","NEW") else (stl.get(stg) or stn.get(st,"-"))
-  tb.append(f"{c[:6]:<6}{(format(float(p),'.6g')[:8] if p else '-'):>8}{(format(r,'.0f') if r is not None else '-'):>4}{(format(h,'+.1f') if h is not None else '-'):>6} {tag:<2}{(str(int(float(mscore or 0)))+'/10') if mc else '-':>4}")
-  if adv:notes.append(f"🧠 {c}: "+str(adv)[:110])
- lines+=["```"]+tb+["```","_ST: W Watch, M Manual, A Auto, R Ready, N New, H Held, X Rejected. SC: manual score._"]+notes
+  rk={"high":"H","medium":"M","low":"L"}.get(str(adv or "").split(":")[0].strip().lower(),"-")
+  tb.append(f"{c[:6]:<6}{(format(float(p),'.6g')[:8] if p else '-'):>8}{(format(r,'.0f') if r is not None else '-'):>4}{(format(h,'+.1f') if h is not None else '-'):>6} {tag}{(str(int(float(mscore or 0))) if mc else '-'):>3}{rk:>3}")
+ tb+=["-"*32,"S: W Watch M Manual A Auto","   R Ready N New H Held X Rej","SC: manual score out of 10","RK: AI risk H high M mid L low"]
+ lines+=["```"]+tb+["```"]
  if dropped:
   lines += ["", "⤵ *DROPPED — retained for recovery:* "+", ".join(f"{x['sym'].split('-')[0]} ({int(float(x.get('score') or 0))}/10)" for x in dropped)]
  _send("\n".join(lines),"Markdown",{"inline_keyboard":[_MENU_BTN]})
@@ -3528,7 +3534,7 @@ def ui_cb(t):
    elif len(p)>3 and p[2]=="t":
     k=p[3]
     if k in b:b.remove(k)
-    elif len(b)>=LAYOUT_MAX:note=f"\n⚠️ Bottom is full ({LAYOUT_MAX+1} keys with Menu). Move one back to the list first."
+    elif len(b)>=LAYOUT_MAX:note=f"\n⚠️ Both shortcut slots are used. Remove one first."
     else:b.append(k)
    try:
     st=load(ST,{});st["layout_bottom"]=b;save(ST,st)
@@ -3538,7 +3544,7 @@ def ui_cb(t):
     c=cfg();c["page_lines"]=max(6,min(24,int(c.get("page_lines",12) or 12)+(1 if p[3]=="+" else -1)));save(CFG,c);note="\n✅ Page size: %d lines."%c["page_lines"]
    note+=_UI.pop("lay_note","")
    rows=[[_B(("⌨️ " if k in b else "📋 ")+lbl(k),f"m:lay:t:{k}") for k,l,_ in LAYOUT_ITEMS[i:i+2]] for i in range(0,len(LAYOUT_ITEMS),2)]
-   ui_send(f"🧩 *LAYOUT*\nTap a button to move it.\n⌨️ = bottom key (below the text box)\n📋 = Menu list\nBottom keys: {len(b)+1}/{LAYOUT_MAX+1} (Menu always stays){note}",rows+[[_B("➖","m:lay:pl:-"),_B("📏 Page: %d lines"%int(cfg().get("page_lines",12) or 12),"m:lay"),_B("➕","m:lay:pl:+")],[_B("✏️ Rename buttons","m:lay:rn"),_B("↩️ Reset layout","m:lay:reset")],[_B("⬅️ Tools","m:tools")]])
+   ui_send(f"🧩 *SHORTCUTS*\nTap a button to add it next to Menu or remove it.\n⌨️ = shortcut (below the text box)\nShortcuts: {len(b)}/{LAYOUT_MAX}{note}",rows+[[_B("➖","m:lay:pl:-"),_B("📏 Page: %d lines"%int(cfg().get("page_lines",12) or 12),"m:lay"),_B("➕","m:lay:pl:+")],[_B("✏️ Rename buttons","m:lay:rn"),_B("↩️ Reset layout","m:lay:reset")],[_B("⬅️ Tools","m:tools")]])
   elif a=="tools":
    ui_send("🧰 *TOOLS*\nChoose a group.",[[_B("🧹 Orders & Dust","m:tl:trade"),_B("🔔 Alerts","m:tl:alerts")],[_B("📚 Coin List","m:coins"),_B("🛠️ System","m:tl:sys")],[_B("⬅️ Main Menu","m:menu")]])
   elif a=="tl" and len(p)>2:
@@ -3547,7 +3553,7 @@ def ui_cb(t):
    elif p[2]=="alerts":ui_send("🔔 *ALERTS*",[[_B("🔔 Set alert","m:al"),_B("📋 My alerts","m:r:alerts")],[_B("🗑 Cancel all alerts","m:r:cancelalerts")],_T])
    elif p[2]=="sys":ui_send("🛠️ *SYSTEM*",[[_B("🛠️ Audit","m:r:audit")],[_B("🧠 Resume AI Mode","m:r:airesume")],_T])
   elif a=="pf":ui_send("💼 *PORTFOLIO*",[[_B("💼 Holdings","m:r:holdings")],[_B("📈 Stats","m:r:stats")],[_B("🧾 Trade History","m:r:history")],[_B("🚨 PANIC SELL","/panic")],[_B("🏠 Main Menu","m:menu")]])
-  elif a=="sy":ui_send("🖥 *SYSTEM*",[[_B("🖥 Bot Status","m:r:bot")],[_B("⚙️ Settings","m:set")],[_B("🧠 Ask AI","m:ai:1")],[_B("🛠️ Audit","m:r:audit")],[_B("🧠 Resume AI Mode","m:r:airesume")],[_B("🧹 Clear Chat","m:r:clear")],[_B("🏠 Main Menu","m:menu")]])
+  elif a=="sy":ui_send("🖥 *SYSTEM*",[[_B("🖥 Bot Status","m:r:bot")],[_B("⚙️ Settings","m:set")],[_B("🧠 Ask AI","m:ai:1")],[_B("🛠️ Audit","m:r:audit")],[_B("🧠 Resume AI Mode","m:r:airesume")],[_B("🧩 Shortcuts","m:lay")],[_B("🧹 Clear Chat","m:r:clear")],[_B("🏠 Main Menu","m:menu")]])
   elif a=="more" and len(p)>3:ui_more(p[2],int(p[3]))
   elif a=="dash":
    ui_send("📊 *DASHBOARD*\nChoose a dashboard screen.",[
