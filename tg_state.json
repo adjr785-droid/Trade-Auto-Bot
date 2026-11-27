@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935691330,
+    "last_update_id": 935691332,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -64,8 +64,8 @@
             1795558649.4358172
         ],
         "m:coins": [
-            3,
-            1795739339.4125237
+            2,
+            1795788896.70724
         ],
         "m:su": [
             0,
@@ -95,7 +95,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "1/4",
+                "text": "3/4",
                 "callback_data": "pg:x"
             },
             {
@@ -108,7 +108,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/4*",
+    "panel_text": "\ud83d\udcc4 *Page 3/4*",
     "out_time": 1795788855.539722,
     "pages": {
         "p": [
@@ -117,7 +117,7 @@
             "   \ud83e\udde0 low: RSI 64, stable price; not eligible.\n *WLD* 0.251200 | NOT_ELIGIBLE | 1H -0.09% \ud83d\udcc8 | RSI 64 | seen 116x\n   \ud83e\udde0 low: RSI 63.9, slight gains; low risk.\n *KII* 0.084723 | NOT_ELIGIBLE | 1H -0.20% | RSI 50 | seen 116x\n   \ud83e\udde0 low: RSI 49.96, near neutral; low risk.\n *LTC* 44.5200 | NOT_ELIGIBLE | 1H -0.30% | RSI 64 | seen 116x\n   \ud83e\udde0 low: RSI 63.8, modest rise; low risk.\n *ARX* 0.166200 | NOT_ELIGIBLE | 1H -0.30% | RSI 76 | seen 116x\n   \ud83e\udde0 moderate: RSI 75.6 (overbought), 24h up 9.5%; monitor for reversal.\n\n\u2800\n\u2800",
             "\u2935 *DROPPED \u2014 retained for recovery:* IDOL (3/10), PORTAL (6/10), UNI (6/10),\nADA (6/10), SUI (6/10)\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 0,
+        "i": 2,
         "mode": "Markdown",
         "x": [],
         "cmd": "m:coins"
