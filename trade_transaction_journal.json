@@ -4757,5 +4757,15 @@
         "time": 1795801735.6267164,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 63.33, 'net_pnl_usdt': 1.4014, 'recurring_patterns': {'reasons': {'PANIC': 7, 'MANUAL SELL': 11, 'CRASH GUARD': 1}, 'symbols': {'BLESS-USDT': 4, 'MOVE-USDT': 4, 'PUMP-USDT': 2, 'BTW-USDT': 2}}, 'recommendations': ['Limit panic-driven exits; implement stricter stop\u2011loss thresholds', 'Review manual sell triggers to ensure they align with profit targets', 'Monitor symbols with repeated losses (e.g., MOVE-USDT, PUMP-USDT) and consider reducing exposure', 'Enhance crash\u2011guard parameters to activate earlier before large drawdowns']}"
+    },
+    {
+        "time": 1795802484.9740248,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'DOS-USDT', 'action': 'monitor', 'reason': 'Position is small, modest profit (+3.62%). Current price 0.0823 is above stop 0.075584, but market volatility could erode gains; keep stop\u2011loss at 0.0756 and watch for reversal.'}, {'symbol': 'PWT-USDT', 'action': 'tighten_stop', 'reason': 'Position shows slight loss (-0.53%). Price 0.31498 is close to stop 0.300827; consider moving stop up to ~0.307 to limit downside while preserving upside potential, acknowledging limited data on future moves.'}], 'summary': 'Overall portfolio risk remains acceptable (PASS). Maintain current exposure, but adjust the stop for PWT-USDT to reduce potential loss. No new entries are recommended given limited market signals and the conservative stance.'}"
+    },
+    {
+        "time": 1795802485.6180608,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 63.33, 'net_pnl_usdt': 1.4014, 'recurring_patterns': {'reasons': {'PANIC': 9, 'MANUAL SELL': 10, 'CRASH GUARD': 1}}, 'recommendations': 'Maintain current risk limits; avoid panic exits; prioritize manual sell signals with clear profit targets; monitor high\u2011frequency loss symbols (e.g., MOVE-USDT) for potential de\u2011listing; consider reducing exposure to assets with repeated panic closures.'}"
     }
 ]
