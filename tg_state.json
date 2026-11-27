@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT34.10/\u20a646,586",
+    "kb_ph": "USDT34.10/\u20a646,583",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -87,7 +87,7 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 7211,
+    "kb_mid": 7213,
     "out_text": "\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *DOS* $21.74 (64%)\n+1.48% (+$0.32) | Entry 0.079428\nQty 269.71809 | Price 0.080600 | Stop 0.075584 (-6%)\nRSI 57 | Bullish | ATH -91%\n\n\ud83d\udfe2 *PWT* $7.04 (21%)\n+0.64% (+$0.04) | Entry 0.317999\nQty 21.98293 | Price 0.320034 | Stop 0.302099 (-6%)\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "out_time": 1795782568.9726484,
