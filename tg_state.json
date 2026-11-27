@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691453,
+    "last_update_id": 935691456,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT35.03/\u20a647,856",
+    "kb_ph": "USDT35.04/\u20a647,861",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -82,43 +82,70 @@
         "LTC-USDT"
     ],
     "audit_down": {},
-    "audit_last": 1795820288.8011608,
+    "audit_last": 1795821175.3758507,
     "audit_ai_cls": "",
     "perf_breaker": {
         "until": 1795742224.733271,
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 7495,
-    "out_mid": 7496,
-    "out_text": "\ud83d\udcdf *OUTPUT*\nResults appear here.",
+    "kb_mid": 7501,
+    "out_text": "\ud83e\uddf9 *DUST \u2192 BGB*\n18 eligible coin(s), about $0.06 priced:\n```\nCOIN         AMOUNT     VALUE\n-----------------------------\nUNI        9.04e-05   $0.0004\nADA        0.000961   $0.0001\nGRAM        0.00637   $0.0063\nMOVE       0.000242   $0.0000\nSKYAI      0.007208   $0.0003\n```\n\u2800",
     "out_mode": "Markdown",
-    "panel_mid": 7497,
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udcbc Portfolio",
-                "callback_data": "m:pf"
+                "text": "\u25c0",
+                "callback_data": "pg:p"
+            },
+            {
+                "text": "1/3",
+                "callback_data": "pg:x"
+            },
+            {
+                "text": "\u25b6",
+                "callback_data": "pg:n"
+            },
+            {
+                "text": "\ud83c\udfe0",
+                "callback_data": "m:menu"
             }
         ],
         [
             {
-                "text": "\ud83c\udfc6 Markets",
-                "callback_data": "/analyse"
-            }
-        ],
-        [
+                "text": "\u2705 Convert all to BGB",
+                "callback_data": "/dust confirm"
+            },
             {
-                "text": "\ud83e\uddf0 Tools",
-                "callback_data": "m:tools"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udda5 System",
-                "callback_data": "m:sy"
+                "text": "\u274c Cancel",
+                "callback_data": "/dust cancel"
             }
         ]
     ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nChoose a group."
+    "panel_text": "\ud83d\udcc4 *Page 1/3*",
+    "out_time": 1795821201.6987364,
+    "out_mid": 7499,
+    "pages": {
+        "p": [
+            "\ud83e\uddf9 *DUST \u2192 BGB*\n18 eligible coin(s), about $0.06 priced:\n```\nCOIN         AMOUNT     VALUE\n-----------------------------\nUNI        9.04e-05   $0.0004\nADA        0.000961   $0.0001\nGRAM        0.00637   $0.0063\nMOVE       0.000242   $0.0000\nSKYAI      0.007208   $0.0003\n```\n\u2800",
+            "```\nIDOL        0.00166   $0.0000\nICNT        0.00473   $0.0014\nPUMP        0.00645   $0.0000\nARIA          0.064   $0.0212\nMON          0.0619   $0.0006\nMMT          0.0661   $0.0109\nJCT          0.0995   $0.0002\nCOLLECT     0.00953   $0.0003\nGWEI        0.00125   $0.0000\nBTW         0.00685   $0.0081\n```",
+            "```\nUMXM        0.00071   $0.0000\nPROS        0.00177   $0.0012\nDGAI        0.00498   $0.0046\n```\n\nNothing is sold at market. Bitget converts these small balances to BGB. Coins in\nyour active trades are never included.\n\u2800\n\u2800\n\u2800\n\u2800"
+        ],
+        "i": 0,
+        "mode": "Markdown",
+        "x": [
+            [
+                {
+                    "text": "\u2705 Convert all to BGB",
+                    "callback_data": "/dust confirm"
+                },
+                {
+                    "text": "\u274c Cancel",
+                    "callback_data": "/dust cancel"
+                }
+            ]
+        ],
+        "cmd": "m:r:dust"
+    },
+    "panel_mid": 7500
 }
