@@ -5001,5 +5001,15 @@
             "lesson": "When exiting manually, ensure that the exit price sufficiently exceeds the entry price to justify transaction costs and opportunity cost. Consider scaling out more aggressively if the market shows strong momentum, or setting clearer profit targets to avoid minimal gains. Retaining a large residual base may expose the portfolio to further market risk without a defined exit plan.",
             "confidence": "medium"
         }
+    },
+    {
+        "time": 1795823856.8135126,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'DOS-USDT', 'action': 'hold', 'reason': 'Position is modestly profitable (+1.48%) and price remains above entry; no immediate risk signals.'}, {'symbol': 'PWT-USDT', 'action': 'monitor_stop', 'reason': 'Small loss (-0.31%) with stop at 0.300301, price at 0.315131; consider tightening stop if price trends downward, but uncertainty remains due to limited price movement.'}], 'summary': 'Overall portfolio risk passes safeguards. Maintain DOS-USDT position while watching PWT-USDT for potential stop adjustment. No decisive action required given current modest P&L and limited data.'}"
+    },
+    {
+        "time": 1795823857.6623483,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 66.67, 'net_pnl_usdt': 1.1404, 'recurring_patterns': {'reasons': {'PANIC': 4, 'MANUAL SELL': 13, 'CRASH GUARD': 1}, 'symbols': {'MOVE-USDT': 4, 'DOS-USDT': 4, 'BLESS-USDT': 3, 'PUMP-USDT': 2, 'DGAI-USDT': 1, 'SKYAI-USDT': 1, 'GWEI-USDT': 1, 'TRX-USDT': 1, 'PWT-USDT': 1, 'ENA-USDT': 1, 'BTW-USDT': 1}}, 'recommendations': 'Maintain current risk limits but reduce reliance on manual panic exits. Consider tightening stop\u2011loss thresholds for high\u2011volatility assets (e.g., MOVE-USDT) and review the frequent manual sell triggers to ensure they align with a defined strategy. Monitor symbols with repeated losses (MOVE-USDT) and limit exposure until a clearer pattern emerges.'}"
     }
 ]
