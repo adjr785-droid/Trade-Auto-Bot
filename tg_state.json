@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935691469,
+    "last_update_id": 935691471,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -88,10 +88,10 @@
         "loss": -0.25205024200007214
     },
     "kb_mid": 7513,
-    "out_mid": 7509,
-    "out_text": "\ud83d\udcbc *HOURLY HOLDINGS*\n\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *DOS* $19.57 (56%)\n+1.48% (+$0.28) | Entry 0.079428\nQty 242.84809 | Price 0.080600 | Stop 0.079428 (-1%)\nRSI 54 | Mixed | ATH -91%\n\n\ud83d\udfe2 *PWT* $15.44 (44%)\n+0.81% (+$0.12) | Entry 0.316429\n\u2800\n\u2800",
+    "out_mid": 7519,
+    "out_text": "\ud83d\udcdf *OUTPUT*\nResults appear here.",
     "out_mode": "Markdown",
-    "out_time": 1795822327.8982995,
+    "panel_mid": 7520,
     "panel_rows": [
         [
             {
@@ -118,16 +118,5 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nChoose a group.",
-    "pages": {
-        "p": [
-            "\ud83d\udcbc *HOURLY HOLDINGS*\n\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *DOS* $19.57 (56%)\n+1.48% (+$0.28) | Entry 0.079428\nQty 242.84809 | Price 0.080600 | Stop 0.079428 (-1%)\nRSI 54 | Mixed | ATH -91%\n\n\ud83d\udfe2 *PWT* $15.44 (44%)\n+0.81% (+$0.12) | Entry 0.316429\n\u2800\n\u2800",
-            "Qty 48.41706 | Price 0.318987 | Stop 0.300608 (-6%)\nRSI 44 | Mixed | ATH -56%\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
-        ],
-        "i": 0,
-        "mode": "Markdown",
-        "x": [],
-        "cmd": null
-    },
-    "panel_mid": 7517
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nChoose a group."
 }
