@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691247,
+    "last_update_id": 935691251,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT33.52/\u20a645,791",
+    "kb_ph": "USDT33.72/\u20a646,056",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -77,12 +77,59 @@
         "ARX-USDT"
     ],
     "audit_down": {},
-    "audit_last": 1795760765.5257614,
-    "audit_ai_cls": "OTHER",
+    "audit_last": 1795761952.7752094,
+    "audit_ai_cls": "",
     "perf_breaker": {
         "until": 1795742224.733271,
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 7050
+    "kb_mid": 7059,
+    "out_text": "\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *PWT* $24.99 (74%)\n+0.24% (+$0.06) | Entry 0.317999\nQty 78.40293 | Price 0.318760 | Stop 0.302099 (-5%)\nRSI 46 | Mixed | ATH -56%\n\n\ud83d\udfe2 *DOS* $8.64 (26%)\n+2.65% (+$0.22) | Entry 0.077256\nQty 109.00457 | Price 0.079300 | Stop 0.073517 (-7%)\n\u2800\n\u2800",
+    "out_mode": "Markdown",
+    "out_time": 1795761990.6909716,
+    "panel_rows": [
+        [
+            {
+                "text": "\u25c0",
+                "callback_data": "pg:p"
+            },
+            {
+                "text": "1/2",
+                "callback_data": "pg:x"
+            },
+            {
+                "text": "\u25b6",
+                "callback_data": "pg:n"
+            },
+            {
+                "text": "\ud83c\udfe0",
+                "callback_data": "m:menu"
+            },
+            {
+                "text": "\ud83d\udd04",
+                "callback_data": "rf:go"
+            }
+        ]
+    ],
+    "panel_text": "\ud83d\udcc4 *Page 1/2*",
+    "pages": {
+        "p": [
+            "\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *PWT* $24.99 (74%)\n+0.24% (+$0.06) | Entry 0.317999\nQty 78.40293 | Price 0.318760 | Stop 0.302099 (-5%)\nRSI 46 | Mixed | ATH -56%\n\n\ud83d\udfe2 *DOS* $8.64 (26%)\n+2.65% (+$0.22) | Entry 0.077256\nQty 109.00457 | Price 0.079300 | Stop 0.073517 (-7%)\n\u2800\n\u2800",
+            "RSI 54 | Bullish | ATH -91%\n\n\ud83e\udde0 *AI:* BTC filter is inactive; holdings show PWT (74%) and DOS (26%) with\nmodest gains, RSI near mid-range, and stop\u2011losses 5\u20117% below entry\u2014monitor\nstop levels and market volatility.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+        ],
+        "i": 0,
+        "mode": "Markdown",
+        "x": [
+            [
+                {
+                    "text": "\ud83d\udd04",
+                    "callback_data": "rf:go"
+                }
+            ]
+        ],
+        "cmd": "m:r:holdings"
+    },
+    "out_mid": 7057,
+    "panel_mid": 7058
 }
