@@ -4785,5 +4785,15 @@
             "lesson": "When exiting a spot position, ensure that the exit price sufficiently exceeds the entry cost to justify transaction fees and opportunity cost. Partial sells should be aligned with clear targets or risk thresholds to avoid leaving a large residual position without a defined plan.",
             "confidence": "medium"
         }
+    },
+    {
+        "time": 1795802603.954783,
+        "event": "ai_manual_buy_review",
+        "symbol": "PWT-USDT",
+        "review": {
+            "risk_level": "medium",
+            "warning": "The market filter indicates BTC is below its 50\u2011hour average, which may suggest short\u2011term weakness. RSI is near 48, not strongly oversold or overbought. Position already exists, increasing exposure could raise portfolio concentration risk.",
+            "summary": "Proceed with caution. The signal is modestly bearish; consider limiting the additional $2.22 exposure or waiting for clearer confirmation before adding to the position."
+        }
     }
 ]
