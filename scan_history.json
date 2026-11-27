@@ -10,7 +10,7 @@
             "status": "READY",
             "decision": "SETUP \u2014 NOT QUEUED",
             "reason": "TREND matched; stage DROPPED, must pass Watch > Manual > Auto first",
-            "execution_status": "HELD",
+            "execution_status": "BOUGHT",
             "scan_id": "1795756361",
             "rank": 24,
             "vol": 1408564.56,
