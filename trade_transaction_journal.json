@@ -4955,5 +4955,23 @@
         "time": 1795822877.0129254,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 63.33, 'net_pnl_usdt': 0.372, 'recurring_patterns': {'high_frequency_symbols': ['BLESS-USDT', 'MOVE-USDT', 'DOS-USDT'], 'common_reasons': {'PANIC': 6, 'MANUAL SELL': 13, 'CRASH GUARD': 1}, 'loss_concentration': {'MOVE-USDT': 2, 'PROS-USDT': 1, 'PUMP-USDT': 1, 'TRX-USDT': 1}}, 'recommendations': ['Limit panic\u2011driven exits; implement stricter stop\u2011loss thresholds.', 'Diversify across symbols rather than concentrating on a few high\u2011turnover assets.', 'Review manual sell triggers to ensure they align with predefined profit targets.', 'Maintain current win\u2011rate focus but aim to improve average win size versus loss size.', 'Monitor crash\u2011guard activation frequency and adjust risk parameters to reduce large negative hits.']}"
+    },
+    {
+        "time": 1795823172.6279,
+        "event": "trade_closed",
+        "symbol": "DOS-USDT",
+        "pnl_usdt": 0.05493744000000004,
+        "reason": "MANUAL SELL $4.55",
+        "strategy": "MANUAL"
+    },
+    {
+        "time": 1795823177.263586,
+        "event": "ai_manual_sell_review",
+        "symbol": "DOS-USDT",
+        "review": {
+            "review": "The position in DOS-USDT was manually closed at an average exit price of 0.0804 USDT, realizing a profit of 0.05493744 USDT on the 56.52 units sold. The remaining base of 186.328088 DOS was not liquidated, indicating a partial exit strategy. The manual sell suggests a discretionary decision rather than an automated signal, which may reflect market sentiment or risk management considerations at the time.",
+            "lesson": "Partial exits can lock in gains while preserving exposure to potential further upside. However, manual interventions introduce subjectivity; establishing clear criteria for manual sells can improve consistency. Monitoring remaining base exposure is essential to ensure it aligns with overall portfolio risk limits.",
+            "confidence": "high"
+        }
     }
 ]

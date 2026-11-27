@@ -444,5 +444,13 @@
         "time": 1795802578.1051571,
         "reason": "MANUAL SELL $2.22",
         "strategy": "MANUAL"
+    },
+    {
+        "sym": "DOS-USDT",
+        "pnl": 0.05493744000000004,
+        "fee": 0.009088,
+        "time": 1795823172.6260612,
+        "reason": "MANUAL SELL $4.55",
+        "strategy": "MANUAL"
     }
 ]
