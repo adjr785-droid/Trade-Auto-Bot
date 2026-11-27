@@ -3,21 +3,21 @@
         "entry_price": 0.077256,
         "safe_zone": 0.077256,
         "stop_loss": 0.073517,
-        "peak_price": 0.0807,
-        "last_price": 0.0805,
+        "peak_price": 0.0808,
+        "last_price": 0.0808,
         "opened_at": 1795720487.514375,
         "sl_pct": 4.84,
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
         "xsl": 0.075858,
-        "seen": 1795779073.429736
+        "seen": 1795779408.3956614
     },
     "PWT-USDT": {
         "entry_price": 0.317999,
         "safe_zone": 0.317999,
         "stop_loss": 0.302099,
-        "peak_price": 0.321106,
-        "last_price": 0.321106,
+        "peak_price": 0.321144,
+        "last_price": 0.321144,
         "opened_at": 1795756432.1270068,
         "sl_pct": 5.0,
         "entry_qty": 78.45,
@@ -25,14 +25,14 @@
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
         "xsl": 0.302099,
-        "seen": 1795779073.7824028
+        "seen": 1795779408.825534
     },
     "ENA-USDT": {
         "entry_price": 0.10655,
         "safe_zone": 0.10655,
         "stop_loss": 0.101223,
-        "peak_price": 0.10775,
-        "last_price": 0.10768,
+        "peak_price": 0.10785,
+        "last_price": 0.10785,
         "opened_at": 1795762300.5306354,
         "sl_pct": 5.0,
         "entry_qty": 46.92,
@@ -40,15 +40,15 @@
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
         "xsl": 0.101223,
-        "seen": 1795779074.1282947,
+        "seen": 1795779409.2342281,
         "rsi_peak": 75.67
     },
     "BTW-USDT": {
         "entry_price": 0.951821,
         "safe_zone": 0.951821,
         "stop_loss": 0.951821,
-        "peak_price": 1.000834,
-        "last_price": 1.0,
+        "peak_price": 1.00092,
+        "last_price": 1.00092,
         "opened_at": 1795764235.3383274,
         "sl_pct": 5.0,
         "entry_qty": 5.25,
@@ -56,6 +56,6 @@
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
         "xsl": 0.951821,
-        "seen": 1795779074.6944976
+        "seen": 1795779409.613302
     }
 }
