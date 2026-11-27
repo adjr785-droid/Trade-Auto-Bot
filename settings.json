@@ -35,7 +35,7 @@
     "cleanup_hours": 24.0,
     "scan_interval_minutes": 30.0,
     "auto_clear_hours": 24.0,
-    "live_mode_seconds": 270,
+    "live_mode_seconds": 840,
     "mtf_confirm": true,
     "btc_shock_pct": 3.0,
     "max_open_risk_pct": 3.0,
@@ -96,5 +96,6 @@
     "pullback_rsi_min": 40,
     "setups_v1": true,
     "auto_dyn_v1": true,
-    "fixed5_v1": true
+    "fixed5_v1": true,
+    "live840_v1": true
 }

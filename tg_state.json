@@ -1,16 +1,16 @@
 {
-    "last_update_id": 935691423,
+    "last_update_id": 935691426,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT35.03/\u20a647,855",
+    "kb_ph": "USDT34.87/\u20a647,628",
     "layout_bottom": [
         "tools",
         "analyse"
     ],
-    "kb_keys": "[['\ud83d\udccb Menu', '\ud83e\uddf0 Tools', '\ud83c\udfc6 Analyse']]",
+    "kb_keys": "[['\ud83d\udccb Menu']]",
     "bot_seen": {
         "t": 1795429354.8422616,
         "eq": 24.669762035972877,
@@ -88,31 +88,36 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 7447,
-    "out_mid": 7444,
-    "out_text": "\ud83d\udd0d *SCAN COMPLETE*\nChecked 460 markets in 11s.\nNo coin matched any setup.\n\ud83d\udea7 *GATES* (20 analysed, 0 passed)\nBlocked: RSI 12 | MA 17 | 1H 18 | 24H 9 | Score 0\nSetups: Trend 0 | Pullback 0 | Bounce 0 | Breakout 0\nRules: RSI \u2264 48, Price > MA5 > MA10, 1H +0.5 to +6%, 24H up, Core 5+ and Extra\n2+\n\u2800\n\u2800\n\u2800\n\u2800",
+    "kb_mid": 7450,
+    "out_mid": 7451,
+    "out_text": "\ud83d\udcdf *OUTPUT*\nResults appear here.",
     "out_mode": "Markdown",
-    "out_time": 1795818552.293291,
+    "panel_mid": 7452,
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
-            },
+                "text": "\ud83d\udcbc Portfolio",
+                "callback_data": "m:pf"
+            }
+        ],
+        [
             {
-                "text": "1/2",
-                "callback_data": "pg:x"
-            },
+                "text": "\ud83c\udfc6 Markets",
+                "callback_data": "/analyse"
+            }
+        ],
+        [
             {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
-            },
+                "text": "\ud83e\uddf0 Tools",
+                "callback_data": "m:tools"
+            }
+        ],
+        [
             {
-                "text": "\ud83c\udfe0",
-                "callback_data": "m:menu"
+                "text": "\ud83d\udda5 System",
+                "callback_data": "m:sy"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/2*",
-    "panel_hidden": true
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nChoose a group."
 }
