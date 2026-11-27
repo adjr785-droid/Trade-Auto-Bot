@@ -4935,5 +4935,15 @@
         "time": 1795821162.8196309,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 63.33, 'net_pnl_usdt': 0.372, 'recurring_patterns': {'high_frequency_symbols': ['BLESS-USDT', 'MOVE-USDT', 'DOS-USDT'], 'common_reasons': {'PANIC': 6, 'MANUAL SELL': 13, 'CRASH GUARD': 1}, 'loss_concentration': {'MOVE-USDT': 2, 'PROS-USDT': 1, 'PUMP-USDT': 1, 'TRX-USDT': 1}}, 'recommendations': ['Limit panic\u2011driven exits; implement stricter stop\u2011loss thresholds.', 'Diversify across symbols rather than concentrating on a few repeated assets.', 'Review manual sell triggers to ensure they align with predefined profit targets.', 'Monitor crash\u2011guard activation frequency and adjust risk parameters to avoid large single\u2011trade losses.']}"
+    },
+    {
+        "time": 1795822000.932067,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'DOS-USDT', 'action': 'HOLD', 'reason': 'Positive PnL (+1.48%) and price above stop; no immediate risk, but monitor for reversal.'}, {'symbol': 'PWT-USDT', 'action': 'WATCH', 'reason': 'Slight negative PnL (-0.09%) and price close to stop (0.316156 vs stop 0.300608); consider tightening stop if volatility increases.'}], 'summary': 'Overall portfolio risk passes safeguards. DOS-USDT shows modest gains; maintain position. PWT-USDT is near its stop; keep a close watch and be ready to adjust stop-loss if price moves unfavorably.'}"
+    },
+    {
+        "time": 1795822001.9074578,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 63.33, 'net_pnl_usdt': 0.372, 'recurring_patterns': {'high_frequency_symbols': ['BLESS-USDT', 'MOVE-USDT', 'DOS-USDT'], 'common_reasons': {'PANIC': 6, 'MANUAL SELL': 13, 'CRASH GUARD': 1}, 'loss_concentration': {'MOVE-USDT': 2, 'PROS-USDT': 1, 'PUMP-USDT': 1, 'TRX-USDT': 1}}, 'recommendations': ['Limit panic\u2011driven exits; implement stricter stop\u2011loss thresholds.', 'Diversify across symbols rather than concentrating on a few high\u2011turnover assets.', 'Review manual sell triggers to ensure they align with predefined profit targets.', 'Maintain current win\u2011rate focus but aim to improve average win size versus loss size.', 'Monitor crash\u2011guard activation frequency and adjust risk parameters to reduce large negative hits.']}"
     }
 ]
