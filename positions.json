@@ -26,5 +26,19 @@
         "purchase_source": "MANUAL",
         "xsl": 0.302099,
         "seen": 1795762278.7329228
+    },
+    "ENA-USDT": {
+        "entry_price": 0.10655,
+        "safe_zone": 0.10655,
+        "stop_loss": 0.101223,
+        "peak_price": 0.10655,
+        "last_price": 0.10655,
+        "opened_at": 1795762300.5306354,
+        "sl_pct": 5.0,
+        "entry_qty": 46.92,
+        "entry_usdt": 4.9993,
+        "strategy": "MANUAL",
+        "purchase_source": "MANUAL",
+        "xsl": 0.101223
     }
 }

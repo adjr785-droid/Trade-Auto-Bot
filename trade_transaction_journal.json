@@ -4464,5 +4464,15 @@
             "lesson": "When exiting a position, especially with a partial sell, ensure that the realized profit justifies the transaction costs and potential opportunity cost of leaving a sizable remainder (\u224822\u202funits) exposed. Consider setting clearer profit targets or trailing thresholds to avoid minimal gains that may not outweigh fees. Additionally, document the rationale for manual overrides to improve future decision\u2011making and to align with risk management policies.",
             "confidence": "high"
         }
+    },
+    {
+        "time": 1795762303.581189,
+        "event": "ai_manual_buy_review",
+        "symbol": "ENA-USDT",
+        "review": {
+            "risk_level": "high",
+            "warning": "RSI is elevated (~70) indicating overbought conditions; price is near recent highs and market volatility can be significant. Manual spot purchase of $5 may result in immediate downside risk.",
+            "summary": "Given the high RSI and lack of additional filters, the trade carries high risk. Consider waiting for a pullback or confirming signals before entering."
+        }
     }
 ]

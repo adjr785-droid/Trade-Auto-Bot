@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691261,
+    "last_update_id": 935691262,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT33.68/\u20a646,011",
+    "kb_ph": "USDT33.69/\u20a646,026",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -84,10 +84,10 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 7078,
-    "out_text": "USDT17.98\n\ud83d\udc41 *WATCH LIST*\n_Rising coins being watched. They move up when they pass the manual rules._\n\n```\nCOIN    RSI    1H    24H  S TY\n------------------------------\nENA      70  +1.2   +3.5  8  K\n```\n_TY: T Trend, P Pullback, B Bounce, K Breakout_\n\u2800\n\u2800",
+    "kb_mid": 7083,
+    "out_text": "\ud83e\udde0 AI manual-buy advisory: Given the high RSI and lack of additional filters,\nthe trade carries high risk. Consider waiting for a pullback or confirming\nsignals before entering.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795762273.563614,
+    "out_time": 1795762303.959921,
     "panel_rows": [
         [
             {
