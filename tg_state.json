@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691201,
+    "last_update_id": 935691202,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT33.77/\u20a646,131",
+    "kb_ph": "USDT33.73/\u20a646,073",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -74,18 +74,15 @@
         "BNB-USDT"
     ],
     "audit_down": {},
-    "audit_last": 1795744516.9672492,
+    "audit_last": 1795744996.2674556,
     "audit_ai_cls": "",
     "perf_breaker": {
         "until": 1795742224.733271,
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 6929,
-    "out_mid": 6930,
-    "out_text": "\ud83d\udcdf *OUTPUT*\nResults appear here.",
+    "out_text": "\ud83e\uddf9 Cleared 3 bot message(s).\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "panel_mid": 6931,
     "panel_rows": [
         [
             {
@@ -128,5 +125,9 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below."
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
+    "out_mid": 6932,
+    "out_time": 1795745016.9543083,
+    "kb_mid": 6934,
+    "panel_hidden": true
 }
