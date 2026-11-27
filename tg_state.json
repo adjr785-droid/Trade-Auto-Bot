@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691369,
+    "last_update_id": 935691371,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT35.21/\u20a648,094",
+    "kb_ph": "USDT35.28/\u20a648,193",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -85,52 +85,43 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 7338,
-    "out_text": "\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *DOS* $20.08 (57%)\n+4.12% (+$0.79) | Entry 0.079428\nQty 242.84809 | Price 0.082700 | Stop 0.075584 (-9%)\nRSI 61 | Bullish | ATH -91%\n\n\ud83d\udd34 *PWT* $15.26 (43%)\n-0.42% (-$0.06) | Entry 0.316429\nQty 48.41706 | Price 0.315099 | Stop 0.300608 (-5%)\n\u2800\n\u2800",
+    "kb_mid": 7341,
+    "out_text": "USDT0.03\n\ud83d\udfe1 *MANUAL BUY*\n_Passed at least 5/7 core and 2/3 additional criteria. Manual review only._\n\nNone right now.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795802636.2674592,
+    "out_time": 1795802874.3142817,
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
+                "text": "\ud83d\udc41 Watch (0)",
+                "callback_data": "m:at:W"
             },
             {
-                "text": "1/2",
-                "callback_data": "pg:x"
+                "text": "\u25b6 \ud83d\udfe1 Manual (0)",
+                "callback_data": "m:at:M"
             },
             {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
+                "text": "\ud83e\udd16 Auto (0)",
+                "callback_data": "m:at:A"
+            }
+        ],
+        [
+            {
+                "text": "\ud83c\udfaf SETUPS",
+                "callback_data": "m:su"
             },
             {
-                "text": "\ud83c\udfe0",
-                "callback_data": "m:menu"
-            },
+                "text": "\ud83d\uddc2 MORE",
+                "callback_data": "m:am"
+            }
+        ],
+        [
             {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
+                "text": "\ud83d\udd04 Refresh",
+                "callback_data": "m:at:M"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/2*",
-    "out_mid": 7335,
-    "pages": {
-        "p": [
-            "\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *DOS* $20.08 (57%)\n+4.12% (+$0.79) | Entry 0.079428\nQty 242.84809 | Price 0.082700 | Stop 0.075584 (-9%)\nRSI 61 | Bullish | ATH -91%\n\n\ud83d\udd34 *PWT* $15.26 (43%)\n-0.42% (-$0.06) | Entry 0.316429\nQty 48.41706 | Price 0.315099 | Stop 0.300608 (-5%)\n\u2800\n\u2800",
-            "RSI 48 | Mixed | ATH -56%\n\n\ud83e\udde0 *AI:* BTC filter active; DOS position up 4.12% but stop 9% below entry,\nmonitor risk, while PWT down 0.42% with stop 5% below entry; both holdings near\ntheir respective stops.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
-        ],
-        "i": 0,
-        "mode": "Markdown",
-        "x": [
-            [
-                {
-                    "text": "\ud83d\udd04",
-                    "callback_data": "rf:go"
-                }
-            ]
-        ],
-        "cmd": "m:r:holdings"
-    },
-    "panel_mid": 7336
+    "panel_text": "\ud83d\udc47 *Actions*",
+    "out_mid": 7342,
+    "panel_mid": 7343
 }
