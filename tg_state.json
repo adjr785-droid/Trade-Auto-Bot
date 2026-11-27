@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT35.35/\u20a648,283",
+    "kb_ph": "USDT34.89/\u20a647,656",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -80,13 +80,17 @@
         "IDOL-USDT"
     ],
     "audit_down": {},
-    "audit_last": 1795811550.8828056,
+    "audit_last": 1795815007.0590725,
     "audit_ai_cls": "",
     "perf_breaker": {
         "until": 1795742224.733271,
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 7439,
-    "panel_hidden": true
+    "kb_mid": 7442,
+    "panel_hidden": true,
+    "out_mid": 7440,
+    "out_text": "\ud83d\udd0d *SCAN COMPLETE*\nChecked 460 markets in 14s.\nNo coin matched any setup.\n\ud83d\udea7 *GATES* (19 analysed, 0 passed)\nBlocked: RSI 13 | MA 15 | 1H 15 | 24H 8 | Score 0\nSetups: Trend 0 | Pullback 0 | Bounce 0 | Breakout 1\nRules: RSI \u2264 48, Price > MA5 > MA10, 1H +0.5 to +6%, 24H up, Core 5+ and Extra\n2+\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_mode": "Markdown",
+    "out_time": 1795815001.7020524
 }
