@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691252,
+    "last_update_id": 935691254,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT33.72/\u20a646,056",
+    "kb_ph": "USDT33.74/\u20a646,085",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -84,52 +84,43 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 7059,
-    "out_text": "\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *PWT* $24.99 (74%)\n+0.24% (+$0.06) | Entry 0.317999\nQty 78.40293 | Price 0.318760 | Stop 0.302099 (-5%)\nRSI 46 | Mixed | ATH -56%\n\n\ud83d\udfe2 *DOS* $8.64 (26%)\n+2.65% (+$0.22) | Entry 0.077256\nQty 109.00457 | Price 0.079300 | Stop 0.073517 (-7%)\n\u2800\n\u2800",
+    "kb_mid": 7063,
+    "out_text": "USDT0.03\n\ud83d\udc41 *WATCH LIST*\n_Rising coins being watched. They move up when they pass the manual rules._\n\n```\nCOIN    RSI    1H    24H  S TY\n------------------------------\nENA      70  +1.2   +3.5  8  K\n```\n_TY: T Trend, P Pullback, B Bounce, K Breakout_\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795761990.6909716,
+    "out_time": 1795762111.4571316,
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
+                "text": "\u25b6 \ud83d\udc41 Watch (1)",
+                "callback_data": "m:at:W"
             },
             {
-                "text": "2/2",
-                "callback_data": "pg:x"
+                "text": "\ud83d\udfe1 Manual (0)",
+                "callback_data": "m:at:M"
             },
             {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
+                "text": "\ud83e\udd16 Auto (0)",
+                "callback_data": "m:at:A"
+            }
+        ],
+        [
+            {
+                "text": "\ud83c\udfaf SETUPS",
+                "callback_data": "m:su"
             },
             {
-                "text": "\ud83c\udfe0",
-                "callback_data": "m:menu"
-            },
+                "text": "\ud83d\uddc2 MORE",
+                "callback_data": "m:am"
+            }
+        ],
+        [
             {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
+                "text": "\ud83d\udd04 Refresh",
+                "callback_data": "m:at:W"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 2/2*",
-    "pages": {
-        "p": [
-            "\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *PWT* $24.99 (74%)\n+0.24% (+$0.06) | Entry 0.317999\nQty 78.40293 | Price 0.318760 | Stop 0.302099 (-5%)\nRSI 46 | Mixed | ATH -56%\n\n\ud83d\udfe2 *DOS* $8.64 (26%)\n+2.65% (+$0.22) | Entry 0.077256\nQty 109.00457 | Price 0.079300 | Stop 0.073517 (-7%)\n\u2800\n\u2800",
-            "RSI 54 | Bullish | ATH -91%\n\n\ud83e\udde0 *AI:* BTC filter is inactive; holdings show PWT (74%) and DOS (26%) with\nmodest gains, RSI near mid-range, and stop\u2011losses 5\u20117% below entry\u2014monitor\nstop levels and market volatility.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
-        ],
-        "i": 1,
-        "mode": "Markdown",
-        "x": [
-            [
-                {
-                    "text": "\ud83d\udd04",
-                    "callback_data": "rf:go"
-                }
-            ]
-        ],
-        "cmd": "m:r:holdings"
-    },
-    "out_mid": 7057,
-    "panel_mid": 7058
+    "panel_text": "\ud83d\udc47 *Actions*",
+    "out_mid": 7064,
+    "panel_mid": 7065
 }
