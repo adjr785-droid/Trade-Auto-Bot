@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691282,
+    "last_update_id": 935691283,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT33.52/\u20a645,785",
+    "kb_ph": "USDT33.52/\u20a645,792",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -88,51 +88,43 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 7116,
-    "out_text": "\ud83e\udde0 AI manual-buy advisory: Manual buy of 5.0 USDT of BTW-USDT at 0.952748 is\npermissible but carries moderate risk due to lack of strong technical\nconfirmation. Verify that this trade fits within your risk limits and monitor\nthe position closely.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "kb_mid": 7120,
+    "out_text": "USDT7.98\n\ud83d\udfe1 *MANUAL BUY*\n_Passed at least 5/7 core and 2/3 additional criteria. Manual review only._\n\nNone right now.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
+                "text": "\ud83d\udc41 Watch (0)",
+                "callback_data": "m:at:W"
             },
             {
-                "text": "1/2",
-                "callback_data": "pg:x"
+                "text": "\u25b6 \ud83d\udfe1 Manual (0)",
+                "callback_data": "m:at:M"
             },
             {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
-            },
-            {
-                "text": "\ud83c\udfe0",
-                "callback_data": "m:menu"
+                "text": "\ud83e\udd16 Auto (0)",
+                "callback_data": "m:at:A"
             }
         ],
         [
             {
-                "text": "\ud83d\udd0d SCAN NOW",
-                "callback_data": "m:r:scan"
+                "text": "\ud83c\udfaf SETUPS",
+                "callback_data": "m:su"
             },
             {
-                "text": "\ud83d\udcdc SCAN HISTORY",
-                "callback_data": "/scan_history"
+                "text": "\ud83d\uddc2 MORE",
+                "callback_data": "m:am"
             }
         ],
         [
-            {
-                "text": "\u2b05\ufe0f Analyse",
-                "callback_data": "/analyse"
-            },
             {
                 "text": "\ud83d\udd04 Refresh",
-                "callback_data": "m:su"
+                "callback_data": "m:at:M"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/2*",
-    "out_time": 1795764238.6967568,
-    "out_mid": 7112,
-    "panel_hidden": true
+    "panel_text": "\ud83d\udc47 *Actions*",
+    "out_time": 1795764277.597903,
+    "out_mid": 7118,
+    "panel_mid": 7119
 }
