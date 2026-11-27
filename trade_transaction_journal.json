@@ -4689,5 +4689,11 @@
         "time": 1795789250.4517853,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 63.33, 'net_pnl_usdt': 1.4014, 'recurring_patterns': {'reasons': {'PANIC': 6, 'MANUAL SELL ALL': 3, 'MANUAL SELL $': 5, 'CRASH GUARD': 1}}, 'recommendations': 'Maintain current risk limits, reduce reliance on panic exits, and consider tighter stop\u2011loss thresholds. Focus on symbols with consistent positive pnl and avoid repeated manual sell triggers that indicate volatility.'}"
+    },
+    {
+        "time": 1795789278.418396,
+        "event": "ai_coin_advisory",
+        "reviewed": 25,
+        "source": "coins.db"
     }
 ]
