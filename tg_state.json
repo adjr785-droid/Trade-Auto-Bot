@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT35.32/\u20a648,251",
+    "kb_ph": "USDT35.31/\u20a648,233",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -85,7 +85,7 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 7381,
+    "kb_mid": 7384,
     "out_text": "USDT0.03\n\n\u2b50 *FAVOURITES*\n_Your own list. Tap a coin to buy, sell or remove it._\n\n```\nCOIN     PRICE RSI    1H    24H\n-------------------------------\nDOS     0.0822   -     -   +6.8\n```\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "out_time": 1795803890.3864958,
