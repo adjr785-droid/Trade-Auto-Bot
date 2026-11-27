@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935691180,
+    "last_update_id": 935691181,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -127,5 +127,5 @@
     "out_time": 1795739463.3016524,
     "out_mid": 6892,
     "kb_mid": 6894,
-    "panel_hidden": true
+    "panel_mid": 6896
 }
