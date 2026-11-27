@@ -4877,5 +4877,11 @@
         "time": 1795811511.5261936,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 63.33, 'net_pnl_usdt': 0.372, 'recurring_patterns': 'Frequent PANIC exits and manual sell actions dominate; same symbols appear repeatedly (BLESS-USDT, MOVE-USDT, DOS-USDT); occasional large positive trades (BTW-USDT, DOS-USDT) offset multiple small losses; crash guard triggered on MOVE-USDT', 'recommendations': 'Limit panic\u2011driven exits; implement stricter stop\u2011loss thresholds; diversify away from repeatedly traded symbols; increase position sizing discipline for manual sells; monitor crash\u2011guard triggers to avoid large drawdowns'}"
+    },
+    {
+        "time": 1795811544.970859,
+        "event": "ai_coin_advisory",
+        "reviewed": 25,
+        "source": "coins.db"
     }
 ]
