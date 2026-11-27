@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935691421,
+    "last_update_id": 935691422,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -17,7 +17,7 @@
         "pos": [],
         "hn": 31
     },
-    "last_cmd": "/stats",
+    "last_cmd": "m:r:holdings",
     "page_mem": {
         "/bot": [
             1,
@@ -77,11 +77,10 @@
         ]
     },
     "radar": [
-        "PWT-USDT",
         "IDOL-USDT"
     ],
     "audit_down": {},
-    "audit_last": 1795806420.2756279,
+    "audit_last": 1795808261.2871418,
     "audit_ai_cls": "",
     "perf_breaker": {
         "until": 1795742224.733271,
