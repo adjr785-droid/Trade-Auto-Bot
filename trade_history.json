@@ -420,5 +420,13 @@
         "time": 1795762245.5610511,
         "reason": "MANUAL SELL $18.00",
         "strategy": "MANUAL"
+    },
+    {
+        "sym": "ENA-USDT",
+        "pnl": 0.06142589999999961,
+        "fee": 0.010115,
+        "time": 1795779547.8364286,
+        "reason": "MANUAL SELL ALL",
+        "strategy": "MANUAL"
     }
 ]

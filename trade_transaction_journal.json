@@ -4594,5 +4594,23 @@
         "time": 1795779417.9366736,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.1971, 'recurring_patterns': {'panic_trades': 7, 'manual_sell_trades': 12, 'crash_guard_trades': 1, 'symbols_with_multiple_trades': ['BLESS-USDT', 'MOVE-USDT', 'PUMP-USDT']}, 'recommendations': ['Limit exposure to panic-driven exits; consider tighter stop\u2011loss thresholds.', 'Review manual sell decisions for consistency with strategy rules.', 'Monitor symbols with repeated losses (e.g., MOVE-USDT) and consider reducing position size.', 'Maintain current win\u2011rate focus but aim to improve net P&L through tighter risk management.']}"
+    },
+    {
+        "time": 1795779547.8380294,
+        "event": "trade_closed",
+        "symbol": "ENA-USDT",
+        "pnl_usdt": 0.06142589999999961,
+        "reason": "MANUAL SELL ALL",
+        "strategy": "MANUAL"
+    },
+    {
+        "time": 1795779563.3297842,
+        "event": "ai_manual_sell_review",
+        "symbol": "ENA-USDT",
+        "review": {
+            "review": "The position in ENA-USDT was manually closed at an average exit price of 0.10786, realizing a modest profit of 0.0614\u202fUSDT on the sold quantity of 46.89 units. A small residual base amount (0.009518 ENA) remains, indicating the trade was not fully liquidated. The profit margin was limited, suggesting the exit may have been premature or the market moved only slightly in favor before the manual sell was executed.",
+            "lesson": "When trading low\u2011price altcoins, ensure that the exit strategy accounts for transaction costs and the potential need to fully close the position to avoid leftover balances. Manual exits should be aligned with predefined profit targets or risk thresholds to capture more meaningful gains and reduce residual exposure.",
+            "confidence": "medium"
+        }
     }
 ]

@@ -10,14 +10,14 @@
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
         "xsl": 0.075858,
-        "seen": 1795779481.0025377
+        "seen": 1795779567.8382387
     },
     "PWT-USDT": {
         "entry_price": 0.317999,
         "safe_zone": 0.317999,
         "stop_loss": 0.302099,
         "peak_price": 0.321144,
-        "last_price": 0.321026,
+        "last_price": 0.320955,
         "opened_at": 1795756432.1270068,
         "sl_pct": 5.0,
         "entry_qty": 78.45,
@@ -25,23 +25,7 @@
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
         "xsl": 0.302099,
-        "seen": 1795779481.4066947
-    },
-    "ENA-USDT": {
-        "entry_price": 0.10655,
-        "safe_zone": 0.10655,
-        "stop_loss": 0.101223,
-        "peak_price": 0.10785,
-        "last_price": 0.1077,
-        "opened_at": 1795762300.5306354,
-        "sl_pct": 5.0,
-        "entry_qty": 46.92,
-        "entry_usdt": 4.9993,
-        "strategy": "MANUAL",
-        "purchase_source": "MANUAL",
-        "xsl": 0.101223,
-        "seen": 1795779481.7803965,
-        "rsi_peak": 75.67
+        "seen": 1795779568.3597717
     },
     "BTW-USDT": {
         "entry_price": 0.951821,
@@ -56,6 +40,6 @@
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
         "xsl": 0.951821,
-        "seen": 1795779482.143554
+        "seen": 1795779568.766706
     }
 }
