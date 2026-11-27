@@ -1,11 +1,11 @@
 {
-    "last_check": 1795762241.6563973,
+    "last_check": 1795762954.1993215,
     "status": "healthy",
     "model": "openai/gpt-oss-120b",
-    "latency_ms": 191,
+    "latency_ms": 397,
     "last_error": "",
     "consecutive_failures": 0,
-    "consecutive_successes": 9,
+    "consecutive_successes": 10,
     "last_response_valid": true,
     "alerted_status": "healthy",
     "emergency_mode": false,
@@ -29,8 +29,8 @@
             "failures": 22
         },
         "market_regime": {
-            "last_success": 1795760749.4549124,
-            "successes": 150,
+            "last_success": 1795762936.9505982,
+            "successes": 151,
             "last_error": ""
         },
         "manual_buy_review": {
@@ -69,15 +69,15 @@
             "last_error": ""
         },
         "coin_advisory": {
-            "last_success": 1795758498.4449697,
-            "successes": 81,
-            "last_error": "Expecting ',' delimiter: line 1 column 2928 (char 2927)",
+            "last_success": 1795762945.1330976,
+            "successes": 82,
+            "last_error": "",
             "last_failure": 1795760759.0638635,
             "failures": 23
         }
     },
-    "last_stage_success": 1795762918.39002,
-    "last_success": 1795762241.6563976,
+    "last_stage_success": 1795762945.1330976,
+    "last_success": 1795762954.1993217,
     "emergency_ended": 1795755062.674488,
     "recovery_start_alerted": false
 }
