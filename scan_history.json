@@ -10,7 +10,7 @@
             "status": "READY",
             "decision": "SETUP \u2014 NOT QUEUED",
             "reason": "PULLBACK matched; stage DROPPED, must pass Watch > Manual > Auto first",
-            "execution_status": "BLOCKED",
+            "execution_status": "NOT_ELIGIBLE",
             "scan_id": "1795738869",
             "rank": 26,
             "vol": 1113947.0,

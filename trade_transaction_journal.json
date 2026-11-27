@@ -4303,5 +4303,11 @@
         "time": 1795746204.2543705,
         "event": "ai_portfolio_review",
         "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'DOS-USDT', 'action': 'HOLD', 'reason': 'Current PnL is +2.65% and price is above entry; stop loss remains comfortably below market. Monitor for any adverse price movement, especially if BTC volatility increases.'}], 'summary': 'The portfolio passes risk checks. The only open position (DOS-USDT) is modestly profitable and within its stop-loss buffer. No immediate action required; continue to observe market conditions and maintain existing stop levels.'}"
+    },
+    {
+        "time": 1795746305.2986708,
+        "event": "ai_coin_advisory",
+        "reviewed": 25,
+        "source": "coins.db"
     }
 ]
