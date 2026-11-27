@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691214,
+    "last_update_id": 935691216,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT33.30/\u20a645,492",
+    "kb_ph": "USDT33.73/\u20a646,073",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -83,31 +83,52 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 6969,
-    "out_mid": 6966,
-    "out_text": "\ud83d\udee0 *AUDIT \u2014 AI RECOVERY 2/3*\nCheck passed. 1 more to go.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "kb_mid": 6972,
+    "out_mid": 6973,
+    "out_text": "\ud83d\udcdf *OUTPUT*\nResults appear here.",
     "out_mode": "Markdown",
-    "out_time": 1795751108.8214035,
+    "panel_mid": 6974,
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
+                "text": "\ud83d\udda5 System",
+                "callback_data": "/bot"
             },
             {
-                "text": "1/2",
-                "callback_data": "pg:x"
+                "text": "\ud83d\udcc8 Stats",
+                "callback_data": "/stats"
+            }
+        ],
+        [
+            {
+                "text": "\u2699\ufe0f Settings",
+                "callback_data": "m:set"
             },
             {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
+                "text": "\ud83d\udcbc Holdings",
+                "callback_data": "m:r:holdings"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udcdc Trade History",
+                "callback_data": "m:r:history"
             },
             {
-                "text": "\ud83c\udfe0",
-                "callback_data": "m:menu"
+                "text": "\ud83e\udde0 Ask AI",
+                "callback_data": "m:ai:1"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\uddf9 Clear Chat",
+                "callback_data": "/clear"
+            },
+            {
+                "text": "\ud83d\udea8 PANIC SELL",
+                "callback_data": "/panic"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/2*",
-    "panel_hidden": true
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below."
 }

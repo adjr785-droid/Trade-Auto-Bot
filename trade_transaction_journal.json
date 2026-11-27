@@ -4330,5 +4330,15 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795755021.5505438,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'DOS-USDT', 'action': 'hold', 'reason': 'Position is modest (entry 0.077256), price is slightly above entry (0.0791) with a small unrealized gain of 2.39%. Stop loss at 0.073517 provides a comfortable buffer. No immediate risk signals; continue monitoring.'}], 'summary': 'Overall portfolio risk remains PASS. The only open position (DOS-USDT) shows a modest profit and is within its risk parameters. No action required beyond standard monitoring.'}"
+    },
+    {
+        "time": 1795755022.1803594,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6846, 'recurring_patterns': {'panic_sells': 9, 'manual_sells': 9, 'crash_guard': 1, 'symbols_with_multiple_trades': ['ADA-USDT', 'BLESS-USDT', 'MOVE-USDT', 'PUMP-USDT']}, 'recommendations': ['Limit panic-driven exits; implement stricter stop\u2011loss thresholds', 'Review manual sell decisions for consistency with strategy', 'Consider reducing exposure to high\u2011volatility tokens (e.g., MOVE-USDT)', 'Monitor crash\u2011guard triggers and adjust risk parameters accordingly']}"
     }
 ]
