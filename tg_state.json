@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935691319,
+    "last_update_id": 935691320,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -24,8 +24,8 @@
             1795739610.5038157
         ],
         "m:r:holdings": [
-            1,
-            1795788488.1712499
+            0,
+            1795788582.8587217
         ],
         "/analyse": [
             6,
@@ -95,7 +95,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "2/2",
+                "text": "1/2",
                 "callback_data": "pg:x"
             },
             {
@@ -112,7 +112,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 2/2*",
+    "panel_text": "\ud83d\udcc4 *Page 1/2*",
     "out_mid": 7224,
     "out_time": 1795788453.9442215,
     "pages": {
@@ -120,7 +120,7 @@
             "\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *DOS* $21.82 (63%)\n+1.85% (+$0.40) | Entry 0.079428\nQty 269.71809 | Price 0.080900 | Stop 0.075584 (-7%)\nRSI 54 | Bullish | ATH -91%\n\n\ud83d\udd34 *PWT* $6.92 (20%)\n-0.95% (-$0.07) | Entry 0.317999\nQty 21.98293 | Price 0.314991 | Stop 0.302099 (-4%)\n\u2800\n\u2800",
             "RSI 48 | Bearish | ATH -56%\n\n\ud83d\udfe2 *BTW* $6.05 (17%)\n+21.08% (+$1.05) | Entry 0.951821\nQty 5.24685 | Price 1.1525 | Stop 0.951821 (-17%)\nRSI 80 | Bullish | ATH -58%\n\n\ud83e\udde0 *AI:* DOS shows modest gain but its stop is 7% below entry, PWT is slightly\ndown with a 4% stop gap, and BTW\u2019s stop equals entry despite a 21% rise,\nindicating potential downside risk.\n\u2800\n\u2800"
         ],
-        "i": 1,
+        "i": 0,
         "mode": "Markdown",
         "x": [
             [
