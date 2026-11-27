@@ -4446,5 +4446,23 @@
         "time": 1795762229.1416886,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.1652, 'recurring_patterns': {'panic_trades': 7, 'manual_sell_trades': 12, 'crash_guard_trades': 1, 'symbols_with_multiple_losses': ['PROS-USDT', 'MOVE-USDT', 'PUMP-USDT']}, 'recommendations': ['Limit reliance on panic exits; consider tighter stop\u2011loss thresholds.', 'Review manual sell decisions that repeatedly result in losses.', 'Investigate the high\u2011impact loss on MOVE-USDT and adjust position sizing.', 'Maintain current win\u2011rate focus but aim to improve overall profitability.']}"
+    },
+    {
+        "time": 1795762245.5631156,
+        "event": "trade_closed",
+        "symbol": "PWT-USDT",
+        "pnl_usdt": 0.016474640000000818,
+        "reason": "MANUAL SELL $18.00",
+        "strategy": "MANUAL"
+    },
+    {
+        "time": 1795762250.421386,
+        "event": "ai_manual_sell_review",
+        "symbol": "PWT-USDT",
+        "review": {
+            "review": "The position was manually closed at an average exit price of 0.318291\u202fUSDT, realizing a modest profit of 0.0165\u202fUSDT on the trade. The trade sold 56.42 units while 21.98 units of the base asset remain unsold, indicating a partial exit rather than a full liquidation. The profit margin is very small relative to the position size, suggesting limited upside capture or possibly a conservative exit strategy. No automated safeguards or risk limits appear to have been triggered, and the manual decision overrides any deterministic exit rules that might have been in place.",
+            "lesson": "When exiting a position, especially with a partial sell, ensure that the realized profit justifies the transaction costs and potential opportunity cost of leaving a sizable remainder (\u224822\u202funits) exposed. Consider setting clearer profit targets or trailing thresholds to avoid minimal gains that may not outweigh fees. Additionally, document the rationale for manual overrides to improve future decision\u2011making and to align with risk management policies.",
+            "confidence": "high"
+        }
     }
 ]
