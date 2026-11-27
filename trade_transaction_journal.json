@@ -4262,5 +4262,15 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795739419.387643,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'Performance breaker: last 10 trades lost $0.25; auto-buy paused for 0.8h', 'attention': [{'symbol': 'DOS-USDT', 'action': 'monitor', 'reason': 'Position is 315 minutes old, down 1.37% with stop 0.073517 close to current price 0.0762; risk of further loss if price approaches stop.'}], 'summary': 'Current portfolio risk flag remains active. No new entries recommended while auto-buy is paused. Keep existing DOS-USDT position under watch; consider exiting if price approaches stop or if further downside risk emerges.'}"
+    },
+    {
+        "time": 1795739420.0956693,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6846, 'recurring_patterns': {'PANIC': 9, 'MANUAL_SELL': 9, 'CRASH_GUARD': 1}, 'recommendations': ['Limit panic exits and prioritize structured exit strategies', 'Implement tighter stop\u2011loss thresholds to avoid large negative trades', 'Review manual sell triggers for consistency and avoid ad\u2011hoc sizing', 'Monitor high\u2011frequency loss symbols (e.g., MOVE-USDT, PROS-USDT) and consider reducing exposure']}"
     }
 ]
