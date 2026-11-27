@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935691509,
+    "last_update_id": 935691514,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -92,102 +92,34 @@
     "panel_rows": [
         [
             {
-                "text": "BTC",
-                "callback_data": "m:a:BTC"
-            },
-            {
-                "text": "ETH",
-                "callback_data": "m:a:ETH"
-            },
-            {
-                "text": "SOL",
-                "callback_data": "m:a:SOL"
+                "text": "\ud83d\udd0d Search any coin",
+                "callback_data": "m:se"
             }
         ],
         [
             {
-                "text": "USDGO",
-                "callback_data": "m:a:USDGO"
+                "text": "DOS",
+                "callback_data": "m:a:DOS"
             },
             {
-                "text": "MTX",
-                "callback_data": "m:a:MTX"
-            },
-            {
-                "text": "NEAR",
-                "callback_data": "m:a:NEAR"
+                "text": "PWT",
+                "callback_data": "m:a:PWT"
             }
         ],
         [
             {
-                "text": "UMXM",
-                "callback_data": "m:a:UMXM"
-            },
-            {
-                "text": "ZEC",
-                "callback_data": "m:a:ZEC"
-            },
-            {
-                "text": "COLLECT",
-                "callback_data": "m:a:COLLECT"
+                "text": "\u2795 More coins",
+                "callback_data": "m:more:analyse:0"
             }
         ],
         [
             {
-                "text": "HYPE",
-                "callback_data": "m:a:HYPE"
-            },
-            {
-                "text": "DOGE",
-                "callback_data": "m:a:DOGE"
-            },
-            {
-                "text": "EVAA",
-                "callback_data": "m:a:EVAA"
-            }
-        ],
-        [
-            {
-                "text": "BGB",
-                "callback_data": "m:a:BGB"
-            },
-            {
-                "text": "DGAI",
-                "callback_data": "m:a:DGAI"
-            },
-            {
-                "text": "TRX",
-                "callback_data": "m:a:TRX"
-            }
-        ],
-        [
-            {
-                "text": "ENA",
-                "callback_data": "m:a:ENA"
-            },
-            {
-                "text": "PORTAL",
-                "callback_data": "m:a:PORTAL"
-            },
-            {
-                "text": "SUI",
-                "callback_data": "m:a:SUI"
-            }
-        ],
-        [
-            {
-                "text": "Next \u25b6\ufe0f",
-                "callback_data": "m:more:analyse:1"
-            }
-        ],
-        [
-            {
-                "text": "\u2b05\ufe0f Back",
-                "callback_data": "m:an"
+                "text": "\u2b05\ufe0f Menu",
+                "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "USDT0.02\n\u2795 *MORE COINS* (page 1/26)\nBiggest 24h volume first. Tap a coin.",
+    "panel_text": "USDT0.02\n\ud83d\udd0e *ANALYSE A COIN* \u2014 choose:",
     "out_time": 1795823341.5376403,
     "out_mid": 7574,
     "kb_mid": 7575,
