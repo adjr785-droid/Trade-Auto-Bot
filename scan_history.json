@@ -20,26 +20,6 @@
             "min_volume": 1000000.0,
             "spread_pct": 0.09117547191167061,
             "near_miss": null
-        },
-        {
-            "sym": "PEPE-USDT",
-            "time": 1795738873.664218,
-            "price": 3.495e-06,
-            "h1": 0.71,
-            "rsi": 46.54,
-            "status": "READY",
-            "decision": "SETUP \u2014 NOT QUEUED",
-            "reason": "PULLBACK matched; stage DROPPED, must pass Watch > Manual > Auto first",
-            "execution_status": "NOT_ELIGIBLE",
-            "scan_id": "1795738869",
-            "rank": 26,
-            "vol": 1113947.0,
-            "chg": -0.626,
-            "ma5": 4e-06,
-            "ma10": 3e-06,
-            "min_volume": 1000000.0,
-            "spread_pct": 0.05727376861396698,
-            "near_miss": null
         }
     ]
 }
