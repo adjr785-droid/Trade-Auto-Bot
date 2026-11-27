@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691473,
+    "last_update_id": 935691476,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT35.10/\u20a647,951",
+    "kb_ph": "USDT35.06/\u20a647,893",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -87,37 +87,44 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "out_text": "\ud83e\uddf9 Cleared 3 bot message(s).\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "\ud83d\udcda *COIN LIST*\n\u2705 Ready 0 | \ud83c\udd95 New 0 | \ud83d\udcbc Held 2 | \u26d4 Rejected 441\nPipeline: \ud83d\udc41 Watch 0 \u2192 \ud83d\udfe1 Manual 0 \u2192 \ud83e\udd16 Auto 0 | \u2935 Dropped 447 | Archived 0\nExecution: \ud83d\udce5 queued 0 | \u26d4 blocked 0 | \ud83d\udfe2 held 2\n\n```\nCOIN     PRICE RSI    1H ST  SC\n-------------------------------\nPORTAL 0.04055  92  +1.5 -    -\nLTC      44.65  59  +0.4 -    -\n```\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udcbc Portfolio",
-                "callback_data": "m:pf"
-            }
-        ],
-        [
+                "text": "\u25c0",
+                "callback_data": "pg:p"
+            },
             {
-                "text": "\ud83c\udfc6 Markets",
-                "callback_data": "/analyse"
-            }
-        ],
-        [
+                "text": "1/5",
+                "callback_data": "pg:x"
+            },
             {
-                "text": "\ud83e\uddf0 Tools",
-                "callback_data": "m:tools"
-            }
-        ],
-        [
+                "text": "\u25b6",
+                "callback_data": "pg:n"
+            },
             {
-                "text": "\ud83d\udda5 System",
-                "callback_data": "m:sy"
+                "text": "\ud83c\udfe0",
+                "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nChoose a group.",
-    "out_mid": 7521,
-    "out_time": 1795822685.2199483,
-    "kb_mid": 7523,
-    "panel_hidden": true
+    "panel_text": "\ud83d\udcc4 *Page 1/5*",
+    "out_time": 1795822741.3299787,
+    "kb_mid": 7528,
+    "out_mid": 7526,
+    "pages": {
+        "p": [
+            "\ud83d\udcda *COIN LIST*\n\u2705 Ready 0 | \ud83c\udd95 New 0 | \ud83d\udcbc Held 2 | \u26d4 Rejected 441\nPipeline: \ud83d\udc41 Watch 0 \u2192 \ud83d\udfe1 Manual 0 \u2192 \ud83e\udd16 Auto 0 | \u2935 Dropped 447 | Archived 0\nExecution: \ud83d\udce5 queued 0 | \u26d4 blocked 0 | \ud83d\udfe2 held 2\n\n```\nCOIN     PRICE RSI    1H ST  SC\n-------------------------------\nPORTAL 0.04055  92  +1.5 -    -\nLTC      44.65  59  +0.4 -    -\n```\n\u2800",
+            "```\nBNB     553.72  43  +0.1 -    -\nLINK     9.343  47  +0.1 -    -\nKII   0.084512  37  +0.1 -    -\nIDOL   0.01668  54  -0.1 -    -\nPONS    0.1017  55  -0.1 -    -\nJCT   0.001566  59  -0.1 -    -\nWLD     0.2457  50  -0.2 -    -\nSUI     0.6704  44  -0.2 -    -\nADA     0.1479  41  -0.3 -    -\nTAO      186.1  51  -0.4 -    -\n```",
+            "```\n```\n_ST: W Watch, M Manual, A Auto, R Ready, N New, H Held, X Rejected. SC: manual\nscore._\n\ud83e\udde0 PORTAL: high: Not eligible; RSI 92 extremely overbought, 24h up 226%; very\nhigh risk.\n\ud83e\udde0 LTC: moderate: Not eligible; RSI 58.8, 24h up 2%; approaching overbought.\n\ud83e\udde0 BNB: low: Not eligible; RSI 42.8, very low 24h change; stable large\u2011cap\nasset.\n\ud83e\udde0 LINK: low: Not eligible; RSI 46.6, modest gains; relatively stable.\n\ud83e\udde0 KII: low: Not eligible; RSI 37.4 low, 24h slight down; oversold but no clear\n\u2800",
+            "entry.\n\ud83e\udde0 IDOL: moderate: Not eligible; RSI 54, 24h down 5.3%; mixed signals, watch\nvolatility.\n\ud83e\udde0 PONS: moderate: Not eligible; RSI 54.9, 24h up 18%; rising but still below\nextreme overbought.\n\ud83e\udde0 JCT: high: Not eligible; RSI 59, 24h up 7.1%; elevated risk, overbought.\n\ud83e\udde0 WLD: low: Not eligible; RSI 49.96, modest 24h gain; stable.\n\ud83e\udde0 SUI: low: Not eligible; RSI 44.4, small declines; price stable, low\nvolatility.\n\ud83e\udde0 ADA: low: Not eligible; RSI 40.7, slight negative 24h; low risk but no\n\u2800\n\u2800",
+            "signal.\n\ud83e\udde0 TAO: low: Not eligible; RSI 50.8, modest 24h gain; stable.\n\n\u2935 *DROPPED \u2014 retained for recovery:* PORTAL (3/10), LTC (5/10), BNB (4/10),\nLINK (4/10), KII (2/10)\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+        ],
+        "i": 0,
+        "mode": "Markdown",
+        "x": [],
+        "cmd": "m:coins"
+    },
+    "panel_mid": 7527
 }
