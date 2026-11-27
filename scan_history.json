@@ -1,5 +1,5 @@
 {
-    "window_start": 1795717271.235082,
+    "window_start": 1795803691.8701556,
     "items": [
         {
             "sym": "PWT-USDT",
@@ -10,7 +10,7 @@
             "status": "READY",
             "decision": "SETUP \u2014 NOT QUEUED",
             "reason": "TREND matched; stage DROPPED, must pass Watch > Manual > Auto first",
-            "execution_status": "BOUGHT",
+            "execution_status": "HELD",
             "scan_id": "1795756361",
             "rank": 24,
             "vol": 1408564.56,
