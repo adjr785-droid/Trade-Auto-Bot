@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691435,
+    "last_update_id": 935691436,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT34.87/\u20a647,628",
+    "kb_ph": "USDT34.97/\u20a647,771",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -89,24 +89,66 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 7469,
-    "out_text": "USDT0.03\n\n\u2b50 *FAVOURITES*\n_Your own list. Tap a coin to buy, sell or remove it._\n\n```\nCOIN     PRICE RSI    1H    24H\n-------------------------------\nDOS     0.0812   -     -   +5.7\nBLESS 0.014282   -     -  -13.6\n```\n\u2800",
+    "kb_mid": 7471,
+    "out_text": "USDT0.03\n\u2705 PWT added.\n\u2b50 *FAVOURITES*\n_Your own list. Tap a coin to buy, sell or remove it._\n\n```\nCOIN     PRICE RSI    1H    24H\n-------------------------------\nDOS     0.0812   -     -   +5.7\nBLESS 0.014282   -     -  -13.6\n```\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
             {
-                "text": "\u274c Cancel",
+                "text": "\u25c0",
+                "callback_data": "pg:p"
+            },
+            {
+                "text": "1/2",
+                "callback_data": "pg:x"
+            },
+            {
+                "text": "\u25b6",
+                "callback_data": "pg:n"
+            },
+            {
+                "text": "\ud83c\udfe0",
+                "callback_data": "m:menu"
+            }
+        ],
+        [
+            {
+                "text": "\u2795 Add coin",
+                "callback_data": "m:fs"
+            },
+            {
+                "text": "\ud83d\udd04 Refresh",
                 "callback_data": "m:fv"
+            }
+        ],
+        [
+            {
+                "text": "\u2b50 DOS",
+                "callback_data": "m:fc:DOS:fv"
+            },
+            {
+                "text": "\u2b50 BLESS",
+                "callback_data": "m:fc:BLESS:fv"
+            },
+            {
+                "text": "\u2b50 PWT",
+                "callback_data": "m:fc:PWT:fv"
+            }
+        ],
+        [
+            {
+                "text": "\u2b05\ufe0f Markets",
+                "callback_data": "/analyse"
             }
         ]
     ],
-    "panel_text": "\u2b50 *ADD TO FAVOURITES*\nType the coin name or part of it (example: SOL).",
-    "out_time": 1795820449.4510381,
+    "panel_text": "\ud83d\udcc4 *Page 1/2*",
+    "out_time": 1795820499.3744466,
     "out_mid": 7467,
     "pages": {
         "p": [
-            "USDT0.03\n\n\u2b50 *FAVOURITES*\n_Your own list. Tap a coin to buy, sell or remove it._\n\n```\nCOIN     PRICE RSI    1H    24H\n-------------------------------\nDOS     0.0812   -     -   +5.7\nBLESS 0.014282   -     -  -13.6\n```\n\u2800",
-            "```\n```\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+            "USDT0.03\n\u2705 PWT added.\n\u2b50 *FAVOURITES*\n_Your own list. Tap a coin to buy, sell or remove it._\n\n```\nCOIN     PRICE RSI    1H    24H\n-------------------------------\nDOS     0.0812   -     -   +5.7\nBLESS 0.014282   -     -  -13.6\n```\n\u2800",
+            "```\nPWT   0.311006  46  -0.6   +3.3\n```\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
         "i": 0,
         "mode": "Markdown",
@@ -129,6 +171,10 @@
                 {
                     "text": "\u2b50 BLESS",
                     "callback_data": "m:fc:BLESS:fv"
+                },
+                {
+                    "text": "\u2b50 PWT",
+                    "callback_data": "m:fc:PWT:fv"
                 }
             ],
             [
@@ -138,11 +184,7 @@
                 }
             ]
         ],
-        "cmd": "m:fv"
+        "cmd": null
     },
-    "panel_mid": 7468,
-    "search_pending": {
-        "t": 1795820458.845869,
-        "kind": "fav"
-    }
+    "panel_mid": 7468
 }
