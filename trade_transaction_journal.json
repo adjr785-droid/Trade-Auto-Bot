@@ -4731,5 +4731,15 @@
         "time": 1795795514.4881542,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 63.33, 'net_pnl_usdt': 1.4014, 'recurring_patterns': {'exit_reasons': {'PANIC': 9, 'MANUAL_SELL': 10, 'CRASH_GUARD': 1}, 'symbols_with_multiple_trades': {'BTW-USDT': 2, 'BLESS-USDT': 4, 'MOVE-USDT': 4, 'PUMP-USDT': 2}}, 'recommendations': {'risk_management': 'Consider tightening panic\u2011sell thresholds and implementing stricter stop\u2011loss rules to reduce reliance on manual panic exits.', 'position_sizing': 'Maintain conservative position sizes, especially for symbols with high volatility such as MOVE-USDT and PUMP-USDT.', 'monitoring': 'Add alerts for rapid price drops to trigger automated protective actions before manual intervention is needed.', 'review': 'Periodically review manual sell decisions to ensure they align with predefined profit targets rather than emotional responses.'}}"
+    },
+    {
+        "time": 1795798122.516868,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'DOS-USDT', 'action': 'monitor', 'reason': 'Small profit (0.85%) but stop is close; consider tightening stop to protect gains'}, {'symbol': 'PWT-USDT', 'action': 'review_exit', 'reason': 'Negative PnL (-0.52%) and price approaching stop; evaluate exit or tighter stop'}], 'summary': 'Overall portfolio risk passes. BTC filter is active, so no new BTC exposure is recommended. Maintain current positions while closely watching stop levels; adjust stops conservatively to lock in modest gains on DOS and limit further loss on PWT.'}"
+    },
+    {
+        "time": 1795798123.1513915,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 63.33, 'net_pnl_usdt': 1.4014, 'recurring_patterns': {'reasons': ['PANIC', 'MANUAL SELL'], 'symbols': ['BLESS-USDT', 'MOVE-USDT', 'PUMP-USDT']}, 'recommendations': 'Maintain current risk limits, reduce exposure to assets with frequent PANIC exits, and consider tighter stop\u2011losses for high\u2011volatility symbols. Continue manual oversight for manual sell triggers.'}"
     }
 ]
