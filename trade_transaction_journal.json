@@ -4362,5 +4362,23 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795756393.4253142,
+        "event": "trade_closed",
+        "symbol": "DOS-USDT",
+        "pnl_usdt": 0.5202437999999977,
+        "reason": "MANUAL SELL $25.00",
+        "strategy": "MANUAL"
+    },
+    {
+        "time": 1795756398.08095,
+        "event": "ai_manual_sell_review",
+        "symbol": "DOS-USDT",
+        "review": {
+            "review": "The position was manually closed at an average exit price of 0.0789\u202fUSDT, realizing a profit of approximately 0.52\u202fUSDT on the sold 316.45 units. The remaining base of 109.00 units was not sold, indicating a partial exit. The profit is modest relative to the position size, suggesting the exit may have been driven by non\u2011technical factors or a conservative risk approach.",
+            "lesson": "When exiting a position, ensure the exit price aligns with the predefined risk\u2011reward targets. Partial exits should be documented with clear rationale, especially if a significant base remains. Consider using automated triggers to capture larger moves and avoid leaving sizable residual balances that may be exposed to market volatility.",
+            "confidence": "medium"
+        }
     }
 ]
