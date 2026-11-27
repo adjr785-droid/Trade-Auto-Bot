@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935691413,
+    "last_update_id": 935691414,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -72,8 +72,8 @@
             1795803102.8512123
         ],
         "/scan_history": [
-            7,
-            1795804153.8984947
+            8,
+            1795804180.4975417
         ]
     },
     "radar": [],
@@ -96,7 +96,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "8/17",
+                "text": "9/17",
                 "callback_data": "pg:x"
             },
             {
@@ -109,7 +109,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 8/17*",
+    "panel_text": "\ud83d\udcc4 *Page 9/17*",
     "pages": {
         "p": [
             "USDT0.03\n\ud83d\udd0e *SCAN HISTORY* \u00b7 464/464 coins (first 150)\n27 scans \u00b7 0.1h\n```\nCOIN    RSI    1H WHY\n------------------------------\nPWT      47  +0.9 Blocked\nPEPE     47  +0.7 Blocked\nBTC      38     - Top 15\nETH      37     - Top 15\n```\n\u2800",
@@ -130,7 +130,7 @@
             "```\nHNT      46     - Vol low\nPOWER    37     - Vol low\nUAI      34     - Vol low\nPENDLE   42     - Vol low\nBSV      50     - Vol low\nDTEC     45     - Vol low\n```\n\n\ud83e\udde0 *AI:* BTC shows a relatively low RSI (38) yet remains in the top\u201115 list,\nwhile many other coins exhibit high RSI or low volume flags, indicating BTC may\n\u2800",
             "be the only stable candidate in this scan.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 7,
+        "i": 8,
         "mode": "Markdown",
         "x": [],
         "cmd": "/scan_history"
