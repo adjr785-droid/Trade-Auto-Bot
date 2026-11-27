@@ -4298,5 +4298,10 @@
         "time": 1795744990.366435,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.6846, 'recurring_patterns': {'panic_sells': 9, 'manual_sells': 9, 'crash_guard': 1, 'symbols_with_multiple_trades': ['ADA-USDT', 'BLESS-USDT', 'MOVE-USDT', 'PUMP-USDT']}, 'recommendations': ['Limit panic\u2011sell triggers and require confirmation before exiting positions', 'Review manual sell criteria to ensure they align with predefined profit targets', 'Implement tighter stop\u2011loss thresholds to avoid large negative trades like the MOVE\u2011USDT crash guard event', 'Diversify across more stable assets to reduce exposure to high\u2011volatility tokens', 'Monitor win\u2011rate trends; current 56.7% is marginally above break\u2011even but net PnL is negative, indicating need for tighter risk control']}"
+    },
+    {
+        "time": 1795746204.2543705,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'DOS-USDT', 'action': 'HOLD', 'reason': 'Current PnL is +2.65% and price is above entry; stop loss remains comfortably below market. Monitor for any adverse price movement, especially if BTC volatility increases.'}], 'summary': 'The portfolio passes risk checks. The only open position (DOS-USDT) is modestly profitable and within its stop-loss buffer. No immediate action required; continue to observe market conditions and maintain existing stop levels.'}"
     }
 ]

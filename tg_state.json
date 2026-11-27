@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691207,
+    "last_update_id": 935691208,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT33.81/\u20a646,190",
+    "kb_ph": "USDT33.82/\u20a646,190",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -81,53 +81,53 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "out_text": "\n\ud83e\udde0 *AI:* Overall spot bot shows modest profit (+$4.22) with a 52% win rate, but\nlow trade counts in breakout/older strategies and limited watch data make the\nresults statistically uncertain.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "kb_mid": 6943,
+    "out_mid": 6944,
+    "out_text": "\ud83d\udea8 *AI FAILURE*\nAI notes and reviews are paused. Buying, selling and all stops keep running on\nthe rules. The audit is recovering the AI (3 checks).\nReason: AI stage performance_review failed: Expecting ',' delimiter: line 1\ncolumn 521 (char 520)\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
+    "panel_mid": 6945,
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
+                "text": "\ud83d\udda5 System",
+                "callback_data": "/bot"
             },
             {
-                "text": "3/3",
-                "callback_data": "pg:x"
+                "text": "\ud83d\udcc8 Stats",
+                "callback_data": "/stats"
+            }
+        ],
+        [
+            {
+                "text": "\u2699\ufe0f Settings",
+                "callback_data": "m:set"
             },
             {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
+                "text": "\ud83d\udcbc Holdings",
+                "callback_data": "m:r:holdings"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udcdc Trade History",
+                "callback_data": "m:r:history"
             },
             {
-                "text": "\ud83c\udfe0",
-                "callback_data": "m:menu"
+                "text": "\ud83e\udde0 Ask AI",
+                "callback_data": "m:ai:1"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\uddf9 Clear Chat",
+                "callback_data": "/clear"
             },
             {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
+                "text": "\ud83d\udea8 PANIC SELL",
+                "callback_data": "/panic"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 3/3*",
-    "out_time": 1795745121.4925368,
-    "kb_mid": 6941,
-    "pages": {
-        "p": [
-            "\ud83d\udcc8 *TRADE STATS* (after estimated fees)\nClosed trades: 56\nWin rate: 52% (29 wins, 27 losses)\nAverage win: $+0.34 | Average loss: $-0.21\nProfit factor: 1.75\nExpectancy per trade: $+0.08\nNet profit: $+4.22\nBest: $+2.97 | Worst: $-0.70\n\n*By strategy*\n\u2800\n\u2800",
-            "MANUAL: 42 trades | win 55% | avg $+0.15 | total $+6.13\nBREAKOUT: 1 trades | win 100% | avg $+0.10 | total $+0.10\nOLDER: 2 trades | win 0% | avg $-0.15 | total $-0.29\nOTHER: 11 trades | win 45% | avg $-0.16 | total $-1.73\n\n\ud83d\udd2c *RULE RESULTS* (what coins did after each stage)\n\ud83d\udc41 Watch (2): 4h -0.3% | win 0% | up +1.8% / down -3.4%\n\ud83d\udfe1 Manual: collecting data\n\ud83e\udd16 Auto: collecting data\nWin = beats round-trip fees at 4h. Needs a few days of scans to mean anything.\n\u2800\n\u2800",
-            "\n\ud83e\udde0 *AI:* Overall spot bot shows modest profit (+$4.22) with a 52% win rate, but\nlow trade counts in breakout/older strategies and limited watch data make the\nresults statistically uncertain.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
-        ],
-        "i": 2,
-        "mode": "Markdown",
-        "x": [
-            [
-                {
-                    "text": "\ud83d\udd04",
-                    "callback_data": "rf:go"
-                }
-            ]
-        ],
-        "cmd": "/stats"
-    },
-    "out_mid": 6939,
-    "panel_mid": 6940
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
+    "out_time": 1795746205.665221
 }
