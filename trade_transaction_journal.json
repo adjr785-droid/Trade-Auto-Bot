@@ -4620,5 +4620,15 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795787423.1304371,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'PWT-USDT', 'action': 'monitor', 'reason': 'Negative PnL (-0.94%) and price approaching stop level (0.315 vs stop 0.302). Consider tightening stop or reducing exposure if further downside appears.'}, {'symbol': 'DOS-USDT', 'action': 'hold', 'reason': 'Small positive PnL (1.48%) with price comfortably above stop (0.0806 vs 0.0756). No immediate action required.'}, {'symbol': 'BTW-USDT', 'action': 'hold', 'reason': 'Strong positive PnL (13.5%) and price well above stop (1.080 vs 0.952). Position appears healthy.'}], 'summary': 'Overall portfolio risk remains PASS. Primary focus should be on PWT-USDT, which is the only position showing a loss and nearing its stop. Maintain vigilance on that trade while the other positions are performing within acceptable parameters.'}"
+    },
+    {
+        "time": 1795787424.0732617,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': -0.1231, 'recurring_patterns': [{'reason_category': 'PANIC', 'frequency': 7, 'average_pnl': 0.0585}, {'reason_category': 'MANUAL SELL', 'frequency': 11, 'average_pnl': 0.1243}, {'reason_category': 'CRASH GUARD', 'frequency': 1, 'average_pnl': -0.5691}], 'recommendations': ['Limit exposure to symbols that trigger frequent PANIC exits.', 'Review manual sell thresholds to avoid small, frequent losses.', 'Implement tighter stop\u2011loss rules to replace ad\u2011hoc panic sells.', 'Consider reducing position size on MOVE-USDT where a large crash guard loss occurred.', 'Maintain current win\u2011rate focus but aim to improve average pnl per trade above breakeven.']}"
     }
 ]

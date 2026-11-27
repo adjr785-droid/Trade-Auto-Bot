@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691313,
+    "last_update_id": 935691314,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT34.10/\u20a646,583",
+    "kb_ph": "USDT34.42/\u20a647,019",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -87,52 +87,5 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 7213,
-    "out_text": "\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *DOS* $21.74 (64%)\n+1.48% (+$0.32) | Entry 0.079428\nQty 269.71809 | Price 0.080600 | Stop 0.075584 (-6%)\nRSI 57 | Bullish | ATH -91%\n\n\ud83d\udfe2 *PWT* $7.04 (21%)\n+0.64% (+$0.04) | Entry 0.317999\nQty 21.98293 | Price 0.320034 | Stop 0.302099 (-6%)\n\u2800\n\u2800",
-    "out_mode": "Markdown",
-    "out_time": 1795782568.9726484,
-    "panel_rows": [
-        [
-            {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
-            },
-            {
-                "text": "2/2",
-                "callback_data": "pg:x"
-            },
-            {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
-            },
-            {
-                "text": "\ud83c\udfe0",
-                "callback_data": "m:menu"
-            },
-            {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
-            }
-        ]
-    ],
-    "panel_text": "\ud83d\udcc4 *Page 2/2*",
-    "out_mid": 7209,
-    "pages": {
-        "p": [
-            "\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *DOS* $21.74 (64%)\n+1.48% (+$0.32) | Entry 0.079428\nQty 269.71809 | Price 0.080600 | Stop 0.075584 (-6%)\nRSI 57 | Bullish | ATH -91%\n\n\ud83d\udfe2 *PWT* $7.04 (21%)\n+0.64% (+$0.04) | Entry 0.317999\nQty 21.98293 | Price 0.320034 | Stop 0.302099 (-6%)\n\u2800\n\u2800",
-            "RSI 54 | Bullish | ATH -55%\n\n\ud83d\udfe2 *BTW* $5.25 (15%)\n+5.20% (+$0.26) | Entry 0.951821\nQty 5.24685 | Price 1.0013 | Stop 0.951821 (-5%)\nRSI 60 | Mixed | ATH -64%\n\n\ud83e\udde0 *AI:* Holdings show modest gains; DOS up 1.48% with stop 6% below entry, PWT\nup 0.64% with similar stop, BTW up 5.2% but stop equals entry\u2014monitor stops and\nRSI as BTC filter is inactive.\n\u2800\n\u2800"
-        ],
-        "i": 1,
-        "mode": "Markdown",
-        "x": [
-            [
-                {
-                    "text": "\ud83d\udd04",
-                    "callback_data": "rf:go"
-                }
-            ]
-        ],
-        "cmd": "m:r:holdings"
-    },
-    "panel_mid": 7210
+    "kb_mid": 7214
 }
