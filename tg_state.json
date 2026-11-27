@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT33.54/\u20a645,808",
+    "kb_ph": "USDT33.66/\u20a645,973",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -76,15 +76,43 @@
             1795762454.8791695
         ]
     },
-    "radar": [],
+    "radar": [
+        "ARX-USDT",
+        "JCT-USDT"
+    ],
     "audit_down": {},
-    "audit_last": 1795767383.569762,
-    "audit_ai_cls": "OTHER",
+    "audit_last": 1795771885.189265,
+    "audit_ai_cls": "",
     "perf_breaker": {
         "until": 1795742224.733271,
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 7134,
+    "kb_mid": 7139,
+    "out_mid": 7135,
+    "out_text": "\ud83d\udee0 AUDIT\n\u2705 Fixed: AI problem cleared (unknown error)\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_mode": "Markdown",
+    "out_time": 1795771886.0303857,
+    "panel_rows": [
+        [
+            {
+                "text": "\u25c0",
+                "callback_data": "pg:p"
+            },
+            {
+                "text": "1/3",
+                "callback_data": "pg:x"
+            },
+            {
+                "text": "\u25b6",
+                "callback_data": "pg:n"
+            },
+            {
+                "text": "\ud83c\udfe0",
+                "callback_data": "m:menu"
+            }
+        ]
+    ],
+    "panel_text": "\ud83d\udcc4 *Page 1/3*",
     "panel_hidden": true
 }
