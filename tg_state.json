@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691339,
+    "last_update_id": 935691340,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT34.43/\u20a647,031",
+    "kb_ph": "USDT34.72/\u20a647,427",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -85,12 +85,12 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 7267,
-    "out_mid": 7264,
-    "out_text": "\ud83d\udee0 AUDIT\n\u2705 Fixed: AI problem cleared (unknown error)\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "kb_mid": 7269,
+    "out_mid": 7270,
+    "out_text": "\u23f8 *BTC FILTER:* BTC RSI is 24.96 (needs \u2265 50).\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795790559.139977,
-    "panel_mid": 7265,
+    "out_time": 1795794126.9428341,
+    "panel_mid": 7271,
     "panel_rows": [
         [
             {

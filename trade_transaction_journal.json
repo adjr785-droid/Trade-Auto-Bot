@@ -4705,5 +4705,15 @@
         "time": 1795790541.331912,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 63.33, 'net_pnl_usdt': 1.4014, 'recurring_patterns': {'reasons': {'PANIC': 6, 'MANUAL SELL ALL': 3, 'MANUAL SELL $': 5, 'CRASH GUARD': 1}}, 'recommendations': 'Maintain current risk limits, reduce reliance on panic exits, and consider tighter stop\u2011losses. Focus on symbols with consistent positive pnl and avoid repeated manual sell triggers that indicate volatility.'}"
+    },
+    {
+        "time": 1795794133.322812,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'DOS-USDT', 'action': 'monitor', 'reason': 'Small positive PnL (0.85%) and price near entry; stop loss relatively close (6% below entry). Maintain watch for adverse moves.'}, {'symbol': 'PWT-USDT', 'action': 'monitor', 'reason': 'Slight negative PnL (-0.54%) with price approaching stop level (0.3008). No immediate action, but watch for further downside.'}], 'summary': 'Overall portfolio risk remains acceptable (PASS). Both positions are small and within manual setups. Continue monitoring; no new orders recommended.'}"
+    },
+    {
+        "time": 1795794133.8603327,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 63.33, 'net_pnl_usdt': 1.4014, 'recurring_patterns': {'reasons': {'PANIC': 9, 'MANUAL SELL': 10, 'CRASH GUARD': 1}}, 'recommendations': 'Maintain current risk limits; avoid panic exits; prioritize manual sell signals with clear profit targets; monitor high\u2011frequency loss symbols (e.g., MOVE-USDT) for potential de\u2011listing or volatility spikes; consider reducing exposure to assets with repeated panic closures.'}"
     }
 ]
