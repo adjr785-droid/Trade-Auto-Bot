@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935691237,
+    "last_update_id": 935691239,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -68,8 +68,8 @@
             1795739339.4125237
         ],
         "m:su": [
-            1,
-            1795756315.5894995
+            0,
+            1795756794.589568
         ]
     },
     "radar": [
@@ -89,44 +89,46 @@
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
+                "text": "\ud83d\udda5 System",
+                "callback_data": "/bot"
             },
             {
-                "text": "2/2",
-                "callback_data": "pg:x"
-            },
-            {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
-            },
-            {
-                "text": "\ud83c\udfe0",
-                "callback_data": "m:menu"
+                "text": "\ud83d\udcc8 Stats",
+                "callback_data": "/stats"
             }
         ],
         [
             {
-                "text": "\ud83d\udd0d SCAN NOW",
-                "callback_data": "m:r:scan"
+                "text": "\u2699\ufe0f Settings",
+                "callback_data": "m:set"
             },
             {
-                "text": "\ud83d\udcdc SCAN HISTORY",
-                "callback_data": "/scan_history"
+                "text": "\ud83d\udcbc Holdings",
+                "callback_data": "m:r:holdings"
             }
         ],
         [
             {
-                "text": "\u2b05\ufe0f Analyse",
-                "callback_data": "/analyse"
+                "text": "\ud83d\udcdc Trade History",
+                "callback_data": "m:r:history"
             },
             {
-                "text": "\ud83d\udd04 Refresh",
-                "callback_data": "m:su"
+                "text": "\ud83e\udde0 Ask AI",
+                "callback_data": "m:ai:1"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\uddf9 Clear Chat",
+                "callback_data": "/clear"
+            },
+            {
+                "text": "\ud83d\udea8 PANIC SELL",
+                "callback_data": "/panic"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 2/2*",
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nSelect an option below.",
     "kb_mid": 7021,
     "out_mid": 7022,
     "pages": {
@@ -134,7 +136,7 @@
             "USDT0.03\n\ud83c\udfaf *SETUPS*\n_Coins from the latest scan that pass at least 3 of 5 checks._\n\n```\nCOIN  RSI   1H  24H TY PASS BLOCK\n--------------------------------\nBNB    71 +0.6   +1  - 3/5 RS\nADA    66 +0.6   +2  - 3/5 RS\nUNI    66 +0.9   +2  - 3/5 RS\n```\n\u2800",
             "```\nLTC    71 +0.7   +2  - 3/5 RS\nJCT    57 +1.0   +0  - 3/5 RM\n```\n_TY: T Trend, P Pullback, B Bounce, K Breakout, - none_\n_BLOCK: R RSI, M MA, H 1H, D 24H, S score (Core 5+ and Extra 2+). OK = all\npassed._\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 1,
+        "i": 0,
         "mode": "Markdown",
         "x": [
             [
