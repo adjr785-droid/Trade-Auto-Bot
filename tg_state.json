@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691471,
+    "last_update_id": 935691473,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT35.11/\u20a647,954",
+    "kb_ph": "USDT35.10/\u20a647,951",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -87,11 +87,8 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 7513,
-    "out_mid": 7519,
-    "out_text": "\ud83d\udcdf *OUTPUT*\nResults appear here.",
+    "out_text": "\ud83e\uddf9 Cleared 3 bot message(s).\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "panel_mid": 7520,
     "panel_rows": [
         [
             {
@@ -118,5 +115,9 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nChoose a group."
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nChoose a group.",
+    "out_mid": 7521,
+    "out_time": 1795822685.2199483,
+    "kb_mid": 7523,
+    "panel_hidden": true
 }
