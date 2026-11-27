@@ -4536,5 +4536,15 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795773917.0974357,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'PWT-USDT', 'action': 'monitor', 'reason': 'Negative P&L (-1.96%) and price approaching stop level (0.3118 vs stop 0.3021). Consider tightening stop or reducing position if further downside appears.'}, {'symbol': 'DOS-USDT', 'action': 'hold', 'reason': 'Small positive P&L (2.13%) with price still above stop. No immediate risk, but monitor for reversal as price nears stop (0.0789 vs 0.0735).'}, {'symbol': 'ENA-USDT', 'action': 'hold', 'reason': 'Near break-even (0.28% P&L) and price comfortably above stop. Continue to watch for trend confirmation.'}, {'symbol': 'BTW-USDT', 'action': 'hold', 'reason': 'Strong positive P&L (5.05%) and price well above stop. Position appears healthy; maintain current risk parameters.'}], 'summary': 'Overall portfolio risk remains PASS. The only position showing downside pressure is PWT-USDT, which is nearin"
+    },
+    {
+        "time": 1795773917.9155228,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 56.67, 'net_pnl_usdt': -0.1971, 'recurring_patterns': {'panic_trades': 7, 'manual_sell_trades': 13, 'crash_guard_trades': 1, 'symbols_with_multiple_trades': ['BLESS-USDT', 'MOVE-USDT', 'PUMP-USDT']}, 'recommendations': ['Limit exposure to panic-driven exits; consider tighter stop\u2011loss thresholds.', 'Review manual sell decisions for consistency with strategy rules.', 'Monitor symbols with repeated losses (e.g., MOVE-USDT) and consider reducing position size.', 'Maintain current win\u2011rate focus but aim to improve net P&L through tighter risk management.']}"
     }
 ]
