@@ -4831,5 +4831,15 @@
         "time": 1795804045.3685448,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 63.33, 'net_pnl_usdt': 0.372, 'recurring_patterns': {'high_frequency_symbols': ['BLESS-USDT', 'MOVE-USDT', 'DOS-USDT'], 'common_reasons': {'PANIC': 6, 'MANUAL SELL': 13, 'CRASH GUARD': 1}, 'loss_concentration': {'MOVE-USDT': 2, 'PROS-USDT': 1, 'PUMP-USDT': 1, 'TRX-USDT': 1}}, 'recommendations': ['Limit panic\u2011driven exits; implement stricter stop\u2011loss thresholds.', 'Diversify across symbols rather than concentrating on a few repeated assets.', 'Review manual sell triggers to ensure they align with predefined profit targets.', 'Maintain current win\u2011rate but aim to improve average win size versus loss size.', 'Monitor crash\u2011guard activation frequency and adjust risk parameters accordingly.']}"
+    },
+    {
+        "time": 1795804445.2175303,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'DOS-USDT', 'action': 'hold', 'reason': 'Positive PnL (+4.25%) and price above entry; stop is ~8.9% below entry, providing cushion. Monitor for downside but no immediate action.'}, {'symbol': 'PWT-USDT', 'action': 'review_stop', 'reason': 'Slight negative PnL (-0.42%) and price approaching stop (0.315 vs stop 0.3006). Consider tightening stop or reducing position if further downside appears.'}], 'summary': 'Overall portfolio risk remains PASS. DOS-USDT is performing well; maintain position with current stop. PWT-USDT shows marginal loss; re-evaluate stop level and watch for further decline.'}"
+    },
+    {
+        "time": 1795804446.2786558,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 63.33, 'net_pnl_usdt': 0.372, 'recurring_patterns': {'high_frequency_symbols': ['BLESS-USDT', 'MOVE-USDT', 'DOS-USDT'], 'common_reasons': {'PANIC': 6, 'MANUAL SELL': 13, 'CRASH GUARD': 1}, 'loss_concentration': {'MOVE-USDT': 2, 'PROS-USDT': 1, 'PUMP-USDT': 1, 'TRX-USDT': 1}}, 'recommendations': ['Limit panic\u2011driven exits; implement stricter stop\u2011loss thresholds.', 'Diversify across symbols rather than concentrating on a few high\u2011turnover assets.', 'Review manual sell triggers to ensure they align with predefined profit targets.', 'Maintain current win\u2011rate but aim to improve average win size while reducing large losses (e.g., -0.569 on MOVE).', 'Consider adding automated risk controls to replace ad\u2011hoc manual decisions.']}"
     }
 ]

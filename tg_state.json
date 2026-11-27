@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691414,
+    "last_update_id": 935691415,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT35.35/\u20a648,285",
+    "kb_ph": "USDT35.45/\u20a648,429",
     "layout_bottom": [
         "tools",
         "analyse"
@@ -72,8 +72,8 @@
             1795803102.8512123
         ],
         "/scan_history": [
-            8,
-            1795804180.4975417
+            9,
+            1795804438.56481
         ]
     },
     "radar": [],
@@ -85,7 +85,7 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 7400,
+    "kb_mid": 7401,
     "out_text": "```\nARIA     49     - Vol low\nINJ      54     - Vol low\nBLESS    26     - Vol low\nPAXG     58     - Vol low\nSKY      51     - Vol low\nFET      60     - Vol low\nPROS     51     - Vol low\nACN      34     - Vol low\nOPEN     49     - Vol low\nASTER    47     - Vol low\n```",
     "out_mode": "Markdown",
     "out_time": 1795804148.8799336,
@@ -96,7 +96,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "9/17",
+                "text": "10/17",
                 "callback_data": "pg:x"
             },
             {
@@ -109,7 +109,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 9/17*",
+    "panel_text": "\ud83d\udcc4 *Page 10/17*",
     "pages": {
         "p": [
             "USDT0.03\n\ud83d\udd0e *SCAN HISTORY* \u00b7 464/464 coins (first 150)\n27 scans \u00b7 0.1h\n```\nCOIN    RSI    1H WHY\n------------------------------\nPWT      47  +0.9 Blocked\nPEPE     47  +0.7 Blocked\nBTC      38     - Top 15\nETH      37     - Top 15\n```\n\u2800",
@@ -130,7 +130,7 @@
             "```\nHNT      46     - Vol low\nPOWER    37     - Vol low\nUAI      34     - Vol low\nPENDLE   42     - Vol low\nBSV      50     - Vol low\nDTEC     45     - Vol low\n```\n\n\ud83e\udde0 *AI:* BTC shows a relatively low RSI (38) yet remains in the top\u201115 list,\nwhile many other coins exhibit high RSI or low volume flags, indicating BTC may\n\u2800",
             "be the only stable candidate in this scan.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 8,
+        "i": 9,
         "mode": "Markdown",
         "x": [],
         "cmd": "/scan_history"
