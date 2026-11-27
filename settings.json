@@ -1,7 +1,7 @@
 {
     "rsi_min": 42,
     "rsi_max": 48,
-    "stop_loss_pct": 15,
+    "stop_loss_pct": 5.0,
     "sl_sell_percent": 0.5,
     "dca_reserve": 2.4143,
     "auto_buy_enabled": true,
@@ -19,7 +19,7 @@
     "max_spread_pct": 0.5,
     "auto_mode_v1": true,
     "rebuy_cooldown_hours": 6.0,
-    "atr_stop_enabled": true,
+    "atr_stop_enabled": false,
     "atr_stop_mult": 2.0,
     "atr_stop_min_pct": 3.0,
     "atr_stop_max_pct": 10.0,
@@ -95,5 +95,6 @@
     "perf_breaker_hours": 24.0,
     "pullback_rsi_min": 40,
     "setups_v1": true,
-    "auto_dyn_v1": true
+    "auto_dyn_v1": true,
+    "fixed5_v1": true
 }
