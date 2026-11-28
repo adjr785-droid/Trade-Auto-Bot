@@ -216,5 +216,15 @@
             "lesson": "When manually exiting a position, document the rationale and ensure it aligns with the bot's risk framework (e.g., target profit, stop\u2011loss, or trailing thresholds). Partial exits should be accompanied by a clear plan for the remaining holdings to avoid unintended exposure. Maintaining consistent exit criteria improves reproducibility and risk management.",
             "confidence": "medium"
         }
+    },
+    {
+        "time": 1795853698.278343,
+        "event": "ai_manual_buy_review",
+        "symbol": "JCT-USDT",
+        "review": {
+            "risk_level": "moderate",
+            "warning": "BTC is currently below its 50\u2011hour average, indicating short\u2011term downward pressure. While the RSI is neutral and the trade size is small, the market filter suggests caution.",
+            "summary": "Proceed with the manual buy only if you accept the added risk from the bearish BTC trend; otherwise consider waiting for a more favorable price alignment."
+        }
     }
 ]
