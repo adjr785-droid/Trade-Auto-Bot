@@ -124,5 +124,15 @@
             "lesson": "Manual exits should be aligned with predefined risk thresholds or market signals to avoid unnecessary losses. Consider implementing automated stop\u2011loss or target\u2011price rules to capture favorable exits and fully close positions when appropriate.",
             "confidence": "medium"
         }
+    },
+    {
+        "time": 1795846707.9597208,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [], 'summary': 'Both positions (JCT-USDT and IDOL-USDT) are in profit with stops below current prices. No immediate action required; continue monitoring market conditions and maintain current stops.'}"
+    },
+    {
+        "time": 1795846708.5784907,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 33.33, 'net_pnl_usdt': 0.2321, 'recurring_patterns': {'manual_sell_all': 3, 'symbols': ['BTW-USDT', 'TRX-USDT', 'WLD-USDT']}, 'recommendations': 'Maintain current risk limits and avoid initiating new manual sell\u2011all orders until a larger sample size confirms any pattern. Monitor each position closely, prioritize stop\u2011loss protection, and consider reducing position size on high\u2011volatility assets.'}"
     }
 ]
