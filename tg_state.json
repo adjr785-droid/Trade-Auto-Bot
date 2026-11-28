@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691920,
+    "last_update_id": 935691921,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT36.17/\u20a649,234",
+    "kb_ph": "USDT36.19/\u20a649,266",
     "layout_bottom": [
         "query",
         "an"
@@ -100,7 +100,7 @@
     "layout_names": {
         "scanh": "Scan Hist"
     },
-    "out_text": "USDT0.03\n\ud83d\udd0e *PULLBACK \u2014 4 COINS*\n_All coins in this group, ranked by setup score (SC, out of 10); equal scores\nare ordered by how close each coin is to the ideal picture of the setup.\nInformational only; it never changes trading._\n```\n # COIN    PRICE SC RSI   1H 24H\n--------------------------------\n 1*IDOL  0.01992  8  64 -1.7 +36\n 2 TAG  0.000544  6  55 -8.2 +19\n```\n\u2800",
+    "out_text": "USDT0.03\n\ud83d\udd0e *TREND \u2014 1 COINS*\n_All coins in this group, ranked by setup score (SC, out of 10); equal scores\nare ordered by how close each coin is to the ideal picture of the setup.\nInformational only; it never changes trading._\n```\n # COIN    PRICE SC RSI   1H 24H\n--------------------------------\n 1*VELVE 0.10141  8  47 +3.6  +6\n```\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
@@ -148,17 +148,17 @@
             },
             {
                 "text": "\ud83d\udd04 Refresh",
-                "callback_data": "m:q:PULLBACK"
+                "callback_data": "m:q:TREND"
             }
         ]
     ],
     "panel_text": "\ud83d\udcc4 *Page 1/2*",
-    "out_time": 1795872508.8417685,
-    "kb_mid": 8334,
+    "out_time": 1795872531.900927,
+    "kb_mid": 8339,
     "pages": {
         "p": [
-            "USDT0.03\n\ud83d\udd0e *PULLBACK \u2014 4 COINS*\n_All coins in this group, ranked by setup score (SC, out of 10); equal scores\nare ordered by how close each coin is to the ideal picture of the setup.\nInformational only; it never changes trading._\n```\n # COIN    PRICE SC RSI   1H 24H\n--------------------------------\n 1*IDOL  0.01992  8  64 -1.7 +36\n 2 TAG  0.000544  6  55 -8.2 +19\n```\n\u2800",
-            "```\n 3 KII  0.084324  4  44 -0.4  -1\n 4 TRX   0.30048  4  40 -0.1  -2\n```\n_* = top of group, marked BUY (score 6/10 or more). A marker only; nothing is\nbought automatically._\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+            "USDT0.03\n\ud83d\udd0e *TREND \u2014 1 COINS*\n_All coins in this group, ranked by setup score (SC, out of 10); equal scores\nare ordered by how close each coin is to the ideal picture of the setup.\nInformational only; it never changes trading._\n```\n # COIN    PRICE SC RSI   1H 24H\n--------------------------------\n 1*VELVE 0.10141  8  47 +3.6  +6\n```\n\u2800\n\u2800",
+            "_* = top of group, marked BUY (strongest of the four). A marker only; nothing is\nbought automatically._\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
         "i": 0,
         "mode": "Markdown",
@@ -190,12 +190,12 @@
                 },
                 {
                     "text": "\ud83d\udd04 Refresh",
-                    "callback_data": "m:q:PULLBACK"
+                    "callback_data": "m:q:TREND"
                 }
             ]
         ],
-        "cmd": "m:q:PULLBACK"
+        "cmd": "m:q:TREND"
     },
-    "out_mid": 8335,
-    "panel_mid": 8336
+    "out_mid": 8337,
+    "panel_mid": 8338
 }
