@@ -504,5 +504,61 @@
         "time": 1795882133.9139361,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 57.14, 'net_pnl_usdt': 1.4433, 'recurring_patterns': {'sell_reason_distribution': {'MANUAL SELL ALL': 3, 'MANUAL SELL $2.75': 1, 'MANUAL SELL $10.00': 1, 'MANUAL SELL $31.00': 1}, 'symbol_frequency': {'IDOL-USDT': 2, 'BTW-USDT': 1, 'TRX-USDT': 1, 'WLD-USDT': 1, 'VSN-USDT': 1, 'JCT-USDT': 1}}, 'recommendations': {'risk_management': 'Consider reducing reliance on manual sell-all actions, as they appear frequently and may limit upside potential.', 'position_sizing': 'Maintain or slightly lower position sizes on symbols with negative P&L (TRX-USDT, WLD-USDT, JCT-USDT) until a clearer trend emerges.', 'strategy_review': 'The win rate is modest (~57%). Monitor whether the manual sell thresholds (e.g., $2.75, $10, $31) align with market volatility; adjust thresholds conservatively.', 'uncertainty': 'Data set is small (7 trades); patterns may not be statistically robust. Treat i"
+    },
+    {
+        "time": 1795882226.8015726,
+        "event": "ai_manual_buy_review",
+        "symbol": "VSN-USDT",
+        "review": {
+            "risk_level": "medium",
+            "warning": "BTC filter is active and BTC is below its 50\u2011hour average, which may indicate broader market weakness. RSI is above 60, suggesting overbought conditions. Proceed with caution and ensure position sizing aligns with your risk tolerance.",
+            "summary": "Manual buy of 30.97\u202fUSDT of VSN-USDT at 0.03313 is possible, but market conditions show moderate risk due to BTC weakness and elevated RSI."
+        }
+    },
+    {
+        "time": 1795882230.9688022,
+        "event": "sell_fill_verified",
+        "symbol": "JCT-USDT",
+        "filled": 3150.4,
+        "average": 0.001523,
+        "order_id": "1510605048517435392",
+        "reason": "ROTATION: single Manual coin",
+        "attempt": 1
+    },
+    {
+        "time": 1795882232.0886157,
+        "event": "trade_closed",
+        "symbol": "JCT-USDT",
+        "pnl_usdt": -0.07560959999999979,
+        "reason": "ROTATION: single Manual coin",
+        "strategy": "MANUAL"
+    },
+    {
+        "time": 1795882232.4410946,
+        "event": "full_sale_verified_or_dust",
+        "symbol": "JCT-USDT",
+        "remaining_base": 0.00078,
+        "remaining_value_usdt": 1.1887199999999999e-06,
+        "filled": 3150.4
+    },
+    {
+        "time": 1795882241.816206,
+        "event": "ai_sell_review",
+        "symbol": "JCT-USDT",
+        "review": {
+            "review": "The trade exited at an average price of 0.001523 USDT, resulting in a realized loss of -0.0756 USDT on a sold quantity of 3,150.4 units. The position was closed as part of a rotation strategy, indicating a manual decision to reallocate capital rather than a market-driven stop. The remaining base of 0.00078 USDT suggests a small residual exposure that may need to be cleared to avoid idle capital.",
+            "lesson": "Manual rotation decisions should incorporate a clear profit target or loss tolerance to avoid small but cumulative losses. Verify that the remaining base is either fully liquidated or redeployed promptly to maintain capital efficiency.",
+            "confidence": "medium"
+        }
+    },
+    {
+        "time": 1795882249.112639,
+        "event": "ai_manual_buy_review",
+        "symbol": "VSN-USDT",
+        "review": {
+            "risk_level": "moderate",
+            "warning": "BTC market is currently below its 50\u2011hour average, indicating broader bearish pressure. While the RSI for VSN is not overbought, the existing position and the small trade size mean any additional exposure should be limited. Ensure stop\u2011loss and position\u2011size limits are respected.",
+            "summary": "Considering the bearish BTC context, a modest USDT amount, and a neutral RSI, the trade carries moderate risk. Proceed with caution and adhere to your risk management rules."
+        }
     }
 ]

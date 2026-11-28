@@ -4,15 +4,30 @@
         "safe_zone": 0.001547,
         "stop_loss": 0.00147,
         "peak_price": 0.001586,
-        "last_price": 0.001522,
+        "last_price": 0.001525,
         "opened_at": 1795872372.9186153,
         "sl_pct": 5.0,
         "entry_qty": 29831.199999999997,
         "entry_usdt": 46.0798,
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
-        "seen": 1795882127.1611724,
+        "seen": 1795882202.5746713,
         "dca_count": 4,
         "xsl": 0.00147
+    },
+    "VSN-USDT": {
+        "entry_price": 0.033139,
+        "safe_zone": 0.033139,
+        "stop_loss": 0.031482,
+        "peak_price": 0.03314,
+        "last_price": 0.03313,
+        "opened_at": 1795882245.9743462,
+        "sl_pct": 5.0,
+        "entry_qty": 1079.1,
+        "entry_usdt": 35.7599,
+        "strategy": "MANUAL",
+        "purchase_source": "MANUAL",
+        "dca_count": 1,
+        "xsl": 0.031482
     }
 }

@@ -54,5 +54,13 @@
         "time": 1795873369.052737,
         "reason": "MANUAL SELL $31.00",
         "strategy": "MANUAL"
+    },
+    {
+        "sym": "JCT-USDT",
+        "pnl": -0.07560959999999979,
+        "fee": 0.009596,
+        "time": 1795882232.0880494,
+        "reason": "ROTATION: single Manual coin",
+        "strategy": "MANUAL"
     }
 ]
