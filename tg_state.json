@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691794,
+    "last_update_id": 935691796,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT34.41/\u20a646,840",
+    "kb_ph": "USDT34.40/\u20a646,831",
     "layout_bottom": [
         "query",
         "an"
@@ -96,9 +96,9 @@
     "layout_names": {
         "scanh": "Scan Hist"
     },
-    "out_text": "USDT0.03\n\ud83d\udd0e *PULLBACK \u2014 0 COINS*\n_All coins in this group, ranked by setup score (SC, out of 10); equal scores\nare ordered by how close each coin is to the ideal picture of the setup.\nInformational only; it never changes trading._\nNo coin matches this setup in the latest scan.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "USDT0.03\n\ud83d\udd0e *TREND \u2014 1 COINS*\n_All coins in this group, ranked by setup score (SC, out of 10); equal scores\nare ordered by how close each coin is to the ideal picture of the setup.\nInformational only; it never changes trading._\n```\n # COIN    PRICE SC RSI   1H 24H\n--------------------------------\n 1 BTW    1.2581  8  76 +2.7 +30\n```\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795845263.3911073,
+    "out_time": 1795845285.809055,
     "panel_rows": [
         [
             {
@@ -127,12 +127,12 @@
             },
             {
                 "text": "\ud83d\udd04 Refresh",
-                "callback_data": "m:q:PULLBACK"
+                "callback_data": "m:q:TREND"
             }
         ]
     ],
     "panel_text": "\ud83d\udc47 *Actions*",
-    "kb_mid": 8046,
-    "out_mid": 8044,
-    "panel_mid": 8045
+    "kb_mid": 8051,
+    "out_mid": 8049,
+    "panel_mid": 8050
 }
