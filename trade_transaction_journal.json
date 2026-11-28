@@ -134,5 +134,15 @@
         "time": 1795846708.5784907,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 33.33, 'net_pnl_usdt': 0.2321, 'recurring_patterns': {'manual_sell_all': 3, 'symbols': ['BTW-USDT', 'TRX-USDT', 'WLD-USDT']}, 'recommendations': 'Maintain current risk limits and avoid initiating new manual sell\u2011all orders until a larger sample size confirms any pattern. Monitor each position closely, prioritize stop\u2011loss protection, and consider reducing position size on high\u2011volatility assets.'}"
+    },
+    {
+        "time": 1795846800.3166337,
+        "event": "ai_manual_buy_review",
+        "symbol": "IDOL-USDT",
+        "review": {
+            "risk_level": "moderate",
+            "warning": "BTC market filter indicates bearish condition (price below 50\u2011hour average). Existing position and small USDT amount reduce exposure, but overall market bias is negative.",
+            "summary": "Considering the 4.3\u202fUSDT size, existing position, and BTC being below its 50\u2011hour average, the trade carries moderate risk. Proceed with caution and monitor BTC trend closely."
+        }
     }
 ]

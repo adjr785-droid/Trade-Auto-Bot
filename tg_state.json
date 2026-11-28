@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691810,
+    "last_update_id": 935691811,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT35.31/\u20a648,062",
+    "kb_ph": "USDT35.41/\u20a648,207",
     "layout_bottom": [
         "query",
         "an"
@@ -96,8 +96,8 @@
     "layout_names": {
         "scanh": "Scan Hist"
     },
-    "kb_mid": 8077,
-    "out_text": "RSI 47 | Mixed | ATH -92%\n\n\ud83e\udde0 *AI:* Holdings are 59% IDOL (+3.77%) and 29% JCT (+1.31%); both have stop\norders ~8% and 6% below current prices, RSI mid-range, so monitor stop proximity\nand market moves.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "kb_mid": 8080,
+    "out_text": "\ud83e\udde0 AI manual-buy advisory: Considering the 4.3\u202fUSDT size, existing position,\nand BTC being below its 50\u2011hour average, the trade carries moderate risk.\nProceed with caution and monitor BTC trend closely.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
@@ -124,24 +124,7 @@
         ]
     ],
     "panel_text": "\ud83d\udcc4 *Page 1/2*",
-    "out_time": 1795846754.9371188,
-    "pages": {
-        "p": [
-            "\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *IDOL* $20.81 (59%)\n+3.77% (+$0.76) | Entry 0.017298\nQty 1159.5255 | Price 0.017950 | Stop 0.016433 (-8%)\nRSI 59 | Bullish | ATH -62%\n\n\ud83d\udfe2 *JCT* $10.11 (29%)\n+1.31% (+$0.13) | Entry 0.001521\nQty 6561.9692 | Price 0.001541 | Stop 0.001445 (-6%)\n\u2800\n\u2800",
-            "RSI 47 | Mixed | ATH -92%\n\n\ud83e\udde0 *AI:* Holdings are 59% IDOL (+3.77%) and 29% JCT (+1.31%); both have stop\norders ~8% and 6% below current prices, RSI mid-range, so monitor stop proximity\nand market moves.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
-        ],
-        "i": 0,
-        "mode": "Markdown",
-        "x": [
-            [
-                {
-                    "text": "\ud83d\udd04",
-                    "callback_data": "rf:go"
-                }
-            ]
-        ],
-        "cmd": "m:r:holdings"
-    },
+    "out_time": 1795846800.5955722,
     "out_mid": 8075,
-    "panel_mid": 8076
+    "panel_hidden": true
 }
