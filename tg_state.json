@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691583,
+    "last_update_id": 935691585,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT34.83/\u20a647,418",
+    "kb_ph": "USDT34.81/\u20a647,389",
     "layout_bottom": [
         "an",
         "clear"
@@ -92,36 +92,102 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 7690,
-    "out_mid": 7692,
-    "out_text": "\ud83d\udcdf *OUTPUT*\nResults appear here.",
+    "kb_mid": 7698,
+    "out_text": "USDT0.03\n\ud83d\udc41 *WATCH LIST*\n_Rising coins being watched. They move up when they pass the manual rules._\n\n```\nCOIN    RSI    1H    24H  S TY\n------------------------------\nSUI      47  +0.7   +0.8  7  T\nWLD      48  +0.5   +1.4  7  T\n```\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "panel_mid": 7693,
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udcbc Portfolio",
-                "callback_data": "m:pf"
+                "text": "\u25c0",
+                "callback_data": "pg:p"
+            },
+            {
+                "text": "1/2",
+                "callback_data": "pg:x"
+            },
+            {
+                "text": "\u25b6",
+                "callback_data": "pg:n"
+            },
+            {
+                "text": "\ud83c\udfe0",
+                "callback_data": "m:menu"
             }
         ],
         [
             {
-                "text": "\ud83c\udfc6 Markets",
-                "callback_data": "/analyse"
+                "text": "\u25b6 \ud83d\udc41 Watch (2)",
+                "callback_data": "m:at:W"
+            },
+            {
+                "text": "\ud83d\udfe1 Manual (0)",
+                "callback_data": "m:at:M"
+            },
+            {
+                "text": "\ud83e\udd16 Auto (0)",
+                "callback_data": "m:at:A"
             }
         ],
         [
             {
-                "text": "\ud83e\uddf0 Tools",
-                "callback_data": "m:tools"
+                "text": "\ud83d\udd0e QUERY",
+                "callback_data": "m:query"
+            },
+            {
+                "text": "\ud83d\uddc2 MORE",
+                "callback_data": "m:am"
             }
         ],
         [
             {
-                "text": "\ud83d\udda5 System",
-                "callback_data": "m:sy"
+                "text": "\ud83d\udd04 Refresh",
+                "callback_data": "m:at:W"
             }
         ]
     ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nChoose a group."
+    "panel_text": "\ud83d\udcc4 *Page 1/2*",
+    "out_time": 1795831623.2989028,
+    "out_mid": 7699,
+    "pages": {
+        "p": [
+            "USDT0.03\n\ud83d\udc41 *WATCH LIST*\n_Rising coins being watched. They move up when they pass the manual rules._\n\n```\nCOIN    RSI    1H    24H  S TY\n------------------------------\nSUI      47  +0.7   +0.8  7  T\nWLD      48  +0.5   +1.4  7  T\n```\n\u2800\n\u2800",
+            "_TY: T Trend, P Pullback, B Bounce, K Breakout_\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+        ],
+        "i": 0,
+        "mode": "Markdown",
+        "x": [
+            [
+                {
+                    "text": "\u25b6 \ud83d\udc41 Watch (2)",
+                    "callback_data": "m:at:W"
+                },
+                {
+                    "text": "\ud83d\udfe1 Manual (0)",
+                    "callback_data": "m:at:M"
+                },
+                {
+                    "text": "\ud83e\udd16 Auto (0)",
+                    "callback_data": "m:at:A"
+                }
+            ],
+            [
+                {
+                    "text": "\ud83d\udd0e QUERY",
+                    "callback_data": "m:query"
+                },
+                {
+                    "text": "\ud83d\uddc2 MORE",
+                    "callback_data": "m:am"
+                }
+            ],
+            [
+                {
+                    "text": "\ud83d\udd04 Refresh",
+                    "callback_data": "m:at:W"
+                }
+            ]
+        ],
+        "cmd": "m:at:W"
+    },
+    "panel_mid": 7700
 }
