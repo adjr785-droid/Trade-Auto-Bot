@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691675,
+    "last_update_id": 935691677,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT34.41/\u20a646,844",
+    "kb_ph": "USDT34.41/\u20a646,846",
     "layout_bottom": [
         "an",
         "clear"
@@ -98,48 +98,43 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 7856,
-    "out_mid": 7854,
-    "out_text": "\ud83d\udcbc *HOURLY HOLDINGS*\n\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *JCT* $15.00 (44%)\n+0.20% (+$0.03) | Entry 0.001536\nQty 9746.8479 | Price 0.001539 | Stop 0.001459 (-5%)\nRSI 47 | Bearish | ATH -92%\n\n\ud83d\udfe2 *BTW* $5.01 (15%)\n+0.20% (+$0.01) | Entry 1.1951\n\u2800\n\u2800",
+    "kb_mid": 7863,
+    "out_text": "USDT0.02\n\ud83d\udd0e *QUERY \u2014 SETUP CLASSIFICATION*\n_Every coin in the latest scan is placed once in the setup it scores highest on,\nthen ranked inside its group. Tap a group to see all its coins; the ranking is\nkept in the setup_groups table._\n\nBreakout (131) | Bounce (324) | Pullback (4) | Trend (1)\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795841051.4739926,
-    "panel_mid": 7855,
+    "out_time": 1795841203.9265635,
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udcbc Portfolio",
-                "callback_data": "m:pf"
+                "text": "\ud83d\ude80 BREAKOUT",
+                "callback_data": "m:q:BREAKOUT"
+            },
+            {
+                "text": "\ud83d\udfe2 BOUNCE",
+                "callback_data": "m:q:BOUNCE"
             }
         ],
         [
             {
-                "text": "\ud83c\udfc6 Markets",
+                "text": "\u21a9\ufe0f PULLBACK",
+                "callback_data": "m:q:PULLBACK"
+            },
+            {
+                "text": "\ud83d\udcc8 TREND",
+                "callback_data": "m:q:TREND"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udd04 Refresh",
+                "callback_data": "m:query"
+            },
+            {
+                "text": "\u2b05\ufe0f Markets",
                 "callback_data": "/analyse"
-            }
-        ],
-        [
-            {
-                "text": "\ud83e\uddf0 Tools",
-                "callback_data": "m:tools"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udda5 System",
-                "callback_data": "m:sy"
             }
         ]
     ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nChoose a group.",
-    "pages": {
-        "p": [
-            "\ud83d\udcbc *HOURLY HOLDINGS*\n\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *JCT* $15.00 (44%)\n+0.20% (+$0.03) | Entry 0.001536\nQty 9746.8479 | Price 0.001539 | Stop 0.001459 (-5%)\nRSI 47 | Bearish | ATH -92%\n\n\ud83d\udfe2 *BTW* $5.01 (15%)\n+0.20% (+$0.01) | Entry 1.1951\n\u2800\n\u2800",
-            "Qty 4.184342 | Price 1.1975 | Stop 1.1354 (-5%)\nRSI 68 | Bullish | ATH -57%\n\n\ud83d\udd34 *TRX* $4.99 (15%)\n-0.11% (-$0.01) | Entry 0.300820\nQty 16.611227 | Price 0.300490 | Stop 0.285779 (-5%)\nRSI 32 | Bearish | ATH -70%\n\n\ud83d\udd34 *ICNT* $4.97 (14%)\n-0.59% (-$0.03) | Entry 0.290400\n\u2800\n\u2800",
-            "Qty 17.204404 | Price 0.288700 | Stop 0.275880 (-4%)\nRSI 42 | Bearish | ATH -52%\n\n\ud83d\udd34 *WLD* $4.38 (13%)\n-0.85% (-$0.04) | Entry 0.246500\nQty 17.92567 | Price 0.244400 | Stop 0.234175 (-4%)\nRSI 44 | Bearish | ATH -98%\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
-        ],
-        "i": 1,
-        "mode": "Markdown",
-        "x": [],
-        "cmd": null
-    }
+    "panel_text": "\ud83d\udc47 *Actions*",
+    "out_mid": 7861,
+    "panel_mid": 7862
 }
