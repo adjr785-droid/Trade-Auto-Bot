@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935691875,
+    "last_update_id": 935691878,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -101,9 +101,9 @@
         "scanh": "Scan Hist"
     },
     "kb_mid": 8224,
-    "out_text": "\ud83d\udda5 *SYSTEM* \u2014 HEALTHY \u2705\nBuying: PAUSED \u26d4 (BTC filter)\nHealth: Bot 100% | AI 100% (Normal)\nLayers: \u2705 Exchange \u2705 Scanner \u2705 Database \u2705 Buyer \u2705 Stops\nRate limits (1h): Exchange 0 | AI 0\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83e\udded *STRATEGY* (4 setups)\nTrend: price > MA5 > MA10, RSI 42-48, 1H +0.5\u20136%\nPullback: MA5 > MA10, price between MA10 and MA5, RSI 40-48, 1H +0.5\u20136%\nBounce ON: RSI under 30, price back above last close, 1H +0.5\u20136%\n\u2800\n\u2800",
+    "out_text": "USDT0.02\n\ud83d\udd0e *BREAKOUT \u2014 54 COINS*\n_All coins in this group, ranked by setup score (SC, out of 10); equal scores\nare ordered by how close each coin is to the ideal picture of the setup.\nInformational only; it never changes trading._\n```\n # COIN    PRICE SC RSI   1H 24H\n--------------------------------\n 1 VSN   0.03302  8  61 +0.2  +1\n 2 JCT  0.001539  4  56 -1.1  +1\n```\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795859414.6196523,
+    "out_time": 1795859484.1482973,
     "panel_rows": [
         [
             {
@@ -111,7 +111,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "2/2",
+                "text": "1/7",
                 "callback_data": "pg:x"
             },
             {
@@ -122,19 +122,85 @@
                 "text": "\ud83c\udfe0",
                 "callback_data": "m:menu"
             }
+        ],
+        [
+            {
+                "text": "\ud83d\ude80 BREAKOUT",
+                "callback_data": "m:q:BREAKOUT"
+            },
+            {
+                "text": "\ud83d\udfe2 BOUNCE",
+                "callback_data": "m:q:BOUNCE"
+            }
+        ],
+        [
+            {
+                "text": "\u21a9\ufe0f PULLBACK",
+                "callback_data": "m:q:PULLBACK"
+            },
+            {
+                "text": "\ud83d\udcc8 TREND",
+                "callback_data": "m:q:TREND"
+            }
+        ],
+        [
+            {
+                "text": "\u2b05\ufe0f Query",
+                "callback_data": "m:query"
+            },
+            {
+                "text": "\ud83d\udd04 Refresh",
+                "callback_data": "m:q:BREAKOUT"
+            }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 2/2*",
-    "out_mid": 8222,
+    "panel_text": "\ud83d\udcc4 *Page 1/7*",
+    "out_mid": 8228,
     "pages": {
         "p": [
-            "\ud83d\udda5 *SYSTEM* \u2014 HEALTHY \u2705\nBuying: PAUSED \u26d4 (BTC filter)\nHealth: Bot 100% | AI 100% (Normal)\nLayers: \u2705 Exchange \u2705 Scanner \u2705 Database \u2705 Buyer \u2705 Stops\nRate limits (1h): Exchange 0 | AI 0\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83e\udded *STRATEGY* (4 setups)\nTrend: price > MA5 > MA10, RSI 42-48, 1H +0.5\u20136%\nPullback: MA5 > MA10, price between MA10 and MA5, RSI 40-48, 1H +0.5\u20136%\nBounce ON: RSI under 30, price back above last close, 1H +0.5\u20136%\n\u2800\n\u2800",
-            "Breakout: price clears the 20H high, volume 1.5x+, RSI 50-70, hard stop 2% | all\nmust be rising vs last scan\nExit: stop 5.0% sells 75% of entry, new stop on the rest | trail 8.0% | RSI 75+\n(dynamic)\nSize: 50% of balance (all-in if half < $5) | max 25 trades/day | pause at -5.0%\nday\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udcbc $35.94 | \u20a648,926 | Cash $0.02 | Coins $35.85\nToday +2.96% | Last scan 4 min ago | Queue 0 | Positions 2\n\u2800\n\u2800\n\u2800"
+            "USDT0.02\n\ud83d\udd0e *BREAKOUT \u2014 54 COINS*\n_All coins in this group, ranked by setup score (SC, out of 10); equal scores\nare ordered by how close each coin is to the ideal picture of the setup.\nInformational only; it never changes trading._\n```\n # COIN    PRICE SC RSI   1H 24H\n--------------------------------\n 1 VSN   0.03302  8  61 +0.2  +1\n 2 JCT  0.001539  4  56 -1.1  +1\n```\n\u2800",
+            "```\n 3 AB    0.00052  2   -    -  +0\n 4 ACE   0.04457  2   -    - +15\n 5 ACN  0.003234  2   -    -  +2\n 6 ACT   0.00951  2   -    -  +4\n 7 AIAV 0.000483  2   -    -  +2\n 8 ALIGN0.003009  2   -    -  +0\n 9 AVA     0.224  2   -    -  +4\n10 BABY 0.009617  2   -    -  +2\n11 BGSC 0.000926  2   -    - +16\n12 BILL 0.004013  2   -    -  +0\n```",
+            "```\n13 BTT  3.02e-07  2   -    -  +0\n14 CATI  0.03632  2   -    -  +1\n15 DNA   0.14732  2   -    -  +6\n16 DODO  0.04187  2   -    -  +8\n17 EVAA   2.1432  2   -    -  +1\n18 GALA 0.001418  2   -    -  +3\n19 GLM    0.0965  2   -    -  +1\n20 GMX     8.394  2   -    -  +2\n21 GOMIN  0.3742  2   -    -  +2\n22 GUN  0.001491  2   -    -  +7\n```",
+            "```\n23 ILY    0.1405  2   -    -  +5\n24 JST   0.14699  2   -    -  +3\n25 KAIO 0.015986  2   -    -  +1\n26 KAVA  0.02802  2   -    - +12\n27 MGO  0.006287  2   -    -  +8\n28 MHA  0.009962  2   -    - +11\n29 NES   0.27039  2   -    -  +7\n30 NESS 0.001535  2   -    -  +2\n31 NIGHT 0.05255  2   -    -  +5\n32 PUFFE 0.02036  2   -    -  +6\n```",
+            "```\n33 PWT    0.3159  2   -    -  +1\n34 SENT 0.023938  2   -    -  +5\n35 SKY   0.04988  2   -    -  +8\n36 SKYAI 0.03684  2   -    -  +9\n37 SLX   0.03536  2   -    -  +2\n38 SPACE 0.00456  2   -    -  +9\n39 SPK  0.012545  2   -    -  +2\n40 SSV     2.735  2   -    -  +8\n41 T    0.003872  2   -    -  +0\n42 TCOM 0.008277  2   -    -  +1\n```",
+            "```\n43 TLM  0.001019  2   -    -  +9\n44 TLOS  0.01309  2   -    -  +2\n45 U      0.9998  2   -    -  +0\n46 UNITA  0.1984  2   -    -  +0\n47 VELVE 0.11062  2   -    - +19\n48 WIF    0.1415  2   -    -  +2\n49 WIN  5.563e-0  2   -    -  +3\n50 YGG   0.02072  2   -    -  +0\n51 CRO   0.05377  0   -    -   -\n52 GHO    1.0199  0   -    -  +0\n```",
+            "```\n53 USDS   0.9986  0   -    -  +0\n54 WEETH    2600  0   -    -  +0\n```\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 1,
+        "i": 0,
         "mode": "Markdown",
-        "x": [],
-        "cmd": "m:r:bot"
+        "x": [
+            [
+                {
+                    "text": "\ud83d\ude80 BREAKOUT",
+                    "callback_data": "m:q:BREAKOUT"
+                },
+                {
+                    "text": "\ud83d\udfe2 BOUNCE",
+                    "callback_data": "m:q:BOUNCE"
+                }
+            ],
+            [
+                {
+                    "text": "\u21a9\ufe0f PULLBACK",
+                    "callback_data": "m:q:PULLBACK"
+                },
+                {
+                    "text": "\ud83d\udcc8 TREND",
+                    "callback_data": "m:q:TREND"
+                }
+            ],
+            [
+                {
+                    "text": "\u2b05\ufe0f Query",
+                    "callback_data": "m:query"
+                },
+                {
+                    "text": "\ud83d\udd04 Refresh",
+                    "callback_data": "m:q:BREAKOUT"
+                }
+            ]
+        ],
+        "cmd": "m:q:BREAKOUT"
     },
-    "panel_mid": 8223
+    "panel_mid": 8229
 }
