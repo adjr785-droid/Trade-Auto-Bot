@@ -302,5 +302,11 @@
         "time": 1795862008.627658,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 1.671, 'recurring_patterns': {'trade_reason': 'All trades were manual sell actions, with two distinct sell price triggers ($2.75 and $10.00) for IDOL-USDT and generic manual sells for other symbols.', 'symbol_distribution': {'IDOL-USDT': 2, 'BTW-USDT': 1, 'TRX-USDT': 1, 'WLD-USDT': 1}, 'pnl_distribution': {'positive_trades': 3, 'negative_trades': 2, 'average_positive_pnl': 0.602, 'average_negative_pnl': -0.0675}}, 'recommendations': ['Maintain a conservative position size given the modest net profit and limited sample size.', 'Consider adding automated exit criteria to reduce reliance on manual sell decisions.', 'Monitor IDOL-USDT performance closely, as it contributed the majority of profit; verify if the pattern is repeatable before scaling.', 'Diversify across additional symbols to mitigate concentration risk observed in the current trade set.']}"
+    },
+    {
+        "time": 1795862031.4035645,
+        "event": "ai_coin_advisory",
+        "reviewed": 25,
+        "source": "coins.db"
     }
 ]

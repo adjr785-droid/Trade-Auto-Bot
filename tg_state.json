@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT36.06/\u20a649,092",
+    "kb_ph": "USDT35.69/\u20a648,578",
     "layout_bottom": [
         "query",
         "an"
@@ -90,7 +90,7 @@
     },
     "radar": [],
     "audit_down": {},
-    "audit_last": 1795859562.9602432,
+    "audit_last": 1795862037.9344552,
     "audit_ai_cls": "",
     "perf_breaker": {
         "until": 1795742224.733271,
@@ -100,37 +100,5 @@
     "layout_names": {
         "scanh": "Scan Hist"
     },
-    "kb_mid": 8255,
-    "out_mid": 8256,
-    "out_text": "\u23f8 *BTC FILTER:* BTC RSI is 37.43 (needs \u2265 50).\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
-    "out_mode": "Markdown",
-    "out_time": 1795862001.4748108,
-    "panel_mid": 8257,
-    "panel_rows": [
-        [
-            {
-                "text": "\ud83d\udcbc Portfolio",
-                "callback_data": "m:pf"
-            }
-        ],
-        [
-            {
-                "text": "\ud83c\udfc6 Markets",
-                "callback_data": "/analyse"
-            }
-        ],
-        [
-            {
-                "text": "\ud83e\uddf0 Tools",
-                "callback_data": "m:tools"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udda5 System",
-                "callback_data": "m:sy"
-            }
-        ]
-    ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nChoose a group."
+    "kb_mid": 8259
 }
