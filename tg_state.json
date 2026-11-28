@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935691802,
+    "last_update_id": 935691803,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -24,8 +24,8 @@
             1795739610.5038157
         ],
         "m:r:holdings": [
-            2,
-            1795844946.8960857
+            1,
+            1795846489.1222801
         ],
         "/analyse": [
             6,
@@ -106,7 +106,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "1/2",
+                "text": "2/2",
                 "callback_data": "pg:x"
             },
             {
@@ -123,7 +123,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/2*",
+    "panel_text": "\ud83d\udcc4 *Page 2/2*",
     "out_mid": 8062,
     "out_time": 1795846466.76545,
     "pages": {
@@ -131,7 +131,7 @@
             "\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *IDOL* $20.47 (59%)\n+2.03% (+$0.41) | Entry 0.017298\nQty 1159.5255 | Price 0.017650 | Stop 0.016433 (-7%)\nRSI 59 | Bullish | ATH -63%\n\n\ud83d\udfe2 *JCT* $10.00 (29%)\n+0.20% (+$0.02) | Entry 0.001521\nQty 6561.9692 | Price 0.001524 | Stop 0.001445 (-5%)\n\u2800\n\u2800",
             "RSI 47 | Bearish | ATH -92%\n\n\ud83d\udd34 *WLD* $4.30 (12%)\n-2.64% (-$0.12) | Entry 0.246500\nQty 17.92567 | Price 0.240000 | Stop 0.234175 (-2%)\nRSI 34 | Bearish | ATH -98%\n\n\ud83e\udde0 *AI:* IDOL is up modestly with healthy RSI, JCT flat but bearish RSI, while\nWLD shows declining price, low RSI and a stop only 2% below current price,\nwarranting monitoring.\n\u2800\n\u2800"
         ],
-        "i": 0,
+        "i": 1,
         "mode": "Markdown",
         "x": [
             [
