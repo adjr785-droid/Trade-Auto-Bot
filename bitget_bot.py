@@ -1033,10 +1033,17 @@ def parse(txt,usage,allow_all=False):
  except:tg("❌ Invalid amount.");return None
  if a<=0:tg("❌ Amount must be positive.");return None
  return c,a
-def cmd_buy(txt):
+_AUTO_BUY={"on":False}
+def cmd_buy(txt,by_bot=False):
  r=parse(txt,"❌ Usage: `/buy COIN USDT_AMOUNT` or `/buy COIN ALL`",True)
  if not r:return
  c,amt=r;sym=f"{c}-USDT"
+ if not by_bot:                                         # Auto coins are bought only by the bot; your buying is for Manual coins
+  try:
+   _p=load(DB).get(sym);_st=_dbq("SELECT stage FROM coins WHERE sym=?",(sym,),one=True)
+   if (_p and _p.get("purchase_source")=="AUTO") or (not _p and _st and _st[0]=="AUTO"):
+    tg(f"🤖 {c} is an Auto coin: Auto buys it by itself. Manual buying is only for Manual coins.");return
+  except Exception:pass
  if cd(f"buy:{sym}",5):tg(f"⏳ Processing /buy {c}...");return
  db=load(DB);old=db.get(sym);ub=B('free','USDT')
  if amt is None:
@@ -1519,6 +1526,16 @@ def apply_setup_pipeline(c,g):
   if sym==bsym:c.execute("UPDATE coins SET stage='MANUAL',manual_candidate=1,stage_ok_at=COALESCE(stage_ok_at,?) WHERE sym=?",(now,sym))
   else:c.execute("UPDATE coins SET stage='WATCH',manual_candidate=0,stage_ok_at=COALESCE(stage_ok_at,?) WHERE sym=?",(now,sym))
  c.commit()
+def fund_from_manual(why):
+ """No free USDT for an Auto buy: sell 50% of the Manual holding and return the usable free USDT (0 if nothing could be sold)."""
+ try:
+  m=[k for k,v in load(DB).items() if isinstance(v,dict) and v.get("purchase_source")!="AUTO"]
+  if not m:return 0.0
+  sym=max(m,key=lambda k:float(load(DB)[k].get("entry_usdt") or 0))
+  tg(f"💸 *AUTO FUNDING:* no free USDT. Selling 50% of Manual {sym.split('-')[0]} for {why}.")
+  if not sell(sym,50,"AUTO FUNDING: 50% of Manual"):return 0.0
+  time.sleep(1.0);return max(0.0,B('free','USDT')-0.02)
+ except Exception as e:print("FUND ERR",str(e)[:100]);return 0.0
 def auto_dca():
  """Auto DCA: an AUTO-held coin that certifies again (all 4 hard gates, score 8/10 or more, RSI in the entry band) gets 75% of the free USDT added;
  if 75% is under 5 USDT, 100% is used. One add per coin per hour; market and BTC filters must be clear. Manual DCA is untouched (cmd_buy)."""
@@ -1538,6 +1555,8 @@ def auto_dca():
    if not hard or int(float(r[0] or 0))<AUTO_MIN_SCORE or r[1] is None or not (lo<=float(r[1])<=hi):continue
    if cd(f"autodca:{sym}",3600):continue
    free=B('free','USDT');avail=max(0.0,free-0.02)
+   if avail<5.0:
+    mk_cd(f"autodca:{sym}");avail=fund_from_manual(f"Auto DCA of {sym.split('-')[0]}");free=avail+0.02
    amt=free*0.75;amt=amt if amt>=5.0 else avail
    amt=int(min(amt,avail)*100)/100
    if amt<1.0:continue
@@ -1586,7 +1605,6 @@ def buy_best_manual():
   if not best:return
   bsym=lead[best]["sym"];bc=bsym.split("-")[0]
   if bsym in load(DB):return
-  if market_filter(s) or btc_blocked(s):return
   r=_dbq("SELECT stage,manual_candidate FROM coins WHERE sym=?",(bsym,),one=True)
   if not r or r[0]!="MANUAL" or not r[1]:return
   free=B('free','USDT');amt=int(max(0.0,free-0.02)*100)/100
@@ -1607,31 +1625,28 @@ def rotate_manual():
   lead,best=query_leaders(g)
   if not best:return
   b=lead[best];bsym=b["sym"];bc=bsym.split("-")[0]
-  if market_filter(s) or btc_blocked(s):return
   db=load(DB)
-  if bsym in db:return                                   # already holding the best coin
   r=_dbq("SELECT stage,manual_candidate FROM coins WHERE sym=?",(bsym,),one=True)
   if not r or r[0]!="MANUAL" or not r[1]:return           # the best must be listed for Manual
-  worst=None
+  others=[]                                              # only ONE coin lives in Manual: every other Manual holding goes into the best
   for sym,pos in db.items():
-   if not isinstance(pos,dict) or pos.get("purchase_source")!="MANUAL":continue
-   h=next((x for k in g for x in g[k] if x["sym"]==sym),None)
-   if not h:continue
-   if b["score"]>h["score"] or (b["score"]==h["score"] and b["fit"]>=h["fit"]+15):
-    if worst is None or (h["score"],h["fit"])<(worst[1]["score"],worst[1]["fit"]):worst=(sym,h)
-  if not worst:return
-  sym,h=worst;coin=sym.split("-")[0]
+   if sym==bsym or not isinstance(pos,dict) or pos.get("purchase_source")=="AUTO":continue
+   h=next((x for k in g for x in g[k] if x["sym"]==sym),None) or {"score":-1,"fit":0}
+   if b["score"]>h["score"] or (b["score"]==h["score"] and b["fit"]>=h["fit"]+15):others.append((sym,h))
+  if not others:return
   mk_cd("rotate")
-  tg(f"🔁 *ROTATION:* {bc} ({b['score']}/10) now beats held {coin} ({h['score']}/10). Selling {coin}, then buying {bc}.")
-  if not sell(sym,100,"ROTATION: better Manual coin"):
-   tg(f"⚠️ Rotation stopped: {coin} could not be sold.");return
+  names=", ".join(x[0].split("-")[0] for x in others)
+  tg(f"🔁 *MANUAL ROTATION:* best coin is {bc} ({b['score']}/10). Selling {names}, then buying {bc}.")
+  for sym,h in others:
+   if not sell(sym,100,"ROTATION: single Manual coin"):
+    tg(f"⚠️ Rotation: {sym.split('-')[0]} could not be sold.")
   time.sleep(1.0);free=B('free','USDT');amt=int(max(0.0,free-0.02)*100)/100
-  if amt<1.0:tg(f"⚠️ Rotation: {coin} sold but only ${free:.2f} free USDT, too little to buy {bc}.");return
+  if amt<1.0:tg(f"⚠️ Rotation: sold, but only ${free:.2f} free USDT, too little to buy {bc}.");return
   cmd_buy(f"/buy {bc} {amt:.2f}")
  except Exception as e:print("ROTATE ERR",str(e)[:120])
 def rotate_auto():
  """When a new coin certifies for AUTO (hard gates + 8/10 or higher, so it sits in the AUTO list), sell the whole position held before in AUTO and buy the
- highest-ranked AUTO coin with the proceeds. If no AUTO position is held, half of the lowest-ranked MANUAL position funds it instead.
+ highest-ranked AUTO coin with the proceeds. If no AUTO position is held, the free USDT buys it; with no free USDT, 50% of the Manual holding funds it.
  Safeguards: one rotation per hour, the market filter must be open, never sells a coin that ranks above the new one."""
  s=cfg()
  if not s.get("rotate_auto",True):return
@@ -1652,11 +1667,19 @@ def rotate_auto():
      r=rank.get(sym,(0,0))
      if best is None or r<best[1]:best=(sym,r)
    return best
-  d=donor("AUTO");pct=100
-  if not d:d=donor("MANUAL");pct=50     # a Manual position only funds it when no Auto position is held (half of it)
-  if not d:return
+  d=donor("AUTO");pct=100                                    # Auto never touches Manual positions
+  tc=tgt.split("-")[0]
+  if not d:                                                  # no Auto position held: buy with the free USDT
+   free=B('free','USDT');amt=int(max(0.0,free-0.02)*100)/100
+   if amt<5.0:
+    mk_cd("rotate_auto");amt=int(fund_from_manual(f"Auto buy of {tc}")*100)/100       # no free USDT: 50% of the Manual holding funds it
+    if amt<5.0:return
+   mk_cd("rotate_auto");tg(f"🤖 *AUTO BUY:* {tc} certified for Auto. Buying with ${amt:.2f} free USDT.")
+   cmd_buy(f"/buy {tc} {amt:.2f}",True);db=load(DB)
+   if tgt in db and isinstance(db[tgt],dict):db[tgt]["purchase_source"]="AUTO";save(DB,db)
+   return
   if d[1]>=rank.get(tgt,(0,0)):return                      # never sell a coin that ranks at least as high as the new one
-  sym=d[0];coin=sym.split("-")[0];tc=tgt.split("-")[0]
+  sym=d[0];coin=sym.split("-")[0]
   pre=B('free','USDT')
   mk_cd("rotate_auto")
   tg(f"🔁 *AUTO ROTATION:* {tc} certified for Auto. Selling {'all' if pct==100 else '50%'} of {coin} to buy {tc}.")
@@ -1664,7 +1687,7 @@ def rotate_auto():
    tg(f"⚠️ Auto rotation stopped: {coin} could not be sold.");return
   time.sleep(1.0);free=B('free','USDT');amt=int(max(0.0,min(free,free-pre+0.0 if free>pre else free)-0.02)*100)/100
   if amt<1.0:tg(f"⚠️ Auto rotation: sold part of {coin} but only ${amt:.2f} usable, too little to buy {tc}.");return
-  cmd_buy(f"/buy {tc} {amt:.2f}")
+  cmd_buy(f"/buy {tc} {amt:.2f}",True)
   db=load(DB)
   if tgt in db and isinstance(db[tgt],dict):
    db[tgt]["purchase_source"]="AUTO";save(DB,db)
@@ -1706,7 +1729,7 @@ def query_leaders(items):
  lead={k:(items[k][0] if items[k] else None) for k in QUERY_TYPES}
  try:_s=cfg();lo,hi=float(_s.get("rsi_min",42)),float(_s.get("rsi_max",48))
  except Exception:lo,hi=42.0,48.0
- ok={k:v for k,v in lead.items() if v and v["score"]>=QUERY_BUY_MIN and True}   # no RSI limit for the Manual best
+ ok={k:v for k,v in lead.items() if v}   # Manual best = highest-ranked of the four watch leaders: no score or RSI minimum
  best=max(ok,key=lambda k:(ok[k]["score"],ok[k]["fit"])) if ok else None
  return lead,best
 def analyse_query(category=None):
@@ -3033,7 +3056,8 @@ def gate_report_text(s=None):
  L=[f"🚧 *GATES* ({g['n']} analysed, {g.get('pass',0)} passed)",
     f"Blocked: RSI {g.get('RSI',0)} | MA {g.get('MA',0)} | 1H {g.get('1H',0)} | 24H {g.get('24H',0)} | Score {g.get('Score',0)}",
     f"Setups: Trend {tg_.get('TREND',0)} | Pullback {tg_.get('PULLBACK',0)} | Bounce {tg_.get('BOUNCE',0)} | Breakout {tg_.get('BREAKOUT',0)}",
-    f"Rules: RSI ≤ {float(s.get('rsi_max',48)):g}, Price > MA5 > MA10, {h1}, 24H up, Core 5+ and Extra 2+"]
+    f"AUTO: RSI {float(s.get('rsi_min',42)):g}-{float(s.get('rsi_max',48)):g}, Price > MA5 > MA10, {h1}, 24H up, score {AUTO_MIN_SCORE}/10+. Bought by the bot only; DCA 75% of free USDT (all if under $5). No free USDT: sells 50% of Manual to fund it.",
+    "MANUAL: one coin, the best of the four Watch leaders. No filters; other Manual holdings are sold into it."]
  return "\n".join(L)
 def coin_db_update(records,held,newc=None,keep_days=3,keep_snaps=24,queue=None,buying_allowed=True,block_reason="",settings=None):
  now=time.time();held=set(held);newc=newc or {};queue=queue if isinstance(queue,dict) else {};settings=settings or {};c=coin_db_conn()
