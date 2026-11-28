@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935691885,
+    "last_update_id": 935691886,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -106,30 +106,36 @@
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udcbc Portfolio",
-                "callback_data": "m:pf"
+                "text": "\ud83d\udcbc Holdings",
+                "callback_data": "m:r:holdings"
             }
         ],
         [
             {
-                "text": "\ud83c\udfc6 Markets",
-                "callback_data": "/analyse"
+                "text": "\ud83d\udcc8 Stats",
+                "callback_data": "m:r:stats"
             }
         ],
         [
             {
-                "text": "\ud83e\uddf0 Tools",
-                "callback_data": "m:tools"
+                "text": "\ud83e\uddfe Trade History",
+                "callback_data": "m:r:history"
             }
         ],
         [
             {
-                "text": "\ud83d\udda5 System",
-                "callback_data": "m:sy"
+                "text": "\ud83d\udea8 PANIC SELL",
+                "callback_data": "/panic"
+            }
+        ],
+        [
+            {
+                "text": "\ud83c\udfe0 Main Menu",
+                "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nChoose a group.",
+    "panel_text": "\ud83d\udcbc *PORTFOLIO*",
     "out_time": 1795859890.7234201,
     "out_mid": 8239,
     "pages": {

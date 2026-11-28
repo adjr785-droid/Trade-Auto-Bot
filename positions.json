@@ -4,14 +4,14 @@
         "safe_zone": 0.001549,
         "stop_loss": 0.001472,
         "peak_price": 0.001585,
-        "last_price": 0.001539,
+        "last_price": 0.001538,
         "opened_at": 1795857175.823288,
         "sl_pct": 5.0,
         "entry_qty": 25935.1,
         "entry_usdt": 40.0798,
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
-        "seen": 1795859916.5347414,
+        "seen": 1795859977.5101018,
         "dca_count": 3,
         "xsl": 0.001472
     },
@@ -19,8 +19,8 @@
         "entry_price": 0.03302,
         "safe_zone": 0.03302,
         "stop_loss": 0.031369,
-        "peak_price": 0.03303,
-        "last_price": 0.03301,
+        "peak_price": 0.03304,
+        "last_price": 0.03304,
         "opened_at": 1795857153.1950083,
         "sl_pct": 5.0,
         "entry_qty": 181.7,
@@ -28,6 +28,6 @@
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
         "xsl": 0.031369,
-        "seen": 1795859916.8640406
+        "seen": 1795859977.8264623
     }
 }
