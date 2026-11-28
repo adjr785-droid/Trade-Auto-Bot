@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935691708,
+    "last_update_id": 935691709,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -97,7 +97,7 @@
     "layout_names": {
         "scanh": "Scan Hist"
     },
-    "out_text": "USDT0.03\n\ud83d\udd0e *QUERY \u2014 SETUP CLASSIFICATION*\n_Every coin in the latest scan is placed once in the setup it scores highest on,\nthen ranked inside its group. Tap a group to see all its coins; the ranking is\nkept in the setup_groups table._\n\nBreakout (106) | Bounce (347) | Pullback (6) | Trend (1)\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "USDT0.03\n\ud83d\udd0e *TREND \u2014 1 COINS*\n_All coins in this group, ranked by setup score (SC, out of 10); equal scores\nare ordered by how close each coin is to the ideal picture of the setup.\nInformational only; it never changes trading._\n```\n # COIN    PRICE SC RSI   1H 24H\n--------------------------------\n 1 BTW    1.2447  8  76 +4.8 +25\n```\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
@@ -122,17 +122,17 @@
         ],
         [
             {
-                "text": "\ud83d\udd04 Refresh",
+                "text": "\u2b05\ufe0f Query",
                 "callback_data": "m:query"
             },
             {
-                "text": "\u2b05\ufe0f Markets",
-                "callback_data": "/analyse"
+                "text": "\ud83d\udd04 Refresh",
+                "callback_data": "m:q:TREND"
             }
         ]
     ],
     "panel_text": "\ud83d\udc47 *Actions*",
-    "out_time": 1795842330.2655425,
-    "out_mid": 7904,
-    "panel_mid": 7905
+    "out_time": 1795842340.404734,
+    "out_mid": 7907,
+    "panel_mid": 7908
 }
