@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935691956,
+    "last_update_id": 935691957,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -105,9 +105,9 @@
         "scanh": "Scan Hist"
     },
     "kb_mid": 8421,
-    "out_text": "USDT30.99\n\ud83d\udc41 *WATCH LIST*\n_The top-rated coin of each setup (Breakout, Bounce, Pullback, Trend), updated\nevery scan._\n\n```\nCOIN    RSI    1H    24H  S TY\n------------------------------\nLAB      84  +5.9  +26.7  6  -\nICNT     33  +0.1  -15.4  2  -\n```\n\u2800",
+    "out_text": "USDT30.99\n\ud83d\udfe1 *MANUAL BUY*\n_The best-rated of those four, listed for Manual buy, plus every other coin you\nhold (marked *)._\n\n```\nCOIN    RSI    1H    24H  S TY\n------------------------------\nKII      46  +0.0   -0.3  3  -\nJCT*     53  +0.7   +4.6  6  -\n```\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795878372.0769372,
+    "out_time": 1795878385.1869462,
     "panel_rows": [
         [
             {
@@ -129,11 +129,11 @@
         ],
         [
             {
-                "text": "\u25b6 \ud83d\udc41 Watch (2)",
+                "text": "\ud83d\udc41 Watch (2)",
                 "callback_data": "m:at:W"
             },
             {
-                "text": "\ud83d\udfe1 Manual (2)",
+                "text": "\u25b6 \ud83d\udfe1 Manual (2)",
                 "callback_data": "m:at:M"
             },
             {
@@ -154,14 +154,14 @@
         [
             {
                 "text": "\ud83d\udd04 Refresh",
-                "callback_data": "m:at:W"
+                "callback_data": "m:at:M"
             }
         ]
     ],
     "panel_text": "\ud83d\udcc4 *Page 1/2*",
     "pages": {
         "p": [
-            "USDT30.99\n\ud83d\udc41 *WATCH LIST*\n_The top-rated coin of each setup (Breakout, Bounce, Pullback, Trend), updated\nevery scan._\n\n```\nCOIN    RSI    1H    24H  S TY\n------------------------------\nLAB      84  +5.9  +26.7  6  -\nICNT     33  +0.1  -15.4  2  -\n```\n\u2800",
+            "USDT30.99\n\ud83d\udfe1 *MANUAL BUY*\n_The best-rated of those four, listed for Manual buy, plus every other coin you\nhold (marked *)._\n\n```\nCOIN    RSI    1H    24H  S TY\n------------------------------\nKII      46  +0.0   -0.3  3  -\nJCT*     53  +0.7   +4.6  6  -\n```\n\u2800",
             "```\n```\n_TY: T Trend, P Pullback, B Bounce, K Breakout_\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
         "i": 0,
@@ -169,11 +169,11 @@
         "x": [
             [
                 {
-                    "text": "\u25b6 \ud83d\udc41 Watch (2)",
+                    "text": "\ud83d\udc41 Watch (2)",
                     "callback_data": "m:at:W"
                 },
                 {
-                    "text": "\ud83d\udfe1 Manual (2)",
+                    "text": "\u25b6 \ud83d\udfe1 Manual (2)",
                     "callback_data": "m:at:M"
                 },
                 {
@@ -194,12 +194,12 @@
             [
                 {
                     "text": "\ud83d\udd04 Refresh",
-                    "callback_data": "m:at:W"
+                    "callback_data": "m:at:M"
                 }
             ]
         ],
-        "cmd": "m:at:W"
+        "cmd": "m:at:M"
     },
-    "out_mid": 8419,
-    "panel_mid": 8420
+    "out_mid": 8422,
+    "panel_mid": 8423
 }
