@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691565,
+    "last_update_id": 935691569,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT34.83/\u20a647,409",
+    "kb_ph": "USDT34.84/\u20a647,431",
     "layout_bottom": [
         "an",
         "clear"
@@ -92,54 +92,98 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 7671,
+    "kb_mid": 7679,
     "out_text": "\ud83d\udd0d *SCAN COMPLETE*\nChecked 460 markets in 13s.\nMatched: 2 | Queued: 0.\nBTC safety filter blocked buying\n\ud83d\udea7 *GATES* (19 analysed, 2 passed)\nBlocked: RSI 12 | MA 8 | 1H 10 | 24H 4 | Score 2\nSetups: Trend 2 | Pullback 0 | Bounce 0 | Breakout 0\nRules: RSI \u2264 48, Price > MA5 > MA10, 1H +0.5 to +6%, 24H up, Core 5+ and Extra\n2+\n\ud83e\udde0 AI market view: BEARISH | MEDIUM\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udd0d Search any coin",
-                "callback_data": "m:se"
-            }
-        ],
-        [
-            {
-                "text": "DOS",
-                "callback_data": "m:a:DOS"
+                "text": "\ud83d\udccb \ud83e\uddf0 Tools",
+                "callback_data": "m:lay:t:tools"
             },
             {
-                "text": "PWT",
-                "callback_data": "m:a:PWT"
+                "text": "\ud83d\udccb \ud83c\udfc6 Markets",
+                "callback_data": "m:lay:t:analyse"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udccb \ud83d\udda5 System",
+                "callback_data": "m:lay:t:bot"
             },
             {
-                "text": "ZORA",
-                "callback_data": "m:a:ZORA"
+                "text": "\ud83d\udccb \ud83d\udcc8 Stats",
+                "callback_data": "m:lay:t:stats"
             }
         ],
         [
             {
-                "text": "WLD",
-                "callback_data": "m:a:WLD"
+                "text": "\u2328\ufe0f \ud83d\udd0e Analyse Coin",
+                "callback_data": "m:lay:t:an"
             },
             {
-                "text": "SUI",
-                "callback_data": "m:a:SUI"
+                "text": "\ud83d\udccb \u2699\ufe0f Settings",
+                "callback_data": "m:lay:t:set"
             }
         ],
         [
             {
-                "text": "\u2795 More coins",
-                "callback_data": "m:more:analyse:0"
+                "text": "\ud83d\udccb \ud83d\udcbc Holdings",
+                "callback_data": "m:lay:t:hold"
+            },
+            {
+                "text": "\ud83d\udccb \ud83d\udcdc Trade History",
+                "callback_data": "m:lay:t:hist"
             }
         ],
         [
             {
-                "text": "\u2b05\ufe0f Menu",
-                "callback_data": "m:menu"
+                "text": "\ud83d\udccb \ud83e\udde0 Ask AI",
+                "callback_data": "m:lay:t:ai"
+            },
+            {
+                "text": "\u2328\ufe0f \ud83e\uddf9 Clear Chat",
+                "callback_data": "m:lay:t:clear"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udccb \ud83d\udea8 PANIC SELL",
+                "callback_data": "m:lay:t:panic"
+            }
+        ],
+        [
+            {
+                "text": "\u2796",
+                "callback_data": "m:lay:pl:-"
+            },
+            {
+                "text": "\ud83d\udccf Page: 12 lines",
+                "callback_data": "m:lay"
+            },
+            {
+                "text": "\u2795",
+                "callback_data": "m:lay:pl:+"
+            }
+        ],
+        [
+            {
+                "text": "\u270f\ufe0f Rename buttons",
+                "callback_data": "m:lay:rn"
+            },
+            {
+                "text": "\u21a9\ufe0f Reset layout",
+                "callback_data": "m:lay:reset"
+            }
+        ],
+        [
+            {
+                "text": "\u2b05\ufe0f Tools",
+                "callback_data": "m:tools"
             }
         ]
     ],
-    "panel_text": "USDT0.03\n\ud83d\udd0e *ANALYSE A COIN* \u2014 choose:",
+    "panel_text": "\ud83e\udde9 *SHORTCUTS*\nTap a button to add it next to Menu or remove it.\n\u2328\ufe0f = shortcut (below the text box)\nShortcuts: 2/2",
     "out_time": 1795830572.08301,
     "out_mid": 7672,
     "panel_mid": 7673,
