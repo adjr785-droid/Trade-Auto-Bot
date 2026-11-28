@@ -1,18 +1,18 @@
 {
     "JCT-USDT": {
-        "entry_price": 0.001549,
-        "safe_zone": 0.001549,
-        "stop_loss": 0.001472,
+        "entry_price": 0.001547,
+        "safe_zone": 0.001547,
+        "stop_loss": 0.00147,
         "peak_price": 0.001585,
-        "last_price": 0.001537,
-        "opened_at": 1795857175.823288,
+        "last_price": 0.00154,
+        "opened_at": 1795872372.9186153,
         "sl_pct": 5.0,
-        "entry_qty": 25935.1,
-        "entry_usdt": 40.0798,
+        "entry_qty": 29831.199999999997,
+        "entry_usdt": 46.0798,
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
-        "seen": 1795872328.870202,
-        "dca_count": 3,
-        "xsl": 0.001472
+        "seen": 1795872386.481725,
+        "dca_count": 4,
+        "xsl": 0.00147
     }
 }

@@ -390,5 +390,15 @@
             "lesson": "Manual exits can secure small gains but may also leave residual exposure. Future trades could benefit from predefined profit targets or trailing stops to capture more upside while ensuring the remaining base is fully cleared to avoid lingering exposure.",
             "confidence": "medium"
         }
+    },
+    {
+        "time": 1795872376.1833656,
+        "event": "ai_manual_buy_review",
+        "symbol": "JCT-USDT",
+        "review": {
+            "risk_level": "high",
+            "warning": "Manual buy request for JCT-USDT at $0.001539 with RSI 41.43 and market condition indicating BTC below its 50\u2011hour average. Existing position present and BTC filter active increase systemic risk. Proceed only if you fully understand potential loss of capital and have appropriate risk limits.",
+            "summary": "Given the low RSI, bearish BTC trend, and existing exposure, the trade carries high risk. Consider waiting for clearer market signals or reducing position size."
+        }
     }
 ]
