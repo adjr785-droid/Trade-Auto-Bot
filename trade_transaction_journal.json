@@ -5045,5 +5045,15 @@
             "warning": "BTC market is currently below its 50\u2011hour average, indicating broader bearish pressure. The RSI of 42.62 suggests the asset is not oversold yet, and the trade size is small (\u2248$20). Proceed with caution and consider waiting for clearer momentum or additional confirmation signals.",
             "summary": "A manual buy of ZORA-USDT for $19.93 at $0.004231 is possible, but market conditions are slightly unfavorable. Risk is moderate; monitor BTC trend and ZORA's price action before executing."
         }
+    },
+    {
+        "time": 1795825056.6547236,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'PWT-USDT', 'action': 'monitor', 'reason': 'PnL slightly negative and stop is close to current price, risk of further downside.'}, {'symbol': 'DOS-USDT', 'action': 'hold', 'reason': 'Small positive PnL and stop equals entry, position is stable.'}, {'symbol': 'ZORA-USDT', 'action': 'hold', 'reason': 'Near breakeven with minimal upside, stop is comfortably below price.'}], 'summary': 'Overall portfolio risk remains acceptable. Maintain current positions while closely watching PWT-USDT for potential stop\u2011loss breach. No new entries recommended at this time.'}"
+    },
+    {
+        "time": 1795825057.4454224,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 70.0, 'net_pnl_usdt': 1.1557, 'recurring_patterns': {'manual_sell': 5, 'panic_trades': 5, 'crash_guard_losses': 1, 'symbol_concentration': {'MOVE-USDT': 4, 'DOS-USDT': 4, 'BLESS-USDT': 2}}, 'recommendations': {'reduce_panic_trades': 'Consider limiting panic exits as they yield modest gains and increase operational noise', 'tighten_crash_guard': 'Review crash\u2011guard threshold to avoid large single\u2011trade losses', 'diversify_symbols': 'Spread exposure more evenly across symbols to lower concentration risk', 'monitor_win_rate': 'Current win rate is acceptable but small sample size adds uncertainty; continue tracking over larger sample'}}"
     }
 ]
