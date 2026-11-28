@@ -438,5 +438,15 @@
         "time": 1795875476.0137355,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 57.14, 'net_pnl_usdt': 1.4433, 'recurring_patterns': {'sell_methods': ['MANUAL SELL ALL', 'MANUAL SELL $2.75', 'MANUAL SELL $10.00', 'MANUAL SELL $31.00'], 'symbols': ['IDOL-USDT', 'BTW-USDT', 'TRX-USDT', 'WLD-USDT', 'VSN-USDT', 'JCT-USDT']}, 'recommendations': {'risk_advice': 'Maintain a conservative stance given modest net profit and a win rate just above 50%. Consider limiting manual sell triggers to higher confidence signals and reviewing loss-making symbols (TRX-USDT, WLD-USDT, JCT-USDT) for potential strategy adjustments.', 'data_uncertainty': 'Limited sample size (7 trades) introduces uncertainty in performance metrics; treat win_rate_pct and net_pnl_usdt as provisional indicators.'}}"
+    },
+    {
+        "time": 1795876344.5718608,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'JCT-USDT', 'action': 'HOLD', 'reason': 'Current PnL is modest (+2.52%). Stop loss at 0.00147 provides a buffer; no immediate signal to adjust. Continue monitoring price relative to stop and market volatility.'}, {'symbol': 'BTC-USDT', 'action': 'OBSERVE', 'reason': 'BTC filter is active and price is $59,293.51. Market conditions may affect correlated altcoins; keep watch for significant moves that could impact JCT-USDT.'}], 'summary': 'Portfolio risk remains acceptable (PASS). Maintain the JCT-USDT position while closely watching its stop level and overall BTC market movements. No new orders recommended at this time.'}"
+    },
+    {
+        "time": 1795876345.3047373,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 57.14, 'net_pnl_usdt': 1.4433, 'recurring_patterns': {'manual_sell_frequency': 7, 'repeat_symbols': ['IDOL-USDT'], 'common_reasons': ['MANUAL SELL ALL', 'MANUAL SELL $2.75', 'MANUAL SELL $10.00', 'MANUAL SELL $31.00']}, 'recommendations': {'risk_management': 'Maintain current position sizing; consider reducing exposure on symbols with negative pnl trends (e.g., TRX-USDT, WLD-USDT, JCT-USDT).', 'strategy_adjustments': 'Review manual sell triggers; evaluate if profit targets (e.g., $2.75, $10.00, $31.00) are optimal given volatility.', 'data_collection': 'Track reasons for each trade more granularly to identify if specific market conditions correlate with wins or losses.'}}"
     }
 ]
