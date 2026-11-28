@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691811,
+    "last_update_id": 935691814,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT35.41/\u20a648,207",
+    "kb_ph": "USDT35.22/\u20a647,949",
     "layout_bottom": [
         "query",
         "an"
@@ -96,8 +96,8 @@
     "layout_names": {
         "scanh": "Scan Hist"
     },
-    "kb_mid": 8080,
-    "out_text": "\ud83e\udde0 AI manual-buy advisory: Considering the 4.3\u202fUSDT size, existing position,\nand BTC being below its 50\u2011hour average, the trade carries moderate risk.\nProceed with caution and monitor BTC trend closely.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "kb_mid": 8085,
+    "out_text": "\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *IDOL* $25.04 (71%)\n+2.82% (+$0.69) | Entry 0.017418\nQty 1398.2622 | Price 0.017910 | Stop 0.016547 (-8%)\nRSI 59 | Bullish | ATH -62%\n\n\ud83d\udfe2 *JCT* $10.16 (29%)\n+1.78% (+$0.18) | Entry 0.001521\nQty 6561.9692 | Price 0.001548 | Stop 0.001445 (-7%)\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
@@ -124,7 +124,24 @@
         ]
     ],
     "panel_text": "\ud83d\udcc4 *Page 1/2*",
-    "out_time": 1795846800.5955722,
-    "out_mid": 8075,
-    "panel_hidden": true
+    "out_time": 1795846850.9346015,
+    "out_mid": 8083,
+    "pages": {
+        "p": [
+            "\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *IDOL* $25.04 (71%)\n+2.82% (+$0.69) | Entry 0.017418\nQty 1398.2622 | Price 0.017910 | Stop 0.016547 (-8%)\nRSI 59 | Bullish | ATH -62%\n\n\ud83d\udfe2 *JCT* $10.16 (29%)\n+1.78% (+$0.18) | Entry 0.001521\nQty 6561.9692 | Price 0.001548 | Stop 0.001445 (-7%)\n\u2800\n\u2800",
+            "RSI 47 | Mixed | ATH -92%\n\n\ud83e\udde0 *AI:* Both IDOL (71% of portfolio) and JCT (29%) show modest gains but have\nstop\u2011losses ~8% below current price and RSI in neutral range, warranting\nmonitoring for potential downside.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+        ],
+        "i": 0,
+        "mode": "Markdown",
+        "x": [
+            [
+                {
+                    "text": "\ud83d\udd04",
+                    "callback_data": "rf:go"
+                }
+            ]
+        ],
+        "cmd": "m:r:holdings"
+    },
+    "panel_mid": 8084
 }
