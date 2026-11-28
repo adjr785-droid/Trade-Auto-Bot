@@ -5205,5 +5205,15 @@
             "warning": "BTC filter is active; ensure the broader market conditions for BTC support this trade. Position size is small, but liquidity and price volatility may affect execution.",
             "summary": "Considering a $5 USDT purchase of ICNT at $0.2907 with RSI 42.14 and price below its 50\u2011hour average, the trade carries moderate risk. No existing position and a small order size limit exposure, but the active BTC filter suggests caution."
         }
+    },
+    {
+        "time": 1795840557.4740825,
+        "event": "ai_manual_buy_review",
+        "symbol": "TRX-USDT",
+        "review": {
+            "risk_level": "moderate",
+            "warning": "BTC market is below its 50\u2011hour average, indicating broader bearish pressure. Although TRX RSI is low (31.55) suggesting oversold conditions, the active BTC filter adds caution.",
+            "summary": "Proceed with the $5 USDT TRX purchase only if you accept moderate risk due to overall market weakness. Consider waiting for clearer bullish signals or a stronger BTC trend before committing."
+        }
     }
 ]
