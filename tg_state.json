@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935691682,
+    "last_update_id": 935691683,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -105,208 +105,16 @@
     "panel_rows": [
         [
             {
-                "text": "\u270f\ufe0f \ud83d\udccb Menu",
-                "callback_data": "m:lay:rk:menu"
-            },
-            {
-                "text": "\u270f\ufe0f \ud83e\uddf0 Tools",
-                "callback_data": "m:lay:rk:tools"
-            }
-        ],
-        [
-            {
-                "text": "\u270f\ufe0f \ud83c\udfc6 Markets",
-                "callback_data": "m:lay:rk:analyse"
-            },
-            {
-                "text": "\u270f\ufe0f \ud83d\udda5 System",
-                "callback_data": "m:lay:rk:bot"
-            }
-        ],
-        [
-            {
-                "text": "\u270f\ufe0f \ud83d\udcc8 Stats",
-                "callback_data": "m:lay:rk:stats"
-            },
-            {
-                "text": "\u270f\ufe0f \ud83d\udd0e Analyse Coin",
-                "callback_data": "m:lay:rk:an"
-            }
-        ],
-        [
-            {
-                "text": "\u270f\ufe0f \u2699\ufe0f Settings",
-                "callback_data": "m:lay:rk:set"
-            },
-            {
-                "text": "\u270f\ufe0f \ud83d\udcbc Holdings",
-                "callback_data": "m:lay:rk:hold"
-            }
-        ],
-        [
-            {
-                "text": "\u270f\ufe0f \ud83d\udcdc Trade History",
-                "callback_data": "m:lay:rk:hist"
-            },
-            {
-                "text": "\u270f\ufe0f \ud83e\udde0 Ask AI",
-                "callback_data": "m:lay:rk:ai"
-            }
-        ],
-        [
-            {
-                "text": "\u270f\ufe0f \ud83e\uddf9 Clear Chat",
-                "callback_data": "m:lay:rk:clear"
-            },
-            {
-                "text": "\u270f\ufe0f \ud83d\udea8 PANIC SELL",
-                "callback_data": "m:lay:rk:panic"
-            }
-        ],
-        [
-            {
-                "text": "\u270f\ufe0f \ud83d\udcbc Portfolio",
-                "callback_data": "m:lay:rk:pf"
-            },
-            {
-                "text": "\u270f\ufe0f \ud83d\udda5 System Menu",
-                "callback_data": "m:lay:rk:sy"
-            }
-        ],
-        [
-            {
-                "text": "\u270f\ufe0f \u2b50 Favourites",
-                "callback_data": "m:lay:rk:fav"
-            },
-            {
-                "text": "\u270f\ufe0f \ud83c\udfaf Setups",
-                "callback_data": "m:lay:rk:setups"
-            }
-        ],
-        [
-            {
-                "text": "\u270f\ufe0f \ud83c\udd95 New Listings",
-                "callback_data": "m:lay:rk:newl"
-            },
-            {
-                "text": "\u270f\ufe0f \ud83d\uddc4 Archive",
-                "callback_data": "m:lay:rk:arch"
-            }
-        ],
-        [
-            {
-                "text": "\u270f\ufe0f \ud83d\udc41 Watch List",
-                "callback_data": "m:lay:rk:watch"
-            },
-            {
-                "text": "\u270f\ufe0f \ud83d\udfe1 Manual List",
-                "callback_data": "m:lay:rk:manual"
-            }
-        ],
-        [
-            {
-                "text": "\u270f\ufe0f \ud83e\udd16 Auto List",
-                "callback_data": "m:lay:rk:auto"
-            },
-            {
-                "text": "\u270f\ufe0f \ud83d\udd0d Scan Now",
-                "callback_data": "m:lay:rk:scan"
-            }
-        ],
-        [
-            {
-                "text": "\u270f\ufe0f \ud83d\udcdc Scan History",
-                "callback_data": "m:lay:rk:scanh"
-            },
-            {
-                "text": "\u270f\ufe0f \ud83d\uded2 Buy a Coin",
-                "callback_data": "m:lay:rk:buy"
-            }
-        ],
-        [
-            {
-                "text": "\u270f\ufe0f \ud83d\udcb8 Sell a Coin",
-                "callback_data": "m:lay:rk:sell"
-            },
-            {
-                "text": "\u270f\ufe0f \ud83d\udcda Coin List",
-                "callback_data": "m:lay:rk:coins"
-            }
-        ],
-        [
-            {
-                "text": "\u270f\ufe0f \ud83d\udd14 Set Alert",
-                "callback_data": "m:lay:rk:alert"
-            },
-            {
-                "text": "\u270f\ufe0f \ud83d\udccb My Alerts",
-                "callback_data": "m:lay:rk:myal"
-            }
-        ],
-        [
-            {
-                "text": "\u270f\ufe0f \ud83e\uddf9 Dust \u2192 BGB",
-                "callback_data": "m:lay:rk:dust"
-            },
-            {
-                "text": "\u270f\ufe0f \u274c Cancel Orders",
-                "callback_data": "m:lay:rk:cancel"
-            }
-        ],
-        [
-            {
-                "text": "\u270f\ufe0f \ud83d\udee0\ufe0f Audit",
-                "callback_data": "m:lay:rk:audit"
-            },
-            {
-                "text": "\u270f\ufe0f \ud83e\udde0 Resume AI",
-                "callback_data": "m:lay:rk:airesume"
-            }
-        ],
-        [
-            {
-                "text": "\u270f\ufe0f \ud83d\udd04 Sync",
-                "callback_data": "m:lay:rk:sync"
-            },
-            {
-                "text": "\u270f\ufe0f \ud83d\udd0e Query",
-                "callback_data": "m:lay:rk:query"
-            }
-        ],
-        [
-            {
-                "text": "\u270f\ufe0f \ud83d\ude80 Breakout",
-                "callback_data": "m:lay:rk:qbo"
-            },
-            {
-                "text": "\u270f\ufe0f \ud83d\udfe2 Bounce",
-                "callback_data": "m:lay:rk:qbn"
-            }
-        ],
-        [
-            {
-                "text": "\u270f\ufe0f \u21a9\ufe0f Pullback",
-                "callback_data": "m:lay:rk:qpb"
-            },
-            {
-                "text": "\u270f\ufe0f \ud83d\udcc8 Trend",
-                "callback_data": "m:lay:rk:qtr"
-            }
-        ],
-        [
-            {
-                "text": "\u21a9\ufe0f Restore all names",
-                "callback_data": "m:lay:rnreset"
-            }
-        ],
-        [
-            {
-                "text": "\u2b05\ufe0f Layout",
+                "text": "\u2b05\ufe0f Cancel",
                 "callback_data": "m:lay"
             }
         ]
     ],
-    "panel_text": "\u270f\ufe0f *RENAME*\nChoose the button to rename.",
+    "panel_text": "\u270f\ufe0f *RENAME*\nSend the new name as a message (1-20 characters, emoji allowed).\nSend `reset` to restore the original name or `cancel` to stop.",
     "out_mid": 7861,
-    "panel_mid": 7865
+    "panel_mid": 7865,
+    "rename_pending": {
+        "key": "scanh",
+        "t": 1795841620.4052968
+    }
 }
