@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691777,
+    "last_update_id": 935691779,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT34.30/\u20a646,688",
+    "kb_ph": "USDT34.27/\u20a646,656",
     "layout_bottom": [
         "query",
         "an"
@@ -24,8 +24,8 @@
             1795739610.5038157
         ],
         "m:r:holdings": [
-            0,
-            1795844751.7919555
+            1,
+            1795844931.9339023
         ],
         "/analyse": [
             6,
@@ -93,46 +93,56 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 8011,
+    "kb_mid": 8018,
     "layout_names": {
         "scanh": "Scan Hist"
     },
-    "out_text": "\ud83e\udde0 AI manual-buy advisory: Considering the BTC downtrend filter, a modest USDT\namount, and a neutral RSI, proceed with caution. Verify that this trade fits\nwithin your risk management parameters before executing.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udd34 *IDOL* $20.01 (58%)\n-0.22% (-$0.04) | Entry 0.017298\nQty 1159.5255 | Price 0.017260 | Stop 0.016433 (-5%)\nRSI 59 | Bullish | ATH -64%\n\n\ud83d\udd34 *TRX* $4.97 (15%)\n-0.44% (-$0.02) | Entry 0.300820\nQty 16.611227 | Price 0.299490 | Stop 0.285779 (-5%)\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795844853.5847383,
+    "out_time": 1795844919.6004543,
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udcbc Holdings",
-                "callback_data": "m:r:holdings"
-            }
-        ],
-        [
+                "text": "\u25c0",
+                "callback_data": "pg:p"
+            },
             {
-                "text": "\ud83d\udcc8 Stats",
-                "callback_data": "m:r:stats"
-            }
-        ],
-        [
+                "text": "2/3",
+                "callback_data": "pg:x"
+            },
             {
-                "text": "\ud83e\uddfe Trade History",
-                "callback_data": "m:r:history"
-            }
-        ],
-        [
+                "text": "\u25b6",
+                "callback_data": "pg:n"
+            },
             {
-                "text": "\ud83d\udea8 PANIC SELL",
-                "callback_data": "/panic"
-            }
-        ],
-        [
-            {
-                "text": "\ud83c\udfe0 Main Menu",
+                "text": "\ud83c\udfe0",
                 "callback_data": "m:menu"
+            },
+            {
+                "text": "\ud83d\udd04",
+                "callback_data": "rf:go"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcbc *PORTFOLIO*",
-    "out_mid": 8007,
-    "panel_mid": 8008
+    "panel_text": "\ud83d\udcc4 *Page 2/3*",
+    "out_mid": 8016,
+    "pages": {
+        "p": [
+            "\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udd34 *IDOL* $20.01 (58%)\n-0.22% (-$0.04) | Entry 0.017298\nQty 1159.5255 | Price 0.017260 | Stop 0.016433 (-5%)\nRSI 59 | Bullish | ATH -64%\n\n\ud83d\udd34 *TRX* $4.97 (15%)\n-0.44% (-$0.02) | Entry 0.300820\nQty 16.611227 | Price 0.299490 | Stop 0.285779 (-5%)\n\u2800\n\u2800",
+            "RSI 32 | Bearish | ATH -70%\n\n\ud83d\udd34 *JCT* $4.91 (14%)\n-2.15% (-$0.11) | Entry 0.001536\nQty 3266.0479 | Price 0.001503 | Stop 0.001459 (-3%)\nRSI 52 | Mixed | ATH -92%\n\n\ud83d\udd34 *WLD* $4.29 (13%)\n-2.92% (-$0.13) | Entry 0.246500\nQty 17.92567 | Price 0.239300 | Stop 0.234175 (-2%)\n\u2800\n\u2800",
+            "RSI 42 | Bearish | ATH -98%\n\n\ud83e\udde0 *AI:* Holdings are diversified across IDOL, TRX, JCT, and WLD with modest\nlosses; all stop\u2011losses are set around 2\u20115% below entry, but TRX\u2019s low RSI\n(32) and bearish trend suggest heightened downside risk.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+        ],
+        "i": 1,
+        "mode": "Markdown",
+        "x": [
+            [
+                {
+                    "text": "\ud83d\udd04",
+                    "callback_data": "rf:go"
+                }
+            ]
+        ],
+        "cmd": "m:r:holdings"
+    },
+    "panel_mid": 8017
 }
