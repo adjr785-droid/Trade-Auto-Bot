@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935691753,
+    "last_update_id": 935691755,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -24,8 +24,8 @@
             1795739610.5038157
         ],
         "m:r:holdings": [
-            0,
-            1795844474.4118385
+            2,
+            1795844530.1858115
         ],
         "/analyse": [
             6,
@@ -107,7 +107,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "1/3",
+                "text": "3/3",
                 "callback_data": "pg:x"
             },
             {
@@ -124,14 +124,14 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/3*",
+    "panel_text": "\ud83d\udcc4 *Page 3/3*",
     "pages": {
         "p": [
             "\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *BTW* $15.33 (45%)\n+2.41% (+$0.36) | Entry 1.2310\nQty 12.159554 | Price 1.2607 | Stop 1.1695 (-7%)\nRSI 76 | Bullish | ATH -54%\n\n\ud83d\udd34 *TRX* $4.98 (14%)\n-0.37% (-$0.02) | Entry 0.300820\nQty 16.611227 | Price 0.299700 | Stop 0.285779 (-5%)\n\u2800\n\u2800",
             "RSI 32 | Bearish | ATH -70%\n\n\ud83d\udd34 *JCT* $4.95 (14%)\n-1.30% (-$0.07) | Entry 0.001536\nQty 3266.0479 | Price 0.001516 | Stop 0.001459 (-4%)\nRSI 52 | Mixed | ATH -92%\n\n\ud83d\udd34 *WLD* $4.32 (13%)\n-2.31% (-$0.10) | Entry 0.246500\nQty 17.92567 | Price 0.240800 | Stop 0.234175 (-3%)\n\u2800\n\u2800",
             "RSI 42 | Bearish | ATH -98%\n\n\ud83e\udde0 *AI:* BTC holding shows strong upside (+2.41%) but RSI 76 indicates\noverbought and stop 7% below entry; TRX and WLD are losing modestly with low RSI\nand stops near current price, warranting monitoring.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 0,
+        "i": 2,
         "mode": "Markdown",
         "x": [
             [
