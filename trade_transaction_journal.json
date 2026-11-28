@@ -90,5 +90,15 @@
             "warning": "BTC is trading below its 50\u2011hour average, indicating short\u2011term downward pressure. While the RSI is neutral, the market filter suggests caution.",
             "summary": "Considering the modest USDT amount, existing position, and bearish BTC trend, proceed with the manual buy only if you accept moderate risk and monitor price action closely."
         }
+    },
+    {
+        "time": 1795845745.5258188,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'WLD-USDT', 'action': 'monitor', 'reason': 'Position is down -2.72% and approaching stop (0.234175). Age is high (230 min). Consider tightening stop or reducing size if risk tolerance is low.'}, {'symbol': 'JCT-USDT', 'action': 'hold', 'reason': 'Small positive PnL (+0.07%) and price near entry. Stop is reasonably below current price, but position is very small; no immediate action required.'}, {'symbol': 'IDOL-USDT', 'action': 'hold', 'reason': 'Modest gain (+0.71%) with stop comfortably below current price. Age is moderate; continue monitoring.'}], 'summary': 'Overall portfolio risk remains PASS. The main concern is WLD-USDT, which is losing value and nearing its stop; consider risk mitigation. JCT-USDT and IDOL-USDT are stable with small gains. Maintain current allocations while keeping a close eye on the WLD position.'}"
+    },
+    {
+        "time": 1795845745.920118,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 50.0, 'net_pnl_usdt': 0.345, 'recurring_patterns': [], 'recommendations': 'Maintain current strategy but monitor market volatility and position sizing; consider increasing sample size before adjusting parameters.'}"
     }
 ]
