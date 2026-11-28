@@ -170,5 +170,23 @@
         "time": 1795852531.4166937,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 33.33, 'net_pnl_usdt': 0.2321, 'recurring_patterns': \"All trades executed with reason 'MANUAL SELL ALL'; limited sample size (3 trades) prevents robust pattern detection\", 'recommendations': 'Maintain current risk limits; avoid increasing position size until more data is collected; consider reviewing manual sell triggers for consistency; monitor win rate and P&L closely'}"
+    },
+    {
+        "time": 1795852656.2843862,
+        "event": "trade_closed",
+        "symbol": "IDOL-USDT",
+        "pnl_usdt": 0.23463852000000027,
+        "reason": "MANUAL SELL $2.75",
+        "strategy": "MANUAL"
+    },
+    {
+        "time": 1795852660.8198683,
+        "event": "ai_manual_sell_review",
+        "symbol": "IDOL-USDT",
+        "review": {
+            "review": "The position was manually closed at an average exit price of 0.01904\u202fUSDT, realizing a profit of 0.2346\u202fUSDT on the 144.66\u202fIDOL sold. The remaining base balance of 1,253.60\u202fIDOL was retained, indicating a partial exit strategy. The manual decision suggests a discretionary response to market conditions or risk limits.",
+            "lesson": "Partial exits can lock in gains while preserving exposure for potential upside. Ensure that manual interventions are aligned with predefined risk thresholds and that the remaining position size remains within the overall risk budget.",
+            "confidence": "high"
+        }
     }
 ]
