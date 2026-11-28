@@ -458,5 +458,11 @@
         "time": 1795877469.2961702,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 57.14, 'net_pnl_usdt': 1.4433, 'recurring_patterns': {'manual_sell_all_count': 3, 'manual_sell_specific_amounts': 4, 'symbols_involved': ['BTW-USDT', 'TRX-USDT', 'WLD-USDT', 'IDOL-USDT', 'VSN-USDT', 'JCT-USDT']}, 'recommendations': {'caution': 'Performance is modest with a slight positive PnL; consider reducing manual sell frequency and reviewing specific amount thresholds.', 'suggestion': 'Focus on symbols with positive outcomes (IDOL-USDT, BTW-USDT, VSN-USDT) and limit exposure to those with repeated losses (TRX-USDT, WLD-USDT, JCT-USDT).', 'risk': 'Maintain current risk limits; avoid increasing position sizes until a clearer positive trend emerges.'}}"
+    },
+    {
+        "time": 1795877491.2951157,
+        "event": "ai_coin_advisory",
+        "reviewed": 25,
+        "source": "coins.db"
     }
 ]
