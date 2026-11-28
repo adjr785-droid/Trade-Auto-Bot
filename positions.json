@@ -8,7 +8,7 @@
         "opened_at": 1795831915.5742848,
         "entry_qty": 140.46567,
         "entry_usdt": 34.6248,
-        "seen": 1795840451.7437792,
+        "seen": 1795840524.0615165,
         "xsl": 0.234175
     },
     "BTW-USDT": {
@@ -16,7 +16,7 @@
         "safe_zone": 1.195135,
         "stop_loss": 1.135378,
         "peak_price": 1.195135,
-        "last_price": 1.193113,
+        "last_price": 1.188568,
         "opened_at": 1795840413.0456681,
         "sl_pct": 5.0,
         "entry_qty": 4.18,
@@ -24,20 +24,21 @@
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
         "xsl": 1.135378,
-        "seen": 1795840452.1467714
+        "seen": 1795840524.456868
     },
     "ICNT-USDT": {
         "entry_price": 0.2904,
         "safe_zone": 0.2904,
         "stop_loss": 0.27588,
         "peak_price": 0.2904,
-        "last_price": 0.2904,
+        "last_price": 0.29,
         "opened_at": 1795840456.0410578,
         "sl_pct": 5.0,
         "entry_qty": 17.21,
         "entry_usdt": 4.9978,
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
-        "xsl": 0.27588
+        "xsl": 0.27588,
+        "seen": 1795840524.8403676
     }
 }
