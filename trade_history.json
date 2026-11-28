@@ -6,5 +6,13 @@
         "time": 1795844784.1818519,
         "reason": "MANUAL SELL ALL",
         "strategy": "MANUAL"
+    },
+    {
+        "sym": "TRX-USDT",
+        "pnl": -0.022092895999999966,
+        "fee": 0.00995,
+        "time": 1795844989.1695266,
+        "reason": "MANUAL SELL ALL",
+        "strategy": "MANUAL"
     }
 ]

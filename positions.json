@@ -4,27 +4,12 @@
         "safe_zone": 0.2465,
         "stop_loss": 0.234175,
         "peak_price": 0.2467,
-        "last_price": 0.2392,
+        "last_price": 0.2394,
         "opened_at": 1795831915.5742848,
         "entry_qty": 140.46567,
         "entry_usdt": 34.6248,
-        "seen": 1795844924.8869538,
+        "seen": 1795844999.73608,
         "xsl": 0.234175
-    },
-    "TRX-USDT": {
-        "entry_price": 0.30082,
-        "safe_zone": 0.30082,
-        "stop_loss": 0.285779,
-        "peak_price": 0.30082,
-        "last_price": 0.29952,
-        "opened_at": 1795840554.274539,
-        "sl_pct": 5.0,
-        "entry_qty": 16.6212,
-        "entry_usdt": 5.0,
-        "strategy": "MANUAL",
-        "purchase_source": "MANUAL",
-        "xsl": 0.285779,
-        "seen": 1795844924.9956138
     },
     "JCT-USDT": {
         "entry_price": 0.001536,
@@ -39,7 +24,7 @@
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
         "xsl": 0.001459,
-        "seen": 1795844925.104938
+        "seen": 1795844999.96026
     },
     "IDOL-USDT": {
         "entry_price": 0.017298,
@@ -53,7 +38,7 @@
         "entry_usdt": 20.0698,
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
-        "seen": 1795844925.2197723,
+        "seen": 1795845000.189219,
         "dca_count": 1,
         "xsl": 0.016433
     }

@@ -62,5 +62,23 @@
             "warning": "BTC market filter indicates price below 50\u2011hour average, suggesting downward pressure. Existing position may increase exposure. Ensure position size aligns with overall risk limits.",
             "summary": "Considering the BTC downtrend filter, a modest USDT amount, and a neutral RSI, proceed with caution. Verify that this trade fits within your risk management parameters before executing."
         }
+    },
+    {
+        "time": 1795844989.1696696,
+        "event": "trade_closed",
+        "symbol": "TRX-USDT",
+        "pnl_usdt": -0.022092895999999966,
+        "reason": "MANUAL SELL ALL",
+        "strategy": "MANUAL"
+    },
+    {
+        "time": 1795844999.5123065,
+        "event": "ai_manual_sell_review",
+        "symbol": "TRX-USDT",
+        "review": {
+            "review": "The manual sell was executed at an average price of 0.29949\u202fUSDT, resulting in a realized loss of 0.02209\u202fUSDT on the position. The small remaining base amount (2.728e\u201105\u202fTRX) suggests the trade was largely closed, but the loss indicates the exit price was below the entry cost basis. The loss magnitude is modest relative to the trade size, yet it reflects a missed opportunity to capture a higher price or to limit downside earlier.",
+            "lesson": "When exiting a position, especially in volatile markets like TRX/USDT, consider using tiered limit orders or trailing stops to protect against small adverse price moves. Manual exits should be justified by clear market signals or risk thresholds to avoid unnecessary slippage.",
+            "confidence": "medium"
+        }
     }
 ]
