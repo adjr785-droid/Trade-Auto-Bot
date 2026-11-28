@@ -410,5 +410,23 @@
         "time": 1795872758.462311,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 66.67, 'net_pnl_usdt': 1.6855, 'recurring_patterns': {'manual_sell_all_count': 4, 'manual_sell_specific_amount_count': 2, 'symbols_traded': ['BTW-USDT', 'TRX-USDT', 'WLD-USDT', 'IDOL-USDT', 'VSN-USDT']}, 'recommendations': {'caution': 'Performance sample is small (6 trades); results may not generalize.', 'suggestion': 'Consider diversifying entry criteria beyond manual sell triggers and monitor win rate over a larger sample before scaling position sizes.'}}"
+    },
+    {
+        "time": 1795873369.0529733,
+        "event": "trade_closed",
+        "symbol": "JCT-USDT",
+        "pnl_usdt": -0.24218640000000152,
+        "reason": "MANUAL SELL $31.00",
+        "strategy": "MANUAL"
+    },
+    {
+        "time": 1795873373.748236,
+        "event": "ai_manual_sell_review",
+        "symbol": "JCT-USDT",
+        "review": {
+            "review": "The manual sell resulted in a realized loss of $0.2422 on an average exit price of 0.001535 USDT per JCT, selling 20,182.2 JCT while 3,150.4 JCT remain unsold. The loss indicates the exit price was lower than the acquisition cost for the sold portion, suggesting timing or market pressure issues. No automated safeguards intervened, as the action was manual.",
+            "lesson": "Future exits should incorporate predefined price thresholds or trailing stops to avoid selling below cost, especially in volatile markets. Maintaining a buffer of unsold base assets can provide flexibility, but the remaining 3,150.4 JCT should be monitored for optimal re\u2011entry or further exit strategies. Manual interventions should be aligned with risk limits to prevent avoidable losses.",
+            "confidence": "medium"
+        }
     }
 ]
