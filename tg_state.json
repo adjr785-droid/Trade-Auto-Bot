@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691666,
+    "last_update_id": 935691669,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT34.41/\u20a646,840",
+    "kb_ph": "USDT34.42/\u20a646,854",
     "layout_bottom": [
         "an",
         "clear"
@@ -98,34 +98,46 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 7839,
-    "out_text": "USDT0.02\n\ud83d\udfe1 *MANUAL BUY*\n_Passed at least 5/7 core and 2/3 additional criteria. Manual review only._\n\nNone right now.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "kb_mid": 7842,
+    "out_text": "USDT0.02\n\u2705 DOS removed.\n\u2b50 *FAVOURITES*\n_Your own list. Tap a coin to buy, sell or remove it._\n\n```\nCOIN     PRICE RSI    1H    24H\n-------------------------------\nBLESS 0.013102   -     -  -22.2\nWLD     0.2451  44  +0.1   -1.7\n```\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
             {
-                "text": "\u2b50 FAVOURITES",
+                "text": "\u25c0",
+                "callback_data": "pg:p"
+            },
+            {
+                "text": "1/2",
+                "callback_data": "pg:x"
+            },
+            {
+                "text": "\u25b6",
+                "callback_data": "pg:n"
+            },
+            {
+                "text": "\ud83c\udfe0",
+                "callback_data": "m:menu"
+            }
+        ],
+        [
+            {
+                "text": "\u2795 Add coin",
+                "callback_data": "m:fs"
+            },
+            {
+                "text": "\ud83d\udd04 Refresh",
                 "callback_data": "m:fv"
-            },
-            {
-                "text": "\ud83c\udd95 NEW LISTINGS",
-                "callback_data": "m:nl"
             }
         ],
         [
             {
-                "text": "\ud83d\uddc4 ARCHIVE",
-                "callback_data": "m:ar:D"
+                "text": "\u2b50 BLESS",
+                "callback_data": "m:fc:BLESS:fv"
             },
             {
-                "text": "\ud83d\udd0e ANALYSE A COIN",
-                "callback_data": "m:an"
-            }
-        ],
-        [
-            {
-                "text": "\ud83c\udfaf SETUPS",
-                "callback_data": "m:su"
+                "text": "\u2b50 WLD",
+                "callback_data": "m:fc:WLD:fv"
             }
         ],
         [
@@ -135,8 +147,45 @@
             }
         ]
     ],
-    "panel_text": "USDT0.02\n\ud83d\uddc2 *MARKETS \u2014 MORE*",
-    "out_time": 1795840739.5330532,
-    "out_mid": 7837,
-    "panel_mid": 7838
+    "panel_text": "\ud83d\udcc4 *Page 1/2*",
+    "out_time": 1795840779.4054472,
+    "pages": {
+        "p": [
+            "USDT0.02\n\u2705 DOS removed.\n\u2b50 *FAVOURITES*\n_Your own list. Tap a coin to buy, sell or remove it._\n\n```\nCOIN     PRICE RSI    1H    24H\n-------------------------------\nBLESS 0.013102   -     -  -22.2\nWLD     0.2451  44  +0.1   -1.7\n```\n\u2800",
+            "```\n```\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+        ],
+        "i": 0,
+        "mode": "Markdown",
+        "x": [
+            [
+                {
+                    "text": "\u2795 Add coin",
+                    "callback_data": "m:fs"
+                },
+                {
+                    "text": "\ud83d\udd04 Refresh",
+                    "callback_data": "m:fv"
+                }
+            ],
+            [
+                {
+                    "text": "\u2b50 BLESS",
+                    "callback_data": "m:fc:BLESS:fv"
+                },
+                {
+                    "text": "\u2b50 WLD",
+                    "callback_data": "m:fc:WLD:fv"
+                }
+            ],
+            [
+                {
+                    "text": "\u2b05\ufe0f Markets",
+                    "callback_data": "/analyse"
+                }
+            ]
+        ],
+        "cmd": "m:fd:DOS"
+    },
+    "out_mid": 7843,
+    "panel_mid": 7844
 }
