@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691836,
+    "last_update_id": 935691838,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT37.69/\u20a651,306",
+    "kb_ph": "USDT37.79/\u20a651,436",
     "layout_bottom": [
         "query",
         "an"
@@ -86,8 +86,8 @@
     },
     "radar": [],
     "audit_down": {},
-    "audit_last": 1795852569.413263,
-    "audit_ai_cls": "OTHER",
+    "audit_last": 1795853468.13145,
+    "audit_ai_cls": "",
     "perf_breaker": {
         "until": 1795742224.733271,
         "since": 1795655824.733271,
@@ -96,36 +96,52 @@
     "layout_names": {
         "scanh": "Scan Hist"
     },
-    "kb_mid": 8139,
-    "out_mid": 8141,
-    "out_text": "\ud83d\udcdf *OUTPUT*\nResults appear here.",
+    "kb_mid": 8146,
+    "out_text": "\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *IDOL* $24.56 (65%)\n+12.47% (+$2.72) | Entry 0.017418\nQty 1253.6022 | Price 0.019590 | Stop 0.017418 (-11%)\nRSI 73 | Bullish | ATH -59%\n\n\ud83d\udfe2 *JCT* $10.38 (27%)\n+4.01% (+$0.40) | Entry 0.001521\nQty 6561.9692 | Price 0.001582 | Stop 0.001445 (-9%)\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "panel_mid": 8142,
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udcbc Portfolio",
-                "callback_data": "m:pf"
-            }
-        ],
-        [
+                "text": "\u25c0",
+                "callback_data": "pg:p"
+            },
             {
-                "text": "\ud83c\udfc6 Markets",
-                "callback_data": "/analyse"
-            }
-        ],
-        [
+                "text": "1/2",
+                "callback_data": "pg:x"
+            },
             {
-                "text": "\ud83e\uddf0 Tools",
-                "callback_data": "m:tools"
-            }
-        ],
-        [
+                "text": "\u25b6",
+                "callback_data": "pg:n"
+            },
             {
-                "text": "\ud83d\udda5 System",
-                "callback_data": "m:sy"
+                "text": "\ud83c\udfe0",
+                "callback_data": "m:menu"
+            },
+            {
+                "text": "\ud83d\udd04",
+                "callback_data": "rf:go"
             }
         ]
     ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nChoose a group."
+    "panel_text": "\ud83d\udcc4 *Page 1/2*",
+    "out_time": 1795853491.2178369,
+    "out_mid": 8144,
+    "pages": {
+        "p": [
+            "\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *IDOL* $24.56 (65%)\n+12.47% (+$2.72) | Entry 0.017418\nQty 1253.6022 | Price 0.019590 | Stop 0.017418 (-11%)\nRSI 73 | Bullish | ATH -59%\n\n\ud83d\udfe2 *JCT* $10.38 (27%)\n+4.01% (+$0.40) | Entry 0.001521\nQty 6561.9692 | Price 0.001582 | Stop 0.001445 (-9%)\n\u2800\n\u2800",
+            "RSI 56 | Mixed | ATH -92%\n\n\ud83e\udde0 *AI:* IDOL holds 65% of portfolio with RSI 73 and stop 11% below entry,\nindicating overbought condition and tight downside protection; JCT at 27% has\nmoderate RSI 56 but stop 9% below entry\u2014monitor both positions closely.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+        ],
+        "i": 0,
+        "mode": "Markdown",
+        "x": [
+            [
+                {
+                    "text": "\ud83d\udd04",
+                    "callback_data": "rf:go"
+                }
+            ]
+        ],
+        "cmd": "m:r:holdings"
+    },
+    "panel_mid": 8145
 }
