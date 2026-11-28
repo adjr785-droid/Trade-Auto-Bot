@@ -154,5 +154,11 @@
         "time": 1795847906.9993277,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 33.33, 'net_pnl_usdt': 0.2321, 'recurring_patterns': \"All trades executed with reason 'MANUAL SELL ALL'; limited sample size (3 trades) prevents robust pattern detection\", 'recommendations': 'Maintain current risk limits; avoid increasing position size until more data is collected; consider reviewing manual sell triggers for consistency; monitor win rate and P&L closely'}"
+    },
+    {
+        "time": 1795847930.7235172,
+        "event": "ai_coin_advisory",
+        "reviewed": 25,
+        "source": "coins.db"
     }
 ]
