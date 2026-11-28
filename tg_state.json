@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691869,
+    "last_update_id": 935691870,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT36.08/\u20a649,113",
+    "kb_ph": "USDT36.04/\u20a649,058",
     "layout_bottom": [
         "query",
         "an"
@@ -86,7 +86,7 @@
     },
     "radar": [],
     "audit_down": {},
-    "audit_last": 1795856994.2633548,
+    "audit_last": 1795858705.8858678,
     "audit_ai_cls": "",
     "perf_breaker": {
         "until": 1795742224.733271,
@@ -96,5 +96,43 @@
     "layout_names": {
         "scanh": "Scan Hist"
     },
-    "kb_mid": 8212
+    "kb_mid": 8220,
+    "out_text": "USDT0.02\n\ud83d\udd0e *QUERY \u2014 SETUP CLASSIFICATION*\n_Every coin in the latest scan is placed once in the setup it scores highest on,\nthen ranked inside its group. Tap a group to see all its coins; the ranking is\nkept in the setup_groups table._\n\nBreakout (54) | Bounce (405) | Pullback (0) | Trend (1)\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_mode": "Markdown",
+    "out_time": 1795859362.9546494,
+    "panel_rows": [
+        [
+            {
+                "text": "\ud83d\ude80 BREAKOUT",
+                "callback_data": "m:q:BREAKOUT"
+            },
+            {
+                "text": "\ud83d\udfe2 BOUNCE",
+                "callback_data": "m:q:BOUNCE"
+            }
+        ],
+        [
+            {
+                "text": "\u21a9\ufe0f PULLBACK",
+                "callback_data": "m:q:PULLBACK"
+            },
+            {
+                "text": "\ud83d\udcc8 TREND",
+                "callback_data": "m:q:TREND"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udd04 Refresh",
+                "callback_data": "m:query"
+            },
+            {
+                "text": "\u2b05\ufe0f Markets",
+                "callback_data": "/analyse"
+            }
+        ]
+    ],
+    "panel_text": "\ud83d\udc47 *Actions*",
+    "out_mid": 8217,
+    "panel_mid": 8218
 }
