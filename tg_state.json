@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935691725,
+    "last_update_id": 935691727,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -24,8 +24,8 @@
             1795739610.5038157
         ],
         "m:r:holdings": [
-            0,
-            1795840703.5608473
+            2,
+            1795842619.022078
         ],
         "/analyse": [
             6,
@@ -106,7 +106,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "1/3",
+                "text": "3/3",
                 "callback_data": "pg:x"
             },
             {
@@ -123,7 +123,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/3*",
+    "panel_text": "\ud83d\udcc4 *Page 3/3*",
     "out_time": 1795842586.040322,
     "out_mid": 7929,
     "pages": {
@@ -132,7 +132,7 @@
             "RSI 52 | Mixed | ATH -92%\n\n\ud83d\udd34 *TRX* $4.98 (14%)\n-0.26% (-$0.01) | Entry 0.300820\nQty 16.611227 | Price 0.300050 | Stop 0.285779 (-5%)\nRSI 32 | Bearish | ATH -70%\n\n\ud83d\udd34 *ICNT* $4.90 (14%)\n-1.96% (-$0.10) | Entry 0.290400\nQty 17.204404 | Price 0.284700 | Stop 0.275880 (-3%)\n\u2800\n\u2800",
             "RSI 43 | Bearish | ATH -53%\n\n\ud83d\udd34 *WLD* $4.33 (13%)\n-2.07% (-$0.09) | Entry 0.246500\nQty 17.92567 | Price 0.241400 | Stop 0.234175 (-3%)\nRSI 42 | Bearish | ATH -98%\n\n\ud83e\udde0 *AI:* BTC (BTW) is modestly up 0.69% but RSI 76 signals overbought; all other\nassets show bearish RSI, negative price moves, and stops within 3\u20116%,\nwarranting caution.\n\u2800\n\u2800"
         ],
-        "i": 0,
+        "i": 2,
         "mode": "Markdown",
         "x": [
             [
