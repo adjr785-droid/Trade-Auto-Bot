@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691868,
+    "last_update_id": 935691869,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT36.21/\u20a649,296",
+    "kb_ph": "USDT36.23/\u20a649,313",
     "layout_bottom": [
         "query",
         "an"
@@ -98,43 +98,43 @@
     "layout_names": {
         "scanh": "Scan Hist"
     },
-    "kb_mid": 8203,
-    "out_text": "\ud83e\udde0 AI manual-buy advisory: Manual buy of 10.13\u202fUSDT JCT at 0.00155\u202fUSDT per\ntoken is possible, but consider the bearish BTC context and your existing\nexposure. Proceed only if comfortable with moderate risk.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "kb_mid": 8209,
+    "out_text": "USDT0.02\n\ud83d\udd0e *QUERY \u2014 SETUP CLASSIFICATION*\n_Every coin in the latest scan is placed once in the setup it scores highest on,\nthen ranked inside its group. Tap a group to see all its coins; the ranking is\nkept in the setup_groups table._\n\nBreakout (2) | Bounce (0) | Pullback (0) | Trend (0)\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795857179.5477839,
+    "out_time": 1795857246.5066075,
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udcbc Holdings",
-                "callback_data": "m:r:holdings"
+                "text": "\ud83d\ude80 BREAKOUT",
+                "callback_data": "m:q:BREAKOUT"
+            },
+            {
+                "text": "\ud83d\udfe2 BOUNCE",
+                "callback_data": "m:q:BOUNCE"
             }
         ],
         [
             {
-                "text": "\ud83d\udcc8 Stats",
-                "callback_data": "m:r:stats"
+                "text": "\u21a9\ufe0f PULLBACK",
+                "callback_data": "m:q:PULLBACK"
+            },
+            {
+                "text": "\ud83d\udcc8 TREND",
+                "callback_data": "m:q:TREND"
             }
         ],
         [
             {
-                "text": "\ud83e\uddfe Trade History",
-                "callback_data": "m:r:history"
-            }
-        ],
-        [
+                "text": "\ud83d\udd04 Refresh",
+                "callback_data": "m:query"
+            },
             {
-                "text": "\ud83d\udea8 PANIC SELL",
-                "callback_data": "/panic"
-            }
-        ],
-        [
-            {
-                "text": "\ud83c\udfe0 Main Menu",
-                "callback_data": "m:menu"
+                "text": "\u2b05\ufe0f Markets",
+                "callback_data": "/analyse"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcbc *PORTFOLIO*",
-    "out_mid": 8195,
-    "panel_mid": 8205
+    "panel_text": "\ud83d\udc47 *Actions*",
+    "out_mid": 8207,
+    "panel_mid": 8208
 }
