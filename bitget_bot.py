@@ -62,27 +62,22 @@ def ai_emergency_resume(auto=False):
  save(AI_HEALTH,hs)
  tg("✅ *AUDIT — AI RECOVERY VERIFIED*\n3 checks passed. AI is back to normal"+("." if auto else " (you confirmed)."))
 _C={};_BAL={"t":0,"m":""};LAYOUT_ITEMS=[("tools","🧰 Tools","m:tools"),("analyse","🏆 Markets","/analyse"),("bot","🖥 System","/bot"),("stats","📈 Stats","/stats"),("an","🔎 Analyse Coin","m:an"),("set","⚙️ Settings","m:set"),("hold","💼 Holdings","m:r:holdings"),("hist","📜 Trade History","m:r:history"),("ai","🧠 Ask AI","m:ai:1"),("clear","🧹 Clear Chat","/clear"),("panic","🚨 PANIC SELL","/panic")]
-LAYOUT_DEFAULT=[];LAYOUT_MAX=2
+LAYOUT_DEFAULT=[];LAYOUT_MAX=5
 def layout_bottom():
- try:b=load(ST,{}).get("layout_bottom")
- except Exception:b=None
- if not isinstance(b,list):b=list(LAYOUT_DEFAULT)
- ok={i[0] for i in LAYOUT_ITEMS}
- return [k for k in dict.fromkeys(b) if k in ok][:LAYOUT_MAX]
+ return []  # the bottom bar is fixed: only Menu; Portfolio, Markets, Tools and System live inside it
 def lbl(k):
  try:n=(load(ST,{}).get("layout_names") or {}).get(k)
  except Exception:n=None
  return n or ({"menu":"📋 Menu"}.get(k) or next((l for i,l,_ in LAYOUT_ITEMS if i==k),k))
 def kb_markup():
  keys=[lbl("menu")]+[lbl(k) for k in layout_bottom()]
- keys=keys+["\u2800"]*(3-len(keys))  # Menu stays bottom-left; empty shortcut slots are blank keys
  return {"keyboard":[keys[i:i+3] for i in range(0,len(keys),3)],"resize_keyboard":True,"is_persistent":True}
 def bottom_map():
  m={"📋 menu":"m:menu","📊 menu":"m:menu","🏆 analyse (top 3)":"/analyse","🏆 analyse":"/analyse"}
  for k,l,d in LAYOUT_ITEMS:m[l.lower()]=d
  m["📋 menu"]="m:menu"
  for k,l,d in LAYOUT_ITEMS:m[lbl(k).lower()]=d
- m[lbl("menu").lower()]="m:menu";m["\u2800"]="m:menu"
+ m[lbl("menu").lower()]="m:menu"
  return m
 def rename_apply(t):
  st=load(ST,{});pd=st.get("rename_pending") or {};k=pd.get("key")
@@ -1389,7 +1384,7 @@ def analyse_top3(tab="M"):
  lines=[title,sub,"",_coin_table(items)]
  def tb(k,lbl):return _B(("▶ " if tab==k else "")+f"{lbl} ({cnt.get({'W':'WATCH','M':'MANUAL','A':'AUTO'}[k],0)})",f"m:at:{k}")
  keyboard=[[tb("W","👁 Watch"),tb("M","🟡 Manual"),tb("A","🤖 Auto")],
-           [_B("🎯 SETUPS","m:su"),_B("🗂 MORE","m:am")],
+           [_B("🔎 QUERY","m:query"),_B("🗂 MORE","m:am")],
            [_B("🔄 Refresh",f"m:at:{tab}")]]
  # Coin names remain in the readable list above; do not create a separate button for every coin.
  _send("\n".join(lines)[:3800],"Markdown",{"inline_keyboard":keyboard})
@@ -1434,6 +1429,53 @@ def analyse_setups():
  body=("```\n"+f"{'COIN':<6}{'RSI':>3}{'1H':>5}{'24H':>5}{'TY':>3} PASS BLOCK"+"\n"+"-"*32+"\n"+"\n".join(out)+"\n```") if out else "No coin passes 3 of the 5 checks right now."
  lines=["🎯 *SETUPS*","_Coins from the latest scan that pass at least 3 of 5 checks._","",body,"_TY: T Trend, P Pullback, B Bounce, K Breakout, - none_","_BLOCK: R RSI, M MA, H 1H, D 24H, S score (Core 5+ and Extra 2+). OK = all passed._"]
  _send("\n".join(lines),"Markdown",{"inline_keyboard":[[_B("🔍 SCAN NOW","m:r:scan"),_B("📜 SCAN HISTORY","/scan_history")],[_B("⬅️ Markets","/analyse"),_B("🔄 Refresh","m:su")]]})
+
+
+QUERY_TYPES=("BREAKOUT","BOUNCE","PULLBACK","TREND")
+def query_setup_items():
+ """Classify every coin recorded in the latest scan by its strongest transparent setup score (0-10). Read-only; never affects trading eligibility."""
+ try:
+  mx=_dbq("SELECT MAX(last_seen) FROM coins",one=True)[0] or 0
+  rows=_dbq("SELECT sym,price,chg24,h1,rsi,ma5,ma10,vol,tag,checks_json FROM coins WHERE last_seen>=? ORDER BY last_seen DESC",(float(mx)-600,))
+ except Exception as e:
+  print("QUERY SCORE ERR",str(e)[:120]);return None
+ settings=cfg();rmin=float(settings.get("rsi_min",42));rmax=float(settings.get("rsi_max",48));max24=float(settings.get("max_24h_pct",100))
+ grouped={k:[] for k in QUERY_TYPES}
+ for sym,price,chg,h1,rsi,ma5,ma10,vol,tag,cj in rows:
+  try:
+   px=float(price) if price is not None else None;ch=float(chg) if chg is not None else None
+   h=float(h1) if h1 is not None else None;r=float(rsi) if rsi is not None else None
+   m5=float(ma5) if ma5 is not None else None;m10=float(ma10) if ma10 is not None else None;v=float(vol) if vol is not None else None
+  except (TypeError,ValueError):px=ch=h=r=m5=m10=v=None
+  try:scan_data=(json.loads(cj or "{}").get("scanner") or {})
+  except Exception:scan_data={}
+  # Five equally weighted evidence checks per setup; missing evidence earns no points.
+  aligned=px is not None and m5 is not None and m10 is not None and px>m5>m10
+  bounce_scores=[ch is not None and -30.0<ch<-8.0,r is not None and r<35.0,h is not None and h>0.0,px is not None and m5 is not None and px>m5,v is not None and v>0]
+  breakout_scores=[ch is not None and 0.0<ch<25.0,r is not None and 50.0<=r<=70.0,aligned,h is not None and h>0.0,scan_data.get("breakout_confirmed") is True or (v is not None and v>=float(scan_data.get("min_volume") or 1e100) and scan_data.get("strategy")=="BREAKOUT")]
+  pullback_scores=[m5 is not None and m10 is not None and m5>m10,px is not None and m5 is not None and m10 is not None and m10<=px<=m5,r is not None and 40.0<=r<=65.0,h is not None and h>0.0,ch is not None and ch>0.0]
+  trend_scores=[ch is not None and 0.0<ch<=max24,h is not None and h>0.0,r is not None and rmin<=r<=rmax,aligned,scan_data.get("trend_4h_ok") is True or str(tag or "").upper()=="TREND"]
+  scores={"BREAKOUT":sum(bool(x) for x in breakout_scores)*2,"BOUNCE":sum(bool(x) for x in bounce_scores)*2,"PULLBACK":sum(bool(x) for x in pullback_scores)*2,"TREND":sum(bool(x) for x in trend_scores)*2}
+  best=max(scores.values())
+  # Preserve the scanner's setup tag only as a tie-break; otherwise use fixed deterministic order.
+  tied=[k for k in QUERY_TYPES if scores[k]==best]
+  chosen=str(tag or "").upper() if str(tag or "").upper() in tied else tied[0]
+  grouped[chosen].append({"sym":sym,"score":scores[chosen],"scores":scores,"rsi":r,"h1":h,"chg":ch,"price":px})
+ for k in QUERY_TYPES:grouped[k].sort(key=lambda x:(-x["score"],-(x["h1"] if x["h1"] is not None else -999),x["sym"]))
+ return grouped
+
+def analyse_query(category=None):
+ """Four-button Query menu; each category shows its top ten coins, highest setup score first."""
+ items=query_setup_items()
+ if items is None:tg("⚠️ Could not read the latest scan scores. Run a scan and try again.");return
+ if category not in QUERY_TYPES:
+  counts=[f"{k.title()} ({len(items[k])})" for k in QUERY_TYPES]
+  _send("🔎 *QUERY — SETUP CLASSIFICATION*\n_All coins in the latest scan are assigned once to the setup with their highest score. Each list is ranked by score; top 10 shown._\n\n"+" | ".join(counts),"Markdown",{"inline_keyboard":[[_B("🚀 BREAKOUT","m:q:BREAKOUT"),_B("🟢 BOUNCE","m:q:BOUNCE")],[_B("↩️ PULLBACK","m:q:PULLBACK"),_B("📈 TREND","m:q:TREND")],[_B("🔄 Refresh","m:query"),_B("⬅️ Markets","/analyse")]]});return
+ rows=items[category][:10]
+ if rows:
+  body=[f"{i}. *{x['sym'].replace('-USDT','')}* — {x['score']}/10 | RSI {_fmt(x['rsi'],'.1f')} | 1H {_fmt(x['h1'],'+.2f')}% | 24H {_fmt(x['chg'],'+.2f')}%" for i,x in enumerate(rows,1)]
+ else:body=["No coins recorded in this category in the latest scan."]
+ _send(f"🔎 *{category} — TOP 10*\n_Sorted by setup score, highest first. Scores are evidence points out of 10; classification is informational only._\n\n"+"\n".join(body),"Markdown",{"inline_keyboard":[[_B("🚀 BREAKOUT","m:q:BREAKOUT"),_B("🟢 BOUNCE","m:q:BOUNCE")],[_B("↩️ PULLBACK","m:q:PULLBACK"),_B("📈 TREND","m:q:TREND")],[_B("⬅️ Query","m:query"),_B("🔄 Refresh",f"m:q:{category}")]]})
 def coin_search(q,kind=None):
  """Type any part of a coin name: exact match opens its analysis (or adds it to Favourites), several matches give a pick list."""
  _UI["ub"]=True;_UI["ub_done"]=False
@@ -2906,14 +2948,13 @@ def cmd_coins():
  lines=["📚 *COIN LIST*",f"✅ Ready {cnt.get('READY',0)} | 🆕 New {cnt.get('NEW',0)} | 💼 Held {cnt.get('BOUGHT',0)} | ⛔ Rejected {cnt.get('REJECTED',0)}",
   f"Pipeline: 👁 Watch {cnt.get('WATCH',0)} → 🟡 Manual {cnt.get('MANUAL',0)} → 🤖 Auto {cnt.get('AUTO',0)} | ⤵ Dropped {cnt.get('DROPPED',0)} | Archived {cnt.get('ARCHIVED',0)}",
   f"Execution: 📥 queued {ec.get('QUEUED',0)} | ⛔ blocked {ec.get('BLOCKED',0)} | 🟢 held {ec.get('HELD',0)}",""]
- tb=[f"{'COIN':<6}{'PRICE':>8}{'RSI':>4}{'1H':>6} S{'SC':>3}{'RK':>3}","-"*32]
+ tb=[f"{'COIN':<6}{'PRICE':>8}{'RSI':>4}{'1H':>6} {'ST':<2}{'SC':>4}","-"*31];notes=[]
  stl={"WATCH":"W","MANUAL":"M","AUTO":"A"};stn={"BOUGHT":"H","NEW":"N","READY":"R","REJECTED":"X"}
  for sym,st,exst,p,h,r,n,why,mc,mscore,adv,cj,stg in rows:
   c=sym.split("-")[0];tag=stn.get(st) if st in ("BOUGHT","NEW") else (stl.get(stg) or stn.get(st,"-"))
-  rk={"high":"H","medium":"M","low":"L"}.get(str(adv or "").split(":")[0].strip().lower(),"-")
-  tb.append(f"{c[:6]:<6}{(format(float(p),'.6g')[:8] if p else '-'):>8}{(format(r,'.0f') if r is not None else '-'):>4}{(format(h,'+.1f') if h is not None else '-'):>6} {tag}{(str(int(float(mscore or 0))) if mc else '-'):>3}{rk:>3}")
- tb+=["-"*32,"S: W Watch M Manual A Auto","   R Ready N New H Held X Rej","SC: manual score out of 10","RK: AI risk H high M mid L low"]
- lines+=["```"]+tb+["```"]
+  tb.append(f"{c[:6]:<6}{(format(float(p),'.6g')[:8] if p else '-'):>8}{(format(r,'.0f') if r is not None else '-'):>4}{(format(h,'+.1f') if h is not None else '-'):>6} {tag:<2}{(str(int(float(mscore or 0)))+'/10') if mc else '-':>4}")
+  if adv:notes.append(f"🧠 {c}: "+str(adv)[:110])
+ lines+=["```"]+tb+["```","_ST: W Watch, M Manual, A Auto, R Ready, N New, H Held, X Rejected. SC: manual score._"]+notes
  if dropped:
   lines += ["", "⤵ *DROPPED — retained for recovery:* "+", ".join(f"{x['sym'].split('-')[0]} ({int(float(x.get('score') or 0))}/10)" for x in dropped)]
  _send("\n".join(lines),"Markdown",{"inline_keyboard":[_MENU_BTN]})
@@ -3441,6 +3482,8 @@ def ui_cb(t):
   elif a=="nl":analyse_new_listings()
   elif a=="ar":analyse_archive(p[2] if len(p)>2 else "D")
   elif a=="su":analyse_setups()
+  elif a=="query":analyse_query()
+  elif a=="q" and len(p)>2:analyse_query(p[2].upper())
   elif a=="am":ui_send("🗂 *MARKETS — MORE*",[[_B("⭐ FAVOURITES","m:fv"),_B("🆕 NEW LISTINGS","m:nl")],[_B("🗄 ARCHIVE","m:ar:D"),_B("🔎 ANALYSE A COIN","m:an")],[_B("⬅️ Markets","/analyse")]])
   elif a=="fv":fav_show()
   elif a=="fc" and len(p)>2:fav_coin(p[2],p[3] if len(p)>3 else "fv")
@@ -3534,7 +3577,7 @@ def ui_cb(t):
    elif len(p)>3 and p[2]=="t":
     k=p[3]
     if k in b:b.remove(k)
-    elif len(b)>=LAYOUT_MAX:note=f"\n⚠️ Both shortcut slots are used. Remove one first."
+    elif len(b)>=LAYOUT_MAX:note=f"\n⚠️ Bottom is full ({LAYOUT_MAX+1} keys with Menu). Move one back to the list first."
     else:b.append(k)
    try:
     st=load(ST,{});st["layout_bottom"]=b;save(ST,st)
@@ -3544,7 +3587,7 @@ def ui_cb(t):
     c=cfg();c["page_lines"]=max(6,min(24,int(c.get("page_lines",12) or 12)+(1 if p[3]=="+" else -1)));save(CFG,c);note="\n✅ Page size: %d lines."%c["page_lines"]
    note+=_UI.pop("lay_note","")
    rows=[[_B(("⌨️ " if k in b else "📋 ")+lbl(k),f"m:lay:t:{k}") for k,l,_ in LAYOUT_ITEMS[i:i+2]] for i in range(0,len(LAYOUT_ITEMS),2)]
-   ui_send(f"🧩 *SHORTCUTS*\nTap a button to add it next to Menu or remove it.\n⌨️ = shortcut (below the text box)\nShortcuts: {len(b)}/{LAYOUT_MAX}{note}",rows+[[_B("➖","m:lay:pl:-"),_B("📏 Page: %d lines"%int(cfg().get("page_lines",12) or 12),"m:lay"),_B("➕","m:lay:pl:+")],[_B("✏️ Rename buttons","m:lay:rn"),_B("↩️ Reset layout","m:lay:reset")],[_B("⬅️ Tools","m:tools")]])
+   ui_send(f"🧩 *LAYOUT*\nTap a button to move it.\n⌨️ = bottom key (below the text box)\n📋 = Menu list\nBottom keys: {len(b)+1}/{LAYOUT_MAX+1} (Menu always stays){note}",rows+[[_B("➖","m:lay:pl:-"),_B("📏 Page: %d lines"%int(cfg().get("page_lines",12) or 12),"m:lay"),_B("➕","m:lay:pl:+")],[_B("✏️ Rename buttons","m:lay:rn"),_B("↩️ Reset layout","m:lay:reset")],[_B("⬅️ Tools","m:tools")]])
   elif a=="tools":
    ui_send("🧰 *TOOLS*\nChoose a group.",[[_B("🧹 Orders & Dust","m:tl:trade"),_B("🔔 Alerts","m:tl:alerts")],[_B("📚 Coin List","m:coins"),_B("🛠️ System","m:tl:sys")],[_B("⬅️ Main Menu","m:menu")]])
   elif a=="tl" and len(p)>2:
@@ -3553,7 +3596,7 @@ def ui_cb(t):
    elif p[2]=="alerts":ui_send("🔔 *ALERTS*",[[_B("🔔 Set alert","m:al"),_B("📋 My alerts","m:r:alerts")],[_B("🗑 Cancel all alerts","m:r:cancelalerts")],_T])
    elif p[2]=="sys":ui_send("🛠️ *SYSTEM*",[[_B("🛠️ Audit","m:r:audit")],[_B("🧠 Resume AI Mode","m:r:airesume")],_T])
   elif a=="pf":ui_send("💼 *PORTFOLIO*",[[_B("💼 Holdings","m:r:holdings")],[_B("📈 Stats","m:r:stats")],[_B("🧾 Trade History","m:r:history")],[_B("🚨 PANIC SELL","/panic")],[_B("🏠 Main Menu","m:menu")]])
-  elif a=="sy":ui_send("🖥 *SYSTEM*",[[_B("🖥 Bot Status","m:r:bot")],[_B("⚙️ Settings","m:set")],[_B("🧠 Ask AI","m:ai:1")],[_B("🛠️ Audit","m:r:audit")],[_B("🧠 Resume AI Mode","m:r:airesume")],[_B("🧩 Shortcuts","m:lay")],[_B("🧹 Clear Chat","m:r:clear")],[_B("🏠 Main Menu","m:menu")]])
+  elif a=="sy":ui_send("🖥 *SYSTEM*",[[_B("🖥 Bot Status","m:r:bot")],[_B("⚙️ Settings","m:set")],[_B("🧠 Ask AI","m:ai:1")],[_B("🛠️ Audit","m:r:audit")],[_B("🧠 Resume AI Mode","m:r:airesume")],[_B("🧹 Clear Chat","m:r:clear")],[_B("🏠 Main Menu","m:menu")]])
   elif a=="more" and len(p)>3:ui_more(p[2],int(p[3]))
   elif a=="dash":
    ui_send("📊 *DASHBOARD*\nChoose a dashboard screen.",[
@@ -3671,7 +3714,7 @@ def handle(t,age):
 def ui_cb(t):
  k=_AI_CMD.get(str(t).strip().lower())
  return _ai_run(k,_u0,t) if k else _u0(t)
-_UB_CB={"at","ar","su","pk","fc","fv","fa","fd","nl","am","an","se","a"}
+_UB_CB={"at","ar","su","query","q","pk","fc","fv","fa","fd","nl","am","an","se","a"}
 _ub_cb0=ui_cb;_ub_h0=handle
 def ui_cb(t):
  p=str(t).split(":");_UI["ub"]=len(p)>1 and p[0]=="m" and (p[1] in _UB_CB or (p[1]=="more" and len(p)>2 and p[2] in ("analyse","fav")));_UI["ub_done"]=False
