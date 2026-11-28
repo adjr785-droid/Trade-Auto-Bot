@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691664,
+    "last_update_id": 935691666,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT34.31/\u20a646,704",
+    "kb_ph": "USDT34.41/\u20a646,840",
     "layout_bottom": [
         "an",
         "clear"
@@ -98,55 +98,45 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 7835,
-    "out_text": "\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udd34 *JCT* $14.94 (44%)\n-0.20% (-$0.03) | Entry 0.001536\nQty 9746.8479 | Price 0.001533 | Stop 0.001459 (-5%)\nRSI 47 | Bearish | ATH -92%\n\n\ud83d\udd34 *TRX* $4.99 (15%)\n-0.13% (-$0.01) | Entry 0.300820\nQty 16.611227 | Price 0.300420 | Stop 0.285779 (-5%)\n\u2800\n\u2800",
+    "kb_mid": 7839,
+    "out_text": "USDT0.02\n\ud83d\udfe1 *MANUAL BUY*\n_Passed at least 5/7 core and 2/3 additional criteria. Manual review only._\n\nNone right now.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udcbc Portfolio",
-                "callback_data": "m:pf"
+                "text": "\u2b50 FAVOURITES",
+                "callback_data": "m:fv"
+            },
+            {
+                "text": "\ud83c\udd95 NEW LISTINGS",
+                "callback_data": "m:nl"
             }
         ],
         [
             {
-                "text": "\ud83c\udfc6 Markets",
+                "text": "\ud83d\uddc4 ARCHIVE",
+                "callback_data": "m:ar:D"
+            },
+            {
+                "text": "\ud83d\udd0e ANALYSE A COIN",
+                "callback_data": "m:an"
+            }
+        ],
+        [
+            {
+                "text": "\ud83c\udfaf SETUPS",
+                "callback_data": "m:su"
+            }
+        ],
+        [
+            {
+                "text": "\u2b05\ufe0f Markets",
                 "callback_data": "/analyse"
-            }
-        ],
-        [
-            {
-                "text": "\ud83e\uddf0 Tools",
-                "callback_data": "m:tools"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udda5 System",
-                "callback_data": "m:sy"
             }
         ]
     ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nChoose a group.",
-    "out_time": 1795840653.4517303,
-    "pages": {
-        "p": [
-            "\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udd34 *JCT* $14.94 (44%)\n-0.20% (-$0.03) | Entry 0.001536\nQty 9746.8479 | Price 0.001533 | Stop 0.001459 (-5%)\nRSI 47 | Bearish | ATH -92%\n\n\ud83d\udd34 *TRX* $4.99 (15%)\n-0.13% (-$0.01) | Entry 0.300820\nQty 16.611227 | Price 0.300420 | Stop 0.285779 (-5%)\n\u2800\n\u2800",
-            "RSI 32 | Bearish | ATH -70%\n\n\ud83d\udd34 *ICNT* $4.97 (14%)\n-0.52% (-$0.03) | Entry 0.290400\nQty 17.204404 | Price 0.288900 | Stop 0.275880 (-5%)\nRSI 42 | Bearish | ATH -52%\n\n\ud83d\udd34 *BTW* $4.93 (14%)\n-1.37% (-$0.07) | Entry 1.1951\nQty 4.184342 | Price 1.1787 | Stop 1.1354 (-4%)\n\u2800\n\u2800",
-            "RSI 68 | Mixed | ATH -57%\n\n\ud83d\udd34 *WLD* $4.37 (13%)\n-1.01% (-$0.04) | Entry 0.246500\nQty 17.92567 | Price 0.244000 | Stop 0.234175 (-4%)\nRSI 44 | Bearish | ATH -98%\n\n\ud83e\udde0 *AI:* All four positions are small, showing modest losses (\u20110.13% to\n\u20111.37%) and bearish RSI, with stops roughly 4\u20115% below entry, so monitor stop\nproximity and overall downside risk.\n\u2800\n\u2800"
-        ],
-        "i": 0,
-        "mode": "Markdown",
-        "x": [
-            [
-                {
-                    "text": "\ud83d\udd04",
-                    "callback_data": "rf:go"
-                }
-            ]
-        ],
-        "cmd": "m:r:holdings"
-    },
-    "out_mid": 7833,
-    "panel_mid": 7834
+    "panel_text": "USDT0.02\n\ud83d\uddc2 *MARKETS \u2014 MORE*",
+    "out_time": 1795840739.5330532,
+    "out_mid": 7837,
+    "panel_mid": 7838
 }
