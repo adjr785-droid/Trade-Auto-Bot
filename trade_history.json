@@ -500,5 +500,13 @@
         "time": 1795840351.3956542,
         "reason": "MANUAL SELL $30.00",
         "strategy": "OTHER"
+    },
+    {
+        "sym": "JCT-USDT",
+        "pnl": 0.03888479999999954,
+        "fee": 0.019987,
+        "time": 1795842244.694926,
+        "reason": "MANUAL SELL $10.00",
+        "strategy": "MANUAL"
     }
 ]
