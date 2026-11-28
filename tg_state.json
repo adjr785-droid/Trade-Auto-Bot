@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691881,
+    "last_update_id": 935691883,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT35.92/\u20a648,895",
+    "kb_ph": "USDT35.96/\u20a648,950",
     "layout_bottom": [
         "query",
         "an"
@@ -90,7 +90,7 @@
     },
     "radar": [],
     "audit_down": {},
-    "audit_last": 1795858705.8858678,
+    "audit_last": 1795859562.9602432,
     "audit_ai_cls": "",
     "perf_breaker": {
         "until": 1795742224.733271,
@@ -100,36 +100,43 @@
     "layout_names": {
         "scanh": "Scan Hist"
     },
-    "kb_mid": 8233,
-    "out_mid": 8234,
-    "out_text": "\ud83d\udcdf *OUTPUT*\nResults appear here.",
+    "kb_mid": 8236,
+    "out_text": "USDT0.02\n\ud83d\udc41 *WATCH LIST*\n_The top-rated coin of each setup (Breakout, Bounce, Pullback, Trend), updated\nevery scan._\n\nNone right now.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "panel_mid": 8235,
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udcbc Portfolio",
-                "callback_data": "m:pf"
+                "text": "\u25b6 \ud83d\udc41 Watch (0)",
+                "callback_data": "m:at:W"
+            },
+            {
+                "text": "\ud83d\udfe1 Manual (0)",
+                "callback_data": "m:at:M"
+            },
+            {
+                "text": "\ud83e\udd16 Auto (0)",
+                "callback_data": "m:at:A"
             }
         ],
         [
             {
-                "text": "\ud83c\udfc6 Markets",
-                "callback_data": "/analyse"
+                "text": "\ud83d\udd0e QUERY",
+                "callback_data": "m:query"
+            },
+            {
+                "text": "\ud83d\uddc2 MORE",
+                "callback_data": "m:am"
             }
         ],
         [
             {
-                "text": "\ud83e\uddf0 Tools",
-                "callback_data": "m:tools"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udda5 System",
-                "callback_data": "m:sy"
+                "text": "\ud83d\udd04 Refresh",
+                "callback_data": "m:at:W"
             }
         ]
     ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nChoose a group."
+    "panel_text": "\ud83d\udc47 *Actions*",
+    "out_time": 1795859571.5727332,
+    "out_mid": 8239,
+    "panel_mid": 8240
 }
