@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935691788,
+    "last_update_id": 935691789,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -103,30 +103,54 @@
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udcbc Portfolio",
-                "callback_data": "m:pf"
+                "text": "\ud83d\udda5 Bot Status",
+                "callback_data": "m:r:bot"
             }
         ],
         [
             {
-                "text": "\ud83c\udfc6 Markets",
-                "callback_data": "/analyse"
+                "text": "\u2699\ufe0f Settings",
+                "callback_data": "m:set"
             }
         ],
         [
             {
-                "text": "\ud83e\uddf0 Tools",
-                "callback_data": "m:tools"
+                "text": "\ud83e\udde0 Ask AI",
+                "callback_data": "m:ai:1"
             }
         ],
         [
             {
-                "text": "\ud83d\udda5 System",
-                "callback_data": "m:sy"
+                "text": "\ud83d\udee0\ufe0f Audit",
+                "callback_data": "m:r:audit"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\udde0 Resume AI Mode",
+                "callback_data": "m:r:airesume"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\udde9 Shortcuts",
+                "callback_data": "m:lay"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\uddf9 Clear Chat",
+                "callback_data": "m:r:clear"
+            }
+        ],
+        [
+            {
+                "text": "\ud83c\udfe0 Main Menu",
+                "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nChoose a group.",
+    "panel_text": "\ud83d\udda5 *SYSTEM*",
     "out_mid": 8025,
     "panel_mid": 8032
 }
