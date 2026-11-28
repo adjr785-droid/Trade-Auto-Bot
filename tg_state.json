@@ -1,16 +1,15 @@
 {
-    "last_update_id": 935691691,
+    "last_update_id": 935691698,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT34.66/\u20a647,174",
+    "kb_ph": "USDT34.54/\u20a647,015",
     "layout_bottom": [
-        "an",
-        "clear"
+        "query"
     ],
-    "kb_keys": "[['\ud83d\udccb Menu', '\ud83d\udd0e Analyse Coin', '\ud83e\uddf9 Clear Chat']]",
+    "kb_keys": "[['\ud83d\udccb Menu', '\ud83d\udd0e Query', '\u2800']]",
     "bot_seen": {
         "t": 1795429354.8422616,
         "eq": 24.669762035972877,
@@ -84,25 +83,20 @@
             1795840366.553824
         ]
     },
-    "radar": [
-        "BNB-USDT",
-        "PUMP-USDT",
-        "PONS-USDT",
-        "IDOL-USDT"
-    ],
+    "radar": [],
     "audit_down": {},
-    "audit_last": 1795841052.7671597,
-    "audit_ai_cls": "",
+    "audit_last": 1795842030.8957493,
+    "audit_ai_cls": "OTHER",
     "perf_breaker": {
         "until": 1795742224.733271,
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 7879,
+    "kb_mid": 7884,
     "layout_names": {
         "scanh": "Scan Hist"
     },
-    "out_text": "\ud83d\udea8 *AI FAILURE*\nAI notes and reviews are paused. Buying, selling and all stops keep running on\nthe rules. The audit is recovering the AI (3 checks).\nReason: AI stage performance_review failed: Expecting ',' delimiter: line 1\ncolumn 728 (char 727)\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "\ud83d\udee0 AUDIT\n\u2705 Fixed: AI \u2014 unknown error (stage: coin_advisory). Retrying; no automatic fix\nknown for this error.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
@@ -127,7 +121,7 @@
         ],
         [
             {
-                "text": "\u2705 \ud83d\udd0e Analyse Coin",
+                "text": "\ud83d\udd0e Analyse Coin",
                 "callback_data": "m:lay:t:an"
             },
             {
@@ -151,7 +145,7 @@
                 "callback_data": "m:lay:t:ai"
             },
             {
-                "text": "\u2705 \ud83e\uddf9 Clear Chat",
+                "text": "\ud83e\uddf9 Clear Chat",
                 "callback_data": "m:lay:t:clear"
             }
         ],
@@ -267,7 +261,7 @@
         ],
         [
             {
-                "text": "\ud83d\udd0e Query",
+                "text": "\u2705 \ud83d\udd0e Query",
                 "callback_data": "m:lay:t:query"
             },
             {
@@ -322,8 +316,8 @@
             }
         ]
     ],
-    "panel_text": "\ud83e\udde9 *SHORTCUTS*\nTap a button to add it next to Menu or remove it.\n\u2705 = shortcut (below the text box)\nShortcuts: 2/2",
+    "panel_text": "\ud83e\udde9 *SHORTCUTS*\nTap a button to add it next to Menu or remove it.\n\u2705 = shortcut (below the text box)\nShortcuts: 1/2",
     "out_mid": 7872,
-    "out_time": 1795841997.3695724,
-    "panel_hidden": true
+    "out_time": 1795842033.0345795,
+    "panel_mid": 7882
 }

@@ -4,11 +4,11 @@
         "safe_zone": 0.2465,
         "stop_loss": 0.234175,
         "peak_price": 0.2467,
-        "last_price": 0.2435,
+        "last_price": 0.243,
         "opened_at": 1795831915.5742848,
         "entry_qty": 140.46567,
         "entry_usdt": 34.6248,
-        "seen": 1795841984.690774,
+        "seen": 1795842072.1389632,
         "xsl": 0.234175
     },
     "BTW-USDT": {
@@ -16,7 +16,7 @@
         "safe_zone": 1.195135,
         "stop_loss": 1.195135,
         "peak_price": 1.263258,
-        "last_price": 1.263258,
+        "last_price": 1.236,
         "opened_at": 1795840413.0456681,
         "sl_pct": 5.0,
         "entry_qty": 4.18,
@@ -24,14 +24,15 @@
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
         "xsl": 1.195135,
-        "seen": 1795841985.013389
+        "seen": 1795842072.7883787,
+        "rsi_peak": 76.09
     },
     "ICNT-USDT": {
         "entry_price": 0.2904,
         "safe_zone": 0.2904,
         "stop_loss": 0.27588,
         "peak_price": 0.2904,
-        "last_price": 0.2886,
+        "last_price": 0.2871,
         "opened_at": 1795840456.0410578,
         "sl_pct": 5.0,
         "entry_qty": 17.21,
@@ -39,14 +40,14 @@
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
         "xsl": 0.27588,
-        "seen": 1795841988.1613243
+        "seen": 1795842073.1059394
     },
     "TRX-USDT": {
         "entry_price": 0.30082,
         "safe_zone": 0.30082,
         "stop_loss": 0.285779,
         "peak_price": 0.30082,
-        "last_price": 0.30032,
+        "last_price": 0.30034,
         "opened_at": 1795840554.274539,
         "sl_pct": 5.0,
         "entry_qty": 16.6212,
@@ -54,14 +55,14 @@
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
         "xsl": 0.285779,
-        "seen": 1795841988.4796433
+        "seen": 1795842073.4356766
     },
     "JCT-USDT": {
         "entry_price": 0.001536,
         "safe_zone": 0.001536,
         "stop_loss": 0.001459,
         "peak_price": 0.001546,
-        "last_price": 0.001538,
+        "last_price": 0.001541,
         "opened_at": 1795840589.424666,
         "sl_pct": 5.0,
         "entry_qty": 9752.6,
@@ -69,6 +70,6 @@
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
         "xsl": 0.001459,
-        "seen": 1795841988.795924
+        "seen": 1795842073.8521867
     }
 }
