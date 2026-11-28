@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935691557,
+    "last_update_id": 935691577,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -78,7 +78,6 @@
     },
     "radar": [
         "BNB-USDT",
-        "WLD-USDT",
         "ENA-USDT",
         "LINK-USDT",
         "IDOL-USDT",
@@ -86,7 +85,7 @@
         "UNI-USDT"
     ],
     "audit_down": {},
-    "audit_last": 1795829255.224314,
+    "audit_last": 1795830165.1959717,
     "audit_ai_cls": "",
     "perf_breaker": {
         "until": 1795742224.733271,
