@@ -246,5 +246,25 @@
         "time": 1795856987.7531233,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 1.671, 'recurring_patterns': {'trade_reason': 'All trades were manual sell actions, with two distinct sell price triggers ($2.75 and $10.00) for IDOL-USDT and generic manual sells for other symbols.', 'symbol_distribution': {'IDOL-USDT': 2, 'BTW-USDT': 1, 'TRX-USDT': 1, 'WLD-USDT': 1}, 'pnl_distribution': {'positive_trades': 3, 'negative_trades': 2, 'average_positive_pnl': 0.602, 'average_negative_pnl': -0.0675}}, 'recommendations': {'risk_management': 'Maintain current position sizing; the small sample shows modest profit but also losses. Consider limiting manual sell triggers to predefined profit targets rather than ad\u2011hoc decisions.', 'strategy_refinement': 'Introduce systematic exit criteria (e.g., trailing stop or target % gain) to reduce reliance on manual sells.', 'data_collection': 'Gather more trades before adjusting core parameters; the cu"
+    },
+    {
+        "time": 1795857156.2640243,
+        "event": "ai_manual_buy_review",
+        "symbol": "VSN-USDT",
+        "review": {
+            "risk_level": "high",
+            "warning": "BTC filter active and market condition indicates BTC is below its 50\u2011hour average, which suggests broader market weakness. The RSI of 60.57 for VSN\u2011USDT is not oversold and the price is near recent lows, increasing downside risk. Proceed with extreme caution.",
+            "summary": "Given the active BTC filter, unfavorable BTC trend, and lack of an existing position, a manual buy of 6\u202fUSDT worth of VSN\u2011USDT carries high risk. Consider waiting for clearer bullish signals or a stronger market backdrop before entering."
+        }
+    },
+    {
+        "time": 1795857179.2258835,
+        "event": "ai_manual_buy_review",
+        "symbol": "JCT-USDT",
+        "review": {
+            "risk_level": "moderate",
+            "warning": "BTC is currently below its 50\u2011hour average, indicating broader market weakness. Adding a new position in JCT while you already hold a position increases exposure. Ensure this aligns with your risk tolerance and portfolio limits.",
+            "summary": "Manual buy of 10.13\u202fUSDT JCT at 0.00155\u202fUSDT per token is possible, but consider the bearish BTC context and your existing exposure. Proceed only if comfortable with moderate risk."
+        }
     }
 ]
