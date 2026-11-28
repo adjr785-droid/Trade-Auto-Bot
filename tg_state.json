@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT34.31/\u20a646,704",
+    "kb_ph": "USDT34.43/\u20a646,869",
     "layout_bottom": [
         "an",
         "clear"
@@ -98,53 +98,5 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 7835,
-    "out_text": "\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udd34 *JCT* $14.94 (44%)\n-0.20% (-$0.03) | Entry 0.001536\nQty 9746.8479 | Price 0.001533 | Stop 0.001459 (-5%)\nRSI 47 | Bearish | ATH -92%\n\n\ud83d\udd34 *TRX* $4.99 (15%)\n-0.13% (-$0.01) | Entry 0.300820\nQty 16.611227 | Price 0.300420 | Stop 0.285779 (-5%)\n\u2800\n\u2800",
-    "out_mode": "Markdown",
-    "panel_rows": [
-        [
-            {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
-            },
-            {
-                "text": "3/3",
-                "callback_data": "pg:x"
-            },
-            {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
-            },
-            {
-                "text": "\ud83c\udfe0",
-                "callback_data": "m:menu"
-            },
-            {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
-            }
-        ]
-    ],
-    "panel_text": "\ud83d\udcc4 *Page 3/3*",
-    "out_time": 1795840653.4517303,
-    "pages": {
-        "p": [
-            "\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udd34 *JCT* $14.94 (44%)\n-0.20% (-$0.03) | Entry 0.001536\nQty 9746.8479 | Price 0.001533 | Stop 0.001459 (-5%)\nRSI 47 | Bearish | ATH -92%\n\n\ud83d\udd34 *TRX* $4.99 (15%)\n-0.13% (-$0.01) | Entry 0.300820\nQty 16.611227 | Price 0.300420 | Stop 0.285779 (-5%)\n\u2800\n\u2800",
-            "RSI 32 | Bearish | ATH -70%\n\n\ud83d\udd34 *ICNT* $4.97 (14%)\n-0.52% (-$0.03) | Entry 0.290400\nQty 17.204404 | Price 0.288900 | Stop 0.275880 (-5%)\nRSI 42 | Bearish | ATH -52%\n\n\ud83d\udd34 *BTW* $4.93 (14%)\n-1.37% (-$0.07) | Entry 1.1951\nQty 4.184342 | Price 1.1787 | Stop 1.1354 (-4%)\n\u2800\n\u2800",
-            "RSI 68 | Mixed | ATH -57%\n\n\ud83d\udd34 *WLD* $4.37 (13%)\n-1.01% (-$0.04) | Entry 0.246500\nQty 17.92567 | Price 0.244000 | Stop 0.234175 (-4%)\nRSI 44 | Bearish | ATH -98%\n\n\ud83e\udde0 *AI:* All four positions are small, showing modest losses (\u20110.13% to\n\u20111.37%) and bearish RSI, with stops roughly 4\u20115% below entry, so monitor stop\nproximity and overall downside risk.\n\u2800\n\u2800"
-        ],
-        "i": 2,
-        "mode": "Markdown",
-        "x": [
-            [
-                {
-                    "text": "\ud83d\udd04",
-                    "callback_data": "rf:go"
-                }
-            ]
-        ],
-        "cmd": "m:r:holdings"
-    },
-    "out_mid": 7833,
-    "panel_mid": 7834
+    "kb_mid": 7853
 }
