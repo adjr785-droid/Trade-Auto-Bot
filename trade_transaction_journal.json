@@ -160,5 +160,15 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795852530.755502,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'JCT-USDT', 'action': 'hold', 'reason': 'Position is modestly profitable (2.3% PnL) with stop loss comfortably below current price; age > 100 days suggests stability. Monitor for downside pressure before adjusting stop.'}, {'symbol': 'IDOL-USDT', 'action': 'tighten_stop', 'reason': 'Strong profit (8.51% PnL) but stop is set at entry; consider moving stop to breakeven or a small trailing level to protect gains while allowing upside.'}], 'summary': 'Overall portfolio risk remains acceptable (PASS). Maintain JCT-USDT position with current stop, but tighten IDOL-USDT stop to lock in gains. Continue monitoring market volatility and price action before making further adjustments.'}"
+    },
+    {
+        "time": 1795852531.4166937,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 33.33, 'net_pnl_usdt': 0.2321, 'recurring_patterns': \"All trades executed with reason 'MANUAL SELL ALL'; limited sample size (3 trades) prevents robust pattern detection\", 'recommendations': 'Maintain current risk limits; avoid increasing position size until more data is collected; consider reviewing manual sell triggers for consistency; monitor win rate and P&L closely'}"
     }
 ]
