@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935691886,
+    "last_update_id": 935691887,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -101,52 +101,35 @@
         "scanh": "Scan Hist"
     },
     "kb_mid": 8241,
-    "out_text": "\ud83d\udcbc *HOURLY HOLDINGS*\n\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udd34 *JCT* $29.92 (83%)\n-0.65% (-$0.19) | Entry 0.001549\nQty 19438.838 | Price 0.001539 | Stop 0.001472 (-4%)\nRSI 56 | Mixed | ATH -92%\n\n\ud83d\udd34 *VSN* $5.99 (17%)\n-0.03% (-$0.00) | Entry 0.033020\n\u2800\n\u2800",
+    "out_mid": 8245,
+    "out_text": "\ud83d\udcdf *OUTPUT*\nResults appear here.",
     "out_mode": "Markdown",
+    "panel_mid": 8246,
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udcbc Holdings",
-                "callback_data": "m:r:holdings"
+                "text": "\ud83d\udcbc Portfolio",
+                "callback_data": "m:pf"
             }
         ],
         [
             {
-                "text": "\ud83d\udcc8 Stats",
-                "callback_data": "m:r:stats"
+                "text": "\ud83c\udfc6 Markets",
+                "callback_data": "/analyse"
             }
         ],
         [
             {
-                "text": "\ud83e\uddfe Trade History",
-                "callback_data": "m:r:history"
+                "text": "\ud83e\uddf0 Tools",
+                "callback_data": "m:tools"
             }
         ],
         [
             {
-                "text": "\ud83d\udea8 PANIC SELL",
-                "callback_data": "/panic"
-            }
-        ],
-        [
-            {
-                "text": "\ud83c\udfe0 Main Menu",
-                "callback_data": "m:menu"
+                "text": "\ud83d\udda5 System",
+                "callback_data": "m:sy"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcbc *PORTFOLIO*",
-    "out_time": 1795859890.7234201,
-    "out_mid": 8239,
-    "pages": {
-        "p": [
-            "\ud83d\udcbc *HOURLY HOLDINGS*\n\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udd34 *JCT* $29.92 (83%)\n-0.65% (-$0.19) | Entry 0.001549\nQty 19438.838 | Price 0.001539 | Stop 0.001472 (-4%)\nRSI 56 | Mixed | ATH -92%\n\n\ud83d\udd34 *VSN* $5.99 (17%)\n-0.03% (-$0.00) | Entry 0.033020\n\u2800\n\u2800",
-            "Qty 181.59098 | Price 0.033010 | Stop 0.031369 (-5%)\nRSI 61 | Bullish | ATH -66%\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
-        ],
-        "i": 0,
-        "mode": "Markdown",
-        "x": [],
-        "cmd": null
-    },
-    "panel_mid": 8243
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nChoose a group."
 }
