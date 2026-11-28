@@ -1573,12 +1573,34 @@ def held_manual_items():
    out.append({"sym":sym.split("-")[0]+"*-USDT","price":r[0],"chg":r[1],"h1":r[2],"rsi":r[3],"score":(q["score"] if q else r[4]),"tag":""})
  except Exception as e:print("HELD LIST ERR",str(e)[:100])
  return out
+def buy_best_manual():
+ """Spends the free USDT on the BEST listed Manual coin when it is not held yet (score 6/10 or more, no RSI limit).
+ One buy per hour; the market and BTC filters must be clear."""
+ s=cfg()
+ if not s.get("manual_autobuy",True):return
+ if in_cd("bestbuy",3600):return
+ try:
+  g=query_setup_items()
+  if not g:return
+  lead,best=query_leaders(g)
+  if not best:return
+  bsym=lead[best]["sym"];bc=bsym.split("-")[0]
+  if bsym in load(DB):return
+  if market_filter(s) or btc_blocked(s):return
+  r=_dbq("SELECT stage,manual_candidate FROM coins WHERE sym=?",(bsym,),one=True)
+  if not r or r[0]!="MANUAL" or not r[1]:return
+  free=B('free','USDT');amt=int(max(0.0,free-0.02)*100)/100
+  if amt<5.0:return
+  mk_cd("bestbuy")
+  tg(f"🛒 *BEST MANUAL COIN:* buying {bc} ({lead[best]['score']}/10) with ${amt:.2f} free USDT.")
+  cmd_buy(f"/buy {bc} {amt:.2f}")
+ except Exception as e:print("BEST BUY ERR",str(e)[:120])
 def rotate_manual():
  """If the BEST coin of the four setups now scores clearly higher than a coin held from a Manual buy, sell the held coin and buy the BEST.
  Safeguards: one rotation per hour, the market filter must be open, and the held coin must be comparable (listed in setup_groups)."""
  s=cfg()
  if not s.get("rotate_manual",True):return
- if cd("rotate",3600):return
+ if in_cd("rotate",3600):return
  try:
   g=query_setup_items()
   if not g:return
@@ -1599,6 +1621,7 @@ def rotate_manual():
     if worst is None or (h["score"],h["fit"])<(worst[1]["score"],worst[1]["fit"]):worst=(sym,h)
   if not worst:return
   sym,h=worst;coin=sym.split("-")[0]
+  mk_cd("rotate")
   tg(f"🔁 *ROTATION:* {bc} ({b['score']}/10) now beats held {coin} ({h['score']}/10). Selling {coin}, then buying {bc}.")
   if not sell(sym,100,"ROTATION: better Manual coin"):
    tg(f"⚠️ Rotation stopped: {coin} could not be sold.");return
@@ -1612,7 +1635,7 @@ def rotate_auto():
  Safeguards: one rotation per hour, the market filter must be open, never sells a coin that ranks above the new one."""
  s=cfg()
  if not s.get("rotate_auto",True):return
- if cd("rotate_auto",3600):return
+ if in_cd("rotate_auto",3600):return
  try:
   g=query_setup_items()
   rank={x["sym"]:(x["score"],x["fit"]) for k in (g or {}) for x in g[k]}
@@ -1635,6 +1658,7 @@ def rotate_auto():
   if d[1]>=rank.get(tgt,(0,0)):return                      # never sell a coin that ranks at least as high as the new one
   sym=d[0];coin=sym.split("-")[0];tc=tgt.split("-")[0]
   pre=B('free','USDT')
+  mk_cd("rotate_auto")
   tg(f"🔁 *AUTO ROTATION:* {tc} certified for Auto. Selling {'all' if pct==100 else '50%'} of {coin} to buy {tc}.")
   if not sell(sym,pct,"ROTATION: new Auto coin"):
    tg(f"⚠️ Auto rotation stopped: {coin} could not be sold.");return
@@ -1682,7 +1706,7 @@ def query_leaders(items):
  lead={k:(items[k][0] if items[k] else None) for k in QUERY_TYPES}
  try:_s=cfg();lo,hi=float(_s.get("rsi_min",42)),float(_s.get("rsi_max",48))
  except Exception:lo,hi=42.0,48.0
- ok={k:v for k,v in lead.items() if v and v["score"]>=QUERY_BUY_MIN and v.get("rsi") is not None and lo<=float(v["rsi"])<=hi}   # entry RSI band
+ ok={k:v for k,v in lead.items() if v and v["score"]>=QUERY_BUY_MIN and True}   # no RSI limit for the Manual best
  best=max(ok,key=lambda k:(ok[k]["score"],ok[k]["fit"])) if ok else None
  return lead,best
 def analyse_query(category=None):
@@ -4104,7 +4128,7 @@ def live_loop(t0):
   except Exception as e:print(f"LIVE POLL ERR: {e}")
   now=time.time()
   if now-last_light>=30:
-   for fn in (web_cmds,audit_ai,manage,check_alerts,scan,cleanup_telegram_output,consolidate_manual,query_setup_items,auto_dca,rotate_manual,rotate_auto,fast_watch,exec_q):
+   for fn in (web_cmds,audit_ai,manage,check_alerts,scan,cleanup_telegram_output,consolidate_manual,query_setup_items,auto_dca,buy_best_manual,rotate_manual,rotate_auto,fast_watch,exec_q):
     if fn is scan and deadline-time.time()<60:continue
     run_step(fn)
     try:tg_check(poll=0)
