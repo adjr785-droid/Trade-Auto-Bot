@@ -8,15 +8,15 @@
         "opened_at": 1795831915.5742848,
         "entry_qty": 140.46567,
         "entry_usdt": 34.6248,
-        "seen": 1795841023.9087148,
+        "seen": 1795841098.6517394,
         "xsl": 0.234175
     },
     "BTW-USDT": {
         "entry_price": 1.195135,
         "safe_zone": 1.195135,
         "stop_loss": 1.135378,
-        "peak_price": 1.197352,
-        "last_price": 1.197352,
+        "peak_price": 1.197463,
+        "last_price": 1.197463,
         "opened_at": 1795840413.0456681,
         "sl_pct": 5.0,
         "entry_qty": 4.18,
@@ -24,14 +24,14 @@
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
         "xsl": 1.135378,
-        "seen": 1795841024.1598272
+        "seen": 1795841099.1727977
     },
     "ICNT-USDT": {
         "entry_price": 0.2904,
         "safe_zone": 0.2904,
         "stop_loss": 0.27588,
         "peak_price": 0.2904,
-        "last_price": 0.2892,
+        "last_price": 0.2884,
         "opened_at": 1795840456.0410578,
         "sl_pct": 5.0,
         "entry_qty": 17.21,
@@ -39,14 +39,14 @@
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
         "xsl": 0.27588,
-        "seen": 1795841024.4815683
+        "seen": 1795841099.428329
     },
     "TRX-USDT": {
         "entry_price": 0.30082,
         "safe_zone": 0.30082,
         "stop_loss": 0.285779,
         "peak_price": 0.30082,
-        "last_price": 0.30049,
+        "last_price": 0.30046,
         "opened_at": 1795840554.274539,
         "sl_pct": 5.0,
         "entry_qty": 16.6212,
@@ -54,14 +54,14 @@
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
         "xsl": 0.285779,
-        "seen": 1795841024.768636
+        "seen": 1795841099.699541
     },
     "JCT-USDT": {
         "entry_price": 0.001536,
         "safe_zone": 0.001536,
         "stop_loss": 0.001459,
         "peak_price": 0.001539,
-        "last_price": 0.001539,
+        "last_price": 0.001538,
         "opened_at": 1795840589.424666,
         "sl_pct": 5.0,
         "entry_qty": 9752.6,
@@ -69,6 +69,6 @@
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
         "xsl": 0.001459,
-        "seen": 1795841025.0270545
+        "seen": 1795841099.9557388
     }
 }
