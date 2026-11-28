@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691940,
+    "last_update_id": 935691941,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT36.01/\u20a649,014",
+    "kb_ph": "USDT35.99/\u20a648,996",
     "layout_bottom": [
         "query",
         "an"
@@ -104,102 +104,41 @@
     "layout_names": {
         "scanh": "Scan Hist"
     },
-    "kb_mid": 8380,
-    "out_text": "USDT30.99\n\ud83d\udd0e *QUERY \u2014 SETUP CLASSIFICATION*\n_Every coin in the latest scan is placed once in the setup it scores highest on,\nthen ranked inside its group. Tap a group to see all its coins; the ranking is\nkept in the setup_groups table._\n\nBreakout (54) | Bounce (400) | Pullback (4) | Trend (2)\n\n\ud83c\udfc1 *Top coin of each group*\n```\n```\n\u2800",
+    "kb_mid": 8384,
+    "out_text": "\ud83d\udda5 *SYSTEM* \u2014 HEALTHY \u2705\nBuying: PAUSED \u26d4 (BTC filter)\nHealth: Bot 100% | AI 95% (Normal)\nLayers: \u2705 Exchange \u2705 Scanner \u2705 Database \u2705 Buyer \u2705 Stops\nRate limits (1h): Exchange 0 | AI 0\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83e\udded *STRATEGY* (4 setups)\nTrend: price > MA5 > MA10, RSI 42-48, 1H +0.5\u20136%\nPullback: MA5 > MA10, price between MA10 and MA5, RSI 40-48, 1H +0.5\u20136%\nBounce ON: RSI under 30, price back above last close, 1H +0.5\u20136%\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795876417.441014,
+    "out_time": 1795876523.90498,
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udda5 Bot Status",
-                "callback_data": "m:r:bot"
-            }
-        ],
-        [
+                "text": "\u25c0",
+                "callback_data": "pg:p"
+            },
             {
-                "text": "\u2699\ufe0f Settings",
-                "callback_data": "m:set"
-            }
-        ],
-        [
+                "text": "1/2",
+                "callback_data": "pg:x"
+            },
             {
-                "text": "\ud83e\udde0 Ask AI",
-                "callback_data": "m:ai:1"
-            }
-        ],
-        [
+                "text": "\u25b6",
+                "callback_data": "pg:n"
+            },
             {
-                "text": "\ud83d\udee0\ufe0f Audit",
-                "callback_data": "m:r:audit"
-            }
-        ],
-        [
-            {
-                "text": "\ud83e\udde0 Resume AI Mode",
-                "callback_data": "m:r:airesume"
-            }
-        ],
-        [
-            {
-                "text": "\ud83e\udde9 Shortcuts",
-                "callback_data": "m:lay"
-            }
-        ],
-        [
-            {
-                "text": "\ud83e\uddf9 Clear Chat",
-                "callback_data": "m:r:clear"
-            }
-        ],
-        [
-            {
-                "text": "\ud83c\udfe0 Main Menu",
+                "text": "\ud83c\udfe0",
                 "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83d\udda5 *SYSTEM*",
-    "out_mid": 8378,
+    "panel_text": "\ud83d\udcc4 *Page 1/2*",
     "pages": {
         "p": [
-            "USDT30.99\n\ud83d\udd0e *QUERY \u2014 SETUP CLASSIFICATION*\n_Every coin in the latest scan is placed once in the setup it scores highest on,\nthen ranked inside its group. Tap a group to see all its coins; the ranking is\nkept in the setup_groups table._\n\nBreakout (54) | Bounce (400) | Pullback (4) | Trend (2)\n\n\ud83c\udfc1 *Top coin of each group*\n```\n```\n\u2800",
-            "```\nSETUP    LEADER  SC FIT MARK\n----------------------------\nBreakout JCT      6  48 BUY\nBounce   TRUMP    6  50 BUY\nPullback KII      8  81 BEST\nTrend    O        8   0 BUY\n```\n_BUY = leader with score 6/10 or more; BEST = strongest of the four. A marker\nonly; nothing is bought automatically._\n\u2800\n\u2800"
+            "\ud83d\udda5 *SYSTEM* \u2014 HEALTHY \u2705\nBuying: PAUSED \u26d4 (BTC filter)\nHealth: Bot 100% | AI 95% (Normal)\nLayers: \u2705 Exchange \u2705 Scanner \u2705 Database \u2705 Buyer \u2705 Stops\nRate limits (1h): Exchange 0 | AI 0\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83e\udded *STRATEGY* (4 setups)\nTrend: price > MA5 > MA10, RSI 42-48, 1H +0.5\u20136%\nPullback: MA5 > MA10, price between MA10 and MA5, RSI 40-48, 1H +0.5\u20136%\nBounce ON: RSI under 30, price back above last close, 1H +0.5\u20136%\n\u2800\n\u2800",
+            "Breakout: price clears the 20H high, volume 1.5x+, RSI 50-70, hard stop 2% | all\nmust be rising vs last scan\nExit: stop 5.0% sells 75% of entry, new stop on the rest | trail 8.0% | RSI 75+\n(dynamic)\nSize: 50% of balance (all-in if half < $5) | max 25 trades/day | pause at -5.0%\nday\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udcbc $35.98 | \u20a648,975 | Cash $30.99 | Coins $4.92\nToday +3.08% | Last scan 17 min ago | Queue 0 | Positions 1\n\u2800\n\u2800\n\u2800"
         ],
         "i": 0,
         "mode": "Markdown",
-        "x": [
-            [
-                {
-                    "text": "\ud83d\ude80 BREAKOUT",
-                    "callback_data": "m:q:BREAKOUT"
-                },
-                {
-                    "text": "\ud83d\udfe2 BOUNCE",
-                    "callback_data": "m:q:BOUNCE"
-                }
-            ],
-            [
-                {
-                    "text": "\u21a9\ufe0f PULLBACK",
-                    "callback_data": "m:q:PULLBACK"
-                },
-                {
-                    "text": "\ud83d\udcc8 TREND",
-                    "callback_data": "m:q:TREND"
-                }
-            ],
-            [
-                {
-                    "text": "\ud83d\udd04 Refresh",
-                    "callback_data": "m:query"
-                },
-                {
-                    "text": "\u2b05\ufe0f Markets",
-                    "callback_data": "/analyse"
-                }
-            ]
-        ],
-        "cmd": "m:query"
+        "x": [],
+        "cmd": "m:r:bot"
     },
-    "panel_mid": 8379
+    "out_mid": 8382,
+    "panel_mid": 8383
 }
