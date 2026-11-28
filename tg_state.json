@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT35.52/\u20a648,346",
+    "kb_ph": "USDT35.26/\u20a647,999",
     "layout_bottom": [
         "query",
         "an"
@@ -102,6 +102,6 @@
     "layout_names": {
         "scanh": "Scan Hist"
     },
-    "kb_mid": 8267,
+    "kb_mid": 8268,
     "panel_hidden": true
 }
