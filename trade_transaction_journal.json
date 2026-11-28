@@ -458,5 +458,15 @@
         "time": 1795877469.2961702,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 57.14, 'net_pnl_usdt': 1.4433, 'recurring_patterns': {'manual_sell_all_count': 3, 'manual_sell_specific_amounts': 4, 'symbols_involved': ['BTW-USDT', 'TRX-USDT', 'WLD-USDT', 'IDOL-USDT', 'VSN-USDT', 'JCT-USDT']}, 'recommendations': {'caution': 'Performance is modest with a slight positive PnL; consider reducing manual sell frequency and reviewing specific amount thresholds.', 'suggestion': 'Focus on symbols with positive outcomes (IDOL-USDT, BTW-USDT, VSN-USDT) and limit exposure to those with repeated losses (TRX-USDT, WLD-USDT, JCT-USDT).', 'risk': 'Maintain current risk limits; avoid increasing position sizes until a clearer positive trend emerges.'}}"
+    },
+    {
+        "time": 1795878337.1990116,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'JCT-USDT', 'action': 'monitor', 'reason': 'Position shows a slight negative PnL (-0.06%) and is close to its stop level (0.00147). Consider tightening the stop or exiting if price approaches stop.'}], 'summary': 'Overall portfolio risk remains acceptable (PASS). The only open position, JCT-USDT, is marginally underwater and near its stop. Maintain vigilance, adjust risk parameters if the price moves unfavorably, and ensure overall exposure stays within predefined limits.'}"
+    },
+    {
+        "time": 1795878338.0365798,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 57.14, 'net_pnl_usdt': 1.4433, 'recurring_patterns': {'sell_reason_distribution': {'MANUAL SELL ALL': 3, 'MANUAL SELL $2.75': 1, 'MANUAL SELL $10.00': 1, 'MANUAL SELL $31.00': 1}, 'symbols_traded': ['BTW-USDT', 'TRX-USDT', 'WLD-USDT', 'IDOL-USDT', 'VSN-USDT', 'JCT-USDT'], 'pnl_sign_distribution': {'positive': 4, 'negative': 3}}, 'recommendations': ['Maintain current risk parameters pending more data', 'Consider reducing reliance on manual sell-all triggers to improve consistency', 'Monitor symbols with repeated losses (TRX-USDT, WLD-USDT, JCT-USDT) for potential de\u2011allocation', 'Gather additional trade samples before adjusting win\u2011rate expectations']}"
     }
 ]
