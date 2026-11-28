@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT34.75/\u20a647,301",
+    "kb_ph": "USDT34.71/\u20a647,243",
     "layout_bottom": [
         "an",
         "clear"
@@ -78,10 +78,10 @@
     },
     "radar": [
         "BNB-USDT",
-        "SUI-USDT",
         "WLD-USDT",
         "ENA-USDT",
         "LINK-USDT",
+        "IDOL-USDT",
         "TAO-USDT",
         "UNI-USDT"
     ],
@@ -93,10 +93,22 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "out_mid": 7652,
-    "out_text": "\ud83d\udd0d *SCAN COMPLETE*\nChecked 460 markets in 16s.\nNo coin matched any setup.\n\ud83d\udea7 *GATES* (19 analysed, 0 passed)\nBlocked: RSI 12 | MA 9 | 1H 16 | 24H 5 | Score 0\nSetups: Trend 0 | Pullback 0 | Bounce 0 | Breakout 0\nRules: RSI \u2264 48, Price > MA5 > MA10, 1H +0.5 to +6%, 24H up, Core 5+ and Extra\n2+\n\u2800\n\u2800\n\u2800\n\u2800",
+    "kb_mid": 7663,
+    "out_mid": 7660,
+    "out_text": "\ud83d\udd0d *SCAN COMPLETE*\nChecked 460 markets in 12s.\nMatched: 1 | Queued: 0.\nBTC safety filter blocked buying\n\ud83d\udea7 *GATES* (19 analysed, 1 passed)\nBlocked: RSI 12 | MA 8 | 1H 12 | 24H 4 | Score 1\nSetups: Trend 1 | Pullback 0 | Bounce 0 | Breakout 0\nRules: RSI \u2264 48, Price > MA5 > MA10, 1H +0.5 to +6%, 24H up, Core 5+ and Extra\n2+\n\ud83e\udde0 AI market view: BEARISH | moderate\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795829251.1899693,
+    "out_time": 1795829654.8602726,
+    "pages": {
+        "p": [
+            "\ud83d\udd0d *SCAN COMPLETE*\nChecked 460 markets in 12s.\nMatched: 1 | Queued: 0.\nBTC safety filter blocked buying\n\ud83d\udea7 *GATES* (19 analysed, 1 passed)\nBlocked: RSI 12 | MA 8 | 1H 12 | 24H 4 | Score 1\nSetups: Trend 1 | Pullback 0 | Bounce 0 | Breakout 0\nRules: RSI \u2264 48, Price > MA5 > MA10, 1H +0.5 to +6%, 24H up, Core 5+ and Extra\n2+\n\ud83e\udde0 AI market view: BEARISH | moderate\n\u2800\n\u2800",
+            "\n\u2705 *MATCHED COINS*\n1. *SUI-USDT* \u2014 TREND matched, BTC safety filter blocked buying\n   Price 0.676200 | 24h +0.70% | RSI 47.0 | \u23f8 not queued\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+        ],
+        "i": 0,
+        "mode": "Markdown",
+        "x": [],
+        "cmd": null
+    },
+    "panel_mid": 7661,
     "panel_rows": [
         [
             {
@@ -117,7 +129,5 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/2*",
-    "kb_mid": 7655,
-    "panel_hidden": true
+    "panel_text": "\ud83d\udcc4 *Page 1/2*"
 }

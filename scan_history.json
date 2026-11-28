@@ -1,4 +1,33 @@
 {
     "window_start": 1795803691.8701556,
-    "items": []
+    "items": [
+        {
+            "time": 1795829651,
+            "rank": 18,
+            "sym": "SUI-USDT",
+            "vol": 3043508.06,
+            "chg": 0.7,
+            "price": 0.6762,
+            "high_24h": 0.693,
+            "spread_pct": 0.014791805339840097,
+            "rsi": 47.0,
+            "rr": 1.6533569949718971,
+            "ma5": 0.6726,
+            "ma10": 0.67257,
+            "btc_market_safe": false,
+            "market_trend_4h": true,
+            "breakout_confirmed": false,
+            "volume_expansion_ratio": 0.4115755340294277,
+            "decision": "SETUP \u2014 NOT QUEUED",
+            "reason": "TREND matched, BTC safety filter blocked buying",
+            "min_volume": 1000000,
+            "prev_close": 0.6724,
+            "h1": 0.51,
+            "trend_4h_ok": true,
+            "rising_guard_ok": true,
+            "strategy": "TREND",
+            "rr_target": 0.7320999999999999,
+            "rr_stop_pct": 5.0
+        }
+    ]
 }
