@@ -4,11 +4,11 @@
         "safe_zone": 0.2465,
         "stop_loss": 0.234175,
         "peak_price": 0.2467,
-        "last_price": 0.2439,
+        "last_price": 0.2437,
         "opened_at": 1795831915.5742848,
         "entry_qty": 140.46567,
         "entry_usdt": 34.6248,
-        "seen": 1795841650.3900852,
+        "seen": 1795841763.2449183,
         "xsl": 0.234175
     },
     "BTW-USDT": {
@@ -16,7 +16,7 @@
         "safe_zone": 1.195135,
         "stop_loss": 1.135378,
         "peak_price": 1.238489,
-        "last_price": 1.230001,
+        "last_price": 1.229228,
         "opened_at": 1795840413.0456681,
         "sl_pct": 5.0,
         "entry_qty": 4.18,
@@ -24,14 +24,14 @@
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
         "xsl": 1.135378,
-        "seen": 1795841650.6471145
+        "seen": 1795841763.5231228
     },
     "ICNT-USDT": {
         "entry_price": 0.2904,
         "safe_zone": 0.2904,
         "stop_loss": 0.27588,
         "peak_price": 0.2904,
-        "last_price": 0.2901,
+        "last_price": 0.2891,
         "opened_at": 1795840456.0410578,
         "sl_pct": 5.0,
         "entry_qty": 17.21,
@@ -39,14 +39,14 @@
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
         "xsl": 0.27588,
-        "seen": 1795841650.9019296
+        "seen": 1795841763.7796571
     },
     "TRX-USDT": {
         "entry_price": 0.30082,
         "safe_zone": 0.30082,
         "stop_loss": 0.285779,
         "peak_price": 0.30082,
-        "last_price": 0.30045,
+        "last_price": 0.30036,
         "opened_at": 1795840554.274539,
         "sl_pct": 5.0,
         "entry_qty": 16.6212,
@@ -54,7 +54,7 @@
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
         "xsl": 0.285779,
-        "seen": 1795841651.2153661
+        "seen": 1795841764.0440207
     },
     "JCT-USDT": {
         "entry_price": 0.001536,
@@ -69,6 +69,6 @@
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
         "xsl": 0.001459,
-        "seen": 1795841651.4861321
+        "seen": 1795841764.2974775
     }
 }
