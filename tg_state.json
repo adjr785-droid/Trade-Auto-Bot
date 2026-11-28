@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691592,
+    "last_update_id": 935691595,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT34.79/\u20a647,359",
+    "kb_ph": "USDT34.80/\u20a647,368",
     "layout_bottom": [
         "an",
         "clear"
@@ -96,37 +96,43 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 7714,
-    "out_text": "USDT0.03\n\ud83d\udd0e *TREND \u2014 TOP 10*\n_Sorted by setup score, highest first. Scores are evidence points out of 10;\nclassification is informational only._\n\n1. *SUI* \u2014 10/10 | RSI 47.0 | 1H +0.66% | 24H +0.82%\n2. *WLD* \u2014 10/10 | RSI 47.6 | 1H +0.54% | 24H +1.44%\n3. *PUMP* \u2014 8/10 | RSI 46.1 | 1H +1.54% | 24H +1.07%\n4. *BTW* \u2014 6/10 | RSI 71.7 | 1H -0.70% | 24H +19.05%\n\u2800\n\u2800\n\u2800",
+    "kb_mid": 7718,
+    "out_text": "USDT0.03\n\ud83d\udfe1 *MANUAL BUY*\n_Passed at least 5/7 core and 2/3 additional criteria. Manual review only._\n\nNone right now.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udcbc Portfolio",
-                "callback_data": "m:pf"
+                "text": "\ud83d\udcbc Holdings",
+                "callback_data": "m:r:holdings"
             }
         ],
         [
             {
-                "text": "\ud83c\udfc6 Markets",
-                "callback_data": "/analyse"
+                "text": "\ud83d\udcc8 Stats",
+                "callback_data": "m:r:stats"
             }
         ],
         [
             {
-                "text": "\ud83e\uddf0 Tools",
-                "callback_data": "m:tools"
+                "text": "\ud83e\uddfe Trade History",
+                "callback_data": "m:r:history"
             }
         ],
         [
             {
-                "text": "\ud83d\udda5 System",
-                "callback_data": "m:sy"
+                "text": "\ud83d\udea8 PANIC SELL",
+                "callback_data": "/panic"
+            }
+        ],
+        [
+            {
+                "text": "\ud83c\udfe0 Main Menu",
+                "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nChoose a group.",
-    "out_time": 1795831745.5311196,
-    "out_mid": 7712,
-    "panel_mid": 7713
+    "panel_text": "\ud83d\udcbc *PORTFOLIO*",
+    "out_time": 1795831772.3850954,
+    "out_mid": 7716,
+    "panel_mid": 7717
 }
