@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691927,
+    "last_update_id": 935691929,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT36.08/\u20a649,107",
+    "kb_ph": "USDT36.15/\u20a649,203",
     "layout_bottom": [
         "query",
         "an"
@@ -90,7 +90,7 @@
     },
     "radar": [],
     "audit_down": {},
-    "audit_last": 1795871828.4564562,
+    "audit_last": 1795872765.0076163,
     "audit_ai_cls": "",
     "perf_breaker": {
         "until": 1795742224.733271,
@@ -100,51 +100,41 @@
     "layout_names": {
         "scanh": "Scan Hist"
     },
-    "out_text": "\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *JCT* $36.12 (100%)\n+0.06% (+$0.02) | Entry 0.001547\nQty 23332.601 | Price 0.001548 | Stop 0.001470 (-5%)\nRSI 41 | Mixed | ATH -92%\n\n\ud83e\udde0 *AI:* JCT holding shows a modest 0.06% gain but a stop loss only 5% below\nentry and RSI 41; monitor for downside risk as price nears stop and overall ATH\nis down 92%.\n\u2800\n\u2800",
+    "out_text": "USDT0.03\n\ud83d\udcca *ANALYSIS: JCT-USDT*\nLive price: 0.001545 USDT\n24h change: +1.11%\nRSI(14): 41.4300 \u2014 Neutral\nMA5: 0.001522 | MA10: 0.001528 | MA20: 0.001542\nMACD: -0.00000024 | Signal: 0.00000700 | Histogram: -0.00000725\nATR(14): 0.00003729 (2.41% of price)\nLast hour vol vs 20h avg: 0.58x\nBid/ask spread: 0.129%\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udd0d Search any coin",
-                "callback_data": "m:se"
-            }
-        ],
-        [
-            {
-                "text": "JCT",
-                "callback_data": "m:a:JCT"
+                "text": "\u25c0",
+                "callback_data": "pg:p"
             },
             {
-                "text": "SUI",
-                "callback_data": "m:a:SUI"
+                "text": "1/2",
+                "callback_data": "pg:x"
             },
             {
-                "text": "WLD",
-                "callback_data": "m:a:WLD"
-            }
-        ],
-        [
+                "text": "\u25b6",
+                "callback_data": "pg:n"
+            },
             {
-                "text": "WLFI",
-                "callback_data": "m:a:WLFI"
-            }
-        ],
-        [
-            {
-                "text": "\u2795 More coins",
-                "callback_data": "m:more:analyse:0"
-            }
-        ],
-        [
-            {
-                "text": "\u2b05\ufe0f Menu",
+                "text": "\ud83c\udfe0",
                 "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "USDT0.03\n\ud83d\udd0e *ANALYSE A COIN* \u2014 choose:",
-    "out_time": 1795872579.4563909,
-    "kb_mid": 8348,
-    "out_mid": 8341,
-    "panel_mid": 8342
+    "panel_text": "\ud83d\udcc4 *Page 1/2*",
+    "out_time": 1795872768.201362,
+    "kb_mid": 8352,
+    "out_mid": 8350,
+    "pages": {
+        "p": [
+            "USDT0.03\n\ud83d\udcca *ANALYSIS: JCT-USDT*\nLive price: 0.001545 USDT\n24h change: +1.11%\nRSI(14): 41.4300 \u2014 Neutral\nMA5: 0.001522 | MA10: 0.001528 | MA20: 0.001542\nMACD: -0.00000024 | Signal: 0.00000700 | Histogram: -0.00000725\nATR(14): 0.00003729 (2.41% of price)\nLast hour vol vs 20h avg: 0.58x\nBid/ask spread: 0.129%\n\u2800\n\u2800",
+            "Technical checks: 0/4\nAssessment: *WAIT / WEAK SETUP*\nCoin database: WATCHING / BOUGHT | seen 150 scans | Manual DCA fill confirmed\nAI notebook note: low: Held status, RSI 41.4, minor declines; lower risk.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+        ],
+        "i": 0,
+        "mode": "Markdown",
+        "x": [],
+        "cmd": "m:a:JCT"
+    },
+    "panel_mid": 8351
 }
