@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691803,
+    "last_update_id": 935691804,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT34.86/\u20a647,451",
+    "kb_ph": "USDT34.99/\u20a647,630",
     "layout_bottom": [
         "query",
         "an"
@@ -96,8 +96,8 @@
     "layout_names": {
         "scanh": "Scan Hist"
     },
-    "kb_mid": 8064,
-    "out_text": "\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *IDOL* $20.47 (59%)\n+2.03% (+$0.41) | Entry 0.017298\nQty 1159.5255 | Price 0.017650 | Stop 0.016433 (-7%)\nRSI 59 | Bullish | ATH -63%\n\n\ud83d\udfe2 *JCT* $10.00 (29%)\n+0.20% (+$0.02) | Entry 0.001521\nQty 6561.9692 | Price 0.001524 | Stop 0.001445 (-5%)\n\u2800\n\u2800",
+    "kb_mid": 8067,
+    "out_text": "\u26a0\ufe0f BGB conversion outcome is UNKNOWN for WLD; do not retry until Bitget\nconversion history and balances are checked. Reason: bitget\n{\"code\":\"13011\",\"msg\":\"Can be convert 1 times every 6\nhours\",\"requestTime\":1795846539570,\"data\":null}\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
@@ -125,23 +125,6 @@
     ],
     "panel_text": "\ud83d\udcc4 *Page 2/2*",
     "out_mid": 8062,
-    "out_time": 1795846466.76545,
-    "pages": {
-        "p": [
-            "\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *IDOL* $20.47 (59%)\n+2.03% (+$0.41) | Entry 0.017298\nQty 1159.5255 | Price 0.017650 | Stop 0.016433 (-7%)\nRSI 59 | Bullish | ATH -63%\n\n\ud83d\udfe2 *JCT* $10.00 (29%)\n+0.20% (+$0.02) | Entry 0.001521\nQty 6561.9692 | Price 0.001524 | Stop 0.001445 (-5%)\n\u2800\n\u2800",
-            "RSI 47 | Bearish | ATH -92%\n\n\ud83d\udd34 *WLD* $4.30 (12%)\n-2.64% (-$0.12) | Entry 0.246500\nQty 17.92567 | Price 0.240000 | Stop 0.234175 (-2%)\nRSI 34 | Bearish | ATH -98%\n\n\ud83e\udde0 *AI:* IDOL is up modestly with healthy RSI, JCT flat but bearish RSI, while\nWLD shows declining price, low RSI and a stop only 2% below current price,\nwarranting monitoring.\n\u2800\n\u2800"
-        ],
-        "i": 1,
-        "mode": "Markdown",
-        "x": [
-            [
-                {
-                    "text": "\ud83d\udd04",
-                    "callback_data": "rf:go"
-                }
-            ]
-        ],
-        "cmd": "m:r:holdings"
-    },
-    "panel_mid": 8063
+    "out_time": 1795846540.027122,
+    "panel_hidden": true
 }

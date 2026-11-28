@@ -14,5 +14,13 @@
         "time": 1795844989.1695266,
         "reason": "MANUAL SELL ALL",
         "strategy": "MANUAL"
+    },
+    {
+        "sym": "WLD-USDT",
+        "pnl": -0.11289600000000001,
+        "fee": 0.008609,
+        "time": 1795846535.3034654,
+        "reason": "MANUAL SELL ALL",
+        "strategy": "OTHER"
     }
 ]

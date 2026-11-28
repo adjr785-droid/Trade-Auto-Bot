@@ -106,5 +106,23 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795846535.3038118,
+        "event": "trade_closed",
+        "symbol": "WLD-USDT",
+        "pnl_usdt": -0.11289600000000001,
+        "reason": "MANUAL SELL ALL",
+        "strategy": "OTHER"
+    },
+    {
+        "time": 1795846546.3366652,
+        "event": "ai_manual_sell_review",
+        "symbol": "WLD-USDT",
+        "review": {
+            "review": "The manual sell resulted in a realized loss of $0.1129 on an average exit price of $0.2402, with 17.92 units sold and a small residual base of 0.00567 remaining. The loss indicates the exit price was below the acquisition cost, and the remaining base suggests incomplete position closure.",
+            "lesson": "Manual exits should be aligned with predefined risk thresholds or market signals to avoid unnecessary losses. Consider implementing automated stop\u2011loss or target\u2011price rules to capture favorable exits and fully close positions when appropriate.",
+            "confidence": "medium"
+        }
     }
 ]
