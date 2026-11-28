@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691771,
+    "last_update_id": 935691774,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT34.26/\u20a646,634",
+    "kb_ph": "USDT34.30/\u20a646,688",
     "layout_bottom": [
         "query",
         "an"
@@ -93,46 +93,40 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 8006,
+    "kb_mid": 8011,
     "layout_names": {
         "scanh": "Scan Hist"
     },
-    "out_text": "USDT15.34\n\ud83d\udd0e *BREAKOUT \u2014 1 COINS*\n_All coins in this group, ranked by setup score (SC, out of 10); equal scores\nare ordered by how close each coin is to the ideal picture of the setup.\nInformational only; it never changes trading._\n```\n # COIN    PRICE SC RSI   1H 24H\n--------------------------------\n 1 IDOL  0.01758  8  59 +3.2  +2\n```\n\u2800\n\u2800",
+    "out_text": "\ud83e\udde0 AI manual-buy advisory: Considering the BTC downtrend filter, a modest USDT\namount, and a neutral RSI, proceed with caution. Verify that this trade fits\nwithin your risk management parameters before executing.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795844823.433986,
+    "out_time": 1795844853.5847383,
     "panel_rows": [
         [
             {
-                "text": "\ud83d\ude80 BREAKOUT",
-                "callback_data": "m:q:BREAKOUT"
-            },
-            {
-                "text": "\ud83d\udfe2 BOUNCE",
-                "callback_data": "m:q:BOUNCE"
+                "text": "\ud83d\udcbc Portfolio",
+                "callback_data": "m:pf"
             }
         ],
         [
             {
-                "text": "\u21a9\ufe0f PULLBACK",
-                "callback_data": "m:q:PULLBACK"
-            },
-            {
-                "text": "\ud83d\udcc8 TREND",
-                "callback_data": "m:q:TREND"
+                "text": "\ud83c\udfc6 Markets",
+                "callback_data": "/analyse"
             }
         ],
         [
             {
-                "text": "\u2b05\ufe0f Query",
-                "callback_data": "m:query"
-            },
+                "text": "\ud83e\uddf0 Tools",
+                "callback_data": "m:tools"
+            }
+        ],
+        [
             {
-                "text": "\ud83d\udd04 Refresh",
-                "callback_data": "m:q:BREAKOUT"
+                "text": "\ud83d\udda5 System",
+                "callback_data": "m:sy"
             }
         ]
     ],
-    "panel_text": "\ud83d\udc47 *Actions*",
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nChoose a group.",
     "out_mid": 8007,
     "panel_mid": 8008
 }

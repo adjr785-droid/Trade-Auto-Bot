@@ -52,5 +52,15 @@
         "time": 1795844801.6111314,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 100.0, 'net_pnl_usdt': 0.3671, 'recurring_patterns': [], 'recommendations': 'No clear recurring pattern from a single trade. Maintain current strategy, monitor for additional data before adjusting exposure.'}"
+    },
+    {
+        "time": 1795844853.0688925,
+        "event": "ai_manual_buy_review",
+        "symbol": "IDOL-USDT",
+        "review": {
+            "risk_level": "moderate",
+            "warning": "BTC market filter indicates price below 50\u2011hour average, suggesting downward pressure. Existing position may increase exposure. Ensure position size aligns with overall risk limits.",
+            "summary": "Considering the BTC downtrend filter, a modest USDT amount, and a neutral RSI, proceed with caution. Verify that this trade fits within your risk management parameters before executing."
+        }
     }
 ]
