@@ -272,5 +272,15 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795858698.0383027,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'JCT-USDT', 'action': 'monitor', 'reason': 'P&L -0.32% and price is within ~5% of stop; consider tightening stop or exiting if further downside.'}, {'symbol': 'VSN-USDT', 'action': 'hold', 'reason': 'Small positive P&L (+0.03%) with price ~5.5% above stop; no immediate action required.'}], 'summary': 'Overall risk is acceptable. Keep close watch on JCT-USDT due to proximity to stop; VSN-USDT can remain unchanged pending further movement.'}"
+    },
+    {
+        "time": 1795858699.0463085,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 1.671, 'recurring_patterns': {'trade_reason': 'All trades were manual sell actions, with two distinct sell price triggers ($2.75 and $10.00) for IDOL-USDT and generic manual sells for other symbols.', 'symbol_distribution': {'IDOL-USDT': 2, 'BTW-USDT': 1, 'TRX-USDT': 1, 'WLD-USDT': 1}, 'pnl_distribution': {'positive_trades': 3, 'negative_trades': 2, 'average_positive_pnl': 0.6019673633333334, 'average_negative_pnl': -0.06749444799999998}}, 'recommendations': ['Maintain manual oversight; automated triggers are not yet demonstrated.', 'Limit exposure to symbols with limited trade history (e.g., TRX-USDT, WLD-USDT) until more data is collected.', 'Consider implementing stop\u2011loss thresholds to reduce downside on future manual sells.', 'Monitor IDOL-USDT performance closely, as it contributed the majority of profit.']}"
     }
 ]
