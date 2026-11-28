@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691907,
+    "last_update_id": 935691908,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT35.20/\u20a647,920",
+    "kb_ph": "USDT35.23/\u20a647,952",
     "layout_bottom": [
         "query",
         "an"
@@ -100,7 +100,7 @@
     "layout_names": {
         "scanh": "Scan Hist"
     },
-    "out_text": "\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udd34 *JCT* $29.10 (83%)\n-3.36% (-$1.01) | Entry 0.001549\nQty 19438.838 | Price 0.001497 | Stop 0.001472 (-2%)\nRSI 45 | Mixed | ATH -92%\n\n\ud83d\udfe2 *VSN* $6.01 (17%)\n+0.30% (+$0.02) | Entry 0.033020\nQty 181.59098 | Price 0.033120 | Stop 0.031369 (-5%)\n\u2800\n\u2800",
+    "out_text": "USDT0.02\n\ud83d\udd0e *QUERY \u2014 SETUP CLASSIFICATION*\n_Every coin in the latest scan is placed once in the setup it scores highest on,\nthen ranked inside its group. Tap a group to see all its coins; the ranking is\nkept in the setup_groups table._\n\nBreakout (62) | Bounce (393) | Pullback (4) | Trend (1)\n\n\ud83c\udfc1 *Top coin of each group*\n```\n```\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
@@ -109,7 +109,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "2/2",
+                "text": "1/2",
                 "callback_data": "pg:x"
             },
             {
@@ -119,33 +119,83 @@
             {
                 "text": "\ud83c\udfe0",
                 "callback_data": "m:menu"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\ude80 BREAKOUT",
+                "callback_data": "m:q:BREAKOUT"
             },
             {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
+                "text": "\ud83d\udfe2 BOUNCE",
+                "callback_data": "m:q:BOUNCE"
+            }
+        ],
+        [
+            {
+                "text": "\u21a9\ufe0f PULLBACK",
+                "callback_data": "m:q:PULLBACK"
+            },
+            {
+                "text": "\ud83d\udcc8 TREND",
+                "callback_data": "m:q:TREND"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udd04 Refresh",
+                "callback_data": "m:query"
+            },
+            {
+                "text": "\u2b05\ufe0f Markets",
+                "callback_data": "/analyse"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 2/2*",
-    "out_time": 1795869423.5838776,
-    "kb_mid": 8298,
+    "panel_text": "\ud83d\udcc4 *Page 1/2*",
+    "out_time": 1795869550.5503876,
+    "kb_mid": 8304,
     "pages": {
         "p": [
-            "\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udd34 *JCT* $29.10 (83%)\n-3.36% (-$1.01) | Entry 0.001549\nQty 19438.838 | Price 0.001497 | Stop 0.001472 (-2%)\nRSI 45 | Mixed | ATH -92%\n\n\ud83d\udfe2 *VSN* $6.01 (17%)\n+0.30% (+$0.02) | Entry 0.033020\nQty 181.59098 | Price 0.033120 | Stop 0.031369 (-5%)\n\u2800\n\u2800",
-            "RSI 64 | Bullish | ATH -65%\n\n\ud83e\udde0 *AI:* JCT is down 3.36% toward its 2% stop (RSI 45, mixed signal) and may\nneed attention, while VSN shows a modest 0.30% gain with a 5% stop below price\n(RSI 64, bullish).\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+            "USDT0.02\n\ud83d\udd0e *QUERY \u2014 SETUP CLASSIFICATION*\n_Every coin in the latest scan is placed once in the setup it scores highest on,\nthen ranked inside its group. Tap a group to see all its coins; the ranking is\nkept in the setup_groups table._\n\nBreakout (62) | Bounce (393) | Pullback (4) | Trend (1)\n\n\ud83c\udfc1 *Top coin of each group*\n```\n```\n\u2800",
+            "```\nSETUP    LEADER  SC FIT MARK\n----------------------------\nBreakout VSN      8  74 BEST\nBounce   TRUMP    8  56 BUY\nPullback TAG      8  24 BUY\nTrend    IDOL     8   0 BUY\n```\n_BUY = leader with score 6/10 or more; BEST = strongest of the four. A marker\nonly; nothing is bought automatically._\n\u2800\n\u2800"
         ],
-        "i": 1,
+        "i": 0,
         "mode": "Markdown",
         "x": [
             [
                 {
-                    "text": "\ud83d\udd04",
-                    "callback_data": "rf:go"
+                    "text": "\ud83d\ude80 BREAKOUT",
+                    "callback_data": "m:q:BREAKOUT"
+                },
+                {
+                    "text": "\ud83d\udfe2 BOUNCE",
+                    "callback_data": "m:q:BOUNCE"
+                }
+            ],
+            [
+                {
+                    "text": "\u21a9\ufe0f PULLBACK",
+                    "callback_data": "m:q:PULLBACK"
+                },
+                {
+                    "text": "\ud83d\udcc8 TREND",
+                    "callback_data": "m:q:TREND"
+                }
+            ],
+            [
+                {
+                    "text": "\ud83d\udd04 Refresh",
+                    "callback_data": "m:query"
+                },
+                {
+                    "text": "\u2b05\ufe0f Markets",
+                    "callback_data": "/analyse"
                 }
             ]
         ],
-        "cmd": "m:r:holdings"
+        "cmd": "m:query"
     },
-    "out_mid": 8299,
-    "panel_mid": 8300
+    "out_mid": 8302,
+    "panel_mid": 8303
 }
