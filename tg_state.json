@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691557,
+    "last_update_id": 935691562,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT34.70/\u20a647,230",
+    "kb_ph": "USDT34.83/\u20a647,409",
     "layout_bottom": [
         "an",
         "clear"
@@ -86,12 +86,50 @@
         "UNI-USDT"
     ],
     "audit_down": {},
-    "audit_last": 1795829255.224314,
+    "audit_last": 1795830165.1959717,
     "audit_ai_cls": "",
     "perf_breaker": {
         "until": 1795742224.733271,
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 7664
+    "kb_mid": 7671,
+    "out_text": "USDT0.03\n\ud83d\udc41 *WATCH LIST*\n_Rising coins being watched. They move up when they pass the manual rules._\n\n```\nCOIN    RSI    1H    24H  S TY\n------------------------------\nSUI      47  +0.5   +0.7  7  T\n```\n_TY: T Trend, P Pullback, B Bounce, K Breakout_\n\u2800\n\u2800",
+    "out_mode": "Markdown",
+    "panel_rows": [
+        [
+            {
+                "text": "\u25b6 \ud83d\udc41 Watch (1)",
+                "callback_data": "m:at:W"
+            },
+            {
+                "text": "\ud83d\udfe1 Manual (0)",
+                "callback_data": "m:at:M"
+            },
+            {
+                "text": "\ud83e\udd16 Auto (0)",
+                "callback_data": "m:at:A"
+            }
+        ],
+        [
+            {
+                "text": "\ud83c\udfaf SETUPS",
+                "callback_data": "m:su"
+            },
+            {
+                "text": "\ud83d\uddc2 MORE",
+                "callback_data": "m:am"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udd04 Refresh",
+                "callback_data": "m:at:W"
+            }
+        ]
+    ],
+    "panel_text": "\ud83d\udc47 *Actions*",
+    "out_time": 1795830510.068292,
+    "out_mid": 7672,
+    "panel_mid": 7673
 }
