@@ -334,5 +334,11 @@
         "time": 1795867983.6371388,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 1.671, 'recurring_patterns': {'trade_reason': \"All trades were manual sell actions, with two distinct sell price triggers ($2.75 and $10.00) and generic 'MANUAL SELL ALL' entries.\", 'symbols': ['BTW-USDT', 'TRX-USDT', 'WLD-USDT', 'IDOL-USDT'], 'pnl_distribution': {'positive_trades': 3, 'negative_trades': 2, 'average_positive_pnl': 0.60196748, 'average_negative_pnl': -0.06749445}}, 'recommendations': {'risk_management': 'Maintain current position sizing; consider limiting exposure to manual sell triggers until a more systematic strategy is defined.', 'strategy_refinement': 'Introduce objective entry/exit criteria rather than relying solely on manual sells; track performance per symbol to identify any consistent edge.', 'monitoring': 'Continue logging detailed trade reasons and outcomes to enable pattern detection; with only 5 trades, statistical conf"
+    },
+    {
+        "time": 1795868005.4103546,
+        "event": "ai_coin_advisory",
+        "reviewed": 25,
+        "source": "coins.db"
     }
 ]
