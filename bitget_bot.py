@@ -489,7 +489,13 @@ def daily_reset():
  except Exception:pass
 def menu():
  b=lambda t,c:{"text":t,"callback_data":c}
- ui_send("🕹️ *MENU*\nChoose a group.",[[b("💼 Portfolio","m:pf")],[b("🏆 Markets","/analyse")],[b("🧰 Tools","m:tools")],[b("🖥 System","m:sy")]])
+ ui_send("🕹️ *MENU*\nChoose a shortcut or group.",[
+  [b("🚀 BREAKOUT","m:q:BREAKOUT"),b("🟢 BOUNCE","m:q:BOUNCE")],
+  [b("↩️ PULLBACK","m:q:PULLBACK"),b("📈 TREND","m:q:TREND")],
+  [b("💼 Portfolio","m:pf"),b("🏆 Markets","/analyse")],
+  [b("🧰 Tools","m:tools"),b("🖥 System","m:sy")]
+ ])
+
 def panic_prompt():_send("🚨 *CONFIRM PANIC*\nThis sells ALL positions at market.\nConfirm within 15 minutes.","Markdown",{"inline_keyboard":[[{"text":"✅ YES, SELL EVERYTHING","callback_data":"panic_confirm"},{"text":"❌ Cancel","callback_data":"panic_cancel"}]]})
 def load(f,d=None):
  d=[] if f==HIST else ({} if d is None else d)
