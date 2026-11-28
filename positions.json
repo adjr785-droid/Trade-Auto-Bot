@@ -9,7 +9,7 @@
         "sl_pct": 4.84,
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
-        "seen": 1795830493.0328286,
+        "seen": 1795830551.9753518,
         "entry_qty": 269.814574,
         "entry_usdt": 21.4308,
         "dca_count": 1,
@@ -20,14 +20,14 @@
         "safe_zone": 0.316106,
         "stop_loss": 0.300301,
         "peak_price": 0.321106,
-        "last_price": 0.312995,
+        "last_price": 0.313063,
         "opened_at": 1795823196.0950158,
         "sl_pct": 5.0,
         "entry_qty": 119.34,
         "entry_usdt": 37.8309,
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
-        "seen": 1795830493.2587209,
+        "seen": 1795830552.2028987,
         "dca_count": 3,
         "xsl": 0.300301
     },
@@ -44,6 +44,6 @@
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
         "xsl": 0.004022,
-        "seen": 1795830493.4836273
+        "seen": 1795830552.4272923
     }
 }
