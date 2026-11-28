@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935691770,
+    "last_update_id": 935691771,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -97,9 +97,9 @@
     "layout_names": {
         "scanh": "Scan Hist"
     },
-    "out_text": "USDT15.34\n\ud83d\udd0e *TREND \u2014 1 COINS*\n_All coins in this group, ranked by setup score (SC, out of 10); equal scores\nare ordered by how close each coin is to the ideal picture of the setup.\nInformational only; it never changes trading._\n```\n # COIN    PRICE SC RSI   1H 24H\n--------------------------------\n 1 BTW    1.2581  8  76 +2.7 +30\n```\n\u2800\n\u2800",
+    "out_text": "USDT15.34\n\ud83d\udd0e *BREAKOUT \u2014 1 COINS*\n_All coins in this group, ranked by setup score (SC, out of 10); equal scores\nare ordered by how close each coin is to the ideal picture of the setup.\nInformational only; it never changes trading._\n```\n # COIN    PRICE SC RSI   1H 24H\n--------------------------------\n 1 IDOL  0.01758  8  59 +3.2  +2\n```\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795844812.6664906,
+    "out_time": 1795844823.433986,
     "panel_rows": [
         [
             {
@@ -128,11 +128,11 @@
             },
             {
                 "text": "\ud83d\udd04 Refresh",
-                "callback_data": "m:q:TREND"
+                "callback_data": "m:q:BREAKOUT"
             }
         ]
     ],
     "panel_text": "\ud83d\udc47 *Actions*",
-    "out_mid": 8004,
-    "panel_mid": 8005
+    "out_mid": 8007,
+    "panel_mid": 8008
 }
