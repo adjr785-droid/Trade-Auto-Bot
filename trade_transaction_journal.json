@@ -8,5 +8,11 @@
         "time": 1795843774.2660549,
         "event": "ai_portfolio_review",
         "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'WLD-USDT', 'action': 'monitor', 'reason': 'Negative PnL (-1.83%) and price approaching stop (0.242 vs stop 0.234175). Consider tightening stop or reducing position if further downside.'}, {'symbol': 'ICNT-USDT', 'action': 'monitor', 'reason': 'Negative PnL (-2.55%) with price close to stop (0.283 vs stop 0.27588). Risk of stop hit increasing.'}, {'symbol': 'TRX-USDT', 'action': 'hold', 'reason': 'Small negative PnL (-0.28%) but price comfortably above stop (0.29998 vs stop 0.285779). No immediate action.'}, {'symbol': 'BTW-USDT', 'action': 'hold', 'reason': 'Positive PnL (2.21%) and price well above stop (1.258196 vs stop 1.169469). Continue monitoring.'}, {'symbol': 'JCT-USDT', 'action': 'hold', 'reason': 'Slight positive PnL (0.72%) with price above stop (0.001547 vs stop 0.001459). No change needed.'}], 'summary': 'Overall portfolio"
+    },
+    {
+        "time": 1795843851.9005616,
+        "event": "ai_coin_advisory",
+        "reviewed": 25,
+        "source": "coins.db"
     }
 ]
