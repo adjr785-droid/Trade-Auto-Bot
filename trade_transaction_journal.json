@@ -226,5 +226,15 @@
             "warning": "BTC is currently below its 50\u2011hour average, indicating short\u2011term downward pressure. While the RSI is neutral and the trade size is small, the market filter suggests caution.",
             "summary": "Proceed with the manual buy only if you accept the added risk from the bearish BTC trend; otherwise consider waiting for a more favorable price alignment."
         }
+    },
+    {
+        "time": 1795855508.1679084,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'JCT-USDT', 'action': 'monitor', 'reason': 'Small positive PnL (0.71%) and stop loss relatively close; maintain position but watch for price approaching stop.'}], 'summary': 'Overall portfolio risk passes safeguards. The sole position shows modest gains; continue monitoring the stop level and market conditions without taking new actions.'}"
+    },
+    {
+        "time": 1795855509.0475671,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 1.671, 'recurring_patterns': {'trade_reason': 'All trades were manual sell actions, with two distinct sell price triggers ($2.75 and $10.00) for IDOL-USDT and generic manual sells for other symbols.', 'symbol_distribution': {'IDOL-USDT': 2, 'BTW-USDT': 1, 'TRX-USDT': 1, 'WLD-USDT': 1}, 'pnl_distribution': {'positive_trades': 3, 'negative_trades': 2, 'average_positive_pnl': 0.602, 'average_negative_pnl': -0.0675}}, 'recommendations': {'risk_management': 'Maintain current position sizing; the small sample shows modest profit but also negative outcomes. Consider limiting manual sell triggers to well\u2011defined profit targets.', 'strategy_review': 'The reliance on manual sells suggests limited automation. Introducing rule\u2011based exit criteria could improve consistency.', 'data_collection': 'Gather more trades before adjusting parameters; the sample size (5)"
     }
 ]
