@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691953,
+    "last_update_id": 935691956,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT35.93/\u20a648,911",
+    "kb_ph": "USDT35.92/\u20a648,902",
     "layout_bottom": [
         "query",
         "an"
@@ -94,7 +94,7 @@
     },
     "radar": [],
     "audit_down": {},
-    "audit_last": 1795877497.9245048,
+    "audit_last": 1795878349.5434198,
     "audit_ai_cls": "",
     "perf_breaker": {
         "until": 1795742224.733271,
@@ -104,5 +104,102 @@
     "layout_names": {
         "scanh": "Scan Hist"
     },
-    "kb_mid": 8412
+    "kb_mid": 8421,
+    "out_text": "USDT30.99\n\ud83d\udc41 *WATCH LIST*\n_The top-rated coin of each setup (Breakout, Bounce, Pullback, Trend), updated\nevery scan._\n\n```\nCOIN    RSI    1H    24H  S TY\n------------------------------\nLAB      84  +5.9  +26.7  6  -\nICNT     33  +0.1  -15.4  2  -\n```\n\u2800",
+    "out_mode": "Markdown",
+    "out_time": 1795878372.0769372,
+    "panel_rows": [
+        [
+            {
+                "text": "\u25c0",
+                "callback_data": "pg:p"
+            },
+            {
+                "text": "1/2",
+                "callback_data": "pg:x"
+            },
+            {
+                "text": "\u25b6",
+                "callback_data": "pg:n"
+            },
+            {
+                "text": "\ud83c\udfe0",
+                "callback_data": "m:menu"
+            }
+        ],
+        [
+            {
+                "text": "\u25b6 \ud83d\udc41 Watch (2)",
+                "callback_data": "m:at:W"
+            },
+            {
+                "text": "\ud83d\udfe1 Manual (2)",
+                "callback_data": "m:at:M"
+            },
+            {
+                "text": "\ud83e\udd16 Auto (0)",
+                "callback_data": "m:at:A"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udd0e QUERY",
+                "callback_data": "m:query"
+            },
+            {
+                "text": "\ud83d\uddc2 MORE",
+                "callback_data": "m:am"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udd04 Refresh",
+                "callback_data": "m:at:W"
+            }
+        ]
+    ],
+    "panel_text": "\ud83d\udcc4 *Page 1/2*",
+    "pages": {
+        "p": [
+            "USDT30.99\n\ud83d\udc41 *WATCH LIST*\n_The top-rated coin of each setup (Breakout, Bounce, Pullback, Trend), updated\nevery scan._\n\n```\nCOIN    RSI    1H    24H  S TY\n------------------------------\nLAB      84  +5.9  +26.7  6  -\nICNT     33  +0.1  -15.4  2  -\n```\n\u2800",
+            "```\n```\n_TY: T Trend, P Pullback, B Bounce, K Breakout_\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+        ],
+        "i": 0,
+        "mode": "Markdown",
+        "x": [
+            [
+                {
+                    "text": "\u25b6 \ud83d\udc41 Watch (2)",
+                    "callback_data": "m:at:W"
+                },
+                {
+                    "text": "\ud83d\udfe1 Manual (2)",
+                    "callback_data": "m:at:M"
+                },
+                {
+                    "text": "\ud83e\udd16 Auto (0)",
+                    "callback_data": "m:at:A"
+                }
+            ],
+            [
+                {
+                    "text": "\ud83d\udd0e QUERY",
+                    "callback_data": "m:query"
+                },
+                {
+                    "text": "\ud83d\uddc2 MORE",
+                    "callback_data": "m:am"
+                }
+            ],
+            [
+                {
+                    "text": "\ud83d\udd04 Refresh",
+                    "callback_data": "m:at:W"
+                }
+            ]
+        ],
+        "cmd": "m:at:W"
+    },
+    "out_mid": 8419,
+    "panel_mid": 8420
 }
