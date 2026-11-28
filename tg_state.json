@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691994,
+    "last_update_id": 935692001,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT35.83/\u20a648,775",
+    "kb_ph": "USDT35.84/\u20a648,790",
     "layout_bottom": [
         "query",
         "an"
@@ -106,102 +106,67 @@
     "layout_names": {
         "scanh": "Scan Hist"
     },
-    "kb_mid": 8504,
-    "out_text": "USDT0.03\n\ud83d\udfe1 *MANUAL BUY*\n_The best-rated of those four, listed for Manual buy, plus every other coin you\nhold (marked *)._\n\n```\nCOIN    RSI    1H    24H  S TY\n------------------------------\nVSN*     63  +0.1   +1.1  8  -\n```\n\u2800\n\u2800",
+    "kb_mid": 8507,
+    "out_text": "USDT0.03\n\u2705 VSN added.\n\u2b50 *FAVOURITES*\n_Your own list. Tap a coin to buy, sell or remove it._\n\n```\nCOIN     PRICE RSI    1H    24H\n-------------------------------\nVSN    0.03313  63  +0.1   +1.1\n```\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795883490.1031158,
+    "out_time": 1795883567.8560212,
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
+                "text": "\ud83d\udfe2 25%",
+                "callback_data": "m:bp:VSN:25"
             },
             {
-                "text": "1/2",
-                "callback_data": "pg:x"
+                "text": "\ud83d\udfe2 50%",
+                "callback_data": "m:bp:VSN:50"
             },
             {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
+                "text": "\ud83d\udfe2 75%",
+                "callback_data": "m:bp:VSN:75"
             },
             {
-                "text": "\ud83c\udfe0",
-                "callback_data": "m:menu"
+                "text": "\ud83d\udfe2 ALL",
+                "callback_data": "m:bp:VSN:100"
             }
         ],
         [
             {
-                "text": "\ud83d\udc41 Watch (3)",
-                "callback_data": "m:at:W"
-            },
-            {
-                "text": "\u25b6 \ud83d\udfe1 Manual (1)",
-                "callback_data": "m:at:M"
-            },
-            {
-                "text": "\ud83e\udd16 Auto (0)",
-                "callback_data": "m:at:A"
+                "text": "\ud83d\uded2 Buy VSN: other amount",
+                "callback_data": "m:b:VSN"
             }
         ],
         [
             {
-                "text": "\ud83d\udd0e QUERY",
-                "callback_data": "m:query"
+                "text": "\ud83d\udd34 25%",
+                "callback_data": "m:sc:VSN:25"
             },
             {
-                "text": "\ud83d\uddc2 MORE",
-                "callback_data": "m:am"
+                "text": "\ud83d\udd34 50%",
+                "callback_data": "m:sc:VSN:50"
+            },
+            {
+                "text": "\ud83d\udd34 75%",
+                "callback_data": "m:sc:VSN:75"
+            },
+            {
+                "text": "\ud83d\udd34 ALL",
+                "callback_data": "m:sc:VSN:100"
             }
         ],
         [
             {
-                "text": "\ud83d\udd04 Refresh",
-                "callback_data": "m:at:M"
+                "text": "\ud83d\uddd1 Remove from favourites",
+                "callback_data": "m:fd:VSN"
+            }
+        ],
+        [
+            {
+                "text": "\u2b05\ufe0f Back",
+                "callback_data": "m:fv"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/2*",
-    "pages": {
-        "p": [
-            "USDT0.03\n\ud83d\udfe1 *MANUAL BUY*\n_The best-rated of those four, listed for Manual buy, plus every other coin you\nhold (marked *)._\n\n```\nCOIN    RSI    1H    24H  S TY\n------------------------------\nVSN*     63  +0.1   +1.1  8  -\n```\n\u2800\n\u2800",
-            "_TY: T Trend, P Pullback, B Bounce, K Breakout_\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
-        ],
-        "i": 0,
-        "mode": "Markdown",
-        "x": [
-            [
-                {
-                    "text": "\ud83d\udc41 Watch (3)",
-                    "callback_data": "m:at:W"
-                },
-                {
-                    "text": "\u25b6 \ud83d\udfe1 Manual (1)",
-                    "callback_data": "m:at:M"
-                },
-                {
-                    "text": "\ud83e\udd16 Auto (0)",
-                    "callback_data": "m:at:A"
-                }
-            ],
-            [
-                {
-                    "text": "\ud83d\udd0e QUERY",
-                    "callback_data": "m:query"
-                },
-                {
-                    "text": "\ud83d\uddc2 MORE",
-                    "callback_data": "m:am"
-                }
-            ],
-            [
-                {
-                    "text": "\ud83d\udd04 Refresh",
-                    "callback_data": "m:at:M"
-                }
-            ]
-        ],
-        "cmd": "m:at:M"
-    },
-    "out_mid": 8502,
-    "panel_mid": 8503
+    "panel_text": "USDT0.03\n\u2b50 *VSN*\nPrice: 0.033150 USDT\nYou hold: 1078.4525 (about $35.75)",
+    "out_mid": 8508,
+    "panel_mid": 8509
 }
