@@ -160,5 +160,11 @@
         "atl": 0.0003,
         "checked_at": 1795824220.022587,
         "status": "complete"
+    },
+    "VSN-USDT": {
+        "ath": 0.09571,
+        "atl": 0.01,
+        "checked_at": 1795859883.981351,
+        "status": "complete"
     }
 }
