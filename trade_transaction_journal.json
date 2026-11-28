@@ -14,5 +14,10 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795844620.578446,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'WLD-USDT', 'action': 'monitor', 'reason': 'Negative PnL (-2.56%) and price approaching stop (0.2402 vs stop 0.234175). Consider tightening stop or reducing position size.'}, {'symbol': 'BTW-USDT', 'action': 'hold', 'reason': 'Positive PnL (2.23%) and price comfortably above stop. No immediate action required.'}, {'symbol': 'TRX-USDT', 'action': 'monitor', 'reason': 'Slight negative PnL (-0.37%) with price near stop (0.2997 vs stop 0.285779). Watch for further downside.'}, {'symbol': 'JCT-USDT', 'action': 'monitor', 'reason': 'Negative PnL (-1.37%) and price very close to stop (0.001515 vs stop 0.001459). Consider tightening stop to protect capital.'}], 'summary': 'Overall portfolio risk remains PASS, but three of four positions show negative performance and are near their stop levels. Recommend tighter risk controls on WLD-USDT, TRX-US"
     }
 ]
