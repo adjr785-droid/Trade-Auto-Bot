@@ -5017,5 +5017,23 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795824055.7412512,
+        "event": "trade_closed",
+        "symbol": "PWT-USDT",
+        "pnl_usdt": 0.014899500000000038,
+        "reason": "MANUAL SELL $10.00",
+        "strategy": "MANUAL"
+    },
+    {
+        "time": 1795824060.3116071,
+        "event": "ai_manual_sell_review",
+        "symbol": "PWT-USDT",
+        "review": {
+            "review": "The position was manually closed at an average exit price of 0.316579\u202fUSDT, realizing a modest profit of 0.0149\u202fUSDT on the 31.5\u202fPWT sold. The remaining base balance of 31.348396\u202fPWT indicates a small residual amount that was not included in the sell, suggesting either rounding or partial fill considerations. The profit margin is very thin, implying limited upside capture and potential exposure to transaction fees or slippage that could erode the net gain.",
+            "lesson": "When exiting small\u2011cap or low\u2011price assets, ensure the full intended quantity is executed to avoid leftover balances that may incur additional holding risk. Verify that the average exit price sufficiently exceeds the entry price after accounting for fees, especially for manual exits where market impact can be higher. Consider setting tighter profit targets or using limit orders to lock in clearer gains rather than manual market sells that may produce marginal returns.",
+            "confidence": "high"
+        }
     }
 ]

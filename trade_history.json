@@ -460,5 +460,13 @@
         "time": 1795823669.5228815,
         "reason": "MANUAL SELL $10.00",
         "strategy": "MANUAL"
+    },
+    {
+        "sym": "PWT-USDT",
+        "pnl": 0.014899500000000038,
+        "fee": 0.019944,
+        "time": 1795824055.739211,
+        "reason": "MANUAL SELL $10.00",
+        "strategy": "MANUAL"
     }
 ]
