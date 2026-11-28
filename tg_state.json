@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT34.56/\u20a647,042",
+    "kb_ph": "USDT34.40/\u20a646,831",
     "layout_bottom": [
         "an",
         "clear"
@@ -92,53 +92,5 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 7766,
-    "out_mid": 7764,
-    "out_text": "\ud83d\udd0d *SCAN COMPLETE*\nChecked 460 markets in 13s.\nNo coin matched any setup.\n\ud83d\udea7 *GATES* (19 analysed, 0 passed)\nBlocked: RSI 14 | MA 14 | 1H 18 | 24H 12 | Score 0\nSetups: Trend 0 | Pullback 0 | Bounce 0 | Breakout 0\nRules: RSI \u2264 48, Price > MA5 > MA10, 1H +0.5 to +6%, 24H up, Core 5+ and Extra\n2+\n\u2800\n\u2800\n\u2800\n\u2800",
-    "out_mode": "Markdown",
-    "out_time": 1795834197.2621553,
-    "panel_mid": 7765,
-    "panel_rows": [
-        [
-            {
-                "text": "\ud83d\ude80 BREAKOUT",
-                "callback_data": "m:q:BREAKOUT"
-            },
-            {
-                "text": "\ud83d\udfe2 BOUNCE",
-                "callback_data": "m:q:BOUNCE"
-            }
-        ],
-        [
-            {
-                "text": "\u21a9\ufe0f PULLBACK",
-                "callback_data": "m:q:PULLBACK"
-            },
-            {
-                "text": "\ud83d\udcc8 TREND",
-                "callback_data": "m:q:TREND"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udcbc Portfolio",
-                "callback_data": "m:pf"
-            },
-            {
-                "text": "\ud83c\udfc6 Markets",
-                "callback_data": "/analyse"
-            }
-        ],
-        [
-            {
-                "text": "\ud83e\uddf0 Tools",
-                "callback_data": "m:tools"
-            },
-            {
-                "text": "\ud83d\udda5 System",
-                "callback_data": "m:sy"
-            }
-        ]
-    ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nChoose a shortcut or group."
+    "kb_mid": 7767
 }

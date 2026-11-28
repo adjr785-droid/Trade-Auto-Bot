@@ -5135,5 +5135,15 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795836932.8800688,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [], 'summary': 'Current portfolio risk passes the predefined checks. The only position (WLD-USDT) shows a small negative P&L (-0.85%) and is within its stop level margin. No immediate action is recommended; monitor the trade and reassess if price approaches the stop (0.234175) or market conditions change.'}"
+    },
+    {
+        "time": 1795836933.5834477,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 70.0, 'net_pnl_usdt': 1.5969, 'recurring_patterns': {'reasons': ['PANIC', 'MANUAL SELL', 'CRASH GUARD'], 'symbols': ['MOVE-USDT', 'DOS-USDT', 'PWT-USDT']}, 'recommendations': ['Limit exposure to PANIC-triggered trades; consider tighter stop\u2011loss thresholds', 'Review manual sell triggers for consistency; avoid large manual exits without clear criteria', 'Monitor MOVE-USDT volatility as it appears in both profit and loss events', 'Implement additional safeguards for CRASH GUARD scenarios to reduce large negative swings']}"
     }
 ]
