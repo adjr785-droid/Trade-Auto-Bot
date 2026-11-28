@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT35.82/\u20a648,760",
+    "kb_ph": "USDT35.80/\u20a648,730",
     "layout_bottom": [
         "query",
         "an"
@@ -106,9 +106,9 @@
     "layout_names": {
         "scanh": "Scan Hist"
     },
-    "kb_mid": 8523,
+    "kb_mid": 8530,
     "out_mid": 8527,
-    "out_text": "\ud83d\udcdf *OUTPUT*\nResults appear here.",
+    "out_text": "\ud83d\udcbc *HOURLY HOLDINGS*\n\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *VSN* $35.74 (100%)\n+0.00% (+$0.00) | Entry 0.033139\nQty 1078.4525 | Price 0.033140 | Stop 0.031482 (-5%)\nRSI 63 | Bullish | ATH -65%\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_mid": 8528,
     "panel_rows": [
@@ -137,5 +137,6 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nChoose a group."
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nChoose a group.",
+    "out_time": 1795884958.09476
 }
