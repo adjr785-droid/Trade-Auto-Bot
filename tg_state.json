@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691718,
+    "last_update_id": 935691722,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT34.48/\u20a646,940",
+    "kb_ph": "USDT34.47/\u20a646,916",
     "layout_bottom": [
         "query",
         "an"
@@ -93,11 +93,11 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 7918,
+    "kb_mid": 7925,
     "layout_names": {
         "scanh": "Scan Hist"
     },
-    "out_text": "USDT0.03\n\ud83d\udcca *ANALYSIS: BTW-USDT*\nLive price: 1.2435 USDT\n24h change: +27.85%\nRSI(14): 76.0900 \u2014 Overbought\nMA5: 1.1983 | MA10: 1.1833 | MA20: 1.1330\nMACD: 0.056345 | Signal: 0.052026 | Histogram: 0.004319\nATR(14): 0.042573 (3.42% of price)\nLast hour vol vs 20h avg: 2.30x\nBid/ask spread: 0.084%\n\u2800\n\u2800",
+    "out_text": "\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *BTW* $15.09 (44%)\n+0.80% (+$0.12) | Entry 1.2310\nQty 12.159554 | Price 1.2408 | Stop 1.1695 (-6%)\nRSI 76 | Bullish | ATH -55%\n\n\ud83d\udfe2 *JCT* $5.04 (15%)\n+0.46% (+$0.02) | Entry 0.001536\nQty 3266.0479 | Price 0.001543 | Stop 0.001459 (-5%)\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
@@ -106,7 +106,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "1/2",
+                "text": "1/3",
                 "callback_data": "pg:x"
             },
             {
@@ -116,21 +116,33 @@
             {
                 "text": "\ud83c\udfe0",
                 "callback_data": "m:menu"
+            },
+            {
+                "text": "\ud83d\udd04",
+                "callback_data": "rf:go"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/2*",
-    "out_time": 1795842429.4659739,
-    "out_mid": 7916,
+    "panel_text": "\ud83d\udcc4 *Page 1/3*",
+    "out_time": 1795842499.41218,
     "pages": {
         "p": [
-            "USDT0.03\n\ud83d\udcca *ANALYSIS: BTW-USDT*\nLive price: 1.2435 USDT\n24h change: +27.85%\nRSI(14): 76.0900 \u2014 Overbought\nMA5: 1.1983 | MA10: 1.1833 | MA20: 1.1330\nMACD: 0.056345 | Signal: 0.052026 | Histogram: 0.004319\nATR(14): 0.042573 (3.42% of price)\nLast hour vol vs 20h avg: 2.30x\nBid/ask spread: 0.084%\n\u2800\n\u2800",
-            "Technical checks: 3/4\nAssessment: *WAIT / WEAK SETUP*\nCoin database: WATCHING / BOUGHT | seen 138 scans | Manual DCA fill confirmed\nAI notebook note: high: Not eligible; RSI high at 68, 24h up 19.5% but\noverbought; high risk.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+            "\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *BTW* $15.09 (44%)\n+0.80% (+$0.12) | Entry 1.2310\nQty 12.159554 | Price 1.2408 | Stop 1.1695 (-6%)\nRSI 76 | Bullish | ATH -55%\n\n\ud83d\udfe2 *JCT* $5.04 (15%)\n+0.46% (+$0.02) | Entry 0.001536\nQty 3266.0479 | Price 0.001543 | Stop 0.001459 (-5%)\n\u2800\n\u2800",
+            "RSI 52 | Mixed | ATH -92%\n\n\ud83d\udd34 *TRX* $4.99 (14%)\n-0.23% (-$0.01) | Entry 0.300820\nQty 16.611227 | Price 0.300140 | Stop 0.285779 (-5%)\nRSI 32 | Bearish | ATH -70%\n\n\ud83d\udd34 *ICNT* $4.92 (14%)\n-1.55% (-$0.08) | Entry 0.290400\nQty 17.204404 | Price 0.285900 | Stop 0.275880 (-4%)\n\u2800\n\u2800",
+            "RSI 43 | Bearish | ATH -53%\n\n\ud83d\udd34 *WLD* $4.33 (13%)\n-1.95% (-$0.09) | Entry 0.246500\nQty 17.92567 | Price 0.241700 | Stop 0.234175 (-3%)\nRSI 42 | Bearish | ATH -98%\n\n\ud83e\udde0 *AI:* BTC filter is active; holdings show mixed performance with BTC up 0.8%\nbut several altcoins (TRX, ICNT, WLD) bearish and nearing stop levels,\nwarranting close monitoring.\n\u2800\n\u2800"
         ],
         "i": 0,
         "mode": "Markdown",
-        "x": [],
-        "cmd": "m:a:BTW"
+        "x": [
+            [
+                {
+                    "text": "\ud83d\udd04",
+                    "callback_data": "rf:go"
+                }
+            ]
+        ],
+        "cmd": "m:r:holdings"
     },
-    "panel_mid": 7917
+    "out_mid": 7923,
+    "panel_mid": 7924
 }
