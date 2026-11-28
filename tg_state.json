@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935692006,
+    "last_update_id": 935692009,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -96,7 +96,7 @@
         "KII-USDT"
     ],
     "audit_down": {},
-    "audit_last": 1795883425.199556,
+    "audit_last": 1795884259.3778703,
     "audit_ai_cls": "",
     "perf_breaker": {
         "until": 1795742224.733271,
@@ -107,11 +107,10 @@
         "scanh": "Scan Hist"
     },
     "kb_mid": 8523,
-    "out_mid": 8524,
-    "out_text": "\u23f8 *BTC FILTER:* BTC RSI is 42.01 (needs \u2265 50).\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_mid": 8527,
+    "out_text": "\ud83d\udcdf *OUTPUT*\nResults appear here.",
     "out_mode": "Markdown",
-    "out_time": 1795884242.9145463,
-    "panel_mid": 8525,
+    "panel_mid": 8528,
     "panel_rows": [
         [
             {
