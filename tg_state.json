@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691974,
+    "last_update_id": 935691979,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT35.82/\u20a648,761",
+    "kb_ph": "USDT35.81/\u20a648,746",
     "layout_bottom": [
         "query",
         "an"
@@ -104,102 +104,23 @@
     "layout_names": {
         "scanh": "Scan Hist"
     },
-    "out_text": "USDT0.03\n\ud83d\udd0e *QUERY \u2014 SETUP CLASSIFICATION*\n_Every coin in the latest scan is placed once in the setup it scores highest on,\nthen ranked inside its group. Tap a group to see all its coins; the ranking is\nkept in the setup_groups table._\n\nBreakout (2) | Bounce (0) | Pullback (0) | Trend (0)\n\n\ud83c\udfc1 *Top coin of each group*\n```\n```\n\u2800",
+    "out_text": "\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udd34 *VSN* $35.72 (100%)\n-0.06% (-$0.02) | Entry 0.033139\nQty 1078.4525 | Price 0.033120 | Stop 0.031482 (-5%)\nRSI 63 | Bullish | ATH -65%\n\n\ud83e\udde0 *AI:* VSN holding shows a minor -0.06% loss; stop at $0.031482 (~5% below\nentry) may trigger if price falls, while RSI 63 suggests bullish momentum, but\nmonitor for downside risk.\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
-            },
-            {
-                "text": "1/2",
-                "callback_data": "pg:x"
-            },
-            {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
+                "text": "\ud83d\udd04",
+                "callback_data": "rf:go"
             },
             {
                 "text": "\ud83c\udfe0",
                 "callback_data": "m:menu"
             }
-        ],
-        [
-            {
-                "text": "\ud83d\ude80 BREAKOUT",
-                "callback_data": "m:q:BREAKOUT"
-            },
-            {
-                "text": "\ud83d\udfe2 BOUNCE",
-                "callback_data": "m:q:BOUNCE"
-            }
-        ],
-        [
-            {
-                "text": "\u21a9\ufe0f PULLBACK",
-                "callback_data": "m:q:PULLBACK"
-            },
-            {
-                "text": "\ud83d\udcc8 TREND",
-                "callback_data": "m:q:TREND"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udd04 Refresh",
-                "callback_data": "m:query"
-            },
-            {
-                "text": "\u2b05\ufe0f Markets",
-                "callback_data": "/analyse"
-            }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/2*",
-    "out_time": 1795882401.8548882,
-    "kb_mid": 8461,
-    "out_mid": 8471,
-    "pages": {
-        "p": [
-            "USDT0.03\n\ud83d\udd0e *QUERY \u2014 SETUP CLASSIFICATION*\n_Every coin in the latest scan is placed once in the setup it scores highest on,\nthen ranked inside its group. Tap a group to see all its coins; the ranking is\nkept in the setup_groups table._\n\nBreakout (2) | Bounce (0) | Pullback (0) | Trend (0)\n\n\ud83c\udfc1 *Top coin of each group*\n```\n```\n\u2800",
-            "```\nSETUP    LEADER  SC FIT MARK\n----------------------------\nBreakout VSN      8  82 BEST\nBounce   -      \nPullback -      \nTrend    -      \n```\n_BUY = leader with score 6/10 or more; BEST = strongest of the four. A marker\nonly; nothing is bought automatically._\n\u2800\n\u2800"
-        ],
-        "i": 0,
-        "mode": "Markdown",
-        "x": [
-            [
-                {
-                    "text": "\ud83d\ude80 BREAKOUT",
-                    "callback_data": "m:q:BREAKOUT"
-                },
-                {
-                    "text": "\ud83d\udfe2 BOUNCE",
-                    "callback_data": "m:q:BOUNCE"
-                }
-            ],
-            [
-                {
-                    "text": "\u21a9\ufe0f PULLBACK",
-                    "callback_data": "m:q:PULLBACK"
-                },
-                {
-                    "text": "\ud83d\udcc8 TREND",
-                    "callback_data": "m:q:TREND"
-                }
-            ],
-            [
-                {
-                    "text": "\ud83d\udd04 Refresh",
-                    "callback_data": "m:query"
-                },
-                {
-                    "text": "\u2b05\ufe0f Markets",
-                    "callback_data": "/analyse"
-                }
-            ]
-        ],
-        "cmd": "m:query"
-    },
-    "panel_mid": 8472
+    "panel_text": "\ud83d\udd04 *Refresh*",
+    "out_time": 1795882472.5803623,
+    "kb_mid": 8476,
+    "out_mid": 8480,
+    "panel_mid": 8481
 }
