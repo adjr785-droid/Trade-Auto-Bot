@@ -484,5 +484,15 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795881253.2054672,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'JCT-USDT', 'action': 'monitor', 'reason': 'Current P&L is -1.49% and price is approaching the stop level (0.00147). Consider tightening the stop to protect capital while awaiting potential reversal.'}], 'summary': 'Portfolio risk remains acceptable. The only open position shows a modest loss and is near its stop; maintain vigilance and adjust risk parameters if the price continues downward.'}"
+    },
+    {
+        "time": 1795881254.1252446,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 57.14, 'net_pnl_usdt': 1.4433, 'recurring_patterns': {'sell_reason_counts': {'MANUAL SELL ALL': 3, 'MANUAL SELL $2.75': 1, 'MANUAL SELL $10.00': 1, 'MANUAL SELL $31.00': 1}, 'symbols_traded': ['BTW-USDT', 'TRX-USDT', 'WLD-USDT', 'IDOL-USDT', 'VSN-USDT', 'JCT-USDT'], 'pnl_sign_distribution': {'positive': 4, 'negative': 3}}, 'recommendations': ['Review the criteria for \"MANUAL SELL ALL\" as it appears frequently and includes both profitable and losing trades.', 'Consider implementing tighter stop\u2011loss rules for symbols that showed negative P&L (TRX-USDT, WLD-USDT, JCT-USDT).', 'Monitor the impact of fixed\u2011amount sell triggers (e.g., $2.75, $10.00, $31.00) as they may not align with market conditions.', 'Maintain a conservative stance given the modest net profit and mixed trade outcomes.']}"
     }
 ]
