@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935691766,
+    "last_update_id": 935691767,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -24,8 +24,8 @@
             1795739610.5038157
         ],
         "m:r:holdings": [
-            1,
-            1795844747.274253
+            0,
+            1795844751.7919555
         ],
         "/analyse": [
             6,
@@ -107,7 +107,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "2/3",
+                "text": "1/3",
                 "callback_data": "pg:x"
             },
             {
@@ -124,7 +124,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 2/3*",
+    "panel_text": "\ud83d\udcc4 *Page 1/3*",
     "out_mid": 7995,
     "pages": {
         "p": [
@@ -132,7 +132,7 @@
             "RSI 32 | Bearish | ATH -70%\n\n\ud83d\udd34 *JCT* $4.92 (14%)\n-2.02% (-$0.10) | Entry 0.001536\nQty 3266.0479 | Price 0.001505 | Stop 0.001459 (-3%)\nRSI 52 | Mixed | ATH -92%\n\n\ud83d\udd34 *IDOL* $4.72 (14%)\n-0.63% (-$0.03) | Entry 0.017390\nQty 272.97778 | Price 0.017280 | Stop 0.016520 (-4%)\n\u2800\n\u2800",
             "RSI 59 | Bullish | ATH -64%\n\n\ud83d\udd34 *WLD* $4.30 (13%)\n-2.68% (-$0.12) | Entry 0.246500\nQty 17.92567 | Price 0.239900 | Stop 0.234175 (-2%)\nRSI 42 | Bearish | ATH -98%\n\n\ud83e\udde0 *AI:* BTC holding shows modest gain (+1.98%) but RSI 76 signals overbought;\nstop at 1.1695 is 7% below entry\u2014monitor closely, while other assets are flat\nto down with lower RSI.\n\u2800\n\u2800"
         ],
-        "i": 1,
+        "i": 0,
         "mode": "Markdown",
         "x": [
             [
