@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691536,
+    "last_update_id": 935691539,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT34.88/\u20a647,641",
+    "kb_ph": "USDT34.99/\u20a647,801",
     "layout_bottom": [
         "an",
         "clear"
@@ -92,7 +92,7 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "out_text": "\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udd34 *PWT* $19.80 (57%)\n-0.34% (-$0.07) | Entry 0.316106\nQty 62.848396 | Price 0.315018 | Stop 0.300301 (-5%)\nRSI 48 | Mixed | ATH -56%\n\n\ud83d\udfe2 *DOS* $5.03 (14%)\n+1.73% (+$0.09) | Entry 0.079428\nQty 62.268088 | Price 0.080800 | Stop 0.079428 (-2%)\n\u2800\n\u2800",
+    "out_text": "\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *PWT* $9.95 (28%)\n+0.37% (+$0.04) | Entry 0.316106\nQty 31.348396 | Price 0.317270 | Stop 0.300301 (-5%)\nRSI 48 | Mixed | ATH -56%\n\n\ud83d\udfe2 *DOS* $5.03 (14%)\n+1.73% (+$0.09) | Entry 0.079428\nQty 62.268088 | Price 0.080800 | Stop 0.079428 (-2%)\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
@@ -119,13 +119,12 @@
         ]
     ],
     "panel_text": "\ud83d\udcc4 *Page 1/2*",
-    "out_time": 1795824018.9441779,
-    "kb_mid": 7609,
-    "out_mid": 7607,
+    "out_time": 1795824084.8471842,
+    "kb_mid": 7615,
     "pages": {
         "p": [
-            "\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udd34 *PWT* $19.80 (57%)\n-0.34% (-$0.07) | Entry 0.316106\nQty 62.848396 | Price 0.315018 | Stop 0.300301 (-5%)\nRSI 48 | Mixed | ATH -56%\n\n\ud83d\udfe2 *DOS* $5.03 (14%)\n+1.73% (+$0.09) | Entry 0.079428\nQty 62.268088 | Price 0.080800 | Stop 0.079428 (-2%)\n\u2800\n\u2800",
-            "RSI 52 | Mixed | ATH -91%\n\n\ud83e\udde0 *AI:* BTC filter is active; PWT position is slightly down (-0.34%) and\napproaching its stop (0.300301), while DOS is modestly up (+1.73%) but its stop\nequals the entry price, warranting close monitoring.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+            "\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *PWT* $9.95 (28%)\n+0.37% (+$0.04) | Entry 0.316106\nQty 31.348396 | Price 0.317270 | Stop 0.300301 (-5%)\nRSI 48 | Mixed | ATH -56%\n\n\ud83d\udfe2 *DOS* $5.03 (14%)\n+1.73% (+$0.09) | Entry 0.079428\nQty 62.268088 | Price 0.080800 | Stop 0.079428 (-2%)\n\u2800\n\u2800",
+            "RSI 52 | Mixed | ATH -91%\n\n\ud83e\udde0 *AI:* BTC filter is active; holdings show modest gains but both positions\nhave stops near entry (PWT stop 5% below, DOS stop 2% below), warranting\nmonitoring for potential downside.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
         "i": 0,
         "mode": "Markdown",
@@ -139,5 +138,6 @@
         ],
         "cmd": "m:r:holdings"
     },
-    "panel_mid": 7608
+    "out_mid": 7613,
+    "panel_mid": 7614
 }
