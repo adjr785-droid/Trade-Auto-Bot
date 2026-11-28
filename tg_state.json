@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691801,
+    "last_update_id": 935691802,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT34.46/\u20a646,907",
+    "kb_ph": "USDT34.86/\u20a647,451",
     "layout_bottom": [
         "query",
         "an"
@@ -96,42 +96,52 @@
     "layout_names": {
         "scanh": "Scan Hist"
     },
-    "kb_mid": 8058,
-    "out_mid": 8060,
-    "out_text": "\ud83d\udcdf *OUTPUT*\nResults appear here.",
+    "kb_mid": 8064,
+    "out_text": "\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *IDOL* $20.47 (59%)\n+2.03% (+$0.41) | Entry 0.017298\nQty 1159.5255 | Price 0.017650 | Stop 0.016433 (-7%)\nRSI 59 | Bullish | ATH -63%\n\n\ud83d\udfe2 *JCT* $10.00 (29%)\n+0.20% (+$0.02) | Entry 0.001521\nQty 6561.9692 | Price 0.001524 | Stop 0.001445 (-5%)\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "panel_mid": 8061,
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udcbc Holdings",
-                "callback_data": "m:r:holdings"
-            }
-        ],
-        [
+                "text": "\u25c0",
+                "callback_data": "pg:p"
+            },
             {
-                "text": "\ud83d\udcc8 Stats",
-                "callback_data": "m:r:stats"
-            }
-        ],
-        [
+                "text": "1/2",
+                "callback_data": "pg:x"
+            },
             {
-                "text": "\ud83e\uddfe Trade History",
-                "callback_data": "m:r:history"
-            }
-        ],
-        [
+                "text": "\u25b6",
+                "callback_data": "pg:n"
+            },
             {
-                "text": "\ud83d\udea8 PANIC SELL",
-                "callback_data": "/panic"
-            }
-        ],
-        [
-            {
-                "text": "\ud83c\udfe0 Main Menu",
+                "text": "\ud83c\udfe0",
                 "callback_data": "m:menu"
+            },
+            {
+                "text": "\ud83d\udd04",
+                "callback_data": "rf:go"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcbc *PORTFOLIO*"
+    "panel_text": "\ud83d\udcc4 *Page 1/2*",
+    "out_mid": 8062,
+    "out_time": 1795846466.76545,
+    "pages": {
+        "p": [
+            "\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *IDOL* $20.47 (59%)\n+2.03% (+$0.41) | Entry 0.017298\nQty 1159.5255 | Price 0.017650 | Stop 0.016433 (-7%)\nRSI 59 | Bullish | ATH -63%\n\n\ud83d\udfe2 *JCT* $10.00 (29%)\n+0.20% (+$0.02) | Entry 0.001521\nQty 6561.9692 | Price 0.001524 | Stop 0.001445 (-5%)\n\u2800\n\u2800",
+            "RSI 47 | Bearish | ATH -92%\n\n\ud83d\udd34 *WLD* $4.30 (12%)\n-2.64% (-$0.12) | Entry 0.246500\nQty 17.92567 | Price 0.240000 | Stop 0.234175 (-2%)\nRSI 34 | Bearish | ATH -98%\n\n\ud83e\udde0 *AI:* IDOL is up modestly with healthy RSI, JCT flat but bearish RSI, while\nWLD shows declining price, low RSI and a stop only 2% below current price,\nwarranting monitoring.\n\u2800\n\u2800"
+        ],
+        "i": 0,
+        "mode": "Markdown",
+        "x": [
+            [
+                {
+                    "text": "\ud83d\udd04",
+                    "callback_data": "rf:go"
+                }
+            ]
+        ],
+        "cmd": "m:r:holdings"
+    },
+    "panel_mid": 8063
 }
