@@ -188,5 +188,15 @@
             "lesson": "Partial exits can lock in gains while preserving exposure for potential upside. Ensure that manual interventions are aligned with predefined risk thresholds and that the remaining position size remains within the overall risk budget.",
             "confidence": "high"
         }
+    },
+    {
+        "time": 1795853461.1260989,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'JCT-USDT', 'action': 'monitor', 'reason': 'Profit modest (3.9%); price above stop but close. Consider tightening stop to protect gains while allowing upside.'}, {'symbol': 'IDOL-USDT', 'action': 'adjust_stop', 'reason': 'Strong profit (11.8%); stop currently at entry. Raising stop to near current price can lock in gains without exiting.'}], 'summary': 'Portfolio risk remains acceptable. Maintain positions, but tighten JCT stop and raise IDOL stop to safeguard realized profits.'}"
+    },
+    {
+        "time": 1795853461.6829617,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 50.0, 'net_pnl_usdt': 0.4667, 'recurring_patterns': {'manual_sell_all_count': 3, 'manual_sell_specific_amount_count': 1, 'symbols_traded': ['BTW-USDT', 'TRX-USDT', 'WLD-USDT', 'IDOL-USDT']}, 'recommendations': ['Maintain current risk limits due to modest net profit and low sample size', 'Consider diversifying entry criteria beyond manual sell triggers', 'Monitor win/loss ratio as sample size grows before scaling position sizes']}"
     }
 ]
