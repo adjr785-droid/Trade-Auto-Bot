@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT35.32/\u20a648,085",
+    "kb_ph": "USDT35.46/\u20a648,274",
     "layout_bottom": [
         "query",
         "an"
@@ -96,7 +96,7 @@
     "layout_names": {
         "scanh": "Scan Hist"
     },
-    "kb_mid": 8110,
+    "kb_mid": 8112,
     "out_mid": 8108,
     "out_text": "\ud83d\udcbc *HOURLY HOLDINGS*\n\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *IDOL* $24.99 (71%)\n+2.60% (+$0.63) | Entry 0.017418\nQty 1398.2622 | Price 0.017870 | Stop 0.016547 (-7%)\nRSI 59 | Bullish | ATH -63%\n\n\ud83d\udfe2 *JCT* $10.24 (29%)\n+2.63% (+$0.26) | Entry 0.001521\n\u2800\n\u2800",
     "out_mode": "Markdown",
