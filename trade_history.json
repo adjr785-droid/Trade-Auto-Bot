@@ -1,1 +1,10 @@
-[]
+[
+    {
+        "sym": "BTW-USDT",
+        "pnl": 0.36706364999999985,
+        "fee": 0.030648,
+        "time": 1795844784.1818519,
+        "reason": "MANUAL SELL ALL",
+        "strategy": "MANUAL"
+    }
+]

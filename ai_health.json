@@ -22,9 +22,9 @@
             "successes": 290
         },
         "performance_review": {
-            "last_success": 1795841031.069826,
-            "successes": 290,
-            "last_error": "Expecting ',' delimiter: line 1 column 728 (char 727)",
+            "last_success": 1795844801.1069794,
+            "successes": 291,
+            "last_error": "",
             "last_failure": 1795841996.541517,
             "failures": 24
         },
@@ -39,8 +39,8 @@
             "last_error": ""
         },
         "sell_review": {
-            "last_success": 1795842248.75581,
-            "successes": 49,
+            "last_success": 1795844794.9639914,
+            "successes": 50,
             "last_error": ""
         },
         "analyse_review": {
@@ -76,7 +76,7 @@
             "failures": 27
         }
     },
-    "last_stage_success": 1795844735.139752,
+    "last_stage_success": 1795844801.1069794,
     "last_success": 1795844631.8075042,
     "emergency_ended": 1795842550.7490833,
     "recovery_start_alerted": false

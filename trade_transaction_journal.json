@@ -29,5 +29,28 @@
             "warning": "BTC market filter is active and indicates BTC is below its 50\u2011hour average, suggesting broader bearish pressure. Proceed with caution.",
             "summary": "A manual buy of 4.75\u202fUSDT of IDOL\u2011USDT at 0.01737 is small, but the active BTC filter and bearish BTC trend increase risk. RSI is neutral (58.5). Consider waiting for clearer market signals or reducing exposure."
         }
+    },
+    {
+        "time": 1795844784.181952,
+        "event": "trade_closed",
+        "symbol": "BTW-USDT",
+        "pnl_usdt": 0.36706364999999985,
+        "reason": "MANUAL SELL ALL",
+        "strategy": "MANUAL"
+    },
+    {
+        "time": 1795844795.5651412,
+        "event": "ai_manual_sell_review",
+        "symbol": "BTW-USDT",
+        "review": {
+            "review": "The position was manually closed at an average exit price of 1.261231 USDT, realizing a profit of 0.36706365 USDT on the sold quantity of 12.15 units. A small residual base amount of 0.009554 BTW remains unsold, indicating the exit was not fully liquidated. The manual sell suggests a discretionary decision rather than an automated trigger, which may reflect market sentiment or risk management considerations at the time.",
+            "lesson": "When manually exiting a spot position, ensure the remaining base balance is either negligible or intentionally retained for future strategy. Document the rationale for partial exits to improve future decision\u2011making and consider setting predefined exit thresholds to reduce reliance on ad\u2011hoc actions.",
+            "confidence": "high"
+        }
+    },
+    {
+        "time": 1795844801.6111314,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 100.0, 'net_pnl_usdt': 0.3671, 'recurring_patterns': [], 'recommendations': 'No clear recurring pattern from a single trade. Maintain current strategy, monitor for additional data before adjusting exposure.'}"
     }
 ]
