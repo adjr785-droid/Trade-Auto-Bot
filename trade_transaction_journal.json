@@ -80,5 +80,15 @@
             "lesson": "When exiting a position, especially in volatile markets like TRX/USDT, consider using tiered limit orders or trailing stops to protect against small adverse price moves. Manual exits should be justified by clear market signals or risk thresholds to avoid unnecessary slippage.",
             "confidence": "medium"
         }
+    },
+    {
+        "time": 1795845055.9189322,
+        "event": "ai_manual_buy_review",
+        "symbol": "JCT-USDT",
+        "review": {
+            "risk_level": "medium",
+            "warning": "BTC is trading below its 50\u2011hour average, indicating short\u2011term downward pressure. While the RSI is neutral, the market filter suggests caution.",
+            "summary": "Considering the modest USDT amount, existing position, and bearish BTC trend, proceed with the manual buy only if you accept moderate risk and monitor price action closely."
+        }
     }
 ]

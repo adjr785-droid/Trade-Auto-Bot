@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691785,
+    "last_update_id": 935691787,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT34.27/\u20a646,650",
+    "kb_ph": "USDT34.25/\u20a646,626",
     "layout_bottom": [
         "query",
         "an"
@@ -93,46 +93,38 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 8022,
+    "kb_mid": 8030,
     "layout_names": {
         "scanh": "Scan Hist"
     },
-    "out_text": "\u26a0\ufe0f BGB conversion outcome is UNKNOWN for TRX; do not retry until Bitget\nconversion history and balances are checked. Reason: bitget\n{\"code\":\"13011\",\"msg\":\"Can be convert 1 times every 6\nhours\",\"requestTime\":1795844993396,\"data\":null}\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "\ud83e\udde0 AI manual-buy advisory: Considering the modest USDT amount, existing\nposition, and bearish BTC trend, proceed with the manual buy only if you accept\nmoderate risk and monitor price action closely.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795844993.9720576,
+    "out_time": 1795845056.4433584,
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udcbc Holdings",
-                "callback_data": "m:r:holdings"
-            }
-        ],
-        [
+                "text": "\u25c0",
+                "callback_data": "pg:p"
+            },
             {
-                "text": "\ud83d\udcc8 Stats",
-                "callback_data": "m:r:stats"
-            }
-        ],
-        [
+                "text": "1/2",
+                "callback_data": "pg:x"
+            },
             {
-                "text": "\ud83e\uddfe Trade History",
-                "callback_data": "m:r:history"
-            }
-        ],
-        [
+                "text": "\u25b6",
+                "callback_data": "pg:n"
+            },
             {
-                "text": "\ud83d\udea8 PANIC SELL",
-                "callback_data": "/panic"
-            }
-        ],
-        [
-            {
-                "text": "\ud83c\udfe0 Main Menu",
+                "text": "\ud83c\udfe0",
                 "callback_data": "m:menu"
+            },
+            {
+                "text": "\ud83d\udd04",
+                "callback_data": "rf:go"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcbc *PORTFOLIO*",
-    "out_mid": 8016,
-    "panel_mid": 8024
+    "panel_text": "\ud83d\udcc4 *Page 1/2*",
+    "out_mid": 8025,
+    "panel_hidden": true
 }
