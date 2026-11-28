@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935691944,
+    "last_update_id": 935691945,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -111,16 +111,30 @@
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
-            },
+                "text": "\ud83d\udcbc Portfolio",
+                "callback_data": "m:pf"
+            }
+        ],
+        [
             {
-                "text": "\ud83c\udfe0",
-                "callback_data": "m:menu"
+                "text": "\ud83c\udfc6 Markets",
+                "callback_data": "/analyse"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\uddf0 Tools",
+                "callback_data": "m:tools"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udda5 System",
+                "callback_data": "m:sy"
             }
         ]
     ],
-    "panel_text": "\ud83d\udd04 *Refresh*",
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nChoose a group.",
     "out_mid": 8386,
     "panel_mid": 8387
 }
