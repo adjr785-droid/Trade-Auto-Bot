@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935691839,
+    "last_update_id": 935691840,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -102,28 +102,30 @@
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
-            },
+                "text": "\ud83d\udcbc Portfolio",
+                "callback_data": "m:pf"
+            }
+        ],
+        [
             {
-                "text": "1/2",
-                "callback_data": "pg:x"
-            },
+                "text": "\ud83c\udfc6 Markets",
+                "callback_data": "/analyse"
+            }
+        ],
+        [
             {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
-            },
+                "text": "\ud83e\uddf0 Tools",
+                "callback_data": "m:tools"
+            }
+        ],
+        [
             {
-                "text": "\ud83c\udfe0",
-                "callback_data": "m:menu"
-            },
-            {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
+                "text": "\ud83d\udda5 System",
+                "callback_data": "m:sy"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/2*",
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nChoose a group.",
     "out_time": 1795853491.2178369,
     "out_mid": 8144,
     "pages": {
