@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935691677,
+    "last_update_id": 935691679,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -105,36 +105,30 @@
     "panel_rows": [
         [
             {
-                "text": "\ud83d\ude80 BREAKOUT",
-                "callback_data": "m:q:BREAKOUT"
-            },
-            {
-                "text": "\ud83d\udfe2 BOUNCE",
-                "callback_data": "m:q:BOUNCE"
+                "text": "\ud83d\udcbc Portfolio",
+                "callback_data": "m:pf"
             }
         ],
         [
             {
-                "text": "\u21a9\ufe0f PULLBACK",
-                "callback_data": "m:q:PULLBACK"
-            },
-            {
-                "text": "\ud83d\udcc8 TREND",
-                "callback_data": "m:q:TREND"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udd04 Refresh",
-                "callback_data": "m:query"
-            },
-            {
-                "text": "\u2b05\ufe0f Markets",
+                "text": "\ud83c\udfc6 Markets",
                 "callback_data": "/analyse"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\uddf0 Tools",
+                "callback_data": "m:tools"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udda5 System",
+                "callback_data": "m:sy"
             }
         ]
     ],
-    "panel_text": "\ud83d\udc47 *Actions*",
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nChoose a group.",
     "out_mid": 7861,
-    "panel_mid": 7862
+    "panel_mid": 7865
 }
