@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691821,
+    "last_update_id": 935691822,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT34.97/\u20a647,597",
+    "kb_ph": "USDT34.97/\u20a647,607",
     "layout_bottom": [
         "query",
         "an"
@@ -96,7 +96,7 @@
     "layout_names": {
         "scanh": "Scan Hist"
     },
-    "out_text": "USDT0.03\n\ud83d\udd0e *BOUNCE \u2014 1 COINS*\n_All coins in this group, ranked by setup score (SC, out of 10); equal scores\nare ordered by how close each coin is to the ideal picture of the setup.\nInformational only; it never changes trading._\n```\n # COIN    PRICE SC RSI   1H 24H\n--------------------------------\n 1 WLD    0.2398  4  34 -1.4  -5\n```\n\u2800\n\u2800",
+    "out_text": "USDT0.03\n\ud83d\udd0e *BREAKOUT \u2014 1 COINS*\n_All coins in this group, ranked by setup score (SC, out of 10); equal scores\nare ordered by how close each coin is to the ideal picture of the setup.\nInformational only; it never changes trading._\n```\n # COIN    PRICE SC RSI   1H 24H\n--------------------------------\n 1 IDOL  0.01742  8  59 +0.9  +1\n```\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
@@ -126,13 +126,13 @@
             },
             {
                 "text": "\ud83d\udd04 Refresh",
-                "callback_data": "m:q:BOUNCE"
+                "callback_data": "m:q:BREAKOUT"
             }
         ]
     ],
     "panel_text": "\ud83d\udc47 *Actions*",
-    "out_time": 1795846960.9120548,
-    "kb_mid": 8099,
-    "out_mid": 8097,
-    "panel_mid": 8098
+    "out_time": 1795846989.6169705,
+    "kb_mid": 8102,
+    "out_mid": 8100,
+    "panel_mid": 8101
 }
