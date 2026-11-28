@@ -350,5 +350,11 @@
         "time": 1795869226.651662,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 1.671, 'recurring_patterns': {'manual_sell_frequency': 5, 'symbols_traded': ['BTW-USDT', 'TRX-USDT', 'WLD-USDT', 'IDOL-USDT'], 'profit_distribution': {'wins': 3, 'losses': 2}}, 'recommendations': 'Maintain current manual sell approach but increase sample size before scaling. Monitor IDOL-USDT for repeat profitability; consider tighter risk limits on less predictable assets like TRX-USDT and WLD-USDT. Continue conservative position sizing and avoid new automated strategies until more data is collected.'}"
+    },
+    {
+        "time": 1795869792.6079257,
+        "event": "ai_coin_advisory",
+        "reviewed": 25,
+        "source": "coins.db"
     }
 ]
