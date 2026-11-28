@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691856,
+    "last_update_id": 935691857,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT36.24/\u20a649,327",
+    "kb_ph": "USDT36.21/\u20a649,292",
     "layout_bottom": [
         "query",
         "an"
@@ -98,23 +98,43 @@
     "layout_names": {
         "scanh": "Scan Hist"
     },
-    "kb_mid": 8181,
-    "out_text": "\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *JCT* $19.99 (55%)\n+0.06% (+$0.01) | Entry 0.001548\nQty 12907.36 | Price 0.001549 | Stop 0.001471 (-5%)\nRSI 56 | Mixed | ATH -92%\n\n\ud83e\udde0 *AI:* JCT comprises 55% of holdings, showing a modest 0.06% gain; stop loss\nis set 5% below entry, but the -92% ATH flag suggests significant past drawdown,\nwarranting monitoring.\n\u2800\n\u2800",
+    "kb_mid": 8185,
+    "out_text": "USDT16.15\n\ud83d\udd0e *QUERY \u2014 SETUP CLASSIFICATION*\n_Every coin in the latest scan is placed once in the setup it scores highest on,\nthen ranked inside its group. Tap a group to see all its coins; the ranking is\nkept in the setup_groups table._\n\nBreakout (61) | Bounce (397) | Pullback (1) | Trend (1)\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795857021.5407624,
+    "out_time": 1795857038.2922382,
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
+                "text": "\ud83d\ude80 BREAKOUT",
+                "callback_data": "m:q:BREAKOUT"
             },
             {
-                "text": "\ud83c\udfe0",
-                "callback_data": "m:menu"
+                "text": "\ud83d\udfe2 BOUNCE",
+                "callback_data": "m:q:BOUNCE"
+            }
+        ],
+        [
+            {
+                "text": "\u21a9\ufe0f PULLBACK",
+                "callback_data": "m:q:PULLBACK"
+            },
+            {
+                "text": "\ud83d\udcc8 TREND",
+                "callback_data": "m:q:TREND"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udd04 Refresh",
+                "callback_data": "m:query"
+            },
+            {
+                "text": "\u2b05\ufe0f Markets",
+                "callback_data": "/analyse"
             }
         ]
     ],
-    "panel_text": "\ud83d\udd04 *Refresh*",
-    "out_mid": 8179,
-    "panel_mid": 8180
+    "panel_text": "\ud83d\udc47 *Actions*",
+    "out_mid": 8183,
+    "panel_mid": 8184
 }
