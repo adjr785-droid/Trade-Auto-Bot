@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691848,
+    "last_update_id": 935691853,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT36.21/\u20a649,292",
+    "kb_ph": "USDT36.29/\u20a649,398",
     "layout_bottom": [
         "query",
         "an"
@@ -98,43 +98,5 @@
     "layout_names": {
         "scanh": "Scan Hist"
     },
-    "kb_mid": 8171,
-    "out_mid": 8167,
-    "out_text": "\ud83d\udcbc *HOURLY HOLDINGS*\n\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *JCT* $20.06 (55%)\n+0.39% (+$0.08) | Entry 0.001548\nQty 12907.36 | Price 0.001554 | Stop 0.001471 (-5%)\nRSI 56 | Mixed | ATH -92%\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
-    "out_mode": "Markdown",
-    "out_time": 1795856185.29337,
-    "panel_mid": 8170,
-    "panel_rows": [
-        [
-            {
-                "text": "\ud83d\udcbc Holdings",
-                "callback_data": "m:r:holdings"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udcc8 Stats",
-                "callback_data": "m:r:stats"
-            }
-        ],
-        [
-            {
-                "text": "\ud83e\uddfe Trade History",
-                "callback_data": "m:r:history"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udea8 PANIC SELL",
-                "callback_data": "/panic"
-            }
-        ],
-        [
-            {
-                "text": "\ud83c\udfe0 Main Menu",
-                "callback_data": "m:menu"
-            }
-        ]
-    ],
-    "panel_text": "\ud83d\udcbc *PORTFOLIO*"
+    "kb_mid": 8174
 }
