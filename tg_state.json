@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691589,
+    "last_update_id": 935691590,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT34.79/\u20a647,362",
+    "kb_ph": "USDT34.79/\u20a647,357",
     "layout_bottom": [
         "an",
         "clear"
@@ -96,8 +96,8 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 7708,
-    "out_text": "USDT0.03\n\ud83d\udd0e *BOUNCE \u2014 TOP 10*\n_Sorted by setup score, highest first. Scores are evidence points out of 10;\nclassification is informational only._\n\n1. *ADA* \u2014 6/10 | RSI 43.1 | 1H +0.33% | 24H -0.40%\n2. *KII* \u2014 6/10 | RSI 39.0 | 1H +0.03% | 24H -0.62%\n3. *BGSC* \u2014 4/10 | RSI - | 1H -% | 24H -26.75%\n4. *BIGTIME* \u2014 4/10 | RSI - | 1H -% | 24H -8.28%\n5. *BLESS* \u2014 4/10 | RSI - | 1H -% | 24H -18.92%\n\u2800\n\u2800",
+    "kb_mid": 7711,
+    "out_text": "USDT0.03\n\ud83d\udd0e *PULLBACK \u2014 TOP 10*\n_Sorted by setup score, highest first. Scores are evidence points out of 10;\nclassification is informational only._\n\n1. *ENA* \u2014 8/10 | RSI 49.9 | 1H +0.66% | 24H +2.45%\n2. *PONS* \u2014 8/10 | RSI 52.1 | 1H +0.31% | 24H +13.79%\n3. *BNB* \u2014 8/10 | RSI 47.5 | 1H +0.27% | 24H +0.03%\n4. *FET* \u2014 6/10 | RSI 55.2 | 1H -0.23% | 24H +4.83%\n5. *PORTAL* \u2014 6/10 | RSI 79.5 | 1H -0.34% | 24H +213.49%\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
@@ -145,16 +145,16 @@
             },
             {
                 "text": "\ud83d\udd04 Refresh",
-                "callback_data": "m:q:BOUNCE"
+                "callback_data": "m:q:PULLBACK"
             }
         ]
     ],
     "panel_text": "\ud83d\udcc4 *Page 1/2*",
-    "out_time": 1795831682.9054706,
+    "out_time": 1795831721.6467984,
     "pages": {
         "p": [
-            "USDT0.03\n\ud83d\udd0e *BOUNCE \u2014 TOP 10*\n_Sorted by setup score, highest first. Scores are evidence points out of 10;\nclassification is informational only._\n\n1. *ADA* \u2014 6/10 | RSI 43.1 | 1H +0.33% | 24H -0.40%\n2. *KII* \u2014 6/10 | RSI 39.0 | 1H +0.03% | 24H -0.62%\n3. *BGSC* \u2014 4/10 | RSI - | 1H -% | 24H -26.75%\n4. *BIGTIME* \u2014 4/10 | RSI - | 1H -% | 24H -8.28%\n5. *BLESS* \u2014 4/10 | RSI - | 1H -% | 24H -18.92%\n\u2800\n\u2800",
-            "6. *DEBIT* \u2014 4/10 | RSI - | 1H -% | 24H -10.27%\n7. *H* \u2014 4/10 | RSI - | 1H -% | 24H -10.47%\n8. *KLV* \u2014 4/10 | RSI - | 1H -% | 24H -12.25%\n9. *KOR* \u2014 4/10 | RSI - | 1H -% | 24H -16.50%\n10. *ME* \u2014 4/10 | RSI - | 1H -% | 24H -13.53%\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+            "USDT0.03\n\ud83d\udd0e *PULLBACK \u2014 TOP 10*\n_Sorted by setup score, highest first. Scores are evidence points out of 10;\nclassification is informational only._\n\n1. *ENA* \u2014 8/10 | RSI 49.9 | 1H +0.66% | 24H +2.45%\n2. *PONS* \u2014 8/10 | RSI 52.1 | 1H +0.31% | 24H +13.79%\n3. *BNB* \u2014 8/10 | RSI 47.5 | 1H +0.27% | 24H +0.03%\n4. *FET* \u2014 6/10 | RSI 55.2 | 1H -0.23% | 24H +4.83%\n5. *PORTAL* \u2014 6/10 | RSI 79.5 | 1H -0.34% | 24H +213.49%\n\u2800\n\u2800",
+            "6. *ICNT* \u2014 4/10 | RSI 45.2 | 1H -1.26% | 24H +8.24%\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
         "i": 0,
         "mode": "Markdown",
@@ -186,12 +186,12 @@
                 },
                 {
                     "text": "\ud83d\udd04 Refresh",
-                    "callback_data": "m:q:BOUNCE"
+                    "callback_data": "m:q:PULLBACK"
                 }
             ]
         ],
-        "cmd": "m:q:BOUNCE"
+        "cmd": "m:q:PULLBACK"
     },
-    "out_mid": 7706,
-    "panel_mid": 7707
+    "out_mid": 7709,
+    "panel_mid": 7710
 }
