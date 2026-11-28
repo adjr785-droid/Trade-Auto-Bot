@@ -5083,5 +5083,15 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795830159.5181193,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'PWT-USDT', 'action': 'monitor', 'reason': 'Negative PnL (-2.04%) and price approaching stop level (0.3096 vs stop 0.3003). Consider tightening stop or reducing position if further downside risk emerges.'}, {'symbol': 'ZORA-USDT', 'action': 'monitor', 'reason': 'Slight negative PnL (-0.28%) with price very close to stop (0.004222 vs stop 0.004022). Maintain vigilance; adjust stop if price drifts lower.'}, {'symbol': 'DOS-USDT', 'action': 'hold', 'reason': 'Positive PnL (1.85%) and price above stop; position is within acceptable risk parameters.'}], 'summary': 'Overall portfolio risk remains PASS. Two positions (PWT-USDT, ZORA-USDT) are near their stop thresholds and show modest losses; monitor closely and be prepared to tighten stops if downside continues. DOS-USDT is performing positively and can be held as is.'}"
+    },
+    {
+        "time": 1795830160.3082914,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 70.0, 'net_pnl_usdt': 1.1557, 'recurring_patterns': {'manual_sell': 5, 'panic_trades': 5, 'crash_guard_losses': 1, 'symbol_concentration': {'MOVE-USDT': 4, 'DOS-USDT': 4, 'BLESS-USDT': 2}}, 'recommendations': {'reduce_panic_trades': 'Consider limiting panic exits; they yield modest gains and increase operational noise.', 'tighten_crash_guard': 'Implement tighter stop\u2011loss thresholds to avoid large single\u2011trade drawdowns like the -11.3% MOVE\u2011USDT event.', 'diversify_symbols': 'Avoid over\u2011exposure to a few symbols (e.g., MOVE, DOS) to smooth performance.', 'monitor_win_rate': 'Current win rate appears high but driven by many small gains; ensure it remains sustainable before scaling.'}}"
     }
 ]
