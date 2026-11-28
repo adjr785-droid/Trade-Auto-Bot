@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT34.74/\u20a647,291",
+    "kb_ph": "USDT34.71/\u20a647,252",
     "layout_bottom": [
         "an",
         "clear"
@@ -82,11 +82,9 @@
     },
     "radar": [
         "BNB-USDT",
-        "ENA-USDT",
-        "LINK-USDT",
+        "WLD-USDT",
         "IDOL-USDT",
-        "TAO-USDT",
-        "UNI-USDT"
+        "PONS-USDT"
     ],
     "audit_down": {},
     "audit_last": 1795831949.4011292,
@@ -96,9 +94,9 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "out_text": "\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *WLD* $34.65 (100%)\n+0.08% (+$0.03) | Entry 0.246500\nQty 140.46567 | Price 0.246700 | Stop 0.234175 (-5%)\nRSI 51 | Bullish | ATH -98%\n\n\ud83e\udde0 *AI:* WLD holding shows a modest 0.08% gain with a stop loss set 5% below\nentry; RSI at 51 indicates neutral momentum, monitor for any price drop toward\nthe stop.\n\u2800\n\u2800",
+    "out_text": "\ud83d\udd0d *SCAN COMPLETE*\nChecked 460 markets in 17s.\nNo coin matched any setup.\n\ud83d\udea7 *GATES* (19 analysed, 0 passed)\nBlocked: RSI 15 | MA 13 | 1H 15 | 24H 9 | Score 0\nSetups: Trend 0 | Pullback 0 | Bounce 0 | Breakout 0\nRules: RSI \u2264 48, Price > MA5 > MA10, 1H +0.5 to +6%, 24H up, Core 5+ and Extra\n2+\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795832156.0908685,
+    "out_time": 1795832366.793511,
     "panel_rows": [
         [
             {
@@ -142,7 +140,7 @@
         ]
     ],
     "panel_text": "\ud83d\udd79\ufe0f *MENU*\nChoose a shortcut or group.",
-    "kb_mid": 7758,
+    "kb_mid": 7760,
     "out_mid": 7756,
     "panel_mid": 7757
 }
