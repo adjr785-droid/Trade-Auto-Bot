@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691553,
+    "last_update_id": 935691555,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT34.88/\u20a647,475",
+    "kb_ph": "USDT34.75/\u20a647,306",
     "layout_bottom": [
         "an",
         "clear"
@@ -90,12 +90,11 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 7648,
-    "out_mid": 7645,
-    "out_text": "\ud83d\udd0d *SCAN COMPLETE*\nChecked 460 markets in 18s.\nNo coin matched any setup.\n\ud83d\udea7 *GATES* (19 analysed, 1 passed)\nBlocked: RSI 12 | MA 12 | 1H 16 | 24H 4 | Score 1\nSetups: Trend 0 | Pullback 0 | Bounce 0 | Breakout 1\nRules: RSI \u2264 48, Price > MA5 > MA10, 1H +0.5 to +6%, 24H up, Core 5+ and Extra\n2+\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_mid": 7652,
+    "out_text": "\ud83e\uddf9 Daily auto-clear: removed 1 message(s).\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795825776.5511873,
-    "panel_mid": 7646,
+    "out_time": 1795829204.1030877,
+    "panel_mid": 7653,
     "panel_rows": [
         [
             {
@@ -122,5 +121,6 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nChoose a group."
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nChoose a group.",
+    "kb_mid": 7654
 }
