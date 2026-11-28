@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691577,
+    "last_update_id": 935691580,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT34.83/\u20a647,415",
+    "kb_ph": "USDT34.83/\u20a647,418",
     "layout_bottom": [
         "an",
         "clear"
@@ -85,12 +85,43 @@
         "UNI-USDT"
     ],
     "audit_down": {},
-    "audit_last": 1795830165.1959717,
+    "audit_last": 1795831034.1199179,
     "audit_ai_cls": "",
     "perf_breaker": {
         "until": 1795742224.733271,
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 7687
+    "kb_mid": 7690,
+    "out_mid": 7692,
+    "out_text": "\ud83d\udcdf *OUTPUT*\nResults appear here.",
+    "out_mode": "Markdown",
+    "panel_mid": 7693,
+    "panel_rows": [
+        [
+            {
+                "text": "\ud83d\udcbc Portfolio",
+                "callback_data": "m:pf"
+            }
+        ],
+        [
+            {
+                "text": "\ud83c\udfc6 Markets",
+                "callback_data": "/analyse"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\uddf0 Tools",
+                "callback_data": "m:tools"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udda5 System",
+                "callback_data": "m:sy"
+            }
+        ]
+    ],
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nChoose a group."
 }
