@@ -576,5 +576,15 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795884247.879888,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'VSN-USDT', 'action': 'HOLD', 'reason': 'Current PnL is -0.03% and price is near stop level (0.031482). No clear signal to add or exit; monitor closely.'}], 'summary': 'Portfolio risk passes safeguards. The only position (VSN-USDT) shows a marginal loss and is close to its stop price. Recommend holding and watching price action for any breach of the stop level before considering further action.'}"
+    },
+    {
+        "time": 1795884248.9831445,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 50.0, 'net_pnl_usdt': 1.3677, 'recurring_patterns': {'manual_sell_all': {'occurrences': 4, 'symbols': ['BTW-USDT', 'TRX-USDT', 'WLD-USDT', 'VSN-USDT']}, 'manual_sell_specific_amount': {'occurrences': 3, 'details': [{'symbol': 'IDOL-USDT', 'amount_usdt': 2.75}, {'symbol': 'IDOL-USDT', 'amount_usdt': 10.0}, {'symbol': 'JCT-USDT', 'amount_usdt': 31.0}]}, 'rotation_single_manual_coin': {'occurrences': 1, 'symbol': 'JCT-USDT'}}, 'recommendations': [\"Review the effectiveness of the generic 'MANUAL SELL ALL' strategy, as it yields mixed results.\", 'Consider limiting exposure to JCT-USDT, which shows consistent negative PnL.', 'Maintain the IDOL-USDT positions that have contributed positively to net PnL.', 'Implement tighter risk controls on manual sell amounts to avoid large single\u2011trade losses.']}"
     }
 ]
