@@ -44,13 +44,13 @@
     "ICNT-USDT": {
         "ath": 0.607568,
         "atl": 0.01,
-        "checked_at": 1795496256.2213168,
+        "checked_at": 1795840615.8927,
         "status": "complete"
     },
     "JCT-USDT": {
         "ath": 0.019589,
         "atl": 0.00015,
-        "checked_at": 1795430932.8262658,
+        "checked_at": 1795840618.0712814,
         "status": "complete"
     },
     "ONDO-USDT": {
@@ -62,7 +62,7 @@
     "TRX-USDT": {
         "ath": 1.0,
         "atl": 3e-05,
-        "checked_at": 1795676777.963307,
+        "checked_at": 1795840621.3006036,
         "status": "complete"
     },
     "ENA-USDT": {
