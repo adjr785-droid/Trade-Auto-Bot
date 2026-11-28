@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT34.84/\u20a647,432",
+    "kb_ph": "USDT34.84/\u20a647,419",
     "layout_bottom": [
         "an",
         "clear"
@@ -92,7 +92,7 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 7683,
+    "kb_mid": 7686,
     "out_text": "\ud83d\udcda *COIN LIST*\n\u2705 Ready 2 | \ud83c\udd95 New 0 | \ud83d\udcbc Held 3 | \u26d4 Rejected 440\nPipeline: \ud83d\udc41 Watch 0 \u2192 \ud83d\udfe1 Manual 0 \u2192 \ud83e\udd16 Auto 0 | \u2935 Dropped 444 | Archived 0\nExecution: \ud83d\udce5 queued 0 | \u26d4 blocked 2 | \ud83d\udfe2 held 3\n\n```\nCOIN     PRICE RSI    1H S SC RK\n--------------------------------\nSUI      0.677  47  +0.7 W  -  H\nWLD     0.2474  48  +0.5 W  -  H\n```\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
