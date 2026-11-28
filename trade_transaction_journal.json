@@ -292,5 +292,15 @@
         "time": 1795859550.3051298,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 1.671, 'recurring_patterns': {'trade_reason': 'All trades were manual sell actions, with two distinct sell price triggers ($2.75 and $10.00) for IDOL-USDT and generic manual sells for other symbols.', 'symbol_distribution': {'IDOL-USDT': 2, 'BTW-USDT': 1, 'TRX-USDT': 1, 'WLD-USDT': 1}, 'pnl_distribution': {'positive_trades': 3, 'negative_trades': 2, 'average_positive_pnl': 0.602, 'average_negative_pnl': -0.0675}}, 'recommendations': ['Maintain a conservative position size given the modest net profit and limited sample size.', 'Consider adding automated exit criteria to reduce reliance on manual sell decisions.', 'Monitor IDOL-USDT performance closely, as it contributed the majority of profit; verify if the pattern is repeatable before scaling.', 'Diversify across more symbols to mitigate concentration risk observed in the current trade set.']}"
+    },
+    {
+        "time": 1795862007.7773902,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'JCT-USDT', 'action': 'hold', 'reason': 'Position is slightly underwater (-0.45% PnL) and close to stop; consider tightening stop to protect capital while awaiting potential rebound.'}, {'symbol': 'VSN-USDT', 'action': 'hold', 'reason': 'Small positive PnL (+0.09%) with price near entry; maintain current stop level but monitor for volatility.'}], 'summary': 'Overall portfolio risk remains acceptable. No immediate actions required beyond monitoring stops and price movement for both positions. Maintain current exposure while being prepared to adjust stops if adverse price moves occur.'}"
+    },
+    {
+        "time": 1795862008.627658,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 1.671, 'recurring_patterns': {'trade_reason': 'All trades were manual sell actions, with two distinct sell price triggers ($2.75 and $10.00) for IDOL-USDT and generic manual sells for other symbols.', 'symbol_distribution': {'IDOL-USDT': 2, 'BTW-USDT': 1, 'TRX-USDT': 1, 'WLD-USDT': 1}, 'pnl_distribution': {'positive_trades': 3, 'negative_trades': 2, 'average_positive_pnl': 0.602, 'average_negative_pnl': -0.0675}}, 'recommendations': ['Maintain a conservative position size given the modest net profit and limited sample size.', 'Consider adding automated exit criteria to reduce reliance on manual sell decisions.', 'Monitor IDOL-USDT performance closely, as it contributed the majority of profit; verify if the pattern is repeatable before scaling.', 'Diversify across additional symbols to mitigate concentration risk observed in the current trade set.']}"
     }
 ]
