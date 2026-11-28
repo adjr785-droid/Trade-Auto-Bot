@@ -468,5 +468,15 @@
         "time": 1795878338.0365798,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 57.14, 'net_pnl_usdt': 1.4433, 'recurring_patterns': {'sell_reason_distribution': {'MANUAL SELL ALL': 3, 'MANUAL SELL $2.75': 1, 'MANUAL SELL $10.00': 1, 'MANUAL SELL $31.00': 1}, 'symbols_traded': ['BTW-USDT', 'TRX-USDT', 'WLD-USDT', 'IDOL-USDT', 'VSN-USDT', 'JCT-USDT'], 'pnl_sign_distribution': {'positive': 4, 'negative': 3}}, 'recommendations': ['Maintain current risk parameters pending more data', 'Consider reducing reliance on manual sell-all triggers to improve consistency', 'Monitor symbols with repeated losses (TRX-USDT, WLD-USDT, JCT-USDT) for potential de\u2011allocation', 'Gather additional trade samples before adjusting win\u2011rate expectations']}"
+    },
+    {
+        "time": 1795879230.8571143,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'JCT-USDT', 'action': 'monitor', 'reason': 'Position shows slight negative PnL (-0.32%) and is close to its stop level (0.00147). No immediate action required, but watch for further downside.'}], 'summary': 'Overall portfolio risk remains acceptable. Maintain current positions while closely monitoring JCT-USDT for potential stop\u2011loss breach. No new trades recommended at this time.'}"
+    },
+    {
+        "time": 1795879231.6723983,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 57.14, 'net_pnl_usdt': 1.4433, 'recurring_patterns': {'sell_reason_counts': {'MANUAL SELL ALL': 3, 'MANUAL SELL $2.75': 1, 'MANUAL SELL $10.00': 1, 'MANUAL SELL $31.00': 1}, 'symbols_traded': ['BTW-USDT', 'TRX-USDT', 'WLD-USDT', 'IDOL-USDT', 'VSN-USDT', 'JCT-USDT'], 'pnl_sign_distribution': {'positive': 4, 'negative': 3}}, 'recommendations': ['Review the criteria for \"MANUAL SELL ALL\" as it appears frequently and includes both profitable and losing trades.', 'Consider implementing tighter stop\u2011loss rules for symbols that showed negative P&L (TRX-USDT, WLD-USDT, JCT-USDT).', 'Monitor the impact of fixed\u2011amount sell triggers (e.g., $2.75, $10.00, $31.00) as they may not align with market conditions.', 'Maintain a conservative stance given the modest net profit and mixed trade outcomes.']}"
     }
 ]
