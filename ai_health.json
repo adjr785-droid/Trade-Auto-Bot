@@ -1,11 +1,11 @@
 {
-    "last_check": 1795830952.3021889,
+    "last_check": 1795831779.185005,
     "status": "healthy",
     "model": "openai/gpt-oss-120b",
-    "latency_ms": 282,
+    "latency_ms": 334,
     "last_error": "",
     "consecutive_failures": 0,
-    "consecutive_successes": 44,
+    "consecutive_successes": 47,
     "last_response_valid": true,
     "alerted_status": "healthy",
     "emergency_mode": false,
@@ -34,13 +34,13 @@
             "last_error": ""
         },
         "manual_buy_review": {
-            "last_success": 1795824172.7105706,
-            "successes": 54,
+            "last_success": 1795831851.948439,
+            "successes": 55,
             "last_error": ""
         },
         "sell_review": {
-            "last_success": 1795824059.658905,
-            "successes": 44,
+            "last_success": 1795831848.4511514,
+            "successes": 47,
             "last_error": ""
         },
         "analyse_review": {

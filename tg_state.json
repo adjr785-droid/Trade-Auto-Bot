@@ -74,6 +74,10 @@
         "/scan_history": [
             9,
             1795804438.56481
+        ],
+        "m:q:BREAKOUT": [
+            1,
+            1795831668.6025107
         ]
     },
     "radar": [
@@ -85,7 +89,7 @@
         "UNI-USDT"
     ],
     "audit_down": {},
-    "audit_last": 1795830165.1959717,
+    "audit_last": 1795831034.1199179,
     "audit_ai_cls": "",
     "perf_breaker": {
         "until": 1795742224.733271,
