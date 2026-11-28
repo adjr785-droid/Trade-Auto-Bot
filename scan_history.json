@@ -1,25 +1,4 @@
 {
     "window_start": 1795803691.8701556,
-    "items": [
-        {
-            "sym": "PWT-USDT",
-            "time": 1795756366.1150458,
-            "price": 0.318017,
-            "h1": 0.89,
-            "rsi": 46.75,
-            "status": "READY",
-            "decision": "SETUP \u2014 NOT QUEUED",
-            "reason": "TREND matched; stage DROPPED, must pass Watch > Manual > Auto first",
-            "execution_status": "HELD",
-            "scan_id": "1795756361",
-            "rank": 24,
-            "vol": 1408564.56,
-            "chg": 3.133,
-            "ma5": 0.315244,
-            "ma10": 0.311661,
-            "min_volume": 1000000.0,
-            "spread_pct": 0.09117547191167061,
-            "near_miss": null
-        }
-    ]
+    "items": []
 }
