@@ -266,5 +266,11 @@
             "warning": "BTC is currently below its 50\u2011hour average, indicating broader market weakness. Adding a new position in JCT while you already hold a position increases exposure. Ensure this aligns with your risk tolerance and portfolio limits.",
             "summary": "Manual buy of 10.13\u202fUSDT JCT at 0.00155\u202fUSDT per token is possible, but consider the bearish BTC context and your existing exposure. Proceed only if comfortable with moderate risk."
         }
+    },
+    {
+        "time": 1795857353.0957851,
+        "event": "ai_coin_advisory",
+        "reviewed": 25,
+        "source": "coins.db"
     }
 ]

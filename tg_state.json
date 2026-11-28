@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT36.23/\u20a649,313",
+    "kb_ph": "USDT36.04/\u20a649,053",
     "layout_bottom": [
         "query",
         "an"
@@ -84,9 +84,7 @@
             1795840366.553824
         ]
     },
-    "radar": [
-        "VSN-USDT"
-    ],
+    "radar": [],
     "audit_down": {},
     "audit_last": 1795856994.2633548,
     "audit_ai_cls": "",
@@ -98,10 +96,10 @@
     "layout_names": {
         "scanh": "Scan Hist"
     },
-    "kb_mid": 8209,
-    "out_text": "USDT0.02\n\ud83d\udd0e *QUERY \u2014 SETUP CLASSIFICATION*\n_Every coin in the latest scan is placed once in the setup it scores highest on,\nthen ranked inside its group. Tap a group to see all its coins; the ranking is\nkept in the setup_groups table._\n\nBreakout (2) | Bounce (0) | Pullback (0) | Trend (0)\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "kb_mid": 8211,
+    "out_text": "\ud83d\udd0d *SCAN COMPLETE*\nChecked 460 markets in 17s.\nNo coin matched any setup.\n\ud83d\udea7 *GATES* (18 analysed, 0 passed)\nBlocked: RSI 2 | MA 17 | 1H 17 | 24H 17 | Score 0\nSetups: Trend 0 | Pullback 0 | Bounce 0 | Breakout 0\nRules: RSI \u2264 48, Price > MA5 > MA10, 1H +0.5 to +6%, 24H up, Core 5+ and Extra\n2+\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795857246.5066075,
+    "out_time": 1795857353.400556,
     "panel_rows": [
         [
             {

@@ -2,6 +2,26 @@
     "window_start": 1795843757.2413101,
     "items": [
         {
+            "sym": "WLFI-USDT",
+            "time": 1795855529.4144242,
+            "price": 0.01964,
+            "h1": 2.69,
+            "rsi": 6.15,
+            "status": "READY",
+            "decision": "SETUP \u2014 NOT QUEUED",
+            "reason": "BOUNCE matched, BTC safety filter blocked buying",
+            "execution_status": "BLOCKED",
+            "scan_id": "1795855527",
+            "rank": 17,
+            "vol": 3875529.83,
+            "chg": -52.618,
+            "ma5": 0.023392,
+            "ma10": 0.029443,
+            "min_volume": 1000000.0,
+            "spread_pct": 0.25425883549452305,
+            "near_miss": null
+        },
+        {
             "sym": "SUI-USDT",
             "time": 1795830569.3213313,
             "price": 0.677,
@@ -60,32 +80,6 @@
             "min_volume": 1000000.0,
             "spread_pct": 0.014791805339840097,
             "near_miss": null
-        },
-        {
-            "time": 1795855527,
-            "rank": 17,
-            "sym": "WLFI-USDT",
-            "vol": 3875529.83,
-            "chg": -52.618,
-            "price": 0.01964,
-            "high_24h": 0.04147,
-            "spread_pct": 0.25425883549452305,
-            "rsi": 6.15,
-            "rr": null,
-            "ma5": 0.023392,
-            "ma10": 0.029443,
-            "btc_market_safe": false,
-            "market_trend_4h": null,
-            "breakout_confirmed": null,
-            "volume_expansion_ratio": null,
-            "decision": "SETUP \u2014 NOT QUEUED",
-            "reason": "BOUNCE matched, BTC safety filter blocked buying",
-            "min_volume": 1000000,
-            "prev_close": 0.0192,
-            "h1": 2.69,
-            "trend_4h_ok": false,
-            "rising_guard_ok": true,
-            "strategy": "BOUNCE"
         }
     ]
 }
