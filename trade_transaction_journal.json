@@ -144,5 +144,15 @@
             "warning": "BTC market filter indicates bearish condition (price below 50\u2011hour average). Existing position and small USDT amount reduce exposure, but overall market bias is negative.",
             "summary": "Considering the 4.3\u202fUSDT size, existing position, and BTC being below its 50\u2011hour average, the trade carries moderate risk. Proceed with caution and monitor BTC trend closely."
         }
+    },
+    {
+        "time": 1795847906.3313708,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [], 'summary': 'Both positions are modestly profitable (2.8% and 3.6% PnL) and remain within their manual stop levels. No immediate action is required; continue monitoring for any adverse price movement or changes in market conditions.'}"
+    },
+    {
+        "time": 1795847906.9993277,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 33.33, 'net_pnl_usdt': 0.2321, 'recurring_patterns': \"All trades executed with reason 'MANUAL SELL ALL'; limited sample size (3 trades) prevents robust pattern detection\", 'recommendations': 'Maintain current risk limits; avoid increasing position size until more data is collected; consider reviewing manual sell triggers for consistency; monitor win rate and P&L closely'}"
     }
 ]
