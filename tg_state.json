@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935691908,
+    "last_update_id": 935691909,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -90,7 +90,7 @@
     },
     "radar": [],
     "audit_down": {},
-    "audit_last": 1795869245.9054592,
+    "audit_last": 1795871828.4564562,
     "audit_ai_cls": "",
     "perf_breaker": {
         "until": 1795742224.733271,
@@ -101,5 +101,35 @@
         "scanh": "Scan Hist"
     },
     "kb_mid": 8307,
-    "panel_hidden": true
+    "out_mid": 8310,
+    "out_text": "\ud83d\udcdf *OUTPUT*\nResults appear here.",
+    "out_mode": "Markdown",
+    "panel_mid": 8311,
+    "panel_rows": [
+        [
+            {
+                "text": "\ud83d\udcbc Portfolio",
+                "callback_data": "m:pf"
+            }
+        ],
+        [
+            {
+                "text": "\ud83c\udfc6 Markets",
+                "callback_data": "/analyse"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\uddf0 Tools",
+                "callback_data": "m:tools"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udda5 System",
+                "callback_data": "m:sy"
+            }
+        ]
+    ],
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nChoose a group."
 }
