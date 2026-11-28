@@ -356,5 +356,15 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795871798.0016015,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'JCT-USDT', 'action': 'monitor', 'reason': 'Position is -3.1% below entry and within ~2% of stop; consider tightening stop or preparing to exit if price approaches stop.'}, {'symbol': 'VSN-USDT', 'action': 'hold', 'reason': 'Small positive PnL (+0.3%) with price comfortably above stop; maintain current position but watch for volatility.'}], 'summary': 'Overall portfolio risk remains acceptable. Focus on the JCT-USDT position due to proximity to its stop loss; VSN-USDT appears stable for now.'}"
+    },
+    {
+        "time": 1795871798.9179552,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 1.671, 'recurring_patterns': {'trade_reason': 'All trades were manual sell actions, with two distinct sell price triggers ($2.75 and $10.00) for IDOL-USDT and generic manual sells for other symbols.', 'symbol_distribution': {'IDOL-USDT': 2, 'BTW-USDT': 1, 'TRX-USDT': 1, 'WLD-USDT': 1}, 'pnl_distribution': {'positive_trades': 3, 'negative_trades': 2, 'average_positive_pnl': 0.602, 'average_negative_pnl': -0.0675}}, 'recommendations': ['Maintain a conservative position size given the modest net profit and limited sample size.', 'Consider adding automated exit criteria to reduce reliance on manual sell decisions.', 'Monitor IDOL-USDT performance closely, as it contributed the majority of profit; verify if the pattern is repeatable before scaling.', 'Diversify symbols to avoid concentration risk; current trades are spread across four assets but with lim"
     }
 ]
