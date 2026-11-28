@@ -400,5 +400,15 @@
             "warning": "Manual buy request for JCT-USDT at $0.001539 with RSI 41.43 and market condition indicating BTC below its 50\u2011hour average. Existing position present and BTC filter active increase systemic risk. Proceed only if you fully understand potential loss of capital and have appropriate risk limits.",
             "summary": "Given the low RSI, bearish BTC trend, and existing exposure, the trade carries high risk. Consider waiting for clearer market signals or reducing position size."
         }
+    },
+    {
+        "time": 1795872757.6227624,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'JCT-USDT', 'action': 'monitor', 'reason': 'Position is slightly below entry price with a -0.19% PnL and close to the stop level (0.00147). No immediate exit required, but tighten stop if price continues downward.'}], 'summary': 'Overall portfolio risk remains acceptable. The only open position (JCT-USDT) shows a minor loss and is near its stop threshold. Recommend continued monitoring and consider adjusting the stop loss to protect capital if the downward trend persists.'}"
+    },
+    {
+        "time": 1795872758.462311,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 66.67, 'net_pnl_usdt': 1.6855, 'recurring_patterns': {'manual_sell_all_count': 4, 'manual_sell_specific_amount_count': 2, 'symbols_traded': ['BTW-USDT', 'TRX-USDT', 'WLD-USDT', 'IDOL-USDT', 'VSN-USDT']}, 'recommendations': {'caution': 'Performance sample is small (6 trades); results may not generalize.', 'suggestion': 'Consider diversifying entry criteria beyond manual sell triggers and monitor win rate over a larger sample before scaling position sizes.'}}"
     }
 ]

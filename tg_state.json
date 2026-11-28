@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691924,
+    "last_update_id": 935691927,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT36.15/\u20a649,202",
+    "kb_ph": "USDT36.08/\u20a649,107",
     "layout_bottom": [
         "query",
         "an"
@@ -105,18 +105,46 @@
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
+                "text": "\ud83d\udd0d Search any coin",
+                "callback_data": "m:se"
+            }
+        ],
+        [
+            {
+                "text": "JCT",
+                "callback_data": "m:a:JCT"
             },
             {
-                "text": "\ud83c\udfe0",
+                "text": "SUI",
+                "callback_data": "m:a:SUI"
+            },
+            {
+                "text": "WLD",
+                "callback_data": "m:a:WLD"
+            }
+        ],
+        [
+            {
+                "text": "WLFI",
+                "callback_data": "m:a:WLFI"
+            }
+        ],
+        [
+            {
+                "text": "\u2795 More coins",
+                "callback_data": "m:more:analyse:0"
+            }
+        ],
+        [
+            {
+                "text": "\u2b05\ufe0f Menu",
                 "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83d\udd04 *Refresh*",
+    "panel_text": "USDT0.03\n\ud83d\udd0e *ANALYSE A COIN* \u2014 choose:",
     "out_time": 1795872579.4563909,
-    "kb_mid": 8344,
+    "kb_mid": 8348,
     "out_mid": 8341,
     "panel_mid": 8342
 }
