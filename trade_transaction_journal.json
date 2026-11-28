@@ -5195,5 +5195,15 @@
             "warning": "RSI is elevated (68.47) and price is near recent highs; BTC filter active may limit upside; small USDT amount may not justify transaction cost; ensure position sizing aligns with overall portfolio risk.",
             "summary": "Given the high RSI and the market filter indicating BTC is below its 50\u2011hour average, the trade carries elevated risk. Proceed only if you accept potential loss of the full $5.00 and have confirmed that the symbol BTW\u2011USDT fits your strategy."
         }
+    },
+    {
+        "time": 1795840459.201145,
+        "event": "ai_manual_buy_review",
+        "symbol": "ICNT-USDT",
+        "review": {
+            "risk_level": "moderate",
+            "warning": "BTC filter is active; ensure the broader market conditions for BTC support this trade. Position size is small, but liquidity and price volatility may affect execution.",
+            "summary": "Considering a $5 USDT purchase of ICNT at $0.2907 with RSI 42.14 and price below its 50\u2011hour average, the trade carries moderate risk. No existing position and a small order size limit exposure, but the active BTC filter suggests caution."
+        }
     }
 ]

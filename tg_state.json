@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691647,
+    "last_update_id": 935691648,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT34.43/\u20a646,873",
+    "kb_ph": "USDT34.43/\u20a646,866",
     "layout_bottom": [
         "an",
         "clear"
@@ -98,8 +98,8 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 7805,
-    "out_text": "```\n 3 ICNT    0.292  6  42 +0.4  +6\n 4 SUI    0.6722  4  46 -0.0  -1\n```\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "kb_mid": 7810,
+    "out_text": "\ud83e\udde0 AI manual-buy advisory: Considering a $5 USDT purchase of ICNT at $0.2907\nwith RSI 42.14 and price below its 50\u2011hour average, the trade carries moderate\nrisk. No existing position and a small order size limit exposure, but the active\nBTC filter suggests caution.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
@@ -152,48 +152,7 @@
         ]
     ],
     "panel_text": "\ud83d\udcc4 *Page 2/2*",
-    "out_time": 1795840424.5211072,
+    "out_time": 1795840459.4978812,
     "out_mid": 7806,
-    "pages": {
-        "p": [
-            "USDT25.00\n\ud83d\udd0e *PULLBACK \u2014 4 COINS*\n_All coins in this group, ranked by setup score (SC, out of 10); equal scores\nare ordered by how close each coin is to the ideal picture of the setup.\nInformational only; it never changes trading._\n```\n # COIN    PRICE SC RSI   1H 24H\n--------------------------------\n 1 TAO     187.3 10  52 +0.1  +0\n 2 LTC     44.66  8  56 -0.2  +0\n```\n\u2800",
-            "```\n 3 ICNT    0.292  6  42 +0.4  +6\n 4 SUI    0.6722  4  46 -0.0  -1\n```\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
-        ],
-        "i": 1,
-        "mode": "Markdown",
-        "x": [
-            [
-                {
-                    "text": "\ud83d\ude80 BREAKOUT",
-                    "callback_data": "m:q:BREAKOUT"
-                },
-                {
-                    "text": "\ud83d\udfe2 BOUNCE",
-                    "callback_data": "m:q:BOUNCE"
-                }
-            ],
-            [
-                {
-                    "text": "\u21a9\ufe0f PULLBACK",
-                    "callback_data": "m:q:PULLBACK"
-                },
-                {
-                    "text": "\ud83d\udcc8 TREND",
-                    "callback_data": "m:q:TREND"
-                }
-            ],
-            [
-                {
-                    "text": "\u2b05\ufe0f Query",
-                    "callback_data": "m:query"
-                },
-                {
-                    "text": "\ud83d\udd04 Refresh",
-                    "callback_data": "m:q:PULLBACK"
-                }
-            ]
-        ],
-        "cmd": "m:q:PULLBACK"
-    },
-    "panel_mid": 7807
+    "panel_hidden": true
 }
