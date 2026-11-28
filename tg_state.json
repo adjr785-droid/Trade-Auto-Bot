@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691709,
+    "last_update_id": 935691712,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT34.65/\u20a647,166",
+    "kb_ph": "USDT34.58/\u20a647,072",
     "layout_bottom": [
         "query",
         "clear"
@@ -93,7 +93,7 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 7906,
+    "kb_mid": 7910,
     "layout_names": {
         "scanh": "Scan Hist"
     },
@@ -102,36 +102,222 @@
     "panel_rows": [
         [
             {
-                "text": "\ud83d\ude80 BREAKOUT",
-                "callback_data": "m:q:BREAKOUT"
+                "text": "\ud83e\uddf0 Tools",
+                "callback_data": "m:lay:t:tools"
             },
             {
-                "text": "\ud83d\udfe2 BOUNCE",
-                "callback_data": "m:q:BOUNCE"
+                "text": "\ud83c\udfc6 Markets",
+                "callback_data": "m:lay:t:analyse"
             }
         ],
         [
             {
-                "text": "\u21a9\ufe0f PULLBACK",
-                "callback_data": "m:q:PULLBACK"
+                "text": "\ud83d\udda5 System",
+                "callback_data": "m:lay:t:bot"
             },
             {
-                "text": "\ud83d\udcc8 TREND",
-                "callback_data": "m:q:TREND"
+                "text": "\ud83d\udcc8 Stats",
+                "callback_data": "m:lay:t:stats"
             }
         ],
         [
             {
-                "text": "\u2b05\ufe0f Query",
-                "callback_data": "m:query"
+                "text": "\ud83d\udd0e Analyse Coin",
+                "callback_data": "m:lay:t:an"
             },
             {
-                "text": "\ud83d\udd04 Refresh",
-                "callback_data": "m:q:TREND"
+                "text": "\u2699\ufe0f Settings",
+                "callback_data": "m:lay:t:set"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udcbc Holdings",
+                "callback_data": "m:lay:t:hold"
+            },
+            {
+                "text": "\ud83d\udcdc Trade History",
+                "callback_data": "m:lay:t:hist"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\udde0 Ask AI",
+                "callback_data": "m:lay:t:ai"
+            },
+            {
+                "text": "\u2705 \ud83e\uddf9 Clear Chat",
+                "callback_data": "m:lay:t:clear"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udea8 PANIC SELL",
+                "callback_data": "m:lay:t:panic"
+            },
+            {
+                "text": "\ud83d\udcbc Portfolio",
+                "callback_data": "m:lay:t:pf"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udda5 System Menu",
+                "callback_data": "m:lay:t:sy"
+            },
+            {
+                "text": "\u2b50 Favourites",
+                "callback_data": "m:lay:t:fav"
+            }
+        ],
+        [
+            {
+                "text": "\ud83c\udfaf Setups",
+                "callback_data": "m:lay:t:setups"
+            },
+            {
+                "text": "\ud83c\udd95 New Listings",
+                "callback_data": "m:lay:t:newl"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\uddc4 Archive",
+                "callback_data": "m:lay:t:arch"
+            },
+            {
+                "text": "\ud83d\udc41 Watch List",
+                "callback_data": "m:lay:t:watch"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udfe1 Manual List",
+                "callback_data": "m:lay:t:manual"
+            },
+            {
+                "text": "\ud83e\udd16 Auto List",
+                "callback_data": "m:lay:t:auto"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udd0d Scan Now",
+                "callback_data": "m:lay:t:scan"
+            },
+            {
+                "text": "Scan Hist",
+                "callback_data": "m:lay:t:scanh"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\uded2 Buy a Coin",
+                "callback_data": "m:lay:t:buy"
+            },
+            {
+                "text": "\ud83d\udcb8 Sell a Coin",
+                "callback_data": "m:lay:t:sell"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udcda Coin List",
+                "callback_data": "m:lay:t:coins"
+            },
+            {
+                "text": "\ud83d\udd14 Set Alert",
+                "callback_data": "m:lay:t:alert"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udccb My Alerts",
+                "callback_data": "m:lay:t:myal"
+            },
+            {
+                "text": "\ud83e\uddf9 Dust \u2192 BGB",
+                "callback_data": "m:lay:t:dust"
+            }
+        ],
+        [
+            {
+                "text": "\u274c Cancel Orders",
+                "callback_data": "m:lay:t:cancel"
+            },
+            {
+                "text": "\ud83d\udee0\ufe0f Audit",
+                "callback_data": "m:lay:t:audit"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\udde0 Resume AI",
+                "callback_data": "m:lay:t:airesume"
+            },
+            {
+                "text": "\ud83d\udd04 Sync",
+                "callback_data": "m:lay:t:sync"
+            }
+        ],
+        [
+            {
+                "text": "\u2705 \ud83d\udd0e Query",
+                "callback_data": "m:lay:t:query"
+            },
+            {
+                "text": "\ud83d\ude80 Breakout",
+                "callback_data": "m:lay:t:qbo"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udfe2 Bounce",
+                "callback_data": "m:lay:t:qbn"
+            },
+            {
+                "text": "\u21a9\ufe0f Pullback",
+                "callback_data": "m:lay:t:qpb"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udcc8 Trend",
+                "callback_data": "m:lay:t:qtr"
+            }
+        ],
+        [
+            {
+                "text": "\u2796",
+                "callback_data": "m:lay:pl:-"
+            },
+            {
+                "text": "\ud83d\udccf Page: 12 lines",
+                "callback_data": "m:lay"
+            },
+            {
+                "text": "\u2795",
+                "callback_data": "m:lay:pl:+"
+            }
+        ],
+        [
+            {
+                "text": "\u270f\ufe0f Rename buttons",
+                "callback_data": "m:lay:rn"
+            },
+            {
+                "text": "\u21a9\ufe0f Reset layout",
+                "callback_data": "m:lay:reset"
+            }
+        ],
+        [
+            {
+                "text": "\u2b05\ufe0f Tools",
+                "callback_data": "m:tools"
             }
         ]
     ],
-    "panel_text": "\ud83d\udc47 *Actions*",
+    "panel_text": "\ud83e\udde9 *SHORTCUTS*\nTap a button to add it next to Menu or remove it.\n\u2705 = shortcut (below the text box)\nShortcuts: 2/2",
     "out_time": 1795842340.404734,
     "out_mid": 7907,
     "panel_mid": 7908
