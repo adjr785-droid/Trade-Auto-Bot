@@ -372,5 +372,23 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795872344.8521976,
+        "event": "trade_closed",
+        "symbol": "VSN-USDT",
+        "pnl_usdt": 0.014527199999999409,
+        "reason": "MANUAL SELL ALL",
+        "strategy": "MANUAL"
+    },
+    {
+        "time": 1795872360.404627,
+        "event": "ai_manual_sell_review",
+        "symbol": "VSN-USDT",
+        "review": {
+            "review": "The position was manually closed at an average exit price of 0.0331 USDT, realizing a modest profit of 0.0145 USDT on the sold quantity of 181.59 units. A small residual balance of 0.00098 base remains, indicating the trade was largely liquidated. The profit margin was narrow, suggesting limited upside capture or a conservative exit strategy.",
+            "lesson": "Manual exits can secure small gains but may also leave residual exposure. Future trades could benefit from predefined profit targets or trailing stops to capture more upside while ensuring the remaining base is fully cleared to avoid lingering exposure.",
+            "confidence": "medium"
+        }
     }
 ]

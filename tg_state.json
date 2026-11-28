@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691911,
+    "last_update_id": 935691912,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT35.79/\u20a648,712",
+    "kb_ph": "USDT36.01/\u20a649,022",
     "layout_bottom": [
         "query",
         "an"
@@ -100,8 +100,8 @@
     "layout_names": {
         "scanh": "Scan Hist"
     },
-    "kb_mid": 8314,
-    "out_text": "\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udd34 *JCT* $29.68 (83%)\n-1.42% (-$0.43) | Entry 0.001549\nQty 19438.838 | Price 0.001527 | Stop 0.001472 (-4%)\nRSI 41 | Mixed | ATH -92%\n\n\ud83d\udfe2 *VSN* $6.01 (17%)\n+0.27% (+$0.02) | Entry 0.033020\nQty 181.59098 | Price 0.033110 | Stop 0.031369 (-5%)\n\u2800\n\u2800",
+    "kb_mid": 8317,
+    "out_text": "\ud83d\udfe1 Bitget accepted VSN\u2192BGB dust conversion. Order: 1510563604880629760. Final\nstatus can be checked in Bitget conversion history.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
@@ -129,23 +129,6 @@
     ],
     "panel_text": "\ud83d\udcc4 *Page 1/2*",
     "out_mid": 8312,
-    "out_time": 1795872267.112335,
-    "pages": {
-        "p": [
-            "\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udd34 *JCT* $29.68 (83%)\n-1.42% (-$0.43) | Entry 0.001549\nQty 19438.838 | Price 0.001527 | Stop 0.001472 (-4%)\nRSI 41 | Mixed | ATH -92%\n\n\ud83d\udfe2 *VSN* $6.01 (17%)\n+0.27% (+$0.02) | Entry 0.033020\nQty 181.59098 | Price 0.033110 | Stop 0.031369 (-5%)\n\u2800\n\u2800",
-            "RSI 64 | Bullish | ATH -65%\n\n\ud83e\udde0 *AI:* JCT shows a modest 1.42% loss with a stop 4% below current price, while\nVSN is up 0.27% but its stop is 5% lower; monitor both stops closely as they\napproach risk thresholds.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
-        ],
-        "i": 0,
-        "mode": "Markdown",
-        "x": [
-            [
-                {
-                    "text": "\ud83d\udd04",
-                    "callback_data": "rf:go"
-                }
-            ]
-        ],
-        "cmd": "m:r:holdings"
-    },
-    "panel_mid": 8313
+    "out_time": 1795872353.4072819,
+    "panel_hidden": true
 }
