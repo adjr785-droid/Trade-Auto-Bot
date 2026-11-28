@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935691612,
+    "last_update_id": 935691614,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -103,60 +103,32 @@
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udfe2 25%",
-                "callback_data": "m:bp:WLD:25"
+                "text": "\ud83e\uddf9 Orders & Dust",
+                "callback_data": "m:tl:trade"
             },
             {
-                "text": "\ud83d\udfe2 50%",
-                "callback_data": "m:bp:WLD:50"
-            },
-            {
-                "text": "\ud83d\udfe2 75%",
-                "callback_data": "m:bp:WLD:75"
-            },
-            {
-                "text": "\ud83d\udfe2 ALL",
-                "callback_data": "m:bp:WLD:100"
+                "text": "\ud83d\udd14 Alerts",
+                "callback_data": "m:tl:alerts"
             }
         ],
         [
             {
-                "text": "\ud83d\uded2 Buy WLD: other amount",
-                "callback_data": "m:b:WLD"
+                "text": "\ud83d\udcda Coin List",
+                "callback_data": "m:coins"
+            },
+            {
+                "text": "\ud83d\udee0\ufe0f System",
+                "callback_data": "m:tl:sys"
             }
         ],
         [
             {
-                "text": "\ud83d\udd34 25%",
-                "callback_data": "m:sc:WLD:25"
-            },
-            {
-                "text": "\ud83d\udd34 50%",
-                "callback_data": "m:sc:WLD:50"
-            },
-            {
-                "text": "\ud83d\udd34 75%",
-                "callback_data": "m:sc:WLD:75"
-            },
-            {
-                "text": "\ud83d\udd34 ALL",
-                "callback_data": "m:sc:WLD:100"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\uddd1 Remove from favourites",
-                "callback_data": "m:fd:WLD"
-            }
-        ],
-        [
-            {
-                "text": "\u2b05\ufe0f Back",
-                "callback_data": "m:fv"
+                "text": "\u2b05\ufe0f Main Menu",
+                "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "USDT0.03\n\u2b50 *WLD*\nPrice: 0.246500 USDT\nYou hold: 140.46567 (about $34.62)",
+    "panel_text": "\ud83e\uddf0 *TOOLS*\nChoose a group.",
     "out_mid": 7747,
     "pages": {
         "p": [
