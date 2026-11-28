@@ -5258,5 +5258,15 @@
             "lesson": "When manually exiting a spot position, ensure that the rationale aligns with a clear risk management framework\u2014such as target profit levels, stop\u2011loss thresholds, or market condition triggers\u2014to avoid ad\u2011hoc decisions. Consider fully liquidating or clearly documenting the plan for remaining holdings to maintain portfolio transparency and risk control.",
             "confidence": "medium"
         }
+    },
+    {
+        "time": 1795842265.7765913,
+        "event": "ai_manual_buy_review",
+        "symbol": "BTW-USDT",
+        "review": {
+            "risk_level": "high",
+            "warning": "The RSI is elevated (76.09) indicating overbought conditions, and the market filter signals that BTC is below its 50\u2011hour average, suggesting bearish momentum. Combined with an existing position, adding more exposure increases downside risk.",
+            "summary": "Given the overbought RSI, bearish BTC trend, and existing exposure, proceeding with a manual buy of 9.98\u202fUSDT worth of BTW-USDT is considered high risk. Recommend reconsidering or reducing the order size."
+        }
     }
 ]

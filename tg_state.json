@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691704,
+    "last_update_id": 935691705,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT34.62/\u20a647,120",
+    "kb_ph": "USDT34.60/\u20a647,100",
     "layout_bottom": [
         "query",
         "clear"
@@ -93,11 +93,11 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 7894,
+    "kb_mid": 7899,
     "layout_names": {
         "scanh": "Scan Hist"
     },
-    "out_text": "USDT0.02\n\ud83d\udd0e *TREND \u2014 1 COINS*\n_All coins in this group, ranked by setup score (SC, out of 10); equal scores\nare ordered by how close each coin is to the ideal picture of the setup.\nInformational only; it never changes trading._\n```\n # COIN    PRICE SC RSI   1H 24H\n--------------------------------\n 1 BTW    1.2447  8  76 +4.8 +25\n```\n\u2800\n\u2800",
+    "out_text": "\ud83e\udde0 AI manual-buy advisory: Given the overbought RSI, bearish BTC trend, and\nexisting exposure, proceeding with a manual buy of 9.98\u202fUSDT worth of BTW-USDT\nis considered high risk. Recommend reconsidering or reducing the order size.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
@@ -132,7 +132,7 @@
         ]
     ],
     "panel_text": "\ud83d\udc47 *Actions*",
-    "out_time": 1795842202.747693,
+    "out_time": 1795842266.1855772,
     "out_mid": 7892,
     "panel_mid": 7893
 }
