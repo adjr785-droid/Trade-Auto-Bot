@@ -282,5 +282,15 @@
         "time": 1795858699.0463085,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 1.671, 'recurring_patterns': {'trade_reason': 'All trades were manual sell actions, with two distinct sell price triggers ($2.75 and $10.00) for IDOL-USDT and generic manual sells for other symbols.', 'symbol_distribution': {'IDOL-USDT': 2, 'BTW-USDT': 1, 'TRX-USDT': 1, 'WLD-USDT': 1}, 'pnl_distribution': {'positive_trades': 3, 'negative_trades': 2, 'average_positive_pnl': 0.6019673633333334, 'average_negative_pnl': -0.06749444799999998}}, 'recommendations': ['Maintain manual oversight; automated triggers are not yet demonstrated.', 'Limit exposure to symbols with limited trade history (e.g., TRX-USDT, WLD-USDT) until more data is collected.', 'Consider implementing stop\u2011loss thresholds to reduce downside on future manual sells.', 'Monitor IDOL-USDT performance closely, as it contributed the majority of profit.']}"
+    },
+    {
+        "time": 1795859549.2795272,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'JCT-USDT', 'action': 'monitor', 'reason': 'Position is slightly negative (-0.9%) and close to stop (0.001472). No immediate exit signal; consider tightening stop if price declines further.'}, {'symbol': 'VSN-USDT', 'action': 'monitor', 'reason': 'Position is marginally negative (-0.03%) and near stop (0.031369). Hold while watching price; adjust stop if downside pressure increases.'}], 'summary': 'Both positions are marginally under water and near their stop levels. Maintain current exposure but closely monitor price action and be prepared to tighten stops if further declines occur. No new entries recommended at this time.'}"
+    },
+    {
+        "time": 1795859550.3051298,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 60.0, 'net_pnl_usdt': 1.671, 'recurring_patterns': {'trade_reason': 'All trades were manual sell actions, with two distinct sell price triggers ($2.75 and $10.00) for IDOL-USDT and generic manual sells for other symbols.', 'symbol_distribution': {'IDOL-USDT': 2, 'BTW-USDT': 1, 'TRX-USDT': 1, 'WLD-USDT': 1}, 'pnl_distribution': {'positive_trades': 3, 'negative_trades': 2, 'average_positive_pnl': 0.602, 'average_negative_pnl': -0.0675}}, 'recommendations': ['Maintain a conservative position size given the modest net profit and limited sample size.', 'Consider adding automated exit criteria to reduce reliance on manual sell decisions.', 'Monitor IDOL-USDT performance closely, as it contributed the majority of profit; verify if the pattern is repeatable before scaling.', 'Diversify across more symbols to mitigate concentration risk observed in the current trade set.']}"
     }
 ]
