@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691722,
+    "last_update_id": 935691724,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT34.47/\u20a646,916",
+    "kb_ph": "USDT34.38/\u20a646,798",
     "layout_bottom": [
         "query",
         "an"
@@ -93,56 +93,46 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 7925,
+    "kb_mid": 7926,
     "layout_names": {
         "scanh": "Scan Hist"
     },
-    "out_text": "\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *BTW* $15.09 (44%)\n+0.80% (+$0.12) | Entry 1.2310\nQty 12.159554 | Price 1.2408 | Stop 1.1695 (-6%)\nRSI 76 | Bullish | ATH -55%\n\n\ud83d\udfe2 *JCT* $5.04 (15%)\n+0.46% (+$0.02) | Entry 0.001536\nQty 3266.0479 | Price 0.001543 | Stop 0.001459 (-5%)\n\u2800\n\u2800",
+    "out_text": "\u2705 *AUDIT \u2014 AI RECOVERY VERIFIED*\n3 checks passed. AI is back to normal.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
-            },
+                "text": "\ud83d\udcbc Holdings",
+                "callback_data": "m:r:holdings"
+            }
+        ],
+        [
             {
-                "text": "1/3",
-                "callback_data": "pg:x"
-            },
+                "text": "\ud83d\udcc8 Stats",
+                "callback_data": "m:r:stats"
+            }
+        ],
+        [
             {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
-            },
+                "text": "\ud83e\uddfe Trade History",
+                "callback_data": "m:r:history"
+            }
+        ],
+        [
             {
-                "text": "\ud83c\udfe0",
+                "text": "\ud83d\udea8 PANIC SELL",
+                "callback_data": "/panic"
+            }
+        ],
+        [
+            {
+                "text": "\ud83c\udfe0 Main Menu",
                 "callback_data": "m:menu"
-            },
-            {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/3*",
-    "out_time": 1795842499.41218,
-    "pages": {
-        "p": [
-            "\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *BTW* $15.09 (44%)\n+0.80% (+$0.12) | Entry 1.2310\nQty 12.159554 | Price 1.2408 | Stop 1.1695 (-6%)\nRSI 76 | Bullish | ATH -55%\n\n\ud83d\udfe2 *JCT* $5.04 (15%)\n+0.46% (+$0.02) | Entry 0.001536\nQty 3266.0479 | Price 0.001543 | Stop 0.001459 (-5%)\n\u2800\n\u2800",
-            "RSI 52 | Mixed | ATH -92%\n\n\ud83d\udd34 *TRX* $4.99 (14%)\n-0.23% (-$0.01) | Entry 0.300820\nQty 16.611227 | Price 0.300140 | Stop 0.285779 (-5%)\nRSI 32 | Bearish | ATH -70%\n\n\ud83d\udd34 *ICNT* $4.92 (14%)\n-1.55% (-$0.08) | Entry 0.290400\nQty 17.204404 | Price 0.285900 | Stop 0.275880 (-4%)\n\u2800\n\u2800",
-            "RSI 43 | Bearish | ATH -53%\n\n\ud83d\udd34 *WLD* $4.33 (13%)\n-1.95% (-$0.09) | Entry 0.246500\nQty 17.92567 | Price 0.241700 | Stop 0.234175 (-3%)\nRSI 42 | Bearish | ATH -98%\n\n\ud83e\udde0 *AI:* BTC filter is active; holdings show mixed performance with BTC up 0.8%\nbut several altcoins (TRX, ICNT, WLD) bearish and nearing stop levels,\nwarranting close monitoring.\n\u2800\n\u2800"
-        ],
-        "i": 0,
-        "mode": "Markdown",
-        "x": [
-            [
-                {
-                    "text": "\ud83d\udd04",
-                    "callback_data": "rf:go"
-                }
-            ]
-        ],
-        "cmd": "m:r:holdings"
-    },
+    "panel_text": "\ud83d\udcbc *PORTFOLIO*",
+    "out_time": 1795842551.150077,
     "out_mid": 7923,
-    "panel_mid": 7924
+    "panel_mid": 7928
 }
