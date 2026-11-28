@@ -5103,5 +5103,15 @@
         "time": 1795831021.0204682,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 70.0, 'net_pnl_usdt': 1.1557, 'recurring_patterns': {'manual_sell': 5, 'panic_trades': 5, 'crash_guard_losses': 1, 'symbol_concentration': {'MOVE-USDT': 4, 'DOS-USDT': 4, 'BLESS-USDT': 2}}, 'recommendations': {'reduce_panic_trades': 'Consider limiting panic exits as they yield modest gains and increase operational noise.', 'tighten_crash_guard': 'Review the -11.3% crash guard threshold; a tighter stop may prevent large single losses.', 'diversify_symbols': 'Avoid over\u2011exposure to any single token (e.g., MOVE-USDT) to mitigate concentration risk.', 'increase_stop_loss_precision': 'Implement more granular stop\u2011loss levels to capture small gains while protecting against outsized drops.', 'monitor_win_rate_uncertainty': 'Current win rate is based on 30 trades; treat the 70% figure as indicative, not definitive.'}}"
+    },
+    {
+        "time": 1795831935.9353223,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'WLD-USDT', 'action': 'monitor', 'reason': 'Position is at break-even with stop loss only ~5% below entry; consider tightening stop if volatility increases or price shows downward pressure.'}, {'symbol': 'BTC-USDT', 'action': 'hold', 'reason': 'BTC filter is active and price is high; no immediate action required, but remain vigilant for rapid market moves.'}], 'summary': 'Overall portfolio risk remains acceptable. The sole position WLD-USDT is flat; maintain observation and be prepared to adjust the stop loss if market conditions shift. No new entries are recommended at this time.'}"
+    },
+    {
+        "time": 1795831936.8611982,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 70.0, 'net_pnl_usdt': 1.1557, 'recurring_patterns': {'manual_sell': 5, 'panic_trades': 5, 'crash_guard_losses': 1, 'symbol_concentration': {'MOVE-USDT': 4, 'DOS-USDT': 4, 'BLESS-USDT': 2}}, 'recommendations': {'reduce_panic_trades': 'Consider limiting panic exits as they yield modest gains and increase operational noise.', 'tighten_crash_guard': 'Review the -11.3% crash guard threshold; a tighter stop may prevent larger drawdowns.', 'diversify_symbols': 'Avoid over\u2011exposure to single symbols like MOVE-USDT and DOS-USDT to mitigate concentration risk.', 'monitor_win_rate': 'Current win rate appears high but is based on a small sample; treat it as indicative, not guaranteed.'}}"
     }
 ]
