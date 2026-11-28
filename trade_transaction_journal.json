@@ -560,5 +560,15 @@
             "warning": "BTC market is currently below its 50\u2011hour average, indicating broader bearish pressure. While the RSI for VSN is not overbought, the existing position and the small trade size mean any additional exposure should be limited. Ensure stop\u2011loss and position\u2011size limits are respected.",
             "summary": "Considering the bearish BTC context, a modest USDT amount, and a neutral RSI, the trade carries moderate risk. Proceed with caution and adhere to your risk management rules."
         }
+    },
+    {
+        "time": 1795883394.0339098,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'VSN-USDT', 'action': 'monitor', 'reason': 'Position is at break-even with stop loss only ~4.5% below entry; no profit target defined. Maintain vigilance given market volatility and BTC price context.'}], 'summary': 'Overall portfolio risk passes safeguards. The sole position VSN-USDT is flat; recommend continued monitoring without new orders. Adjust stop if price moves unfavorably beyond current level.'}"
+    },
+    {
+        "time": 1795883394.5318074,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 50.0, 'net_pnl_usdt': 1.3677, 'recurring_patterns': {'manual_sell_all': 3, 'manual_sell_specific_amount': 3, 'rotation_single_manual_coin': 1}, 'recommendations': 'Maintain current strategy but monitor high\u2011frequency manual sell signals. Consider reducing manual sell frequency for symbols with repeated small losses (e.g., TRX\u2011USDT, WLD\u2011USDT, JCT\u2011USDT) and evaluate rotation approach before execution. No new positions recommended until further data is collected.'}"
     }
 ]
