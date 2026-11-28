@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935691539,
+    "last_update_id": 935691540,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -24,8 +24,8 @@
             1795739610.5038157
         ],
         "m:r:holdings": [
-            0,
-            1795801811.5189013
+            1,
+            1795824116.6172683
         ],
         "/analyse": [
             6,
@@ -101,7 +101,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "1/2",
+                "text": "2/2",
                 "callback_data": "pg:x"
             },
             {
@@ -118,7 +118,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/2*",
+    "panel_text": "\ud83d\udcc4 *Page 2/2*",
     "out_time": 1795824084.8471842,
     "kb_mid": 7615,
     "pages": {
@@ -126,7 +126,7 @@
             "\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *PWT* $9.95 (28%)\n+0.37% (+$0.04) | Entry 0.316106\nQty 31.348396 | Price 0.317270 | Stop 0.300301 (-5%)\nRSI 48 | Mixed | ATH -56%\n\n\ud83d\udfe2 *DOS* $5.03 (14%)\n+1.73% (+$0.09) | Entry 0.079428\nQty 62.268088 | Price 0.080800 | Stop 0.079428 (-2%)\n\u2800\n\u2800",
             "RSI 52 | Mixed | ATH -91%\n\n\ud83e\udde0 *AI:* BTC filter is active; holdings show modest gains but both positions\nhave stops near entry (PWT stop 5% below, DOS stop 2% below), warranting\nmonitoring for potential downside.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 0,
+        "i": 1,
         "mode": "Markdown",
         "x": [
             [
