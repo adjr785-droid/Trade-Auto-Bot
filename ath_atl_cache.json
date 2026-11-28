@@ -154,5 +154,11 @@
         "atl": 0.005,
         "checked_at": 1795756455.0971472,
         "status": "complete"
+    },
+    "ZORA-USDT": {
+        "ath": 0.148426,
+        "atl": 0.0003,
+        "checked_at": 1795824220.022587,
+        "status": "complete"
     }
 }
