@@ -180,7 +180,7 @@ def _edit(mid,text,mode,rm=None):
    return bool(r.ok)
  except Exception:pass
  return False
-def _create(text,mode,rm,silent=False):
+def _create(text,mode,rm,silent=False,hold=None):
  text=(text or "")[:4000]
  try:
   p={"chat_id":CHAT,"text":text}
@@ -194,7 +194,7 @@ def _create(text,mode,rm,silent=False):
   if r.ok:
    mid=((r.json() or {}).get("result") or {}).get("message_id")
    if mid:
-    out=load(OUT,[]);out.append({"message_id":mid,"sent_at":time.time()});save(OUT,out)
+    out=load(OUT,[]);out.append({"message_id":mid,"sent_at":time.time(),**({"hold":hold} if hold else {})});save(OUT,out)
     return mid
  except Exception as e:print("TG EXCEPTION:",e)
  return None
@@ -252,8 +252,8 @@ def _mark_pnl(t):
   out.append(ln)
  return "\n".join(out)
 def _ring(m,mode):
- mid=_create(m,mode,None,silent=False)
- if not mid:_create(m,None,None,silent=False)
+ mid=_create(m,mode,None,silent=False,hold=3600)       # trade alerts stay for an hour, then leave the screen
+ if not mid:_create(m,None,None,silent=False,hold=3600)
 def stale_output():
  mins=float(cfg().get('output_stale_minutes',5) or 0)
  st=load(ST,{})
@@ -383,7 +383,7 @@ def cleanup_telegram_output():
  for item in out:
   if item.get("message_id") in persistent_mid:
    keep.append(item);continue
-  if now-float(item.get("sent_at",now))<300:keep.append(item);continue
+  if now-float(item.get("sent_at",now))<float(item.get("hold") or 60):keep.append(item);continue
   try:
    r=requests.post(API+"/deleteMessage",json={"chat_id":CHAT,"message_id":item.get("message_id")},timeout=10)
    if not r.ok:
@@ -1384,12 +1384,14 @@ def analyse_top3(tab="M"):
  threshold=7
  try:
   cnt=coin_db_stage_counts()
-  items=coin_db_manual_candidates(50) if tab=="M" else coin_db_stage_list("WATCH" if tab=="W" else "AUTO",50)
+  consolidate_manual();query_setup_items();cnt=coin_db_stage_counts()
+  items=(coin_db_manual_candidates(50)+held_manual_items()) if tab=="M" else coin_db_stage_list("WATCH" if tab=="W" else "AUTO",50)
+  cnt["MANUAL"]=cnt.get("MANUAL",0)+len(held_manual_items())
  except Exception as e:
   print("ANALYSE LIST ERR",str(e)[:120]);tg("⚠️ Could not read the coin lists. Try again shortly.");return
  title={"W":"👁 *WATCH LIST*","M":"🟡 *MANUAL BUY*","A":"🤖 *AUTO BUY*"}[tab]
  sub={"W":"_The top-rated coin of each setup (Breakout, Bounce, Pullback, Trend), updated every scan._",
-      "M":"_The best-rated of those four, listed automatically for Manual buy._",
+      "M":"_The best-rated of those four, listed for Manual buy, plus every other coin you hold (marked *)._",
       "A":f"_Scored at least {AUTO_MIN_SCORE}/10 and passed all four hard gates. Still requires independent READY, risk and execution checks._"}[tab]
  lines=[title,sub,"",_coin_table(items)]
  def tb(k,lbl):return _B(("▶ " if tab==k else "")+f"{lbl} ({cnt.get({'W':'WATCH','M':'MANUAL','A':'AUTO'}[k],0)})",f"m:at:{k}")
@@ -1491,6 +1493,7 @@ def _classify_latest_scan():
   # Preserve the scanner's setup tag only as a tie-break; otherwise use fixed deterministic order.
   tied=[k for k in QUERY_TYPES if scores[k]==best]
   chosen=str(tag or "").upper() if str(tag or "").upper() in tied else tied[0]
+  if px is None or r is None:continue                    # no usable data: not rankable
   grouped[chosen].append({"sym":sym,"score":scores[chosen],"scores":scores,"rsi":r,"h1":h,"chg":ch,"price":px,"fit":_setup_fit(chosen,px,r,h,m5,m10,v,rmin,rmax)})
  for k in QUERY_TYPES:grouped[k].sort(key=lambda x:(-x["score"],-x["fit"],-(x["h1"] if x["h1"] is not None else -999),x["sym"]))
  return grouped
@@ -1516,6 +1519,60 @@ def apply_setup_pipeline(c,g):
   if sym==bsym:c.execute("UPDATE coins SET stage='MANUAL',manual_candidate=1,stage_ok_at=COALESCE(stage_ok_at,?) WHERE sym=?",(now,sym))
   else:c.execute("UPDATE coins SET stage='WATCH',manual_candidate=0,stage_ok_at=COALESCE(stage_ok_at,?) WHERE sym=?",(now,sym))
  c.commit()
+def auto_dca():
+ """Auto DCA: an AUTO-held coin that certifies again (all 4 hard gates, score 8/10 or more, RSI in the entry band) gets 75% of the free USDT added;
+ if 75% is under 5 USDT, 100% is used. One add per coin per hour; market and BTC filters must be clear. Manual DCA is untouched (cmd_buy)."""
+ s=cfg()
+ if not s.get("auto_dca",True):return
+ try:
+  db=load(DB)
+  held=[k for k,v in db.items() if isinstance(v,dict) and v.get("purchase_source")=="AUTO"]
+  if not held:return
+  if market_filter(s) or btc_blocked(s):return
+  lo,hi=float(s.get("rsi_min",42)),float(s.get("rsi_max",48))
+  for sym in held:
+   r=_dbq("SELECT manual_score,rsi,checks_json,last_seen FROM coins WHERE sym=?",(sym,),one=True)
+   if not r or time.time()-float(r[3] or 0)>1800:continue
+   try:hard=bool((((json.loads(r[2] or "{}").get("scanner") or {}).get("manual_candidate") or {}).get("checks") or {}).get("hard_ok"))
+   except Exception:hard=False
+   if not hard or int(float(r[0] or 0))<AUTO_MIN_SCORE or r[1] is None or not (lo<=float(r[1])<=hi):continue
+   if cd(f"autodca:{sym}",3600):continue
+   free=B('free','USDT');avail=max(0.0,free-0.02)
+   amt=free*0.75;amt=amt if amt>=5.0 else avail
+   amt=int(min(amt,avail)*100)/100
+   if amt<1.0:continue
+   c=sym.split("-")[0];old=db[sym];ob=B('total',c)
+   f,a=m_buy(f"{c}/USDT",amt)
+   if f<=0 or a<=0:tg(f"⚠️ Auto DCA for {c}: fill not verified.");continue
+   e0=old['entry_price'];avg=round((ob*e0+f*a)/(ob+f),6) if ob>0 else round(a,6);sl=sl_pct(sym,old)
+   old.update(entry_price=avg,safe_zone=avg,stop_loss=round(avg*(1-sl/100),6),last_price=a,peak_price=max(old.get('peak_price',avg),a),opened_at=time.time(),purchase_source='AUTO')
+   old.update(entry_qty=float(old.get('entry_qty') or ob)+float(f),entry_usdt=round(float(old.get('entry_usdt') or ob*e0)+float(f)*float(a),4),dca_count=int(old.get('dca_count',0))+1)
+   old.pop('partial_done',None);old.pop('stop_ref',None);old.pop('xsl',None);db[sym]=old;save(DB,db)
+   ok=place_trailing_sl(sym,free_qty(sym,ob+f))
+   tg(f"➕ *AUTO DCA ADDED:* {c} @ {a:.6f}\nSpent: ${amt:.2f} ({'75%' if amt<free*0.75+0.01 else '100%'} of free USDT)\nNew avg entry: {avg:.6f}\nTotal entry amount: ${old['entry_usdt']:.2f}\n"+(STOP_OK if ok else STOP_NO))
+   return
+ except Exception as e:print("AUTO DCA ERR",str(e)[:120])
+def consolidate_manual():
+ """Every held position that is not an AUTO buy is counted as a MANUAL position (one place for all other holdings)."""
+ try:
+  db=load(DB);ch=False
+  for sym,pos in db.items():
+   if isinstance(pos,dict) and pos.get("purchase_source")!="AUTO" and pos.get("purchase_source")!="MANUAL":
+    pos["purchase_source"]="MANUAL";ch=True
+  if ch:save(DB,db)
+ except Exception as e:print("CONSOLIDATE ERR",str(e)[:100])
+def held_manual_items():
+ """Held MANUAL positions as list rows (name marked with *)."""
+ out=[]
+ try:
+  g=query_setup_items() or {};rk={x["sym"]:x for k in g for x in g[k]}
+  for sym,pos in load(DB).items():
+   if not isinstance(pos,dict) or pos.get("purchase_source")=="AUTO":continue
+   r=_dbq("SELECT price,chg24,h1,rsi,manual_score FROM coins WHERE sym=?",(sym,),one=True) or (None,None,None,None,None)
+   q=rk.get(sym)
+   out.append({"sym":sym.split("-")[0]+"*-USDT","price":r[0],"chg":r[1],"h1":r[2],"rsi":r[3],"score":(q["score"] if q else r[4]),"tag":""})
+ except Exception as e:print("HELD LIST ERR",str(e)[:100])
+ return out
 def rotate_manual():
  """If the BEST coin of the four setups now scores clearly higher than a coin held from a Manual buy, sell the held coin and buy the BEST.
  Safeguards: one rotation per hour, the market filter must be open, and the held coin must be comparable (listed in setup_groups)."""
@@ -1623,7 +1680,9 @@ QUERY_BUY_MIN=6   # a leader is only marked BUY with a setup score of at least 6
 def query_leaders(items):
  """The top-ranked coin of each category, and which of the four is the strongest overall (score first, then closeness)."""
  lead={k:(items[k][0] if items[k] else None) for k in QUERY_TYPES}
- ok={k:v for k,v in lead.items() if v and v["score"]>=QUERY_BUY_MIN}
+ try:_s=cfg();lo,hi=float(_s.get("rsi_min",42)),float(_s.get("rsi_max",48))
+ except Exception:lo,hi=42.0,48.0
+ ok={k:v for k,v in lead.items() if v and v["score"]>=QUERY_BUY_MIN and v.get("rsi") is not None and lo<=float(v["rsi"])<=hi}   # entry RSI band
  best=max(ok,key=lambda k:(ok[k]["score"],ok[k]["fit"])) if ok else None
  return lead,best
 def analyse_query(category=None):
@@ -2508,6 +2567,9 @@ def exec_q():
    if in_cd(f"fail_{sym}",300):buy_rejection(sym,"Previous fail.");continue
    if sym in db:buy_rejection(sym,"Position exists.");q.pop(sym,None);save(QF,q);continue
    if not live(sym):buy_rejection(sym,"No price.");continue
+   try:_r=data(sym)[2];_lo,_hi=float(s.get("rsi_min",42)),float(s.get("rsi_max",48))
+   except Exception:_r=None
+   if _r is None or not (_lo<=float(_r)<=_hi):buy_rejection(sym,f"RSI {('n/a' if _r is None else format(float(_r),'.0f'))} outside the {_lo:g}-{_hi:g} entry band.");continue
    if str(qd.get("type","")).upper()=="BOUNCE" and weak_market(s):buy_rejection(sym,"Weak market: BOUNCE skipped.");continue
    if stale_signal(qd,s):buy_rejection(sym,"Queued signal expired; waiting for a fresh scan.");q.pop(sym,None);save(QF,q);continue
    if s.get("smart_risk_enabled",True):
@@ -2844,13 +2906,13 @@ def manual_candidate_assess(rec,settings=None):
   core_score=sum(v is True for v in core.values());additional_score=sum(v is True for v in additional.values());score=core_score+additional_score
   # HARD GATES: always required, no score can override them. Missing evidence fails a gate.
   gates={
-   "rsi_ceiling":None if rsi is None else (rsi<30 if tag=="BOUNCE" else rsi<=70.0 if tag=="BREAKOUT" else rsi<=_rmax),
+   "rsi_ceiling":None if rsi is None else (float(s.get("rsi_min",42))<=rsi<=_rmax),   # entry band for Manual and Auto buys: RSI 42-48
    "price_above_ma":(_pb_ok if tag=="PULLBACK" else (None if price is None else True) if tag=="BOUNCE" else (None if price is None or ma5 is None or ma10 is None else price>ma5>ma10)),
    "momentum_1h":(True if not mom_on(s) else (None if h1v is None else float(s.get("mom_1h_min_pct",0.5))<=h1v<=float(s.get("mom_1h_max_pct",6.0)))),
    "momentum_24h_up":None if chg is None else ((chg<=_chgmax) if tag=="BOUNCE" else 0.0<chg<=_chgmax),
   }
   hard_ok=all(v is True for v in gates.values())
-  glabels={"rsi_ceiling":"RSI at or below the entry ceiling","price_above_ma":"Price above MA5 above MA10","momentum_1h":"1H momentum in range","momentum_24h_up":"24H change above 0%"}
+  glabels={"rsi_ceiling":"RSI inside the entry band (42-48)","price_above_ma":"Price above MA5 above MA10","momentum_1h":"1H momentum in range","momentum_24h_up":"24H change above 0%"}
   gfailed=[glabels[k] for k,v in gates.items() if v is not True]
   auto=hard_ok and core_score+additional_score>=AUTO_MIN_SCORE
   manual=hard_ok and core_score>=5 and additional_score>=2 and not auto
@@ -3952,6 +4014,8 @@ def tg_check(poll=0):
    try:handle(txt,age)
    except Exception as e:print(f"HANDLER ERR: {e}");tg(f"⚠️ Command failed: `{e}`")
    finally:_UI["edit_mode"]=False;_UI["acc"]=None
+   try:cleanup_telegram_output()                          # keep one screen: older messages leave right away
+   except Exception:pass
    if ("callback_query" in u or tapped) and not _UI.get("panel_used"):
     try:
      _hide_panel(m.get("message_id"))
@@ -4040,7 +4104,7 @@ def live_loop(t0):
   except Exception as e:print(f"LIVE POLL ERR: {e}")
   now=time.time()
   if now-last_light>=30:
-   for fn in (web_cmds,audit_ai,manage,check_alerts,scan,rotate_manual,rotate_auto,fast_watch,exec_q):
+   for fn in (web_cmds,audit_ai,manage,check_alerts,scan,cleanup_telegram_output,consolidate_manual,query_setup_items,auto_dca,rotate_manual,rotate_auto,fast_watch,exec_q):
     if fn is scan and deadline-time.time()<60:continue
     run_step(fn)
     try:tg_check(poll=0)
