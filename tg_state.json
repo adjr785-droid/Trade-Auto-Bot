@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935691899,
+    "last_update_id": 935691901,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -106,54 +106,54 @@
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
-            },
+                "text": "\ud83d\udda5 Bot Status",
+                "callback_data": "m:r:bot"
+            }
+        ],
+        [
             {
-                "text": "1/2",
-                "callback_data": "pg:x"
-            },
+                "text": "\u2699\ufe0f Settings",
+                "callback_data": "m:set"
+            }
+        ],
+        [
             {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
-            },
+                "text": "\ud83e\udde0 Ask AI",
+                "callback_data": "m:ai:1"
+            }
+        ],
+        [
             {
-                "text": "\ud83c\udfe0",
+                "text": "\ud83d\udee0\ufe0f Audit",
+                "callback_data": "m:r:audit"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\udde0 Resume AI Mode",
+                "callback_data": "m:r:airesume"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\udde9 Shortcuts",
+                "callback_data": "m:lay"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\uddf9 Clear Chat",
+                "callback_data": "m:r:clear"
+            }
+        ],
+        [
+            {
+                "text": "\ud83c\udfe0 Main Menu",
                 "callback_data": "m:menu"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\ude80 BREAKOUT",
-                "callback_data": "m:q:BREAKOUT"
-            },
-            {
-                "text": "\ud83d\udfe2 BOUNCE",
-                "callback_data": "m:q:BOUNCE"
-            }
-        ],
-        [
-            {
-                "text": "\u21a9\ufe0f PULLBACK",
-                "callback_data": "m:q:PULLBACK"
-            },
-            {
-                "text": "\ud83d\udcc8 TREND",
-                "callback_data": "m:q:TREND"
-            }
-        ],
-        [
-            {
-                "text": "\u2b05\ufe0f Query",
-                "callback_data": "m:query"
-            },
-            {
-                "text": "\ud83d\udd04 Refresh",
-                "callback_data": "m:q:TREND"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/2*",
+    "panel_text": "\ud83d\udda5 *SYSTEM*",
     "out_time": 1795869325.8703997,
     "pages": {
         "p": [
