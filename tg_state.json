@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691585,
+    "last_update_id": 935691589,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT34.81/\u20a647,389",
+    "kb_ph": "USDT34.79/\u20a647,362",
     "layout_bottom": [
         "an",
         "clear"
@@ -74,6 +74,10 @@
         "/scan_history": [
             9,
             1795804438.56481
+        ],
+        "m:q:BREAKOUT": [
+            1,
+            1795831668.6025107
         ]
     },
     "radar": [
@@ -92,8 +96,8 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 7698,
-    "out_text": "USDT0.03\n\ud83d\udc41 *WATCH LIST*\n_Rising coins being watched. They move up when they pass the manual rules._\n\n```\nCOIN    RSI    1H    24H  S TY\n------------------------------\nSUI      47  +0.7   +0.8  7  T\nWLD      48  +0.5   +1.4  7  T\n```\n\u2800\n\u2800",
+    "kb_mid": 7708,
+    "out_text": "USDT0.03\n\ud83d\udd0e *BOUNCE \u2014 TOP 10*\n_Sorted by setup score, highest first. Scores are evidence points out of 10;\nclassification is informational only._\n\n1. *ADA* \u2014 6/10 | RSI 43.1 | 1H +0.33% | 24H -0.40%\n2. *KII* \u2014 6/10 | RSI 39.0 | 1H +0.03% | 24H -0.62%\n3. *BGSC* \u2014 4/10 | RSI - | 1H -% | 24H -26.75%\n4. *BIGTIME* \u2014 4/10 | RSI - | 1H -% | 24H -8.28%\n5. *BLESS* \u2014 4/10 | RSI - | 1H -% | 24H -18.92%\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
@@ -116,78 +120,78 @@
         ],
         [
             {
-                "text": "\u25b6 \ud83d\udc41 Watch (2)",
-                "callback_data": "m:at:W"
+                "text": "\ud83d\ude80 BREAKOUT",
+                "callback_data": "m:q:BREAKOUT"
             },
             {
-                "text": "\ud83d\udfe1 Manual (0)",
-                "callback_data": "m:at:M"
-            },
-            {
-                "text": "\ud83e\udd16 Auto (0)",
-                "callback_data": "m:at:A"
+                "text": "\ud83d\udfe2 BOUNCE",
+                "callback_data": "m:q:BOUNCE"
             }
         ],
         [
             {
-                "text": "\ud83d\udd0e QUERY",
+                "text": "\u21a9\ufe0f PULLBACK",
+                "callback_data": "m:q:PULLBACK"
+            },
+            {
+                "text": "\ud83d\udcc8 TREND",
+                "callback_data": "m:q:TREND"
+            }
+        ],
+        [
+            {
+                "text": "\u2b05\ufe0f Query",
                 "callback_data": "m:query"
             },
             {
-                "text": "\ud83d\uddc2 MORE",
-                "callback_data": "m:am"
-            }
-        ],
-        [
-            {
                 "text": "\ud83d\udd04 Refresh",
-                "callback_data": "m:at:W"
+                "callback_data": "m:q:BOUNCE"
             }
         ]
     ],
     "panel_text": "\ud83d\udcc4 *Page 1/2*",
-    "out_time": 1795831623.2989028,
-    "out_mid": 7699,
+    "out_time": 1795831682.9054706,
     "pages": {
         "p": [
-            "USDT0.03\n\ud83d\udc41 *WATCH LIST*\n_Rising coins being watched. They move up when they pass the manual rules._\n\n```\nCOIN    RSI    1H    24H  S TY\n------------------------------\nSUI      47  +0.7   +0.8  7  T\nWLD      48  +0.5   +1.4  7  T\n```\n\u2800\n\u2800",
-            "_TY: T Trend, P Pullback, B Bounce, K Breakout_\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+            "USDT0.03\n\ud83d\udd0e *BOUNCE \u2014 TOP 10*\n_Sorted by setup score, highest first. Scores are evidence points out of 10;\nclassification is informational only._\n\n1. *ADA* \u2014 6/10 | RSI 43.1 | 1H +0.33% | 24H -0.40%\n2. *KII* \u2014 6/10 | RSI 39.0 | 1H +0.03% | 24H -0.62%\n3. *BGSC* \u2014 4/10 | RSI - | 1H -% | 24H -26.75%\n4. *BIGTIME* \u2014 4/10 | RSI - | 1H -% | 24H -8.28%\n5. *BLESS* \u2014 4/10 | RSI - | 1H -% | 24H -18.92%\n\u2800\n\u2800",
+            "6. *DEBIT* \u2014 4/10 | RSI - | 1H -% | 24H -10.27%\n7. *H* \u2014 4/10 | RSI - | 1H -% | 24H -10.47%\n8. *KLV* \u2014 4/10 | RSI - | 1H -% | 24H -12.25%\n9. *KOR* \u2014 4/10 | RSI - | 1H -% | 24H -16.50%\n10. *ME* \u2014 4/10 | RSI - | 1H -% | 24H -13.53%\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
         "i": 0,
         "mode": "Markdown",
         "x": [
             [
                 {
-                    "text": "\u25b6 \ud83d\udc41 Watch (2)",
-                    "callback_data": "m:at:W"
+                    "text": "\ud83d\ude80 BREAKOUT",
+                    "callback_data": "m:q:BREAKOUT"
                 },
                 {
-                    "text": "\ud83d\udfe1 Manual (0)",
-                    "callback_data": "m:at:M"
-                },
-                {
-                    "text": "\ud83e\udd16 Auto (0)",
-                    "callback_data": "m:at:A"
+                    "text": "\ud83d\udfe2 BOUNCE",
+                    "callback_data": "m:q:BOUNCE"
                 }
             ],
             [
                 {
-                    "text": "\ud83d\udd0e QUERY",
+                    "text": "\u21a9\ufe0f PULLBACK",
+                    "callback_data": "m:q:PULLBACK"
+                },
+                {
+                    "text": "\ud83d\udcc8 TREND",
+                    "callback_data": "m:q:TREND"
+                }
+            ],
+            [
+                {
+                    "text": "\u2b05\ufe0f Query",
                     "callback_data": "m:query"
                 },
                 {
-                    "text": "\ud83d\uddc2 MORE",
-                    "callback_data": "m:am"
-                }
-            ],
-            [
-                {
                     "text": "\ud83d\udd04 Refresh",
-                    "callback_data": "m:at:W"
+                    "callback_data": "m:q:BOUNCE"
                 }
             ]
         ],
-        "cmd": "m:at:W"
+        "cmd": "m:q:BOUNCE"
     },
-    "panel_mid": 7700
+    "out_mid": 7706,
+    "panel_mid": 7707
 }
