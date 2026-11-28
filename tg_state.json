@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT34.40/\u20a646,831",
+    "kb_ph": "USDT34.46/\u20a646,902",
     "layout_bottom": [
         "query",
         "an"
@@ -132,7 +132,7 @@
         ]
     ],
     "panel_text": "\ud83d\udc47 *Actions*",
-    "kb_mid": 8051,
+    "kb_mid": 8052,
     "out_mid": 8049,
     "panel_mid": 8050
 }
