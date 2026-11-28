@@ -19,5 +19,15 @@
         "time": 1795844620.578446,
         "event": "ai_portfolio_review",
         "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'WLD-USDT', 'action': 'monitor', 'reason': 'Negative PnL (-2.56%) and price approaching stop (0.2402 vs stop 0.234175). Consider tightening stop or reducing position size.'}, {'symbol': 'BTW-USDT', 'action': 'hold', 'reason': 'Positive PnL (2.23%) and price comfortably above stop. No immediate action required.'}, {'symbol': 'TRX-USDT', 'action': 'monitor', 'reason': 'Slight negative PnL (-0.37%) with price near stop (0.2997 vs stop 0.285779). Watch for further downside.'}, {'symbol': 'JCT-USDT', 'action': 'monitor', 'reason': 'Negative PnL (-1.37%) and price very close to stop (0.001515 vs stop 0.001459). Consider tightening stop to protect capital.'}], 'summary': 'Overall portfolio risk remains PASS, but three of four positions show negative performance and are near their stop levels. Recommend tighter risk controls on WLD-USDT, TRX-US"
+    },
+    {
+        "time": 1795844663.289616,
+        "event": "ai_manual_buy_review",
+        "symbol": "IDOL-USDT",
+        "review": {
+            "risk_level": "moderate",
+            "warning": "BTC market filter is active and indicates BTC is below its 50\u2011hour average, suggesting broader bearish pressure. Proceed with caution.",
+            "summary": "A manual buy of 4.75\u202fUSDT of IDOL\u2011USDT at 0.01737 is small, but the active BTC filter and bearish BTC trend increase risk. RSI is neutral (58.5). Consider waiting for clearer market signals or reducing exposure."
+        }
     }
 ]
