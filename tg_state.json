@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691829,
+    "last_update_id": 935691830,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT36.73/\u20a650,000",
+    "kb_ph": "USDT37.35/\u20a650,840",
     "layout_bottom": [
         "query",
         "an"
@@ -96,52 +96,43 @@
     "layout_names": {
         "scanh": "Scan Hist"
     },
-    "kb_mid": 8124,
-    "out_text": "\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *IDOL* $26.37 (72%)\n+8.28% (+$2.02) | Entry 0.017418\nQty 1398.2622 | Price 0.018860 | Stop 0.017418 (-8%)\nRSI 69 | Bullish | ATH -60%\n\n\ud83d\udfe2 *JCT* $10.21 (28%)\n+2.30% (+$0.23) | Entry 0.001521\nQty 6561.9692 | Price 0.001556 | Stop 0.001445 (-7%)\n\u2800\n\u2800",
+    "kb_mid": 8130,
+    "out_text": "USDT2.78\n\ud83d\udd0e *QUERY \u2014 SETUP CLASSIFICATION*\n_Every coin in the latest scan is placed once in the setup it scores highest on,\nthen ranked inside its group. Tap a group to see all its coins; the ranking is\nkept in the setup_groups table._\n\nBreakout (64) | Bounce (395) | Pullback (1) | Trend (0)\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795852612.7820935,
+    "out_time": 1795853052.7150972,
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
+                "text": "\ud83d\ude80 BREAKOUT",
+                "callback_data": "m:q:BREAKOUT"
             },
             {
-                "text": "1/2",
-                "callback_data": "pg:x"
+                "text": "\ud83d\udfe2 BOUNCE",
+                "callback_data": "m:q:BOUNCE"
+            }
+        ],
+        [
+            {
+                "text": "\u21a9\ufe0f PULLBACK",
+                "callback_data": "m:q:PULLBACK"
             },
             {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
+                "text": "\ud83d\udcc8 TREND",
+                "callback_data": "m:q:TREND"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udd04 Refresh",
+                "callback_data": "m:query"
             },
             {
-                "text": "\ud83c\udfe0",
-                "callback_data": "m:menu"
-            },
-            {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
+                "text": "\u2b05\ufe0f Markets",
+                "callback_data": "/analyse"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/2*",
-    "out_mid": 8122,
-    "pages": {
-        "p": [
-            "\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *IDOL* $26.37 (72%)\n+8.28% (+$2.02) | Entry 0.017418\nQty 1398.2622 | Price 0.018860 | Stop 0.017418 (-8%)\nRSI 69 | Bullish | ATH -60%\n\n\ud83d\udfe2 *JCT* $10.21 (28%)\n+2.30% (+$0.23) | Entry 0.001521\nQty 6561.9692 | Price 0.001556 | Stop 0.001445 (-7%)\n\u2800\n\u2800",
-            "RSI 54 | Mixed | ATH -92%\n\n\ud83e\udde0 *AI:* IDOL holds 72% of portfolio with RSI 69 and stop 8% below entry,\nindicating moderate overbought risk; JCT at 28% has RSI 54 and a 7% stop,\nmonitor both stops closely.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
-        ],
-        "i": 0,
-        "mode": "Markdown",
-        "x": [
-            [
-                {
-                    "text": "\ud83d\udd04",
-                    "callback_data": "rf:go"
-                }
-            ]
-        ],
-        "cmd": "m:r:holdings"
-    },
-    "panel_mid": 8123
+    "panel_text": "\ud83d\udc47 *Actions*",
+    "out_mid": 8128,
+    "panel_mid": 8129
 }
