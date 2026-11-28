@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935691625,
+    "last_update_id": 935691629,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -81,10 +81,13 @@
         ]
     },
     "radar": [
+        "BNB-USDT",
+        "PUMP-USDT",
+        "PONS-USDT",
         "IDOL-USDT"
     ],
     "audit_down": {},
-    "audit_last": 1795836962.583555,
+    "audit_last": 1795840181.5791812,
     "audit_ai_cls": "",
     "perf_breaker": {
         "until": 1795742224.733271,
@@ -92,36 +95,133 @@
         "loss": -0.25205024200007214
     },
     "kb_mid": 7775,
-    "out_mid": 7777,
-    "out_text": "\u23f8 *BTC FILTER:* BTC RSI is 43.54 (needs \u2265 50).\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
+    "out_text": "USDT0.03\n\ud83d\udd0e *BOUNCE \u2014 324 COINS*\n_All coins in this group, ranked by setup score (SC, out of 10); equal scores\nare ordered by how close each coin is to the ideal picture of the setup.\nInformational only; it never changes trading._\n```\n # COIN    PRICE SC RSI   1H 24H\n--------------------------------\n 1 TRX   0.30081  8  32 +0.1  -1\n 2 BNB    555.47  6  49 +0.0  -1\n```\n\u2800",
     "out_mode": "Markdown",
-    "panel_mid": 7778,
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udcbc Portfolio",
-                "callback_data": "m:pf"
+                "text": "\u25c0",
+                "callback_data": "pg:p"
+            },
+            {
+                "text": "1/34",
+                "callback_data": "pg:x"
+            },
+            {
+                "text": "\u25b6",
+                "callback_data": "pg:n"
+            },
+            {
+                "text": "\ud83c\udfe0",
+                "callback_data": "m:menu"
             }
         ],
         [
             {
-                "text": "\ud83c\udfc6 Markets",
-                "callback_data": "/analyse"
+                "text": "\ud83d\ude80 BREAKOUT",
+                "callback_data": "m:q:BREAKOUT"
+            },
+            {
+                "text": "\ud83d\udfe2 BOUNCE",
+                "callback_data": "m:q:BOUNCE"
             }
         ],
         [
             {
-                "text": "\ud83e\uddf0 Tools",
-                "callback_data": "m:tools"
+                "text": "\u21a9\ufe0f PULLBACK",
+                "callback_data": "m:q:PULLBACK"
+            },
+            {
+                "text": "\ud83d\udcc8 TREND",
+                "callback_data": "m:q:TREND"
             }
         ],
         [
             {
-                "text": "\ud83d\udda5 System",
-                "callback_data": "m:sy"
+                "text": "\u2b05\ufe0f Query",
+                "callback_data": "m:query"
+            },
+            {
+                "text": "\ud83d\udd04 Refresh",
+                "callback_data": "m:q:BOUNCE"
             }
         ]
     ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nChoose a group.",
-    "out_time": 1795840145.888694
+    "panel_text": "\ud83d\udcc4 *Page 1/34*",
+    "out_time": 1795840227.4113028,
+    "pages": {
+        "p": [
+            "USDT0.03\n\ud83d\udd0e *BOUNCE \u2014 324 COINS*\n_All coins in this group, ranked by setup score (SC, out of 10); equal scores\nare ordered by how close each coin is to the ideal picture of the setup.\nInformational only; it never changes trading._\n```\n # COIN    PRICE SC RSI   1H 24H\n--------------------------------\n 1 TRX   0.30081  8  32 +0.1  -1\n 2 BNB    555.47  6  49 +0.0  -1\n```\n\u2800",
+            "```\n 3 WLD    0.2451  4  44 +0.1  -2\n 4 ADA     0.148  4  41 +0.1  -2\n 5 ENA   0.10305  4  45 +0.0  -2\n 6 BIGTI0.005536  4   -    - -20\n 7 BLESS0.013102  4   -    - -22\n 8 COLLE0.028837  4   -    - -14\n 9 H    0.010365  4   -    - -12\n10 KLV  0.000394  4   -    - -12\n11 KOR   7.8e-05  4   -    -  -8\n12 LIGHT 0.19043  4   -    -  -8\n```",
+            "```\n13 ME    0.03775  4   -    - -11\n14 MMT    0.1597  4   -    - -17\n15 SWARM0.019319  4   -    - -10\n16 TMX  0.001841  4   -    - -17\n17 WLFI  0.03456  4   -    - -17\n18 KII  0.084386  2  38 -0.0  -1\n19 PEPE 3.525e-0  2  48 -0.1  -1\n20 LINK    9.236  2  40 -0.5  -3\n21 UNI     4.749  2  45 -0.6  -2\n22 10SET0.003038  2   -    -  -1\n```",
+            "```\n23 1INCH 0.05794  2   -    -  -1\n24 2U2  0.015966  2   -    -  -7\n25 2Z   0.017295  2   -    -  -2\n26 A     0.06519  2   -    -  -0\n27 A8   0.003086  2   -    -  -0\n28 AAVE    94.54  2   -    -  -2\n29 AB   0.000519  2   -    -  -0\n30 ACH  0.003699  2   -    -  -1\n31 ACN  0.003184  2   -    -  -4\n32 AERO   0.3869  2   -    -  -5\n```",
+            "```\n33 AGLD   0.1355  2   -    -  -1\n34 AIO  0.027706  2   -    -  -3\n35 ALGO 0.080379  2   -    -  -2\n36 ALIGN 0.00293  2   -    -  -4\n37 ALLO   0.1169  2   -    -  -4\n38 ANIME0.002245  2   -    -  -1\n39 ANKR 0.003192  2   -    -  -1\n40 APE    0.0718  2   -    -  -2\n41 APR   0.02994  2   -    -  -6\n42 APT    0.3871  2   -    -  -0\n```",
+            "```\n43 AR      2.251  2   -    -  -3\n44 ARB   0.11354  2   -    -  -3\n45 ARIA  0.32653  2   -    -  -1\n46 ARKM   0.0713  2   -    -  -1\n47 ARPA 0.007721  2   -    -  -1\n48 ARTX  0.10404  2   -    -  -7\n49 ARX   0.15377  2   -    -  -2\n50 ASR     0.667  2   -    -  -2\n51 ASTER  0.5054  2   -    -  -1\n52 ASTR 0.004625  2   -    -  -1\n```",
+            "```\n53 ATH  0.003646  2   -    -  -2\n54 ATM      0.82  2   -    -  -3\n55 ATOM    1.225  2   -    -  -1\n56 AVAX    6.612  2   -    -  -2\n57 AVNT  0.06143  2   -    -  -1\n58 AVV  0.003902  2   -    -  -0\n59 AWE   0.05217  2   -    -  -2\n60 AXL   0.03219  2   -    -  -3\n61 AXS    0.6491  2   -    -  -1\n62 BABYD2.482e-1  2   -    -  -2\n```",
+            "```\n63 BABYS0.001074  2   -    -  -3\n64 BANAN0.004854  2   -    -  -1\n65 BARD  0.07894  2   -    -  -2\n66 BAT   0.07453  2   -    -  -6\n67 BAY  0.040392  2   -    -  -0\n68 BB   0.005169  2   -    -  -1\n69 BCH     209.9  2   -    -  -2\n70 BEAM 0.003165  2   -    -  -3\n71 BERA   0.0813  2   -    -  -0\n72 BGB    1.5201  2   -    -  -0\n```",
+            "```\n73 BGBTC   60033  2   -    -  -2\n74 BGSOL   84.92  2   -    -  -1\n75 BIO   0.01529  2   -    -  -1\n76 BIRB  0.05416  2   -    -  -4\n77 BLEND 0.04455  2   -    -  -4\n78 BLUE 0.006399  2   -    -  -3\n79 BOME 0.000472  2   -    -  -1\n80 BONK 2.152e-0  2   -    -  -2\n81 BSV     14.44  2   -    -  -0\n82 BTC     60031  2   -    -  -2\n```",
+            "```\n83 C     0.06227  2   -    -  -4\n84 CAKE    1.567  2   -    -  -2\n85 CARV  0.02388  2   -    -  -3\n86 CBK    0.1637  2   -    -  -0\n87 CETUS 0.01544  2   -    -  -2\n88 CGN  0.002023  2   -    -  -0\n89 CGPT  0.01276  2   -    -  -2\n90 CHEEM2.929e-0  2   -    -  -3\n91 CHR   0.01341  2   -    -  -1\n92 CKB  0.000825  2   -    -  -3\n```",
+            "```\n93 CLANK   10.44  2   -    -  -3\n94 CNPY  0.08774  2   -    -  -7\n95 COAI   0.1649  2   -    -  -3\n96 COMP     18.1  2   -    -  +0\n97 COOKI  0.0077  2   -    -  -1\n98 CORE  0.00908  2   -    -  -5\n99 COW    0.0993  2   -    -  -1\n100 CP     0.0057  2   -    -  -5\n101 CRV     0.175  2   -    -  -2\n102 CTC    0.0646  2   -    -  -1\n```",
+            "```\n103 CTSI  0.02028  2   -    -  -2\n104 CUDIS0.000111  2   -    -  -0\n105 CYBER  0.2043  2   -    -  -5\n106 CYS   0.05096  2   -    -  -5\n107 DATA  0.08291  2   -    -  -0\n108 DBR   0.01411  2   -    -  -2\n109 DEBIT  0.4625  2   -    -  -6\n110 DEEP  0.01186  2   -    -  -1\n111 DOGE   0.0577  2   -    -  -0\n112 DOT    0.6628  2   -    -  -3\n```",
+            "```\n113 DTEC 0.002595  2   -    -  -2\n114 DYDX   0.0708  2   -    -  -2\n115 EDGE   0.2475  2   -    -  -6\n116 EGL1  0.00871  2   -    -  -4\n117 EIGEN  0.1108  2   -    -  -3\n118 ENJ   0.01906  2   -    -  -1\n119 ENS     3.488  2   -    -  -3\n120 ENSO   0.3901  2   -    -  -2\n121 ERA   0.07348  2   -    -  -0\n122 ETC      5.88  2   -    -  -1\n```",
+            "```\n123 ETH    1665.5  2   -    -  -4\n124 ETHFI  0.4411  2   -    -  -4\n125 EVAA   1.5168  2   -    - -32\n126 F    0.002214  2   -    -  -4\n127 FARTC  0.0798  2   -    -  -4\n128 FF     0.1002  2   -    -  -3\n129 FIL    0.5272  2   -    -  -4\n130 FLOCK 0.02948  2   -    -  -2\n131 FLOKI1.643e-0  2   -    -  -2\n132 FORM   0.1671  2   -    -  -0\n```",
+            "```\n133 FROGG0.008168  2   -    -  -3\n134 FUEL 0.000624  2   -    -  -1\n135 FUN   0.01099  2   -    -  -3\n136 G    0.002836  2   -    -  -1\n137 GAIA 0.001212  2   -    -  -1\n138 GAME20.000747  2   -    -  -2\n139 GENIU 0.27538  2   -    -  -1\n140 GMT  0.005232  2   -    -  -1\n141 GOAT  0.01132  2   -    -  -2\n142 GPS  0.009273  2   -    -  -2\n```",
+            "```\n143 GRASS   0.367  2   -    -  -6\n144 GWEI 0.009801  2   -    -  -4\n145 HAEDA 0.02232  2   -    -  -5\n146 HBAR  0.05367  2   -    -  -2\n147 HIVE  0.03561  2   -    -  -1\n148 HMSTR0.000124  2   -    -  -1\n149 HNT    0.2298  2   -    -  -2\n150 HOLD  0.10515  2   -    -  -0\n151 HOLO   0.0402  2   -    -  -2\n152 HOME 0.004152  2   -    -  -3\n```",
+            "```\n153 HTX  1.442e-0  2   -    -  -0\n154 HUMA   0.0069  2   -    -  -1\n155 HYPE   64.399  2   -    -  -3\n156 HYPER 0.04077  2   -    -  -1\n157 IAG   0.04092  2   -    -  -1\n158 ICP     2.019  2   -    -  -2\n159 IMX    0.0942  2   -    -  +0\n160 IN    0.02179  2   -    -  -3\n161 INIT  0.08332  2   -    - -35\n162 INJ     6.261  2   -    -  -1\n```",
+            "```\n163 IO     0.0977  2   -    -  -4\n164 IR   0.001803  2   -    -  -2\n165 IRYS  0.01569  2   -    -  -3\n166 JASMY0.003138  2   -    -  -2\n167 JOE   0.02029  2   -    -  -2\n168 JTO    0.2351  2   -    -  -0\n169 JUP    0.2463  2   -    -  -1\n170 JUV    0.2307  2   -    -  -0\n171 KAIA  0.02864  2   -    -  -1\n172 KAITO  0.1551  2   -    -  -1\n```",
+            "```\n173 KAS   0.02663  2   -    -  -2\n174 KAT  0.003119  2   -    -  -1\n175 KERNE 0.04198  2   -    -  -3\n176 KGEN  0.08424  2   -    -  -4\n177 KITE  0.14164  2   -    -  -1\n178 KMNO  0.02385  2   -    -  -0\n179 KNC     0.095  2   -    -  -1\n180 KSM     2.562  2   -    -  -3\n181 KUB    0.4445  2   -    -  -2\n182 LA    0.04121  2   -    -  -3\n```",
+            "```\n183 LAB    0.0305  2   -    -  -2\n184 LAT  0.000377  2   -    -  -1\n185 LAYER 0.04807  2   -    -  -1\n186 LDO    0.2378  2   -    -  -2\n187 LNQ  0.004398  2   -    -  -5\n188 LUNA  0.03194  2   -    -  -2\n189 M      0.8154  2   -    -  -4\n190 MANA  0.05747  2   -    -  -1\n191 MANTA 0.03453  2   -    -  -5\n192 MAPO 0.000680  2   -    -  -2\n```",
+            "```\n193 MASK    0.276  2   -    -  -2\n194 MAV   0.00659  2   -    -  -2\n195 MAXEX  0.1777  2   -    -  -0\n196 MCAT   0.5041  2   -    -  -1\n197 MEGA  0.03938  2   -    -  -5\n198 MEME 0.000292  2   -    -  -1\n199 MERL  0.02705  2   -    -  -0\n200 MET    0.1937  2   -    -  -6\n201 METIS   2.195  2   -    -  -4\n202 MINA  0.04203  2   -    -  -2\n```",
+            "```\n203 MOCA 0.005823  2   -    -  -2\n204 MOEW 0.000129  2   -    -  -3\n205 MOG  8.37e-08  2   -    -  -1\n206 MON   0.00997  2   -    -  -4\n207 MORPH  1.6387  2   -    -  -2\n208 MOVE  0.00559  2   -    -  -2\n209 MOVR    0.848  2   -    -  -1\n210 MTX    0.3512  2   -    - -30\n211 MUBAR 0.02262  2   -    -  -4\n212 MYX   0.03519  2   -    -  -3\n```",
+            "```\n213 NAORI 0.02761  2   -    -  -1\n214 NEAR    3.054  2   -    -  -2\n215 NEIRO4.723e-0  2   -    -  -1\n216 NEO     1.548  2   -    -  -3\n217 NERO 8.97e-05  2   -    -  -1\n218 NEWT  0.03491  2   -    -  -2\n219 NFT  1.802e-0  2   -    -  +0\n220 NIL   0.04403  2   -    -  -2\n221 NMR     7.389  2   -    -  -0\n222 NOT  0.000292  2   -    -  -0\n```",
+            "```\n223 NPC  0.010344  2   -    -  -1\n224 NXPC  0.13403  2   -    -  -0\n225 NYM   0.01742  2   -    -  -1\n226 OGN   0.01885  2   -    -  -3\n227 ONDO   0.2871  2   -    -  -2\n228 ONT   0.03526  2   -    -  -1\n229 OP    0.07034  2   -    -  -1\n230 OPEN  0.08004  2   -    -  -0\n231 OPN   0.03274  2   -    -  -0\n232 ORCA    1.228  2   -    -  -0\n```",
+            "```\n233 ORDER 0.02622  2   -    -  -2\n234 ORDI    2.627  2   -    -  -3\n235 PARTI 0.03513  2   -    -  -2\n236 PCI   0.02838  2   -    -  -1\n237 PENDL   1.191  2   -    -  -3\n238 PENGU0.004415  2   -    -  -2\n239 PEOPL 0.00496  2   -    -  -0\n240 PHA   0.02965  2   -    -  -2\n241 PI   0.051642  2   -    -  -4\n242 PLAI   0.0021  2   -    - +46\n```",
+            "```\n243 PLUME 0.01073  2   -    -  -1\n244 PNUT  0.02715  2   -    -  -1\n245 POL   0.07743  2   -    -  -1\n246 PORTA 0.01633  2   -    - +31\n247 POWER0.053941  2   -    -  -4\n248 PRESP  131.91  2   -    -  -0\n249 PROMP 0.00976  2   -    -  +0\n250 PROPS0.003938  2   -    -  -1\n251 PROS   0.6598  2   -    -  -1\n252 PROVE  0.1346  2   -    -  -2\n```",
+            "```\n253 PSG    0.3133  2   -    -  -0\n254 PWT   0.31512  2   -    -  -2\n255 PYTH  0.04788  2   -    -  -4\n256 PYUSD  1.0008  2   -    -  +0\n257 Q    0.025698  2   -    -  -0\n258 QNT    146.09  2   -    -  -3\n259 QTUM     0.64  2   -    -  -1\n260 QUID  0.04056  2   -    -  -3\n261 S     0.02822  2   -    -  -3\n262 SAFE  0.08035  2   -    -  -0\n```",
+            "```\n263 SAND  0.03434  2   -    -  -1\n264 SDEX 0.000611  2   -    -  -0\n265 SHIB 3.665e-0  2   -    -  -0\n266 SIGN 0.008771  2   -    -  -1\n267 SNEK 0.000405  2   -    -  -3\n268 SNX    0.1442  2   -    -  -2\n269 SOL     71.68  2   -    -  -2\n270 SOLV 0.004079  2   -    -  -1\n271 SOMI   0.1186  2   -    -  -3\n272 SONIC0.019106  2   -    -  -1\n```",
+            "```\n273 SOPH 0.000883  2   -    -  -3\n274 SSV     2.653  2   -    -  -1\n275 STABL 0.02433  2   -    -  -5\n276 STETH  1665.6  2   -    -  -4\n277 STO   0.02216  2   -    -  -1\n278 STRAX0.007593  2   -    -  -1\n279 STRK  0.03129  2   -    -  -1\n280 SUN   0.01443  2   -    -  -0\n281 SUSHI    0.15  2   -    -  -3\n282 SWELL0.000486  2   -    -  -1\n```",
+            "```\n283 SYRUP  0.0698  2   -    -  -4\n284 TAC  0.001093  2   -    -  -1\n285 TAIKO  0.0616  2   -    -  -1\n286 TIA      0.34  2   -    -  -1\n287 TNSR   0.0192  2   -    -  -1\n288 TOSHI   8e-05  2   -    -  -3\n289 TOWNS0.000913  2   -    -  -0\n290 TRADO  0.6201  2   -    -  -3\n291 TRB      13.2  2   -    -  -3\n292 TREE  0.02968  2   -    -  -0\n```",
+            "```\n293 TRIA  0.00206  2   -    -  -1\n294 TRUMP   0.869  2   -    -  -0\n295 TRUST 0.04769  2   -    -  -5\n296 TWT     0.301  2   -    -  -4\n297 U      1.0005  2   -    -  -0\n298 UAI   0.02747  2   -    -  -6\n299 UMXM  0.00267  2   -    -  -8\n300 UPC   0.07391  2   -    -  -0\n301 USAT   0.9999  2   -    -  +0\n302 USDGO  1.0011  2   -    -  -0\n```",
+            "```\n303 USTC 0.004129  2   -    -  -0\n304 VANA   0.5711  2   -    -  -2\n305 VELO 0.002466  2   -    -  -1\n306 VIRTU  0.3683  2   -    -  -2\n307 VOOI 0.005588  2   -    -  -6\n308 VTHO 0.000425  2   -    -  -2\n309 W    0.009232  2   -    -  -5\n310 WAI  0.005643  2   -    -  -2\n311 WBTC    60099  2   -    -  -2\n312 WIN  5.337e-0  2   -    -  -1\n```",
+            "```\n313 WOO   0.00881  2   -    -  -1\n314 ZBCN 0.001653  2   -    -  -3\n315 ZBT   0.05092  2   -    -  -2\n316 ZEC    750.51  2   -    -  -1\n317 ZEN     3.726  2   -    -  -4\n318 ZETA  0.02904  2   -    -  -0\n319 ZIG   0.03074  2   -    -  -0\n320 ZK   0.006283  2   -    -  -4\n321 ZKC   0.02262  2   -    -  +0\n322 ZORA 0.004218  2   -    -  -3\n```",
+            "```\n323 ZRO     1.097  2   -    -  -4\n324 ZTC  0.000535  2   -    -  -0\n```\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+        ],
+        "i": 0,
+        "mode": "Markdown",
+        "x": [
+            [
+                {
+                    "text": "\ud83d\ude80 BREAKOUT",
+                    "callback_data": "m:q:BREAKOUT"
+                },
+                {
+                    "text": "\ud83d\udfe2 BOUNCE",
+                    "callback_data": "m:q:BOUNCE"
+                }
+            ],
+            [
+                {
+                    "text": "\u21a9\ufe0f PULLBACK",
+                    "callback_data": "m:q:PULLBACK"
+                },
+                {
+                    "text": "\ud83d\udcc8 TREND",
+                    "callback_data": "m:q:TREND"
+                }
+            ],
+            [
+                {
+                    "text": "\u2b05\ufe0f Query",
+                    "callback_data": "m:query"
+                },
+                {
+                    "text": "\ud83d\udd04 Refresh",
+                    "callback_data": "m:q:BOUNCE"
+                }
+            ]
+        ],
+        "cmd": "m:q:BOUNCE"
+    },
+    "out_mid": 7786,
+    "panel_mid": 7787
 }
