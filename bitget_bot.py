@@ -66,6 +66,7 @@ _C={};_BAL={"t":0,"m":""};LAYOUT_ITEMS=[("tools","🧰 Tools","m:tools"),("analy
  ("watch","👁 Watch List","m:at:W"),("manual","🟡 Manual List","m:at:M"),("auto","🤖 Auto List","m:at:A"),("scan","🔍 Scan Now","m:r:scan"),("scanh","📜 Scan History","/scan_history"),
  ("buy","🛒 Buy a Coin","m:buy"),("sell","💸 Sell a Coin","m:sell"),("coins","📚 Coin List","m:coins"),("alert","🔔 Set Alert","m:al"),("myal","📋 My Alerts","m:r:alerts"),
  ("dust","🧹 Dust → BGB","m:r:dust"),("cancel","❌ Cancel Orders","m:r:cancel"),("audit","🛠️ Audit","m:r:audit"),("airesume","🧠 Resume AI","m:r:airesume"),("sync","🔄 Sync","m:r:sync"),("query","🔎 Query","m:query"),("qbo","🚀 Breakout","m:q:BREAKOUT"),("qbn","🟢 Bounce","m:q:BOUNCE"),("qpb","↩️ Pullback","m:q:PULLBACK"),("qtr","📈 Trend","m:q:TREND")]
+AUTO_MIN_SCORE=8   # Auto = hard gates passed AND core + additional score of at least 8 out of 10
 LAYOUT_DEFAULT=[];LAYOUT_MAX=2
 def layout_bottom():
  try:b=load(ST,{}).get("layout_bottom")
@@ -1338,7 +1339,7 @@ def manual_candidate_detail(sym):
  core_count=int(checks.get("core_score",0) or 0);add_count=int(checks.get("additional_score",0) or 0)
  # Recheck spread at detail time. A missing or excessive spread disables this candidate shortcut.
  spr=spread_pct(sym);spread_ok=spr is not None and spr<=float(s.get("max_spread_pct",0.5))
- is_auto=bool(score==10 and core_count==7 and add_count==3 and mc.get('checks',{}).get('hard_ok'))
+ is_auto=bool(core_count+add_count>=AUTO_MIN_SCORE and mc.get('checks',{}).get('hard_ok'))
  db_eligible=(bool(mc.get("eligible")) and score>=threshold) or is_auto
  safe=bool(mc.get("eligible")) and score>=threshold and fresh and spread_ok and memo.get("signal_status")!="BOUGHT"
  px=live(sym) or 0.0
@@ -1354,9 +1355,9 @@ def manual_candidate_detail(sym):
   *(["📈 1H move has risen for 3 scans in a row"] if (memo.get("checks",{}).get("scanner",{}) or {}).get("h1_rising_three_scans") else []),
   "Automatic-buy exclusion: "+str(mc.get('reason') or memo.get('reason') or "Did not meet all automatic entry rules")[:180],
   f"Spread safety: {spr:.3f}% — {'within' if spread_ok else 'outside/unverified against'} {float(s.get('max_spread_pct',0.5)):g}% limit" if spr is not None else "Spread safety: UNAVAILABLE — cannot verify",
-  "Classification: "+("10/10 AUTO score; independent safety and execution checks remain mandatory" if is_auto else "MANUAL score passed; manual review only" if db_eligible else "Not qualified for MANUAL/AUTO"),
+  "Classification: "+(f"{AUTO_MIN_SCORE}/10 or higher AUTO score; independent safety and execution checks remain mandatory" if is_auto else "MANUAL score passed; manual review only" if db_eligible else "Not qualified for MANUAL/AUTO"),
   "Candidate freshness: "+("FRESH" if fresh else "STALE — wait for a new scan"),
-  ("10/10 AUTO classification; independent scanner, risk and execution checks are still mandatory." if is_auto else "MANUAL classification requires at least 5/7 core and 2/3 additional; advisory only.")]
+  (f"{AUTO_MIN_SCORE}/10 or higher AUTO classification; independent scanner, risk and execution checks are still mandatory." if is_auto else "MANUAL classification requires at least 5/7 core and 2/3 additional; advisory only.")]
  rows=[]
  if safe and px>0:
   rows.append([_B("🛒 Continue to manual buy","m:b:"+sym.split("-")[0])])
@@ -1387,9 +1388,9 @@ def analyse_top3(tab="M"):
  except Exception as e:
   print("ANALYSE LIST ERR",str(e)[:120]);tg("⚠️ Could not read the coin lists. Try again shortly.");return
  title={"W":"👁 *WATCH LIST*","M":"🟡 *MANUAL BUY*","A":"🤖 *AUTO BUY*"}[tab]
- sub={"W":"_Rising coins being watched. They move up when they pass the manual rules._",
-      "M":"_Passed at least 5/7 core and 2/3 additional criteria. Manual review only._",
-      "A":"_Passed all 7/7 core and 3/3 additional criteria. Still requires independent READY, risk and execution checks._"}[tab]
+ sub={"W":"_The top-rated coin of each setup (Breakout, Bounce, Pullback, Trend), updated every scan._",
+      "M":"_The best-rated of those four, listed automatically for Manual buy._",
+      "A":f"_Scored at least {AUTO_MIN_SCORE}/10 and passed all four hard gates. Still requires independent READY, risk and execution checks._"}[tab]
  lines=[title,sub,"",_coin_table(items)]
  def tb(k,lbl):return _B(("▶ " if tab==k else "")+f"{lbl} ({cnt.get({'W':'WATCH','M':'MANUAL','A':'AUTO'}[k],0)})",f"m:at:{k}")
  keyboard=[[tb("W","👁 Watch"),tb("M","🟡 Manual"),tb("A","🤖 Auto")],
@@ -1494,6 +1495,99 @@ def _classify_latest_scan():
  for k in QUERY_TYPES:grouped[k].sort(key=lambda x:(-x["score"],-x["fit"],-(x["h1"] if x["h1"] is not None else -999),x["sym"]))
  return grouped
 
+def apply_setup_pipeline(c,g):
+ """Pipeline rule: the top-rated coin of each setup (Breakout, Bounce, Pullback, Trend) is listed in WATCH; the BEST of those four is listed for MANUAL buy
+ (no hard-gate requirement). AUTO keeps its own rule (8/10 or higher with all hard gates). Coins that are no longer a leader move to DROPPED (never deleted)."""
+ lead,best=query_leaders(g)
+ picks={x["sym"] for x in lead.values() if x};bsym=lead[best]["sym"] if best else None
+ hard={}
+ for sym in picks:
+  r=c.execute("SELECT checks_json,status FROM coins WHERE sym=?",(sym,)).fetchone()
+  if not r:continue
+  try:ck=json.loads(r[0] or "{}");hard[sym]=bool((((ck.get("scanner") or {}).get("manual_candidate") or {}).get("checks") or {}).get("hard_ok"))
+  except Exception:hard[sym]=False
+ keep=set(picks)
+ for (sym,stg) in c.execute("SELECT sym,stage FROM coins WHERE stage IN ('WATCH','MANUAL') AND status<>'BOUGHT'").fetchall():
+  if sym not in keep:c.execute("UPDATE coins SET stage='DROPPED',manual_candidate=0 WHERE sym=?",(sym,))
+ now=time.time()
+ for sym in picks:
+  r=c.execute("SELECT stage,status FROM coins WHERE sym=?",(sym,)).fetchone()
+  if not r or r[1]=="BOUGHT" or r[0]=="AUTO":continue
+  if sym==bsym:c.execute("UPDATE coins SET stage='MANUAL',manual_candidate=1,stage_ok_at=COALESCE(stage_ok_at,?) WHERE sym=?",(now,sym))
+  else:c.execute("UPDATE coins SET stage='WATCH',manual_candidate=0,stage_ok_at=COALESCE(stage_ok_at,?) WHERE sym=?",(now,sym))
+ c.commit()
+def rotate_manual():
+ """If the BEST coin of the four setups now scores clearly higher than a coin held from a Manual buy, sell the held coin and buy the BEST.
+ Safeguards: one rotation per hour, the market filter must be open, and the held coin must be comparable (listed in setup_groups)."""
+ s=cfg()
+ if not s.get("rotate_manual",True):return
+ if cd("rotate",3600):return
+ try:
+  g=query_setup_items()
+  if not g:return
+  lead,best=query_leaders(g)
+  if not best:return
+  b=lead[best];bsym=b["sym"];bc=bsym.split("-")[0]
+  if market_filter(s) or btc_blocked(s):return
+  db=load(DB)
+  if bsym in db:return                                   # already holding the best coin
+  r=_dbq("SELECT stage,manual_candidate FROM coins WHERE sym=?",(bsym,),one=True)
+  if not r or r[0]!="MANUAL" or not r[1]:return           # the best must be listed for Manual
+  worst=None
+  for sym,pos in db.items():
+   if not isinstance(pos,dict) or pos.get("purchase_source")!="MANUAL":continue
+   h=next((x for k in g for x in g[k] if x["sym"]==sym),None)
+   if not h:continue
+   if b["score"]>h["score"] or (b["score"]==h["score"] and b["fit"]>=h["fit"]+15):
+    if worst is None or (h["score"],h["fit"])<(worst[1]["score"],worst[1]["fit"]):worst=(sym,h)
+  if not worst:return
+  sym,h=worst;coin=sym.split("-")[0]
+  tg(f"🔁 *ROTATION:* {bc} ({b['score']}/10) now beats held {coin} ({h['score']}/10). Selling {coin}, then buying {bc}.")
+  if not sell(sym,100,"ROTATION: better Manual coin"):
+   tg(f"⚠️ Rotation stopped: {coin} could not be sold.");return
+  time.sleep(1.0);free=B('free','USDT');amt=int(max(0.0,free-0.02)*100)/100
+  if amt<1.0:tg(f"⚠️ Rotation: {coin} sold but only ${free:.2f} free USDT, too little to buy {bc}.");return
+  cmd_buy(f"/buy {bc} {amt:.2f}")
+ except Exception as e:print("ROTATE ERR",str(e)[:120])
+def rotate_auto():
+ """When a new coin certifies for AUTO (hard gates + 8/10 or higher, so it sits in the AUTO list), sell the whole position held before in AUTO and buy the
+ highest-ranked AUTO coin with the proceeds. If no AUTO position is held, half of the lowest-ranked MANUAL position funds it instead.
+ Safeguards: one rotation per hour, the market filter must be open, never sells a coin that ranks above the new one."""
+ s=cfg()
+ if not s.get("rotate_auto",True):return
+ if cd("rotate_auto",3600):return
+ try:
+  g=query_setup_items()
+  rank={x["sym"]:(x["score"],x["fit"]) for k in (g or {}) for x in g[k]}
+  rows=_dbq("SELECT sym FROM coins WHERE stage='AUTO' AND status<>'BOUGHT'")
+  db=load(DB)
+  cands=[r[0] for r in rows if r[0] not in db]
+  if not cands:return
+  tgt=max(cands,key=lambda x:rank.get(x,(0,0)))
+  if market_filter(s) or btc_blocked(s):return
+  def donor(src):
+   best=None
+   for sym,pos in db.items():
+    if isinstance(pos,dict) and pos.get("purchase_source")==src and sym!=tgt:
+     r=rank.get(sym,(0,0))
+     if best is None or r<best[1]:best=(sym,r)
+   return best
+  d=donor("AUTO");pct=100
+  if not d:d=donor("MANUAL");pct=50     # a Manual position only funds it when no Auto position is held (half of it)
+  if not d:return
+  if d[1]>=rank.get(tgt,(0,0)):return                      # never sell a coin that ranks at least as high as the new one
+  sym=d[0];coin=sym.split("-")[0];tc=tgt.split("-")[0]
+  pre=B('free','USDT')
+  tg(f"🔁 *AUTO ROTATION:* {tc} certified for Auto. Selling {'all' if pct==100 else '50%'} of {coin} to buy {tc}.")
+  if not sell(sym,pct,"ROTATION: new Auto coin"):
+   tg(f"⚠️ Auto rotation stopped: {coin} could not be sold.");return
+  time.sleep(1.0);free=B('free','USDT');amt=int(max(0.0,min(free,free-pre+0.0 if free>pre else free)-0.02)*100)/100
+  if amt<1.0:tg(f"⚠️ Auto rotation: sold part of {coin} but only ${amt:.2f} usable, too little to buy {tc}.");return
+  cmd_buy(f"/buy {tc} {amt:.2f}")
+  db=load(DB)
+  if tgt in db and isinstance(db[tgt],dict):
+   db[tgt]["purchase_source"]="AUTO";save(DB,db)
+ except Exception as e:print("ROTATE AUTO ERR",str(e)[:120])
 def refresh_setup_groups():
  """Builds the setup_groups table: every coin in the latest scan is placed in one group (BREAKOUT, BOUNCE, PULLBACK or TREND) and ranked inside it. Read-only for trading."""
  g=_classify_latest_scan()
@@ -1504,7 +1598,10 @@ def refresh_setup_groups():
   for grp,items in g.items():
    for i,x in enumerate(items,1):
     c.execute("INSERT OR REPLACE INTO setup_groups(sym,grp,score,rnk,price,chg24,h1,rsi,updated,fit) VALUES(?,?,?,?,?,?,?,?,?,?)",(x["sym"],grp,int(x["score"]),i,x["price"],x["chg"],x["h1"],x["rsi"],now,x["fit"]))
-  c.commit();return True
+  c.commit()
+  try:apply_setup_pipeline(c,g)
+  except Exception as e:print("PIPELINE ERR",str(e)[:120])
+  return True
  except Exception as e:
   print("SETUP GROUPS ERR",str(e)[:120]);return False
  finally:c.close()
@@ -1522,16 +1619,31 @@ def query_setup_items():
   if grp in grouped:grouped[grp].append({"sym":sym,"score":int(sc or 0),"rank":rk,"rsi":r,"h1":h,"chg":ch,"price":px,"fit":ft})
  return grouped
 
+QUERY_BUY_MIN=6   # a leader is only marked BUY with a setup score of at least 6/10
+def query_leaders(items):
+ """The top-ranked coin of each category, and which of the four is the strongest overall (score first, then closeness)."""
+ lead={k:(items[k][0] if items[k] else None) for k in QUERY_TYPES}
+ ok={k:v for k,v in lead.items() if v and v["score"]>=QUERY_BUY_MIN}
+ best=max(ok,key=lambda k:(ok[k]["score"],ok[k]["fit"])) if ok else None
+ return lead,best
 def analyse_query(category=None):
  """Four-button Query menu; each category shows all its coins, highest setup score first."""
  items=query_setup_items()
  if items is None:tg("⚠️ Could not read the latest scan scores. Run a scan and try again.");return
  if category not in QUERY_TYPES:
   counts=[f"{k.title()} ({len(items[k])})" for k in QUERY_TYPES]
-  _send("🔎 *QUERY — SETUP CLASSIFICATION*\n_Every coin in the latest scan is placed once in the setup it scores highest on, then ranked inside its group. Tap a group to see all its coins; the ranking is kept in the setup_groups table._\n\n"+" | ".join(counts),"Markdown",{"inline_keyboard":[[_B("🚀 BREAKOUT","m:q:BREAKOUT"),_B("🟢 BOUNCE","m:q:BOUNCE")],[_B("↩️ PULLBACK","m:q:PULLBACK"),_B("📈 TREND","m:q:TREND")],[_B("🔄 Refresh","m:query"),_B("⬅️ Markets","/analyse")]]});return
+  lead,best=query_leaders(items)
+  pk=["```",f"{'SETUP':<9}{'LEADER':<7}{'SC':>3}{'FIT':>4} {'MARK':<4}","-"*28]
+  for k in QUERY_TYPES:
+   x=lead[k]
+   if not x:pk.append(f"{k.title():<9}{'-':<7}");continue
+   pk.append(f"{k.title():<9}{x['sym'].replace('-USDT','')[:6]:<7}{x['score']:>3}{x['fit']:>4.0f} "+("BEST" if k==best else ("BUY" if x["score"]>=QUERY_BUY_MIN else "-")))
+  pk.append("```")
+  _send("🔎 *QUERY — SETUP CLASSIFICATION*\n_Every coin in the latest scan is placed once in the setup it scores highest on, then ranked inside its group. Tap a group to see all its coins; the ranking is kept in the setup_groups table._\n\n"+" | ".join(counts)+"\n\n🏁 *Top coin of each group*\n"+"\n".join(pk)+f"\n_BUY = leader with score {QUERY_BUY_MIN}/10 or more; BEST = strongest of the four. A marker only; nothing is bought automatically._","Markdown",{"inline_keyboard":[[_B("🚀 BREAKOUT","m:q:BREAKOUT"),_B("🟢 BOUNCE","m:q:BOUNCE")],[_B("↩️ PULLBACK","m:q:PULLBACK"),_B("📈 TREND","m:q:TREND")],[_B("🔄 Refresh","m:query"),_B("⬅️ Markets","/analyse")]]});return
  rows=items[category]
  if rows:
-  body=["```",f"{'#':>2} {'COIN':<5}{'PRICE':>8}{'SC':>3}{'RSI':>4}{'1H':>5}{'24H':>4}","-"*32]+[f"{i:>2} {x['sym'].replace('-USDT','')[:5]:<5}{(format(float(x['price']),'.5g')[:8] if x.get('price') else '-'):>8}{x['score']:>3}{_fmt(x['rsi'],'.0f'):>4}{_fmt(x['h1'],'+.1f'):>5}{_fmt(x['chg'],'+.0f'):>4}" for i,x in enumerate(rows,1)]+["```"]
+  lead,best=query_leaders(items)
+  body=["```",f"{'#':>2} {'COIN':<5}{'PRICE':>8}{'SC':>3}{'RSI':>4}{'1H':>5}{'24H':>4}","-"*32]+[f"{i:>2}{'*' if (i==1 and rows[0]['score']>=QUERY_BUY_MIN) else ' '}{x['sym'].replace('-USDT','')[:5]:<5}{(format(float(x['price']),'.5g')[:8] if x.get('price') else '-'):>8}{x['score']:>3}{_fmt(x['rsi'],'.0f'):>4}{_fmt(x['h1'],'+.1f'):>5}{_fmt(x['chg'],'+.0f'):>4}" for i,x in enumerate(rows,1)]+["```"]+([f"_* = top of group, marked BUY ({'strongest of the four' if best==category else 'score '+str(QUERY_BUY_MIN)+'/10 or more'}). A marker only; nothing is bought automatically._"] if rows[0]["score"]>=QUERY_BUY_MIN else [f"_No BUY marker: the best score here is {rows[0]['score']}/10, below {QUERY_BUY_MIN}._"])
  else:body=["No coin matches this setup in the latest scan."]
  _send(f"🔎 *{category} — {len(rows)} COINS*\n_All coins in this group, ranked by setup score (SC, out of 10); equal scores are ordered by how close each coin is to the ideal picture of the setup. Informational only; it never changes trading._\n"+"\n".join(body),"Markdown",{"inline_keyboard":[[_B("🚀 BREAKOUT","m:q:BREAKOUT"),_B("🟢 BOUNCE","m:q:BOUNCE")],[_B("↩️ PULLBACK","m:q:PULLBACK"),_B("📈 TREND","m:q:TREND")],[_B("⬅️ Query","m:query"),_B("🔄 Refresh",f"m:q:{category}")]]})
 def coin_search(q,kind=None):
@@ -2701,7 +2813,7 @@ def setup_tag(rec,s):
 def manual_candidate_assess(rec,settings=None):
  """Approved Coin List score: 7 mandatory core checks + 3 additional checks.
  WATCH needs >=5/7 core; MANUAL needs >=5/7 core and >=2/3 additional;
- AUTO is only considered at 7/7 core + 3/3 additional and still faces all
+ AUTO is only considered at 8/10 or higher (core + additional) with all hard gates, and still faces all
  independent execution/risk gates. Missing evidence never earns a point.
  """
  s=settings or cfg();tag=setup_tag(rec,s)
@@ -2740,7 +2852,7 @@ def manual_candidate_assess(rec,settings=None):
   hard_ok=all(v is True for v in gates.values())
   glabels={"rsi_ceiling":"RSI at or below the entry ceiling","price_above_ma":"Price above MA5 above MA10","momentum_1h":"1H momentum in range","momentum_24h_up":"24H change above 0%"}
   gfailed=[glabels[k] for k,v in gates.items() if v is not True]
-  auto=hard_ok and core_score==7 and additional_score==3
+  auto=hard_ok and core_score+additional_score>=AUTO_MIN_SCORE
   manual=hard_ok and core_score>=5 and additional_score>=2 and not auto
   labels={"liquidity":"Liquidity (24H quote volume)","spread":"Bid/ask spread","market_trend":"4H market trend","price_structure":"Price above MA5 above MA10",
    "rsi_condition":"RSI within configured entry range","momentum_24h":"24H change within safe range","btc_market_safety":"BTC market safety",
@@ -2748,7 +2860,7 @@ def manual_candidate_assess(rec,settings=None):
   failed=[labels[k] for group in (core,additional) for k,v in group.items() if v is False]
   unknown=[labels[k] for group in (core,additional) for k,v in group.items() if v is None]
   reason=(f"HARD GATE failed: {', '.join(gfailed)}; never Manual or Auto" if not hard_ok else
-          f"AUTO score: 7/7 core + 3/3 additional; independent safety gates still required" if auto else
+          f"AUTO score: {core_score+additional_score}/10 (8 or more needed); independent safety gates still required" if auto else
           (f"MANUAL: {core_score}/7 core + {additional_score}/3 additional; manual review only" if manual else
            (f"WATCH: {core_score}/7 core; need at least 5/7" if core_score>=5 else f"DROPPED threshold: {core_score}/7 core; need at least 5/7")))
   if failed:reason += "; failed: "+", ".join(failed)
@@ -2811,7 +2923,7 @@ def coin_stage_from_scores(prev,manual_checks,ok_at,now):
   unknown=sum(1 for k in keys if core.get(k) is None)
   hard_ok=bool(mc.get("hard_ok",False))
   manual=hard_ok and core_score>=5 and additional_score>=2
-  auto=hard_ok and core_score==7 and additional_score==3
+  auto=hard_ok and core_score+additional_score>=AUTO_MIN_SCORE
   if hard_ok and core_score>=5:return stage_decide(prev,True,manual,auto,ok_at,now)
   if hard_ok and core_score+unknown>=5 and prev in ("WATCH","MANUAL","AUTO"):return (prev if prev=="WATCH" else "WATCH"),ok_at
   # A failed hard gate (RSI above the ceiling, below the MAs, 1H/24H not rising) leaves the Watch list immediately: no 24h grace.
@@ -2925,7 +3037,7 @@ def coin_db_can_execute(sym,qd):
   row=c.execute("SELECT signal_status,execution_status,expires_at,status,stage,manual_score FROM coins WHERE sym=?",(sym,)).fetchone()
   if not row:return False,"No coin database record; waiting for a fresh scanner decision."
   signal,execution,expiry,legacy,stage,manual_score=row
-  if stage!="AUTO" or int(float(manual_score or 0))!=10:return False,f"Stage/score is {stage or 'none'} / {manual_score or 0}/10; AUTO requires 10/10."
+  if stage!="AUTO" or int(float(manual_score or 0))<AUTO_MIN_SCORE:return False,f"Stage/score is {stage or 'none'} / {manual_score or 0}/10; AUTO requires {AUTO_MIN_SCORE}/10 or higher."
   if signal!="READY":return False,f"Database signal status is {signal or 'UNKNOWN'}, not READY."
   if execution!="QUEUED":return False,f"Database execution status is {execution or 'UNASSESSED'}, not QUEUED."
   if expiry is not None and float(expiry)<=time.time():return False,"Database signal expired; waiting for a fresh scan."
@@ -2975,7 +3087,7 @@ def coin_db_auto_ready_candidates(limit=3):
    ORDER BY COALESCE(h1,-999) DESC,last_seen DESC LIMIT ?""",(fresh_after,time.time(),int(limit)))
  return [{"sym":x[0],"price":x[1],"h1":x[2],"rsi":x[3],"scans":x[4],"execution_status":x[5],"last_seen":x[6],"expires_at":x[7]} for x in rows]
 def coin_db_manual_candidates(limit=10):
- rows=_dbq("SELECT sym,price,chg24,h1,rsi,scans,manual_score,manual_reason,reason,execution_status,tag FROM coins WHERE manual_candidate=1 AND stage='MANUAL' AND manual_score BETWEEN 7 AND 9 AND status<>'BOUGHT' ORDER BY manual_score DESC,last_seen DESC LIMIT ?",(int(limit),))
+ rows=_dbq("SELECT sym,price,chg24,h1,rsi,scans,manual_score,manual_reason,reason,execution_status,tag FROM coins WHERE manual_candidate=1 AND stage='MANUAL' AND status<>'BOUGHT' ORDER BY manual_score DESC,last_seen DESC LIMIT ?",(int(limit),))
  return [{"sym":x[0],"price":x[1],"chg":x[2],"h1":x[3],"rsi":x[4],"scans":x[5],"score":x[6],"manual_reason":x[7],"scanner_reason":x[8],"execution_status":x[9],"tag":x[10]} for x in rows]
 def coin_db_stage_list(stage,limit=20):
  rows=_dbq("SELECT sym,price,chg24,h1,rsi,scans,first_seen,manual_score,tag FROM coins WHERE stage=? AND status<>'BOUGHT' ORDER BY COALESCE(h1,-99) DESC,last_seen DESC LIMIT ?",(stage,int(limit)))
@@ -3928,7 +4040,7 @@ def live_loop(t0):
   except Exception as e:print(f"LIVE POLL ERR: {e}")
   now=time.time()
   if now-last_light>=30:
-   for fn in (web_cmds,audit_ai,manage,check_alerts,scan,fast_watch,exec_q):
+   for fn in (web_cmds,audit_ai,manage,check_alerts,scan,rotate_manual,rotate_auto,fast_watch,exec_q):
     if fn is scan and deadline-time.time()<60:continue
     run_step(fn)
     try:tg_check(poll=0)
