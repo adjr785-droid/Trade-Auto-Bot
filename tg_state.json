@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT36.22/\u20a649,298",
+    "kb_ph": "USDT36.15/\u20a649,202",
     "layout_bottom": [
         "query",
         "an"
@@ -116,7 +116,7 @@
     ],
     "panel_text": "\ud83d\udd04 *Refresh*",
     "out_time": 1795872579.4563909,
-    "kb_mid": 8343,
+    "kb_mid": 8344,
     "out_mid": 8341,
     "panel_mid": 8342
 }
