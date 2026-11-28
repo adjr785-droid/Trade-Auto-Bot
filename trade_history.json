@@ -468,5 +468,29 @@
         "time": 1795824055.739211,
         "reason": "MANUAL SELL $10.00",
         "strategy": "MANUAL"
+    },
+    {
+        "sym": "DOS-USDT",
+        "pnl": 0.07296872000000039,
+        "fee": 0.010036,
+        "time": 1795831810.388693,
+        "reason": "PANIC",
+        "strategy": "MANUAL"
+    },
+    {
+        "sym": "PWT-USDT",
+        "pnl": -0.1386481599999995,
+        "fee": 0.019536,
+        "time": 1795831828.6897814,
+        "reason": "PANIC",
+        "strategy": "MANUAL"
+    },
+    {
+        "sym": "ZORA-USDT",
+        "pnl": -0.025269600000090275,
+        "fee": 0.039785,
+        "time": 1795831838.2490807,
+        "reason": "PANIC",
+        "strategy": "MANUAL"
     }
 ]

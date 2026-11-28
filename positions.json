@@ -1,49 +1,17 @@
 {
-    "DOS-USDT": {
-        "entry_price": 0.079428,
-        "safe_zone": 0.079428,
-        "stop_loss": 0.079428,
-        "peak_price": 0.0834,
-        "last_price": 0.0807,
-        "opened_at": 1795779691.6356573,
-        "sl_pct": 4.84,
-        "strategy": "MANUAL",
-        "purchase_source": "MANUAL",
-        "seen": 1795831782.865025,
-        "entry_qty": 269.814574,
-        "entry_usdt": 21.4308,
-        "dca_count": 1,
-        "xsl": 0.079428
-    },
-    "PWT-USDT": {
-        "entry_price": 0.316106,
-        "safe_zone": 0.316106,
-        "stop_loss": 0.300301,
-        "peak_price": 0.321106,
-        "last_price": 0.311975,
-        "opened_at": 1795823196.0950158,
+    "WLD-USDT": {
+        "entry_price": 0.246594,
+        "safe_zone": 0.246594,
+        "stop_loss": 0.234265,
+        "peak_price": 0.2466,
+        "last_price": 0.2466,
+        "opened_at": 1795831854.267025,
         "sl_pct": 5.0,
-        "entry_qty": 119.34,
-        "entry_usdt": 37.8309,
+        "entry_qty": 140.55,
+        "entry_usdt": 34.6588,
         "strategy": "MANUAL",
         "purchase_source": "MANUAL",
-        "seen": 1795831783.191599,
-        "dca_count": 3,
-        "xsl": 0.300301
-    },
-    "ZORA-USDT": {
-        "entry_price": 0.004234,
-        "safe_zone": 0.004234,
-        "stop_loss": 0.004022,
-        "peak_price": 0.004237,
-        "last_price": 0.004231,
-        "opened_at": 1795824174.6869624,
-        "sl_pct": 5.0,
-        "entry_qty": 4707.06,
-        "entry_usdt": 19.93,
-        "strategy": "MANUAL",
-        "purchase_source": "MANUAL",
-        "xsl": 0.004022,
-        "seen": 1795831783.5199137
+        "xsl": 0.234264,
+        "seen": 1795831858.6201758
     }
 }

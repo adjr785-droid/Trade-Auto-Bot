@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691595,
+    "last_update_id": 935691600,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT34.80/\u20a647,368",
+    "kb_ph": "USDT34.73/\u20a647,272",
     "layout_bottom": [
         "an",
         "clear"
@@ -96,43 +96,43 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 7718,
+    "kb_mid": 7733,
     "out_text": "USDT0.03\n\ud83d\udfe1 *MANUAL BUY*\n_Passed at least 5/7 core and 2/3 additional criteria. Manual review only._\n\nNone right now.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udcbc Holdings",
-                "callback_data": "m:r:holdings"
+                "text": "\ud83d\udc41 Watch (1)",
+                "callback_data": "m:at:W"
+            },
+            {
+                "text": "\u25b6 \ud83d\udfe1 Manual (0)",
+                "callback_data": "m:at:M"
+            },
+            {
+                "text": "\ud83e\udd16 Auto (0)",
+                "callback_data": "m:at:A"
             }
         ],
         [
             {
-                "text": "\ud83d\udcc8 Stats",
-                "callback_data": "m:r:stats"
+                "text": "\ud83d\udd0e QUERY",
+                "callback_data": "m:query"
+            },
+            {
+                "text": "\ud83d\uddc2 MORE",
+                "callback_data": "m:am"
             }
         ],
         [
             {
-                "text": "\ud83e\uddfe Trade History",
-                "callback_data": "m:r:history"
-            }
-        ],
-        [
-            {
-                "text": "\ud83d\udea8 PANIC SELL",
-                "callback_data": "/panic"
-            }
-        ],
-        [
-            {
-                "text": "\ud83c\udfe0 Main Menu",
-                "callback_data": "m:menu"
+                "text": "\ud83d\udd04 Refresh",
+                "callback_data": "m:at:M"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcbc *PORTFOLIO*",
-    "out_time": 1795831772.3850954,
-    "out_mid": 7716,
-    "panel_mid": 7717
+    "panel_text": "\ud83d\udc47 *Actions*",
+    "out_time": 1795831872.2750998,
+    "out_mid": 7731,
+    "panel_mid": 7732
 }

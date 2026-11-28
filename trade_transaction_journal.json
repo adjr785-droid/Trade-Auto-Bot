@@ -5103,5 +5103,123 @@
         "time": 1795831021.0204682,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 70.0, 'net_pnl_usdt': 1.1557, 'recurring_patterns': {'manual_sell': 5, 'panic_trades': 5, 'crash_guard_losses': 1, 'symbol_concentration': {'MOVE-USDT': 4, 'DOS-USDT': 4, 'BLESS-USDT': 2}}, 'recommendations': {'reduce_panic_trades': 'Consider limiting panic exits as they yield modest gains and increase operational noise.', 'tighten_crash_guard': 'Review the -11.3% crash guard threshold; a tighter stop may prevent large single losses.', 'diversify_symbols': 'Avoid over\u2011exposure to any single token (e.g., MOVE-USDT) to mitigate concentration risk.', 'increase_stop_loss_precision': 'Implement more granular stop\u2011loss levels to capture small gains while protecting against outsized drops.', 'monitor_win_rate_uncertainty': 'Current win rate is based on 30 trades; treat the 70% figure as indicative, not definitive.'}}"
+    },
+    {
+        "time": 1795831809.2575467,
+        "event": "sell_fill_verified",
+        "symbol": "DOS-USDT",
+        "filled": 62.26,
+        "average": 0.0806,
+        "order_id": "1510393564466192391",
+        "reason": "PANIC",
+        "attempt": 1
+    },
+    {
+        "time": 1795831810.3915374,
+        "event": "trade_closed",
+        "symbol": "DOS-USDT",
+        "pnl_usdt": 0.07296872000000039,
+        "reason": "PANIC",
+        "strategy": "MANUAL"
+    },
+    {
+        "time": 1795831810.787983,
+        "event": "full_sale_verified_or_dust",
+        "symbol": "DOS-USDT",
+        "remaining_base": 0.008088,
+        "remaining_value_usdt": 0.0006518928,
+        "filled": 62.26
+    },
+    {
+        "time": 1795831824.3405633,
+        "event": "ai_sell_review",
+        "symbol": "DOS-USDT",
+        "review": {
+            "review": "The position was exited at an average price of 0.0806 USDT, realizing a profit of 0.07297 USDT on the sold 62.26 units. The exit was triggered by panic, leaving a small residual base of 0.008088 units. While the trade yielded a modest gain, the decision was driven by emotional response rather than a systematic risk rule, which could lead to suboptimal outcomes in future volatile moves.",
+            "lesson": "Implement stricter emotional controls and adhere to predefined exit criteria (e.g., stop\u2011loss or target profit levels) to avoid panic\u2011driven exits. Ensure any remaining base is either fully liquidated according to the strategy or managed with a clear plan to prevent orphaned positions.",
+            "confidence": "medium"
+        }
+    },
+    {
+        "time": 1795831827.546704,
+        "event": "sell_fill_verified",
+        "symbol": "PWT-USDT",
+        "filled": 31.34,
+        "average": 0.311682,
+        "order_id": "1510393641226149893",
+        "reason": "PANIC",
+        "attempt": 1
+    },
+    {
+        "time": 1795831828.6928277,
+        "event": "trade_closed",
+        "symbol": "PWT-USDT",
+        "pnl_usdt": -0.1386481599999995,
+        "reason": "PANIC",
+        "strategy": "MANUAL"
+    },
+    {
+        "time": 1795831829.1590502,
+        "event": "full_sale_verified_or_dust",
+        "symbol": "PWT-USDT",
+        "remaining_base": 0.008396,
+        "remaining_value_usdt": 0.002616882072,
+        "filled": 31.34
+    },
+    {
+        "time": 1795831834.0531216,
+        "event": "ai_sell_review",
+        "symbol": "PWT-USDT",
+        "review": {
+            "review": "The trade exited at an average price of 0.311682\u202fUSDT, resulting in a realized loss of approximately 0.139\u202fUSDT on the position. The exit was triggered by panic rather than a systematic signal, and a small residual base amount (0.008396\u202fPWT) remains unsold. The loss magnitude relative to the position size suggests the exit was premature and not aligned with risk management protocols.",
+            "lesson": "Avoid panic\u2011driven exits; adhere to predefined stop\u2011loss or exit criteria. Ensure that any remaining base tokens are either fully liquidated or managed according to a clear plan to prevent stranded balances. Incorporate stricter emotional discipline checks and reinforce deterministic safeguards before overriding them.",
+            "confidence": "medium"
+        }
+    },
+    {
+        "time": 1795831837.1133766,
+        "event": "sell_fill_verified",
+        "symbol": "ZORA-USDT",
+        "filled": 4704.23,
+        "average": 0.0042286283238702,
+        "order_id": "1510393681344667648",
+        "reason": "PANIC",
+        "attempt": 1
+    },
+    {
+        "time": 1795831838.2522173,
+        "event": "trade_closed",
+        "symbol": "ZORA-USDT",
+        "pnl_usdt": -0.025269600000090275,
+        "reason": "PANIC",
+        "strategy": "MANUAL"
+    },
+    {
+        "time": 1795831844.1913247,
+        "event": "full_sale_verified_or_dust",
+        "symbol": "ZORA-USDT",
+        "remaining_base": 0.005764,
+        "remaining_value_usdt": 2.4387484000000003e-05,
+        "filled": 4704.23
+    },
+    {
+        "time": 1795831849.218573,
+        "event": "ai_sell_review",
+        "symbol": "ZORA-USDT",
+        "review": {
+            "review": "The position in ZORA-USDT was closed at an average exit price of 0.0042286 USDT, resulting in a realized loss of approximately 0.02527 USDT. The exit was triggered by panic, not by a systematic risk rule, and the remaining base asset (0.005764 ZORA) was not fully liquidated, indicating incomplete position closure. The sold quantity reported (4704.23) appears inconsistent with the remaining base amount, suggesting a possible data mismatch that should be investigated before drawing firm conclusions.",
+            "lesson": "Avoid panic\u2011driven exits; rely on predefined risk thresholds and stop\u2011loss mechanisms. Ensure that exit calculations (sold quantity vs. remaining base) are validated to prevent partial fills or data errors. Maintain clear documentation of exit triggers to improve post\u2011trade analysis.",
+            "confidence": "medium"
+        }
+    },
+    {
+        "time": 1795831857.2619126,
+        "event": "ai_manual_buy_review",
+        "symbol": "WLD-USDT",
+        "review": {
+            "risk_level": "moderate",
+            "warning": "BTC market filter is active and indicates BTC is below its 50\u2011hour average, which may signal broader downside pressure. Proceed with caution and monitor price action closely.",
+            "summary": "Manual buy of 34.66\u202fUSDT of WLD at 0.2465\u202fUSDT per token is possible, but given the active BTC filter and bearish BTC trend, the trade carries moderate risk. No existing position and RSI is neutral, yet market conditions suggest caution."
+        }
     }
 ]
