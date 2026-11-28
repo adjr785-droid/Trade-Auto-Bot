@@ -448,5 +448,15 @@
         "time": 1795876345.3047373,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 57.14, 'net_pnl_usdt': 1.4433, 'recurring_patterns': {'manual_sell_frequency': 7, 'repeat_symbols': ['IDOL-USDT'], 'common_reasons': ['MANUAL SELL ALL', 'MANUAL SELL $2.75', 'MANUAL SELL $10.00', 'MANUAL SELL $31.00']}, 'recommendations': {'risk_management': 'Maintain current position sizing; consider reducing exposure on symbols with negative pnl trends (e.g., TRX-USDT, WLD-USDT, JCT-USDT).', 'strategy_adjustments': 'Review manual sell triggers; evaluate if profit targets (e.g., $2.75, $10.00, $31.00) are optimal given volatility.', 'data_collection': 'Track reasons for each trade more granularly to identify if specific market conditions correlate with wins or losses.'}}"
+    },
+    {
+        "time": 1795877468.550185,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [], 'summary': 'Current portfolio risk passes the defined safeguards. The only position (JCT-USDT) shows a minor unrealized loss of -0.19% and remains within its stop level. No immediate action is required; continue monitoring the position and maintain existing risk controls.'}"
+    },
+    {
+        "time": 1795877469.2961702,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 57.14, 'net_pnl_usdt': 1.4433, 'recurring_patterns': {'manual_sell_all_count': 3, 'manual_sell_specific_amounts': 4, 'symbols_involved': ['BTW-USDT', 'TRX-USDT', 'WLD-USDT', 'IDOL-USDT', 'VSN-USDT', 'JCT-USDT']}, 'recommendations': {'caution': 'Performance is modest with a slight positive PnL; consider reducing manual sell frequency and reviewing specific amount thresholds.', 'suggestion': 'Focus on symbols with positive outcomes (IDOL-USDT, BTW-USDT, VSN-USDT) and limit exposure to those with repeated losses (TRX-USDT, WLD-USDT, JCT-USDT).', 'risk': 'Maintain current risk limits; avoid increasing position sizes until a clearer positive trend emerges.'}}"
     }
 ]
