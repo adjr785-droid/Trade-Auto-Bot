@@ -5151,5 +5151,15 @@
         "event": "ai_coin_advisory",
         "reviewed": 25,
         "source": "coins.db"
+    },
+    {
+        "time": 1795840151.4347124,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [], 'summary': 'The portfolio currently passes risk checks. The only open position is WLD-USDT with a small negative P&L (-0.57%). The stop loss is set at 0.234175, which is below the current price (0.2451), providing a modest downside buffer. No immediate action is required; monitor the position for further price movement and maintain the existing stop. Remain vigilant for any market changes, especially BTC price movements, as the btc_filter flag is active.'}"
+    },
+    {
+        "time": 1795840152.171118,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 70.0, 'net_pnl_usdt': 1.5969, 'recurring_patterns': {'reasons': ['PANIC', 'MANUAL SELL', 'CRASH GUARD'], 'symbols': ['MOVE-USDT', 'DOS-USDT', 'PWT-USDT']}, 'recommendations': ['Limit exposure to PANIC-triggered trades; consider tighter stop\u2011loss thresholds', 'Review manual sell triggers for consistency; avoid large manual exits without clear profit targets', 'Monitor MOVE-USDT volatility as it appears in both profit and loss events', 'Implement additional safeguards for CRASH GUARD events to reduce large negative swings']}"
     }
 ]
