@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691860,
+    "last_update_id": 935691864,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT36.20/\u20a649,275",
+    "kb_ph": "USDT36.21/\u20a649,292",
     "layout_bottom": [
         "query",
         "an"
@@ -98,23 +98,107 @@
     "layout_names": {
         "scanh": "Scan Hist"
     },
-    "kb_mid": 8192,
-    "out_text": "\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udfe2 *JCT* $19.98 (55%)\n+0.00% (+$0.00) | Entry 0.001548\nQty 12907.36 | Price 0.001548 | Stop 0.001471 (-5%)\nRSI 56 | Mixed | ATH -92%\n\n\ud83e\udde0 *AI:* JCT comprises 55% of holdings at $19.98 with no P&L change; stop loss\nset 5% below entry (0.001471) and RSI 56, monitor for price movement toward\nstop.\n\u2800\n\u2800",
+    "kb_mid": 8197,
+    "out_text": "USDT16.15\n\ud83d\udd0e *BREAKOUT \u2014 61 COINS*\n_All coins in this group, ranked by setup score (SC, out of 10); equal scores\nare ordered by how close each coin is to the ideal picture of the setup.\nInformational only; it never changes trading._\n```\n # COIN    PRICE SC RSI   1H 24H\n--------------------------------\n 1 VSN   0.03298  8  56 +0.5  +1\n 2 JCT  0.001559  6  56 +0.3  +3\n```\n\u2800",
     "out_mode": "Markdown",
-    "out_time": 1795857080.6760993,
+    "out_time": 1795857093.1708028,
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udd04",
-                "callback_data": "rf:go"
+                "text": "\u25c0",
+                "callback_data": "pg:p"
+            },
+            {
+                "text": "1/7",
+                "callback_data": "pg:x"
+            },
+            {
+                "text": "\u25b6",
+                "callback_data": "pg:n"
             },
             {
                 "text": "\ud83c\udfe0",
                 "callback_data": "m:menu"
             }
+        ],
+        [
+            {
+                "text": "\ud83d\ude80 BREAKOUT",
+                "callback_data": "m:q:BREAKOUT"
+            },
+            {
+                "text": "\ud83d\udfe2 BOUNCE",
+                "callback_data": "m:q:BOUNCE"
+            }
+        ],
+        [
+            {
+                "text": "\u21a9\ufe0f PULLBACK",
+                "callback_data": "m:q:PULLBACK"
+            },
+            {
+                "text": "\ud83d\udcc8 TREND",
+                "callback_data": "m:q:TREND"
+            }
+        ],
+        [
+            {
+                "text": "\u2b05\ufe0f Query",
+                "callback_data": "m:query"
+            },
+            {
+                "text": "\ud83d\udd04 Refresh",
+                "callback_data": "m:q:BREAKOUT"
+            }
         ]
     ],
-    "panel_text": "\ud83d\udd04 *Refresh*",
-    "out_mid": 8190,
-    "panel_mid": 8191
+    "panel_text": "\ud83d\udcc4 *Page 1/7*",
+    "out_mid": 8195,
+    "pages": {
+        "p": [
+            "USDT16.15\n\ud83d\udd0e *BREAKOUT \u2014 61 COINS*\n_All coins in this group, ranked by setup score (SC, out of 10); equal scores\nare ordered by how close each coin is to the ideal picture of the setup.\nInformational only; it never changes trading._\n```\n # COIN    PRICE SC RSI   1H 24H\n--------------------------------\n 1 VSN   0.03298  8  56 +0.5  +1\n 2 JCT  0.001559  6  56 +0.3  +3\n```\n\u2800",
+            "```\n 3 ACE     0.046  2   -    - +18\n 4 ACN  0.003246  2   -    -  +2\n 5 ACT   0.00943  2   -    -  +4\n 6 AIAV 0.000484  2   -    -  +2\n 7 ALICE  0.1018  2   -    -  +1\n 8 AUCTI   2.647  2   -    -  +1\n 9 AVA    0.2221  2   -    -  +3\n10 BABY  0.00966  2   -    -  +4\n11 BGSC 0.000942  2   -    - +17\n12 BTT  3.014e-0  2   -    -  +0\n```",
+            "```\n13 CATI  0.03652  2   -    -  +2\n14 CLEAR 0.02046  2   -    -  +2\n15 DGAI  0.92312  2   -    -  +0\n16 DMC  0.000250  2   -    -  +1\n17 DNA   0.14823  2   -    -  +7\n18 DODO  0.04156  2   -    -  +6\n19 GALA 0.001406  2   -    -  +2\n20 GLM    0.0963  2   -    -  +1\n21 GMX     8.492  2   -    -  +2\n22 GOMIN  0.3744  2   -    -  +2\n```",
+            "```\n23 GRVT   0.1308  2   -    -  +0\n24 GUN  0.001453  2   -    -  +4\n25 ILY   0.14158  2   -    -  +7\n26 IR   0.001832  2   -    -  +1\n27 JST   0.14716  2   -    -  +3\n28 KAVA  0.02767  2   -    - +10\n29 LMWR  0.00616  2   -    -  +1\n30 LUNC 4.585e-0  2   -    -  +0\n31 MGO  0.006297  2   -    -  +8\n32 MHA  0.009687  2   -    -  +7\n```",
+            "```\n33 ML   0.002598  2   -    -  +1\n34 NES   0.27202  2   -    -  +7\n35 NESS 0.001532  2   -    -  +2\n36 NIGHT 0.05087  2   -    -  +3\n37 NS    0.00708  2   -    -  +1\n38 O     0.65314  2   -    -  +0\n39 PLAI 0.001803  2   -    - +24\n40 PREOP  713.08  2   -    -  +0\n41 PUFFE  0.0205  2   -    -  +8\n42 PWT   0.32103  2   -    -  +3\n```",
+            "```\n43 SENT 0.023541  2   -    -  +5\n44 SKY   0.05004  2   -    -  +6\n45 SKYAI 0.03666  2   -    -  +9\n46 SLX   0.03514  2   -    -  +4\n47 SPACE0.004371  2   -    -  +6\n48 TCOM 0.008254  2   -    -  +1\n49 TLM   0.00109  2   -    - +16\n50 TLOS  0.01309  2   -    -  +3\n51 U           1  2   -    -  +0\n52 UNITA  0.1996  2   -    -  +1\n```",
+            "```\n53 VELVE 0.10424  2   -    - +14\n54 VERON  0.0866  2   -    -  +0\n55 WIF    0.1398  2   -    -  +1\n56 WIN   5.4e-05  2   -    -  +0\n57 YGG   0.02081  2   -    -  +1\n58 CRO   0.05377  0   -    -   -\n59 GHO    1.0199  0   -    -  +0\n60 USDS   0.9986  0   -    -  +0\n61 WEETH    2600  0   -    -  +0\n```\n\u2800"
+        ],
+        "i": 0,
+        "mode": "Markdown",
+        "x": [
+            [
+                {
+                    "text": "\ud83d\ude80 BREAKOUT",
+                    "callback_data": "m:q:BREAKOUT"
+                },
+                {
+                    "text": "\ud83d\udfe2 BOUNCE",
+                    "callback_data": "m:q:BOUNCE"
+                }
+            ],
+            [
+                {
+                    "text": "\u21a9\ufe0f PULLBACK",
+                    "callback_data": "m:q:PULLBACK"
+                },
+                {
+                    "text": "\ud83d\udcc8 TREND",
+                    "callback_data": "m:q:TREND"
+                }
+            ],
+            [
+                {
+                    "text": "\u2b05\ufe0f Query",
+                    "callback_data": "m:query"
+                },
+                {
+                    "text": "\ud83d\udd04 Refresh",
+                    "callback_data": "m:q:BREAKOUT"
+                }
+            ]
+        ],
+        "cmd": "m:q:BREAKOUT"
+    },
+    "panel_mid": 8196
 }
