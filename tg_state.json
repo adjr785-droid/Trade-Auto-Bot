@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935692002,
+    "last_update_id": 935692006,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT35.84/\u20a648,790",
+    "kb_ph": "USDT35.82/\u20a648,760",
     "layout_bottom": [
         "query",
         "an"
@@ -106,36 +106,102 @@
     "layout_names": {
         "scanh": "Scan Hist"
     },
-    "kb_mid": 8507,
-    "out_mid": 8512,
-    "out_text": "\ud83d\udcdf *OUTPUT*\nResults appear here.",
+    "kb_mid": 8516,
+    "out_text": "USDT0.03\n\ud83d\udfe1 *MANUAL BUY*\n_The best-rated of those four, listed for Manual buy, plus every other coin you\nhold (marked *)._\n\n```\nCOIN    RSI    1H    24H  S TY\n------------------------------\nVSN*     63  +0.1   +1.1  8  -\n```\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "panel_mid": 8513,
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udcbc Portfolio",
-                "callback_data": "m:pf"
+                "text": "\u25c0",
+                "callback_data": "pg:p"
+            },
+            {
+                "text": "1/2",
+                "callback_data": "pg:x"
+            },
+            {
+                "text": "\u25b6",
+                "callback_data": "pg:n"
+            },
+            {
+                "text": "\ud83c\udfe0",
+                "callback_data": "m:menu"
             }
         ],
         [
             {
-                "text": "\ud83c\udfc6 Markets",
-                "callback_data": "/analyse"
+                "text": "\ud83d\udc41 Watch (3)",
+                "callback_data": "m:at:W"
+            },
+            {
+                "text": "\u25b6 \ud83d\udfe1 Manual (1)",
+                "callback_data": "m:at:M"
+            },
+            {
+                "text": "\ud83e\udd16 Auto (0)",
+                "callback_data": "m:at:A"
             }
         ],
         [
             {
-                "text": "\ud83e\uddf0 Tools",
-                "callback_data": "m:tools"
+                "text": "\ud83d\udd0e QUERY",
+                "callback_data": "m:query"
+            },
+            {
+                "text": "\ud83d\uddc2 MORE",
+                "callback_data": "m:am"
             }
         ],
         [
             {
-                "text": "\ud83d\udda5 System",
-                "callback_data": "m:sy"
+                "text": "\ud83d\udd04 Refresh",
+                "callback_data": "m:at:M"
             }
         ]
     ],
-    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nChoose a group."
+    "panel_text": "\ud83d\udcc4 *Page 1/2*",
+    "out_time": 1795884194.7546551,
+    "pages": {
+        "p": [
+            "USDT0.03\n\ud83d\udfe1 *MANUAL BUY*\n_The best-rated of those four, listed for Manual buy, plus every other coin you\nhold (marked *)._\n\n```\nCOIN    RSI    1H    24H  S TY\n------------------------------\nVSN*     63  +0.1   +1.1  8  -\n```\n\u2800\n\u2800",
+            "_TY: T Trend, P Pullback, B Bounce, K Breakout_\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+        ],
+        "i": 0,
+        "mode": "Markdown",
+        "x": [
+            [
+                {
+                    "text": "\ud83d\udc41 Watch (3)",
+                    "callback_data": "m:at:W"
+                },
+                {
+                    "text": "\u25b6 \ud83d\udfe1 Manual (1)",
+                    "callback_data": "m:at:M"
+                },
+                {
+                    "text": "\ud83e\udd16 Auto (0)",
+                    "callback_data": "m:at:A"
+                }
+            ],
+            [
+                {
+                    "text": "\ud83d\udd0e QUERY",
+                    "callback_data": "m:query"
+                },
+                {
+                    "text": "\ud83d\uddc2 MORE",
+                    "callback_data": "m:am"
+                }
+            ],
+            [
+                {
+                    "text": "\ud83d\udd04 Refresh",
+                    "callback_data": "m:at:M"
+                }
+            ]
+        ],
+        "cmd": "m:at:M"
+    },
+    "out_mid": 8521,
+    "panel_mid": 8522
 }
