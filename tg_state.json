@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT37.29/\u20a650,762",
+    "kb_ph": "USDT37.61/\u20a651,193",
     "layout_bottom": [
         "query",
         "an"
@@ -96,7 +96,7 @@
     "layout_names": {
         "scanh": "Scan Hist"
     },
-    "kb_mid": 8133,
+    "kb_mid": 8134,
     "out_text": "USDT2.78\n\ud83d\udd0e *BREAKOUT \u2014 64 COINS*\n_All coins in this group, ranked by setup score (SC, out of 10); equal scores\nare ordered by how close each coin is to the ideal picture of the setup.\nInformational only; it never changes trading._\n```\n # COIN    PRICE SC RSI   1H 24H\n--------------------------------\n 1 IDOL  0.01885  8  69 +2.5 +10\n 2 JCT  0.001557  6  54 +0.8  +6\n```\n\u2800",
     "out_mode": "Markdown",
     "out_time": 1795853076.9299178,
