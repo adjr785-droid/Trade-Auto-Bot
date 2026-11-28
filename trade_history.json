@@ -30,5 +30,13 @@
         "time": 1795852656.2834053,
         "reason": "MANUAL SELL $2.75",
         "strategy": "MANUAL"
+    },
+    {
+        "sym": "IDOL-USDT",
+        "pnl": 1.204243920000001,
+        "fee": 0.02002,
+        "time": 1795853549.1867888,
+        "reason": "MANUAL SELL $10.00",
+        "strategy": "MANUAL"
     }
 ]

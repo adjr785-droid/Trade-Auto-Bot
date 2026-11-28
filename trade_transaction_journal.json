@@ -198,5 +198,23 @@
         "time": 1795853461.6829617,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 50.0, 'net_pnl_usdt': 0.4667, 'recurring_patterns': {'manual_sell_all_count': 3, 'manual_sell_specific_amount_count': 1, 'symbols_traded': ['BTW-USDT', 'TRX-USDT', 'WLD-USDT', 'IDOL-USDT']}, 'recommendations': ['Maintain current risk limits due to modest net profit and low sample size', 'Consider diversifying entry criteria beyond manual sell triggers', 'Monitor win/loss ratio as sample size grows before scaling position sizes']}"
+    },
+    {
+        "time": 1795853549.1871479,
+        "event": "trade_closed",
+        "symbol": "IDOL-USDT",
+        "pnl_usdt": 1.204243920000001,
+        "reason": "MANUAL SELL $10.00",
+        "strategy": "MANUAL"
+    },
+    {
+        "time": 1795853553.9693272,
+        "event": "ai_manual_sell_review",
+        "symbol": "IDOL-USDT",
+        "review": {
+            "review": "The position was manually closed at an average exit price of 0.0198\u202fUSDT, realizing a profit of approximately 1.20\u202fUSDT on the sold 505.56\u202fIDOL units. The remaining base balance of 748.04\u202fIDOL was not sold, indicating a partial exit. The manual decision suggests the trader acted on discretion rather than a predefined signal, which introduces uncertainty about the timing and price optimality. No explicit risk parameters or stop\u2011loss levels are provided, so the trade\u2019s alignment with systematic risk controls cannot be verified.",
+            "lesson": "When manually exiting a position, document the rationale and ensure it aligns with the bot's risk framework (e.g., target profit, stop\u2011loss, or trailing thresholds). Partial exits should be accompanied by a clear plan for the remaining holdings to avoid unintended exposure. Maintaining consistent exit criteria improves reproducibility and risk management.",
+            "confidence": "medium"
+        }
     }
 ]
