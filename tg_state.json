@@ -5,7 +5,7 @@
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT34.40/\u20a646,826",
+    "kb_ph": "USDT34.48/\u20a646,935",
     "layout_bottom": [
         "query",
         "an"
@@ -93,7 +93,7 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 7940,
+    "kb_mid": 7941,
     "layout_names": {
         "scanh": "Scan Hist"
     },
