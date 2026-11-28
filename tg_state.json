@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935692001,
+    "last_update_id": 935692002,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -107,66 +107,35 @@
         "scanh": "Scan Hist"
     },
     "kb_mid": 8507,
-    "out_text": "USDT0.03\n\u2705 VSN added.\n\u2b50 *FAVOURITES*\n_Your own list. Tap a coin to buy, sell or remove it._\n\n```\nCOIN     PRICE RSI    1H    24H\n-------------------------------\nVSN    0.03313  63  +0.1   +1.1\n```\n\u2800\n\u2800",
+    "out_mid": 8512,
+    "out_text": "\ud83d\udcdf *OUTPUT*\nResults appear here.",
     "out_mode": "Markdown",
-    "out_time": 1795883567.8560212,
+    "panel_mid": 8513,
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udfe2 25%",
-                "callback_data": "m:bp:VSN:25"
-            },
-            {
-                "text": "\ud83d\udfe2 50%",
-                "callback_data": "m:bp:VSN:50"
-            },
-            {
-                "text": "\ud83d\udfe2 75%",
-                "callback_data": "m:bp:VSN:75"
-            },
-            {
-                "text": "\ud83d\udfe2 ALL",
-                "callback_data": "m:bp:VSN:100"
+                "text": "\ud83d\udcbc Portfolio",
+                "callback_data": "m:pf"
             }
         ],
         [
             {
-                "text": "\ud83d\uded2 Buy VSN: other amount",
-                "callback_data": "m:b:VSN"
+                "text": "\ud83c\udfc6 Markets",
+                "callback_data": "/analyse"
             }
         ],
         [
             {
-                "text": "\ud83d\udd34 25%",
-                "callback_data": "m:sc:VSN:25"
-            },
-            {
-                "text": "\ud83d\udd34 50%",
-                "callback_data": "m:sc:VSN:50"
-            },
-            {
-                "text": "\ud83d\udd34 75%",
-                "callback_data": "m:sc:VSN:75"
-            },
-            {
-                "text": "\ud83d\udd34 ALL",
-                "callback_data": "m:sc:VSN:100"
+                "text": "\ud83e\uddf0 Tools",
+                "callback_data": "m:tools"
             }
         ],
         [
             {
-                "text": "\ud83d\uddd1 Remove from favourites",
-                "callback_data": "m:fd:VSN"
-            }
-        ],
-        [
-            {
-                "text": "\u2b05\ufe0f Back",
-                "callback_data": "m:fv"
+                "text": "\ud83d\udda5 System",
+                "callback_data": "m:sy"
             }
         ]
     ],
-    "panel_text": "USDT0.03\n\u2b50 *VSN*\nPrice: 0.033150 USDT\nYou hold: 1078.4525 (about $35.75)",
-    "out_mid": 8508,
-    "panel_mid": 8509
+    "panel_text": "\ud83d\udd79\ufe0f *MENU*\nChoose a group."
 }
