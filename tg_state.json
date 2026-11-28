@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691983,
+    "last_update_id": 935691984,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT35.81/\u20a648,746",
+    "kb_ph": "USDT35.83/\u20a648,775",
     "layout_bottom": [
         "query",
         "an"
@@ -128,7 +128,7 @@
     ],
     "panel_text": "\ud83d\udcc4 *Page 2/2*",
     "out_time": 1795882572.692349,
-    "kb_mid": 8476,
+    "kb_mid": 8485,
     "out_mid": 8483,
     "pages": {
         "p": [
