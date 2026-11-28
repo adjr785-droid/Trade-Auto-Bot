@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935691906,
+    "last_update_id": 935691907,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -24,8 +24,8 @@
             1795739610.5038157
         ],
         "m:r:holdings": [
-            0,
-            1795846756.1573858
+            1,
+            1795869510.6512802
         ],
         "/analyse": [
             6,
@@ -109,7 +109,7 @@
                 "callback_data": "pg:p"
             },
             {
-                "text": "1/2",
+                "text": "2/2",
                 "callback_data": "pg:x"
             },
             {
@@ -126,7 +126,7 @@
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/2*",
+    "panel_text": "\ud83d\udcc4 *Page 2/2*",
     "out_time": 1795869423.5838776,
     "kb_mid": 8298,
     "pages": {
@@ -134,7 +134,7 @@
             "\ud83d\udcbc *HOLDINGS*\n\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\n\ud83d\udd34 *JCT* $29.10 (83%)\n-3.36% (-$1.01) | Entry 0.001549\nQty 19438.838 | Price 0.001497 | Stop 0.001472 (-2%)\nRSI 45 | Mixed | ATH -92%\n\n\ud83d\udfe2 *VSN* $6.01 (17%)\n+0.30% (+$0.02) | Entry 0.033020\nQty 181.59098 | Price 0.033120 | Stop 0.031369 (-5%)\n\u2800\n\u2800",
             "RSI 64 | Bullish | ATH -65%\n\n\ud83e\udde0 *AI:* JCT is down 3.36% toward its 2% stop (RSI 45, mixed signal) and may\nneed attention, while VSN shows a modest 0.30% gain with a 5% stop below price\n(RSI 64, bullish).\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
         ],
-        "i": 0,
+        "i": 1,
         "mode": "Markdown",
         "x": [
             [
