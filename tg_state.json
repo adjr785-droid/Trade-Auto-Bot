@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691688,
+    "last_update_id": 935691691,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT34.58/\u20a647,073",
+    "kb_ph": "USDT34.66/\u20a647,174",
     "layout_bottom": [
         "an",
         "clear"
@@ -98,74 +98,232 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 7876,
+    "kb_mid": 7879,
     "layout_names": {
         "scanh": "Scan Hist"
     },
-    "out_text": "USDT0.02\n\ud83d\udcca *ANALYSIS: JCT-USDT*\nLive price: 0.001542 USDT\n24h change: +2.05%\nRSI(14): 46.5100 \u2014 Neutral\nMA5: 0.001545 | MA10: 0.001555 | MA20: 0.001534\nMACD: 0.00001225 | Signal: 0.00001567 | Histogram: -0.00000342\nATR(14): 0.00003621 (2.35% of price)\nLast hour vol vs 20h avg: 0.29x\nBid/ask spread: 0.130%\n\u2800\n\u2800",
+    "out_text": "\ud83d\udea8 *AI FAILURE*\nAI notes and reviews are paused. Buying, selling and all stops keep running on\nthe rules. The audit is recovering the AI (3 checks).\nReason: AI stage performance_review failed: Expecting ',' delimiter: line 1\ncolumn 728 (char 727)\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800",
     "out_mode": "Markdown",
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udda5 Bot Status",
-                "callback_data": "m:r:bot"
+                "text": "\ud83e\uddf0 Tools",
+                "callback_data": "m:lay:t:tools"
+            },
+            {
+                "text": "\ud83c\udfc6 Markets",
+                "callback_data": "m:lay:t:analyse"
             }
         ],
         [
             {
+                "text": "\ud83d\udda5 System",
+                "callback_data": "m:lay:t:bot"
+            },
+            {
+                "text": "\ud83d\udcc8 Stats",
+                "callback_data": "m:lay:t:stats"
+            }
+        ],
+        [
+            {
+                "text": "\u2705 \ud83d\udd0e Analyse Coin",
+                "callback_data": "m:lay:t:an"
+            },
+            {
                 "text": "\u2699\ufe0f Settings",
-                "callback_data": "m:set"
+                "callback_data": "m:lay:t:set"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udcbc Holdings",
+                "callback_data": "m:lay:t:hold"
+            },
+            {
+                "text": "\ud83d\udcdc Trade History",
+                "callback_data": "m:lay:t:hist"
             }
         ],
         [
             {
                 "text": "\ud83e\udde0 Ask AI",
-                "callback_data": "m:ai:1"
+                "callback_data": "m:lay:t:ai"
+            },
+            {
+                "text": "\u2705 \ud83e\uddf9 Clear Chat",
+                "callback_data": "m:lay:t:clear"
             }
         ],
         [
+            {
+                "text": "\ud83d\udea8 PANIC SELL",
+                "callback_data": "m:lay:t:panic"
+            },
+            {
+                "text": "\ud83d\udcbc Portfolio",
+                "callback_data": "m:lay:t:pf"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udda5 System Menu",
+                "callback_data": "m:lay:t:sy"
+            },
+            {
+                "text": "\u2b50 Favourites",
+                "callback_data": "m:lay:t:fav"
+            }
+        ],
+        [
+            {
+                "text": "\ud83c\udfaf Setups",
+                "callback_data": "m:lay:t:setups"
+            },
+            {
+                "text": "\ud83c\udd95 New Listings",
+                "callback_data": "m:lay:t:newl"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\uddc4 Archive",
+                "callback_data": "m:lay:t:arch"
+            },
+            {
+                "text": "\ud83d\udc41 Watch List",
+                "callback_data": "m:lay:t:watch"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udfe1 Manual List",
+                "callback_data": "m:lay:t:manual"
+            },
+            {
+                "text": "\ud83e\udd16 Auto List",
+                "callback_data": "m:lay:t:auto"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udd0d Scan Now",
+                "callback_data": "m:lay:t:scan"
+            },
+            {
+                "text": "Scan Hist",
+                "callback_data": "m:lay:t:scanh"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\uded2 Buy a Coin",
+                "callback_data": "m:lay:t:buy"
+            },
+            {
+                "text": "\ud83d\udcb8 Sell a Coin",
+                "callback_data": "m:lay:t:sell"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udcda Coin List",
+                "callback_data": "m:lay:t:coins"
+            },
+            {
+                "text": "\ud83d\udd14 Set Alert",
+                "callback_data": "m:lay:t:alert"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udccb My Alerts",
+                "callback_data": "m:lay:t:myal"
+            },
+            {
+                "text": "\ud83e\uddf9 Dust \u2192 BGB",
+                "callback_data": "m:lay:t:dust"
+            }
+        ],
+        [
+            {
+                "text": "\u274c Cancel Orders",
+                "callback_data": "m:lay:t:cancel"
+            },
             {
                 "text": "\ud83d\udee0\ufe0f Audit",
-                "callback_data": "m:r:audit"
+                "callback_data": "m:lay:t:audit"
             }
         ],
         [
             {
-                "text": "\ud83e\udde0 Resume AI Mode",
-                "callback_data": "m:r:airesume"
+                "text": "\ud83e\udde0 Resume AI",
+                "callback_data": "m:lay:t:airesume"
+            },
+            {
+                "text": "\ud83d\udd04 Sync",
+                "callback_data": "m:lay:t:sync"
             }
         ],
         [
             {
-                "text": "\ud83e\udde9 Shortcuts",
+                "text": "\ud83d\udd0e Query",
+                "callback_data": "m:lay:t:query"
+            },
+            {
+                "text": "\ud83d\ude80 Breakout",
+                "callback_data": "m:lay:t:qbo"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udfe2 Bounce",
+                "callback_data": "m:lay:t:qbn"
+            },
+            {
+                "text": "\u21a9\ufe0f Pullback",
+                "callback_data": "m:lay:t:qpb"
+            }
+        ],
+        [
+            {
+                "text": "\ud83d\udcc8 Trend",
+                "callback_data": "m:lay:t:qtr"
+            }
+        ],
+        [
+            {
+                "text": "\u2796",
+                "callback_data": "m:lay:pl:-"
+            },
+            {
+                "text": "\ud83d\udccf Page: 12 lines",
                 "callback_data": "m:lay"
+            },
+            {
+                "text": "\u2795",
+                "callback_data": "m:lay:pl:+"
             }
         ],
         [
             {
-                "text": "\ud83e\uddf9 Clear Chat",
-                "callback_data": "m:r:clear"
+                "text": "\u270f\ufe0f Rename buttons",
+                "callback_data": "m:lay:rn"
+            },
+            {
+                "text": "\u21a9\ufe0f Reset layout",
+                "callback_data": "m:lay:reset"
             }
         ],
         [
             {
-                "text": "\ud83c\udfe0 Main Menu",
-                "callback_data": "m:menu"
+                "text": "\u2b05\ufe0f Tools",
+                "callback_data": "m:tools"
             }
         ]
     ],
-    "panel_text": "\ud83d\udda5 *SYSTEM*",
+    "panel_text": "\ud83e\udde9 *SHORTCUTS*\nTap a button to add it next to Menu or remove it.\n\u2705 = shortcut (below the text box)\nShortcuts: 2/2",
     "out_mid": 7872,
-    "out_time": 1795841780.5122788,
-    "pages": {
-        "p": [
-            "USDT0.02\n\ud83d\udcca *ANALYSIS: JCT-USDT*\nLive price: 0.001542 USDT\n24h change: +2.05%\nRSI(14): 46.5100 \u2014 Neutral\nMA5: 0.001545 | MA10: 0.001555 | MA20: 0.001534\nMACD: 0.00001225 | Signal: 0.00001567 | Histogram: -0.00000342\nATR(14): 0.00003621 (2.35% of price)\nLast hour vol vs 20h avg: 0.29x\nBid/ask spread: 0.130%\n\u2800\n\u2800",
-            "Technical checks: 0/4\nAssessment: *WAIT / WEAK SETUP*\nCoin database: WATCHING / BOUGHT | seen 137 scans | Manual buy fill confirmed\nAI notebook note: medium: Not eligible; RSI 46.5, 24h up 2.14%; moderate risk.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
-        ],
-        "i": 0,
-        "mode": "Markdown",
-        "x": [],
-        "cmd": "m:a:JCT"
-    },
-    "panel_mid": 7873
+    "out_time": 1795841997.3695724,
+    "panel_hidden": true
 }

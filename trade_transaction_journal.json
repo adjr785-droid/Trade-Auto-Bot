@@ -5235,5 +5235,10 @@
         "time": 1795841031.8112261,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 70.0, 'net_pnl_usdt': 1.3817, 'recurring_patterns': {'high_frequency_symbols': ['MOVE-USDT', 'DOS-USDT', 'PWT-USDT'], 'common_reasons': ['PANIC', 'MANUAL SELL ALL'], 'loss_clusters': ['MOVE-USDT with CRASH GUARD', 'PANIC entries across multiple symbols']}, 'recommendations': 'Maintain current risk limits; avoid panic exits where possible; monitor MOVE-USDT volatility closely; consider reducing exposure to symbols with repeated panic triggers; continue using manual sell thresholds but tighten stop\u2011loss levels for high\u2011variance assets.'}"
+    },
+    {
+        "time": 1795841995.7110617,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'WLD-USDT', 'action': 'monitor', 'reason': 'Negative PnL (-1.22%) and price approaching stop (0.2435 vs stop 0.234175). Consider tightening stop or exiting if price continues down.'}, {'symbol': 'ICNT-USDT', 'action': 'monitor', 'reason': 'Slight negative PnL (-0.62%) and price near stop (0.2886 vs stop 0.27588). No immediate action but watch for further decline.'}, {'symbol': 'TRX-USDT', 'action': 'monitor', 'reason': 'Small negative PnL (-0.17%) with price just above stop (0.30032 vs stop 0.285779). Maintain current stop.'}, {'symbol': 'JCT-USDT', 'action': 'hold', 'reason': 'Slight positive PnL (0.13%) and price marginally above stop. No change needed.'}, {'symbol': 'BTW-USDT', 'action': 'hold', 'reason': 'Positive PnL (5.18%) and price comfortably above stop. Position is healthy.'}], 'summary': 'Overall portfolio risk passes safegua"
     }
 ]
