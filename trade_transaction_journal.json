@@ -494,5 +494,15 @@
         "time": 1795881254.1252446,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 57.14, 'net_pnl_usdt': 1.4433, 'recurring_patterns': {'sell_reason_counts': {'MANUAL SELL ALL': 3, 'MANUAL SELL $2.75': 1, 'MANUAL SELL $10.00': 1, 'MANUAL SELL $31.00': 1}, 'symbols_traded': ['BTW-USDT', 'TRX-USDT', 'WLD-USDT', 'IDOL-USDT', 'VSN-USDT', 'JCT-USDT'], 'pnl_sign_distribution': {'positive': 4, 'negative': 3}}, 'recommendations': ['Review the criteria for \"MANUAL SELL ALL\" as it appears frequently and includes both profitable and losing trades.', 'Consider implementing tighter stop\u2011loss rules for symbols that showed negative P&L (TRX-USDT, WLD-USDT, JCT-USDT).', 'Monitor the impact of fixed\u2011amount sell triggers (e.g., $2.75, $10.00, $31.00) as they may not align with market conditions.', 'Maintain a conservative stance given the modest net profit and mixed trade outcomes.']}"
+    },
+    {
+        "time": 1795882133.0726244,
+        "event": "ai_portfolio_review",
+        "summary": "{'portfolio_risk': 'PASS', 'attention': [{'symbol': 'JCT-USDT', 'action': 'monitor', 'reason': 'Position is down -1.49% and price is approaching stop level (current 0.001524 vs stop 0.00147). Consider tightening stop or preparing to exit if further downside occurs.'}], 'summary': 'Overall portfolio risk passes safeguards. The only active position (JCT-USDT) shows modest loss and is nearing its stop threshold; maintain vigilance and be ready to adjust risk parameters.'}"
+    },
+    {
+        "time": 1795882133.9139361,
+        "event": "ai_performance_review",
+        "review": "{'win_rate_pct': 57.14, 'net_pnl_usdt': 1.4433, 'recurring_patterns': {'sell_reason_distribution': {'MANUAL SELL ALL': 3, 'MANUAL SELL $2.75': 1, 'MANUAL SELL $10.00': 1, 'MANUAL SELL $31.00': 1}, 'symbol_frequency': {'IDOL-USDT': 2, 'BTW-USDT': 1, 'TRX-USDT': 1, 'WLD-USDT': 1, 'VSN-USDT': 1, 'JCT-USDT': 1}}, 'recommendations': {'risk_management': 'Consider reducing reliance on manual sell-all actions, as they appear frequently and may limit upside potential.', 'position_sizing': 'Maintain or slightly lower position sizes on symbols with negative P&L (TRX-USDT, WLD-USDT, JCT-USDT) until a clearer trend emerges.', 'strategy_review': 'The win rate is modest (~57%). Monitor whether the manual sell thresholds (e.g., $2.75, $10, $31) align with market volatility; adjust thresholds conservatively.', 'uncertainty': 'Data set is small (7 trades); patterns may not be statistically robust. Treat i"
     }
 ]
