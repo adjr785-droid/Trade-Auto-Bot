@@ -10,5 +10,19 @@
         "entry_usdt": 34.6248,
         "seen": 1795840399.653926,
         "xsl": 0.234175
+    },
+    "BTW-USDT": {
+        "entry_price": 1.195135,
+        "safe_zone": 1.195135,
+        "stop_loss": 1.135378,
+        "peak_price": 1.195135,
+        "last_price": 1.195135,
+        "opened_at": 1795840413.0456681,
+        "sl_pct": 5.0,
+        "entry_qty": 4.18,
+        "entry_usdt": 4.9957,
+        "strategy": "MANUAL",
+        "purchase_source": "MANUAL",
+        "xsl": 1.135378
     }
 }
