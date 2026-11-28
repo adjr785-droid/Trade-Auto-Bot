@@ -1,11 +1,11 @@
 {
-    "last_update_id": 935691685,
+    "last_update_id": 935691688,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
     "display_reset_v3": true,
     "display_reset_v4": true,
-    "kb_ph": "USDT34.60/\u20a647,102",
+    "kb_ph": "USDT34.56/\u20a647,046",
     "layout_bottom": [
         "an",
         "clear"
@@ -98,61 +98,74 @@
         "since": 1795655824.733271,
         "loss": -0.25205024200007214
     },
-    "kb_mid": 7868,
+    "kb_mid": 7874,
     "layout_names": {
         "scanh": "Scan Hist"
     },
-    "out_mid": 7870,
-    "out_text": "\ud83d\udcdf *OUTPUT*\nResults appear here.",
+    "out_text": "USDT0.02\n\ud83d\udcca *ANALYSIS: JCT-USDT*\nLive price: 0.001542 USDT\n24h change: +2.05%\nRSI(14): 46.5100 \u2014 Neutral\nMA5: 0.001545 | MA10: 0.001555 | MA20: 0.001534\nMACD: 0.00001225 | Signal: 0.00001567 | Histogram: -0.00000342\nATR(14): 0.00003621 (2.35% of price)\nLast hour vol vs 20h avg: 0.29x\nBid/ask spread: 0.130%\n\u2800\n\u2800",
     "out_mode": "Markdown",
-    "panel_mid": 7871,
     "panel_rows": [
         [
             {
-                "text": "\ud83d\udd0d Search any coin",
-                "callback_data": "m:se"
+                "text": "\ud83d\udda5 Bot Status",
+                "callback_data": "m:r:bot"
             }
         ],
         [
             {
-                "text": "WLD",
-                "callback_data": "m:a:WLD"
-            },
-            {
-                "text": "BTW",
-                "callback_data": "m:a:BTW"
-            },
-            {
-                "text": "ICNT",
-                "callback_data": "m:a:ICNT"
+                "text": "\u2699\ufe0f Settings",
+                "callback_data": "m:set"
             }
         ],
         [
             {
-                "text": "TRX",
-                "callback_data": "m:a:TRX"
-            },
-            {
-                "text": "JCT",
-                "callback_data": "m:a:JCT"
-            },
-            {
-                "text": "SUI",
-                "callback_data": "m:a:SUI"
+                "text": "\ud83e\udde0 Ask AI",
+                "callback_data": "m:ai:1"
             }
         ],
         [
             {
-                "text": "\u2795 More coins",
-                "callback_data": "m:more:analyse:0"
+                "text": "\ud83d\udee0\ufe0f Audit",
+                "callback_data": "m:r:audit"
             }
         ],
         [
             {
-                "text": "\u2b05\ufe0f Menu",
+                "text": "\ud83e\udde0 Resume AI Mode",
+                "callback_data": "m:r:airesume"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\udde9 Shortcuts",
+                "callback_data": "m:lay"
+            }
+        ],
+        [
+            {
+                "text": "\ud83e\uddf9 Clear Chat",
+                "callback_data": "m:r:clear"
+            }
+        ],
+        [
+            {
+                "text": "\ud83c\udfe0 Main Menu",
                 "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "USDT0.02\n\ud83d\udd0e *ANALYSE A COIN* \u2014 choose:"
+    "panel_text": "\ud83d\udda5 *SYSTEM*",
+    "out_mid": 7872,
+    "out_time": 1795841780.5122788,
+    "pages": {
+        "p": [
+            "USDT0.02\n\ud83d\udcca *ANALYSIS: JCT-USDT*\nLive price: 0.001542 USDT\n24h change: +2.05%\nRSI(14): 46.5100 \u2014 Neutral\nMA5: 0.001545 | MA10: 0.001555 | MA20: 0.001534\nMACD: 0.00001225 | Signal: 0.00001567 | Histogram: -0.00000342\nATR(14): 0.00003621 (2.35% of price)\nLast hour vol vs 20h avg: 0.29x\nBid/ask spread: 0.130%\n\u2800\n\u2800",
+            "Technical checks: 0/4\nAssessment: *WAIT / WEAK SETUP*\nCoin database: WATCHING / BOUGHT | seen 137 scans | Manual buy fill confirmed\nAI notebook note: medium: Not eligible; RSI 46.5, 24h up 2.14%; moderate risk.\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800\n\u2800"
+        ],
+        "i": 0,
+        "mode": "Markdown",
+        "x": [],
+        "cmd": "m:a:JCT"
+    },
+    "panel_mid": 7873
 }
