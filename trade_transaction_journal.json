@@ -570,5 +570,11 @@
         "time": 1795883394.5318074,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 50.0, 'net_pnl_usdt': 1.3677, 'recurring_patterns': {'manual_sell_all': 3, 'manual_sell_specific_amount': 3, 'rotation_single_manual_coin': 1}, 'recommendations': 'Maintain current strategy but monitor high\u2011frequency manual sell signals. Consider reducing manual sell frequency for symbols with repeated small losses (e.g., TRX\u2011USDT, WLD\u2011USDT, JCT\u2011USDT) and evaluate rotation approach before execution. No new positions recommended until further data is collected.'}"
+    },
+    {
+        "time": 1795883418.2752275,
+        "event": "ai_coin_advisory",
+        "reviewed": 25,
+        "source": "coins.db"
     }
 ]
