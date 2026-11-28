@@ -5215,5 +5215,15 @@
             "warning": "BTC market is below its 50\u2011hour average, indicating broader bearish pressure. Although TRX RSI is low (31.55) suggesting oversold conditions, the active BTC filter adds caution.",
             "summary": "Proceed with the $5 USDT TRX purchase only if you accept moderate risk due to overall market weakness. Consider waiting for clearer bullish signals or a stronger BTC trend before committing."
         }
+    },
+    {
+        "time": 1795840592.671052,
+        "event": "ai_manual_buy_review",
+        "symbol": "JCT-USDT",
+        "review": {
+            "risk_level": "moderate",
+            "warning": "BTC market filter is active and indicates BTC is below its 50\u2011hour average, suggesting broader bearish pressure. The RSI for JCT is near neutral (46.5), offering no strong momentum signal. Proceed with caution and consider tighter stop\u2011losses.",
+            "summary": "A small USDT amount (\u2248$15) is proposed for JCT\u2011USDT at $0.001534. While the token's RSI is neutral, the active BTC filter signals potential downside in the overall market. The trade carries moderate risk; ensure risk limits are respected."
+        }
     }
 ]

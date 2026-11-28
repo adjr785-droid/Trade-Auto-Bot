@@ -55,5 +55,19 @@
         "purchase_source": "MANUAL",
         "xsl": 0.285779,
         "seen": 1795840571.006664
+    },
+    "JCT-USDT": {
+        "entry_price": 0.001536,
+        "safe_zone": 0.001536,
+        "stop_loss": 0.001459,
+        "peak_price": 0.001536,
+        "last_price": 0.001536,
+        "opened_at": 1795840589.424666,
+        "sl_pct": 5.0,
+        "entry_qty": 9752.6,
+        "entry_usdt": 14.98,
+        "strategy": "MANUAL",
+        "purchase_source": "MANUAL",
+        "xsl": 0.001459
     }
 }
