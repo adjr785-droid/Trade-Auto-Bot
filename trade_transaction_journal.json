@@ -100,5 +100,11 @@
         "time": 1795845745.920118,
         "event": "ai_performance_review",
         "review": "{'win_rate_pct': 50.0, 'net_pnl_usdt': 0.345, 'recurring_patterns': [], 'recommendations': 'Maintain current strategy but monitor market volatility and position sizing; consider increasing sample size before adjusting parameters.'}"
+    },
+    {
+        "time": 1795845767.7006383,
+        "event": "ai_coin_advisory",
+        "reviewed": 25,
+        "source": "coins.db"
     }
 ]
