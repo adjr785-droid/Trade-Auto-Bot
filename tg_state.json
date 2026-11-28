@@ -1,5 +1,5 @@
 {
-    "last_update_id": 935691564,
+    "last_update_id": 935691565,
     "pin_id": 2055,
     "display_reset_v1": true,
     "display_reset_v2": true,
@@ -98,24 +98,48 @@
     "panel_rows": [
         [
             {
-                "text": "\u25c0",
-                "callback_data": "pg:p"
+                "text": "\ud83d\udd0d Search any coin",
+                "callback_data": "m:se"
+            }
+        ],
+        [
+            {
+                "text": "DOS",
+                "callback_data": "m:a:DOS"
             },
             {
-                "text": "1/2",
-                "callback_data": "pg:x"
+                "text": "PWT",
+                "callback_data": "m:a:PWT"
             },
             {
-                "text": "\u25b6",
-                "callback_data": "pg:n"
+                "text": "ZORA",
+                "callback_data": "m:a:ZORA"
+            }
+        ],
+        [
+            {
+                "text": "WLD",
+                "callback_data": "m:a:WLD"
             },
             {
-                "text": "\ud83c\udfe0",
+                "text": "SUI",
+                "callback_data": "m:a:SUI"
+            }
+        ],
+        [
+            {
+                "text": "\u2795 More coins",
+                "callback_data": "m:more:analyse:0"
+            }
+        ],
+        [
+            {
+                "text": "\u2b05\ufe0f Menu",
                 "callback_data": "m:menu"
             }
         ]
     ],
-    "panel_text": "\ud83d\udcc4 *Page 1/2*",
+    "panel_text": "USDT0.03\n\ud83d\udd0e *ANALYSE A COIN* \u2014 choose:",
     "out_time": 1795830572.08301,
     "out_mid": 7672,
     "panel_mid": 7673,
